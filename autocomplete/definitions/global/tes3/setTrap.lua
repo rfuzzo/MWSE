@@ -9,6 +9,5 @@ return {
 			{ name = "spell", type = "tes3spell|string" },
 		},
 	}},
-	returns = "trapped",
-	valuetype = "boolean",
+	returns = { { name = "trapped", type = "boolean" } },
 }

@@ -1,4 +1,4 @@
 return {
-	type = "lib",
+	type = "table",
 	description = "Constant values relating to animation state.",
 }

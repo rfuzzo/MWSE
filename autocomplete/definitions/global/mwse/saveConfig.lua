@@ -3,8 +3,8 @@ return {
 	description = [[Saves a config table to Data Files\MWSE\config\{fileName}.json.]],
 	arguments = {
 		{ name = "fileName", type = "string" },
-		{ name = "object", type = "unknown" },
+		{ name = "object", type = "any" },
 		{ name = "config", type = "table", optional = true },
 	},
-	returns = "table",
+	returns = { { type = "table" } },
 }

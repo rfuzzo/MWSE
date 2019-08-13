@@ -5,5 +5,5 @@ return {
 		{ name = "s", type = "string" },
 		{ name = "pattern", type = "string" },
 	},
-	valuetype = "boolean",
+	returns = { { type = "boolean" } },
 }

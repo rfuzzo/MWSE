@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "number" }
 	},
-	returns = "state",
-	valuetype = "boolean|nil",
+	returns = { { name = "state", type = "boolean|nil" } },
 }

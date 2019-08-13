@@ -5,6 +5,5 @@ return {
 		{ name = "item", type = "tes3item|string" },
 		{ name = "reference", type = "tes3reference|tes3mobileActor|string" },
 	},
-	returns = "trades",
-	valuetype = "boolean",
+	returns = { { name = "trades", type = "boolean" } },
 }

@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "type", type = "number" },
 	},
-	returns = "string",
+	returns = {{ type = "string" }},
 }

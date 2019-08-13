@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "attributeId", type = "number", description = "The attribute id to get the name of, from tes3.attributeName constants." }
 	},
-	returns = "name",
-	valuetype = "string",
+	returns = { { name = "name", type = "string" } },
 }

@@ -12,8 +12,7 @@ return {
 			{ name = "type", type = "number", optional = true, description = "Maps to tes3.weaponType. Used to filter equipment by type." },
 		},
 	}},
-	returns = "stack",
-	valuetype = "tes3equipmentStack",
+	returns = { { name = "stack", type = "tes3equipmentStack" } },
 	examples = {
 		["GetPlayerLight"] = {
 			title = "Get Player’s Equipped Light",

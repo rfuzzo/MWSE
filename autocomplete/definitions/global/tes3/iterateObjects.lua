@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "filter", type = "number", description = "Maps to tes3.objectType constants." }
 	},
-	returns = "object",
-	valuetype = "tes3object",
+	returns = { { name = "object", type = "tes3object" } },
 }

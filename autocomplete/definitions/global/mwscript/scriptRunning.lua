@@ -8,5 +8,5 @@ return {
 			{ name = "script", type = "tes3script|string" },
 		},
 	}},
-	returns = "boolean",
+	returns = {{ type = "boolean" }},
 }

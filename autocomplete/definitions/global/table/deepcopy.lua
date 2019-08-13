@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "t", type = "table" },
 	},
-	valuetype = "table",
+	returns = { { type = "table" } },
 }

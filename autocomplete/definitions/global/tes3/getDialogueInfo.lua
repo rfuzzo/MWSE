@@ -5,6 +5,5 @@ return {
 		{ name = "dialogue", type = "tes3dialogue|string", description = "The dialogue that the info belongs to." },
 		{ name = "id", type = "string", description = "The numerical, unique id for the info object." },
 	},
-	returns = "dialogueInfo",
-	valuetype = "tes3dialogueInfo",
+	returns = { { name = "dialogueInfo", type = "tes3dialogueInfo" } },
 }

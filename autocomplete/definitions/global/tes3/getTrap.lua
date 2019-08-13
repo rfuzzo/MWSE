@@ -8,6 +8,5 @@ return {
 			{ name = "reference", type = "tes3reference|tes3mobileActor|string" },
 		},
 	}},
-	returns = "spell",
-	valuetype = "tes3spell",
+	returns = { { name = "spell", type = "tes3spell" } },
 }

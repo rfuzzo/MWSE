@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "number" }
 	},
-	returns = "magicEffect",
-	valuetype = "tes3magicEffect",
+	returns = { { name = "magicEffect", type = "tes3magicEffect" } },
 }

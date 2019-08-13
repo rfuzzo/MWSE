@@ -17,9 +17,9 @@ Return value:
 	on failure: nil]],
 	arguments = {
 		{ name = "t", type = "table" },
-		{ name = "value", type = "unknown" },
-		{ name = "compval", type = "unknown", optional = true },
-		{ name = "reversed", type = "unknown", optional = true },
+		{ name = "value", type = "any" },
+		{ name = "compval", type = "any", optional = true },
+		{ name = "reversed", type = "any", optional = true },
 	},
-	valuetype = "table",
+	returns = { { type = "table" } },
 }

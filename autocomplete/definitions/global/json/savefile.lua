@@ -3,8 +3,7 @@ return {
 	description = [[Saves a serializable table to Data Files\MWSE\{fileName}.json, using json.encode.]],
 	arguments = {
 		{ name = "fileName", type = "string" },
-		{ name = "object", type = "unknown" },
+		{ name = "object", type = "any" },
 		{ name = "config", type = "table", optional = true },
 	},
-	valuetype = "table",
 }

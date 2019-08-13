@@ -3,7 +3,7 @@ return {
 	description = [[Removes a value from a given table. Returns true if the value was successfully removed.]],
 	arguments = {
 		{ name = "t", type = "table" },
-		{ name = "value", type = "unknown" },
+		{ name = "value", type = "any" },
 	},
-	valuetype = "boolean",
+	returns = { { type = "boolean" } },
 }

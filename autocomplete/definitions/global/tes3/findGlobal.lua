@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "string" }
 	},
-	returns = "globalVariable",
-	valuetype = "tes3globalVariable",
+	returns = { { name = "globalVariable", type = "tes3globalVariable" } },
 }

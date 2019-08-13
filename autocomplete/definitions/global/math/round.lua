@@ -5,5 +5,5 @@ return {
 		{ name = "value", type = "number" },
 		{ name = "digits", type = "number" },
 	},
-	valuetype = "number",
+	returns = { { type = "number"} },
 }

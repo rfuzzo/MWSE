@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Preforms a ray test and returns various information related to the result(s). If findAll is set, the result will be a table of results, otherwise only the first result is returned.]],
+	description = [[Performs a ray test and returns various information related to the result(s). If findAll is set, the result will be a table of results, otherwise only the first result is returned.]],
 	arguments = {{
 		name = "params",
 		type = "table",
@@ -35,6 +35,5 @@ return {
 			description = "This example performs a ray test and displays all results in the entire ray test, rather than ending at the first object hit.",
 		},
 	},
-	returns = "result",
-	valuetype = "niPickRecord|table",
+	returns = { { name = "result", type = "niPickRecord|table" } },
 }

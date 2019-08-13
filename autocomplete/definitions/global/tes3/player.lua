@@ -1,5 +1,4 @@
 return {
-	type = "value",
+	type = "tes3reference",
 	description = [[A reference to the player.]],
-	valuetype = "tes3reference",
 }

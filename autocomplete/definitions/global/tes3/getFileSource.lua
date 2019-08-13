@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "path", type = "string" }
 	},
-	returns = "exists",
-	valuetype = "string",
+	returns = { { name = "exists", type = "string" } },
 }

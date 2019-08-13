@@ -4,5 +4,7 @@ return {
 	arguments = {
 		{ name = "modname", type = "string" },
 	},
-	valuetype = "table",
+	returns = {
+		{ type = "table "},
+	}
 }

@@ -10,6 +10,5 @@ return {
 			{ name = "enabled", type = "boolean", default = true, description = "If not toggling, will set true to enable or false to disable.", },
 		},
 	}},
-	returns = "success",
-	valuetype = "boolean",
+	returns = { { name = "success", type = "boolean" } },
 }

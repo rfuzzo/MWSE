@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "tag", type = "string" },
 	},
-	returns = "number",
+	returns = { { type = "number" } },
 }

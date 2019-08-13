@@ -4,5 +4,4 @@ return {
 	arguments = {
 		{ name = "value", type = "tes3baseObject" },
 	},
-	returns = "nil",
 }

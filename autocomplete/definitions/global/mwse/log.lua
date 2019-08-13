@@ -7,5 +7,4 @@ The message accepts formatting and additional parameters matching string.format'
 		{ name = "message", type = "string" },
 		{ type = "variadic", optional = true }
 	},
-	returns = "nil",
 }

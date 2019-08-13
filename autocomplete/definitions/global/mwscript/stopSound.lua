@@ -9,5 +9,5 @@ return {
 			{ name = "sound", type = "tes3sound|string" },
 		},
 	}},
-	returns = "boolean",
+	returns = {{ type = "boolean" }},
 }

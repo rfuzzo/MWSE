@@ -6,5 +6,5 @@ return {
 		{ name = "min", type = "number" },
 		{ name = "max", type = "number" },
 	},
-	valuetype = "number",
+	returns = { { type = "number"} },
 }

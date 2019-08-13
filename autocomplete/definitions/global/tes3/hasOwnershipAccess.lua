@@ -9,6 +9,5 @@ return {
 			{ name = "target", type = "tes3reference|tes3mobileActor|string", description = "The reference to check access of.", },
 		},
 	}},
-	returns = "hasAccess",
-	valuetype = "boolean",
+	returns = { { name = "hasAccess", type = "boolean" } },
 }

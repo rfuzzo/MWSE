@@ -9,5 +9,5 @@ return {
 			{ name = "target", type = "tes3reference|tes3mobileActor|string", description = "Actor to check detection for." },
 		},
 	}},
-	returns = "boolean",
+	returns = {{ type = "boolean" }},
 }

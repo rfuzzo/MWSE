@@ -5,7 +5,7 @@ return {
 	arguments = {
 		{ name = "s", type = "string" },
 		{ name = "position", type = "number", default = 1 },
-		{ name = "nullValue", type = "unknown", default = "nil" },
+		{ name = "nullValue", type = "any", default = "nil" },
 	},
-	valuetype = "table",
+	returns = { { type = "table"} },
 }

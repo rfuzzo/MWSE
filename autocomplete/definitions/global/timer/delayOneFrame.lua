@@ -5,6 +5,5 @@ return {
 		{ name = "callback", type = "function" },
 		{ name = "type", type = "number", default = "timer.simulate" },
 	},
-	returns = "timer",
-	valuetype = "mwseTimer",
+	returns = { { name = "timer", type = "mwseTimer" } },
 }

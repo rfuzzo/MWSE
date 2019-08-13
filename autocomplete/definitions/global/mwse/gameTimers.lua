@@ -1,5 +1,5 @@
 return {
-	type = "value",
+	type = "mwseTimerController",
 	description = [[The mwseTimerController responsible for game-type timers.]],
-	valuetype = "mwseTimerController",
+	returns = { { type = "mwseTimerController"} },
 }

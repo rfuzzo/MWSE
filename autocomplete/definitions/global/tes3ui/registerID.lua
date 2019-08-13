@@ -6,5 +6,5 @@ The registry namespace is shared between Property and UI_ID. It is advisable to 
 	arguments = {
 		{ name = "s", type = "string" },
 	},
-	valuetype = "number",
+	returns = { { type = "number" } },
 }

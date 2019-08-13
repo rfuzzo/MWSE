@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "string" }
 	},
-	returns = "faction",
-	valuetype = "tes3faction",
+	returns = { { name = "faction", type = "tes3faction" } },
 }

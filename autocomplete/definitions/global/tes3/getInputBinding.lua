@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "keybind", type = "number", description = "Maps to tes3.keybind constants." }
 	},
-	returns = "inputConfig",
-	valuetype = "tes3inputConfig",
+	returns = { { name = "inputConfig", type = "tes3inputConfig" } },
 }

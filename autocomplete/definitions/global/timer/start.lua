@@ -11,8 +11,7 @@ return {
 			{ name = "iterations", type = "number", default = 1, description = "The number of iterations to run." },
 		}
 	}},
-	returns = "timer",
-	valuetype = "mwseTimer",
+	returns = { { name = "timer", type = "mwseTimer" } },
 	examples = {
 		["ShowCountdownMessage"] = {
 			title = "Show a Countdown Message",

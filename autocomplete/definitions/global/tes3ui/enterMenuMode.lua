@@ -5,5 +5,5 @@ return {
 		{ name = "id", type = "number" },
 	},
 	returnDescription = "true if the menu was switched, or false if it was already active.",
-	valuetype = "boolean",
+	returns = { { type = "boolean" } },
 }

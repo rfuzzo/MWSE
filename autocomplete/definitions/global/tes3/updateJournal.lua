@@ -10,6 +10,5 @@ return {
 			{ name = "showMessage", type = "boolean", default = false, description = "If set, a message may be shown to the player." },
 		},
 	}},
-	returns = "wasSet",
-	valuetype = "boolean",
+	returns = { { name = "wasSet", type = "boolean" } },
 }

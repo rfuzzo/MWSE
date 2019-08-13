@@ -9,5 +9,5 @@ return {
 			{ name = "item", type = "tes3item|string", description = "The item to be added." },
 		},
 	}},
-	returns = "boolean",
+	returns = {{ type = "boolean" }},
 }

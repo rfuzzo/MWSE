@@ -3,7 +3,7 @@ return {
 	description = [[Returns the key for a given value, or nil if the table does not contain the value.]],
 	arguments = {
 		{ name = "t", type = "table" },
-		{ name = "value", type = "unknown" },
+		{ name = "value", type = "any" },
 	},
-	valuetype = "unknown",
+	returns = { { type = "any" } },
 }

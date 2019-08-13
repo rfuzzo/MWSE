@@ -9,6 +9,5 @@ return {
 			{ name = "reference", type = "tes3reference|tes3mobileActor|string", optional = true },
 		},
 	}},
-	returns = "soundIsPlaying",
-	valuetype = "boolean",
+	returns = { { name = "soundIsPlaying", type = "boolean" } },
 }

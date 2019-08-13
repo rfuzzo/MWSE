@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "number|string" },
 	},
-	returns = "gameSetting",
-	valuetype = "tes3gameSetting",
+	returns = { { name = "gameSetting", type = "tes3gameSetting" } },
 }

@@ -4,5 +4,4 @@ return {
 	arguments = {
 		{ name = "value", type = "number" },
 	},
-	returns = "nil",
 }

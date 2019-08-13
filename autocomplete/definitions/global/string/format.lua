@@ -5,5 +5,5 @@ return {
 		{ name = "format", type = "string", description = "The format string to use for the output." },
 		{ type = "values", optional = true, description = "Values to format into the given string." }
 	},
-	valuetype = "string",
+	returns = { { type = "string" } },
 }

@@ -10,6 +10,5 @@ return {
 			{ name = "modifier", type = "number", optional = true, description = "If no index is provided, this is the direct modifier to try.", },
 		},
 	}},
-	returns = "success",
-	valuetype = "boolean",
+	returns = { { name = "success", type = "boolean" } },
 }

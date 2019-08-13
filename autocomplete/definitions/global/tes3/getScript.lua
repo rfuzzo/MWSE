@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "string" }
 	},
-	returns = "script",
-	valuetype = "tes3script",
+	returns = { { name = "script", type = "tes3script" } },
 }

@@ -9,5 +9,5 @@ return {
 			{ name = "item", type = "tes3item|string" },
 		},
 	}},
-	returns = "number",
+	returns = {{ type = "number" }},
 }

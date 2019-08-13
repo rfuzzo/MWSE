@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "filename", type = "string", description = "The filename of the mod to find, including the extension." }
 	},
-	valuetype = "boolean",
+	returns = { { type = "boolean" } },
 }

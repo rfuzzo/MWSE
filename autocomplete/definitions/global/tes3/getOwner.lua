@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "reference", type = "tes3reference" },
 	},
-	returns = "object",
-	valuetype = "tes3object",
+	returns = { { name = "object", type = "tes3object" } },
 }

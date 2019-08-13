@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "number", description = "Maps to tes3.skill constants." }
 	},
-	returns = "skill",
-	valuetype = "tes3skill",
+	returns = { { name = "skill", type = "tes3skill" } },
 }

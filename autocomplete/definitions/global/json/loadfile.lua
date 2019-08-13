@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "fileName", type = "string" },
 	},
-	valuetype = "table",
+	returns = { { type = "table"} },
 }

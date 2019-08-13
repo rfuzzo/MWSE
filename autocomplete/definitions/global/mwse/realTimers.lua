@@ -1,5 +1,4 @@
 return {
-	type = "value",
+	type = "mwseTimerController",
 	description = [[The mwseTimerController responsible for real-type timers.]],
-	valuetype = "mwseTimerController",
 }

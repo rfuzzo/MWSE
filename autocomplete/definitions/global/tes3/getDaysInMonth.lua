@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "month", type = "number" }
 	},
-	returns = "dayCount",
-	valuetype = "number",
+	returns = { { name = "dayCount", type = "number" } },
 }

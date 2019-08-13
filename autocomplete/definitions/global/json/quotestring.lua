@@ -5,5 +5,5 @@ return {
 	arguments = {
 		{ name = "s", type = "string" },
 	},
-	valuetype = "string",
+	returns = { { type = "string"} },
 }

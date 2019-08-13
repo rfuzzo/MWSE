@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "iterator", type = "tes3iterator" }
 	},
-	returns = "function",
-	valuetype = "function",
+	returns = { { name = "function", type = "function" } },
 }

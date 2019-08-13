@@ -9,6 +9,5 @@ return {
 			{ name = "voiceover", type = "number", description = "Maps to tes3.voiceover constants." },
 		},
 	}},
-	returns = "played",
-	valuetype = "boolean",
+	returns = { { name = "played", type = "boolean" } },
 }

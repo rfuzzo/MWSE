@@ -5,6 +5,5 @@ return {
 		{ name = "id", type = "string" },
 		{ name = "value", type = "number" },
 	},
-	returns = "value",
-	valuetype = "boolean",
+	returns = { { name = "value", type = "boolean" } },
 }

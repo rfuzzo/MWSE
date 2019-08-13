@@ -1,0 +1,1 @@
+This folder is where log files will be displayed. Use common.setLogFile() to write content here.

@@ -5,6 +5,5 @@ return {
 		{ name = "creatureId", type = "string" },
 		{ name = "soundType", type = "number", description = "Maps to tes3.soundGenType constants." },
 	},
-	returns = "soundGenerator",
-	valuetype = "tes3soundGenerator",
+	returns = { { name = "soundGenerator", type = "tes3soundGenerator" } },
 }

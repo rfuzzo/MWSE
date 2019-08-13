@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "id", type = "string" }
 	},
-	returns = "sound",
-	valuetype = "tes3sound",
+	returns = { { name = "sound", type = "tes3sound" } },
 }

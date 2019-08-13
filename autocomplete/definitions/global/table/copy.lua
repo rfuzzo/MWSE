@@ -5,5 +5,5 @@ return {
 		{ name = "from", type = "table" },
 		{ name = "to", type = "table", optional = true },
 	},
-	valuetype = "table",
+	returns = { { type = "table" } },
 }

@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "path", type = "string", description = "Path, relative to Data Files/Meshes." }
 	},
-	returns = "model",
-	valuetype = "niNode",
+	returns = { { name = "model", type = "niNode" } },
 }

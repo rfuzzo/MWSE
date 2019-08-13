@@ -1,5 +1,4 @@
 return {
-	type = "value",
+	type = "tes3mobilePlayer",
 	description = [[The player's mobile actor.]],
-	valuetype = "tes3mobilePlayer",
 }

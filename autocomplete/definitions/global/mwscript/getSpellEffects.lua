@@ -9,5 +9,5 @@ return {
 			{ name = "spell", type = "tes3spell|string" },
 		},
 	}},
-	returns = "boolean",
+	returns = {{ type = "boolean" }},
 }

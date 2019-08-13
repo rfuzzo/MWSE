@@ -1,0 +1,5 @@
+return {
+	type = "string",
+	description = [[An array-style table access the attributes associated with the effects.]],
+	readOnly = true,
+}

@@ -8,6 +8,5 @@ return {
 			{ name = "reference", type = "tes3reference|tes3mobileActor|string" },
 		},
 	}},
-	returns = "isLocked",
-	valuetype = "boolean",
+	returns = { { name = "isLocked", type = "boolean" } },
 }

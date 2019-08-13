@@ -8,6 +8,5 @@ return {
 			{ name = "reference", type = "tes3reference|tes3mobileActor|string" },
 		},
 	}},
-	returns = "level",
-	valuetype = "number",
+	returns = { { name = "level", type = "number" } },
 }

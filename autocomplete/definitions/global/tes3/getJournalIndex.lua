@@ -8,6 +8,5 @@ return {
 			{ name = "id", type = "tes3dialogue|string" },
 		},
 	}},
-	returns = "index",
-	valuetype = "number",
+	returns = { { name = "index", type = "number" } },
 }

@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "tarray", type = "tes3tarray" }
 	},
-	returns = "iterationFunction",
-	valuetype = "function",
+	returns = { { name = "iterationFunction", type = "function" } },
 }

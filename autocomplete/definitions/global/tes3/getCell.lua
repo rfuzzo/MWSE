@@ -10,6 +10,5 @@ return {
 			{ name = "y", type = "number" },
 		},
 	}},
-	returns = "cell",
-	valuetype = "tes3cell",
+	returns = { { name = "cell", type = "tes3cell" } },
 }

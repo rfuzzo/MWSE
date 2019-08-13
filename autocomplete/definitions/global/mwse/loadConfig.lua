@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "fileName", type = "string" },
 	},
-	returns = "table",
+	returns = {{ type = "table|nil" }},
 }

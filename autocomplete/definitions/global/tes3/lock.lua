@@ -9,6 +9,5 @@ return {
 			{ name = "level", type = "number", optional = true }
 		},
 	}},
-	returns = "locked",
-	valuetype = "boolean",
+	returns = { { name = "locked", type = "boolean" } },
 }

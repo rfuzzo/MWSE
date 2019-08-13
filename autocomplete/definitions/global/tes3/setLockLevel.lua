@@ -9,6 +9,5 @@ return {
 			{ name = "level", type = "number" }
 		},
 	}},
-	returns = "set",
-	valuetype = "boolean",
+	returns = { { name = "set", type = "boolean" } },
 }

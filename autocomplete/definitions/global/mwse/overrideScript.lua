@@ -5,5 +5,5 @@ return {
 		{ name = "scriptId", type = "string" },
 		{ name = "callback", type = "function" },
 	},
-	returns = "boolean",
+	returns = { { type = "boolean" } },
 }

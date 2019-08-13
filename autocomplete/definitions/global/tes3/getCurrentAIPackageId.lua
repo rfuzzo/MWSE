@@ -4,6 +4,5 @@ return {
 	arguments = {
 		{ name = "reference", type = "tes3mobileActor|tes3reference" },
 	},
-	returns = "packageID",
-	valuetype = "number",
+	returns = { { name = "packageID", type = "number" } },
 }

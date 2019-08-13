@@ -1,5 +1,4 @@
 return {
-	type = "value",
+	type = "tes3worldController",
 	description = [[One of the core game objects.]],
-	valuetype = "tes3worldController",
 }

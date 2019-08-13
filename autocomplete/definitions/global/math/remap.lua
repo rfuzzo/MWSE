@@ -8,5 +8,5 @@ return {
 		{ name = "lowOut", type = "number" },
 		{ name = "highOut", type = "number" },
 	},
-	valuetype = "number",
+	returns = { { type = "number"} },
 }
