@@ -1,0 +1,3 @@
+# pause
+
+Pauses the timer.

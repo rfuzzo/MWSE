@@ -1,0 +1,3 @@
+# getScreenRotation
+
+Wrapper for MGEGetScreenRotation.

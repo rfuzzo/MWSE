@@ -1,0 +1,3 @@
+# isInstance
+
+Always returns false.

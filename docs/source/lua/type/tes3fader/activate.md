@@ -1,0 +1,3 @@
+# activate
+
+Activates a deactivated fader.

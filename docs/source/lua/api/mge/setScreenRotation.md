@@ -1,0 +1,3 @@
+# setScreenRotation
+
+Wrapper for MGERotateScreen.

@@ -1,0 +1,3 @@
+# resistedPercent
+
+No description available.

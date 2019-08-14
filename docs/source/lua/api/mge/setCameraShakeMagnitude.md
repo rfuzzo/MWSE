@@ -1,0 +1,3 @@
+# setCameraShakeMagnitude
+
+Wrapper for MGESetCameraShakeMagnitude.

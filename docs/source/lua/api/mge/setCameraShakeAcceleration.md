@@ -1,0 +1,3 @@
+# setCameraShakeAcceleration
+
+Wrapper for MGECameraShakeZoom.

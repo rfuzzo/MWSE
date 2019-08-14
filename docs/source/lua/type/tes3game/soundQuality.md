@@ -1,0 +1,3 @@
+# soundQuality
+
+Sound quality level.

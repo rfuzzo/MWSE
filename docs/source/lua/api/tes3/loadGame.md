@@ -1,0 +1,3 @@
+# loadGame
+
+Loads a game.

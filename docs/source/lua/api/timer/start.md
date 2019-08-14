@@ -1,0 +1,3 @@
+# start
+
+Creates a timer.

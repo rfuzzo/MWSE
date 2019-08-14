@@ -1,0 +1,3 @@
+# getGlobal
+
+Retrieves the value of a global value, or nil if the global could not be found.

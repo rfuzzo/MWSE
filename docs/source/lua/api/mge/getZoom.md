@@ -1,0 +1,3 @@
+# getZoom
+
+Wrapper for MGEGetZoom.

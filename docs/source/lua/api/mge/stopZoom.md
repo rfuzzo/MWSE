@@ -1,0 +1,3 @@
+# stopZoom
+
+Wrapper for MGEStopZoom.

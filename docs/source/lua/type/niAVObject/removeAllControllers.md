@@ -1,0 +1,3 @@
+# removeAllControllers
+
+Removes all controllers.
