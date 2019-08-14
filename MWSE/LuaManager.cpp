@@ -1898,6 +1898,27 @@ namespace mwse {
 			}
 		}
 
+		void __fastcall OnSkillTrained(TES3::SkillStatistic * skill, DWORD _UNDEFINED_, float delta, bool capAt0, bool capAt100) {
+			skill->modSkillCapped(delta, capAt0, capAt100);
+
+			int skillId = -1;
+			auto macp = TES3::WorldController::get()->getMobilePlayer();
+			for (int i = TES3::SkillID::FirstSkill; i <= TES3::SkillID::LastSkill; i++) {
+				if (&macp->skills[i] == skill) {
+					skillId = i;
+					break;
+				}
+			}
+
+			if (skillId == -1) {
+				return;
+			}
+
+			if (event::SkillRaisedEvent::getEventEnabled()) {
+				LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::SkillRaisedEvent(skillId, skill->base));
+			}
+		}
+
 		void LuaManager::executeMainModScripts(const char* path, const char* filename) {
 			for (auto & p : std::experimental::filesystem::recursive_directory_iterator(path)) {
 				if (p.path().filename() == filename) {
@@ -3294,6 +3315,7 @@ namespace mwse {
 			// Event: Skill Raised.
 			genCallEnforced(0x4A28C6, 0x629FC0, reinterpret_cast<DWORD>(OnSkillRaised));
 			genCallEnforced(0x56BCF2, 0x629FC0, reinterpret_cast<DWORD>(OnSkillRaised));
+			genCallEnforced(0x618355, 0x401060, reinterpret_cast<DWORD>(OnSkillTrained));
 
 			// Event: UI Refreshed.
 			genCallEnforced(0x6272F9, 0x649870, reinterpret_cast<DWORD>(OnRefreshedStatsPane)); // MenuStat_scroll_pane
@@ -3577,6 +3599,10 @@ namespace mwse {
 			auto mobileNPCApplyArmorRating = &TES3::MobileNPC::applyArmorRating;
 			overrideVirtualTableEnforced(0x74AE6C, 0xE0, 0x54D820, *reinterpret_cast<DWORD*>(&mobileNPCApplyArmorRating)); // MACH
 			overrideVirtualTableEnforced(0x74B174, 0xE0, 0x54D820, *reinterpret_cast<DWORD*>(&mobileNPCApplyArmorRating)); // MACP
+
+			// Events: disarmTrap/pickLock
+			auto referenceAttemptUnlockDisarm = &TES3::Reference::attemptUnlockDisarm;
+			genCallEnforced(0x569A62, 0x4EB160, *reinterpret_cast<DWORD*>(&referenceAttemptUnlockDisarm));
 
 			// UI framework hooks
 			TES3::UI::hook();
