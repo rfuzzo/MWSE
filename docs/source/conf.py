@@ -21,6 +21,9 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+import recommonmark
+from recommonmark.parser import CommonMarkParser
+from recommonmark.transform import AutoStructify
 
 # -- General configuration ------------------------------------------------
 
@@ -31,7 +34,7 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ['recommonmark']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -40,7 +43,7 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
@@ -165,5 +168,13 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
+def setup(app):
+    from recommonmark.transform import AutoStructify
 
-
+    app.add_config_value('recommonmark_config', {
+        'enable_auto_toc_tree': True,
+        'enable_auto_doc_ref': False, # broken in Sphinx 1.6+
+        'enable_eval_rst': True,
+        'url_resolver': lambda url: '/' + url
+    }, True)
+    app.add_transform(AutoStructify)

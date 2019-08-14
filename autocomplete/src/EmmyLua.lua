@@ -71,22 +71,6 @@ function definitionWriters.table(file, def, parent)
 	end
 end
 
-local function flattenChildren(def, children)
-	local children = children or {}
-
-	for k, v in pairs(def.children) do
-		if (children[k] == nil) then
-			children[k] = common.copyTable(v)
-		end
-	end
-
-	if (def.inherits and data.types[def.inherits]) then
-		flattenChildren(data.types[def.inherits], children)
-	end
-
-	return children
-end
-
 function definitionWriters.class(file, def, parent)
 	if (def.description) then
 		file:write(getLinedDescription(def.description) .. "\n")
@@ -101,7 +85,7 @@ function definitionWriters.class(file, def, parent)
 	file:write(string.format("%s = {}\n\n", def.key))
 
 	if (def.children) then
-		for k, child in pairs(flattenChildren(def)) do
+		for k, child in pairs(common.flattenChildren(def)) do
 			child.parent = def
 			writeDefinition(file, child, def)
 		end

@@ -3,6 +3,8 @@ local lfs = require("lfs")
 
 local common = {}
 
+local data = nil
+
 --- A dictionary of relevant directories.
 common.directory = {}
 
@@ -67,6 +69,40 @@ function common.isTableEmpty(t)
 	return true
 end
 
+function common.fileExists(path)
+	return lfs.attributes(path, "mode") == "file"
+end
+
+function common.flattenChildren(def, children)
+	local children = children or {}
+
+	for k, v in pairs(def.children) do
+		if (children[k] == nil) then
+			local copiedChild = common.copyTable(v)
+			copiedChild.originalParent = copiedChild.parent
+			copiedChild.parent = def
+			children[k] = copiedChild
+		end
+	end
+
+	if (def.inherits and data.types[def.inherits]) then
+		common.flattenChildren(data.types[def.inherits], children)
+	end
+
+	return children
+end
+
+function common.getFileContents(path)
+	local file = io.open(path, "r")
+	local result = common.trimString(file:read("*a"))
+	file:close()
+	return result
+end
+
+function common.trimString(s)
+	return string.match(s,'^()%s*$') and '' or string.match(s,'^%s*(.*%S)')
+end
+
 function common.getDefinitionCompleteKey(def)
 	if (def.parent) then
 		return common.getDefinitionCompleteKey(def.parent) .. "." .. def.key
@@ -81,7 +117,7 @@ end
 function common.execute(command, ...)
 	local cmd = tostring(command):format(...)
 	common.log("Executing command: %s", cmd)
-	-- os.execute(cmd .. " >nul 2>nul")
+	os.execute(cmd .. " >nul 2>nul")
 end
 
 local function buildGlobal(key, folder, parent)
@@ -143,6 +179,7 @@ function common.buildDatabase()
 		end
 	end
 
+	data = database
 	return database
 end
 
