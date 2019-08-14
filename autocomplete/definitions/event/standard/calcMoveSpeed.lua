@@ -1,5 +1,5 @@
 return {
-	description = "This event is called when an actor’s movement speed is calculated. The event allows modification of this value, to dehardcode actor movement speeds. Invoked after all other movement speed events are finished.",
+	description = "This event is called when an actor's movement speed is calculated. The event allows modification of this value, to dehardcode actor movement speeds. Invoked after all other movement speed events are finished.",
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",
@@ -9,7 +9,7 @@ return {
 		["reference"] = {
 			type = "tes3reference",
 			readonly = true,
-			description = "mobile’s related reference.",
+			description = "mobile's related reference.",
 		},
 		["speed"] = {
 			type = "number",

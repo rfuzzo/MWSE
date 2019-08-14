@@ -15,12 +15,12 @@ return {
 	returns = { { name = "stack", type = "tes3equipmentStack" } },
 	examples = {
 		["GetPlayerLight"] = {
-			title = "Get Player’s Equipped Light",
-			description = "In this example, we print the object ID of the player’s equipped light source.",
+			title = "Get Player's Equipped Light",
+			description = "In this example, we print the object ID of the player's equipped light source.",
 		},
 		["GetPlayerShield"] = {
-			title = "Get Player’s Shield",
-			description = "This example shows the player’s shield.",
+			title = "Get Player's Shield",
+			description = "This example shows the player's shield.",
 		},
 	},
 }

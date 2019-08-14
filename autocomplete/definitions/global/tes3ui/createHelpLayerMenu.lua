@@ -9,7 +9,7 @@ Unlike standard menus, help layer menus are always created with a fixed frame.]]
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "id", type = "number", description = "The menu’s ID. The menu can be later accessed by tes3ui.findHelpLayerMenu(id)." },
+			{ name = "id", type = "number", description = "The menu's ID. The menu can be later accessed by tes3ui.findHelpLayerMenu(id)." },
 		},
 	}},
 	returns = { { type = "tes3uiElement" } },

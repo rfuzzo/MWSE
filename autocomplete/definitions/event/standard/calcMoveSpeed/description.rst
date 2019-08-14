@@ -1,4 +1,4 @@
-This event is called when an actor’s movement speed is calculated. The event allows modification of this value, to dehardcode actor movement speeds.
+This event is called when an actor's movement speed is calculated. The event allows modification of this value, to dehardcode actor movement speeds.
 Invoked after all other movement speed events are finished.
 
 The movement event flow is described below:

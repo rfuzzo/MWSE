@@ -14,7 +14,7 @@ return {
 		reference = {
 			type = "tes3reference",
 			readonly = true,
-			description = "actor’s associated reference.",
+			description = "actor's associated reference.",
 		},
 		item = {
 			type = "tes3baseObject",

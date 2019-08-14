@@ -24,7 +24,7 @@ return {
 		["effectIndex"] = {
 			type = "number",
 			readonly = true,
-			description = "The index of the effect in source’s effects list.",
+			description = "The index of the effect in source's effects list.",
 		},
 		["effectInstance"] = {
 			type = "tes3magicEffectInstance",

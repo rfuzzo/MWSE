@@ -9,7 +9,7 @@ return {
 		reference = {
 			type = "tes3reference",
 			readonly = true,
-			description = "mobile’s related reference.",
+			description = "mobile's related reference.",
 		},
 		speed = {
 			type = "number",

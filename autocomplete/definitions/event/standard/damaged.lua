@@ -14,7 +14,7 @@ return {
 		reference = {
 			type = "tes3reference",
 			readonly = true,
-			description = "mobile’s associated reference.",
+			description = "mobile's associated reference.",
 		},
 	},
 }
