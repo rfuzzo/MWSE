@@ -19,8 +19,6 @@ common.directory.docsType = common.directory.docs .. "/type"
 -- Helper functions to produce the needed output.
 --
 
-local headerDividerLength = 100
-
 local headers = {
 	["h1"] = string.rep("#", 1),
 	["h2"] = string.rep("#", 2),
@@ -29,6 +27,8 @@ local headers = {
 	["h5"] = string.rep("#", 5),
 }
 
+local definitionWriters = {}
+
 local function getFullAccesKey(def)
 	if (def.parent) then
 		return getFullAccesKey(def.parent) .. "." .. def.key
@@ -36,12 +36,6 @@ local function getFullAccesKey(def)
 		return def.key
 	end
 end
-
-local function definitionSorter(a, b)
-	return a.key < b.key
-end
-
-local definitionWriters = {}
 
 local function writeOutDefinition(def, path, fallback)
 	local key = getFullAccesKey(def)
@@ -52,22 +46,6 @@ local function writeOutDefinition(def, path, fallback)
 	else
 		common.log("No writer found '%s'. Type '%s' has no writer defined.", key, def.type)
 	end
-end
-
-local function valueWriter(def, path)
-	local file = io.open(path .. "/" .. def.key .. ".md", "w")
-	file:write(headers.h1 .. " " .. def.key)
-
-	local optionalDescriptionPath = path .. "/" .. def.key .. "/description.md"
-	if (common.fileExists(optionalDescriptionPath)) then
-		file:write("\n\n" .. common.getFileContents(optionalDescriptionPath))
-	else
-		file:write("\n\n" .. (def.description or "No description available."))
-	end
-
-	file:write("\n")
-	file:close()
-	file = nil
 end
 
 local function getIndentedString(description, indentLevel)
@@ -87,19 +65,80 @@ local function getDefinitionReferenceLink(def, parent)
 	return parent.key .. "/" .. def.key
 end
 
+local function writeTableOfContentsTree(file, def, elements)
+	-- Write out the toctree.
+	file:write("\n\n```eval_rst")
+	file:write("\n.. toctree::")
+	file:write("\n    :hidden:")
+	file:write("\n")
+	for _, element in ipairs(elements) do
+		file:write(string.format("\n    %s", getDefinitionReferenceLink(element, def)))
+	end
+	file:write("\n```")
+end
+
+local function writeDescriptiveLinks(file, path, def, elements, fallbackWriter)
+	for _, element in ipairs(elements) do
+		file:write(string.format("\n\n%s %s", headers.h3, getDefinitionLink(element, def)))
+		file:write(string.format("\n\n%s", getListedDescription(element.brief or element.description or "No description available.")))
+		writeOutDefinition(element, path .. "/" .. def.key, fallbackWriter)
+	end
+end
+
+local function getDetailedDescription(def, path)
+	local optionalDescriptionPath = path .. "/" .. def.key .. "/description.md"
+	if (common.fileExists(optionalDescriptionPath)) then
+		return common.getFileContents(optionalDescriptionPath)
+	else
+		return def.description or "No description available."
+	end
+end
+
+local function definitionSorter(a, b)
+	return a.key < b.key
+end
+
+local function valueWriter(def, path)
+	local file = io.open(path .. "/" .. def.key .. ".md", "w")
+	file:write(headers.h1 .. " " .. def.key)
+
+	file:write("\n\n" .. getDetailedDescription(def, path))
+
+	file:write("\n")
+	file:close()
+	file = nil
+end
+
 definitionWriters["boolean"] = valueWriter
 definitionWriters["string"] = valueWriter
 definitionWriters["number"] = valueWriter
+
+local function writeArguments(file, args)
+	for i, arg in ipairs(args) do
+		file:write(string.format("\n\n%s %s (%s)", headers.h3, arg.name or ("arg" .. i), arg.type))
+		file:write(string.format("\n\n%s", arg.brief or arg.description or "No description available."))
+	end
+end
 
 local function writeFunctionOrMethod(def, path, isMethod)
 	local file = io.open(path .. "/" .. def.key .. ".md", "w")
 	file:write(headers.h1 .. " " .. def.key)
 
-	local optionalDescriptionPath = path .. "/" .. def.key .. "/description.md"
-	if (common.fileExists(optionalDescriptionPath)) then
-		file:write("\n\n" .. common.getFileContents(optionalDescriptionPath))
-	else
-		file:write("\n\n" .. (def.description or "No description available."))
+	file:write("\n\n" .. getDetailedDescription(def, path))
+
+	if (def.arguments and #def.arguments > 0) then
+		file:write("\n\n" .. headers.h2 .. " Parameters")
+		if (#def.arguments == 1 and def.arguments[1].tableParams and #def.arguments[1].tableParams > 0) then
+			file:write("\n\nThis function accepts parameters through a table with the following named entries:")
+			writeArguments(file, def.arguments[1].tableParams)
+		else
+			writeArguments(file, def.arguments)
+		end
+	end
+
+	if (def.returns and #def.returns > 0) then
+		file:write("\n\n" .. headers.h2 .. " Returns")
+		writeArguments(file, def.returns)
 	end
 
 	file:write("\n")
@@ -114,91 +153,54 @@ local function writeClassOrTable(def, path, isClass)
 	local file = io.open(path .. "/" .. def.key .. ".md", "w")
 	file:write(headers.h1 .. " " .. def.key)
 
-	local optionalDescriptionPath = path .. "/" .. def.key .. "/description.md"
-	if (common.fileExists(optionalDescriptionPath)) then
-		file:write("\n\n" .. common.getFileContents(optionalDescriptionPath))
-	else
-		file:write("\n\n" .. (def.description or "No description available."))
-	end
+	file:write("\n\n" .. getDetailedDescription(def, path))
 
 	if (def.children) then
 		local values = {}
 		local functions = {}
 		local methods = {}
+		local metatables = {}
 
 		common.execute("mkdir %q", path .. "/" .. def.key)
 
 		for _, child in pairs(common.flattenChildren(def)) do
-			if (child.type ~= "function" and child.type ~= "method") then
-				table.insert(values, child)
-			elseif (isClass and false) then
+			if (child.type == "metatable") then
+				table.insert(metatables, child)
+			elseif (child.type == "function") then
+				table.insert(functions, child)
+			elseif (child.type == "method") then
 				table.insert(methods, child)
 			else
-				table.insert(functions, child)
+				table.insert(values, child)
 			end
 		end
 
 		table.sort(values, definitionSorter)
 		if (#values > 0) then
 			file:write("\n\n" .. headers.h2 .. " Values")
-
-			-- Write out the toctree.
-			file:write("\n\n```eval_rst")
-			file:write("\n.. toctree::")
-			file:write("\n    :hidden:")
-			file:write("\n")
-			for _, value in ipairs(values) do
-				file:write(string.format("\n    %s", getDefinitionReferenceLink(value, def)))
-			end
-			file:write("\n```")
-
-			for _, value in ipairs(values) do
-				file:write(string.format("\n\n%s %s", headers.h4, getDefinitionLink(value, def)))
-				file:write(string.format("\n\n%s", getListedDescription(value.brief or value.description or "No description available.")))
-				writeOutDefinition(value, path .. "/" .. def.key, valueWriter)
-			end
+			writeTableOfContentsTree(file, def, values)
+			writeDescriptiveLinks(file, path, def, values, valueWriter)
 		end
 
 		table.sort(methods, definitionSorter)
 		if (#methods > 0) then
 			file:write("\n\n" .. headers.h2 .. " Methods")
-
-			-- Write out the toctree.
-			file:write("\n\n```eval_rst")
-			file:write("\n.. toctree::")
-			file:write("\n    :hidden:")
-			file:write("\n")
-			for _, method in ipairs(methods) do
-				file:write(string.format("\n    %s", getDefinitionReferenceLink(method, def)))
-			end
-			file:write("\n```")
-
-			for _, method in ipairs(methods) do
-				file:write(string.format("\n\n%s %s", headers.h4, getDefinitionLink(method, def)))
-				file:write(string.format("\n\n%s", getListedDescription(method.brief or method.description or "No description available.")))
-				writeOutDefinition(method, path .. "/" .. def.key)
-			end
+			writeTableOfContentsTree(file, def, methods)
+			writeDescriptiveLinks(file, path, def, methods)
 		end
 
 		table.sort(functions, definitionSorter)
 		if (#functions > 0) then
 			file:write("\n\n" .. headers.h2 .. " Functions")
+			writeTableOfContentsTree(file, def, functions)
+			writeDescriptiveLinks(file, path, def, functions)
+		end
 
-			-- Write out the toctree.
-			file:write("\n\n```eval_rst")
-			file:write("\n.. toctree::")
-			file:write("\n    :hidden:")
-			file:write("\n")
-			for _, fn in ipairs(functions) do
-				file:write(string.format("\n    %s", getDefinitionReferenceLink(fn, def)))
-			end
-			file:write("\n```")
-
-			for _, fn in ipairs(functions) do
-				file:write(string.format("\n\n%s %s", headers.h4, getDefinitionLink(fn, def)))
-				file:write(string.format("\n\n%s", getListedDescription(fn.brief or fn.description or "No description available.")))
-				writeOutDefinition(fn, path .. "/" .. def.key)
-			end
+		table.sort(metatables, definitionSorter)
+		if (#metatables > 0) then
+			file:write("\n\n" .. headers.h2 .. " Metatable Events")
+			writeTableOfContentsTree(file, def, metatables)
+			writeDescriptiveLinks(file, path, def, metatables)
 		end
 	end
 
