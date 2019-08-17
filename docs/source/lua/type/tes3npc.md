@@ -2,258 +2,305 @@
 
 An NPC object that has not been cloned. Typically represents the raw information edited in the construction set.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">actorFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3npc/__tostring
-    tes3npc/actorFlags
-    tes3npc/aiConfig
-    tes3npc/attributes
-    tes3npc/autoCalc
-    tes3npc/barterGold
-    tes3npc/boundingBox
-    tes3npc/class
-    tes3npc/cloneCount
-    tes3npc/deleted
-    tes3npc/disabled
-    tes3npc/disposition
-    tes3npc/equipment
-    tes3npc/faction
-    tes3npc/factionIndex
-    tes3npc/factionRank
-    tes3npc/fatigue
-    tes3npc/female
-    tes3npc/hair
-    tes3npc/head
-    tes3npc/health
-    tes3npc/id
-    tes3npc/inventory
-    tes3npc/isAttacked
-    tes3npc/isEssential
-    tes3npc/isInstance
-    tes3npc/isRespawn
-    tes3npc/level
-    tes3npc/magicka
-    tes3npc/mesh
-    tes3npc/modified
-    tes3npc/name
-    tes3npc/nextInCollection
-    tes3npc/objectFlags
-    tes3npc/objectType
-    tes3npc/owningCollection
-    tes3npc/previousInCollection
-    tes3npc/race
-    tes3npc/reputation
-    tes3npc/scale
-    tes3npc/sceneNode
-    tes3npc/sceneReference
-    tes3npc/script
-    tes3npc/skills
-    tes3npc/sourceMod
-    tes3npc/spells
-    tes3npc/stolenList
-```
+A number representing the actor flags. Truly a bit field.
 
-#### [__tostring](tes3npc/__tostring.md)
+</dd>
+<dt><code class="descname">aiConfig: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3aiConfig.html">tes3aiConfig</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+A substructure off of actors that contains information on the current AI configuration.
 
-#### [actorFlags](tes3npc/actorFlags.md)
+</dd>
+<dt><code class="descname">attributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> A number representing the actor flags. Truly a bit field.
+A table of eight numbers, representing the base values for the actor's attributes.
 
-#### [aiConfig](tes3npc/aiConfig.md)
+</dd>
+<dt><code class="descname">autoCalc: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A substructure off of actors that contains information on the current AI configuration.
+Direct access to the actor autocalc flag.
 
-#### [attributes](tes3npc/attributes.md)
+</dd>
+<dt><code class="descname">barterGold: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A table of eight numbers, representing the base values for the actor's attributes.
+The actor's max health.
 
-#### [autoCalc](tes3npc/autoCalc.md)
+</dd>
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-> Direct access to the actor autocalc flag.
+The bounding box for the object.
 
-#### [barterGold](tes3npc/barterGold.md)
+</dd>
+<dt><code class="descname">class: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3class.html">tes3class</a></code></dt>
+<dd>
 
-> The actor's max health.
+The class that the NPC uses.
 
-#### [boundingBox](tes3npc/boundingBox.md)
+</dd>
+<dt><code class="descname">cloneCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The number of clones that exist of this actor.
 
-#### [class](tes3npc/class.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The class that the NPC uses.
+The deleted state of the object.
 
-#### [cloneCount](tes3npc/cloneCount.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The number of clones that exist of this actor.
+The disabled state of the object.
 
-#### [deleted](tes3npc/deleted.md)
+</dd>
+<dt><code class="descname">disposition: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The actor's base disposition.
 
-#### [disabled](tes3npc/disabled.md)
+</dd>
+<dt><code class="descname">equipment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The items currently equipped to the actor.
 
-#### [disposition](tes3npc/disposition.md)
+</dd>
+<dt><code class="descname">faction: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3faction.html">tes3faction</a></code></dt>
+<dd>
 
-> The actor's base disposition.
+The class that the NPC is joined to.
 
-#### [equipment](tes3npc/equipment.md)
+</dd>
+<dt><code class="descname">factionIndex: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The items currently equipped to the actor.
+No description available.
 
-#### [faction](tes3npc/faction.md)
+</dd>
+<dt><code class="descname">factionRank: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The class that the NPC is joined to.
+The NPC's rank in their faction.
 
-#### [factionIndex](tes3npc/factionIndex.md)
+</dd>
+<dt><code class="descname">fatigue: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+The actor's max fatigue.
 
-#### [factionRank](tes3npc/factionRank.md)
+</dd>
+<dt><code class="descname">female: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The NPC's rank in their faction.
+Direct access to the actor female flag.
 
-#### [fatigue](tes3npc/fatigue.md)
+</dd>
+<dt><code class="descname">hair: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The actor's max fatigue.
+The hair body part that the NPC will use.
 
-#### [female](tes3npc/female.md)
+</dd>
+<dt><code class="descname">head: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> Direct access to the actor female flag.
+The head body part that the NPC will use.
 
-#### [hair](tes3npc/hair.md)
+</dd>
+<dt><code class="descname">health: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The hair body part that the NPC will use.
+The actor's max health.
 
-#### [head](tes3npc/head.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The head body part that the NPC will use.
+The unique identifier for the object.
 
-#### [health](tes3npc/health.md)
+</dd>
+<dt><code class="descname">inventory: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The actor's max health.
+The items currently carried by the actor.
 
-#### [id](tes3npc/id.md)
+</dd>
+<dt><code class="descname">isAttacked: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+If true, the actor's attacked flag is set.
 
-#### [inventory](tes3npc/inventory.md)
+</dd>
+<dt><code class="descname">isEssential: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The items currently carried by the actor.
+If true, the actor's essential flag is set.
 
-#### [isAttacked](tes3npc/isAttacked.md)
+</dd>
+<dt><code class="descname">isInstance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the actor's attacked flag is set.
+Always returns false.
 
-#### [isEssential](tes3npc/isEssential.md)
+</dd>
+<dt><code class="descname">isRespawn: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the actor's essential flag is set.
+If true, the actor's respawn flag is set.
 
-#### [isInstance](tes3npc/isInstance.md)
+</dd>
+<dt><code class="descname">level: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Always returns false.
+The actor's level.
 
-#### [isRespawn](tes3npc/isRespawn.md)
+</dd>
+<dt><code class="descname">magicka: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> If true, the actor's respawn flag is set.
+The actor's max magicka.
 
-#### [level](tes3npc/level.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The actor's level.
+The path to the object's mesh.
 
-#### [magicka](tes3npc/magicka.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The actor's max magicka.
+The modification state of the object since the last save.
 
-#### [mesh](tes3npc/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3npc/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3npc/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3npc/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3npc/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3npc/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3npc/owningCollection.md)
+</dd>
+<dt><code class="descname">race: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3race.html">tes3race</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The race that the NPC uses.
 
-#### [previousInCollection](tes3npc/previousInCollection.md)
+</dd>
+<dt><code class="descname">reputation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The actor's base reputation.
 
-#### [race](tes3npc/race.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The race that the NPC uses.
+The object's scale.
 
-#### [reputation](tes3npc/reputation.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The actor's base reputation.
+The scene graph node for this object.
 
-#### [scale](tes3npc/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3npc/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3npc/sceneReference.md)
+</dd>
+<dt><code class="descname">skills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+A table of twenty seven numbers, representing the base values for the NPC's skills.
 
-#### [script](tes3npc/script.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+The filename of the mod that owns this object.
 
-#### [skills](tes3npc/skills.md)
+</dd>
+<dt><code class="descname">spells: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3spellList.html">tes3spellList</a></code></dt>
+<dd>
 
-> A table of twenty seven numbers, representing the base values for the NPC's skills.
+A list of spells that the actor has access to.
 
-#### [sourceMod](tes3npc/sourceMod.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+A list of actors that the object has been stolen from.
 
-#### [spells](tes3npc/spells.md)
+</dd>
+</dl>
 
-> A list of spells that the actor has access to.
+## Methods
 
-#### [stolenList](tes3npc/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">onInventoryClose(<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>)</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3npc/onInventoryClose
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [onInventoryClose](tes3npc/onInventoryClose.md)
+An object can be converted using `tostring()` to its id.
 
-> A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
+</dd>
+</dl>

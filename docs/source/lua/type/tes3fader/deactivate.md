@@ -1,3 +1,0 @@
-# deactivate
-
-Deactivates an activated fader.

@@ -13,14 +13,23 @@ This library provides generic functions for string manipulation, such as finding
     string/startswith
 ```
 
-#### [endswith](string/endswith.md)
+<dl class="describe">
+<dt><code class="descname"><a href="string/endswith.html">endswith</a>(<i>s:</i> string, <i>pattern:</i> string) -> boolean</code></dt>
+<dd>
 
-> Returns true if a string ends with a given pattern.
+Returns true if a string ends with a given pattern.
 
-#### [format](string/format.md)
+</dd>
+<dt><code class="descname"><a href="string/format.html">format</a>(<i>format:</i> string, <i>arg2:</i> values) -> string</code></dt>
+<dd>
 
-> This function creates a string, given various values. The format follows the printf format, with the additional option of %q to automatically quote a string.
+This function creates a string, given various values. The format follows the printf format, with the additional option of %q to automatically quote a string.
 
-#### [startswith](string/startswith.md)
+</dd>
+<dt><code class="descname"><a href="string/startswith.html">startswith</a>(<i>s:</i> string, <i>pattern:</i> string) -> boolean</code></dt>
+<dd>
 
-> Returns true if a string begins with a given pattern.
+Returns true if a string begins with a given pattern.
+
+</dd>
+</dl>

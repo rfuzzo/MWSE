@@ -2,65 +2,73 @@
 
 Represents an individual instance of a magic effect being applied to a reference.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">cumulativeMagnitude: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3magicEffectInstance/cumulativeMagnitude
-    tes3magicEffectInstance/lastUsedArmor
-    tes3magicEffectInstance/lastUsedEnchItem
-    tes3magicEffectInstance/lastUsedShield
-    tes3magicEffectInstance/lastUsedWeapon
-    tes3magicEffectInstance/magnitude
-    tes3magicEffectInstance/resistedPercent
-    tes3magicEffectInstance/state
-    tes3magicEffectInstance/target
-    tes3magicEffectInstance/timeActive
-    tes3magicEffectInstance/visual
-```
+No description available.
 
-#### [cumulativeMagnitude](tes3magicEffectInstance/cumulativeMagnitude.md)
+</dd>
+<dt><code class="descname">lastUsedArmor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3armor.html">tes3armor</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [lastUsedArmor](tes3magicEffectInstance/lastUsedArmor.md)
+</dd>
+<dt><code class="descname">lastUsedEnchItem: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3item.html">tes3item</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [lastUsedEnchItem](tes3magicEffectInstance/lastUsedEnchItem.md)
+</dd>
+<dt><code class="descname">lastUsedShield: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3armor.html">tes3armor</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [lastUsedShield](tes3magicEffectInstance/lastUsedShield.md)
+</dd>
+<dt><code class="descname">lastUsedWeapon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3weapon.html">tes3weapon</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [lastUsedWeapon](tes3magicEffectInstance/lastUsedWeapon.md)
+</dd>
+<dt><code class="descname">magnitude: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [magnitude](tes3magicEffectInstance/magnitude.md)
+</dd>
+<dt><code class="descname">resistedPercent: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [resistedPercent](tes3magicEffectInstance/resistedPercent.md)
+</dd>
+<dt><code class="descname">state: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [state](tes3magicEffectInstance/state.md)
+</dd>
+<dt><code class="descname">target: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [target](tes3magicEffectInstance/target.md)
+</dd>
+<dt><code class="descname">timeActive: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [timeActive](tes3magicEffectInstance/timeActive.md)
+</dd>
+<dt><code class="descname">visual: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [visual](tes3magicEffectInstance/visual.md)
-
-> No description available.
+</dd>
+</dl>

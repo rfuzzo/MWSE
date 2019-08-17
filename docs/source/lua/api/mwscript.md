@@ -49,158 +49,239 @@ The mwscript library allows vanilla mwscript functions to be called. This is not
     mwscript/wakeUpPC
 ```
 
-#### [activate](mwscript/activate.md)
+<dl class="describe">
+<dt><code class="descname"><a href="mwscript/activate.html">activate</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string})</code></dt>
+<dd>
 
-> Wrapper for the Activate mwscript function.
+Wrapper for the Activate mwscript function.
 
-#### [addItem](mwscript/addItem.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/addItem.html">addItem</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>item:</i> tes3item|string, <i>count:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AddItem mwscript function.
+Wrapper for the AddItem mwscript function.
 
-#### [addSoulGem](mwscript/addSoulGem.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/addSoulGem.html">addSoulGem</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>creature:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3creature.html">tes3creature</a>|string, <i>soulgem:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3misc.html">tes3misc</a>|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AddSoulGem mwscript function.
+Wrapper for the AddSoulGem mwscript function.
 
-#### [addSpell](mwscript/addSpell.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/addSpell.html">addSpell</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>spell:</i> tes3spell|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AddItem mwscript function.
+Wrapper for the AddItem mwscript function.
 
-#### [addToLevCreature](mwscript/addToLevCreature.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/addToLevCreature.html">addToLevCreature</a>({<i>list:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3leveledCreature.html">tes3leveledCreature</a>|string, <i>creature:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actor.html">tes3actor</a>|string, <i>level:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AddToLevCreature mwscript function.
+Wrapper for the AddToLevCreature mwscript function.
 
-#### [addToLevItem](mwscript/addToLevItem.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/addToLevItem.html">addToLevItem</a>({<i>list:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3leveledItem.html">tes3leveledItem</a>|string, <i>item:</i> tes3item|string, <i>level:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AddToLevItem mwscript function.
+Wrapper for the AddToLevItem mwscript function.
 
-#### [addTopic](mwscript/addTopic.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/addTopic.html">addTopic</a>({<i>topic:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3dialogue.html">tes3dialogue</a>|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AddItem mwscript function.
+Wrapper for the AddItem mwscript function.
 
-#### [aiTravel](mwscript/aiTravel.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/aiTravel.html">aiTravel</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>x:</i> number, <i>y:</i> number, <i>z:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the AITravel mwscript function.
+Wrapper for the AITravel mwscript function.
 
-#### [disable](mwscript/disable.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/disable.html">disable</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>modify:</i> boolean}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the Disable mwscript function.
+Wrapper for the Disable mwscript function.
 
-#### [drop](mwscript/drop.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/drop.html">drop</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>item:</i> tes3item|string, <i>count:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the Drop mwscript function.
+Wrapper for the Drop mwscript function.
 
-#### [enable](mwscript/enable.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/enable.html">enable</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>modify:</i> boolean}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the Enable mwscript function.
+Wrapper for the Enable mwscript function.
 
-#### [equip](mwscript/equip.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/equip.html">equip</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>item:</i> tes3item|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the Equip mwscript function.
+Wrapper for the Equip mwscript function.
 
-#### [explodeSpell](mwscript/explodeSpell.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/explodeSpell.html">explodeSpell</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>spell:</i> tes3spell|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the ExplodeSpell mwscript function.
+Wrapper for the ExplodeSpell mwscript function.
 
-#### [getButtonPressed](mwscript/getButtonPressed.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getButtonPressed.html">getButtonPressed</a>()</code></dt>
+<dd>
 
-> Wrapper for the GetButtonPressed mwscript function.
+Wrapper for the GetButtonPressed mwscript function.
 
-#### [getDetected](mwscript/getDetected.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getDetected.html">getDetected</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>target:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the GetDetected mwscript function.
+Wrapper for the GetDetected mwscript function.
 
-#### [getDisabled](mwscript/getDisabled.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getDisabled.html">getDisabled</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the GetDisabled mwscript function.
+Wrapper for the GetDisabled mwscript function.
 
-#### [getDistance](mwscript/getDistance.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getDistance.html">getDistance</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>target:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the GetDistance mwscript function.
+Wrapper for the GetDistance mwscript function.
 
-#### [getItemCount](mwscript/getItemCount.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getItemCount.html">getItemCount</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>item:</i> tes3item|string}) -> number</code></dt>
+<dd>
 
-> Wrapper for the GetItemCount mwscript function.
+Wrapper for the GetItemCount mwscript function.
 
-#### [getPCJumping](mwscript/getPCJumping.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getPCJumping.html">getPCJumping</a>()</code></dt>
+<dd>
 
-> Wrapper for the GetPCJumping mwscript function.
+Wrapper for the GetPCJumping mwscript function.
 
-#### [getPCRunning](mwscript/getPCRunning.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getPCRunning.html">getPCRunning</a>()</code></dt>
+<dd>
 
-> Wrapper for the GetPCRunning mwscript function.
+Wrapper for the GetPCRunning mwscript function.
 
-#### [getPCSneaking](mwscript/getPCSneaking.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getPCSneaking.html">getPCSneaking</a>()</code></dt>
+<dd>
 
-> Wrapper for the GetPCSneaking mwscript function.
+Wrapper for the GetPCSneaking mwscript function.
 
-#### [getReference](mwscript/getReference.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getReference.html">getReference</a>()</code></dt>
+<dd>
 
-> Returns the script target for the currently running Morrowind script, if any.
+Returns the script target for the currently running Morrowind script, if any.
 
-#### [getScript](mwscript/getScript.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getScript.html">getScript</a>()</code></dt>
+<dd>
 
-> Returns the currently running Morrowind script, if any.
+Returns the currently running Morrowind script, if any.
 
-#### [getSpellEffects](mwscript/getSpellEffects.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/getSpellEffects.html">getSpellEffects</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>spell:</i> tes3spell|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the GetSpellEffects mwscript function.
+Wrapper for the GetSpellEffects mwscript function.
 
-#### [hasItemEquipped](mwscript/hasItemEquipped.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/hasItemEquipped.html">hasItemEquipped</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>item:</i> tes3item|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the HasItemEquipped mwscript function.
+Wrapper for the HasItemEquipped mwscript function.
 
-#### [placeAtPC](mwscript/placeAtPC.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/placeAtPC.html">placeAtPC</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>object:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a>|string, <i>count:</i> number, <i>distance:</i> number, <i>direction:</i> number}) -> <i>lastPlacedReference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> Wrapper for the PlaceAtPC mwscript function.
+Wrapper for the PlaceAtPC mwscript function.
 
-#### [playSound](mwscript/playSound.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/playSound.html">playSound</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>sound:</i> tes3sound|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the PlaySound mwscript function.
+Wrapper for the PlaySound mwscript function.
 
-#### [position](mwscript/position.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/position.html">position</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>cell:</i> string, <i>x:</i> number, <i>y:</i> number, <i>z:</i> number, <i>rotation:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the Position mwscript function.
+Wrapper for the Position mwscript function.
 
-#### [positionCell](mwscript/positionCell.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/positionCell.html">positionCell</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>cell:</i> string, <i>x:</i> number, <i>y:</i> number, <i>z:</i> number, <i>rotation:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the PositionCell mwscript function.
+Wrapper for the PositionCell mwscript function.
 
-#### [removeItem](mwscript/removeItem.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/removeItem.html">removeItem</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>item:</i> tes3item|string, <i>count:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the RemoveItem mwscript function.
+Wrapper for the RemoveItem mwscript function.
 
-#### [removeSpell](mwscript/removeSpell.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/removeSpell.html">removeSpell</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>spell:</i> tes3spell|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the RemoveSpell mwscript function.
+Wrapper for the RemoveSpell mwscript function.
 
-#### [scriptRunning](mwscript/scriptRunning.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/scriptRunning.html">scriptRunning</a>({<i>script:</i> tes3script|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the ScriptRunning mwscript function.
+Wrapper for the ScriptRunning mwscript function.
 
-#### [setLevel](mwscript/setLevel.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/setLevel.html">setLevel</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>level:</i> number}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the SetLevel mwscript function.
+Wrapper for the SetLevel mwscript function.
 
-#### [startCombat](mwscript/startCombat.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/startCombat.html">startCombat</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>target:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the StartCombat mwscript function.
+Wrapper for the StartCombat mwscript function.
 
-#### [startScript](mwscript/startScript.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/startScript.html">startScript</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>script:</i> tes3script|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the StartCombat mwscript function.
+Wrapper for the StartCombat mwscript function.
 
-#### [stopCombat](mwscript/stopCombat.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/stopCombat.html">stopCombat</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>target:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the StopCombat mwscript function.
+Wrapper for the StopCombat mwscript function.
 
-#### [stopScript](mwscript/stopScript.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/stopScript.html">stopScript</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>script:</i> tes3script|string}) -> <i>executed:</i> boolean</code></dt>
+<dd>
 
-> Wrapper for the StartCombat mwscript function.
+Wrapper for the StartCombat mwscript function.
 
-#### [stopSound](mwscript/stopSound.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/stopSound.html">stopSound</a>({<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|string, <i>sound:</i> tes3sound|string}) -> boolean</code></dt>
+<dd>
 
-> Wrapper for the StopSound mwscript function.
+Wrapper for the StopSound mwscript function.
 
-#### [wakeUpPC](mwscript/wakeUpPC.md)
+</dd>
+<dt><code class="descname"><a href="mwscript/wakeUpPC.html">wakeUpPC</a>()</code></dt>
+<dd>
 
-> Wrapper for the WakeUpPC mwscript function.
+Wrapper for the WakeUpPC mwscript function.
+
+</dd>
+</dl>

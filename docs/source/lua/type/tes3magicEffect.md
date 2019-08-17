@@ -2,180 +2,211 @@
 
 A core magic effect definition.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">allowEnchanting: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-    tes3magicEffect/allowEnchanting
-    tes3magicEffect/allowSpellmaking
-    tes3magicEffect/appliesOnce
-    tes3magicEffect/areaSoundEffect
-    tes3magicEffect/baseFlags
-    tes3magicEffect/baseMagickaCost
-    tes3magicEffect/boltSoundEffects
-    tes3magicEffect/canCastSelf
-    tes3magicEffect/canCastTarget
-    tes3magicEffect/canCastTouch
-    tes3magicEffect/castSoundEffect
-    tes3magicEffect/casterLinked
-    tes3magicEffect/flags
-    tes3magicEffect/hasContinuousVFX
-    tes3magicEffect/hasNoDuration
-    tes3magicEffect/hasNoMagnitude
-    tes3magicEffect/hitSoundEffect
-    tes3magicEffect/icon
-    tes3magicEffect/id
-    tes3magicEffect/illegalDaedra
-    tes3magicEffect/isHarmful
-    tes3magicEffect/lightingBlue
-    tes3magicEffect/lightingGreen
-    tes3magicEffect/lightingRed
-    tes3magicEffect/nonRecastable
-    tes3magicEffect/particleTexture
-    tes3magicEffect/school
-    tes3magicEffect/size
-    tes3magicEffect/sizeCap
-    tes3magicEffect/speed
-    tes3magicEffect/targetsAttributes
-    tes3magicEffect/targetsSkills
-    tes3magicEffect/unreflectable
-    tes3magicEffect/usesNegativeLighting
-```
+Access to the flag that determines if this effect can be used in enchanting.
 
-#### [allowEnchanting](tes3magicEffect/allowEnchanting.md)
+</dd>
+<dt><code class="descname">allowSpellmaking: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the flag that determines if this effect can be used in enchanting.
+Access to the flag that determines if this effect can be used with spellmaking.
 
-#### [allowSpellmaking](tes3magicEffect/allowSpellmaking.md)
+</dd>
+<dt><code class="descname">appliesOnce: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the flag that determines if this effect can be used with spellmaking.
+Access to the base flag that determines if this effect can be used in enchanting.
 
-#### [appliesOnce](tes3magicEffect/appliesOnce.md)
+</dd>
+<dt><code class="descname">areaSoundEffect: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect can be used in enchanting.
+The sound path to the sound effect to use for area of effect impacts.
 
-#### [areaSoundEffect](tes3magicEffect/areaSoundEffect.md)
+</dd>
+<dt><code class="descname">baseFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The sound path to the sound effect to use for area of effect impacts.
+No description available.
 
-#### [baseFlags](tes3magicEffect/baseFlags.md)
+</dd>
+<dt><code class="descname">baseMagickaCost: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+The base magicka cost to use in calculations.
 
-#### [baseMagickaCost](tes3magicEffect/baseMagickaCost.md)
+</dd>
+<dt><code class="descname">boltSoundEffects: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The base magicka cost to use in calculations.
+The sound path to the sound effect to use for target projectiles.
 
-#### [boltSoundEffects](tes3magicEffect/boltSoundEffects.md)
+</dd>
+<dt><code class="descname">canCastSelf: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The sound path to the sound effect to use for target projectiles.
+Access to the base flag that determines if this effect can be used with a range of self.
 
-#### [canCastSelf](tes3magicEffect/canCastSelf.md)
+</dd>
+<dt><code class="descname">canCastTarget: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect can be used with a range of self.
+Access to the base flag that determines if this effect can be used with a range of target.
 
-#### [canCastTarget](tes3magicEffect/canCastTarget.md)
+</dd>
+<dt><code class="descname">canCastTouch: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect can be used with a range of target.
+Access to the base flag that determines if this effect can be used with a range of touch.
 
-#### [canCastTouch](tes3magicEffect/canCastTouch.md)
+</dd>
+<dt><code class="descname">castSoundEffect: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect can be used with a range of touch.
+The sound path to the sound effect to use when casting.
 
-#### [castSoundEffect](tes3magicEffect/castSoundEffect.md)
+</dd>
+<dt><code class="descname">casterLinked: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The sound path to the sound effect to use when casting.
+Access to the base flag.
 
-#### [casterLinked](tes3magicEffect/casterLinked.md)
+</dd>
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the base flag.
+Raw access to the numerical representation of flags. Typically shouldn't be used.
 
-#### [flags](tes3magicEffect/flags.md)
+</dd>
+<dt><code class="descname">hasContinuousVFX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Raw access to the numerical representation of flags. Typically shouldn't be used.
+Access to the base flag that determines if this effect's VFX continuously plays.
 
-#### [hasContinuousVFX](tes3magicEffect/hasContinuousVFX.md)
+</dd>
+<dt><code class="descname">hasNoDuration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect's VFX continuously plays.
+Access to the base flag that determines if this effect doesn't use a duration.
 
-#### [hasNoDuration](tes3magicEffect/hasNoDuration.md)
+</dd>
+<dt><code class="descname">hasNoMagnitude: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect doesn't use a duration.
+Access to the base flag that determines if this effect doesn't make use of its magnitude.
 
-#### [hasNoMagnitude](tes3magicEffect/hasNoMagnitude.md)
+</dd>
+<dt><code class="descname">hitSoundEffect: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect doesn't make use of its magnitude.
+The sound path to the sound effect to use when the effect hits a target.
 
-#### [hitSoundEffect](tes3magicEffect/hitSoundEffect.md)
+</dd>
+<dt><code class="descname">icon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The sound path to the sound effect to use when the effect hits a target.
+The sound path to the icon to use for the effect.
 
-#### [icon](tes3magicEffect/icon.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The sound path to the icon to use for the effect.
+The numerical id for the effect.
 
-#### [id](tes3magicEffect/id.md)
+</dd>
+<dt><code class="descname">illegalDaedra: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The numerical id for the effect.
+Access to the base flag that determines if this effect summons an illegal daedra. This flag isn't used.
 
-#### [illegalDaedra](tes3magicEffect/illegalDaedra.md)
+</dd>
+<dt><code class="descname">isHarmful: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect summons an illegal daedra. This flag isn't used.
+Access to the base flag that determines if this effect is counted as a hostile action.
 
-#### [isHarmful](tes3magicEffect/isHarmful.md)
+</dd>
+<dt><code class="descname">lightingBlue: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect is counted as a hostile action.
+The amount of blue lighting to use when lighting projectiles.
 
-#### [lightingBlue](tes3magicEffect/lightingBlue.md)
+</dd>
+<dt><code class="descname">lightingGreen: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The amount of blue lighting to use when lighting projectiles.
+The amount of green lighting to use when lighting projectiles.
 
-#### [lightingGreen](tes3magicEffect/lightingGreen.md)
+</dd>
+<dt><code class="descname">lightingRed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The amount of green lighting to use when lighting projectiles.
+The amount of red lighting to use when lighting projectiles.
 
-#### [lightingRed](tes3magicEffect/lightingRed.md)
+</dd>
+<dt><code class="descname">nonRecastable: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The amount of red lighting to use when lighting projectiles.
+Access to the base flag that determines if this effect can be refreshed by recasting.
 
-#### [nonRecastable](tes3magicEffect/nonRecastable.md)
+</dd>
+<dt><code class="descname">particleTexture: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect can be refreshed by recasting.
+The path to use for the particle effect texture.
 
-#### [particleTexture](tes3magicEffect/particleTexture.md)
+</dd>
+<dt><code class="descname">school: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The path to use for the particle effect texture.
+The school that the effect is associated with.
 
-#### [school](tes3magicEffect/school.md)
+</dd>
+<dt><code class="descname">size: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The school that the effect is associated with.
+No description available.
 
-#### [size](tes3magicEffect/size.md)
+</dd>
+<dt><code class="descname">sizeCap: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [sizeCap](tes3magicEffect/sizeCap.md)
+</dd>
+<dt><code class="descname">speed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [speed](tes3magicEffect/speed.md)
+</dd>
+<dt><code class="descname">targetsAttributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+Access to the base flag that determines if this effect makes use of attributes.
 
-#### [targetsAttributes](tes3magicEffect/targetsAttributes.md)
+</dd>
+<dt><code class="descname">targetsSkills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect makes use of attributes.
+Access to the base flag that determines if this effect makes use of skills.
 
-#### [targetsSkills](tes3magicEffect/targetsSkills.md)
+</dd>
+<dt><code class="descname">unreflectable: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect makes use of skills.
+Access to the base flag that determines if this effect can't be reflected.
 
-#### [unreflectable](tes3magicEffect/unreflectable.md)
+</dd>
+<dt><code class="descname">usesNegativeLighting: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the base flag that determines if this effect can't be reflected.
+Access to the base flag that determines if this effect provides negative lighting.
 
-#### [usesNegativeLighting](tes3magicEffect/usesNegativeLighting.md)
-
-> Access to the base flag that determines if this effect provides negative lighting.
+</dd>
+</dl>

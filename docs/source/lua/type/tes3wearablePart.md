@@ -2,25 +2,25 @@
 
 A container class that maps a body part id to its male and female body parts.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">female: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-    tes3wearablePart/female
-    tes3wearablePart/male
-    tes3wearablePart/type
-```
+The body part object used for female actors.
 
-#### [female](tes3wearablePart/female.md)
+</dd>
+<dt><code class="descname">male: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The body part object used for female actors.
+The body part object used for male actors.
 
-#### [male](tes3wearablePart/male.md)
+</dd>
+<dt><code class="descname">type: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The body part object used for male actors.
+No description available.
 
-#### [type](tes3wearablePart/type.md)
-
-> No description available.
+</dd>
+</dl>

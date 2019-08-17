@@ -4,228 +4,269 @@ A reference is a sort of container structure for objects. It holds a base object
 
 For example, many doors may share the same base object. However, each door reference might have a different owner, different lock/trap statuses, etc. that make the object unique.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">activationReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-    tes3reference/__tostring
-    tes3reference/activationReference
-    tes3reference/attachments
-    tes3reference/cell
-    tes3reference/context
-    tes3reference/data
-    tes3reference/deleted
-    tes3reference/disabled
-    tes3reference/id
-    tes3reference/isEmpty
-    tes3reference/isRespawn
-    tes3reference/light
-    tes3reference/lockNode
-    tes3reference/mobile
-    tes3reference/modified
-    tes3reference/nextInCollection
-    tes3reference/nextNode
-    tes3reference/nodeData
-    tes3reference/object
-    tes3reference/objectFlags
-    tes3reference/objectType
-    tes3reference/orientation
-    tes3reference/owningCollection
-    tes3reference/position
-    tes3reference/previousInCollection
-    tes3reference/previousNode
-    tes3reference/scale
-    tes3reference/sceneNode
-    tes3reference/sceneReference
-    tes3reference/sourceMod
-    tes3reference/stackSize
-```
+The current reference, if any, that this reference will activate.
 
-#### [__tostring](tes3reference/__tostring.md)
+</dd>
+<dt><code class="descname">attachments: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+A table with friendly named access to all supported attachments.
 
-#### [activationReference](tes3reference/activationReference.md)
+</dd>
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-> The current reference, if any, that this reference will activate.
+The cell that the reference is currently in.
 
-#### [attachments](tes3reference/attachments.md)
+</dd>
+<dt><code class="descname">context: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3scriptContext.html">tes3scriptContext</a></code></dt>
+<dd>
 
-> A table with friendly named access to all supported attachments.
+Access to the script context for this reference and its associated script.
 
-#### [cell](tes3reference/cell.md)
+</dd>
+<dt><code class="descname">data: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The cell that the reference is currently in.
+A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the tes3itemData structure.
 
-#### [context](tes3reference/context.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the script context for this reference and its associated script.
+The deleted state of the object.
 
-#### [data](tes3reference/data.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the tes3itemData structure.
+The disabled state of the object.
 
-#### [deleted](tes3reference/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3reference/disabled.md)
+</dd>
+<dt><code class="descname">isEmpty: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+Friendly access onto the reference's empty inventory flag.
 
-#### [id](tes3reference/id.md)
+</dd>
+<dt><code class="descname">isRespawn: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+If true, the references respawn flag is set.
 
-#### [isEmpty](tes3reference/isEmpty.md)
+</dd>
+<dt><code class="descname">light: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niPointLight.html">niPointLight</a></code></dt>
+<dd>
 
-> Friendly access onto the reference's empty inventory flag.
+Direct access to the scene graph light, if a dynamic light is set.
 
-#### [isRespawn](tes3reference/isRespawn.md)
+</dd>
+<dt><code class="descname">lockNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3lockNode.html">tes3lockNode</a></code></dt>
+<dd>
 
-> If true, the references respawn flag is set.
+Quick access to the reference's lock node, if any.
 
-#### [light](tes3reference/light.md)
+</dd>
+<dt><code class="descname">mobile: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileObject.html">tes3mobileObject</a></code></dt>
+<dd>
 
-> Direct access to the scene graph light, if a dynamic light is set.
+Access to the attached mobile object, if applicable.
 
-#### [lockNode](tes3reference/lockNode.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Quick access to the reference's lock node, if any.
+The modification state of the object since the last save.
 
-#### [mobile](tes3reference/mobile.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> Access to the attached mobile object, if applicable.
+The next object in parent collection's list.
 
-#### [modified](tes3reference/modified.md)
+</dd>
+<dt><code class="descname">nextNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next reference in the parent reference list.
 
-#### [nextInCollection](tes3reference/nextInCollection.md)
+</dd>
+<dt><code class="descname">nodeData: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+Redundant access to this object, for iterating over a tes3referenceList.
 
-#### [nextNode](tes3reference/nextNode.md)
+</dd>
+<dt><code class="descname">object: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3physicalObject.html">tes3physicalObject</a></code></dt>
+<dd>
 
-> The next reference in the parent reference list.
+The object that the reference is for, such as a weapon, armor, or actor.
 
-#### [nodeData](tes3reference/nodeData.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Redundant access to this object, for iterating over a tes3referenceList.
+The raw flags of the object.
 
-#### [object](tes3reference/object.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The object that the reference is for, such as a weapon, armor, or actor.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3reference/objectFlags.md)
+</dd>
+<dt><code class="descname">orientation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+Access to the reference's orientation.
 
-#### [objectType](tes3reference/objectType.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The collection responsible for holding this object.
 
-#### [orientation](tes3reference/orientation.md)
+</dd>
+<dt><code class="descname">position: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> Access to the reference's orientation.
+Access to the reference's position.
 
-#### [owningCollection](tes3reference/owningCollection.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The previous object in parent collection's list.
 
-#### [position](tes3reference/position.md)
+</dd>
+<dt><code class="descname">previousNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> Access to the reference's position.
+The previous reference in the parent reference list.
 
-#### [previousInCollection](tes3reference/previousInCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The object's scale.
 
-#### [previousNode](tes3reference/previousNode.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous reference in the parent reference list.
+The scene graph node that the reference uses for rendering.
 
-#### [scale](tes3reference/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3reference/sceneNode.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph node that the reference uses for rendering.
+The filename of the mod that owns this object.
 
-#### [sceneReference](tes3reference/sceneReference.md)
+</dd>
+<dt><code class="descname">stackSize: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+Access to the size of a stack, if the reference represents one or more items.
 
-#### [sourceMod](tes3reference/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Methods
 
-#### [stackSize](tes3reference/stackSize.md)
+<dl class="describe">
+<dt><code class="descname">activate(<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>)</code></dt>
+<dd>
 
-> Access to the size of a stack, if the reference represents one or more items.
+Causes this reference to activate another. This will lead them to go through doors, pick up items, etc.
 
-## Functions
+</dd>
+<dt><code class="descname">clearActionFlag(<i>flagIndex:</i> number)</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Unsets a bit in the reference's action data attachment
 
-    tes3reference/activate
-    tes3reference/clearActionFlag
-    tes3reference/clone
-    tes3reference/deleteDynamicLightAttachment
-    tes3reference/detachDynamicLightFromAffectedNodes
-    tes3reference/getAttachedDynamicLight
-    tes3reference/getOrCreateAttachedDynamicLight
-    tes3reference/setActionFlag
-    tes3reference/testActionFlag
-    tes3reference/updateEquipment
-    tes3reference/updateSceneGraph
-```
+</dd>
+<dt><code class="descname">clone()</code></dt>
+<dd>
 
-#### [activate](tes3reference/activate.md)
+Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory.
 
-> Causes this reference to activate another. This will lead them to go through doors, pick up items, etc.
+</dd>
+<dt><code class="descname">deleteDynamicLightAttachment()</code></dt>
+<dd>
 
-#### [clearActionFlag](tes3reference/clearActionFlag.md)
+Deletes the dynamic light attachment, if it exists. This will automatically detach the dynamic light from affected nodes.
 
-> Unsets a bit in the reference's action data attachment
+</dd>
+<dt><code class="descname">detachDynamicLightFromAffectedNodes()</code></dt>
+<dd>
 
-#### [clone](tes3reference/clone.md)
+Removes the dynamic light from any affected scene graph nodes, but will not delete the associated attachment.
 
-> Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory.
+</dd>
+<dt><code class="descname">getAttachedDynamicLight()</code></dt>
+<dd>
 
-#### [deleteDynamicLightAttachment](tes3reference/deleteDynamicLightAttachment.md)
+Fetches the dynamic light attachment.
 
-> Deletes the dynamic light attachment, if it exists. This will automatically detach the dynamic light from affected nodes.
+</dd>
+<dt><code class="descname">getOrCreateAttachedDynamicLight(<i>light:</i> niPointLight, <i>value:</i> number) -> tes3lightNode</code></dt>
+<dd>
 
-#### [detachDynamicLightFromAffectedNodes](tes3reference/detachDynamicLightFromAffectedNodes.md)
+Fetches the dynamic light attachment. If there isn't one, a new one will be created with the given light and value.
 
-> Removes the dynamic light from any affected scene graph nodes, but will not delete the associated attachment.
+</dd>
+<dt><code class="descname">setActionFlag(<i>flagIndex:</i> number)</code></dt>
+<dd>
 
-#### [getAttachedDynamicLight](tes3reference/getAttachedDynamicLight.md)
+Sets a bit in the reference's action data attachment
 
-> Fetches the dynamic light attachment.
+</dd>
+<dt><code class="descname">testActionFlag(<i>flagIndex:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [getOrCreateAttachedDynamicLight](tes3reference/getOrCreateAttachedDynamicLight.md)
+Returns the flag's value in the reference's action data attachment
 
-> Fetches the dynamic light attachment. If there isn't one, a new one will be created with the given light and value.
+</dd>
+<dt><code class="descname">updateEquipment()</code></dt>
+<dd>
 
-#### [setActionFlag](tes3reference/setActionFlag.md)
+Causes the reference, if of an actor, to reevaluate its equipment choices and equip items it should.
 
-> Sets a bit in the reference's action data attachment
+</dd>
+<dt><code class="descname">updateSceneGraph()</code></dt>
+<dd>
 
-#### [testActionFlag](tes3reference/testActionFlag.md)
+Updates the reference's local rotation matrix, propagates position changes to the scene graph, and sets the reference's modified flag.
 
-> Returns the flag's value in the reference's action data attachment
+</dd>
+</dl>
 
-#### [updateEquipment](tes3reference/updateEquipment.md)
+## Metatable Events
 
-> Causes the reference, if of an actor, to reevaluate its equipment choices and equip items it should.
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [updateSceneGraph](tes3reference/updateSceneGraph.md)
+An object can be converted using `tostring()` to its id.
 
-> Updates the reference's local rotation matrix, propagates position changes to the scene graph, and sets the reference's modified flag.
+</dd>
+</dl>

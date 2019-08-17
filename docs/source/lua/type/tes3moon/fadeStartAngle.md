@@ -1,3 +1,0 @@
-# fadeStartAngle
-
-No description available.

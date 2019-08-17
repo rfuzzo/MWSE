@@ -2,63 +2,66 @@
 
 An object that has a name, extra data, and controllers.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-    niObjectNET/name
-    niObjectNET/references
-    niObjectNET/runTimeTypeInformation
-```
+The human-facing name of the given object.
 
-#### [name](niObjectNET/name.md)
+</dd>
+<dt><code class="descname">references: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The human-facing name of the given object.
+The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
 
-#### [references](niObjectNET/references.md)
+</dd>
+<dt><code class="descname">runTimeTypeInformation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niRTTI.html">niRTTI</a></code></dt>
+<dd>
 
-> The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
+The runtime type information for this object.
 
-#### [runTimeTypeInformation](niObjectNET/runTimeTypeInformation.md)
+</dd>
+</dl>
 
-> The runtime type information for this object.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">clone()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of this object.
 
-    niObjectNET/clone
-    niObjectNET/isInstanceOfType
-    niObjectNET/isOfType
-    niObjectNET/prependController
-    niObjectNET/removeAllControllers
-    niObjectNET/removeController
-```
+</dd>
+<dt><code class="descname">isInstanceOfType(<i>type:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [clone](niObjectNET/clone.md)
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
 
-> Creates a copy of this object.
+</dd>
+<dt><code class="descname">isOfType(<i>type:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [isInstanceOfType](niObjectNET/isInstanceOfType.md)
+Determines if the object is of a given type. Types can be found in the tes3.niType table.
 
-> Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+</dd>
+<dt><code class="descname">prependController(<i>type:</i> niTimeController)</code></dt>
+<dd>
 
-#### [isOfType](niObjectNET/isOfType.md)
+Add a controller to the object as the first controller.
 
-> Determines if the object is of a given type. Types can be found in the tes3.niType table.
+</dd>
+<dt><code class="descname">removeAllControllers()</code></dt>
+<dd>
 
-#### [prependController](niObjectNET/prependController.md)
+Removes all controllers.
 
-> Add a controller to the object as the first controller.
+</dd>
+<dt><code class="descname">removeController(<i>type:</i> niTimeController)</code></dt>
+<dd>
 
-#### [removeAllControllers](niObjectNET/removeAllControllers.md)
+Removes a controller from the object.
 
-> Removes all controllers.
-
-#### [removeController](niObjectNET/removeController.md)
-
-> Removes a controller from the object.
+</dd>
+</dl>

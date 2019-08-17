@@ -2,20 +2,19 @@
 
 A substructure for a race, storing a base attribute value for male and female actors.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">female: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3raceBaseAttribute/female
-    tes3raceBaseAttribute/male
-```
+The base attribute for female actors.
 
-#### [female](tes3raceBaseAttribute/female.md)
+</dd>
+<dt><code class="descname">male: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The base attribute for female actors.
+The base attribute for male actors.
 
-#### [male](tes3raceBaseAttribute/male.md)
-
-> The base attribute for male actors.
+</dd>
+</dl>

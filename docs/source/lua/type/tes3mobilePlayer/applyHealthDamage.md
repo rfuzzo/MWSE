@@ -1,3 +1,0 @@
-# applyHealthDamage
-
-Damages the actor.

@@ -1,3 +1,0 @@
-# effectIndex
-
-No description available.

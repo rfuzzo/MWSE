@@ -2,68 +2,77 @@
 
 A Timer is a class used to keep track of callback that should be invoked at a later time.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">duration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    mwseTimer/duration
-    mwseTimer/iterations
-    mwseTimer/state
-    mwseTimer/timeLeft
-    mwseTimer/timing
-```
+The amount of time left on the timer.
 
-#### [duration](mwseTimer/duration.md)
+</dd>
+<dt><code class="descname">iterations: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The amount of time left on the timer.
+The amount of iterations left for the timer.
 
-#### [iterations](mwseTimer/iterations.md)
+</dd>
+<dt><code class="descname">state: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The amount of iterations left for the timer.
+The state of the timer, matching timer.active, timer.paused, or timer.expired.
 
-#### [state](mwseTimer/state.md)
+</dd>
+<dt><code class="descname">timeLeft: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The state of the timer, matching timer.active, timer.paused, or timer.expired.
+The amount of time left before this timer will complete.
 
-#### [timeLeft](mwseTimer/timeLeft.md)
+</dd>
+<dt><code class="descname">timing: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The amount of time left before this timer will complete.
+When this timer ends, or the time remaining if the timer is paused.
 
-#### [timing](mwseTimer/timing.md)
+</dd>
+</dl>
 
-> When this timer ends, or the time remaining if the timer is paused.
+## Methods
+
+<dl class="describe">
+<dt><code class="descname">cancel()</code></dt>
+<dd>
+
+Cancels the timer.
+
+</dd>
+<dt><code class="descname">pause()</code></dt>
+<dd>
+
+Pauses the timer.
+
+</dd>
+<dt><code class="descname">reset()</code></dt>
+<dd>
+
+Resets the timer completion time, as if it elapsed. Only works if the timer is active.
+
+</dd>
+<dt><code class="descname">resume()</code></dt>
+<dd>
+
+Resumes a paused timer.
+
+</dd>
+</dl>
 
 ## Functions
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">callback()</code></dt>
+<dd>
 
-    mwseTimer/callback
-    mwseTimer/cancel
-    mwseTimer/pause
-    mwseTimer/reset
-    mwseTimer/resume
-```
+The callback that will be invoked when the timer elapses.
 
-#### [callback](mwseTimer/callback.md)
-
-> The callback that will be invoked when the timer elapses.
-
-#### [cancel](mwseTimer/cancel.md)
-
-> Cancels the timer.
-
-#### [pause](mwseTimer/pause.md)
-
-> Pauses the timer.
-
-#### [reset](mwseTimer/reset.md)
-
-> Resets the timer completion time, as if it elapsed. Only works if the timer is active.
-
-#### [resume](mwseTimer/resume.md)
-
-> Resumes a paused timer.
+</dd>
+</dl>

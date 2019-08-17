@@ -2,198 +2,233 @@
 
 A core light object. This isn't actually a light in the rendering engine, but something like a lamp or torch.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3light/__tostring
-    tes3light/boundingBox
-    tes3light/canCarry
-    tes3light/color
-    tes3light/deleted
-    tes3light/disabled
-    tes3light/flickers
-    tes3light/flickersSlowly
-    tes3light/icon
-    tes3light/id
-    tes3light/isDynamic
-    tes3light/isFire
-    tes3light/isNegative
-    tes3light/isOffByDefault
-    tes3light/mesh
-    tes3light/modified
-    tes3light/name
-    tes3light/nextInCollection
-    tes3light/objectFlags
-    tes3light/objectType
-    tes3light/owningCollection
-    tes3light/previousInCollection
-    tes3light/pulses
-    tes3light/pulsesSlowly
-    tes3light/radius
-    tes3light/scale
-    tes3light/sceneNode
-    tes3light/sceneReference
-    tes3light/script
-    tes3light/sound
-    tes3light/sourceMod
-    tes3light/stolenList
-    tes3light/time
-    tes3light/value
-    tes3light/weight
-```
+The bounding box for the object.
 
-#### [__tostring](tes3light/__tostring.md)
+</dd>
+<dt><code class="descname">canCarry: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+Access to the light's flags, determining if the light can be carried.
 
-#### [boundingBox](tes3light/boundingBox.md)
+</dd>
+<dt><code class="descname">color: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+Access to the light's base colors, in an array-style table of four values. The values can range from 0 to 255.
 
-#### [canCarry](tes3light/canCarry.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light can be carried.
+The deleted state of the object.
 
-#### [color](tes3light/color.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the light's base colors, in an array-style table of four values. The values can range from 0 to 255.
+The disabled state of the object.
 
-#### [deleted](tes3light/deleted.md)
+</dd>
+<dt><code class="descname">flickers: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+Access to the light's flags, determining if the light attenuation flickers.
 
-#### [disabled](tes3light/disabled.md)
+</dd>
+<dt><code class="descname">flickersSlowly: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+Access to the light's flags, determining if the light attenuation flickers slowly.
 
-#### [flickers](tes3light/flickers.md)
+</dd>
+<dt><code class="descname">icon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light attenuation flickers.
+The path to the object's icon.
 
-#### [flickersSlowly](tes3light/flickersSlowly.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light attenuation flickers slowly.
+The unique identifier for the object.
 
-#### [icon](tes3light/icon.md)
+</dd>
+<dt><code class="descname">isDynamic: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The path to the object's icon.
+Access to the light's flags, determining if the light affects dynamically moving objects.
 
-#### [id](tes3light/id.md)
+</dd>
+<dt><code class="descname">isFire: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+Access to the light's flags, determining if the light represents flame.
 
-#### [isDynamic](tes3light/isDynamic.md)
+</dd>
+<dt><code class="descname">isNegative: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light affects dynamically moving objects.
+Access to the light's flags, determining if the object creates darkness.
 
-#### [isFire](tes3light/isFire.md)
+</dd>
+<dt><code class="descname">isOffByDefault: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light represents flame.
+Access to the light's flags, determining if the light won't be active initially.
 
-#### [isNegative](tes3light/isNegative.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the object creates darkness.
+The path to the object's mesh.
 
-#### [isOffByDefault](tes3light/isOffByDefault.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light won't be active initially.
+The modification state of the object since the last save.
 
-#### [mesh](tes3light/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3light/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3light/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3light/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3light/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3light/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3light/owningCollection.md)
+</dd>
+<dt><code class="descname">pulses: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+Access to the light's flags, determining if the light attenuation pulses.
 
-#### [previousInCollection](tes3light/previousInCollection.md)
+</dd>
+<dt><code class="descname">pulsesSlowly: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+Access to the light's flags, determining if the light attenuation pulses slowly.
 
-#### [pulses](tes3light/pulses.md)
+</dd>
+<dt><code class="descname">radius: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light attenuation pulses.
+The base radius of the light.
 
-#### [pulsesSlowly](tes3light/pulsesSlowly.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the light's flags, determining if the light attenuation pulses slowly.
+The object's scale.
 
-#### [radius](tes3light/radius.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The base radius of the light.
+The scene graph node for this object.
 
-#### [scale](tes3light/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3light/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3light/sceneReference.md)
+</dd>
+<dt><code class="descname">sound: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3sound.html">tes3sound</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The sound that runs on the object.
 
-#### [script](tes3light/script.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+The filename of the mod that owns this object.
 
-#### [sound](tes3light/sound.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The sound that runs on the object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3light/sourceMod.md)
+</dd>
+<dt><code class="descname">time: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The amount of time that the light will last.
 
-#### [stolenList](tes3light/stolenList.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+The value of the object.
 
-#### [time](tes3light/time.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The amount of time that the light will last.
+The weight, in pounds, of the object.
 
-#### [value](tes3light/value.md)
+</dd>
+</dl>
 
-> The value of the object.
+## Methods
 
-#### [weight](tes3light/weight.md)
+<dl class="describe">
+<dt><code class="descname">getTimeLeft(<i>data:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a>) -> number</code></dt>
+<dd>
 
-> The weight, in pounds, of the object.
+Gets the time remaining for a light, given a tes3itemData, tes3reference, or tes3equipmentStack.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3light/getTimeLeft
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [getTimeLeft](tes3light/getTimeLeft.md)
+An object can be converted using `tostring()` to its id.
 
-> Gets the time remaining for a light, given a tes3itemData, tes3reference, or tes3equipmentStack.
+</dd>
+</dl>

@@ -2,20 +2,19 @@
 
 An attachment-capable structure that manages travel destinations.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-    tes3travelDestinationNode/cell
-    tes3travelDestinationNode/marker
-```
+The destination cell.
 
-#### [cell](tes3travelDestinationNode/cell.md)
+</dd>
+<dt><code class="descname">marker: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The destination cell.
+The reference door marker that the destination places the traveling actor at.
 
-#### [marker](tes3travelDestinationNode/marker.md)
-
-> The reference door marker that the destination places the traveling actor at.
+</dd>
+</dl>

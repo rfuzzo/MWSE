@@ -1,3 +1,0 @@
-# fadeEndAngle
-
-No description available.

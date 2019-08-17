@@ -2,103 +2,114 @@
 
 Represents a loaded ESM, ESP, or ESS file.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">author: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-    tes3gameFile/author
-    tes3gameFile/cellName
-    tes3gameFile/currentHealth
-    tes3gameFile/day
-    tes3gameFile/daysPassed
-    tes3gameFile/description
-    tes3gameFile/fileSize
-    tes3gameFile/filename
-    tes3gameFile/gameHour
-    tes3gameFile/masters
-    tes3gameFile/maxHealth
-    tes3gameFile/modifiedTime
-    tes3gameFile/month
-    tes3gameFile/path
-    tes3gameFile/playerName
-    tes3gameFile/year
-```
+The file's author.
 
-#### [author](tes3gameFile/author.md)
+</dd>
+<dt><code class="descname">cellName: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The file's author.
+The current cell, from a save game.
 
-#### [cellName](tes3gameFile/cellName.md)
+</dd>
+<dt><code class="descname">currentHealth: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The current cell, from a save game.
+The player's health, from a save game.
 
-#### [currentHealth](tes3gameFile/currentHealth.md)
+</dd>
+<dt><code class="descname">day: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player's health, from a save game.
+The current day, from a save game.
 
-#### [day](tes3gameFile/day.md)
+</dd>
+<dt><code class="descname">daysPassed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The current day, from a save game.
+The number of days passed, from a save game.
 
-#### [daysPassed](tes3gameFile/daysPassed.md)
+</dd>
+<dt><code class="descname">description: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The number of days passed, from a save game.
+The description of the file.
 
-#### [description](tes3gameFile/description.md)
+</dd>
+<dt><code class="descname">fileSize: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The description of the file.
+The size of the file.
 
-#### [fileSize](tes3gameFile/fileSize.md)
+</dd>
+<dt><code class="descname">filename: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The size of the file.
+The simple filename.
 
-#### [filename](tes3gameFile/filename.md)
+</dd>
+<dt><code class="descname">gameHour: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The simple filename.
+The current game hour, from a save game.
 
-#### [gameHour](tes3gameFile/gameHour.md)
+</dd>
+<dt><code class="descname">masters: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The current game hour, from a save game.
+An array-style table of the tes3gameFiles that this is dependent upon.
 
-#### [masters](tes3gameFile/masters.md)
+</dd>
+<dt><code class="descname">maxHealth: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An array-style table of the tes3gameFiles that this is dependent upon.
+The player's maximum health, from a save game.
 
-#### [maxHealth](tes3gameFile/maxHealth.md)
+</dd>
+<dt><code class="descname">modifiedTime: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The player's maximum health, from a save game.
+The timestamp that the file was modified.
 
-#### [modifiedTime](tes3gameFile/modifiedTime.md)
+</dd>
+<dt><code class="descname">month: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The timestamp that the file was modified.
+The current month, from a save game.
 
-#### [month](tes3gameFile/month.md)
+</dd>
+<dt><code class="descname">path: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The current month, from a save game.
+The path to the file.
 
-#### [path](tes3gameFile/path.md)
+</dd>
+<dt><code class="descname">playerName: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the file.
+The player's name, from a save game.
 
-#### [playerName](tes3gameFile/playerName.md)
+</dd>
+<dt><code class="descname">year: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player's name, from a save game.
+The current year, from a save game.
 
-#### [year](tes3gameFile/year.md)
+</dd>
+</dl>
 
-> The current year, from a save game.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">deleteFile()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Deletes the file.
 
-    tes3gameFile/deleteFile
-```
-
-#### [deleteFile](tes3gameFile/deleteFile.md)
-
-> Deletes the file.
+</dd>
+</dl>

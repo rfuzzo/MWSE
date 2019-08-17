@@ -1,3 +1,0 @@
-# cumulativeMagnitude
-
-No description available.

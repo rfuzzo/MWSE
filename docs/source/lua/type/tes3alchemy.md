@@ -2,143 +2,167 @@
 
 An alchemy game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">autoCalc: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-    tes3alchemy/__tostring
-    tes3alchemy/autoCalc
-    tes3alchemy/boundingBox
-    tes3alchemy/deleted
-    tes3alchemy/disabled
-    tes3alchemy/effects
-    tes3alchemy/icon
-    tes3alchemy/id
-    tes3alchemy/mesh
-    tes3alchemy/modified
-    tes3alchemy/name
-    tes3alchemy/nextInCollection
-    tes3alchemy/objectFlags
-    tes3alchemy/objectType
-    tes3alchemy/owningCollection
-    tes3alchemy/previousInCollection
-    tes3alchemy/scale
-    tes3alchemy/sceneNode
-    tes3alchemy/sceneReference
-    tes3alchemy/script
-    tes3alchemy/sourceMod
-    tes3alchemy/stolenList
-    tes3alchemy/value
-    tes3alchemy/weight
-```
+If set, the value of the object is automatically calculated.
 
-#### [__tostring](tes3alchemy/__tostring.md)
+</dd>
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The bounding box for the object.
 
-#### [autoCalc](tes3alchemy/autoCalc.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If set, the value of the object is automatically calculated.
+The deleted state of the object.
 
-#### [boundingBox](tes3alchemy/boundingBox.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The disabled state of the object.
 
-#### [deleted](tes3alchemy/deleted.md)
+</dd>
+<dt><code class="descname">effects: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+An array-style table of the tes3effect data on the object.
 
-#### [disabled](tes3alchemy/disabled.md)
+</dd>
+<dt><code class="descname">icon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The path to the object's icon.
 
-#### [effects](tes3alchemy/effects.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> An array-style table of the tes3effect data on the object.
+The unique identifier for the object.
 
-#### [icon](tes3alchemy/icon.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's icon.
+The path to the object's mesh.
 
-#### [id](tes3alchemy/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [mesh](tes3alchemy/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3alchemy/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3alchemy/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3alchemy/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3alchemy/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3alchemy/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3alchemy/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3alchemy/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3alchemy/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3alchemy/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3alchemy/sceneReference.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The filename of the mod that owns this object.
 
-#### [script](tes3alchemy/script.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3alchemy/sourceMod.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The value of the object.
 
-#### [stolenList](tes3alchemy/stolenList.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+The weight, in pounds, of the object.
 
-#### [value](tes3alchemy/value.md)
-
-> The value of the object.
-
-#### [weight](tes3alchemy/weight.md)
-
-> The weight, in pounds, of the object.
+</dd>
+</dl>
 
 ## Functions
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">create({<i>id:</i> string, <i>name:</i> string, <i>script:</i> tes3script, <i>mesh:</i> string, <i>icon:</i> string, <i>objectFlags:</i> number, <i>weight:</i> number, <i>value:</i> number, <i>flags:</i> number, <i>effects:</i> table})</code></dt>
+<dd>
 
-    tes3alchemy/create
-```
+Creates a new alchemy item, which will be stored as part of the current saved game.
 
-#### [create](tes3alchemy/create.md)
+</dd>
+</dl>
 
-> Creates a new alchemy item, which will be stored as part of the current saved game.
+## Metatable Events
+
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
+
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

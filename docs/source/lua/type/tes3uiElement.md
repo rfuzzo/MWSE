@@ -2,15 +2,13 @@
 
 A simple pair of floating-point numbers.
 
-## Functions
+## Methods
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">findMenu(<i>id:</i> number) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3uiElement.html">tes3uiElement</a></code></dt>
+<dd>
 
-    tes3uiElement/findMenu
-```
+Returns a child element with a given id.
 
-#### [findMenu](tes3uiElement/findMenu.md)
-
-> Returns a child element with a given id.
+</dd>
+</dl>

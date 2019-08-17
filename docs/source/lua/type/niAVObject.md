@@ -2,73 +2,78 @@
 
 The typical base type for most NetImmerse scene graph objects.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    niAVObject/flags
-    niAVObject/name
-    niAVObject/references
-    niAVObject/rotation
-    niAVObject/runTimeTypeInformation
-```
+Flags, dependent on the specific object type.
 
-#### [flags](niAVObject/flags.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Flags, dependent on the specific object type.
+The human-facing name of the given object.
 
-#### [name](niAVObject/name.md)
+</dd>
+<dt><code class="descname">references: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The human-facing name of the given object.
+The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
 
-#### [references](niAVObject/references.md)
+</dd>
+<dt><code class="descname">rotation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3matrix33.html">tes3matrix33</a></code></dt>
+<dd>
 
-> The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
+The object's local rotation matrix.
 
-#### [rotation](niAVObject/rotation.md)
+</dd>
+<dt><code class="descname">runTimeTypeInformation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niRTTI.html">niRTTI</a></code></dt>
+<dd>
 
-> The object's local rotation matrix.
+The runtime type information for this object.
 
-#### [runTimeTypeInformation](niAVObject/runTimeTypeInformation.md)
+</dd>
+</dl>
 
-> The runtime type information for this object.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">clone()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of this object.
 
-    niAVObject/clone
-    niAVObject/isInstanceOfType
-    niAVObject/isOfType
-    niAVObject/prependController
-    niAVObject/removeAllControllers
-    niAVObject/removeController
-```
+</dd>
+<dt><code class="descname">isInstanceOfType(<i>type:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [clone](niAVObject/clone.md)
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
 
-> Creates a copy of this object.
+</dd>
+<dt><code class="descname">isOfType(<i>type:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [isInstanceOfType](niAVObject/isInstanceOfType.md)
+Determines if the object is of a given type. Types can be found in the tes3.niType table.
 
-> Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+</dd>
+<dt><code class="descname">prependController(<i>type:</i> niTimeController)</code></dt>
+<dd>
 
-#### [isOfType](niAVObject/isOfType.md)
+Add a controller to the object as the first controller.
 
-> Determines if the object is of a given type. Types can be found in the tes3.niType table.
+</dd>
+<dt><code class="descname">removeAllControllers()</code></dt>
+<dd>
 
-#### [prependController](niAVObject/prependController.md)
+Removes all controllers.
 
-> Add a controller to the object as the first controller.
+</dd>
+<dt><code class="descname">removeController(<i>type:</i> niTimeController)</code></dt>
+<dd>
 
-#### [removeAllControllers](niAVObject/removeAllControllers.md)
+Removes a controller from the object.
 
-> Removes all controllers.
-
-#### [removeController](niAVObject/removeController.md)
-
-> Removes a controller from the object.
+</dd>
+</dl>

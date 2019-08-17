@@ -1,3 +1,0 @@
-# currentAnimationGroup
-
-No description available.

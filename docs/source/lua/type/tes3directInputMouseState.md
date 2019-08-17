@@ -2,30 +2,31 @@
 
 A raw DirectInput mouse state.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">buttons: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-    tes3directInputMouseState/buttons
-    tes3directInputMouseState/x
-    tes3directInputMouseState/y
-    tes3directInputMouseState/z
-```
+The array-style access to 8 buttons states available on the mouse. Not all may be used.
 
-#### [buttons](tes3directInputMouseState/buttons.md)
+</dd>
+<dt><code class="descname">x: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The array-style access to 8 buttons states available on the mouse. Not all may be used.
+A basic property of the mouse for the X-axis.
 
-#### [x](tes3directInputMouseState/x.md)
+</dd>
+<dt><code class="descname">y: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A basic property of the mouse for the X-axis.
+A basic property of the mouse for the Y-axis.
 
-#### [y](tes3directInputMouseState/y.md)
+</dd>
+<dt><code class="descname">z: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A basic property of the mouse for the Y-axis.
+A basic property of the mouse for the Z-axis. This is typically the scroll wheel.
 
-#### [z](tes3directInputMouseState/z.md)
-
-> A basic property of the mouse for the Z-axis. This is typically the scroll wheel.
+</dd>
+</dl>

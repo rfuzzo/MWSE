@@ -2,20 +2,19 @@
 
 A substructure for a race, storing up to 7 skill bonuses.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">bonus: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3raceSkillBonus/bonus
-    tes3raceSkillBonus/skill
-```
+The value to modify the skill with.
 
-#### [bonus](tes3raceSkillBonus/bonus.md)
+</dd>
+<dt><code class="descname">skill: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The value to modify the skill with.
+The skill id to modify.
 
-#### [skill](tes3raceSkillBonus/skill.md)
-
-> The skill id to modify.
+</dd>
+</dl>

@@ -2,95 +2,109 @@
 
 A core game object used for storing both active and non-dynamic gameplay data.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">backgroundThread: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3dataHandler/backgroundThread
-    tes3dataHandler/backgroundThreadId
-    tes3dataHandler/backgroundThreadRunning
-    tes3dataHandler/cellChanged
-    tes3dataHandler/centralGridX
-    tes3dataHandler/centralGridY
-    tes3dataHandler/currentCell
-    tes3dataHandler/currentInteriorCell
-    tes3dataHandler/exteriorCells
-    tes3dataHandler/lastExteriorCell
-    tes3dataHandler/mainThread
-    tes3dataHandler/mainThreadId
-    tes3dataHandler/nonDynamicData
-    tes3dataHandler/threadSleepTime
-    tes3dataHandler/worldObjectRoot
-    tes3dataHandler/worldPickLandscapeRoot
-    tes3dataHandler/worldPickObjectRoot
-```
+A Windows handle to the background processing thread.
 
-#### [backgroundThread](tes3dataHandler/backgroundThread.md)
+</dd>
+<dt><code class="descname">backgroundThreadId: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A Windows handle to the background processing thread.
+The thread ID for the background processing thread.
 
-#### [backgroundThreadId](tes3dataHandler/backgroundThreadId.md)
+</dd>
+<dt><code class="descname">backgroundThreadRunning: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The thread ID for the background processing thread.
+Access to the running state for the background processing thread.
 
-#### [backgroundThreadRunning](tes3dataHandler/backgroundThreadRunning.md)
+</dd>
+<dt><code class="descname">cellChanged: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the running state for the background processing thread.
+A flag set for the frame that the player has changed cells.
 
-#### [cellChanged](tes3dataHandler/cellChanged.md)
+</dd>
+<dt><code class="descname">centralGridX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A flag set for the frame that the player has changed cells.
+The position of the origin horizontal grid coordinate.
 
-#### [centralGridX](tes3dataHandler/centralGridX.md)
+</dd>
+<dt><code class="descname">centralGridY: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The position of the origin horizontal grid coordinate.
+The position of the origin longitudinal grid coordinate.
 
-#### [centralGridY](tes3dataHandler/centralGridY.md)
+</dd>
+<dt><code class="descname">currentCell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-> The position of the origin longitudinal grid coordinate.
+Access to the cell that the player is currently in.
 
-#### [currentCell](tes3dataHandler/currentCell.md)
+</dd>
+<dt><code class="descname">currentInteriorCell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-> Access to the cell that the player is currently in.
+Access to the current interior cell, if the player is in an interior.
 
-#### [currentInteriorCell](tes3dataHandler/currentInteriorCell.md)
+</dd>
+<dt><code class="descname">exteriorCells: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> Access to the current interior cell, if the player is in an interior.
+A table of nine tes3cellExteriorData objects for any loaded exterior cells.
 
-#### [exteriorCells](tes3dataHandler/exteriorCells.md)
+</dd>
+<dt><code class="descname">lastExteriorCell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-> A table of nine tes3cellExteriorData objects for any loaded exterior cells.
+Access to the last visited exterior cell.
 
-#### [lastExteriorCell](tes3dataHandler/lastExteriorCell.md)
+</dd>
+<dt><code class="descname">mainThread: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the last visited exterior cell.
+A Windows handle to the main execution thread.
 
-#### [mainThread](tes3dataHandler/mainThread.md)
+</dd>
+<dt><code class="descname">mainThreadId: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A Windows handle to the main execution thread.
+The thread ID for the main execution thread.
 
-#### [mainThreadId](tes3dataHandler/mainThreadId.md)
+</dd>
+<dt><code class="descname">nonDynamicData: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3nonDynamicData.html">tes3nonDynamicData</a></code></dt>
+<dd>
 
-> The thread ID for the main execution thread.
+A child structure where core game objects are held.
 
-#### [nonDynamicData](tes3dataHandler/nonDynamicData.md)
+</dd>
+<dt><code class="descname">threadSleepTime: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A child structure where core game objects are held.
+No description available.
 
-#### [threadSleepTime](tes3dataHandler/threadSleepTime.md)
+</dd>
+<dt><code class="descname">worldObjectRoot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> No description available.
+One of the core parent scene graph nodes.
 
-#### [worldObjectRoot](tes3dataHandler/worldObjectRoot.md)
+</dd>
+<dt><code class="descname">worldPickLandscapeRoot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> One of the core parent scene graph nodes.
+One of the core parent scene graph nodes.
 
-#### [worldPickLandscapeRoot](tes3dataHandler/worldPickLandscapeRoot.md)
+</dd>
+<dt><code class="descname">worldPickObjectRoot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> One of the core parent scene graph nodes.
+One of the core parent scene graph nodes.
 
-#### [worldPickObjectRoot](tes3dataHandler/worldPickObjectRoot.md)
-
-> One of the core parent scene graph nodes.
+</dd>
+</dl>

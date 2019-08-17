@@ -2,150 +2,180 @@
 
 A clothing game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3clothing/__tostring
-    tes3clothing/boundingBox
-    tes3clothing/deleted
-    tes3clothing/disabled
-    tes3clothing/enchantCapacity
-    tes3clothing/enchantment
-    tes3clothing/icon
-    tes3clothing/id
-    tes3clothing/isLeftPart
-    tes3clothing/mesh
-    tes3clothing/modified
-    tes3clothing/name
-    tes3clothing/nextInCollection
-    tes3clothing/objectFlags
-    tes3clothing/objectType
-    tes3clothing/owningCollection
-    tes3clothing/parts
-    tes3clothing/previousInCollection
-    tes3clothing/scale
-    tes3clothing/sceneNode
-    tes3clothing/sceneReference
-    tes3clothing/script
-    tes3clothing/slot
-    tes3clothing/slotName
-    tes3clothing/sourceMod
-    tes3clothing/stolenList
-    tes3clothing/value
-    tes3clothing/weight
-```
+The bounding box for the object.
 
-#### [__tostring](tes3clothing/__tostring.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The deleted state of the object.
 
-#### [boundingBox](tes3clothing/boundingBox.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The disabled state of the object.
 
-#### [deleted](tes3clothing/deleted.md)
+</dd>
+<dt><code class="descname">enchantCapacity: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The object's enchantment capacity.
 
-#### [disabled](tes3clothing/disabled.md)
+</dd>
+<dt><code class="descname">enchantment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3enchantment.html">tes3enchantment</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The enchantment used by the object.
 
-#### [enchantCapacity](tes3clothing/enchantCapacity.md)
+</dd>
+<dt><code class="descname">icon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The object's enchantment capacity.
+The path to the object's icon.
 
-#### [enchantment](tes3clothing/enchantment.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The enchantment used by the object.
+The unique identifier for the object.
 
-#### [icon](tes3clothing/icon.md)
+</dd>
+<dt><code class="descname">isLeftPart: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The path to the object's icon.
+Determines if the armor is the left part of a pair.
 
-#### [id](tes3clothing/id.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The path to the object's mesh.
 
-#### [isLeftPart](tes3clothing/isLeftPart.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Determines if the armor is the left part of a pair.
+The modification state of the object since the last save.
 
-#### [mesh](tes3clothing/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3clothing/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3clothing/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3clothing/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3clothing/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3clothing/objectType.md)
+</dd>
+<dt><code class="descname">parts: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+An array-style table of the tes3wearablePart data on the object.
 
-#### [owningCollection](tes3clothing/owningCollection.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The previous object in parent collection's list.
 
-#### [parts](tes3clothing/parts.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An array-style table of the tes3wearablePart data on the object.
+The object's scale.
 
-#### [previousInCollection](tes3clothing/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3clothing/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3clothing/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3clothing/sceneReference.md)
+</dd>
+<dt><code class="descname">slot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The slot used by the armor.
 
-#### [script](tes3clothing/script.md)
+</dd>
+<dt><code class="descname">slotName: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+The name of the slot used by the armor.
 
-#### [slot](tes3clothing/slot.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The slot used by the armor.
+The filename of the mod that owns this object.
 
-#### [slotName](tes3clothing/slotName.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The name of the slot used by the armor.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3clothing/sourceMod.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The value of the object.
 
-#### [stolenList](tes3clothing/stolenList.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+The weight, in pounds, of the object.
 
-#### [value](tes3clothing/value.md)
+</dd>
+</dl>
 
-> The value of the object.
+## Metatable Events
 
-#### [weight](tes3clothing/weight.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The weight, in pounds, of the object.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

@@ -1,3 +1,0 @@
-# cell
-
-The destination cell.

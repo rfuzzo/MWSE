@@ -2,90 +2,108 @@
 
 Almost anything that can be represented in the Construction Set is based on this structure.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3physicalObject/__tostring
-    tes3physicalObject/boundingBox
-    tes3physicalObject/deleted
-    tes3physicalObject/disabled
-    tes3physicalObject/id
-    tes3physicalObject/modified
-    tes3physicalObject/nextInCollection
-    tes3physicalObject/objectFlags
-    tes3physicalObject/objectType
-    tes3physicalObject/owningCollection
-    tes3physicalObject/previousInCollection
-    tes3physicalObject/scale
-    tes3physicalObject/sceneNode
-    tes3physicalObject/sceneReference
-    tes3physicalObject/sourceMod
-    tes3physicalObject/stolenList
-```
+The bounding box for the object.
 
-#### [__tostring](tes3physicalObject/__tostring.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The deleted state of the object.
 
-#### [boundingBox](tes3physicalObject/boundingBox.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The disabled state of the object.
 
-#### [deleted](tes3physicalObject/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3physicalObject/disabled.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The modification state of the object since the last save.
 
-#### [id](tes3physicalObject/id.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The next object in parent collection's list.
 
-#### [modified](tes3physicalObject/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [nextInCollection](tes3physicalObject/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3physicalObject/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3physicalObject/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3physicalObject/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3physicalObject/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3physicalObject/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3physicalObject/sceneNode.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The filename of the mod that owns this object.
 
-#### [sceneReference](tes3physicalObject/sceneReference.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3physicalObject/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Metatable Events
 
-#### [stolenList](tes3physicalObject/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

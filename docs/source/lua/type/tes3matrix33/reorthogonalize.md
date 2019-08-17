@@ -1,3 +1,0 @@
-# reorthogonalize
-
-Reorthogonalizes the matrix.

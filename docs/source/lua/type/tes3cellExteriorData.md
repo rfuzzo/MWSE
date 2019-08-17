@@ -2,25 +2,25 @@
 
 A structure that contains a cell and its grid coordinates.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-    tes3cellExteriorData/cell
-    tes3cellExteriorData/gridX
-    tes3cellExteriorData/gridY
-```
+The cell in the package.
 
-#### [cell](tes3cellExteriorData/cell.md)
+</dd>
+<dt><code class="descname">gridX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The cell in the package.
+The cell in the package's X grid value.
 
-#### [gridX](tes3cellExteriorData/gridX.md)
+</dd>
+<dt><code class="descname">gridY: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The cell in the package's X grid value.
+The cell in the package's Y grid value.
 
-#### [gridY](tes3cellExteriorData/gridY.md)
-
-> The cell in the package's Y grid value.
+</dd>
+</dl>

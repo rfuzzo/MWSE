@@ -2,123 +2,143 @@
 
 A game structure that keeps track of a magic source on an object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">castChanceOverride: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3magicSourceInstance/__tostring
-    tes3magicSourceInstance/castChanceOverride
-    tes3magicSourceInstance/caster
-    tes3magicSourceInstance/deleted
-    tes3magicSourceInstance/disabled
-    tes3magicSourceInstance/id
-    tes3magicSourceInstance/item
-    tes3magicSourceInstance/itemData
-    tes3magicSourceInstance/itemID
-    tes3magicSourceInstance/magicID
-    tes3magicSourceInstance/modified
-    tes3magicSourceInstance/objectFlags
-    tes3magicSourceInstance/objectType
-    tes3magicSourceInstance/projectile
-    tes3magicSourceInstance/source
-    tes3magicSourceInstance/sourceMod
-    tes3magicSourceInstance/sourceType
-    tes3magicSourceInstance/state
-    tes3magicSourceInstance/target
-    tes3magicSourceInstance/timestampCastBegin
-```
+No description available.
 
-#### [__tostring](tes3magicSourceInstance/__tostring.md)
+</dd>
+<dt><code class="descname">caster: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+No description available.
 
-#### [castChanceOverride](tes3magicSourceInstance/castChanceOverride.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+The deleted state of the object.
 
-#### [caster](tes3magicSourceInstance/caster.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+The disabled state of the object.
 
-#### [deleted](tes3magicSourceInstance/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3magicSourceInstance/disabled.md)
+</dd>
+<dt><code class="descname">item: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3item.html">tes3item</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+No description available.
 
-#### [id](tes3magicSourceInstance/id.md)
+</dd>
+<dt><code class="descname">itemData: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+No description available.
 
-#### [item](tes3magicSourceInstance/item.md)
+</dd>
+<dt><code class="descname">itemID: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [itemData](tes3magicSourceInstance/itemData.md)
+</dd>
+<dt><code class="descname">magicID: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [itemID](tes3magicSourceInstance/itemID.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+The modification state of the object since the last save.
 
-#### [magicID](tes3magicSourceInstance/magicID.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+The raw flags of the object.
 
-#### [modified](tes3magicSourceInstance/modified.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3magicSourceInstance/objectFlags.md)
+</dd>
+<dt><code class="descname">projectile: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileProjectile.html">tes3mobileProjectile</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+No description available.
 
-#### [objectType](tes3magicSourceInstance/objectType.md)
+</dd>
+<dt><code class="descname">source: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3alchemy|tes3enchantment|tes3spell.html">tes3alchemy|tes3enchantment|tes3spell</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+No description available.
 
-#### [projectile](tes3magicSourceInstance/projectile.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> No description available.
+The filename of the mod that owns this object.
 
-#### [source](tes3magicSourceInstance/source.md)
+</dd>
+<dt><code class="descname">sourceType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+Shows if the source is a spell, enchantment, or alchemy.
 
-#### [sourceMod](tes3magicSourceInstance/sourceMod.md)
+</dd>
+<dt><code class="descname">state: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+Shows if the state is pre-cast, cast, beginning, working, ending, retired, etc.
 
-#### [sourceType](tes3magicSourceInstance/sourceType.md)
+</dd>
+<dt><code class="descname">target: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> Shows if the source is a spell, enchantment, or alchemy.
+No description available.
 
-#### [state](tes3magicSourceInstance/state.md)
+</dd>
+<dt><code class="descname">timestampCastBegin: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Shows if the state is pre-cast, cast, beginning, working, ending, retired, etc.
+No description available.
 
-#### [target](tes3magicSourceInstance/target.md)
+</dd>
+</dl>
 
-> No description available.
+## Methods
 
-#### [timestampCastBegin](tes3magicSourceInstance/timestampCastBegin.md)
+<dl class="describe">
+<dt><code class="descname">getMagnitudeForIndex(<i>index:</i> number) -> number</code></dt>
+<dd>
 
-> No description available.
+Gets the magnitude from the casting source for a given effect index.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3magicSourceInstance/getMagnitudeForIndex
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [getMagnitudeForIndex](tes3magicSourceInstance/getMagnitudeForIndex.md)
+An object can be converted using `tostring()` to its id.
 
-> Gets the magnitude from the casting source for a given effect index.
+</dd>
+</dl>

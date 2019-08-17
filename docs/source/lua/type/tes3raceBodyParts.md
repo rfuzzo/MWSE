@@ -2,90 +2,103 @@
 
 A substructure for a race, storing the used body parts for a given sex.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">ankle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-    tes3raceBodyParts/ankle
-    tes3raceBodyParts/chest
-    tes3raceBodyParts/clavicle
-    tes3raceBodyParts/foot
-    tes3raceBodyParts/forearm
-    tes3raceBodyParts/groin
-    tes3raceBodyParts/hair
-    tes3raceBodyParts/hands
-    tes3raceBodyParts/head1
-    tes3raceBodyParts/head2
-    tes3raceBodyParts/knee
-    tes3raceBodyParts/neck
-    tes3raceBodyParts/tail
-    tes3raceBodyParts/upperArm
-    tes3raceBodyParts/upperLeg
-    tes3raceBodyParts/wrist
-```
+The ankle that an actor of this race and sex will use.
 
-#### [ankle](tes3raceBodyParts/ankle.md)
+</dd>
+<dt><code class="descname">chest: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The ankle that an actor of this race and sex will use.
+The chest that an actor of this race and sex will use.
 
-#### [chest](tes3raceBodyParts/chest.md)
+</dd>
+<dt><code class="descname">clavicle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The chest that an actor of this race and sex will use.
+The clavicle that an actor of this race and sex will use.
 
-#### [clavicle](tes3raceBodyParts/clavicle.md)
+</dd>
+<dt><code class="descname">foot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The clavicle that an actor of this race and sex will use.
+The foot that an actor of this race and sex will use.
 
-#### [foot](tes3raceBodyParts/foot.md)
+</dd>
+<dt><code class="descname">forearm: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The foot that an actor of this race and sex will use.
+The forearm that an actor of this race and sex will use.
 
-#### [forearm](tes3raceBodyParts/forearm.md)
+</dd>
+<dt><code class="descname">groin: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The forearm that an actor of this race and sex will use.
+The groin that an actor of this race and sex will use.
 
-#### [groin](tes3raceBodyParts/groin.md)
+</dd>
+<dt><code class="descname">hair: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The groin that an actor of this race and sex will use.
+The base hair that an actor of this race and sex will use.
 
-#### [hair](tes3raceBodyParts/hair.md)
+</dd>
+<dt><code class="descname">hands: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The base hair that an actor of this race and sex will use.
+The hands that an actor of this race and sex will use.
 
-#### [hands](tes3raceBodyParts/hands.md)
+</dd>
+<dt><code class="descname">head1: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The hands that an actor of this race and sex will use.
+No description available.
 
-#### [head1](tes3raceBodyParts/head1.md)
+</dd>
+<dt><code class="descname">head2: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [head2](tes3raceBodyParts/head2.md)
+</dd>
+<dt><code class="descname">knee: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> No description available.
+The knee that an actor of this race and sex will use.
 
-#### [knee](tes3raceBodyParts/knee.md)
+</dd>
+<dt><code class="descname">neck: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The knee that an actor of this race and sex will use.
+The neck that an actor of this race and sex will use.
 
-#### [neck](tes3raceBodyParts/neck.md)
+</dd>
+<dt><code class="descname">tail: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The neck that an actor of this race and sex will use.
+The tail that an actor of this race and sex will use.
 
-#### [tail](tes3raceBodyParts/tail.md)
+</dd>
+<dt><code class="descname">upperArm: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The tail that an actor of this race and sex will use.
+The upper arm that an actor of this race and sex will use.
 
-#### [upperArm](tes3raceBodyParts/upperArm.md)
+</dd>
+<dt><code class="descname">upperLeg: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The upper arm that an actor of this race and sex will use.
+The upper leg that an actor of this race and sex will use.
 
-#### [upperLeg](tes3raceBodyParts/upperLeg.md)
+</dd>
+<dt><code class="descname">wrist: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3bodyPart.html">tes3bodyPart</a></code></dt>
+<dd>
 
-> The upper leg that an actor of this race and sex will use.
+The wrist that an actor of this race and sex will use.
 
-#### [wrist](tes3raceBodyParts/wrist.md)
-
-> The wrist that an actor of this race and sex will use.
+</dd>
+</dl>

@@ -2,115 +2,138 @@
 
 A child for a given dialogue. Whereas a dialogue may be a conversation topic, a tes3dialogueInfo would be an individual response.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">actor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actor.html">tes3actor</a></code></dt>
+<dd>
 
-    tes3dialogueInfo/__tostring
-    tes3dialogueInfo/actor
-    tes3dialogueInfo/cell
-    tes3dialogueInfo/deleted
-    tes3dialogueInfo/disabled
-    tes3dialogueInfo/disposition
-    tes3dialogueInfo/firstHeardFrom
-    tes3dialogueInfo/id
-    tes3dialogueInfo/modified
-    tes3dialogueInfo/npcClass
-    tes3dialogueInfo/npcFaction
-    tes3dialogueInfo/npcRace
-    tes3dialogueInfo/npcRank
-    tes3dialogueInfo/npcSex
-    tes3dialogueInfo/objectFlags
-    tes3dialogueInfo/objectType
-    tes3dialogueInfo/pcFaction
-    tes3dialogueInfo/pcRank
-    tes3dialogueInfo/sourceMod
-    tes3dialogueInfo/text
-    tes3dialogueInfo/type
-```
+The speaker's actor that the info is filtered for.
 
-#### [__tostring](tes3dialogueInfo/__tostring.md)
+</dd>
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The speaker's current cell that the info is filtered for.
 
-#### [actor](tes3dialogueInfo/actor.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The speaker's actor that the info is filtered for.
+The deleted state of the object.
 
-#### [cell](tes3dialogueInfo/cell.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The speaker's current cell that the info is filtered for.
+The disabled state of the object.
 
-#### [deleted](tes3dialogueInfo/deleted.md)
+</dd>
+<dt><code class="descname">disposition: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The minimum disposition that the info is filtered for.
 
-#### [disabled](tes3dialogueInfo/disabled.md)
+</dd>
+<dt><code class="descname">firstHeardFrom: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actor.html">tes3actor</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The actor that the player first heard the info from.
 
-#### [disposition](tes3dialogueInfo/disposition.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The minimum disposition that the info is filtered for.
+The unique long string ID for the info. This is not kept in memory, and must be loaded from files for each call.
 
-#### [firstHeardFrom](tes3dialogueInfo/firstHeardFrom.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The actor that the player first heard the info from.
+The modification state of the object since the last save.
 
-#### [id](tes3dialogueInfo/id.md)
+</dd>
+<dt><code class="descname">npcClass: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3class.html">tes3class</a></code></dt>
+<dd>
 
-> The unique long string ID for the info. This is not kept in memory, and must be loaded from files for each call.
+The speaker's class that the info is filtered for.
 
-#### [modified](tes3dialogueInfo/modified.md)
+</dd>
+<dt><code class="descname">npcFaction: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3faction.html">tes3faction</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The speaker's faction that the info is filtered for.
 
-#### [npcClass](tes3dialogueInfo/npcClass.md)
+</dd>
+<dt><code class="descname">npcRace: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actor.html">tes3actor</a></code></dt>
+<dd>
 
-> The speaker's class that the info is filtered for.
+The speaker's race that the info is filtered for.
 
-#### [npcFaction](tes3dialogueInfo/npcFaction.md)
+</dd>
+<dt><code class="descname">npcRank: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The speaker's faction that the info is filtered for.
+The speaker's faction rank that the info is filtered for.
 
-#### [npcRace](tes3dialogueInfo/npcRace.md)
+</dd>
+<dt><code class="descname">npcSex: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The speaker's race that the info is filtered for.
+The speaker's sex that the info is filtered for.
 
-#### [npcRank](tes3dialogueInfo/npcRank.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The speaker's faction rank that the info is filtered for.
+The raw flags of the object.
 
-#### [npcSex](tes3dialogueInfo/npcSex.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The speaker's sex that the info is filtered for.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3dialogueInfo/objectFlags.md)
+</dd>
+<dt><code class="descname">pcFaction: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The player's joined faction that the info is filtered for.
 
-#### [objectType](tes3dialogueInfo/objectType.md)
+</dd>
+<dt><code class="descname">pcRank: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The player's rank required rank in the speaker's faction.
 
-#### [pcFaction](tes3dialogueInfo/pcFaction.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The player's joined faction that the info is filtered for.
+The filename of the mod that owns this object.
 
-#### [pcRank](tes3dialogueInfo/pcRank.md)
+</dd>
+<dt><code class="descname">text: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The player's rank required rank in the speaker's faction.
+String contents for the info. This is not kept in memory, and must be loaded from files for each call.
 
-#### [sourceMod](tes3dialogueInfo/sourceMod.md)
+</dd>
+<dt><code class="descname">type: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The type of the info.
 
-#### [text](tes3dialogueInfo/text.md)
+</dd>
+</dl>
 
-> String contents for the info. This is not kept in memory, and must be loaded from files for each call.
+## Metatable Events
 
-#### [type](tes3dialogueInfo/type.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The type of the info.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

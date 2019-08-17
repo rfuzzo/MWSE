@@ -2,20 +2,19 @@
 
 Runtime type information for NetImmerse structures.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-    niRTTI/name
-    niRTTI/parent
-```
+The human readable name for the type.
 
-#### [name](niRTTI/name.md)
+</dd>
+<dt><code class="descname">parent: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niRTTI.html">niRTTI</a></code></dt>
+<dd>
 
-> The human readable name for the type.
+The runtime type information that this type derives from.
 
-#### [parent](niRTTI/parent.md)
-
-> The runtime type information that this type derives from.
+</dd>
+</dl>

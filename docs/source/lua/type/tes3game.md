@@ -2,85 +2,97 @@
 
 A core game object used for storing game settings.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">parentWindowHandle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3game/parentWindowHandle
-    tes3game/playerTarget
-    tes3game/renderDistance
-    tes3game/screenShotsEnabled
-    tes3game/screenX
-    tes3game/screenY
-    tes3game/soundQuality
-    tes3game/voice
-    tes3game/volumeEffect
-    tes3game/volumeFootsteps
-    tes3game/volumeMaster
-    tes3game/volumeMedia
-    tes3game/windowHandle
-    tes3game/wireframeProperty
-    tes3game/worldSceneGraphRoot
-```
+The Windows HWND for the parent window.
 
-#### [parentWindowHandle](tes3game/parentWindowHandle.md)
+</dd>
+<dt><code class="descname">playerTarget: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The Windows HWND for the parent window.
+The current activation target.
 
-#### [playerTarget](tes3game/playerTarget.md)
+</dd>
+<dt><code class="descname">renderDistance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The current activation target.
+The game's rendering distance.
 
-#### [renderDistance](tes3game/renderDistance.md)
+</dd>
+<dt><code class="descname">screenShotsEnabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The game's rendering distance.
+State on if screenshots are enabled.
 
-#### [screenShotsEnabled](tes3game/screenShotsEnabled.md)
+</dd>
+<dt><code class="descname">screenX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> State on if screenshots are enabled.
+The screen's horizontal position.
 
-#### [screenX](tes3game/screenX.md)
+</dd>
+<dt><code class="descname">screenY: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The screen's horizontal position.
+The screen's vertical position.
 
-#### [screenY](tes3game/screenY.md)
+</dd>
+<dt><code class="descname">soundQuality: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The screen's vertical position.
+Sound quality level.
 
-#### [soundQuality](tes3game/soundQuality.md)
+</dd>
+<dt><code class="descname">voice: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Sound quality level.
+Mix volumes for voices.
 
-#### [voice](tes3game/voice.md)
+</dd>
+<dt><code class="descname">volumeEffect: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Mix volumes for voices.
+Mix volumes for effects.
 
-#### [volumeEffect](tes3game/volumeEffect.md)
+</dd>
+<dt><code class="descname">volumeFootsteps: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Mix volumes for effects.
+Mix volumes for footsteps.
 
-#### [volumeFootsteps](tes3game/volumeFootsteps.md)
+</dd>
+<dt><code class="descname">volumeMaster: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Mix volumes for footsteps.
+Mix volumes for all sounds.
 
-#### [volumeMaster](tes3game/volumeMaster.md)
+</dd>
+<dt><code class="descname">volumeMedia: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Mix volumes for all sounds.
+Mix volumes for music.
 
-#### [volumeMedia](tes3game/volumeMedia.md)
+</dd>
+<dt><code class="descname">windowHandle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Mix volumes for music.
+The Windows HWND for the window.
 
-#### [windowHandle](tes3game/windowHandle.md)
+</dd>
+<dt><code class="descname">wireframeProperty: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niProperty.html">niProperty</a></code></dt>
+<dd>
 
-> The Windows HWND for the window.
+The reused wireframe property, appled when toggling wireframe rendering.
 
-#### [wireframeProperty](tes3game/wireframeProperty.md)
+</dd>
+<dt><code class="descname">worldSceneGraphRoot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The reused wireframe property, appled when toggling wireframe rendering.
+Access to the root of the scene graph.
 
-#### [worldSceneGraphRoot](tes3game/worldSceneGraphRoot.md)
-
-> Access to the root of the scene graph.
+</dd>
+</dl>

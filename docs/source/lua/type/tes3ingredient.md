@@ -2,135 +2,162 @@
 
 An ingredient game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3ingredient/__tostring
-    tes3ingredient/boundingBox
-    tes3ingredient/deleted
-    tes3ingredient/disabled
-    tes3ingredient/effectAttributeIds
-    tes3ingredient/effects
-    tes3ingredient/effectsSkillIds
-    tes3ingredient/icon
-    tes3ingredient/id
-    tes3ingredient/mesh
-    tes3ingredient/modified
-    tes3ingredient/name
-    tes3ingredient/nextInCollection
-    tes3ingredient/objectFlags
-    tes3ingredient/objectType
-    tes3ingredient/owningCollection
-    tes3ingredient/previousInCollection
-    tes3ingredient/scale
-    tes3ingredient/sceneNode
-    tes3ingredient/sceneReference
-    tes3ingredient/script
-    tes3ingredient/sourceMod
-    tes3ingredient/stolenList
-    tes3ingredient/value
-    tes3ingredient/weight
-```
+The bounding box for the object.
 
-#### [__tostring](tes3ingredient/__tostring.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The deleted state of the object.
 
-#### [boundingBox](tes3ingredient/boundingBox.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The disabled state of the object.
 
-#### [deleted](tes3ingredient/deleted.md)
+</dd>
+<dt><code class="descname">effectAttributeIds: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+An array-style table access the attributes associated with the effects.
 
-#### [disabled](tes3ingredient/disabled.md)
+</dd>
+<dt><code class="descname">effects: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+An array-style table access to the four ingredient effects. Unlike alchemy or enchanting objects, these are simple numbers representing the effect ID.
 
-#### [effectAttributeIds](tes3ingredient/effectAttributeIds.md)
+</dd>
+<dt><code class="descname">effectsSkillIds: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> An array-style table access the attributes associated with the effects.
+An array-style table access the skills associated with the effects.
 
-#### [effects](tes3ingredient/effects.md)
+</dd>
+<dt><code class="descname">icon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> An array-style table access to the four ingredient effects. Unlike alchemy or enchanting objects, these are simple numbers representing the effect ID.
+The path to the object's icon.
 
-#### [effectsSkillIds](tes3ingredient/effectsSkillIds.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> An array-style table access the skills associated with the effects.
+The unique identifier for the object.
 
-#### [icon](tes3ingredient/icon.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's icon.
+The path to the object's mesh.
 
-#### [id](tes3ingredient/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [mesh](tes3ingredient/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3ingredient/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3ingredient/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3ingredient/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3ingredient/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3ingredient/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3ingredient/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3ingredient/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3ingredient/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3ingredient/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3ingredient/sceneReference.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The filename of the mod that owns this object.
 
-#### [script](tes3ingredient/script.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3ingredient/sourceMod.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The value of the object.
 
-#### [stolenList](tes3ingredient/stolenList.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+The weight, in pounds, of the object.
 
-#### [value](tes3ingredient/value.md)
+</dd>
+</dl>
 
-> The value of the object.
+## Metatable Events
 
-#### [weight](tes3ingredient/weight.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The weight, in pounds, of the object.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

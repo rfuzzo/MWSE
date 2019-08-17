@@ -2,33 +2,30 @@
 
 A simple pair of floating-point numbers.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">x: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3vector2/x
-    tes3vector2/y
-```
+The first value in the vector.
 
-#### [x](tes3vector2/x.md)
+</dd>
+<dt><code class="descname">y: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The first value in the vector.
+The second value in the vector.
 
-#### [y](tes3vector2/y.md)
+</dd>
+</dl>
 
-> The second value in the vector.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">copy()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of the vector.
 
-    tes3vector2/copy
-```
-
-#### [copy](tes3vector2/copy.md)
-
-> Creates a copy of the vector.
+</dd>
+</dl>

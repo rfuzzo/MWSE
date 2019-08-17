@@ -1,3 +1,0 @@
-# locked
-
-The locked state.

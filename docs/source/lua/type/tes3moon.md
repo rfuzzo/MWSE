@@ -2,85 +2,97 @@
 
 A structure that keeps track of information related two the game's two moons.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">axisOffset: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3moon/axisOffset
-    tes3moon/dailyIncrement
-    tes3moon/fadeEndAngle
-    tes3moon/fadeInFinish
-    tes3moon/fadeInStart
-    tes3moon/fadeOutFinish
-    tes3moon/fadeOutStart
-    tes3moon/fadeStartAngle
-    tes3moon/index
-    tes3moon/isRed
-    tes3moon/phase
-    tes3moon/shadowEarlyFadeAngle
-    tes3moon/speed
-    tes3moon/texture
-    tes3moon/weatherController
-```
+No description available.
 
-#### [axisOffset](tes3moon/axisOffset.md)
+</dd>
+<dt><code class="descname">dailyIncrement: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [dailyIncrement](tes3moon/dailyIncrement.md)
+</dd>
+<dt><code class="descname">fadeEndAngle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [fadeEndAngle](tes3moon/fadeEndAngle.md)
+</dd>
+<dt><code class="descname">fadeInFinish: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [fadeInFinish](tes3moon/fadeInFinish.md)
+</dd>
+<dt><code class="descname">fadeInStart: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [fadeInStart](tes3moon/fadeInStart.md)
+</dd>
+<dt><code class="descname">fadeOutFinish: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [fadeOutFinish](tes3moon/fadeOutFinish.md)
+</dd>
+<dt><code class="descname">fadeOutStart: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [fadeOutStart](tes3moon/fadeOutStart.md)
+</dd>
+<dt><code class="descname">fadeStartAngle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [fadeStartAngle](tes3moon/fadeStartAngle.md)
+</dd>
+<dt><code class="descname">index: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+The index of the moon, 0 for Masser, 1 for Secunda
 
-#### [index](tes3moon/index.md)
+</dd>
+<dt><code class="descname">isRed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The index of the moon, 0 for Masser, 1 for Secunda
+Determines if the moon is red, typically during the events of Bloodmoon.
 
-#### [isRed](tes3moon/isRed.md)
+</dd>
+<dt><code class="descname">phase: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Determines if the moon is red, typically during the events of Bloodmoon.
+No description available.
 
-#### [phase](tes3moon/phase.md)
+</dd>
+<dt><code class="descname">shadowEarlyFadeAngle: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [shadowEarlyFadeAngle](tes3moon/shadowEarlyFadeAngle.md)
+</dd>
+<dt><code class="descname">speed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [speed](tes3moon/speed.md)
+</dd>
+<dt><code class="descname">texture: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> No description available.
+The texture to use for the moon.
 
-#### [texture](tes3moon/texture.md)
+</dd>
+<dt><code class="descname">weatherController: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3weatherController.html">tes3weatherController</a></code></dt>
+<dd>
 
-> The texture to use for the moon.
+Quick access back to the weather controller structure.
 
-#### [weatherController](tes3moon/weatherController.md)
-
-> Quick access back to the weather controller structure.
+</dd>
+</dl>

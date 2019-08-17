@@ -2,25 +2,25 @@
 
 A simple structure to hold mark/recall data.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-    tes3markData/cell
-    tes3markData/position
-    tes3markData/rotation
-```
+The cell to recall to.
 
-#### [cell](tes3markData/cell.md)
+</dd>
+<dt><code class="descname">position: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> The cell to recall to.
+The position to recall to.
 
-#### [position](tes3markData/position.md)
+</dd>
+<dt><code class="descname">rotation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The position to recall to.
+The rotation to use when recalling.
 
-#### [rotation](tes3markData/rotation.md)
-
-> The rotation to use when recalling.
+</dd>
+</dl>

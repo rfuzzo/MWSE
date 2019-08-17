@@ -2,68 +2,72 @@
 
 A data structure, off of the world controller, that handles input.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">creationFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3inputController/creationFlags
-    tes3inputController/inputMaps
-    tes3inputController/keyboardState
-    tes3inputController/mouseState
-    tes3inputController/previousKeyboardState
-    tes3inputController/previousMouseStatement
-```
+A bit field representing device capabilities and settings.
 
-#### [creationFlags](tes3inputController/creationFlags.md)
+</dd>
+<dt><code class="descname">inputMaps: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> A bit field representing device capabilities and settings.
+The array-style access to input bindings.
 
-#### [inputMaps](tes3inputController/inputMaps.md)
+</dd>
+<dt><code class="descname">keyboardState: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The array-style access to input bindings.
+The array-style access to raw key states.
 
-#### [keyboardState](tes3inputController/keyboardState.md)
+</dd>
+<dt><code class="descname">mouseState: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3directInputMouseState.html">tes3directInputMouseState</a></code></dt>
+<dd>
 
-> The array-style access to raw key states.
+The raw DirectInput mouse state.
 
-#### [mouseState](tes3inputController/mouseState.md)
+</dd>
+<dt><code class="descname">previousKeyboardState: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The raw DirectInput mouse state.
+The array-style access to the previous frame's raw key states.
 
-#### [previousKeyboardState](tes3inputController/previousKeyboardState.md)
+</dd>
+<dt><code class="descname">previousMouseStatement: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3directInputMouseState.html">tes3directInputMouseState</a></code></dt>
+<dd>
 
-> The array-style access to the previous frame's raw key states.
+The raw DirectInput mouse state for the previous state.
 
-#### [previousMouseStatement](tes3inputController/previousMouseStatement.md)
+</dd>
+</dl>
 
-> The raw DirectInput mouse state for the previous state.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">isKeyDown(<i>key:</i> number) -> boolean</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Performs a key down test for a given scan key code.
 
-    tes3inputController/isKeyDown
-    tes3inputController/isKeyPressedThisFrame
-    tes3inputController/isKeyReleasedThisFrame
-    tes3inputController/keybindTest
-```
+</dd>
+<dt><code class="descname">isKeyPressedThisFrame(<i>key:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [isKeyDown](tes3inputController/isKeyDown.md)
+Checks to see if a given scan code is pressed, and wasn't pressed last frame.
 
-> Performs a key down test for a given scan key code.
+</dd>
+<dt><code class="descname">isKeyReleasedThisFrame(<i>key:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [isKeyPressedThisFrame](tes3inputController/isKeyPressedThisFrame.md)
+Checks to see if a given scan code is released, and was pressed last frame.
 
-> Checks to see if a given scan code is pressed, and wasn't pressed last frame.
+</dd>
+<dt><code class="descname">keybindTest(<i>key:</i> number, <i>transition:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [isKeyReleasedThisFrame](tes3inputController/isKeyReleasedThisFrame.md)
+Performs a test for a given keybind, and optionally a transition state.
 
-> Checks to see if a given scan code is released, and was pressed last frame.
-
-#### [keybindTest](tes3inputController/keybindTest.md)
-
-> Performs a test for a given keybind, and optionally a transition state.
+</dd>
+</dl>

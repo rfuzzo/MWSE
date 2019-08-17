@@ -2,38 +2,36 @@
 
 A rotation matrix, translation vector, and scale that marks an object's transformation.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">rotation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3matrix33.html">tes3matrix33</a></code></dt>
+<dd>
 
-    tes3transform/rotation
-    tes3transform/scale
-    tes3transform/translation
-```
+The transform's rotation matrix.
 
-#### [rotation](tes3transform/rotation.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The transform's rotation matrix.
+The transform's scale.
 
-#### [scale](tes3transform/scale.md)
+</dd>
+<dt><code class="descname">translation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> The transform's scale.
+The transform's translation vector.
 
-#### [translation](tes3transform/translation.md)
+</dd>
+</dl>
 
-> The transform's translation vector.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">copy()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of the transform.
 
-    tes3transform/copy
-```
-
-#### [copy](tes3transform/copy.md)
-
-> Creates a copy of the transform.
+</dd>
+</dl>

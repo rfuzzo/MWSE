@@ -2,70 +2,79 @@
 
 An active magic effect.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">attributeId: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3activeMagicEffect/attributeId
-    tes3activeMagicEffect/duration
-    tes3activeMagicEffect/effectId
-    tes3activeMagicEffect/effectIndex
-    tes3activeMagicEffect/harmful
-    tes3activeMagicEffect/instance
-    tes3activeMagicEffect/magnitude
-    tes3activeMagicEffect/magnitudeMin
-    tes3activeMagicEffect/next
-    tes3activeMagicEffect/previous
-    tes3activeMagicEffect/serial
-    tes3activeMagicEffect/skillId
-```
+The attribute ID (note that this may be the skill ID if the effect affects skills).
 
-#### [attributeId](tes3activeMagicEffect/attributeId.md)
+</dd>
+<dt><code class="descname">duration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The attribute ID (note that this may be the skill ID if the effect affects skills).
+No description available.
 
-#### [duration](tes3activeMagicEffect/duration.md)
+</dd>
+<dt><code class="descname">effectId: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [effectId](tes3activeMagicEffect/effectId.md)
+</dd>
+<dt><code class="descname">effectIndex: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [effectIndex](tes3activeMagicEffect/effectIndex.md)
+</dd>
+<dt><code class="descname">harmful: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [harmful](tes3activeMagicEffect/harmful.md)
+</dd>
+<dt><code class="descname">instance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3magicSourceInstance.html">tes3magicSourceInstance</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [instance](tes3activeMagicEffect/instance.md)
+</dd>
+<dt><code class="descname">magnitude: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [magnitude](tes3activeMagicEffect/magnitude.md)
+</dd>
+<dt><code class="descname">magnitudeMin: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [magnitudeMin](tes3activeMagicEffect/magnitudeMin.md)
+</dd>
+<dt><code class="descname">next: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3activeMagicEffect.html">tes3activeMagicEffect</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [next](tes3activeMagicEffect/next.md)
+</dd>
+<dt><code class="descname">previous: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3activeMagicEffect.html">tes3activeMagicEffect</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [previous](tes3activeMagicEffect/previous.md)
+</dd>
+<dt><code class="descname">serial: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [serial](tes3activeMagicEffect/serial.md)
+</dd>
+<dt><code class="descname">skillId: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+The skill ID (note that this may be the attribute ID if the effect affects attributes).
 
-#### [skillId](tes3activeMagicEffect/skillId.md)
-
-> The skill ID (note that this may be the attribute ID if the effect affects attributes).
+</dd>
+</dl>

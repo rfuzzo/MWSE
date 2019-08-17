@@ -2,185 +2,222 @@
 
 A core object representing a character class.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">attributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-    tes3class/__tostring
-    tes3class/attributes
-    tes3class/bartersAlchemy
-    tes3class/bartersApparatus
-    tes3class/bartersArmor
-    tes3class/bartersBooks
-    tes3class/bartersClothing
-    tes3class/bartersEnchantedItems
-    tes3class/bartersIngredients
-    tes3class/bartersLights
-    tes3class/bartersLockpicks
-    tes3class/bartersMiscItems
-    tes3class/bartersProbes
-    tes3class/bartersRepairTools
-    tes3class/bartersWeapons
-    tes3class/deleted
-    tes3class/description
-    tes3class/disabled
-    tes3class/id
-    tes3class/majorSkills
-    tes3class/minorSkills
-    tes3class/modified
-    tes3class/name
-    tes3class/objectFlags
-    tes3class/objectType
-    tes3class/offersEnchanting
-    tes3class/offersRepairs
-    tes3class/offersSpellmaking
-    tes3class/offersSpells
-    tes3class/offersTraining
-    tes3class/playable
-    tes3class/services
-    tes3class/skills
-    tes3class/sourceMod
-    tes3class/specialization
-```
+An array-style table of the two attribute IDs associated with the class.
 
-#### [__tostring](tes3class/__tostring.md)
+</dd>
+<dt><code class="descname">bartersAlchemy: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+If true, the class will barter alchemy items.
 
-#### [attributes](tes3class/attributes.md)
+</dd>
+<dt><code class="descname">bartersApparatus: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An array-style table of the two attribute IDs associated with the class.
+If true, the class will barter apparatus items.
 
-#### [bartersAlchemy](tes3class/bartersAlchemy.md)
+</dd>
+<dt><code class="descname">bartersArmor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter alchemy items.
+If true, the class will barter armor items.
 
-#### [bartersApparatus](tes3class/bartersApparatus.md)
+</dd>
+<dt><code class="descname">bartersBooks: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter apparatus items.
+If true, the class will barter book items.
 
-#### [bartersArmor](tes3class/bartersArmor.md)
+</dd>
+<dt><code class="descname">bartersClothing: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter armor items.
+If true, the class will barter clothing items.
 
-#### [bartersBooks](tes3class/bartersBooks.md)
+</dd>
+<dt><code class="descname">bartersEnchantedItems: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter book items.
+If true, the class will barter enchanted items.
 
-#### [bartersClothing](tes3class/bartersClothing.md)
+</dd>
+<dt><code class="descname">bartersIngredients: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter clothing items.
+If true, the class will barter ingredient items.
 
-#### [bartersEnchantedItems](tes3class/bartersEnchantedItems.md)
+</dd>
+<dt><code class="descname">bartersLights: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter enchanted items.
+If true, the class will barter light items.
 
-#### [bartersIngredients](tes3class/bartersIngredients.md)
+</dd>
+<dt><code class="descname">bartersLockpicks: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter ingredient items.
+If true, the class will barter lockpick items.
 
-#### [bartersLights](tes3class/bartersLights.md)
+</dd>
+<dt><code class="descname">bartersMiscItems: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter light items.
+If true, the class will barter misc items.
 
-#### [bartersLockpicks](tes3class/bartersLockpicks.md)
+</dd>
+<dt><code class="descname">bartersProbes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter lockpick items.
+If true, the class will barter probe items.
 
-#### [bartersMiscItems](tes3class/bartersMiscItems.md)
+</dd>
+<dt><code class="descname">bartersRepairTools: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter misc items.
+If true, the class will barter repair items.
 
-#### [bartersProbes](tes3class/bartersProbes.md)
+</dd>
+<dt><code class="descname">bartersWeapons: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter probe items.
+If true, the class will barter weapon items.
 
-#### [bartersRepairTools](tes3class/bartersRepairTools.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will barter repair items.
+The deleted state of the object.
 
-#### [bartersWeapons](tes3class/bartersWeapons.md)
+</dd>
+<dt><code class="descname">description: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> If true, the class will barter weapon items.
+Loads from disk and returns the description of the class.
 
-#### [deleted](tes3class/deleted.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The disabled state of the object.
 
-#### [description](tes3class/description.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Loads from disk and returns the description of the class.
+The unique identifier for the object.
 
-#### [disabled](tes3class/disabled.md)
+</dd>
+<dt><code class="descname">majorSkills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+An array-style table of the 5 skills IDs associated with the class' major skills.
 
-#### [id](tes3class/id.md)
+</dd>
+<dt><code class="descname">minorSkills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+An array-style table of the 5 skills IDs associated with the class' major skills.
 
-#### [majorSkills](tes3class/majorSkills.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An array-style table of the 5 skills IDs associated with the class' major skills.
+The modification state of the object since the last save.
 
-#### [minorSkills](tes3class/minorSkills.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> An array-style table of the 5 skills IDs associated with the class' major skills.
+The player-facing name for the object.
 
-#### [modified](tes3class/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [name](tes3class/name.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3class/objectFlags.md)
+</dd>
+<dt><code class="descname">offersEnchanting: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+If true, the class will offer repair services.
 
-#### [objectType](tes3class/objectType.md)
+</dd>
+<dt><code class="descname">offersRepairs: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+If true, the class will offer enchanting services.
 
-#### [offersEnchanting](tes3class/offersEnchanting.md)
+</dd>
+<dt><code class="descname">offersSpellmaking: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will offer repair services.
+If true, the class will offer spellmaking services.
 
-#### [offersRepairs](tes3class/offersRepairs.md)
+</dd>
+<dt><code class="descname">offersSpells: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will offer enchanting services.
+If true, the class will offer spell selling services.
 
-#### [offersSpellmaking](tes3class/offersSpellmaking.md)
+</dd>
+<dt><code class="descname">offersTraining: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will offer spellmaking services.
+If true, the class will offer spell training services.
 
-#### [offersSpells](tes3class/offersSpells.md)
+</dd>
+<dt><code class="descname">playable: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the class will offer spell selling services.
+If true, the class is selectable at character generation.
 
-#### [offersTraining](tes3class/offersTraining.md)
+</dd>
+<dt><code class="descname">services: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> If true, the class will offer spell training services.
+The services offered by the class. This is a bit field, and its values should typically be accessed through values such as bartersAlchemy.
 
-#### [playable](tes3class/playable.md)
+</dd>
+<dt><code class="descname">skills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> If true, the class is selectable at character generation.
+An array-style table of the 10 skills IDs associated with the class. For major or minor skills specifically, use the majorSkills and MinorSkills properties.
 
-#### [services](tes3class/services.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The services offered by the class. This is a bit field, and its values should typically be accessed through values such as bartersAlchemy.
+The filename of the mod that owns this object.
 
-#### [skills](tes3class/skills.md)
+</dd>
+<dt><code class="descname">specialization: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An array-style table of the 10 skills IDs associated with the class. For major or minor skills specifically, use the majorSkills and MinorSkills properties.
+The specialization for the class. Maps to the tes3.specialization table.
 
-#### [sourceMod](tes3class/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Metatable Events
 
-#### [specialization](tes3class/specialization.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The specialization for the class. Maps to the tes3.specialization table.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

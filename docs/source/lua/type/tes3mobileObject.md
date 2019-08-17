@@ -2,70 +2,79 @@
 
 The base object from which all other mobiles (AI/movement using) structures derive.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundSize: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-    tes3mobileObject/boundSize
-    tes3mobileObject/cellX
-    tes3mobileObject/cellY
-    tes3mobileObject/flags
-    tes3mobileObject/height
-    tes3mobileObject/impulseVelocity
-    tes3mobileObject/movementFlags
-    tes3mobileObject/objectType
-    tes3mobileObject/position
-    tes3mobileObject/prevMovementFlags
-    tes3mobileObject/reference
-    tes3mobileObject/velocity
-```
+A vector that shows the size of the bounding box in each direction.
 
-#### [boundSize](tes3mobileObject/boundSize.md)
+</dd>
+<dt><code class="descname">cellX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A vector that shows the size of the bounding box in each direction.
+The X grid coordinate of the cell the mobile is in.
 
-#### [cellX](tes3mobileObject/cellX.md)
+</dd>
+<dt><code class="descname">cellY: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The X grid coordinate of the cell the mobile is in.
+The Y grid coordinate of the cell the mobile is in.
 
-#### [cellY](tes3mobileObject/cellY.md)
+</dd>
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The Y grid coordinate of the cell the mobile is in.
+Access to the root mobile object flags, represented as an integer. Should not be accessed directly.
 
-#### [flags](tes3mobileObject/flags.md)
+</dd>
+<dt><code class="descname">height: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the root mobile object flags, represented as an integer. Should not be accessed directly.
+The height of the mobile above the ground.
 
-#### [height](tes3mobileObject/height.md)
+</dd>
+<dt><code class="descname">impulseVelocity: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> The height of the mobile above the ground.
+A vector that represents the 3D acceleration of the object.
 
-#### [impulseVelocity](tes3mobileObject/impulseVelocity.md)
+</dd>
+<dt><code class="descname">movementFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A vector that represents the 3D acceleration of the object.
+Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.
 
-#### [movementFlags](tes3mobileObject/movementFlags.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.
+The type of mobile object. Maps to values in tes3.objectType.
 
-#### [objectType](tes3mobileObject/objectType.md)
+</dd>
+<dt><code class="descname">position: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> The type of mobile object. Maps to values in tes3.objectType.
+A vector that represents the 3D position of the object.
 
-#### [position](tes3mobileObject/position.md)
+</dd>
+<dt><code class="descname">prevMovementFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A vector that represents the 3D position of the object.
+Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.
 
-#### [prevMovementFlags](tes3mobileObject/prevMovementFlags.md)
+</dd>
+<dt><code class="descname">reference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.
+Access to the reference object for the mobile, if any.
 
-#### [reference](tes3mobileObject/reference.md)
+</dd>
+<dt><code class="descname">velocity: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> Access to the reference object for the mobile, if any.
+A vector that represents the 3D velocity of the object.
 
-#### [velocity](tes3mobileObject/velocity.md)
-
-> A vector that represents the 3D velocity of the object.
+</dd>
+</dl>

@@ -1,3 +1,0 @@
-# lastUsedArmor
-
-No description available.

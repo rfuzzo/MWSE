@@ -5,6 +5,6 @@ return {
 		{ name = "modname", type = "string" },
 	},
 	returns = {
-		{ type = "table "},
+		{ name = "module", type = "table "},
 	}
 }

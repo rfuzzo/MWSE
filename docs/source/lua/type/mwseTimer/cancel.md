@@ -1,3 +1,0 @@
-# cancel
-
-Cancels the timer.

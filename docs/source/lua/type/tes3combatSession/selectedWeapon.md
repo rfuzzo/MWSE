@@ -1,3 +1,0 @@
-# selectedWeapon
-
-No description available.

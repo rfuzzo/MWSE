@@ -1,3 +1,0 @@
-# fadeOutStart
-
-No description available.

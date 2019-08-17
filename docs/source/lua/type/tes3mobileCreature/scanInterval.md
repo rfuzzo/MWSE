@@ -1,3 +1,0 @@
-# scanInterval
-
-No description available.

@@ -1,3 +1,0 @@
-# fadeInStart
-
-No description available.

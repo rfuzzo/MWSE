@@ -2,248 +2,293 @@
 
 A creature object that has not been cloned. Typically represents the raw information edited in the construction set.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">actorFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3creature/__tostring
-    tes3creature/actorFlags
-    tes3creature/aiConfig
-    tes3creature/attacks
-    tes3creature/attributes
-    tes3creature/biped
-    tes3creature/boundingBox
-    tes3creature/cloneCount
-    tes3creature/deleted
-    tes3creature/disabled
-    tes3creature/equipment
-    tes3creature/fatigue
-    tes3creature/flies
-    tes3creature/health
-    tes3creature/id
-    tes3creature/inventory
-    tes3creature/isAttacked
-    tes3creature/isEssential
-    tes3creature/isInstance
-    tes3creature/isRespawn
-    tes3creature/level
-    tes3creature/magicka
-    tes3creature/mesh
-    tes3creature/modified
-    tes3creature/name
-    tes3creature/nextInCollection
-    tes3creature/objectFlags
-    tes3creature/objectType
-    tes3creature/owningCollection
-    tes3creature/previousInCollection
-    tes3creature/respawns
-    tes3creature/scale
-    tes3creature/sceneNode
-    tes3creature/sceneReference
-    tes3creature/script
-    tes3creature/skills
-    tes3creature/soul
-    tes3creature/soundCreature
-    tes3creature/sourceMod
-    tes3creature/spells
-    tes3creature/stolenList
-    tes3creature/swims
-    tes3creature/type
-    tes3creature/usesEquipment
-    tes3creature/walks
-```
+A number representing the actor flags. Truly a bit field.
 
-#### [__tostring](tes3creature/__tostring.md)
+</dd>
+<dt><code class="descname">aiConfig: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3aiConfig.html">tes3aiConfig</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+A substructure off of actors that contains information on the current AI configuration.
 
-#### [actorFlags](tes3creature/actorFlags.md)
+</dd>
+<dt><code class="descname">attacks: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> A number representing the actor flags. Truly a bit field.
+A table of three attacks, represented by a trio of tes3rangeInt.
 
-#### [aiConfig](tes3creature/aiConfig.md)
+</dd>
+<dt><code class="descname">attributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> A substructure off of actors that contains information on the current AI configuration.
+A table of eight numbers, representing the base values for the actor's attributes.
 
-#### [attacks](tes3creature/attacks.md)
+</dd>
+<dt><code class="descname">biped: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A table of three attacks, represented by a trio of tes3rangeInt.
+Access to the creature's biped flag.
 
-#### [attributes](tes3creature/attributes.md)
+</dd>
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-> A table of eight numbers, representing the base values for the actor's attributes.
+The bounding box for the object.
 
-#### [biped](tes3creature/biped.md)
+</dd>
+<dt><code class="descname">cloneCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the creature's biped flag.
+The number of clones that exist of this actor.
 
-#### [boundingBox](tes3creature/boundingBox.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The deleted state of the object.
 
-#### [cloneCount](tes3creature/cloneCount.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The number of clones that exist of this actor.
+The disabled state of the object.
 
-#### [deleted](tes3creature/deleted.md)
+</dd>
+<dt><code class="descname">equipment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The items currently equipped to the actor.
 
-#### [disabled](tes3creature/disabled.md)
+</dd>
+<dt><code class="descname">fatigue: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The actor's max fatigue.
 
-#### [equipment](tes3creature/equipment.md)
+</dd>
+<dt><code class="descname">flies: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The items currently equipped to the actor.
+Access to the creature's flies flag.
 
-#### [fatigue](tes3creature/fatigue.md)
+</dd>
+<dt><code class="descname">health: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The actor's max fatigue.
+The actor's max health.
 
-#### [flies](tes3creature/flies.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to the creature's flies flag.
+The unique identifier for the object.
 
-#### [health](tes3creature/health.md)
+</dd>
+<dt><code class="descname">inventory: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The actor's max health.
+The items currently carried by the actor.
 
-#### [id](tes3creature/id.md)
+</dd>
+<dt><code class="descname">isAttacked: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+If true, the actor's attacked flag is set.
 
-#### [inventory](tes3creature/inventory.md)
+</dd>
+<dt><code class="descname">isEssential: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The items currently carried by the actor.
+If true, the actor's essential flag is set.
 
-#### [isAttacked](tes3creature/isAttacked.md)
+</dd>
+<dt><code class="descname">isInstance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the actor's attacked flag is set.
+Always returns false.
 
-#### [isEssential](tes3creature/isEssential.md)
+</dd>
+<dt><code class="descname">isRespawn: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the actor's essential flag is set.
+If true, the actor's respawn flag is set.
 
-#### [isInstance](tes3creature/isInstance.md)
+</dd>
+<dt><code class="descname">level: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Always returns false.
+The base level of the creature.
 
-#### [isRespawn](tes3creature/isRespawn.md)
+</dd>
+<dt><code class="descname">magicka: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> If true, the actor's respawn flag is set.
+The actor's max magicka.
 
-#### [level](tes3creature/level.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The base level of the creature.
+The path to the object's mesh.
 
-#### [magicka](tes3creature/magicka.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The actor's max magicka.
+The modification state of the object since the last save.
 
-#### [mesh](tes3creature/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3creature/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3creature/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3creature/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3creature/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3creature/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3creature/owningCollection.md)
+</dd>
+<dt><code class="descname">respawns: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+Access to the creature's respawns flag.
 
-#### [previousInCollection](tes3creature/previousInCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The object's scale.
 
-#### [respawns](tes3creature/respawns.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> Access to the creature's respawns flag.
+The scene graph node for this object.
 
-#### [scale](tes3creature/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3creature/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3creature/sceneReference.md)
+</dd>
+<dt><code class="descname">skills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+A table of three numbers, representing the base values for the creature's combat, magic, and stealth skills.
 
-#### [script](tes3creature/script.md)
+</dd>
+<dt><code class="descname">soul: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+The amount of soul value that the creature provides.
 
-#### [skills](tes3creature/skills.md)
+</dd>
+<dt><code class="descname">soundCreature: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3creature.html">tes3creature</a></code></dt>
+<dd>
 
-> A table of three numbers, representing the base values for the creature's combat, magic, and stealth skills.
+A creature to use instead of this one for sound generation.
 
-#### [soul](tes3creature/soul.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The amount of soul value that the creature provides.
+The filename of the mod that owns this object.
 
-#### [soundCreature](tes3creature/soundCreature.md)
+</dd>
+<dt><code class="descname">spells: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3spellList.html">tes3spellList</a></code></dt>
+<dd>
 
-> A creature to use instead of this one for sound generation.
+A list of spells that the actor has access to.
 
-#### [sourceMod](tes3creature/sourceMod.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+A list of actors that the object has been stolen from.
 
-#### [spells](tes3creature/spells.md)
+</dd>
+<dt><code class="descname">swims: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A list of spells that the actor has access to.
+Access to the creature's swims flag.
 
-#### [stolenList](tes3creature/stolenList.md)
+</dd>
+<dt><code class="descname">type: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+The type of the creature, represented by a number for normal, daedra, undead, or humanoid.
 
-#### [swims](tes3creature/swims.md)
+</dd>
+<dt><code class="descname">usesEquipment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Access to the creature's swims flag.
+Access to the creature's usesEquipment flag.
 
-#### [type](tes3creature/type.md)
+</dd>
+<dt><code class="descname">walks: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The type of the creature, represented by a number for normal, daedra, undead, or humanoid.
+Access to the creature's walks flag.
 
-#### [usesEquipment](tes3creature/usesEquipment.md)
+</dd>
+</dl>
 
-> Access to the creature's usesEquipment flag.
+## Methods
 
-#### [walks](tes3creature/walks.md)
+<dl class="describe">
+<dt><code class="descname">onInventoryClose(<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>)</code></dt>
+<dd>
 
-> Access to the creature's walks flag.
+A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3creature/onInventoryClose
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [onInventoryClose](tes3creature/onInventoryClose.md)
+An object can be converted using `tostring()` to its id.
 
-> A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
+</dd>
+</dl>

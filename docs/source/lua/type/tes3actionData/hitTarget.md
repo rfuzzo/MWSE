@@ -1,3 +1,0 @@
-# hitTarget
-
-No description available.

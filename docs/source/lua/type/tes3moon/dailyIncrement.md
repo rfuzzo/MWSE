@@ -1,3 +1,0 @@
-# dailyIncrement
-
-No description available.

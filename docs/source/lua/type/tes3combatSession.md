@@ -2,68 +2,72 @@
 
 A structure that keeps track of combat session data.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">alchemyPriority: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3combatSession/alchemyPriority
-    tes3combatSession/distance
-    tes3combatSession/mobile
-    tes3combatSession/selectedAction
-    tes3combatSession/selectedAlchemy
-    tes3combatSession/selectedShield
-    tes3combatSession/selectedSpell
-    tes3combatSession/selectedWeapon
-    tes3combatSession/selectionPriority
-```
+No description available.
 
-#### [alchemyPriority](tes3combatSession/alchemyPriority.md)
+</dd>
+<dt><code class="descname">distance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [distance](tes3combatSession/distance.md)
+</dd>
+<dt><code class="descname">mobile: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [mobile](tes3combatSession/mobile.md)
+</dd>
+<dt><code class="descname">selectedAction: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [selectedAction](tes3combatSession/selectedAction.md)
+</dd>
+<dt><code class="descname">selectedAlchemy: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3alchemy.html">tes3alchemy</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [selectedAlchemy](tes3combatSession/selectedAlchemy.md)
+</dd>
+<dt><code class="descname">selectedShield: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [selectedShield](tes3combatSession/selectedShield.md)
+</dd>
+<dt><code class="descname">selectedSpell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3spell.html">tes3spell</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [selectedSpell](tes3combatSession/selectedSpell.md)
+</dd>
+<dt><code class="descname">selectedWeapon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [selectedWeapon](tes3combatSession/selectedWeapon.md)
+</dd>
+<dt><code class="descname">selectionPriority: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [selectionPriority](tes3combatSession/selectionPriority.md)
+</dd>
+</dl>
 
-> No description available.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">selectAlchemyWithEffect()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Selects the alchemy item with the greatest value, for a given effect ID and loads it into the selectedAlchemy property.
 
-    tes3combatSession/selectAlchemyWithEffect
-```
-
-#### [selectAlchemyWithEffect](tes3combatSession/selectAlchemyWithEffect.md)
-
-> Selects the alchemy item with the greatest value, for a given effect ID and loads it into the selectedAlchemy property.
+</dd>
+</dl>

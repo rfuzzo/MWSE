@@ -2,43 +2,42 @@
 
 The base-most object from which almost all NetImmerse structures are derived from.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">references: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-    niObject/references
-    niObject/runTimeTypeInformation
-```
+The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
 
-#### [references](niObject/references.md)
+</dd>
+<dt><code class="descname">runTimeTypeInformation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niRTTI.html">niRTTI</a></code></dt>
+<dd>
 
-> The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
+The runtime type information for this object.
 
-#### [runTimeTypeInformation](niObject/runTimeTypeInformation.md)
+</dd>
+</dl>
 
-> The runtime type information for this object.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">clone()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of this object.
 
-    niObject/clone
-    niObject/isInstanceOfType
-    niObject/isOfType
-```
+</dd>
+<dt><code class="descname">isInstanceOfType(<i>type:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [clone](niObject/clone.md)
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
 
-> Creates a copy of this object.
+</dd>
+<dt><code class="descname">isOfType(<i>type:</i> number) -> boolean</code></dt>
+<dd>
 
-#### [isInstanceOfType](niObject/isInstanceOfType.md)
+Determines if the object is of a given type. Types can be found in the tes3.niType table.
 
-> Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
-
-#### [isOfType](niObject/isOfType.md)
-
-> Determines if the object is of a given type. Types can be found in the tes3.niType table.
+</dd>
+</dl>

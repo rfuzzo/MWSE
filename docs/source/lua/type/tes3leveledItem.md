@@ -2,123 +2,143 @@
 
 A leveled creature game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3leveledItem/__tostring
-    tes3leveledItem/boundingBox
-    tes3leveledItem/chanceForNothing
-    tes3leveledItem/count
-    tes3leveledItem/deleted
-    tes3leveledItem/disabled
-    tes3leveledItem/flags
-    tes3leveledItem/id
-    tes3leveledItem/list
-    tes3leveledItem/modified
-    tes3leveledItem/nextInCollection
-    tes3leveledItem/objectFlags
-    tes3leveledItem/objectType
-    tes3leveledItem/owningCollection
-    tes3leveledItem/previousInCollection
-    tes3leveledItem/scale
-    tes3leveledItem/sceneNode
-    tes3leveledItem/sceneReference
-    tes3leveledItem/sourceMod
-    tes3leveledItem/stolenList
-```
+The bounding box for the object.
 
-#### [__tostring](tes3leveledItem/__tostring.md)
+</dd>
+<dt><code class="descname">chanceForNothing: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The percent chance, from 0 to 100, for no object to be chosen.
 
-#### [boundingBox](tes3leveledItem/boundingBox.md)
+</dd>
+<dt><code class="descname">count: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The number of possible options in the leveled object container.
 
-#### [chanceForNothing](tes3leveledItem/chanceForNothing.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The percent chance, from 0 to 100, for no object to be chosen.
+The deleted state of the object.
 
-#### [count](tes3leveledItem/count.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The number of possible options in the leveled object container.
+The disabled state of the object.
 
-#### [deleted](tes3leveledItem/deleted.md)
+</dd>
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+A numerical representation of bit flags for the object.
 
-#### [disabled](tes3leveledItem/disabled.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The unique identifier for the object.
 
-#### [flags](tes3leveledItem/flags.md)
+</dd>
+<dt><code class="descname">list: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> A numerical representation of bit flags for the object.
+The collection that itself, containing tes3leveledListNodes.
 
-#### [id](tes3leveledItem/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [list](tes3leveledItem/list.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The collection that itself, containing tes3leveledListNodes.
+The next object in parent collection's list.
 
-#### [modified](tes3leveledItem/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [nextInCollection](tes3leveledItem/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3leveledItem/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3leveledItem/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3leveledItem/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3leveledItem/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3leveledItem/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3leveledItem/sceneNode.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The filename of the mod that owns this object.
 
-#### [sceneReference](tes3leveledItem/sceneReference.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3leveledItem/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Methods
 
-#### [stolenList](tes3leveledItem/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">pickFrom()</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+Chooses a random item from the list, based on the player's level.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3leveledItem/pickFrom
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [pickFrom](tes3leveledItem/pickFrom.md)
+An object can be converted using `tostring()` to its id.
 
-> Chooses a random item from the list, based on the player's level.
+</dd>
+</dl>

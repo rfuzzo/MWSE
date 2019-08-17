@@ -2,20 +2,19 @@
 
 A substructure for a race, storing a height or weight for male and female actors.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">female: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3raceHeightWeight/female
-    tes3raceHeightWeight/male
-```
+The height or weight for female actors.
 
-#### [female](tes3raceHeightWeight/female.md)
+</dd>
+<dt><code class="descname">male: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The height or weight for female actors.
+The height or weight for male actors.
 
-#### [male](tes3raceHeightWeight/male.md)
-
-> The height or weight for male actors.
+</dd>
+</dl>

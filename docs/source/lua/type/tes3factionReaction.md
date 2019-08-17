@@ -2,20 +2,19 @@
 
 A container mapping a reputation for an associated faction.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">faction: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3faction.html">tes3faction</a></code></dt>
+<dd>
 
-    tes3factionReaction/faction
-    tes3factionReaction/reputation
-```
+The faction whose reaction will be adjusted.
 
-#### [faction](tes3factionReaction/faction.md)
+</dd>
+<dt><code class="descname">reputation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The faction whose reaction will be adjusted.
+The reaction adjustment for the faction.
 
-#### [reputation](tes3factionReaction/reputation.md)
-
-> The reaction adjustment for the faction.
+</dd>
+</dl>

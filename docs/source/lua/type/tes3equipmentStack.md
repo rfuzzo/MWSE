@@ -2,20 +2,19 @@
 
 A simple container that holds a relationship between an item, and any associated item data.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">object: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3item.html">tes3item</a></code></dt>
+<dd>
 
-    tes3equipmentStack/object
-    tes3equipmentStack/variables
-```
+The core game object that the stack represents.
 
-#### [object](tes3equipmentStack/object.md)
+</dd>
+<dt><code class="descname">variables: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a></code></dt>
+<dd>
 
-> The core game object that the stack represents.
+Variables that are associated with the stack's object, if any.
 
-#### [variables](tes3equipmentStack/variables.md)
-
-> Variables that are associated with the stack's object, if any.
+</dd>
+</dl>

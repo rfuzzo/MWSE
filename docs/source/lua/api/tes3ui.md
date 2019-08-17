@@ -34,106 +34,157 @@ The tes3ui library provides access to manipulating the game's GUI.
     tes3ui/updateInventoryTiles
 ```
 
-#### [acquireTextInput](tes3ui/acquireTextInput.md)
+<dl class="describe">
+<dt><code class="descname"><a href="tes3ui/acquireTextInput.html">acquireTextInput</a>(<i>element:</i> tes3uiElemenet)</code></dt>
+<dd>
 
-> Sends all text input to the specified element. Suppresses keybinds while active. Calling this function with a nil argument will release text input and allow keybinds to work.
+Sends all text input to the specified element. Suppresses keybinds while active. Calling this function with a nil argument will release text input and allow keybinds to work.
 
-#### [captureMouseDrag](tes3ui/captureMouseDrag.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/captureMouseDrag.html">captureMouseDrag</a>(<i>capture:</i> boolean)</code></dt>
+<dd>
 
-> When used in a mouse event, causes the element to capture further mouse events even when the cursor goes outside the element.
+When used in a mouse event, causes the element to capture further mouse events even when the cursor goes outside the element.
 
-#### [createHelpLayerMenu](tes3ui/createHelpLayerMenu.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/createHelpLayerMenu.html">createHelpLayerMenu</a>({<i>id:</i> number}) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3uiElement.html">tes3uiElement</a></code></dt>
+<dd>
 
-> Creates a help layer menu. Help layer menus include notifications and tooltips that are always above the rest of the interface. The game realizes this using a separate menu root and set of functions.
- >
- >Note, to create tooltips with the correct behaviour, use tes3ui.createTooltipMenu.
- >
- >Unlike standard menus, help layer menus are always created with a fixed frame.
+Creates a help layer menu. Help layer menus include notifications and tooltips that are always above the rest of the interface. The game realizes this using a separate menu root and set of functions.
 
-#### [createMenu](tes3ui/createMenu.md)
+Note, to create tooltips with the correct behaviour, use tes3ui.createTooltipMenu.
 
-> Creates a top-level menu.
+Unlike standard menus, help layer menus are always created with a fixed frame.
 
-#### [createTooltipMenu](tes3ui/createTooltipMenu.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/createMenu.html">createMenu</a>({<i>id:</i> number, <i>dragFrame:</i> boolean, <i>fixedFrame:</i> boolean}) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3uiElement.html">tes3uiElement</a></code></dt>
+<dd>
 
-> Creates a tooltip menu. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element.
+Creates a top-level menu.
 
-#### [enterMenuMode](tes3ui/enterMenuMode.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/createTooltipMenu.html">createTooltipMenu</a>()</code></dt>
+<dd>
 
-> Requests menu mode be activated on a menu with a given id.
+Creates a tooltip menu. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element.
 
-#### [findHelpLayerMenu](tes3ui/findHelpLayerMenu.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/enterMenuMode.html">enterMenuMode</a>(<i>id:</i> number) -> boolean</code></dt>
+<dd>
 
-> Locates a help layer menu through its id. Help layer menus include notifications and tooltips that are always above the rest of the interface. The game realizes this using a separate menu root and set of functions.
+Requests menu mode be activated on a menu with a given id.
 
-#### [findMenu](tes3ui/findMenu.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/findHelpLayerMenu.html">findHelpLayerMenu</a>(<i>id:</i> number) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3uiElement.html">tes3uiElement</a></code></dt>
+<dd>
 
-> Locates a top-level menu through its id.
+Locates a help layer menu through its id. Help layer menus include notifications and tooltips that are always above the rest of the interface. The game realizes this using a separate menu root and set of functions.
 
-#### [forcePlayerInventoryUpdate](tes3ui/forcePlayerInventoryUpdate.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/findMenu.html">findMenu</a>(<i>id:</i> number) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3uiElement.html">tes3uiElement</a></code></dt>
+<dd>
 
-> Forces the game to update the inventory tile GUI elements. Unlike tes3ui.updateInventoryTiles, this will force-resync the player's inventory to the GUI, rather than updating what is already in the GUI system.
+Locates a top-level menu through its id.
 
-#### [getInventorySelectType](tes3ui/getInventorySelectType.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/forcePlayerInventoryUpdate.html">forcePlayerInventoryUpdate</a>()</code></dt>
+<dd>
 
-> Determines what sort of search is being done when performing an inventory selection, e.g. "alembic" or "ingredient" or "soulGemFilled".
+Forces the game to update the inventory tile GUI elements. Unlike tes3ui.updateInventoryTiles, this will force-resync the player's inventory to the GUI, rather than updating what is already in the GUI system.
 
-#### [getMenuOnTop](tes3ui/getMenuOnTop.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/getInventorySelectType.html">getInventorySelectType</a>()</code></dt>
+<dd>
 
-> Returns the top-most, active menu.
+Determines what sort of search is being done when performing an inventory selection, e.g. "alembic" or "ingredient" or "soulGemFilled".
 
-#### [getPalette](tes3ui/getPalette.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/getMenuOnTop.html">getMenuOnTop</a>()</code></dt>
+<dd>
 
-> Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
+Returns the top-most, active menu.
 
-#### [getServiceActor](tes3ui/getServiceActor.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/getPalette.html">getPalette</a>(<i>name:</i> string) -> table</code></dt>
+<dd>
 
-> Returns the mobile actor currently providing services to the player.
+Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
 
-#### [leaveMenuMode](tes3ui/leaveMenuMode.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/getServiceActor.html">getServiceActor</a>()</code></dt>
+<dd>
 
-> Requests menu mode be deactivated on a menu with a given id.
+Returns the mobile actor currently providing services to the player.
 
-#### [logToConsole](tes3ui/logToConsole.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/leaveMenuMode.html">leaveMenuMode</a>(<i>id:</i> number) -> boolean</code></dt>
+<dd>
 
-> Logs a message to the console.
+Requests menu mode be deactivated on a menu with a given id.
 
-#### [menuMode](tes3ui/menuMode.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/logToConsole.html">logToConsole</a>(<i>text:</i> string, <i>isCommand:</i> boolean)</code></dt>
+<dd>
 
-> Checks if the game is in menu mode.
+Logs a message to the console.
 
-#### [registerID](tes3ui/registerID.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/menuMode.html">menuMode</a>()</code></dt>
+<dd>
 
-> Registers a UI element name, returning a UI_ID. Once a property is registered, this function always returns the same UI_ID. These UI_IDs are used by the API to locate elements that may not exist (a weak reference), instead of by element name.
- >
- >The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.
+Checks if the game is in menu mode.
 
-#### [registerProperty](tes3ui/registerProperty.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/registerID.html">registerID</a>(<i>s:</i> string) -> number</code></dt>
+<dd>
 
-> Registers a property name, returning a Property. Once a property is registered, this function always returns the same Property.
- >
- >The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.
+Registers a UI element name, returning a UI_ID. Once a property is registered, this function always returns the same UI_ID. These UI_IDs are used by the API to locate elements that may not exist (a weak reference), instead of by element name.
 
-#### [showBookMenu](tes3ui/showBookMenu.md)
+The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.
 
-> Displays the book menu with arbitrary text. Paging is automatically handled.
+</dd>
+<dt><code class="descname"><a href="tes3ui/registerProperty.html">registerProperty</a>(<i>s:</i> string) -> number</code></dt>
+<dd>
 
-#### [showScrollMenu](tes3ui/showScrollMenu.md)
+Registers a property name, returning a Property. Once a property is registered, this function always returns the same Property.
 
-> Displays the scroll menu with arbitrary text.
+The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.
 
-#### [suppressTooltip](tes3ui/suppressTooltip.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/showBookMenu.html">showBookMenu</a>(<i>text:</i> string)</code></dt>
+<dd>
 
-> Controls hiding of world object tooltips.
+Displays the book menu with arbitrary text. Paging is automatically handled.
 
-#### [updateBarterMenuTiles](tes3ui/updateBarterMenuTiles.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/showScrollMenu.html">showScrollMenu</a>(<i>text:</i> string)</code></dt>
+<dd>
 
-> Forces the game to update the barter tile GUI elements.
+Displays the scroll menu with arbitrary text.
 
-#### [updateInventorySelectTiles](tes3ui/updateInventorySelectTiles.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/suppressTooltip.html">suppressTooltip</a>(<i>suppress:</i> boolean)</code></dt>
+<dd>
 
-> Forces the game to update the inventory selection GUI elements.
+Controls hiding of world object tooltips.
 
-#### [updateInventoryTiles](tes3ui/updateInventoryTiles.md)
+</dd>
+<dt><code class="descname"><a href="tes3ui/updateBarterMenuTiles.html">updateBarterMenuTiles</a>()</code></dt>
+<dd>
 
-> Forces the game to update the inventory tile GUI elements.
+Forces the game to update the barter tile GUI elements.
+
+</dd>
+<dt><code class="descname"><a href="tes3ui/updateInventorySelectTiles.html">updateInventorySelectTiles</a>()</code></dt>
+<dd>
+
+Forces the game to update the inventory selection GUI elements.
+
+</dd>
+<dt><code class="descname"><a href="tes3ui/updateInventoryTiles.html">updateInventoryTiles</a>()</code></dt>
+<dd>
+
+Forces the game to update the inventory tile GUI elements.
+
+</dd>
+</dl>

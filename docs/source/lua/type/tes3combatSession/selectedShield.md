@@ -1,3 +1,0 @@
-# selectedShield
-
-No description available.

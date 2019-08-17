@@ -2,43 +2,42 @@
 
 A set of 4 floating-point numbers.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">w: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3vector4/w
-    tes3vector4/x
-    tes3vector4/y
-    tes3vector4/z
-```
+The fourth value in the vector.
 
-#### [w](tes3vector4/w.md)
+</dd>
+<dt><code class="descname">x: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The fourth value in the vector.
+The first value in the vector.
 
-#### [x](tes3vector4/x.md)
+</dd>
+<dt><code class="descname">y: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The first value in the vector.
+The second value in the vector.
 
-#### [y](tes3vector4/y.md)
+</dd>
+<dt><code class="descname">z: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The second value in the vector.
+The third value in the vector.
 
-#### [z](tes3vector4/z.md)
+</dd>
+</dl>
 
-> The third value in the vector.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">copy()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of the vector.
 
-    tes3vector4/copy
-```
-
-#### [copy](tes3vector4/copy.md)
-
-> Creates a copy of the vector.
+</dd>
+</dl>

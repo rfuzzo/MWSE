@@ -2,168 +2,197 @@
 
 A faction game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">actorFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3faction/__tostring
-    tes3faction/actorFlags
-    tes3faction/attributes
-    tes3faction/boundingBox
-    tes3faction/cloneCount
-    tes3faction/deleted
-    tes3faction/disabled
-    tes3faction/equipment
-    tes3faction/id
-    tes3faction/inventory
-    tes3faction/modified
-    tes3faction/name
-    tes3faction/nextInCollection
-    tes3faction/objectFlags
-    tes3faction/objectType
-    tes3faction/owningCollection
-    tes3faction/playerExpelled
-    tes3faction/playerJoined
-    tes3faction/playerRank
-    tes3faction/playerReputation
-    tes3faction/previousInCollection
-    tes3faction/ranks
-    tes3faction/reactions
-    tes3faction/scale
-    tes3faction/sceneNode
-    tes3faction/sceneReference
-    tes3faction/skills
-    tes3faction/sourceMod
-    tes3faction/stolenList
-```
+A number representing the actor flags. Truly a bit field.
 
-#### [__tostring](tes3faction/__tostring.md)
+</dd>
+<dt><code class="descname">attributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+An array-style table holding the two attributes that govern advancement.
 
-#### [actorFlags](tes3faction/actorFlags.md)
+</dd>
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-> A number representing the actor flags. Truly a bit field.
+The bounding box for the object.
 
-#### [attributes](tes3faction/attributes.md)
+</dd>
+<dt><code class="descname">cloneCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An array-style table holding the two attributes that govern advancement.
+The number of clones that exist of this actor.
 
-#### [boundingBox](tes3faction/boundingBox.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The deleted state of the object.
 
-#### [cloneCount](tes3faction/cloneCount.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The number of clones that exist of this actor.
+The disabled state of the object.
 
-#### [deleted](tes3faction/deleted.md)
+</dd>
+<dt><code class="descname">equipment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The items currently equipped to the actor.
 
-#### [disabled](tes3faction/disabled.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The unique identifier for the object.
 
-#### [equipment](tes3faction/equipment.md)
+</dd>
+<dt><code class="descname">inventory: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The items currently equipped to the actor.
+The items currently carried by the actor.
 
-#### [id](tes3faction/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [inventory](tes3faction/inventory.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The items currently carried by the actor.
+The faction's player-facing name.
 
-#### [modified](tes3faction/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3faction/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The faction's player-facing name.
+The raw flags of the object.
 
-#### [nextInCollection](tes3faction/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3faction/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3faction/objectType.md)
+</dd>
+<dt><code class="descname">playerExpelled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The player's expelled state in the faction.
 
-#### [owningCollection](tes3faction/owningCollection.md)
+</dd>
+<dt><code class="descname">playerJoined: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The player's join state for the faction.
 
-#### [playerExpelled](tes3faction/playerExpelled.md)
+</dd>
+<dt><code class="descname">playerRank: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player's expelled state in the faction.
+The player's current rank in the faction.
 
-#### [playerJoined](tes3faction/playerJoined.md)
+</dd>
+<dt><code class="descname">playerReputation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player's join state for the faction.
+The player's current reputation in the faction.
 
-#### [playerRank](tes3faction/playerRank.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The player's current rank in the faction.
+The previous object in parent collection's list.
 
-#### [playerReputation](tes3faction/playerReputation.md)
+</dd>
+<dt><code class="descname">ranks: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The player's current reputation in the faction.
+An array-style table holding the ten related tes3factionRanks.
 
-#### [previousInCollection](tes3faction/previousInCollection.md)
+</dd>
+<dt><code class="descname">reactions: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+A collection of tes3factionReactions.
 
-#### [ranks](tes3faction/ranks.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An array-style table holding the ten related tes3factionRanks.
+The object's scale.
 
-#### [reactions](tes3faction/reactions.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> A collection of tes3factionReactions.
+The scene graph node for this object.
 
-#### [scale](tes3faction/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3faction/sceneNode.md)
+</dd>
+<dt><code class="descname">skills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+An array-style table holding the seven skills that govern advancement.
 
-#### [sceneReference](tes3faction/sceneReference.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The filename of the mod that owns this object.
 
-#### [skills](tes3faction/skills.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> An array-style table holding the seven skills that govern advancement.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3faction/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Methods
 
-#### [stolenList](tes3faction/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">onInventoryClose(<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>)</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3faction/onInventoryClose
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [onInventoryClose](tes3faction/onInventoryClose.md)
+An object can be converted using `tostring()` to its id.
 
-> A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
+</dd>
+</dl>

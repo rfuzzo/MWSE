@@ -2,25 +2,25 @@
 
 A node from a collection, which has a link to the previous and next node, as well as its contained data.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">data: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3iteratorNode/data
-    tes3iteratorNode/head
-    tes3iteratorNode/tail
-```
+The data stored in the node. Its type depends on the specific collection.
 
-#### [data](tes3iteratorNode/data.md)
+</dd>
+<dt><code class="descname">head: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iteratorNode.html">tes3iteratorNode</a></code></dt>
+<dd>
 
-> The data stored in the node. Its type depends on the specific collection.
+The previous node in the collection.
 
-#### [head](tes3iteratorNode/head.md)
+</dd>
+<dt><code class="descname">tail: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iteratorNode.html">tes3iteratorNode</a></code></dt>
+<dd>
 
-> The previous node in the collection.
+The next node in the collection.
 
-#### [tail](tes3iteratorNode/tail.md)
-
-> The next node in the collection.
+</dd>
+</dl>

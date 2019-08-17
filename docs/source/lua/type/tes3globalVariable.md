@@ -2,55 +2,66 @@
 
 An global variable game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-    tes3globalVariable/__tostring
-    tes3globalVariable/deleted
-    tes3globalVariable/disabled
-    tes3globalVariable/id
-    tes3globalVariable/modified
-    tes3globalVariable/objectFlags
-    tes3globalVariable/objectType
-    tes3globalVariable/sourceMod
-    tes3globalVariable/value
-```
+The deleted state of the object.
 
-#### [__tostring](tes3globalVariable/__tostring.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The disabled state of the object.
 
-#### [deleted](tes3globalVariable/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3globalVariable/disabled.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The modification state of the object since the last save.
 
-#### [id](tes3globalVariable/id.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The raw flags of the object.
 
-#### [modified](tes3globalVariable/modified.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3globalVariable/objectFlags.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The filename of the mod that owns this object.
 
-#### [objectType](tes3globalVariable/objectType.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The value of the variable. Unlike GMSTs, globals are always numbers.
 
-#### [sourceMod](tes3globalVariable/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Metatable Events
 
-#### [value](tes3globalVariable/value.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The value of the variable. Unlike GMSTs, globals are always numbers.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

@@ -2,130 +2,156 @@
 
 A core lockpick object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3lockpick/__tostring
-    tes3lockpick/boundingBox
-    tes3lockpick/condition
-    tes3lockpick/deleted
-    tes3lockpick/disabled
-    tes3lockpick/icon
-    tes3lockpick/id
-    tes3lockpick/mesh
-    tes3lockpick/modified
-    tes3lockpick/name
-    tes3lockpick/nextInCollection
-    tes3lockpick/objectFlags
-    tes3lockpick/objectType
-    tes3lockpick/owningCollection
-    tes3lockpick/previousInCollection
-    tes3lockpick/quality
-    tes3lockpick/scale
-    tes3lockpick/sceneNode
-    tes3lockpick/sceneReference
-    tes3lockpick/script
-    tes3lockpick/sourceMod
-    tes3lockpick/stolenList
-    tes3lockpick/value
-    tes3lockpick/weight
-```
+The bounding box for the object.
 
-#### [__tostring](tes3lockpick/__tostring.md)
+</dd>
+<dt><code class="descname">condition: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The maximum condition/health of the object.
 
-#### [boundingBox](tes3lockpick/boundingBox.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The deleted state of the object.
 
-#### [condition](tes3lockpick/condition.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The maximum condition/health of the object.
+The disabled state of the object.
 
-#### [deleted](tes3lockpick/deleted.md)
+</dd>
+<dt><code class="descname">icon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The path to the object's icon.
 
-#### [disabled](tes3lockpick/disabled.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The unique identifier for the object.
 
-#### [icon](tes3lockpick/icon.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's icon.
+The path to the object's mesh.
 
-#### [id](tes3lockpick/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [mesh](tes3lockpick/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3lockpick/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3lockpick/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3lockpick/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3lockpick/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3lockpick/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3lockpick/owningCollection.md)
+</dd>
+<dt><code class="descname">quality: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The quality of the object, with how much of a bonus it has.
 
-#### [previousInCollection](tes3lockpick/previousInCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The object's scale.
 
-#### [quality](tes3lockpick/quality.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The quality of the object, with how much of a bonus it has.
+The scene graph node for this object.
 
-#### [scale](tes3lockpick/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3lockpick/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3lockpick/sceneReference.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The filename of the mod that owns this object.
 
-#### [script](tes3lockpick/script.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3lockpick/sourceMod.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The value of the object.
 
-#### [stolenList](tes3lockpick/stolenList.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+The weight, in pounds, of the object.
 
-#### [value](tes3lockpick/value.md)
+</dd>
+</dl>
 
-> The value of the object.
+## Metatable Events
 
-#### [weight](tes3lockpick/weight.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The weight, in pounds, of the object.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

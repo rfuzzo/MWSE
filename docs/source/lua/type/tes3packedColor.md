@@ -2,30 +2,31 @@
 
 A densely packed structure for single-byte red, green, blue and alpha values.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">a: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3packedColor/a
-    tes3packedColor/b
-    tes3packedColor/g
-    tes3packedColor/r
-```
+The alpha color value.
 
-#### [a](tes3packedColor/a.md)
+</dd>
+<dt><code class="descname">b: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The alpha color value.
+The blue color value.
 
-#### [b](tes3packedColor/b.md)
+</dd>
+<dt><code class="descname">g: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The blue color value.
+The green color value.
 
-#### [g](tes3packedColor/g.md)
+</dd>
+<dt><code class="descname">r: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The green color value.
+The red color value.
 
-#### [r](tes3packedColor/r.md)
-
-> The red color value.
+</dd>
+</dl>

@@ -2,148 +2,173 @@
 
 An exterior or interior game area.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">activators: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-    tes3cell/__tostring
-    tes3cell/activators
-    tes3cell/actors
-    tes3cell/ambientColor
-    tes3cell/behavesAsExterior
-    tes3cell/cellFlags
-    tes3cell/deleted
-    tes3cell/disabled
-    tes3cell/fogColor
-    tes3cell/fogDensity
-    tes3cell/gridX
-    tes3cell/gridY
-    tes3cell/hasWater
-    tes3cell/id
-    tes3cell/isInterior
-    tes3cell/modified
-    tes3cell/name
-    tes3cell/objectFlags
-    tes3cell/objectType
-    tes3cell/region
-    tes3cell/restingIsIllegal
-    tes3cell/sourceMod
-    tes3cell/statics
-    tes3cell/sunColor
-    tes3cell/waterLevel
-```
+One of the three reference collections for a cell.
 
-#### [__tostring](tes3cell/__tostring.md)
+</dd>
+<dt><code class="descname">actors: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+One of the three reference collections for a cell.
 
-#### [activators](tes3cell/activators.md)
+</dd>
+<dt><code class="descname">ambientColor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3packedColor.html">tes3packedColor</a></code></dt>
+<dd>
 
-> One of the three reference collections for a cell.
+The cell's ambient color. Only available on interior cells.
 
-#### [actors](tes3cell/actors.md)
+</dd>
+<dt><code class="descname">behavesAsExterior: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> One of the three reference collections for a cell.
+If true, the cell behaves as an exterior instead of an interior for certain properties. Only available on interior cells.
 
-#### [ambientColor](tes3cell/ambientColor.md)
+</dd>
+<dt><code class="descname">cellFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The cell's ambient color. Only available on interior cells.
+A numeric representation of the packed bit flags for the cell, typically accessed from other properties.
 
-#### [behavesAsExterior](tes3cell/behavesAsExterior.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the cell behaves as an exterior instead of an interior for certain properties. Only available on interior cells.
+The deleted state of the object.
 
-#### [cellFlags](tes3cell/cellFlags.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A numeric representation of the packed bit flags for the cell, typically accessed from other properties.
+The disabled state of the object.
 
-#### [deleted](tes3cell/deleted.md)
+</dd>
+<dt><code class="descname">fogColor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3packedColor.html">tes3packedColor</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The cell's fog color. Only available on interior cells.
 
-#### [disabled](tes3cell/disabled.md)
+</dd>
+<dt><code class="descname">fogDensity: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The cell's fog density. Only available on interior cells.
 
-#### [fogColor](tes3cell/fogColor.md)
+</dd>
+<dt><code class="descname">gridX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The cell's fog color. Only available on interior cells.
+The cell's X grid coordinate. Only available on exterior cells.
 
-#### [fogDensity](tes3cell/fogDensity.md)
+</dd>
+<dt><code class="descname">gridY: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The cell's fog density. Only available on interior cells.
+The cell's Y grid coordinate. Only available on exterior cells.
 
-#### [gridX](tes3cell/gridX.md)
+</dd>
+<dt><code class="descname">hasWater: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The cell's X grid coordinate. Only available on exterior cells.
+If true, the cell has water. Only applies to interior cells.
 
-#### [gridY](tes3cell/gridY.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The cell's Y grid coordinate. Only available on exterior cells.
+The unique identifier for the object.
 
-#### [hasWater](tes3cell/hasWater.md)
+</dd>
+<dt><code class="descname">isInterior: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> If true, the cell has water. Only applies to interior cells.
+If true, the cell is an interior.
 
-#### [id](tes3cell/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [isInterior](tes3cell/isInterior.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> If true, the cell is an interior.
+The name and id of the cell.
 
-#### [modified](tes3cell/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [name](tes3cell/name.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The name and id of the cell.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3cell/objectFlags.md)
+</dd>
+<dt><code class="descname">region: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3region.html">tes3region</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The region associated with the cell. Only available on exterior cells, or interior cells that behave as exterior cells.
 
-#### [objectType](tes3cell/objectType.md)
+</dd>
+<dt><code class="descname">restingIsIllegal: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+If true, the player may not rest in the cell.
 
-#### [region](tes3cell/region.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The region associated with the cell. Only available on exterior cells, or interior cells that behave as exterior cells.
+The filename of the mod that owns this object.
 
-#### [restingIsIllegal](tes3cell/restingIsIllegal.md)
+</dd>
+<dt><code class="descname">statics: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> If true, the player may not rest in the cell.
+One of the three reference collections for a cell.
 
-#### [sourceMod](tes3cell/sourceMod.md)
+</dd>
+<dt><code class="descname">sunColor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3packedColor.html">tes3packedColor</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The cell's sun color. Only available on interior cells.
 
-#### [statics](tes3cell/statics.md)
+</dd>
+<dt><code class="descname">waterLevel: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> One of the three reference collections for a cell.
+The water level in the cell. Only available on interior cells.
 
-#### [sunColor](tes3cell/sunColor.md)
+</dd>
+</dl>
 
-> The cell's sun color. Only available on interior cells.
+## Methods
 
-#### [waterLevel](tes3cell/waterLevel.md)
+<dl class="describe">
+<dt><code class="descname">iterateReferences(<i>filter:</i> number)</code></dt>
+<dd>
 
-> The water level in the cell. Only available on interior cells.
+Used in a for loop, iterates over objects in the cell.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3cell/iterateReferences
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [iterateReferences](tes3cell/iterateReferences.md)
+An object can be converted using `tostring()` to its id.
 
-> Used in a for loop, iterates over objects in the cell.
+</dd>
+</dl>

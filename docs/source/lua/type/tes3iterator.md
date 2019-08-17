@@ -2,45 +2,54 @@
 
 A collection that can be iterated over Contains items in a simple linked list, and stores its head/tail.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">current: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iteratorNode.html">tes3iteratorNode</a></code></dt>
+<dd>
 
-    tes3iterator/__index
-    tes3iterator/__length
-    tes3iterator/__pairs
-    tes3iterator/current
-    tes3iterator/head
-    tes3iterator/size
-    tes3iterator/tail
-```
+A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.
 
-#### [__index](tes3iterator/__index.md)
+</dd>
+<dt><code class="descname">head: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iteratorNode.html">tes3iteratorNode</a></code></dt>
+<dd>
 
-> An element can be accessed using its numerical index in the collection.
+The first node in the collection.
 
-#### [__length](tes3iterator/__length.md)
+</dd>
+<dt><code class="descname">size: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The length operator fetches the number of elements in the collection.
+The amount of items in the iterator.
 
-#### [__pairs](tes3iterator/__pairs.md)
+</dd>
+<dt><code class="descname">tail: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iteratorNode.html">tes3iteratorNode</a></code></dt>
+<dd>
 
-> Elements in the collection can be iterated over using pairs. The first object is the node, the second is the value itself.
+The last node in the collection.
 
-#### [current](tes3iterator/current.md)
+</dd>
+</dl>
 
-> A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.
+## Metatable Events
 
-#### [head](tes3iterator/head.md)
+<dl class="describe">
+<dt><code class="descname">__index</code></dt>
+<dd>
 
-> The first node in the collection.
+An element can be accessed using its numerical index in the collection.
 
-#### [size](tes3iterator/size.md)
+</dd>
+<dt><code class="descname">__length</code></dt>
+<dd>
 
-> The amount of items in the iterator.
+The length operator fetches the number of elements in the collection.
 
-#### [tail](tes3iterator/tail.md)
+</dd>
+<dt><code class="descname">__pairs</code></dt>
+<dd>
 
-> The last node in the collection.
+Elements in the collection can be iterated over using pairs. The first object is the node, the second is the value itself.
+
+</dd>
+</dl>

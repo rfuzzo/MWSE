@@ -1,3 +1,0 @@
-# selectedSpell
-
-No description available.

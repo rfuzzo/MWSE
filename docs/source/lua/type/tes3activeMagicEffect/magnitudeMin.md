@@ -1,3 +1,0 @@
-# magnitudeMin
-
-No description available.

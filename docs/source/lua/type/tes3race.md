@@ -2,90 +2,108 @@
 
 A core object representing a character race.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">baseAttributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-    tes3race/__tostring
-    tes3race/baseAttributes
-    tes3race/deleted
-    tes3race/disabled
-    tes3race/femaleBody
-    tes3race/flags
-    tes3race/height
-    tes3race/id
-    tes3race/maleBody
-    tes3race/modified
-    tes3race/name
-    tes3race/objectFlags
-    tes3race/objectType
-    tes3race/skillBonuses
-    tes3race/sourceMod
-    tes3race/weight
-```
+Array-style table access to base 8 attributes for the race. Each element in the array is a tes3raceBaseAttribute.
 
-#### [__tostring](tes3race/__tostring.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The deleted state of the object.
 
-#### [baseAttributes](tes3race/baseAttributes.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Array-style table access to base 8 attributes for the race. Each element in the array is a tes3raceBaseAttribute.
+The disabled state of the object.
 
-#### [deleted](tes3race/deleted.md)
+</dd>
+<dt><code class="descname">femaleBody: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3raceBodyParts.html">tes3raceBodyParts</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+Access to all the body parts that will be used for female actors of this race.
 
-#### [disabled](tes3race/disabled.md)
+</dd>
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+Raw bit-based flags.
 
-#### [femaleBody](tes3race/femaleBody.md)
+</dd>
+<dt><code class="descname">height: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3raceHeightWeight.html">tes3raceHeightWeight</a></code></dt>
+<dd>
 
-> Access to all the body parts that will be used for female actors of this race.
+Access to the the height pair for males/females of the race.
 
-#### [flags](tes3race/flags.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Raw bit-based flags.
+The unique identifier for the object.
 
-#### [height](tes3race/height.md)
+</dd>
+<dt><code class="descname">maleBody: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3raceBodyParts.html">tes3raceBodyParts</a></code></dt>
+<dd>
 
-> Access to the the height pair for males/females of the race.
+Access to all the body parts that will be used for male actors of this race.
 
-#### [id](tes3race/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [maleBody](tes3race/maleBody.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> Access to all the body parts that will be used for male actors of this race.
+The player-facing name for the object.
 
-#### [modified](tes3race/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [name](tes3race/name.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3race/objectFlags.md)
+</dd>
+<dt><code class="descname">skillBonuses: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+Array-style table access for 7 skill bonuses for the race. Each element in the array is a tes3raceSkillBonus.
 
-#### [objectType](tes3race/objectType.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The filename of the mod that owns this object.
 
-#### [skillBonuses](tes3race/skillBonuses.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3raceHeightWeight.html">tes3raceHeightWeight</a></code></dt>
+<dd>
 
-> Array-style table access for 7 skill bonuses for the race. Each element in the array is a tes3raceSkillBonus.
+Access to the the height pair for males/females of the race.
 
-#### [sourceMod](tes3race/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Metatable Events
 
-#### [weight](tes3race/weight.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> Access to the the height pair for males/females of the race.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

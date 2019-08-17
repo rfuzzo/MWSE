@@ -2,70 +2,84 @@
 
 An GMST game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">defaultValue: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number|string.html">number|string</a></code></dt>
+<dd>
 
-    tes3gameSetting/__tostring
-    tes3gameSetting/defaultValue
-    tes3gameSetting/deleted
-    tes3gameSetting/disabled
-    tes3gameSetting/id
-    tes3gameSetting/index
-    tes3gameSetting/modified
-    tes3gameSetting/objectFlags
-    tes3gameSetting/objectType
-    tes3gameSetting/sourceMod
-    tes3gameSetting/type
-    tes3gameSetting/value
-```
+The default value of the GMST, if no master defines the value.
 
-#### [__tostring](tes3gameSetting/__tostring.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The deleted state of the object.
 
-#### [defaultValue](tes3gameSetting/defaultValue.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The default value of the GMST, if no master defines the value.
+The disabled state of the object.
 
-#### [deleted](tes3gameSetting/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3gameSetting/disabled.md)
+</dd>
+<dt><code class="descname">index: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The array index for the GMST.
 
-#### [id](tes3gameSetting/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [index](tes3gameSetting/index.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The array index for the GMST.
+The raw flags of the object.
 
-#### [modified](tes3gameSetting/modified.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3gameSetting/objectFlags.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The filename of the mod that owns this object.
 
-#### [objectType](tes3gameSetting/objectType.md)
+</dd>
+<dt><code class="descname">type: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The type of the variable, either 'i', 'f', or 's'.
 
-#### [sourceMod](tes3gameSetting/sourceMod.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number|string.html">number|string</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+The value of the GMST.
 
-#### [type](tes3gameSetting/type.md)
+</dd>
+</dl>
 
-> The type of the variable, either 'i', 'f', or 's'.
+## Metatable Events
 
-#### [value](tes3gameSetting/value.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The value of the GMST.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

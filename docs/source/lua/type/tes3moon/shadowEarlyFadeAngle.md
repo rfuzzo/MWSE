@@ -1,3 +1,0 @@
-# shadowEarlyFadeAngle
-
-No description available.

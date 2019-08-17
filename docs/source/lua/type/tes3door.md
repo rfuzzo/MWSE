@@ -2,115 +2,138 @@
 
 An door game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3door/__tostring
-    tes3door/boundingBox
-    tes3door/closeSound
-    tes3door/deleted
-    tes3door/disabled
-    tes3door/id
-    tes3door/mesh
-    tes3door/modified
-    tes3door/name
-    tes3door/nextInCollection
-    tes3door/objectFlags
-    tes3door/objectType
-    tes3door/openSound
-    tes3door/owningCollection
-    tes3door/previousInCollection
-    tes3door/scale
-    tes3door/sceneNode
-    tes3door/sceneReference
-    tes3door/script
-    tes3door/sourceMod
-    tes3door/stolenList
-```
+The bounding box for the object.
 
-#### [__tostring](tes3door/__tostring.md)
+</dd>
+<dt><code class="descname">closeSound: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3sound.html">tes3sound</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The sound to be played when the door closes.
 
-#### [boundingBox](tes3door/boundingBox.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The deleted state of the object.
 
-#### [closeSound](tes3door/closeSound.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The sound to be played when the door closes.
+The disabled state of the object.
 
-#### [deleted](tes3door/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3door/disabled.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The path to the object's mesh.
 
-#### [id](tes3door/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [mesh](tes3door/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3door/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3door/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3door/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3door/objectFlags.md)
+</dd>
+<dt><code class="descname">openSound: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3sound.html">tes3sound</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The sound to be played when the door opens.
 
-#### [objectType](tes3door/objectType.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The collection responsible for holding this object.
 
-#### [openSound](tes3door/openSound.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The sound to be played when the door opens.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3door/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3door/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3door/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3door/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3door/sceneReference.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The filename of the mod that owns this object.
 
-#### [script](tes3door/script.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3door/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Metatable Events
 
-#### [stolenList](tes3door/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

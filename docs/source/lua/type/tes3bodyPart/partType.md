@@ -1,3 +1,0 @@
-# partType
-
-No description available.

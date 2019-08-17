@@ -2,45 +2,49 @@
 
 A structure that holds (sometimes redundant) information on a soul gem.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-    tes3soulGemData/id
-    tes3soulGemData/item
-    tes3soulGemData/mesh
-    tes3soulGemData/name
-    tes3soulGemData/texture
-    tes3soulGemData/value
-    tes3soulGemData/weight
-```
+The unique object ID.
 
-#### [id](tes3soulGemData/id.md)
+</dd>
+<dt><code class="descname">item: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3misc.html">tes3misc</a></code></dt>
+<dd>
 
-> The unique object ID.
+A reference back to the misc item that the soul gem represents.
 
-#### [item](tes3soulGemData/item.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> A reference back to the misc item that the soul gem represents.
+The path to the object's mesh.
 
-#### [mesh](tes3soulGemData/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [name](tes3soulGemData/name.md)
+</dd>
+<dt><code class="descname">texture: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The path to the object's texture.
 
-#### [texture](tes3soulGemData/texture.md)
+</dd>
+<dt><code class="descname">value: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The path to the object's texture.
+The value of the object.
 
-#### [value](tes3soulGemData/value.md)
+</dd>
+<dt><code class="descname">weight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The value of the object.
+The weight, in pounds, of the object.
 
-#### [weight](tes3soulGemData/weight.md)
-
-> The weight, in pounds, of the object.
+</dd>
+</dl>

@@ -2,30 +2,31 @@
 
 An attachment-capable structure that maintains lock and trap data.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">key: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3misc.html">tes3misc</a></code></dt>
+<dd>
 
-    tes3lockNode/key
-    tes3lockNode/level
-    tes3lockNode/locked
-    tes3lockNode/trap
-```
+The key that will open this door.
 
-#### [key](tes3lockNode/key.md)
+</dd>
+<dt><code class="descname">level: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The key that will open this door.
+The level of the lock.
 
-#### [level](tes3lockNode/level.md)
+</dd>
+<dt><code class="descname">locked: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The level of the lock.
+The locked state.
 
-#### [locked](tes3lockNode/locked.md)
+</dd>
+<dt><code class="descname">trap: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3spell.html">tes3spell</a></code></dt>
+<dd>
 
-> The locked state.
+The trap associated with the object.
 
-#### [trap](tes3lockNode/trap.md)
-
-> The trap associated with the object.
+</dd>
+</dl>

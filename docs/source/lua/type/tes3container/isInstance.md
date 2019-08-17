@@ -1,3 +1,0 @@
-# isInstance
-
-Always returns false.

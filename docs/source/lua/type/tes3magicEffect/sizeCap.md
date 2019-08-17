@@ -1,3 +1,0 @@
-# sizeCap
-
-No description available.

@@ -2,30 +2,31 @@
 
 A collection for references, holding a cell and a linked list of references contained in the cell.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-    tes3referenceList/cell
-    tes3referenceList/head
-    tes3referenceList/size
-    tes3referenceList/tail
-```
+The cell for the collection.
 
-#### [cell](tes3referenceList/cell.md)
+</dd>
+<dt><code class="descname">head: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The cell for the collection.
+The first reference in the collection.
 
-#### [head](tes3referenceList/head.md)
+</dd>
+<dt><code class="descname">size: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The first reference in the collection.
+The number of references in the collection.
 
-#### [size](tes3referenceList/size.md)
+</dd>
+<dt><code class="descname">tail: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The number of references in the collection.
+The last reference in the collection.
 
-#### [tail](tes3referenceList/tail.md)
-
-> The last reference in the collection.
+</dd>
+</dl>

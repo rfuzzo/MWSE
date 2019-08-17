@@ -2,25 +2,25 @@
 
 A container describing an individual rank inside a faction.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">attributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-    tes3factionRank/attributes
-    tes3factionRank/reputation
-    tes3factionRank/skills
-```
+An array-style table holding the two attribute requirements.
 
-#### [attributes](tes3factionRank/attributes.md)
+</dd>
+<dt><code class="descname">reputation: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An array-style table holding the two attribute requirements.
+The reputation requirement to advance to this rank.
 
-#### [reputation](tes3factionRank/reputation.md)
+</dd>
+<dt><code class="descname">skills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The reputation requirement to advance to this rank.
+An array-style table holding the two skill requirements.
 
-#### [skills](tes3factionRank/skills.md)
-
-> An array-style table holding the two skill requirements.
+</dd>
+</dl>

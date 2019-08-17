@@ -1,3 +1,0 @@
-# timestampCastBegin
-
-No description available.

@@ -2,93 +2,102 @@
 
 A 3 by 3 matrix.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">x: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-    tes3matrix33/x
-    tes3matrix33/y
-    tes3matrix33/z
-```
+A copy of the first row of the matrix.
 
-#### [x](tes3matrix33/x.md)
+</dd>
+<dt><code class="descname">y: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> A copy of the first row of the matrix.
+A copy of the second row of the matrix.
 
-#### [y](tes3matrix33/y.md)
+</dd>
+<dt><code class="descname">z: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> A copy of the second row of the matrix.
+A copy of the third row of the matrix.
 
-#### [z](tes3matrix33/z.md)
+</dd>
+</dl>
 
-> A copy of the third row of the matrix.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">copy()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of the matrix.
 
-    tes3matrix33/copy
-    tes3matrix33/fromEulerXYZ
-    tes3matrix33/fromEulerZYX
-    tes3matrix33/invert
-    tes3matrix33/reorthogonalize
-    tes3matrix33/toIdentity
-    tes3matrix33/toRotation
-    tes3matrix33/toRotationX
-    tes3matrix33/toRotationY
-    tes3matrix33/toRotationZ
-    tes3matrix33/toZero
-    tes3matrix33/transpose
-```
+</dd>
+<dt><code class="descname">fromEulerXYZ(<i>x:</i> number, <i>y:</i> number, <i>z:</i> number)</code></dt>
+<dd>
 
-#### [copy](tes3matrix33/copy.md)
+Fills the matrix with values from euler coordinates.
 
-> Creates a copy of the matrix.
+</dd>
+<dt><code class="descname">fromEulerZYX(<i>z:</i> number, <i>y:</i> number, <i>x:</i> number)</code></dt>
+<dd>
 
-#### [fromEulerXYZ](tes3matrix33/fromEulerXYZ.md)
+Fills the matrix with values from euler coordinates.
 
-> Fills the matrix with values from euler coordinates.
+</dd>
+<dt><code class="descname">invert()</code></dt>
+<dd>
 
-#### [fromEulerZYX](tes3matrix33/fromEulerZYX.md)
+Inverts the matrix.
 
-> Fills the matrix with values from euler coordinates.
+</dd>
+<dt><code class="descname">reorthogonalize()</code></dt>
+<dd>
 
-#### [invert](tes3matrix33/invert.md)
+Reorthogonalizes the matrix.
 
-> Inverts the matrix.
+</dd>
+<dt><code class="descname">toIdentity()</code></dt>
+<dd>
 
-#### [reorthogonalize](tes3matrix33/reorthogonalize.md)
+Converts the matrix to the identity matrix's values.
 
-> Reorthogonalizes the matrix.
+</dd>
+<dt><code class="descname">toRotation(<i>angle:</i> number, <i>x:</i> number, <i>y:</i> number, <i>z:</i> number)</code></dt>
+<dd>
 
-#### [toIdentity](tes3matrix33/toIdentity.md)
+No description available.
 
-> Converts the matrix to the identity matrix's values.
+</dd>
+<dt><code class="descname">toRotationX(<i>x:</i> number)</code></dt>
+<dd>
 
-#### [toRotation](tes3matrix33/toRotation.md)
+No description available.
 
-> No description available.
+</dd>
+<dt><code class="descname">toRotationY(<i>y:</i> number)</code></dt>
+<dd>
 
-#### [toRotationX](tes3matrix33/toRotationX.md)
+No description available.
 
-> No description available.
+</dd>
+<dt><code class="descname">toRotationZ(<i>z:</i> number)</code></dt>
+<dd>
 
-#### [toRotationY](tes3matrix33/toRotationY.md)
+No description available.
 
-> No description available.
+</dd>
+<dt><code class="descname">toZero()</code></dt>
+<dd>
 
-#### [toRotationZ](tes3matrix33/toRotationZ.md)
+Zeroes out all values in the matrix.
 
-> No description available.
+</dd>
+<dt><code class="descname">transpose()</code></dt>
+<dd>
 
-#### [toZero](tes3matrix33/toZero.md)
+No description available.
 
-> Zeroes out all values in the matrix.
-
-#### [transpose](tes3matrix33/transpose.md)
-
-> No description available.
+</dd>
+</dl>

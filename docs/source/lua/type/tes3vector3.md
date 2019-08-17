@@ -2,98 +2,108 @@
 
 A simple trio of floating-point numbers.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">b: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3vector3/b
-    tes3vector3/g
-    tes3vector3/r
-    tes3vector3/x
-    tes3vector3/y
-    tes3vector3/z
-```
+The third value in the vector. An alias for z.
 
-#### [b](tes3vector3/b.md)
+</dd>
+<dt><code class="descname">g: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The third value in the vector. An alias for z.
+The second value in the vector. An alias for y.
 
-#### [g](tes3vector3/g.md)
+</dd>
+<dt><code class="descname">r: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The second value in the vector. An alias for y.
+The first value in the vector. An alias for x.
 
-#### [r](tes3vector3/r.md)
+</dd>
+<dt><code class="descname">x: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The first value in the vector. An alias for x.
+The first value in the vector.
 
-#### [x](tes3vector3/x.md)
+</dd>
+<dt><code class="descname">y: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The first value in the vector.
+The second value in the vector.
 
-#### [y](tes3vector3/y.md)
+</dd>
+<dt><code class="descname">z: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The second value in the vector.
+The third value in the vector.
 
-#### [z](tes3vector3/z.md)
+</dd>
+</dl>
 
-> The third value in the vector.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">copy()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of the vector.
 
-    tes3vector3/copy
-    tes3vector3/cross
-    tes3vector3/distance
-    tes3vector3/dot
-    tes3vector3/heightDifference
-    tes3vector3/length
-    tes3vector3/negate
-    tes3vector3/normalize
-    tes3vector3/normalized
-    tes3vector3/outerProduct
-```
+</dd>
+<dt><code class="descname">cross(<i>vec:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-#### [copy](tes3vector3/copy.md)
+Calculates the cross product with another vector.
 
-> Creates a copy of the vector.
+</dd>
+<dt><code class="descname">distance(<i>vec:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>) -> number</code></dt>
+<dd>
 
-#### [cross](tes3vector3/cross.md)
+Calculates the distance to another vector.
 
-> Calculates the cross product with another vector.
+</dd>
+<dt><code class="descname">dot(<i>vec:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-#### [distance](tes3vector3/distance.md)
+Calculates the dot product with another vector.
 
-> Calculates the distance to another vector.
+</dd>
+<dt><code class="descname">heightDifference(<i>vec:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>) -> number</code></dt>
+<dd>
 
-#### [dot](tes3vector3/dot.md)
+Calculates the vertical distance to another vector.
 
-> Calculates the dot product with another vector.
+</dd>
+<dt><code class="descname">length()</code></dt>
+<dd>
 
-#### [heightDifference](tes3vector3/heightDifference.md)
+Calculates the length of the vector.
 
-> Calculates the vertical distance to another vector.
+</dd>
+<dt><code class="descname">negate()</code></dt>
+<dd>
 
-#### [length](tes3vector3/length.md)
+Negates all values in the vector.
 
-> Calculates the length of the vector.
+</dd>
+<dt><code class="descname">normalize()</code></dt>
+<dd>
 
-#### [negate](tes3vector3/negate.md)
+Normalize the vector in-place, or set its components to zero if normalization is not possible. Returns true if the vector was successfully normalized.
 
-> Negates all values in the vector.
+</dd>
+<dt><code class="descname">normalized()</code></dt>
+<dd>
 
-#### [normalize](tes3vector3/normalize.md)
+Get a normalized copy of the vector.
 
-> Normalize the vector in-place, or set its components to zero if normalization is not possible. Returns true if the vector was successfully normalized.
+</dd>
+<dt><code class="descname">outerProduct(<i>vec:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3matrix33.html">tes3matrix33</a></code></dt>
+<dd>
 
-#### [normalized](tes3vector3/normalized.md)
+Calculates the outer product with another vector.
 
-> Get a normalized copy of the vector.
-
-#### [outerProduct](tes3vector3/outerProduct.md)
-
-> Calculates the outer product with another vector.
+</dd>
+</dl>

@@ -1,3 +1,0 @@
-# lastUsedShield
-
-No description available.

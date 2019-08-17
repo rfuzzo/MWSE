@@ -2,125 +2,150 @@
 
 A body part game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-    tes3bodyPart/__tostring
-    tes3bodyPart/boundingBox
-    tes3bodyPart/deleted
-    tes3bodyPart/disabled
-    tes3bodyPart/female
-    tes3bodyPart/id
-    tes3bodyPart/mesh
-    tes3bodyPart/modified
-    tes3bodyPart/nextInCollection
-    tes3bodyPart/objectFlags
-    tes3bodyPart/objectType
-    tes3bodyPart/owningCollection
-    tes3bodyPart/part
-    tes3bodyPart/partType
-    tes3bodyPart/playable
-    tes3bodyPart/previousInCollection
-    tes3bodyPart/raceName
-    tes3bodyPart/scale
-    tes3bodyPart/sceneNode
-    tes3bodyPart/sceneReference
-    tes3bodyPart/sourceMod
-    tes3bodyPart/stolenList
-    tes3bodyPart/vampiric
-```
+The bounding box for the object.
 
-#### [__tostring](tes3bodyPart/__tostring.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The deleted state of the object.
 
-#### [boundingBox](tes3bodyPart/boundingBox.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The disabled state of the object.
 
-#### [deleted](tes3bodyPart/deleted.md)
+</dd>
+<dt><code class="descname">female: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+A flag that marks this body part as used for female actors.
 
-#### [disabled](tes3bodyPart/disabled.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The unique identifier for the object.
 
-#### [female](tes3bodyPart/female.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> A flag that marks this body part as used for female actors.
+The path to the object's mesh.
 
-#### [id](tes3bodyPart/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [mesh](tes3bodyPart/mesh.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The next object in parent collection's list.
 
-#### [modified](tes3bodyPart/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [nextInCollection](tes3bodyPart/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3bodyPart/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3bodyPart/objectType.md)
+</dd>
+<dt><code class="descname">part: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+No description available.
 
-#### [owningCollection](tes3bodyPart/owningCollection.md)
+</dd>
+<dt><code class="descname">partType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+No description available.
 
-#### [part](tes3bodyPart/part.md)
+</dd>
+<dt><code class="descname">playable: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+A flag that marks this body part as selectable during character generation.
 
-#### [partType](tes3bodyPart/partType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> No description available.
+The previous object in parent collection's list.
 
-#### [playable](tes3bodyPart/playable.md)
+</dd>
+<dt><code class="descname">raceName: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> A flag that marks this body part as selectable during character generation.
+The name of the race associated with this body part.
 
-#### [previousInCollection](tes3bodyPart/previousInCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The object's scale.
 
-#### [raceName](tes3bodyPart/raceName.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The name of the race associated with this body part.
+The NiNode-derived object for the object's loaded mesh.
 
-#### [scale](tes3bodyPart/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3bodyPart/sceneNode.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The NiNode-derived object for the object's loaded mesh.
+The filename of the mod that owns this object.
 
-#### [sceneReference](tes3bodyPart/sceneReference.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3bodyPart/sourceMod.md)
+</dd>
+<dt><code class="descname">vampiric: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+A flag that marks this body part as used for vampires.
 
-#### [stolenList](tes3bodyPart/stolenList.md)
+</dd>
+</dl>
 
-> A list of actors that the object has been stolen from.
+## Metatable Events
 
-#### [vampiric](tes3bodyPart/vampiric.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> A flag that marks this body part as used for vampires.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

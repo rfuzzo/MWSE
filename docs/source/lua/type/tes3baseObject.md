@@ -2,50 +2,60 @@
 
 Almost anything that can be represented in the Construction Set is based on this structure.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-    tes3baseObject/__tostring
-    tes3baseObject/deleted
-    tes3baseObject/disabled
-    tes3baseObject/id
-    tes3baseObject/modified
-    tes3baseObject/objectFlags
-    tes3baseObject/objectType
-    tes3baseObject/sourceMod
-```
+The deleted state of the object.
 
-#### [__tostring](tes3baseObject/__tostring.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The disabled state of the object.
 
-#### [deleted](tes3baseObject/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3baseObject/disabled.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The modification state of the object since the last save.
 
-#### [id](tes3baseObject/id.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The raw flags of the object.
 
-#### [modified](tes3baseObject/modified.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3baseObject/objectFlags.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The filename of the mod that owns this object.
 
-#### [objectType](tes3baseObject/objectType.md)
+</dd>
+</dl>
 
-> The type of object. Maps to values in tes3.objectType.
+## Metatable Events
 
-#### [sourceMod](tes3baseObject/sourceMod.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

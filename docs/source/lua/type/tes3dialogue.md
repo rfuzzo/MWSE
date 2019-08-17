@@ -2,83 +2,95 @@
 
 A parent-level dialogue, such as a topic, voice, greeting, persuasion response, or journal.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-    tes3dialogue/__tostring
-    tes3dialogue/deleted
-    tes3dialogue/disabled
-    tes3dialogue/id
-    tes3dialogue/info
-    tes3dialogue/journalIndex
-    tes3dialogue/modified
-    tes3dialogue/objectFlags
-    tes3dialogue/objectType
-    tes3dialogue/sourceMod
-    tes3dialogue/type
-```
+The deleted state of the object.
 
-#### [__tostring](tes3dialogue/__tostring.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The disabled state of the object.
 
-#### [deleted](tes3dialogue/deleted.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The unique identifier for the object.
 
-#### [disabled](tes3dialogue/disabled.md)
+</dd>
+<dt><code class="descname">info: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+A collection of individual entries in the dialogue.
 
-#### [id](tes3dialogue/id.md)
+</dd>
+<dt><code class="descname">journalIndex: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+For journal dialogues, the currently active journal index.
 
-#### [info](tes3dialogue/info.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> A collection of individual entries in the dialogue.
+The modification state of the object since the last save.
 
-#### [journalIndex](tes3dialogue/journalIndex.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> For journal dialogues, the currently active journal index.
+The raw flags of the object.
 
-#### [modified](tes3dialogue/modified.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3dialogue/objectFlags.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The filename of the mod that owns this object.
 
-#### [objectType](tes3dialogue/objectType.md)
+</dd>
+<dt><code class="descname">type: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The type of the dialogue.
 
-#### [sourceMod](tes3dialogue/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Methods
 
-#### [type](tes3dialogue/type.md)
+<dl class="describe">
+<dt><code class="descname">addToJournal({<i>index:</i> number, <i>actor:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|string}) -> boolean</code></dt>
+<dd>
 
-> The type of the dialogue.
+Adds the dialogue to the player's journal, if applicable, at a given index.
 
-## Functions
+</dd>
+<dt><code class="descname">getInfo({<i>actor:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|string}) -> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3dialogueInfo.html">tes3dialogueInfo</a></code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Fetches the info that a given actor would produce for the dialogue.
 
-    tes3dialogue/addToJournal
-    tes3dialogue/getInfo
-```
+</dd>
+</dl>
 
-#### [addToJournal](tes3dialogue/addToJournal.md)
+## Metatable Events
 
-> Adds the dialogue to the player's journal, if applicable, at a given index.
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [getInfo](tes3dialogue/getInfo.md)
+An object can be converted using `tostring()` to its id.
 
-> Fetches the info that a given actor would produce for the dialogue.
+</dd>
+</dl>

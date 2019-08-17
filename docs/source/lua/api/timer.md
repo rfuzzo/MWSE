@@ -4,41 +4,44 @@ The timer library provides helper functions for creating delayed executors.
 
 ## Values
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">active: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    timer/active
-    timer/expired
-    timer/game
-    timer/paused
-    timer/real
-    timer/simulate
-```
+Constant to represent a timer that is actively running.
 
-#### [active](timer/active.md)
+</dd>
+<dt><code class="descname">expired: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Constant to represent a timer that is actively running.
+Constant to represent a timer that has completed.
 
-#### [expired](timer/expired.md)
+</dd>
+<dt><code class="descname">game: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Constant to represent a timer that has completed.
+Constant to represent timers that run based on in-world time.
 
-#### [game](timer/game.md)
+</dd>
+<dt><code class="descname">paused: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Constant to represent timers that run based on in-world time.
+Constant to represent a timer that is paused.
 
-#### [paused](timer/paused.md)
+</dd>
+<dt><code class="descname">real: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Constant to represent a timer that is paused.
+Constant to represent timers that run in real-time.
 
-#### [real](timer/real.md)
+</dd>
+<dt><code class="descname">simulate: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Constant to represent timers that run in real-time.
+Constant to represent timers that run when the game isn't paused.
 
-#### [simulate](timer/simulate.md)
-
-> Constant to represent timers that run when the game isn't paused.
+</dd>
+</dl>
 
 ## Functions
 
@@ -50,10 +53,17 @@ The timer library provides helper functions for creating delayed executors.
     timer/start
 ```
 
-#### [delayOneFrame](timer/delayOneFrame.md)
+<dl class="describe">
+<dt><code class="descname"><a href="timer/delayOneFrame.html">delayOneFrame</a>(<i>callback:</i> function, <i>type:</i> number) -> <i>timer:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/mwseTimer.html">mwseTimer</a></code></dt>
+<dd>
 
-> Creates a timer that will finish the next frame. It defaults to the next simulation frame.
+Creates a timer that will finish the next frame. It defaults to the next simulation frame.
 
-#### [start](timer/start.md)
+</dd>
+<dt><code class="descname"><a href="timer/start.html">start</a>({<i>type:</i> number, <i>duration:</i> number, <i>callback:</i> function, <i>iterations:</i> number}) -> <i>timer:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/mwseTimer.html">mwseTimer</a></code></dt>
+<dd>
 
-> Creates a timer.
+Creates a timer.
+
+</dd>
+</dl>

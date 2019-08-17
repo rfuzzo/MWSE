@@ -1,3 +1,0 @@
-# lastUsedWeapon
-
-No description available.

@@ -1,3 +1,0 @@
-# deleteFile
-
-Deletes the file.

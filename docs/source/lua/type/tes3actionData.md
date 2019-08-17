@@ -2,70 +2,79 @@
 
 A substructure of mobile actors that provides information about the current or previous action.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">aiBehaviorState: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3actionData/aiBehaviorState
-    tes3actionData/animationAttackState
-    tes3actionData/attackDirection
-    tes3actionData/attackSwing
-    tes3actionData/currentAnimationGroup
-    tes3actionData/hitTarget
-    tes3actionData/lastBarterHoursPassed
-    tes3actionData/nockedProjectile
-    tes3actionData/physicalDamage
-    tes3actionData/stolenFrom
-    tes3actionData/target
-    tes3actionData/walkDestination
-```
+The behavior state of the tes3actionData.
 
-#### [aiBehaviorState](tes3actionData/aiBehaviorState.md)
+</dd>
+<dt><code class="descname">animationAttackState: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The behavior state of the tes3actionData.
+No description available.
 
-#### [animationAttackState](tes3actionData/animationAttackState.md)
+</dd>
+<dt><code class="descname">attackDirection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+When attacking, the direction swung with the weapon. This shows if the actor was thrusting, swinging, or chopping.
 
-#### [attackDirection](tes3actionData/attackDirection.md)
+</dd>
+<dt><code class="descname">attackSwing: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> When attacking, the direction swung with the weapon. This shows if the actor was thrusting, swinging, or chopping.
+When attacking, this value represents how much the weapon has been pulled back. The value ranges from [0.0 - 1.0].
 
-#### [attackSwing](tes3actionData/attackSwing.md)
+</dd>
+<dt><code class="descname">currentAnimationGroup: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> When attacking, this value represents how much the weapon has been pulled back. The value ranges from [0.0 - 1.0].
+No description available.
 
-#### [currentAnimationGroup](tes3actionData/currentAnimationGroup.md)
+</dd>
+<dt><code class="descname">hitTarget: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [hitTarget](tes3actionData/hitTarget.md)
+</dd>
+<dt><code class="descname">lastBarterHoursPassed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [lastBarterHoursPassed](tes3actionData/lastBarterHoursPassed.md)
+</dd>
+<dt><code class="descname">nockedProjectile: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3weapon.html">tes3weapon</a></code></dt>
+<dd>
 
-> No description available.
+The currently knocked projectile the associated actor is using.
 
-#### [nockedProjectile](tes3actionData/nockedProjectile.md)
+</dd>
+<dt><code class="descname">physicalDamage: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The currently knocked projectile the associated actor is using.
+When attacking, this is the value of the weapon damage that was rolled. This value doesn't take into account the actor's strength, or other additional damage.
 
-#### [physicalDamage](tes3actionData/physicalDamage.md)
+</dd>
+<dt><code class="descname">stolenFrom: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> When attacking, this is the value of the weapon damage that was rolled. This value doesn't take into account the actor's strength, or other additional damage.
+No description available.
 
-#### [stolenFrom](tes3actionData/stolenFrom.md)
+</dd>
+<dt><code class="descname">target: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [target](tes3actionData/target.md)
+</dd>
+<dt><code class="descname">walkDestination: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> No description available.
+If moving to a location, this is the position to be walked to.
 
-#### [walkDestination](tes3actionData/walkDestination.md)
-
-> If moving to a location, this is the position to be walked to.
+</dd>
+</dl>

@@ -2,68 +2,77 @@
 
 An inventory composes of an iterator, and flags caching the state of the inventory.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3inventory/__length
-    tes3inventory/__pairs
-    tes3inventory/flags
-    tes3inventory/iterator
-```
+Raw bit-based flags.
 
-#### [__length](tes3inventory/__length.md)
+</dd>
+<dt><code class="descname">iterator: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> Gives the number of elements in the contained iterator.
+Direct acces to the container that holds the inventory's items.
 
-#### [__pairs](tes3inventory/__pairs.md)
+</dd>
+</dl>
 
-> A quick access to the elements in the contained iterator.
+## Methods
 
-#### [flags](tes3inventory/flags.md)
+<dl class="describe">
+<dt><code class="descname">addItem({<i>mobile:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|string, <i>item:</i> tes3item, <i>itemData:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a>, <i>count:</i> number})</code></dt>
+<dd>
 
-> Raw bit-based flags.
+Adds an item into the inventory directly. This should not be used, in favor of the tes3 API function.
 
-#### [iterator](tes3inventory/iterator.md)
+</dd>
+<dt><code class="descname">calculateWeight()</code></dt>
+<dd>
 
-> Direct acces to the container that holds the inventory's items.
+Calculates the weight of all items in the container.
 
-## Functions
+</dd>
+<dt><code class="descname">contains(<i>item:</i> tes3item|string, <i>itemData:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a>) -> boolean</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Checks to see if the inventory contains an item.
 
-    tes3inventory/addItem
-    tes3inventory/calculateWeight
-    tes3inventory/contains
-    tes3inventory/dropItem
-    tes3inventory/removeItem
-    tes3inventory/resolveLeveledItems
-```
+</dd>
+<dt><code class="descname">dropItem(<i>mobile:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|string, <i>item:</i> tes3item|string, <i>itemData:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a>, <i>count:</i> number, <i>position:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>, <i>orientation:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a>, <i>unknown:</i> boolean)</code></dt>
+<dd>
 
-#### [addItem](tes3inventory/addItem.md)
+Checks to see if the inventory contains an item. This should not be used, in favor of tes3 APIs.
 
-> Adds an item into the inventory directly. This should not be used, in favor of the tes3 API function.
+</dd>
+<dt><code class="descname">removeItem({<i>mobile:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>|string, <i>item:</i> tes3item, <i>itemData:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a>, <i>count:</i> number, <i>deleteItemData:</i> boolean})</code></dt>
+<dd>
 
-#### [calculateWeight](tes3inventory/calculateWeight.md)
+Removes an item from the inventory directly. This should not be used, in favor of the tes3 API function.
 
-> Calculates the weight of all items in the container.
+</dd>
+<dt><code class="descname">resolveLeveledItems(<i>mobile:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>)</code></dt>
+<dd>
 
-#### [contains](tes3inventory/contains.md)
+Resolves all contained leveled lists and adds the randomized items to the inventory. This should generally not be called directly.
 
-> Checks to see if the inventory contains an item.
+</dd>
+</dl>
 
-#### [dropItem](tes3inventory/dropItem.md)
+## Metatable Events
 
-> Checks to see if the inventory contains an item. This should not be used, in favor of tes3 APIs.
+<dl class="describe">
+<dt><code class="descname">__length</code></dt>
+<dd>
 
-#### [removeItem](tes3inventory/removeItem.md)
+Gives the number of elements in the contained iterator.
 
-> Removes an item from the inventory directly. This should not be used, in favor of the tes3 API function.
+</dd>
+<dt><code class="descname">__pairs</code></dt>
+<dd>
 
-#### [resolveLeveledItems](tes3inventory/resolveLeveledItems.md)
+A quick access to the elements in the contained iterator.
 
-> Resolves all contained leveled lists and adds the randomized items to the inventory. This should generally not be called directly.
+</dd>
+</dl>

@@ -2,20 +2,19 @@
 
 A simple pair of integers, typically used to define a range.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">max: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3rangeInt/max
-    tes3rangeInt/min
-```
+The maximum value in the range.
 
-#### [max](tes3rangeInt/max.md)
+</dd>
+<dt><code class="descname">min: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The maximum value in the range.
+The minimum value in the range.
 
-#### [min](tes3rangeInt/min.md)
-
-> The minimum value in the range.
+</dd>
+</dl>

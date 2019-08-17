@@ -4,123 +4,143 @@ An Actor (not to be confused with a Mobile Actor) is an object that can be clone
 
 It is standard for creatures and NPCs to be composed of an actor and a mobile actor, linked together with a reference.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">actorFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3actor/__tostring
-    tes3actor/actorFlags
-    tes3actor/boundingBox
-    tes3actor/cloneCount
-    tes3actor/deleted
-    tes3actor/disabled
-    tes3actor/equipment
-    tes3actor/id
-    tes3actor/inventory
-    tes3actor/modified
-    tes3actor/nextInCollection
-    tes3actor/objectFlags
-    tes3actor/objectType
-    tes3actor/owningCollection
-    tes3actor/previousInCollection
-    tes3actor/scale
-    tes3actor/sceneNode
-    tes3actor/sceneReference
-    tes3actor/sourceMod
-    tes3actor/stolenList
-```
+A number representing the actor flags. Truly a bit field.
 
-#### [__tostring](tes3actor/__tostring.md)
+</dd>
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The bounding box for the object.
 
-#### [actorFlags](tes3actor/actorFlags.md)
+</dd>
+<dt><code class="descname">cloneCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A number representing the actor flags. Truly a bit field.
+The number of clones that exist of this actor.
 
-#### [boundingBox](tes3actor/boundingBox.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The deleted state of the object.
 
-#### [cloneCount](tes3actor/cloneCount.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The number of clones that exist of this actor.
+The disabled state of the object.
 
-#### [deleted](tes3actor/deleted.md)
+</dd>
+<dt><code class="descname">equipment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The items currently equipped to the actor.
 
-#### [disabled](tes3actor/disabled.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The unique identifier for the object.
 
-#### [equipment](tes3actor/equipment.md)
+</dd>
+<dt><code class="descname">inventory: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The items currently equipped to the actor.
+The items currently carried by the actor.
 
-#### [id](tes3actor/id.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The modification state of the object since the last save.
 
-#### [inventory](tes3actor/inventory.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The items currently carried by the actor.
+The next object in parent collection's list.
 
-#### [modified](tes3actor/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [nextInCollection](tes3actor/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3actor/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3actor/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3actor/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3actor/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3actor/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3actor/sceneNode.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The filename of the mod that owns this object.
 
-#### [sceneReference](tes3actor/sceneReference.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3actor/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Methods
 
-#### [stolenList](tes3actor/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">onInventoryClose(<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>)</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3actor/onInventoryClose
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [onInventoryClose](tes3actor/onInventoryClose.md)
+An object can be converted using `tostring()` to its id.
 
-> A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
+</dd>
+</dl>

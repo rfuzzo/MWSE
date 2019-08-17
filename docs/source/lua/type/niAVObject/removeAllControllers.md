@@ -1,3 +1,0 @@
-# removeAllControllers
-
-Removes all controllers.

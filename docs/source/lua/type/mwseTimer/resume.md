@@ -1,3 +1,0 @@
-# resume
-
-Resumes a paused timer.

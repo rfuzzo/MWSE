@@ -1,3 +1,0 @@
-# greetDuration
-
-No description available.

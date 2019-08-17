@@ -2,110 +2,132 @@
 
 An enchantment game object.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">castType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3enchantment/__tostring
-    tes3enchantment/castType
-    tes3enchantment/chargeCost
-    tes3enchantment/deleted
-    tes3enchantment/disabled
-    tes3enchantment/effects
-    tes3enchantment/flags
-    tes3enchantment/id
-    tes3enchantment/magickaCost
-    tes3enchantment/maxCharge
-    tes3enchantment/modified
-    tes3enchantment/nextInCollection
-    tes3enchantment/objectFlags
-    tes3enchantment/objectType
-    tes3enchantment/owningCollection
-    tes3enchantment/previousInCollection
-    tes3enchantment/scale
-    tes3enchantment/sceneNode
-    tes3enchantment/sceneReference
-    tes3enchantment/sourceMod
-```
+The enchantment's cast type.
 
-#### [__tostring](tes3enchantment/__tostring.md)
+</dd>
+<dt><code class="descname">chargeCost: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The cost of using the enchantment.
 
-#### [castType](tes3enchantment/castType.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The enchantment's cast type.
+The deleted state of the object.
 
-#### [chargeCost](tes3enchantment/chargeCost.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The cost of using the enchantment.
+The disabled state of the object.
 
-#### [deleted](tes3enchantment/deleted.md)
+</dd>
+<dt><code class="descname">effects: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+An array-style table of the tes3effect data on the object.
 
-#### [disabled](tes3enchantment/disabled.md)
+</dd>
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+A bit field for the enchantment's flags.
 
-#### [effects](tes3enchantment/effects.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> An array-style table of the tes3effect data on the object.
+The unique identifier for the object.
 
-#### [flags](tes3enchantment/flags.md)
+</dd>
+<dt><code class="descname">magickaCost: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> A bit field for the enchantment's flags.
+No description available.
 
-#### [id](tes3enchantment/id.md)
+</dd>
+<dt><code class="descname">maxCharge: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+The maximum charge for the associated enchantment.
 
-#### [magickaCost](tes3enchantment/magickaCost.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> No description available.
+The modification state of the object since the last save.
 
-#### [maxCharge](tes3enchantment/maxCharge.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The maximum charge for the associated enchantment.
+The next object in parent collection's list.
 
-#### [modified](tes3enchantment/modified.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The raw flags of the object.
 
-#### [nextInCollection](tes3enchantment/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3enchantment/objectFlags.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+The collection responsible for holding this object.
 
-#### [objectType](tes3enchantment/objectType.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3enchantment/owningCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+The object's scale.
 
-#### [previousInCollection](tes3enchantment/previousInCollection.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The scene graph node for this object.
 
-#### [scale](tes3enchantment/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3enchantment/sceneNode.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The filename of the mod that owns this object.
 
-#### [sceneReference](tes3enchantment/sceneReference.md)
+</dd>
+</dl>
 
-> The scene graph reference node for this object.
+## Metatable Events
 
-#### [sourceMod](tes3enchantment/sourceMod.md)
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-> The filename of the mod that owns this object.
+An object can be converted using `tostring()` to its id.
+
+</dd>
+</dl>

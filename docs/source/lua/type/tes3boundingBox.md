@@ -2,33 +2,30 @@
 
 A pair of vectors marking a bounding box.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">max: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-    tes3boundingBox/max
-    tes3boundingBox/min
-```
+The maximum bound of the box.
 
-#### [max](tes3boundingBox/max.md)
+</dd>
+<dt><code class="descname">min: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> The maximum bound of the box.
+The minimum bound of the box.
 
-#### [min](tes3boundingBox/min.md)
+</dd>
+</dl>
 
-> The minimum bound of the box.
+## Methods
 
-## Functions
+<dl class="describe">
+<dt><code class="descname">copy()</code></dt>
+<dd>
 
-```eval_rst
-.. toctree::
-    :hidden:
+Creates a copy of the bounding box.
 
-    tes3boundingBox/copy
-```
-
-#### [copy](tes3boundingBox/copy.md)
-
-> Creates a copy of the bounding box.
+</dd>
+</dl>

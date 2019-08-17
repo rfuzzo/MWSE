@@ -2,158 +2,185 @@
 
 A container object that has been cloned. Typically represents a container that has been instanced by being opened by the player.
 
-## Values
+## Properties
 
-```eval_rst
-.. toctree::
-    :hidden:
+<dl class="describe">
+<dt><code class="descname">actorFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-    tes3containerInstance/__tostring
-    tes3containerInstance/actorFlags
-    tes3containerInstance/baseObject
-    tes3containerInstance/boundingBox
-    tes3containerInstance/cloneCount
-    tes3containerInstance/deleted
-    tes3containerInstance/disabled
-    tes3containerInstance/equipment
-    tes3containerInstance/id
-    tes3containerInstance/inventory
-    tes3containerInstance/isInstance
-    tes3containerInstance/mesh
-    tes3containerInstance/modified
-    tes3containerInstance/name
-    tes3containerInstance/nextInCollection
-    tes3containerInstance/objectFlags
-    tes3containerInstance/objectType
-    tes3containerInstance/organic
-    tes3containerInstance/owningCollection
-    tes3containerInstance/previousInCollection
-    tes3containerInstance/respawns
-    tes3containerInstance/scale
-    tes3containerInstance/sceneNode
-    tes3containerInstance/sceneReference
-    tes3containerInstance/script
-    tes3containerInstance/sourceMod
-    tes3containerInstance/stolenList
-```
+A number representing the actor flags. Truly a bit field.
 
-#### [__tostring](tes3containerInstance/__tostring.md)
+</dd>
+<dt><code class="descname">baseObject: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> An object can be converted using ``tostring()`` to its id.
+The base container object that the instance inherits from.
 
-#### [actorFlags](tes3containerInstance/actorFlags.md)
+</dd>
+<dt><code class="descname">boundingBox: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3boundingBox.html">tes3boundingBox</a></code></dt>
+<dd>
 
-> A number representing the actor flags. Truly a bit field.
+The bounding box for the object.
 
-#### [baseObject](tes3containerInstance/baseObject.md)
+</dd>
+<dt><code class="descname">cloneCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The base container object that the instance inherits from.
+The number of clones that exist of this actor.
 
-#### [boundingBox](tes3containerInstance/boundingBox.md)
+</dd>
+<dt><code class="descname">deleted: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The bounding box for the object.
+The deleted state of the object.
 
-#### [cloneCount](tes3containerInstance/cloneCount.md)
+</dd>
+<dt><code class="descname">disabled: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The number of clones that exist of this actor.
+The disabled state of the object.
 
-#### [deleted](tes3containerInstance/deleted.md)
+</dd>
+<dt><code class="descname">equipment: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The deleted state of the object.
+The items currently equipped to the actor.
 
-#### [disabled](tes3containerInstance/disabled.md)
+</dd>
+<dt><code class="descname">id: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The disabled state of the object.
+The unique identifier for the object.
 
-#### [equipment](tes3containerInstance/equipment.md)
+</dd>
+<dt><code class="descname">inventory: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The items currently equipped to the actor.
+The items currently carried by the actor.
 
-#### [id](tes3containerInstance/id.md)
+</dd>
+<dt><code class="descname">isInstance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The unique identifier for the object.
+Always returns true.
 
-#### [inventory](tes3containerInstance/inventory.md)
+</dd>
+<dt><code class="descname">mesh: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The items currently carried by the actor.
+The path to the object's mesh.
 
-#### [isInstance](tes3containerInstance/isInstance.md)
+</dd>
+<dt><code class="descname">modified: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Always returns true.
+The modification state of the object since the last save.
 
-#### [mesh](tes3containerInstance/mesh.md)
+</dd>
+<dt><code class="descname">name: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The path to the object's mesh.
+The player-facing name for the object.
 
-#### [modified](tes3containerInstance/modified.md)
+</dd>
+<dt><code class="descname">nextInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> The modification state of the object since the last save.
+The next object in parent collection's list.
 
-#### [name](tes3containerInstance/name.md)
+</dd>
+<dt><code class="descname">objectFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The player-facing name for the object.
+The raw flags of the object.
 
-#### [nextInCollection](tes3containerInstance/nextInCollection.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The next object in parent collection's list.
+The type of object. Maps to values in tes3.objectType.
 
-#### [objectFlags](tes3containerInstance/objectFlags.md)
+</dd>
+<dt><code class="descname">organic: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The raw flags of the object.
+Determines if the container's organic flag is enabled.
 
-#### [objectType](tes3containerInstance/objectType.md)
+</dd>
+<dt><code class="descname">owningCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3referenceList.html">tes3referenceList</a></code></dt>
+<dd>
 
-> The type of object. Maps to values in tes3.objectType.
+The collection responsible for holding this object.
 
-#### [organic](tes3containerInstance/organic.md)
+</dd>
+<dt><code class="descname">previousInCollection: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3object.html">tes3object</a></code></dt>
+<dd>
 
-> Determines if the container's organic flag is enabled.
+The previous object in parent collection's list.
 
-#### [owningCollection](tes3containerInstance/owningCollection.md)
+</dd>
+<dt><code class="descname">respawns: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> The collection responsible for holding this object.
+Determines if the container's respawn flag is enabled.
 
-#### [previousInCollection](tes3containerInstance/previousInCollection.md)
+</dd>
+<dt><code class="descname">scale: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The previous object in parent collection's list.
+The object's scale.
 
-#### [respawns](tes3containerInstance/respawns.md)
+</dd>
+<dt><code class="descname">sceneNode: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> Determines if the container's respawn flag is enabled.
+The scene graph node for this object.
 
-#### [scale](tes3containerInstance/scale.md)
+</dd>
+<dt><code class="descname">sceneReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/niNode.html">niNode</a></code></dt>
+<dd>
 
-> The object's scale.
+The scene graph reference node for this object.
 
-#### [sceneNode](tes3containerInstance/sceneNode.md)
+</dd>
+<dt><code class="descname">script: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3script.html">tes3script</a></code></dt>
+<dd>
 
-> The scene graph node for this object.
+The script that runs on the object.
 
-#### [sceneReference](tes3containerInstance/sceneReference.md)
+</dd>
+<dt><code class="descname">sourceMod: <a href="https://mwse.readthedocs.io/en/latest/lua/type/string.html">string</a></code></dt>
+<dd>
 
-> The scene graph reference node for this object.
+The filename of the mod that owns this object.
 
-#### [script](tes3containerInstance/script.md)
+</dd>
+<dt><code class="descname">stolenList: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> The script that runs on the object.
+A list of actors that the object has been stolen from.
 
-#### [sourceMod](tes3containerInstance/sourceMod.md)
+</dd>
+</dl>
 
-> The filename of the mod that owns this object.
+## Methods
 
-#### [stolenList](tes3containerInstance/stolenList.md)
+<dl class="describe">
+<dt><code class="descname">onInventoryClose(<i>reference:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a>)</code></dt>
+<dd>
 
-> A list of actors that the object has been stolen from.
+A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Metatable Events
 
-    tes3containerInstance/onInventoryClose
-```
+<dl class="describe">
+<dt><code class="descname">__tostring</code></dt>
+<dd>
 
-#### [onInventoryClose](tes3containerInstance/onInventoryClose.md)
+An object can be converted using `tostring()` to its id.
 
-> A callback function invoked when an inventory is closed. Typically not used outside of specific purposes.
+</dd>
+</dl>

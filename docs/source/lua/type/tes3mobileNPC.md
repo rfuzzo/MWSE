@@ -2,788 +2,936 @@
 
 A mobile object for an NPC.
 
-## Values
-
-```eval_rst
-.. toctree::
-    :hidden:
-
-    tes3mobileNPC/acrobatics
-    tes3mobileNPC/actionBeforeCombat
-    tes3mobileNPC/actionData
-    tes3mobileNPC/activeAI
-    tes3mobileNPC/activeMagicEffectCount
-    tes3mobileNPC/activeMagicEffects
-    tes3mobileNPC/actorType
-    tes3mobileNPC/agility
-    tes3mobileNPC/aiPlanner
-    tes3mobileNPC/alarm
-    tes3mobileNPC/alchemy
-    tes3mobileNPC/alteration
-    tes3mobileNPC/animationData
-    tes3mobileNPC/armorer
-    tes3mobileNPC/athletics
-    tes3mobileNPC/attackBonus
-    tes3mobileNPC/attacked
-    tes3mobileNPC/attributes
-    tes3mobileNPC/axe
-    tes3mobileNPC/barterGold
-    tes3mobileNPC/blind
-    tes3mobileNPC/block
-    tes3mobileNPC/bluntWeapon
-    tes3mobileNPC/boundSize
-    tes3mobileNPC/cell
-    tes3mobileNPC/cellX
-    tes3mobileNPC/cellY
-    tes3mobileNPC/chameleon
-    tes3mobileNPC/collidingReference
-    tes3mobileNPC/conjuration
-    tes3mobileNPC/corpseHourstamp
-    tes3mobileNPC/currentEnchantedItem
-    tes3mobileNPC/currentSpell
-    tes3mobileNPC/destruction
-    tes3mobileNPC/effectAttributes
-    tes3mobileNPC/enchant
-    tes3mobileNPC/encumbrance
-    tes3mobileNPC/endurance
-    tes3mobileNPC/fatigue
-    tes3mobileNPC/fight
-    tes3mobileNPC/flags
-    tes3mobileNPC/flee
-    tes3mobileNPC/flySpeed
-    tes3mobileNPC/forceJump
-    tes3mobileNPC/forceMoveJump
-    tes3mobileNPC/forceRun
-    tes3mobileNPC/forceSneak
-    tes3mobileNPC/friendlyActors
-    tes3mobileNPC/greetDuration
-    tes3mobileNPC/greetTimer
-    tes3mobileNPC/handToHand
-    tes3mobileNPC/health
-    tes3mobileNPC/heavyArmor
-    tes3mobileNPC/height
-    tes3mobileNPC/hello
-    tes3mobileNPC/holdBreathTime
-    tes3mobileNPC/hostileActors
-    tes3mobileNPC/idleAnim
-    tes3mobileNPC/illusion
-    tes3mobileNPC/impulseVelocity
-    tes3mobileNPC/inCombat
-    tes3mobileNPC/intelligence
-    tes3mobileNPC/invisibility
-    tes3mobileNPC/isCrittable
-    tes3mobileNPC/isFlying
-    tes3mobileNPC/isJumping
-    tes3mobileNPC/isMovingBack
-    tes3mobileNPC/isMovingForward
-    tes3mobileNPC/isMovingLeft
-    tes3mobileNPC/isMovingRight
-    tes3mobileNPC/isRunning
-    tes3mobileNPC/isSneaking
-    tes3mobileNPC/isStartingJump
-    tes3mobileNPC/isSwimming
-    tes3mobileNPC/isTurningLeft
-    tes3mobileNPC/isTurningRight
-    tes3mobileNPC/isWalking
-    tes3mobileNPC/jump
-    tes3mobileNPC/lastGroundZ
-    tes3mobileNPC/levitate
-    tes3mobileNPC/lightArmor
-    tes3mobileNPC/longBlade
-    tes3mobileNPC/luck
-    tes3mobileNPC/magicka
-    tes3mobileNPC/magickaMultiplier
-    tes3mobileNPC/marksman
-    tes3mobileNPC/mediumArmor
-    tes3mobileNPC/mercantile
-    tes3mobileNPC/moveSpeed
-    tes3mobileNPC/movementFlags
-    tes3mobileNPC/mysticism
-    tes3mobileNPC/nextActionWeight
-    tes3mobileNPC/object
-    tes3mobileNPC/objectType
-    tes3mobileNPC/paralyze
-    tes3mobileNPC/personality
-    tes3mobileNPC/position
-    tes3mobileNPC/prevMovementFlags
-    tes3mobileNPC/readiedAmmo
-    tes3mobileNPC/readiedAmmoCount
-    tes3mobileNPC/readiedShield
-    tes3mobileNPC/readiedWeapon
-    tes3mobileNPC/reference
-    tes3mobileNPC/resistBlightDisease
-    tes3mobileNPC/resistCommonDisease
-    tes3mobileNPC/resistCorprus
-    tes3mobileNPC/resistFire
-    tes3mobileNPC/resistFrost
-    tes3mobileNPC/resistMagicka
-    tes3mobileNPC/resistNormalWeapons
-    tes3mobileNPC/resistParalysis
-    tes3mobileNPC/resistPoison
-    tes3mobileNPC/resistShock
-    tes3mobileNPC/restoration
-    tes3mobileNPC/runSpeed
-    tes3mobileNPC/sanctuary
-    tes3mobileNPC/scanInterval
-    tes3mobileNPC/scanTimer
-    tes3mobileNPC/security
-    tes3mobileNPC/shield
-    tes3mobileNPC/shortBlade
-    tes3mobileNPC/silence
-    tes3mobileNPC/skills
-    tes3mobileNPC/sneak
-    tes3mobileNPC/sound
-    tes3mobileNPC/spear
-    tes3mobileNPC/speechcraft
-    tes3mobileNPC/speed
-    tes3mobileNPC/spellReadied
-    tes3mobileNPC/strength
-    tes3mobileNPC/swiftSwim
-    tes3mobileNPC/swimRunSpeed
-    tes3mobileNPC/swimSpeed
-    tes3mobileNPC/torchSlot
-    tes3mobileNPC/unarmored
-    tes3mobileNPC/underwater
-    tes3mobileNPC/velocity
-    tes3mobileNPC/walkSpeed
-    tes3mobileNPC/waterBreathing
-    tes3mobileNPC/waterWalking
-    tes3mobileNPC/weaponDrawn
-    tes3mobileNPC/werewolf
-    tes3mobileNPC/width
-    tes3mobileNPC/willpower
-```
+## Properties
 
-#### [acrobatics](tes3mobileNPC/acrobatics.md)
+<dl class="describe">
+<dt><code class="descname">acrobatics: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's acrobatics skill statistic.
+Direct access to the NPC's acrobatics skill statistic.
 
-#### [actionBeforeCombat](tes3mobileNPC/actionBeforeCombat.md)
+</dd>
+<dt><code class="descname">actionBeforeCombat: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actionData.html">tes3actionData</a></code></dt>
+<dd>
 
-> Action data stored before the actor entered combat.
+Action data stored before the actor entered combat.
 
-#### [actionData](tes3mobileNPC/actionData.md)
+</dd>
+<dt><code class="descname">actionData: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actionData.html">tes3actionData</a></code></dt>
+<dd>
 
-> Current action data. Pre-combat action data is stored in the actionBeforeCombat property.
+Current action data. Pre-combat action data is stored in the actionBeforeCombat property.
 
-#### [activeAI](tes3mobileNPC/activeAI.md)
+</dd>
+<dt><code class="descname">activeAI: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if AI is active.
+Friendly access to the actor's flag that controls if AI is active.
 
-#### [activeMagicEffectCount](tes3mobileNPC/activeMagicEffectCount.md)
+</dd>
+<dt><code class="descname">activeMagicEffectCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The number of active magic effects currently operating on the actor.
+The number of active magic effects currently operating on the actor.
 
-#### [activeMagicEffects](tes3mobileNPC/activeMagicEffects.md)
+</dd>
+<dt><code class="descname">activeMagicEffects: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3activeMagicEffect.html">tes3activeMagicEffect</a></code></dt>
+<dd>
 
-> The first active magic effect on the actor, from which all others can be accessed.
+The first active magic effect on the actor, from which all others can be accessed.
 
-#### [actorType](tes3mobileNPC/actorType.md)
+</dd>
+<dt><code class="descname">actorType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The type of the mobile actor. 0 is a creature, 1 is an NPC, 2 is the player.
+The type of the mobile actor. 0 is a creature, 1 is an NPC, 2 is the player.
 
-#### [agility](tes3mobileNPC/agility.md)
+</dd>
+<dt><code class="descname">agility: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's agility attribute statistic.
+Direct access to the actor's agility attribute statistic.
 
-#### [aiPlanner](tes3mobileNPC/aiPlanner.md)
+</dd>
+<dt><code class="descname">aiPlanner: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3aiPlanner.html">tes3aiPlanner</a></code></dt>
+<dd>
 
-> Access to the mobile's AI planner and AI package information.
+Access to the mobile's AI planner and AI package information.
 
-#### [alarm](tes3mobileNPC/alarm.md)
+</dd>
+<dt><code class="descname">alarm: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The actor's alarm AI value.
+The actor's alarm AI value.
 
-#### [alchemy](tes3mobileNPC/alchemy.md)
+</dd>
+<dt><code class="descname">alchemy: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's alchemy skill statistic.
+Direct access to the NPC's alchemy skill statistic.
 
-#### [alteration](tes3mobileNPC/alteration.md)
+</dd>
+<dt><code class="descname">alteration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's alteration skill statistic.
+Direct access to the NPC's alteration skill statistic.
 
-#### [animationData](tes3mobileNPC/animationData.md)
+</dd>
+<dt><code class="descname">animationData: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3actorAnimationData.html">tes3actorAnimationData</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [armorer](tes3mobileNPC/armorer.md)
+</dd>
+<dt><code class="descname">armorer: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's armorer skill statistic.
+Direct access to the NPC's armorer skill statistic.
 
-#### [athletics](tes3mobileNPC/athletics.md)
+</dd>
+<dt><code class="descname">athletics: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's athletics skill statistic.
+Direct access to the NPC's athletics skill statistic.
 
-#### [attackBonus](tes3mobileNPC/attackBonus.md)
+</dd>
+<dt><code class="descname">attackBonus: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's attack bonus effect attribute.
+Direct access to the actor's attack bonus effect attribute.
 
-#### [attacked](tes3mobileNPC/attacked.md)
+</dd>
+<dt><code class="descname">attacked: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor has been attacked.
+Friendly access to the actor's flag that controls if the actor has been attacked.
 
-#### [attributes](tes3mobileNPC/attributes.md)
+</dd>
+<dt><code class="descname">attributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> Access to a table of 8 tes3statistic objects for the actor's attributes.
+Access to a table of 8 tes3statistic objects for the actor's attributes.
 
-#### [axe](tes3mobileNPC/axe.md)
+</dd>
+<dt><code class="descname">axe: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's axe skill statistic.
+Direct access to the NPC's axe skill statistic.
 
-#### [barterGold](tes3mobileNPC/barterGold.md)
+</dd>
+<dt><code class="descname">barterGold: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The current amount of gold that the actor has access to for bartering.
+The current amount of gold that the actor has access to for bartering.
 
-#### [blind](tes3mobileNPC/blind.md)
+</dd>
+<dt><code class="descname">blind: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's blind effect attribute.
+Direct access to the actor's blind effect attribute.
 
-#### [block](tes3mobileNPC/block.md)
+</dd>
+<dt><code class="descname">block: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's block skill statistic.
+Direct access to the NPC's block skill statistic.
 
-#### [bluntWeapon](tes3mobileNPC/bluntWeapon.md)
+</dd>
+<dt><code class="descname">bluntWeapon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's blunt weapon skill statistic.
+Direct access to the NPC's blunt weapon skill statistic.
 
-#### [boundSize](tes3mobileNPC/boundSize.md)
+</dd>
+<dt><code class="descname">boundSize: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> A vector that shows the size of the bounding box in each direction.
+A vector that shows the size of the bounding box in each direction.
 
-#### [cell](tes3mobileNPC/cell.md)
+</dd>
+<dt><code class="descname">cell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3cell.html">tes3cell</a></code></dt>
+<dd>
 
-> Fetches the cell that the actor is in.
+Fetches the cell that the actor is in.
 
-#### [cellX](tes3mobileNPC/cellX.md)
+</dd>
+<dt><code class="descname">cellX: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The X grid coordinate of the cell the mobile is in.
+The X grid coordinate of the cell the mobile is in.
 
-#### [cellY](tes3mobileNPC/cellY.md)
+</dd>
+<dt><code class="descname">cellY: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The Y grid coordinate of the cell the mobile is in.
+The Y grid coordinate of the cell the mobile is in.
 
-#### [chameleon](tes3mobileNPC/chameleon.md)
+</dd>
+<dt><code class="descname">chameleon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's chameleon effect attribute.
+Direct access to the actor's chameleon effect attribute.
 
-#### [collidingReference](tes3mobileNPC/collidingReference.md)
+</dd>
+<dt><code class="descname">collidingReference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> The reference that the mobile has collided with this frame.
+The reference that the mobile has collided with this frame.
 
-#### [conjuration](tes3mobileNPC/conjuration.md)
+</dd>
+<dt><code class="descname">conjuration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's conjuration skill statistic.
+Direct access to the NPC's conjuration skill statistic.
 
-#### [corpseHourstamp](tes3mobileNPC/corpseHourstamp.md)
+</dd>
+<dt><code class="descname">corpseHourstamp: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [currentEnchantedItem](tes3mobileNPC/currentEnchantedItem.md)
+</dd>
+<dt><code class="descname">currentEnchantedItem: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> The currently equipped enchanted item that the actor will use.
+The currently equipped enchanted item that the actor will use.
 
-#### [currentSpell](tes3mobileNPC/currentSpell.md)
+</dd>
+<dt><code class="descname">currentSpell: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3spell.html">tes3spell</a></code></dt>
+<dd>
 
-> The currently equipped spell that the actor will use.
+The currently equipped spell that the actor will use.
 
-#### [destruction](tes3mobileNPC/destruction.md)
+</dd>
+<dt><code class="descname">destruction: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's destruction skill statistic.
+Direct access to the NPC's destruction skill statistic.
 
-#### [effectAttributes](tes3mobileNPC/effectAttributes.md)
+</dd>
+<dt><code class="descname">effectAttributes: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> Access to a table of 24 numbers for the actor's effect attributes.
+Access to a table of 24 numbers for the actor's effect attributes.
 
-#### [enchant](tes3mobileNPC/enchant.md)
+</dd>
+<dt><code class="descname">enchant: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's enchant skill statistic.
+Direct access to the NPC's enchant skill statistic.
 
-#### [encumbrance](tes3mobileNPC/encumbrance.md)
+</dd>
+<dt><code class="descname">encumbrance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Access to the actor's encumbrance statistic.
+Access to the actor's encumbrance statistic.
 
-#### [endurance](tes3mobileNPC/endurance.md)
+</dd>
+<dt><code class="descname">endurance: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's endurance attribute statistic.
+Direct access to the actor's endurance attribute statistic.
 
-#### [fatigue](tes3mobileNPC/fatigue.md)
+</dd>
+<dt><code class="descname">fatigue: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Access to the actor's fatigue statistic.
+Access to the actor's fatigue statistic.
 
-#### [fight](tes3mobileNPC/fight.md)
+</dd>
+<dt><code class="descname">fight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The actor's fight AI value.
+The actor's fight AI value.
 
-#### [flags](tes3mobileNPC/flags.md)
+</dd>
+<dt><code class="descname">flags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the root mobile object flags, represented as an integer. Should not be accessed directly.
+Access to the root mobile object flags, represented as an integer. Should not be accessed directly.
 
-#### [flee](tes3mobileNPC/flee.md)
+</dd>
+<dt><code class="descname">flee: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The actor's flee AI value.
+The actor's flee AI value.
 
-#### [flySpeed](tes3mobileNPC/flySpeed.md)
+</dd>
+<dt><code class="descname">flySpeed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The calculated fly movement speed.
+The calculated fly movement speed.
 
-#### [forceJump](tes3mobileNPC/forceJump.md)
+</dd>
+<dt><code class="descname">forceJump: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Toggle flag for if the NPC jumps.
+Toggle flag for if the NPC jumps.
 
-#### [forceMoveJump](tes3mobileNPC/forceMoveJump.md)
+</dd>
+<dt><code class="descname">forceMoveJump: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Toggle flag for if the NPC moves and jumps.
+Toggle flag for if the NPC moves and jumps.
 
-#### [forceRun](tes3mobileNPC/forceRun.md)
+</dd>
+<dt><code class="descname">forceRun: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Toggle flag for if the NPC runs.
+Toggle flag for if the NPC runs.
 
-#### [forceSneak](tes3mobileNPC/forceSneak.md)
+</dd>
+<dt><code class="descname">forceSneak: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Toggle flag for if the NPC sneaks.
+Toggle flag for if the NPC sneaks.
 
-#### [friendlyActors](tes3mobileNPC/friendlyActors.md)
+</dd>
+<dt><code class="descname">friendlyActors: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> A collection of other tes3mobileActors that this actor considers friendly.
+A collection of other tes3mobileActors that this actor considers friendly.
 
-#### [greetDuration](tes3mobileNPC/greetDuration.md)
+</dd>
+<dt><code class="descname">greetDuration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [greetTimer](tes3mobileNPC/greetTimer.md)
+</dd>
+<dt><code class="descname">greetTimer: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [handToHand](tes3mobileNPC/handToHand.md)
+</dd>
+<dt><code class="descname">handToHand: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's hand to hand skill statistic.
+Direct access to the NPC's hand to hand skill statistic.
 
-#### [health](tes3mobileNPC/health.md)
+</dd>
+<dt><code class="descname">health: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Access to the actor's health statistic.
+Access to the actor's health statistic.
 
-#### [heavyArmor](tes3mobileNPC/heavyArmor.md)
+</dd>
+<dt><code class="descname">heavyArmor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's heavy armor skill statistic.
+Direct access to the NPC's heavy armor skill statistic.
 
-#### [height](tes3mobileNPC/height.md)
+</dd>
+<dt><code class="descname">height: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The height of the mobile above the ground.
+The height of the mobile above the ground.
 
-#### [hello](tes3mobileNPC/hello.md)
+</dd>
+<dt><code class="descname">hello: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The actor's hello AI value.
+The actor's hello AI value.
 
-#### [holdBreathTime](tes3mobileNPC/holdBreathTime.md)
+</dd>
+<dt><code class="descname">holdBreathTime: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [hostileActors](tes3mobileNPC/hostileActors.md)
+</dd>
+<dt><code class="descname">hostileActors: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3iterator.html">tes3iterator</a></code></dt>
+<dd>
 
-> A collection of other tes3mobileActors that this actor considers hostile.
+A collection of other tes3mobileActors that this actor considers hostile.
 
-#### [idleAnim](tes3mobileNPC/idleAnim.md)
+</dd>
+<dt><code class="descname">idleAnim: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor is using their idle animation.
+Friendly access to the actor's flag that controls if the actor is using their idle animation.
 
-#### [illusion](tes3mobileNPC/illusion.md)
+</dd>
+<dt><code class="descname">illusion: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's illusion skill statistic.
+Direct access to the NPC's illusion skill statistic.
 
-#### [impulseVelocity](tes3mobileNPC/impulseVelocity.md)
+</dd>
+<dt><code class="descname">impulseVelocity: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> A vector that represents the 3D acceleration of the object.
+A vector that represents the 3D acceleration of the object.
 
-#### [inCombat](tes3mobileNPC/inCombat.md)
+</dd>
+<dt><code class="descname">inCombat: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor is in combat.
+Friendly access to the actor's flag that controls if the actor is in combat.
 
-#### [intelligence](tes3mobileNPC/intelligence.md)
+</dd>
+<dt><code class="descname">intelligence: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's intelligence attribute statistic.
+Direct access to the actor's intelligence attribute statistic.
 
-#### [invisibility](tes3mobileNPC/invisibility.md)
+</dd>
+<dt><code class="descname">invisibility: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's invisibility effect attribute.
+Direct access to the actor's invisibility effect attribute.
 
-#### [isCrittable](tes3mobileNPC/isCrittable.md)
+</dd>
+<dt><code class="descname">isCrittable: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor can be crittically hit.
+Friendly access to the actor's flag that controls if the actor can be crittically hit.
 
-#### [isFlying](tes3mobileNPC/isFlying.md)
+</dd>
+<dt><code class="descname">isFlying: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is flying.
+Direct access to the actor's current movement flags, showing if the actor is flying.
 
-#### [isJumping](tes3mobileNPC/isJumping.md)
+</dd>
+<dt><code class="descname">isJumping: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is jumping.
+Direct access to the actor's current movement flags, showing if the actor is jumping.
 
-#### [isMovingBack](tes3mobileNPC/isMovingBack.md)
+</dd>
+<dt><code class="descname">isMovingBack: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is moving backwards.
+Direct access to the actor's current movement flags, showing if the actor is moving backwards.
 
-#### [isMovingForward](tes3mobileNPC/isMovingForward.md)
+</dd>
+<dt><code class="descname">isMovingForward: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is moving forwards.
+Direct access to the actor's current movement flags, showing if the actor is moving forwards.
 
-#### [isMovingLeft](tes3mobileNPC/isMovingLeft.md)
+</dd>
+<dt><code class="descname">isMovingLeft: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is moving left.
+Direct access to the actor's current movement flags, showing if the actor is moving left.
 
-#### [isMovingRight](tes3mobileNPC/isMovingRight.md)
+</dd>
+<dt><code class="descname">isMovingRight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is moving right.
+Direct access to the actor's current movement flags, showing if the actor is moving right.
 
-#### [isRunning](tes3mobileNPC/isRunning.md)
+</dd>
+<dt><code class="descname">isRunning: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is running.
+Direct access to the actor's current movement flags, showing if the actor is running.
 
-#### [isSneaking](tes3mobileNPC/isSneaking.md)
+</dd>
+<dt><code class="descname">isSneaking: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is sneaking.
+Direct access to the actor's current movement flags, showing if the actor is sneaking.
 
-#### [isStartingJump](tes3mobileNPC/isStartingJump.md)
+</dd>
+<dt><code class="descname">isStartingJump: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor has started jumping.
+Direct access to the actor's current movement flags, showing if the actor has started jumping.
 
-#### [isSwimming](tes3mobileNPC/isSwimming.md)
+</dd>
+<dt><code class="descname">isSwimming: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is swimming.
+Direct access to the actor's current movement flags, showing if the actor is swimming.
 
-#### [isTurningLeft](tes3mobileNPC/isTurningLeft.md)
+</dd>
+<dt><code class="descname">isTurningLeft: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is turning left.
+Direct access to the actor's current movement flags, showing if the actor is turning left.
 
-#### [isTurningRight](tes3mobileNPC/isTurningRight.md)
+</dd>
+<dt><code class="descname">isTurningRight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is turning right.
+Direct access to the actor's current movement flags, showing if the actor is turning right.
 
-#### [isWalking](tes3mobileNPC/isWalking.md)
+</dd>
+<dt><code class="descname">isWalking: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Direct access to the actor's current movement flags, showing if the actor is walking.
+Direct access to the actor's current movement flags, showing if the actor is walking.
 
-#### [jump](tes3mobileNPC/jump.md)
+</dd>
+<dt><code class="descname">jump: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's jump effect attribute.
+Direct access to the actor's jump effect attribute.
 
-#### [lastGroundZ](tes3mobileNPC/lastGroundZ.md)
+</dd>
+<dt><code class="descname">lastGroundZ: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [levitate](tes3mobileNPC/levitate.md)
+</dd>
+<dt><code class="descname">levitate: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's levitate effect attribute.
+Direct access to the actor's levitate effect attribute.
 
-#### [lightArmor](tes3mobileNPC/lightArmor.md)
+</dd>
+<dt><code class="descname">lightArmor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's light armor skill statistic.
+Direct access to the NPC's light armor skill statistic.
 
-#### [longBlade](tes3mobileNPC/longBlade.md)
+</dd>
+<dt><code class="descname">longBlade: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's long blade skill statistic.
+Direct access to the NPC's long blade skill statistic.
 
-#### [luck](tes3mobileNPC/luck.md)
+</dd>
+<dt><code class="descname">luck: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's luck attribute statistic.
+Direct access to the actor's luck attribute statistic.
 
-#### [magicka](tes3mobileNPC/magicka.md)
+</dd>
+<dt><code class="descname">magicka: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Access to the actor's magicka statistic.
+Access to the actor's magicka statistic.
 
-#### [magickaMultiplier](tes3mobileNPC/magickaMultiplier.md)
+</dd>
+<dt><code class="descname">magickaMultiplier: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Access to the actor's magicka multiplier statistic.
+Access to the actor's magicka multiplier statistic.
 
-#### [marksman](tes3mobileNPC/marksman.md)
+</dd>
+<dt><code class="descname">marksman: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's marksman skill statistic.
+Direct access to the NPC's marksman skill statistic.
 
-#### [mediumArmor](tes3mobileNPC/mediumArmor.md)
+</dd>
+<dt><code class="descname">mediumArmor: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's medium armor skill statistic.
+Direct access to the NPC's medium armor skill statistic.
 
-#### [mercantile](tes3mobileNPC/mercantile.md)
+</dd>
+<dt><code class="descname">mercantile: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's mercantile skill statistic.
+Direct access to the NPC's mercantile skill statistic.
 
-#### [moveSpeed](tes3mobileNPC/moveSpeed.md)
+</dd>
+<dt><code class="descname">moveSpeed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The calculated base movement speed.
+The calculated base movement speed.
 
-#### [movementFlags](tes3mobileNPC/movementFlags.md)
+</dd>
+<dt><code class="descname">movementFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.
+Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.
 
-#### [mysticism](tes3mobileNPC/mysticism.md)
+</dd>
+<dt><code class="descname">mysticism: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's mysticism skill statistic.
+Direct access to the NPC's mysticism skill statistic.
 
-#### [nextActionWeight](tes3mobileNPC/nextActionWeight.md)
+</dd>
+<dt><code class="descname">nextActionWeight: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [object](tes3mobileNPC/object.md)
+</dd>
+<dt><code class="descname">object: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3npcInstance.html">tes3npcInstance</a></code></dt>
+<dd>
 
-> The actor object that maps to this mobile.
+The actor object that maps to this mobile.
 
-#### [objectType](tes3mobileNPC/objectType.md)
+</dd>
+<dt><code class="descname">objectType: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The type of mobile object. Maps to values in tes3.objectType.
+The type of mobile object. Maps to values in tes3.objectType.
 
-#### [paralyze](tes3mobileNPC/paralyze.md)
+</dd>
+<dt><code class="descname">paralyze: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's paralyze effect attribute.
+Direct access to the actor's paralyze effect attribute.
 
-#### [personality](tes3mobileNPC/personality.md)
+</dd>
+<dt><code class="descname">personality: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's personality attribute statistic.
+Direct access to the actor's personality attribute statistic.
 
-#### [position](tes3mobileNPC/position.md)
+</dd>
+<dt><code class="descname">position: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> A vector that represents the 3D position of the object.
+A vector that represents the 3D position of the object.
 
-#### [prevMovementFlags](tes3mobileNPC/prevMovementFlags.md)
+</dd>
+<dt><code class="descname">prevMovementFlags: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.
+Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.
 
-#### [readiedAmmo](tes3mobileNPC/readiedAmmo.md)
+</dd>
+<dt><code class="descname">readiedAmmo: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> The currently equipped ammo.
+The currently equipped ammo.
 
-#### [readiedAmmoCount](tes3mobileNPC/readiedAmmoCount.md)
+</dd>
+<dt><code class="descname">readiedAmmoCount: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The number of ammo equipped for the readied ammo.
+The number of ammo equipped for the readied ammo.
 
-#### [readiedShield](tes3mobileNPC/readiedShield.md)
+</dd>
+<dt><code class="descname">readiedShield: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> The currently equipped shield.
+The currently equipped shield.
 
-#### [readiedWeapon](tes3mobileNPC/readiedWeapon.md)
+</dd>
+<dt><code class="descname">readiedWeapon: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> The currently equipped weapon.
+The currently equipped weapon.
 
-#### [reference](tes3mobileNPC/reference.md)
+</dd>
+<dt><code class="descname">reference: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3reference.html">tes3reference</a></code></dt>
+<dd>
 
-> Access to the reference object for the mobile, if any.
+Access to the reference object for the mobile, if any.
 
-#### [resistBlightDisease](tes3mobileNPC/resistBlightDisease.md)
+</dd>
+<dt><code class="descname">resistBlightDisease: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's blight disease resistance effect attribute.
+Direct access to the actor's blight disease resistance effect attribute.
 
-#### [resistCommonDisease](tes3mobileNPC/resistCommonDisease.md)
+</dd>
+<dt><code class="descname">resistCommonDisease: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's common disease resistance effect attribute.
+Direct access to the actor's common disease resistance effect attribute.
 
-#### [resistCorprus](tes3mobileNPC/resistCorprus.md)
+</dd>
+<dt><code class="descname">resistCorprus: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's corprus disease resistance effect attribute.
+Direct access to the actor's corprus disease resistance effect attribute.
 
-#### [resistFire](tes3mobileNPC/resistFire.md)
+</dd>
+<dt><code class="descname">resistFire: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's fire resistance effect attribute.
+Direct access to the actor's fire resistance effect attribute.
 
-#### [resistFrost](tes3mobileNPC/resistFrost.md)
+</dd>
+<dt><code class="descname">resistFrost: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's frost resistance effect attribute.
+Direct access to the actor's frost resistance effect attribute.
 
-#### [resistMagicka](tes3mobileNPC/resistMagicka.md)
+</dd>
+<dt><code class="descname">resistMagicka: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's magicka resistance effect attribute.
+Direct access to the actor's magicka resistance effect attribute.
 
-#### [resistNormalWeapons](tes3mobileNPC/resistNormalWeapons.md)
+</dd>
+<dt><code class="descname">resistNormalWeapons: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's normal weapon resistance effect attribute.
+Direct access to the actor's normal weapon resistance effect attribute.
 
-#### [resistParalysis](tes3mobileNPC/resistParalysis.md)
+</dd>
+<dt><code class="descname">resistParalysis: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's paralysis resistance effect attribute.
+Direct access to the actor's paralysis resistance effect attribute.
 
-#### [resistPoison](tes3mobileNPC/resistPoison.md)
+</dd>
+<dt><code class="descname">resistPoison: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's poison resistance effect attribute.
+Direct access to the actor's poison resistance effect attribute.
 
-#### [resistShock](tes3mobileNPC/resistShock.md)
+</dd>
+<dt><code class="descname">resistShock: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's shock resistance effect attribute.
+Direct access to the actor's shock resistance effect attribute.
 
-#### [restoration](tes3mobileNPC/restoration.md)
+</dd>
+<dt><code class="descname">restoration: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's restoration skill statistic.
+Direct access to the NPC's restoration skill statistic.
 
-#### [runSpeed](tes3mobileNPC/runSpeed.md)
+</dd>
+<dt><code class="descname">runSpeed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The calculated run movement speed.
+The calculated run movement speed.
 
-#### [sanctuary](tes3mobileNPC/sanctuary.md)
+</dd>
+<dt><code class="descname">sanctuary: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's sanctuary effect attribute.
+Direct access to the actor's sanctuary effect attribute.
 
-#### [scanInterval](tes3mobileNPC/scanInterval.md)
+</dd>
+<dt><code class="descname">scanInterval: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [scanTimer](tes3mobileNPC/scanTimer.md)
+</dd>
+<dt><code class="descname">scanTimer: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [security](tes3mobileNPC/security.md)
+</dd>
+<dt><code class="descname">security: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's security skill statistic.
+Direct access to the NPC's security skill statistic.
 
-#### [shield](tes3mobileNPC/shield.md)
+</dd>
+<dt><code class="descname">shield: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's shield effect attribute.
+Direct access to the actor's shield effect attribute.
 
-#### [shortBlade](tes3mobileNPC/shortBlade.md)
+</dd>
+<dt><code class="descname">shortBlade: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's short blade skill statistic.
+Direct access to the NPC's short blade skill statistic.
 
-#### [silence](tes3mobileNPC/silence.md)
+</dd>
+<dt><code class="descname">silence: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's silence effect attribute.
+Direct access to the actor's silence effect attribute.
 
-#### [skills](tes3mobileNPC/skills.md)
+</dd>
+<dt><code class="descname">skills: <a href="https://mwse.readthedocs.io/en/latest/lua/type/table.html">table</a></code></dt>
+<dd>
 
-> An array-style table with access to the twenty seven NPC skill statistics.
+An array-style table with access to the twenty seven NPC skill statistics.
 
-#### [sneak](tes3mobileNPC/sneak.md)
+</dd>
+<dt><code class="descname">sneak: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's sneak skill statistic.
+Direct access to the NPC's sneak skill statistic.
 
-#### [sound](tes3mobileNPC/sound.md)
+</dd>
+<dt><code class="descname">sound: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's sound effect attribute.
+Direct access to the actor's sound effect attribute.
 
-#### [spear](tes3mobileNPC/spear.md)
+</dd>
+<dt><code class="descname">spear: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's spear skill statistic.
+Direct access to the NPC's spear skill statistic.
 
-#### [speechcraft](tes3mobileNPC/speechcraft.md)
+</dd>
+<dt><code class="descname">speechcraft: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's speechcraft skill statistic.
+Direct access to the NPC's speechcraft skill statistic.
 
-#### [speed](tes3mobileNPC/speed.md)
+</dd>
+<dt><code class="descname">speed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's speed attribute statistic.
+Direct access to the actor's speed attribute statistic.
 
-#### [spellReadied](tes3mobileNPC/spellReadied.md)
+</dd>
+<dt><code class="descname">spellReadied: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor has a spell readied.
+Friendly access to the actor's flag that controls if the actor has a spell readied.
 
-#### [strength](tes3mobileNPC/strength.md)
+</dd>
+<dt><code class="descname">strength: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's strength attribute statistic.
+Direct access to the actor's strength attribute statistic.
 
-#### [swiftSwim](tes3mobileNPC/swiftSwim.md)
+</dd>
+<dt><code class="descname">swiftSwim: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's swift swim effect attribute.
+Direct access to the actor's swift swim effect attribute.
 
-#### [swimRunSpeed](tes3mobileNPC/swimRunSpeed.md)
+</dd>
+<dt><code class="descname">swimRunSpeed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The calculated swim movement speed while running.
+The calculated swim movement speed while running.
 
-#### [swimSpeed](tes3mobileNPC/swimSpeed.md)
+</dd>
+<dt><code class="descname">swimSpeed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The calculated swim movement speed.
+The calculated swim movement speed.
 
-#### [torchSlot](tes3mobileNPC/torchSlot.md)
+</dd>
+<dt><code class="descname">torchSlot: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3equipmentStack.html">tes3equipmentStack</a></code></dt>
+<dd>
 
-> The currently equipped light.
+The currently equipped light.
 
-#### [unarmored](tes3mobileNPC/unarmored.md)
+</dd>
+<dt><code class="descname">unarmored: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3skillStatistic.html">tes3skillStatistic</a></code></dt>
+<dd>
 
-> Direct access to the NPC's unarmored skill statistic.
+Direct access to the NPC's unarmored skill statistic.
 
-#### [underwater](tes3mobileNPC/underwater.md)
+</dd>
+<dt><code class="descname">underwater: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor is under water.
+Friendly access to the actor's flag that controls if the actor is under water.
 
-#### [velocity](tes3mobileNPC/velocity.md)
+</dd>
+<dt><code class="descname">velocity: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3vector3.html">tes3vector3</a></code></dt>
+<dd>
 
-> A vector that represents the 3D velocity of the object.
+A vector that represents the 3D velocity of the object.
 
-#### [walkSpeed](tes3mobileNPC/walkSpeed.md)
+</dd>
+<dt><code class="descname">walkSpeed: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> The calculated walk movement speed.
+The calculated walk movement speed.
 
-#### [waterBreathing](tes3mobileNPC/waterBreathing.md)
+</dd>
+<dt><code class="descname">waterBreathing: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's water breathing effect attribute.
+Direct access to the actor's water breathing effect attribute.
 
-#### [waterWalking](tes3mobileNPC/waterWalking.md)
+</dd>
+<dt><code class="descname">waterWalking: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> Direct access to the actor's water walking effect attribute.
+Direct access to the actor's water walking effect attribute.
 
-#### [weaponDrawn](tes3mobileNPC/weaponDrawn.md)
+</dd>
+<dt><code class="descname">weaponDrawn: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor has a weapon readied.
+Friendly access to the actor's flag that controls if the actor has a weapon readied.
 
-#### [werewolf](tes3mobileNPC/werewolf.md)
+</dd>
+<dt><code class="descname">werewolf: <a href="https://mwse.readthedocs.io/en/latest/lua/type/boolean.html">boolean</a></code></dt>
+<dd>
 
-> Friendly access to the actor's flag that controls if the actor in werewolf form.
+Friendly access to the actor's flag that controls if the actor in werewolf form.
 
-#### [width](tes3mobileNPC/width.md)
+</dd>
+<dt><code class="descname">width: <a href="https://mwse.readthedocs.io/en/latest/lua/type/number.html">number</a></code></dt>
+<dd>
 
-> No description available.
+No description available.
 
-#### [willpower](tes3mobileNPC/willpower.md)
+</dd>
+<dt><code class="descname">willpower: <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3statistic.html">tes3statistic</a></code></dt>
+<dd>
 
-> Direct access to the actor's willpower attribute statistic.
+Direct access to the actor's willpower attribute statistic.
 
-## Functions
+</dd>
+</dl>
 
-```eval_rst
-.. toctree::
-    :hidden:
+## Methods
 
-    tes3mobileNPC/applyHealthDamage
-    tes3mobileNPC/equip
-    tes3mobileNPC/getSkillStatistic
-    tes3mobileNPC/getSkillValue
-    tes3mobileNPC/hasFreeAction
-    tes3mobileNPC/isAffectedByObject
-    tes3mobileNPC/startCombat
-    tes3mobileNPC/startDialogue
-    tes3mobileNPC/stopCombat
-    tes3mobileNPC/unequip
-```
+<dl class="describe">
+<dt><code class="descname">applyHealthDamage(<i>damage:</i> number, <i>flipDifficultyScale:</i> boolean, <i>scaleWithDifficulty:</i> boolean, <i>takeHealth:</i> boolean) -> boolean</code></dt>
+<dd>
 
-#### [applyHealthDamage](tes3mobileNPC/applyHealthDamage.md)
+Damages the actor.
 
-> Damages the actor.
+</dd>
+<dt><code class="descname">equip({<i>item:</i> tes3item|string, <i>itemData:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3itemData.html">tes3itemData</a>, <i>forceSpecifiedItemData:</i> boolean, <i>addItem:</i> boolean}) -> boolean</code></dt>
+<dd>
 
-#### [equip](tes3mobileNPC/equip.md)
+Equips an item, optionally adding the item if needed.
 
-> Equips an item, optionally adding the item if needed.
+</dd>
+<dt><code class="descname">getSkillStatistic(<i>skillId:</i> number) -> tes3skillStatistic</code></dt>
+<dd>
 
-#### [getSkillStatistic](tes3mobileNPC/getSkillStatistic.md)
+Fetches the statistic object of a skill with a given index. This converts to the limited options available for creatures.
 
-> Fetches the statistic object of a skill with a given index. This converts to the limited options available for creatures.
+</dd>
+<dt><code class="descname">getSkillValue(<i>skillId:</i> number) -> number</code></dt>
+<dd>
 
-#### [getSkillValue](tes3mobileNPC/getSkillValue.md)
+Fetches the current value of a skill with a given index. This converts to the limited options available for creatures.
 
-> Fetches the current value of a skill with a given index. This converts to the limited options available for creatures.
+</dd>
+<dt><code class="descname">hasFreeAction()</code></dt>
+<dd>
 
-#### [hasFreeAction](tes3mobileNPC/hasFreeAction.md)
+If true, the actor isn't paralyzed, dead, stunned, or otherwise unable to take action.
 
-> If true, the actor isn't paralyzed, dead, stunned, or otherwise unable to take action.
+</dd>
+<dt><code class="descname">isAffectedByObject(<i>object:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3alchemy.html">tes3alchemy</a>|<a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3enchantment.html">tes3enchantment</a>|tes3spell) -> boolean</code></dt>
+<dd>
 
-#### [isAffectedByObject](tes3mobileNPC/isAffectedByObject.md)
+Determines if the actor is currently being affected by a given alchemy, enchantment, or spell.
 
-> Determines if the actor is currently being affected by a given alchemy, enchantment, or spell.
+</dd>
+<dt><code class="descname">startCombat(<i>target:</i> <a href="https://mwse.readthedocs.io/en/latest/lua/type/tes3mobileActor.html">tes3mobileActor</a>)</code></dt>
+<dd>
 
-#### [startCombat](tes3mobileNPC/startCombat.md)
+Forces the actor into combat with another actor.
 
-> Forces the actor into combat with another actor.
+</dd>
+<dt><code class="descname">startDialogue()</code></dt>
+<dd>
 
-#### [startDialogue](tes3mobileNPC/startDialogue.md)
+Starts dialogue with this actor for the player.
 
-> Starts dialogue with this actor for the player.
+</dd>
+<dt><code class="descname">stopCombat(<i>force:</i> boolean)</code></dt>
+<dd>
 
-#### [stopCombat](tes3mobileNPC/stopCombat.md)
+Ends combat for the actor.
 
-> Ends combat for the actor.
+</dd>
+<dt><code class="descname">unequip({<i>item:</i> tes3item|string, <i>type:</i> number, <i>armorSlot:</i> number, <i>clothingSlot:</i> number}) -> boolean</code></dt>
+<dd>
 
-#### [unequip](tes3mobileNPC/unequip.md)
+Unequips one or more items from the actor.
 
-> Unequips one or more items from the actor.
+</dd>
+</dl>
