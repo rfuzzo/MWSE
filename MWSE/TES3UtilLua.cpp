@@ -25,6 +25,7 @@
 #include "TES3Actor.h"
 #include "TES3AIData.h"
 #include "TES3AIPackage.h"
+#include "TES3Alchemy.h"
 #include "TES3Armor.h"
 #include "TES3AudioController.h"
 #include "TES3Cell.h"
@@ -36,6 +37,7 @@
 #include "TES3Dialogue.h"
 #include "TES3DialogueInfo.h"
 #include "TES3Door.h"
+#include "TES3Enchantment.h"
 #include "TES3Faction.h"
 #include "TES3Fader.h"
 #include "TES3Game.h"
@@ -394,9 +396,6 @@ namespace mwse {
 				sol::state& state = stateHandle.state;
 
 				if (param.is<std::string>()) {
-					auto& luaManager = mwse::lua::LuaManager::getInstance();
-					auto stateHandle = luaManager.getThreadSafeStateHandle();
-					sol::state& state = stateHandle.state;
 					std::string message = state["string"]["format"](param, va);
 					return tes3::ui::messagePlayer(message.c_str());
 				}
@@ -437,7 +436,16 @@ namespace mwse {
 					// Temporary hook into the function that creates message boxes. 
 					return reinterpret_cast<int(__cdecl *)(const char*, ...)>(0x5F1AA0)(message.c_str(), buttonTextStruct, NULL);
 				}
-
+				else {
+					sol::protected_function_result result = state["tostring"](param);
+					if (result.valid()) {
+						sol::optional<const char*> asString = result;
+						if (asString) {
+							return tes3::ui::messagePlayer(asString.value()); 
+						}
+					}
+					throw std::exception("tes3.messageBox: Unable to convert parameter to string.");
+				}
 				return 0;
 			};
 
@@ -2202,6 +2210,8 @@ namespace mwse {
 					throw std::invalid_argument("Invalid 'item' parameter provided.");
 				}
 
+				TES3::ItemData * itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
+
 				// Make sure we're dealing with actors.
 				TES3::Actor * actor = static_cast<TES3::Actor*>(reference->baseObject);
 				if (!actor->isActor()) {
@@ -2216,9 +2226,13 @@ namespace mwse {
 				// Get how many items we are adding.
 				int fulfilledCount = 0;
 				int desiredCount = std::max(std::abs(getOptionalParam(params, "count", 1)), 1);
+				if (itemData != nullptr) {
+					desiredCount = 1;
+				}
+
 				if (getOptionalParam<bool>(params, "limit", false)) {
 					// Prevent placing items into organic containers.
-					if (actor->getActorFlag(TES3::ActorFlagContainer::Organic)) {
+					if (actor->actorFlags.test(TES3::ActorFlagContainer::OrganicBit)) {
 						return 0;
 					}
 
@@ -2236,9 +2250,20 @@ namespace mwse {
 					return 0;
 				}
 
+				if (itemData) {
+					// Clear the owner, if any.
+					itemData->owner = nullptr;
+
+					// Delete the item data if it's fully repaired.
+					if (TES3::ItemData::isFullyRepaired(itemData, item)) {
+						delete itemData;
+						itemData = nullptr;
+					}
+				}
+
 				// Add the item and return the added count, since we do no inventory checking.
 				auto mobile = reference->getAttachedMobileActor();
-				actor->inventory.addItem(mobile, item, fulfilledCount, false, nullptr);
+				actor->inventory.addItem(mobile, item, fulfilledCount, false, &itemData);
 
 				// Play the relevant sound.
 				auto worldController = TES3::WorldController::get();
@@ -2294,6 +2319,9 @@ namespace mwse {
 					throw std::invalid_argument("Invalid 'item' parameter provided.");
 				}
 
+				TES3::ItemData * itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
+				auto deleteItemData = getOptionalParam<bool>(params, "deleteItemData", itemData != nullptr);
+
 				// Make sure we're dealing with actors.
 				TES3::Actor * actor = static_cast<TES3::Actor*>(reference->baseObject);
 				if (!actor->isActor()) {
@@ -2305,13 +2333,24 @@ namespace mwse {
 					actor = static_cast<TES3::Actor*>(reference->baseObject);
 				}
 
-				// Get how many items we are removing.
+				// Get how many items we are removing. Force to 1 if we supply an itemData.
 				int desiredCount = std::max(std::abs(getOptionalParam(params, "count", 1)), 1);
+				if (itemData != nullptr) {
+					desiredCount = 1;
+				}
 
+				// Make sure that the inventory contains the item.
 				TES3::ItemStack * stack = actor->inventory.findItemStack(item);
 				if (stack == nullptr) {
 					return 0;
 				}
+
+				// If we were given an itemData, make sure that it's here.
+				if (itemData != nullptr && stack->variables != nullptr && !stack->variables->contains(itemData)) {
+					return 0;
+				}
+
+				// Limit removal by stack count.
 				int fulfilledCount = std::min(desiredCount, stack->count);
 
 				// No items to remove? Great, let's get out of here.
@@ -2319,9 +2358,14 @@ namespace mwse {
 					return 0;
 				}
 
-				// Add the item and return the added count, since we do no inventory checking.
+				// Try to unequip the item if it's equipped.
 				auto mobile = reference->getAttachedMobileActor();
-				actor->inventory.removeItemWithData(mobile, item, nullptr, fulfilledCount, false);
+				if (itemData != nullptr) {
+					actor->unequipItem(item, true, mobile, false, itemData);
+				}
+
+				// Add the item and return the added count, since we do no inventory checking.
+				actor->inventory.removeItemWithData(mobile, item, itemData, fulfilledCount, deleteItemData);
 
 				// Play the relevant sound.
 				auto worldController = TES3::WorldController::get();
@@ -2421,7 +2465,7 @@ namespace mwse {
 				float itemWeight = item->getWeight();
 				if (toActor->objectType == TES3::ObjectType::Container && getOptionalParam<bool>(params, "limitCapacity", true)) {
 					// Prevent placing items into organic containers.
-					if (toActor->getActorFlag(TES3::ActorFlagContainer::Organic)) {
+					if (toActor->actorFlags.test(TES3::ActorFlagContainer::OrganicBit)) {
 						return 0;
 					}
 
@@ -3026,6 +3070,56 @@ namespace mwse {
 				animData->unknown_0x54 |= 0xFFFF;
 			};
 
+			state["tes3"]["isAffectedBy"] = [](sol::table params) {
+				TES3::Reference * reference = getOptionalParamExecutionReference(params);
+				if (reference == nullptr) {
+					throw std::invalid_argument("Invalid 'reference' parameter provided.");
+				}
+
+				auto mact = reference->getAttachedMobileActor();
+				if (mact == nullptr) {
+					throw std::invalid_argument("Invalid 'reference' parameter provided. No mobile actor found.");
+				}
+
+				// Are we checking for being affected by an object?
+				int effectId = getOptionalParam<int>(params, "effect", -1);
+				TES3::BaseObject * object = getOptionalParamObject<TES3::BaseObject>(params, "object");
+				if (object != nullptr) {
+					if (object->objectType == TES3::ObjectType::Alchemy) {
+						return mact->isAffectedByAlchemy(static_cast<TES3::Alchemy*>(object));
+					}
+					else if (object->objectType == TES3::ObjectType::Enchantment) {
+						return mact->isAffectedByEnchantment(static_cast<TES3::Enchantment*>(object));
+					}
+					else if (object->objectType == TES3::ObjectType::Spell) {
+						return mact->isAffectedBySpell(static_cast<TES3::Spell*>(object));
+					}
+					else if (object->objectType == TES3::ObjectType::MagicEffect) {
+						effectId = static_cast<TES3::MagicEffect*>(object)->id;
+					}
+					else {
+						throw std::invalid_argument("Invalid 'object' parameter provided.");
+					}
+				}
+
+				// Check based on effect ID.
+				if (effectId > -1) {
+					auto firstEffect = mact->activeMagicEffects.firstEffect;
+					auto itt = firstEffect->next;
+					while (itt != firstEffect) {
+						if (itt->magicEffectID == effectId) {
+							return true;
+						}
+						itt = itt->next;
+					}
+				}
+				else {
+					throw std::invalid_argument("Invalid 'effect' parameter provided.");
+				}
+
+				return false;
+			};
+
 			state["tes3"]["addMagicEffect"] = [](sol::table params) {
 				auto magicEffectController = TES3::DataHandler::get()->nonDynamicData->magicEffects;
 
@@ -3141,39 +3235,39 @@ namespace mwse {
 
 				// Set individual flags.
 				magicEffectController->setEffectFlags(id, 0U);
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::AllowEnchanting,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::AllowEnchantingBit,
 					getOptionalParam<bool>(params, "allowEnchanting", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::AllowSpellmaking,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::AllowSpellmakingBit,
 					getOptionalParam<bool>(params, "allowSpellmaking", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::AppliedOnce,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::AppliedOnceBit,
 					getOptionalParam<bool>(params, "appliesOnce", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CanCastSelf,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CanCastSelfBit,
 					getOptionalParam<bool>(params, "canCastSelf", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CanCastTarget,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CanCastTargetBit,
 					getOptionalParam<bool>(params, "canCastTarget", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CanCastTouch,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CanCastTouchBit,
 					getOptionalParam<bool>(params, "canCastTouch", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CasterLinked,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::CasterLinkedBit,
 					getOptionalParam<bool>(params, "casterLinked", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::ContinuousVFX,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::ContinuousVFXBit,
 					getOptionalParam<bool>(params, "hasContinuousVFX", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NoDuration,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NoDurationBit,
 					getOptionalParam<bool>(params, "hasNoDuration", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NoMagnitude,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NoMagnitudeBit,
 					getOptionalParam<bool>(params, "hasNoMagnitude", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::IllegalDaedra,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::IllegalDaedraBit,
 					getOptionalParam<bool>(params, "illegalDaedra", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::Harmful,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::HarmfulBit,
 					getOptionalParam<bool>(params, "isHarmful", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NonRecastable,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NonRecastableBit,
 					getOptionalParam<bool>(params, "nonRecastable", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::TargetAttribute,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::TargetAttributeBit,
 					getOptionalParam<bool>(params, "targetsAttributes", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::TargetSkill,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::TargetSkillBit,
 					getOptionalParam<bool>(params, "targetsSkills", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::Unreflectable,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::UnreflectableBit,
 					getOptionalParam<bool>(params, "unreflectable", true));
-				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NegativeLighting,
+				magicEffectController->setEffectFlag(id, TES3::EffectFlag::NegativeLightingBit,
 					getOptionalParam<bool>(params, "usesNegativeLighting", true));
 				effect->flags = magicEffectController->getEffectFlags(id);
 
