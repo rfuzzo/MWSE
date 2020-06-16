@@ -3,6 +3,7 @@
 #include "TES3Defines.h"
 
 #include "TES3HashMap.h"
+#include "TES3MagicEffectInstance.h"
 #include "TES3Object.h"
 #include "TES3Vectors.h"
 
@@ -46,7 +47,7 @@ namespace TES3 {
 		Reference * target;
 		signed char unknown_0x18;
 		char padding_0x19[3];
-		HashMap<Reference*, void*> effects[8]; // 0x1C
+		HashMap<char*, MagicEffectInstance> effects[8]; // 0x1C
 		MobileProjectile * magicProjectile;
 		MagicSourceCombo sourceCombo;
 		unsigned int serialNumber;
