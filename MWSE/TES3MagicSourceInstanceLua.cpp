@@ -60,6 +60,9 @@ namespace mwse {
 				}
 			);
 
+			// Indirect bindings to unions and arrays.
+			usertypeDefinition.set("effects", sol::readonly_property([](TES3::MagicSourceInstance& self) { return std::ref(self.effects); }));
+
 			// Access to other objects that need to be packaged.
 			usertypeDefinition.set("target", sol::readonly_property([](TES3::MagicSourceInstance& self) { return makeLuaObject(self.target); }));
 			usertypeDefinition.set("projectile", sol::readonly_property([](TES3::MagicSourceInstance& self) { return makeLuaObject(self.magicProjectile); }));
