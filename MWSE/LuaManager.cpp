@@ -88,6 +88,7 @@
 #include "TES3GameFileLua.h"
 #include "TES3GameSettingLua.h"
 #include "TES3GlobalVariableLua.h"
+#include "TES3HashMapLua.h"
 #include "TES3IngredientLua.h"
 #include "TES3InputControllerLua.h"
 #include "TES3InventoryLua.h"
@@ -483,6 +484,7 @@ namespace mwse {
 			bindTES3GameFile();
 			bindTES3GameSetting();
 			bindTES3GlobalVariable();
+			bindTES3HashMap();
 			bindTES3Ingredient();
 			bindTES3InputController();
 			bindTES3Inventory();
