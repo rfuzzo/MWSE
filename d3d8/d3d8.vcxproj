@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{44cea117-a939-483d-8614-9e8500e2f02e}</ProjectGuid>
+    <RootNamespace>d3d8</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Games\Morrowind\mwse-source\deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Games\Morrowind\mwse-source\deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;D3D8_EXPORTS;_WINDOWS;_USRDLL;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(TargetDir)d3d8.dll" "$(SolutionDir)..\d3d8.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;D3D8_EXPORTS;_WINDOWS;_USRDLL;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(TargetDir)d3d8.dll" "$(SolutionDir)..\d3d8.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;D3D8_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;D3D8_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="configinternal.h" />
+    <ClInclude Include="configuration.h" />
+    <ClInclude Include="distantland.h" />
+    <ClInclude Include="distantshader.h" />
+    <ClInclude Include="dlformat.h" />
+    <ClInclude Include="dlmath.h" />
+    <ClInclude Include="doublesurface.h" />
+    <ClInclude Include="ffeshader.h" />
+    <ClInclude Include="inidata.h" />
+    <ClInclude Include="memorypool.h" />
+    <ClInclude Include="mged3d8device.h" />
+    <ClInclude Include="mgedinput.h" />
+    <ClInclude Include="mgedirect3d8.h" />
+    <ClInclude Include="mgeversion.h" />
+    <ClInclude Include="mmefunctiondefs.h" />
+    <ClInclude Include="morrowindbsa.h" />
+    <ClInclude Include="mwbridge.h" />
+    <ClInclude Include="mwinitpatch.h" />
+    <ClInclude Include="postshaders.h" />
+    <ClInclude Include="quadtree.h" />
+    <ClInclude Include="specificrender.h" />
+    <ClInclude Include="statusoverlay.h" />
+    <ClInclude Include="userhud.h" />
+    <ClInclude Include="videobackground.h" />
+    <ClInclude Include="funccamera.h" />
+    <ClInclude Include="funcentity.h" />
+    <ClInclude Include="funcgeneral.h" />
+    <ClInclude Include="funcgmst.h" />
+    <ClInclude Include="funchud.h" />
+    <ClInclude Include="funcinput.h" />
+    <ClInclude Include="funcmwui.h" />
+    <ClInclude Include="funcphysics.h" />
+    <ClInclude Include="funcshader.h" />
+    <ClInclude Include="funcweather.h" />
+    <ClInclude Include="mgebridge.h" />
+    <ClInclude Include="mwseinstruction.h" />
+    <ClInclude Include="VMTYPES.h" />
+    <ClInclude Include="d3d8device.h" />
+    <ClInclude Include="d3d8header.h" />
+    <ClInclude Include="d3d8interface.h" />
+    <ClInclude Include="d3d8surface.h" />
+    <ClInclude Include="d3d8texture.h" />
+    <ClInclude Include="direct3d8.h" />
+    <ClInclude Include="directin8.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="pngsave.h" />
+    <ClInclude Include="timing.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="configuration.cpp" />
+    <ClCompile Include="distantinit.cpp" />
+    <ClCompile Include="distantland.cpp" />
+    <ClCompile Include="dlmath.cpp" />
+    <ClCompile Include="ffeshader.cpp" />
+    <ClCompile Include="macrofunctions.cpp" />
+    <ClCompile Include="memorypool.cpp" />
+    <ClCompile Include="mged3d8device.cpp" />
+    <ClCompile Include="mgedinput.cpp" />
+    <ClCompile Include="mgedirect3d8.cpp" />
+    <ClCompile Include="mgedxwrap.cpp" />
+    <ClCompile Include="morrowindbsa.cpp" />
+    <ClCompile Include="mwbridge.cpp" />
+    <ClCompile Include="mwinitpatch.cpp" />
+    <ClCompile Include="postshaders.cpp" />
+    <ClCompile Include="quadtree.cpp" />
+    <ClCompile Include="renderdepth.cpp" />
+    <ClCompile Include="renderexterior.cpp" />
+    <ClCompile Include="rendergrass.cpp" />
+    <ClCompile Include="rendershadow.cpp" />
+    <ClCompile Include="renderwater.cpp" />
+    <ClCompile Include="specificrender.cpp" />
+    <ClCompile Include="statusoverlay.cpp" />
+    <ClCompile Include="userhud.cpp" />
+    <ClCompile Include="videobackground.cpp" />
+    <ClCompile Include="funccamera.cpp" />
+    <ClCompile Include="funcentity.cpp" />
+    <ClCompile Include="funcgeneral.cpp" />
+    <ClCompile Include="funcgmst.cpp" />
+    <ClCompile Include="funchud.cpp" />
+    <ClCompile Include="funcinput.cpp" />
+    <ClCompile Include="funcmwui.cpp" />
+    <ClCompile Include="funcphysics.cpp" />
+    <ClCompile Include="funcshader.cpp" />
+    <ClCompile Include="funcweather.cpp" />
+    <ClCompile Include="mgebridge.cpp" />
+    <ClCompile Include="mwseinstruction.cpp" />
+    <ClCompile Include="d3d8device.cpp" />
+    <ClCompile Include="d3d8surface.cpp" />
+    <ClCompile Include="d3d8texture.cpp" />
+    <ClCompile Include="dinput8.cpp" />
+    <ClCompile Include="direct3d8.cpp" />
+    <ClCompile Include="dxguid.cpp" />
+    <ClCompile Include="log.cpp" />
+    <ClCompile Include="pngsave.cpp" />
+    <ClCompile Include="timing.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="d3d8header.inl" />
+    <None Include="exports.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
