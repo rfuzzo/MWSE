@@ -4,7 +4,7 @@
 #include "distantshader.h"
 #include "mwbridge.h"
 #include "d3d8header.h"
-#include "log.h"
+#include "mge_log.h"
 
 void DistantLand::renderDepth() {
     auto mwBridge = MWBridge::get();

@@ -178,6 +178,36 @@
     <Filter Include="Source Files\Lua\Events">
       <UniqueIdentifier>{c81b5931-1a46-4ba2-b3dc-3e0a8dfd6d2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MGE">
+      <UniqueIdentifier>{5486eab5-7100-41be-baf1-2ee5967c65d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MGE">
+      <UniqueIdentifier>{b7415d4c-0b5b-441a-87f2-092722b8191c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MGE\Core">
+      <UniqueIdentifier>{dd78cf78-4c7e-40f8-bc94-aa0d08f22581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MGE\MWSE">
+      <UniqueIdentifier>{00f05ed8-0d85-4ce5-9655-427278d8909c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MGE\ProxyDX">
+      <UniqueIdentifier>{f62f4001-e7ed-4f43-8c85-1bb7b12f4b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MGE\Support">
+      <UniqueIdentifier>{f945aac4-4481-4376-81bf-126b3824a1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MGE\Core">
+      <UniqueIdentifier>{93177e9c-025e-4037-bbb6-5084a273577e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MGE\MWSE">
+      <UniqueIdentifier>{92e5e6d9-cc0e-43a2-9fd3-c0e9eab8681d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MGE\ProxyDX">
+      <UniqueIdentifier>{efb10e82-190f-4f9e-ab0f-a828f2f1b9ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MGE\Support">
+      <UniqueIdentifier>{7c241a3c-209b-44af-9ab8-4270dc9a6b31}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flags.h">
@@ -1478,6 +1508,147 @@
     </ClInclude>
     <ClInclude Include="LuaSpellCreatedEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="configinternal.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="configuration.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="distantland.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="distantshader.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dlformat.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="dlmath.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="doublesurface.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ffeshader.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="inidata.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="memorypool.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mged3d8device.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mgedinput.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mgedirect3d8.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mgeversion.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mmefunctiondefs.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="morrowindbsa.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mwbridge.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="mwinitpatch.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="postshaders.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="quadtree.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="specificrender.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="statusoverlay.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="userhud.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="videobackground.h">
+      <Filter>Header Files\MGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="funccamera.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcentity.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcgeneral.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcgmst.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funchud.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcinput.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcmwui.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcphysics.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcshader.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="funcweather.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="mgebridge.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="mwseinstruction.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="VMTYPES.h">
+      <Filter>Header Files\MGE\MWSE</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8device.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8header.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8interface.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8surface.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8texture.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="direct3d8.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="directin8.h">
+      <Filter>Header Files\MGE\ProxyDX</Filter>
+    </ClInclude>
+    <ClInclude Include="mge_log.h">
+      <Filter>Header Files\MGE\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="pngsave.h">
+      <Filter>Header Files\MGE\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="timing.h">
+      <Filter>Header Files\MGE\Support</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3257,10 +3428,156 @@
     <ClCompile Include="LuaSpellCreatedEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
+    <ClCompile Include="mge_log.cpp">
+      <Filter>Source Files\MGE\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="pngsave.cpp">
+      <Filter>Source Files\MGE\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="timing.cpp">
+      <Filter>Source Files\MGE\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8device.cpp">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8surface.cpp">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8texture.cpp">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </ClCompile>
+    <ClCompile Include="dinput8.cpp">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </ClCompile>
+    <ClCompile Include="direct3d8.cpp">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </ClCompile>
+    <ClCompile Include="dxguid.cpp">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </ClCompile>
+    <ClCompile Include="funccamera.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcentity.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcgeneral.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcgmst.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funchud.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcinput.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcmwui.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcphysics.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcshader.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="funcweather.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="mgebridge.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="mwseinstruction.cpp">
+      <Filter>Source Files\MGE\MWSE</Filter>
+    </ClCompile>
+    <ClCompile Include="configuration.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="distantinit.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="distantland.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="dlmath.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ffeshader.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="macrofunctions.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="memorypool.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="mged3d8device.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="mgedinput.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="mgedirect3d8.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="mgedxwrap.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="morrowindbsa.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="mwbridge.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="mwinitpatch.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="postshaders.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="quadtree.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="renderdepth.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="renderexterior.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="rendergrass.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="rendershadow.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="renderwater.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="specificrender.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="statusoverlay.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="userhud.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="videobackground.cpp">
+      <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MWSE.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="d3d8header.inl">
+      <Filter>Source Files\MGE\ProxyDX</Filter>
+    </None>
+    <None Include="exports.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

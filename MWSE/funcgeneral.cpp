@@ -4,7 +4,7 @@
 #include "mgeversion.h"
 #include "distantland.h"
 #include "userhud.h"
-#include "log.h"
+#include "mge_log.h"
 
 MWSEINSTRUCTION_DECLARE_VTABLE(mwseWipeAll)
 

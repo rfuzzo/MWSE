@@ -3,7 +3,7 @@
 #include "distantshader.h"
 #include "configuration.h"
 #include "mged3d8device.h"
-#include "log.h"
+#include "mge_log.h"
 
 void DistantLand::cullGrass(const D3DXMATRIX* view, const D3DXMATRIX* proj) {
     D3DXMATRIX ds_proj = *proj, ds_viewproj;

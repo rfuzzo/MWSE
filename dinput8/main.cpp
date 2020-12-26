@@ -1,12 +1,16 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
 
-typedef HRESULT(__stdcall* DirectInput8Create_t)(HINSTANCE, DWORD, REFIID, LPVOID*, LPUNKNOWN);
-
-extern "C" HRESULT __stdcall FakeDirectInput8Create(HINSTANCE a, DWORD b, REFIID c, void** d, LPUNKNOWN e) {
-    HMODULE FakeD3Ddll = LoadLibrary("d3d8.dll");
-    if (FakeD3Ddll == nullptr) {
-        return DIERR_BETADIRECTINPUTVERSION;
+template <typename T>
+T getProc(const char* lib, const char* funcname) {
+    HMODULE dll = LoadLibraryA(lib);
+    if (dll == NULL) {
+        return NULL;
     }
-    return DirectInput8Create_t(GetProcAddress(FakeD3Ddll, "DirectInput8Create"))(a, b, c, d, e);
+    return T(GetProcAddress(dll, funcname));
+}
+
+typedef HRESULT(__stdcall* DirectInput8Create_t)(HINSTANCE, DWORD, REFIID, LPVOID*, LPUNKNOWN);
+extern "C" HRESULT __stdcall FakeDirectInput8Create(HINSTANCE a, DWORD b, REFIID c, void** d, LPUNKNOWN e) {
+    return getProc<DirectInput8Create_t>("mwse.dll", "DirectInput8Create")(a, b, c, d, e);
 }

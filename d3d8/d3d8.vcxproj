@@ -73,14 +73,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -103,7 +99,6 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
@@ -129,7 +124,6 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
@@ -174,53 +168,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="configinternal.h" />
-    <ClInclude Include="configuration.h" />
-    <ClInclude Include="distantland.h" />
-    <ClInclude Include="distantshader.h" />
-    <ClInclude Include="dlformat.h" />
-    <ClInclude Include="dlmath.h" />
-    <ClInclude Include="doublesurface.h" />
-    <ClInclude Include="ffeshader.h" />
-    <ClInclude Include="inidata.h" />
-    <ClInclude Include="memorypool.h" />
-    <ClInclude Include="mged3d8device.h" />
-    <ClInclude Include="mgedinput.h" />
-    <ClInclude Include="mgedirect3d8.h" />
-    <ClInclude Include="mgeversion.h" />
-    <ClInclude Include="mmefunctiondefs.h" />
-    <ClInclude Include="morrowindbsa.h" />
-    <ClInclude Include="mwbridge.h" />
-    <ClInclude Include="mwinitpatch.h" />
-    <ClInclude Include="postshaders.h" />
-    <ClInclude Include="quadtree.h" />
-    <ClInclude Include="specificrender.h" />
-    <ClInclude Include="statusoverlay.h" />
-    <ClInclude Include="userhud.h" />
-    <ClInclude Include="videobackground.h" />
-    <ClInclude Include="funccamera.h" />
-    <ClInclude Include="funcentity.h" />
-    <ClInclude Include="funcgeneral.h" />
-    <ClInclude Include="funcgmst.h" />
-    <ClInclude Include="funchud.h" />
-    <ClInclude Include="funcinput.h" />
-    <ClInclude Include="funcmwui.h" />
-    <ClInclude Include="funcphysics.h" />
-    <ClInclude Include="funcshader.h" />
-    <ClInclude Include="funcweather.h" />
-    <ClInclude Include="mgebridge.h" />
-    <ClInclude Include="mwseinstruction.h" />
-    <ClInclude Include="VMTYPES.h" />
-    <ClInclude Include="d3d8device.h" />
-    <ClInclude Include="d3d8header.h" />
-    <ClInclude Include="d3d8interface.h" />
-    <ClInclude Include="d3d8surface.h" />
-    <ClInclude Include="d3d8texture.h" />
-    <ClInclude Include="direct3d8.h" />
-    <ClInclude Include="directin8.h" />
-    <ClInclude Include="log.h" />
-    <ClInclude Include="pngsave.h" />
-    <ClInclude Include="timing.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -230,55 +177,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="configuration.cpp" />
-    <ClCompile Include="distantinit.cpp" />
-    <ClCompile Include="distantland.cpp" />
-    <ClCompile Include="dlmath.cpp" />
-    <ClCompile Include="ffeshader.cpp" />
-    <ClCompile Include="macrofunctions.cpp" />
-    <ClCompile Include="memorypool.cpp" />
-    <ClCompile Include="mged3d8device.cpp" />
-    <ClCompile Include="mgedinput.cpp" />
-    <ClCompile Include="mgedirect3d8.cpp" />
-    <ClCompile Include="mgedxwrap.cpp" />
-    <ClCompile Include="morrowindbsa.cpp" />
-    <ClCompile Include="mwbridge.cpp" />
-    <ClCompile Include="mwinitpatch.cpp" />
-    <ClCompile Include="postshaders.cpp" />
-    <ClCompile Include="quadtree.cpp" />
-    <ClCompile Include="renderdepth.cpp" />
-    <ClCompile Include="renderexterior.cpp" />
-    <ClCompile Include="rendergrass.cpp" />
-    <ClCompile Include="rendershadow.cpp" />
-    <ClCompile Include="renderwater.cpp" />
-    <ClCompile Include="specificrender.cpp" />
-    <ClCompile Include="statusoverlay.cpp" />
-    <ClCompile Include="userhud.cpp" />
-    <ClCompile Include="videobackground.cpp" />
-    <ClCompile Include="funccamera.cpp" />
-    <ClCompile Include="funcentity.cpp" />
-    <ClCompile Include="funcgeneral.cpp" />
-    <ClCompile Include="funcgmst.cpp" />
-    <ClCompile Include="funchud.cpp" />
-    <ClCompile Include="funcinput.cpp" />
-    <ClCompile Include="funcmwui.cpp" />
-    <ClCompile Include="funcphysics.cpp" />
-    <ClCompile Include="funcshader.cpp" />
-    <ClCompile Include="funcweather.cpp" />
-    <ClCompile Include="mgebridge.cpp" />
-    <ClCompile Include="mwseinstruction.cpp" />
-    <ClCompile Include="d3d8device.cpp" />
-    <ClCompile Include="d3d8surface.cpp" />
-    <ClCompile Include="d3d8texture.cpp" />
-    <ClCompile Include="dinput8.cpp" />
-    <ClCompile Include="direct3d8.cpp" />
-    <ClCompile Include="dxguid.cpp" />
-    <ClCompile Include="log.cpp" />
-    <ClCompile Include="pngsave.cpp" />
-    <ClCompile Include="timing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="d3d8header.inl" />
     <None Include="exports.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,5 @@
 
-#include "log.h"
+#include "mge_log.h"
 #include "configuration.h"
 #include "distantland.h"
 #include "distantshader.h"

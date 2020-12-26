@@ -13,6 +13,8 @@
 #define WINVER 0x0410
 #include <windows.h>
 #include <objbase.h>
+
+#define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 
 #endif //PCH_H

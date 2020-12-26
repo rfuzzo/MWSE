@@ -1,7 +1,7 @@
 
 #include "userhud.h"
 #include "morrowindbsa.h"
-#include "log.h"
+#include "mge_log.h"
 
 const DWORD fvfHUD = D3DFVF_XYZRHW | D3DFVF_TEX2;
 

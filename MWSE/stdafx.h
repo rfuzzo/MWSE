@@ -36,9 +36,23 @@
 #include <psapi.h>
 #include <dbghelp.h>
 
+// Remove annoying defines from windows.h
+#undef near
+#undef far
+#undef NEAR
+#undef FAR
+#define NEAR
+#define FAR
+
 // 3rd party library: span-lite
 // URL: https://github.com/martinmoene/span-lite
 #include <nonstd/span.hpp>
+
+// DirectX requirements.
+#define D3DXFX_LARGEADDRESS_HANDLE
+#include <d3d9.h>
+#include <d3d9types.h>
+#include <d3dx9math.h>
 
 // DirectInput/Sound requirements.
 #define DIRECTINPUT_VERSION 0x0800

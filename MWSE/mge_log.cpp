@@ -1,5 +1,5 @@
 
-#include "log.h"
+#include "mge_log.h"
 
 
 HANDLE LOG::handle = INVALID_HANDLE_VALUE;

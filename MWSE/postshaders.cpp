@@ -1,6 +1,6 @@
 
 #include "d3d8header.h"
-#include "log.h"
+#include "mge_log.h"
 #include "configuration.h"
 #include "mwbridge.h"
 #include "postshaders.h"

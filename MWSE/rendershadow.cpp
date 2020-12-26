@@ -3,7 +3,7 @@
 #include "distantshader.h"
 #include "configuration.h"
 #include "mwbridge.h"
-#include "log.h"
+#include "mge_log.h"
 
 static const float shadowNearRadius = 1000.0;
 static const float shadowFarRadius = 4000.0;

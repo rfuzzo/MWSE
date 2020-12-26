@@ -11,6 +11,53 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="configinternal.h" />
+    <ClInclude Include="configuration.h" />
+    <ClInclude Include="d3d8device.h" />
+    <ClInclude Include="d3d8header.h" />
+    <ClInclude Include="d3d8interface.h" />
+    <ClInclude Include="d3d8surface.h" />
+    <ClInclude Include="d3d8texture.h" />
+    <ClInclude Include="direct3d8.h" />
+    <ClInclude Include="directin8.h" />
+    <ClInclude Include="distantland.h" />
+    <ClInclude Include="distantshader.h" />
+    <ClInclude Include="dlformat.h" />
+    <ClInclude Include="dlmath.h" />
+    <ClInclude Include="doublesurface.h" />
+    <ClInclude Include="ffeshader.h" />
+    <ClInclude Include="funccamera.h" />
+    <ClInclude Include="funcentity.h" />
+    <ClInclude Include="funcgeneral.h" />
+    <ClInclude Include="funcgmst.h" />
+    <ClInclude Include="funchud.h" />
+    <ClInclude Include="funcinput.h" />
+    <ClInclude Include="funcmwui.h" />
+    <ClInclude Include="funcphysics.h" />
+    <ClInclude Include="funcshader.h" />
+    <ClInclude Include="funcweather.h" />
+    <ClInclude Include="inidata.h" />
+    <ClInclude Include="mge_log.h" />
+    <ClInclude Include="memorypool.h" />
+    <ClInclude Include="mgebridge.h" />
+    <ClInclude Include="mged3d8device.h" />
+    <ClInclude Include="mgedinput.h" />
+    <ClInclude Include="mgedirect3d8.h" />
+    <ClInclude Include="mgeversion.h" />
+    <ClInclude Include="mmefunctiondefs.h" />
+    <ClInclude Include="morrowindbsa.h" />
+    <ClInclude Include="mwbridge.h" />
+    <ClInclude Include="mwinitpatch.h" />
+    <ClInclude Include="mwseinstruction.h" />
+    <ClInclude Include="pngsave.h" />
+    <ClInclude Include="postshaders.h" />
+    <ClInclude Include="quadtree.h" />
+    <ClInclude Include="specificrender.h" />
+    <ClInclude Include="statusoverlay.h" />
+    <ClInclude Include="timing.h" />
+    <ClInclude Include="userhud.h" />
+    <ClInclude Include="videobackground.h" />
+    <ClInclude Include="VMTYPES.h" />
     <ClInclude Include="ArrayUtil.h" />
     <ClInclude Include="BitUtil.h" />
     <ClInclude Include="BSAnimationManager.h" />
@@ -446,6 +493,52 @@
     <ClInclude Include="WindowsUtil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="configuration.cpp" />
+    <ClCompile Include="d3d8device.cpp" />
+    <ClCompile Include="d3d8surface.cpp" />
+    <ClCompile Include="d3d8texture.cpp" />
+    <ClCompile Include="dinput8.cpp" />
+    <ClCompile Include="direct3d8.cpp" />
+    <ClCompile Include="distantinit.cpp" />
+    <ClCompile Include="distantland.cpp" />
+    <ClCompile Include="dlmath.cpp" />
+    <ClCompile Include="dxguid.cpp" />
+    <ClCompile Include="ffeshader.cpp" />
+    <ClCompile Include="funccamera.cpp" />
+    <ClCompile Include="funcentity.cpp" />
+    <ClCompile Include="funcgeneral.cpp" />
+    <ClCompile Include="funcgmst.cpp" />
+    <ClCompile Include="funchud.cpp" />
+    <ClCompile Include="funcinput.cpp" />
+    <ClCompile Include="funcmwui.cpp" />
+    <ClCompile Include="funcphysics.cpp" />
+    <ClCompile Include="funcshader.cpp" />
+    <ClCompile Include="funcweather.cpp" />
+    <ClCompile Include="mge_log.cpp" />
+    <ClCompile Include="macrofunctions.cpp" />
+    <ClCompile Include="memorypool.cpp" />
+    <ClCompile Include="mgebridge.cpp" />
+    <ClCompile Include="mged3d8device.cpp" />
+    <ClCompile Include="mgedinput.cpp" />
+    <ClCompile Include="mgedirect3d8.cpp" />
+    <ClCompile Include="mgedxwrap.cpp" />
+    <ClCompile Include="morrowindbsa.cpp" />
+    <ClCompile Include="mwbridge.cpp" />
+    <ClCompile Include="mwinitpatch.cpp" />
+    <ClCompile Include="mwseinstruction.cpp" />
+    <ClCompile Include="pngsave.cpp" />
+    <ClCompile Include="postshaders.cpp" />
+    <ClCompile Include="quadtree.cpp" />
+    <ClCompile Include="renderdepth.cpp" />
+    <ClCompile Include="renderexterior.cpp" />
+    <ClCompile Include="rendergrass.cpp" />
+    <ClCompile Include="rendershadow.cpp" />
+    <ClCompile Include="renderwater.cpp" />
+    <ClCompile Include="specificrender.cpp" />
+    <ClCompile Include="statusoverlay.cpp" />
+    <ClCompile Include="timing.cpp" />
+    <ClCompile Include="userhud.cpp" />
+    <ClCompile Include="videobackground.cpp" />
     <ClCompile Include="ArrayUtil.cpp" />
     <ClCompile Include="CodePatchUtil.cpp" />
     <ClCompile Include="DynamicLuaObject.cpp" />
@@ -1044,6 +1137,10 @@
   <ItemGroup>
     <ResourceCompile Include="MWSE.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="d3d8header.inl" />
+    <None Include="exports.def" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{CF29BC49-506F-4555-8849-5D59F2519D53}</ProjectGuid>
@@ -1083,13 +1180,13 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)deps\boost;$(SolutionDir)deps\LuaJIT\src;$(SolutionDir)deps\sol\include;$(SolutionDir)deps\span-lite;$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <LibraryPath>$(OutDir);$(SolutionDir)deps\LuaJIT\src;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(OutDir);$(SolutionDir)deps\DirectX9\Lib\x86;$(SolutionDir)deps\LuaJIT\src;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)deps\boost;$(SolutionDir)deps\LuaJIT\src;$(SolutionDir)deps\sol\include;$(SolutionDir)deps\span-lite;$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <LibraryPath>$(OutDir);$(SolutionDir)deps\LuaJIT\src;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(OutDir);$(SolutionDir)deps\DirectX9\Lib\x86;$(SolutionDir)deps\LuaJIT\src;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -1107,7 +1204,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>dbghelp.lib;lua51.lib;luajit.lib;version.lib;Winmm.lib;Strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dbghelp.lib;lua51.lib;luajit.lib;version.lib;Winmm.lib;Strmiids.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent />
@@ -1145,7 +1243,8 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>dbghelp.lib;lua51.lib;luajit.lib;version.lib;Winmm.lib;Strmiids.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dbghelp.lib;lua51.lib;luajit.lib;version.lib;Winmm.lib;Strmiids.lib;d3d9.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>exports.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent />
     <PostBuildEvent />

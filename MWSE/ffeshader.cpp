@@ -1,6 +1,6 @@
 
 #include "ffeshader.h"
-#include "log.h"
+#include "mge_log.h"
 
 using std::string;
 using std::stringstream;

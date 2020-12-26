@@ -1,0 +1,6 @@
+LIBRARY MWSE
+EXPORTS
+Direct3DCreate8=FakeDirect3DCreate
+DirectInput8Create=FakeDirectInputCreate
+MWSEGetVM=MWSEGetVM
+MWSEAddInstruction=MWSEAddInstruction

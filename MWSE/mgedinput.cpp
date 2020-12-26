@@ -1,5 +1,5 @@
 
-#include "log.h"
+#include "mge_log.h"
 #include "mgedinput.h"
 #include "configuration.h"
 #include "mgeversion.h"

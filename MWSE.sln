@@ -20,6 +20,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dinput8", "dinput8\dinput8.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d3d8", "d3d8\d3d8.vcxproj", "{44CEA117-A939-483D-8614-9E8500E2F02E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "injections", "injections", "{D74D8DCD-7404-47E2-B821-A153074E31C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{3FBC3252-B71E-410B-8BFB-BB012040B675}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -57,6 +61,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{633E0327-60A7-49C5-B1CF-870280D7DA07} = {3FBC3252-B71E-410B-8BFB-BB012040B675}
+		{98486B79-9258-45CD-B357-36B7CE809788} = {3FBC3252-B71E-410B-8BFB-BB012040B675}
+		{37B35C6E-1D32-4B67-B392-57288F330386} = {D74D8DCD-7404-47E2-B821-A153074E31C8}
+		{44CEA117-A939-483D-8614-9E8500E2F02E} = {D74D8DCD-7404-47E2-B821-A153074E31C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3079D20E-0739-4F0C-9134-0686AF0EB20E}

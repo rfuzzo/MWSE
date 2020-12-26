@@ -1,6 +1,6 @@
 
 #include "funcphysics.h"
-#include "log.h"
+#include "mge_log.h"
 
 struct MWEntity : MWRecord {
     char other[0x18];
