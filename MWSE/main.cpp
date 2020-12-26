@@ -209,7 +209,7 @@ void MWSE_DllAttach() {
 extern void* CreateD3DWrapper(UINT);
 extern void* CreateInputWrapper(void*);
 
-static FARPROC getProc1(const char* lib, const char* funcname);
+static FARPROC GetSystemLibrary(const char* lib, const char* funcname);
 static void setDPIScalingAware();
 
 static const char* welcomeMessage = XE_VERSION_STRING;
@@ -294,14 +294,14 @@ extern "C" void* _stdcall FakeDirect3DCreate(UINT version) {
 	else {
 		// Use system D3D8
 		typedef void* (_stdcall* D3DProc) (UINT);
-		D3DProc func = (D3DProc)getProc1("d3d8.dll", "Direct3DCreate8");
+		D3DProc func = (D3DProc)GetSystemLibrary("d3d8.dll", "Direct3DCreate8");
 		return (func)(version);
 	}
 }
 
 extern "C" HRESULT _stdcall FakeDirectInputCreate(HINSTANCE a, DWORD b, REFIID c, void** d, void* e) {
 	typedef HRESULT(_stdcall* DInputProc) (HINSTANCE, DWORD, REFIID, void**, void*);
-	DInputProc func = (DInputProc)getProc1("dinput8.dll", "DirectInput8Create");
+	DInputProc func = (DInputProc)GetSystemLibrary("dinput8.dll", "DirectInput8Create");
 
 	void* dinput = 0;
 	HRESULT hr = (func)(a, b, c, &dinput, e);
@@ -318,7 +318,7 @@ extern "C" HRESULT _stdcall FakeDirectInputCreate(HINSTANCE a, DWORD b, REFIID c
 	return hr;
 }
 
-FARPROC getProc1(const char* lib, const char* funcname) {
+FARPROC GetSystemLibrary(const char* lib, const char* funcname) {
 	// Get the address of a single function from a dll
 	char syspath[MAX_PATH], path[MAX_PATH];
 	GetSystemDirectoryA(syspath, sizeof(syspath));
@@ -339,7 +339,7 @@ FARPROC getProc1(const char* lib, const char* funcname) {
 void setDPIScalingAware() {
 	// Prevent DPI scaling from affecting chosen window size
 	typedef BOOL(WINAPI* dpiProc)();
-	dpiProc SetProcessDPIAware = (dpiProc)getProc1("user32.dll", "SetProcessDPIAware");
+	dpiProc SetProcessDPIAware = (dpiProc)GetSystemLibrary("user32.dll", "SetProcessDPIAware");
 	if (SetProcessDPIAware) {
 		SetProcessDPIAware();
 	}
