@@ -10,7 +10,7 @@ T getProc(const char* lib, const char* funcname) {
     return T(GetProcAddress(dll, funcname));
 }
 
-typedef HRESULT(__stdcall* DirectInput8Create_t)(HINSTANCE, DWORD, REFIID, LPVOID*, LPUNKNOWN);
-extern "C" HRESULT __stdcall FakeDirectInput8Create(HINSTANCE a, DWORD b, REFIID c, void** d, LPUNKNOWN e) {
+typedef HRESULT(__stdcall* DirectInput8Create_t)(HINSTANCE, DWORD, REFIID, LPVOID*, void*);
+extern "C" HRESULT __stdcall FakeDirectInput8Create(HINSTANCE a, DWORD b, REFIID c, void** d, void* e) {
     return getProc<DirectInput8Create_t>("mwse.dll", "DirectInput8Create")(a, b, c, d, e);
 }
