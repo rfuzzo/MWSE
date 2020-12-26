@@ -74,13 +74,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <IncludePath>$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Games\Morrowind\mwse-source\deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <IncludePath>$(SolutionDir)deps\DirectX9\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Games\Morrowind\mwse-source\deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)deps\DirectX9\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
