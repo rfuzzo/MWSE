@@ -46,7 +46,10 @@ namespace mwse {
 
 	float xSetAirVelocity::execute(mwse::VMExecuteInterface& virtualMachine) {
 		auto& stack = Stack::getInstance();
-		TES3::Vector3 velocity(stack.popFloat(), stack.popFloat(), stack.popFloat());
+		TES3::Vector3 velocity;
+		velocity.x = stack.popFloat();
+		velocity.y = stack.popFloat();
+		velocity.z = stack.popFloat();
 
 		auto reference = virtualMachine.getReference();
 		auto mobile = reference ? reference->getAttachedMobileActor() : nullptr;

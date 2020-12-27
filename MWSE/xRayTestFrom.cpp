@@ -45,8 +45,13 @@ namespace mwse {
 
 	float xRayTestFrom::execute(mwse::VMExecuteInterface& virtualMachine) {
 		auto& stack = Stack::getInstance();
-		TES3::Vector3 position(stack.popFloat(), stack.popFloat(), stack.popFloat());
-		TES3::Vector3 direction(stack.popFloat(), stack.popFloat(), stack.popFloat());
+		TES3::Vector3 position, direction;
+		position.x = stack.popFloat();
+		position.y = stack.popFloat();
+		position.z = stack.popFloat();
+		direction.x = stack.popFloat();
+		direction.y = stack.popFloat();
+		direction.z = stack.popFloat();
 
 		bool hit = false;
 		float distance = FLT_MAX;
