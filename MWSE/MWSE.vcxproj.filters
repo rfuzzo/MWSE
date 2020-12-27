@@ -3806,6 +3806,9 @@
     <ClCompile Include="xSetAirVelocity.cpp">
       <Filter>Source Files\MWScript\MGE</Filter>
     </ClCompile>
+    <ClCompile Include="MGERotateScreen.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MWSE.rc">

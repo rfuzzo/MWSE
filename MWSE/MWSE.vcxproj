@@ -484,6 +484,7 @@
     <ClCompile Include="MGEDisableShader.cpp" />
     <ClCompile Include="MGEEnableShader.cpp" />
     <ClCompile Include="MGEGetZoom.cpp" />
+    <ClCompile Include="MGERotateScreen.cpp" />
     <ClCompile Include="MGESetZoom.cpp" />
     <ClCompile Include="MGEDisableZoom.cpp" />
     <ClCompile Include="MGEEnableZoom.cpp" />
