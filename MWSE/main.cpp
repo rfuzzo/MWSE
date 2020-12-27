@@ -218,7 +218,9 @@ static bool isCS;
 extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 	if (reason == DLL_PROCESS_DETACH) {
 		// Unhook Lua interface.
-		mwse::lua::LuaManager::getInstance().cleanup();
+		if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
+			mwse::lua::LuaManager::getInstance().cleanup();
+		}
 		return true;
 	}
 	else if (reason != DLL_PROCESS_ATTACH) {
