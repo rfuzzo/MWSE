@@ -23,6 +23,9 @@ public:
     typedef int hud_id;
     static const hud_id invalid_hud_id = -1;
 
+    static hud_id currentHUD;
+    static std::string currentHUDId;
+
 public:
     static bool init(IDirect3DDevice9* d);
     static void release();
@@ -31,6 +34,7 @@ public:
     static int getScreenHeight();
 
     static void reset();
+    static void resetMWSE();
     static void reload();
     static hud_id load(const char* name, const char* texture);
     static hud_id resolveName(const char* name);

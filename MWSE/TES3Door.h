@@ -12,6 +12,14 @@ namespace TES3 {
 		Script * script; // 0x74
 		Sound * openSound; // 0x78
 		Sound * closeSound; // 0x7C
+
+		//
+		// Custom functions.
+		//
+
+		// Isn't defined by the vtable, have to overwrite here.
+		void setName(const char* n);
+
 	};
 	static_assert(sizeof(Door) == 0x80, "TES3::Door failed size validation");
 }

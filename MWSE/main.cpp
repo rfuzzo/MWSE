@@ -36,7 +36,6 @@
 #include "configuration.h"
 #include "mgeversion.h"
 #include "mwinitpatch.h"
-#include "mgebridge.h"
 #include "mge_log.h"
 
 TES3MACHINE* mge_virtual_machine = NULL;
@@ -252,7 +251,6 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 
 		if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
 			MWSE_DllAttach();
-			MWSE_MGEPlugin::init(HMODULE(hModule));
 			LOG::logline("MWSE.dll injected.");
 		}
 		else {

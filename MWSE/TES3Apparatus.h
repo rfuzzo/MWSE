@@ -28,6 +28,9 @@ namespace TES3 {
 		// Custom functions.
 		//
 
+		// Isn't defined by the vtable, have to overwrite here.
+		void setName(const char* n);
+
 		void setIconPath(const char* path);
 
 	};

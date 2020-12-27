@@ -15,7 +15,8 @@ MGEhud::Element MGEhud::elements[MGEhud::max_elements];
 static std::vector<MGEhud::hud_id> elements_free;
 static std::map<std::string, MGEhud::hud_id> element_names;
 
-
+std::string MGEhud::currentHUDId = "";
+MGEhud::hud_id MGEhud::currentHUD = invalid_hud_id;
 
 bool MGEhud::init(IDirect3DDevice9* d) {
     device = d;
@@ -155,6 +156,11 @@ void MGEhud::reset() {
     for (int i = max_elements; i-- > 0; ) {
         elements_free.push_back(i);
     }
+}
+
+void MGEhud::resetMWSE() {
+    reset();
+    currentHUD = invalid_hud_id;
 }
 
 void MGEhud::reload() {

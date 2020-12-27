@@ -22,9 +22,6 @@
     <Filter Include="Source Files\ScriptVM">
       <UniqueIdentifier>{98090f88-6af9-4784-8299-282fb0bcd73a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Functions">
-      <UniqueIdentifier>{9751081a-e2ea-4487-ac5f-9bec70a7fd7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Utility">
       <UniqueIdentifier>{b56416f6-f9d7-4b4b-ae95-94e13114b47a}</UniqueIdentifier>
     </Filter>
@@ -34,44 +31,11 @@
     <Filter Include="Source Files\DataAdapters">
       <UniqueIdentifier>{2fb5c485-2d19-4254-bda9-7ef4f0c79a3b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Functions\Logic">
-      <UniqueIdentifier>{bdee9a24-8699-48c0-8e36-0d28cc804d3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Math">
-      <UniqueIdentifier>{bce34f47-3e61-4286-b89e-a5c0233970c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Arrays">
-      <UniqueIdentifier>{c0c18598-6c02-475a-9a09-ab224f72034b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\File IO">
-      <UniqueIdentifier>{bf50a121-5d26-4031-80b7-2bc93169bc3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Utility">
-      <UniqueIdentifier>{69246e43-644e-4abd-b2e3-bbe9ff5d1bc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\References">
-      <UniqueIdentifier>{6c987b3d-88c0-45ef-8b2e-803ee7617540}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Records">
-      <UniqueIdentifier>{009ec149-c399-43f1-bd12-f2507b3b2411}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Actors">
-      <UniqueIdentifier>{f698aff9-3bb6-4a1c-b46f-ad0d38d278d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Objects">
-      <UniqueIdentifier>{b3ead495-e949-4db1-a356-84486fb72449}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Strings">
-      <UniqueIdentifier>{95e8e115-a53a-4b11-82f1-30d6e1d7fc47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MGE Interface">
       <UniqueIdentifier>{da22a9fe-c632-4ac8-a7aa-2797d17b8a6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\MGE Interface">
       <UniqueIdentifier>{23f0c759-9924-4947-8988-c3c89b4ea786}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Functions\Scripting">
-      <UniqueIdentifier>{04372d31-c2ee-45ef-97a7-648c4a812ad1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\DataAdapters\TES3">
       <UniqueIdentifier>{ee1c02d9-6611-4b4b-a057-f9f244552b8c}</UniqueIdentifier>
@@ -133,9 +97,6 @@
     <Filter Include="Source Files\DataAdapters\TES3">
       <UniqueIdentifier>{e7548b0d-dee0-4eb0-ba9f-eb68c6fcc75f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Functions\Lua">
-      <UniqueIdentifier>{b9bc6abb-6f06-41bd-94e9-8870580495e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\DataAdapters\TES3\UI">
       <UniqueIdentifier>{eeba7987-7ada-4dfb-821c-466cfe35073d}</UniqueIdentifier>
     </Filter>
@@ -187,9 +148,6 @@
     <Filter Include="Header Files\MGE\Core">
       <UniqueIdentifier>{dd78cf78-4c7e-40f8-bc94-aa0d08f22581}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MGE\MWSE">
-      <UniqueIdentifier>{00f05ed8-0d85-4ce5-9655-427278d8909c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MGE\ProxyDX">
       <UniqueIdentifier>{f62f4001-e7ed-4f43-8c85-1bb7b12f4b8e}</UniqueIdentifier>
     </Filter>
@@ -199,14 +157,68 @@
     <Filter Include="Source Files\MGE\Core">
       <UniqueIdentifier>{93177e9c-025e-4037-bbb6-5084a273577e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MGE\MWSE">
-      <UniqueIdentifier>{92e5e6d9-cc0e-43a2-9fd3-c0e9eab8681d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\MGE\ProxyDX">
       <UniqueIdentifier>{efb10e82-190f-4f9e-ab0f-a828f2f1b9ec}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\MGE\Support">
       <UniqueIdentifier>{7c241a3c-209b-44af-9ab8-4270dc9a6b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript">
+      <UniqueIdentifier>{9751081a-e2ea-4487-ac5f-9bec70a7fd7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Logic">
+      <UniqueIdentifier>{bdee9a24-8699-48c0-8e36-0d28cc804d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Math">
+      <UniqueIdentifier>{bce34f47-3e61-4286-b89e-a5c0233970c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Arrays">
+      <UniqueIdentifier>{c0c18598-6c02-475a-9a09-ab224f72034b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\File IO">
+      <UniqueIdentifier>{bf50a121-5d26-4031-80b7-2bc93169bc3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Utility">
+      <UniqueIdentifier>{69246e43-644e-4abd-b2e3-bbe9ff5d1bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\References">
+      <UniqueIdentifier>{6c987b3d-88c0-45ef-8b2e-803ee7617540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Records">
+      <UniqueIdentifier>{009ec149-c399-43f1-bd12-f2507b3b2411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Actors">
+      <UniqueIdentifier>{f698aff9-3bb6-4a1c-b46f-ad0d38d278d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Objects">
+      <UniqueIdentifier>{b3ead495-e949-4db1-a356-84486fb72449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Strings">
+      <UniqueIdentifier>{95e8e115-a53a-4b11-82f1-30d6e1d7fc47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Scripting">
+      <UniqueIdentifier>{04372d31-c2ee-45ef-97a7-648c4a812ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Lua">
+      <UniqueIdentifier>{b9bc6abb-6f06-41bd-94e9-8870580495e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\MGE">
+      <UniqueIdentifier>{72ad2507-bcb5-4a80-a491-86cc6f7c7955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\UI">
+      <UniqueIdentifier>{8e6e9685-3c85-4472-beb9-937d73482a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Lighting &amp; Weather">
+      <UniqueIdentifier>{a21eb991-f527-4215-81f5-c4e2b2fba18f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Input">
+      <UniqueIdentifier>{d5cc6ed3-f0c6-46c0-87c5-cd68482318ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Camera">
+      <UniqueIdentifier>{cb28b6a5-5392-4ec6-95b1-fadcfde1598a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MWScript\Shaders">
+      <UniqueIdentifier>{101867af-b691-45dd-be7f-8748f4dbfff1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1581,45 +1593,6 @@
     <ClInclude Include="videobackground.h">
       <Filter>Header Files\MGE\Core</Filter>
     </ClInclude>
-    <ClInclude Include="funccamera.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcentity.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcgeneral.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcgmst.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funchud.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcinput.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcmwui.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcphysics.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcshader.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="funcweather.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="mgebridge.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="mwseinstruction.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
-    <ClInclude Include="VMTYPES.h">
-      <Filter>Header Files\MGE\MWSE</Filter>
-    </ClInclude>
     <ClInclude Include="d3d8device.h">
       <Filter>Header Files\MGE\ProxyDX</Filter>
     </ClInclude>
@@ -1648,6 +1621,9 @@
       <Filter>Header Files\MGE\Support</Filter>
     </ClInclude>
     <ClInclude Include="timing.h">
+      <Filter>Header Files\MGE\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="MGEUtil.h">
       <Filter>Header Files\MGE\Support</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1707,592 +1683,583 @@
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xAnd.cpp">
-      <Filter>Source Files\Functions\Logic</Filter>
+      <Filter>Source Files\MWScript\Logic</Filter>
     </ClCompile>
     <ClCompile Include="xArcCos.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xArcSin.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xArcTan.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xBitAnd.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xBitNot.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xBitOr.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xBitXor.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xClearArray.cpp">
-      <Filter>Source Files\Functions\Arrays</Filter>
+      <Filter>Source Files\MWScript\Arrays</Filter>
     </ClCompile>
     <ClCompile Include="xCos.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xCreateArray.cpp">
-      <Filter>Source Files\Functions\Arrays</Filter>
+      <Filter>Source Files\MWScript\Arrays</Filter>
     </ClCompile>
     <ClCompile Include="xDegRad.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xDistance.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xFileReadFloat.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileReadLong.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileReadShort.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileReadString.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileReadText.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileRewind.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileSeek.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileWriteFloat.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileWriteLong.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileWriteShort.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileWriteString.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFileWriteText.cpp">
-      <Filter>Source Files\Functions\File IO</Filter>
+      <Filter>Source Files\MWScript\File IO</Filter>
     </ClCompile>
     <ClCompile Include="xFloatsToLong.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xGetArraySize.cpp">
-      <Filter>Source Files\Functions\Arrays</Filter>
+      <Filter>Source Files\MWScript\Arrays</Filter>
     </ClCompile>
     <ClCompile Include="xGetArrayValue.cpp">
-      <Filter>Source Files\Functions\Arrays</Filter>
+      <Filter>Source Files\MWScript\Arrays</Filter>
     </ClCompile>
     <ClCompile Include="xGetAttribute.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAcrobatics.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAgi.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAlchemy.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAlteration.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseArmorer.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAthletics.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAttribute.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseAxe.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseBlock.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseBluntWeapon.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseConjuration.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseDestruction.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseEnchant.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseEnd.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseHandToHand.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseHeavyArmor.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseIllusion.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseInt.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseLightArmor.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseLongBlade.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseLuc.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseMarksman.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseMediumArmor.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseMercantile.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseMysticism.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBasePer.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseRestoration.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseSecurity.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseShortBlade.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseSkill.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseSneak.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseSpe.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseSpear.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseSpeechcraft.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseStr.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseUnarmored.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseWil.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xLongToFloats.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xShift.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xSin.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xSqrt.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xTan.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xPow.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xRadDeg.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xHypot.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xSetArrayValue.cpp">
-      <Filter>Source Files\Functions\Arrays</Filter>
+      <Filter>Source Files\MWScript\Arrays</Filter>
     </ClCompile>
     <ClCompile Include="xFirstItem.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xFirstNPC.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xFirstStatic.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetPCTarget.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetRef.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xNextRef.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xRefType.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xSetRef.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xLogMessage.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xRandomFloat.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xRandomLong.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseGold.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xOr.cpp">
-      <Filter>Source Files\Functions\Logic</Filter>
+      <Filter>Source Files\MWScript\Logic</Filter>
     </ClCompile>
     <ClCompile Include="xNot.cpp">
-      <Filter>Source Files\Functions\Logic</Filter>
+      <Filter>Source Files\MWScript\Logic</Filter>
     </ClCompile>
     <ClCompile Include="xXor.cpp">
-      <Filter>Source Files\Functions\Logic</Filter>
+      <Filter>Source Files\MWScript\Logic</Filter>
     </ClCompile>
     <ClCompile Include="xSetBaseGold.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetClass.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetCombat.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetGold.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetMagic.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseID.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetCharge.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetCondition.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetEnchantEffectInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetEffectInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetEnchantInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetLockLevel.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetEnchant.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetMaxCharge.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetSpellEffectInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetMaxCondition.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetMaxFatigue.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetMaxHealth.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetMaxMagicka.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetName.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetOwner.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetOwnerInfo.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetProgressLevel.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetProgressSkill.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetQuality.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetRace.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetService.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetSkill.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetSkillInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetSpell.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetSpellInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetTrap.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetValue.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetWeight.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xIsFemale.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xIsProvider.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xIsTrader.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xIsTrainer.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="xKeyPressed.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xModAttribute.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xModProgressLevel.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xModProgressSkill.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xModService.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xPCCellID.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xRefID.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetBaseEffectInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xSetCharge.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetCondition.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetEffectInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xStringBuild.cpp">
-      <Filter>Source Files\Functions\Strings</Filter>
+      <Filter>Source Files\MWScript\Strings</Filter>
     </ClCompile>
     <ClCompile Include="xStringCompare.cpp">
-      <Filter>Source Files\Functions\Strings</Filter>
+      <Filter>Source Files\MWScript\Strings</Filter>
     </ClCompile>
     <ClCompile Include="xStringLength.cpp">
-      <Filter>Source Files\Functions\Strings</Filter>
+      <Filter>Source Files\MWScript\Strings</Filter>
     </ClCompile>
     <ClCompile Include="xStringMatch.cpp">
-      <Filter>Source Files\Functions\Strings</Filter>
+      <Filter>Source Files\MWScript\Strings</Filter>
     </ClCompile>
     <ClCompile Include="xStringParse.cpp">
-      <Filter>Source Files\Functions\Strings</Filter>
+      <Filter>Source Files\MWScript\Strings</Filter>
     </ClCompile>
     <ClCompile Include="xSetEnchantInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xSetGlobal.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xSetGold.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xSetGSString.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xSetMaxCharge.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetMaxCondition.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetName.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xSetProgressLevel.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xSetProgressSkill.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xSetQuality.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetService.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xSetSkillInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xSetSpellInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xSetTrap.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetValue.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xSetWeight.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xGetGlobal.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xAddEffect.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xContentList.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseEffectInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xCreateSpell.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xDeleteEffect.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xDeleteSpell.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetGSString.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xGetEncumb.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetEncumbrance.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseFatigue.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseHealth.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xGetBaseMagicka.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xAddItem.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="ScriptUtil.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xAITravel.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xAddSpell.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xDrop.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xEquip.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xExplodeSpell.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xHasItemEquipped.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetSpellEffects.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xMyCellID.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xPlace.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xPosition.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xPositionCell.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xRemoveItem.cpp">
-      <Filter>Source Files\Functions\Objects</Filter>
+      <Filter>Source Files\MWScript\Objects</Filter>
     </ClCompile>
     <ClCompile Include="xRemoveSpell.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xSetLevel.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xStartCombat.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xSpellList.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="xTextInput.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xMessageFix.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="xTextInputAlt.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xInventory.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xNextStack.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="MgeTes3Machine.cpp">
       <Filter>Source Files\MGE Interface</Filter>
@@ -2301,61 +2268,58 @@
       <Filter>Source Files\MGE Interface</Filter>
     </ClCompile>
     <ClCompile Include="xCast.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xGetModel.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetMCPFeatureState.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Utility</Filter>
     </ClCompile>
     <ClCompile Include="CodePatchUtil.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
     <ClCompile Include="xStartScript.cpp">
-      <Filter>Source Files\Functions\Scripting</Filter>
+      <Filter>Source Files\MWScript\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="xStopScript.cpp">
-      <Filter>Source Files\Functions\Scripting</Filter>
+      <Filter>Source Files\MWScript\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="xScriptRunning.cpp">
-      <Filter>Source Files\Functions\Scripting</Filter>
+      <Filter>Source Files\MWScript\Scripting</Filter>
     </ClCompile>
     <ClCompile Include="xGetStackSize.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xGetItemCount.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xContentListFiltered.cpp">
-      <Filter>Source Files\Functions\References</Filter>
+      <Filter>Source Files\MWScript\References</Filter>
     </ClCompile>
     <ClCompile Include="xStringCapture.cpp">
-      <Filter>Source Files\Functions\Strings</Filter>
+      <Filter>Source Files\MWScript\Strings</Filter>
     </ClCompile>
     <ClCompile Include="xGetIngredientEffect.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xSetIngredientEffect.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xEquipmentList.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xArcTan2.cpp">
-      <Filter>Source Files\Functions\Math</Filter>
+      <Filter>Source Files\MWScript\Math</Filter>
     </ClCompile>
     <ClCompile Include="xGetAlchemyInfo.cpp">
-      <Filter>Source Files\Functions\Records</Filter>
-    </ClCompile>
-    <ClCompile Include="xGetKeyBind.cpp">
-      <Filter>Source Files\Functions\Utility</Filter>
+      <Filter>Source Files\MWScript\Records</Filter>
     </ClCompile>
     <ClCompile Include="xActivate.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="xMyRef.cpp">
-      <Filter>Source Files\Functions\Actors</Filter>
+      <Filter>Source Files\MWScript\Actors</Filter>
     </ClCompile>
     <ClCompile Include="LuaManager.cpp">
       <Filter>Source Files\Lua</Filter>
@@ -2529,7 +2493,7 @@
       <Filter>Source Files\DataAdapters\TES3</Filter>
     </ClCompile>
     <ClCompile Include="xLuaRunScript.cpp">
-      <Filter>Source Files\Functions\Lua</Filter>
+      <Filter>Source Files\MWScript\Lua</Filter>
     </ClCompile>
     <ClCompile Include="StackLua.cpp">
       <Filter>Source Files\Lua\Bindings</Filter>
@@ -3455,42 +3419,6 @@
     <ClCompile Include="dxguid.cpp">
       <Filter>Source Files\MGE\ProxyDX</Filter>
     </ClCompile>
-    <ClCompile Include="funccamera.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcentity.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcgeneral.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcgmst.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funchud.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcinput.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcmwui.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcphysics.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcshader.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="funcweather.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="mgebridge.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
-    <ClCompile Include="mwseinstruction.cpp">
-      <Filter>Source Files\MGE\MWSE</Filter>
-    </ClCompile>
     <ClCompile Include="configuration.cpp">
       <Filter>Source Files\MGE\Core</Filter>
     </ClCompile>
@@ -3565,6 +3493,318 @@
     </ClCompile>
     <ClCompile Include="videobackground.cpp">
       <Filter>Source Files\MGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="xGetGS.cpp">
+      <Filter>Source Files\MWScript\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetGS.cpp">
+      <Filter>Source Files\MWScript\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="xGetDeleted.cpp">
+      <Filter>Source Files\MWScript\References</Filter>
+    </ClCompile>
+    <ClCompile Include="xIsScripted.cpp">
+      <Filter>Source Files\MWScript\References</Filter>
+    </ClCompile>
+    <ClCompile Include="xLastActorHit.cpp">
+      <Filter>Source Files\MWScript\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetEntityName.cpp">
+      <Filter>Source Files\MWScript\References</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetOwner.cpp">
+      <Filter>Source Files\MWScript\References</Filter>
+    </ClCompile>
+    <ClCompile Include="xModelSwitch.cpp">
+      <Filter>Source Files\MWScript\References</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEUIShow.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEUIHide.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherSky.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherFog.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherAmbient.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherSun.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetSunriseSunset.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherScattering.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherGlare.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherCloudSpeed.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetWeatherWindSpeed.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="xGetWeatherScattering.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetWeatherDLFog.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="MGESetWeatherDLFog.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetWeatherPPLLight.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="MGESetWeatherPPLLight.cpp">
+      <Filter>Source Files\MWScript\Lighting &amp; Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEWipeAll.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEOutputDebugString.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEOutputVersionString.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetVersion.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetWidth.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetHeight.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEWipeHUDElements.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEWithHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGECancelWithHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGELoadHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEPositionHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEScaleHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEFullscreenHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEEnableHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEDisableHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEChangeHUDTexture.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEChangeHUDEffect.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEFreeHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDLoadHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDPositionHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDScaleHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDFullscreenHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDEnableHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDDisableHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDChangeHUDTexture.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDChangeHUDEffect.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDFreeHUD.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDSetHUDEffectLong.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDSetHUDEffectFloat.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGENIDSetHUDEffectVec.cpp">
+      <Filter>Source Files\MWScript\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MGETapKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="xGetKeyBind.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="xKeyPressed.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="xTextInput.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="xTextInputAlt.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEPushKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEReleaseKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEHammerKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEUnhammerKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEAHammerKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEAUnhammerKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEDisallowKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEAllowKey.cpp">
+      <Filter>Source Files\MWScript\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEStopSpinSpin.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEDisableZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEEnableZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetScreenRotation.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGERotateScreenBy.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEScreenSpin.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGESetScreenRotation.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEStopCameraShakeZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGECameraShakeZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEDisableCameraShake.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEEnableCameraShake.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetEyeVec.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGESetCameraShakeMagnitude.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEToggleZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEZoomIn.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEZoomOut.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEZoomInBy.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEZoomOutBy.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGESetZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEStopZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEGetZoom.cpp">
+      <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEEnableShader.cpp">
+      <Filter>Source Files\MWScript\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEDisableShader.cpp">
+      <Filter>Source Files\MWScript\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEShaderSetFloat.cpp">
+      <Filter>Source Files\MWScript\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEShaderSetLong.cpp">
+      <Filter>Source Files\MWScript\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEShaderSetVector.cpp">
+      <Filter>Source Files\MWScript\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="xRayTest.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xRayTestFrom.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEUtil.cpp">
+      <Filter>Source Files\MGE\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="xRayHitPosition.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xRayHitNormal.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xRayHitRef.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xModelBounds.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xTransformVec.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xIsAirborne.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="xSetAirVelocity.cpp">
+      <Filter>Source Files\MWScript\MGE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

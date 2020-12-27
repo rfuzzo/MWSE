@@ -22,6 +22,7 @@ namespace TES3 {
 
 		enum Flag : value_type {
 			ActiveAI = 0x4,
+			IsAirborne = 0x10,
 			Werewolf = 0x400,
 			Underwater = 0x800,
 			WeaponDrawn = 0x2000,
@@ -37,6 +38,7 @@ namespace TES3 {
 
 		enum FlagBit {
 			ActiveAIBit = 2,
+			IsAirborneBit = 4,
 			WerewolfBit = 10,
 			UnderwaterBit = 11,
 			WeaponDrawnBit = 13,
