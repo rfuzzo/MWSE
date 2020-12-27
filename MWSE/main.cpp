@@ -211,9 +211,8 @@ extern void* CreateInputWrapper(void*);
 static FARPROC GetSystemLibrary(const char* lib, const char* funcname);
 static void setDPIScalingAware();
 
-static const char* welcomeMessage = XE_VERSION_STRING;
-static bool isMW;
-static bool isCS;
+static bool isMW = false;
+static bool isCS = false;
 
 extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 	if (reason == DLL_PROCESS_DETACH) {
@@ -233,7 +232,7 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 
 	if (isMW) {
 		LOG::open("mgeXE.log");
-		LOG::logline(welcomeMessage);
+		LOG::logline(XE_VERSION_STRING);
 
 		setDPIScalingAware();
 
