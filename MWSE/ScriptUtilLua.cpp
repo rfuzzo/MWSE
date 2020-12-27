@@ -18,6 +18,14 @@
 
 #include "BitUtil.h"
 
+// MGE support functions.
+#include "configuration.h"
+#include "distantland.h"
+#include "mge_log.h"
+#include "mgeversion.h"
+#include "postshaders.h"
+#include "userhud.h"
+
 namespace mwse {
 	namespace lua {
 		void bindScriptUtil() {
@@ -493,493 +501,405 @@ namespace mwse {
 
 			// General functions.
 			state["mge"]["getScreenHeight"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetHeight);
-				return Stack::getInstance().popLong();
+				return MGEhud::getScreenHeight();
 			};
 			state["mge"]["getScreenWidth"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetWidth);
-				return Stack::getInstance().popLong();
+				return MGEhud::getScreenWidth();
 			};
 			state["mge"]["getVersion"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetVersion);
-				return Stack::getInstance().popLong();
+				return MGE_MWSE_VERSION;
 			};
-			state["mge"]["log"] = [](std::string string) {
-				Stack::getInstance().pushString(string);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEOutputDebugString);
+			state["mge"]["log"] = [](std::string& string) {
+				LOG::write(string.c_str());
 			};
 
 			// HUD-related functions.
 			state["mge"]["clearHUD"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEWipeAll);
+				MGEhud::resetMWSE();
 			};
 			state["mge"]["disableHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEDisableHUD);
-				}
-				else {
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDDisableHUD);
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
+				if (id != MGEhud::invalid_hud_id) {
+					MGEhud::disable(id);
 				}
 
 				return true;
 			};
 			state["mge"]["enableHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEEnableHUD);
-				}
-				else {
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDEnableHUD);
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
+				if (id != MGEhud::invalid_hud_id) {
+					MGEhud::enable(id);
 				}
 
 				return true;
 			};
 			state["mge"]["freeHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEFreeHUD);
-				}
-				else {
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDFreeHUD);
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
+				if (id != MGEhud::invalid_hud_id) {
+					MGEhud::free(id);
 				}
 
 				return true;
 			};
 			state["mge"]["fullscreenHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEFullscreenHUD);
-				}
-				else {
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDFullscreenHUD);
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
+				if (id != MGEhud::invalid_hud_id) {
+					MGEhud::setFullscreen(id);
 				}
 
 				return true;
 			};
 			state["mge"]["loadHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				std::string texture = getOptionalParam<std::string>(params, "texture", "");
-				if (hud.empty() || texture.empty()) {
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto texture = getOptionalParam<const char*>(params, "hud", nullptr);
+				if (!hudName || !texture) {
 					return false;
 				}
 
-				Stack::getInstance().pushString(texture);
-				Stack::getInstance().pushString(hud);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGELoadHUD);
+				MGEhud::load(hudName, texture);
 
 				if (getOptionalParam<bool>(params, "enable", false)) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEEnableHUD);
+					MGEhud::enable(MGEhud::resolveName(hudName));
 				}
 
 				return true;
 			};
 			state["mge"]["positionHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				double x = getOptionalParam<double>(params, "x", 0.0);
-				double y = getOptionalParam<double>(params, "y", 0.0);
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushFloat(y);
-					Stack::getInstance().pushFloat(x);
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEPositionHUD);
-				}
-				else {
-					Stack::getInstance().pushFloat(y);
-					Stack::getInstance().pushFloat(x);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDPositionHUD);
+				if (id == MGEhud::invalid_hud_id) {
+					return false;
 				}
 
+				auto x = getOptionalParam(params, "x", 0.0f);
+				auto y = getOptionalParam(params, "y", 0.0f);
+				MGEhud::setPosition(id, x, y);
 				return true;
 			};
 			state["mge"]["scaleHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				double x = getOptionalParam<double>(params, "x", 0.0);
-				double y = getOptionalParam<double>(params, "y", 0.0);
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushFloat(y);
-					Stack::getInstance().pushFloat(x);
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEScaleHUD);
-				}
-				else {
-					Stack::getInstance().pushFloat(y);
-					Stack::getInstance().pushFloat(x);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDScaleHUD);
+				if (id == MGEhud::invalid_hud_id) {
+					return false;
 				}
 
+				auto x = getOptionalParam(params, "x", 0.0f);
+				auto y = getOptionalParam(params, "y", 0.0f);
+				MGEhud::setScale(id, x, y);
 				return true;
 			};
 			state["mge"]["selectHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				if (hud.empty()) {
-					return false;
-				}
+				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto id = MGEhud::resolveName(hudName);
 
-				Stack::getInstance().pushString(hud);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEWithHUD);
+				MGEhud::currentHUDId = hudName;
+				MGEhud::currentHUD = id;
+
 				return true;
 			};
 			state["mge"]["setHUDEffect"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				std::string effect = getOptionalParam<std::string>(params, "effect", "");
-				if (effect.empty()) {
+				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto effect = getOptionalParam<const char*>(params, "effect", nullptr);
+				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+
+				if (!effect) {
 					return false;
 				}
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(effect);
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEChangeHUDEffect);
-				}
-				else {
-					Stack::getInstance().pushString(effect);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDChangeHUDEffect);
+				if (id == MGEhud::invalid_hud_id) {
+					return false;
 				}
 
+				MGEhud::setEffect(id, effect);
 				return true;
 			};
 			state["mge"]["setHUDEffectFloat"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				std::string variable = getOptionalParam<std::string>(params, "variable", "");
-				float value = getOptionalParam<double>(params, "value", 0.0);
-				if (variable.empty()) {
-					return false;
+				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
+				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+
+				if (id != MGEhud::invalid_hud_id) {
+					auto value = getOptionalParam<float>(params, "value");
+					if (value) {
+						MGEhud::setEffectFloat(id, variable, value.value());
+						return true;
+					}
 				}
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEWithHUD);
-				}
-
-				Stack::getInstance().pushFloat(value);
-				Stack::getInstance().pushString(variable);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDSetHUDEffectFloat);
-
-				return true;
+				return false;
 			};
 			state["mge"]["setHUDEffectLong"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				std::string variable = getOptionalParam<std::string>(params, "variable", "");
-				long value = getOptionalParam<double>(params, "value", 0.0);
-				if (variable.empty()) {
-					return false;
+				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
+				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+
+				if (id != MGEhud::invalid_hud_id) {
+					auto value = getOptionalParam<int>(params, "value");
+					if (value) {
+						MGEhud::setEffectInt(id, variable, value.value());
+						return true;
+					}
 				}
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEWithHUD);
-				}
-
-				Stack::getInstance().pushLong(value);
-				Stack::getInstance().pushString(variable);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDSetHUDEffectLong);
-
-				return true;
+				return false;
 			};
 			state["mge"]["setHUDEffectVector4"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				std::string variable = getOptionalParam<std::string>(params, "variable", "");
-				sol::table values = getOptionalParam<sol::table>(params, "value", sol::nil);
-				if (variable.empty() || values == sol::nil || values.size() != 4) {
-					return false;
+				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
+				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+
+				if (id != MGEhud::invalid_hud_id) {
+					sol::table values = getOptionalParam<sol::table>(params, "value", sol::nil);
+					if (values != sol::nil && values.size() == 4) {
+						float valueBuffer[4];
+						for (size_t i = 0; i < 4; i++) {
+							valueBuffer[i] = values[i];
+						}
+						MGEhud::setEffectVec4(id, variable, valueBuffer);
+						return true;
+					}
 				}
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEWithHUD);
-				}
-
-				for (int i = 4; i > 0; i--) {
-					Stack::getInstance().pushFloat(values[i]);
-				}
-				Stack::getInstance().pushString(variable);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDSetHUDEffectVec);
-
-				return true;
+				return false;
 			};
 			state["mge"]["setHUDTexture"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				std::string texture = getOptionalParam<std::string>(params, "texture", "");
-				if (texture.empty()) {
+				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
+				auto texture = getOptionalParam<const char*>(params, "texture", nullptr);
+				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+
+				if (!texture) {
 					return false;
 				}
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(texture);
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEChangeHUDTexture);
-				}
-				else {
-					Stack::getInstance().pushString(texture);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGENIDChangeHUDTexture);
+				if (id == MGEhud::invalid_hud_id) {
+					return false;
 				}
 
+				MGEhud::setTexture(id, texture);
 				return true;
 			};
 			state["mge"]["unselectHUD"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "hud", "");
-				if (hud.empty()) {
-					return false;
-				}
-
-				Stack::getInstance().pushString(hud);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGECancelWithHUD);
+				MGEhud::currentHUDId.clear();
+				MGEhud::currentHUD = MGEhud::invalid_hud_id;
 				return true;
 			};
 
 			// Shader-related functions.
 			state["mge"]["disableShader"] = [](sol::optional<sol::table> params) {
-				std::string shader = getOptionalParam<std::string>(params, "shader", "");
-				if (shader.empty()) {
+				auto shader = getOptionalParam<const char*>(params, "shader", nullptr);
+				if (!shader) {
 					return false;
 				}
 
-				Stack::getInstance().pushString(shader);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEDisableShader);
+				PostShaders::setShaderEnable(shader, false);
 
 				return true;
 			};
 			state["mge"]["enableShader"] = [](sol::optional<sol::table> params) {
-				std::string shader = getOptionalParam<std::string>(params, "shader", "");
-				if (shader.empty()) {
+				auto shader = getOptionalParam<const char*>(params, "shader", nullptr);
+				if (!shader) {
 					return false;
 				}
 
-				Stack::getInstance().pushString(shader);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEEnableShader);
+				PostShaders::setShaderEnable(shader, true);
 
 				return true;
 			};
 			state["mge"]["setShaderFloat"] = [](sol::optional<sol::table> params) {
-				std::string shader = getOptionalParam<std::string>(params, "shader", "");
-				std::string variable = getOptionalParam<std::string>(params, "variable", "");
-				float value = getOptionalParam<double>(params, "value", 0.0);
-				if (shader.empty() || variable.empty()) {
+				auto shader = getOptionalParam<const char*>(params, "shader", nullptr);
+				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
+				if (!shader || !variable) {
 					return false;
 				}
 
-				Stack::getInstance().pushFloat(value);
-				Stack::getInstance().pushString(variable);
-				Stack::getInstance().pushString(shader);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEShaderSetFloat);
+				auto value = getOptionalParam<float>(params, "value");
+				if (!value) {
+					return false;
+				}
+
+				PostShaders::setShaderVar(shader, variable, value.value());
 
 				return true;
 			};
 			state["mge"]["setShaderLong"] = [](sol::optional<sol::table> params) {
-				std::string shader = getOptionalParam<std::string>(params, "shader", "");
-				std::string variable = getOptionalParam<std::string>(params, "variable", "");
-				long value = getOptionalParam<double>(params, "value", 0.0);
-				if (shader.empty() || variable.empty()) {
+				auto shader = getOptionalParam<const char*>(params, "shader", nullptr);
+				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
+				if (!shader || !variable) {
 					return false;
 				}
 
-				Stack::getInstance().pushLong(value);
-				Stack::getInstance().pushString(variable);
-				Stack::getInstance().pushString(shader);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEShaderSetLong);
+				auto value = getOptionalParam<int>(params, "value");
+				if (!value) {
+					return false;
+				}
+
+				PostShaders::setShaderVar(shader, variable, value.value());
 
 				return true;
 			};
 			state["mge"]["setShaderVector4"] = [](sol::optional<sol::table> params) {
-				std::string hud = getOptionalParam<std::string>(params, "shader", "");
-				std::string variable = getOptionalParam<std::string>(params, "variable", "");
-				sol::table values = getOptionalParam<sol::table>(params, "value", sol::nil);
-				if (variable.empty() || values == sol::nil || values.size() != 4) {
+				auto shader = getOptionalParam<const char*>(params, "shader", nullptr);
+				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
+				if (!shader || !variable) {
 					return false;
 				}
 
-				if (!hud.empty()) {
-					Stack::getInstance().pushString(hud);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEWithHUD);
+				float values[4];
+				sol::table valuesTable = getOptionalParam<sol::table>(params, "value", sol::nil);
+				if (valuesTable == sol::nil && valuesTable.size() != 4) {
+					for (size_t i = 0; i < 4; i++) {
+						values[i] = valuesTable[i];
+					}
 				}
 
-				for (int i = 4; i > 0; i--) {
-					Stack::getInstance().pushFloat(values[i]);
-				}
-				Stack::getInstance().pushString(variable);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEShaderSetVector);
+				PostShaders::setShaderVar(shader, variable, values);
 
 				return true;
 			};
 
 			// Camera zoom functions.
 			state["mge"]["disableZoom"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEDisableZoom);
+				Configuration.MGEFlags &= ~ZOOM_ASPECT;
 			};
 			state["mge"]["enableZoom"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEEnableZoom);
+				Configuration.MGEFlags |= ZOOM_ASPECT;
 			};
 			state["mge"]["toggleZoom"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEToggleZoom);
+				Configuration.MGEFlags ^= ZOOM_ASPECT;
 			};
 			state["mge"]["zoomIn"] = [](sol::optional<sol::table> params) {
-				double amount = getOptionalParam<double>(params, "amount", 0.0);
-
-				if (amount == 0.0) {
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEZoomIn);
+				auto amount = getOptionalParam<float>(params, "amount");
+				if (amount) {
+					Configuration.CameraEffects.zoom = std::min(Configuration.CameraEffects.zoom + amount.value(), 8.0f);
 				}
 				else {
-					Stack::getInstance().pushFloat(amount);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEZoomInBy);
+					Configuration.CameraEffects.zoom = std::min(Configuration.CameraEffects.zoom + 0.0625f, 40.0f);
 				}
+
+				return true;
 			};
 			state["mge"]["zoomOut"] = [](sol::optional<sol::table> params) {
-				double amount = getOptionalParam<double>(params, "amount", 0.0);
-
-				if (amount == 0.0) {
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEZoomOut);
-				}
-				else {
-					Stack::getInstance().pushFloat(amount);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEZoomOutBy);
-				}
+				auto amount = getOptionalParam<float>(params, "amount", 0.0625f);
+				Configuration.CameraEffects.zoom = std::max(1.0f, Configuration.CameraEffects.zoom - amount);
 			};
 			state["mge"]["setZoom"] = [](sol::optional<sol::table> params) {
-				double amount = getOptionalParam<double>(params, "amount", 0.0);
-				bool animate = getOptionalParam<double>(params, "animate", false);
+				auto amount = getOptionalParam<float>(params, "amount", 0.0f);
+				bool animate = getOptionalParam<bool>(params, "animate", false);
 
 				if (animate) {
-					Stack::getInstance().pushFloat(amount);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEZoom);
+					Configuration.CameraEffects.zoomRateTarget = amount;
+					Configuration.CameraEffects.zoomRate = (amount < 0) ? amount : 0;
 				}
 				else {
-					Stack::getInstance().pushFloat(amount);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGESetZoom);
+					Configuration.CameraEffects.zoom = std::max(1.0f, amount);
 				}
 			};
 			state["mge"]["getZoom"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetZoom);
-				return Stack::getInstance().popFloat();
+				return Configuration.CameraEffects.zoom;
 			};
 			state["mge"]["stopZoom"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEStopZoom);
+				Configuration.CameraEffects.zoomRateTarget = 0;
+				Configuration.CameraEffects.zoomRate = 0;
 			};
 
 			// Camera shake functions.
 			state["mge"]["enableCameraShake"] = [](sol::optional<sol::table> params) {
-				double magnitude = getOptionalParam<double>(params, "magnitude", 0.0);
-				if (magnitude != 0.0) {
-					Stack::getInstance().pushFloat(magnitude);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGESetCameraShakeMagnitude);
+				auto magnitude = getOptionalParam<float>(params, "magnitude");
+				if (magnitude) {
+					Configuration.CameraEffects.shakeMagnitude = magnitude.value();
 				}
 
-				double acceleration = getOptionalParam<double>(params, "acceleration", 0.0);
-				if (acceleration != 0.0) {
-					Stack::getInstance().pushFloat(acceleration);
-					mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGECameraShakeZoom);
+				auto acceleration = getOptionalParam<float>(params, "acceleration");
+				if (acceleration) {
+					Configuration.CameraEffects.shakeAccel = acceleration.value();
 				}
 
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEEnableCameraShake);
+				Configuration.CameraEffects.shake = true;
 			};
 			state["mge"]["disableCameraShake"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEDisableCameraShake);
+				Configuration.CameraEffects.shake = false;
 			};
 			state["mge"]["setCameraShakeMagnitude"] = [](sol::optional<sol::table> params) {
-				double magnitude = getOptionalParam<double>(params, "magnitude", 0.0);
-				Stack::getInstance().pushFloat(magnitude);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGESetCameraShakeMagnitude);
+				auto magnitude = getOptionalParam<float>(params, "magnitude");
+				if (magnitude) {
+					Configuration.CameraEffects.shakeMagnitude = magnitude.value();
+				}
 			};
 			state["mge"]["setCameraShakeAcceleration"] = [](sol::optional<sol::table> params) {
-				double acceleration = getOptionalParam<double>(params, "acceleration", 0.0);
-				Stack::getInstance().pushFloat(acceleration);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGECameraShakeZoom);
+				auto acceleration = getOptionalParam<float>(params, "acceleration");
+				if (acceleration) {
+					Configuration.CameraEffects.shakeAccel = acceleration.value();
+				}
 			};
 
 			// Camera rotation functions.
 			state["mge"]["getScreenRotation"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetScreenRotation);
-				return Stack::getInstance().popFloat();
+				return Configuration.CameraEffects.rotation;
 			};
 			state["mge"]["modScreenRotation"] = [](sol::optional<sol::table> params) {
-				double rotation = getOptionalParam<double>(params, "rotation", 0.0);
-				Stack::getInstance().pushFloat(rotation);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGERotateScreenBy);
+				auto rotation = getOptionalParam<float>(params, "rotation");
+				if (rotation) {
+					Configuration.CameraEffects.rotateUpdate = true;
+					Configuration.CameraEffects.rotation += rotation.value();
+				}
 			};
 			state["mge"]["setScreenRotation"] = [](sol::optional<sol::table> params) {
-				double rotation = getOptionalParam<double>(params, "rotation", 0.0);
-				Stack::getInstance().pushFloat(rotation);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGERotateScreen);
+				auto rotation = getOptionalParam<float>(params, "rotation");
+				if (rotation) {
+					Configuration.CameraEffects.rotateUpdate = true;
+					Configuration.CameraEffects.rotation = rotation.value();
+				}
 			};
 			state["mge"]["startScreenRotation"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEScreenSpin);
+				Configuration.CameraEffects.rotateUpdate = true;
 			};
 			state["mge"]["stopScreenRotation"] = []() {
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEStopSpinSpin);
+				Configuration.CameraEffects.rotateUpdate = false;
 			};
 
 			// MGE XE rendering functions.
 			state["mge"]["setWeatherScattering"] = [](sol::optional<sol::table> params) {
-				sol::table outscatter = getOptionalParam<sol::table>(params, "outscatter", sol::nil);
-				sol::table inscatter = getOptionalParam<sol::table>(params, "inscatter", sol::nil);
+				auto outscatter = getOptionalParamVector3(params, "outscatter");
+				auto inscatter = getOptionalParamVector3(params, "inscatter");
 
-				if (outscatter == sol::nil || outscatter.size() != 3 || inscatter == sol::nil || inscatter.size() != 3) {
+				if (!outscatter || !inscatter) {
 					return false;
 				}
 
-				for (int i = 3; i > 0; i--) {
-					Stack::getInstance().pushFloat(inscatter[i]);
-				}
-				for (int i = 3; i > 0; i--) {
-					Stack::getInstance().pushFloat(outscatter[i]);
-				}
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::xSetWeatherScattering);
+				RGBVECTOR outer(outscatter.value().x, outscatter.value().y, outscatter.value().z);
+				RGBVECTOR inner(inscatter.value().x, inscatter.value().y, inscatter.value().z);
+				DistantLand::setScattering(outer, inner);
+
 				return true;
 			};
-			state["mge"]["getWeatherScattering"] = []() {
+			state["mge"]["getWeatherScattering"] = [](sol::this_state ts) {
 				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-				sol::state& state = stateHandle.state;
-				sol::table inscatter = state.create_table();
-				sol::table outscatter = state.create_table();
+				sol::state_view state = ts;
 
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::xGetWeatherScattering);
-				inscatter[3] = Stack::getInstance().popFloat();
-				inscatter[2] = Stack::getInstance().popFloat();
-				inscatter[1] = Stack::getInstance().popFloat();
-				outscatter[3] = Stack::getInstance().popFloat();
-				outscatter[2] = Stack::getInstance().popFloat();
-				outscatter[1] = Stack::getInstance().popFloat();
+				sol::table inner = state.create_table_with(1, DistantLand::atmInscatter.r, 2, DistantLand::atmInscatter.g, 3, DistantLand::atmInscatter.b);
+				sol::table outer = state.create_table_with(1, DistantLand::atmOutscatter.r, 2, DistantLand::atmOutscatter.g, 3, DistantLand::atmOutscatter.b);
 
-				return std::make_tuple(outscatter, inscatter);
+				return std::make_tuple(inner, outer);
 			};
 			state["mge"]["getWeatherDLFog"] = [](int weatherID) {
-				Stack::getInstance().pushLong(weatherID);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetWeatherDLFog);
-
-				float fogOffset = Stack::getInstance().popFloat();
-				float fogDistMult = Stack::getInstance().popFloat();
-				return std::make_tuple(fogDistMult, fogOffset);
+				return std::make_tuple(Configuration.DL.FogD[weatherID], Configuration.DL.FgOD[weatherID]);
 			};
 			state["mge"]["setWeatherDLFog"] = [](int weatherID, float fogDistMult, float fogOffset) {
-				Stack::getInstance().pushFloat(fogOffset);
-				Stack::getInstance().pushFloat(fogDistMult);
-				Stack::getInstance().pushLong(weatherID);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGESetWeatherDLFog);
+				Configuration.DL.FogD[weatherID] = fogDistMult;
+				Configuration.DL.FgOD[weatherID] = fogOffset;
 			};
 			state["mge"]["getWeatherPPLLight"] = [](int weatherID) {
-				Stack::getInstance().pushLong(weatherID);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGEGetWeatherPPLLight);
-
-				float ambMult = Stack::getInstance().popFloat();
-				float sunMult = Stack::getInstance().popFloat();
-				return std::make_tuple(sunMult, ambMult);
+				return std::make_tuple(Configuration.Lighting.SunMult[weatherID], Configuration.Lighting.AmbMult[weatherID]);
 			};
 			state["mge"]["setWeatherPPLLight"] = [](int weatherID, float sunMult, float ambMult) {
-				Stack::getInstance().pushFloat(ambMult);
-				Stack::getInstance().pushFloat(sunMult);
-				Stack::getInstance().pushLong(weatherID);
-				mwscript::RunOriginalOpCode(NULL, NULL, OpCode::MGESetWeatherPPLLight);
+				Configuration.Lighting.SunMult[weatherID] = sunMult;
+				Configuration.Lighting.AmbMult[weatherID] = ambMult;
 			};
 		}
 	}

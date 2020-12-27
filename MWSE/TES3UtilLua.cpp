@@ -73,6 +73,9 @@
 #include "TES3WeatherController.h"
 #include "TES3WorldController.h"
 
+#include "distantland.h"
+#include "mgedinput.h"
+
 #include "BitUtil.h"
 
 namespace mwse {
@@ -628,17 +631,8 @@ namespace mwse {
 			return nullptr;
 		}
 
-		// This function currently calls out to MGE, which should be changed at some point.
 		TES3::Vector3 getCameraVector() {
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEGetEyeVec);
-
-			// Get the results from the MWSE stack.
-			Stack& stack = Stack::getInstance();
-			float x = stack.popFloat();
-			float y = stack.popFloat();
-			float z = stack.popFloat();
-
-			return TES3::Vector3(x, y, z);
+			return TES3::Vector3(DistantLand::eyeVec.x, DistantLand::eyeVec.y, DistantLand::eyeVec.z);
 		}
 
 		sol::optional<TES3::Vector3> getCameraPosition() {
@@ -902,38 +896,31 @@ namespace mwse {
 		}
 
 		void tapKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGETapKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::TAP, true);
 		}
 
 		void pushKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEPushKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::PUSH, true);
 		}
 
 		void releaseKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEReleaseKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::PUSH, false);
 		}
 
 		void hammerKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEHammerKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::HAMMER, true);
 		}
 
 		void unhammerKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEUnhammerKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::HAMMER, false);
 		}
 
 		void enableKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEAllowKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::DISALLOW, false);
 		}
 
 		void disableKey(int key) {
-			Stack::getInstance().pushLong(key);
-			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEDisallowKey);
+			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::DISALLOW, true);
 		}
 
 		sol::optional<bool> hasCodePatchFeature(int id) {
