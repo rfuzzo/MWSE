@@ -1,10 +1,21 @@
 #pragma once
 
-#define XE_VERSION_STRING "MGE XE 0.11.5"
-#define MGE_MAJOR_VERSION 4
-#define MGE_MINOR_VERSION 11
-#define MGE_BUILD_VERSION 5
+namespace MGE {
+	// Main MGE XE version.
+	static constexpr auto VERSION_STRING = "MGE XE 0.12.0";
+	static constexpr auto MGE_MAJOR_VERSION = 4u;
+	static constexpr auto MGE_MINOR_VERSION = 12u;
+	static constexpr auto MGE_BUILD_VERSION = 0u;
 
-#define MGE_SAVE_VERSION 47
-#define MGE_DL_VERSION 6
-#define MGE_MWSE_VERSION ((MGE_MAJOR_VERSION*0x10000)+(MGE_MINOR_VERSION*0x100)+MGE_BUILD_VERSION)
+	// Enforce version packing space.
+	static_assert(MGE_MAJOR_VERSION <= 255);
+	static_assert(MGE_MINOR_VERSION <= 255);
+	static_assert(MGE_BUILD_VERSION <= 255);
+
+	// Distant land version. Changing this invalidates DL previously generated.
+	static constexpr auto DISTANT_LAND_VERSION = 6;
+
+	// Version exposed to MWSE interface.
+	static constexpr auto PACKED_VERSION = ((MGE_MAJOR_VERSION * 0x10000u) + (MGE_MINOR_VERSION * 0x100u) + MGE_BUILD_VERSION);
+}
+

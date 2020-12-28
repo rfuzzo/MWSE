@@ -47,7 +47,7 @@ namespace mwse
 
 	float MGEGetVersion::execute(mwse::VMExecuteInterface& virtualMachine)
 	{
-		Stack::getInstance().pushLong(MGE_MWSE_VERSION);
+		Stack::getInstance().pushLong(MGE::PACKED_VERSION);
 
 		return 0.0f;
 	}

@@ -202,7 +202,7 @@ HRESULT _stdcall MGEProxyDevice::BeginScene() {
         if (!isHUDready) {
             // Initialize HUD
             StatusOverlay::init(realDevice);
-            StatusOverlay::setStatus(XE_VERSION_STRING);
+            StatusOverlay::setStatus(MGE::VERSION_STRING);
             MGEhud::init(realDevice);
 
             // Set scaling on Morrowind's UI system

@@ -40,42 +40,6 @@
 
 TES3MACHINE* mge_virtual_machine = NULL;
 
-struct VersionStruct {
-	BYTE major;
-	BYTE minor;
-	BYTE patch;
-	BYTE build;
-};
-
-VersionStruct GetMGEVersion() {
-	DWORD dwSize = GetFileVersionInfoSize("MGEXEgui.exe", NULL);
-	if (dwSize == 0) {
-		return VersionStruct{};
-	}
-
-	BYTE * pbVersionInfo = new BYTE[dwSize];
-	if (!GetFileVersionInfo("MGEXEgui.exe", 0, dwSize, pbVersionInfo)) {
-		delete[] pbVersionInfo;
-		return VersionStruct{};
-	}
-
-	VS_FIXEDFILEINFO * pFileInfo = NULL;
-	UINT puLenFileInfo = 0;
-	if (!VerQueryValue(pbVersionInfo, TEXT("\\"), (LPVOID*)&pFileInfo, &puLenFileInfo)) {
-		delete[] pbVersionInfo;
-		return VersionStruct{};
-	}
-
-	VersionStruct version;
-	version.major = BYTE(HIWORD(pFileInfo->dwProductVersionMS));
-	version.minor = BYTE(LOWORD(pFileInfo->dwProductVersionMS));
-	version.patch = BYTE(LOWORD(pFileInfo->dwProductVersionLS >> 16));
-	version.build = BYTE(HIWORD(pFileInfo->dwProductVersionLS >> 16));
-	delete[] pbVersionInfo;
-
-	return version;
-}
-
 const auto TES3_Game_ctor = reinterpret_cast<TES3::Game*(__thiscall*)(TES3::Game*)>(0x417280);
 TES3::Game* __fastcall OnGameStructCreated(TES3::Game * game) {
 	// Install necessary patches.
@@ -108,26 +72,6 @@ void MWSE_DllAttach() {
 	// Before we do anything else, ensure that we can make minidumps.
 	if (!mwse::patch::installMiniDumpHook()) {
 		mwse::log::getLog() << "Warning: Unable to hook minidump! Crash dumps will be unavailable." << std::endl;
-	}
-
-	// Make sure we have the right version of MGE XE installed.
-	VersionStruct mgeVersion = GetMGEVersion();
-	if (mgeVersion.major == 0 && mgeVersion.minor == 0) {
-		mwse::log::getLog() << "Error: Could not determine MGE XE version." << std::endl;
-		MessageBox(NULL, "MGE XE does not seem to be installed. Please install MGE XE v0.10.0.0 or later.", "MGE XE Check Failed", MB_ICONERROR | MB_OK);
-		exit(0);
-	}
-	else if (mgeVersion.major == 0 && mgeVersion.minor < 10) {
-		mwse::log::getLog() << "Invalid MGE XE version: " << (int)mgeVersion.major << "." << (int)mgeVersion.minor << "." << (int)mgeVersion.patch << "." << (int)mgeVersion.build << std::endl;
-
-		std::stringstream ss;
-		ss << "Invalid MGE XE version found. Minimum version is 0.10.0.0.\nFound version: ";
-		ss << "Found MGE XE v" << (int)mgeVersion.major << "." << (int)mgeVersion.minor << "." << (int)mgeVersion.patch << "." << (int)mgeVersion.build;
-		MessageBox(NULL, ss.str().c_str(), "MGE XE Check Failed", MB_ICONERROR | MB_OK);
-		exit(0);
-	}
-	else {
-		mwse::log::getLog() << "Found MGE XE. Version: " << (int)mgeVersion.major << "." << (int)mgeVersion.minor << "." << (int)mgeVersion.patch << "." << (int)mgeVersion.build << std::endl;
 	}
 
 	// Legacy support for old updater exe swap method.
@@ -232,7 +176,7 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 
 	if (isMW) {
 		LOG::open("mgeXE.log");
-		LOG::logline(XE_VERSION_STRING);
+		LOG::logline(MGE::VERSION_STRING);
 
 		setDPIScalingAware();
 

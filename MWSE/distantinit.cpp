@@ -690,7 +690,7 @@ bool DistantLand::loadDistantStatics() {
     }
     BYTE version = 0;
     ReadFile(h, &version, sizeof(version), &unused, 0);
-    if (version != MGE_DL_VERSION) {
+    if (version != MGE::DISTANT_LAND_VERSION) {
         LOG::logline("!! Distant land data is from an old version and needs to be regenerated");
         return false;
     }

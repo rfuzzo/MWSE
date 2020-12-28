@@ -507,7 +507,7 @@ namespace mwse {
 				return MGEhud::getScreenWidth();
 			};
 			state["mge"]["getVersion"] = []() {
-				return MGE_MWSE_VERSION;
+				return MGE::PACKED_VERSION;
 			};
 			state["mge"]["log"] = [](std::string& string) {
 				LOG::write(string.c_str());
