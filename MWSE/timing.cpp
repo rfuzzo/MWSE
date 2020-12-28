@@ -8,24 +8,24 @@ static double reciprocalFreq;
 static LARGE_INTEGER initialTime;
 
 void HighResolutionTimer::init() {
-    LARGE_INTEGER frequency;
-    QueryPerformanceFrequency(&frequency);
-    QueryPerformanceCounter(&initialTime);
-    reciprocalFreq = 1.0 / frequency.QuadPart;
+	LARGE_INTEGER frequency;
+	QueryPerformanceFrequency(&frequency);
+	QueryPerformanceCounter(&initialTime);
+	reciprocalFreq = 1.0 / frequency.QuadPart;
 }
 
 int HighResolutionTimer::getMicroseconds() {
-    LARGE_INTEGER t;
-    QueryPerformanceCounter(&t);
+	LARGE_INTEGER t;
+	QueryPerformanceCounter(&t);
 
-    double x = 1000000 * (double(t.QuadPart - initialTime.QuadPart) * reciprocalFreq);
-    return int(int64_t(x));
+	double x = 1000000 * (double(t.QuadPart - initialTime.QuadPart) * reciprocalFreq);
+	return int(int64_t(x));
 }
 
 int HighResolutionTimer::getMilliseconds() {
-    LARGE_INTEGER t;
-    QueryPerformanceCounter(&t);
+	LARGE_INTEGER t;
+	QueryPerformanceCounter(&t);
 
-    double x = 1000 * (double(t.QuadPart - initialTime.QuadPart) * reciprocalFreq);
-    return int(int64_t(x));
+	double x = 1000 * (double(t.QuadPart - initialTime.QuadPart) * reciprocalFreq);
+	return int(int64_t(x));
 }

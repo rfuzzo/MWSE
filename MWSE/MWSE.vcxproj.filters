@@ -1623,14 +1623,14 @@
     <ClInclude Include="timing.h">
       <Filter>Header Files\MGE\Support</Filter>
     </ClInclude>
-    <ClInclude Include="MGEUtil.h">
-      <Filter>Header Files\MGE\Support</Filter>
-    </ClInclude>
     <ClInclude Include="NIFrustum.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
     <ClInclude Include="TES3WaterController.h">
       <Filter>Header Files\DataAdapters\TES3\_Unsorted_</Filter>
+    </ClInclude>
+    <ClInclude Include="MGEUtil.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3788,9 +3788,6 @@
     <ClCompile Include="xRayTestFrom.cpp">
       <Filter>Source Files\MWScript\MGE</Filter>
     </ClCompile>
-    <ClCompile Include="MGEUtil.cpp">
-      <Filter>Source Files\MGE\Support</Filter>
-    </ClCompile>
     <ClCompile Include="xRayHitPosition.cpp">
       <Filter>Source Files\MWScript\MGE</Filter>
     </ClCompile>
@@ -3814,6 +3811,9 @@
     </ClCompile>
     <ClCompile Include="MGERotateScreen.cpp">
       <Filter>Source Files\MWScript\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEUtil.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -28,26 +28,26 @@ char (&_ArraySizeHelper(T (&array)[N]))[N];
 enum vtype { t_bit, t_bool, t_uint8, t_int8, t_uint16, t_int16, t_uint32, t_int32, t_float, t_double, t_string, t_set };
 
 struct tdictent {
-    const char* key;
-    double value;
+	const char* key;
+	double value;
 };
 
 struct tdictionary {
-    unsigned int length;
-    const tdictent* dictent;
+	unsigned int length;
+	const tdictent* dictent;
 };
 
 struct iniSetting {
-    void* variable;
-    vtype type;
-    size_t bit_size;
-    const char* section;
-    const char* key;
-    const char* defval;
-    const tdictionary* dictionary;
-    DWORD flags;
-    double min;
-    double max;
+	void* variable;
+	vtype type;
+	size_t bit_size;
+	const char* section;
+	const char* key;
+	const char* defval;
+	const tdictionary* dictionary;
+	DWORD flags;
+	double min;
+	double max;
 };
 
 #endif /* _CONFIGINTERNAL_H_ */
