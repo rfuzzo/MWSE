@@ -100,17 +100,6 @@ public:
 protected:
     DWORD m_version;
     bool m_loaded;
-
-    /// Functions for reading and writing data at locations in Morrowind's memory
-    DWORD read_dword(const DWORD dwAddress);
-    WORD read_word(const DWORD dwAddress);
-    BYTE read_byte(const DWORD dwAddress);
-    float read_float(const DWORD dwAddress);
-    void write_dword(const DWORD dwAddress, DWORD dword);
-    void write_word(const DWORD dwAddress, WORD word);
-    void write_byte(const DWORD dwAddress, BYTE byte);
-    void write_float(const DWORD dwAddress, float f);
-    void write_ptr(const DWORD dwAddress, void* ptr);
 };
 
 //-----------------------------------------------------------------------------

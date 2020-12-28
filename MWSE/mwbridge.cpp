@@ -28,6 +28,7 @@
 #include "NIGeometryData.h"
 #include "NITriShape.h"
 
+#include "MemoryUtil.h"
 #include "TES3Util.h"
 
 static MWBridge m_instance;
@@ -69,60 +70,6 @@ MWBridge* MWBridge::get() {
 
 void MWBridge::Load() {
     m_loaded = true;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::read_dword(const DWORD dwAddress) {
-    return *reinterpret_cast<DWORD*>(dwAddress);
-}
-
-//-----------------------------------------------------------------------------
-
-WORD MWBridge::read_word(const DWORD dwAddress) {
-    return *reinterpret_cast<WORD*>(dwAddress);
-}
-
-//-----------------------------------------------------------------------------
-
-BYTE MWBridge::read_byte(const DWORD dwAddress) {
-    return *reinterpret_cast<BYTE*>(dwAddress);
-}
-
-//-----------------------------------------------------------------------------
-
-float MWBridge::read_float(const DWORD dwAddress) {
-    return *reinterpret_cast<float*>(dwAddress);
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::write_dword(const DWORD dwAddress, DWORD dword) {
-    *reinterpret_cast<DWORD*>(dwAddress) = dword;
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::write_word(const DWORD dwAddress, WORD word) {
-    *reinterpret_cast<WORD*>(dwAddress) = word;
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::write_byte(const DWORD dwAddress, BYTE byte) {
-    *reinterpret_cast<BYTE*>(dwAddress) = byte;
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::write_float(const DWORD dwAddress, float f) {
-    *reinterpret_cast<float*>(dwAddress) = f;
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::write_ptr(const DWORD dwAddress, void* ptr) {
-    *reinterpret_cast<void**>(dwAddress) = ptr;
 }
 
 //-----------------------------------------------------------------------------
@@ -496,7 +443,7 @@ DWORD MWBridge::PlayerPositionPointer() {
 
 float MWBridge::PlayerHeight() { // player eyes height, in CS
     // Is this accurate? This is the player rotation matrix...
-    float height = read_float(0x7D39F0); // like "Master", only read, in game PlayerHeight*125.0f
+    auto height = reinterpret_cast<TES3::Matrix33*>(0x7D39D0)->m2.z;
     return (height == 0 ? 1.0f : height);
 }
 
@@ -603,15 +550,13 @@ bool MWBridge::isPlayerAimingWeapon() {
 // toggleRipples - Turns off ripple generation from all sources
 void MWBridge::toggleRipples(BOOL enabled) {
     // TODO: Clean this up to ideally not require code injection. Maybe just set maxRipples to 0?
-    DWORD addr = 0x51C2D4;
-    DWORD code = read_dword(addr);
+    auto code = *reinterpret_cast<DWORD*>(0x51C2D4);
     if (enabled && code == 0x33504D8B || !enabled && code == 0x3390C931) {
         return;
     }
-    code = enabled ? 0x33504D8B : 0x3390C931;
 
-    VirtualMemWriteAccessor vw((void*)addr, 4);
-    write_dword(addr, code);
+    auto newCode = code = enabled ? 0x33504D8B : 0x3390C931;
+    mwse::writeDoubleWordEnforced(0x51C2D4, code, newCode);
 }
 
 //-----------------------------------------------------------------------------
@@ -648,12 +593,9 @@ void MWBridge::markMoonNodes(float k) {
 // disableScreenshotFunc
 // Stops Morrowind from taking its own screenshots, or displaying an error message, when PrtScr is pressed
 void MWBridge::disableScreenshotFunc() {
-    // TODO: Change this to a toggleable function thing.
-    DWORD addr = 0x41b08a;
-
+    // TODO: More code injection changes.
     // Replace jz short with jmp (74 -> eb)
-    VirtualMemWriteAccessor vw((void*)addr, 4);
-    write_byte(addr, 0xeb);
+    mwse::writeByteUnprotected(0x41B08A, 0xEB);
 }
 
 //-----------------------------------------------------------------------------
@@ -661,12 +603,7 @@ void MWBridge::disableScreenshotFunc() {
 // disableSunglare - Turns off the sunglare billboard and fullscreen glare that appears when looking at the sun
 void MWBridge::disableSunglare() {
     // TODO: More code injection changes.
-    DWORD addr = 0x4404fb;
-
-    // Replace jz short with nop (74 xx -> 90 90)
-    VirtualMemWriteAccessor vw((void*)addr, 4);
-    write_byte(addr, 0x90);
-    write_byte(addr+1, 0x90);
+    mwse::genNOPUnprotected(0x4404FB, 2);
 }
 
 //-----------------------------------------------------------------------------
@@ -689,72 +626,55 @@ void MWBridge::disableIntroMovies() {
 
 // isIntroDone - Tests if both intro movies are finished, and main menu is about to display
 bool MWBridge::isIntroDone() {
-    return read_byte(0x7d5005) != 0;
+    return *reinterpret_cast<bool*>(0x7D5005);
 }
 
 //-----------------------------------------------------------------------------
 
 // isLoadingSplash - Tests if a splash screen is shown (as a proxy for post-main menu loading)
 bool MWBridge::isLoadingSplash() {
-    return read_byte(0x7d4294) != 0;
+    return *reinterpret_cast<bool*>(0x7D4294);
 }
 
 //-----------------------------------------------------------------------------
 
 // redirectMenuBackground - Redirects splash screen scenegraph draw call to another function
 void MWBridge::redirectMenuBackground(void (_stdcall* func)(int)) {
-    DWORD addr = 0x04589fb;
-
-    // Reset to original if null is passed
-    DWORD calladdr = func ? (DWORD)func : 0x6cc7b0;
-
     // Replace jump address
-    VirtualMemWriteAccessor vw((void*)addr, 4);
-    write_dword(addr, calladdr - (addr+4));
+    DWORD newCall = func ? (DWORD)func : 0x6CC7B0;
+    mwse::writeDoubleWordUnprotected(0x04589FB, newCall);
 }
 
 //-----------------------------------------------------------------------------
 
+const auto TES3_WorldController_configScaling = reinterpret_cast<void (__thiscall*)(TES3::WorldController*, int)>(0x40F2A0);
+const auto TES3_MouseController_setMouseBounds = reinterpret_cast<void (__thiscall*)(TES3::MouseController*, int, int, int, int)>(0x408740);
+
 // setUIScale - Configures the scaling of Morrowind's UI system, must be called early before main menu
 //              MWBridge is not required to be loaded for this function.
 void MWBridge::setUIScale(float scale) {
-    DWORD addr = DWORD(TES3::WorldController::get());
-    int w, h;
+    auto worldController = TES3::WorldController::get();
 
-    // Read UI viewport width and height
-    w = read_dword(addr + 0x78);
-    h = read_dword(addr + 0x7c);
-    // Calculate a smaller viewport that will be scaled up by Morrowind
-    w = (int)(w / scale);
-    h = (int)(h / scale);
-    // Write new viewport size
-    write_dword(addr + 0x78, w);
-    write_dword(addr + 0x7c, h);
+    // Change view scales.
+    worldController->viewWidth /= scale;
+    worldController->viewHeight /= scale;
 
-    // Call UI configuration method to update scaling
-    typedef void (__thiscall *uiproc1)(DWORD, DWORD);
-    const uiproc1 ui_configureUIScale = (uiproc1)0x40f2a0;
+    // Update main scaling.
+    TES3_WorldController_configScaling(worldController, worldController->viewWidth);
 
-    ui_configureUIScale(addr, w);
-
-    // Call UI configuration method to update mouse bounds
-    typedef void (__thiscall *uiproc2)(DWORD, int, int, int, int);
-    const uiproc2 ui_configureUIMouseArea = (uiproc2)0x408740;
-
-    int w_half = (w+1) / 2, h_half = (h+1) / 2;
-    ui_configureUIMouseArea(read_dword(addr + 0x50), -w_half, -h_half, w_half, h_half);
+    // Update mouse bounds.
+    int halfW = (worldController->viewWidth + 1) / 2;
+    int halfH = (worldController->viewHeight + 1) / 2;
+    TES3_MouseController_setMouseBounds(worldController->mouseController, -halfW, -halfH, halfW, halfH);
 
     // Patch raycast system to use UI viewport size instead of D3D viewport size
-    addr = 0x6f5157;
     const BYTE patch[] = {
         0xa1, 0xdc, 0x67, 0x7c, 0x00,       // mov eax, eMaster
         0x8b, 0x78, 0x78,                   // mov edi, [eax+0x78]
         0x8b, 0x40, 0x7c,                   // mov eax, [eax+0x7c]
         0x90, 0x90, 0x90                    // nops
     };
-
-    VirtualMemWriteAccessor vw((void*)addr, sizeof(patch));
-    memcpy((void*)addr, patch, sizeof(patch));
+    mwse::writeBytesUnprotected(0x6F5157, patch, sizeof(patch));
 }
 
 //-----------------------------------------------------------------------------
@@ -762,31 +682,26 @@ void MWBridge::setUIScale(float scale) {
 // patchUIConfigure - Patches the normal call to ui_configureUIScale to redirect to a new function.
 //                    MWBridge is not required to be loaded for this function.
 void MWBridge::patchUIConfigure(void (_stdcall* newfunc)()) {
-    DWORD addr = 0x40e554;
     BYTE patch[] = {
         0xb8, 0xff, 0xff, 0xff, 0xff,       // mov eax, newfunc
         0xff, 0xd0,                         // call eax
         0xeb, 0x06                          // jmp past rest of block
     };
-
-    VirtualMemWriteAccessor vw((void*)addr, sizeof(patch));
-    memcpy((void*)addr, patch, sizeof(patch));
-    write_ptr(addr + 1, reinterpret_cast<void*>(newfunc));
+    mwse::writeBytesUnprotected(0x40E554, patch, sizeof(patch));
 }
 
 //-----------------------------------------------------------------------------
 
-static int (__cdecl* patchFrameTimerTarget)();
+static int(__cdecl* patchFrameTimerTarget)();
 
 // patchFrameTimer - Patches certain calls to timeGetTime to redirect to a new function.
 void MWBridge::patchFrameTimer(int (__cdecl* newfunc)()) {
-    DWORD addrs[] = { 0x403b52, 0x4535fd, 0x453615, 0x453638 };
+    DWORD patchPoints[] = { 0x403b52, 0x4535fd, 0x453615, 0x453638 };
 
     patchFrameTimerTarget = newfunc;
 
-    for (int i = 0; i != sizeof(addrs)/sizeof(addrs[0]); ++i) {
-        VirtualMemWriteAccessor vw((void*)addrs[i], sizeof(&patchFrameTimerTarget));
-        write_dword(addrs[i], reinterpret_cast<DWORD>(&patchFrameTimerTarget));
+    for (size_t i = 0; i < sizeof(patchPoints) / sizeof(DWORD); i++) {
+        mwse::writeDoubleWordUnprotected(patchPoints[i], DWORD(&patchFrameTimerTarget));
     }
 }
 
