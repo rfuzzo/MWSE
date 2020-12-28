@@ -565,24 +565,6 @@ namespace mwse {
 		}
 
 		//
-		// Hook: Finished initializing game code.
-		//
-
-		void __fastcall FinishInitialization(TES3::IteratedList<void*>* itt) {
-			// Call overwritten code.
-			itt->clear();
-
-			// Hook up shorthand access to data handler, world controller, and game.
-			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::state &state = stateHandle.state;
-			state["tes3"]["dataHandler"] = TES3::DataHandler::get();
-			state["tes3"]["worldController"] = TES3::WorldController::get();
-			state["tes3"]["game"] = TES3::Game::get();
-
-			stateHandle.triggerEvent(new event::GenericEvent("initialized"));
-		}
-
-		//
 		// Hook: Enter Frame
 		//
 
@@ -2885,10 +2867,6 @@ namespace mwse {
 
 			// Hook the MACP creation functions to update lua variables that point to the player.
 			genCallEnforced(0x5635D6, 0x56EAE0, reinterpret_cast<DWORD>(OnPlayerRecreated));
-
-			// Event: initialized. Hook just before we return successfully from where game data is loaded.
-			genCallEnforced(0x4BB440, 0x47E280, reinterpret_cast<DWORD>(FinishInitialization));
-			genCallEnforced(0x4BBC07, 0x47E280, reinterpret_cast<DWORD>(FinishInitialization));
 
 			// Event: enterFrame. This hook can be in a couple of locations, because of MCP.
 			genCallEnforced(0x41ABB0, 0x40F610, reinterpret_cast<DWORD>(EnterFrame));

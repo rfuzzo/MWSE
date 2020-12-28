@@ -6,6 +6,7 @@
 
 #include "NIDefines.h"
 #include "NIAmbientLight.h"
+#include "NIDX8Renderer.h"
 
 namespace TES3 {
 	struct Game_vTable {
@@ -74,7 +75,7 @@ namespace TES3 {
 		char unknown_0x5B;
 		HWND parentWindowHandle; // 0x5C
 		HWND windowHandle; // 0x60
-		NI::Renderer* renderer; // 0x64
+		NI::Pointer<NI::DX8Renderer> renderer; // 0x64
 		int unknown_0x68;
 		int unknown_0x6C;
 		int unknown_0x70;

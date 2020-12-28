@@ -7,7 +7,7 @@
 
 #include "NIUtil.h"
 
-namespace mwse::mge {
+namespace mge {
 	void performRayTest(VMExecuteInterface& vm, TES3::Vector3& position, TES3::Vector3& direction, bool& out_hit, float& out_distance) {
 		auto reference = vm.getReference();
 		if (!reference) {

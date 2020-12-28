@@ -4,11 +4,19 @@
 
 #include "NIRenderer.h"
 
+#include "TES3HashMap.h"
+
+#include "d3d8header.h"
+
+namespace mge {
+	class MGEProxyDevice;
+}
+
 namespace NI {
-	class DX8Renderer : Renderer {
+	struct DX8Renderer : Renderer {
 		int unknown_0x1C;
 		int unknown_0x20;
-		int unknown_0x24;
+		mge::MGEProxyDevice* device; // 0x24
 		int unknown_0x28;
 		int unknown_0x2C;
 		int unknown_0x30;
@@ -141,23 +149,11 @@ namespace NI {
 		int unknown_0x22C;
 		int unknown_0x230;
 		int unknown_0x234;
-		int unknown_0x238;
-		int unknown_0x23C;
-		int unknown_0x240;
-		int unknown_0x244;
-		int unknown_0x248;
-		int unknown_0x24C;
-		int unknown_0x250;
-		int unknown_0x254;
-		int unknown_0x258;
-		int unknown_0x25C;
-		int unknown_0x260;
-		int unknown_0x264;
-		int unknown_0x268;
-		int unknown_0x26C;
-		int unknown_0x270;
-		int unknown_0x274;
-		int unknown_0x278;
+		unsigned int behaviorFlags; // 0x238
+		D3DPRESENT_PARAMETERS8 d3dPresentParameters; // 0x23C
+		void* systemDesc; // 0x270 // NiDX8SystemDesc*
+		void* currentAdapter; // 0x274 // NiDX8AdapterDesc*
+		void* currentDeviceDesc; // 0x278 // NiDX8DeviceDesc*
 		int unknown_0x27C;
 		int unknown_0x280;
 		int unknown_0x284;

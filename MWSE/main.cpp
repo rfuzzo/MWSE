@@ -30,13 +30,22 @@
 #include "BuildDate.h"
 
 #include "LuaManager.h"
+#include "LuaGenericEvent.h"
+
 #include "TES3Game.h"
+#include "TES3DataHandler.h"
+#include "TES3WorldController.h"
+
+#include "NIDX8Renderer.h"
 
 // MGE headers
 #include "MGEConfiguration.h"
 #include "MGEVersion.h"
 #include "MGEMWInitPatch.h"
-#include "Log.h"
+#include "MGEDistantLand.h"
+#include "MGEStatusOverlay.h"
+#include "MGEMWBridge.h"
+#include "MGED3D8Device.h"
 
 const auto TES3_Game_ctor = reinterpret_cast<TES3::Game*(__thiscall*)(TES3::Game*)>(0x417280);
 TES3::Game* __fastcall OnGameStructCreated(TES3::Game * game) {
@@ -59,6 +68,44 @@ bool __fastcall OnGameStructInitialized(TES3::Game* game) {
 	// Call overloaded function.
 	return game->initialize();
 }
+
+const auto TES3_UI_UpdateLoadingLabel = reinterpret_cast<void(__cdecl*)(const char*)>(0x5DEEF0);
+void __fastcall FinishInitialization(TES3::IteratedList<void*>* itt) {
+	// Call overwritten code.
+	itt->clear();
+
+	// Set up distant land.
+	if (!(mge::Configuration.MGEFlags & MGE_DISABLED)) {
+		TES3_UI_UpdateLoadingLabel("Initializing DistantLand");
+		// Set scaling on Morrowind's UI system
+		if (mge::DistantLand::init(TES3::Game::get()->renderer->device->realDevice)) {
+			// Initially force view distance to max, required for full extent shadows and grass
+			if (mge::Configuration.MGEFlags & USE_DISTANT_LAND) {
+				mge::MWBridge::get()->SetViewDistance(7168.0);
+			}
+		}
+		else {
+			mge::Configuration.MGEFlags &= ~USE_DISTANT_LAND;
+			mge::StatusOverlay::setStatus("MGE XE serious error condition. Check mgeXE.log for details.");
+		}
+	}
+
+	// Let lua modders know the game is initialized.
+	if (~mge::Configuration.MGEFlags & MWSE_DISABLED && ~mge::Configuration.MGEFlags & MGE_DISABLED) {
+		TES3_UI_UpdateLoadingLabel("Initializing lua mods");
+
+		// Hook up shorthand access to data handler, world controller, and game.
+		auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+		sol::state& state = stateHandle.state;
+
+		state["tes3"]["dataHandler"] = TES3::DataHandler::get();
+		state["tes3"]["worldController"] = TES3::WorldController::get();
+		state["tes3"]["game"] = TES3::Game::get();
+
+		stateHandle.triggerEvent(new mwse::lua::event::GenericEvent("initialized"));
+	}
+}
+
 
 //
 // MGE XE
@@ -206,6 +253,10 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 			mwse::log::getLog() << "Could not hook MWSE-Lua initialization point!" << std::endl;
 			exit(1);
 		}
+
+		// Setup more things when initialization is finished.
+		mwse::genCallEnforced(0x4BB440, 0x47E280, reinterpret_cast<DWORD>(FinishInitialization));
+		mwse::genCallEnforced(0x4BBC07, 0x47E280, reinterpret_cast<DWORD>(FinishInitialization));
 	}
 
 	return true;

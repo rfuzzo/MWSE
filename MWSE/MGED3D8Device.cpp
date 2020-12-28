@@ -211,7 +211,6 @@ namespace mge {
 				if (Configuration.UIScale != 1.0f) {
 					mwBridge->setUIScale(Configuration.UIScale);
 				}
-
 				isHUDready = true;
 			}
 
@@ -223,19 +222,6 @@ namespace mge {
 				// Set any custom FOV
 				if (sceneCount == 0 && Configuration.ScreenFOV > 0) {
 					mwBridge->SetFOV(Configuration.ScreenFOV);
-				}
-
-				if (!DistantLand::ready) {
-					if (DistantLand::init(realDevice)) {
-						// Initially force view distance to max, required for full extent shadows and grass
-						if (Configuration.MGEFlags & USE_DISTANT_LAND) {
-							mwBridge->SetViewDistance(7168.0);
-						}
-					}
-					else {
-						Configuration.MGEFlags &= ~USE_DISTANT_LAND;
-						StatusOverlay::setStatus("MGE XE serious error condition. Check mgeXE.log for details.");
-					}
 				}
 			}
 			else {
