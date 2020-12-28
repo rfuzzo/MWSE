@@ -100,6 +100,14 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 		mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << " (built " << __DATE__ << ") hooked." << std::endl;
 #endif
 
+		// Clear out legacy logs.
+		if (std::filesystem::exists("mwselog.txt")) {
+			std::filesystem::remove("mwselog.txt");
+		}
+		if (std::filesystem::exists("mgeXE.log")) {
+			std::filesystem::remove("mgeXE.log");
+		}
+
 		// Before we do anything else, ensure that we can make minidumps.
 		if (!mwse::patch::installMiniDumpHook()) {
 			mwse::log::getLog() << "Warning: Unable to hook minidump! Crash dumps will be unavailable." << std::endl;
