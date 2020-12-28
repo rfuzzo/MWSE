@@ -33,20 +33,6 @@
 
 static MWBridge m_instance;
 
-class VirtualMemWriteAccessor {
-    void* address;
-    size_t length;
-    DWORD oldProtect;
-
-public:
-    VirtualMemWriteAccessor(void* addr, size_t len) : address(addr), length(len) {
-        VirtualProtect(address, length, PAGE_EXECUTE_READWRITE, &oldProtect);
-    }
-    ~VirtualMemWriteAccessor() {
-        VirtualProtect(address, length, oldProtect, &oldProtect);
-    }
-};
-
 //-----------------------------------------------------------------------------
 
 MWBridge::MWBridge() {
@@ -611,15 +597,10 @@ void MWBridge::disableSunglare() {
 // disableIntroMovies - Skips playing both intro movies
 void MWBridge::disableIntroMovies() {
     // TODO: More code injection changes.
-    DWORD addr = 0x418ef0;
     BYTE patch[] = { 0xeb, 0x16 };
 
-    VirtualMemWriteAccessor vw0((void*)addr, 2);
-    memcpy((void*)addr, patch, sizeof(patch));
-
-    addr = 0x5fc8f7;
-    VirtualMemWriteAccessor vw1((void*)addr, 2);
-    memcpy((void*)addr, patch, sizeof(patch));
+    mwse::writeBytesUnprotected(0x418EF0, patch, sizeof(patch));
+    mwse::writeBytesUnprotected(0x5FC8F7, patch, sizeof(patch));
 }
 
 //-----------------------------------------------------------------------------
