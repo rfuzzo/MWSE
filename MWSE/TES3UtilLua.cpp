@@ -632,7 +632,7 @@ namespace mwse {
 		}
 
 		TES3::Vector3 getCameraVector() {
-			return TES3::Vector3(DistantLand::eyeVec.x, DistantLand::eyeVec.y, DistantLand::eyeVec.z);
+			return TES3::Vector3(mge::DistantLand::eyeVec.x, mge::DistantLand::eyeVec.y, mge::DistantLand::eyeVec.z);
 		}
 
 		sol::optional<TES3::Vector3> getCameraPosition() {
@@ -896,31 +896,31 @@ namespace mwse {
 		}
 
 		void tapKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::TAP, true);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::TAP, true);
 		}
 
 		void pushKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::PUSH, true);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::PUSH, true);
 		}
 
 		void releaseKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::PUSH, false);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::PUSH, false);
 		}
 
 		void hammerKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::HAMMER, true);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::HAMMER, true);
 		}
 
 		void unhammerKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::HAMMER, false);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::HAMMER, false);
 		}
 
 		void enableKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::DISALLOW, false);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::DISALLOW, false);
 		}
 
 		void disableKey(int key) {
-			MGEProxyDirectInput::changeKeyBehavior(key, MGEProxyDirectInput::DISALLOW, true);
+			mge::MGEProxyDirectInput::changeKeyBehavior(key, mge::MGEProxyDirectInput::DISALLOW, true);
 		}
 
 		sol::optional<bool> hasCodePatchFeature(int id) {

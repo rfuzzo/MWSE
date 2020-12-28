@@ -26,6 +26,7 @@
 #include "MGEPostShaders.h"
 
 using namespace mwse;
+using namespace mge;
 
 namespace mwse {
 	class MGEShaderSetLong : mwse::InstructionInterface_t {

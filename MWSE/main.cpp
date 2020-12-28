@@ -48,7 +48,7 @@ TES3::Game* __fastcall OnGameStructCreated(TES3::Game * game) {
 }
 
 bool __fastcall OnGameStructInitialized(TES3::Game* game) {
-	if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
+	if (~mge::Configuration.MGEFlags & MWSE_DISABLED && ~mge::Configuration.MGEFlags & MGE_DISABLED) {
 		// Setup our lua interface before initializing.
 		mwse::lua::LuaManager::getInstance().hook();
 	}
@@ -64,8 +64,10 @@ bool __fastcall OnGameStructInitialized(TES3::Game* game) {
 // MGE XE
 //
 
-extern void* CreateD3DWrapper(UINT);
-extern void* CreateInputWrapper(void*);
+namespace mge {
+	extern void* CreateD3DWrapper(UINT);
+	extern void* CreateInputWrapper(void*);
+}
 
 static FARPROC GetSystemLibrary(const char* lib, const char* funcname);
 static void setDPIScalingAware();
@@ -76,7 +78,7 @@ static bool isCS = false;
 extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 	if (reason == DLL_PROCESS_DETACH) {
 		// Unhook Lua interface.
-		if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
+		if (~mge::Configuration.MGEFlags & MWSE_DISABLED && ~mge::Configuration.MGEFlags & MGE_DISABLED) {
 			mwse::lua::LuaManager::getInstance().cleanup();
 		}
 		return true;
@@ -160,21 +162,21 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 
 		setDPIScalingAware();
 
-		if (!Configuration.LoadSettings()) {
+		if (!mge::Configuration.LoadSettings()) {
 			mwse::log::logLine("Error: MGE XE is not configured. MGE XE will be disabled for this session.");
 			isMW = false;
 			return true;
 		}
 
-		if (Configuration.MGEFlags & MGE_DISABLED) {
+		if (mge::Configuration.MGEFlags & MGE_DISABLED) {
 			// Signal that DirectX proxies should not load
 			isMW = false;
 
 			// Make Morrowind apply UI scaling, as the D3D proxy is not available to do it
-			MWInitPatch::patchUIScale();
+			mge::MWInitPatch::patchUIScale();
 		}
 
-		if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
+		if (~mge::Configuration.MGEFlags & MWSE_DISABLED && ~mge::Configuration.MGEFlags & MGE_DISABLED) {
 			// Initialize our main mwscript hook.
 			mwse::mwAdapter::Hook();
 		}
@@ -182,11 +184,11 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 			mwse::log::logLine("MWSE is disabled. Lua scripts and MWScript VM extensions are disabled.");
 		}
 
-		if (Configuration.MGEFlags & SKIP_INTRO) {
-			MWInitPatch::disableIntroMovies();
+		if (mge::Configuration.MGEFlags & SKIP_INTRO) {
+			mge::MWInitPatch::disableIntroMovies();
 		}
 
-		MWInitPatch::patchFrameTimer();
+		mge::MWInitPatch::patchFrameTimer();
 
 		// Install patches.
 		mwse::genCallEnforced(0x417169, 0x417280, reinterpret_cast<DWORD>(OnGameStructCreated));
@@ -204,7 +206,7 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 extern "C" void* _stdcall FakeDirect3DCreate(UINT version) {
 	// Wrap Morrowind only, not TESCS
 	if (isMW) {
-		return CreateD3DWrapper(version);
+		return mge::CreateD3DWrapper(version);
 	}
 	else {
 		// Use system D3D8
@@ -223,7 +225,7 @@ extern "C" HRESULT _stdcall FakeDirectInputCreate(HINSTANCE a, DWORD b, REFIID c
 
 	if (hr == S_OK) {
 		if (isMW) {
-			*d = CreateInputWrapper(dinput);
+			*d = mge::CreateInputWrapper(dinput);
 		}
 		else {
 			*d = dinput;

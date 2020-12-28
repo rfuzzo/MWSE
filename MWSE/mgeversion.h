@@ -1,6 +1,6 @@
 #pragma once
 
-namespace MGE {
+namespace mge {
 	// Main MGE XE version.
 	static constexpr auto VERSION_STRING = "MGE XE 0.12.0";
 	static constexpr auto MGE_MAJOR_VERSION = 4u;

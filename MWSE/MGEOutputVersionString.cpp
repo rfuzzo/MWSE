@@ -48,7 +48,7 @@ namespace mwse
 
 	float MGEOutputVersionString::execute(mwse::VMExecuteInterface& virtualMachine)
 	{
-		mwse::log::logLine("%s", MGE::VERSION_STRING);
+		mwse::log::logLine("%s", mge::VERSION_STRING);
 
 		return 0.0f;
 	}

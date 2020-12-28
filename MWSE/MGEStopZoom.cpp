@@ -26,6 +26,7 @@
 #include "MGEConfiguration.h"
 
 using namespace mwse;
+using namespace mge;
 
 namespace mwse {
 	class MGEStopZoom : mwse::InstructionInterface_t {

@@ -27,6 +27,7 @@
 #include "MGEUserHUD.h"
 
 using namespace mwse;
+using namespace mge;
 
 namespace mwse
 {

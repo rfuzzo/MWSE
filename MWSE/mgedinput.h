@@ -2,17 +2,17 @@
 
 #include "directin8.h"
 
+namespace mge {
+	class MGEProxyDirectInput : public ProxyDirectInput {
+	public:
+		enum KeyBehavior { TAP, PUSH, HAMMER, AHAMMER, DISALLOW };
+		static bool mouseClick;
 
+		static void changeKeyBehavior(DWORD key, KeyBehavior kb, bool on);
 
-class MGEProxyDirectInput : public ProxyDirectInput {
-public:
-	enum KeyBehavior { TAP, PUSH, HAMMER, AHAMMER, DISALLOW };
-	static bool mouseClick;
+	public:
+		MGEProxyDirectInput(IDirectInput8* real) : ProxyDirectInput(real) {}
 
-	static void changeKeyBehavior(DWORD key, KeyBehavior kb, bool on);
-
-public:
-	MGEProxyDirectInput(IDirectInput8* real) : ProxyDirectInput(real) {}
-
-	IDirectInputDevice8* factoryProxyInput(IDirectInputDevice8* device, REFGUID g);
-};
+		IDirectInputDevice8* factoryProxyInput(IDirectInputDevice8* device, REFGUID g);
+	};
+}

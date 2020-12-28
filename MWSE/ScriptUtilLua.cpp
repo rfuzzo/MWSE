@@ -501,13 +501,13 @@ namespace mwse {
 
 			// General functions.
 			state["mge"]["getScreenHeight"] = []() {
-				return MGEhud::getScreenHeight();
+				return mge::MGEhud::getScreenHeight();
 			};
 			state["mge"]["getScreenWidth"] = []() {
-				return MGEhud::getScreenWidth();
+				return mge::MGEhud::getScreenWidth();
 			};
 			state["mge"]["getVersion"] = []() {
-				return MGE::PACKED_VERSION;
+				return mge::PACKED_VERSION;
 			};
 			state["mge"]["log"] = [](std::string& string) {
 				mwse::log::getLog() << string;
@@ -515,40 +515,40 @@ namespace mwse {
 
 			// HUD-related functions.
 			state["mge"]["clearHUD"] = []() {
-				MGEhud::resetMWSE();
+				mge::MGEhud::resetMWSE();
 			};
 			state["mge"]["disableHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
-				if (id != MGEhud::invalid_hud_id) {
-					MGEhud::disable(id);
+				auto id = hudName ? mge::MGEhud::resolveName(hudName) : mge::MGEhud::currentHUD;
+				if (id != mge::MGEhud::invalid_hud_id) {
+					mge::MGEhud::disable(id);
 				}
 
 				return true;
 			};
 			state["mge"]["enableHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
-				if (id != MGEhud::invalid_hud_id) {
-					MGEhud::enable(id);
+				auto id = hudName ? mge::MGEhud::resolveName(hudName) : mge::MGEhud::currentHUD;
+				if (id != mge::MGEhud::invalid_hud_id) {
+					mge::MGEhud::enable(id);
 				}
 
 				return true;
 			};
 			state["mge"]["freeHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
-				if (id != MGEhud::invalid_hud_id) {
-					MGEhud::free(id);
+				auto id = hudName ? mge::MGEhud::resolveName(hudName) : mge::MGEhud::currentHUD;
+				if (id != mge::MGEhud::invalid_hud_id) {
+					mge::MGEhud::free(id);
 				}
 
 				return true;
 			};
 			state["mge"]["fullscreenHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
-				if (id != MGEhud::invalid_hud_id) {
-					MGEhud::setFullscreen(id);
+				auto id = hudName ? mge::MGEhud::resolveName(hudName) : mge::MGEhud::currentHUD;
+				if (id != mge::MGEhud::invalid_hud_id) {
+					mge::MGEhud::setFullscreen(id);
 				}
 
 				return true;
@@ -560,74 +560,74 @@ namespace mwse {
 					return false;
 				}
 
-				MGEhud::load(hudName, texture);
+				mge::MGEhud::load(hudName, texture);
 
 				if (getOptionalParam<bool>(params, "enable", false)) {
-					MGEhud::enable(MGEhud::resolveName(hudName));
+					mge::MGEhud::enable(mge::MGEhud::resolveName(hudName));
 				}
 
 				return true;
 			};
 			state["mge"]["positionHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
+				auto id = hudName ? mge::MGEhud::resolveName(hudName) : mge::MGEhud::currentHUD;
 
-				if (id == MGEhud::invalid_hud_id) {
+				if (id == mge::MGEhud::invalid_hud_id) {
 					return false;
 				}
 
 				auto x = getOptionalParam(params, "x", 0.0f);
 				auto y = getOptionalParam(params, "y", 0.0f);
-				MGEhud::setPosition(id, x, y);
+				mge::MGEhud::setPosition(id, x, y);
 				return true;
 			};
 			state["mge"]["scaleHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = hudName ? MGEhud::resolveName(hudName) : MGEhud::currentHUD;
+				auto id = hudName ? mge::MGEhud::resolveName(hudName) : mge::MGEhud::currentHUD;
 
-				if (id == MGEhud::invalid_hud_id) {
+				if (id == mge::MGEhud::invalid_hud_id) {
 					return false;
 				}
 
 				auto x = getOptionalParam(params, "x", 0.0f);
 				auto y = getOptionalParam(params, "y", 0.0f);
-				MGEhud::setScale(id, x, y);
+				mge::MGEhud::setScale(id, x, y);
 				return true;
 			};
 			state["mge"]["selectHUD"] = [](sol::optional<sol::table> params) {
 				auto hudName = getOptionalParam<const char*>(params, "hud", nullptr);
-				auto id = MGEhud::resolveName(hudName);
+				auto id = mge::MGEhud::resolveName(hudName);
 
-				MGEhud::currentHUDId = hudName;
-				MGEhud::currentHUD = id;
+				mge::MGEhud::currentHUDId = hudName;
+				mge::MGEhud::currentHUD = id;
 
 				return true;
 			};
 			state["mge"]["setHUDEffect"] = [](sol::optional<sol::table> params) {
 				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
 				auto effect = getOptionalParam<const char*>(params, "effect", nullptr);
-				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+				auto id = hud ? mge::MGEhud::resolveName(hud) : mge::MGEhud::currentHUD;
 
 				if (!effect) {
 					return false;
 				}
 
-				if (id == MGEhud::invalid_hud_id) {
+				if (id == mge::MGEhud::invalid_hud_id) {
 					return false;
 				}
 
-				MGEhud::setEffect(id, effect);
+				mge::MGEhud::setEffect(id, effect);
 				return true;
 			};
 			state["mge"]["setHUDEffectFloat"] = [](sol::optional<sol::table> params) {
 				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
 				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
-				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+				auto id = hud ? mge::MGEhud::resolveName(hud) : mge::MGEhud::currentHUD;
 
-				if (id != MGEhud::invalid_hud_id) {
+				if (id != mge::MGEhud::invalid_hud_id) {
 					auto value = getOptionalParam<float>(params, "value");
 					if (value) {
-						MGEhud::setEffectFloat(id, variable, value.value());
+						mge::MGEhud::setEffectFloat(id, variable, value.value());
 						return true;
 					}
 				}
@@ -637,12 +637,12 @@ namespace mwse {
 			state["mge"]["setHUDEffectLong"] = [](sol::optional<sol::table> params) {
 				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
 				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
-				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+				auto id = hud ? mge::MGEhud::resolveName(hud) : mge::MGEhud::currentHUD;
 
-				if (id != MGEhud::invalid_hud_id) {
+				if (id != mge::MGEhud::invalid_hud_id) {
 					auto value = getOptionalParam<int>(params, "value");
 					if (value) {
-						MGEhud::setEffectInt(id, variable, value.value());
+						mge::MGEhud::setEffectInt(id, variable, value.value());
 						return true;
 					}
 				}
@@ -652,16 +652,16 @@ namespace mwse {
 			state["mge"]["setHUDEffectVector4"] = [](sol::optional<sol::table> params) {
 				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
 				auto variable = getOptionalParam<const char*>(params, "variable", nullptr);
-				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+				auto id = hud ? mge::MGEhud::resolveName(hud) : mge::MGEhud::currentHUD;
 
-				if (id != MGEhud::invalid_hud_id) {
+				if (id != mge::MGEhud::invalid_hud_id) {
 					sol::table values = getOptionalParam<sol::table>(params, "value", sol::nil);
 					if (values != sol::nil && values.size() == 4) {
 						float valueBuffer[4];
 						for (size_t i = 0; i < 4; i++) {
 							valueBuffer[i] = values[i];
 						}
-						MGEhud::setEffectVec4(id, variable, valueBuffer);
+						mge::MGEhud::setEffectVec4(id, variable, valueBuffer);
 						return true;
 					}
 				}
@@ -671,22 +671,22 @@ namespace mwse {
 			state["mge"]["setHUDTexture"] = [](sol::optional<sol::table> params) {
 				auto hud = getOptionalParam<const char*>(params, "hud", nullptr);
 				auto texture = getOptionalParam<const char*>(params, "texture", nullptr);
-				auto id = hud ? MGEhud::resolveName(hud) : MGEhud::currentHUD;
+				auto id = hud ? mge::MGEhud::resolveName(hud) : mge::MGEhud::currentHUD;
 
 				if (!texture) {
 					return false;
 				}
 
-				if (id == MGEhud::invalid_hud_id) {
+				if (id == mge::MGEhud::invalid_hud_id) {
 					return false;
 				}
 
-				MGEhud::setTexture(id, texture);
+				mge::MGEhud::setTexture(id, texture);
 				return true;
 			};
 			state["mge"]["unselectHUD"] = [](sol::optional<sol::table> params) {
-				MGEhud::currentHUDId.clear();
-				MGEhud::currentHUD = MGEhud::invalid_hud_id;
+				mge::MGEhud::currentHUDId.clear();
+				mge::MGEhud::currentHUD = mge::MGEhud::invalid_hud_id;
 				return true;
 			};
 
@@ -697,7 +697,7 @@ namespace mwse {
 					return false;
 				}
 
-				PostShaders::setShaderEnable(shader, false);
+				mge::PostShaders::setShaderEnable(shader, false);
 
 				return true;
 			};
@@ -707,7 +707,7 @@ namespace mwse {
 					return false;
 				}
 
-				PostShaders::setShaderEnable(shader, true);
+				mge::PostShaders::setShaderEnable(shader, true);
 
 				return true;
 			};
@@ -723,7 +723,7 @@ namespace mwse {
 					return false;
 				}
 
-				PostShaders::setShaderVar(shader, variable, value.value());
+				mge::PostShaders::setShaderVar(shader, variable, value.value());
 
 				return true;
 			};
@@ -739,7 +739,7 @@ namespace mwse {
 					return false;
 				}
 
-				PostShaders::setShaderVar(shader, variable, value.value());
+				mge::PostShaders::setShaderVar(shader, variable, value.value());
 
 				return true;
 			};
@@ -758,109 +758,109 @@ namespace mwse {
 					}
 				}
 
-				PostShaders::setShaderVar(shader, variable, values);
+				mge::PostShaders::setShaderVar(shader, variable, values);
 
 				return true;
 			};
 
 			// Camera zoom functions.
 			state["mge"]["disableZoom"] = []() {
-				Configuration.MGEFlags &= ~ZOOM_ASPECT;
+				mge::Configuration.MGEFlags &= ~ZOOM_ASPECT;
 			};
 			state["mge"]["enableZoom"] = []() {
-				Configuration.MGEFlags |= ZOOM_ASPECT;
+				mge::Configuration.MGEFlags |= ZOOM_ASPECT;
 			};
 			state["mge"]["toggleZoom"] = []() {
-				Configuration.MGEFlags ^= ZOOM_ASPECT;
+				mge::Configuration.MGEFlags ^= ZOOM_ASPECT;
 			};
 			state["mge"]["zoomIn"] = [](sol::optional<sol::table> params) {
 				auto amount = getOptionalParam<float>(params, "amount");
 				if (amount) {
-					Configuration.CameraEffects.zoom = std::min(Configuration.CameraEffects.zoom + amount.value(), 8.0f);
+					mge::Configuration.CameraEffects.zoom = std::min(mge::Configuration.CameraEffects.zoom + amount.value(), 8.0f);
 				}
 				else {
-					Configuration.CameraEffects.zoom = std::min(Configuration.CameraEffects.zoom + 0.0625f, 40.0f);
+					mge::Configuration.CameraEffects.zoom = std::min(mge::Configuration.CameraEffects.zoom + 0.0625f, 40.0f);
 				}
 
 				return true;
 			};
 			state["mge"]["zoomOut"] = [](sol::optional<sol::table> params) {
 				auto amount = getOptionalParam<float>(params, "amount", 0.0625f);
-				Configuration.CameraEffects.zoom = std::max(1.0f, Configuration.CameraEffects.zoom - amount);
+				mge::Configuration.CameraEffects.zoom = std::max(1.0f, mge::Configuration.CameraEffects.zoom - amount);
 			};
 			state["mge"]["setZoom"] = [](sol::optional<sol::table> params) {
 				auto amount = getOptionalParam<float>(params, "amount", 0.0f);
 				bool animate = getOptionalParam<bool>(params, "animate", false);
 
 				if (animate) {
-					Configuration.CameraEffects.zoomRateTarget = amount;
-					Configuration.CameraEffects.zoomRate = (amount < 0) ? amount : 0;
+					mge::Configuration.CameraEffects.zoomRateTarget = amount;
+					mge::Configuration.CameraEffects.zoomRate = (amount < 0) ? amount : 0;
 				}
 				else {
-					Configuration.CameraEffects.zoom = std::max(1.0f, amount);
+					mge::Configuration.CameraEffects.zoom = std::max(1.0f, amount);
 				}
 			};
 			state["mge"]["getZoom"] = []() {
-				return Configuration.CameraEffects.zoom;
+				return mge::Configuration.CameraEffects.zoom;
 			};
 			state["mge"]["stopZoom"] = []() {
-				Configuration.CameraEffects.zoomRateTarget = 0;
-				Configuration.CameraEffects.zoomRate = 0;
+				mge::Configuration.CameraEffects.zoomRateTarget = 0;
+				mge::Configuration.CameraEffects.zoomRate = 0;
 			};
 
 			// Camera shake functions.
 			state["mge"]["enableCameraShake"] = [](sol::optional<sol::table> params) {
 				auto magnitude = getOptionalParam<float>(params, "magnitude");
 				if (magnitude) {
-					Configuration.CameraEffects.shakeMagnitude = magnitude.value();
+					mge::Configuration.CameraEffects.shakeMagnitude = magnitude.value();
 				}
 
 				auto acceleration = getOptionalParam<float>(params, "acceleration");
 				if (acceleration) {
-					Configuration.CameraEffects.shakeAccel = acceleration.value();
+					mge::Configuration.CameraEffects.shakeAccel = acceleration.value();
 				}
 
-				Configuration.CameraEffects.shake = true;
+				mge::Configuration.CameraEffects.shake = true;
 			};
 			state["mge"]["disableCameraShake"] = []() {
-				Configuration.CameraEffects.shake = false;
+				mge::Configuration.CameraEffects.shake = false;
 			};
 			state["mge"]["setCameraShakeMagnitude"] = [](sol::optional<sol::table> params) {
 				auto magnitude = getOptionalParam<float>(params, "magnitude");
 				if (magnitude) {
-					Configuration.CameraEffects.shakeMagnitude = magnitude.value();
+					mge::Configuration.CameraEffects.shakeMagnitude = magnitude.value();
 				}
 			};
 			state["mge"]["setCameraShakeAcceleration"] = [](sol::optional<sol::table> params) {
 				auto acceleration = getOptionalParam<float>(params, "acceleration");
 				if (acceleration) {
-					Configuration.CameraEffects.shakeAccel = acceleration.value();
+					mge::Configuration.CameraEffects.shakeAccel = acceleration.value();
 				}
 			};
 
 			// Camera rotation functions.
 			state["mge"]["getScreenRotation"] = []() {
-				return Configuration.CameraEffects.rotation;
+				return mge::Configuration.CameraEffects.rotation;
 			};
 			state["mge"]["modScreenRotation"] = [](sol::optional<sol::table> params) {
 				auto rotation = getOptionalParam<float>(params, "rotation");
 				if (rotation) {
-					Configuration.CameraEffects.rotateUpdate = true;
-					Configuration.CameraEffects.rotation += rotation.value();
+					mge::Configuration.CameraEffects.rotateUpdate = true;
+					mge::Configuration.CameraEffects.rotation += rotation.value();
 				}
 			};
 			state["mge"]["setScreenRotation"] = [](sol::optional<sol::table> params) {
 				auto rotation = getOptionalParam<float>(params, "rotation");
 				if (rotation) {
-					Configuration.CameraEffects.rotateUpdate = true;
-					Configuration.CameraEffects.rotation = rotation.value();
+					mge::Configuration.CameraEffects.rotateUpdate = true;
+					mge::Configuration.CameraEffects.rotation = rotation.value();
 				}
 			};
 			state["mge"]["startScreenRotation"] = []() {
-				Configuration.CameraEffects.rotateUpdate = true;
+				mge::Configuration.CameraEffects.rotateUpdate = true;
 			};
 			state["mge"]["stopScreenRotation"] = []() {
-				Configuration.CameraEffects.rotateUpdate = false;
+				mge::Configuration.CameraEffects.rotateUpdate = false;
 			};
 
 			// MGE XE rendering functions.
@@ -874,7 +874,7 @@ namespace mwse {
 
 				RGBVECTOR outer(outscatter.value().x, outscatter.value().y, outscatter.value().z);
 				RGBVECTOR inner(inscatter.value().x, inscatter.value().y, inscatter.value().z);
-				DistantLand::setScattering(outer, inner);
+				mge::DistantLand::setScattering(outer, inner);
 
 				return true;
 			};
@@ -882,24 +882,24 @@ namespace mwse {
 				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 				sol::state_view state = ts;
 
-				sol::table inner = state.create_table_with(1, DistantLand::atmInscatter.r, 2, DistantLand::atmInscatter.g, 3, DistantLand::atmInscatter.b);
-				sol::table outer = state.create_table_with(1, DistantLand::atmOutscatter.r, 2, DistantLand::atmOutscatter.g, 3, DistantLand::atmOutscatter.b);
+				sol::table inner = state.create_table_with(1, mge::DistantLand::atmInscatter.r, 2, mge::DistantLand::atmInscatter.g, 3, mge::DistantLand::atmInscatter.b);
+				sol::table outer = state.create_table_with(1, mge::DistantLand::atmOutscatter.r, 2, mge::DistantLand::atmOutscatter.g, 3, mge::DistantLand::atmOutscatter.b);
 
 				return std::make_tuple(inner, outer);
 			};
 			state["mge"]["getWeatherDLFog"] = [](int weatherID) {
-				return std::make_tuple(Configuration.DL.FogD[weatherID], Configuration.DL.FgOD[weatherID]);
+				return std::make_tuple(mge::Configuration.DL.FogD[weatherID], mge::Configuration.DL.FgOD[weatherID]);
 			};
 			state["mge"]["setWeatherDLFog"] = [](int weatherID, float fogDistMult, float fogOffset) {
-				Configuration.DL.FogD[weatherID] = fogDistMult;
-				Configuration.DL.FgOD[weatherID] = fogOffset;
+				mge::Configuration.DL.FogD[weatherID] = fogDistMult;
+				mge::Configuration.DL.FgOD[weatherID] = fogOffset;
 			};
 			state["mge"]["getWeatherPPLLight"] = [](int weatherID) {
-				return std::make_tuple(Configuration.Lighting.SunMult[weatherID], Configuration.Lighting.AmbMult[weatherID]);
+				return std::make_tuple(mge::Configuration.Lighting.SunMult[weatherID], mge::Configuration.Lighting.AmbMult[weatherID]);
 			};
 			state["mge"]["setWeatherPPLLight"] = [](int weatherID, float sunMult, float ambMult) {
-				Configuration.Lighting.SunMult[weatherID] = sunMult;
-				Configuration.Lighting.AmbMult[weatherID] = ambMult;
+				mge::Configuration.Lighting.SunMult[weatherID] = sunMult;
+				mge::Configuration.Lighting.AmbMult[weatherID] = ambMult;
 			};
 		}
 	}

@@ -1,8 +1,9 @@
 #pragma once
 
+namespace mge {
 #define MASK(x) (1 << x)
 
-// MGE Generic flags
+	// MGE Generic flags
 #define MGE_DISABLED_BIT        0
 #define MGE_DISABLED            MASK(MGE_DISABLED_BIT)
 #define FOG_ENABLED_BIT         1
@@ -72,82 +73,83 @@
 
 
 
-typedef unsigned long DWORD;
-typedef unsigned char BYTE;
+	typedef unsigned long DWORD;
+	typedef unsigned char BYTE;
 #pragma once
 
-struct ConfigurationStruct {
-	DWORD MGEFlags;
-	BYTE AALevel;
-	BYTE ZBufFormat;
-	BYTE VWait;
-	BYTE RefreshRate;
-	bool Borderless;
-	BYTE AnisoLevel;
-	BYTE ScaleFilter;
-	float LODBias;
-	float ScreenFOV;
-	BYTE FogMode;
-	BYTE SSFormat;
-	BYTE SSSuffix;
-	char SSDir[208];
-	char SSName[32];
-	float HDRReactionSpeed;
-	DWORD PerPixelLightFlags;
-	int StatusTimeout;
-	bool Force3rdPerson;
-	struct {
-		float x, y, z;
-	} Offset3rdPerson;
-	bool CrosshairAutohide;
-	float UIScale;
+	struct ConfigurationStruct {
+		DWORD MGEFlags;
+		BYTE AALevel;
+		BYTE ZBufFormat;
+		BYTE VWait;
+		BYTE RefreshRate;
+		bool Borderless;
+		BYTE AnisoLevel;
+		BYTE ScaleFilter;
+		float LODBias;
+		float ScreenFOV;
+		BYTE FogMode;
+		BYTE SSFormat;
+		BYTE SSSuffix;
+		char SSDir[208];
+		char SSName[32];
+		float HDRReactionSpeed;
+		DWORD PerPixelLightFlags;
+		int StatusTimeout;
+		bool Force3rdPerson;
+		struct {
+			float x, y, z;
+		} Offset3rdPerson;
+		bool CrosshairAutohide;
+		float UIScale;
 
-	struct {
-		float zoom, zoomRate, zoomRateTarget;
-		bool rotateUpdate;
-		float rotation, rotationRate;
-		bool shake;
-		float shakeMagnitude, shakeAccel;
-	} CameraEffects;
+		struct {
+			float zoom, zoomRate, zoomRateTarget;
+			bool rotateUpdate;
+			float rotation, rotationRate;
+			bool shake;
+			float shakeMagnitude, shakeAccel;
+		} CameraEffects;
 
-	struct {
-		float DrawDist;
-		float NearStaticEnd;
-		float FarStaticEnd;
-		float VeryFarStaticEnd;
-		float FarStaticMinSize;
-		float VeryFarStaticMinSize;
-		float AboveWaterFogStart;
-		float AboveWaterFogEnd;
-		float BelowWaterFogStart;
-		float BelowWaterFogEnd;
-		float InteriorFogStart;
-		float InteriorFogEnd;
-		float ExpFogDistMult;
-		BYTE WaterWaveHeight;
-		BYTE WaterCaustics;
-		BYTE WaterReflect;
-		DWORD ShadowResolution;
-		float Wind[10];
-		float FogD[10];
-		float FgOD[10];
-	} DL;
+		struct {
+			float DrawDist;
+			float NearStaticEnd;
+			float FarStaticEnd;
+			float VeryFarStaticEnd;
+			float FarStaticMinSize;
+			float VeryFarStaticMinSize;
+			float AboveWaterFogStart;
+			float AboveWaterFogEnd;
+			float BelowWaterFogStart;
+			float BelowWaterFogEnd;
+			float InteriorFogStart;
+			float InteriorFogEnd;
+			float ExpFogDistMult;
+			BYTE WaterWaveHeight;
+			BYTE WaterCaustics;
+			BYTE WaterReflect;
+			DWORD ShadowResolution;
+			float Wind[10];
+			float FogD[10];
+			float FgOD[10];
+		} DL;
 
-	struct {
-		float SunMult[10];
-		float AmbMult[10];
-	} Lighting;
+		struct {
+			float SunMult[10];
+			float AmbMult[10];
+		} Lighting;
 
-	struct {
-		bool AltCombat;
-		char Macros[4096];
-		char Triggers[4096];
-		char Remap[4096];
-	} Input;
+		struct {
+			bool AltCombat;
+			char Macros[4096];
+			char Triggers[4096];
+			char Remap[4096];
+		} Input;
 
-	char ShaderChain[512];
+		char ShaderChain[512];
 
-	bool LoadSettings();
-};
+		bool LoadSettings();
+	};
 
-extern ConfigurationStruct Configuration;
+	extern ConfigurationStruct Configuration;
+}

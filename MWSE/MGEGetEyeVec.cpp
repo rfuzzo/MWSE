@@ -27,6 +27,7 @@
 #include "MGEDistantLand.h"
 
 using namespace mwse;
+using namespace mge;
 
 namespace mwse
 {
