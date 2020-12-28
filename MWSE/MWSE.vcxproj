@@ -340,9 +340,6 @@
     <ClInclude Include="InstructionStore.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MemAccess.h" />
-    <ClInclude Include="MgeInstruction.h" />
-    <ClInclude Include="MgeVirtualMachine.h" />
-    <ClInclude Include="MgeVmtypes.h" />
     <ClInclude Include="mwAdapter.h" />
     <ClInclude Include="mwOffsets.h" />
     <ClInclude Include="MWSEDefs.h" />
@@ -352,7 +349,6 @@
     <ClInclude Include="RngUtil.h" />
     <ClInclude Include="ScriptUtil.h" />
     <ClInclude Include="Stack.h" />
-    <ClInclude Include="MgeTes3Machine.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="TES3ActionData.h" />
     <ClInclude Include="TES3Actor.h" />
@@ -768,8 +764,6 @@
     <ClCompile Include="TES3MagicEffectController.cpp" />
     <ClCompile Include="MemoryUtil.cpp" />
     <ClCompile Include="MemoryUtilLua.cpp" />
-    <ClCompile Include="MgeVirtualMachine.cpp" />
-    <ClCompile Include="MgeTes3Machine.cpp" />
     <ClCompile Include="NIAVObject.cpp" />
     <ClCompile Include="NICameraLua.cpp" />
     <ClCompile Include="NICollisionSwitchLua.cpp" />

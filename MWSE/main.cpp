@@ -21,7 +21,6 @@
 
 #include "mwAdapter.h"
 #include "Log.h"
-#include "MgeTes3Machine.h"
 
 #include "TES3Util.h"
 #include "CodePatchUtil.h"
