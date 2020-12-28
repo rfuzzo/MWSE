@@ -31,8 +31,8 @@ namespace TES3 {
 			Alchemy * asAlchemy;
 			Enchantment * asEnchantment;
 			Spell * asSpell;
-		} source; // 0xA0
-		MagicSourceType sourceType;// 0xA4
+		} source; // 0x0
+		MagicSourceType sourceType; // 0x4
 
 		MagicSourceCombo();
 		MagicSourceCombo(Object* object);

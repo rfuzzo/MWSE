@@ -61,6 +61,8 @@ namespace TES3 {
 		void updateStatsPane();
 		void updateSpellmakingMenu();
 		void updateEnchantingMenu();
+		int& getHaggleAmount();
+		bool updateHaggleLabels();
 
 		void updateInventoryMenuTiles();
 		void updateContentsMenuTiles();

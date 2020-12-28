@@ -409,6 +409,15 @@ namespace TES3 {
 			TES3_UI_UpdateEnchantingMenu();
 		}
 
+		int& getHaggleAmount() {
+			return *reinterpret_cast<int*>(0x7D287C);
+		}
+
+		const auto TES3_ui_updateHaggleLabels = reinterpret_cast<bool(__cdecl*)()>(0x5A74C0);
+		bool updateHaggleLabels() {
+			return TES3_ui_updateHaggleLabels();
+		}
+
 		const auto TES3_UpdateInventoryTiles = reinterpret_cast<void(__cdecl*)()>(0x5CC910);
 		void updateInventoryMenuTiles() {
 			TES3_UpdateInventoryTiles();

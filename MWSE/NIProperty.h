@@ -28,7 +28,7 @@ namespace NI {
 	static_assert(sizeof(Property_vTable) == 0x34, "NI::Property's vtable failed size validation");
 
 	struct Property : ObjectNET {
-		unsigned short flags;
+		unsigned short flags;  // 0x14
 
 		Property();
 		~Property();
@@ -56,8 +56,8 @@ namespace NI {
 	static_assert(sizeof(AlphaProperty) == 0x1C, "NI::AlphaProperty failed size validation");
 
 	struct FogProperty : Property {
-		float density;
-		unsigned char color[4];
+		float density;  // 0x18
+		unsigned char color[4];  // 0x1C
 
 		//
 		// Custom functions.
@@ -69,14 +69,14 @@ namespace NI {
 	static_assert(sizeof(FogProperty) == 0x20, "NI::FogProperty failed size validation");
 
 	struct MaterialProperty : Property {
-		int index;
-		Color ambient;
-		Color diffuse;
-		Color specular;
-		Color emissive;
-		float shininess;
-		float alpha;
-		unsigned int revisionID;
+		int index; // 0x18
+		Color ambient; // 0x1C
+		Color diffuse; // 0x28
+		Color specular; // 0x34
+		Color emissive; // 0x40
+		float shininess; // 0x4C
+		float alpha; // 0x50
+		unsigned int revisionID; // 0x54
 
 		//
 		// Custom functions.

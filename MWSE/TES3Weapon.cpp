@@ -3,7 +3,7 @@
 #include "TES3DataHandler.h"
 
 namespace TES3 {
-	bool Weapon::isOneHanded() {
+	bool Weapon::isOneHanded() const {
 		switch (weaponType)
 		{
 		case WeaponType::ShortBlade1H:
@@ -15,7 +15,7 @@ namespace TES3 {
 		return false;
 	}
 
-	bool Weapon::isTwoHanded() {
+	bool Weapon::isTwoHanded() const {
 		switch (weaponType)
 		{
 		case WeaponType::LongBlade2H:
@@ -28,19 +28,19 @@ namespace TES3 {
 		return false;
 	}
 
-	bool Weapon::isMelee() {
+	bool Weapon::isMelee() const {
 		return weaponType <= WeaponType::Axe2H;
 	}
 
-	bool Weapon::isRanged() {
+	bool Weapon::isRanged() const {
 		return weaponType >= WeaponType::Bow && weaponType <= WeaponType::Thrown;
 	}
 
-	bool Weapon::isAmmo() {
+	bool Weapon::isAmmo() const {
 		return weaponType == WeaponType::Arrow || weaponType == WeaponType::Bolt;
 	}
 
-	bool Weapon::hasDurability() {
+	bool Weapon::hasDurability() const {
 		return weaponType <= TES3::WeaponType::Crossbow;
 	}
 

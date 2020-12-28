@@ -1,6 +1,7 @@
 #pragma once
 
 #include "NIAVObject.h"
+#include "NIFrustum.h"
 
 namespace NI {
 	struct Camera : AVObject {
@@ -11,7 +12,7 @@ namespace NI {
 		TES3::Vector3 worldDirection; // 0xDC
 		TES3::Vector3 worldUp; // 0xE8
 		TES3::Vector3 worldRight; // 0xF4
-		float viewFrustum[6]; // 0x100
+		Frustum viewFrustum; // 0x100
 		TES3::Vector4 port; // 0x118
 		Object * scene; // 0x128
 		NI::TArray<void*> unknown_0x12C; // Screen related?

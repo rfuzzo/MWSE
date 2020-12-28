@@ -38,11 +38,13 @@
     <ClInclude Include="morrowindbsa.h" />
     <ClInclude Include="mwbridge.h" />
     <ClInclude Include="mwinitpatch.h" />
+    <ClInclude Include="NIFrustum.h" />
     <ClInclude Include="pngsave.h" />
     <ClInclude Include="postshaders.h" />
     <ClInclude Include="quadtree.h" />
     <ClInclude Include="specificrender.h" />
     <ClInclude Include="statusoverlay.h" />
+    <ClInclude Include="TES3WaterController.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="userhud.h" />
     <ClInclude Include="videobackground.h" />

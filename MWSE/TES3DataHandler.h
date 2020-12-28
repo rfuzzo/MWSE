@@ -224,8 +224,8 @@ namespace TES3 {
 		NI::Node * worldObjectRoot; // 0x8C
 		NI::Node * worldPickObjectRoot; // 0x90
 		NI::Node * worldLandscapeRoot; // 0x94
-		NI::DirectionalLight * sgSunlight;
-		NI::FogProperty * sgFogProperty;
+		NI::DirectionalLight * sgSunlight; // 0x98
+		NI::FogProperty * sgFogProperty; // 0x9C
 		int centralGridX; // 0xA0
 		int centralGridY; // 0xA4
 		bool cellChanged; // 0xA8
@@ -256,7 +256,7 @@ namespace TES3 {
 		char unknown_0xB4E6;
 		char unknown_0xB4E7;
 		HashMap<const char*, NI::Pointer<NI::SourceTexture>>* textures; // 0xB4E8
-		void * waterController;
+		WaterController * waterController; // 0xB4EC
 		int unknown_0xB4F0;
 		int unknown_0xB4F4;
 		char unknown_0xB4F8;

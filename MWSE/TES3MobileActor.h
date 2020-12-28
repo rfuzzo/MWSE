@@ -118,7 +118,7 @@ namespace TES3 {
 		IteratedList<MobileActor*> listFriendlyActors; // 0x94
 		float scanTimer; // 0xA8
 		int scanInterval; // 0xAC
-		float greetTimer; // B0
+		float greetTimer; // 0xB0
 		Vector3 unknown_0xB4;
 		char unknown_0xC0;
 		char unknown_0xC1; // Undefined.
@@ -154,38 +154,38 @@ namespace TES3 {
 			PlayerAnimationData * asPlayer;
 		} animationData; // 0x244
 		CrimeController crimesB; // 0x248
-		Statistic attributes[8];
-		Statistic health;
-		Statistic magicka;
-		Statistic encumbrance;
-		Statistic fatigue;
-		Statistic magickaMultiplier;
-		int effectAttributes[24];
-		int fight;
-		int flee;
-		int hello;
-		int alarm;
-		int barterGold;
-		short widthInUnits;
-		short heightInUnits;
-		short readiedAmmoCount;
-		short corpseHourstamp;
-		short greetDuration;
+		Statistic attributes[8]; // 0x254
+		Statistic health; // 0x2B4
+		Statistic magicka; // 0x2C0
+		Statistic encumbrance; // 0x2CC
+		Statistic fatigue; // 0x2D8
+		Statistic magickaMultiplier; // 0x2E4
+		int effectAttributes[24]; // 0x2F0
+		int fight; // 0x350
+		int flee; // 0x354
+		int hello; // 0x358
+		int alarm; // 0x35C
+		int barterGold; // 0x360
+		short widthInUnits; // 0x364
+		short heightInUnits; // 0x366
+		short readiedAmmoCount; // 0x368
+		short corpseHourstamp; // 0x36A
+		short greetDuration; // 0x36C
 		char unknown_0x36E;
 		char unknown_0x36F; // Undefined.
-		float holdBreathTime;
+		float holdBreathTime; // 0x370
 		int unknown_0x374;
-		MagicSourceCombo currentSpell;
-		EquipmentStack currentEnchantedItem; // Not a pointer.
-		EquipmentStack * readiedWeapon;
-		EquipmentStack * readiedAmmo;
-		EquipmentStack * readiedShield;
-		EquipmentStack * torchSlot;
+		MagicSourceCombo currentSpell; // 0x378
+		EquipmentStack currentEnchantedItem; // 0x380 // Not a pointer.
+		EquipmentStack * readiedWeapon; // 0x388
+		EquipmentStack * readiedAmmo; // 0x38C
+		EquipmentStack * readiedShield; // 0x390
+		EquipmentStack * torchSlot; // 0x394
 		char unknown_0x398;
 		char unknown_0x399; // Undefined.
 		char unknown_0x39A; // Undefined.
 		char unknown_0x39B; // Undefined.
-		void * arrowBone;
+		void * arrowBone; // 0x39C
 		int unknown_0x3A0;
 		Vector3 unknown_0x3A4;
 

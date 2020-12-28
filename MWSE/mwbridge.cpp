@@ -4,6 +4,32 @@
 #include "mwbridge.h"
 #include "assert.h"
 
+#include "TES3AudioController.h"
+#include "TES3Cell.h"
+#include "TES3DataHandler.h"
+#include "TES3Game.h"
+#include "TES3GameSetting.h"
+#include "TES3GlobalVariable.h"
+#include "TES3InputController.h"
+#include "TES3MobController.h"
+#include "TES3MobilePlayer.h"
+#include "TES3Moon.h"
+#include "TES3NPC.h"
+#include "TES3PlayerAnimationData.h"
+#include "TES3UIManager.h"
+#include "TES3WaterController.h"
+#include "TES3Weapon.h"
+#include "TES3Weather.h"
+#include "TES3WeatherController.h"
+#include "TES3WorldController.h"
+
+#include "NICamera.h"
+#include "NIColor.h"
+#include "NIGeometryData.h"
+#include "NITriShape.h"
+
+#include "TES3Util.h"
+
 static MWBridge m_instance;
 
 class VirtualMemWriteAccessor {
@@ -26,7 +52,6 @@ MWBridge::MWBridge() {
     memset(this, 0, sizeof(*this));
     m_loaded = false;
     m_version = 0;
-    InitStaticMemory();
 }
 
 //-----------------------------------------------------------------------------
@@ -42,98 +67,7 @@ MWBridge* MWBridge::get() {
 
 //-----------------------------------------------------------------------------
 
-void MWBridge::InitStaticMemory() {
-    // Bloodmoon v. 1080
-    eNoMusicBreak = 0x00403659;
-    eMusicVolFunc = 0x00403a10;
-    eHaggleMore = 0x005A73D0;
-    eTruform = 0x006e4ffc;
-    eGetMouseState = 0x00406721;
-    eNoWorldFOV = 0x004049fe;
-    eXRotSpeed = 0x005692b1;
-    eYRotSpeed = eXRotSpeed + 0x11C;
-    eScrollScale = 0x006139b6;
-    eBookScale = 0x005ac47b;
-    eRipplesSwitch = 0x0051C2D4;
-
-    eXMenuHudIn = 0x005f43c4;
-    eXMenuNoMouse = 0x00408740;
-    eXMenuNoFOV = 0x00404b38;
-    eXMenuWnds = 0x00583072;
-    eXMenuPopups = 0x005961AC;
-    eXMenuLoWnds = 0x00586985;
-    eXMenuSubtitles = 0x005f980f;
-    eXMenuFPS = 0x0041bc5e;
-
-    dwAlwaysRunOffset = 0x5B4;
-
-    eMaster = 0x007C67DC;
-    eEnviro = eMaster + 0x4;
-    eLoad = eMaster + 0x1DDC;
-
-    eHaggleLess  = eHaggleMore + 0xF0;
-    eXMenuHudOut = eXMenuHudIn + 0x448;
-    eMenuMouseMove = eXMenuNoMouse + 0xE0;
-    eJournalScale = eBookScale + 0xF5;
-}
-
-//-----------------------------------------------------------------------------
-
 void MWBridge::Load() {
-    // Standard Morrowind
-    DWORD dwTruRenderWidthOff = 0x48;
-    DWORD dwHRotScaleOff = 0x50;
-
-    eMaster1 = read_dword(eMaster);
-    eMaster2 = read_dword(eMaster + 0x500);
-
-    eFPS = eMaster1 + 0x14;
-    eTimer = eFPS + 0xC;
-    eD3D = eTimer + 0x10;
-    ePCRef = eD3D + 0x2C;
-    eTruRenderWidth = eD3D + dwTruRenderWidthOff;
-    eShadowSlider = eTruRenderWidth + 0xC;
-    eCrosshair1 = eShadowSlider + 0x10;
-    eAI = eCrosshair1 + 0x4;
-    eMenu = eMaster1 + 0xD6;
-    eView0 = eAI + dwHRotScaleOff + 0x5C;
-    eRenderWidth = eView0 + 0x4;
-    eView1 = eRenderWidth + 0x188;
-    eCombat = eView1 + 0x80;
-
-    eGamma = eMaster2 + 0x3C;
-    eView4 = eGamma + 0x10;
-    eLookMenu = eView4 + 0x9C;
-
-    eX = read_dword(eView0 - 0x10) + 0x1C;
-    eCos = eX + 0xD4;
-    eWorldFOV = eCos + 0x10;
-    eView2 = eWorldFOV + 0x14;
-
-    eSkyFOV = read_dword(eRenderWidth + 0x18) + 0x100;
-    eMenuFOV = read_dword(eRenderWidth + 0x44) + 0x100;
-
-    eView3 = read_dword(eView1 - 0x10) + 0x114;
-    eExt = read_dword(eView1 + 0x10) + 0x10;
-    eMouseLim = read_dword(eD3D + 0x20) + 0x24;
-
-    eGammaFunc = read_dword(read_dword(eMaster2) + 0x50);
-
-    eWthrArray = read_dword(eMaster1 + 0x58) + 0x14;
-    eCurWthrStruct = eWthrArray + 0x28;  // 0x3c
-    eNextWthrStruct = eCurWthrStruct + 0x04;  // 0x40
-    eCurSkyCol = eNextWthrStruct + 0x50;  // 0x90
-    eCurFogCol = eNextWthrStruct + 0x5c;  // 0x9c
-    eWindVector = eNextWthrStruct + 0x78;  // 0xb8
-    eSunriseHour = eNextWthrStruct + 0x9c;  // 0xdc
-    eSunsetHour = eNextWthrStruct + 0xa0;  // 0xe0
-    eSunriseDuration = eNextWthrStruct + 0xa4;  // 0xe4
-    eSunsetDuration = eNextWthrStruct + 0xa8;  // 0xe8
-    eWeatherRatio = eNextWthrStruct + 0x130;  // 0x170
-
-    eSunDir = read_dword(eWthrArray - 0x14) + 0x30;
-    eSunVis = read_dword(read_dword(read_dword(eWthrArray + 0x74)+0x98)+0x24)+0x3;
-
     m_loaded = true;
 }
 
@@ -195,310 +129,156 @@ void MWBridge::write_ptr(const DWORD dwAddress, void* ptr) {
 
 bool MWBridge::CanLoad() {
     // reads static address, so game doesn't need to be loaded
-    return read_dword(eEnviro) != 0;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetAlwaysRun() {
-    assert(m_loaded);
-    return read_dword(read_dword(read_dword(eD3D + 0x2C) + 0x24)) + dwAlwaysRunOffset;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetAutoRun() {
-    assert(m_loaded);
-    return GetAlwaysRun() + 4;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetShadowToggleAddr() {
-    assert(m_loaded);
-    DWORD addr = read_dword(eView1 + 0xC);
-    return addr ?  (addr + 0xC) : 0;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetShadowRealAddr() {
-    assert(m_loaded);
-    DWORD addr = read_dword(eView1 + 0xC);
-    return addr ?  (addr + 0x14) : 0;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetShadowFovAddr() {
-    assert(m_loaded);
-
-    eShadowFOV = read_dword (eView1 + 0xC);
-    if (eShadowFOV) {
-        eShadowFOV = read_dword (eShadowFOV + 0x8);
-        if (eShadowFOV) {
-            eShadowFOV += 0x100;
-        }
-    }
-    return eShadowFOV;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetCrosshair2() {
-    assert(m_loaded);
-    return read_dword(eView0 - 0x50) + 0x14;
+    return TES3::DataHandler::get() != nullptr;
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::SetCrosshairEnabled(bool enabled) {
-    assert(m_loaded);
-    if (enabled) {
-        eCrosshair2 = GetCrosshair2();
-        write_byte(eCrosshair2, read_byte(eCrosshair2) & 0xfe);
-        write_byte(eCrosshair1, read_byte(eCrosshair1) & 0xfe);
-    } else {
-        eCrosshair2 = GetCrosshair2();
-        write_byte(eCrosshair2, read_byte(eCrosshair2) | 0x01);
-        write_byte(eCrosshair1, read_byte(eCrosshair1) | 0x01);
-    }
+    // This is just appculling WorldController::nodeCursor
+    auto worldController = TES3::WorldController::get();
+    worldController->nodeCursor->setAppCulled(!enabled);
+    worldController->cursorOff = !enabled;
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::ToggleCrosshair() {
-    assert(m_loaded);
-    eCrosshair2 = GetCrosshair2();
-    BYTE b = read_byte(eCrosshair2);
-    BYTE b2 = read_byte(eCrosshair1);
-    write_byte(eCrosshair2, b ^ 0x01);
-    write_byte(eCrosshair1, b2 ^ 0x01);
+    auto worldController = TES3::WorldController::get();
+    auto disabled = !worldController->cursorOff;
+    worldController->cursorOff = disabled;
+    worldController->nodeCursor->setAppCulled(disabled);
 }
 
 //-----------------------------------------------------------------------------
 
 bool MWBridge::IsExterior() {
-    assert(m_loaded);
-    DWORD addr = read_dword(eEnviro);
-    if ( addr != 0 ) {
-        return read_dword(addr + 0xAC) == 0;
-    } else {
-        return false;
-    }
+    return TES3::DataHandler::get()->currentInteriorCell == nullptr;
 }
 
 //-----------------------------------------------------------------------------
 
 bool MWBridge::IsMenu() {
-    assert(m_loaded);
-    return read_byte(eMenu);
+    return TES3::WorldController::get()->flagMenuMode;
 }
 
 //-----------------------------------------------------------------------------
 
 bool MWBridge::IsLoadScreen() {
-    return (read_byte(eLoad) != 0);
-}
-
-//-----------------------------------------------------------------------------
-
-bool MWBridge::IsCombat() {
-    assert(m_loaded);
-    return (read_dword(eCombat) & 1) != 0;
-}
-
-//-----------------------------------------------------------------------------
-
-bool MWBridge::IsCrosshair() {
-    assert(m_loaded);
-    return (read_dword(eCrosshair1) & 1) == 0;
-}
-
-//-----------------------------------------------------------------------------
-
-bool MWBridge::IsAlwaysRun() {
-    assert(m_loaded);
-    return  read_byte(GetAlwaysRun()+3) != 0;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetNextTrack() {
-    assert(m_loaded);
-    return read_dword(eD3D + 0x4) + 0x8;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetMusicVol() {
-    assert(m_loaded);
-    return GetNextTrack() + 0x28C;
+    return *reinterpret_cast<bool*>(0x7C85B8);
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::SkipToNextTrack() {
-    assert(m_loaded);
-    BYTE* flags = (BYTE*)GetNextTrack();
-    *flags &= ~2;
+    TES3::WorldController::get()->audioController->unknown_0x8 &= ~0x2;
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::DisableMusic() {
-    assert(m_loaded);
-    eMusicVol = GetMusicVol();
-    write_float(eMusicVol, 0.01f);
-    write_float(eMusicVol - 0x08, 0.01f);
-
-    typedef void (__thiscall *mmVolumeProc)(DWORD, float);
-    const mmVolumeProc mvp = (mmVolumeProc)eMusicVolFunc;
-
-    mvp(eMusicVol - 0x294, 0.01f);
+    auto audioController = TES3::WorldController::get()->audioController;
+    audioController->setMusicVolume(0.01f);
+    audioController->volumeNextTrack = 0.01f;
 }
 
 //-----------------------------------------------------------------------------
 
 DWORD MWBridge::GetCurrentWeather() {
-    assert(m_loaded);
-    DWORD weather = read_dword(eCurWthrStruct);
-    if (weather == 0) {
+    auto currentWeather = TES3::WorldController::get()->weatherController->currentWeather;
+    if (currentWeather == nullptr) {
         return 0;
     }
-    return read_byte(weather + 4);
+    return currentWeather->index;
 }
 
 //-----------------------------------------------------------------------------
 
 DWORD MWBridge::GetNextWeather() {
-    assert(m_loaded);
-    DWORD weather = read_dword(eNextWthrStruct);
-    if (weather == 0) {
-        return GetCurrentWeather();
+    auto weatherController = TES3::WorldController::get()->weatherController;
+    if (weatherController->nextWeather) {
+        return weatherController->nextWeather->index;
     }
-    return read_byte(weather + 4);
-}
-
-//-----------------------------------------------------------------------------
-
-float MWBridge::GetWeatherRatio() {
-    assert(m_loaded);
-    return read_float(eWeatherRatio);
-}
-
-//-----------------------------------------------------------------------------
-
-const RGBVECTOR* MWBridge::getCurrentWeatherSkyCol() {
-    assert(m_loaded);
-    return (RGBVECTOR*)eCurSkyCol;
-}
-
-//-----------------------------------------------------------------------------
-
-const RGBVECTOR* MWBridge::getCurrentWeatherFogCol() {
-    assert(m_loaded);
-    return (RGBVECTOR*)eCurFogCol;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::getScenegraphFogCol() {
-    DWORD addr = read_dword(eEnviro) + 0x9c;
-    addr = read_dword(addr) + 0x1c;
-    return read_dword(addr);
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::setScenegraphFogCol(DWORD c) {
-    DWORD addr = read_dword(eEnviro) + 0x9c;
-    addr = read_dword(addr) + 0x1c;
-    write_dword(addr, c);
-}
-
-//-----------------------------------------------------------------------------
-
-float MWBridge::getScenegraphFogDensity() {
-    DWORD addr = read_dword(eEnviro) + 0x9c;
-    addr = read_dword(addr) + 0x18;
-    return read_float(addr);
-}
-
-//-----------------------------------------------------------------------------
-
-bool MWBridge::CellHasWeather() {
-    assert(m_loaded);
-    DWORD addr = read_dword(eEnviro);
-    if (addr == 0) {
-        return true;
-    }
-    addr = read_dword(addr + 0xAC);
-    if (addr != 0) {
-        return ((read_byte(addr + 0x18) & 0xF3) == 0x93);
-    }
-    return true;
-}
-
-//-----------------------------------------------------------------------------
-
-float* MWBridge::GetWindVector() {
-    assert(m_loaded);
-    return (float*)eWindVector;
-}
-
-//-----------------------------------------------------------------------------
-
-DWORD MWBridge::GetWthrStruct(int wthr) {
-    assert(m_loaded);
-    if (wthr >= 0 && wthr <= 9) {
-        return read_dword(eWthrArray + 4*wthr);
+    else if (weatherController->currentWeather) {
+        return weatherController->currentWeather->index;
     }
     return 0;
 }
 
 //-----------------------------------------------------------------------------
 
-int MWBridge::GetWthrString(int wthr, int offset, char str[]) {
-    assert(m_loaded);
-    DWORD addr = GetWthrStruct(wthr);
-    int i = 0;
-
-    if (addr != 0) {
-        addr += offset;
-        while ((str[i] = read_byte(addr)) != 0) {
-            ++addr;
-            ++i;
-        }
-    }
-    str[i++] = 0;
-    return i;
+float MWBridge::GetWeatherRatio() {
+    return TES3::WorldController::get()->weatherController->transitionScalar;
 }
 
 //-----------------------------------------------------------------------------
 
-void MWBridge::SetWthrString(int wthr, int offset, char str[]) {
-    assert(m_loaded);
-    DWORD addr = GetWthrStruct(wthr);
-    int i = 0;
+const RGBVECTOR* MWBridge::getCurrentWeatherSkyCol() {
+    return reinterpret_cast<RGBVECTOR*>(&TES3::WorldController::get()->weatherController->currentSkyColor);
+}
 
-    if (addr != 0) {
-        char c;
-        addr += offset;
-        do {
-            c = str[i++];
-            write_byte(addr++, c);
-        } while (c != 0);
+//-----------------------------------------------------------------------------
+
+const RGBVECTOR* MWBridge::getCurrentWeatherFogCol() {
+    return reinterpret_cast<RGBVECTOR*>(&TES3::WorldController::get()->weatherController->currentFogColor);
+}
+
+//-----------------------------------------------------------------------------
+
+DWORD MWBridge::getScenegraphFogCol() {
+    // TODO: Handle packed colors better.
+    return *reinterpret_cast<DWORD*>(&TES3::DataHandler::get()->sgFogProperty->color[0]);
+}
+
+//-----------------------------------------------------------------------------
+
+void MWBridge::setScenegraphFogCol(DWORD c) {
+    // TODO: Handle packed colors better.
+    *reinterpret_cast<DWORD*>(&TES3::DataHandler::get()->sgFogProperty->color[0]) = c;
+}
+
+//-----------------------------------------------------------------------------
+
+float MWBridge::getScenegraphFogDensity() {
+    return TES3::DataHandler::get()->sgFogProperty->density;
+}
+
+//-----------------------------------------------------------------------------
+
+bool MWBridge::CellHasWeather() {
+    auto dataHandler = TES3::DataHandler::get();
+    if (dataHandler == nullptr) {
+        return true;
     }
+
+    if (dataHandler->currentInteriorCell) {
+        return dataHandler->currentInteriorCell->getRegion() != nullptr;
+    }
+
+    return true;
+}
+
+//-----------------------------------------------------------------------------
+
+float* MWBridge::GetWindVector() {
+    return &TES3::WorldController::get()->weatherController->windVelocityCurrWeather.x;
+}
+
+//-----------------------------------------------------------------------------
+
+DWORD MWBridge::GetWthrStruct(int wthr) {
+    if (wthr >= 0 && wthr <= 9) {
+        return DWORD(TES3::WorldController::get()->weatherController->arrayWeathers[wthr]);
+    }
+    return 0;
 }
 
 //-----------------------------------------------------------------------------
 
 bool MWBridge::CellHasWater() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return ((read_byte(addr + 0x18) & 0x73) == 0x13);
+    auto currentInteriorCell = TES3::DataHandler::get()->currentInteriorCell;
+    if (currentInteriorCell) {
+        return currentInteriorCell->getHasWater();
     }
     return true;
 }
@@ -506,31 +286,26 @@ bool MWBridge::CellHasWater() {
 //-----------------------------------------------------------------------------
 
 bool MWBridge::IsUnderwater(float eyeZ) {
-    assert(m_loaded);
-    return (CellHasWater() && (eyeZ < WaterLevel() - 1.0f));
-}
+    auto level = TES3::DataHandler::get()->currentCell->getWaterLevel();
+    if (!level) {
+        return false;
+    }
 
-//-----------------------------------------------------------------------------
-
-bool MWBridge::WaterReflects(float eyeZ) {
-    assert(m_loaded);
-    return (CellHasWater() && (eyeZ > WaterLevel() - 1.0f));
+    return eyeZ < level.value() - 1.0f;
 }
 
 //-----------------------------------------------------------------------------
 
 // simulationTime - Total real time elapsed this session, does not advance in menus
 float MWBridge::simulationTime() {
-    assert(m_loaded);
-    return read_float(0x7c6708);
+    return mwse::tes3::getSimulationTimestamp();
 }
 
 //-----------------------------------------------------------------------------
 
 // frameTime - Duration of last frame in seconds
 float MWBridge::frameTime() {
-    assert(m_loaded);
-    return read_float(eMaster1 + 0x2c);
+    return TES3::WorldController::get()->deltaTime;
 }
 
 //-----------------------------------------------------------------------------
@@ -538,71 +313,60 @@ float MWBridge::frameTime() {
 // getMouseSensitivityYX() - Returns address of mouse sensitivity struct
 // data is float[2], Y sensitivity component is first
 float* MWBridge::getMouseSensitivityYX() {
-    return reinterpret_cast<float*>(eMaster1 + 0xe8);
+    return &TES3::WorldController::get()->mouseSensitivity;
 }
 
 //-----------------------------------------------------------------------------
 
 float MWBridge::GetViewDistance() {
-    assert(m_loaded);
-    return read_float(eView0);
+    return TES3::WorldController::get()->worldCamera.cameraData.farPlaneDistance;
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::SetViewDistance(float dist) {
-    assert(m_loaded);
-    write_float(eView0, dist);
-    write_float(eView1, dist);
-    write_float(eView2, dist);
-    write_float(eView3, dist);
-    write_float(eView4, dist);
-}
+    auto worldController = TES3::WorldController::get();
+    worldController->shadowCamera.cameraData.camera->viewFrustum.far = dist;
+    worldController->shadowCamera.cameraData.farPlaneDistance = dist;
+    worldController->worldCamera.cameraData.camera->viewFrustum.far = dist;
+    worldController->worldCamera.cameraData.farPlaneDistance = dist;
 
-//-----------------------------------------------------------------------------
+    TES3::Game::get()->renderDistance = dist;
 
-float MWBridge::GetAIDistance() {
-    assert(m_loaded);
-    return read_float(eAI);
-}
-
-//-----------------------------------------------------------------------------
-
-void MWBridge::SetAIDistance(float dist) {
-    assert(m_loaded);
-    write_float(eAI, dist);
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::SetFOV(float screenFOV) {
-    assert(m_loaded);
-
     // Recalculate FOV values
     float fovtan = std::tan(screenFOV*D3DX_PI/360.0f);
 
-    if ( std::fabs(read_float(eWorldFOV)+fovtan) > 0.001f ) {
-        float aspect = read_float(eWorldFOV+1*sizeof(float)) / read_float(eWorldFOV+2*sizeof(float));
+    auto* frustrum = &TES3::WorldController::get()->worldCamera.cameraData.camera->viewFrustum;
+    if (std::fabs(frustrum->left + fovtan) > 0.001f) {
+        float aspect = frustrum->right / frustrum->top;
         float fovtanaspect = fovtan / aspect;
 
-        write_float(eWorldFOV,-fovtan);
-        write_float(eWorldFOV+1*sizeof(float),fovtan);
-        write_float(eWorldFOV+2*sizeof(float),fovtanaspect);
-        write_float(eWorldFOV+3*sizeof(float),-fovtanaspect);
+        frustrum->left = -fovtan;
+        frustrum->right = fovtan;
+        frustrum->top = fovtanaspect;
+        frustrum->bottom = -fovtanaspect;
 
-        write_float(eSkyFOV ,-fovtan);
-        write_float(eSkyFOV+1*sizeof(float),fovtan);
-        write_float(eSkyFOV+2*sizeof(float),fovtanaspect);
-        write_float(eSkyFOV+3*sizeof(float),-fovtanaspect);
+        frustrum = &TES3::WorldController::get()->armCamera.cameraData.camera->viewFrustum;
+        frustrum->left = -fovtan;
+        frustrum->right = fovtan;
+        frustrum->top = fovtanaspect;
+        frustrum->bottom = -fovtanaspect;
 
-        if (!eShadowFOV) {
-            GetShadowFovAddr();
-        }
-        if (eShadowFOV) {
-            write_float(eShadowFOV ,-fovtan);
-            write_float(eShadowFOV+1*sizeof(float),fovtan);
-            write_float(eShadowFOV+2*sizeof(float),fovtanaspect);
-            write_float(eShadowFOV+3*sizeof(float),-fovtanaspect);
+        auto shadowManager = TES3::WorldController::get()->shadowManager;
+        if (shadowManager) {
+            auto camera = shadowManager->camera;
+            if (camera) {
+                frustrum = &camera->viewFrustum;
+                frustrum->left = -fovtan;
+                frustrum->right = fovtan;
+                frustrum->top = fovtanaspect;
+                frustrum->bottom = -fovtanaspect;
+            }
         }
     }
 
@@ -613,252 +377,134 @@ void MWBridge::SetFOV(float screenFOV) {
 void MWBridge::GetSunDir(float& x, float& y, float& z) {
     // Note: Previous method caused significant jitter with moving view
     // This now returns the exact offset which was in the same scenegraph node
-    assert(m_loaded);
-    x = read_float(eSunDir);
-    y = read_float(eSunDir + 0x4);
-    z = read_float(eSunDir + 0x8);
+    auto& translate = TES3::WorldController::get()->weatherController->sgSunVis->localTranslate;
+    x = translate.x;
+    y = translate.y;
+    z = translate.z;
 }
 
 //-----------------------------------------------------------------------------
 
 BYTE MWBridge::GetSunVis() {
-    assert(m_loaded);
-    return read_byte(eSunVis);
-}
-
-//-----------------------------------------------------------------------------
-
-// setSunriseSunset - Sets sunrise and sunset time and duration
-void MWBridge::setSunriseSunset(float rise_time, float rise_dur, float set_time, float set_dur) {
-    write_float(eSunriseHour, rise_time);
-    write_float(eSunriseDuration, rise_dur);
-    write_float(eSunsetHour, set_time);
-    write_float(eSunsetDuration, set_dur);
+    // TODO: This is totally wrong, need to look at fixing it without breaking visuals.
+    auto color = reinterpret_cast<BYTE*>(TES3::WorldController::get()->weatherController->shTriSunBase->modelData->color);
+    return color[3];
 }
 
 //-----------------------------------------------------------------------------
 
 DWORD MWBridge::IntCurCellAddr() {
-    assert(m_loaded);
-
-    DWORD addr = read_dword(eEnviro);
-    if (addr != 0) {
-        return read_dword(addr + 0xAC);
+    auto dataHandler = TES3::DataHandler::get();
+    if (dataHandler) {
+        return DWORD(dataHandler->currentInteriorCell);
     }
+
     return 0;
 }
 
 //-----------------------------------------------------------------------------
 
 const char* MWBridge::getInteriorName() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-
-    if (addr) {
-        return (const char*)read_dword(addr + 0x10);
-    } else {
-        return nullptr;
+    auto dataHandler = TES3::DataHandler::get();
+    if (dataHandler && dataHandler->currentInteriorCell) {
+        return dataHandler->currentInteriorCell->name;
     }
+
+    return nullptr;
 }
 
 //-----------------------------------------------------------------------------
 
 bool MWBridge::IntLikeExterior() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return ((read_byte(addr + 0x18) & 0xF3) == 0x93);
+    auto dataHandler = TES3::DataHandler::get();
+    if (dataHandler && dataHandler->currentInteriorCell) {
+        return dataHandler->currentInteriorCell->getBehavesAsExterior();
     }
-    return false;
-}
 
-//-----------------------------------------------------------------------------
-
-bool MWBridge::IntIllegSleep() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return ((read_byte(addr + 0x18) & 0x75) == 0x15);
-    }
-    return false;
-}
-
-//-----------------------------------------------------------------------------
-
-bool MWBridge::IntHasWater() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return ((read_byte(addr + 0x18) & 0xF3) == 0x13);
-    }
     return false;
 }
 
 //-----------------------------------------------------------------------------
 
 float MWBridge::WaterLevel() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0 && ((read_byte(addr + 0x18) & 0xF3) == 0x13)) {
-        return read_float(addr + 0x90);
-    }
-    return 0.0f;
+    return TES3::DataHandler::get()->currentCell->getWaterLevel().value_or(0.0f);
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::HaggleMore(DWORD num) {
-    assert(m_loaded);
-    typedef void (_stdcall *mmHaggleProc)();
-    mmHaggleProc proc = (mmHaggleProc)eHaggleMore;
-    num -= 1;
-    if (num != 0) {
-        int d = (int)read_dword(0x7D287C);
-        if (d <= 0) {
-            d -= num;
-        } else {
-            d += num;
-        }
+    int& haggleAmount = TES3::UI::getHaggleAmount();
 
-        write_dword(0x7D287C, d);
+    if (haggleAmount != 0) {
+        if (haggleAmount <= 0) {
+            haggleAmount -= num;
+        } else {
+            haggleAmount += num;
+        }
     }
-    proc();
+
+    TES3::UI::updateHaggleLabels();
 }
 
 //-----------------------------------------------------------------------------
 
 void MWBridge::HaggleLess(DWORD num) {
-    assert(m_loaded);
-    typedef void (_stdcall *mmHaggleProc)();
-    mmHaggleProc proc = (mmHaggleProc)eHaggleLess;
-    num -= 1;
-    if (num != 0) {
-        int d = (int)read_dword(0x7D287C);
-        if (d <= 0) {
-            d += num;
-        } else {
-            d -= num;
+    int& haggleAmount = TES3::UI::getHaggleAmount();
+
+    if (haggleAmount != 0) {
+        if (haggleAmount <= 0) {
+            haggleAmount += num;
         }
-
-        write_dword(0x7D287C, d);
+        else {
+            haggleAmount -= num;
+        }
     }
-    proc();
-}
 
-//-----------------------------------------------------------------------------
-
-const BYTE* MWBridge::getInteriorAmb() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return (BYTE*)(addr + 0x1C);
-    }
-    return 0;
+    TES3::UI::updateHaggleLabels();
 }
 
 //-----------------------------------------------------------------------------
 
 const BYTE* MWBridge::getInteriorSun() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return (BYTE*)(addr + 0x20);
+    auto interior = TES3::DataHandler::get()->currentInteriorCell;
+    if (interior) {
+        return reinterpret_cast<const BYTE*>(&interior->VariantData.interior.sunColor);
     }
-    return 0;
-}
 
-//-----------------------------------------------------------------------------
-
-const BYTE* MWBridge::getInteriorFog() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return (BYTE*)(addr + 0x24);
-    }
     return nullptr;
 }
 
 //-----------------------------------------------------------------------------
 
 float MWBridge::getInteriorFogDens() {
-    assert(m_loaded);
-    DWORD addr = IntCurCellAddr();
-    if (addr != 0) {
-        return read_float(addr + 0x28);
+    auto interior = TES3::DataHandler::get()->currentInteriorCell;
+    if (interior) {
+        return interior->VariantData.interior.fogDensity;
     }
-    return 0;
+
+    return 0.0f;
 }
 
 //-----------------------------------------------------------------------------
 
 DWORD MWBridge::PlayerPositionPointer() {
-    DWORD addr = eMaster1;
-    if (addr != 0) {
-        addr = read_dword(addr + 0x34);
-        if (addr != 0) {
-            return addr + 0x2AC;
-        }
-    }
-    return 0;
-}
-
-//-----------------------------------------------------------------------------
-
-float MWBridge::PlayerPositionX() {
-    DWORD addr = PlayerPositionPointer();
-    if (addr != 0) {
-        return read_float(addr + 0);
-    }
-    return 0;
-}
-
-//-----------------------------------------------------------------------------
-
-float MWBridge::PlayerPositionY() {
-    DWORD addr = PlayerPositionPointer();
-    if (addr != 0) {
-        return read_float(addr + 4);
-    }
-    return 0;
-}
-
-//-----------------------------------------------------------------------------
-
-float MWBridge::PlayerPositionZ() {
-    DWORD addr = PlayerPositionPointer();
-    if (addr != 0) {
-        return read_float(addr + 8);
-    }
-    return 0;
+    // Note: This used to point to the AudioController listenerPosition.
+    return DWORD(&TES3::WorldController::get()->getMobilePlayer()->position);
 }
 
 //-----------------------------------------------------------------------------
 
 float MWBridge::PlayerHeight() { // player eyes height, in CS
+    // Is this accurate? This is the player rotation matrix...
     float height = read_float(0x7D39F0); // like "Master", only read, in game PlayerHeight*125.0f
     return (height == 0 ? 1.0f : height);
 }
 
 //-----------------------------------------------------------------------------
 
-bool MWBridge::IsPlayerWaiting() { // wait/sleep menu
-    DWORD addr = eMaster1;
-    if (addr != 0) {
-        addr = read_dword(addr + 0x354);
-        if (addr != 0) {
-            return (read_byte(addr) == 0x01);
-        }
-    }
-    return false;
-}
-
-//-----------------------------------------------------------------------------
-
 // getPlayerMACP - Gets main game object holding the player state
 DWORD MWBridge::getPlayerMACP() {
-    DWORD addr = read_dword(eMaster1 + 0x5c);
-    addr = read_dword(addr + 0x24);
-    return read_dword(addr);
+    return DWORD(TES3::WorldController::get()->getMobilePlayer());
 }
 
 //-----------------------------------------------------------------------------
@@ -869,103 +515,95 @@ D3DXVECTOR3* MWBridge::PCam3Offset() {
         return nullptr;
     }
 
-    DWORD macp = getPlayerMACP();
-    if (macp == 0) {
+    auto macp = TES3::WorldController::get()->getMobilePlayer();
+    if (macp == nullptr) {
         return nullptr;
     }
 
-    // Camera control structure
-    DWORD node = read_dword(macp + 0x244);
-    return (D3DXVECTOR3*)(node + 0xd8);
+    return reinterpret_cast<D3DXVECTOR3*>(&macp->animationData.asPlayer->cameraOffset);
 }
 
 //-----------------------------------------------------------------------------
 
 bool MWBridge::is3rdPerson() {
-    // Pointer resolve will fail during load screens
     if (IsLoadScreen()) {
         return false;
     }
 
-    DWORD macp = getPlayerMACP();
-    if (macp == 0) {
+    auto macp = TES3::WorldController::get()->getMobilePlayer();
+    if (macp == nullptr) {
         return false;
     }
 
-    // Camera control structure
-    DWORD node = read_dword(macp + 0x244);
-    return read_byte(node + 0xe8);
+    return macp->animationData.asPlayer->is3rdPerson;
 }
 
 //-----------------------------------------------------------------------------
 
 DWORD MWBridge::getPlayerTarget() {
-    return read_dword(eLookMenu);
+    constexpr auto x = offsetof(TES3::MobileActor, currentEnchantedItem) == 0x380;
+    return DWORD(TES3::Game::get()->playerTarget);
 }
 
 //-----------------------------------------------------------------------------
 
 // getPlayerWeapon - Gets player weapon type
 int MWBridge::getPlayerWeapon() {
-    DWORD macp = getPlayerMACP();
-    if (macp == 0) {
+    auto macp = TES3::WorldController::get()->getMobilePlayer();
+    if (macp == nullptr) {
         return 0;
     }
 
     // Check active weapon
-    DWORD weapon = read_dword(macp + 0x388);
-    if (weapon == 0) {
+    auto readiedWeapon = macp->readiedWeapon;
+    if (readiedWeapon == nullptr) {
         return -1;
     }
 
-    weapon = read_dword(weapon);
-    return read_byte(weapon + 0x5c);
+    return static_cast<TES3::Weapon*>(readiedWeapon->object)->weaponType;
 }
 
 //-----------------------------------------------------------------------------
 
 // isPlayerCasting - Tests is the player is currently casting
 bool MWBridge::isPlayerCasting() {
-    DWORD macp = getPlayerMACP();
-    if (macp == 0) {
+    auto macp = TES3::WorldController::get()->getMobilePlayer();
+    if (macp == nullptr) {
         return false;
     }
-
-    // Check animation state machine for casting
-    BYTE anim = read_byte(macp + 0xdd);
-    return anim == 0x0a;
+    return macp->actionData.animStateAttack == TES3::AttackAnimationState::Casting;
 }
 
 //-----------------------------------------------------------------------------
 
 // isPlayerAimingWeapon - Tests if the player is in the drawing stage of attacking with a ranged weapon
 bool MWBridge::isPlayerAimingWeapon() {
-    DWORD macp = getPlayerMACP();
-    if (macp == 0) {
-        return 0;
+    auto macp = TES3::WorldController::get()->getMobilePlayer();
+    if (macp == nullptr) {
+        return false;
     }
 
     // Check animation state machine for weapon pullback
-    BYTE anim = read_byte(macp + 0xdd);
-    if (anim != 2) {
+    auto anim = macp->actionData.animStateAttack;
+    if (anim != TES3::AttackAnimationState::SwingUp) {
         return false;
     }
 
     // Check weapon type (bow, crossbow, thrown)
-    DWORD weapon = read_dword(macp + 0x388);
-    if (weapon == 0) {
+    auto readiedWeapon = macp->readiedWeapon;
+    if (readiedWeapon == nullptr) {
         return false;
     }
 
-    weapon = read_dword(weapon);
-    return read_byte(weapon + 0x5c) >= 9;
+    return static_cast<TES3::Weapon*>(readiedWeapon->object)->isRanged();
 }
 
 //-----------------------------------------------------------------------------
 
 // toggleRipples - Turns off ripple generation from all sources
 void MWBridge::toggleRipples(BOOL enabled) {
-    DWORD addr = eRipplesSwitch;
+    // TODO: Clean this up to ideally not require code injection. Maybe just set maxRipples to 0?
+    DWORD addr = 0x51C2D4;
     DWORD code = read_dword(addr);
     if (enabled && code == 0x33504D8B || !enabled && code == 0x3390C931) {
         return;
@@ -981,22 +619,9 @@ void MWBridge::toggleRipples(BOOL enabled) {
 // markWaterNode
 // Edits the water material to set (normally unused) specular power to a recognizable value
 void MWBridge::markWaterNode(float k) {
-    // Get water node
-    DWORD addr = read_dword(eEnviro);
-    addr = read_dword(addr + 0xb4ec);
-    addr = read_dword(addr + 0xb4);
-
-    // Look for NiMaterialProperty in property list (skipping first property)
-    DWORD linknode;
-    for (linknode = read_dword(addr + 0x8c); linknode; linknode = read_dword(linknode + 4)) {
-        if (read_dword(read_dword(linknode)) == 0x75036c) {
-            break;
-        }
-    }
-
-    // Write to specular power member
-    if (linknode) {
-        write_float(read_dword(linknode) + 0x4c, k);
+    auto waterMaterialProperty = static_cast<NI::MaterialProperty*>(TES3::DataHandler::get()->waterController->waterNode->getProperty(NI::PropertyType::Material).get());
+    if (waterMaterialProperty) {
+        waterMaterialProperty->shininess = k;
     }
 }
 
@@ -1005,31 +630,16 @@ void MWBridge::markWaterNode(float k) {
 // markMoonNodes
 // Edits the material for both moons to set (normally unused) specular power to a recognizable value
 void MWBridge::markMoonNodes(float k) {
-    DWORD addr = read_dword(eMaster);
-    addr = read_dword(addr + 0x58);
+    auto weatherController = TES3::WorldController::get()->weatherController;
 
-    // Get masser node
-    DWORD moon = read_dword(addr + 0x48);
-    moon = read_dword(moon + 0x10);
-
-    // Look for NiMaterialProperty in first property slot
-    DWORD node = read_dword(moon + 0x88);
-
-    // Write to specular power member
-    if (node && read_dword(node) == 0x75036c) {
-        write_float(node + 0x4c, k);
+    auto materialProperty = static_cast<NI::MaterialProperty*>(weatherController->moonMasser->sgTriMoonShadow->getProperty(NI::PropertyType::Material).get());
+    if (materialProperty) {
+        materialProperty->shininess = k;
     }
 
-    // Get secunda node
-    moon = read_dword(addr + 0x44);
-    moon = read_dword(moon + 0x10);
-
-    // Look for NiMaterialProperty in first property slot
-    node = read_dword(moon + 0x88);
-
-    // Write to specular power member
-    if (node && read_dword(node) == 0x75036c) {
-        write_float(node + 0x4c, k);
+    materialProperty = static_cast<NI::MaterialProperty*>(weatherController->moonSecunda->sgTriMoonShadow->getProperty(NI::PropertyType::Material).get());
+    if (materialProperty) {
+        materialProperty->shininess = k;
     }
 }
 
@@ -1038,6 +648,7 @@ void MWBridge::markMoonNodes(float k) {
 // disableScreenshotFunc
 // Stops Morrowind from taking its own screenshots, or displaying an error message, when PrtScr is pressed
 void MWBridge::disableScreenshotFunc() {
+    // TODO: Change this to a toggleable function thing.
     DWORD addr = 0x41b08a;
 
     // Replace jz short with jmp (74 -> eb)
@@ -1049,6 +660,7 @@ void MWBridge::disableScreenshotFunc() {
 
 // disableSunglare - Turns off the sunglare billboard and fullscreen glare that appears when looking at the sun
 void MWBridge::disableSunglare() {
+    // TODO: More code injection changes.
     DWORD addr = 0x4404fb;
 
     // Replace jz short with nop (74 xx -> 90 90)
@@ -1061,6 +673,7 @@ void MWBridge::disableSunglare() {
 
 // disableIntroMovies - Skips playing both intro movies
 void MWBridge::disableIntroMovies() {
+    // TODO: More code injection changes.
     DWORD addr = 0x418ef0;
     BYTE patch[] = { 0xeb, 0x16 };
 
@@ -1105,7 +718,7 @@ void MWBridge::redirectMenuBackground(void (_stdcall* func)(int)) {
 // setUIScale - Configures the scaling of Morrowind's UI system, must be called early before main menu
 //              MWBridge is not required to be loaded for this function.
 void MWBridge::setUIScale(float scale) {
-    DWORD addr = read_dword(eMaster);
+    DWORD addr = DWORD(TES3::WorldController::get());
     int w, h;
 
     // Read UI viewport width and height
@@ -1181,11 +794,7 @@ void MWBridge::patchFrameTimer(int (__cdecl* newfunc)()) {
 
 // getGMSTPointer - Gets a pointer directly to the data of a GMST (of any type)
 void* MWBridge::getGMSTPointer(DWORD id) {
-    DWORD addr = read_dword(eEnviro);
-    addr = read_dword(addr);
-    addr = read_dword(addr + 0x18);
-    addr = read_dword(addr + 4 * id);
-    return (void*)(addr + 0x10);
+    return &TES3::DataHandler::get()->nonDynamicData->GMSTs[id]->value;
 }
 
 //-----------------------------------------------------------------------------
@@ -1193,44 +802,39 @@ void* MWBridge::getGMSTPointer(DWORD id) {
 // getKeybindCode - Gets the scancode that an action is bound to
 // action -> the keybind order in the Morrowind controls menu
 DWORD MWBridge::getKeybindCode(DWORD action) {
-    DWORD addr = read_dword(eMaster1 + 0x4c) + 0x1b3c;
-    return read_dword(addr + 16*action);
+    return TES3::WorldController::get()->inputController->inputMaps[action].keyCode;
 }
 
 //-----------------------------------------------------------------------------
 
 // getPlayerName - Returns the player's name, or null if not loaded
 const char* MWBridge::getPlayerName() {
-    DWORD macp = getPlayerMACP();
-    if (macp == 0) {
+    auto macp = TES3::WorldController::get()->getMobilePlayer();
+    if (macp == nullptr) {
         return nullptr;
     }
 
     // Get name from base NPC
-    DWORD npcClone = read_dword(macp + 0x560);
-    DWORD npcBase = read_dword(npcClone + 0x6c);
-    return reinterpret_cast<const char*>(read_dword(npcBase + 0x70));
+    return macp->npcInstance->baseNPC->name;
 }
 
 //-----------------------------------------------------------------------------
 
 // getGameHour - Returns the value of the script global GameHour
 float MWBridge::getGameHour() {
-    DWORD gvar = read_dword(eMaster1 + 0xa8);
-    return read_float(gvar + 0x34);
+    return TES3::WorldController::get()->gvarGameHour->value;
 }
 
 //-----------------------------------------------------------------------------
 
 // getDaysPassed - Returns the value of the script global DaysPassed
 int MWBridge::getDaysPassed() {
-    DWORD gvar = read_dword(eMaster1 + 0xb8);
-    return int(read_float(gvar + 0x34));
+    return int(TES3::WorldController::get()->gvarDaysPassed->value);
 }
 
 //-----------------------------------------------------------------------------
 
 // getFrameBeginMillis - Returns timer millis measured at start of frame
 int MWBridge::getFrameBeginMillis() {
-    return read_dword(eMaster1 + 0x20);
+    return TES3::WorldController::get()->systemTimeMillis;
 }

@@ -218,6 +218,27 @@ namespace TES3 {
 	static_assert(sizeof(SplashController) == 0x74, "TES3::SplashController failed size validation");
 	static_assert(sizeof(SplashController::ActiveSplash) == 0xC, "TES3::SplashController::ActiveSplash failed size validation");
 
+	struct ShadowManager {
+		bool unknown_0x0;
+		TES3::IteratedList<void*>* unknown_0x04;
+		NI::Pointer<NI::Camera> camera; // 0x8
+		bool unknown_0xC;
+		int unknown_0x10;
+		short unknown_0x14;
+		short unknown_0x16;
+		short unknown_0x18;
+		short unknown_0x1A;
+		short unknown_0x1C;
+		NI::Pointer<NI::Object> unknown_0x20[14];
+		NI::Pointer<NI::Object> unknown_0x58;
+		NI::Pointer<NI::Object> unknown_0x5C;
+		int unknown_0x60;
+		int unknown_0x64;
+		int unknown_0x68;
+		bool forceUpdate; // 0x6C
+	};
+	static_assert(sizeof(ShadowManager) == 0x70, "TES3::ShadowManager failed size validation");
+
 	struct WorldController {
 		int unknown_0x0;
 		int unknown_0x4;
@@ -228,9 +249,9 @@ namespace TES3 {
 		int unknown_0x18;
 		int unknown_0x1C;
 		unsigned int systemTimeMillis; // 0x20
-		unsigned int lastFrameTimeMillis; // 0x4
+		unsigned int lastFrameTimeMillis; // 0x24
 		int unknown_0x28;
-		float deltaTime; // 0xC
+		float deltaTime; // 0x2C
 		NI::Renderer * renderer; // 0x30
 		AudioController * audioController; // 0x34
 		int unknown_0x38;
@@ -301,7 +322,7 @@ namespace TES3 {
 		WorldControllerRenderTarget characterRenderTarget; // 0x1A8
 		WorldControllerRenderTarget mapRenderTarget; // 0x22C
 		WorldControllerRenderCamera shadowCamera; // 0x2B0
-		void* shadowManager; // 0x2DC
+		ShadowManager* shadowManager; // 0x2DC
 		void* fogOfWarController; // 0x2E0
 		UI::MenuController * menuController; // 0x2E4
 		InventoryData * inventoryData; // 0x2E8
