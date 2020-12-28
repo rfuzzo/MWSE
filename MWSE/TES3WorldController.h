@@ -35,8 +35,8 @@ namespace TES3 {
 			float fovDegrees; // 0x8
 			float nearPlaneDistance; // 0xC
 			float farPlaneDistance; // 0x10
-			float viewportWidth; // 0x14
-			float viewportHeight; // 0x18
+			int viewportWidth; // 0x14
+			int viewportHeight; // 0x18
 
 			//
 			// Other related this-call functions.
