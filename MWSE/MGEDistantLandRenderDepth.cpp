@@ -1,8 +1,8 @@
 
-#include "configuration.h"
-#include "distantland.h"
-#include "distantshader.h"
-#include "mwbridge.h"
+#include "MGEConfiguration.h"
+#include "MGEDistantLand.h"
+#include "MGEDistantLandShader.h"
+#include "MGEMWBridge.h"
 #include "d3d8header.h"
 
 void DistantLand::renderDepth() {

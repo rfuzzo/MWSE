@@ -3,7 +3,7 @@
 #ifndef _INIDATA_H_
 #define _INIDATA_H_
 
-#include "configinternal.h"
+#include "MGEConfigInternal.h"
 
 
 

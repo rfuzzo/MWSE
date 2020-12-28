@@ -23,7 +23,7 @@
 #include "Stack.h"
 #include "InstructionInterface.h"
 
-#include "configuration.h"
+#include "MGEConfiguration.h"
 
 using namespace mwse;
 

@@ -25,7 +25,7 @@
 #include "MemoryUtil.h"
 
 #include "Log.h"
-#include "mgeversion.h"
+#include "MGEVersion.h"
 
 using namespace mwse;
 

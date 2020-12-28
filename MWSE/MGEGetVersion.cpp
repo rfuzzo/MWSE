@@ -24,7 +24,7 @@
 #include "InstructionInterface.h"
 #include "MemoryUtil.h"
 
-#include "mgeversion.h"
+#include "MGEVersion.h"
 
 using namespace mwse;
 

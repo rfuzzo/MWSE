@@ -1,6 +1,6 @@
 #pragma once
 
-#include "doublesurface.h"
+#include "MGEDoubleSurface.h"
 
 enum EffectVariableID {
 	EV_lastshader, EV_lastpass, EV_depthframe, EV_watertexture,

@@ -1,5 +1,5 @@
 
-#include "dlmath.h"
+#include "MGEDistantLandMath.h"
 
 //-----------------------------------------------------------------------------
 // BoundingSphere class

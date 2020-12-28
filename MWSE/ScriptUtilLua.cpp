@@ -19,12 +19,12 @@
 #include "BitUtil.h"
 
 // MGE support functions.
-#include "configuration.h"
-#include "distantland.h"
+#include "MGEConfiguration.h"
+#include "MGEDistantLand.h"
 #include "Log.h"
-#include "mgeversion.h"
-#include "postshaders.h"
-#include "userhud.h"
+#include "MGEVersion.h"
+#include "MGEPostShaders.h"
+#include "MGEUserHUD.h"
 
 namespace mwse {
 	namespace lua {

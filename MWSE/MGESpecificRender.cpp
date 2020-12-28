@@ -1,6 +1,6 @@
 
-#include "specificrender.h"
-#include "configuration.h"
+#include "MGESpecificRender.h"
+#include "MGEConfiguration.h"
 
 
 

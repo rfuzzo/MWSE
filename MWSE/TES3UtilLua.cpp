@@ -73,8 +73,8 @@
 #include "TES3WeatherController.h"
 #include "TES3WorldController.h"
 
-#include "distantland.h"
-#include "mgedinput.h"
+#include "MGEDistantLand.h"
+#include "MGEDInput.h"
 
 #include "BitUtil.h"
 

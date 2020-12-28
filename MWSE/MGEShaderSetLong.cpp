@@ -23,7 +23,7 @@
 #include "Stack.h"
 #include "InstructionInterface.h"
 
-#include "postshaders.h"
+#include "MGEPostShaders.h"
 
 using namespace mwse;
 

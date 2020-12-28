@@ -33,9 +33,9 @@
 #include "TES3Game.h"
 
 // MGE headers
-#include "configuration.h"
-#include "mgeversion.h"
-#include "mwinitpatch.h"
+#include "MGEConfiguration.h"
+#include "MGEVersion.h"
+#include "MGEMWInitPatch.h"
 #include "Log.h"
 
 const auto TES3_Game_ctor = reinterpret_cast<TES3::Game*(__thiscall*)(TES3::Game*)>(0x417280);

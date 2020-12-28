@@ -1,11 +1,11 @@
 
-#include "mmefunctiondefs.h"
-#include "configuration.h"
-#include "mwbridge.h"
-#include "statusoverlay.h"
-#include "distantland.h"
-#include "postshaders.h"
-#include "pngsave.h"
+#include "MGEMacroFunctionDefs.h"
+#include "MGEConfiguration.h"
+#include "MGEMWBridge.h"
+#include "MGEStatusOverlay.h"
+#include "MGEDistantLand.h"
+#include "MGEPostShaders.h"
+#include "PNGUtil.h"
 
 enum SuffixFormatting {
 	SuffixFormatting_Timestamp = 0,

@@ -1,10 +1,10 @@
 
-#include "distantland.h"
-#include "distantshader.h"
-#include "configuration.h"
-#include "doublesurface.h"
-#include "mwbridge.h"
-#include "postshaders.h"
+#include "MGEDistantLand.h"
+#include "MGEDistantLandShader.h"
+#include "MGEConfiguration.h"
+#include "MGEDoubleSurface.h"
+#include "MGEMWBridge.h"
+#include "MGEPostShaders.h"
 
 
 

@@ -1,8 +1,8 @@
 
-#include "distantland.h"
-#include "distantshader.h"
-#include "configuration.h"
-#include "mwbridge.h"
+#include "MGEDistantLand.h"
+#include "MGEDistantLandShader.h"
+#include "MGEConfiguration.h"
+#include "MGEMWBridge.h"
 #include "d3d8header.h"
 
 // renderSky - Render atmosphere scattering sky layer and other recorded draw calls on top

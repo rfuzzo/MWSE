@@ -1,10 +1,10 @@
 
 #include "Log.h"
-#include "mgedinput.h"
-#include "configuration.h"
-#include "mgeversion.h"
-#include "mmefunctiondefs.h"
-#include "mwbridge.h"
+#include "MGEDInput.h"
+#include "MGEConfiguration.h"
+#include "MGEVersion.h"
+#include "MGEMacroFunctionDefs.h"
+#include "MGEMWBridge.h"
 
 
 bool MGEProxyDirectInput::mouseClick = false;

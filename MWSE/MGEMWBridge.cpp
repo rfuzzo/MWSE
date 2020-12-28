@@ -1,7 +1,7 @@
 // This file contains code from fps optimizer
 // Memory layout originally worked out by Alexander Stasenko
 
-#include "mwbridge.h"
+#include "MGEMWBridge.h"
 #include "assert.h"
 
 #include "TES3AudioController.h"

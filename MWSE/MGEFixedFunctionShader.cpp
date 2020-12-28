@@ -1,5 +1,5 @@
 
-#include "ffeshader.h"
+#include "MGEFixedFunctionShader.h"
 #include "Log.h"
 
 using std::string;

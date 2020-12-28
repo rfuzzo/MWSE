@@ -26,7 +26,7 @@
 
 #include "TES3WeatherController.h"
 
-#include "configuration.h"
+#include "MGEConfiguration.h"
 
 using namespace mwse;
 

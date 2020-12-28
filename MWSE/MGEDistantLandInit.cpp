@@ -1,13 +1,13 @@
 
 #include "Log.h"
-#include "configuration.h"
-#include "distantland.h"
-#include "distantshader.h"
-#include "dlformat.h"
-#include "postshaders.h"
-#include "morrowindbsa.h"
-#include "mwbridge.h"
-#include "mgeversion.h"
+#include "MGEConfiguration.h"
+#include "MGEDistantLand.h"
+#include "MGEDistantLandShader.h"
+#include "MGEDistantLandFormat.h"
+#include "MGEPostShaders.h"
+#include "MGEMorrowindBSA.h"
+#include "MGEMWBridge.h"
+#include "MGEVersion.h"
 
 #define READ_FROM_BUFFER(src, dest, size) memcpy((void*)dest, (void*)src, size); src += size;
 

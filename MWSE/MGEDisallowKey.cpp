@@ -23,7 +23,7 @@
 #include "Stack.h"
 #include "InstructionInterface.h"
 
-#include "mgedinput.h"
+#include "MGEDInput.h"
 
 using namespace mwse;
 

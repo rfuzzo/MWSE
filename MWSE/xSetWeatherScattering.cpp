@@ -24,7 +24,7 @@
 #include "InstructionInterface.h"
 #include "MemoryUtil.h"
 
-#include "distantland.h"
+#include "MGEDistantLand.h"
 
 using namespace mwse;
 

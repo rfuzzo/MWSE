@@ -1,8 +1,8 @@
 #pragma once
 
-#include "quadtree.h"
-#include "ffeshader.h"
-#include "specificrender.h"
+#include "MGEQuadTree.h"
+#include "MGEFixedFunctionShader.h"
+#include "MGESpecificRender.h"
 
 struct MGEShader;
 

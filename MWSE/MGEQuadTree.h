@@ -1,7 +1,7 @@
 #pragma once
 
-#include "dlmath.h"
-#include "memorypool.h"
+#include "MGEDistantLandMath.h"
+#include "MGEMemoryPool.h"
 
 struct QuadTreeMesh {
 	BoundingSphere sphere;

@@ -1,6 +1,6 @@
 
-#include "videobackground.h"
-#include "mwbridge.h"
+#include "MGEVideoBackground.h"
+#include "MGEMWBridge.h"
 #include "Log.h"
 
 #define BINKSURFACE32       3

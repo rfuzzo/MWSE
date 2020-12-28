@@ -2,8 +2,8 @@
 
 #pragma setlocale("C")
 
-#include "configuration.h"
-#include "inidata.h"
+#include "MGEConfiguration.h"
+#include "MGEINIData.h"
 
 ConfigurationStruct Configuration;
 

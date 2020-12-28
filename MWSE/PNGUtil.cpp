@@ -1,5 +1,5 @@
 
-#include "pngsave.h"
+#include "PNGUtil.h"
 
 struct CRC32 {
 	static std::array<uint32_t, 256> table;

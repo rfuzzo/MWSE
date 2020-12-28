@@ -1,10 +1,10 @@
 
-#include "mgedinput.h"
-#include "configuration.h"
-#include "distantland.h"
-#include "distantshader.h"
-#include "postshaders.h"
-#include "mwbridge.h"
+#include "MGEDInput.h"
+#include "MGEConfiguration.h"
+#include "MGEDistantLand.h"
+#include "MGEDistantLandShader.h"
+#include "MGEPostShaders.h"
+#include "MGEMWBridge.h"
 
 using std::string;
 using std::unordered_map;

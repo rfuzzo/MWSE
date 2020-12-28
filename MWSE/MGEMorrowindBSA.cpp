@@ -1,5 +1,5 @@
 
-#include "morrowindbsa.h"
+#include "MGEMorrowindBSA.h"
 #include "d3d8header.h"
 
 using std::unordered_map;

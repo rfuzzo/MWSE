@@ -1,5 +1,5 @@
 
-#include "quadtree.h"
+#include "MGEQuadTree.h"
 
 using std::deque;
 

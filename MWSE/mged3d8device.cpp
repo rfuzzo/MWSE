@@ -1,15 +1,15 @@
 
-#include "mged3d8device.h"
+#include "MGED3D8Device.h"
 #include "d3d8texture.h"
 #include "d3d8surface.h"
 
-#include "mgeversion.h"
-#include "configuration.h"
-#include "distantland.h"
-#include "mwbridge.h"
-#include "statusoverlay.h"
-#include "userhud.h"
-#include "videobackground.h"
+#include "MGEVersion.h"
+#include "MGEConfiguration.h"
+#include "MGEDistantLand.h"
+#include "MGEMWBridge.h"
+#include "MGEStatusOverlay.h"
+#include "MGEUserHUD.h"
+#include "MGEVideoBackground.h"
 
 static int sceneCount;
 static bool rendertargetNormal, isHUDready;

@@ -1,7 +1,7 @@
 
-#include "statusoverlay.h"
-#include "configuration.h"
-#include "mged3d8device.h"
+#include "MGEStatusOverlay.h"
+#include "MGEConfiguration.h"
+#include "MGED3D8Device.h"
 
 char StatusOverlay::statusText[512];
 char StatusOverlay::fpsText[16];

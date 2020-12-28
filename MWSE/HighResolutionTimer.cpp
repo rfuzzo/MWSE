@@ -1,6 +1,6 @@
 
 #include "stdint.h"
-#include "timing.h"
+#include "HighResolutionTimer.h"
 
 // Calculations use doubles, as int64 ops bring in an excessive amount of library code on a 32-bit target
 

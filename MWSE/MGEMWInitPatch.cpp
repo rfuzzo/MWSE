@@ -1,8 +1,8 @@
 
-#include "mwinitpatch.h"
-#include "configuration.h"
-#include "mwbridge.h"
-#include "timing.h"
+#include "MGEMWInitPatch.h"
+#include "MGEConfiguration.h"
+#include "MGEMWBridge.h"
+#include "HighResolutionTimer.h"
 
 // Disable intro movies on initialization as the logo appears before game init
 void MWInitPatch::disableIntroMovies() {

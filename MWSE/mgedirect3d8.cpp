@@ -1,7 +1,7 @@
 
-#include "mgedirect3d8.h"
-#include "mged3d8device.h"
-#include "configuration.h"
+#include "MGEDirect3D8.h"
+#include "MGED3D8Device.h"
+#include "MGEConfiguration.h"
 #include "Log.h"
 
 MGEProxyD3D::MGEProxyD3D(IDirect3D9* real) : ProxyD3D(real, 120) { // Morrowind requires D3D version 120

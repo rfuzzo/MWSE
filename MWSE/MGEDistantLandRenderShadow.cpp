@@ -1,8 +1,8 @@
 
-#include "distantland.h"
-#include "distantshader.h"
-#include "configuration.h"
-#include "mwbridge.h"
+#include "MGEDistantLand.h"
+#include "MGEDistantLandShader.h"
+#include "MGEConfiguration.h"
+#include "MGEMWBridge.h"
 
 static const float shadowNearRadius = 1000.0;
 static const float shadowFarRadius = 4000.0;

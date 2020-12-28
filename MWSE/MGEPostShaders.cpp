@@ -1,9 +1,9 @@
 
 #include "d3d8header.h"
 #include "Log.h"
-#include "configuration.h"
-#include "mwbridge.h"
-#include "postshaders.h"
+#include "MGEConfiguration.h"
+#include "MGEMWBridge.h"
+#include "MGEPostShaders.h"
 
 // Must match enum EffectVariableID in postshaders.h
 const char* effectVariableList[] = {

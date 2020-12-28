@@ -24,7 +24,7 @@
 #include "InstructionInterface.h"
 #include "MemoryUtil.h"
 
-#include "userhud.h"
+#include "MGEUserHUD.h"
 
 using namespace mwse;
 
