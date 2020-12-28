@@ -38,8 +38,6 @@
 #include "mwinitpatch.h"
 #include "mge_log.h"
 
-TES3MACHINE* mge_virtual_machine = NULL;
-
 const auto TES3_Game_ctor = reinterpret_cast<TES3::Game*(__thiscall*)(TES3::Game*)>(0x417280);
 TES3::Game* __fastcall OnGameStructCreated(TES3::Game * game) {
 	// Install necessary patches.
@@ -108,9 +106,6 @@ void MWSE_DllAttach() {
 
 	// Install patches.
 	mwse::genCallEnforced(0x417169, 0x417280, reinterpret_cast<DWORD>(OnGameStructCreated));
-
-	// Create MGE VM interface.
-	mge_virtual_machine = new TES3MACHINE();
 
 	// Parse and load the features installed by the Morrowind Code Patch.
 	if (mwse::mcp::loadFeatureList()) {
@@ -210,23 +205,6 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 	}
 
 	return true;
-}
-
-// MGE XE exports
-extern "C"
-{
-	__declspec(dllexport) TES3MACHINE* MWSEGetVM();
-	__declspec(dllexport) bool MWSEAddInstruction(OPCODE op, INSTRUCTION *ins);
-}
-
-TES3MACHINE* MWSEGetVM()
-{
-	return mge_virtual_machine;
-}
-
-bool MWSEAddInstruction(OPCODE op, INSTRUCTION *ins)
-{
-	return mge_virtual_machine->AddInstruction(op, ins);
 }
 
 extern "C" void* _stdcall FakeDirect3DCreate(UINT version) {
