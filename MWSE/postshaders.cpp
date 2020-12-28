@@ -1,6 +1,6 @@
 
 #include "d3d8header.h"
-#include "mge_log.h"
+#include "Log.h"
 #include "configuration.h"
 #include "mwbridge.h"
 #include "postshaders.h"
@@ -34,7 +34,6 @@ float PostShaders::rcpRes[2];
 
 // init - Initialize post-processing shader system
 bool PostShaders::init(IDirect3DDevice9* realDevice) {
-	LOG::logline(">> Post Process shader init");
 	device = realDevice;
 
 	if (!initBuffers()) {
@@ -45,7 +44,6 @@ bool PostShaders::init(IDirect3DDevice9* realDevice) {
 		return false;
 	}
 
-	LOG::logline("<< Post Process shader init");
 	return true;
 }
 
@@ -69,7 +67,7 @@ bool PostShaders::initShaderChain() {
 
 		std::snprintf(path, sizeof(path), "Data Files\\shaders\\XEshaders\\%s.fx", p);
 		if (!GetFileAttributesEx(path, GetFileExInfoStandard, &fileAttrs)) {
-			LOG::logline("!! Post shader %s missing", path);
+			mwse::log::logLine("!! Post shader %s missing", path);
 			continue;
 		}
 
@@ -84,25 +82,22 @@ bool PostShaders::initShaderChain() {
 				initShader(&shader);
 				loadShaderDependencies(&shader);
 				shaders.push_back(shader);
-				LOG::logline("-- Post shader %s loaded", path);
 			} else {
 				shader.effect->Release();
-				LOG::logline("## Post shader %s is not version compatible, not loaded", path);
+				mwse::log::logLine("## Post shader %s is not version compatible, not loaded", path);
 			}
 		} else {
-			LOG::logline("!! Post shader %s failed to load/compile", path);
+			mwse::log::logLine("!! Post shader %s failed to load/compile", path);
 			if (errors) {
-				LOG::logline("!! Shader errors: %s", errors->GetBufferPointer());
+				mwse::log::logLine("!! Shader errors: %s", errors->GetBufferPointer());
 				errors->Release();
 			}
 		}
 	}
 
-	LOG::logline("-- Shader chain indicates HDR %s", (Configuration.MGEFlags & USE_HDR) ? "On" : "Off");
 
 	if (Configuration.MGEFlags & NO_MW_SUNGLARE) {
 		MWBridge::get()->disableSunglare();
-		LOG::logline("-- Shader chain replaces standard Morrowind sun glare");
 	}
 
 	return true;
@@ -134,12 +129,11 @@ bool PostShaders::updateShaderChain() {
 
 				initShader(&s);
 				loadShaderDependencies(&s);
-				LOG::logline("-- Post shader %s reloaded", path);
 				updated = true;
 			} else {
-				LOG::logline("!! Post shader %s failed to load/compile", path);
+				mwse::log::logLine("!! Post shader %s failed to load/compile", path);
 				if (errors) {
-					LOG::logline("!! Shader errors: %s", errors->GetBufferPointer());
+					mwse::log::logLine("!! Shader errors: %s", errors->GetBufferPointer());
 					errors->Release();
 				}
 			}
@@ -231,7 +225,7 @@ void PostShaders::loadShaderDependencies(MGEShader* shader) {
 			if (D3DXCreateTextureFromFile(device, texturepath, &tex) == D3D_OK) {
 				effect->SetTexture(ehTextureRef, tex);
 			} else {
-				LOG::logline("!! Post shader %s failed to load texture %s", shader->name.c_str(), texturepath);
+				mwse::log::logLine("!! Post shader %s failed to load texture %s", shader->name.c_str(), texturepath);
 			}
 		}
 	}
@@ -254,17 +248,17 @@ bool PostShaders::initBuffers() {
 
 	hr = device->CreateTexture(w, h, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &texLastShader, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create post-process render target");
+		mwse::log::logLine("!! Failed to create post-process render target");
 		return false;
 	}
 	hr = device->CreateTexture(w, h, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &texDoubleBuffer[0], NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create post-process render target");
+		mwse::log::logLine("!! Failed to create post-process render target");
 		return false;
 	}
 	hr = device->CreateTexture(w, h, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &texDoubleBuffer[1], NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create post-process render target");
+		mwse::log::logLine("!! Failed to create post-process render target");
 		return false;
 	}
 
@@ -279,7 +273,7 @@ bool PostShaders::initBuffers() {
 	// Skip vertex shader with post-transform vertex buffer
 	hr = device->CreateVertexBuffer(4 * 32, 0, 0, D3DPOOL_MANAGED, &vbPost, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create post-process verts");
+		mwse::log::logLine("!! Failed to create post-process verts");
 		return false;
 	}
 
@@ -299,12 +293,12 @@ bool PostShaders::initBuffers() {
 	// HDR readback system
 	hr = device->CreateRenderTarget(1, 1, D3DFMT_A8R8G8B8, D3DMULTISAMPLE_NONE, 0, false, &surfReadqueue, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create HDR surface queue");
+		mwse::log::logLine("!! Failed to create HDR surface queue");
 		return false;
 	}
 	hr = device->CreateOffscreenPlainSurface(1, 1, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &surfReadback, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create HDR surface queue");
+		mwse::log::logLine("!! Failed to create HDR surface queue");
 		return false;
 	}
 	adaptPoint = D3DXVECTOR4(1.0, 1.0, 1.0, 1.0);

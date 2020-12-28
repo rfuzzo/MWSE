@@ -1,5 +1,5 @@
 
-#include "mge_log.h"
+#include "Log.h"
 #include "configuration.h"
 #include "distantland.h"
 #include "distantshader.h"
@@ -191,70 +191,56 @@ bool DistantLand::init(IDirect3DDevice9* realDevice) {
 	}
 
 	device = realDevice;
-	LOG::logline(">> Distant Land init");
 	vsr.init(device);
 
-	LOG::logline(">> Distant Land init BSAs");
 	BSAInit();
 
-	LOG::logline(">> Distant Land init shader");
 	if (!initShader()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init fixed function emu");
 	if (!FixedFunctionShader::init(device, effectPool)) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init post shaders");
 	if (!PostShaders::init(device)) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init depth");
 	if (!initDepth()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init shadow");
 	if (!initShadow()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init water");
 	if (!initWater()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init world");
 	if (!initLandscape()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init statics");
 	if (!initDistantStatics()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land init grass");
 	if (!initGrass()) {
 		return false;
 	}
 
-	LOG::logline("<< Distant Land init");
 	ready = true;
 	isRenderCached = false;
 	return true;
 }
 
 bool DistantLand::reloadShaders() {
-	LOG::logline(">> Distant Land reload shader");
 	if (!initShader()) {
 		return false;
 	}
 
-	LOG::logline(">> Distant Land reload fixed function emu");
 	FixedFunctionShader::release();
 	if (!FixedFunctionShader::init(device, effectPool)) {
 		return false;
@@ -264,9 +250,9 @@ bool DistantLand::reloadShaders() {
 }
 
 static void logShaderError(const char* shaderID, ID3DXBuffer* errors) {
-	LOG::logline("!! %s shader error", shaderID);
+	mwse::log::logLine("!! %s shader error", shaderID);
 	if (errors) {
-		LOG::logline("!! Shader errors: %s", errors->GetBufferPointer());
+		mwse::log::logLine("!! Shader errors: %s", errors->GetBufferPointer());
 		errors->Release();
 	}
 }
@@ -300,7 +286,7 @@ bool DistantLand::initShader() {
 	if (!effectPool) {
 		hr = D3DXCreateEffectPool(&effectPool);
 		if (hr != D3D_OK) {
-			LOG::logline("!! Effect pool creation failure");
+			mwse::log::logLine("!! Effect pool creation failure");
 			return false;
 		}
 	}
@@ -352,7 +338,7 @@ bool DistantLand::initShader() {
 	effect->SetFloatArray(ehRcpRes, rcpres, 2);
 	effect->SetFloat(ehShadowRcpRes, 1.0f / Configuration.DL.ShadowResolution);
 
-	LOG::logline("-- Shader compiled OK");
+	mwse::log::logLine("-- Shader compiled OK");
 
 	hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE Shadowmap.fx", &*features.begin(), 0, D3DXSHADER_OPTIMIZATION_LEVEL3|D3DXFX_LARGEADDRESSAWARE, effectPool, &effectShadow, &errors);
 	if (hr != D3D_OK) {
@@ -360,7 +346,7 @@ bool DistantLand::initShader() {
 		return false;
 	}
 
-	LOG::logline("-- Shadow map shader compiled OK");
+	mwse::log::logLine("-- Shadow map shader compiled OK");
 
 	hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE Depth.fx", &*features.begin(), 0, D3DXSHADER_OPTIMIZATION_LEVEL3|D3DXFX_LARGEADDRESSAWARE, effectPool, &effectDepth, &errors);
 	if (hr != D3D_OK) {
@@ -368,7 +354,7 @@ bool DistantLand::initShader() {
 		return false;
 	}
 
-	LOG::logline("-- Depth shader compiled OK");
+	mwse::log::logLine("-- Depth shader compiled OK");
 
 	if (Configuration.MGEFlags & USE_ATM_SCATTER) {
 		ehOutscatter = effect->GetParameterByName(0, "outscatter");
@@ -390,13 +376,13 @@ bool DistantLand::initDepth() {
 
 	hr = device->CreateTexture(vp.Width, vp.Height, 1, D3DUSAGE_RENDERTARGET, D3DFMT_R32F, D3DPOOL_DEFAULT, &texDepthFrame, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create depth frame render target");
+		mwse::log::logLine("!! Failed to create depth frame render target");
 		return false;
 	}
 
 	hr = device->CreateDepthStencilSurface(vp.Width, vp.Height, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, FALSE, &surfDepthDepth, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create depth target z-buffer");
+		mwse::log::logLine("!! Failed to create depth target z-buffer");
 		return false;
 	}
 
@@ -410,14 +396,14 @@ bool DistantLand::initWater() {
 	// Reflection render target
 	hr = device->CreateTexture(reflRes, reflRes, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &texReflection, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create reflection render target");
+		mwse::log::logLine("!! Failed to create reflection render target");
 		return false;
 	}
 
 	// Reflection Z-buffer
 	hr = device->CreateDepthStencilSurface(reflRes, reflRes, D3DFMT_D24X8, D3DMULTISAMPLE_NONE, 0, TRUE, &surfReflectionZ, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create reflection Z buffer");
+		mwse::log::logLine("!! Failed to create reflection Z buffer");
 		return false;
 	}
 
@@ -429,22 +415,22 @@ bool DistantLand::initWater() {
 
 	hr = D3DXCreateVolumeTextureFromFile(device, "Data Files\\textures\\MGE\\water_NRM.dds", &texWater);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to load water texture");
+		mwse::log::logLine("!! Failed to load water texture");
 		return false;
 	}
 	hr = device->CreateVertexDeclaration(WaterElem, &WaterDecl);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create water decl");
+		mwse::log::logLine("!! Failed to create water decl");
 		return false;
 	}
 	hr = device->CreateVertexBuffer(numWaterVerts * 12, 0, 0, D3DPOOL_MANAGED, &vbWater, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create water verts");
+		mwse::log::logLine("!! Failed to create water verts");
 		return false;
 	}
 	hr = device->CreateIndexBuffer(numWaterTris * 6, 0, D3DFMT_INDEX16, D3DPOOL_MANAGED, &ibWater, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create water indices");
+		mwse::log::logLine("!! Failed to create water indices");
 		return false;
 	}
 
@@ -504,7 +490,7 @@ bool DistantLand::initWater() {
 	ibWater->Unlock();
 
 	if (Configuration.MGEFlags & DYNAMIC_RIPPLES) {
-		LOG::logline("-- Distant Land init dynamic water");
+		mwse::log::logLine("-- Distant Land init dynamic water");
 
 		// Setup water simulation
 		if (!initDynamicWaves()) {
@@ -523,7 +509,7 @@ bool DistantLand::initDynamicWaves() {
 
 	hr = device->CreateTexture(waveTexResolution, waveTexResolution, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A16B16G16R16F, D3DPOOL_DEFAULT, &texRain, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create rain simulation texture");
+		mwse::log::logLine("!! Failed to create rain simulation texture");
 		return false;
 	}
 	texRain->GetSurfaceLevel(0, &surfRain);
@@ -531,7 +517,7 @@ bool DistantLand::initDynamicWaves() {
 
 	hr = device->CreateTexture(waveTexResolution, waveTexResolution, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A16B16G16R16F, D3DPOOL_DEFAULT, &texRipples, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create ripple simulation texture");
+		mwse::log::logLine("!! Failed to create ripple simulation texture");
 		return false;
 	}
 	texRipples->GetSurfaceLevel(0, &surfRipples);
@@ -539,7 +525,7 @@ bool DistantLand::initDynamicWaves() {
 
 	hr = device->CreateTexture(waveTexResolution, waveTexResolution, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A16B16G16R16F, D3DPOOL_DEFAULT, &texRippleBuffer, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create ripple simulation texture");
+		mwse::log::logLine("!! Failed to create ripple simulation texture");
 		return false;
 	}
 	texRippleBuffer->GetSurfaceLevel(0, &surfRippleBuffer);
@@ -563,11 +549,11 @@ bool DistantLand::initDynamicWaves() {
 	void* vp;
 	hr = device->CreateVertexBuffer(3 * 32, D3DUSAGE_WRITEONLY, fvfWave, D3DPOOL_DEFAULT, &vbWaveSim, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create wave simulation vb");
+		mwse::log::logLine("!! Failed to create wave simulation vb");
 		return false;
 	}
 	if (vbWaveSim->Lock(0, 0, (void**)&vp, 0) != D3D_OK) {
-		LOG::logline("!! Failed to lock wave simulation vb");
+		mwse::log::logLine("!! Failed to lock wave simulation vb");
 		return false;
 	}
 	memcpy(vp, waveVertices, sizeof(waveVertices));
@@ -590,27 +576,27 @@ bool DistantLand::initShadow() {
 	// The shadow texture holds a horizontal-packed shadow atlas
 	hr = device->CreateTexture(cascades * shadowSize, shadowSize, 1, D3DUSAGE_RENDERTARGET, shadowFormat, D3DPOOL_DEFAULT, &texShadow, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create shadow render target");
+		mwse::log::logLine("!! Failed to create shadow render target");
 		return false;
 	}
 	hr = device->CreateTexture(cascades * shadowSize, shadowSize, 1, D3DUSAGE_RENDERTARGET, shadowFormat, D3DPOOL_DEFAULT, &texSoftShadow, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create shadow render target");
+		mwse::log::logLine("!! Failed to create shadow render target");
 		return false;
 	}
 	hr = device->CreateDepthStencilSurface(cascades * shadowSize, shadowSize, shadowZFormat, D3DMULTISAMPLE_NONE, 0, TRUE, &surfShadowZ, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create shadow Z buffer");
+		mwse::log::logLine("!! Failed to create shadow Z buffer");
 		return false;
 	}
 	hr = device->CreateVertexBuffer(4 * 12, D3DUSAGE_WRITEONLY, 0, D3DPOOL_DEFAULT, &vbFullFrame, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create shadow processing verts");
+		mwse::log::logLine("!! Failed to create shadow processing verts");
 		return false;
 	}
 	hr = device->CreateVertexBuffer(14 * 12, D3DUSAGE_WRITEONLY, 0, D3DPOOL_DEFAULT, &vbClipCube, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create shadow processing verts");
+		mwse::log::logLine("!! Failed to create shadow processing verts");
 		return false;
 	}
 
@@ -648,7 +634,7 @@ bool DistantLand::initShadow() {
 
 bool DistantLand::initDistantStatics() {
 	if (FAILED(device->CreateVertexDeclaration(StaticElem, &StaticDecl))) {
-		LOG::logline("!! Failed to to create static vertex declaration");
+		mwse::log::logLine("!! Failed to to create static vertex declaration");
 		return false;
 	}
 
@@ -679,25 +665,25 @@ bool DistantLand::loadDistantStatics() {
 	HANDLE h;
 
 	if (GetFileAttributes("Data Files\\distantland\\statics") == INVALID_FILE_ATTRIBUTES) {
-		LOG::logline("!! Distant statics have not been generated");
+		mwse::log::logLine("!! Distant statics have not been generated");
 		return !(Configuration.MGEFlags & USE_DISTANT_LAND);
 	}
 
 	h = CreateFile("Data Files\\distantland\\version", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
 	if (h == INVALID_HANDLE_VALUE) {
-		LOG::logline("!! Required distant statics data is missing or corrupted");
+		mwse::log::logLine("!! Required distant statics data is missing or corrupted");
 		return false;
 	}
 	BYTE version = 0;
 	ReadFile(h, &version, sizeof(version), &unused, 0);
 	if (version != MGE::DISTANT_LAND_VERSION) {
-		LOG::logline("!! Distant land data is from an old version and needs to be regenerated");
+		mwse::log::logLine("!! Distant land data is from an old version and needs to be regenerated");
 		return false;
 	}
 
 	h = CreateFile("Data Files\\distantland\\statics\\usage.data", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
 	if (h == INVALID_HANDLE_VALUE) {
-		LOG::logline("!! Required distant statics data is missing or corrupted");
+		mwse::log::logLine("!! Required distant statics data is missing or corrupted");
 		return false;
 	}
 
@@ -707,7 +693,7 @@ bool DistantLand::loadDistantStatics() {
 
 	HANDLE h2 = CreateFile("Data Files\\distantland\\statics\\static_meshes", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
 	if (h2 == INVALID_HANDLE_VALUE) {
-		LOG::logline("!! Required distant statics data is missing or corrupted");
+		mwse::log::logLine("!! Required distant statics data is missing or corrupted");
 		return false;
 	}
 
@@ -786,7 +772,7 @@ bool DistantLand::loadDistantStatics() {
 
 			IDirect3DTexture9* tex = BSALoadTexture(device, texname);
 			if (!tex) {
-				LOG::logline("Cannot load texture %s", texname);
+				mwse::log::logLine("Cannot load texture %s", texname);
 				errorTexture->AddRef();
 				tex = errorTexture;
 			}
@@ -804,8 +790,8 @@ bool DistantLand::loadDistantStatics() {
 	int texturesLoaded, texMemUsage;
 	BSACacheStats(&texturesLoaded, &texMemUsage);
 
-	LOG::logline("-- Distant static textures loaded, %d textures", texturesLoaded);
-	LOG::logline("-- Distant static texture memory use: %d MB", texMemUsage);
+	mwse::log::logLine("-- Distant static textures loaded, %d textures", texturesLoaded);
+	mwse::log::logLine("-- Distant static texture memory use: %d MB", texMemUsage);
 
 
 	// Load statics references
@@ -873,7 +859,7 @@ bool DistantLand::loadDistantStatics() {
 	}
 
 	CloseHandle(h);
-	LOG::logline("-- Distant Land finished loading distant statics");
+	mwse::log::logLine("-- Distant Land finished loading distant statics");
 	return true;
 }
 
@@ -1005,38 +991,38 @@ bool DistantLand::initDistantStaticsBVH() {
 
 bool DistantLand::initLandscape() {
 	HRESULT hr;
-	LOG::logline(">> Landscape Load");
+	mwse::log::logLine(">> Landscape Load");
 
 	hr = device->CreateVertexDeclaration(LandElem, &LandDecl);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to to create world vertex declaration");
+		mwse::log::logLine("!! Failed to to create world vertex declaration");
 		return false;
 	}
 
 	if (GetFileAttributes("Data Files\\distantland\\world") == INVALID_FILE_ATTRIBUTES) {
-		LOG::logline("!! Distant land files have not been generated");
+		mwse::log::logLine("!! Distant land files have not been generated");
 		return !(Configuration.MGEFlags & USE_DISTANT_LAND);
 	}
 
 	hr = D3DXCreateTextureFromFileEx(device, "Data Files\\distantland\\world.dds", 0, 0, 0, 0, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, 0, 0, &texWorldColour);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Could not load world texture for distant land");
+		mwse::log::logLine("!! Could not load world texture for distant land");
 		return false;
 	}
 
 	hr = D3DXCreateTextureFromFileEx(device, "Data Files\\distantland\\world_n.dds", 0, 0, 0, 0, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, 0, 0, &texWorldNormals);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Could not load world normal map texture for distant land");
+		mwse::log::logLine("!! Could not load world normal map texture for distant land");
 		return false;
 	}
 
 	hr = D3DXCreateTextureFromFileEx(device, "Data Files\\textures\\MGE\\world_detail.dds", 0, 0, 0, 0, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, 0, 0, &texWorldDetail);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Could not load world detail texture for distant land");
+		mwse::log::logLine("!! Could not load world detail texture for distant land");
 		return false;
 	}
 
-	LOG::logline("-- Landscape textures loaded");
+	mwse::log::logLine("-- Landscape textures loaded");
 
 	HANDLE file = CreateFile("Data Files\\distantland\\world", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
 	if (file == INVALID_HANDLE_VALUE) {
@@ -1103,7 +1089,7 @@ bool DistantLand::initLandscape() {
 	CloseHandle(file);
 	LandQuadTree.CalcVolume();
 
-	LOG::logline("<< Landscape Load");
+	mwse::log::logLine("<< Landscape Load");
 	return true;
 }
 
@@ -1112,13 +1098,13 @@ bool DistantLand::initGrass() {
 
 	hr = device->CreateVertexDeclaration(GrassElem, &GrassDecl);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create grass decl");
+		mwse::log::logLine("!! Failed to create grass decl");
 		return false;
 	}
 
 	hr = device->CreateVertexBuffer(MaxGrassElements * GrassInstStride, D3DUSAGE_DYNAMIC|D3DUSAGE_WRITEONLY, 0, D3DPOOL_DEFAULT, &vbGrassInstances, NULL);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create grass instance buffer");
+		mwse::log::logLine("!! Failed to create grass instance buffer");
 		return false;
 	}
 
@@ -1130,7 +1116,7 @@ void DistantLand::release() {
 		return;
 	}
 
-	LOG::logline(">> Distant Land release");
+	mwse::log::logLine(">> Distant Land release");
 
 	PostShaders::release();
 	FixedFunctionShader::release();
@@ -1232,7 +1218,7 @@ void DistantLand::release() {
 	effect->Release();
 	effect = nullptr;
 
-	LOG::logline("<< Distant Land release");
+	mwse::log::logLine("<< Distant Land release");
 
 	device = nullptr;
 	ready = false;

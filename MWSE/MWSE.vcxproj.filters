@@ -1614,9 +1614,6 @@
     <ClInclude Include="directin8.h">
       <Filter>Header Files\MGE\ProxyDX</Filter>
     </ClInclude>
-    <ClInclude Include="mge_log.h">
-      <Filter>Header Files\MGE\Support</Filter>
-    </ClInclude>
     <ClInclude Include="pngsave.h">
       <Filter>Header Files\MGE\Support</Filter>
     </ClInclude>
@@ -3397,9 +3394,6 @@
     </ClCompile>
     <ClCompile Include="LuaSpellCreatedEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="mge_log.cpp">
-      <Filter>Source Files\MGE\Support</Filter>
     </ClCompile>
     <ClCompile Include="pngsave.cpp">
       <Filter>Source Files\MGE\Support</Filter>

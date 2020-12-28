@@ -1,7 +1,7 @@
 
 #include "videobackground.h"
 #include "mwbridge.h"
-#include "mge_log.h"
+#include "Log.h"
 
 #define BINKSURFACE32       3
 #define BINKCOPYALL         0x80000000
@@ -57,13 +57,13 @@ bool VideoBackground::begin(IDirect3DDevice9* device) {
 
 	video = BinkOpen(path, 0);
 	if (!video) {
-		LOG::logline("!! Video renderer: Bink failed to open video file.");
+		mwse::log::logLine("!! Video renderer: Bink failed to open video file.");
 		return false;
 	}
 
 	HRESULT hr = device->CreateOffscreenPlainSurface(video->width, video->height, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT, &surface, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Video renderer: Failed to create a surface for video output.");
+		mwse::log::logLine("!! Video renderer: Failed to create a surface for video output.");
 		return false;
 	}
 

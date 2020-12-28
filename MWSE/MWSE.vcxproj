@@ -28,7 +28,6 @@
     <ClInclude Include="ffeshader.h" />
     <ClInclude Include="inidata.h" />
     <ClInclude Include="MGEUtil.h" />
-    <ClInclude Include="mge_log.h" />
     <ClInclude Include="memorypool.h" />
     <ClInclude Include="mged3d8device.h" />
     <ClInclude Include="mgedinput.h" />
@@ -568,7 +567,6 @@
     <ClCompile Include="MGEZoomInBy.cpp" />
     <ClCompile Include="MGEZoomOut.cpp" />
     <ClCompile Include="MGEZoomOutBy.cpp" />
-    <ClCompile Include="mge_log.cpp" />
     <ClCompile Include="macrofunctions.cpp" />
     <ClCompile Include="memorypool.cpp" />
     <ClCompile Include="mged3d8device.cpp" />

@@ -1,6 +1,6 @@
 
 #include "ffeshader.h"
-#include "mge_log.h"
+#include "Log.h"
 
 using std::string;
 using std::stringstream;
@@ -39,7 +39,7 @@ bool FixedFunctionShader::init(IDirect3DDevice* d, ID3DXEffectPool* pool) {
 	HRESULT hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE FixedFuncEmu.fx", generateDefault, 0, D3DXSHADER_OPTIMIZATION_LEVEL3|D3DXFX_LARGEADDRESSAWARE, constantPool, &effect, &errors);
 	if (hr != D3D_OK) {
 		if (errors) {
-			LOG::logline("!! %s", errors->GetBufferPointer());
+			mwse::log::logLine("!! %s", errors->GetBufferPointer());
 			errors->Release();
 		}
 		return false;
@@ -284,7 +284,7 @@ ID3DXEffect* FixedFunctionShader::generateMWShader(const ShaderKey& sk) {
 	}
 
 	if (totalOutputCoords > 4) {
-		LOG::logline("!! Shader generator error: excessive texcoord usage (%d).", totalOutputCoords);
+		mwse::log::logLine("!! Shader generator error: excessive texcoord usage (%d).", totalOutputCoords);
 		sk.log();
 
 		effectDefaultPurple->AddRef();
@@ -554,18 +554,18 @@ ID3DXEffect* FixedFunctionShader::generateMWShader(const ShaderKey& sk) {
 	ID3DXEffect* effectFFE;
 	ID3DXBuffer* errors;
 
-	//LOG::logline("-- Generating replacement fixed function shader");
+	//mwse::log::logLine("-- Generating replacement fixed function shader");
 	//sk.log();
 
 	HRESULT hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE FixedFuncEmu.fx", generatedCode, 0, D3DXSHADER_OPTIMIZATION_LEVEL3|D3DXFX_LARGEADDRESSAWARE, constantPool, &effectFFE, &errors);
 
 	if (hr != D3D_OK) {
-		LOG::logline("!! Generating FFE shader: compile error %xh", hr);
+		mwse::log::logLine("!! Generating FFE shader: compile error %xh", hr);
 		if (errors) {
-			LOG::logline("!! %s", errors->GetBufferPointer());
+			mwse::log::logLine("!! %s", errors->GetBufferPointer());
 			errors->Release();
 		}
-		LOG::logline("");
+		mwse::log::logLine("");
 		effectDefaultPurple->AddRef();
 		effectFFE = effectDefaultPurple;
 	}
@@ -686,18 +686,18 @@ void FixedFunctionShader::ShaderKey::log() const {
 	const char* opsymbols[] = { "?", "disable", "select1", "select2", "mul", "mul2x", "mul4x", "add", "addsigned", "addsigned2x", "sub", "?", "blend.diffuse", "blend.texture", "?", "?", "?", "?", "?", "?", "?", "?", "bump", "bump.l", "dp3", "mad", "?" };
 	const char* argsymbols[] = { "diffuse", "current", "texture", "tfactor", "specular", "temp", "constant" };
 
-	LOG::logline("   Input state: UVs:%d skin:%d vcol:%d lights:%d vmat:%d fogm:%d", uvSets, usesSkinning, vertexColour, vertexMaterial ? (heavyLighting ? 8 : 4) : 0, vertexMaterial, fogMode);
-	LOG::logline("   Texture stages:");
+	mwse::log::logLine("   Input state: UVs:%d skin:%d vcol:%d lights:%d vmat:%d fogm:%d", uvSets, usesSkinning, vertexColour, vertexMaterial ? (heavyLighting ? 8 : 4) : 0, vertexMaterial, fogMode);
+	mwse::log::logLine("   Texture stages:");
 	for (int i = 0; i != activeStages; ++i) {
 		if (stage[i].colorOp != D3DTOP_MULTIPLYADD) { // or D3DTOP_LERP (unused)
-			LOG::logline("    [%d] % 12s    %s, %s            uv %d texgen %d", i,
+			mwse::log::logLine("    [%d] % 12s    %s, %s            uv %d texgen %d", i,
 						 opsymbols[stage[i].colorOp], argsymbols[stage[i].colorArg1], argsymbols[stage[i].colorArg2],
 						 stage[i].texcoordIndex, stage[i].texcoordGen);
 		} else {
-			LOG::logline("    [%d] % 12s    %s, %s, %s   uv %d texgen %d", i,
+			mwse::log::logLine("    [%d] % 12s    %s, %s, %s   uv %d texgen %d", i,
 						 opsymbols[stage[i].colorOp], argsymbols[stage[i].colorArg1], argsymbols[stage[i].colorArg2], argsymbols[stage[i].colorArg0],
 						 stage[i].texcoordIndex, stage[i].texcoordGen);
 		}
 	}
-	LOG::logline("");
+	mwse::log::logLine("");
 }

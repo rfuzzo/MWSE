@@ -24,7 +24,7 @@
 #include "InstructionInterface.h"
 #include "MemoryUtil.h"
 
-#include "mge_log.h"
+#include "Log.h"
 #include "mgeversion.h"
 
 using namespace mwse;
@@ -48,7 +48,7 @@ namespace mwse
 
 	float MGEOutputVersionString::execute(mwse::VMExecuteInterface& virtualMachine)
 	{
-		LOG::logline("%s", MGE::VERSION_STRING);
+		mwse::log::logLine("%s", MGE::VERSION_STRING);
 
 		return 0.0f;
 	}

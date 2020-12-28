@@ -2,7 +2,7 @@
 #include "mgedirect3d8.h"
 #include "mged3d8device.h"
 #include "configuration.h"
-#include "mge_log.h"
+#include "Log.h"
 
 MGEProxyD3D::MGEProxyD3D(IDirect3D9* real) : ProxyD3D(real, 120) { // Morrowind requires D3D version 120
 	// Force pixel shaders off, to simplify water override
@@ -12,13 +12,12 @@ MGEProxyD3D::MGEProxyD3D(IDirect3D9* real) : ProxyD3D(real, 120) { // Morrowind 
 	// Log adapter details
 	D3DADAPTER_IDENTIFIER9 adapter;
 	realD3D->GetAdapterIdentifier(D3DADAPTER_DEFAULT, 0, &adapter);
-	LOG::logline("GPU: %s (%d.%d.%d.%d)", adapter.Description,
+	mwse::log::logLine("GPU: %s (%d.%d.%d.%d)", adapter.Description,
 				 HIWORD(adapter.DriverVersion.HighPart), LOWORD(adapter.DriverVersion.HighPart),
 				 HIWORD(adapter.DriverVersion.LowPart), LOWORD(adapter.DriverVersion.LowPart));
 }
 
 HRESULT _stdcall MGEProxyD3D::CreateDevice(UINT a, D3DDEVTYPE b, HWND c, DWORD d, D3DPRESENT_PARAMETERS8* e, IDirect3DDevice8** f) {
-	LOG::logline(">> D3D Proxy CreateDevice");
 
 	// Window positioning
 	if (e->Windowed) {
@@ -40,7 +39,6 @@ HRESULT _stdcall MGEProxyD3D::CreateDevice(UINT a, D3DDEVTYPE b, HWND c, DWORD d
 		// Windowed mode does not allow multiple frame vsync
 		if (Configuration.VWait >= D3DPRESENT_INTERVAL_TWO && Configuration.VWait <= D3DPRESENT_INTERVAL_FOUR) {
 			Configuration.VWait = D3DPRESENT_INTERVAL_ONE;
-			LOG::logline("VWait greater than one is not supported in windowed mode.");
 		}
 	}
 
@@ -82,7 +80,7 @@ HRESULT _stdcall MGEProxyD3D::CreateDevice(UINT a, D3DDEVTYPE b, HWND c, DWORD d
 	HRESULT hr = realD3D->CreateDevice(a, b, c, d, &pp, &realDevice);
 
 	if (hr != D3D_OK) {
-		LOG::logline("!! D3D Proxy CreateDevice failure");
+		mwse::log::logLine("!! D3D Proxy CreateDevice failure");
 		return hr;
 	}
 
@@ -118,11 +116,9 @@ HRESULT _stdcall MGEProxyD3D::CreateDevice(UINT a, D3DDEVTYPE b, HWND c, DWORD d
 	realDevice->SetRenderState(D3DRS_RANGEFOGENABLE, RangedFog);
 	realDevice->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, (Configuration.AALevel > 0));
 
-	LOG::logline("<< D3D Proxy CreateDevice");
 	return D3D_OK;
 }
 
 IDirect3DDevice8* MGEProxyD3D::factoryProxyDevice(IDirect3DDevice9* d) {
-	LOG::logline("-- D3D Proxy Factory OK");
 	return new MGEProxyDevice(d, this);
 }

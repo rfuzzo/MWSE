@@ -1,7 +1,7 @@
 
 #include "userhud.h"
 #include "morrowindbsa.h"
-#include "mge_log.h"
+#include "Log.h"
 
 const DWORD fvfHUD = D3DFVF_XYZRHW | D3DFVF_TEX2;
 
@@ -22,18 +22,17 @@ bool MGEhud::init(IDirect3DDevice9* d) {
 	device = d;
 	device->GetViewport(&vp);
 
-	LOG::logline(">> HUD init");
 
 	HRESULT hr = device->CreateVertexBuffer(max_elements * 4 * 32, D3DUSAGE_DYNAMIC|D3DUSAGE_WRITEONLY, fvfHUD, D3DPOOL_DEFAULT, &vbHUD, 0);
 	if (hr != D3D_OK) {
-		LOG::logline("!! Failed to create HUD verts");
+		mwse::log::logLine("!! Failed to create HUD verts");
 		return false;
 	}
 
 	ID3DXBuffer* errors;
 	hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE HUD.fx", 0, 0, D3DXFX_LARGEADDRESSAWARE, 0, &effectStandard, &errors);
 	if (hr != D3D_OK) {
-		LOG::logline("!! HUD Shader errors: %s", errors->GetBufferPointer());
+		mwse::log::logLine("!! HUD Shader errors: %s", errors->GetBufferPointer());
 		errors->Release();
 		return false;
 	}
@@ -44,7 +43,6 @@ bool MGEhud::init(IDirect3DDevice9* d) {
 		reload();
 	}
 
-	LOG::logline("<< HUD init");
 	return true;
 }
 
@@ -112,7 +110,6 @@ void MGEhud::draw() {
 }
 
 void MGEhud::release() {
-	LOG::logline(">> HUD release");
 
 	// Only release D3D resources
 	// HUD status must be remembered if the device restarts on alt-tab
@@ -134,7 +131,6 @@ void MGEhud::release() {
 	effectStandard->Release();
 	vbHUD->Release();
 
-	LOG::logline("<< HUD release");
 }
 
 int MGEhud::getScreenWidth() {
@@ -164,7 +160,6 @@ void MGEhud::resetMWSE() {
 }
 
 void MGEhud::reload() {
-	LOG::logline("-- HUD reloading assets");
 
 	for (auto& i : element_names) {
 		hud_id hud = i.second;
@@ -280,7 +275,7 @@ void MGEhud::setTexture(hud_id hud, const char* texturePath) {
 		tex->AddRef();
 		e->textureFilename = texturePath;
 	} else {
-		LOG::logline("LoadHUDTexture : Cannot load texture %s", texturePath);
+		mwse::log::logLine("LoadHUDTexture : Cannot load texture %s", texturePath);
 		e->texture = 0;
 		e->textureFilename.clear();
 	}
@@ -305,14 +300,13 @@ void MGEhud::setEffect(hud_id hud, const char* effectPath) {
 		HRESULT hr = D3DXCreateEffectFromFile(device, path, 0, 0, D3DXFX_LARGEADDRESSAWARE, 0, &e->effect, &errors);
 
 		if (hr == D3D_OK) {
-			LOG::logline("-- HUD shader %s loaded", path);
 			e->effectFilename = effectPath;
 		} else {
 			e->effect = 0;
 
-			LOG::logline("!! HUD shader %s failed to load/compile", path);
+			mwse::log::logLine("!! HUD shader %s failed to load/compile", path);
 			if (errors) {
-				LOG::logline("!! Shader errors: %s", errors->GetBufferPointer());
+				mwse::log::logLine("!! Shader errors: %s", errors->GetBufferPointer());
 				errors->Release();
 			}
 		}

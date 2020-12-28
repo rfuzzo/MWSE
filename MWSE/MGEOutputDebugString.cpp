@@ -24,7 +24,7 @@
 #include "InstructionInterface.h"
 #include "MemoryUtil.h"
 
-#include "mge_log.h"
+#include "Log.h"
 
 using namespace mwse;
 
@@ -48,7 +48,7 @@ namespace mwse
 	float MGEOutputDebugString::execute(mwse::VMExecuteInterface& virtualMachine)
 	{
 		mwseString& line = virtualMachine.getString(Stack::getInstance().popLong());
-		LOG::logline("%s", line.c_str());
+		mwse::log::logLine("%s", line.c_str());
 
 		return 0.0f;
 	}

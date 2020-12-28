@@ -31,7 +31,6 @@ void DistantLand::renderStage0() {
 	isPPLActive = (Configuration.MGEFlags & USE_FFESHADER) && !(Configuration.PerPixelLightFlags == 1 && !mwBridge->IntCurCellAddr());
 
 	if (!isRenderCached) {
-		///LOG::logline("Sky prims: %d", recordSky.size());
 
 		if (isDistantCell()) {
 			// Save state block manually since we can change FVF/decl
@@ -139,7 +138,6 @@ void DistantLand::renderStage1() {
 	IDirect3DStateBlock9* stateSaved;
 	UINT passes;
 
-	///LOG::logline("Stage 1 prims: %d", recordMW.size());
 
 	if (!isRenderCached) {
 		// Save state block manually since we can change FVF/decl
@@ -193,7 +191,6 @@ void DistantLand::renderStage2() {
 	IDirect3DStateBlock9* stateSaved;
 	UINT passes;
 
-	///LOG::logline("Stage 2 prims: %d", recordMW.size());
 
 	// Early out if nothing is happening
 	if (recordMW.empty()) {

@@ -36,7 +36,7 @@
 #include "configuration.h"
 #include "mgeversion.h"
 #include "mwinitpatch.h"
-#include "mge_log.h"
+#include "Log.h"
 
 const auto TES3_Game_ctor = reinterpret_cast<TES3::Game*(__thiscall*)(TES3::Game*)>(0x417280);
 TES3::Game* __fastcall OnGameStructCreated(TES3::Game * game) {
@@ -48,96 +48,16 @@ TES3::Game* __fastcall OnGameStructCreated(TES3::Game * game) {
 }
 
 bool __fastcall OnGameStructInitialized(TES3::Game* game) {
-	// Setup our lua interface before initializing.
-	mwse::lua::LuaManager::getInstance().hook();
+	if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
+		// Setup our lua interface before initializing.
+		mwse::lua::LuaManager::getInstance().hook();
+	}
 
 	// Install our later patches.
 	mwse::patch::installPostLuaPatches();
 
 	// Call overloaded function.
 	return game->initialize();
-}
-
-void MWSE_DllAttach() {
-	// Initialize log file.
-	mwse::log::OpenLog("MWSE.log");
-#ifdef APPVEYOR_BUILD_NUMBER
-	mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << "-" << APPVEYOR_BUILD_NUMBER << " (built " << __DATE__ << ") hooked." << std::endl;
-#else
-	mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << " (built " << __DATE__ << ") hooked." << std::endl;
-#endif
-
-	// Before we do anything else, ensure that we can make minidumps.
-	if (!mwse::patch::installMiniDumpHook()) {
-		mwse::log::getLog() << "Warning: Unable to hook minidump! Crash dumps will be unavailable." << std::endl;
-	}
-
-	// Legacy support for old updater exe swap method.
-	if (std::filesystem::exists("MWSE-Update.tmp")) {
-		if (std::filesystem::exists("MWSE-Update.exe")) {
-			std::filesystem::remove("MWSE-Update.exe");
-		}
-		std::filesystem::rename("MWSE-Update.tmp", "MWSE-Update.exe");
-	}
-
-	// List of temporary files that the updater couldn't update, and so need to be swapped out.
-	std::vector<std::string> updaterTempFiles;
-	updaterTempFiles.push_back("MWSE-Update.exe");
-	updaterTempFiles.push_back("Newtonsoft.Json.dll");
-		
-	// Look to see if an update to the MWSE Updater was downloaded. If so, swap the temp files.
-	for (const std::string& destFile : updaterTempFiles) {
-		const std::string tempFile = destFile + ".tmp";
-		if (std::filesystem::exists(tempFile)) {
-			if (std::filesystem::exists(destFile)) {
-				std::filesystem::remove(destFile);
-			}
-			std::filesystem::rename(tempFile, destFile);
-		}
-	}
-
-	// Delete any old crash dumps.
-	if (std::filesystem::exists("MWSE_MiniDump.dmp")) {
-		std::filesystem::remove("MWSE_MiniDump.dmp");
-	}
-
-	// Initialize our main mwscript hook.
-	mwse::mwAdapter::Hook();
-
-	// Install patches.
-	mwse::genCallEnforced(0x417169, 0x417280, reinterpret_cast<DWORD>(OnGameStructCreated));
-
-	// Parse and load the features installed by the Morrowind Code Patch.
-	if (mwse::mcp::loadFeatureList()) {
-		auto& log = mwse::log::getLog();
-		log << "Morrowind Code Patch installed features: ";
-
-		// Get a sorted list of enabled features.
-		std::vector<long> enabledFeatures;
-		for (const auto& itt : mwse::mcp::featureStore) {
-			if (itt.second) {
-				enabledFeatures.push_back(itt.first);
-			}
-		}
-		std::sort(enabledFeatures.begin(), enabledFeatures.end());
-
-		// Print them to the log.
-		log << std::dec;
-		for (auto i = 0U; i < enabledFeatures.size(); i++) {
-			if (i != 0) log << ", ";
-			log << enabledFeatures[i];
-		}
-		log << std::endl;
-	}
-	else {
-		mwse::log::getLog() << "Failed to detect Morrowind Code Patch installed features. MCP may not be installed, or the mcpatch\\installed file may have been deleted. Mods will be unable to detect MCP feature support." << std::endl;
-	}
-
-	// Delay our lua hook until later, to ensure that Mod Organizer's VFS is hooked up.
-	if (!mwse::genCallEnforced(0x417195, 0x417880, reinterpret_cast<DWORD>(OnGameStructInitialized))) {
-		mwse::log::getLog() << "Could not hook MWSE-Lua initialization point!" << std::endl;
-		exit(1);
-	}
 }
 
 //
@@ -170,13 +90,78 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 	isCS = bool(GetModuleHandle("TES Construction Set.exe"));
 
 	if (isMW) {
-		LOG::open("mgeXE.log");
-		LOG::logline(MGE::VERSION_STRING);
+		// Initialize log file.
+		mwse::log::open("MWSE.log");
+#ifdef APPVEYOR_BUILD_NUMBER
+		mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << "-" << APPVEYOR_BUILD_NUMBER << " (built " << __DATE__ << ") hooked." << std::endl;
+#else
+		mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << " (built " << __DATE__ << ") hooked." << std::endl;
+#endif
+
+		// Before we do anything else, ensure that we can make minidumps.
+		if (!mwse::patch::installMiniDumpHook()) {
+			mwse::log::getLog() << "Warning: Unable to hook minidump! Crash dumps will be unavailable." << std::endl;
+		}
+
+		// Legacy support for old updater exe swap method.
+		if (std::filesystem::exists("MWSE-Update.tmp")) {
+			if (std::filesystem::exists("MWSE-Update.exe")) {
+				std::filesystem::remove("MWSE-Update.exe");
+			}
+			std::filesystem::rename("MWSE-Update.tmp", "MWSE-Update.exe");
+		}
+
+		// List of temporary files that the updater couldn't update, and so need to be swapped out.
+		std::vector<std::string> updaterTempFiles;
+		updaterTempFiles.push_back("MWSE-Update.exe");
+		updaterTempFiles.push_back("Newtonsoft.Json.dll");
+
+		// Look to see if an update to the MWSE Updater was downloaded. If so, swap the temp files.
+		for (const std::string& destFile : updaterTempFiles) {
+			const std::string tempFile = destFile + ".tmp";
+			if (std::filesystem::exists(tempFile)) {
+				if (std::filesystem::exists(destFile)) {
+					std::filesystem::remove(destFile);
+				}
+				std::filesystem::rename(tempFile, destFile);
+			}
+		}
+
+		// Delete any old crash dumps.
+		if (std::filesystem::exists("MWSE_MiniDump.dmp")) {
+			std::filesystem::remove("MWSE_MiniDump.dmp");
+		}
+
+		// Parse and load the features installed by the Morrowind Code Patch.
+		if (mwse::mcp::loadFeatureList()) {
+			auto& log = mwse::log::getLog();
+			log << "Morrowind Code Patch installed features: ";
+
+			// Get a sorted list of enabled features.
+			std::vector<long> enabledFeatures;
+			for (const auto& itt : mwse::mcp::featureStore) {
+				if (itt.second) {
+					enabledFeatures.push_back(itt.first);
+				}
+			}
+			std::sort(enabledFeatures.begin(), enabledFeatures.end());
+
+			// Print them to the log.
+			log << std::dec;
+			for (auto i = 0U; i < enabledFeatures.size(); i++) {
+				if (i != 0) log << ", ";
+				log << enabledFeatures[i];
+			}
+			log << std::endl;
+		}
+		else {
+			mwse::log::getLog() << "Failed to detect Morrowind Code Patch installed features. MCP may not be installed, or the mcpatch\\installed file may have been deleted. Mods will be unable to detect MCP feature support." << std::endl;
+		}
 
 		setDPIScalingAware();
 
 		if (!Configuration.LoadSettings()) {
-			LOG::logline("Error: MGE XE is not configured. MGE XE will be disabled for this session.");
+			mwse::log::logLine("Error: MGE XE is not configured. MGE XE will be disabled for this session.");
 			isMW = false;
 			return true;
 		}
@@ -190,11 +175,11 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 		}
 
 		if (~Configuration.MGEFlags & MWSE_DISABLED && ~Configuration.MGEFlags & MGE_DISABLED) {
-			MWSE_DllAttach();
-			LOG::logline("MWSE.dll injected.");
+			// Initialize our main mwscript hook.
+			mwse::mwAdapter::Hook();
 		}
 		else {
-			LOG::logline("MWSE is disabled.");
+			mwse::log::logLine("MWSE is disabled. Lua scripts and MWScript VM extensions are disabled.");
 		}
 
 		if (Configuration.MGEFlags & SKIP_INTRO) {
@@ -202,6 +187,15 @@ extern "C" BOOL _stdcall DllMain(HANDLE hModule, DWORD reason, void* unused) {
 		}
 
 		MWInitPatch::patchFrameTimer();
+
+		// Install patches.
+		mwse::genCallEnforced(0x417169, 0x417280, reinterpret_cast<DWORD>(OnGameStructCreated));
+
+		// Delay our lua hook until later, to ensure that Mod Organizer's VFS is hooked up.
+		if (!mwse::genCallEnforced(0x417195, 0x417880, reinterpret_cast<DWORD>(OnGameStructInitialized))) {
+			mwse::log::getLog() << "Could not hook MWSE-Lua initialization point!" << std::endl;
+			exit(1);
+		}
 	}
 
 	return true;

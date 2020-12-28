@@ -21,7 +21,7 @@
 // MGE support functions.
 #include "configuration.h"
 #include "distantland.h"
-#include "mge_log.h"
+#include "Log.h"
 #include "mgeversion.h"
 #include "postshaders.h"
 #include "userhud.h"
@@ -510,7 +510,7 @@ namespace mwse {
 				return MGE::PACKED_VERSION;
 			};
 			state["mge"]["log"] = [](std::string& string) {
-				LOG::write(string.c_str());
+				mwse::log::getLog() << string;
 			};
 
 			// HUD-related functions.

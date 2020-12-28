@@ -3,7 +3,7 @@
 #include "distantshader.h"
 #include "configuration.h"
 #include "mged3d8device.h"
-#include "mge_log.h"
+#include "Log.h"
 
 void DistantLand::cullGrass(const D3DXMATRIX* view, const D3DXMATRIX* proj) {
 	D3DXMATRIX ds_proj = *proj, ds_viewproj;
@@ -41,8 +41,8 @@ void DistantLand::buildGrassInstanceVB() {
 	if (visGrass.visible_set.size() > MaxGrassElements) {
 		static bool warnOnce = true;
 		if (warnOnce) {
-			LOG::logline("!! Too many grass instances. (%d elements, limit %d)", visGrass.visible_set.size(), MaxGrassElements);
-			LOG::logline("!! Reduce grass density to avoid flickering grass.");
+			mwse::log::logLine("!! Too many grass instances. (%d elements, limit %d)", visGrass.visible_set.size(), MaxGrassElements);
+			mwse::log::logLine("!! Reduce grass density to avoid flickering grass.");
 			warnOnce = false;
 		}
 		visGrass.visible_set.resize(MaxGrassElements);
