@@ -337,23 +337,17 @@ namespace mge {
 		effect->SetFloatArray(ehRcpRes, rcpres, 2);
 		effect->SetFloat(ehShadowRcpRes, 1.0f / Configuration.DL.ShadowResolution);
 
-		mwse::log::logLine("-- Shader compiled OK");
-
 		hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE Shadowmap.fx", &*features.begin(), 0, D3DXSHADER_OPTIMIZATION_LEVEL3|D3DXFX_LARGEADDRESSAWARE, effectPool, &effectShadow, &errors);
 		if (hr != D3D_OK) {
 			logShaderError("XE Shadowmap", errors);
 			return false;
 		}
 
-		mwse::log::logLine("-- Shadow map shader compiled OK");
-
 		hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE Depth.fx", &*features.begin(), 0, D3DXSHADER_OPTIMIZATION_LEVEL3|D3DXFX_LARGEADDRESSAWARE, effectPool, &effectDepth, &errors);
 		if (hr != D3D_OK) {
 			logShaderError("XE Depth", errors);
 			return false;
 		}
-
-		mwse::log::logLine("-- Depth shader compiled OK");
 
 		if (Configuration.MGEFlags & USE_ATM_SCATTER) {
 			ehOutscatter = effect->GetParameterByName(0, "outscatter");
@@ -489,8 +483,6 @@ namespace mge {
 		ibWater->Unlock();
 
 		if (Configuration.MGEFlags & DYNAMIC_RIPPLES) {
-			mwse::log::logLine("-- Distant Land init dynamic water");
-
 			// Setup water simulation
 			if (!initDynamicWaves()) {
 				return false;
@@ -789,10 +781,6 @@ namespace mge {
 		int texturesLoaded, texMemUsage;
 		BSACacheStats(&texturesLoaded, &texMemUsage);
 
-		mwse::log::logLine("-- Distant static textures loaded, %d textures", texturesLoaded);
-		mwse::log::logLine("-- Distant static texture memory use: %d MB", texMemUsage);
-
-
 		// Load statics references
 		mapWorldSpaces.clear();
 		for (size_t nWorldSpace = 0; true; ++nWorldSpace) {
@@ -858,7 +846,7 @@ namespace mge {
 		}
 
 		CloseHandle(h);
-		mwse::log::logLine("-- Distant Land finished loading distant statics");
+		mwse::log::getLog() << "Distant land finished loading, using " << texturesLoaded << " textures and " << texMemUsage << " MB." << std::endl;
 		return true;
 	}
 
@@ -990,7 +978,6 @@ namespace mge {
 
 	bool DistantLand::initLandscape() {
 		HRESULT hr;
-		mwse::log::logLine(">> Landscape Load");
 
 		hr = device->CreateVertexDeclaration(LandElem, &LandDecl);
 		if (hr != D3D_OK) {
@@ -1088,7 +1075,6 @@ namespace mge {
 		CloseHandle(file);
 		LandQuadTree.CalcVolume();
 
-		mwse::log::logLine("<< Landscape Load");
 		return true;
 	}
 
@@ -1114,8 +1100,6 @@ namespace mge {
 		if (!ready) {
 			return;
 		}
-
-		mwse::log::logLine(">> Distant Land release");
 
 		PostShaders::release();
 		FixedFunctionShader::release();
@@ -1216,8 +1200,6 @@ namespace mge {
 		effectDepth = nullptr;
 		effect->Release();
 		effect = nullptr;
-
-		mwse::log::logLine("<< Distant Land release");
 
 		device = nullptr;
 		ready = false;
