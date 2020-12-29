@@ -11,6 +11,9 @@
 #include "MGEUserHUD.h"
 #include "MGEVideoBackground.h"
 
+#include "LuaManager.h"
+#include "LuaGenericEvent.h"
+
 namespace mge {
 	static int sceneCount;
 	static bool rendertargetNormal, isHUDready;
@@ -194,6 +197,8 @@ namespace mge {
 	// Fogging needs to be set for Morrowind rendering at start of scene
 	HRESULT _stdcall MGEProxyDevice::BeginScene() {
 		auto mwBridge = MWBridge::get();
+
+		mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::GenericEvent("beginScene"));
 
 		HRESULT hr = ProxyDevice::BeginScene();
 		if (hr != D3D_OK) {

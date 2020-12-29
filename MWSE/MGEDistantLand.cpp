@@ -597,7 +597,7 @@ namespace mge {
 					envFlags |= 64;
 				}
 
-				// Run all shaders (with callback to set changed vars)
+				// Run all shaders
 				PostShaders::shaderTime(envFlags, mwBridge->frameTime());
 			}
 
