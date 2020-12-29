@@ -107,7 +107,7 @@ namespace mwse::log {
 			std::strcpy(buf, "mwse::log::log(null)\r\n");
 		}
 
-		write(buf);
+		logstream << buf;
 
 		va_end(args);
 		return result;
@@ -121,15 +121,14 @@ namespace mwse::log {
 		va_start(args, fmt);
 
 		if (fmt) {
-			result = std::vsnprintf(buf, sizeof(buf) - 4, fmt, args);
-			std::strcat(buf + result, "\r\n");
+			std::vsnprintf(buf, sizeof(buf) - 4, fmt, args);
 		}
 		else {
-			result = 4;
-			std::strcpy(buf, "mwse::log::logLine(null)\r\n");
+			logstream << "mwse::log::logLine(null)" << std::endl;
+			return 4;
 		}
 
-		write(buf);
+		logstream << buf << std::endl;
 
 		va_end(args);
 		return result;
