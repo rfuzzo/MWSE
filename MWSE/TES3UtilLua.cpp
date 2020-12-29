@@ -4453,10 +4453,10 @@ namespace mwse {
 			return true;
 		}
 
-		bool loadShader(sol::table params) {
+		std::shared_ptr<mge::ShaderHandle> loadShader(sol::table params) {
 			auto name = getOptionalParam<const char*>(params, "name", nullptr);
 			if (!name) {
-				return false;
+				return {};
 			}
 
 			auto& shaders = mge::PostShaders::getShaders();
@@ -4480,8 +4480,9 @@ namespace mwse {
 				position = std::find(shaders.begin(), shaders.end(), afterShader) + 1;;
 			}
 
+			auto shader = std::make_shared<mge::ShaderHandle>(name);
 			shaders.insert(position, std::make_shared<mge::ShaderHandle>(name));
-			return true;
+			return shader;
 		}
 
 		bool unloadShader(sol::table params) {
