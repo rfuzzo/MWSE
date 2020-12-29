@@ -4377,7 +4377,7 @@ namespace mwse {
 		}
 
 		bool enableShader(sol::table params) {
-			auto shader = getOptionalParamShader(params, "shader");
+			auto shader = getOptionalParamShader(params, "name");
 			if (!shader) {
 				return false;
 			}
@@ -4386,7 +4386,7 @@ namespace mwse {
 		}
 
 		bool disableShader(sol::table params) {
-			auto shader = getOptionalParamShader(params, "shader");
+			auto shader = getOptionalParamShader(params, "name");
 			if (!shader) {
 				return false;
 			}
@@ -4395,7 +4395,7 @@ namespace mwse {
 		}
 
 		bool reorderShader(sol::table params) {
-			auto shader = getOptionalParamShader(params, "shader");
+			auto shader = getOptionalParamShader(params, "name");
 			if (!shader) {
 				return false;
 			}
@@ -4444,7 +4444,7 @@ namespace mwse {
 		}
 
 		bool reloadShader(sol::table params) {
-			auto shader = getOptionalParamShader(params, "shader");
+			auto shader = getOptionalParamShader(params, "name");
 			if (!shader) {
 				return false;
 			}
@@ -4486,7 +4486,7 @@ namespace mwse {
 		}
 
 		bool unloadShader(sol::table params) {
-			auto shader = getOptionalParamShader(params, "shader");
+			auto shader = getOptionalParamShader(params, "name");
 			if (!shader) {
 				return false;
 			}
