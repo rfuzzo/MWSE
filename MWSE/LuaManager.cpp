@@ -153,6 +153,8 @@
 #include "NITimeControllerLua.h"
 #include "NITriShapeLua.h"
 
+#include "MGEPostShadersLua.h"
+
 #include "LuaDisableableEventManager.h"
 
 #include "LuaActivationTargetChangedEvent.h"
@@ -470,6 +472,9 @@ namespace mwse {
 			bindNITexture();
 			bindNITimeController();
 			bindNITriShape();
+			
+			// Bind MGE data types.
+			bindMGEPostShaders();
 
 			// Bind our disable event manager.
 			mwse::lua::event::DisableableEventManager::bindToLua();

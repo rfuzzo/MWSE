@@ -208,6 +208,12 @@
     <Filter Include="Source Files\MWScript\Shaders">
       <UniqueIdentifier>{101867af-b691-45dd-be7f-8748f4dbfff1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Lua\Bindings\MGE">
+      <UniqueIdentifier>{8d43ffb6-f30e-48a5-bcf9-830084cd0fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lua\Bindings\MGE">
+      <UniqueIdentifier>{456e11ca-6e64-454b-a2e5-7a6e021c5884}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flags.h">
@@ -1604,6 +1610,9 @@
     </ClInclude>
     <ClInclude Include="PNGUtil.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="MGEPostShadersLua.h">
+      <Filter>Header Files\Lua\Bindings\MGE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3778,6 +3787,9 @@
     </ClCompile>
     <ClCompile Include="HighResolutionTimer.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEPostShadersLua.cpp">
+      <Filter>Source Files\Lua\Bindings\MGE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,7 @@
     <ClInclude Include="MGEDoubleSurface.h" />
     <ClInclude Include="MGEFixedFunctionShader.h" />
     <ClInclude Include="MGEINIData.h" />
+    <ClInclude Include="MGEPostShadersLua.h" />
     <ClInclude Include="MGEUtil.h" />
     <ClInclude Include="MGEMemoryPool.h" />
     <ClInclude Include="MGED3D8Device.h" />
@@ -481,6 +482,7 @@
     <ClCompile Include="MGEDisableShader.cpp" />
     <ClCompile Include="MGEEnableShader.cpp" />
     <ClCompile Include="MGEGetZoom.cpp" />
+    <ClCompile Include="MGEPostShadersLua.cpp" />
     <ClCompile Include="MGERotateScreen.cpp" />
     <ClCompile Include="MGESetZoom.cpp" />
     <ClCompile Include="MGEDisableZoom.cpp" />

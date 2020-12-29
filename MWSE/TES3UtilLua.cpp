@@ -75,6 +75,7 @@
 
 #include "MGEDistantLand.h"
 #include "MGEDInput.h"
+#include "MGEPostShaders.h"
 
 #include "BitUtil.h"
 
@@ -4371,6 +4372,10 @@ namespace mwse {
 			return tes3::testLineOfSight(&position1.value(), height1.value(), &position2.value(), height2.value());
 		}
 
+		std::shared_ptr<mge::ShaderHandle> findShader(std::string& name) {
+			return mge::PostShaders::findShader(name.c_str());
+		}
+
 		void bindTES3Util() {
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 			sol::state& state = stateHandle.state;
@@ -4380,6 +4385,8 @@ namespace mwse {
 			//
 
 			sol::table tes3 = state["tes3"];
+
+			tes3["findShader"] = findShader;
 
 			tes3["addArmorSlot"] = addArmorSlot;
 			tes3["addItem"] = addItem;

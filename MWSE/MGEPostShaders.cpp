@@ -356,17 +356,17 @@ namespace mge {
 
 
 	// Scripting interface for shaders
-	ShaderHandle* PostShaders::findShader(const char* shaderName) {
+	std::shared_ptr<ShaderHandle> PostShaders::findShader(const char* shaderName) {
 		for (auto& s : shaders) {
 			if (s->getName() == shaderName) {
-				return s.get();
+				return s;
 			}
 		}
 		return nullptr;
 	}
 
 	bool PostShaders::setShaderVar(const char* shaderName, const char* varName, int x) {
-		ShaderHandle* shader = findShader(shaderName);
+		auto shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
@@ -375,7 +375,7 @@ namespace mge {
 	}
 
 	bool PostShaders::setShaderVar(const char* shaderName, const char* varName, float x) {
-		ShaderHandle* shader = findShader(shaderName);
+		auto shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
@@ -384,7 +384,7 @@ namespace mge {
 	}
 
 	bool PostShaders::setShaderVar(const char* shaderName, const char* varName, float* v) {
-		ShaderHandle* shader = findShader(shaderName);
+		auto shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
@@ -393,7 +393,7 @@ namespace mge {
 	}
 
 	bool PostShaders::setShaderEnable(const char* shaderName, bool enable) {
-		ShaderHandle* shader = findShader(shaderName);
+		auto shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
@@ -461,8 +461,10 @@ namespace mge {
 			m_Effect = nullptr;
 		}
 
-		// Clear legacy variable handles.
+		// Clear variable handles.
 		memset(m_LegacyVariableHandles, 0, sizeof(m_LegacyVariableHandles));
+		m_VariableHandles.clear();
+		m_VariableTypes.clear();
 
 		// Flag as disabled.
 		m_Enabled = false;
@@ -485,7 +487,7 @@ namespace mge {
 	}
 
 	bool ShaderHandle::setLegacyTexture(const char* name, LPDIRECT3DBASETEXTURE9 value) const {
-		auto handle = m_Effect->GetParameterByName(0, name);
+		auto handle = getVariableHandle(name);
 		if (handle) {
 			return m_Effect->SetTexture(handle, value) == D3D_OK;
 		}
@@ -501,7 +503,7 @@ namespace mge {
 	}
 
 	bool ShaderHandle::setLegacyMatrix(const char* name, const D3DXMATRIX* value) const {
-		auto handle = m_Effect->GetParameterByName(0, name);
+		auto handle = getVariableHandle(name);
 		if (handle) {
 			return m_Effect->SetMatrix(handle, value) == D3D_OK;
 		}
@@ -517,7 +519,7 @@ namespace mge {
 	}
 
 	bool ShaderHandle::setLegacyFloatArray(const char* name, const float* values, int count) const {
-		auto handle = m_Effect->GetParameterByName(0, name);
+		auto handle = getVariableHandle(name);
 		if (handle) {
 			return m_Effect->SetFloatArray(handle, values, count) == D3D_OK;
 		}
@@ -533,7 +535,7 @@ namespace mge {
 	}
 
 	bool ShaderHandle::setLegacyFloat(const char* name, float value) const {
-		auto handle = m_Effect->GetParameterByName(0, name);
+		auto handle = getVariableHandle(name);
 		if (handle) {
 			return m_Effect->SetFloat(handle, value) == D3D_OK;
 		}
@@ -549,7 +551,7 @@ namespace mge {
 	}
 
 	bool ShaderHandle::setLegacyInt(const char* name, int value) const {
-		auto handle = m_Effect->GetParameterByName(0, name);
+		auto handle = getVariableHandle(name);
 		if (handle) {
 			return m_Effect->SetInt(handle, value) == D3D_OK;
 		}
@@ -565,11 +567,87 @@ namespace mge {
 	}
 
 	bool ShaderHandle::setLegacyBool(const char* name, bool value) const {
-		auto handle = m_Effect->GetParameterByName(0, name);
+		auto handle = getVariableHandle(name);
 		if (handle) {
 			return m_Effect->SetBool(handle, value) == D3D_OK;
 		}
 		return false;
+	}
+
+	D3DXHANDLE ShaderHandle::getVariableHandle(const char* name) const {
+		auto itt = m_VariableHandles.find(name);
+		if (itt == m_VariableHandles.end()) {
+			return 0;
+		}
+		return itt->second;
+	}
+
+	sol::object ShaderHandle::getVariable(const char* name, sol::this_state ts) const {
+		auto handle = getVariableHandle(name);
+		if (!handle) {
+			return sol::nil;
+		}
+
+		auto type = m_VariableTypes.at(handle);
+		switch (type) {
+		case D3DXPT_BOOL:
+		{
+			BOOL result;
+			if (m_Effect->GetBool(handle, &result) == D3D_OK) {
+				return sol::make_object(ts, bool(result));
+			}
+		}
+		break;
+		case D3DXPT_INT:
+		{
+			int result;
+			if (m_Effect->GetInt(handle, &result) == D3D_OK) {
+				return sol::make_object(ts, result);
+			}
+		}
+		break;
+		case D3DXPT_FLOAT:
+		{
+			float result;
+			if (m_Effect->GetFloat(handle, &result) == D3D_OK) {
+				return sol::make_object(ts, result);
+			}
+		}
+		break;
+		case D3DXPT_STRING:
+		{
+			const char* result;
+			if (m_Effect->GetString(handle, &result) == D3D_OK) {
+				return sol::make_object(ts, result);
+			}
+		}
+		break;
+		}
+
+		return sol::nil;
+	}
+
+	void ShaderHandle::setVariable(const char* name, sol::stack_object value) {
+		auto handle = getVariableHandle(name);
+		if (!handle) {
+			return;
+		}
+
+		auto type = m_VariableTypes.at(handle);
+		switch (type) {
+		case D3DXPT_BOOL:
+			m_Effect->SetBool(handle, value.as<bool>());
+			break;
+		case D3DXPT_INT:
+			m_Effect->SetInt(handle, value.as<int>());
+			break;
+		case D3DXPT_FLOAT:
+			m_Effect->SetFloat(handle, value.as<float>());
+			break;
+		case D3DXPT_STRING:
+			m_Effect->SetString(handle, value.as<const char*>());
+			break;
+		}
 	}
 
 	bool ShaderHandle::checkVersion() const {
@@ -640,6 +718,20 @@ namespace mge {
 				throw std::runtime_error(std::move(ss.str()));
 			}
 			m_Effect->SetTexture(ehTextureRef, tex);
+		}
+
+		// Load all variables.
+		for (size_t i = 0; true; i++) {
+			D3DXHANDLE handle = m_Effect->GetParameter(0, i);
+			if (handle == 0) {
+				break;
+			}
+
+			D3DXPARAMETER_DESC desc;
+			if (SUCCEEDED(m_Effect->GetParameterDesc(handle, &desc))) {
+				m_VariableHandles[desc.Name] = handle;
+				m_VariableTypes[handle] = desc.Type;
+			}
 		}
 
 		// Give the controller an opportunity to set constants.

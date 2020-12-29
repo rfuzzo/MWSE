@@ -50,6 +50,17 @@ namespace mge {
 		bool setLegacyBool(EffectVariableID id, bool value) const;
 		bool setLegacyBool(const char* name, bool value) const;
 
+		//
+		// Convenience functions for lua.
+		//
+
+		sol::object index(std::string& key);
+
+		D3DXHANDLE getVariableHandle(const char* name) const;
+
+		sol::object getVariable(const char* name, sol::this_state ts) const;
+		void setVariable(const char* name, sol::stack_object value);
+
 	private:
 
 		bool checkVersion() const;
@@ -63,6 +74,9 @@ namespace mge {
 		DWORD m_Timestamp;
 		int m_LegacyMGEFlags;
 		D3DXHANDLE m_LegacyVariableHandles[EV_COUNT];
+
+		std::unordered_map<std::string, D3DXHANDLE> m_VariableHandles;
+		std::unordered_map<D3DXHANDLE, D3DXPARAMETER_TYPE> m_VariableTypes;
 
 	};
 
@@ -86,7 +100,7 @@ namespace mge {
 		static bool initBuffers();
 		static void release();
 
-		static ShaderHandle* findShader(const char* shaderName);
+		static std::shared_ptr<ShaderHandle> findShader(const char* shaderName);
 		static bool setShaderVar(const char* shaderName, const char* varName, int x);
 		static bool setShaderVar(const char* shaderName, const char* varName, float x);
 		static bool setShaderVar(const char* shaderName, const char* varName, float* v);
