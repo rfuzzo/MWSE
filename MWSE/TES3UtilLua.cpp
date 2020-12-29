@@ -4376,6 +4376,131 @@ namespace mwse {
 			return mge::PostShaders::findShader(name.c_str());
 		}
 
+		bool enableShader(sol::table params) {
+			auto shader = getOptionalParamShader(params, "shader");
+			if (!shader) {
+				return false;
+			}
+
+			return shader->setEnabled(true);
+		}
+
+		bool disableShader(sol::table params) {
+			auto shader = getOptionalParamShader(params, "shader");
+			if (!shader) {
+				return false;
+			}
+
+			return shader->setEnabled(false);
+		}
+
+		bool reorderShader(sol::table params) {
+			auto shader = getOptionalParamShader(params, "shader");
+			if (!shader) {
+				return false;
+			}
+
+			auto& shaders = mge::PostShaders::getShaders();
+			auto oldPosition = std::find(shaders.begin(), shaders.end(), shader);
+			auto newPosition = oldPosition;
+
+			sol::object after = params["after"];
+			if (after.is<int>()) {
+				int position = after.as<int>();
+				if (position < 0) {
+					newPosition = shaders.end() - std::abs(position);
+				}
+				else {
+					newPosition = shaders.begin() + position;
+				}
+			}
+			else if (after.is<mge::ShaderHandle>()) {
+				newPosition = std::find(shaders.begin(), shaders.end(), after.as<std::shared_ptr<mge::ShaderHandle>>()) + 1;
+			}
+			else if (after.is<const char*>()) {
+				auto afterShader = mge::PostShaders::findShader(after.as<const char*>());
+				newPosition = std::find(shaders.begin(), shaders.end(), afterShader) + 1;;
+			}
+
+			if (oldPosition == newPosition) {
+				return false;
+			}
+
+			std::rotate(oldPosition, oldPosition + 1, newPosition);
+
+			return true;
+		}
+
+		sol::table getShaderChain(sol::this_state ts) {
+			sol::state_view state = ts;
+			sol::table results = state.create_table();
+
+			auto shaders = mge::PostShaders::getShaders();
+			for (auto shader : shaders) {
+				results.add(shader);
+			}
+
+			return results;
+		}
+
+		bool reloadShader(sol::table params) {
+			auto shader = getOptionalParamShader(params, "shader");
+			if (!shader) {
+				return false;
+			}
+
+			shader->reload();
+			return true;
+		}
+
+		bool loadShader(sol::table params) {
+			auto name = getOptionalParam<const char*>(params, "name", nullptr);
+			if (!name) {
+				return false;
+			}
+
+			auto& shaders = mge::PostShaders::getShaders();
+
+			auto position = shaders.end();
+			sol::object after = params["after"];
+			if (after.is<int>()) {
+				int positionRelative = after.as<int>();
+				if (positionRelative < 0) {
+					position = shaders.end() - std::abs(positionRelative);
+				}
+				else {
+					position = shaders.begin() + positionRelative;
+				}
+			}
+			else if (after.is<mge::ShaderHandle>()) {
+				position = std::find(shaders.begin(), shaders.end(), after.as<std::shared_ptr<mge::ShaderHandle>>()) + 1;
+			}
+			else if (after.is<const char*>()) {
+				auto afterShader = mge::PostShaders::findShader(after.as<const char*>());
+				position = std::find(shaders.begin(), shaders.end(), afterShader) + 1;;
+			}
+
+			shaders.insert(position, std::make_shared<mge::ShaderHandle>(name));
+			return true;
+		}
+
+		bool unloadShader(sol::table params) {
+			auto shader = getOptionalParamShader(params, "shader");
+			if (!shader) {
+				return false;
+			}
+
+			auto& shaders = mge::PostShaders::getShaders();
+			auto position = std::find(shaders.begin(), shaders.end(), shader);
+			if (position == shaders.end()) {
+				return false;
+			}
+
+			shaders.erase(position);
+			shader->release();
+			return true;
+		}
+
 		void bindTES3Util() {
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 			sol::state& state = stateHandle.state;
@@ -4385,8 +4510,6 @@ namespace mwse {
 			//
 
 			sol::table tes3 = state["tes3"];
-
-			tes3["findShader"] = findShader;
 
 			tes3["addArmorSlot"] = addArmorSlot;
 			tes3["addItem"] = addItem;
@@ -4408,8 +4531,10 @@ namespace mwse {
 			tes3["decrementKillCount"] = decrementKillCount;
 			tes3["deleteObject"] = deleteObject;
 			tes3["disableKey"] = disableKey;
+			tes3["disableShader"] = disableShader;
 			tes3["dropItem"] = dropItem;
 			tes3["enableKey"] = enableKey;
+			tes3["enableShader"] = enableShader;
 			tes3["fadeIn"] = fadeIn;
 			tes3["fadeOut"] = fadeOut;
 			tes3["fadeTo"] = fadeTo;
@@ -4419,6 +4544,7 @@ namespace mwse {
 			tes3["findGlobal"] = findGlobal;
 			tes3["findGMST"] = findGMST;
 			tes3["findRegion"] = findRegion;
+			tes3["findShader"] = findShader;
 			tes3["force1stPerson"] = force1stPerson;
 			tes3["force3rdPerson"] = force3rdPerson;
 			tes3["get3rdPersonCameraOffset"] = get3rdPersonCameraOffset;
@@ -4469,6 +4595,7 @@ namespace mwse {
 			tes3["getReference"] = getReference;
 			tes3["getRegion"] = getRegion;
 			tes3["getScript"] = getScript;
+			tes3["getShaderChain"] = getShaderChain;
 			tes3["getSimulationTimestamp"] = getSimulationTimestamp;
 			tes3["getSkill"] = getSkill;
 			tes3["getSound"] = getSound;
@@ -4488,6 +4615,7 @@ namespace mwse {
 			tes3["iterateObjects"] = iterateObjects;
 			tes3["loadGame"] = loadGame;
 			tes3["loadMesh"] = loadMesh;
+			tes3["loadShader"] = loadShader;
 			tes3["loadSourceTexture"] = loadSourceTexture;
 			tes3["lock"] = lock;
 			tes3["messageBox"] = messageBox;
@@ -4502,9 +4630,11 @@ namespace mwse {
 			tes3["pushKey"] = pushKey;
 			tes3["rayTest"] = rayTest;
 			tes3["releaseKey"] = releaseKey;
+			tes3["reloadShader"] = reloadShader;
 			tes3["removeEffects"] = removeEffects;
 			tes3["removeItem"] = removeItem;
 			tes3["removeSound"] = removeSound;
+			tes3["reorderShader"] = reorderShader;
 			tes3["runLegacyScript"] = runLegacyScript;
 			tes3["saveGame"] = saveGame;
 			tes3["say"] = say;
@@ -4542,6 +4672,7 @@ namespace mwse {
 			tes3["triggerCrime"] = triggerCrime;
 			tes3["undoTransform"] = undoTransform;
 			tes3["unhammerKey"] = unhammerKey;
+			tes3["unloadShader"] = unloadShader;
 			tes3["unlock"] = unlock;
 			tes3["updateJournal"] = updateJournal;
 			tes3["wakeUp"] = wakeUp;

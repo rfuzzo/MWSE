@@ -8,6 +8,12 @@
 #include "TES3DataHandler.h"
 #include "TES3Vectors.h"
 
+#include "MGEPostShaders.h"
+
+namespace mge {
+	class ShaderHandle;
+}
+
 namespace mwse {
 	namespace lua {
 		template <typename T>
@@ -69,6 +75,8 @@ namespace mwse {
 		sol::optional<TES3::Vector2> getOptionalParamVector2(sol::optional<sol::table> maybeParams, const char* key);
 		sol::optional<TES3::Vector3> getOptionalParamVector3(sol::optional<sol::table> maybeParams, const char* key);
 		TES3::Cell* getOptionalParamCell(sol::optional<sol::table> maybeParams, const char* key);
+
+		std::shared_ptr<mge::ShaderHandle> getOptionalParamShader(sol::optional<sol::table> maybeParams, const char* key);
 
 		TES3::UI::Property getPropertyFromObject(sol::object object);
 		TES3::UI::UI_ID getUIIDFromObject(sol::object object);

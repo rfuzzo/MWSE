@@ -350,6 +350,25 @@ namespace mwse {
 			return value;
 		}
 
+		std::shared_ptr<mge::ShaderHandle> getOptionalParamShader(sol::optional<sol::table> maybeParams, const char* key) {
+			std::shared_ptr<mge::ShaderHandle> result = nullptr;
+
+			if (maybeParams) {
+				sol::table params = maybeParams.value();
+				sol::object maybeValue = params[key];
+				if (maybeValue.valid()) {
+					if (maybeValue.is<const char*>()) {
+						return mge::PostShaders::findShader(maybeValue.as<const char*>());
+					}
+					else if (maybeValue.is<std::shared_ptr<mge::ShaderHandle>>()) {
+						return maybeValue.as<std::shared_ptr<mge::ShaderHandle>>();
+					}
+				}
+			}
+
+			return result;
+		}
+
 		const TES3::UI::UI_ID TES3_UI_ID_NULL = static_cast<TES3::UI::UI_ID>(TES3::UI::Property::null);
 
 		TES3::UI::Property getPropertyFromObject(sol::object object) {

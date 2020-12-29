@@ -16,6 +16,9 @@ namespace mwse::lua {
 			auto usertypeDefinition = state.new_usertype<mge::ShaderHandle>("tes3ShaderHandle");
 			usertypeDefinition["new"] = sol::no_constructor;
 
+			usertypeDefinition[sol::meta_function::to_string] = &mge::ShaderHandle::getName;
+			usertypeDefinition["__tojson"] = &mge::ShaderHandle::toJson;
+
 			// Allow variables to be get/set using their variable name.
 			usertypeDefinition[sol::meta_function::index] = &mge::ShaderHandle::getVariable;
 			usertypeDefinition[sol::meta_function::new_index] = &mge::ShaderHandle::setVariable;

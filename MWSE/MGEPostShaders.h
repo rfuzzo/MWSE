@@ -54,7 +54,7 @@ namespace mge {
 		// Convenience functions for lua.
 		//
 
-		sol::object index(std::string& key);
+		std::string toJson() const;
 
 		D3DXHANDLE getVariableHandle(const char* name) const;
 
@@ -112,6 +112,7 @@ namespace mge {
 		static void applyBlend();
 
 		static inline auto getDevice() { return device; }
+		static inline auto& getShaders() { return shaders; }
 		static inline CONST D3DXMACRO* getFeatures() { return &*features.begin(); }
 	};
 }

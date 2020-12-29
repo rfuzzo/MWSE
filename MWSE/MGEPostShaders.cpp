@@ -408,7 +408,7 @@ namespace mge {
 	ShaderHandle::ShaderHandle(std::string name) :
 		m_Name(std::move(name)),
 		m_Effect(nullptr),
-		m_Enabled(false),
+		m_Enabled(true),
 		m_Timestamp(0),
 		m_LegacyMGEFlags(0)
 	{
@@ -572,6 +572,12 @@ namespace mge {
 			return m_Effect->SetBool(handle, value) == D3D_OK;
 		}
 		return false;
+	}
+
+	std::string ShaderHandle::toJson() const {
+		std::ostringstream ss;
+		ss << "\"" << m_Name << "\"";
+		return std::move(ss.str());
 	}
 
 	D3DXHANDLE ShaderHandle::getVariableHandle(const char* name) const {
