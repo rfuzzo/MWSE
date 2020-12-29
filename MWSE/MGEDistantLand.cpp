@@ -598,7 +598,7 @@ namespace mge {
 				}
 
 				// Run all shaders (with callback to set changed vars)
-				PostShaders::shaderTime(&updatePostShader, envFlags, mwBridge->frameTime());
+				PostShaders::shaderTime(envFlags, mwBridge->frameTime());
 			}
 
 			// Cache render for first frame of menu mode
@@ -637,46 +637,46 @@ namespace mge {
 	}
 
 	// updatePostShader - callback for setting post shader variables based on environment
-	void DistantLand::updatePostShader(MGEShader* shader) {
+	void DistantLand::updatePostShader(ShaderHandle* shader) {
 		auto mwBridge = MWBridge::get();
 
 		// Internal textures
 		// TODO: Should be set once at init time
-		shader->SetTexture(EV_depthframe, texDepthFrame);
-		shader->SetTexture(EV_watertexture, texWater);
+		shader->setLegacyTexture(EV_depthframe, texDepthFrame);
+		shader->setLegacyTexture(EV_watertexture, texWater);
 
 		// View position
 		float zoom = (Configuration.MGEFlags & ZOOM_ASPECT) ? Configuration.CameraEffects.zoom : 1.0f;
-		shader->SetMatrix(EV_mview, &mwView);
-		shader->SetMatrix(EV_mproj, &mwProj);
-		shader->SetFloatArray(EV_eyevec, eyeVec, 3);
-		shader->SetFloatArray(EV_eyepos, eyePos, 3);
-		shader->SetFloat(EV_fov, Configuration.ScreenFOV / zoom);
+		shader->setLegacyMatrix(EV_mview, &mwView);
+		shader->setLegacyMatrix(EV_mproj, &mwProj);
+		shader->setLegacyFloatArray(EV_eyevec, eyeVec, 3);
+		shader->setLegacyFloatArray(EV_eyepos, eyePos, 3);
+		shader->setLegacyFloat(EV_fov, Configuration.ScreenFOV / zoom);
 
 		// Lighting
 		RGBVECTOR totalAmb = sunAmb + ambCol;
-		shader->SetFloatArray(EV_sunvec, sunVec, 3);
-		shader->SetFloatArray(EV_suncol, sunCol, 3);
-		shader->SetFloatArray(EV_sunamb, totalAmb, 3);
-		shader->SetFloatArray(EV_sunpos, sunPos, 3);
-		shader->SetFloat(EV_sunvis, float(lerp(sunVis, 1.0, 0.333 * niceWeather)));
+		shader->setLegacyFloatArray(EV_sunvec, sunVec, 3);
+		shader->setLegacyFloatArray(EV_suncol, sunCol, 3);
+		shader->setLegacyFloatArray(EV_sunamb, totalAmb, 3);
+		shader->setLegacyFloatArray(EV_sunpos, sunPos, 3);
+		shader->setLegacyFloat(EV_sunvis, float(lerp(sunVis, 1.0, 0.333 * niceWeather)));
 
 		// Sky/fog
 		float fogS = (Configuration.MGEFlags & EXP_FOG) ? (fogStart / Configuration.DL.ExpFogDistMult) : fogStart;
 		float fogE = (Configuration.MGEFlags & EXP_FOG) ? (fogEnd / Configuration.DL.ExpFogDistMult) : fogEnd;
-		shader->SetFloatArray(EV_fogcol, horizonCol, 3);
-		shader->SetFloat(EV_fogstart, fogS);
-		shader->SetFloat(EV_fogrange, fogE);
-		shader->SetFloat(EV_fognearstart, fogNearStart);
-		shader->SetFloat(EV_fognearrange, fogNearEnd);
+		shader->setLegacyFloatArray(EV_fogcol, horizonCol, 3);
+		shader->setLegacyFloat(EV_fogstart, fogS);
+		shader->setLegacyFloat(EV_fogrange, fogE);
+		shader->setLegacyFloat(EV_fognearstart, fogNearStart);
+		shader->setLegacyFloat(EV_fognearrange, fogNearEnd);
 
 		// Other
 		// In cells without water, set very low waterlevel for shaders that clip against water
 		float water = mwBridge->CellHasWater() ? mwBridge->WaterLevel() : -1e9f;
-		shader->SetFloat(EV_time, mwBridge->simulationTime());
-		shader->SetFloat(EV_waterlevel, water);
-		shader->SetBool(EV_isinterior, !mwBridge->CellHasWeather());
-		shader->SetBool(EV_isunderwater, mwBridge->IsUnderwater(eyePos.z));
+		shader->setLegacyFloat(EV_time, mwBridge->simulationTime());
+		shader->setLegacyFloat(EV_waterlevel, water);
+		shader->setLegacyBool(EV_isinterior, !mwBridge->CellHasWeather());
+		shader->setLegacyBool(EV_isunderwater, mwBridge->IsUnderwater(eyePos.z));
 	}
 
 	//------------------------------------------------------------

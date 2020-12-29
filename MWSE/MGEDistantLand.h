@@ -5,7 +5,7 @@
 #include "MGESpecificRender.h"
 
 namespace mge {
-	struct MGEShader;
+	class ShaderHandle;
 
 	class DistantLand {
 	public:
@@ -171,7 +171,7 @@ namespace mge {
 		static void renderShadowDebug();
 
 		static void postProcess();
-		static void updatePostShader(MGEShader* shader);
+		static void updatePostShader(ShaderHandle* shader);
 
 		static IDirect3DSurface9* captureScreen();
 		static void requestCaptureNoUI(void (*func)(IDirect3DSurface9*));

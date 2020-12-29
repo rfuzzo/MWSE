@@ -7,30 +7,68 @@ namespace mge {
 		EV_lastshader, EV_lastpass, EV_depthframe, EV_watertexture,
 		EV_eyevec, EV_eyepos, EV_sunvec, EV_suncol, EV_sunamb, EV_sunpos, EV_sunvis, EV_HDR,
 		EV_mview, EV_mproj, EV_fogcol, EV_fogstart, EV_fogrange, EV_fognearstart, EV_fognearrange,
-		EV_rcpres, EV_fov, EV_time, EV_waterlevel, EV_isinterior, EV_isunderwater
+		EV_rcpres, EV_fov, EV_time, EV_waterlevel, EV_isinterior, EV_isunderwater,
+		EV_COUNT
 	};
 
-	struct MGEShader {
-		ID3DXEffect* effect;
-		bool enabled;
-		int disableFlags;
-		DWORD timestamp;
-		std::string name;
-		D3DXHANDLE ehVars[32];
+	class ShaderHandle {
+	public:
+		ShaderHandle(std::string name);
+		~ShaderHandle();
 
-		void SetTexture(EffectVariableID id, LPDIRECT3DBASETEXTURE9 tex);
-		void SetMatrix(EffectVariableID id, const D3DXMATRIX* m);
-		void SetFloatArray(EffectVariableID id, const float* x, int n);
-		void SetFloat(EffectVariableID id, float x);
-		void SetInt(EffectVariableID id, int x);
-		void SetBool(EffectVariableID id, bool b);
+		// Reloads the shader from the source file. Returns false if it failed.
+		bool reload();
+
+		// Releases all shader resources. Does not reload variables.
+		void release();
+
+		//
+		// Basic utility functions.
+		//
+
+		inline auto& getName() const { return m_Name; }
+		inline auto getEffect() const { return m_Effect; }
+		inline auto getEnabled() const { return m_Enabled; }
+		bool setEnabled(bool value);
+		inline auto getTimestamp() const { return m_Timestamp; }
+		inline auto getLegacyFlags() const { return m_LegacyMGEFlags; }
+
+		//
+		// Convenient access for legacy MGE XE shader variables.
+		//
+
+		bool setLegacyTexture(EffectVariableID id, LPDIRECT3DBASETEXTURE9 value) const;
+		bool setLegacyTexture(const char* name, LPDIRECT3DBASETEXTURE9 value) const;
+		bool setLegacyMatrix(EffectVariableID id, const D3DXMATRIX* value) const;
+		bool setLegacyMatrix(const char* name, const D3DXMATRIX* value) const;
+		bool setLegacyFloatArray(EffectVariableID id, const float* values, int count) const;
+		bool setLegacyFloatArray(const char* name, const float* values, int count) const;
+		bool setLegacyFloat(EffectVariableID id, float value) const;
+		bool setLegacyFloat(const char* name, float value) const;
+		bool setLegacyInt(EffectVariableID id, int value) const;
+		bool setLegacyInt(const char* name, int value) const;
+		bool setLegacyBool(EffectVariableID id, bool value) const;
+		bool setLegacyBool(const char* name, bool value) const;
+
+	private:
+
+		bool checkVersion() const;
+
+		// Sets variable handles and loads source textures.
+		void initialize();
+
+		std::string m_Name;
+		ID3DXEffect* m_Effect;
+		bool m_Enabled;
+		DWORD m_Timestamp;
+		int m_LegacyMGEFlags;
+		D3DXHANDLE m_LegacyVariableHandles[EV_COUNT];
+
 	};
-
-	typedef void (*MGEShaderUpdateFunc)(MGEShader*);
 
 	class PostShaders {
 		static IDirect3DDevice9* device;
-		static std::vector<MGEShader> shaders;
+		static std::vector<std::shared_ptr<ShaderHandle>> shaders;
 		static std::vector<D3DXMACRO> features;
 		static IDirect3DTexture9* texLastShader;
 		static IDirect3DSurface9* surfaceLastShader;
@@ -43,22 +81,23 @@ namespace mge {
 	public:
 		static bool init(IDirect3DDevice9* realDevice);
 		static bool initShaderChain();
+		static void setShaderConstants(ShaderHandle* shader);
 		static bool updateShaderChain();
-		static bool checkShaderVersion(MGEShader* shader);
-		static void initShader(MGEShader* shader);
-		static void loadShaderDependencies(MGEShader* shader);
 		static bool initBuffers();
 		static void release();
 
-		static MGEShader* findShader(const char* shaderName);
+		static ShaderHandle* findShader(const char* shaderName);
 		static bool setShaderVar(const char* shaderName, const char* varName, int x);
 		static bool setShaderVar(const char* shaderName, const char* varName, float x);
 		static bool setShaderVar(const char* shaderName, const char* varName, float* v);
 		static bool setShaderEnable(const char* shaderName, bool enable);
 
 		static void evalAdaptHDR(IDirect3DSurface9* source, int environmentFlags, float dt);
-		static void shaderTime(MGEShaderUpdateFunc updateVarsFunc, int environmentFlags, float frameTime);
+		static void shaderTime(int environmentFlags, float frameTime);
 		static IDirect3DTexture9* borrowBuffer(int n);
 		static void applyBlend();
+
+		static inline auto getDevice() { return device; }
+		static inline CONST D3DXMACRO* getFeatures() { return &*features.begin(); }
 	};
 }

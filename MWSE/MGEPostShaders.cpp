@@ -4,6 +4,7 @@
 #include "MGEConfiguration.h"
 #include "MGEMWBridge.h"
 #include "MGEPostShaders.h"
+#include "MGEDistantLand.h"
 
 namespace mge {
 	// Must match enum EffectVariableID in postshaders.h
@@ -21,7 +22,7 @@ namespace mge {
 	const DWORD fvfBlend = D3DFVF_XYZW | D3DFVF_TEX2;
 
 	IDirect3DDevice9* PostShaders::device;
-	std::vector<MGEShader> PostShaders::shaders;
+	std::vector<std::shared_ptr<ShaderHandle>> PostShaders::shaders;
 	std::vector<D3DXMACRO> PostShaders::features;
 	IDirect3DTexture9* PostShaders::texLastShader;
 	IDirect3DSurface9* PostShaders::surfaceLastShader;
@@ -61,40 +62,13 @@ namespace mge {
 		}
 		features.push_back(macroTerminator);
 
+		// Create each shader.
 		for (const char* p = Configuration.ShaderChain; *p; p += strlen(p) + 1) {
-			WIN32_FILE_ATTRIBUTE_DATA fileAttrs;
-			MGEShader shader;
-			ID3DXBuffer* errors;
-
-			std::snprintf(path, sizeof(path), "Data Files\\shaders\\XEshaders\\%s.fx", p);
-			if (!GetFileAttributesEx(path, GetFileExInfoStandard, &fileAttrs)) {
-				mwse::log::logLine("!! Post shader %s missing", path);
-				continue;
+			try {
+				shaders.push_back(std::make_shared<ShaderHandle>(p));
 			}
-
-			HRESULT hr = D3DXCreateEffectFromFile(device, path, &*features.begin(), 0, D3DXFX_LARGEADDRESSAWARE, 0, &shader.effect, &errors);
-
-			if (hr == D3D_OK) {
-				if (checkShaderVersion(&shader)) {
-					shader.name = p;
-					shader.timestamp = fileAttrs.ftLastWriteTime.dwLowDateTime;
-					shader.enabled = true;
-
-					initShader(&shader);
-					loadShaderDependencies(&shader);
-					shaders.push_back(shader);
-				}
-				else {
-					shader.effect->Release();
-					mwse::log::logLine("## Post shader %s is not version compatible, not loaded", path);
-				}
-			}
-			else {
-				mwse::log::logLine("!! Post shader %s failed to load/compile", path);
-				if (errors) {
-					mwse::log::logLine("!! Shader errors: %s", errors->GetBufferPointer());
-					errors->Release();
-				}
+			catch (std::exception& e) {
+				mwse::log::getLog() << "Failed to create shader: " << e.what();
 			}
 		}
 
@@ -104,6 +78,10 @@ namespace mge {
 		}
 
 		return true;
+	}
+
+	void PostShaders::setShaderConstants(ShaderHandle* shader) {
+		shader->setLegacyFloatArray(EV_rcpres, rcpRes, 2);
 	}
 
 	// updateShaderChain
@@ -117,123 +95,24 @@ namespace mge {
 			ID3DXEffect* effect;
 			ID3DXBuffer* errors;
 
-			std::snprintf(path, sizeof(path), "Data Files\\shaders\\XEshaders\\%s.fx", s.name.c_str());
+			std::snprintf(path, sizeof(path), "Data Files\\shaders\\XEshaders\\%s.fx", s->getName().c_str());
 			if (!GetFileAttributesEx(path, GetFileExInfoStandard, &fileAttrs)) {
 				continue;
 			}
 
-			if (s.timestamp != fileAttrs.ftLastWriteTime.dwLowDateTime) {
-				HRESULT hr = D3DXCreateEffectFromFile(device, path, &*features.begin(), 0, D3DXFX_LARGEADDRESSAWARE, 0, &effect, &errors);
-
-				if (hr == D3D_OK) {
-					s.effect->Release();
-					s.effect = effect;
-					s.timestamp = fileAttrs.ftLastWriteTime.dwLowDateTime;
-
-					initShader(&s);
-					loadShaderDependencies(&s);
-					updated = true;
-				}
-				else {
-					mwse::log::logLine("!! Post shader %s failed to load/compile", path);
-					if (errors) {
-						mwse::log::logLine("!! Shader errors: %s", errors->GetBufferPointer());
-						errors->Release();
+			if (s->getTimestamp() != fileAttrs.ftLastWriteTime.dwLowDateTime) {
+				try {
+					if (s->reload()) {
+						updated = true;
 					}
+				}
+				catch (std::exception& e) {
+					mwse::log::getLog() << "Failed to update shader: " << e.what();
 				}
 			}
 		}
 
 		return updated;
-	}
-
-	// checkShaderVersion
-	// Checks effect annotation to see if the shader was designed for MGE XE,
-	// as MGE shaders use an incompatible set of variables
-	bool PostShaders::checkShaderVersion(MGEShader* shader) {
-		ID3DXEffect* effect = shader->effect;
-		D3DXHANDLE tech, ver;
-		const char* verstr;
-
-		tech = effect->GetTechnique(0);
-		if (tech == 0) {
-			return false;
-		}
-
-		ver = effect->GetAnnotationByName(tech, "MGEinterface");
-		if (ver == 0) {
-			return false;
-		}
-
-		if (effect->GetString(ver, &verstr) == D3D_OK) {
-			if (std::strcmp(verstr, compatibleShader) == 0) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	// initShader - Binds standard game environment variables
-	void PostShaders::initShader(MGEShader* shader) {
-		ID3DXEffect* effect = shader->effect;
-		D3DXHANDLE tech, hdr, glare;
-
-		// Variable handles
-		for (int i = 0; i != effectVariableCount; ++i) {
-			shader->ehVars[i] = effect->GetParameterByName(0, effectVariableList[i]);
-		}
-
-		// Read environment activation flags
-		shader->disableFlags = 0;
-		D3DXHANDLE ehMGEflags = effect->GetParameterByName(0, "mgeflags");
-		if (ehMGEflags) {
-			effect->GetInt(ehMGEflags, &shader->disableFlags);
-		}
-
-		// Read feature flags
-		tech = effect->GetTechnique(0);
-		hdr = effect->GetAnnotationByName(tech, "requiresHDR");
-		if (hdr) {
-			Configuration.MGEFlags |= USE_HDR;
-		}
-		glare = effect->GetAnnotationByName(tech, "disableSunglare");
-		if (glare) {
-			Configuration.MGEFlags |= NO_MW_SUNGLARE;
-		}
-
-		// Constants
-		shader->SetFloatArray(EV_rcpres, rcpRes, 2);
-	}
-
-	// loadShaderDependencies - Loads textures referenced inside a shader
-	void PostShaders::loadShaderDependencies(MGEShader* shader) {
-		ID3DXEffect* effect = shader->effect;
-		char texturepath[MAX_PATH];
-		const char* texturesrc;
-
-		for (UINT i = 0; true; ++i) {
-			D3DXHANDLE ehTextureRef = effect->GetParameter(0, i);
-			if (ehTextureRef == 0) {
-				break;
-			}
-
-			D3DXHANDLE ehTextureSrc = effect->GetAnnotationByName(ehTextureRef, "src");
-			if (ehTextureSrc == 0) {
-				continue;
-			}
-
-			if (effect->GetString(ehTextureSrc, &texturesrc) == D3D_OK) {
-				IDirect3DTexture9* tex;
-				std::snprintf(texturepath, sizeof(texturepath), "Data Files\\textures\\%s", texturesrc);
-
-				if (D3DXCreateTextureFromFile(device, texturepath, &tex) == D3D_OK) {
-					effect->SetTexture(ehTextureRef, tex);
-				}
-				else {
-					mwse::log::logLine("!! Post shader %s failed to load texture %s", shader->name.c_str(), texturepath);
-				}
-			}
-		}
 	}
 
 	// initBuffers - Create ping-pong buffers and HDR resolve surfaces
@@ -314,7 +193,7 @@ namespace mge {
 	// release - Cleans up Direct3D resources
 	void PostShaders::release() {
 		for (auto& s : shaders) {
-			s.effect->Release();
+			s->release();
 		}
 		shaders.clear();
 
@@ -373,7 +252,7 @@ namespace mge {
 	}
 
 	// shaderTime - Applies all post processing shaders for the current frame
-	void PostShaders::shaderTime(MGEShaderUpdateFunc updateVarsFunc, int environmentFlags, float frameTime) {
+	void PostShaders::shaderTime(int environmentFlags, float frameTime) {
 		IDirect3DSurface9* backbuffer, * depthstencil;
 
 		// Turn off depth stencil use
@@ -414,24 +293,24 @@ namespace mge {
 
 		// Render all those shaders
 		for (auto& s : shaders) {
-			ID3DXEffect* effect = s.effect;
+			ID3DXEffect* effect = s->getEffect();
 			UINT passes;
 
-			if (!s.enabled) {
+			if (!s->getEnabled()) {
 				continue;
 			}
-			if (s.disableFlags & environmentFlags) {
+			if (s->getLegacyFlags() & environmentFlags) {
 				continue;
 			}
 
-			updateVarsFunc(&s);
-			s.SetFloatArray(EV_HDR, adaptPoint, 4);
-			s.SetTexture(EV_lastshader, texLastShader);
+			DistantLand::updatePostShader(s.get());
+			s->setLegacyFloatArray(EV_HDR, adaptPoint, 4);
+			s->setLegacyTexture(EV_lastshader, texLastShader);
+
 			effect->Begin(&passes, 0);
-
 			for (UINT p = 0; p != passes; ++p) {
 				device->SetRenderTarget(0, doublebuffer.sinkSurface());
-				s.SetTexture(EV_lastpass, doublebuffer.sourceTexture());
+				s->setLegacyTexture(EV_lastpass, doublebuffer.sourceTexture());
 
 				effect->BeginPass(p);
 				device->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -439,7 +318,6 @@ namespace mge {
 
 				doublebuffer.cycle();
 			}
-
 			effect->End();
 
 			// Avoid another copy by exchanging which surfaces are buffers
@@ -484,106 +362,298 @@ namespace mge {
 
 
 	// Scripting interface for shaders
-	MGEShader* PostShaders::findShader(const char* shaderName) {
+	ShaderHandle* PostShaders::findShader(const char* shaderName) {
 		for (auto& s : shaders) {
-			if (s.name == shaderName) {
-				return &s;
+			if (s->getName() == shaderName) {
+				return s.get();
 			}
 		}
 		return nullptr;
 	}
 
 	bool PostShaders::setShaderVar(const char* shaderName, const char* varName, int x) {
-		MGEShader* shader = findShader(shaderName);
+		ShaderHandle* shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
 
-		D3DXHANDLE ehVar = shader->effect->GetParameterByName(0, varName);
-		if (!ehVar) {
-			return false;
-		}
-
-		shader->effect->SetInt(ehVar, x);
-		return true;
+		return shader->setLegacyInt(varName, x);
 	}
 
 	bool PostShaders::setShaderVar(const char* shaderName, const char* varName, float x) {
-		MGEShader* shader = findShader(shaderName);
+		ShaderHandle* shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
 
-		D3DXHANDLE ehVar = shader->effect->GetParameterByName(0, varName);
-		if (!ehVar) {
-			return false;
-		}
-
-		shader->effect->SetFloat(ehVar, x);
-		return true;
+		return shader->setLegacyFloat(varName, x);
 	}
 
 	bool PostShaders::setShaderVar(const char* shaderName, const char* varName, float* v) {
-		MGEShader* shader = findShader(shaderName);
+		ShaderHandle* shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
 
-		D3DXHANDLE ehVar = shader->effect->GetParameterByName(0, varName);
-		if (!ehVar) {
-			return false;
-		}
-
-		shader->effect->SetFloatArray(ehVar, v, 4);
-		return true;
+		return shader->setLegacyFloatArray(varName, v, 4);
 	}
 
 	bool PostShaders::setShaderEnable(const char* shaderName, bool enable) {
-		MGEShader* shader = findShader(shaderName);
+		ShaderHandle* shader = findShader(shaderName);
 		if (!shader) {
 			return false;
 		}
 
-		shader->enabled = enable;
-		return true;
+		return shader->setEnabled(enable);
 	}
 
+	//
+	// Shader handlers.
+	//
 
+	ShaderHandle::ShaderHandle(std::string name) :
+		m_Name(std::move(name)),
+		m_Effect(nullptr),
+		m_Enabled(false),
+		m_Timestamp(0),
+		m_LegacyMGEFlags(0)
+	{
+		// Define variables we can't define above.
+		memset(m_LegacyVariableHandles, 0, sizeof(m_LegacyVariableHandles));
 
-	// Effect helpers, silently ignores attempts to set non-existing shader variables
-	void MGEShader::SetTexture(EffectVariableID id, LPDIRECT3DBASETEXTURE9 tex) {
-		if (ehVars[id]) {
-			effect->SetTexture(ehVars[id], tex);
+		if (!reload()) {
+			throw std::runtime_error("Could not load shader. It may not meet version requirements.");
 		}
 	}
 
-	void MGEShader::SetMatrix(EffectVariableID id, const D3DXMATRIX* m) {
-		if (ehVars[id]) {
-			effect->SetMatrix(ehVars[id], m);
-		}
+	ShaderHandle::~ShaderHandle() {
+		release();
 	}
 
-	void MGEShader::SetFloatArray(EffectVariableID id, const float* x, int n) {
-		if (ehVars[id]) {
-			effect->SetFloatArray(ehVars[id], x, n);
+	bool ShaderHandle::reload() {
+		// Temporarily disable shader.
+		auto wasEnabled = m_Enabled;
+		release();
+
+		char path[MAX_PATH];
+		WIN32_FILE_ATTRIBUTE_DATA fileAttrs;
+		std::snprintf(path, sizeof(path), "Data Files\\shaders\\XEshaders\\%s.fx", m_Name.c_str());
+		if (!GetFileAttributesEx(path, GetFileExInfoStandard, &fileAttrs)) {
+			throw std::runtime_error("Post shader missing.");
 		}
+
+		ID3DXBuffer* errors;
+		if (D3DXCreateEffectFromFile(PostShaders::getDevice(), path, PostShaders::getFeatures(), 0, D3DXFX_LARGEADDRESSAWARE, 0, &m_Effect, &errors) != D3D_OK) {
+			std::ostringstream ss;
+			ss << "Post shader " << path << " failed to load/compile.";
+			if (errors) {
+				ss << "Errors: " << reinterpret_cast<const char*>(errors->GetBufferPointer());
+			}
+			ss << std::endl;
+			throw std::runtime_error(std::move(ss.str()));
+		}
+
+		if (!checkVersion()) {
+			throw std::runtime_error("Shader does not meet version requirements.");
+		}
+
+		// Update variables.
+		initialize();
+		m_Timestamp = fileAttrs.ftLastWriteTime.dwLowDateTime;
+
+		// Restore enabled state.
+		m_Enabled = wasEnabled;
 	}
 
-	void MGEShader::SetFloat(EffectVariableID id, float x) {
-		if (ehVars[id]) {
-			effect->SetFloat(ehVars[id], x);
+	void ShaderHandle::release() {
+		// Release effect.
+		if (m_Effect) {
+			m_Effect->Release();
+			m_Effect = nullptr;
 		}
+
+		// Clear legacy variable handles.
+		memset(m_LegacyVariableHandles, 0, sizeof(m_LegacyVariableHandles));
+
+		// Flag as disabled.
+		m_Enabled = false;
 	}
 
-	void MGEShader::SetInt(EffectVariableID id, int x) {
-		if (ehVars[id]) {
-			effect->SetInt(ehVars[id], x);
+	bool ShaderHandle::setEnabled(bool value) {
+		if (m_Effect) {
+			m_Enabled = value;
+			return true;
 		}
+		return false;
 	}
 
-	void MGEShader::SetBool(EffectVariableID id, bool b) {
-		if (ehVars[id]) {
-			effect->SetBool(ehVars[id], b);
+	bool ShaderHandle::setLegacyTexture(EffectVariableID id, LPDIRECT3DBASETEXTURE9 value) const {
+		assert(id < EV_COUNT);
+		if (m_LegacyVariableHandles[id]) {
+			return m_Effect->SetTexture(m_LegacyVariableHandles[id], value) == D3D_OK;
 		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyTexture(const char* name, LPDIRECT3DBASETEXTURE9 value) const {
+		auto handle = m_Effect->GetParameterByName(0, name);
+		if (handle) {
+			return m_Effect->SetTexture(handle, value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyMatrix(EffectVariableID id, const D3DXMATRIX* value) const {
+		assert(id < EV_COUNT);
+		if (m_LegacyVariableHandles[id]) {
+			return m_Effect->SetMatrix(m_LegacyVariableHandles[id], value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyMatrix(const char* name, const D3DXMATRIX* value) const {
+		auto handle = m_Effect->GetParameterByName(0, name);
+		if (handle) {
+			return m_Effect->SetMatrix(handle, value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyFloatArray(EffectVariableID id, const float* values, int count) const {
+		assert(id < EV_COUNT);
+		if (m_LegacyVariableHandles[id]) {
+			return m_Effect->SetFloatArray(m_LegacyVariableHandles[id], values, count) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyFloatArray(const char* name, const float* values, int count) const {
+		auto handle = m_Effect->GetParameterByName(0, name);
+		if (handle) {
+			return m_Effect->SetFloatArray(handle, values, count) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyFloat(EffectVariableID id, float value) const {
+		assert(id < EV_COUNT);
+		if (m_LegacyVariableHandles[id]) {
+			return m_Effect->SetFloat(m_LegacyVariableHandles[id], value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyFloat(const char* name, float value) const {
+		auto handle = m_Effect->GetParameterByName(0, name);
+		if (handle) {
+			return m_Effect->SetFloat(handle, value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyInt(EffectVariableID id, int value) const {
+		assert(id < EV_COUNT);
+		if (m_LegacyVariableHandles[id]) {
+			return m_Effect->SetInt(m_LegacyVariableHandles[id], value);
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyInt(const char* name, int value) const {
+		auto handle = m_Effect->GetParameterByName(0, name);
+		if (handle) {
+			return m_Effect->SetInt(handle, value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyBool(EffectVariableID id, bool value) const {
+		assert(id < EV_COUNT);
+		if (m_LegacyVariableHandles[id]) {
+			return m_Effect->SetBool(m_LegacyVariableHandles[id], value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::setLegacyBool(const char* name, bool value) const {
+		auto handle = m_Effect->GetParameterByName(0, name);
+		if (handle) {
+			return m_Effect->SetBool(handle, value) == D3D_OK;
+		}
+		return false;
+	}
+
+	bool ShaderHandle::checkVersion() const {
+		auto tech = m_Effect->GetTechnique(0);
+		if (tech == 0) {
+			return false;
+		}
+
+		auto ver = m_Effect->GetAnnotationByName(tech, "MGEinterface");
+		if (ver == 0) {
+			return false;
+		}
+
+		const char* verstr;
+		if (m_Effect->GetString(ver, &verstr) == D3D_OK) {
+			if (std::strcmp(verstr, compatibleShader) == 0) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	void ShaderHandle::initialize() {
+		// Fill out handles for legacy variables.
+		for (size_t i = 0u; i != effectVariableCount; ++i) {
+			m_LegacyVariableHandles[i] = m_Effect->GetParameterByName(0, effectVariableList[i]);
+		}
+
+		// Read environment activation flags
+		D3DXHANDLE ehMGEflags = m_Effect->GetParameterByName(0, "mgeflags");
+		if (ehMGEflags) {
+			m_Effect->GetInt(ehMGEflags, &m_LegacyMGEFlags);
+		}
+
+		// Set HDR and sunglare configuration flags if the shader requires it.
+		auto technique = m_Effect->GetTechnique(0);
+		if (m_Effect->GetAnnotationByName(technique, "requiresHDR")) {
+			Configuration.MGEFlags |= USE_HDR;
+		}
+		if (m_Effect->GetAnnotationByName(technique, "disableSunglare")) {
+			Configuration.MGEFlags |= NO_MW_SUNGLARE;
+		}
+
+		// Load source textures.
+		char fullSourceTexturePath[MAX_PATH];
+		for (size_t i = 0; true; i++) {
+			D3DXHANDLE ehTextureRef = m_Effect->GetParameter(0, i);
+			if (ehTextureRef == 0) {
+				break;
+			}
+
+			D3DXHANDLE ehTextureSrc = m_Effect->GetAnnotationByName(ehTextureRef, "src");
+			if (ehTextureSrc == 0) {
+				continue;
+			}
+
+			const char* sourceTexturePath;
+			if (m_Effect->GetString(ehTextureSrc, &sourceTexturePath) != D3D_OK) {
+				continue;
+			}
+
+			IDirect3DTexture9* tex;
+			std::snprintf(fullSourceTexturePath, sizeof(fullSourceTexturePath), "Data Files\\textures\\%s", sourceTexturePath);
+			if (D3DXCreateTextureFromFile(PostShaders::getDevice(), fullSourceTexturePath, &tex) != D3D_OK) {
+				std::ostringstream ss;
+				ss << "Failed to load texture '" << fullSourceTexturePath << "'.";
+				throw std::runtime_error(std::move(ss.str()));
+			}
+			m_Effect->SetTexture(ehTextureRef, tex);
+		}
+
+		// Give the controller an opportunity to set constants.
+		PostShaders::setShaderConstants(this);
 	}
 }
