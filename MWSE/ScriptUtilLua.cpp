@@ -58,7 +58,7 @@ namespace mwse {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
 				TES3::Item* item = getOptionalParamObject<TES3::Item>(params, "item");
-				int count = getOptionalParam<double>(params, "count", 1.0);
+				auto count = getOptionalParam<int>(params, "count", 1);
 				if (item == NULL || count <= 0) {
 					return false;
 				}
@@ -85,7 +85,7 @@ namespace mwse {
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
 				TES3::LeveledCreature* list = getOptionalParamObject<TES3::LeveledCreature>(params, "list");
 				TES3::Actor* actor = getOptionalParamObject<TES3::Actor>(params, "creature");
-				short level = getOptionalParam<double>(params, "level", 0.0);
+				auto level = getOptionalParam<short>(params, "level", 0);
 				if (list == NULL || actor == NULL || level <= 0) {
 					return false;
 				}
@@ -109,7 +109,7 @@ namespace mwse {
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
 				TES3::BaseObject* list = getOptionalParamObject<TES3::BaseObject>(params, "list");
 				TES3::Item* item = getOptionalParamObject<TES3::Item>(params, "item");
-				short level = getOptionalParam<double>(params, "level", 0.0);
+				short level = getOptionalParam<short>(params, "level", 0);
 				if (list == NULL || item == NULL || level <= 0) {
 					return false;
 				}
@@ -131,9 +131,9 @@ namespace mwse {
 			state["mwscript"]["aiTravel"] = [](sol::optional<sol::table> params) {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
-				double x = getOptionalParam<double>(params, "x", 0.0);
-				double y = getOptionalParam<double>(params, "y", 0.0);
-				double z = getOptionalParam<double>(params, "z", 0.0);
+				auto x = getOptionalParam<float>(params, "x", 0.0f);
+				auto y = getOptionalParam<float>(params, "y", 0.0f);
+				auto z = getOptionalParam<float>(params, "z", 0.0f);
 
 				mwscript::AITravel(script, reference, x, y, z);
 				return true;
@@ -154,7 +154,7 @@ namespace mwse {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
 				TES3::Item* item = getOptionalParamObject<TES3::Item>(params, "item");
-				int count = getOptionalParam<double>(params, "count", 1.0);
+				auto count = getOptionalParam<int>(params, "count", 1);
 				if (item == NULL) {
 					return false;
 				}
@@ -331,9 +331,9 @@ namespace mwse {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
 				TES3::BaseObject* object = getOptionalParamObject<TES3::BaseObject>(params, "object");
-				int count = getOptionalParam<double>(params, "count", 1.0);
-				double distance = getOptionalParam<double>(params, "distance", 256.0);
-				double direction = getOptionalParam<double>(params, "direction", 1.0);
+				auto count = getOptionalParam<int>(params, "count", 1);
+				auto distance = getOptionalParam<float>(params, "distance", 256.0f);
+				auto direction = getOptionalParam<float>(params, "direction", 1.0f);
 				if (object == NULL) {
 					return nullptr;
 				}
@@ -355,10 +355,10 @@ namespace mwse {
 			state["mwscript"]["position"] = [](sol::optional<sol::table> params) {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
-				double x = getOptionalParam<double>(params, "x", 0.0);
-				double y = getOptionalParam<double>(params, "y", 0.0);
-				double z = getOptionalParam<double>(params, "z", 0.0);
-				double rotation = getOptionalParam<double>(params, "rotation", 0.0);
+				auto x = getOptionalParam<float>(params, "x", 0.0f);
+				auto y = getOptionalParam<float>(params, "y", 0.0f);
+				auto z = getOptionalParam<float>(params, "z", 0.0f);
+				auto rotation = getOptionalParam<float>(params, "rotation", 0.0f);
 
 				mwscript::Position(script, reference, x, y, z, rotation);
 				return true;
@@ -366,10 +366,10 @@ namespace mwse {
 			state["mwscript"]["positionCell"] = [](sol::optional<sol::table> params) {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
-				double x = getOptionalParam<double>(params, "x", 0.0);
-				double y = getOptionalParam<double>(params, "y", 0.0);
-				double z = getOptionalParam<double>(params, "z", 0.0);
-				double rotation = getOptionalParam<double>(params, "rotation", 0.0);
+				auto x = getOptionalParam<float>(params, "x", 0.0f);
+				auto y = getOptionalParam<float>(params, "y", 0.0f);
+				auto z = getOptionalParam<float>(params, "z", 0.0f);
+				auto rotation = getOptionalParam<float>(params, "rotation", 0.0f);
 				std::string cell = getOptionalParam<std::string>(params, "cell", "");
 				if (cell.empty()) {
 					return false;
@@ -382,7 +382,7 @@ namespace mwse {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
 				TES3::Item* item = getOptionalParamObject<TES3::Item>(params, "item");
-				int count = getOptionalParam<double>(params, "count", 1.0);
+				auto count = getOptionalParam<int>(params, "count", 1);
 				if (item == NULL) {
 					return false;
 				}
@@ -425,7 +425,7 @@ namespace mwse {
 			state["mwscript"]["setLevel"] = [](sol::optional<sol::table> params) {
 				TES3::Script* script = getOptionalParamExecutionScript(params);
 				TES3::Reference* reference = getOptionalParamExecutionReference(params);
-				short level = getOptionalParam<double>(params, "level", 0);
+				auto level = getOptionalParam<short>(params, "level", 0);
 				if (level <= 0) {
 					return false;
 				}
