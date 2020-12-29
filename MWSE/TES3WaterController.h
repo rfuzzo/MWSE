@@ -5,9 +5,14 @@
 
 namespace TES3 {
 	struct WaterController {
+		struct Ripple {
+			NI::Pointer<NI::TriShape> shape; // 0x0
+			NI::Pointer<NI::TimeController> alphaController; // 0x4
+			int unknown_0x8;
+		};
 		void* nvLake; // 0x0
 		bool pixelShaderEnabled; // 0x4
-		BYTE unknown_0x5;
+		bool waterShown; // 0x5
 		const char* rippleTexturePath; // 0x8
 		NI::Pointer<NI::FlipController> flipController; // 0xC
 		NI::Pointer<NI::TexturingProperty> texturingProperty; // 0x10
@@ -16,7 +21,7 @@ namespace TES3 {
 		int rippleFrameCount; // 0x1C
 		float unknown_0x20;
 		float unknown_0x24;
-		DWORD unknown_0x28;
+		float unknown_0x28;
 		int surfaceFPS; // 0x30
 		float unknown_0x30;
 		float rippleLifetime; // 0x34
@@ -24,8 +29,8 @@ namespace TES3 {
 		float rippleScaleY; // 0x3C
 		float rippleAlphas[3]; // 0x40
 		float rippleRotationSpeed; // 0x4C
-		int maxRippleCount; // 0x50
-		DWORD unknown_0x54;
+		unsigned int rippleCount; // 0x50
+		Ripple* ripples; // 0x54
 		int nearWaterRadius; // 0x58
 		int nearWaterPoints; // 0x5C
 		float nearWaterUnderwaterFrequency; // 0x60
