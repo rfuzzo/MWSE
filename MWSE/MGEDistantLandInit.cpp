@@ -77,8 +77,8 @@ namespace mge {
 	float DistantLand::sunVis;
 	RGBVECTOR DistantLand::sunCol, DistantLand::sunAmb, DistantLand::ambCol;
 	RGBVECTOR DistantLand::nearFogCol, DistantLand::horizonCol;
-	RGBVECTOR DistantLand::atmOutscatter(0.07, 0.36, 0.76);
-	RGBVECTOR DistantLand::atmInscatter(0.25, 0.38, 0.48);
+	RGBVECTOR DistantLand::atmOutscatter(0.07f, 0.36f, 0.76f);
+	RGBVECTOR DistantLand::atmInscatter(0.25f, 0.38f, 0.48f);
 	float DistantLand::fogStart, DistantLand::fogEnd;
 	float DistantLand::fogNearStart, DistantLand::fogNearEnd;
 	float DistantLand::nearViewRange;
@@ -846,7 +846,7 @@ namespace mge {
 		}
 
 		CloseHandle(h);
-		mwse::log::getLog() << "Distant land finished loading, using " << texturesLoaded << " textures and " << texMemUsage << " MB." << std::endl;
+		mwse::log::getLog() << "Distant land finished loading, using " << std::dec << texturesLoaded << " textures and " << texMemUsage << " MB." << std::endl;
 		return true;
 	}
 
@@ -1007,8 +1007,6 @@ namespace mge {
 			mwse::log::logLine("!! Could not load world detail texture for distant land");
 			return false;
 		}
-
-		mwse::log::logLine("-- Landscape textures loaded");
 
 		HANDLE file = CreateFile("Data Files\\distantland\\world", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
 		if (file == INVALID_HANDLE_VALUE) {

@@ -569,9 +569,6 @@ namespace mge {
 		ID3DXEffect* effectFFE;
 		ID3DXBuffer* errors;
 
-		//mwse::log::logLine("-- Generating replacement fixed function shader");
-		//sk.log();
-
 		HRESULT hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE FixedFuncEmu.fx", generatedCode, 0, D3DXSHADER_OPTIMIZATION_LEVEL3 | D3DXFX_LARGEADDRESSAWARE, constantPool, &effectFFE, &errors);
 
 		if (hr != D3D_OK) {
