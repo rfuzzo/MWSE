@@ -54,8 +54,6 @@ namespace mge {
 
 	// initShaderChain - Load and prepare all shaders, ignoring invalid shaders
 	bool PostShaders::initShaderChain() {
-		char path[MAX_PATH];
-
 		// Set shader defines corresponding to required features
 		if (Configuration.MGEFlags & EXP_FOG) {
 			features.push_back(macroExpFog);
@@ -92,9 +90,6 @@ namespace mge {
 
 		for (auto& s : shaders) {
 			WIN32_FILE_ATTRIBUTE_DATA fileAttrs;
-			ID3DXEffect* effect;
-			ID3DXBuffer* errors;
-
 			std::snprintf(path, sizeof(path), "Data Files\\shaders\\XEshaders\\%s.fx", s->getName().c_str());
 			if (!GetFileAttributesEx(path, GetFileExInfoStandard, &fileAttrs)) {
 				continue;
@@ -102,9 +97,8 @@ namespace mge {
 
 			if (s->getTimestamp() != fileAttrs.ftLastWriteTime.dwLowDateTime) {
 				try {
-					if (s->reload()) {
-						updated = true;
-					}
+					s->reload();
+					updated = true;
 				}
 				catch (std::exception& e) {
 					mwse::log::getLog() << "Failed to update shader: " << e.what();
@@ -418,19 +412,14 @@ namespace mge {
 		m_Timestamp(0),
 		m_LegacyMGEFlags(0)
 	{
-		// Define variables we can't define above.
-		memset(m_LegacyVariableHandles, 0, sizeof(m_LegacyVariableHandles));
-
-		if (!reload()) {
-			throw std::runtime_error("Could not load shader. It may not meet version requirements.");
-		}
+		reload();
 	}
 
 	ShaderHandle::~ShaderHandle() {
 		release();
 	}
 
-	bool ShaderHandle::reload() {
+	void ShaderHandle::reload() {
 		// Temporarily disable shader.
 		auto wasEnabled = m_Enabled;
 		release();

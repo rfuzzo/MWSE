@@ -17,7 +17,7 @@ namespace mge {
 		~ShaderHandle();
 
 		// Reloads the shader from the source file. Returns false if it failed.
-		bool reload();
+		void reload();
 
 		// Releases all shader resources. Does not reload variables.
 		void release();
