@@ -33,8 +33,16 @@ namespace mge {
 		ID3DXBuffer* errors;
 		hr = D3DXCreateEffectFromFile(device, "Data Files\\shaders\\XE HUD.fx", 0, 0, D3DXFX_LARGEADDRESSAWARE, 0, &effectStandard, &errors);
 		if (hr != D3D_OK) {
-			mwse::log::logLine("!! HUD Shader errors: %s", errors->GetBufferPointer());
-			errors->Release();
+			if (errors) {
+				mwse::log::logLine("!! HUD Shader errors: %s", errors->GetBufferPointer());
+				errors->Release();
+			}
+			else {
+				// This can error in MO2 if the user installs this shader via its VFS. Let the user know.
+				// TODO: Delay this so that MO2 is supported.
+				mwse::log::getLog() << "!! HUD Shader errors: Could not create effect from Data Files\\shaders\\XE HUD.fx" << std::endl;
+				mwse::log::getLog() << "!! Ensure that the file exists. Note: This file does not currently support Mod Organizer 2. Install it manually." << std::endl;
+			}
 			return false;
 		}
 
