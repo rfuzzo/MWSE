@@ -1656,6 +1656,9 @@
     <ClInclude Include="MGEPostShadersLua.h">
       <Filter>Header Files\Lua\Bindings\MGE</Filter>
     </ClInclude>
+    <ClInclude Include="MGEUtilLua.h">
+      <Filter>Header Files\Lua\Bindings\MGE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3846,6 +3849,9 @@
       <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
     <ClCompile Include="MGEPostShadersLua.cpp">
+      <Filter>Source Files\Lua\Bindings\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="MGEUtilLua.cpp">
       <Filter>Source Files\Lua\Bindings\MGE</Filter>
     </ClCompile>
   </ItemGroup>

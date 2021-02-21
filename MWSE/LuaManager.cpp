@@ -154,6 +154,7 @@
 #include "NITriShapeLua.h"
 
 #include "MGEPostShadersLua.h"
+#include "MGEUtilLua.h"
 
 #include "LuaDisableableEventManager.h"
 
@@ -476,6 +477,7 @@ namespace mwse {
 			
 			// Bind MGE data types.
 			bindMGEPostShaders();
+			bindMGEUtil();
 
 			// Bind our disable event manager.
 			mwse::lua::event::DisableableEventManager::bindToLua();

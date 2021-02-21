@@ -33,6 +33,7 @@
     <ClInclude Include="MGED3D8Device.h" />
     <ClInclude Include="MGEDInput.h" />
     <ClInclude Include="MGEDirect3D8.h" />
+    <ClInclude Include="MGEUtilLua.h" />
     <ClInclude Include="MGEVersion.h" />
     <ClInclude Include="MGEMacroFunctionDefs.h" />
     <ClInclude Include="MGEMorrowindBSA.h" />
@@ -558,6 +559,7 @@
     <ClCompile Include="MGEUIShow.cpp" />
     <ClCompile Include="MGEUnhammerKey.cpp" />
     <ClCompile Include="MGEUtil.cpp" />
+    <ClCompile Include="MGEUtilLua.cpp" />
     <ClCompile Include="MGEWipeAll.cpp" />
     <ClCompile Include="MGEWipeHUDElements.cpp" />
     <ClCompile Include="MGEWithHUD.cpp" />
