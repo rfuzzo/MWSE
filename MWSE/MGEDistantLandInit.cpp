@@ -653,38 +653,39 @@ namespace mge {
 
 	bool DistantLand::loadDistantStatics() {
 		DWORD unused;
-		HANDLE h;
 
 		if (GetFileAttributes("Data Files\\distantland\\statics") == INVALID_FILE_ATTRIBUTES) {
 			mwse::log::logLine("!! Distant statics have not been generated");
 			return !(Configuration.MGEFlags & USE_DISTANT_LAND);
 		}
 
-		h = CreateFile("Data Files\\distantland\\version", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
-		if (h == INVALID_HANDLE_VALUE) {
+		auto hVersion = CreateFile("Data Files\\distantland\\version", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
+		if (hVersion == INVALID_HANDLE_VALUE) {
 			mwse::log::logLine("!! Required distant statics data is missing or corrupted");
 			return false;
 		}
 		BYTE version = 0;
-		ReadFile(h, &version, sizeof(version), &unused, 0);
+		ReadFile(hVersion, &version, sizeof(version), &unused, 0);
+		CloseHandle(hVersion);
 		if (version != mge::DISTANT_LAND_VERSION) {
 			mwse::log::logLine("!! Distant land data is from an old version and needs to be regenerated");
 			return false;
 		}
 
-		h = CreateFile("Data Files\\distantland\\statics\\usage.data", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
-		if (h == INVALID_HANDLE_VALUE) {
+		auto hUsageData = CreateFile("Data Files\\distantland\\statics\\usage.data", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
+		if (hUsageData == INVALID_HANDLE_VALUE) {
 			mwse::log::logLine("!! Required distant statics data is missing or corrupted");
 			return false;
 		}
 
 		size_t DistantStaticCount;
-		ReadFile(h, &DistantStaticCount, 4, &unused, 0);
+		ReadFile(hUsageData, &DistantStaticCount, 4, &unused, 0);
 		DistantStatics.resize(DistantStaticCount);
 
-		HANDLE h2 = CreateFile("Data Files\\distantland\\statics\\static_meshes", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
-		if (h2 == INVALID_HANDLE_VALUE) {
+		HANDLE hStaticMeshes = CreateFile("Data Files\\distantland\\statics\\static_meshes", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
+		if (hStaticMeshes == INVALID_HANDLE_VALUE) {
 			mwse::log::logLine("!! Required distant statics data is missing or corrupted");
+			CloseHandle(hUsageData);
 			return false;
 		}
 
@@ -698,11 +699,11 @@ namespace mge {
 		errorTexture->UnlockRect(0);
 
 		// Read entire file into one big memory buffer
-		DWORD file_size = GetFileSize(h2, NULL);
+		DWORD file_size = GetFileSize(hStaticMeshes, NULL);
 		unsigned char* file_buffer = new unsigned char[file_size];
 		unsigned char* pos = file_buffer;
-		ReadFile(h2, file_buffer, file_size, &unused, NULL);
-		CloseHandle(h2);
+		ReadFile(hStaticMeshes, file_buffer, file_size, &unused, NULL);
+		CloseHandle(hStaticMeshes);
 
 		for (auto& i : DistantStatics) {
 			READ_FROM_BUFFER(pos, &i.numSubsets, 4);
@@ -787,7 +788,7 @@ namespace mge {
 			size_t UsedDistantStaticCount;
 			decltype(UsedDistantStatics)::iterator iCell;
 
-			ReadFile(h, &UsedDistantStaticCount, 4, &unused, 0);
+			ReadFile(hUsageData, &UsedDistantStaticCount, 4, &unused, 0);
 			if (nWorldSpace != 0 && UsedDistantStaticCount == 0) {
 				break;
 			}
@@ -800,14 +801,14 @@ namespace mge {
 				}
 			} else {
 				char cellname[64];
-				ReadFile(h, &cellname, 64, &unused, 0);
+				ReadFile(hUsageData, &cellname, 64, &unused, 0);
 				iCell = UsedDistantStatics.insert(make_pair(string(cellname), vector<UsedDistantStatic>())).first;
 				mapWorldSpaces.insert(make_pair(string(cellname), WorldSpace()));
 			}
 
 			unsigned char* UsedDistantStaticData = new unsigned char[UsedDistantStaticCount * 32];
 			unsigned char* dataPos = UsedDistantStaticData;
-			ReadFile(h, UsedDistantStaticData, UsedDistantStaticCount * 32, &unused, 0);
+			ReadFile(hUsageData, UsedDistantStaticData, UsedDistantStaticCount * 32, &unused, 0);
 
 			vector<UsedDistantStatic>& ThisWorldStatics = iCell->second;
 			ThisWorldStatics.reserve(UsedDistantStaticCount);
@@ -845,7 +846,7 @@ namespace mge {
 			delete [] UsedDistantStaticData;
 		}
 
-		CloseHandle(h);
+		CloseHandle(hUsageData);
 		mwse::log::getLog() << "Distant land finished loading, using " << std::dec << texturesLoaded << " textures and " << texMemUsage << " MB." << std::endl;
 		return true;
 	}
