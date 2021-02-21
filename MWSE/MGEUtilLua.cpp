@@ -25,6 +25,24 @@ namespace mwse::lua {
 		mwse::log::getLog() << string;
 	}
 
+	auto mge_getLightingMode() {
+		return std::make_tuple(bool(mge::Configuration.MGEFlags & USE_FFESHADER), mge::Configuration.PerPixelLightFlags);
+	}
+
+	auto mge_setLightingMode(sol::optional<sol::table> params) {
+		auto useDynamicLighting = getOptionalParam<bool>(params, "dynamic", mge::Configuration.MGEFlags & USE_FFESHADER);
+		if ((mge::Configuration.MGEFlags & USE_FFESHADER) != useDynamicLighting) {
+			mge::Configuration.MGEFlags ^= USE_FFESHADER;
+		}
+
+		DWORD PPLFlags = 0;
+		if (getOptionalParam<bool>(params, "interiorOnly", mge::Configuration.PerPixelLightFlags & 1)) {
+			PPLFlags |= 1;
+		}
+
+		mge::Configuration.PerPixelLightFlags = PPLFlags;
+	}
+
 	//
 	// HUD-related functions.
 	//
@@ -472,6 +490,7 @@ namespace mwse::lua {
 		lua_mge["decreaseViewRange"] = mge::MacroFunctions::DecreaseViewRange;
 		lua_mge["decreaseZoom"] = mge::MacroFunctions::DecreaseZoom;
 		lua_mge["disableMusic"] = mge::MacroFunctions::DisableMusic;
+		lua_mge["getLightingMode"] = mge_getLightingMode;
 		lua_mge["getScreenHeight"] = mge::MGEhud::getScreenHeight;
 		lua_mge["getScreenWidth"] = mge::MGEhud::getScreenWidth;
 		lua_mge["getVersion"] = mge_getVersion;
@@ -497,6 +516,7 @@ namespace mwse::lua {
 		lua_mge["moveUp3PCam"] = mge::MacroFunctions::MoveUp3PCam;
 		lua_mge["nextTrack"] = mge::MacroFunctions::NextTrack;
 		lua_mge["resetEnableZoom"] = mge::MacroFunctions::ResetEnableZoom;
+		lua_mge["setLightingMode"] = mge_setLightingMode;
 		lua_mge["showLastMessage"] = mge::MacroFunctions::ShowLastMessage;
 		lua_mge["takeScreenshot"] = mge::MacroFunctions::TakeScreenshot;
 		lua_mge["toggleBlending"] = mge::MacroFunctions::ToggleBlending;
