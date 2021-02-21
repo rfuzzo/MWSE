@@ -468,10 +468,48 @@ namespace mwse::lua {
 		sol::table lua_mge = state["mge"];
 
 		// General functions.
+		lua_mge["decreaseFOV"] = mge::MacroFunctions::DecreaseFOV;
+		lua_mge["decreaseViewRange"] = mge::MacroFunctions::DecreaseViewRange;
+		lua_mge["decreaseZoom"] = mge::MacroFunctions::DecreaseZoom;
+		lua_mge["disableMusic"] = mge::MacroFunctions::DisableMusic;
 		lua_mge["getScreenHeight"] = mge::MGEhud::getScreenHeight;
 		lua_mge["getScreenWidth"] = mge::MGEhud::getScreenWidth;
 		lua_mge["getVersion"] = mge_getVersion;
+		lua_mge["haggleLess1"] = mge::MacroFunctions::HaggleLess1;
+		lua_mge["haggleLess10"] = mge::MacroFunctions::HaggleLess10;
+		lua_mge["haggleLess100"] = mge::MacroFunctions::HaggleLess100;
+		lua_mge["haggleLess1000"] = mge::MacroFunctions::HaggleLess1000;
+		lua_mge["haggleLess10000"] = mge::MacroFunctions::HaggleLess10000;
+		lua_mge["haggleMore1"] = mge::MacroFunctions::HaggleMore1;
+		lua_mge["haggleMore10"] = mge::MacroFunctions::HaggleMore10;
+		lua_mge["haggleMore100"] = mge::MacroFunctions::HaggleMore100;
+		lua_mge["haggleMore1000"] = mge::MacroFunctions::HaggleMore1000;
+		lua_mge["haggleMore10000"] = mge::MacroFunctions::HaggleMore10000;
+		lua_mge["increaseFOV"] = mge::MacroFunctions::IncreaseFOV;
+		lua_mge["increaseViewRange"] = mge::MacroFunctions::IncreaseViewRange;
+		lua_mge["increaseZoom"] = mge::MacroFunctions::IncreaseZoom;
 		lua_mge["log"] = mge_log;
+		lua_mge["moveBack3PCam"] = mge::MacroFunctions::MoveBack3PCam;
+		lua_mge["moveDown3PCam"] = mge::MacroFunctions::MoveDown3PCam;
+		lua_mge["moveForward3PCam"] = mge::MacroFunctions::MoveForward3PCam;
+		lua_mge["moveLeft3PCam"] = mge::MacroFunctions::MoveLeft3PCam;
+		lua_mge["moveRight3PCam"] = mge::MacroFunctions::MoveRight3PCam;
+		lua_mge["moveUp3PCam"] = mge::MacroFunctions::MoveUp3PCam;
+		lua_mge["nextTrack"] = mge::MacroFunctions::NextTrack;
+		lua_mge["resetEnableZoom"] = mge::MacroFunctions::ResetEnableZoom;
+		lua_mge["showLastMessage"] = mge::MacroFunctions::ShowLastMessage;
+		lua_mge["takeScreenshot"] = mge::MacroFunctions::TakeScreenshot;
+		lua_mge["toggleBlending"] = mge::MacroFunctions::ToggleBlending;
+		lua_mge["toggleCrosshair"] = mge::MacroFunctions::ToggleCrosshair;
+		lua_mge["toggleDistantLand"] = mge::MacroFunctions::ToggleDistantLand;
+		lua_mge["toggleFpsCounter"] = mge::MacroFunctions::ToggleFpsCounter;
+		lua_mge["toggleGrass"] = mge::MacroFunctions::ToggleGrass;
+		lua_mge["toggleLightingMode"] = mge::MacroFunctions::ToggleLightingMode;
+		lua_mge["toggleShaders"] = mge::MacroFunctions::ToggleShaders;
+		lua_mge["toggleShadows"] = mge::MacroFunctions::ToggleShadows;
+		lua_mge["toggleStatusText"] = mge::MacroFunctions::ToggleStatusText;
+		lua_mge["toggleTransparencyAA"] = mge::MacroFunctions::ToggleTransparencyAA;
+		lua_mge["toggleZoom"] = mge::MacroFunctions::ToggleZoom;
 
 		// HUD-related functions.
 		lua_mge["clearHUD"] = mge::MGEhud::resetMWSE;
