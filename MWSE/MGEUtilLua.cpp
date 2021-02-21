@@ -43,6 +43,12 @@ namespace mwse::lua {
 		mge::Configuration.PerPixelLightFlags = PPLFlags;
 	}
 
+	auto mge_reloadDistantLand() {
+		auto device = mge::DistantLand::device;
+		mge::DistantLand::release();
+		return mge::DistantLand::init(device);
+	}
+
 	//
 	// HUD-related functions.
 	//
@@ -515,6 +521,7 @@ namespace mwse::lua {
 		lua_mge["moveRight3PCam"] = mge::MacroFunctions::MoveRight3PCam;
 		lua_mge["moveUp3PCam"] = mge::MacroFunctions::MoveUp3PCam;
 		lua_mge["nextTrack"] = mge::MacroFunctions::NextTrack;
+		lua_mge["reloadDistantLand"] = mge_reloadDistantLand;
 		lua_mge["resetEnableZoom"] = mge::MacroFunctions::ResetEnableZoom;
 		lua_mge["setLightingMode"] = mge_setLightingMode;
 		lua_mge["showLastMessage"] = mge::MacroFunctions::ShowLastMessage;
