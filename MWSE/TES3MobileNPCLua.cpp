@@ -26,10 +26,10 @@ namespace mwse {
 				return false;
 			}
 
-			TES3::ItemData * itemData = getOptionalParam(params, "itemData", nullptr);
-			bool addItem = getOptionalParam<bool>(params, "addItem", false);
-			bool selectBestCondition = getOptionalParam<bool>(params, "selectBestCondition", false);
-			bool selectWorstCondition = getOptionalParam<bool>(params, "selectWorstCondition", false);
+			auto itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
+			auto addItem = getOptionalParam<bool>(params, "addItem", false);
+			auto selectBestCondition = getOptionalParam<bool>(params, "selectBestCondition", false);
+			auto selectWorstCondition = getOptionalParam<bool>(params, "selectWorstCondition", false);
 
 			return self.equipItem(item, itemData, addItem, selectBestCondition, selectWorstCondition);
 		}
@@ -37,7 +37,7 @@ namespace mwse {
 		static bool unequip(TES3::MobileNPC& self, sol::table args) {
 			TES3::Actor* actor = static_cast<TES3::Actor*>(self.reference->baseObject);
 			TES3::EquipmentStack* s = nullptr;
-			TES3::Object* item = args.get<TES3::Object*>("item");
+			auto item = getOptionalParamObject<TES3::Item>(args, "item");
 			int type = args.get_or("type", 0);
 			int armourSlot = args.get_or("armorSlot", -1);
 			int clothingSlot = args.get_or("clothingSlot", -1);
