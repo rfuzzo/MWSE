@@ -29,14 +29,14 @@ namespace mwse {
 			usertypeDefinition["enchantment"] = sol::property(&TES3::Weapon::getEnchantment, &TES3::Weapon::setEnchantment);
 			usertypeDefinition["flags"] = &TES3::Weapon::materialFlags;
 			usertypeDefinition["hasDurability"] = sol::readonly_property(&TES3::Weapon::hasDurability);
-			usertypeDefinition["icon"] = sol::readonly_property(&TES3::Weapon::getIconPath);
+			usertypeDefinition["icon"] = sol::property(&TES3::Weapon::getIconPath, &TES3::Weapon::setIconPath);
 			usertypeDefinition["isAmmo"] = sol::readonly_property(&TES3::Weapon::isAmmo);
 			usertypeDefinition["isMelee"] = sol::readonly_property(&TES3::Weapon::isMelee);
 			usertypeDefinition["isOneHanded"] = sol::readonly_property(&TES3::Weapon::isOneHanded);
 			usertypeDefinition["isRanged"] = sol::readonly_property(&TES3::Weapon::isRanged);
 			usertypeDefinition["isTwoHanded"] = sol::readonly_property(&TES3::Weapon::isTwoHanded);
 			usertypeDefinition["maxCondition"] = sol::property(&TES3::Weapon::getDurability, &TES3::Weapon::setDurability);
-			usertypeDefinition["mesh"] = sol::readonly_property(&TES3::Weapon::getModelPath);
+			usertypeDefinition["mesh"] = sol::property(&TES3::Weapon::getModelPath, &TES3::Weapon::setModelPath);
 			usertypeDefinition["name"] = sol::property(&TES3::Weapon::getName, &TES3::Weapon::setName);
 			usertypeDefinition["reach"] = &TES3::Weapon::reach;
 			usertypeDefinition["script"] = sol::readonly_property(&TES3::Weapon::getScript);

@@ -550,6 +550,14 @@ namespace mwse {
 
 			// Patch: Fix crash when trying to remove items from incomplete references.
 			genCallEnforced(0x508D14, 0x45E5C0, reinterpret_cast<DWORD>(PatchFixupActorSelfReference));
+
+			// Patch: Store last executed script for crash dump information.
+			auto Script_execute = &TES3::Script::execute;
+			genCallEnforced(0x40F679, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
+			genCallEnforced(0x40FC1D, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
+			genCallEnforced(0x49A5D7, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
+			genCallEnforced(0x4E71FE, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
+			genCallEnforced(0x50E6BD, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
 		}
 
 		void installPostLuaPatches() {
@@ -652,6 +660,24 @@ namespace mwse {
 			return bRet;
 		}
 
+		const char* SafeGetObjectId(TES3::BaseObject* object) {
+			__try {
+				return object->getObjectID();
+			}
+			__except (EXCEPTION_EXECUTE_HANDLER) {
+				return "<memory corrupted>";
+			}
+		}
+
+		const char* SafeGetSourceFile(TES3::BaseObject* object) {
+			__try {
+				return object->getSourceFilename();
+			}
+			__except (EXCEPTION_EXECUTE_HANDLER) {
+				return "<memory corrupted>";
+			}
+		}
+
 		void CreateMiniDump(EXCEPTION_POINTERS* pep) {
 			log::getLog() << std::endl;
 			log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to NullCascade@gmail.com or to NullCascade#1010 on Discord." << std::endl;
@@ -663,8 +689,19 @@ namespace mwse {
 			log::getLog() << "Memory usage: " << memCounter.PrivateUsage << " bytes." << std::endl;
 
 			// Try to print the lua stack trace.
-			log::getLog() << "Lua traceback at time of crash:" << std::endl;
-			mwse::lua::logStackTrace();
+			if (mwse::lua::LuaManager::getInstance().getReadOnlyStateView().stack_top() != 0) {
+				log::getLog() << "Lua traceback at time of crash:" << std::endl;
+				mwse::lua::logStackTrace();
+			}
+
+			// Try to print any relevant mwscript information.
+			if (TES3::Script::currentlyExecutingScript) {
+				log::getLog() << "Currently executing mwscript context:" << std::endl;
+				log::getLog() << "  Script: " << SafeGetObjectId(TES3::Script::currentlyExecutingScript) << " (" << SafeGetSourceFile(TES3::Script::currentlyExecutingScript) << ")" << std::endl;
+				log::getLog() << "  Reference: " << SafeGetObjectId(TES3::Script::currentlyExecutingScriptReference) << " (" << SafeGetSourceFile(TES3::Script::currentlyExecutingScriptReference) << ")" << std::endl;
+				log::getLog() << "  OpCode: 0x" << std::hex << *reinterpret_cast<DWORD*>(0x7A91C4) << std::endl;
+				log::getLog() << "  Cursor Offset: 0x" << std::hex << *reinterpret_cast<DWORD*>(0x7CEBB0) << std::endl;
+			}
 
 			// Open the file.
 			HANDLE hFile = CreateFile("MWSE_MiniDump.dmp", GENERIC_READ | GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
