@@ -241,8 +241,6 @@ namespace TES3 {
 #endif
 	}
 
-	static_assert(0x4D414E4Bu == 'MANK', "");
-
 	const auto TES3_KillCounter_load = reinterpret_cast<void(__thiscall*)(KillCounter*, GameFile*)>(0x55DA90);
 	void KillCounter::load(GameFile* file) {
 #if MWSE_CUSTOM_KILLCOUNTER
@@ -392,7 +390,7 @@ namespace TES3 {
 
 	void JournalHTML::showJournalUpdateNotification() {
 		if (UI::findMenu(*reinterpret_cast<UI::UI_ID*>(0x7D3442))) {
-			mwse::tes3::messagePlayer(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sJournalEntry]->value.asString);
+			TES3::UI::showMessageBox(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sJournalEntry]->value.asString);
 		}
 	}
 

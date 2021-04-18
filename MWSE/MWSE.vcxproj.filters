@@ -1659,6 +1659,12 @@
     <ClInclude Include="MGEUtilLua.h">
       <Filter>Header Files\Lua\Bindings\MGE</Filter>
     </ClInclude>
+    <ClInclude Include="NISkinInstance.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="NISkinPartition.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3853,6 +3859,9 @@
     </ClCompile>
     <ClCompile Include="MGEUtilLua.cpp">
       <Filter>Source Files\Lua\Bindings\MGE</Filter>
+    </ClCompile>
+    <ClCompile Include="TES3ScriptCompiler.cpp">
+      <Filter>Source Files\DataAdapters\TES3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

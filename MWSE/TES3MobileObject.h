@@ -101,7 +101,7 @@ namespace TES3 {
 		void * resolveCollisions; // 0x18
 		void * unknown_0x1C;
 		void * simulate; // 0x20
-		bool (__thiscall * isActor)(MobileObject*); // 0x24
+		bool (__thiscall * isActor)(const MobileObject*); // 0x24
 		void * unknown_0x28;
 		void * unknown_0x2C;
 		void * unknown_0x30;
@@ -149,11 +149,11 @@ namespace TES3 {
 		void * getWeaponSwingWeightProduct; // 0xC8
 		void * getReferenceData0; // 0xCC
 		SkillStatistic * (__thiscall * getSkillStatistic)(MobileActor*, int); // 0xD0
-		float(__thiscall * getSkillValue)(MobileActor*, int); // 0xD4
+		float(__thiscall * getSkillValue)(const MobileActor*, int); // 0xD4
 		void * unknown_0xD8;
 		void * unknown_0xDC;
 		float(__thiscall * applyArmorRating)(MobileActor*, float, float, bool); // 0xE0
-		float(__thiscall * calculateArmorRating)(MobileActor*, int*); // 0xE4
+		float(__thiscall * calculateArmorRating)(const MobileActor*, int*); // 0xE4
 		void * getReadiedWeaponCurrentSkill; // 0xE8
 		void * getReadiedWeaponAnimationGroup; // 0xEC
 		void * onWeaponEquip; // 0xF0
@@ -201,7 +201,7 @@ namespace TES3 {
 
 			static constexpr float QUANTIZER = 1.0f / 32767.0f;
 
-			Vector3 getNormal();
+			Vector3 getNormal() const;
 
 			void clone(Collision* from);
 
@@ -249,7 +249,7 @@ namespace TES3 {
 		bool onWaterCollision(int collisionIndex);
 		bool onActivatorCollision(int collisionIndex);
 
-		bool isActor();
+		bool isActor() const;
 		void enterLeaveSimulation(bool entering);
 
 		//
@@ -257,7 +257,7 @@ namespace TES3 {
 		//
 
 		void enterLeaveSimulationByDistance();
-		IteratedList<ItemStack*>* getInventory();
+		IteratedList<ItemStack*>* getInventory() const;
 		bool getBasePositionIsUnderwater() const;
 
 		//

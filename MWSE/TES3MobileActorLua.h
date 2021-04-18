@@ -26,6 +26,7 @@ namespace mwse {
 			usertypeDefinition["corpseHourstamp"] = &TES3::MobileActor::corpseHourstamp;
 			usertypeDefinition["currentEnchantedItem"] = sol::readonly_property(&TES3::MobileActor::currentEnchantedItem);
 			usertypeDefinition["encumbrance"] = sol::readonly_property(&TES3::MobileActor::encumbrance);
+			usertypeDefinition["facing"] = sol::readonly_property(&TES3::MobileActor::getFacing);
 			usertypeDefinition["fatigue"] = sol::readonly_property(&TES3::MobileActor::fatigue);
 			usertypeDefinition["fight"] = &TES3::MobileActor::fight;
 			usertypeDefinition["flee"] = &TES3::MobileActor::flee;
@@ -124,6 +125,11 @@ namespace mwse {
 
 			// Basic function binding.
 			usertypeDefinition["applyHealthDamage"] = &TES3::MobileActor::applyHealthDamage;
+			usertypeDefinition["getBootsWeight"] = &TES3::MobileActor::getBootsWeight;
+			usertypeDefinition["getViewToActor"] = &TES3::MobileActor::getViewToActor;
+			usertypeDefinition["getViewToPoint"] = &TES3::MobileActor::getViewToPoint;
+			usertypeDefinition["getViewToPointWithFacing"] = &TES3::MobileActor::getViewToPointWithFacing;
+			usertypeDefinition["getFatigueTerm"] = &TES3::MobileActor::getFatigueTerm;
 			usertypeDefinition["getPowerUseTimestamp"] = &TES3::MobileActor::getPowerUseTimestamp;
 			usertypeDefinition["getSkillStatistic"] = &TES3::MobileActor::getSkillStatistic;
 			usertypeDefinition["getSkillValue"] = &TES3::MobileActor::getSkillValue;

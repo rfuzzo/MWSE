@@ -144,7 +144,7 @@ namespace TES3 {
 		Collision collision_1D4;
 		HashMap<Spell*, PowerUsage> powers;
 		char unknown_0x224;
-		char prevAIBehaviourState;
+		signed char prevAIBehaviourState;
 		char unknown_0x226;
 		signed char nextActionWeight; // 0x227
 		MobileActorType actorType; // 0x228
@@ -153,8 +153,8 @@ namespace TES3 {
 		char unknown_0x22B; // Undefined.
 		float lastGroundZ; // 0x22C
 		int unknown_0x230;
-		Reference * collidingReference; // 0x234
-		Reference * moreCollidingReferences[2]; // 0x238
+		Reference* collidingReference; // 0x234
+		Reference* moreCollidingReferences[2]; // 0x238
 		int unknown_0x240;
 		union {
 			ActorAnimationData * asActor;
@@ -206,10 +206,10 @@ namespace TES3 {
 		bool onActivatorCollision(int collisionIndex);
 
 		SkillStatistic * getSkillStatistic(int skillId);
-		float getSkillValue(int skillId);
+		float getSkillValue(int skillId) const;
 
 		float applyArmorRating(float damage, float swing, bool damageEquipment);
-		float calculateArmorRating(int * armorItemCount = nullptr);
+		float calculateArmorRating(int * armorItemCount = nullptr) const;
 		void applyHitModifiers(MobileActor * attacker, MobileActor * defender, float unknown, float swing, MobileProjectile * projectile = nullptr, bool unknown2 = false);
 
 		void setCurrentSpell(const Spell* spell);
@@ -220,15 +220,22 @@ namespace TES3 {
 
 		Cell* getCell();
 
-		float getFatigueTerm();
+		float getFatigueTerm() const;
+
+		float getFacing() const;
+		float getViewToPoint(const Vector3* point) const;
+		float getViewToPointWithFacing(float facing, const Vector3* point) const;
+		float getViewToActor(const TES3::MobileActor* mobile) const;
+
+		float getBootsWeight() const;
 
 		void startCombat(MobileActor*);
 		void stopCombat(bool);
 		void stopCombat_lua(sol::optional<bool>);
-		bool isDead();
+		bool isDead() const;
 		void onDeath();
 		bool applyHealthDamage(float damage, bool flipDifficultyScale, bool scaleWithDifficulty, bool takeHealth);
-		bool hasFreeAction();
+		bool hasFreeAction() const;
 		float calculateRunSpeed();
 		float calculateSwimSpeed();
 		float calculateSwimRunSpeed();

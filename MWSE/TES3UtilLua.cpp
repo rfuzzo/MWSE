@@ -249,20 +249,22 @@ namespace mwse {
 				return nullptr;
 			}
 
-			if (key.is<double>()) {
-				int index = key.as<double>();
-				if (index >= TES3::GMST::sMonthMorningstar && index <= TES3::GMST::sWitchhunter) {
-					return dataHandler->nonDynamicData->GMSTs[index];
-				}
+			int index = -1;
+			if (key.is<int>()) {
+				index = key.as<int>();
 			}
 			else if (key.is<const char*>()) {
-				int index = -1;
-				const char* keyStr = key.as<const char*>();
-				for (int i = 0; i <= TES3::GMST::sWitchhunter; i++) {
-					if (strcmp(TES3::GameSettingInfo::get(i)->name, keyStr) == 0) {
-						return dataHandler->nonDynamicData->GMSTs[i];
-					}
+				auto& luaManager = mwse::lua::LuaManager::getInstance();
+				auto stateHandle = luaManager.getThreadSafeStateHandle();
+				sol::state& state = stateHandle.state;
+				sol::object asIndex = state["tes3"]["gmst"][key.as<const char*>()];
+				if (asIndex.is<int>()) {
+					index = asIndex.as<int>();
 				}
+			}
+
+			if (index >= TES3::GMST::sMonthMorningstar && index <= TES3::GMST::sWitchhunter) {
+				return dataHandler->nonDynamicData->GMSTs[index];
 			}
 
 			return nullptr;
@@ -385,29 +387,31 @@ namespace mwse {
 		}
 
 		void streamMusic(sol::optional<sol::table> params) {
+			auto worldController = TES3::WorldController::get();
+
 			// Get parameters.
 			const char* relativePath = getOptionalParam<const char*>(params, "path", nullptr);
 			int situation = getOptionalParam<int>(params, "situation", int(TES3::MusicSituation::Uninterruptible));
 			double crossfade = getOptionalParam<double>(params, "crossfade", 1.0);
+			float volume = getOptionalParam<float>(params, "volume", worldController->audioController->getMusicVolume());
 
 			if (relativePath) {
-				auto w = TES3::WorldController::get();
 				char path[260];
 
 				std::snprintf(path, sizeof(path), "Data Files/music/%s", relativePath);
-				w->audioController->changeMusicTrack(path, 1000 * crossfade, 1.0);
-				w->musicSituation = TES3::MusicSituation(situation);
+				worldController->audioController->changeMusicTrack(path, 1000 * crossfade, volume);
+				worldController->musicSituation = TES3::MusicSituation(situation);
 			}
 		}
 
-		int messageBox(sol::object param, sol::optional<sol::variadic_args> va) {
+		TES3::UI::Element* messageBox(sol::object param, sol::optional<sol::variadic_args> va) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
 			auto stateHandle = luaManager.getThreadSafeStateHandle();
 			sol::state& state = stateHandle.state;
 
 			if (param.is<std::string>()) {
 				std::string message = state["string"]["format"](param, va);
-				return tes3::ui::messagePlayer(message.c_str());
+				return TES3::UI::showMessageBox(message.c_str());
 			}
 			else if (param.get_type() == sol::type::table) {
 				sol::table params = param;
@@ -437,26 +441,37 @@ namespace mwse {
 
 				// No buttons, do a normal popup.
 				else {
-					return tes3::ui::messagePlayer(message.c_str());
+					auto showInDialog = getOptionalParam<bool>(params, "showInDialog", true);
+
+					auto element = TES3::UI::showMessageBox(message.c_str(), nullptr, showInDialog);
+					if (element) {
+						// Allow overriding the duration.
+						auto duration = getOptionalParam<float>(params, "duration");
+						if (duration) {
+							element->setProperty(TES3::UI::registerProperty("MenuNotify_timestamp"), duration.value());
+						}
+					}
+					return element;
 				}
 
 				// Set up our event callback.
 				LuaManager::getInstance().setButtonPressedCallback(params["callback"]);
 
 				// Temporary hook into the function that creates message boxes. 
-				return reinterpret_cast<int(__cdecl*)(const char*, ...)>(0x5F1AA0)(message.c_str(), buttonTextStruct, NULL);
+				reinterpret_cast<void(__cdecl*)(const char*, ...)>(0x5F1AA0)(message.c_str(), buttonTextStruct, NULL);
+				return TES3::UI::findMenu(TES3::UI::registerID("MenuMessage"));
 			}
 			else {
 				sol::protected_function_result result = state["tostring"](param);
 				if (result.valid()) {
 					sol::optional<const char*> asString = result;
 					if (asString) {
-						return tes3::ui::messagePlayer(asString.value());
+						return TES3::UI::showMessageBox(asString.value());
 					}
 				}
 				throw std::exception("tes3.messageBox: Unable to convert parameter to string.");
 			}
-			return 0;
+			return nullptr;
 		}
 
 		bool saveGame(sol::optional<sol::table> params) {
@@ -473,12 +488,10 @@ namespace mwse {
 
 		void loadGame(const char* fileName) {
 			// Char Gen State will equal 0 in the menu.
-			if (TES3::WorldController::get()->gvarCharGenState->value == 0.0f)
-			{
+			if (TES3::WorldController::get()->gvarCharGenState->value == 0.0f) {
 				TES3::DataHandler::get()->nonDynamicData->loadGameMainMenu(fileName);
 			}
-			else
-			{
+			else {
 				TES3::DataHandler::get()->nonDynamicData->loadGame(fileName);
 			}
 		}
@@ -1561,7 +1574,7 @@ namespace mwse {
 
 			sol::optional<bool> showMessage = params["showMessage"];
 			if (showMessage.value_or(false) && tes3::ui::getMenuNode(*reinterpret_cast<short*>(0x7D3442)) == nullptr) {
-				tes3::ui::messagePlayer(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sJournalEntry]->value.asString);
+				TES3::UI::showMessageBox(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sJournalEntry]->value.asString);
 			}
 
 			return true;
@@ -1589,7 +1602,7 @@ namespace mwse {
 
 			sol::optional<bool> showMessage = params["showMessage"];
 			if (showMessage.value_or(true) && tes3::ui::getMenuNode(*reinterpret_cast<short*>(0x7D3442)) == nullptr) {
-				tes3::ui::messagePlayer(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sJournalEntry]->value.asString);
+				TES3::UI::showMessageBox(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sJournalEntry]->value.asString);
 			}
 
 			return true;
@@ -2652,7 +2665,7 @@ namespace mwse {
 			// Play the relevant sound.
 			auto worldController = TES3::WorldController::get();
 			auto playerMobile = worldController->getMobilePlayer();
-			if (getOptionalParam<bool>(params, "playSound", true)) {
+			if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
 				if (mobile == playerMobile) {
 					worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
 				}
@@ -2670,7 +2683,7 @@ namespace mwse {
 			}
 
 			// If either of them are the player, we need to update the GUI.
-			if (getOptionalParam<bool>(params, "updateGUI", true)) {
+			if (playerMobile && getOptionalParam<bool>(params, "updateGUI", true)) {
 				// Update inventory menu if necessary.
 				if (mobile == playerMobile) {
 					worldController->inventoryData->clearIcons(2);
@@ -2685,6 +2698,11 @@ namespace mwse {
 					if (reference == contentsReference) {
 						TES3::UI::updateContentsMenuTiles();
 					}
+
+					// Update container weight variable.
+					auto MenuContents_totalweight = *reinterpret_cast<TES3::UI::Property*>(0x7D30B8);
+					auto currentWeight = contentsMenu->getProperty(TES3::UI::PropertyType::Float, MenuContents_totalweight).floatValue;
+					contentsMenu->setProperty(MenuContents_totalweight, currentWeight + item->getWeight() * fulfilledCount);
 				}
 			}
 
@@ -2756,7 +2774,7 @@ namespace mwse {
 			// Play the relevant sound.
 			auto worldController = TES3::WorldController::get();
 			auto playerMobile = worldController->getMobilePlayer();
-			if (getOptionalParam<bool>(params, "playSound", true)) {
+			if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
 				if (mobile == playerMobile) {
 					worldController->playItemUpDownSound(item, TES3::ItemSoundState::Up);
 				}
@@ -2774,7 +2792,7 @@ namespace mwse {
 			}
 
 			// If either of them are the player, we need to update the GUI.
-			if (getOptionalParam<bool>(params, "updateGUI", true)) {
+			if (playerMobile && getOptionalParam<bool>(params, "updateGUI", true)) {
 				// Update inventory menu if necessary.
 				if (mobile == playerMobile) {
 					worldController->inventoryData->clearIcons(2);
@@ -2789,6 +2807,11 @@ namespace mwse {
 					if (reference == contentsReference) {
 						TES3::UI::updateContentsMenuTiles();
 					}
+
+					// Update container weight variable.
+					auto MenuContents_totalweight = *reinterpret_cast<TES3::UI::Property*>(0x7D30B8);
+					auto currentWeight = contentsMenu->getProperty(TES3::UI::PropertyType::Float, MenuContents_totalweight).floatValue;
+					contentsMenu->setProperty(MenuContents_totalweight, currentWeight - item->getWeight() * fulfilledCount);
 				}
 			}
 
@@ -2974,7 +2997,7 @@ namespace mwse {
 			// Play the relevant sound.
 			auto worldController = TES3::WorldController::get();
 			auto playerMobile = worldController->getMobilePlayer();
-			if (getOptionalParam<bool>(params, "playSound", true)) {
+			if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
 				if (toMobile == playerMobile) {
 					worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
 				}
@@ -2995,7 +3018,7 @@ namespace mwse {
 			}
 
 			// If either of them are the player, we need to update the GUI.
-			if (getOptionalParam<bool>(params, "updateGUI", true)) {
+			if (playerMobile && getOptionalParam<bool>(params, "updateGUI", true)) {
 				// Update inventory menu if necessary.
 				if (fromMobile == playerMobile || toMobile == playerMobile) {
 					worldController->inventoryData->clearIcons(2);
@@ -3024,6 +3047,16 @@ namespace mwse {
 
 						// We also need to update the menu tiles.
 						TES3::UI::updateContentsMenuTiles();
+					}
+
+					// Update container weight variable.
+					auto MenuContents_totalweight = *reinterpret_cast<TES3::UI::Property*>(0x7D30B8);
+					auto currentWeight = contentsMenu->getProperty(TES3::UI::PropertyType::Float, MenuContents_totalweight).floatValue;
+					if (toReference == contentsReference) {
+						contentsMenu->setProperty(MenuContents_totalweight, currentWeight + item->getWeight() * fulfilledCount);
+					}
+					else {
+						contentsMenu->setProperty(MenuContents_totalweight, currentWeight - item->getWeight() * fulfilledCount);
 					}
 				}
 			}
@@ -3287,7 +3320,7 @@ namespace mwse {
 			if (worldController->showSubtitles || getOptionalParam(params, "forceSubtitle", false)) {
 				const char* subtitle = getOptionalParam<const char*>(params, "subtitle", nullptr);
 				if (subtitle != nullptr) {
-					tes3::ui::messagePlayer(subtitle);
+					TES3::UI::showMessageBox(subtitle);
 				}
 			}
 
@@ -4344,11 +4377,16 @@ namespace mwse {
 			// Try to get the first reference's data.
 			auto mobile1 = reference1->getAttachedMobileActor();
 			if (mobile1) {
-				position1 = mobile1->position;
+				position1 = reference1->position;
 				height1 = mobile1->height;
 			}
 			else if (reference1->baseObject->boundingBox) {
 				auto boundingBox = reference1->baseObject->boundingBox;
+				position1 = {
+					(boundingBox->minimum.x + boundingBox->maximum.x) / 2,
+					(boundingBox->minimum.y + boundingBox->maximum.y) / 2,
+					boundingBox->minimum.z
+				};
 				height1 = boundingBox->maximum.z - boundingBox->minimum.z;
 			}
 			else {
@@ -4358,11 +4396,16 @@ namespace mwse {
 			// Try to get the second reference's data.
 			auto mobile2 = reference2->getAttachedMobileActor();
 			if (mobile2) {
-				position2 = mobile2->position;
+				position2 = reference2->position;
 				height2 = mobile2->height;
 			}
 			else if (reference2->baseObject->boundingBox) {
 				auto boundingBox = reference2->baseObject->boundingBox;
+				position2 = {
+					(boundingBox->minimum.x + boundingBox->maximum.x) / 2,
+					(boundingBox->minimum.y + boundingBox->maximum.y) / 2,
+					boundingBox->minimum.z
+				};
 				height2 = boundingBox->maximum.z - boundingBox->minimum.z;
 			}
 			else {

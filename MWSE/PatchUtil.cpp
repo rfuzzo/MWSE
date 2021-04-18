@@ -339,8 +339,19 @@ namespace mwse {
 
 				auto script = self->baseObject->getScript();
 				if (script) {
-					log << "Script: " << self->baseObject->getScript()->getObjectID() << std::endl;
+					log << "Script: " << script->getObjectID() << std::endl;
 					prettyDump(script);
+				}
+
+				auto cell = self->getCell();
+				if (cell) {
+					log << "Cell: " << cell->getEditorName() << std::endl;
+					prettyDump(cell);
+
+					auto playerCell = TES3::DataHandler::get()->currentCell;
+					if (playerCell && playerCell != cell) {
+						log << "Player cell differs: " << playerCell->getEditorName() << std::endl;
+					}
 				}
 
 				log << "mwscript data: OpCode: " << std::hex << *reinterpret_cast<DWORD*>(0x7A91C4) << "; Cursor offset: " << *reinterpret_cast<DWORD*>(0x7CEBB0) << "; Look ahead token: " << int(*reinterpret_cast<unsigned char*>(0x7CEBA8)) << std::endl;
@@ -558,6 +569,10 @@ namespace mwse {
 			genCallEnforced(0x49A5D7, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
 			genCallEnforced(0x4E71FE, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
 			genCallEnforced(0x50E6BD, 0x5028A0, *reinterpret_cast<DWORD*>(&Script_execute));
+
+			// Patch: Always clone scene graph nodes.
+			writeValueEnforced(0x4EF9FB, BYTE(0x02), BYTE(0x00));
+
 		}
 
 		void installPostLuaPatches() {
@@ -665,7 +680,7 @@ namespace mwse {
 				return object->getObjectID();
 			}
 			__except (EXCEPTION_EXECUTE_HANDLER) {
-				return "<memory corrupted>";
+				return nullptr;
 			}
 		}
 
@@ -674,7 +689,17 @@ namespace mwse {
 				return object->getSourceFilename();
 			}
 			__except (EXCEPTION_EXECUTE_HANDLER) {
-				return "<memory corrupted>";
+				return nullptr;
+			}
+		}
+
+		template <typename T>
+		void safePrintObjectToLog(const char* title, const T* object) {
+			auto id = SafeGetObjectId(TES3::Script::currentlyExecutingScript);
+			auto source = SafeGetSourceFile(TES3::Script::currentlyExecutingScript);
+			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
+			if (id) {
+				log::prettyDump(object);
 			}
 		}
 
@@ -686,19 +711,17 @@ namespace mwse {
 			// Display the memory usage in the log.
 			PROCESS_MEMORY_COUNTERS_EX memCounter;
 			GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&memCounter, sizeof(memCounter));
-			log::getLog() << "Memory usage: " << memCounter.PrivateUsage << " bytes." << std::endl;
+			log::getLog() << "Memory usage: " << std::dec << memCounter.PrivateUsage << " bytes." << std::endl;
 
 			// Try to print the lua stack trace.
-			if (mwse::lua::LuaManager::getInstance().getReadOnlyStateView().stack_top() != 0) {
-				log::getLog() << "Lua traceback at time of crash:" << std::endl;
-				mwse::lua::logStackTrace();
-			}
+			log::getLog() << "Lua traceback at time of crash:" << std::endl;
+			mwse::lua::logStackTrace();
 
 			// Try to print any relevant mwscript information.
 			if (TES3::Script::currentlyExecutingScript) {
 				log::getLog() << "Currently executing mwscript context:" << std::endl;
-				log::getLog() << "  Script: " << SafeGetObjectId(TES3::Script::currentlyExecutingScript) << " (" << SafeGetSourceFile(TES3::Script::currentlyExecutingScript) << ")" << std::endl;
-				log::getLog() << "  Reference: " << SafeGetObjectId(TES3::Script::currentlyExecutingScriptReference) << " (" << SafeGetSourceFile(TES3::Script::currentlyExecutingScriptReference) << ")" << std::endl;
+				safePrintObjectToLog("Script", TES3::Script::currentlyExecutingScript);
+				safePrintObjectToLog("Reference", TES3::Script::currentlyExecutingScriptReference);
 				log::getLog() << "  OpCode: 0x" << std::hex << *reinterpret_cast<DWORD*>(0x7A91C4) << std::endl;
 				log::getLog() << "  Cursor Offset: 0x" << std::hex << *reinterpret_cast<DWORD*>(0x7CEBB0) << std::endl;
 			}

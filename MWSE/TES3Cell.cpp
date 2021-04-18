@@ -7,6 +7,10 @@
 #include "LuaCellActivatedEvent.h"
 #include "LuaCellDeactivatedEvent.h"
 
+#include "TES3DataHandler.h"
+#include "TES3GameSetting.h"
+#include "TES3Region.h"
+
 namespace TES3 {
 	const auto TES3_Cell_constructor = reinterpret_cast<Cell*(__thiscall *)(Cell*)>(0x4DB500);
 	Cell * Cell::create() {
@@ -81,14 +85,14 @@ namespace TES3 {
 
 	std::optional<float> Cell::getFogDensity() const {
 		if (cellFlags & CellFlag::Interior) {
-			return VariantData.interior.fogDensity;
+			return variantData.interior.fogDensity;
 		}
 		return {};
 	}
 
 	void Cell::setFogDensity(float value) {
 		if (cellFlags & CellFlag::Interior) {
-			VariantData.interior.fogDensity = value;
+			variantData.interior.fogDensity = value;
 		}
 	}
 
@@ -124,21 +128,21 @@ namespace TES3 {
 
 	TES3::PackedColor* Cell::getAmbientColor() {
 		if (cellFlags & TES3::CellFlag::Interior) {
-			return &VariantData.interior.ambientColor;
+			return &variantData.interior.ambientColor;
 		}
 		return nullptr;
 	}
 
 	TES3::PackedColor* Cell::getFogColor() {
 		if (cellFlags & TES3::CellFlag::Interior) {
-			return &VariantData.interior.fogColor;
+			return &variantData.interior.fogColor;
 		}
 		return nullptr;
 	}
 
 	TES3::PackedColor* Cell::getSunColor() {
 		if (cellFlags & TES3::CellFlag::Interior) {
-			return &VariantData.interior.sunColor;
+			return &variantData.interior.sunColor;
 		}
 		return nullptr;
 	}
@@ -216,14 +220,44 @@ namespace TES3 {
 		return activeCells.find(this) != activeCells.end();
 	}
 
+	const char* Cell::getDisplayName() const {
+		// Try the cell name first.
+		auto name = getName();
+		if (name) {
+			return name;
+		}
+
+		// Fall back to region name.
+		auto region = getRegion();
+		if (region) {
+			return region->getName();
+		}
+
+		// Fallback to GMST.
+		return TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sDefaultCellname]->value.asString;
+	}
+
+	std::string Cell::getEditorName() const {
+		std::stringstream ss;
+
+		ss << getDisplayName();
+		if (!isInterior()) {
+			ss << " (" << getGridX() << ", " << getGridY() << ")";
+		}
+
+		return std::move(ss.str());
+	}
+
 	bool Cell::isPointInCell(float x, float y) const {
-		if (cellFlags & CellFlag::Interior) {
+		if (isInterior()) {
 			return true;
 		}
-		else {
-			int cellX = toGridCoord(x), cellY = toGridCoord(y);
-			return cellX == VariantData.exterior.gridX && cellY == VariantData.exterior.gridY;
-		}
+
+		return toGridCoord(x) == variantData.exterior.gridX && toGridCoord(y) == variantData.exterior.gridY;
+	}
+
+	int Cell::toGridCoord(float x) {
+		return int(x) >> 13;
 	}
 }
 
