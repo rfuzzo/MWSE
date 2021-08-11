@@ -5101,7 +5101,7 @@
                 
                 <h1 id="activationtargetchanged">activationTargetChanged<a class="headerlink" href="#activationtargetchanged" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when the potential activation target for the player changes.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.activationTargetChanged</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e activationTargetChangedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">activationTargetChangedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;activationTargetChanged&quot;</span><span class="p">,</span> <span class="n">activationTargetChangedCallback</span><span class="p">)</span>

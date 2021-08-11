@@ -5101,7 +5101,7 @@
                 
                 <h1 id="damagehandtohand">damageHandToHand<a class="headerlink" href="#damagehandtohand" title="Permanent link">⚓︎</a></h1>
 <p>The damageHandToHand event triggers before an actor takes fatigue damage from hand-to-hand combat. It does not trigger on health damage, but the 'damage' event will. The fatigueDamage value can be modified, or can be prevented completely by blocking the event. The player as attacker will gain hand-to-hand experience only if fatigueDamage is greater than zero.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.damageHandToHand</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e damageHandToHandEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">damageHandToHandCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;damageHandToHand&quot;</span><span class="p">,</span> <span class="n">damageHandToHandCallback</span><span class="p">)</span>

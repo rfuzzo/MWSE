@@ -5101,7 +5101,7 @@
                 
                 <h1 id="cellactivated">cellActivated<a class="headerlink" href="#cellactivated" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when a cell is activated.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.cellActivated</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e cellActivatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">cellActivatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;cellActivated&quot;</span><span class="p">,</span> <span class="n">cellActivatedCallback</span><span class="p">)</span>

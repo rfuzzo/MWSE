@@ -5101,7 +5101,7 @@
                 
                 <h1 id="cellchanged">cellChanged<a class="headerlink" href="#cellchanged" title="Permanent link">⚓︎</a></h1>
 <p>The cellChanged event is occurs when the player changes cells. This might occur from going through a door, using intervention or recall spells, or from scripted repositioning.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.cellChanged</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e cellChangedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">cellChangedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;cellChanged&quot;</span><span class="p">,</span> <span class="n">cellChangedCallback</span><span class="p">)</span>

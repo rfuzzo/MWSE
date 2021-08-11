@@ -5101,7 +5101,7 @@
                 
                 <h1 id="mousewheel">mouseWheel<a class="headerlink" href="#mousewheel" title="Permanent link">⚓︎</a></h1>
 <p>The mouseWheel event fires when the mouse wheel is used, providing a delta value.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.mouseWheel</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e mouseWheelEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">mouseWheelCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseWheel&quot;</span><span class="p">,</span> <span class="n">mouseWheelCallback</span><span class="p">)</span>

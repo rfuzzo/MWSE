@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcsundamagescalar">calcSunDamageScalar<a class="headerlink" href="#calcsundamagescalar" title="Permanent link">⚓︎</a></h1>
 <p>calcSunDamageScalar is used when calculating the amount of damage to apply for the Sun Damage magic effect.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcSunDamageScalar</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcSunDamageScalarEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcSunDamageScalarCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcSunDamageScalar&quot;</span><span class="p">,</span> <span class="n">calcSunDamageScalarCallback</span><span class="p">)</span>

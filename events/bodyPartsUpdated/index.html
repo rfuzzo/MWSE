@@ -5101,7 +5101,7 @@
                 
                 <h1 id="bodypartsupdated">bodyPartsUpdated<a class="headerlink" href="#bodypartsupdated" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when an actor's body parts have finished updating. This typically triggers when an actor is first rendered, or when their equipment changes.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.bodyPartsUpdated</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e bodyPartsUpdatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">bodyPartsUpdatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;bodyPartsUpdated&quot;</span><span class="p">,</span> <span class="n">bodyPartsUpdatedCallback</span><span class="p">)</span>

@@ -5101,7 +5101,7 @@
                 
                 <h1 id="filterinventory">filterInventory<a class="headerlink" href="#filterinventory" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when an item in the inventory is filtered.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.filterInventory</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e filterInventoryEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">filterInventoryCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;filterInventory&quot;</span><span class="p">,</span> <span class="n">filterInventoryCallback</span><span class="p">)</span>

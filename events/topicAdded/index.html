@@ -5101,7 +5101,7 @@
                 
                 <h1 id="topicadded">topicAdded<a class="headerlink" href="#topicadded" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when the player gains access to a new dialogue topic.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.topicAdded</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e topicAddedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">topicAddedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;topicAdded&quot;</span><span class="p">,</span> <span class="n">topicAddedCallback</span><span class="p">)</span>

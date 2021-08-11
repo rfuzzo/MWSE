@@ -5101,7 +5101,7 @@
                 
                 <h1 id="spelltick">spellTick<a class="headerlink" href="#spelltick" title="Permanent link">⚓︎</a></h1>
 <p>The spellTick event happens every frame that an effect is active on a target. This can be used to aid in scripted spells, cancel active spells, or otherwise monitor spell activity on actors.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.spellTick</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e spellTickEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">spellTickCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;spellTick&quot;</span><span class="p">,</span> <span class="n">spellTickCallback</span><span class="p">)</span>

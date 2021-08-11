@@ -5101,7 +5101,7 @@
                 
                 <h1 id="menuenter">menuEnter<a class="headerlink" href="#menuenter" title="Permanent link">⚓︎</a></h1>
 <p>The menuEnter event fires when the player enters menu mode.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.menuEnter</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e menuEnterEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">menuEnterCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;menuEnter&quot;</span><span class="p">,</span> <span class="n">menuEnterCallback</span><span class="p">)</span>

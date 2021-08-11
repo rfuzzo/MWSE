@@ -5101,7 +5101,7 @@
                 
                 <h1 id="determineaction">determineAction<a class="headerlink" href="#determineaction" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when an actor determines an action in a combat session.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.determineAction</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e determineActionEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">determineActionCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;determineAction&quot;</span><span class="p">,</span> <span class="n">determineActionCallback</span><span class="p">)</span>

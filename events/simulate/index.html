@@ -5101,7 +5101,7 @@
                 
                 <h1 id="simulate">simulate<a class="headerlink" href="#simulate" title="Permanent link">⚓︎</a></h1>
 <p>The simulate event occurs at the start of every frame, excluding when the game is paused or in menu mode.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.simulate</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e simulateEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">simulateCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;simulate&quot;</span><span class="p">,</span> <span class="n">simulateCallback</span><span class="p">)</span>

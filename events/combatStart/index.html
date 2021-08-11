@@ -5101,7 +5101,7 @@
                 
                 <h1 id="combatstart">combatStart<a class="headerlink" href="#combatstart" title="Permanent link">⚓︎</a></h1>
 <p>The combatStart event occurs when combat is about to begin between two actors. This event allows scripts to prevent combat from starting.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.combatStart</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e combatStartEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">combatStartCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;combatStart&quot;</span><span class="p">,</span> <span class="n">combatStartCallback</span><span class="p">)</span>

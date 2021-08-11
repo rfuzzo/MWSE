@@ -5101,7 +5101,7 @@
                 
                 <h1 id="projectilehitobject">projectileHitObject<a class="headerlink" href="#projectilehitobject" title="Permanent link">⚓︎</a></h1>
 <p>The projectileHitObject event fires when a projectile collides with an object.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.projectileHitObject</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e projectileHitObjectEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">projectileHitObjectCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;projectileHitObject&quot;</span><span class="p">,</span> <span class="n">projectileHitObjectCallback</span><span class="p">)</span>

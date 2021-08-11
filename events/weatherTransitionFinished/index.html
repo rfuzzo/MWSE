@@ -5101,7 +5101,7 @@
                 
                 <h1 id="weathertransitionfinished">weatherTransitionFinished<a class="headerlink" href="#weathertransitionfinished" title="Permanent link">⚓︎</a></h1>
 <p>The weatherTransitionFinished event occurs when the currently simulated weather finished transitioning to a new weather.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.weatherTransitionFinished</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e weatherTransitionFinishedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weatherTransitionFinishedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weatherTransitionFinished&quot;</span><span class="p">,</span> <span class="n">weatherTransitionFinishedCallback</span><span class="p">)</span>

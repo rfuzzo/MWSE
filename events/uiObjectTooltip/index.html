@@ -5101,7 +5101,7 @@
                 
                 <h1 id="uiobjecttooltip">uiObjectTooltip<a class="headerlink" href="#uiobjecttooltip" title="Permanent link">⚓︎</a></h1>
 <p>The uiObjectTooltip event triggers when a new tooltip is displayed for all in-world objects and items, and inventory tiles in all dialogues. The tooltip will be already be built. Tooltips for inventory tiles are built on mouseover, while tooltips for in-world objects are rebuilt every frame.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.uiObjectTooltip</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e uiObjectTooltipEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">uiObjectTooltipCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;uiObjectTooltip&quot;</span><span class="p">,</span> <span class="n">uiObjectTooltipCallback</span><span class="p">)</span>

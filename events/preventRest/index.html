@@ -5101,7 +5101,7 @@
                 
                 <h1 id="preventrest">preventRest<a class="headerlink" href="#preventrest" title="Permanent link">⚓︎</a></h1>
 <p>This event can be used to prevent player from resting by returning false.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.preventRest</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e preventRestEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">preventRestCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;preventRest&quot;</span><span class="p">,</span> <span class="n">preventRestCallback</span><span class="p">)</span>

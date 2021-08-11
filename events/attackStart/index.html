@@ -5101,7 +5101,7 @@
                 
                 <h1 id="attackstart">attackStart<a class="headerlink" href="#attackstart" title="Permanent link">⚓︎</a></h1>
 <p>This event is invoked whenever an actor starts an attack with their fists or a weapon, or a creature makes any attack. More precisely, it is when the actor raises a melee weapon or draws an arrow. There is not necessarily a target in range, or any target at all for the player.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.attackStart</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e attackStartEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">attackStartCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;attackStart&quot;</span><span class="p">,</span> <span class="n">attackStartCallback</span><span class="p">)</span>

@@ -5101,7 +5101,7 @@
                 
                 <h1 id="uievent">uiEvent<a class="headerlink" href="#uievent" title="Permanent link">⚓︎</a></h1>
 <p>uiEvent is triggered through various UI events. This includes scrolling through panes, clicking buttons, selecting icons, or a host of other UI-related activities.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.uiEvent</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e uiEventEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">uiEventCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;uiEvent&quot;</span><span class="p">,</span> <span class="n">uiEventCallback</span><span class="p">)</span>

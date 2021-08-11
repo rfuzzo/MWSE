@@ -5101,7 +5101,7 @@
                 
                 <h1 id="musicselecttrack">musicSelectTrack<a class="headerlink" href="#musicselecttrack" title="Permanent link">⚓︎</a></h1>
 <p>The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. However, it does not control transitions to combat music, which in the future will be available in another event.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.musicSelectTrack</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e musicSelectTrackEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">musicSelectTrackCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;musicSelectTrack&quot;</span><span class="p">,</span> <span class="n">musicSelectTrackCallback</span><span class="p">)</span>

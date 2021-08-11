@@ -5101,7 +5101,7 @@
                 
                 <h1 id="celldeactivated">cellDeactivated<a class="headerlink" href="#celldeactivated" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when a cell is deactivated.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.cellDeactivated</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e cellDeactivatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">cellDeactivatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;cellDeactivated&quot;</span><span class="p">,</span> <span class="n">cellDeactivatedCallback</span><span class="p">)</span>

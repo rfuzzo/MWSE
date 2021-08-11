@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcarmorrating">calcArmorRating<a class="headerlink" href="#calcarmorrating" title="Permanent link">⚓︎</a></h1>
 <p>This event is fired before an actor's armor rating has been calculated, and can be used to override the armor that the actor is given.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcArmorRating</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcArmorRatingEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcArmorRatingCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcArmorRating&quot;</span><span class="p">,</span> <span class="n">calcArmorRatingCallback</span><span class="p">)</span>

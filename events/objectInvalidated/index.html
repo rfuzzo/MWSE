@@ -5101,7 +5101,7 @@
                 
                 <h1 id="objectinvalidated">objectInvalidated<a class="headerlink" href="#objectinvalidated" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when reference is invalidated. This includes being removed from memory. This event can be used to safely remove references from tables.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.objectInvalidated</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e objectInvalidatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">objectInvalidatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;objectInvalidated&quot;</span><span class="p">,</span> <span class="n">objectInvalidatedCallback</span><span class="p">)</span>

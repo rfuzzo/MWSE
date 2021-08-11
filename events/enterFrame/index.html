@@ -5101,7 +5101,7 @@
                 
                 <h1 id="enterframe">enterFrame<a class="headerlink" href="#enterframe" title="Permanent link">⚓︎</a></h1>
 <p>The enterFrame event occurs at the start of every frame, including when the game is paused or in menu mode.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.enterFrame</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e enterFrameEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">enterFrameCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;enterFrame&quot;</span><span class="p">,</span> <span class="n">enterFrameCallback</span><span class="p">)</span>

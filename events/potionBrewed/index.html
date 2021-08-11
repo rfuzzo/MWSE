@@ -5115,7 +5115,7 @@
                 
                 <h1 id="potionbrewed">potionBrewed<a class="headerlink" href="#potionbrewed" title="Permanent link">⚓︎</a></h1>
 <p>The potionBrewed event is raised when the player brews a new potion.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.potionBrewed</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e potionBrewedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">potionBrewedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;potionBrewed&quot;</span><span class="p">,</span> <span class="n">potionBrewedCallback</span><span class="p">)</span>

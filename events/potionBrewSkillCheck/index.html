@@ -5115,7 +5115,7 @@
                 
                 <h1 id="potionbrewskillcheck">potionBrewSkillCheck<a class="headerlink" href="#potionbrewskillcheck" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when the player attempts to brew a potion. It controls both the strength of the potion's effects, and if the brew is successful. These both use the player's stats, so the game combines them into one function. Because the potion effects are not determined yet, the potion data is not available. When using this event, use the example as a template for your own code.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.potionBrewSkillCheck</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e potionBrewSkillCheckEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">potionBrewSkillCheckCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;potionBrewSkillCheck&quot;</span><span class="p">,</span> <span class="n">potionBrewSkillCheckCallback</span><span class="p">)</span>

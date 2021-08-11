@@ -5101,7 +5101,7 @@
                 
                 <h1 id="save">save<a class="headerlink" href="#save" title="Permanent link">⚓︎</a></h1>
 <p>The save event fires when the game is about to save. This event allows scripts to block saving.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.save</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e saveEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">saveCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="n">saveCallback</span><span class="p">)</span>

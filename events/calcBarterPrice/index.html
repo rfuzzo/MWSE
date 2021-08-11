@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcbarterprice">calcBarterPrice<a class="headerlink" href="#calcbarterprice" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when an item price is being determined when bartering.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcBarterPrice</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcBarterPriceEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcBarterPriceCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcBarterPrice&quot;</span><span class="p">,</span> <span class="n">calcBarterPriceCallback</span><span class="p">)</span>

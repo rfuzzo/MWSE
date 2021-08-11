@@ -5101,7 +5101,7 @@
                 
                 <h1 id="projectilehitterrain">projectileHitTerrain<a class="headerlink" href="#projectilehitterrain" title="Permanent link">⚓︎</a></h1>
 <p>The projectileHitTerrain event fires when a projectile collides with terrain.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.projectileHitTerrain</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e projectileHitTerrainEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">projectileHitTerrainCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;projectileHitTerrain&quot;</span><span class="p">,</span> <span class="n">projectileHitTerrainCallback</span><span class="p">)</span>

@@ -5101,7 +5101,7 @@
                 
                 <h1 id="uishowrestmenu">uiShowRestMenu<a class="headerlink" href="#uishowrestmenu" title="Permanent link">⚓︎</a></h1>
 <p>The uiShowRestMenu event is raised when the rest menu is about to be displayed. It allows the callback to change if sleeping is allowed, or to prevent the UI from showing at all.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.uiShowRestMenu</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e uiShowRestMenuEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">uiShowRestMenuCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;uiShowRestMenu&quot;</span><span class="p">,</span> <span class="n">uiShowRestMenuCallback</span><span class="p">)</span>

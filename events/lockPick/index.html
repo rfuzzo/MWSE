@@ -5101,7 +5101,7 @@
                 
                 <h1 id="lockpick">lockPick<a class="headerlink" href="#lockpick" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when a lock is being picked.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.lockPick</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e lockPickEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">lockPickCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;lockPick&quot;</span><span class="p">,</span> <span class="n">lockPickCallback</span><span class="p">)</span>

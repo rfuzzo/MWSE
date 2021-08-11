@@ -5101,7 +5101,7 @@
                 
                 <h1 id="weatherchangedimmediate">weatherChangedImmediate<a class="headerlink" href="#weatherchangedimmediate" title="Permanent link">⚓︎</a></h1>
 <p>The weatherChangedImmediate event occurs when the currently simulated weather is changed without transition. This can occur when going from an interior to an exterior in a new region, or while resting. This can interrupt weather transitions, which means the weatherTransitionFinished event will not be triggered.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.weatherChangedImmediate</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e weatherChangedImmediateEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weatherChangedImmediateCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weatherChangedImmediate&quot;</span><span class="p">,</span> <span class="n">weatherChangedImmediateCallback</span><span class="p">)</span>

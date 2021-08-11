@@ -5101,7 +5101,7 @@
                 
                 <h1 id="spellcasted">spellCasted<a class="headerlink" href="#spellcasted" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when any spell is cast successfully; this includes spells cast via scripts. This occurs at the end of the casting animation, just after the magic projectile has been constructed.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.spellCasted</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e spellCastedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">spellCastedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;spellCasted&quot;</span><span class="p">,</span> <span class="n">spellCastedCallback</span><span class="p">)</span>

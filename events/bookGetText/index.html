@@ -5101,7 +5101,7 @@
                 
                 <h1 id="bookgettext">bookGetText<a class="headerlink" href="#bookgettext" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when a book's text is about to be displayed. By providing your own text, you can overwrite what is going to be displayed.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.bookGetText</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e bookGetTextEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">bookGetTextCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;bookGetText&quot;</span><span class="p">,</span> <span class="n">bookGetTextCallback</span><span class="p">)</span>

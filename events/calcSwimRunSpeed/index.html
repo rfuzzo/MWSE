@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcswimrunspeed">calcSwimRunSpeed<a class="headerlink" href="#calcswimrunspeed" title="Permanent link">⚓︎</a></h1>
 <p>One of the movement events, calcSwimRunSpeed is used when calculating the movement speed while in water when running.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcSwimRunSpeed</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcSwimRunSpeedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcSwimRunSpeedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcSwimRunSpeed&quot;</span><span class="p">,</span> <span class="n">calcSwimRunSpeedCallback</span><span class="p">)</span>

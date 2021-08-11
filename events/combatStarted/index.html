@@ -5101,7 +5101,7 @@
                 
                 <h1 id="combatstarted">combatStarted<a class="headerlink" href="#combatstarted" title="Permanent link">⚓︎</a></h1>
 <p>The combatStarted event occurs after combat has begun between two actors.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.combatStarted</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e combatStartedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">combatStartedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;combatStarted&quot;</span><span class="p">,</span> <span class="n">combatStartedCallback</span><span class="p">)</span>

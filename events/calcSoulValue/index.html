@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcsoulvalue">calcSoulValue<a class="headerlink" href="#calcsoulvalue" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when determining the value of a soul, unmodified by GMSTs. The value can be modified, or used to provide a soul value to NPCs who would normally not be allowed one.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcSoulValue</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcSoulValueEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcSoulValueCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcSoulValue&quot;</span><span class="p">,</span> <span class="n">calcSoulValueCallback</span><span class="p">)</span>

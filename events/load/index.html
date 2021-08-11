@@ -5101,7 +5101,7 @@
                 
                 <h1 id="load">load<a class="headerlink" href="#load" title="Permanent link">⚓︎</a></h1>
 <p>The load event fires when the game is about to load. This event allows scripts to block loading.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.load</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e loadEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">loadCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="n">loadCallback</span><span class="p">)</span>

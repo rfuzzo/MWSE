@@ -5101,7 +5101,7 @@
                 
                 <h1 id="equipped">equipped<a class="headerlink" href="#equipped" title="Permanent link">⚓︎</a></h1>
 <p>The equipped event fires after an actor has successfully equipped an item.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.equipped</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e equippedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">equippedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;equipped&quot;</span><span class="p">,</span> <span class="n">equippedCallback</span><span class="p">)</span>

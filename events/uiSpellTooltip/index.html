@@ -5101,7 +5101,7 @@
                 
                 <h1 id="uispelltooltip">uiSpellTooltip<a class="headerlink" href="#uispelltooltip" title="Permanent link">⚓︎</a></h1>
 <p>The uiSpellTooltip event triggers when a new tooltip is displayed for a spell. The tooltip will be already be built.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.uiSpellTooltip</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e uiSpellTooltipEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">uiSpellTooltipCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;uiSpellTooltip&quot;</span><span class="p">,</span> <span class="n">uiSpellTooltipCallback</span><span class="p">)</span>

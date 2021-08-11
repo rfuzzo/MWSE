@@ -5101,7 +5101,7 @@
                 
                 <h1 id="addsound">addSound<a class="headerlink" href="#addsound" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when a sound is player by the game or when tes3.playSound is called. This event can be blocked.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.addSound</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e addSoundEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">addSoundCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;addSound&quot;</span><span class="p">,</span> <span class="n">addSoundCallback</span><span class="p">)</span>

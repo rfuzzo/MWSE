@@ -5101,7 +5101,7 @@
                 
                 <h1 id="infogettext">infoGetText<a class="headerlink" href="#infogettext" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when a dialogue info object text is retrieved.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.infoGetText</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e infoGetTextEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">infoGetTextCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;infoGetText&quot;</span><span class="p">,</span> <span class="n">infoGetTextCallback</span><span class="p">)</span>

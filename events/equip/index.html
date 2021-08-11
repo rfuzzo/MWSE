@@ -5102,7 +5102,7 @@
                 <h1 id="equip">equip<a class="headerlink" href="#equip" title="Permanent link">⚓︎</a></h1>
 <p>The equip event fires when an actor is about to equip an item, i.e. just before the item is equipped. This event allows scripts to block equipping. See <code>equipped</code>_ for the post-equip event.</p>
 <p>The item must not be removed from the inventory during this event, as the item and item data is still being referenced by the initiator of the equip action. If you want to consume the item, block the equip and remove it at a later time. Removing the item during this event can cause inventory desync bugs.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.equip</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e equipEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">equipCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;equip&quot;</span><span class="p">,</span> <span class="n">equipCallback</span><span class="p">)</span>

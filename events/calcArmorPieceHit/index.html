@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcarmorpiecehit">calcArmorPieceHit<a class="headerlink" href="#calcarmorpiecehit" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised just after determining which armor piece, if any, was hit with an attack. The slots can be modified, to draw focus onto specific armor slots.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcArmorPieceHit</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcArmorPieceHitEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcArmorPieceHitCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcArmorPieceHit&quot;</span><span class="p">,</span> <span class="n">calcArmorPieceHitCallback</span><span class="p">)</span>

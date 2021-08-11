@@ -5101,7 +5101,7 @@
                 
                 <h1 id="magiccasted">magicCasted<a class="headerlink" href="#magiccasted" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered when any spell or enchant is cast successfully, or when any alchemy item is used. This includes spells cast via scripts. For spells, this occurs at the end of the casting animation. For spells and enchants, it is just after the magic projectile has been constructed.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.magicCasted</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e magicCastedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">magicCastedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;magicCasted&quot;</span><span class="p">,</span> <span class="n">magicCastedCallback</span><span class="p">)</span>

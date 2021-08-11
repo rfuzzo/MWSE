@@ -5101,7 +5101,7 @@
                 
                 <h1 id="weaponunreadied">weaponUnreadied<a class="headerlink" href="#weaponunreadied" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when a weapon is no longer readied, and pairs with the weaponReadied event. It can be used to reliably tell if a specific weapon is readied for attack. This does not necessarily mean that the animation state has changed for the first time. If an actor equips a weapon while having their hands up to attack with, the event will fire for the new weapon.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.weaponUnreadied</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e weaponUnreadiedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weaponUnreadiedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weaponUnreadied&quot;</span><span class="p">,</span> <span class="n">weaponUnreadiedCallback</span><span class="p">)</span>

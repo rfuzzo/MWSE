@@ -5101,7 +5101,7 @@
                 
                 <h1 id="itemtileupdated">itemTileUpdated<a class="headerlink" href="#itemtileupdated" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when a dialogue response is triggered.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.itemTileUpdated</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e itemTileUpdatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">itemTileUpdatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;itemTileUpdated&quot;</span><span class="p">,</span> <span class="n">itemTileUpdatedCallback</span><span class="p">)</span>

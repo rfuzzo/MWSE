@@ -5101,7 +5101,7 @@
                 
                 <h1 id="inforesponse">infoResponse<a class="headerlink" href="#inforesponse" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when a dialogue response is triggered.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.infoResponse</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e infoResponseEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">infoResponseCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;infoResponse&quot;</span><span class="p">,</span> <span class="n">infoResponseCallback</span><span class="p">)</span>

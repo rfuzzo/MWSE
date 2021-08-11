@@ -5101,7 +5101,7 @@
                 
                 <h1 id="projectilehitactor">projectileHitActor<a class="headerlink" href="#projectilehitactor" title="Permanent link">⚓︎</a></h1>
 <p>The projectileHitActor event fires when a projectile collides with an actor.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.projectileHitActor</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e projectileHitActorEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">projectileHitActorCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;projectileHitActor&quot;</span><span class="p">,</span> <span class="n">projectileHitActorCallback</span><span class="p">)</span>

@@ -5115,7 +5115,7 @@
                 
                 <h1 id="calcmovespeed">calcMoveSpeed<a class="headerlink" href="#calcmovespeed" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when an actor’s movement speed is calculated. The event allows modification of this value, to dehardcode actor movement speeds. Invoked after all other movement speed events are finished.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcMoveSpeed</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcMoveSpeedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcMoveSpeedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcMoveSpeed&quot;</span><span class="p">,</span> <span class="n">calcMoveSpeedCallback</span><span class="p">)</span>

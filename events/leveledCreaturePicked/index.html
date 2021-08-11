@@ -5101,7 +5101,7 @@
                 
                 <h1 id="leveledcreaturepicked">leveledCreaturePicked<a class="headerlink" href="#leveledcreaturepicked" title="Permanent link">⚓︎</a></h1>
 <p>This event is called after any leveled creature list is resolved. The event may be filtered by its list, and its pick can be overwritten. While this event allows for customization, the leveled list may be altered directly as well.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.leveledCreaturePicked</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e leveledCreaturePickedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">leveledCreaturePickedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;leveledCreaturePicked&quot;</span><span class="p">,</span> <span class="n">leveledCreaturePickedCallback</span><span class="p">)</span>

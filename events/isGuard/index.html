@@ -5101,7 +5101,7 @@
                 
                 <h1 id="isguard">isGuard<a class="headerlink" href="#isguard" title="Permanent link">⚓︎</a></h1>
 <p>The isGuard event triggers whenever the game engine checks if an NPC object is a guard. The guard status can be modified. This alone will not make an NPC behave like a guard, though.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.isGuard</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e isGuardEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">isGuardCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;isGuard&quot;</span><span class="p">,</span> <span class="n">isGuardCallback</span><span class="p">)</span>

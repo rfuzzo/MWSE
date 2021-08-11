@@ -5101,7 +5101,7 @@
                 
                 <h1 id="loaded">loaded<a class="headerlink" href="#loaded" title="Permanent link">⚓︎</a></h1>
 <p>The loaded event fires after the game has been successfully loaded. This event is preceded by the load event.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.loaded</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e loadedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">loadedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">,</span> <span class="n">loadedCallback</span><span class="p">)</span>

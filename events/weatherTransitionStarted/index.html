@@ -5101,7 +5101,7 @@
                 
                 <h1 id="weathertransitionstarted">weatherTransitionStarted<a class="headerlink" href="#weathertransitionstarted" title="Permanent link">⚓︎</a></h1>
 <p>The weatherTransitionStarted event occurs when the currently simulated weather has started to gradually transition to a new weather.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.weatherTransitionStarted</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e weatherTransitionStartedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weatherTransitionStartedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weatherTransitionStarted&quot;</span><span class="p">,</span> <span class="n">weatherTransitionStartedCallback</span><span class="p">)</span>

@@ -5115,7 +5115,7 @@
                 
                 <h1 id="key">key<a class="headerlink" href="#key" title="Permanent link">⚓︎</a></h1>
 <p>The key event fires when a key up or key down input is detected. It is preferred that the keyDown and keyUp events are used instead.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.key</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e keyEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">keyCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">keyCallback</span><span class="p">)</span>

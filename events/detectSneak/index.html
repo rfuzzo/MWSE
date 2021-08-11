@@ -5101,7 +5101,7 @@
                 
                 <h1 id="detectsneak">detectSneak<a class="headerlink" href="#detectsneak" title="Permanent link">⚓︎</a></h1>
 <p>This event is invoked whenever an actor is checking if they can detect another actor sneaking.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.detectSneak</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e detectSneakEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">detectSneakCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;detectSneak&quot;</span><span class="p">,</span> <span class="n">detectSneakCallback</span><span class="p">)</span>

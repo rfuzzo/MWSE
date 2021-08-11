@@ -5101,7 +5101,7 @@
                 
                 <h1 id="saved">saved<a class="headerlink" href="#saved" title="Permanent link">⚓︎</a></h1>
 <p>The saved event fires after the game has successfully been saved. This event is preceded by the save event.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.saved</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e savedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">savedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;saved&quot;</span><span class="p">,</span> <span class="n">savedCallback</span><span class="p">)</span>

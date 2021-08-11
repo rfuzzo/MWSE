@@ -5101,7 +5101,7 @@
                 
                 <h1 id="levelup">levelUp<a class="headerlink" href="#levelup" title="Permanent link">⚓︎</a></h1>
 <p>This even is called whenever the player successfully finishes leveling up.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.levelUp</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e levelUpEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">levelUpCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;levelUp&quot;</span><span class="p">,</span> <span class="n">levelUpCallback</span><span class="p">)</span>

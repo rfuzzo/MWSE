@@ -5101,7 +5101,7 @@
                 
                 <h1 id="restinterrupt">restInterrupt<a class="headerlink" href="#restinterrupt" title="Permanent link">⚓︎</a></h1>
 <p>This event is invoked when a rest is about to be interrupted. The ambushing spawn can be overridden by changing the creature parameter.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.restInterrupt</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e restInterruptEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">restInterruptCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;restInterrupt&quot;</span><span class="p">,</span> <span class="n">restInterruptCallback</span><span class="p">)</span>

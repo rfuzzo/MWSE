@@ -5101,7 +5101,7 @@
                 
                 <h1 id="barteroffer">barterOffer<a class="headerlink" href="#barteroffer" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when a potentially successful barter offer is made by the player. Potentially successful means both parties have the required funds to make the trade.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.barterOffer</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e barterOfferEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">barterOfferCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;barterOffer&quot;</span><span class="p">,</span> <span class="n">barterOfferCallback</span><span class="p">)</span>

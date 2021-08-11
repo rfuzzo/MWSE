@@ -5101,7 +5101,7 @@
                 
                 <h1 id="combatstopped">combatStopped<a class="headerlink" href="#combatstopped" title="Permanent link">⚓︎</a></h1>
 <p>The combatStopped event occurs after an actor has left combat.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.combatStopped</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e combatStoppedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">combatStoppedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;combatStopped&quot;</span><span class="p">,</span> <span class="n">combatStoppedCallback</span><span class="p">)</span>

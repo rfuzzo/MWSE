@@ -5101,7 +5101,7 @@
                 
                 <h1 id="enchantchargeuse">enchantChargeUse<a class="headerlink" href="#enchantchargeuse" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered just before an on-strike or on-use enchantment is used by any actor, and also by the UI system to label enchant charges. It allows modification of the charge required to use an enchantment.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.enchantChargeUse</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e enchantChargeUseEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">enchantChargeUseCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;enchantChargeUse&quot;</span><span class="p">,</span> <span class="n">enchantChargeUseCallback</span><span class="p">)</span>

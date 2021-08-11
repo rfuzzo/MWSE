@@ -5101,7 +5101,7 @@
                 
                 <h1 id="uipreevent">uiPreEvent<a class="headerlink" href="#uipreevent" title="Permanent link">⚓︎</a></h1>
 <p>uiPreEvent is triggered through various UI events. This includes scrolling through panes, clicking buttons, selecting icons, or a host of other UI-related activities. This event fires before uiEvent, and has the additional advantage of being able to be blocked.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.uiPreEvent</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e uiPreEventEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">uiPreEventCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;uiPreEvent&quot;</span><span class="p">,</span> <span class="n">uiPreEventCallback</span><span class="p">)</span>

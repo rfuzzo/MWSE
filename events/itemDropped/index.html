@@ -5101,7 +5101,7 @@
                 
                 <h1 id="itemdropped">itemDropped<a class="headerlink" href="#itemdropped" title="Permanent link">⚓︎</a></h1>
 <p>This event fires when an item is dropped.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.itemDropped</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e itemDroppedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">itemDroppedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;itemDropped&quot;</span><span class="p">,</span> <span class="n">itemDroppedCallback</span><span class="p">)</span>

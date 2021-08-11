@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calcrestinterrupt">calcRestInterrupt<a class="headerlink" href="#calcrestinterrupt" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when the player is about to start resting. The hour and count of creatures can be modified, or disabled. Blocking this event blocks any interrupting spawn.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcRestInterrupt</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcRestInterruptEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcRestInterruptCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcRestInterrupt&quot;</span><span class="p">,</span> <span class="n">calcRestInterruptCallback</span><span class="p">)</span>

@@ -5101,7 +5101,7 @@
                 
                 <h1 id="potionbrewfailed">potionBrewFailed<a class="headerlink" href="#potionbrewfailed" title="Permanent link">⚓︎</a></h1>
 <p>The potionBrewFailed event is raised when the player fails a potion brew attempt.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.potionBrewFailed</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e potionBrewFailedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">potionBrewFailedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;potionBrewFailed&quot;</span><span class="p">,</span> <span class="n">potionBrewFailedCallback</span><span class="p">)</span>

@@ -5101,7 +5101,7 @@
                 
                 <h1 id="calctrainingprice">calcTrainingPrice<a class="headerlink" href="#calctrainingprice" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when determining the cost of training, and can be used to modify the given price.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.calcTrainingPrice</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcTrainingPriceEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcTrainingPriceCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcTrainingPrice&quot;</span><span class="p">,</span> <span class="n">calcTrainingPriceCallback</span><span class="p">)</span>

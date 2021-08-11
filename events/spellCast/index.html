@@ -5101,7 +5101,7 @@
                 
                 <h1 id="spellcast">spellCast<a class="headerlink" href="#spellcast" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered just before a spell cast is resolved, at the end of the casting animation. It can control the success chance of the spell cast.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.spellCast</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e spellCastEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">spellCastCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;spellCast&quot;</span><span class="p">,</span> <span class="n">spellCastCallback</span><span class="p">)</span>

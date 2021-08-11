@@ -5102,7 +5102,7 @@
                 <h1 id="absorbedmagic">absorbedMagic<a class="headerlink" href="#absorbedmagic" title="Permanent link">⚓︎</a></h1>
 <p>This event is triggered after magic absorption absorbs and cancels a magic effect, and just before magic absorption gives magicka to the target. It can control the amount of magicka restored.</p>
 <p>This event occurs once per effect restored, so a multi-effect spell may trigger this multiple times. The default amount restored is equal to the casting cost of the entire spell, which is the vanilla behaviour.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.absorbedMagic</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e absorbedMagicEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">absorbedMagicCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;absorbedMagic&quot;</span><span class="p">,</span> <span class="n">absorbedMagicCallback</span><span class="p">)</span>

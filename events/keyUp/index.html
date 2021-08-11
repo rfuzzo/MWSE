@@ -5101,7 +5101,7 @@
                 
                 <h1 id="keyup">keyUp<a class="headerlink" href="#keyup" title="Permanent link">⚓︎</a></h1>
 <p>The key event fires when a key is released.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.keyUp</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e keyUpEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">keyUpCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyUp&quot;</span><span class="p">,</span> <span class="n">keyUpCallback</span><span class="p">)</span>

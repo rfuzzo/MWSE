@@ -5101,7 +5101,7 @@
                 
                 <h1 id="weaponreadied">weaponReadied<a class="headerlink" href="#weaponreadied" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when a weapon is readied, and pairs with the weaponUnreadied event. It can be used to reliably tell if a specific weapon is readied for attack. This does not necessarily mean that the animation state has changed for the first time.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @type e event.weaponReadied</span>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e weaponReadiedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weaponReadiedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weaponReadied&quot;</span><span class="p">,</span> <span class="n">weaponReadiedCallback</span><span class="p">)</span>
