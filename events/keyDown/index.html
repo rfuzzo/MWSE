@@ -5120,7 +5120,14 @@
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="n">keyDownCallback</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>This event can be filtered based on the <strong><code>keyCode</code></strong> event data.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>
+</div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
 <li><code>keyCode</code> (number): The scan code of the key that raised the event.</li>

@@ -5106,6 +5106,10 @@
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mobileDeactivated&quot;</span><span class="p">,</span> <span class="n">mobileDeactivatedCallback</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>
+</div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The reference that the mobile has been deactivated for.</li>

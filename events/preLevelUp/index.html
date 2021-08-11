@@ -5106,7 +5106,14 @@
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;preLevelUp&quot;</span><span class="p">,</span> <span class="n">preLevelUpCallback</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>This event can be filtered based on the <strong><code>level</code></strong> event data.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>
+</div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
 <li><code>level</code> (number): The new level about to be obtained.</li>
