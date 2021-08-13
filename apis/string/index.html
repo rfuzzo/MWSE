@@ -1398,8 +1398,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stringsplit" class="md-nav__link">
+    string.split
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stringstartswith" class="md-nav__link">
     string.startswith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stringtrim" class="md-nav__link">
+    string.trim
   </a>
   
 </li>
@@ -5157,8 +5171,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stringsplit" class="md-nav__link">
+    string.split
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stringstartswith" class="md-nav__link">
     string.startswith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stringtrim" class="md-nav__link">
+    string.trim
   </a>
   
 </li>
@@ -5240,6 +5268,20 @@
 <li><code>plain</code> (boolean): If true, a normal search instead of a pattern search will be performed.</li>
 </ul>
 <hr />
+<h3 id="stringsplit"><code>string.split</code><a class="headerlink" href="#stringsplit" title="Permanent link">⚓︎</a></h3>
+<p>Returns an array-style table with <code>str</code> split by <code>sep</code>. The <code>sep</code>erator is not part of the results.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">split</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">sep</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>str</code> (string): The string to split.</li>
+<li><code>sep</code> (string): The token to split the string by.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>split</code> (table)</li>
+</ul>
+<hr />
 <h3 id="stringstartswith"><code>string.startswith</code><a class="headerlink" href="#stringstartswith" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if a string begins with a given pattern.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
@@ -5252,6 +5294,19 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="stringtrim"><code>string.trim</code><a class="headerlink" href="#stringtrim" title="Permanent link">⚓︎</a></h3>
+<p>Returns a copy of the string, with whitespace removed from the start and end.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">trimmed</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">trim</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>s</code> (string)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>trimmed</code> (string)</li>
 </ul>
 <hr />
                 
