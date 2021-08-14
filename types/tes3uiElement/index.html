@@ -3837,6 +3837,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#unregisterafter" class="md-nav__link">
+    unregisterAfter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unregisterbefore" class="md-nav__link">
+    unregisterBefore
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updatelayout" class="md-nav__link">
     updateLayout
   </a>
@@ -6399,6 +6413,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#unregisterafter" class="md-nav__link">
+    unregisterAfter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unregisterbefore" class="md-nav__link">
+    unregisterBefore
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#updatelayout" class="md-nav__link">
     updateLayout
   </a>
@@ -7192,7 +7220,7 @@ This is required because there is no identifying type information stored with th
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (object)</li>
+<li><code>result</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>, <a href="../../types/tes3mobileObject">tes3mobileObject</a>, any)</li>
 </ul>
 <hr />
 <h3 id="gettoplevelmenu"><code>getTopLevelMenu</code><a class="headerlink" href="#gettoplevelmenu" title="Permanent link">⚓︎</a></h3>
@@ -7398,12 +7426,44 @@ Returns ``true`` if the operation succeeded, or ``false`` if at least one argume
 </ul>
 <hr />
 <h3 id="unregister"><code>unregister</code><a class="headerlink" href="#unregister" title="Permanent link">⚓︎</a></h3>
-<p>Unregisters an <code>event</code>_ handler.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3uiElement</span><span class="p">:</span><span class="n">unregister</span><span class="p">(</span><span class="n">eventID</span><span class="p">)</span>
+<p>Unregisters an <code>event</code> handler.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasUnregistered</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">unregister</span><span class="p">(</span><span class="n">eventID</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>eventID</code> (string): The event id.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasUnregistered</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="unregisterafter"><code>unregisterAfter</code><a class="headerlink" href="#unregisterafter" title="Permanent link">⚓︎</a></h3>
+<p>Unregisters a function previously registered using <code>:registerAfter</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasUnregistered</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">unregisterAfter</span><span class="p">(</span><span class="n">eventID</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>eventID</code> (string): The event id.</li>
+<li><code>callback</code> (function): The callback function.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasUnregistered</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="unregisterbefore"><code>unregisterBefore</code><a class="headerlink" href="#unregisterbefore" title="Permanent link">⚓︎</a></h3>
+<p>Unregisters a function previously registered using <code>:registerBefore</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasUnregistered</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">unregisterBefore</span><span class="p">(</span><span class="n">eventID</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>eventID</code> (string): The event id.</li>
+<li><code>callback</code> (function): The callback function.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasUnregistered</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="updatelayout"><code>updateLayout</code><a class="headerlink" href="#updatelayout" title="Permanent link">⚓︎</a></h3>
