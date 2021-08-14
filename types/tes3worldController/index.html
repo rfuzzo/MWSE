@@ -2967,6 +2967,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../tes3rechargingItem/" class="md-nav__link">
+        tes3rechargingItem
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../tes3reference/" class="md-nav__link">
         tes3reference
       </a>
@@ -3440,15 +3452,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#activequests" class="md-nav__link">
-    activeQuests
+  <a href="#aidistancescale" class="md-nav__link">
+    aiDistanceScale
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#aidistancescale" class="md-nav__link">
-    aiDistanceScale
+  <a href="#allmobileactors" class="md-nav__link">
+    allMobileActors
   </a>
   
 </li>
@@ -3477,13 +3489,6 @@
           <li class="md-nav__item">
   <a href="#characterrendertarget" class="md-nav__link">
     characterRenderTarget
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#chargableitems" class="md-nav__link">
-    chargableItems
   </a>
   
 </li>
@@ -3832,8 +3837,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#quests" class="md-nav__link">
+    quests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#quicksavewhenresting" class="md-nav__link">
     quickSaveWhenResting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rechargingitems" class="md-nav__link">
+    rechargingItems
   </a>
   
 </li>
@@ -5669,15 +5688,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#activequests" class="md-nav__link">
-    activeQuests
+  <a href="#aidistancescale" class="md-nav__link">
+    aiDistanceScale
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#aidistancescale" class="md-nav__link">
-    aiDistanceScale
+  <a href="#allmobileactors" class="md-nav__link">
+    allMobileActors
   </a>
   
 </li>
@@ -5706,13 +5725,6 @@
           <li class="md-nav__item">
   <a href="#characterrendertarget" class="md-nav__link">
     characterRenderTarget
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#chargableitems" class="md-nav__link">
-    chargableItems
   </a>
   
 </li>
@@ -6061,8 +6073,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#quests" class="md-nav__link">
+    quests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#quicksavewhenresting" class="md-nav__link">
     quickSaveWhenResting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rechargingitems" class="md-nav__link">
+    rechargingItems
   </a>
   
 </li>
@@ -6228,18 +6254,18 @@
                 <h1 id="tes3worldcontroller">tes3worldController<a class="headerlink" href="#tes3worldcontroller" title="Permanent link">⚓︎</a></h1>
 <p>A core game object used for storing world simulation data.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
-<h3 id="activequests"><code>activeQuests</code><a class="headerlink" href="#activequests" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A list of all available <code>tes3quest</code>s.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
-</ul>
-<hr />
 <h3 id="aidistancescale"><code>aiDistanceScale</code><a class="headerlink" href="#aidistancescale" title="Permanent link">⚓︎</a></h3>
 <p>A value in the range [0, 1]. The (relative) maximum distance setting for AI simulation. Corresponds to the AI distance option in the Options menu.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="allmobileactors"><code>allMobileActors</code><a class="headerlink" href="#allmobileactors" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. The list of all active mobile actors (<code>tes3mobileActor</code>). Mobile actors expire after 72 hours if they have not been in a loaded cell.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="armcamera"><code>armCamera</code><a class="headerlink" href="#armcamera" title="Permanent link">⚓︎</a></h3>
@@ -6268,13 +6294,6 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3worldControllerRenderTarget)</li>
-</ul>
-<hr />
-<h3 id="chargableitems"><code>chargableItems</code><a class="headerlink" href="#chargableitems" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A list of enchanted items that are recharging. Items in the list may not all belong to the player.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="chargenstate"><code>charGenState</code><a class="headerlink" href="#chargenstate" title="Permanent link">⚓︎</a></h3>
@@ -6619,11 +6638,25 @@
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
+<h3 id="quests"><code>quests</code><a class="headerlink" href="#quests" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. A list of all available <code>tes3quest</code>s.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
+</ul>
+<hr />
 <h3 id="quicksavewhenresting"><code>quickSaveWhenResting</code><a class="headerlink" href="#quicksavewhenresting" title="Permanent link">⚓︎</a></h3>
 <p>Controls if auto-save on resting or waiting is enabled. Corresponds to the "Auto-save when rest" option in the Options menu.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (object)</li>
+</ul>
+<hr />
+<h3 id="rechargingitems"><code>rechargingItems</code><a class="headerlink" href="#rechargingitems" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. A list of enchanted items that are recharging (type <code>tes3rechargingItem</code>). Items in the list may not all belong to the player.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="shaderwaterreflectterrain"><code>shaderWaterReflectTerrain</code><a class="headerlink" href="#shaderwaterreflectterrain" title="Permanent link">⚓︎</a></h3>
