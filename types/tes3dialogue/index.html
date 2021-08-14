@@ -5387,28 +5387,28 @@
 </ul>
 <hr />
 <h3 id="deleted"><code>deleted</code><a class="headerlink" href="#deleted" title="Permanent link">⚓︎</a></h3>
-<p>The deleted state of the object.</p>
+<p><em>Read-only</em>. The deleted state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
-<p>The disabled state of the object.</p>
+<p><em>Read-only</em>. The disabled state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The unique identifier for the object.</p>
+<p><em>Read-only</em>. The unique identifier for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="info"><code>info</code><a class="headerlink" href="#info" title="Permanent link">⚓︎</a></h3>
-<p>A collection of individual entries in the dialogue.</p>
+<p><em>Read-only</em>. A collection of individual entries in the dialogue.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
@@ -5429,14 +5429,14 @@
 </ul>
 <hr />
 <h3 id="objectflags"><code>objectFlags</code><a class="headerlink" href="#objectflags" title="Permanent link">⚓︎</a></h3>
-<p>The raw flags of the object.</p>
+<p><em>Read-only</em>. The raw flags of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -5457,7 +5457,7 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p>The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5471,7 +5471,7 @@
 </ul>
 <hr />
 <h3 id="type"><code>type</code><a class="headerlink" href="#type" title="Permanent link">⚓︎</a></h3>
-<p>The type of the dialogue.</p>
+<p><em>Read-only</em>. The type of the dialogue.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -5494,8 +5494,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>index</code> (number)</li>
-<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
+<li><code>index</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.player</code>.</li>
 </ul>
 </li>
 </ul>

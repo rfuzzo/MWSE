@@ -5278,7 +5278,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>callback</code> (function): The callback function that will execute when the timer expires.</li>
-<li><code>type</code> (number): Type of the timer. This value can be timer.simulate, timer.game or timer.real.</li>
+<li><code>type</code> (number): <em>Default</em>: <code>timer.simulate</code>. Type of the timer. This value can be timer.simulate, timer.game or timer.real.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5292,10 +5292,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>type</code> (number): Type of the timer. This value can be timer.simulate, timer.game or timer.real.</li>
+<li><code>type</code> (number): <em>Default</em>: <code>timer.simulate</code>. Type of the timer. This value can be timer.simulate, timer.game or timer.real.</li>
 <li><code>duration</code> (number): Duration of the timer. The method of time passing depends on the timer type.</li>
 <li><code>callback</code> (function): The callback function that will execute when the timer expires.</li>
-<li><code>iterations</code> (number): The number of iterations to run. Use <code>-1</code> for infinite looping.</li>
+<li><code>iterations</code> (number): <em>Default</em>: <code>1</code>. The number of iterations to run. Use <code>-1</code> for infinite looping.</li>
 </ul>
 </li>
 </ul>

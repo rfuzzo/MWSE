@@ -7676,8 +7676,8 @@
 <li><code>params</code> (table)<ul>
 <li><code>slot</code> (number): Armor slot number. A number greater than 10 to configure a slot for.</li>
 <li><code>name</code> (string)</li>
-<li><code>weight</code> (number): A stand-in for the armor base weight value, typically controlled by a GMST (e.g. iHelmWeight).</li>
-<li><code>scalar</code> (number): A multiplier with range 0.0-1.0 that controls how much of an item's armor value applies to a character's overall armor rating. For comparison, standard chest armor uses 0.3, helmets, greaves and pauldrons use 0.1, and gauntlets use 0.05.</li>
+<li><code>weight</code> (number): <em>Default</em>: <code>0</code>. A stand-in for the armor base weight value, typically controlled by a GMST (e.g. iHelmWeight).</li>
+<li><code>scalar</code> (number): <em>Default</em>: <code>0.1</code>. A multiplier with range 0.0-1.0 that controls how much of an item's armor value applies to a character's overall armor rating. For comparison, standard chest armor uses 0.3, helmets, greaves and pauldrons use 0.1, and gauntlets use 0.05.</li>
 </ul>
 </li>
 </ul>
@@ -7695,12 +7695,12 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to give items to.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to add.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): The item data for the item.</li>
-<li><code>soul</code> (<a href="../../types/tes3creature">tes3creature</a>): For creating filled soul gems.</li>
-<li><code>count</code> (number): The maximum number of items to add.</li>
-<li><code>playSound</code> (boolean): If false, the up/down sound for the item won't be played.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data for the item.</li>
+<li><code>soul</code> (<a href="../../types/tes3creature">tes3creature</a>): <em>Optional</em>. For creating filled soul gems.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to add.</li>
+<li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limit</code> (boolean): If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
-<li><code>updateGUI</code> (boolean): If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
 </ul>
@@ -7718,7 +7718,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>to</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference or mobile whose inventory will be modified.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to create item data for.</li>
-<li><code>updateGUI</code> (boolean): If false, the player or contents menu won't be updated.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the player or contents menu won't be updated.</li>
 </ul>
 </li>
 </ul>
@@ -7735,7 +7735,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>text</code> (string): The text of the new Journal entry.</li>
-<li><code>showMessage</code> (boolean): If this parameter is true, a "Your journal has been updated" message will be displayed.</li>
+<li><code>showMessage</code> (boolean): <em>Default</em>: <code>true</code>. If this parameter is true, a "Your journal has been updated" message will be displayed.</li>
 </ul>
 </li>
 </ul>
@@ -7748,48 +7748,48 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>id</code> (tes3.effect): Id of the new effect. Maps to tes3.effect.* added with tes3.claimSpellEffectId. If the effect of this id already exists, an error will be thrown.</li>
-<li><code>name</code> (string): Name of the effect.</li>
-<li><code>baseCost</code> (number): Base magicka cost for the effect.</li>
-<li><code>school</code> (tes3.magicSchool): The magic school the new effect will be assigned to. Maps to tes3.magicSchool.* constants</li>
-<li><code>size</code> (number)</li>
-<li><code>sizeCap</code> (number)</li>
-<li><code>speed</code> (number)</li>
-<li><code>description</code> (string): Description for the effect.</li>
-<li><code>lighting</code> (table)<ul>
-<li><code>x</code> (number): Value of red color channel. In range of 0 - 1.</li>
-<li><code>y</code> (number): Value of green color channel. In range of 0 - 1.</li>
-<li><code>z</code> (number): Value of blue color channel. In range of 0 - 1.</li>
+<li><code>name</code> (string): <em>Default</em>: <code>Unnamed Effect</code>. Name of the effect.</li>
+<li><code>baseCost</code> (number): <em>Default</em>: <code>1</code>. Base magicka cost for the effect.</li>
+<li><code>school</code> (tes3.magicSchool): <em>Default</em>: <code>tes3.magicSchool.alteration</code>. The magic school the new effect will be assigned to. Maps to tes3.magicSchool.* constants</li>
+<li><code>size</code> (number): <em>Default</em>: <code>1</code>.</li>
+<li><code>sizeCap</code> (number): <em>Default</em>: <code>1</code>.</li>
+<li><code>speed</code> (number): <em>Default</em>: <code>1</code>.</li>
+<li><code>description</code> (string): <em>Default</em>: <code>No description available.</code>. Description for the effect.</li>
+<li><code>lighting</code> (table): <em>Optional</em>.<ul>
+<li><code>x</code> (number): <em>Default</em>: <code>1</code>. Value of red color channel. In range of 0 - 1.</li>
+<li><code>y</code> (number): <em>Default</em>: <code>1</code>. Value of green color channel. In range of 0 - 1.</li>
+<li><code>z</code> (number): <em>Default</em>: <code>1</code>. Value of blue color channel. In range of 0 - 1.</li>
 </ul>
 </li>
-<li><code>icon</code> (string): Path to the effect icon. Must be a string no longer than 31 characters long.</li>
-<li><code>particleTexture</code> (string): Path to the particle texture to use for the effect. Must be a string no longer than 31 characters long.</li>
-<li><code>castSound</code> (string): Path to the sound which will be played on casting a spell with this effect. Must be a string no longer than 31 characters long.</li>
-<li><code>boltSound</code> (string): Path to the sound which will be played when a spell with this effect is in flight. Must be a string no longer than 31 characters long.</li>
-<li><code>hitSound</code> (string): Path to the sound which will be played when a spell with this effect hits something. Must be a string no longer than 31 characters long.</li>
-<li><code>areaSound</code> (string): Must be a string no longer than 31 characters long.</li>
-<li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>)</li>
-<li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>)</li>
-<li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>)</li>
-<li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>)</li>
-<li><code>allowEnchanting</code> (boolean): Can this effect be used in a custom enchantment?</li>
-<li><code>allowSpellmaking</code> (boolean): Can this effect be used in a custom spell?</li>
-<li><code>appliesOnce</code> (boolean)</li>
-<li><code>canCastSelf</code> (boolean): Can this effect used with cast on self range?</li>
-<li><code>canCastTarget</code> (boolean): Can this effect be used with cast on target range?</li>
-<li><code>canCastTouch</code> (boolean): Can this effect be used with cast on touch range?</li>
-<li><code>casterLinked</code> (boolean)</li>
-<li><code>hasContinuousVFX</code> (boolean): Will the effect's VFX be played during its whole duration?</li>
-<li><code>hasNoDuration</code> (boolean)</li>
-<li><code>hasNoMagnitude</code> (boolean)</li>
-<li><code>illegalDaedra</code> (boolean): Is this effect illegal to use in public, because it summons Daedra? Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.</li>
-<li><code>isHarmful</code> (boolean): Is this effect considered harmful and casting it can be considered as an attack?</li>
-<li><code>nonRecastable</code> (boolean): Can this effect be recast while it already is in duration?</li>
-<li><code>targetsAttributes</code> (boolean)</li>
-<li><code>targetsSkills</code> (boolean)</li>
-<li><code>unreflectable</code> (boolean): Can the effect be reflected?</li>
-<li><code>usesNegativeLighting</code> (boolean)</li>
-<li><code>onTick</code> (function): A function which will be called on each tick of a spell containing this effect.</li>
-<li><code>onCollision</code> (function): A function which will be called when a spell containing this spell effect collides with something.</li>
+<li><code>icon</code> (string): <em>Optional</em>. Path to the effect icon. Must be a string no longer than 31 characters long.</li>
+<li><code>particleTexture</code> (string): <em>Optional</em>. Path to the particle texture to use for the effect. Must be a string no longer than 31 characters long.</li>
+<li><code>castSound</code> (string): <em>Optional</em>. Path to the sound which will be played on casting a spell with this effect. Must be a string no longer than 31 characters long.</li>
+<li><code>boltSound</code> (string): <em>Optional</em>. Path to the sound which will be played when a spell with this effect is in flight. Must be a string no longer than 31 characters long.</li>
+<li><code>hitSound</code> (string): <em>Optional</em>. Path to the sound which will be played when a spell with this effect hits something. Must be a string no longer than 31 characters long.</li>
+<li><code>areaSound</code> (string): <em>Optional</em>. Must be a string no longer than 31 characters long.</li>
+<li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
+<li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
+<li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
+<li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
+<li><code>allowEnchanting</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used in a custom enchantment?</li>
+<li><code>allowSpellmaking</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used in a custom spell?</li>
+<li><code>appliesOnce</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>canCastSelf</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect used with cast on self range?</li>
+<li><code>canCastTarget</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used with cast on target range?</li>
+<li><code>canCastTouch</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used with cast on touch range?</li>
+<li><code>casterLinked</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>hasContinuousVFX</code> (boolean): <em>Default</em>: <code>true</code>. Will the effect's VFX be played during its whole duration?</li>
+<li><code>hasNoDuration</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>hasNoMagnitude</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>illegalDaedra</code> (boolean): <em>Default</em>: <code>true</code>. Is this effect illegal to use in public, because it summons Daedra? Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.</li>
+<li><code>isHarmful</code> (boolean): <em>Default</em>: <code>true</code>. Is this effect considered harmful and casting it can be considered as an attack?</li>
+<li><code>nonRecastable</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be recast while it already is in duration?</li>
+<li><code>targetsAttributes</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>targetsSkills</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. Can the effect be reflected?</li>
+<li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect.</li>
+<li><code>onCollision</code> (function): <em>Optional</em>. A function which will be called when a spell containing this spell effect collides with something.</li>
 </ul>
 </li>
 </ul>
@@ -7823,8 +7823,8 @@
 <li><code>params</code> (table)<ul>
 <li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or id of the sound to look for.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to attach the sound to.</li>
-<li><code>mixChannel</code> (number): The channel to base volume off of. Maps to tes3.audioMixType constants.</li>
-<li><code>volume</code> (number): A value between 0.0 and 1.0 to scale the volume off of.</li>
+<li><code>mixChannel</code> (number): <em>Default</em>: <code>tes3.audioMixType.effects</code>. The channel to base volume off of. Maps to tes3.audioMixType constants.</li>
+<li><code>volume</code> (number): <em>Default</em>: <code>1.0</code>. A value between 0.0 and 1.0 to scale the volume off of.</li>
 </ul>
 </li>
 </ul>
@@ -7837,8 +7837,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>hours</code> (number): How many hours to progress.</li>
-<li><code>resting</code> (boolean): Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.</li>
-<li><code>updateEnvironment</code> (boolean): Controls if the weather system is updated for each hour passed.</li>
+<li><code>resting</code> (boolean): <em>Optional</em>. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.</li>
+<li><code>updateEnvironment</code> (boolean): <em>Default</em>: <code>true</code>. Controls if the weather system is updated for each hour passed.</li>
 </ul>
 </li>
 </ul>
@@ -7854,24 +7854,24 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
-<li><code>source</code> (<a href="../../types/tes3object">tes3object</a>): A magic source to apply.</li>
-<li><code>name</code> (string): If applying alchemy as a source, you can specifiy a name for the magic source.</li>
-<li><code>effects</code> (table): A table of custom effects to apply as a potion. Maximal number of effects is 8.<ul>
-<li><code>id</code> (boolean): ID of the effect.</li>
-<li><code>skill</code> (tes3.skill.* constants): If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill.</li>
-<li><code>attribute</code> (tes3.attribute.* constants): If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute.</li>
-<li><code>range</code> (tes3.effectRange.<em> constants): The range of the effect. This maps to tes3.effectRange.</em> constants.</li>
-<li><code>radius</code> (number): The radius of the effect.</li>
-<li><code>duration</code> (number): Number of seconds the effect is going to be active.</li>
-<li><code>min</code> (number): The minimal magintude of the effect per tick.</li>
-<li><code>max</code> (number): The maximal magnitude of the effect per tick.</li>
+<li><code>source</code> (<a href="../../types/tes3object">tes3object</a>): <em>Optional</em>. A magic source to apply.</li>
+<li><code>name</code> (string): <em>Optional</em>. If applying alchemy as a source, you can specifiy a name for the magic source.</li>
+<li><code>effects</code> (table): <em>Optional</em>. A table of custom effects to apply as a potion. Maximal number of effects is 8.<ul>
+<li><code>id</code> (boolean): <em>Default</em>: <code>-1</code>. ID of the effect.</li>
+<li><code>skill</code> (tes3.skill.<em> constants): </em>Default*: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill.</li>
+<li><code>attribute</code> (tes3.attribute.<em> constants): </em>Default*: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute.</li>
+<li><code>range</code> (tes3.effectRange.<em> constants): </em>Default<em>: <code>tes3.effectRange.self</code>. The range of the effect. This maps to tes3.effectRange.</em> constants.</li>
+<li><code>radius</code> (number): <em>Default</em>: <code>0</code>. The radius of the effect.</li>
+<li><code>duration</code> (number): <em>Default</em>: <code>0</code>. Number of seconds the effect is going to be active.</li>
+<li><code>min</code> (number): <em>Default</em>: <code>0</code>. The minimal magintude of the effect per tick.</li>
+<li><code>max</code> (number): <em>Default</em>: <code>0</code>. The maximal magnitude of the effect per tick.</li>
 </ul>
 </li>
-<li><code>createCopy</code> (boolean): This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.</li>
-<li><code>fromStack</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>): The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.</li>
-<li><code>castChance</code> (number)</li>
-<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The target of the magic.</li>
-<li><code>bypassResistances</code> (boolean): Is this effect going to bypass magic resistance?</li>
+<li><code>createCopy</code> (boolean): <em>Optional</em>. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.</li>
+<li><code>fromStack</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>): <em>Optional</em>. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.</li>
+<li><code>castChance</code> (number): <em>Default</em>: <code>This parameter allows overriding the casting chance of the magic source.</code>.</li>
+<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The target of the magic.</li>
+<li><code>bypassResistances</code> (boolean): <em>Optional</em>. Is this effect going to bypass magic resistance?</li>
 </ul>
 </li>
 </ul>
@@ -7929,7 +7929,7 @@
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The target reference. Optional only if the caster is the player.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell the caster uses.</li>
 <li><code>instant</code> (boolean): When true, the spell is cast instantly. No animation is performed.</li>
-<li><code>alwaysSucceeds</code> (boolean): When true, the spell cannot fail and does not consume magicka. When false, it is cast using the actor's spell skill, and requires and takes enough magicka to cast. Only applies when 'instant' is true.</li>
+<li><code>alwaysSucceeds</code> (boolean): <em>Default</em>: <code>true</code>. When true, the spell cannot fail and does not consume magicka. When false, it is cast using the actor's spell skill, and requires and takes enough magicka to cast. Only applies when 'instant' is true.</li>
 <li><code>bypassResistances</code> (boolean): The spell will bypass the target's resistances. Only applies when 'instant' is true.</li>
 </ul>
 </li>
@@ -7946,7 +7946,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
-<li><code>service</code> (number): The specific service to check for availability. Uses the tes3.merchantService.* constants.</li>
+<li><code>service</code> (number): <em>Optional</em>. The specific service to check for availability. Uses the tes3.merchantService.* constants.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -8077,8 +8077,8 @@
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): The object to create a reference of.</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The location to create the reference at.</li>
 <li><code>orientation</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The new orientation for the created reference.</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string, table): The cell to create the reference in. This is only needed for interior cells.</li>
-<li><code>scale</code> (number): A scale for the reference.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string, table): <em>Optional</em>. The cell to create the reference in. This is only needed for interior cells.</li>
+<li><code>scale</code> (number): <em>Default</em>: <code>1</code>. A scale for the reference.</li>
 </ul>
 </li>
 </ul>
@@ -8126,10 +8126,10 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The reference whose inventory will be modified.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to drop.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): The item data of the specific item to drop. Without this, the first matching item in the inventory will drop.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to drop. Without this, the first matching item in the inventory will drop.</li>
 <li><code>matchNoItemData</code> (boolean): If true, matches an item without item data. This can be used when you want to drop an item that isn't equipped (equipped items always have item data).</li>
-<li><code>count</code> (number): The number of items to drop.</li>
-<li><code>updateGUI</code> (boolean): If false, the player or contents menu won't be updated.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. The number of items to drop.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the player or contents menu won't be updated.</li>
 </ul>
 </li>
 </ul>
@@ -8154,8 +8154,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): Defaults to the transition fader.</li>
-<li><code>duration</code> (number): Time, in seconds, for the fade.</li>
+<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): <em>Optional</em>. Defaults to the transition fader.</li>
+<li><code>duration</code> (number): <em>Default</em>: <code>1.0</code>. Time, in seconds, for the fade.</li>
 </ul>
 </li>
 </ul>
@@ -8167,8 +8167,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): Defaults to the transition fader.</li>
-<li><code>duration</code> (number): Time, in seconds, for the fade.</li>
+<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): <em>Optional</em>. Defaults to the transition fader.</li>
+<li><code>duration</code> (number): <em>Default</em>: <code>1.0</code>. Time, in seconds, for the fade.</li>
 </ul>
 </li>
 </ul>
@@ -8180,9 +8180,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): Defaults to the transition fader.</li>
-<li><code>duration</code> (number): Time, in seconds, for the fade.</li>
-<li><code>value</code> (number)</li>
+<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): <em>Optional</em>. Defaults to the transition fader.</li>
+<li><code>duration</code> (number): <em>Default</em>: <code>1.0</code>. Time, in seconds, for the fade.</li>
+<li><code>value</code> (number): <em>Default</em>: <code>1.0</code>.</li>
 </ul>
 </li>
 </ul>
@@ -8194,8 +8194,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The position to search from, taken from a reference. Uses the position of the centre of the body if the reference is an actor.</li>
-<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>): The position to search from.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The position to search from, taken from a reference. Uses the position of the centre of the body if the reference is an actor.</li>
+<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>. The position to search from.</li>
 <li><code>range</code> (number): The distance around the position to search. An actor is included if the centre of their body is in range.</li>
 </ul>
 </li>
@@ -8245,7 +8245,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): The object to search for.</li>
-<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>): The position to search from. Must be an exterior position. Defaults to the last exterior position of the player if no position is provided.</li>
+<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>. The position to search from. Must be an exterior position. Defaults to the last exterior position of the player if no position is provided.</li>
 </ul>
 </li>
 </ul>
@@ -8262,9 +8262,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>topic</code> (string): The dialogue topic to look for.</li>
-<li><code>type</code> (number): The type of dialogue to look for. Uses tes3.dialogueType.* constants.</li>
-<li><code>page</code> (number): The page of dialogue to fetch. Uses tes3.dialoguePage.* constants.</li>
+<li><code>topic</code> (string): <em>Optional</em>. The dialogue topic to look for.</li>
+<li><code>type</code> (number): <em>Optional</em>. The type of dialogue to look for. Uses tes3.dialogueType.* constants.</li>
+<li><code>page</code> (number): <em>Optional</em>. The page of dialogue to fetch. Uses tes3.dialoguePage.* constants.</li>
 </ul>
 </li>
 </ul>
@@ -8579,8 +8579,8 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): An associated mobile should exist for this function to be able to work.</li>
 <li><code>effect</code> (tes3.effect.* constants): Effect ID. Can be any of the predefined spell effects, or one added by tes3.claimSpellEffectId.</li>
-<li><code>skill</code> (tes3.skill.* constants): If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill.</li>
-<li><code>attribute</code> (tes3.attribute.* constants): If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute.</li>
+<li><code>skill</code> (tes3.skill.<em> constants): </em>Default*: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill.</li>
+<li><code>attribute</code> (tes3.attribute.<em> constants): </em>Default*: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute.</li>
 </ul>
 </li>
 </ul>
@@ -8605,10 +8605,10 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>actor</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3actor">tes3actor</a>)</li>
-<li><code>enchanted</code> (boolean): If true, filters to enchanted items.</li>
-<li><code>objectType</code> (number): Maps to tes3.objectType constants. Used to filter equipment by type.</li>
-<li><code>slot</code> (number): Maps to tes3.armorSlot or tes3.clothingSlot. Used to filter equipment by slot.</li>
-<li><code>type</code> (number): Maps to tes3.weaponType. Used to filter equipment by type.</li>
+<li><code>enchanted</code> (boolean): <em>Optional</em>. If true, filters to enchanted items.</li>
+<li><code>objectType</code> (number): <em>Optional</em>. Maps to tes3.objectType constants. Used to filter equipment by type.</li>
+<li><code>slot</code> (number): <em>Optional</em>. Maps to tes3.armorSlot or tes3.clothingSlot. Used to filter equipment by slot.</li>
+<li><code>type</code> (number): <em>Optional</em>. Maps to tes3.weaponType. Used to filter equipment by type.</li>
 </ul>
 </li>
 </ul>
@@ -8735,7 +8735,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): The actor (or their ID) for whom to retrieve player's kill count.</li>
+<li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): <em>Optional</em>. The actor (or their ID) for whom to retrieve player's kill count.</li>
 </ul>
 </li>
 </ul>
@@ -9022,7 +9022,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or the ID of the sound to look for.</li>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>.</li>
 </ul>
 </li>
 </ul>
@@ -9113,7 +9113,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The actor to check permissions for.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Default</em>: <code>tes3.player</code>. The actor to check permissions for.</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to check access of.</li>
 </ul>
 </li>
@@ -9153,8 +9153,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
-<li><code>effect</code> (tes3.effect): A tes3.effect constant to check for.</li>
-<li><code>object</code> (<a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3magicEffect">tes3magicEffect</a>, string): An object to check for.</li>
+<li><code>effect</code> (tes3.effect): <em>Optional</em>. A tes3.effect constant to check for.</li>
+<li><code>object</code> (<a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3magicEffect">tes3magicEffect</a>, string): <em>Optional</em>. An object to check for.</li>
 </ul>
 </li>
 </ul>
@@ -9212,7 +9212,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The reference to the actor that is having its animations modified.</li>
-<li><code>file</code> (string): The specified animation base file that will be loaded. e.g. For an animation composed of files anim.nif, xanim.nif and xanim.kf, you should pass file="anim.nif". The animation target skeleton <em>must</em> match the skeleton of the actor to work. i.e. 3rd person anims for NPCs and tes3.player, 1st person anims for firstPersonReference.</li>
+<li><code>file</code> (string): <em>Optional</em>. The specified animation base file that will be loaded. e.g. For an animation composed of files anim.nif, xanim.nif and xanim.kf, you should pass file="anim.nif". The animation target skeleton <em>must</em> match the skeleton of the actor to work. i.e. 3rd person anims for NPCs and tes3.player, 1st person anims for firstPersonReference.</li>
 </ul>
 </li>
 </ul>
@@ -9233,7 +9233,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>path</code> (string): Path, relative to Data Files/Meshes.</li>
-<li><code>useCache</code> (boolean): If false, a new object will be created even if it had been previously loaded.</li>
+<li><code>useCache</code> (boolean): <em>Default</em>: <code>true</code>. If false, a new object will be created even if it had been previously loaded.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9247,7 +9247,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>path</code> (string): Path, relative to Data Files/Textures.</li>
-<li><code>useCache</code> (boolean): If false, a new object will be created even if it had been previously loaded.</li>
+<li><code>useCache</code> (boolean): <em>Default</em>: <code>true</code>. If false, a new object will be created even if it had been previously loaded.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9262,7 +9262,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
-<li><code>level</code> (number)</li>
+<li><code>level</code> (number): <em>Optional</em>.</li>
 </ul>
 </li>
 </ul>
@@ -9311,13 +9311,13 @@
 <ul>
 <li><code>messageOrParams</code> (string, table)<ul>
 <li><code>message</code> (string)</li>
-<li><code>buttons</code> (table): An array of strings to use for buttons.</li>
+<li><code>buttons</code> (table): <em>Optional</em>. An array of strings to use for buttons.</li>
 <li><code>callback</code> (function)</li>
-<li><code>showInDialog</code> (boolean): Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu. Defaults to true.</li>
-<li><code>duration</code> (float): Overrides how long the toast-style message remains visible.</li>
+<li><code>showInDialog</code> (boolean): <em>Optional</em>. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu. Defaults to true.</li>
+<li><code>duration</code> (float): <em>Optional</em>. Overrides how long the toast-style message remains visible.</li>
 </ul>
 </li>
-<li><code>formatAdditions</code> (variadic): Only used if messageOrParams is a string.</li>
+<li><code>formatAdditions</code> (variadic): <em>Optional</em>. Only used if messageOrParams is a string.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9332,12 +9332,12 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
-<li><code>name</code> (string): A generic name of an attribute to set.</li>
-<li><code>attribute</code> (number): The attribute to set.</li>
-<li><code>skill</code> (number): The skill to set.</li>
-<li><code>base</code> (number): If set, the base value will be modified.</li>
-<li><code>current</code> (number): If set, the current value will be modified.</li>
-<li><code>value</code> (number): If set, both the base and current value will be modified.</li>
+<li><code>name</code> (string): <em>Optional</em>. A generic name of an attribute to set.</li>
+<li><code>attribute</code> (number): <em>Optional</em>. The attribute to set.</li>
+<li><code>skill</code> (number): <em>Optional</em>. The skill to set.</li>
+<li><code>base</code> (number): <em>Optional</em>. If set, the base value will be modified.</li>
+<li><code>current</code> (number): <em>Optional</em>. If set, the current value will be modified.</li>
+<li><code>value</code> (number): <em>Optional</em>. If set, both the base and current value will be modified.</li>
 <li><code>limit</code> (boolean): If set, the attribute won't rise above 100 or fall below 0.</li>
 <li><code>limitToBase</code> (boolean): If set, the attribute's current value won't rise above its base value. Useful for health, magicka, and fatigue.</li>
 </ul>
@@ -9381,8 +9381,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The actor to try to persuade.</li>
-<li><code>index</code> (number): If an index is provided, 0-indexed with the following results: admire, intimidate, taunt, bribe (10), bribe (100), bribe (1000).</li>
-<li><code>modifier</code> (number): If no index is provided, this is the direct modifier to try.</li>
+<li><code>index</code> (number): <em>Optional</em>. If an index is provided, 0-indexed with the following results: admire, intimidate, taunt, bribe (10), bribe (100), bribe (1000).</li>
+<li><code>modifier</code> (number): <em>Optional</em>. If no index is provided, this is the direct modifier to try.</li>
 </ul>
 </li>
 </ul>
@@ -9401,13 +9401,13 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The reference that will play the animation.</li>
-<li><code>group</code> (number): The animation group id to start playing -- a value from 0 to 149. Applies the animation to the whole body. Maps to tes3.animationGroup.* constants.</li>
-<li><code>lower</code> (number): Sets the animation group id for the lower body. This is used to combine different animations for each body section. Maps to tes3.animationGroup.* constants.</li>
-<li><code>upper</code> (number): Sets the animation group id for the upper body. This is used to combine different animations for each body section. Maps to tes3.animationGroup.* constants.</li>
-<li><code>shield</code> (number): Sets the animation group id for the shield arm. This is used to combine different animations for each body section. Maps to tes3.animationGroup.* constants.</li>
-<li><code>startFlag</code> (number): A flag for starting the group with, using tes3.animationStartFlag.* constants.</li>
-<li><code>loopCount</code> (number): If provided, the animation will repeat its loop section a given number of times. To make an animation play through once, set loopCount = 0. Defaults to infinite looping.</li>
-<li><code>mesh</code> (string): Deprecated. Please use tes3.loadAnimation (check its documentation) before calling playAnimation. You can also use loadAnimation to reset loaded animations to default.</li>
+<li><code>group</code> (number): <em>Optional</em>. The animation group id to start playing -- a value from 0 to 149. Applies the animation to the whole body. Maps to tes3.animationGroup.* constants.</li>
+<li><code>lower</code> (number): <em>Optional</em>. Sets the animation group id for the lower body. This is used to combine different animations for each body section. Maps to tes3.animationGroup.* constants.</li>
+<li><code>upper</code> (number): <em>Optional</em>. Sets the animation group id for the upper body. This is used to combine different animations for each body section. Maps to tes3.animationGroup.* constants.</li>
+<li><code>shield</code> (number): <em>Optional</em>. Sets the animation group id for the shield arm. This is used to combine different animations for each body section. Maps to tes3.animationGroup.* constants.</li>
+<li><code>startFlag</code> (number): <em>Default</em>: <code>tes3.animationStartFlag.immediate</code>. A flag for starting the group with, using tes3.animationStartFlag.* constants.</li>
+<li><code>loopCount</code> (number): <em>Default</em>: <code>-1</code>. If provided, the animation will repeat its loop section a given number of times. To make an animation play through once, set loopCount = 0. Defaults to infinite looping.</li>
+<li><code>mesh</code> (string): <em>Optional</em>. Deprecated. Please use tes3.loadAnimation (check its documentation) before calling playAnimation. You can also use loadAnimation to reset loaded animations to default.</li>
 </ul>
 </li>
 </ul>
@@ -9419,9 +9419,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to attach the sound to.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference to attach the sound to.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>)</li>
-<li><code>pickup</code> (boolean): If false, the place down item will be used.</li>
+<li><code>pickup</code> (boolean): <em>Default</em>: <code>true</code>. If false, the place down item will be used.</li>
 </ul>
 </li>
 </ul>
@@ -9438,12 +9438,12 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or id of the sound to look for.</li>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to attach the sound to.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference to attach the sound to.</li>
 <li><code>loop</code> (boolean): If true, the sound will loop.</li>
-<li><code>mixChannel</code> (number): The channel to base volume off of. Maps to tes3.audioMixType constants.</li>
-<li><code>volume</code> (number): A value between 0.0 and 1.0 to scale the volume off of.</li>
-<li><code>pitch</code> (number): The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].</li>
-<li><code>soundPath</code> (string): The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound.</li>
+<li><code>mixChannel</code> (number): <em>Default</em>: <code>tes3.audioMixType.effects</code>. The channel to base volume off of. Maps to tes3.audioMixType constants.</li>
+<li><code>volume</code> (number): <em>Default</em>: <code>1.0</code>. A value between 0.0 and 1.0 to scale the volume off of.</li>
+<li><code>pitch</code> (number): <em>Default</em>: <code>1.0</code>. The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].</li>
+<li><code>soundPath</code> (string): <em>Optional</em>. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound.</li>
 </ul>
 </li>
 </ul>
@@ -9476,13 +9476,13 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to reposition.</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>. The reference to reposition.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): <em>Optional</em>. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The position to move the reference to.</li>
-<li><code>orientation</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The position to move the reference to.</li>
+<li><code>orientation</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. The position to move the reference to.</li>
 <li><code>forceCellChange</code> (boolean): When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.</li>
 <li><code>suppressFader</code> (boolean): When moving the player, can be used to prevent the fade in and out visual effect.</li>
-<li><code>teleportCompanions</code> (boolean): If used on the player, determines if companions should also be teleported.</li>
+<li><code>teleportCompanions</code> (boolean): <em>Default</em>: <code>true</code>. If used on the player, determines if companions should also be teleported.</li>
 </ul>
 </li>
 </ul>
@@ -9506,7 +9506,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>seed</code> (number): If provided, it the number generator is seeded with this value. Pointers to objects may be used, such as a reference's sceneNode, to create a consistent if less than random seed.</li>
+<li><code>seed</code> (number): <em>Optional</em>. If provided, it the number generator is seeded with this value. Pointers to objects may be used, such as a reference's sceneNode, to create a consistent if less than random seed.</li>
 </ul>
 <hr />
 <h3 id="tes3raytest"><code>tes3.rayTest</code><a class="headerlink" href="#tes3raytest" title="Permanent link">⚓︎</a></h3>
@@ -9519,19 +9519,19 @@
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Position of the ray origin.</li>
 <li><code>direction</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Direction of the ray. Does not have to be unit length.</li>
 <li><code>findAll</code> (boolean): If true, the ray test won't stop after the first result.</li>
-<li><code>maxDistance</code> (number): The maximum distance that the test will run.</li>
-<li><code>sort</code> (boolean): If true, the results will be sorted by distance from the origin position.</li>
+<li><code>maxDistance</code> (number): <em>Optional</em>. The maximum distance that the test will run.</li>
+<li><code>sort</code> (boolean): <em>Default</em>: <code>true</code>. If true, the results will be sorted by distance from the origin position.</li>
 <li><code>useModelBounds</code> (boolean): If true, model bounds will be tested for intersection. Otherwise triangles will be used.</li>
 <li><code>useModelCoordinates</code> (boolean): If true, model coordinates will be used instead of world coordinates.</li>
 <li><code>useBackTriangles</code> (boolean): Include intersections with back-facing triangles.</li>
-<li><code>observeAppCullFlag</code> (boolean): Ignore intersections with culled (hidden) models.</li>
-<li><code>root</code> (node*): Node pointer to node scene.</li>
+<li><code>observeAppCullFlag</code> (boolean): <em>Default</em>: <code>true</code>. Ignore intersections with culled (hidden) models.</li>
+<li><code>root</code> (node<em>): </em>Default*: <code>tes3.game.worldSceneGraphRoot</code>. Node pointer to node scene.</li>
 <li><code>ignoreSkinned</code> (boolean): Ignore results from skinned objects.</li>
 <li><code>returnColor</code> (boolean): Calculate and return the vertex color at intersections.</li>
-<li><code>returnNormal</code> (boolean): Calculate and return the vertex normal at intersections.</li>
+<li><code>returnNormal</code> (boolean): <em>Default</em>: <code>true</code>. Calculate and return the vertex normal at intersections.</li>
 <li><code>returnSmoothNormal</code> (boolean): Use normal interpolation for calculating vertex normals.</li>
 <li><code>returnTexture</code> (boolean): Calculate and return the texture coordinate at intersections.</li>
-<li><code>ignore</code> (table): An array of references and/or scene graph nodes to cull from the result(s).</li>
+<li><code>ignore</code> (table): <em>Optional</em>. An array of references and/or scene graph nodes to cull from the result(s).</li>
 </ul>
 </li>
 </ul>
@@ -9599,10 +9599,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): Target reference to remove effects from.</li>
-<li><code>effect</code> (number): Maps to tes3.effect constants.</li>
-<li><code>castType</code> (number): Maps to tes3.castType constants.</li>
-<li><code>chance</code> (number): The chance for the effect to be removed.</li>
-<li><code>removeSpell</code> (boolean): If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if castType is not tes3.castType.spell. This causes diseases and curses to be removed when dispelled.</li>
+<li><code>effect</code> (number): <em>Optional</em>. Maps to tes3.effect constants.</li>
+<li><code>castType</code> (number): <em>Optional</em>. Maps to tes3.castType constants.</li>
+<li><code>chance</code> (number): <em>Default</em>: <code>100</code>. The chance for the effect to be removed.</li>
+<li><code>removeSpell</code> (boolean): <em>Optional</em>. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if castType is not tes3.castType.spell. This causes diseases and curses to be removed when dispelled.</li>
 </ul>
 <hr />
 <h3 id="tes3removeitem"><code>tes3.removeItem</code><a class="headerlink" href="#tes3removeitem" title="Permanent link">⚓︎</a></h3>
@@ -9614,11 +9614,11 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to remove items from.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to remove.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): The item data for the exact item to remove.</li>
-<li><code>deleteItemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): Whether to delete the item data after remove succeeds. Automatically set if itemData is used. Does not need to be specified for normal usage.</li>
-<li><code>count</code> (number): The maximum number of items to remove.</li>
-<li><code>playSound</code> (boolean): If false, the up/down sound for the item won't be played.</li>
-<li><code>updateGUI</code> (boolean): If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data for the exact item to remove.</li>
+<li><code>deleteItemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Whether to delete the item data after remove succeeds. Automatically set if itemData is used. Does not need to be specified for normal usage.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to remove.</li>
+<li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
 </ul>
@@ -9635,7 +9635,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or id of the sound to look for.</li>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference the sound is attached to.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference the sound is attached to.</li>
 </ul>
 </li>
 </ul>
@@ -9647,13 +9647,13 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>script</code> (tes3script): The base script to base the execution from.</li>
+<li><code>script</code> (tes3script): <em>Default</em>: <code>tes3.worldController.scriptGlobals</code>. The base script to base the execution from.</li>
 <li><code>source</code> (number): The compilation source to use. Defaults to tes3.scriptSource.default</li>
 <li><code>command</code> (string): The script text to compile and run.</li>
-<li><code>variables</code> (tes3scriptVariables): If a reference is provided, the reference's variables will be used.</li>
+<li><code>variables</code> (tes3scriptVariables): <em>Optional</em>. If a reference is provided, the reference's variables will be used.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to target for execution.</li>
-<li><code>dialogue</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string): If compiling for dialogue context, the dialogue associated with the script.</li>
-<li><code>info</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>): The info associated with the dialogue.</li>
+<li><code>dialogue</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string): <em>Optional</em>. If compiling for dialogue context, the dialogue associated with the script.</li>
+<li><code>info</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>): <em>Optional</em>. The info associated with the dialogue.</li>
 </ul>
 </li>
 </ul>
@@ -9669,8 +9669,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>file</code> (string): The filename of the save that will be created, without extension.</li>
-<li><code>name</code> (string): The display name of the save.</li>
+<li><code>file</code> (string): <em>Default</em>: <code>"quiksave"</code>. The filename of the save that will be created, without extension.</li>
+<li><code>name</code> (string): <em>Default</em>: <code>"Quicksave"</code>. The display name of the save.</li>
 </ul>
 </li>
 </ul>
@@ -9689,10 +9689,10 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to make say something.</li>
 <li><code>soundPath</code> (string): A path to a valid sound file.</li>
-<li><code>pitch</code> (number): A pitch shift to adjust the sound with.</li>
-<li><code>volume</code> (number): The volume to play the sound at, relative to the voice mix channel.</li>
+<li><code>pitch</code> (number): <em>Default</em>: <code>1</code>. A pitch shift to adjust the sound with.</li>
+<li><code>volume</code> (number): <em>Default</em>: <code>1</code>. The volume to play the sound at, relative to the voice mix channel.</li>
 <li><code>forceSubtitle</code> (boolean): If true a subtitle will be shown, even if subtitles are disabled.</li>
-<li><code>subtitle</code> (string): The subtitle to show if subtitles are enabled, or if forceSubtitle is set.</li>
+<li><code>subtitle</code> (string): <em>Optional</em>. The subtitle to show if subtitles are enabled, or if forceSubtitle is set.</li>
 </ul>
 </li>
 </ul>
@@ -9716,7 +9716,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
-<li><code>reset</code> (boolean)</li>
+<li><code>reset</code> (boolean): <em>Default</em>: <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9731,9 +9731,9 @@
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
 <li><code>destination</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table)</li>
-<li><code>duration</code> (number)</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string)</li>
-<li><code>reset</code> (boolean)</li>
+<li><code>duration</code> (number): <em>Optional</em>.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string): <em>Optional</em>.</li>
+<li><code>reset</code> (boolean): <em>Default</em>: <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9747,10 +9747,10 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
-<li><code>destination</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table)</li>
-<li><code>duration</code> (number)</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string)</li>
-<li><code>reset</code> (boolean)</li>
+<li><code>destination</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>.</li>
+<li><code>duration</code> (number): <em>Optional</em>.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string): <em>Optional</em>.</li>
+<li><code>reset</code> (boolean): <em>Default</em>: <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9764,7 +9764,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
 <li><code>destination</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table)</li>
-<li><code>reset</code> (boolean)</li>
+<li><code>reset</code> (boolean): <em>Default</em>: <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9778,10 +9778,10 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
 <li><code>idles</code> (table)</li>
-<li><code>range</code> (number)</li>
-<li><code>duration</code> (number)</li>
-<li><code>time</code> (number)</li>
-<li><code>reset</code> (boolean)</li>
+<li><code>range</code> (number): <em>Optional</em>.</li>
+<li><code>duration</code> (number): <em>Optional</em>.</li>
+<li><code>time</code> (number): <em>Optional</em>.</li>
+<li><code>reset</code> (boolean): <em>Default</em>: <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9809,7 +9809,7 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The door reference that will be updated.</li>
 <li><code>position</code> (tes3vector, table): The new coordinates of the transition.</li>
 <li><code>orientation</code> (tes3vector, table): The new rotation to use after transition.</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string): The cell to transition to, if transitioning to an interior.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string): <em>Optional</em>. The cell to transition to, if transitioning to an interior.</li>
 </ul>
 </li>
 </ul>
@@ -9823,7 +9823,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to enable/disable.</li>
 <li><code>toggle</code> (boolean): If true, the enabled state will be toggled.</li>
-<li><code>enabled</code> (boolean): If not toggling, will set true to enable or false to disable.</li>
+<li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. If not toggling, will set true to enable or false to disable.</li>
 </ul>
 </li>
 </ul>
@@ -9854,7 +9854,7 @@
 <ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item whose stolen flag to modify.</li>
 <li><code>from</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): The location the item is stolen from.</li>
-<li><code>stolen</code> (boolean): If this parameter is set to true, the item will be flagged as stolen. Otherwise, the item's stolen flag will be removed.</li>
+<li><code>stolen</code> (boolean): <em>Default</em>: <code>true</code>. If this parameter is set to true, the item will be flagged as stolen. Otherwise, the item's stolen flag will be removed.</li>
 </ul>
 <hr />
 <h3 id="tes3setjournalindex"><code>tes3.setJournalIndex</code><a class="headerlink" href="#tes3setjournalindex" title="Permanent link">⚓︎</a></h3>
@@ -9914,8 +9914,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>): Coordinates of the mark's position.</li>
-<li><code>rotation</code> (number): This argument controls which direction the player's mark location will be facing.</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): A cell in which the mark should be placed.</li>
+<li><code>rotation</code> (number): <em>Default</em>: <code>Player's current rotation.</code>. This argument controls which direction the player's mark location will be facing.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): <em>Optional</em>. A cell in which the mark should be placed.</li>
 </ul>
 </li>
 </ul>
@@ -9928,10 +9928,10 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference whose owner to set.</li>
-<li><code>remove</code> (boolean): If this parameter is set to true, reference's owner field will be removed.</li>
+<li><code>remove</code> (boolean): <em>Optional</em>. If this parameter is set to true, reference's owner field will be removed.</li>
 <li><code>owner</code> (<a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, string): Assigns this NPC or a faction as the owner of the reference.</li>
-<li><code>requiredGlobal</code> (<a href="../../types/tes3globalVariable">tes3globalVariable</a>): If owner is set to NPC, requiredGlobal variable can be set.</li>
-<li><code>requiredRank</code> (number): If owner is set to faction, requitedRank variable controls minimal rank in faction the player has to have to be able to freely take the reference.</li>
+<li><code>requiredGlobal</code> (<a href="../../types/tes3globalVariable">tes3globalVariable</a>): <em>Optional</em>. If owner is set to NPC, requiredGlobal variable can be set.</li>
+<li><code>requiredRank</code> (number): <em>Default</em>: <code>0</code>. If owner is set to faction, requitedRank variable controls minimal rank in faction the player has to have to be able to freely take the reference.</li>
 </ul>
 </li>
 </ul>
@@ -9943,12 +9943,12 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>enabled</code> (boolean): Setting this to false will disable any kind of control.</li>
-<li><code>attack</code> (boolean): If this is false, it will block player from attacking.</li>
-<li><code>jumping</code> (boolean): If this is false, it will block player from jumping.</li>
-<li><code>magic</code> (boolean): If this is false, it will block player from using magic.</li>
-<li><code>vanity</code> (boolean): If this is false, it will block player from going to vanity mode.</li>
-<li><code>viewSwitch</code> (boolean): If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.</li>
+<li><code>enabled</code> (boolean): <em>Optional</em>. Setting this to false will disable any kind of control.</li>
+<li><code>attack</code> (boolean): <em>Optional</em>. If this is false, it will block player from attacking.</li>
+<li><code>jumping</code> (boolean): <em>Optional</em>. If this is false, it will block player from jumping.</li>
+<li><code>magic</code> (boolean): <em>Optional</em>. If this is false, it will block player from using magic.</li>
+<li><code>vanity</code> (boolean): <em>Optional</em>. If this is false, it will block player from going to vanity mode.</li>
+<li><code>viewSwitch</code> (boolean): <em>Optional</em>. If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.</li>
 </ul>
 </li>
 </ul>
@@ -9965,7 +9965,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>object</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): </li>
-<li><code>sourceless</code> (boolean): </li>
+<li><code>sourceless</code> (boolean): <em>Default</em>: <code>true</code>. </li>
 </ul>
 </li>
 </ul>
@@ -9977,14 +9977,14 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>attribute</code> (number): The attribute to set.</li>
-<li><code>base</code> (number): If set, the base value will be set.</li>
-<li><code>current</code> (number): If set, the current value will be set.</li>
+<li><code>attribute</code> (number): <em>Optional</em>. The attribute to set.</li>
+<li><code>base</code> (number): <em>Optional</em>. If set, the base value will be set.</li>
+<li><code>current</code> (number): <em>Optional</em>. If set, the current value will be set.</li>
 <li><code>limit</code> (boolean): If set, the attribute won't rise above 100 or fall below 0.</li>
-<li><code>name</code> (string): A generic name of an attribute to set.</li>
+<li><code>name</code> (string): <em>Optional</em>. A generic name of an attribute to set.</li>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
-<li><code>skill</code> (number): The skill to set.</li>
-<li><code>value</code> (number): If set, both the base and current value will be set.</li>
+<li><code>skill</code> (number): <em>Optional</em>. The skill to set.</li>
+<li><code>value</code> (number): <em>Optional</em>. If set, both the base and current value will be set.</li>
 </ul>
 </li>
 </ul>
@@ -10014,9 +10014,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>enabled</code> (boolean): </li>
-<li><code>checkVanityDisabled</code> (boolean): </li>
-<li><code>toggle</code> (boolean): </li>
+<li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. </li>
+<li><code>checkVanityDisabled</code> (boolean): <em>Default</em>: <code>true</code>. </li>
+<li><code>toggle</code> (boolean): <em>Optional</em>. </li>
 </ul>
 </li>
 </ul>
@@ -10055,13 +10055,13 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>checkForEnemies</code> (boolean): Perform a check weather there are enemies nearby before opening rest menu. If there are, false is returned.</li>
-<li><code>checkForSolidGround</code> (boolean): Perform a check if the player is underwater. If underwater, false is returned.</li>
-<li><code>checkSleepingIllegal</code> (boolean): Perform a check if the sleeping in the current cell is illegal. If illegal, false if returned.</li>
-<li><code>checkIsWerewolf</code> (boolean): Perform a check if the player is Werewolf. If he/she is, then false is returned.</li>
-<li><code>showMessage</code> (boolean): Should a messagebox be shown if the player can't open resting menu because some condition isn't met.</li>
-<li><code>resting</code> (boolean): Should this be a rest?</li>
-<li><code>waiting</code> (boolean): Or, is this a wait?</li>
+<li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check weather there are enemies nearby before opening rest menu. If there are, false is returned.</li>
+<li><code>checkForSolidGround</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is underwater. If underwater, false is returned.</li>
+<li><code>checkSleepingIllegal</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the sleeping in the current cell is illegal. If illegal, false if returned.</li>
+<li><code>checkIsWerewolf</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is Werewolf. If he/she is, then false is returned.</li>
+<li><code>showMessage</code> (boolean): <em>Default</em>: <code>true</code>. Should a messagebox be shown if the player can't open resting menu because some condition isn't met.</li>
+<li><code>resting</code> (boolean): <em>Default</em>: <code>true</code>. Should this be a rest?</li>
+<li><code>waiting</code> (boolean): <em>Optional</em>. Or, is this a wait?</li>
 </ul>
 </li>
 </ul>
@@ -10090,8 +10090,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>path</code> (string): Path to the music file, relative to Data Files/music/.</li>
-<li><code>situation</code> (number): Determines what kind of gameplay situation the music should stay active for. Explore music plays during non-combat, and ends when combat starts. Combat music starts during combat, and ends when combat ends. Uninterruptible music always plays, ending only when the track does.</li>
-<li><code>crossfade</code> (number): The duration in seconds of the crossfade from the old to the new track. The default is 1.0.</li>
+<li><code>situation</code> (number): <em>Default</em>: <code>tes3.musicSituation.uninterruptible</code>. Determines what kind of gameplay situation the music should stay active for. Explore music plays during non-combat, and ends when combat starts. Combat music starts during combat, and ends when combat ends. Uninterruptible music always plays, ending only when the track does.</li>
+<li><code>crossfade</code> (number): <em>Default</em>: <code>1.0</code>. The duration in seconds of the crossfade from the old to the new track. The default is 1.0.</li>
 </ul>
 </li>
 </ul>
@@ -10122,9 +10122,9 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <li><code>reference1</code> (<a href="../../types/tes3reference">tes3reference</a>): Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.</li>
 <li><code>reference2</code> (<a href="../../types/tes3reference">tes3reference</a>): Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.</li>
 <li><code>position1</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Position of the starting point of the LoS check. Modified by height1.</li>
-<li><code>height1</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.</li>
+<li><code>height1</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.</li>
 <li><code>position2</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Position of the ending point of the LoS check. Modified by height2.</li>
-<li><code>height2</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.</li>
+<li><code>height2</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.</li>
 </ul>
 </li>
 </ul>
@@ -10152,11 +10152,11 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <li><code>from</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to take items from.</li>
 <li><code>to</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to give items to.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to transfer.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): The specific item data to transfer if, for example, you want to transfer a specific player item.</li>
-<li><code>count</code> (number): The maximum number of items to transfer.</li>
-<li><code>playSound</code> (boolean): If false, the up/down sound for the item won't be played.</li>
-<li><code>limitCapacity</code> (boolean): If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
-<li><code>updateGUI</code> (boolean): If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The specific item data to transfer if, for example, you want to transfer a specific player item.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to transfer.</li>
+<li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
+<li><code>limitCapacity</code> (boolean): <em>Default</em>: <code>true</code>. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
 </ul>
@@ -10172,11 +10172,11 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>criminal</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
+<li><code>criminal</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>.</li>
 <li><code>forceDetection</code> (boolean): Can be set to true to ignore normal detection checks.</li>
-<li><code>type</code> (number): Maps to tes3.crimeType constants.</li>
+<li><code>type</code> (number): <em>Default</em>: <code>tes3.crimeType.stealing</code>. Maps to tes3.crimeType constants.</li>
 <li><code>value</code> (number): Penalty for the crime. Defaults to 25 for pickpocketing.</li>
-<li><code>victim</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
+<li><code>victim</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>.</li>
 </ul>
 </li>
 </ul>

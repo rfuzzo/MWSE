@@ -5393,42 +5393,42 @@
 <p>A data structure, off of the world controller, that handles input.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="creationflags"><code>creationFlags</code><a class="headerlink" href="#creationflags" title="Permanent link">⚓︎</a></h3>
-<p>A bit field representing device capabilities and settings.</p>
+<p><em>Read-only</em>. A bit field representing device capabilities and settings.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="inputmaps"><code>inputMaps</code><a class="headerlink" href="#inputmaps" title="Permanent link">⚓︎</a></h3>
-<p>The array-style access to input bindings.</p>
+<p><em>Read-only</em>. The array-style access to input bindings.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="keyboardstate"><code>keyboardState</code><a class="headerlink" href="#keyboardstate" title="Permanent link">⚓︎</a></h3>
-<p>The array-style access to raw key states.</p>
+<p><em>Read-only</em>. The array-style access to raw key states.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="mousestate"><code>mouseState</code><a class="headerlink" href="#mousestate" title="Permanent link">⚓︎</a></h3>
-<p>The raw DirectInput mouse state.</p>
+<p><em>Read-only</em>. The raw DirectInput mouse state.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3directInputMouseState">tes3directInputMouseState</a>)</li>
 </ul>
 <hr />
 <h3 id="previouskeyboardstate"><code>previousKeyboardState</code><a class="headerlink" href="#previouskeyboardstate" title="Permanent link">⚓︎</a></h3>
-<p>The array-style access to the previous frame's raw key states.</p>
+<p><em>Read-only</em>. The array-style access to the previous frame's raw key states.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="previousmousestate"><code>previousMouseState</code><a class="headerlink" href="#previousmousestate" title="Permanent link">⚓︎</a></h3>
-<p>The raw DirectInput mouse state for the previous state.</p>
+<p><em>Read-only</em>. The raw DirectInput mouse state for the previous state.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3directInputMouseState">tes3directInputMouseState</a>)</li>
@@ -5565,7 +5565,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>key</code> (number): The keybind to test. Constants available through <code>tes3.keybind</code>.</li>
-<li><code>transition</code> (number): Transition state, e.g. down, or up. Constants available through <code>tes3.keyTransition</code>.</li>
+<li><code>transition</code> (number): <em>Optional</em>. Transition state, e.g. down, or up. Constants available through <code>tes3.keyTransition</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

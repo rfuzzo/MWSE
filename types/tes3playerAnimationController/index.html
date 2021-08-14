@@ -5144,14 +5144,14 @@
 <p>This type inherits the following: <a href="../../types/tes3actorAnimationController">tes3actorAnimationController</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="mobile"><code>mobile</code><a class="headerlink" href="#mobile" title="Permanent link">⚓︎</a></h3>
-<p>The mobile actor that this controller is responsible for.</p>
+<p><em>Read-only</em>. The mobile actor that this controller is responsible for.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
 </ul>
 <hr />
 <h3 id="weaponspeed"><code>weaponSpeed</code><a class="headerlink" href="#weaponspeed" title="Permanent link">⚓︎</a></h3>
-<p>The animation speed scaling of the weapon animations. This includes all weapon related idle, attack, and ready/unready animations. This value is reset at the starting frame of each weapon strike, normally equal to the the weapon speed. Therefore if you use this it should be changed after every strike, and reset after. Ready/unready actions do not change speed, but are affected by speed.</p>
+<p><em>Read-only</em>. The animation speed scaling of the weapon animations. This includes all weapon related idle, attack, and ready/unready animations. This value is reset at the starting frame of each weapon strike, normally equal to the the weapon speed. Therefore if you use this it should be changed after every strike, and reset after. Ready/unready actions do not change speed, but are affected by speed.</p>
 <p>Use by getting the animation controller from the mobile. e.g. mobile.animationController.weaponSpeed = 0.5</p>
 <p><strong>Returns</strong>:</p>
 <ul>

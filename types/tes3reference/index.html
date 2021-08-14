@@ -6060,14 +6060,14 @@
 </ul>
 <hr />
 <h3 id="attachments"><code>attachments</code><a class="headerlink" href="#attachments" title="Permanent link">⚓︎</a></h3>
-<p>A table with friendly named access to all supported attachments.</p>
+<p><em>Read-only</em>. A table with friendly named access to all supported attachments.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="baseobject"><code>baseObject</code><a class="headerlink" href="#baseobject" title="Permanent link">⚓︎</a></h3>
-<p>This is similar to the object field, but is guaranteed to provide the base-most object. If object is an actor clone, the base actor will be given instead.</p>
+<p><em>Read-only</em>. This is similar to the object field, but is guaranteed to provide the base-most object. If object is an actor clone, the base actor will be given instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>)</li>
@@ -6081,21 +6081,21 @@
 </ul>
 <hr />
 <h3 id="bodypartmanager"><code>bodyPartManager</code><a class="headerlink" href="#bodypartmanager" title="Permanent link">⚓︎</a></h3>
-<p>Access to the reference's body part manager, if available. Typically this is only available on NPC references.</p>
+<p><em>Read-only</em>. Access to the reference's body part manager, if available. Typically this is only available on NPC references.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3bodyPartManager, nil)</li>
 </ul>
 <hr />
 <h3 id="cell"><code>cell</code><a class="headerlink" href="#cell" title="Permanent link">⚓︎</a></h3>
-<p>The cell that the reference is currently in.</p>
+<p><em>Read-only</em>. The cell that the reference is currently in.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3cell">tes3cell</a>)</li>
 </ul>
 <hr />
 <h3 id="context"><code>context</code><a class="headerlink" href="#context" title="Permanent link">⚓︎</a></h3>
-<p>Access to the script context for this reference and its associated script.</p>
+<p><em>Read-only</em>. Access to the script context for this reference and its associated script.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3scriptContext)</li>
@@ -6109,21 +6109,21 @@
 </ul>
 <hr />
 <h3 id="deleted"><code>deleted</code><a class="headerlink" href="#deleted" title="Permanent link">⚓︎</a></h3>
-<p>The deleted state of the object.</p>
+<p><em>Read-only</em>. The deleted state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="destination"><code>destination</code><a class="headerlink" href="#destination" title="Permanent link">⚓︎</a></h3>
-<p>Returns the travel destination node for this reference, or nil. This can be used to determine where a given door links to.</p>
+<p><em>Read-only</em>. Returns the travel destination node for this reference, or nil. This can be used to determine where a given door links to.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3travelDestinationNode">tes3travelDestinationNode</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
-<p>The disabled state of the object.</p>
+<p><em>Read-only</em>. The disabled state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -6144,14 +6144,14 @@
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The unique identifier for the object.</p>
+<p><em>Read-only</em>. The unique identifier for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="isdead"><code>isDead</code><a class="headerlink" href="#isdead" title="Permanent link">⚓︎</a></h3>
-<p>Returns true if the object is dead, false if they are alive, or nil if that couldn't be determined.</p>
+<p><em>Read-only</em>. Returns true if the object is dead, false if they are alive, or nil if that couldn't be determined.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean, nil)</li>
@@ -6165,14 +6165,14 @@
 </ul>
 <hr />
 <h3 id="isleveledspawn"><code>isLeveledSpawn</code><a class="headerlink" href="#isleveledspawn" title="Permanent link">⚓︎</a></h3>
-<p>If true, this reference was created as a result of a leveled spawn.</p>
+<p><em>Read-only</em>. If true, this reference was created as a result of a leveled spawn.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="isrespawn"><code>isRespawn</code><a class="headerlink" href="#isrespawn" title="Permanent link">⚓︎</a></h3>
-<p>If true, the references respawn flag is set.</p>
+<p><em>Read-only</em>. If true, the references respawn flag is set.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -6186,21 +6186,21 @@
 </ul>
 <hr />
 <h3 id="leveledbasereference"><code>leveledBaseReference</code><a class="headerlink" href="#leveledbasereference" title="Permanent link">⚓︎</a></h3>
-<p>If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is nil.</p>
+<p><em>Read-only</em>. If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is nil.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="light"><code>light</code><a class="headerlink" href="#light" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the scene graph light, if a dynamic light is set.</p>
+<p><em>Read-only</em>. Direct access to the scene graph light, if a dynamic light is set.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niPointLight">niPointLight</a>)</li>
 </ul>
 <hr />
 <h3 id="locknode"><code>lockNode</code><a class="headerlink" href="#locknode" title="Permanent link">⚓︎</a></h3>
-<p>Quick access to the reference's lock node, if any.</p>
+<p><em>Read-only</em>. Quick access to the reference's lock node, if any.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3lockNode">tes3lockNode</a>)</li>
@@ -6214,7 +6214,7 @@
 </ul>
 <hr />
 <h3 id="mobile"><code>mobile</code><a class="headerlink" href="#mobile" title="Permanent link">⚓︎</a></h3>
-<p>Access to the attached mobile object, if applicable.</p>
+<p><em>Read-only</em>. Access to the attached mobile object, if applicable.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3mobileCreature">tes3mobileCreature</a>, <a href="../../types/tes3mobileNPC">tes3mobileNPC</a>, <a href="../../types/tes3mobilePlayer">tes3mobilePlayer</a>, <a href="../../types/tes3mobileProjectile">tes3mobileProjectile</a>, tes3mobileSpell, nil)</li>
@@ -6235,35 +6235,35 @@
 </ul>
 <hr />
 <h3 id="nextnode"><code>nextNode</code><a class="headerlink" href="#nextnode" title="Permanent link">⚓︎</a></h3>
-<p>The next reference in the parent reference list.</p>
+<p><em>Read-only</em>. The next reference in the parent reference list.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
 </ul>
 <hr />
 <h3 id="nodedata"><code>nodeData</code><a class="headerlink" href="#nodedata" title="Permanent link">⚓︎</a></h3>
-<p>Redundant access to this object, for iterating over a tes3referenceList.</p>
+<p><em>Read-only</em>. Redundant access to this object, for iterating over a tes3referenceList.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
 </ul>
 <hr />
 <h3 id="object"><code>object</code><a class="headerlink" href="#object" title="Permanent link">⚓︎</a></h3>
-<p>The object that the reference is for, such as a weapon, armor, or actor.</p>
+<p><em>Read-only</em>. The object that the reference is for, such as a weapon, armor, or actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>)</li>
 </ul>
 <hr />
 <h3 id="objectflags"><code>objectFlags</code><a class="headerlink" href="#objectflags" title="Permanent link">⚓︎</a></h3>
-<p>The raw flags of the object.</p>
+<p><em>Read-only</em>. The raw flags of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -6305,7 +6305,7 @@
 </ul>
 <hr />
 <h3 id="previousnode"><code>previousNode</code><a class="headerlink" href="#previousnode" title="Permanent link">⚓︎</a></h3>
-<p>The previous reference in the parent reference list.</p>
+<p><em>Read-only</em>. The previous reference in the parent reference list.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
@@ -6319,7 +6319,7 @@
 </ul>
 <hr />
 <h3 id="scenenode"><code>sceneNode</code><a class="headerlink" href="#scenenode" title="Permanent link">⚓︎</a></h3>
-<p>The scene graph node that the reference uses for rendering.</p>
+<p><em>Read-only</em>. The scene graph node that the reference uses for rendering.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>
@@ -6340,7 +6340,7 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p>The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -6415,7 +6415,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>removeLightFromParent</code> (boolean): If true, the dynamic light is removed from its parent node as well.</li>
+<li><code>removeLightFromParent</code> (boolean): <em>Default</em>: <code>false</code>. If true, the dynamic light is removed from its parent node as well.</li>
 </ul>
 <hr />
 <h3 id="detachdynamiclightfromaffectednodes"><code>detachDynamicLightFromAffectedNodes</code><a class="headerlink" href="#detachdynamiclightfromaffectednodes" title="Permanent link">⚓︎</a></h3>
@@ -6471,8 +6471,8 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>light</code> (<a href="../../types/niPointLight">niPointLight</a>)</li>
-<li><code>phase</code> (number)</li>
+<li><code>light</code> (<a href="../../types/niPointLight">niPointLight</a>): <em>Optional</em>.</li>
+<li><code>phase</code> (number): <em>Optional</em>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

@@ -5429,28 +5429,28 @@
 </ul>
 <hr />
 <h3 id="deleted"><code>deleted</code><a class="headerlink" href="#deleted" title="Permanent link">⚓︎</a></h3>
-<p>The deleted state of the object.</p>
+<p><em>Read-only</em>. The deleted state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
-<p>The disabled state of the object.</p>
+<p><em>Read-only</em>. The disabled state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="filename"><code>filename</code><a class="headerlink" href="#filename" title="Permanent link">⚓︎</a></h3>
-<p>Path to the sound file.</p>
+<p><em>Read-only</em>. Path to the sound file.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The unique identifier for the object.</p>
+<p><em>Read-only</em>. The unique identifier for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5478,14 +5478,14 @@
 </ul>
 <hr />
 <h3 id="objectflags"><code>objectFlags</code><a class="headerlink" href="#objectflags" title="Permanent link">⚓︎</a></h3>
-<p>The raw flags of the object.</p>
+<p><em>Read-only</em>. The raw flags of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -5506,7 +5506,7 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p>The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5560,10 +5560,10 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>playbackFlags</code> (number): These match low-level DirectSound flags. Most mods don't need to modify this, though a value of 1 to loop may be useful. The rest of the flags can be read in the IDirectSoundBuffer8::Play documentation: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee418074(v=vs.85).</li>
-<li><code>volume</code> (number)</li>
-<li><code>pitch</code> (number)</li>
-<li><code>isNot3D</code> (boolean)</li>
+<li><code>playbackFlags</code> (number): <em>Optional</em>. These match low-level DirectSound flags. Most mods don't need to modify this, though a value of 1 to loop may be useful. The rest of the flags can be read in the IDirectSoundBuffer8::Play documentation: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee418074(v=vs.85).</li>
+<li><code>volume</code> (number): <em>Optional</em>.</li>
+<li><code>pitch</code> (number): <em>Optional</em>.</li>
+<li><code>isNot3D</code> (boolean): <em>Optional</em>.</li>
 </ul>
 <hr />
 <h3 id="stop"><code>stop</code><a class="headerlink" href="#stop" title="Permanent link">⚓︎</a></h3>

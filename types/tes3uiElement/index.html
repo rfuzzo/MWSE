@@ -6530,7 +6530,7 @@
 </ul>
 <hr />
 <h3 id="children"><code>children</code><a class="headerlink" href="#children" title="Permanent link">⚓︎</a></h3>
-<p>A table containing references to child elements. This is a copy that does not track changes.</p>
+<p><em>Read-only</em>. A table containing references to child elements. This is a copy that does not track changes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -6593,7 +6593,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The element's ID.  The element can be later accessed by <code>ancestor:findChild(id)</code>. Note that multiple elements may have the same ID, such as subparts of a widget, or list items. Therefore, you may think of ids as an element class identifier.</p>
+<p><em>Read-only</em>. The element's ID.  The element can be later accessed by <code>ancestor:findChild(id)</code>. Note that multiple elements may have the same ID, such as subparts of a widget, or list items. Therefore, you may think of ids as an element class identifier.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -6649,7 +6649,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </ul>
 <hr />
 <h3 id="name"><code>name</code><a class="headerlink" href="#name" title="Permanent link">⚓︎</a></h3>
-<p>The element's name, taken from the name registered for the ID.</p>
+<p><em>Read-only</em>. The element's name, taken from the name registered for the ID.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -6691,7 +6691,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </ul>
 <hr />
 <h3 id="parent"><code>parent</code><a class="headerlink" href="#parent" title="Permanent link">⚓︎</a></h3>
-<p>A reference to the parent element.</p>
+<p><em>Read-only</em>. A reference to the parent element.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
@@ -6785,7 +6785,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6810,7 +6810,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6823,7 +6823,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6843,9 +6843,9 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
-<li><code>current</code> (number): The initial current value.</li>
-<li><code>max</code> (number): The initial maximum value.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>current</code> (number): <em>Optional</em>. The initial current value.</li>
+<li><code>max</code> (number): <em>Optional</em>. The initial maximum value.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6865,7 +6865,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6878,7 +6878,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6891,7 +6891,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 <li><code>path</code> (string): An image path. This path is relative to <code>Data Files</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -6905,7 +6905,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 <li><code>idle</code> (string): The path to the idle image. This path is relative to <code>Data Files</code>.</li>
 <li><code>over</code> (string): The path to the mouse hover image. This path is relative to <code>Data Files</code>.</li>
 <li><code>path</code> (string): The path to the mouse pressed image. This path is relative to <code>Data Files</code>.</li>
@@ -6921,7 +6921,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 <li><code>text</code> (string): The text to display.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -6935,7 +6935,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 <li><code>text</code> (string): A model path. This path is relative to <code>Data Files</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -6952,7 +6952,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6965,8 +6965,8 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
-<li><code>color</code> (table): The fill colour for the element.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>color</code> (table): <em>Optional</em>. The fill colour for the element.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6988,11 +6988,11 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 <li><code>current</code> (number): The initial value for the slider.</li>
 <li><code>max</code> (number): The maximum value for the slider.</li>
-<li><code>step</code> (number): Amount changed by left and right arrow buttons.</li>
-<li><code>jump</code> (number): Amount changed by clicking inside the slider area.</li>
+<li><code>step</code> (number): <em>Optional</em>. Amount changed by left and right arrow buttons.</li>
+<li><code>jump</code> (number): <em>Optional</em>. Amount changed by clicking inside the slider area.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -7014,11 +7014,11 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 <li><code>current</code> (number): The initial value for the slider.</li>
 <li><code>max</code> (number): The maximum value for the slider.</li>
-<li><code>step</code> (number): Amount changed by left and right arrow buttons. The default is 1.</li>
-<li><code>jump</code> (number): Amount changed by clicking inside the slider area. The default is 5.</li>
+<li><code>step</code> (number): <em>Optional</em>. Amount changed by left and right arrow buttons. The default is 1.</li>
+<li><code>jump</code> (number): <em>Optional</em>. Amount changed by clicking inside the slider area. The default is 5.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -7035,7 +7035,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -7048,9 +7048,9 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
-<li><code>text</code> (string): The text to display.</li>
-<li><code>state</code> (number): The initial interaction state. Defaults to normal.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>text</code> (string): <em>Optional</em>. The text to display.</li>
+<li><code>state</code> (number): <em>Optional</em>. The initial interaction state. Defaults to normal.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -7063,7 +7063,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -7083,7 +7083,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): A registered identifier to help find this element later.</li>
+<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -7188,7 +7188,7 @@ This is required because there is no identifying type information stored with th
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>propName</code> (string): The property name.</li>
-<li><code>expectedUsertype</code> (string): A Lua usertype name, if expecting a non-standard object type.</li>
+<li><code>expectedUsertype</code> (string): <em>Optional</em>. A Lua usertype name, if expecting a non-standard object type.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

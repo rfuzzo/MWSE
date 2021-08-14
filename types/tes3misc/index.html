@@ -5630,14 +5630,14 @@
 </ul>
 <hr />
 <h3 id="deleted"><code>deleted</code><a class="headerlink" href="#deleted" title="Permanent link">⚓︎</a></h3>
-<p>The deleted state of the object.</p>
+<p><em>Read-only</em>. The deleted state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
-<p>The disabled state of the object.</p>
+<p><em>Read-only</em>. The disabled state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -5651,7 +5651,7 @@
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The unique identifier for the object.</p>
+<p><em>Read-only</em>. The unique identifier for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5665,7 +5665,7 @@
 </ul>
 <hr />
 <h3 id="issoulgem"><code>isSoulGem</code><a class="headerlink" href="#issoulgem" title="Permanent link">⚓︎</a></h3>
-<p>Determines if this item is a soul gem.</p>
+<p><em>Read-only</em>. Determines if this item is a soul gem.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -5700,14 +5700,14 @@
 </ul>
 <hr />
 <h3 id="objectflags"><code>objectFlags</code><a class="headerlink" href="#objectflags" title="Permanent link">⚓︎</a></h3>
-<p>The raw flags of the object.</p>
+<p><em>Read-only</em>. The raw flags of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -5756,21 +5756,21 @@
 </ul>
 <hr />
 <h3 id="script"><code>script</code><a class="headerlink" href="#script" title="Permanent link">⚓︎</a></h3>
-<p>The script that runs on the object.</p>
+<p><em>Read-only</em>. The script that runs on the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3script)</li>
 </ul>
 <hr />
 <h3 id="soulgemcapacity"><code>soulGemCapacity</code><a class="headerlink" href="#soulgemcapacity" title="Permanent link">⚓︎</a></h3>
-<p>Fetches capacity of the soul gem, if this item is a soul gem.</p>
+<p><em>Read-only</em>. Fetches capacity of the soul gem, if this item is a soul gem.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="soulgemdata"><code>soulGemData</code><a class="headerlink" href="#soulgemdata" title="Permanent link">⚓︎</a></h3>
-<p>Fetches related soul gem data, if this item is a soul gem.</p>
+<p><em>Read-only</em>. Fetches related soul gem data, if this item is a soul gem.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3soulGemData">tes3soulGemData</a>)</li>
@@ -5784,7 +5784,7 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p>The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5845,14 +5845,14 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>id</code> (string): The new object's ID. Must be unique if provided.</li>
-<li><code>name</code> (string): The new object's name.</li>
-<li><code>script</code> (tes3script): A script to attach to the object.</li>
-<li><code>mesh</code> (string): The mesh to use for the object.</li>
-<li><code>objectFlags</code> (number): The object flags initially set. Force set as modified.</li>
-<li><code>weight</code> (tes3script): The weight of the object.</li>
-<li><code>value</code> (string): The value of the object.</li>
-<li><code>flags</code> (number): The object flags initially set.</li>
+<li><code>id</code> (string): <em>Optional</em>. The new object's ID. Must be unique if provided.</li>
+<li><code>name</code> (string): <em>Default</em>: <code>Miscellaneous item</code>. The new object's name.</li>
+<li><code>script</code> (tes3script): <em>Optional</em>. A script to attach to the object.</li>
+<li><code>mesh</code> (string): <em>Default</em>: ``. The mesh to use for the object.</li>
+<li><code>objectFlags</code> (number): <em>Default</em>: <code>0</code>. The object flags initially set. Force set as modified.</li>
+<li><code>weight</code> (tes3script): <em>Default</em>: <code>0</code>. The weight of the object.</li>
+<li><code>value</code> (string): <em>Default</em>: <code>0</code>. The value of the object.</li>
+<li><code>flags</code> (number): <em>Default</em>: <code>0</code>. The object flags initially set.</li>
 </ul>
 </li>
 </ul>

@@ -5898,14 +5898,14 @@
 <p>This type inherits the following: <a href="../../types/tes3actor">tes3actor</a>, <a href="../../types/tes3physicalObject">tes3physicalObject</a>, <a href="../../types/tes3object">tes3object</a>, <a href="../../types/tes3baseObject">tes3baseObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="actorflags"><code>actorFlags</code><a class="headerlink" href="#actorflags" title="Permanent link">⚓︎</a></h3>
-<p>A number representing the actor flags. Truly a bit field.</p>
+<p><em>Read-only</em>. A number representing the actor flags. Truly a bit field.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="aiconfig"><code>aiConfig</code><a class="headerlink" href="#aiconfig" title="Permanent link">⚓︎</a></h3>
-<p>A substructure off of actors that contains information on the current AI configuration.</p>
+<p><em>Read-only</em>. A substructure off of actors that contains information on the current AI configuration.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3aiConfig)</li>
@@ -5961,35 +5961,35 @@
 </ul>
 <hr />
 <h3 id="clonecount"><code>cloneCount</code><a class="headerlink" href="#clonecount" title="Permanent link">⚓︎</a></h3>
-<p>The number of clones that exist of this actor.</p>
+<p><em>Read-only</em>. The number of clones that exist of this actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="deleted"><code>deleted</code><a class="headerlink" href="#deleted" title="Permanent link">⚓︎</a></h3>
-<p>The deleted state of the object.</p>
+<p><em>Read-only</em>. The deleted state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
-<p>The disabled state of the object.</p>
+<p><em>Read-only</em>. The disabled state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="equipment"><code>equipment</code><a class="headerlink" href="#equipment" title="Permanent link">⚓︎</a></h3>
-<p>The items currently equipped to the actor.</p>
+<p><em>Read-only</em>. The items currently equipped to the actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="fatigue"><code>fatigue</code><a class="headerlink" href="#fatigue" title="Permanent link">⚓︎</a></h3>
-<p>The actor's max fatigue.</p>
+<p><em>Read-only</em>. The actor's max fatigue.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -6003,35 +6003,35 @@
 </ul>
 <hr />
 <h3 id="health"><code>health</code><a class="headerlink" href="#health" title="Permanent link">⚓︎</a></h3>
-<p>The actor's max health.</p>
+<p><em>Read-only</em>. The actor's max health.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The unique identifier for the object.</p>
+<p><em>Read-only</em>. The unique identifier for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="inventory"><code>inventory</code><a class="headerlink" href="#inventory" title="Permanent link">⚓︎</a></h3>
-<p>The items currently carried by the actor.</p>
+<p><em>Read-only</em>. The items currently carried by the actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="isattacked"><code>isAttacked</code><a class="headerlink" href="#isattacked" title="Permanent link">⚓︎</a></h3>
-<p>If true, the actor's attacked flag is set.</p>
+<p><em>Read-only</em>. If true, the actor's attacked flag is set.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="isessential"><code>isEssential</code><a class="headerlink" href="#isessential" title="Permanent link">⚓︎</a></h3>
-<p>If true, the actor's essential flag is set.</p>
+<p><em>Read-only</em>. If true, the actor's essential flag is set.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -6045,21 +6045,21 @@
 </ul>
 <hr />
 <h3 id="isrespawn"><code>isRespawn</code><a class="headerlink" href="#isrespawn" title="Permanent link">⚓︎</a></h3>
-<p>If true, the actor's respawn flag is set.</p>
+<p><em>Read-only</em>. If true, the actor's respawn flag is set.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="level"><code>level</code><a class="headerlink" href="#level" title="Permanent link">⚓︎</a></h3>
-<p>The base level of the creature.</p>
+<p><em>Read-only</em>. The base level of the creature.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="magicka"><code>magicka</code><a class="headerlink" href="#magicka" title="Permanent link">⚓︎</a></h3>
-<p>The actor's max magicka.</p>
+<p><em>Read-only</em>. The actor's max magicka.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -6094,14 +6094,14 @@
 </ul>
 <hr />
 <h3 id="objectflags"><code>objectFlags</code><a class="headerlink" href="#objectflags" title="Permanent link">⚓︎</a></h3>
-<p>The raw flags of the object.</p>
+<p><em>Read-only</em>. The raw flags of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -6192,14 +6192,14 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p>The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="spells"><code>spells</code><a class="headerlink" href="#spells" title="Permanent link">⚓︎</a></h3>
-<p>A list of spells that the actor has access to. It is a tes3spellList, which is a list wrapper with helper functions. The actual list is accessed with .iterator. e.g. for _, spell in pairs(creature.spells.iterator) do print(spell.name) end</p>
+<p><em>Read-only</em>. A list of spells that the actor has access to. It is a tes3spellList, which is a list wrapper with helper functions. The actual list is accessed with .iterator. e.g. for _, spell in pairs(creature.spells.iterator) do print(spell.name) end</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3spellList">tes3spellList</a>)</li>

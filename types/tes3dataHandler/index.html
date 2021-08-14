@@ -5381,42 +5381,42 @@
 <p>A core game object used for storing both active and non-dynamic gameplay data.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="backgroundthread"><code>backgroundThread</code><a class="headerlink" href="#backgroundthread" title="Permanent link">⚓︎</a></h3>
-<p>A Windows handle to the background processing thread.</p>
+<p><em>Read-only</em>. A Windows handle to the background processing thread.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="backgroundthreadid"><code>backgroundThreadId</code><a class="headerlink" href="#backgroundthreadid" title="Permanent link">⚓︎</a></h3>
-<p>The thread ID for the background processing thread.</p>
+<p><em>Read-only</em>. The thread ID for the background processing thread.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="backgroundthreadrunning"><code>backgroundThreadRunning</code><a class="headerlink" href="#backgroundthreadrunning" title="Permanent link">⚓︎</a></h3>
-<p>Access to the running state for the background processing thread.</p>
+<p><em>Read-only</em>. Access to the running state for the background processing thread.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="cellchanged"><code>cellChanged</code><a class="headerlink" href="#cellchanged" title="Permanent link">⚓︎</a></h3>
-<p>A flag set for the frame that the player has changed cells.</p>
+<p><em>Read-only</em>. A flag set for the frame that the player has changed cells.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="centralgridx"><code>centralGridX</code><a class="headerlink" href="#centralgridx" title="Permanent link">⚓︎</a></h3>
-<p>The position of the origin horizontal grid coordinate.</p>
+<p><em>Read-only</em>. The position of the origin horizontal grid coordinate.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="centralgridy"><code>centralGridY</code><a class="headerlink" href="#centralgridy" title="Permanent link">⚓︎</a></h3>
-<p>The position of the origin longitudinal grid coordinate.</p>
+<p><em>Read-only</em>. The position of the origin longitudinal grid coordinate.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -5430,56 +5430,56 @@
 </ul>
 <hr />
 <h3 id="currentcell"><code>currentCell</code><a class="headerlink" href="#currentcell" title="Permanent link">⚓︎</a></h3>
-<p>Access to the cell that the player is currently in.</p>
+<p><em>Read-only</em>. Access to the cell that the player is currently in.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3cell">tes3cell</a>)</li>
 </ul>
 <hr />
 <h3 id="currentinteriorcell"><code>currentInteriorCell</code><a class="headerlink" href="#currentinteriorcell" title="Permanent link">⚓︎</a></h3>
-<p>Access to the current interior cell, if the player is in an interior.</p>
+<p><em>Read-only</em>. Access to the current interior cell, if the player is in an interior.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3cell">tes3cell</a>)</li>
 </ul>
 <hr />
 <h3 id="exteriorcells"><code>exteriorCells</code><a class="headerlink" href="#exteriorcells" title="Permanent link">⚓︎</a></h3>
-<p>A table of nine tes3cellExteriorData objects for any loaded exterior cells.</p>
+<p><em>Read-only</em>. A table of nine tes3cellExteriorData objects for any loaded exterior cells.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="lastexteriorcell"><code>lastExteriorCell</code><a class="headerlink" href="#lastexteriorcell" title="Permanent link">⚓︎</a></h3>
-<p>Access to the last visited exterior cell.</p>
+<p><em>Read-only</em>. Access to the last visited exterior cell.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3cell">tes3cell</a>)</li>
 </ul>
 <hr />
 <h3 id="mainthread"><code>mainThread</code><a class="headerlink" href="#mainthread" title="Permanent link">⚓︎</a></h3>
-<p>A Windows handle to the main execution thread.</p>
+<p><em>Read-only</em>. A Windows handle to the main execution thread.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="mainthreadid"><code>mainThreadId</code><a class="headerlink" href="#mainthreadid" title="Permanent link">⚓︎</a></h3>
-<p>The thread ID for the main execution thread.</p>
+<p><em>Read-only</em>. The thread ID for the main execution thread.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="nondynamicdata"><code>nonDynamicData</code><a class="headerlink" href="#nondynamicdata" title="Permanent link">⚓︎</a></h3>
-<p>A child structure where core game objects are held.</p>
+<p><em>Read-only</em>. A child structure where core game objects are held.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3nonDynamicData">tes3nonDynamicData</a>)</li>
 </ul>
 <hr />
 <h3 id="threadsleeptime"><code>threadSleepTime</code><a class="headerlink" href="#threadsleeptime" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -5493,21 +5493,21 @@
 </ul>
 <hr />
 <h3 id="worldlandscaperoot"><code>worldLandscapeRoot</code><a class="headerlink" href="#worldlandscaperoot" title="Permanent link">⚓︎</a></h3>
-<p>One of the core parent scene graph nodes.</p>
+<p><em>Read-only</em>. One of the core parent scene graph nodes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>
 </ul>
 <hr />
 <h3 id="worldobjectroot"><code>worldObjectRoot</code><a class="headerlink" href="#worldobjectroot" title="Permanent link">⚓︎</a></h3>
-<p>One of the core parent scene graph nodes.</p>
+<p><em>Read-only</em>. One of the core parent scene graph nodes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>
 </ul>
 <hr />
 <h3 id="worldpickobjectroot"><code>worldPickObjectRoot</code><a class="headerlink" href="#worldpickobjectroot" title="Permanent link">⚓︎</a></h3>
-<p>One of the core parent scene graph nodes.</p>
+<p><em>Read-only</em>. One of the core parent scene graph nodes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>

@@ -5281,21 +5281,21 @@
 <p>An inventory composes of an iterator, and flags caching the state of the inventory.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="flags"><code>flags</code><a class="headerlink" href="#flags" title="Permanent link">⚓︎</a></h3>
-<p>Raw bit-based flags.</p>
+<p><em>Read-only</em>. Raw bit-based flags.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="items"><code>items</code><a class="headerlink" href="#items" title="Permanent link">⚓︎</a></h3>
-<p>Direct acces to the container that holds the inventory's items.</p>
+<p><em>Read-only</em>. Direct acces to the container that holds the inventory's items.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="iterator"><code>iterator</code><a class="headerlink" href="#iterator" title="Permanent link">⚓︎</a></h3>
-<p>Deprecated. Use <code>for index, stack in pairs(inventory)</code> to iterate over inventory stacks.</p>
+<p><em>Read-only</em>. Deprecated. Use <code>for index, stack in pairs(inventory)</code> to iterate over inventory stacks.</p>
 <p>Direct access to the container that holds the inventory's items.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5310,10 +5310,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The mobile actor whose stats will be updated.</li>
+<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Optional</em>. The mobile actor whose stats will be updated.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item to add.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): Any associated item data to add.</li>
-<li><code>count</code> (number): The number of items to add.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Any associated item data to add.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. The number of items to add.</li>
 </ul>
 </li>
 </ul>
@@ -5334,7 +5334,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to check for.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): If provided, it will check for the specific data as well.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. If provided, it will check for the specific data as well.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5376,10 +5376,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The mobile actor whose stats will be updated.</li>
+<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Optional</em>. The mobile actor whose stats will be updated.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item to add.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): Any associated item data to add.</li>
-<li><code>count</code> (number): The number of items to add.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Any associated item data to add.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. The number of items to add.</li>
 <li><code>deleteItemData</code> (boolean): If set, the itemData will be deleted after being removed.</li>
 </ul>
 </li>
@@ -5391,7 +5391,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): The mobile actor whose stats will be updated.</li>
+<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Optional</em>. The mobile actor whose stats will be updated.</li>
 </ul>
 <hr />
                 

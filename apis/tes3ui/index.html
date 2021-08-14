@@ -5499,7 +5499,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>element</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
+<li><code>element</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): <em>Optional</em>.</li>
 </ul>
 <hr />
 <h3 id="tes3uicapturemousedrag"><code>tes3ui.captureMouseDrag</code><a class="headerlink" href="#tes3uicapturemousedrag" title="Permanent link">⚓︎</a></h3>
@@ -5550,7 +5550,7 @@
 <li><code>id</code> (number): The menu’s ID. The menu can be later accessed by tes3ui.findMenu(id).</li>
 <li><code>dragFrame</code> (boolean): Constructs a draggable and resizeable frame and background for the menu. It is similar to the stats, inventory, magic and map menus in the standard UI. After construction, position and minimum dimensions should be set.</li>
 <li><code>fixedFrame</code> (boolean): Constructs a fixed (non-draggable) frame and background for the menu. The layout system should automatically centre and size it to fit whatever is added to the menu.</li>
-<li><code>loadable</code> (boolean): If set to false, calls to loadMenuPosition will fail.</li>
+<li><code>loadable</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, calls to loadMenuPosition will fail.</li>
 </ul>
 </li>
 </ul>
@@ -5566,8 +5566,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to create a tooltip for. If not specified, the tooltip will be empty.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): The item data for the item.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to create a tooltip for. If not specified, the tooltip will be empty.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data for the item.</li>
 </ul>
 </li>
 </ul>

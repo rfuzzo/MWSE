@@ -5325,105 +5325,105 @@
 <p>An active magic effect.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="attributeid"><code>attributeId</code><a class="headerlink" href="#attributeid" title="Permanent link">⚓︎</a></h3>
-<p>The attribute ID (note that this may be the skill ID if the effect affects skills).</p>
+<p><em>Read-only</em>. The attribute ID (note that this may be the skill ID if the effect affects skills).</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="duration"><code>duration</code><a class="headerlink" href="#duration" title="Permanent link">⚓︎</a></h3>
-<p>The total duration of this specific effect.</p>
+<p><em>Read-only</em>. The total duration of this specific effect.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="effectid"><code>effectId</code><a class="headerlink" href="#effectid" title="Permanent link">⚓︎</a></h3>
-<p>The magic effect ID.</p>
+<p><em>Read-only</em>. The magic effect ID.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="effectindex"><code>effectIndex</code><a class="headerlink" href="#effectindex" title="Permanent link">⚓︎</a></h3>
-<p>The index of the effect inside the magic source instance.</p>
+<p><em>Read-only</em>. The index of the effect inside the magic source instance.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="effectinstance"><code>effectInstance</code><a class="headerlink" href="#effectinstance" title="Permanent link">⚓︎</a></h3>
-<p>The magic effect instance for this effect.</p>
+<p><em>Read-only</em>. The magic effect instance for this effect.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3magicEffectInstance">tes3magicEffectInstance</a>)</li>
 </ul>
 <hr />
 <h3 id="harmful"><code>harmful</code><a class="headerlink" href="#harmful" title="Permanent link">⚓︎</a></h3>
-<p>This flag that determines if this effect is counted as a hostile action.</p>
+<p><em>Read-only</em>. This flag that determines if this effect is counted as a hostile action.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="instance"><code>instance</code><a class="headerlink" href="#instance" title="Permanent link">⚓︎</a></h3>
-<p>The magic source instance for this effect.</p>
+<p><em>Read-only</em>. The magic source instance for this effect.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3magicSourceInstance">tes3magicSourceInstance</a>)</li>
 </ul>
 <hr />
 <h3 id="issummon"><code>isSummon</code><a class="headerlink" href="#issummon" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="magnitude"><code>magnitude</code><a class="headerlink" href="#magnitude" title="Permanent link">⚓︎</a></h3>
-<p>The unresisted magnitude of the magic effect, that is the magnitude before resistance attributes are applied. This is always an integer number. To find the actual applied magnitude, you must check the magic effect instance.</p>
+<p><em>Read-only</em>. The unresisted magnitude of the magic effect, that is the magnitude before resistance attributes are applied. This is always an integer number. To find the actual applied magnitude, you must check the magic effect instance.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="magnitudemin"><code>magnitudeMin</code><a class="headerlink" href="#magnitudemin" title="Permanent link">⚓︎</a></h3>
-<p>Deprecated.</p>
+<p><em>Read-only</em>. Deprecated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="mobile"><code>mobile</code><a class="headerlink" href="#mobile" title="Permanent link">⚓︎</a></h3>
-<p>The mobile affected by the magic effect.</p>
+<p><em>Read-only</em>. The mobile affected by the magic effect.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3magicSourceInstance">tes3magicSourceInstance</a>)</li>
 </ul>
 <hr />
 <h3 id="next"><code>next</code><a class="headerlink" href="#next" title="Permanent link">⚓︎</a></h3>
-<p>Deprecated.</p>
+<p><em>Read-only</em>. Deprecated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3activeMagicEffect">tes3activeMagicEffect</a>)</li>
 </ul>
 <hr />
 <h3 id="previous"><code>previous</code><a class="headerlink" href="#previous" title="Permanent link">⚓︎</a></h3>
-<p>Deprecated.</p>
+<p><em>Read-only</em>. Deprecated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3activeMagicEffect">tes3activeMagicEffect</a>)</li>
 </ul>
 <hr />
 <h3 id="serial"><code>serial</code><a class="headerlink" href="#serial" title="Permanent link">⚓︎</a></h3>
-<p>The magic source instance serial number. See the <code>instance</code> and <code>effectInstance</code> properties to easily access the magic and effect instances.</p>
+<p><em>Read-only</em>. The magic source instance serial number. See the <code>instance</code> and <code>effectInstance</code> properties to easily access the magic and effect instances.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="skillid"><code>skillId</code><a class="headerlink" href="#skillid" title="Permanent link">⚓︎</a></h3>
-<p>The skill ID (note that this may be the attribute ID if the effect affects attributes).</p>
+<p><em>Read-only</em>. The skill ID (note that this may be the attribute ID if the effect affects attributes).</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>

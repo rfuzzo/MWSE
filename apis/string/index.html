@@ -5233,7 +5233,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>format</code> (string): The format string to use for the output.</li>
-<li><code>unnamed</code> (values): Values to format into the given string.</li>
+<li><code>unnamed</code> (values): <em>Optional</em>. Values to format into the given string.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5264,7 +5264,7 @@
 <ul>
 <li><code>s</code> (string): The string to perform finds on.</li>
 <li><code>pattern</code> (table): An array-style table that contains pattern strings.</li>
-<li><code>index</code> (number): Start index of the find.</li>
+<li><code>index</code> (number): <em>Default</em>: <code>1</code>. Start index of the find.</li>
 <li><code>plain</code> (boolean): If true, a normal search instead of a pattern search will be performed.</li>
 </ul>
 <hr />
@@ -5275,7 +5275,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>str</code> (string): The string to split.</li>
-<li><code>sep</code> (string): The token to split the string by.</li>
+<li><code>sep</code> (string): <em>Default</em>: <code>"%s"</code>. The token to split the string by.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

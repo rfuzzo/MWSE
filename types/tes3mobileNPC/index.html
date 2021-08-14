@@ -7648,21 +7648,21 @@
 <p>This type inherits the following: <a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3mobileObject">tes3mobileObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="acrobatics"><code>acrobatics</code><a class="headerlink" href="#acrobatics" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's acrobatics skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's acrobatics skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="actionbeforecombat"><code>actionBeforeCombat</code><a class="headerlink" href="#actionbeforecombat" title="Permanent link">⚓︎</a></h3>
-<p>Action data stored before the actor entered combat.</p>
+<p><em>Read-only</em>. Action data stored before the actor entered combat.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3actionData">tes3actionData</a>)</li>
 </ul>
 <hr />
 <h3 id="actiondata"><code>actionData</code><a class="headerlink" href="#actiondata" title="Permanent link">⚓︎</a></h3>
-<p>Current action data. Pre-combat action data is stored in the actionBeforeCombat property.</p>
+<p><em>Read-only</em>. Current action data. Pre-combat action data is stored in the actionBeforeCombat property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3actionData">tes3actionData</a>)</li>
@@ -7676,28 +7676,28 @@
 </ul>
 <hr />
 <h3 id="activemagiceffectlist"><code>activeMagicEffectList</code><a class="headerlink" href="#activemagiceffectlist" title="Permanent link">⚓︎</a></h3>
-<p>The active magic effects on the actor, from which all others can be accessed. A table with tes3activeMagicEffect items.</p>
+<p><em>Read-only</em>. The active magic effects on the actor, from which all others can be accessed. A table with tes3activeMagicEffect items.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="actortype"><code>actorType</code><a class="headerlink" href="#actortype" title="Permanent link">⚓︎</a></h3>
-<p>The type of the mobile actor. 0 is a creature, 1 is an NPC, 2 is the player.</p>
+<p><em>Read-only</em>. The type of the mobile actor. 0 is a creature, 1 is an NPC, 2 is the player.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="agility"><code>agility</code><a class="headerlink" href="#agility" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's agility attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's agility attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="aiplanner"><code>aiPlanner</code><a class="headerlink" href="#aiplanner" title="Permanent link">⚓︎</a></h3>
-<p>Access to the mobile's AI planner and AI package information.</p>
+<p><em>Read-only</em>. Access to the mobile's AI planner and AI package information.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3aiPlanner)</li>
@@ -7711,35 +7711,35 @@
 </ul>
 <hr />
 <h3 id="alchemy"><code>alchemy</code><a class="headerlink" href="#alchemy" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's alchemy skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's alchemy skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="alteration"><code>alteration</code><a class="headerlink" href="#alteration" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's alteration skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's alteration skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="animationcontroller"><code>animationController</code><a class="headerlink" href="#animationcontroller" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3actorAnimationController">tes3actorAnimationController</a>)</li>
 </ul>
 <hr />
 <h3 id="armorer"><code>armorer</code><a class="headerlink" href="#armorer" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's armorer skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's armorer skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="armorrating"><code>armorRating</code><a class="headerlink" href="#armorrating" title="Permanent link">⚓︎</a></h3>
-<p>The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the applyDamage function.</p>
+<p><em>Read-only</em>. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the applyDamage function.</p>
 <p>Armour mitigation calculation:
 x = damage / (damage + target.armorRating)
 damage *= max(fCombatArmorMinMult, x)
@@ -7750,7 +7750,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="athletics"><code>athletics</code><a class="headerlink" href="#athletics" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's athletics skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's athletics skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -7764,21 +7764,21 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="attacked"><code>attacked</code><a class="headerlink" href="#attacked" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor has been attacked.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor has been attacked.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="attributes"><code>attributes</code><a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h3>
-<p>Access to a table of 8 tes3statistic objects for the actor's attributes.</p>
+<p><em>Read-only</em>. Access to a table of 8 tes3statistic objects for the actor's attributes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="axe"><code>axe</code><a class="headerlink" href="#axe" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's axe skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's axe skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -7799,42 +7799,42 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="block"><code>block</code><a class="headerlink" href="#block" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's block skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's block skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="bluntweapon"><code>bluntWeapon</code><a class="headerlink" href="#bluntweapon" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's blunt weapon skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's blunt weapon skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="boundsize"><code>boundSize</code><a class="headerlink" href="#boundsize" title="Permanent link">⚓︎</a></h3>
-<p>A vector that shows the size of the bounding box in each direction.</p>
+<p><em>Read-only</em>. A vector that shows the size of the bounding box in each direction.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
 </ul>
 <hr />
 <h3 id="cell"><code>cell</code><a class="headerlink" href="#cell" title="Permanent link">⚓︎</a></h3>
-<p>Fetches the cell that the actor is in.</p>
+<p><em>Read-only</em>. Fetches the cell that the actor is in.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3cell">tes3cell</a>)</li>
 </ul>
 <hr />
 <h3 id="cellx"><code>cellX</code><a class="headerlink" href="#cellx" title="Permanent link">⚓︎</a></h3>
-<p>The X grid coordinate of the cell the mobile is in.</p>
+<p><em>Read-only</em>. The X grid coordinate of the cell the mobile is in.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="celly"><code>cellY</code><a class="headerlink" href="#celly" title="Permanent link">⚓︎</a></h3>
-<p>The Y grid coordinate of the cell the mobile is in.</p>
+<p><em>Read-only</em>. The Y grid coordinate of the cell the mobile is in.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -7848,21 +7848,21 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="collidingreference"><code>collidingReference</code><a class="headerlink" href="#collidingreference" title="Permanent link">⚓︎</a></h3>
-<p>The reference that the mobile has collided with this frame.</p>
+<p><em>Read-only</em>. The reference that the mobile has collided with this frame.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
 </ul>
 <hr />
 <h3 id="combatsession"><code>combatSession</code><a class="headerlink" href="#combatsession" title="Permanent link">⚓︎</a></h3>
-<p>Combat session data. This exists while the actor is in combat to provide memory for AI combat decisions.</p>
+<p><em>Read-only</em>. Combat session data. This exists while the actor is in combat to provide memory for AI combat decisions.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3combatSession">tes3combatSession</a>)</li>
 </ul>
 <hr />
 <h3 id="conjuration"><code>conjuration</code><a class="headerlink" href="#conjuration" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's conjuration skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's conjuration skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -7876,63 +7876,63 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="currentenchanteditem"><code>currentEnchantedItem</code><a class="headerlink" href="#currentenchanteditem" title="Permanent link">⚓︎</a></h3>
-<p>The currently equipped enchanted item that the actor will use.</p>
+<p><em>Read-only</em>. The currently equipped enchanted item that the actor will use.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>)</li>
 </ul>
 <hr />
 <h3 id="currentspell"><code>currentSpell</code><a class="headerlink" href="#currentspell" title="Permanent link">⚓︎</a></h3>
-<p>The currently equipped spell that the actor will use.</p>
+<p><em>Read-only</em>. The currently equipped spell that the actor will use.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3spell">tes3spell</a>)</li>
 </ul>
 <hr />
 <h3 id="destruction"><code>destruction</code><a class="headerlink" href="#destruction" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's destruction skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's destruction skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="effectattributes"><code>effectAttributes</code><a class="headerlink" href="#effectattributes" title="Permanent link">⚓︎</a></h3>
-<p>Access to a table of 24 numbers for the actor's effect attributes.</p>
+<p><em>Read-only</em>. Access to a table of 24 numbers for the actor's effect attributes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="enchant"><code>enchant</code><a class="headerlink" href="#enchant" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's enchant skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's enchant skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="encumbrance"><code>encumbrance</code><a class="headerlink" href="#encumbrance" title="Permanent link">⚓︎</a></h3>
-<p>Access to the actor's encumbrance statistic.</p>
+<p><em>Read-only</em>. Access to the actor's encumbrance statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="endurance"><code>endurance</code><a class="headerlink" href="#endurance" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's endurance attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's endurance attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="facing"><code>facing</code><a class="headerlink" href="#facing" title="Permanent link">⚓︎</a></h3>
-<p>The facing of the actor, in radians.</p>
+<p><em>Read-only</em>. The facing of the actor, in radians.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fatigue"><code>fatigue</code><a class="headerlink" href="#fatigue" title="Permanent link">⚓︎</a></h3>
-<p>Access to the actor's fatigue statistic.</p>
+<p><em>Read-only</em>. Access to the actor's fatigue statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
@@ -7946,7 +7946,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="flags"><code>flags</code><a class="headerlink" href="#flags" title="Permanent link">⚓︎</a></h3>
-<p>Access to the root mobile object flags, represented as an integer. Should not be accessed directly.</p>
+<p><em>Read-only</em>. Access to the root mobile object flags, represented as an integer. Should not be accessed directly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -7960,7 +7960,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="flyspeed"><code>flySpeed</code><a class="headerlink" href="#flyspeed" title="Permanent link">⚓︎</a></h3>
-<p>The calculated fly movement speed.</p>
+<p><em>Read-only</em>. The calculated fly movement speed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -7995,7 +7995,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="friendlyactors"><code>friendlyActors</code><a class="headerlink" href="#friendlyactors" title="Permanent link">⚓︎</a></h3>
-<p>A collection of other tes3mobileActors that this actor considers friendly.</p>
+<p><em>Read-only</em>. A collection of other tes3mobileActors that this actor considers friendly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
@@ -8009,35 +8009,35 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="greettimer"><code>greetTimer</code><a class="headerlink" href="#greettimer" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="handtohand"><code>handToHand</code><a class="headerlink" href="#handtohand" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's hand to hand skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's hand to hand skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="health"><code>health</code><a class="headerlink" href="#health" title="Permanent link">⚓︎</a></h3>
-<p>Access to the actor's health statistic.</p>
+<p><em>Read-only</em>. Access to the actor's health statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="heavyarmor"><code>heavyArmor</code><a class="headerlink" href="#heavyarmor" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's heavy armor skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's heavy armor skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="height"><code>height</code><a class="headerlink" href="#height" title="Permanent link">⚓︎</a></h3>
-<p>The height of the mobile above the ground.</p>
+<p><em>Read-only</em>. The height of the mobile above the ground.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8058,21 +8058,21 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="hostileactors"><code>hostileActors</code><a class="headerlink" href="#hostileactors" title="Permanent link">⚓︎</a></h3>
-<p>A collection of other tes3mobileActors that this actor considers hostile.</p>
+<p><em>Read-only</em>. A collection of other tes3mobileActors that this actor considers hostile.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
 </ul>
 <hr />
 <h3 id="idleanim"><code>idleAnim</code><a class="headerlink" href="#idleanim" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor is using their idle animation.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor is using their idle animation.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="illusion"><code>illusion</code><a class="headerlink" href="#illusion" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's illusion skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's illusion skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -8086,14 +8086,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="incombat"><code>inCombat</code><a class="headerlink" href="#incombat" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor is in combat.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor is in combat.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="intelligence"><code>intelligence</code><a class="headerlink" href="#intelligence" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's intelligence attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's intelligence attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
@@ -8107,14 +8107,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="iscrittable"><code>isCrittable</code><a class="headerlink" href="#iscrittable" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor can be critically hit.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor can be critically hit.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="isdead"><code>isDead</code><a class="headerlink" href="#isdead" title="Permanent link">⚓︎</a></h3>
-<p>True if the actor is dead.</p>
+<p><em>Read-only</em>. True if the actor is dead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8247,56 +8247,56 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="lightarmor"><code>lightArmor</code><a class="headerlink" href="#lightarmor" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's light armor skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's light armor skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="longblade"><code>longBlade</code><a class="headerlink" href="#longblade" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's long blade skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's long blade skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="luck"><code>luck</code><a class="headerlink" href="#luck" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's luck attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's luck attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="magicka"><code>magicka</code><a class="headerlink" href="#magicka" title="Permanent link">⚓︎</a></h3>
-<p>Access to the actor's magicka statistic.</p>
+<p><em>Read-only</em>. Access to the actor's magicka statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="magickamultiplier"><code>magickaMultiplier</code><a class="headerlink" href="#magickamultiplier" title="Permanent link">⚓︎</a></h3>
-<p>Access to the actor's magicka multiplier statistic.</p>
+<p><em>Read-only</em>. Access to the actor's magicka multiplier statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="marksman"><code>marksman</code><a class="headerlink" href="#marksman" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's marksman skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's marksman skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="mediumarmor"><code>mediumArmor</code><a class="headerlink" href="#mediumarmor" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's medium armor skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's medium armor skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="mercantile"><code>mercantile</code><a class="headerlink" href="#mercantile" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's mercantile skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's mercantile skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -8318,42 +8318,42 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="movementflags"><code>movementFlags</code><a class="headerlink" href="#movementflags" title="Permanent link">⚓︎</a></h3>
-<p>Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.</p>
+<p><em>Read-only</em>. Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="movespeed"><code>moveSpeed</code><a class="headerlink" href="#movespeed" title="Permanent link">⚓︎</a></h3>
-<p>The calculated base movement speed.</p>
+<p><em>Read-only</em>. The calculated base movement speed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="mysticism"><code>mysticism</code><a class="headerlink" href="#mysticism" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's mysticism skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's mysticism skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="nextactionweight"><code>nextActionWeight</code><a class="headerlink" href="#nextactionweight" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="object"><code>object</code><a class="headerlink" href="#object" title="Permanent link">⚓︎</a></h3>
-<p>The actor object that maps to this mobile.</p>
+<p><em>Read-only</em>. The actor object that maps to this mobile.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3npcInstance">tes3npcInstance</a>)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of mobile object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of mobile object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8367,7 +8367,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="personality"><code>personality</code><a class="headerlink" href="#personality" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's personality attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's personality attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
@@ -8388,7 +8388,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="prevmovementflags"><code>prevMovementFlags</code><a class="headerlink" href="#prevmovementflags" title="Permanent link">⚓︎</a></h3>
-<p>Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.</p>
+<p><em>Read-only</em>. Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8423,7 +8423,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="reference"><code>reference</code><a class="headerlink" href="#reference" title="Permanent link">⚓︎</a></h3>
-<p>Access to the reference object for the mobile, if any.</p>
+<p><em>Read-only</em>. Access to the reference object for the mobile, if any.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
@@ -8500,14 +8500,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="restoration"><code>restoration</code><a class="headerlink" href="#restoration" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's restoration skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's restoration skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="runspeed"><code>runSpeed</code><a class="headerlink" href="#runspeed" title="Permanent link">⚓︎</a></h3>
-<p>The calculated run movement speed.</p>
+<p><em>Read-only</em>. The calculated run movement speed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8521,21 +8521,21 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="scaninterval"><code>scanInterval</code><a class="headerlink" href="#scaninterval" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="scantimer"><code>scanTimer</code><a class="headerlink" href="#scantimer" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="security"><code>security</code><a class="headerlink" href="#security" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's security skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's security skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -8549,7 +8549,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="shortblade"><code>shortBlade</code><a class="headerlink" href="#shortblade" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's short blade skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's short blade skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -8563,14 +8563,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="skills"><code>skills</code><a class="headerlink" href="#skills" title="Permanent link">⚓︎</a></h3>
-<p>An array-style table with access to the twenty seven NPC skill statistics.</p>
+<p><em>Read-only</em>. An array-style table with access to the twenty seven NPC skill statistics.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="sneak"><code>sneak</code><a class="headerlink" href="#sneak" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's sneak skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's sneak skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
@@ -8584,35 +8584,35 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="spear"><code>spear</code><a class="headerlink" href="#spear" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's spear skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's spear skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="speechcraft"><code>speechcraft</code><a class="headerlink" href="#speechcraft" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's speechcraft skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's speechcraft skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="speed"><code>speed</code><a class="headerlink" href="#speed" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's speed attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's speed attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
 </ul>
 <hr />
 <h3 id="spellreadied"><code>spellReadied</code><a class="headerlink" href="#spellreadied" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor has a spell readied.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor has a spell readied.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="strength"><code>strength</code><a class="headerlink" href="#strength" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's strength attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's strength attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
@@ -8626,14 +8626,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="swimrunspeed"><code>swimRunSpeed</code><a class="headerlink" href="#swimrunspeed" title="Permanent link">⚓︎</a></h3>
-<p>The calculated swim movement speed while running.</p>
+<p><em>Read-only</em>. The calculated swim movement speed while running.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="swimspeed"><code>swimSpeed</code><a class="headerlink" href="#swimspeed" title="Permanent link">⚓︎</a></h3>
-<p>The calculated swim movement speed.</p>
+<p><em>Read-only</em>. The calculated swim movement speed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8654,14 +8654,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="unarmored"><code>unarmored</code><a class="headerlink" href="#unarmored" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the NPC's unarmored skill statistic.</p>
+<p><em>Read-only</em>. Direct access to the NPC's unarmored skill statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (tes3skillStatistic)</li>
 </ul>
 <hr />
 <h3 id="underwater"><code>underwater</code><a class="headerlink" href="#underwater" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor is under water.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor is under water.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8675,7 +8675,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="walkspeed"><code>walkSpeed</code><a class="headerlink" href="#walkspeed" title="Permanent link">⚓︎</a></h3>
-<p>The calculated walk movement speed.</p>
+<p><em>Read-only</em>. The calculated walk movement speed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8696,28 +8696,28 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="weapondrawn"><code>weaponDrawn</code><a class="headerlink" href="#weapondrawn" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that shows if the weapon model is visible. When readying a weapon, there is a short period of time at the start of the animation, where the weapon is not visible yet. This flag will only be set after this initial stage is done. This flag is still set with hand-to-hand even though it doesn't use a model. Setting this to false while a weapon is drawn will normally cause the actor to play its weapon draw animation again.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that shows if the weapon model is visible. When readying a weapon, there is a short period of time at the start of the animation, where the weapon is not visible yet. This flag will only be set after this initial stage is done. This flag is still set with hand-to-hand even though it doesn't use a model. Setting this to false while a weapon is drawn will normally cause the actor to play its weapon draw animation again.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="werewolf"><code>werewolf</code><a class="headerlink" href="#werewolf" title="Permanent link">⚓︎</a></h3>
-<p>Friendly access to the actor's flag that controls if the actor in werewolf form.</p>
+<p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor in werewolf form.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="width"><code>width</code><a class="headerlink" href="#width" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="willpower"><code>willpower</code><a class="headerlink" href="#willpower" title="Permanent link">⚓︎</a></h3>
-<p>Direct access to the actor's willpower attribute statistic.</p>
+<p><em>Read-only</em>. Direct access to the actor's willpower attribute statistic.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3statistic">tes3statistic</a>)</li>
@@ -8732,11 +8732,11 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
-<li><code>applyArmor</code> (boolean): If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.</li>
-<li><code>resistAttribute</code> (number): The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from tes3.effectAttributes.</li>
-<li><code>applyDifficulty</code> (boolean): If the game difficulty modifier should be applied. Must be used with the 'playerAttack' argument to apply the correct modifier.</li>
-<li><code>playerAttack</code> (boolean): If the attack came from the player. Used for difficulty calculation.</li>
-<li><code>doNotChangeHealth</code> (boolean): If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.</li>
+<li><code>applyArmor</code> (boolean): <em>Optional</em>. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.</li>
+<li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from tes3.effectAttributes.</li>
+<li><code>applyDifficulty</code> (boolean): <em>Optional</em>. If the game difficulty modifier should be applied. Must be used with the 'playerAttack' argument to apply the correct modifier.</li>
+<li><code>playerAttack</code> (boolean): <em>Optional</em>. If the attack came from the player. Used for difficulty calculation.</li>
+<li><code>doNotChangeHealth</code> (boolean): <em>Optional</em>. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.</li>
 </ul>
 </li>
 </ul>
@@ -8752,8 +8752,8 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>fatigueDamage</code> (number): The amount of fatigue damage to apply.</li>
-<li><code>swing</code> (number): The attack swing magnitude, range 0-1. Only modifies hit volume.</li>
-<li><code>alwaysPlayHitVoice</code> (boolean): Always play the hit reaction voiceover.</li>
+<li><code>swing</code> (number): <em>Optional</em>. The attack swing magnitude, range 0-1. Only modifies hit volume.</li>
+<li><code>alwaysPlayHitVoice</code> (boolean): <em>Optional</em>. Always play the hit reaction voiceover.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -8785,8 +8785,8 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
-<li><code>applyArmor</code> (boolean): If armor should mitigate the incoming damage.</li>
-<li><code>resistAttribute</code> (number): The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from tes3.effectAttributes.</li>
+<li><code>applyArmor</code> (boolean): <em>Optional</em>. If armor should mitigate the incoming damage.</li>
+<li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from tes3.effectAttributes.</li>
 </ul>
 </li>
 </ul>
@@ -8803,7 +8803,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to equip.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): The item data of the specific item to equip.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to equip.</li>
 <li><code>addItem</code> (boolean): If true, the item will be added to the actor's inventory if needed.</li>
 <li><code>selectBestCondition</code> (boolean): If true, the item in the inventory with the best condition and best charge will be selected.</li>
 <li><code>selectWorstCondition</code> (boolean): If true, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
@@ -8822,8 +8822,8 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>effect</code> (number): The magic effect ID to search for.</li>
-<li><code>serial</code> (number): The magic instance serial to search for.</li>
+<li><code>effect</code> (number): <em>Optional</em>. The magic effect ID to search for.</li>
+<li><code>serial</code> (number): <em>Optional</em>. The magic instance serial to search for.</li>
 </ul>
 </li>
 </ul>
@@ -8833,7 +8833,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getbootsweight"><code>getBootsWeight</code><a class="headerlink" href="#getbootsweight" title="Permanent link">⚓︎</a></h3>
-<p>Gets the weight of the boots equipped on the actor, or 0 if no boots are equipped.</p>
+<p><em>Read-only</em>. Gets the weight of the boots equipped on the actor, or 0 if no boots are equipped.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getBootsWeight</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -9013,10 +9013,10 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to unequip.</li>
-<li><code>type</code> (number): The item type to unequip. Only used if no other parameter is provided.</li>
-<li><code>armorSlot</code> (number): The armor slot to unequip.</li>
-<li><code>clothingSlot</code> (number): The clothing slot to unequip.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to unequip.</li>
+<li><code>type</code> (number): <em>Optional</em>. The item type to unequip. Only used if no other parameter is provided.</li>
+<li><code>armorSlot</code> (number): <em>Optional</em>. The armor slot to unequip.</li>
+<li><code>clothingSlot</code> (number): <em>Optional</em>. The clothing slot to unequip.</li>
 </ul>
 </li>
 </ul>
@@ -9031,7 +9031,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>attribute</code> (<a href="../../types/tes3statistic">tes3statistic</a>): Limits the update to statistics derived from this attribute.  e.g. <code>mobile:updateDerivedStatistics(mobile.strength)</code>. If not present, all derived statistics will be updated.</li>
+<li><code>attribute</code> (<a href="../../types/tes3statistic">tes3statistic</a>): <em>Optional</em>. Limits the update to statistics derived from this attribute.  e.g. <code>mobile:updateDerivedStatistics(mobile.strength)</code>. If not present, all derived statistics will be updated.</li>
 </ul>
 <hr />
 <h3 id="updateopacity"><code>updateOpacity</code><a class="headerlink" href="#updateopacity" title="Permanent link">⚓︎</a></h3>

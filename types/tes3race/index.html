@@ -5478,14 +5478,14 @@
 <p>This type inherits the following: <a href="../../types/tes3baseObject">tes3baseObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="abilities"><code>abilities</code><a class="headerlink" href="#abilities" title="Permanent link">⚓︎</a></h3>
-<p>A list of abilities that NPCs of that race have access to. It is a tes3spellList, which is a list wrapper with helper functions. The actual list is accessed with .iterator. e.g. for _, ability in pairs(race.abilities.iterator) do print(ability.name) end</p>
+<p><em>Read-only</em>. A list of abilities that NPCs of that race have access to. It is a tes3spellList, which is a list wrapper with helper functions. The actual list is accessed with .iterator. e.g. for _, ability in pairs(race.abilities.iterator) do print(ability.name) end</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3spellList">tes3spellList</a>)</li>
 </ul>
 <hr />
 <h3 id="baseattributes"><code>baseAttributes</code><a class="headerlink" href="#baseattributes" title="Permanent link">⚓︎</a></h3>
-<p>Array-style table access to base 8 attributes for the race. Each element in the array is a tes3raceBaseAttribute.</p>
+<p><em>Read-only</em>. Array-style table access to base 8 attributes for the race. Each element in the array is a tes3raceBaseAttribute.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -5499,28 +5499,28 @@
 </ul>
 <hr />
 <h3 id="deleted"><code>deleted</code><a class="headerlink" href="#deleted" title="Permanent link">⚓︎</a></h3>
-<p>The deleted state of the object.</p>
+<p><em>Read-only</em>. The deleted state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="description"><code>description</code><a class="headerlink" href="#description" title="Permanent link">⚓︎</a></h3>
-<p>Loads from disk and returns the description of the race.</p>
+<p><em>Read-only</em>. Loads from disk and returns the description of the race.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
-<p>The disabled state of the object.</p>
+<p><em>Read-only</em>. The disabled state of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="femalebody"><code>femaleBody</code><a class="headerlink" href="#femalebody" title="Permanent link">⚓︎</a></h3>
-<p>Access to all the body parts that will be used for female actors of this race.</p>
+<p><em>Read-only</em>. Access to all the body parts that will be used for female actors of this race.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3raceBodyParts">tes3raceBodyParts</a>)</li>
@@ -5534,14 +5534,14 @@
 </ul>
 <hr />
 <h3 id="height"><code>height</code><a class="headerlink" href="#height" title="Permanent link">⚓︎</a></h3>
-<p>Access to the the height pair for males/females of the race.</p>
+<p><em>Read-only</em>. Access to the the height pair for males/females of the race.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3raceHeightWeight">tes3raceHeightWeight</a>)</li>
 </ul>
 <hr />
 <h3 id="id"><code>id</code><a class="headerlink" href="#id" title="Permanent link">⚓︎</a></h3>
-<p>The unique identifier for the object.</p>
+<p><em>Read-only</em>. The unique identifier for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5562,7 +5562,7 @@
 </ul>
 <hr />
 <h3 id="malebody"><code>maleBody</code><a class="headerlink" href="#malebody" title="Permanent link">⚓︎</a></h3>
-<p>Access to all the body parts that will be used for male actors of this race.</p>
+<p><em>Read-only</em>. Access to all the body parts that will be used for male actors of this race.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3raceBodyParts">tes3raceBodyParts</a>)</li>
@@ -5576,21 +5576,21 @@
 </ul>
 <hr />
 <h3 id="name"><code>name</code><a class="headerlink" href="#name" title="Permanent link">⚓︎</a></h3>
-<p>The player-facing name for the object.</p>
+<p><em>Read-only</em>. The player-facing name for the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="objectflags"><code>objectFlags</code><a class="headerlink" href="#objectflags" title="Permanent link">⚓︎</a></h3>
-<p>The raw flags of the object.</p>
+<p><em>Read-only</em>. The raw flags of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p>The type of object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of object. Maps to values in tes3.objectType.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -5604,7 +5604,7 @@
 </ul>
 <hr />
 <h3 id="skillbonuses"><code>skillBonuses</code><a class="headerlink" href="#skillbonuses" title="Permanent link">⚓︎</a></h3>
-<p>Array-style table access for 7 skill bonuses for the race. Each element in the array is a tes3raceSkillBonus.</p>
+<p><em>Read-only</em>. Array-style table access for 7 skill bonuses for the race. Each element in the array is a tes3raceSkillBonus.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -5618,7 +5618,7 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p>The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -5632,7 +5632,7 @@
 </ul>
 <hr />
 <h3 id="weight"><code>weight</code><a class="headerlink" href="#weight" title="Permanent link">⚓︎</a></h3>
-<p>Access to the the height pair for males/females of the race.</p>
+<p><em>Read-only</em>. Access to the the height pair for males/females of the race.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3raceHeightWeight">tes3raceHeightWeight</a>)</li>

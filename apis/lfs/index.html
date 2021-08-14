@@ -5317,8 +5317,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>path</code> (string): The path, relative to the current directory, to get attributes for.</li>
-<li><code>request</code> (string): The specific attribute to look for. If provided, the return value becomes the requested value (or nil) instead of a table.</li>
-<li><code>resultTable</code> (table): If provided, this table will be reused as the result table. If not provided, a new table is created.</li>
+<li><code>request</code> (string): <em>Optional</em>. The specific attribute to look for. If provided, the return value becomes the requested value (or nil) instead of a table.</li>
+<li><code>resultTable</code> (table): <em>Optional</em>. If provided, this table will be reused as the result table. If not provided, a new table is created.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5393,7 +5393,7 @@
 <ul>
 <li><code>old</code> (string): The object to link to.</li>
 <li><code>new</code> (string): The name of the link.</li>
-<li><code>symlink</code> (boolean): If true, the link will be symbolic instead.</li>
+<li><code>symlink</code> (boolean): <em>Optional</em>. If true, the link will be symbolic instead.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5409,8 +5409,8 @@
 <ul>
 <li><code>filehandle</code> (<a href="../../types/ioFile">ioFile</a>): The file handle to lock.</li>
 <li><code>mode</code> (string): "r" for a read/shared lock, or "w" for a write/exclusive lock.</li>
-<li><code>start</code> (number): The starting point of the file to lock.</li>
-<li><code>length</code> (number): The length of the file, relative to start, to lock.</li>
+<li><code>start</code> (number): <em>Optional</em>. The starting point of the file to lock.</li>
+<li><code>length</code> (number): <em>Optional</em>. The length of the file, relative to start, to lock.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5453,7 +5453,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>dirname</code> (string): The name of the directory to remove.</li>
-<li><code>recursive</code> (boolean): If true, all contents of the directory will be removed as well.</li>
+<li><code>recursive</code> (boolean): <em>Default</em>: <code>false</code>. If true, all contents of the directory will be removed as well.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5483,8 +5483,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>path</code> (string): The path to touch.</li>
-<li><code>accessTime</code> (number): The new access time to set.</li>
-<li><code>modifiedTime</code> (number): The new last modified time to set</li>
+<li><code>accessTime</code> (number): <em>Optional</em>. The new access time to set.</li>
+<li><code>modifiedTime</code> (number): <em>Optional</em>. The new last modified time to set</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -5500,8 +5500,8 @@
 <ul>
 <li><code>filehandle</code> (<a href="../../types/ioFile">ioFile</a>): The file handle to unlock.</li>
 <li><code>mode</code> (string): "r" for a read/shared lock, or "w" for a write/exclusive unlock.</li>
-<li><code>start</code> (number): The starting point of the file to unlock.</li>
-<li><code>length</code> (number): The length of the file, relative to start, to unlock.</li>
+<li><code>start</code> (number): <em>Optional</em>. The starting point of the file to unlock.</li>
+<li><code>length</code> (number): <em>Optional</em>. The length of the file, relative to start, to unlock.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
