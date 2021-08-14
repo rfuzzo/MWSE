@@ -246,7 +246,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../apis/event/" class="md-tabs__link">
+      <a href="../../apis/dofile/" class="md-tabs__link">
         APIs
       </a>
     </li>
@@ -1183,8 +1183,32 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apis/dofile/" class="md-nav__link">
+        dofile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apis/event/" class="md-nav__link">
         event
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apis/include/" class="md-nav__link">
+        include
       </a>
     </li>
   
@@ -5203,6 +5227,25 @@
 <span class="kr">end</span><span class="p">)</span>
 </code></pre></div>
 </div>
+<details class="example"><summary>Example: Replace a brewed potion with a modified version</summary><div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;potionBrewed&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;[*]&quot;</span> <span class="o">..</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;mesh&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">mesh</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;icon&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">icon</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">weight</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">value</span> <span class="o">*</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;effects&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="p">}</span>
+    <span class="kr">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span> <span class="kr">do</span>
+        <span class="n">p</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="kr">end</span>
+
+    <span class="kd">local</span> <span class="n">newPotion</span> <span class="o">=</span> <span class="n">tes3alchemy</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">removeItem</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">}</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addItem</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">newPotion</span><span class="p">,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">}</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+</details>
                 
               
               

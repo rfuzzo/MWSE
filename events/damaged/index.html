@@ -246,7 +246,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../apis/event/" class="md-tabs__link">
+      <a href="../../apis/dofile/" class="md-tabs__link">
         APIs
       </a>
     </li>
@@ -1183,8 +1183,32 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apis/dofile/" class="md-nav__link">
+        dofile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apis/event/" class="md-nav__link">
         event
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apis/include/" class="md-nav__link">
+        include
       </a>
     </li>
   
@@ -5207,6 +5231,25 @@
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;damaged&quot;</span><span class="p">,</span> <span class="n">onDamaged</span><span class="p">)</span>
 </code></pre></div>
 </div>
+<details class="example"><summary>Example: Notify the player that their arrow/bolt killed their opponent</summary><div class="highlight"><pre><span></span><code><span class="c1">-- Print a message if player&#39;s arrow killed its target</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onDamaged</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- We only care if the player did the damage</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">attackerReference</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span> <span class="kr">then</span>
+        <span class="kr">return</span>
+    <span class="kr">end</span>
+
+    <span class="c1">-- Check if the damage was caused by a projectile, but not by a spell, so it must be an arrow or a bolt</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">projectile</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="ow">and</span> <span class="n">e</span><span class="p">.</span><span class="n">magicSourceInstance</span> <span class="o">==</span> <span class="kc">nil</span> <span class="kr">then</span>
+
+        <span class="c1">-- Did the damage kill the target?</span>
+        <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">killingBlow</span> <span class="o">==</span> <span class="kc">true</span> <span class="kr">then</span>
+            <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Your arrow felled its target!&quot;</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;damaged&quot;</span><span class="p">,</span> <span class="n">onDamaged</span><span class="p">)</span>
+</code></pre></div>
+</details>
                 
               
               

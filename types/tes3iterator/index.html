@@ -246,7 +246,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../apis/event/" class="md-tabs__link">
+      <a href="../../apis/dofile/" class="md-tabs__link">
         APIs
       </a>
     </li>
@@ -1183,8 +1183,32 @@
   
   
     <li class="md-nav__item">
+      <a href="../../apis/dofile/" class="md-nav__link">
+        dofile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../apis/event/" class="md-nav__link">
         event
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apis/include/" class="md-nav__link">
+        include
       </a>
     </li>
   
@@ -5246,6 +5270,20 @@
 <li><code>result</code> (<a href="../../types/tes3iteratorNode">tes3iteratorNode</a>)</li>
 </ul>
 <hr />
+<details class="example"><summary>Example: Iterating Lists</summary><div class="highlight"><pre><span></span><code><span class="c1">-- Check player equipment</span>
+<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stack</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">equipment</span><span class="p">)</span> <span class="kr">do</span>
+    <span class="c1">-- stack is type tes3equipmentStack, as tes3.player.object.equipment is a list of tes3equipmentStack.</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Equipment object ID: %s&quot;</span><span class="p">,</span> <span class="n">stack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- tes3.player.object.spells is a tes3spellList with helper functions.</span>
+<span class="c1">-- The actual list is spells.iterator.</span>
+<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">spell</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">spells</span><span class="p">.</span><span class="n">iterator</span><span class="p">)</span> <span class="kr">do</span>
+    <span class="c1">-- spell is type tes3spell, as tes3.player.object.spells.iterator is a list of spell.</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Spell %s, cost %d&quot;</span><span class="p">,</span> <span class="n">spell</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">spell</span><span class="p">.</span><span class="n">magickaCost</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
                 
               
               
