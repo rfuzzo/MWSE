@@ -8060,18 +8060,19 @@
 <hr />
 <h3 id="tes3createobject"><code>tes3.createObject</code><a class="headerlink" href="#tes3createobject" title="Permanent link">⚓︎</a></h3>
 <p>Create an object and returns it. The created object will be part of the saved game. Supported object types are those that have their own create function, such as tes3activator for example.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">table</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">createdObject</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">getIfExists</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>objectType</code> (number): Maps to tes3.objectType constants. Used to filter object type to create.</li>
+<li><code>objectType</code> (number): Maps to <code>tes3.objectType</code> constants. Used to filter object type to create.</li>
+<li><code>getIfExists</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, an existing object of the same type and ID will be returned instead of creating a new one.</li>
 </ul>
 </li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>table</code> (tes3BaseObject)</li>
+<li><code>createdObject</code> (<a href="../../types/tes3activator">tes3activator</a>, <a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3container">tes3container</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3misc">tes3misc</a>, <a href="../../types/tes3sound">tes3sound</a>, <a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3static">tes3static</a>, <a href="../../types/tes3weapon">tes3weapon</a>)</li>
 </ul>
 <details class="example"><summary>Example: Creates a tes3misc object</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">miscItemId</span> <span class="o">=</span> <span class="s2">&quot;create_misc_item_id&quot;</span>
 <span class="kd">local</span> <span class="n">miscItemName</span> <span class="o">=</span> <span class="s2">&quot;create_misc_item_name&quot;</span>
