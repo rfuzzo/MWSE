@@ -5299,7 +5299,113 @@
 </ul>
 <hr />
 <h3 id="stringformat"><code>string.format</code><a class="headerlink" href="#stringformat" title="Permanent link">⚓︎</a></h3>
-<p>This function creates a string, given various values. The format follows the printf format, with the additional option of %q to automatically quote a string.</p>
+<p>This function creates a string, given various values. The first parameter follows the <a href="http://www.cplusplus.com/reference/cstdio/printf">printf</a> format, with the additional option of <code>%q</code> to automatically quote a string.</p>
+<table>
+<thead>
+<tr>
+<th>Specifier</th>
+<th>Output</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%d</code></td>
+<td>Signed decimal integer.</td>
+<td>-392</td>
+</tr>
+<tr>
+<td><code>%i</code></td>
+<td>Same as <code>%d</code>.</td>
+<td>-392</td>
+</tr>
+<tr>
+<td><code>%u</code></td>
+<td>Unsigned decimal integer.</td>
+<td>7235</td>
+</tr>
+<tr>
+<td><code>%o</code></td>
+<td>Unsigned octal.</td>
+<td>610</td>
+</tr>
+<tr>
+<td><code>%x</code></td>
+<td>Unsigned hexadecimal integer.</td>
+<td>7fa</td>
+</tr>
+<tr>
+<td><code>%X</code></td>
+<td>As <code>%x</code>, but uppercase.</td>
+<td>7FA</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>Decimal floating point, lowercase.</td>
+<td>392.65</td>
+</tr>
+<tr>
+<td><code>%F</code></td>
+<td>Decimal floating point, uppercase.</td>
+<td>392.65</td>
+</tr>
+<tr>
+<td><code>%e</code></td>
+<td>Scientific notation (mantissa/exponent), lowercase.</td>
+<td>3.9265e+2</td>
+</tr>
+<tr>
+<td><code>%E</code></td>
+<td>Scientific notation (mantissa/exponent), uppercase.</td>
+<td>3.9265E+2</td>
+</tr>
+<tr>
+<td><code>%g</code></td>
+<td>Use the shortest representation: %e or %f.</td>
+<td>392.65</td>
+</tr>
+<tr>
+<td><code>%G</code></td>
+<td>Use the shortest representation: %E or %F.</td>
+<td>392.65</td>
+</tr>
+<tr>
+<td><code>%a</code></td>
+<td>Hexadecimal floating point, lowercase.</td>
+<td>-0xc.90fep-2</td>
+</tr>
+<tr>
+<td><code>%A</code></td>
+<td>Hexadecimal floating point, uppercase.</td>
+<td>-0XC.90FEP-2</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>Character.</td>
+<td>a</td>
+</tr>
+<tr>
+<td><code>%s</code></td>
+<td>String of characters.</td>
+<td>sample</td>
+</tr>
+<tr>
+<td><code>%q</code></td>
+<td>Quoted string of characters.</td>
+<td>"sample"</td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td>Pointer address.</td>
+<td>b8000000</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>The literal <code>%</code> character.</td>
+<td>%</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">string.format</span><span class="p">(</span><span class="n">format</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>

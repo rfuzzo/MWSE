@@ -5172,7 +5172,14 @@
                 
                 
                 <h1 id="calcwalkspeed">calcWalkSpeed<a class="headerlink" href="#calcwalkspeed" title="Permanent link">⚓︎</a></h1>
-<p>One of the movement events, calcWalkSpeed is used when calculating the base walk speed.</p>
+<p>One of the movement events, <strong>calcWalkSpeed</strong> is used when calculating the base walk speed. Nearly every other movement speed event starts with this, with the exception of <a href="https://mwse.github.io/MWSE/events/calcFlySpeed">calcFlySpeed</a>.</p>
+<p>The movement event flow is described below:</p>
+<ul>
+<li>Walking: <strong>calcWalkSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+<li>Running: <strong>calcWalkSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcRunSpeed">calcRunSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+<li>Swimming: <strong>calcWalkSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimSpeed">calcSwimSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+<li>Swimming (while running): <strong>calcWalkSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimSpeed">calcSwimSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimRunSpeed">calcSwimRunSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcWalkSpeedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcWalkSpeedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>

@@ -5173,6 +5173,68 @@
                 
                 <h1 id="calcarmorpiecehit">calcArmorPieceHit<a class="headerlink" href="#calcarmorpiecehit" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised just after determining which armor piece, if any, was hit with an attack. The slots can be modified, to draw focus onto specific armor slots.</p>
+<p>The following table is used by default to determine what armor piece is hit:</p>
+<table>
+<thead>
+<tr>
+<th>Roll (1-100)</th>
+<th>Slot</th>
+<th>Fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-29</td>
+<td>Cuirass</td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>30-34</td>
+<td>Shield</td>
+<td>Cuirass</td>
+</tr>
+<tr>
+<td>35-39</td>
+<td>Shield</td>
+<td>Left Pauldron</td>
+</tr>
+<tr>
+<td>40-49</td>
+<td>Left Pauldron</td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>50-59</td>
+<td>Right Pauldron</td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>60-69</td>
+<td>Greaves</td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>70-79</td>
+<td>Helmet</td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>80-89</td>
+<td>Boots</td>
+<td><em>None</em></td>
+</tr>
+<tr>
+<td>90-94</td>
+<td>Right Gauntlet</td>
+<td>Right Bracer</td>
+</tr>
+<tr>
+<td>95-100</td>
+<td>Left Gauntlet</td>
+<td>Left Bracer</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcArmorPieceHitEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcArmorPieceHitCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>

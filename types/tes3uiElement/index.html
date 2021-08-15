@@ -6699,7 +6699,7 @@
 <p>Sets element dimensions using a proportional sizer. The sizer starts with the parent dimension in the flow direction, subtracts any fixed dimension children leaving the proportional sizer space. Each proportionally sized element then gets an equal division of the space, multiplied by this member. Values above 1.0 are permissible.</p>
 <pre><code>Bug note: If widthProportional is used without heightProportional, an element may not respond to changes in parent size. It is recommended to set heightProportional, or have a fixed size sibling element if dynamic reflow is required.
 
-Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default).
+Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </code></pre>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6878,7 +6878,7 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 <p>Sets element dimensions using a proportional sizer. The sizer starts with the parent dimension in the flow direction, subtracts any fixed dimension children leaving the proportional sizer space. Each proportionally sized element then gets an equal division of the space, multiplied by this member. Values above 1.0 are permissible.</p>
 <pre><code>Bug note: If widthProportional is used without heightProportional, an element may not respond to changes in parent size. It is recommended to set heightProportional, or have a fixed size sibling element if dynamic reflow is required.
 
-Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default).
+Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </code></pre>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6909,16 +6909,16 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 <h3 id="createbutton"><code>createButton</code><a class="headerlink" href="#createbutton" title="Permanent link">⚓︎</a></h3>
 <p>Creates a clickable button. Register the "mouseClick" event to capture a button press.</p>
 <pre><code>Custom widget properties:
-    | `number`_ ``element.widget.state``: Interaction state. 1 = normal, 2 = disabled, 4 = active. Controls which colour set to use for text.
-    | `table`_ (float[3]) ``element.widget.idle``: Text colour for normal state, no mouse interaction.
-    | `table`_ (float[3]) ``element.widget.over``: Text colour for normal state, on mouseOver.
-    | `table`_ (float[3]) ``element.widget.pressed``: Text colour for normal state, on mouseDown.
-    | `table`_ (float[3]) ``element.widget.idleDisabled``: Text colour for disabled state, no mouse interaction.
-    | `table`_ (float[3]) ``element.widget.overDisabled``: Text colour for disabled state, on mouseOver.
-    | `table`_ (float[3]) ``element.widget.pressedDisabled``: Text colour for disabled state, on mouseDown.
-    | `table`_ (float[3]) ``element.widget.idleActive``: Text colour for active state, no mouse interaction.
-    | `table`_ (float[3]) ``element.widget.overActive``: Text colour for active state, on mouseOver.
-    | `table`_ (float[3]) ``element.widget.pressedActive``: Text colour for active state, on mouseDown.
+    | `number`_ `element.widget.state`: Interaction state. 1 = normal, 2 = disabled, 4 = active. Controls which colour set to use for text.
+    | `table`_ (float[3]) `element.widget.idle`: Text colour for normal state, no mouse interaction.
+    | `table`_ (float[3]) `element.widget.over`: Text colour for normal state, on mouseOver.
+    | `table`_ (float[3]) `element.widget.pressed`: Text colour for normal state, on mouseDown.
+    | `table`_ (float[3]) `element.widget.idleDisabled`: Text colour for disabled state, no mouse interaction.
+    | `table`_ (float[3]) `element.widget.overDisabled`: Text colour for disabled state, on mouseOver.
+    | `table`_ (float[3]) `element.widget.pressedDisabled`: Text colour for disabled state, on mouseDown.
+    | `table`_ (float[3]) `element.widget.idleActive`: Text colour for active state, no mouse interaction.
+    | `table`_ (float[3]) `element.widget.overActive`: Text colour for active state, on mouseOver.
+    | `table`_ (float[3]) `element.widget.pressedActive`: Text colour for active state, on mouseDown.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createButton</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
@@ -6947,11 +6947,11 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 <h3 id="createfillbar"><code>createFillBar</code><a class="headerlink" href="#createfillbar" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontal quantity indicator bar.</p>
 <pre><code>Custom widget properties:
-    | `number`_ (integer) ``element.widget.current``: Current (filled) value.
-    | `number`_ (integer) ``element.widget.max``: Maximum value.
-    | `boolean`_ ``element.widget.showText``: If text of the format "current/max" is shown. Default is ``true``.
-    | `table`_ (float[3]) ``element.widget.fillColor``: Colour of filled area.
-    | `number`_ (float) ``element.widget.fillAlpha``: Alpha transparency of filled area.
+    | `number`_ (integer) `element.widget.current`: Current (filled) value.
+    | `number`_ (integer) `element.widget.max`: Maximum value.
+    | `boolean`_ `element.widget.showText`: If text of the format "current/max" is shown. Default is `true`.
+    | `table`_ (float[3]) `element.widget.fillColor`: Colour of filled area.
+    | `number`_ (float) `element.widget.fillAlpha`: Alpha transparency of filled area.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createFillBar</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
 </code></pre></div>
@@ -6969,11 +6969,11 @@ Overrides fixed, minimum and maximum sizes unless this value is ``nil`` (default
 <h3 id="createhorizontalscrollpane"><code>createHorizontalScrollPane</code><a class="headerlink" href="#createhorizontalscrollpane" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontally scrolling pane.</p>
 <pre><code>Custom widget properties:
-    | `number`_ ``element.widget.positionX``: Horizontal scroll offset in pixels.
-    | `boolean`_ ``element.widget.scrollbarVisible``: Set if the scrollbar is displayed.
+    | `number`_ `element.widget.positionX`: Horizontal scroll offset in pixels.
+    | `boolean`_ `element.widget.scrollbarVisible`: Set if the scrollbar is displayed.
 
 Custom widget methods:
-    | ``element.widget:contentsChanged()``: Call to update scroll bar slider and limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after a menu:updateLayout(). Only required if the content size changes.
+    | `element.widget:contentsChanged()`: Call to update scroll bar slider and limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after a menu:updateLayout(). Only required if the content size changes.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createHorizontalScrollPane</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
@@ -7060,7 +7060,7 @@ Custom widget methods:
 <h3 id="createparagraphinput"><code>createParagraphInput</code><a class="headerlink" href="#createparagraphinput" title="Permanent link">⚓︎</a></h3>
 <p>Creates a multi-line text input element, with line wrapping on. To receive input the keyboard must be captured with <code>tes3ui.acquireTextInput(element)</code>. Read the input with the <code>text</code> property. Write an initial value to edit by setting the <code>text</code> property.</p>
 <pre><code>Custom widget properties:
-    | `number`_ (integer) ``element.widget.lengthLimit``: Maximum input length. Default is ``1023``.
+    | `number`_ (integer) `element.widget.lengthLimit`: Maximum input length. Default is `1023`.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createParagraphInput</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
@@ -7090,13 +7090,13 @@ Custom widget methods:
 <h3 id="createslider"><code>createSlider</code><a class="headerlink" href="#createslider" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontal slider.</p>
 <pre><code>Custom widget properties:
-    | `number`_ (integer) ``element.widget.current``: Current value.
-    | `number`_ (integer) ``element.widget.max``: Maximum value.
-    | `number`_ (integer) ``element.widget.step``: Amount changed by left and right arrow buttons.
-    | `number`_ (integer) ``element.widget.jump``: Amount changed by clicking inside the slider area.
+    | `number`_ (integer) `element.widget.current`: Current value.
+    | `number`_ (integer) `element.widget.max`: Maximum value.
+    | `number`_ (integer) `element.widget.step`: Amount changed by left and right arrow buttons.
+    | `number`_ (integer) `element.widget.jump`: Amount changed by clicking inside the slider area.
 
 Custom events used with register:
-    | ``"PartScrollBar_changed"``: Triggers on value change; moving the slider is not enough if the value is the same.
+    | `"PartScrollBar_changed"`: Triggers on value change; moving the slider is not enough if the value is the same.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSlider</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">jump</span><span class="p">)</span>
 </code></pre></div>
@@ -7116,13 +7116,13 @@ Custom events used with register:
 <h3 id="createslidervertical"><code>createSliderVertical</code><a class="headerlink" href="#createslidervertical" title="Permanent link">⚓︎</a></h3>
 <p>Creates a vertical slider.</p>
 <pre><code>Custom widget properties:
-    | `number`_ (integer) ``element.widget.current``: Current value.
-    | `number`_ (integer) ``element.widget.max``: Maximum value.
-    | `number`_ (integer) ``element.widget.step``: Amount changed by up and down arrow buttons.
-    | `number`_ (integer) ``element.widget.jump``: Amount changed by clicking inside the slider area.
+    | `number`_ (integer) `element.widget.current`: Current value.
+    | `number`_ (integer) `element.widget.max`: Maximum value.
+    | `number`_ (integer) `element.widget.step`: Amount changed by up and down arrow buttons.
+    | `number`_ (integer) `element.widget.jump`: Amount changed by clicking inside the slider area.
 
 Custom events used with register:
-    | ``"PartScrollBar_changed"``: Triggers on value change; moving the slider is not enough if the value is the same.
+    | `"PartScrollBar_changed"`: Triggers on value change; moving the slider is not enough if the value is the same.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSliderVertical</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">jump</span><span class="p">)</span>
 </code></pre></div>
@@ -7142,8 +7142,8 @@ Custom events used with register:
 <h3 id="createtextinput"><code>createTextInput</code><a class="headerlink" href="#createtextinput" title="Permanent link">⚓︎</a></h3>
 <p>Creates a single line text input element. To receive input the keyboard must be captured with <code>tes3ui.acquireTextInput(element)</code>. Read the input with the <code>text</code> property. Write an initial value to display by setting the <code>text</code> property; that value will be cleared on the first keypress.</p>
 <pre><code>Custom widget properties:
-    | `boolean`_ ``element.widget.eraseOnFirstKey``: Clears the initial value if the first keypress is not an edit action. Default is ``true``.
-    | `number`_ (integer) ``element.widget.lengthLimit"``: Maximum input length, or ``nil`` for no limit. If you are setting names, the engine limits most identifiers to 31 characters. Default is ``nil``.
+    | `boolean`_ `element.widget.eraseOnFirstKey`: Clears the initial value if the first keypress is not an edit action. Default is `true`.
+    | `number`_ (integer) `element.widget.lengthLimit"`: Maximum input length, or `nil` for no limit. If you are setting names, the engine limits most identifiers to 31 characters. Default is `nil`.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextInput</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
@@ -7187,11 +7187,11 @@ Custom events used with register:
 <h3 id="createverticalscrollpane"><code>createVerticalScrollPane</code><a class="headerlink" href="#createverticalscrollpane" title="Permanent link">⚓︎</a></h3>
 <p>Creates a vertically scrolling pane. Useful as a list box.</p>
 <pre><code>Custom widget properties:
-    | `number`_ ``element.widget.positionY``: Vertical scroll offset in pixels.
-    | `boolean`_ ``element.widget.scrollbarVisible``: Set if the scrollbar is displayed.
+    | `number`_ `element.widget.positionY`: Vertical scroll offset in pixels.
+    | `boolean`_ `element.widget.scrollbarVisible`: Set if the scrollbar is displayed.
 
 Custom widget methods:
-    | ``element.widget:contentsChanged()``: Call to update scroll bar slider and limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after a menu:updateLayout(). Only required if the content size changes.
+    | `element.widget:contentsChanged()`: Call to update scroll bar slider and limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after a menu:updateLayout(). Only required if the content size changes.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createVerticalScrollPane</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
@@ -7288,12 +7288,12 @@ Custom widget methods:
 <hr />
 <h3 id="getpropertyobject"><code>getPropertyObject</code><a class="headerlink" href="#getpropertyobject" title="Permanent link">⚓︎</a></h3>
 <p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns <code>nil</code> if the property key did not have data, or if it could not guess the type of the property value.</p>
-<pre><code>For ``getPropertyObject``, an expected return value not derived from ``tes3baseObject`` requires the usertype to be provided as well. Currently accepted usertypes are:
-``tes3itemData``
-``tes3itemStack``
-``tes3gameFile``
-``tes3inventoryTile``
-``tes3uiElement``
+<pre><code>For `getPropertyObject`, an expected return value not derived from `tes3baseObject` requires the usertype to be provided as well. Currently accepted usertypes are:
+`tes3itemData`
+`tes3itemStack`
+`tes3gameFile`
+`tes3inventoryTile`
+`tes3uiElement`
 
 This is required because there is no identifying type information stored with the pointer. If the usertype is incorrect, there are no safety checks keeping the game from crashing.
 </code></pre>
@@ -7441,9 +7441,9 @@ button:register("mouseClick", onClick)
 </ul>
 <hr />
 <h3 id="reorderchildren"><code>reorderChildren</code><a class="headerlink" href="#reorderchildren" title="Permanent link">⚓︎</a></h3>
-<pre><code>Moves the layout order of the children of this element. ``count`` elements are taken from starting child `Element`_ or index (0-based) ``moveFrom``, and moved before the child `Element`_ or index (0-based) ``insertBefore``. If ``count`` is -1, all children after ``moveFrom`` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+<pre><code>Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 
-Returns ``true`` if the operation succeeded, or ``false`` if at least one argument was invalid.
+Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">reorderChildren</span><span class="p">(</span><span class="n">insertBefore</span><span class="p">,</span> <span class="n">moveFrom</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </code></pre></div>

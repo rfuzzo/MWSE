@@ -5172,7 +5172,12 @@
                 
                 
                 <h1 id="calcswimspeed">calcSwimSpeed<a class="headerlink" href="#calcswimspeed" title="Permanent link">⚓︎</a></h1>
-<p>One of the movement events, calcSwimSpeed is used when calculating the movement speed while in water.</p>
+<p>One of the movement events, <strong>calcSwimSpeed</strong> is used when calculating the movement speed while in water when running.</p>
+<p>The movement event flow is described below:</p>
+<ul>
+<li>Swimming: <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <strong>calcSwimSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+<li>Swimming (while running): <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <strong>calcSwimSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimRunSpeed">calcSwimRunSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcSwimSpeedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcSwimSpeedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>

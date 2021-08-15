@@ -5172,7 +5172,11 @@
                 
                 
                 <h1 id="calcrunspeed">calcRunSpeed<a class="headerlink" href="#calcrunspeed" title="Permanent link">⚓︎</a></h1>
-<p>One of the movement events, calcRunSpeed is used when calculating when the player is running, but not swimming or flying.</p>
+<p>One of the movement events, <strong>calcRunSpeed</strong> is used when calculating when the player is running, but not swimming or flying.</p>
+<p>The movement event flow is described below:</p>
+<ul>
+<li>Running: <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <strong>calcRunSpeed</strong> -&gt; <a href="https://mwse.github.io/MWSE/events/calcMoveSpeed">calcMoveSpeed</a></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcRunSpeedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcRunSpeedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>

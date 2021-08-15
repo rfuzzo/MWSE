@@ -5127,7 +5127,7 @@
                 
                 
                 <h1 id="weathercycled">weatherCycled<a class="headerlink" href="#weathercycled" title="Permanent link">⚓︎</a></h1>
-<p>The weatherCycled event occurs when region weathers are randomized.</p>
+<p>The <strong>weatherCycled</strong> event occurs when region weathers are randomized. This occurs at an interval set by the ini option “Hours Between Weather Changes”. Regions may select the same weather as before, and there will be no transition in this case.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e weatherCycledEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weatherCycledCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>

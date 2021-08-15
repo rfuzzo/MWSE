@@ -5172,7 +5172,8 @@
                 
                 
                 <h1 id="weathertransitionstarted">weatherTransitionStarted<a class="headerlink" href="#weathertransitionstarted" title="Permanent link">⚓︎</a></h1>
-<p>The weatherTransitionStarted event occurs when the currently simulated weather has started to gradually transition to a new weather.</p>
+<p>The <strong>weatherTransitionStarted</strong> event occurs when the currently simulated weather has started to gradually transition to a new weather. This can occur when moving between regions, or when the weather cycles.</p>
+<p>Weather will not start transitioning in interiors, but will continue transitioning, and may finish while in an interior. The transition may be interrupted at any time by the <a href="https://mwse.github.io/MWSE/events/weatherChangedImmediate">weatherChangedImmediate</a> event, and the <a href="https://mwse.github.io/MWSE/events/weatherTransitionFinished">weatherTransitionFinished</a> event will not occur.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e weatherTransitionStartedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weatherTransitionStartedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>

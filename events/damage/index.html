@@ -5239,30 +5239,6 @@
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;damage&quot;</span><span class="p">,</span> <span class="n">onDamage</span><span class="p">)</span>
 </code></pre></div>
 </div>
-<details class="example"><summary>Example: Change fall damage</summary><div class="highlight"><pre><span></span><code><span class="c1">-- Change fall damage if player is a Bosmer</span>
-<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onDamage</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="c1">-- We only care if the player took some damage</span>
-    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">reference</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span> <span class="kr">then</span>
-        <span class="kr">return</span>
-    <span class="kr">end</span>
-
-    <span class="c1">-- Check if the damage was caused by a fall</span>
-    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">source</span> <span class="o">~=</span> <span class="s2">&quot;fall&quot;</span> <span class="kr">then</span>
-        <span class="kr">return</span>
-    <span class="kr">end</span>
-
-    <span class="c1">-- Check weather the player is a Bosmer</span>
-    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">reference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">race</span><span class="p">.</span><span class="n">id</span><span class="p">:</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;bosmer&quot;</span> <span class="kr">then</span>    <span class="c1">-- This is the same as tes3.player.object.race.id:lower() == &quot;bosmer&quot;</span>
-        <span class="c1">-- Taunt the player</span>
-        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Ha ha ha, you broke your leg Bosmer&quot;</span><span class="p">)</span>
-
-        <span class="c1">-- Double the damage. He is Fargoth&#39;s cousin after all</span>
-        <span class="n">e</span><span class="p">.</span><span class="n">damage</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">damage</span> <span class="o">*</span> <span class="mi">2</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;damage&quot;</span><span class="p">,</span> <span class="n">onDamage</span><span class="p">)</span>
-</code></pre></div>
-</details>
                 
               
               

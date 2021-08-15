@@ -5187,6 +5187,14 @@
                 
                 <h1 id="calcmovespeed">calcMoveSpeed<a class="headerlink" href="#calcmovespeed" title="Permanent link">⚓︎</a></h1>
 <p>This event is called when an actor’s movement speed is calculated. The event allows modification of this value, to dehardcode actor movement speeds. Invoked after all other movement speed events are finished.</p>
+<p>The movement event flow is described below:</p>
+<ul>
+<li>Walking: <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <strong>calcMoveSpeed</strong></li>
+<li>Running: <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcRunSpeed">calcRunSpeed</a> -&gt; <strong>calcMoveSpeed</strong></li>
+<li>Swimming: <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimSpeed">calcSwimSpeed</a> -&gt; <strong>calcMoveSpeed</strong></li>
+<li>Swimming (while running): <a href="https://mwse.github.io/MWSE/events/calcWalkSpeed">calcWalkSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimSpeed">calcSwimSpeed</a> -&gt; <a href="https://mwse.github.io/MWSE/events/calcSwimRunSpeed">calcSwimRunSpeed</a> -&gt; <strong>calcMoveSpeed</strong></li>
+<li>Flying: <a href="https://mwse.github.io/MWSE/events/calcFlySpeed">calcFlySpeed</a> -&gt; <strong>calcMoveSpeed</strong></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcMoveSpeedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcMoveSpeedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -5214,14 +5222,6 @@
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">calcMoveSpeed</span><span class="p">,</span> <span class="n">onCalcMoveSpeed</span><span class="p">)</span>
 </code></pre></div>
 </div>
-<details class="example"><summary>Example: 20% Faster Player Movement</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onCalcMoveSpeed</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">reference</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="n">e</span><span class="p">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="mf">1.2</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">calcMoveSpeed</span><span class="p">,</span> <span class="n">onCalcMoveSpeed</span><span class="p">)</span>
-</code></pre></div>
-</details>
                 
               
               
