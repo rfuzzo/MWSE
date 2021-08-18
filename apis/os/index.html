@@ -1377,13 +1377,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#osexecute" class="md-nav__link">
-    os.execute
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#osgetclipboardtext" class="md-nav__link">
     os.getClipboardText
   </a>
@@ -1531,18 +1524,6 @@
     <li class="md-nav__item">
       <a href="../../types/lfsLock/" class="md-nav__link">
         lfsLock
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../types/mwseLuaExecutor/" class="md-nav__link">
-        mwseLuaExecutor
       </a>
     </li>
   
@@ -5213,13 +5194,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#osexecute" class="md-nav__link">
-    os.execute
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#osgetclipboardtext" class="md-nav__link">
     os.getClipboardText
   </a>
@@ -5261,21 +5235,6 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
-</ul>
-<hr />
-<h3 id="osexecute"><code>os.execute</code><a class="headerlink" href="#osexecute" title="Permanent link">⚓︎</a></h3>
-<p>Passes command to be executed by an operating system shell. This will not display a console prompt that interrupts the game.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">exitCode</span><span class="p">,</span> <span class="n">executor</span> <span class="o">=</span> <span class="nb">os.execute</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">async</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>command</code> (string): The command to run.</li>
-<li><code>async</code> (boolean): <em>Default</em>: <code>false</code>. If set to true, the program will be run in a separate thread. The second return value, <code>executor</code>, can be used to monitor its execution.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>exitCode</code> (number): The exit code of the program. If running with <code>async</code> and if successful, the exit code will be STILL_ACTIVE (259).</li>
-<li><code>executor</code> (<a href="../../types/mwseLuaExecutor">mwseLuaExecutor</a>, nil): If running with <code>async</code>, and if successful, this is a handle to the executor. This can be used to check if the program has finished running and to get the program's output.</li>
 </ul>
 <hr />
 <h3 id="osgetclipboardtext"><code>os.getClipboardText</code><a class="headerlink" href="#osgetclipboardtext" title="Permanent link">⚓︎</a></h3>
