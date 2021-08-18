@@ -1398,15 +1398,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ossetclipboardtext" class="md-nav__link">
-    os.setClipboardText
+  <a href="#osopenurl" class="md-nav__link">
+    os.openURL
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#osshowurl" class="md-nav__link">
-    os.showURL
+  <a href="#ossetclipboardtext" class="md-nav__link">
+    os.setClipboardText
   </a>
   
 </li>
@@ -5248,15 +5248,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ossetclipboardtext" class="md-nav__link">
-    os.setClipboardText
+  <a href="#osopenurl" class="md-nav__link">
+    os.openURL
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#osshowurl" class="md-nav__link">
-    os.showURL
+  <a href="#ossetclipboardtext" class="md-nav__link">
+    os.setClipboardText
   </a>
   
 </li>
@@ -5330,6 +5330,15 @@
 <li><code>result</code> (string, nil)</li>
 </ul>
 <hr />
+<h3 id="osopenurl"><code>os.openURL</code><a class="headerlink" href="#osopenurl" title="Permanent link">⚓︎</a></h3>
+<p>Opens the given <code>url</code> in the default browser. This has an advantage over using <code>os.execute("show https://my.url")</code> in that it does not create a command prompt window.</p>
+<div class="highlight"><pre><span></span><code><span class="n">os</span><span class="p">.</span><span class="n">openURL</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>url</code> (string): The URL to open.</li>
+</ul>
+<hr />
 <h3 id="ossetclipboardtext"><code>os.setClipboardText</code><a class="headerlink" href="#ossetclipboardtext" title="Permanent link">⚓︎</a></h3>
 <p>Sets the current clipboard text. If nil is passed, the clipboard will be cleared instead. If either operation fails, the function returns false.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">setClipboardText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -5341,15 +5350,6 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
-</ul>
-<hr />
-<h3 id="osshowurl"><code>os.showURL</code><a class="headerlink" href="#osshowurl" title="Permanent link">⚓︎</a></h3>
-<p>Opens the given <code>url</code> in the default browser. This has an advantage over using <code>os.execute("show https://my.url")</code> in that it does not create a command prompt window.</p>
-<div class="highlight"><pre><span></span><code><span class="n">os</span><span class="p">.</span><span class="n">showURL</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>url</code> (string): The URL to open.</li>
 </ul>
 <hr />
                 
