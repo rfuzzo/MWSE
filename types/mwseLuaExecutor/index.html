@@ -5319,14 +5319,14 @@
 <p>The error code of the program, or 0 if there was no error.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (string, nil)</li>
+<li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="exitcode"><code>exitCode</code><a class="headerlink" href="#exitcode" title="Permanent link">⚓︎</a></h3>
 <p>The exit code of the program, or nil if the program has not yet finished.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (string, nil)</li>
+<li><code>result</code> (number, nil)</li>
 </ul>
 <hr />
 <h3 id="ready"><code>ready</code><a class="headerlink" href="#ready" title="Permanent link">⚓︎</a></h3>
@@ -5339,8 +5339,12 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="getoutput"><code>getOutput</code><a class="headerlink" href="#getoutput" title="Permanent link">⚓︎</a></h3>
 <p>Reads the current output of the program, and clears the output buffer.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mwseLuaExecutor</span><span class="p">:</span><span class="n">getOutput</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">output</span> <span class="o">=</span> <span class="n">mwseLuaExecutor</span><span class="p">:</span><span class="n">getOutput</span><span class="p">()</span>
 </code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>output</code> (string): The output written to stdout by the program.</li>
+</ul>
 <hr />
 <h3 id="wait"><code>wait</code><a class="headerlink" href="#wait" title="Permanent link">⚓︎</a></h3>
 <p>Pauses the main thread, locking up the program until the program has finished.</p>
