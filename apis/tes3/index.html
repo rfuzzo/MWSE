@@ -1907,6 +1907,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getitemcount" class="md-nav__link">
+    tes3.getItemCount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getitemisstolen" class="md-nav__link">
     tes3.getItemIsStolen
   </a>
@@ -6912,6 +6919,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getitemcount" class="md-nav__link">
+    tes3.getItemCount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getitemisstolen" class="md-nav__link">
     tes3.getItemIsStolen
   </a>
@@ -8781,6 +8795,23 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>inputConfig</code> (<a href="../../types/tes3inputConfig">tes3inputConfig</a>)</li>
+</ul>
+<hr />
+<h3 id="tes3getitemcount"><code>tes3.getItemCount</code><a class="headerlink" href="#tes3getitemcount" title="Permanent link">⚓︎</a></h3>
+<p>Returns the amount of a certain item that can be found in a reference's inventory.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">count</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getItemCount</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to get the item count for. Must be a reference that has an inventory.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to get the count of.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>count</code> (number): The absolute value of the stack count in the reference's inventory.</li>
 </ul>
 <hr />
 <h3 id="tes3getitemisstolen"><code>tes3.getItemIsStolen</code><a class="headerlink" href="#tes3getitemisstolen" title="Permanent link">⚓︎</a></h3>
