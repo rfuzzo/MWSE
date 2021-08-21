@@ -3545,6 +3545,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#weaponready" class="md-nav__link">
+    weaponReady
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#werewolf" class="md-nav__link">
     werewolf
   </a>
@@ -3602,6 +3609,13 @@
           <li class="md-nav__item">
   <a href="#calceffectivedamage" class="md-nav__link">
     calcEffectiveDamage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equip" class="md-nav__link">
+    equip
   </a>
   
 </li>
@@ -3728,6 +3742,13 @@
           <li class="md-nav__item">
   <a href="#stopcombat" class="md-nav__link">
     stopCombat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unequip" class="md-nav__link">
+    unequip
   </a>
   
 </li>
@@ -6946,6 +6967,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#weaponready" class="md-nav__link">
+    weaponReady
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#werewolf" class="md-nav__link">
     werewolf
   </a>
@@ -7003,6 +7031,13 @@
           <li class="md-nav__item">
   <a href="#calceffectivedamage" class="md-nav__link">
     calcEffectiveDamage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equip" class="md-nav__link">
+    equip
   </a>
   
 </li>
@@ -7129,6 +7164,13 @@
           <li class="md-nav__item">
   <a href="#stopcombat" class="md-nav__link">
     stopCombat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unequip" class="md-nav__link">
+    unequip
   </a>
   
 </li>
@@ -7951,6 +7993,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="weaponready"><code>weaponReady</code><a class="headerlink" href="#weaponready" title="Permanent link">⚓︎</a></h3>
+<p>A flag for if the actor has a weapon ready or being readied (visible and held in the hand). Setting it to true will cause the actor to take out their weapon. Setting it to false will cause the actor to put it away.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="werewolf"><code>werewolf</code><a class="headerlink" href="#werewolf" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor in werewolf form.</p>
 <p><strong>Returns</strong>:</p>
@@ -8042,6 +8091,26 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="equip"><code>equip</code><a class="headerlink" href="#equip" title="Permanent link">⚓︎</a></h3>
+<p>Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return true.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemEquipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">equip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectBestCondition</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectWorstCondition</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to equip.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to equip.</li>
+<li><code>addItem</code> (boolean): If true, the item will be added to the actor's inventory if needed.</li>
+<li><code>selectBestCondition</code> (boolean): If true, the item in the inventory with the best condition and best charge will be selected.</li>
+<li><code>selectWorstCondition</code> (boolean): If true, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>itemEquipped</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="getactivemagiceffects"><code>getActiveMagicEffects</code><a class="headerlink" href="#getactivemagiceffects" title="Permanent link">⚓︎</a></h3>
@@ -8233,6 +8302,25 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>force</code> (boolean): If false, the function won't stop combat if the actor has other valid hostile targets.</li>
+</ul>
+<hr />
+<h3 id="unequip"><code>unequip</code><a class="headerlink" href="#unequip" title="Permanent link">⚓︎</a></h3>
+<p>Unequips one or more items from the actor.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemUnequipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">unequip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">armorSlot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">clothingSlot</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to unequip.</li>
+<li><code>type</code> (number): <em>Optional</em>. The item type to unequip. Only used if no other parameter is provided.</li>
+<li><code>armorSlot</code> (number): <em>Optional</em>. The armor slot to unequip.</li>
+<li><code>clothingSlot</code> (number): <em>Optional</em>. The clothing slot to unequip.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>itemUnequipped</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="updatederivedstatistics"><code>updateDerivedStatistics</code><a class="headerlink" href="#updatederivedstatistics" title="Permanent link">⚓︎</a></h3>

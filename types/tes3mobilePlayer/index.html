@@ -9633,7 +9633,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="weaponready"><code>weaponReady</code><a class="headerlink" href="#weaponready" title="Permanent link">⚓︎</a></h3>
-<p>Toggle flag for if the player has a weapon ready. Setting it to true will cause the player to take out their weapon. Setting it to false will cause them to put it away.</p>
+<p>A flag for if the player has a weapon ready or being readied (visible and held in the hand). Setting it to true will cause the player to take out their weapon. Setting it to false will cause the player to put it away.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -9734,7 +9734,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <hr />
 <h3 id="equip"><code>equip</code><a class="headerlink" href="#equip" title="Permanent link">⚓︎</a></h3>
 <p>Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return true.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemEquipped</span> <span class="o">=</span> <span class="n">tes3mobileNPC</span><span class="p">:</span><span class="n">equip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectBestCondition</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectWorstCondition</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemEquipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">equip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectBestCondition</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectWorstCondition</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9964,7 +9964,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <hr />
 <h3 id="unequip"><code>unequip</code><a class="headerlink" href="#unequip" title="Permanent link">⚓︎</a></h3>
 <p>Unequips one or more items from the actor.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileNPC</span><span class="p">:</span><span class="n">unequip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">armorSlot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">clothingSlot</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemUnequipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">unequip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">armorSlot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">clothingSlot</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9978,7 +9978,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (boolean)</li>
+<li><code>itemUnequipped</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="updatederivedstatistics"><code>updateDerivedStatistics</code><a class="headerlink" href="#updatederivedstatistics" title="Permanent link">⚓︎</a></h3>
