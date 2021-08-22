@@ -5295,12 +5295,8 @@
 <p class="admonition-title"><strong>The Hello World Mod\i18n\deu.lua</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
-    <span class="n">deu</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hallo Welt!&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+    <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hallo Welt!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5309,12 +5305,8 @@
 <p class="admonition-title"><strong>The Hello World Mod\i18n\eng.lua</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
-    <span class="n">eng</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+    <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5323,12 +5315,8 @@
 <p class="admonition-title"><strong>The Hello World Mod\i18n\fra.lua</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
-    <span class="n">fra</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bonjour le monde!&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+    <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bonjour le monde!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5337,12 +5325,8 @@
 <p class="admonition-title"><strong>The Hello World Mod\i18n\rus.lua</strong></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
-    <span class="n">rus</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Привет, мир!&quot;</span><span class="p">,</span>
-    <span class="p">}</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+    <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Привет, мир!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5365,11 +5349,7 @@
 </div>
 <p>This code looks pretty simple, but what is really happening here? <code>mwse.loadTranslation("The Hello World Mod")</code> loads content from <strong>The Hello World Mod\i18n\eng.lua</strong> as well as an optional additional file, based on the player's game language. This can be <strong>deu.lua</strong>, <strong>fra.lua</strong>, or <strong>rus.lua</strong>. When the <code>i18n</code> translation result is called, it returns the translation for the player's current language with the key <code>"Hello world!"</code>.</p>
 <h2 id="translation-files">Translation Files<a class="headerlink" href="#translation-files" title="Permanent link">⚓︎</a></h2>
-<p>The translation files available in the <strong>i18n</strong> folder follow a simple format, but it warrants description here. Each is a simple lua file that returns a table. That table has a locale as a key, with a value another table with key/value translation pairs.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>There is nothing stopping you from using <strong>eng.lua</strong> to define all translations in one file, but it is not suggested that you do so. Because the locale is known when the game starts, and language cannot be changed mid-game, there is no reason to keep more than one dictionary in memory.</p>
-</div>
+<p>The translation files available in the <strong>i18n</strong> folder follow a simple format, but it warrants description here. Each is a simple lua file that returns a table. The keys in that table can be passed to the <code>i18n</code> value returned from <code>mwse.loadTranslation</code> to get a translation for the player's language.</p>
 <p>A translation value is typically a string, but it can also have support for different translations based on values fed.</p>
 <h3 id="pluralization">Pluralization<a class="headerlink" href="#pluralization" title="Permanent link">⚓︎</a></h3>
 <p>i18n supports the <a href="http://cldr.unicode.org/index/cldr-spec/plural-rules">unicode.org plural rules</a>, to make translations more intelligent and context-sensitive. We will discuss feeding values for this shortly. Consider this example, handling how to display the number of iron daggers the player has:</p>
@@ -5382,16 +5362,12 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">eng</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
-            <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %{count} %{item}s.&quot;</span><span class="p">,</span>
-        <span class="p">},</span>
-    <span class="p">}</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %{count} %{item}s.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5425,16 +5401,12 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">eng</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
-            <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %{count} %{item}s.&quot;</span><span class="p">,</span>
-        <span class="p">},</span>
-    <span class="p">}</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %{count} %{item}s.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5452,16 +5424,12 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">eng</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %ss.&quot;</span><span class="p">,</span>
-            <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %s.&quot;</span><span class="p">,</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %d %ss.&quot;</span><span class="p">,</span>
-        <span class="p">},</span>
-    <span class="p">}</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %ss.&quot;</span><span class="p">,</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %s.&quot;</span><span class="p">,</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %d %ss.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
@@ -5487,16 +5455,12 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">eng</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
-            <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %&lt;item&gt;d.&quot;</span><span class="p">,</span>
-            <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %&lt;count&gt;d %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
-        <span class="p">},</span>
-    <span class="p">}</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %&lt;item&gt;d.&quot;</span><span class="p">,</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %&lt;count&gt;d %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
