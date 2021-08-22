@@ -5338,7 +5338,7 @@
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslation</span><span class="p">(</span><span class="s2">&quot;The Hello World Mod&quot;</span><span class="p">)</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="s2">&quot;The Hello World Mod&quot;</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">))</span>
@@ -5347,9 +5347,9 @@
 </code></pre></div>
 </td></tr></table>
 </div>
-<p>This code looks pretty simple, but what is really happening here? <code>mwse.loadTranslation("The Hello World Mod")</code> loads content from <strong>The Hello World Mod\i18n\eng.lua</strong> as well as an optional additional file, based on the player's game language. This can be <strong>deu.lua</strong>, <strong>fra.lua</strong>, or <strong>rus.lua</strong>. When the <code>i18n</code> translation result is called, it returns the translation for the player's current language with the key <code>"Hello world!"</code>.</p>
+<p>This code looks pretty simple, but what is really happening here? <code>mwse.loadTranslations("The Hello World Mod")</code> loads content from <strong>The Hello World Mod\i18n\eng.lua</strong> as well as an optional additional file, based on the player's game language. This can be <strong>deu.lua</strong>, <strong>fra.lua</strong>, or <strong>rus.lua</strong>. When the <code>i18n</code> translation result is called, it returns the translation for the player's current language with the key <code>"Hello world!"</code>.</p>
 <h2 id="translation-files">Translation Files<a class="headerlink" href="#translation-files" title="Permanent link">⚓︎</a></h2>
-<p>The translation files available in the <strong>i18n</strong> folder follow a simple format, but it warrants description here. Each is a simple lua file that returns a table. The keys in that table can be passed to the <code>i18n</code> value returned from <code>mwse.loadTranslation</code> to get a translation for the player's language.</p>
+<p>The translation files available in the <strong>i18n</strong> folder follow a simple format, but it warrants description here. Each is a simple lua file that returns a table. The keys in that table can be passed to the <code>i18n</code> value returned from <code>mwse.loadTranslations</code> to get a translation for the player's language.</p>
 <p>A translation value is typically a string, but it can also have support for different translations based on values fed.</p>
 <h3 id="pluralization">Pluralization<a class="headerlink" href="#pluralization" title="Permanent link">⚓︎</a></h3>
 <p>i18n supports the <a href="http://cldr.unicode.org/index/cldr-spec/plural-rules">unicode.org plural rules</a>, to make translations more intelligent and context-sensitive. We will discuss feeding values for this shortly. Consider this example, handling how to display the number of iron daggers the player has:</p>
@@ -5378,7 +5378,7 @@
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslation</span><span class="p">(</span><span class="s2">&quot;Iron Dagger Counter&quot;</span><span class="p">)</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="s2">&quot;Iron Dagger Counter&quot;</span><span class="p">)</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">dagger</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron dagger&quot;</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">daggerCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getItemCount</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span> <span class="p">})</span>
