@@ -3235,6 +3235,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#islocationmarker" class="md-nav__link">
+    isLocationMarker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mesh" class="md-nav__link">
     mesh
   </a>
@@ -3293,6 +3300,13 @@
           <li class="md-nav__item">
   <a href="#scale" class="md-nav__link">
     scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenecollisionroot" class="md-nav__link">
+    sceneCollisionRoot
   </a>
   
 </li>
@@ -5404,6 +5418,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#islocationmarker" class="md-nav__link">
+    isLocationMarker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mesh" class="md-nav__link">
     mesh
   </a>
@@ -5462,6 +5483,13 @@
           <li class="md-nav__item">
   <a href="#scale" class="md-nav__link">
     scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenecollisionroot" class="md-nav__link">
+    sceneCollisionRoot
   </a>
   
 </li>
@@ -5554,7 +5582,8 @@
                 
                 
                 <h1 id="tes3static">tes3static<a class="headerlink" href="#tes3static" title="Permanent link">⚓︎</a></h1>
-<p>A static game object.</p>
+<p>A static game object. A non-animated object like a building or rock.</p>
+<p>There are special-case marker statics used for gameplay purposes, such as travel and intervention. Use the <code>object.isLocationMarker</code> property to detect these markers.</p>
 <p>This type inherits the following: <a href="../../types/tes3physicalObject">tes3physicalObject</a>, <a href="../../types/tes3object">tes3object</a>, <a href="../../types/tes3baseObject">tes3baseObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="blocked"><code>blocked</code><a class="headerlink" href="#blocked" title="Permanent link">⚓︎</a></h3>
@@ -5590,6 +5619,13 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
+</ul>
+<hr />
+<h3 id="islocationmarker"><code>isLocationMarker</code><a class="headerlink" href="#islocationmarker" title="Permanent link">⚓︎</a></h3>
+<p>True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="mesh"><code>mesh</code><a class="headerlink" href="#mesh" title="Permanent link">⚓︎</a></h3>
@@ -5653,6 +5689,13 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="scenecollisionroot"><code>sceneCollisionRoot</code><a class="headerlink" href="#scenecollisionroot" title="Permanent link">⚓︎</a></h3>
+<p>The scene graph node for this object's physics collision, if its mesh has a root collision node.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>
 </ul>
 <hr />
 <h3 id="scenenode"><code>sceneNode</code><a class="headerlink" href="#scenenode" title="Permanent link">⚓︎</a></h3>
