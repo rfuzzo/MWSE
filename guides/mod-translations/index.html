@@ -5351,6 +5351,30 @@
 <h2 id="translation-files">Translation Files<a class="headerlink" href="#translation-files" title="Permanent link">⚓︎</a></h2>
 <p>The translation files available in the <strong>i18n</strong> folder follow a simple format, but it warrants description here. Each is a simple lua file that returns a table. The keys in that table can be passed to the <code>i18n</code> value returned from <code>mwse.loadTranslations</code> to get a translation for the player's language.</p>
 <p>A translation value is typically a string, but it can also have support for different translations based on values fed.</p>
+<div class="admonition note">
+<p class="admonition-title">File Encoding</p>
+<p>The encoding used to save your files depends on the language you are writing for. Be sure you use the right encoding!</p>
+<ul>
+<li><strong>Windows 1252</strong>: English, French, German, Spanish</li>
+<li><strong>Windows 1251</strong>: Russian</li>
+<li><strong>Windows 1250</strong>: Polish</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Dots in Translation Keys</p>
+<p>When using dots to break apart translation keys, be careful of not to use a category as a value. For example, the following will create an error:
+<div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="s2">&quot;mcm.component.console&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Enable console component?&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s2">&quot;mcm.component.console.description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;It&#39;s really cool, so you should.&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+Instead, use something like:
+<div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="s2">&quot;mcm.component.console.label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Enable console component?&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s2">&quot;mcm.component.console.description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;It&#39;s really cool, so you should.&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
 <h3 id="pluralization">Pluralization<a class="headerlink" href="#pluralization" title="Permanent link">⚓︎</a></h3>
 <p>i18n supports the <a href="http://cldr.unicode.org/index/cldr-spec/plural-rules">unicode.org plural rules</a>, to make translations more intelligent and context-sensitive. We will discuss feeding values for this shortly. Consider this example, handling how to display the number of iron daggers the player has:</p>
 <div class="admonition example">
