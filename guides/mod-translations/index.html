@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.f7f47774.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.be71726b.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -5406,7 +5406,7 @@ Instead, use something like:
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">dagger</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron dagger&quot;</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">daggerCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getItemCount</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span> <span class="p">})</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="n">itemCountNotification</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="n">onPressZ</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">z</span> <span class="p">})</span>
 </code></pre></div>
@@ -5435,7 +5435,7 @@ Instead, use something like:
 </code></pre></div>
 </td></tr></table>
 <strong>main.lua</strong>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="n">itemCountNotification</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 </code></pre></div>
 </td></tr></table></p>
 </div>
@@ -5463,9 +5463,9 @@ Instead, use something like:
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">if</span> <span class="p">(</span><span class="n">daggerCount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="kr">then</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="n">itemCountNotification</span><span class="p">,</span> <span class="p">{</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 <span class="kr">else</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="n">itemCountNotification</span><span class="p">,</span> <span class="p">{</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 <span class="kr">end</span>
 </code></pre></div>
 </td></tr></table></p>
@@ -5489,7 +5489,7 @@ Instead, use something like:
 </code></pre></div>
 </td></tr></table>
 <strong>main.lua</strong>:
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="n">itemCountNotification</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 </code></pre></div>
 </td></tr></table></p>
 </div>
@@ -5568,10 +5568,10 @@ Instead, use something like:
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.febc23d1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.56a63758.min.js"></script>
       
     
   </body>
