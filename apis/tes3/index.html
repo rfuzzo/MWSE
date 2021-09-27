@@ -3023,6 +3023,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3updatemagicgui" class="md-nav__link">
+    tes3.updateMagicGUI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3wakeup" class="md-nav__link">
     tes3.wakeUp
   </a>
@@ -9276,6 +9283,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3updatemagicgui" class="md-nav__link">
+    tes3.updateMagicGUI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3wakeup" class="md-nav__link">
     tes3.wakeUp
   </a>
@@ -11971,6 +11985,18 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>wasSet</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="tes3updatemagicgui"><code>tes3.updateMagicGUI</code><a class="headerlink" href="#tes3updatemagicgui" title="Permanent link">⚓︎</a></h3>
+<p>Forces the GUI to update magic-relevant elements for a given reference. This can be used after many calls to magic- or magic item-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">updateMagicGUI</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to update GUI elements for.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="tes3wakeup"><code>tes3.wakeUp</code><a class="headerlink" href="#tes3wakeup" title="Permanent link">⚓︎</a></h3>
