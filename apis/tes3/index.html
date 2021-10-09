@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.24c991ad.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -1904,6 +1904,13 @@
           <li class="md-nav__item">
   <a href="#tes3addarmorslot" class="md-nav__link">
     tes3.addArmorSlot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3addclothingslot" class="md-nav__link">
+    tes3.addClothingSlot
   </a>
   
 </li>
@@ -8169,6 +8176,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3addclothingslot" class="md-nav__link">
+    tes3.addClothingSlot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3additem" class="md-nav__link">
     tes3.addItem
   </a>
@@ -9452,6 +9466,19 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>wasAdded</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="tes3addclothingslot"><code>tes3.addClothingSlot</code><a class="headerlink" href="#tes3addclothingslot" title="Permanent link">⚓︎</a></h3>
+<p>Registers a new clothing slot. Adds a new place for clothing pieces with a matching slot number to equip to.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">addClothingSlot</span><span class="p">({</span> <span class="n">slot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>slot</code> (number): Clothing slot number. A number greater than 9 to configure a slot for.</li>
+<li><code>name</code> (string)</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="tes3additem"><code>tes3.addItem</code><a class="headerlink" href="#tes3additem" title="Permanent link">⚓︎</a></h3>
@@ -12141,10 +12168,10 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.bc35569b.min.js"></script>
       
     
   </body>
