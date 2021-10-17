@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.3">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.24c991ad.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.5143246d.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -9705,8 +9705,17 @@
 <hr />
 <h3 id="tes3canrest"><code>tes3.canRest</code><a class="headerlink" href="#tes3canrest" title="Permanent link">⚓︎</a></h3>
 <p>This function returns true if player can rest.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">canRest</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">canRest</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">canRest</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">canRest</span><span class="p">({</span> <span class="n">checkForEnemies</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">checkForSolidGround</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">showMessage</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.</li>
+<li><code>checkForSolidGround</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is underwater. If underwater, false is returned.</li>
+<li><code>showMessage</code> (boolean): If true, a messagebox will be shown if the player can't rest because some condition isn't met.</li>
+</ul>
+</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>canRest</code> (boolean)</li>
@@ -11868,10 +11877,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check weather there are enemies nearby before opening rest menu. If there are, false is returned.</li>
+<li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.</li>
 <li><code>checkForSolidGround</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is underwater. If underwater, false is returned.</li>
-<li><code>checkSleepingIllegal</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the sleeping in the current cell is illegal. If illegal, false if returned.</li>
-<li><code>checkIsWerewolf</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is Werewolf. If he/she is, then false is returned.</li>
+<li><code>checkSleepingIllegal</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the sleeping in the current cell is illegal. If illegal, then the player will be prompted to wait instead of rest.</li>
+<li><code>checkIsWerewolf</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is Werewolf. If they are, then the player will be prompted to wait instead of rest.</li>
 <li><code>showMessage</code> (boolean): <em>Default</em>: <code>true</code>. Should a messagebox be shown if the player can't open resting menu because some condition isn't met.</li>
 <li><code>resting</code> (boolean): <em>Default</em>: <code>true</code>. Should this be a rest?</li>
 <li><code>waiting</code> (boolean): <em>Optional</em>. Or, is this a wait?</li>
@@ -12168,10 +12177,10 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.8397ff9e.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.bc35569b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f89c2efe.min.js"></script>
       
     
   </body>
