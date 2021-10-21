@@ -1951,6 +1951,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3addspell" class="md-nav__link">
+    tes3.addSpell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3adjustsoundvolume" class="md-nav__link">
     tes3.adjustSoundVolume
   </a>
@@ -2588,6 +2595,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3hasspell" class="md-nav__link">
+    tes3.hasSpell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3incrementkillcount" class="md-nav__link">
     tes3.incrementKillCount
   </a>
@@ -2800,6 +2814,13 @@
           <li class="md-nav__item">
   <a href="#tes3removesound" class="md-nav__link">
     tes3.removeSound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3removespell" class="md-nav__link">
+    tes3.removeSpell
   </a>
   
 </li>
@@ -8218,6 +8239,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3addspell" class="md-nav__link">
+    tes3.addSpell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3adjustsoundvolume" class="md-nav__link">
     tes3.adjustSoundVolume
   </a>
@@ -8855,6 +8883,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3hasspell" class="md-nav__link">
+    tes3.hasSpell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3incrementkillcount" class="md-nav__link">
     tes3.incrementKillCount
   </a>
@@ -9067,6 +9102,13 @@
           <li class="md-nav__item">
   <a href="#tes3removesound" class="md-nav__link">
     tes3.removeSound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3removespell" class="md-nav__link">
+    tes3.removeSpell
   </a>
   
 </li>
@@ -9607,6 +9649,24 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>wasAdded</code> (number)</li>
+</ul>
+<hr />
+<h3 id="tes3addspell"><code>tes3.addSpell</code><a class="headerlink" href="#tes3addspell" title="Permanent link">⚓︎</a></h3>
+<p>Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasAdded</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to give the spell to. To manipulate an actor without specifying any particular reference, use <code>actor</code> instead.</li>
+<li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
+<li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to add.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasAdded</code> (boolean): True if the spell was successfully added. This can be false if the actor's race or birthsign already contains the spell.</li>
 </ul>
 <hr />
 <h3 id="tes3adjustsoundvolume"><code>tes3.adjustSoundVolume</code><a class="headerlink" href="#tes3adjustsoundvolume" title="Permanent link">⚓︎</a></h3>
@@ -10945,6 +11005,24 @@
 <li><code>hasAccess</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="tes3hasspell"><code>tes3.hasSpell</code><a class="headerlink" href="#tes3hasspell" title="Permanent link">⚓︎</a></h3>
+<p>Determines if the player has access to a given spell.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hasSpell</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">hasSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to check the spell list of. To check an actor without specifying any particular reference, use <code>actor</code> instead.</li>
+<li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
+<li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to check.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>hasSpell</code> (boolean): True if the spell exists in the actor's spell list, race spell list, or birthsign spell list.</li>
+</ul>
+<hr />
 <h3 id="tes3incrementkillcount"><code>tes3.incrementKillCount</code><a class="headerlink" href="#tes3incrementkillcount" title="Permanent link">⚓︎</a></h3>
 <p>Increases player's kill count of a certain type of actor by one.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">incrementKillCount</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
@@ -11460,6 +11538,24 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference the sound is attached to.</li>
 </ul>
 </li>
+</ul>
+<hr />
+<h3 id="tes3removespell"><code>tes3.removeSpell</code><a class="headerlink" href="#tes3removespell" title="Permanent link">⚓︎</a></h3>
+<p>Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasRemoved</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">removeSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to remove the spell from. To manipulate an actor without specifying any particular reference, use <code>actor</code> instead.</li>
+<li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
+<li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to remove.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasRemoved</code> (boolean): True if the spell was successfully removed. This can be false if the spell comes from a race or birthsign.</li>
 </ul>
 <hr />
 <h3 id="tes3runlegacyscript"><code>tes3.runLegacyScript</code><a class="headerlink" href="#tes3runlegacyscript" title="Permanent link">⚓︎</a></h3>
@@ -12080,12 +12176,14 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <hr />
 <h3 id="tes3updatemagicgui"><code>tes3.updateMagicGUI</code><a class="headerlink" href="#tes3updatemagicgui" title="Permanent link">⚓︎</a></h3>
 <p>Forces the GUI to update magic-relevant elements for a given reference. This can be used after many calls to magic- or magic item-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">updateMagicGUI</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">updateMagicGUI</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateSpells</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateEnchantments</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to update GUI elements for.</li>
+<li><code>updateSpells</code> (boolean): <em>Default</em>: <code>true</code>. Determines if the spell and power lists are refreshed.</li>
+<li><code>updateEnchantments</code> (boolean): <em>Default</em>: <code>true</code>. Determines if the enchanted items list is refreshed.</li>
 </ul>
 </li>
 </ul>
