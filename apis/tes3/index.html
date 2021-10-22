@@ -11541,7 +11541,7 @@
 </ul>
 <hr />
 <h3 id="tes3removespell"><code>tes3.removeSpell</code><a class="headerlink" href="#tes3removespell" title="Permanent link">⚓︎</a></h3>
-<p>Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.</p>
+<p>Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasRemoved</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">removeSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
