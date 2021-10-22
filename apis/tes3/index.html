@@ -9653,7 +9653,7 @@
 <hr />
 <h3 id="tes3addspell"><code>tes3.addSpell</code><a class="headerlink" href="#tes3addspell" title="Permanent link">⚓︎</a></h3>
 <p>Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasAdded</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasAdded</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9661,6 +9661,7 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to give the spell to. To manipulate an actor without specifying any particular reference, use <code>actor</code> instead.</li>
 <li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to add.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respsecting the adding of the spell. This can be useful to disable when batch-adding many spells. The batch should be ended with <code>tes3.updateMagicGUI</code> to reflect the changes.</li>
 </ul>
 </li>
 </ul>
@@ -11542,7 +11543,7 @@
 <hr />
 <h3 id="tes3removespell"><code>tes3.removeSpell</code><a class="headerlink" href="#tes3removespell" title="Permanent link">⚓︎</a></h3>
 <p>Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasRemoved</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">removeSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasRemoved</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">removeSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -11550,6 +11551,7 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to remove the spell from. To manipulate an actor without specifying any particular reference, use <code>actor</code> instead.</li>
 <li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to remove.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respsecting the removal of the spell. This can be useful to disable when batch-removing many spells. The batch should be ended with <code>tes3.updateMagicGUI</code> to reflect the changes.</li>
 </ul>
 </li>
 </ul>
