@@ -3877,6 +3877,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#boundsize2d" class="md-nav__link">
+    boundSize2D
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell" class="md-nav__link">
     cell
   </a>
@@ -7982,6 +7989,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#boundsize2d" class="md-nav__link">
+    boundSize2D
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell" class="md-nav__link">
     cell
   </a>
@@ -9001,10 +9015,17 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="boundsize"><code>boundSize</code><a class="headerlink" href="#boundsize" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A vector that shows the size of the bounding box in each direction.</p>
+<p>A vector that shows the size of the bounding box in each direction. Note that this is a convenience feature, and delivers the <code>x</code> and <code>y</code> values from <code>boundSize2D</code> with the <code>z</code> value of the mobile's <code>height</code>. Editing the values of the returned vector will not change the values that they came from, though setting the property itself will work.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+</ul>
+<hr />
+<h3 id="boundsize2d"><code>boundSize2D</code><a class="headerlink" href="#boundsize2d" title="Permanent link">⚓︎</a></h3>
+<p>A vector that shows the size of the bounding box in each direction. Note that this is a convenience feature, and delivers the values from <code>boundSize2D</code> with the <code>z</code> value of the mobile's <code>height</code>.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3vector2">tes3vector2</a>)</li>
 </ul>
 <hr />
 <h3 id="cell"><code>cell</code><a class="headerlink" href="#cell" title="Permanent link">⚓︎</a></h3>
@@ -9113,7 +9134,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="flags"><code>flags</code><a class="headerlink" href="#flags" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Access to the root mobile object flags, represented as an integer. Should not be accessed directly.</p>
+<p>Access to the root mobile object flags, represented as an integer. Should not be accessed directly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9155,7 +9176,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="height"><code>height</code><a class="headerlink" href="#height" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The height of the mobile above the ground.</p>
+<p>The height of the mobile above the ground.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9394,7 +9415,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="movementflags"><code>movementFlags</code><a class="headerlink" href="#movementflags" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.</p>
+<p>Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9443,7 +9464,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="prevmovementflags"><code>prevMovementFlags</code><a class="headerlink" href="#prevmovementflags" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.</p>
+<p>Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
