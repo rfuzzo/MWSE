@@ -6923,8 +6923,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Example: Prevent the player from activating NPCs</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Show the id when the player activates an object.</span>
-<span class="kd">local</span> <span class="kr">function</span> <span class="nf">myOnActivateCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">myOnActivateCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- We only care if the PC is activating something.</span>
     <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">activator</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">)</span> <span class="kr">then</span>
         <span class="kr">return</span>
