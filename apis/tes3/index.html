@@ -9871,12 +9871,15 @@
 <hr />
 <h3 id="tes3checkmerchanttradesitem"><code>tes3.checkMerchantTradesItem</code><a class="headerlink" href="#tes3checkmerchanttradesitem" title="Permanent link">⚓︎</a></h3>
 <p>Determines if a merchant trades in a given item.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">trades</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">checkMerchantTradesItem</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">trades</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">checkMerchantTradesItem</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string)</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
