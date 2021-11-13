@@ -1801,6 +1801,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#mwseclearscriptoverride" class="md-nav__link">
+    mwse.clearScriptOverride
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwsegetversion" class="md-nav__link">
     mwse.getVersion
   </a>
@@ -7029,6 +7036,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#mwseclearscriptoverride" class="md-nav__link">
+    mwse.clearScriptOverride
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwsegetversion" class="md-nav__link">
     mwse.getVersion
   </a>
@@ -7151,6 +7165,19 @@
 </ul>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="mwseclearscriptoverride"><code>mwse.clearScriptOverride</code><a class="headerlink" href="#mwseclearscriptoverride" title="Permanent link">⚓︎</a></h3>
+<p>Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of <code>mwse.overrideScript</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">clearScriptOverride</span><span class="p">(</span><span class="n">scriptId</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>scriptId</code> (string)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="mwsegetversion"><code>mwse.getVersion</code><a class="headerlink" href="#mwsegetversion" title="Permanent link">⚓︎</a></h3>
 <p>Equivalent to mwse.version.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getVersion</span><span class="p">()</span>
