@@ -646,6 +646,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -864,6 +866,20 @@
     <li class="md-nav__item">
       <a href="../../references/crime-types/" class="md-nav__link">
         Crime Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/damage-sources/" class="md-nav__link">
+        Damage Sources
       </a>
     </li>
   
@@ -1231,7 +1247,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_41" type="checkbox" id="__nav_3_41" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_42" type="checkbox" id="__nav_3_42" >
       
       
       
@@ -1262,13 +1278,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_41">
+        <label class="md-nav__link" for="__nav_3_42">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_41">
+        <label class="md-nav__title" for="__nav_3_42">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1460,7 +1476,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_42" type="checkbox" id="__nav_3_42" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_43" type="checkbox" id="__nav_3_43" >
       
       
       
@@ -1469,13 +1485,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_42">
+        <label class="md-nav__link" for="__nav_3_43">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_42">
+        <label class="md-nav__title" for="__nav_3_43">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -6988,13 +7004,13 @@
 <ul>
 <li><code>activeMagicEffect</code> (<a href="../../types/tes3magicEffect">tes3magicEffect</a>): <em>Read-only</em>. tes3magicEffect which caused damage. Can be nil.</li>
 <li><code>attacker</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor dealing the damage. Can be nil.</li>
-<li><code>attackerReference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. attacker mobile's associated reference. Can be nil.</li>
+<li><code>attackerReference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The attacker mobile's associated reference. Can be nil.</li>
 <li><code>damage</code> (number): The amount of damage done.</li>
 <li><code>magicSourceInstance</code> (<a href="../../types/tes3magicSourceInstance">tes3magicSourceInstance</a>): tes3magicSourceInstance of a spell that caused damage. Can be nil.</li>
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor that is taking damage.</li>
 <li><code>projectile</code> (<a href="../../types/tes3mobileProjectile">tes3mobileProjectile</a>): <em>Read-only</em>. Projectile that dealt the damage. Can be nil.</li>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. mobile’s associated reference.</li>
-<li><code>source</code> (damageSourceType): <em>Read-only</em>. The origin of damage. Values of this variable can be: "script", "fall", "suffocation", "attack", "magic", "shield" or nil.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The mobile’s associated reference.</li>
+<li><code>source</code> (tes3.damageSource constants): <em>Read-only</em>. The origin of damage. Values of this variable can be: "script", "fall", "suffocation", "attack", "magic", "shield" or nil. These damage sources are present as tes3.damageSource.* constants, and those should be used instead. See the example. Damage with "shield" source comes from magic shields. Other sources are self-explanatory.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
@@ -7007,7 +7023,7 @@
     <span class="kr">end</span>
 
     <span class="c1">-- Check if the damage was caused by a fall</span>
-    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">source</span> <span class="o">~=</span> <span class="s2">&quot;fall&quot;</span> <span class="kr">then</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">source</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">damageSource</span><span class="p">.</span><span class="n">fall</span> <span class="kr">then</span>
         <span class="kr">return</span>
     <span class="kr">end</span>
 
