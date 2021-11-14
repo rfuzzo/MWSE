@@ -3546,6 +3546,16 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -4322,6 +4332,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/tes3audioController/" class="md-nav__link">
+        tes3audioController
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/tes3baseObject/" class="md-nav__link">
         tes3baseObject
       </a>
@@ -4716,6 +4740,20 @@
     <li class="md-nav__item">
       <a href="../../types/tes3gameSetting/" class="md-nav__link">
         tes3gameSetting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3globalScript/" class="md-nav__link">
+        tes3globalScript
       </a>
     </li>
   
@@ -5484,6 +5522,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/tes3script/" class="md-nav__link">
+        tes3script
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3scriptContext/" class="md-nav__link">
+        tes3scriptContext
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/tes3skill/" class="md-nav__link">
         tes3skill
       </a>
@@ -5556,6 +5622,20 @@
     <li class="md-nav__item">
       <a href="../../types/tes3spellList/" class="md-nav__link">
         tes3spellList
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3startScript/" class="md-nav__link">
+        tes3startScript
       </a>
     </li>
   
@@ -10888,8 +10968,12 @@
 <hr />
 <h3 id="tes3getregion"><code>tes3.getRegion</code><a class="headerlink" href="#tes3getregion" title="Permanent link">⚓︎</a></h3>
 <p>Gets the current region the player is in. This checks the player's current cell first, but will fall back to the last exterior cell.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">region</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getRegion</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">region</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getRegion</span><span class="p">(</span><span class="n">useDoors</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>useDoors</code> (boolean): <em>Optional</em>.</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>region</code> (<a href="../../types/tes3region">tes3region</a>)</li>
@@ -10905,7 +10989,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>script</code> (tes3script)</li>
+<li><code>script</code> (<a href="../../types/tes3script">tes3script</a>)</li>
 </ul>
 <hr />
 <h3 id="tes3getsimulationtimestamp"><code>tes3.getSimulationTimestamp</code><a class="headerlink" href="#tes3getsimulationtimestamp" title="Permanent link">⚓︎</a></h3>
@@ -11402,6 +11486,8 @@
 <hr />
 <h3 id="tes3playsound"><code>tes3.playSound</code><a class="headerlink" href="#tes3playsound" title="Permanent link">⚓︎</a></h3>
 <p>Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control.</p>
+<pre><code>Note: sounds in MP3 format can only be played if they are inside \Vo\ folder. The format is: 64 Kbps CBR, 44100 kHz, 16-bit mono
+</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">playSound</span><span class="p">({</span> <span class="n">sound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">loop</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">mixChannel</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">volume</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">pitch</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">soundPath</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11541,8 +11627,10 @@
     <span class="n">ignore</span> <span class="o">=</span> <span class="p">{</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span> <span class="p">}</span>
 <span class="p">}</span>
 
+<span class="kd">local</span> <span class="n">ref</span>
+
 <span class="kr">if</span> <span class="n">result</span> <span class="kr">then</span>
-    <span class="kd">local</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">makeSafeObjectHandle</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">reference</span><span class="p">)</span>
+    <span class="n">ref</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">makeSafeObjectHandle</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">reference</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="c1">-- Before using ref, now we can chack if it is valid</span>
@@ -11636,7 +11724,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>script</code> (tes3script): <em>Default</em>: <code>tes3.worldController.scriptGlobals</code>. The base script to base the execution from.</li>
+<li><code>script</code> (<a href="../../types/tes3script">tes3script</a>): <em>Default</em>: <code>tes3.worldController.scriptGlobals</code>. The base script to base the execution from.</li>
 <li><code>source</code> (number): The compilation source to use. Defaults to tes3.scriptSource.default</li>
 <li><code>command</code> (string): The script text to compile and run.</li>
 <li><code>variables</code> (tes3scriptVariables): <em>Optional</em>. If a reference is provided, the reference's variables will be used.</li>

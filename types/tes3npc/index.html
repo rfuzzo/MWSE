@@ -2204,6 +2204,16 @@
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -2980,6 +2990,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../tes3audioController/" class="md-nav__link">
+        tes3audioController
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../tes3baseObject/" class="md-nav__link">
         tes3baseObject
       </a>
@@ -3374,6 +3398,20 @@
     <li class="md-nav__item">
       <a href="../tes3gameSetting/" class="md-nav__link">
         tes3gameSetting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3globalScript/" class="md-nav__link">
+        tes3globalScript
       </a>
     </li>
   
@@ -4282,6 +4320,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hasitemequipped" class="md-nav__link">
+    hasItemEquipped
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#offersservice" class="md-nav__link">
     offersService
   </a>
@@ -4602,6 +4647,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../tes3script/" class="md-nav__link">
+        tes3script
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3scriptContext/" class="md-nav__link">
+        tes3scriptContext
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../tes3skill/" class="md-nav__link">
         tes3skill
       </a>
@@ -4674,6 +4747,20 @@
     <li class="md-nav__item">
       <a href="../tes3spellList/" class="md-nav__link">
         tes3spellList
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3startScript/" class="md-nav__link">
+        tes3startScript
       </a>
     </li>
   
@@ -7673,6 +7760,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hasitemequipped" class="md-nav__link">
+    hasItemEquipped
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#offersservice" class="md-nav__link">
     offersService
   </a>
@@ -8041,7 +8135,7 @@
 <p>The script that runs on the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (tes3script)</li>
+<li><code>result</code> (<a href="../../types/tes3script">tes3script</a>)</li>
 </ul>
 <hr />
 <h3 id="skills"><code>skills</code><a class="headerlink" href="#skills" title="Permanent link">⚓︎</a></h3>
@@ -8094,6 +8188,23 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
+</ul>
+<hr />
+<h3 id="hasitemequipped"><code>hasItemEquipped</code><a class="headerlink" href="#hasitemequipped" title="Permanent link">⚓︎</a></h3>
+<p>Checks if the actor has provided item equipped.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">hasItemEquipped</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to perform a check for.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="offersservice"><code>offersService</code><a class="headerlink" href="#offersservice" title="Permanent link">⚓︎</a></h3>

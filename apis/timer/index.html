@@ -1941,6 +1941,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#timerregister" class="md-nav__link">
+    timer.register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#timerstart" class="md-nav__link">
     timer.start
   </a>
@@ -1982,6 +1989,16 @@
       
       
       
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
           
         
@@ -3097,6 +3114,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/tes3audioController/" class="md-nav__link">
+        tes3audioController
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/tes3baseObject/" class="md-nav__link">
         tes3baseObject
       </a>
@@ -3491,6 +3522,20 @@
     <li class="md-nav__item">
       <a href="../../types/tes3gameSetting/" class="md-nav__link">
         tes3gameSetting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3globalScript/" class="md-nav__link">
+        tes3globalScript
       </a>
     </li>
   
@@ -4259,6 +4304,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/tes3script/" class="md-nav__link">
+        tes3script
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3scriptContext/" class="md-nav__link">
+        tes3scriptContext
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/tes3skill/" class="md-nav__link">
         tes3skill
       </a>
@@ -4331,6 +4404,20 @@
     <li class="md-nav__item">
       <a href="../../types/tes3spellList/" class="md-nav__link">
         tes3spellList
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3startScript/" class="md-nav__link">
+        tes3startScript
       </a>
     </li>
   
@@ -7001,6 +7088,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#timerregister" class="md-nav__link">
+    timer.register
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#timerstart" class="md-nav__link">
     timer.start
   </a>
@@ -7061,9 +7155,37 @@
 <li><code>timer</code> (<a href="../../types/mwseTimer">mwseTimer</a>)</li>
 </ul>
 <hr />
+<h3 id="timerregister"><code>timer.register</code><a class="headerlink" href="#timerregister" title="Permanent link">⚓︎</a></h3>
+<p>Registers a named timer with a callback to persist between game sessions. Bear in mind that nothing in MWSE is sandboxed, so all the registered timers are in the global namespace. Consider prefixing your timer with mod name or something else to avoid name colligions. For instance, "iceCreamMod:myTimer".</p>
+<div class="highlight"><pre><span></span><code><span class="n">timer</span><span class="p">.</span><span class="n">register</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">fn</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>name</code> (string): Name of the registered timer.</li>
+<li><code>fn</code> (function): A callback function for the timer.</li>
+</ul>
+</li>
+</ul>
+<details class="example"><summary>Example: Show a Message After 1 Day</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessage</span><span class="p">()</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;One day later...&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="n">timer</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;testExample:OneDayTimer&quot;</span><span class="p">,</span> <span class="n">showMessage</span><span class="p">)</span>
+
+<span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">game</span><span class="p">,</span>
+    <span class="n">persist</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="n">callback</span> <span class="o">=</span> <span class="s2">&quot;testExample:OneDayTimer&quot;</span> <span class="c1">-- Notice that the callback isn&#39;t a function, but a custom timer.</span>
+<span class="p">})</span>
+</code></pre></div>
+</details>
+<hr />
 <h3 id="timerstart"><code>timer.start</code><a class="headerlink" href="#timerstart" title="Permanent link">⚓︎</a></h3>
 <p>Creates a timer.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">persist</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -7072,6 +7194,7 @@
 <li><code>duration</code> (number): Duration of the timer. The method of time passing depends on the timer type.</li>
 <li><code>callback</code> (function): The callback function that will execute when the timer expires.</li>
 <li><code>iterations</code> (number): <em>Default</em>: <code>1</code>. The number of iterations to run. Use <code>-1</code> for infinite looping.</li>
+<li><code>persist</code> (boolean): <em>Default</em>: <code>true</code>. Registering a timer with persist flag set to true will serialize the callback string in the save to persist between sessions. See timer.register().</li>
 </ul>
 </li>
 </ul>
@@ -7082,13 +7205,13 @@
 <details class="example"><summary>Example: Show a Countdown Message</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timeLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onTimerExpired</span><span class="p">()</span> 
-    <span class="n">timeLeft</span> <span class="o">=</span> <span class="n">timeLeft</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;%d seconds left&quot;</span><span class="p">,</span> <span class="n">timeLeft</span><span class="p">);</span>
+    <span class="n">timeLeft</span> <span class="o">=</span> <span class="n">timeLeft</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;%d seconds left&quot;</span><span class="p">,</span> <span class="n">timeLeft</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onActivate</span><span class="p">(</span><span class="n">eventData</span><span class="p">)</span>
     <span class="kr">if</span> <span class="p">(</span><span class="n">eventData</span><span class="p">.</span><span class="n">activator</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="n">timeLeft</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">timeLeft</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">{</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">simulate</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerExpired</span> <span class="p">}</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
