@@ -7070,7 +7070,9 @@
 <li><code>result</code> (<a href="../../types/tes3iteratorNode">tes3iteratorNode</a>)</li>
 </ul>
 <hr />
-<details class="example"><summary>Example: Iterating Lists</summary><div class="highlight"><pre><span></span><code><span class="c1">-- Check player equipment</span>
+<details class="example">
+<summary>Example: Iterating Lists</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Check player equipment</span>
 <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stack</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">equipment</span><span class="p">)</span> <span class="kr">do</span>
     <span class="c1">-- stack is type tes3equipmentStack, as tes3.player.object.equipment is a list of tes3equipmentStack.</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Equipment object ID: %s&quot;</span><span class="p">,</span> <span class="n">stack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>

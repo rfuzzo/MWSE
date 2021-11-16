@@ -9604,7 +9604,9 @@
 <ul>
 <li><code>result</code> (tes3.skill.* constants)</li>
 </ul>
-<details class="example"><summary>Example: Convert magic school from event data to a respective skill</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">OnSpellFailed</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<details class="example">
+<summary>Example: Convert magic school from event data to a respective skill</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">OnSpellFailed</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="kd">local</span> <span class="n">skill</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">magicSchoolSkill</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">expGainSchool</span><span class="p">]</span> <span class="c1">-- Note: e.expGainSchool is one of tes3.magicSchool(s)</span>
 
@@ -10016,7 +10018,9 @@
 <ul>
 <li><code>createdObject</code> (<a href="../../types/tes3activator">tes3activator</a>, <a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3container">tes3container</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3misc">tes3misc</a>, <a href="../../types/tes3sound">tes3sound</a>, <a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3static">tes3static</a>, <a href="../../types/tes3weapon">tes3weapon</a>)</li>
 </ul>
-<details class="example"><summary>Example: Creates a tes3misc object</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">miscItemId</span> <span class="o">=</span> <span class="s2">&quot;create_misc_item_id&quot;</span>
+<details class="example">
+<summary>Example: Creates a tes3misc object</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">miscItemId</span> <span class="o">=</span> <span class="s2">&quot;create_misc_item_id&quot;</span>
 <span class="kd">local</span> <span class="n">miscItemName</span> <span class="o">=</span> <span class="s2">&quot;create_misc_item_name&quot;</span>
 
 <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="s2">&quot;creating a misc item of id %s&quot;</span><span class="p">,</span> <span class="n">miscItemId</span> <span class="p">)</span>
@@ -10049,7 +10053,9 @@
 <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="s2">&quot;created a reference of a misc item of id %s&quot;</span><span class="p">,</span> <span class="n">miscItem</span><span class="p">.</span><span class="n">id</span> <span class="p">)</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Creates a tes3static object</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">staticId</span> <span class="o">=</span> <span class="s2">&quot;create_static_id&quot;</span>
+<details class="example">
+<summary>Example: Creates a tes3static object</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">staticId</span> <span class="o">=</span> <span class="s2">&quot;create_static_id&quot;</span>
 
 <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="s2">&quot;creating a static of id %s&quot;</span><span class="p">,</span> <span class="n">staticId</span> <span class="p">)</span>
 
@@ -10313,7 +10319,9 @@
 <ul>
 <li><code>gameSetting</code> (<a href="../../types/tes3gameSetting">tes3gameSetting</a>)</li>
 </ul>
-<details class="example"><summary>Example: Document all GMST Default Values</summary><div class="highlight"><pre><span></span><code><span class="c1">-- Converter table for a GMST&#39;s type to something more user-friendly.</span>
+<details class="example">
+<summary>Example: Document all GMST Default Values</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Converter table for a GMST&#39;s type to something more user-friendly.</span>
 <span class="kd">local</span> <span class="n">typeNames</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
     <span class="n">i</span> <span class="o">=</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
@@ -10352,7 +10360,9 @@
 <span class="n">f</span><span class="p">:</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Retrieve value of a GMST</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">oldGMST</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGMST</span><span class="p">(</span><span class="s2">&quot;sServiceTrainingTitle&quot;</span><span class="p">).</span><span class="n">value</span>
+<details class="example">
+<summary>Example: Retrieve value of a GMST</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">oldGMST</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGMST</span><span class="p">(</span><span class="s2">&quot;sServiceTrainingTitle&quot;</span><span class="p">).</span><span class="n">value</span>
 
 <span class="c1">-- oldGMST is now &quot;Training&quot;</span>
 
@@ -10603,11 +10613,15 @@
 <ul>
 <li><code>magnitude, unresistedMagnitude</code> (number, number)</li>
 </ul>
-<details class="example"><summary>Example: Get both magnitudes.</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">magnitude</span><span class="p">,</span> <span class="n">unresistedMagnitude</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEffectMagnitude</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">fireDamage</span><span class="p">}</span>
+<details class="example">
+<summary>Example: Get both magnitudes.</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">magnitude</span><span class="p">,</span> <span class="n">unresistedMagnitude</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEffectMagnitude</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">fireDamage</span><span class="p">}</span>
 <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;fortify speed: %f (%f)&quot;</span><span class="p">,</span> <span class="n">magnitude</span><span class="p">,</span> <span class="n">unresistedMagnitude</span><span class="p">))</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Get magnitude after resistances are applied.</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEffectMagnitude</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">fortifyAttribute</span><span class="p">,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">attribute</span><span class="p">.</span><span class="n">speed</span><span class="p">}</span>
+<details class="example">
+<summary>Example: Get magnitude after resistances are applied.</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEffectMagnitude</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">fortifyAttribute</span><span class="p">,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">attribute</span><span class="p">.</span><span class="n">speed</span><span class="p">}</span>
 <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;fortify speed: %f&quot;</span><span class="p">,</span> <span class="n">magnitude</span><span class="p">))</span>
 </code></pre></div>
 </details>
@@ -10631,7 +10645,9 @@
 <ul>
 <li><code>stack</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>)</li>
 </ul>
-<details class="example"><summary>Example: Get Player’s Equipped Light</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">equippedLightStack</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEquippedItem</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">light</span> <span class="p">})</span>
+<details class="example">
+<summary>Example: Get Player’s Equipped Light</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">equippedLightStack</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEquippedItem</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">light</span> <span class="p">})</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">equippedLightStack</span><span class="p">)</span> <span class="kr">then</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Equipped light: %s&quot;</span><span class="p">,</span> <span class="n">equippedLightStack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
 <span class="kr">else</span>
@@ -10639,7 +10655,9 @@
 <span class="kr">end</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Get Player’s Shield</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">equippedShieldStack</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEquippedItem</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">armor</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">armorSlot</span><span class="p">.</span><span class="n">shield</span> <span class="p">})</span>
+<details class="example">
+<summary>Example: Get Player’s Shield</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">equippedShieldStack</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEquippedItem</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">armor</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">armorSlot</span><span class="p">.</span><span class="n">shield</span> <span class="p">})</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">equippedShieldStack</span><span class="p">)</span> <span class="kr">then</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Equipped shield: %s&quot;</span><span class="p">,</span> <span class="n">equippedShieldStack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
 <span class="kr">else</span>
@@ -11413,14 +11431,18 @@
 </ul>
 </li>
 </ul>
-<details class="example"><summary>Example: Decrease Health of an Actor</summary><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span>
+<details class="example">
+<summary>Example: Decrease Health of an Actor</summary>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span>
     <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;health&quot;</span><span class="p">,</span>
     <span class="n">current</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
 <span class="p">})</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Restore Magicka without Overflowing</summary><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span>
+<details class="example">
+<summary>Example: Restore Magicka without Overflowing</summary>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span>
     <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;magicka&quot;</span><span class="p">,</span>
     <span class="n">current</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
@@ -11611,7 +11633,9 @@
 <ul>
 <li><code>result</code> (<a href="../../types/niPickRecord">niPickRecord</a>, table)</li>
 </ul>
-<details class="example"><summary>Example: Get Activation Target</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hitResult</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyePosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyeVector</span><span class="p">()</span> <span class="p">})</span>
+<details class="example">
+<summary>Example: Get Activation Target</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hitResult</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyePosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyeVector</span><span class="p">()</span> <span class="p">})</span>
 <span class="kd">local</span> <span class="n">hitReference</span> <span class="o">=</span> <span class="n">hitResult</span> <span class="ow">and</span> <span class="n">hitResult</span><span class="p">.</span><span class="n">reference</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">hitReference</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="kr">then</span>
     <span class="kr">return</span>
@@ -11620,7 +11644,9 @@
 <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;The player is looking at a &#39;%s&#39;&quot;</span><span class="p">,</span> <span class="n">hitReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">name</span> <span class="ow">or</span> <span class="n">hitReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Get Camera Target</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hitResult</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraPosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraVector</span><span class="p">()</span> <span class="p">})</span>
+<details class="example">
+<summary>Example: Get Camera Target</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hitResult</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraPosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraVector</span><span class="p">()</span> <span class="p">})</span>
 <span class="kd">local</span> <span class="n">hitReference</span> <span class="o">=</span> <span class="n">hitResult</span> <span class="ow">and</span> <span class="n">hitResult</span><span class="p">.</span><span class="n">reference</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">hitReference</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="kr">then</span>
     <span class="kr">return</span>
@@ -11629,7 +11655,9 @@
 <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;The camera is looking at a &#39;%s&#39;&quot;</span><span class="p">,</span> <span class="n">hitReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">name</span> <span class="ow">or</span> <span class="n">hitReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Multiple Results</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">results</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraPosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraVector</span><span class="p">(),</span> <span class="n">findAll</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">}</span>
+<details class="example">
+<summary>Example: Multiple Results</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">results</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraPosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraVector</span><span class="p">(),</span> <span class="n">findAll</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">}</span>
 <span class="kr">if</span> <span class="n">results</span> <span class="kr">then</span>
     <span class="kr">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hit</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="kr">do</span>
         <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Ray hit #%d: %s&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">hit</span><span class="p">.</span><span class="n">reference</span> <span class="ow">or</span> <span class="s2">&quot;&lt;non-reference&gt;&quot;</span><span class="p">);</span>
@@ -11637,7 +11665,9 @@
 <span class="kr">end</span>
 </code></pre></div>
 </details>
-<details class="example"><summary>Example: Save rayTest result for use at a later point</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="c1">-- result can get invalidated</span>
+<details class="example">
+<summary>Example: Save rayTest result for use at a later point</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="c1">-- result can get invalidated</span>
     <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyePosition</span><span class="p">(),</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyeVector</span><span class="p">(),</span>
     <span class="n">ignore</span> <span class="o">=</span> <span class="p">{</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span> <span class="p">}</span>

@@ -7271,7 +7271,9 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>Simple Filtered Loop</summary><p>This example demonstrates how to loop through all potions the player is carrying.</p>
+<details class="example">
+<summary>Simple Filtered Loop</summary>
+<p>This example demonstrates how to loop through all potions the player is carrying.</p>
 <div class="highlight"><pre><span></span><code>begin Example_xContentListFiltered
 
 long id
@@ -7311,7 +7313,9 @@ StopScript Example_xContentListFiltered
 end
 </code></pre></div>
 </details>
-<details class="example"><summary>Transfer Ingredients</summary><p>This example shows how to efficiently transfer all ingredients and potions from the player to another container. A placeholder variable, such as "_", can be used to ignore return values that are not needed for your script.</p>
+<details class="example">
+<summary>Transfer Ingredients</summary>
+<p>This example shows how to efficiently transfer all ingredients and potions from the player to another container. A placeholder variable, such as "_", can be used to ignore return values that are not needed for your script.</p>
 <div class="highlight"><pre><span></span><code>begin TransferIngreds
 
 long _
@@ -7346,7 +7350,9 @@ StopScript TransferIngreds
 end
 </code></pre></div>
 </details>
-<details class="example"><summary>Get first item of a specific type.</summary><p>This example shows how to efficiently check if the player is carrying any weapons at all. No explicit loop is needed here, so evaluating the weapon id alone will suffice.</p>
+<details class="example">
+<summary>Get first item of a specific type.</summary>
+<p>This example shows how to efficiently check if the player is carrying any weapons at all. No explicit loop is needed here, so evaluating the weapon id alone will suffice.</p>
 <div class="highlight"><pre><span></span><code>begin NoWeaponsAllowed
 
 ; local script on a door
@@ -7401,7 +7407,9 @@ end
 <p class="admonition-title">Tip</p>
 <p>At present this function is the only way to reliably get the equipment a reference has currently worn. Using the <strong>typeFilter</strong> and <strong>subTypeFilter</strong> the script can quickly query to see if, for example, the player is wearing pants.</p>
 </div>
-<details class="example"><summary>Simple Equipment Loop</summary><p>This example demonstrates how to do a simple loop through all equipped items (on the player in this instance).</p>
+<details class="example">
+<summary>Simple Equipment Loop</summary>
+<p>This example demonstrates how to do a simple loop through all equipped items (on the player in this instance).</p>
 <div class="highlight"><pre><span></span><code>Begin loopEquippedItems
 
 long id
@@ -7432,7 +7440,9 @@ endwhile
 End
 </code></pre></div>
 </details>
-<details class="example"><summary>Get Equipped Weapon's Enchantment</summary><p>This example shows how to get the enchantment objectId for the currently equipped weapon. Looping isn't required as the player can never have more than one equipped weapon.</p>
+<details class="example">
+<summary>Get Equipped Weapon's Enchantment</summary>
+<p>This example shows how to get the enchantment objectId for the currently equipped weapon. Looping isn't required as the player can never have more than one equipped weapon.</p>
 <div class="highlight"><pre><span></span><code>begin GetPlayerWeaponInfo
 
 long ref

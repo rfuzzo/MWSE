@@ -7411,7 +7411,9 @@
 <ul>
 <li><code>capture</code> (boolean): Turns on mouse capture for the element currently processing a mouse event if true, sending all further mouse events to that element. Turns off capture if false.</li>
 </ul>
-<details class="example"><summary>Example: Basic Usage</summary><div class="highlight"><pre><span></span><code><span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<details class="example">
+<summary>Example: Basic Usage</summary>
+<div class="highlight"><pre><span></span><code><span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Capture must be inside a mouse event.</span>
     <span class="n">tes3ui</span><span class="p">.</span><span class="n">captureMouseDrag</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 <span class="kr">end</span><span class="p">)</span>
@@ -7476,7 +7478,9 @@
 <ul>
 <li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
 </ul>
-<details class="example"><summary>Example: Add an item tooltip to a new element</summary><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;- Item -&quot;</span><span class="p">}</span>
+<details class="example">
+<summary>Example: Add an item tooltip to a new element</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;- Item -&quot;</span><span class="p">}</span>
 <span class="kd">local</span> <span class="n">item</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron_shield&quot;</span><span class="p">)</span>
 
 <span class="n">button</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>

@@ -7519,7 +7519,9 @@
 </ul>
 <p>Calculates the distance between the calling reference and <strong>target</strong>.</p>
 <p>.. note:: Unlike the vanilla <code>GetDistance</code> function, this function will work on non-actors.</p>
-<details class="example"><summary>Distance from PC Target</summary><p>This example calculates the distance between the PC and what they are looking at.</p>
+<details class="example">
+<summary>Distance from PC Target</summary>
+<p>This example calculates the distance between the PC and what they are looking at.</p>
 <div class="highlight"><pre><span></span><code>begin DistanceToTarget
 
 long pcRef
@@ -7621,7 +7623,9 @@ end
 <li><code>long</code> <strong>itemCount</strong>: The number of items that the reference has.</li>
 </ul>
 <p>This is a wrapper function around <code>GetItemCount</code> that allows variable input.</p>
-<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code>begin Example_xGetItemCount
+<details class="example">
+<summary>Example</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xGetItemCount
 
 long ref
 
@@ -7691,7 +7695,9 @@ end
 <p class="admonition-title">Note</p>
 <p>The path returned does not include the <em>Data Files\models</em> prefix.</p>
 </div>
-<details class="example"><summary>Get Model by Object ID</summary><div class="highlight"><pre><span></span><code>begin Example_xGetModelById
+<details class="example">
+<summary>Get Model by Object ID</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xGetModelById
 
 long model
 
@@ -7706,7 +7712,9 @@ MessageBox &quot;Model: ________________________________&quot;
 end
 </code></pre></div>
 </details>
-<details class="example"><summary>Get Model by Reference</summary><div class="highlight"><pre><span></span><code>begin Example_xGetModelByRef
+<details class="example">
+<summary>Get Model by Reference</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xGetModelByRef
 
 long ref
 long model
@@ -7760,7 +7768,9 @@ end
 <p class="admonition-title">Tip</p>
 <p>If the returned <strong>condition</strong> is a global variable, it can be used with <code>xGetGlobal</code> and <code>xSetGlobal</code>.</p>
 </div>
-<details class="example"><summary>Boobytrapped Mages Guild and Telvanni faction containers</summary><div class="highlight"><pre><span></span><code>begin boobycontainers
+<details class="example">
+<summary>Boobytrapped Mages Guild and Telvanni faction containers</summary>
+<div class="highlight"><pre><span></span><code>begin boobycontainers
 ;if the player tries to open a container owned by either MG or GHT that he
 ;doesn&#39;t have the required rank to legally take items from, then instead of
 ;the container opening, the player will be zapped.
@@ -7836,7 +7846,9 @@ endif
 end
 </code></pre></div>
 </details>
-<details class="example"><summary>World entity destruction with ownership penalty</summary><div class="highlight"><pre><span></span><code>begin entitydestruction
+<details class="example">
+<summary>World entity destruction with ownership penalty</summary>
+<div class="highlight"><pre><span></span><code>begin entitydestruction
 
 ;allows the player to destroy objects in the world by striking at them with
 ;a weapon (or barehanded). but if the player wouldn&#39;t have been (legally) allowed to pick up that
@@ -8054,7 +8066,9 @@ end
 <li><code>long</code> <strong>stackSize</strong>: The amount of items in the stack, or 0 if not called on a reference.</li>
 </ul>
 <p>This function returns the stack size of a given reference. For example if used on a reference to iron arrows, xGetStackSize will tell you how many arrows there are in that stack.</p>
-<details class="example"><summary>Get player target's stack size.</summary><div class="highlight"><pre><span></span><code>begin Example_xGetStackSize
+<details class="example">
+<summary>Get player target's stack size.</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xGetStackSize
 
 long ref
 long size
@@ -8132,7 +8146,9 @@ end
 <li><code>long</code> <strong>reference</strong>: The caller's reference.</li>
 </ul>
 <p>Returns a reference to the calling object.</p>
-<details class="example"><summary>Detect if target from local script.</summary><div class="highlight"><pre><span></span><code>begin Example_xMyRef
+<details class="example">
+<summary>Detect if target from local script.</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xMyRef
 
 long myRef
 long targetRef

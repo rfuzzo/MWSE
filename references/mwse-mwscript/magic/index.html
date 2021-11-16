@@ -7192,7 +7192,9 @@
 <li><code>long</code> <strong>success</strong>: <code>1</code> if the effect was added, or <code>0</code> if it wasn't.</li>
 </ul>
 <p>Adds a new effect to the given spell, enchantment, or potion.</p>
-<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code>begin Example_xAddEffect
+<details class="example">
+<summary>Example</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xAddEffect
 
 short result
 
@@ -7268,7 +7270,9 @@ end
 <p class="admonition-title">Tip</p>
 <p>Use this function to determine the state of a potion before modifying it with <code>xAddEffect</code>, <code>xDeleteEffect</code> or <code>xSetEffectInfo</code>.</p>
 </div>
-<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code>begin Example_xGetAlchemyInfo
+<details class="example">
+<summary>Example</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xGetAlchemyInfo
 
 long numEffects
 long flags
@@ -7344,7 +7348,9 @@ end
 <li><code>long</code> <strong>skillAttributeType</strong>: The <a href="../../attribute-types">Attribute Type</a> or <a href="../../skill-types">Skill Type</a>, if the <strong>effectType</strong> supports one. Otherwise will always be -1.</li>
 </ul>
 <p>This function allows scripts to determine the effects of a given ingredient programmatically. Scripts can alter these values as well using <code>xSetIngredientEffect</code>.</p>
-<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code>begin Example_xGetIngredientEffect
+<details class="example">
+<summary>Example</summary>
+<div class="highlight"><pre><span></span><code>begin Example_xGetIngredientEffect
 
 long effect
 long skillAttribute

@@ -7195,7 +7195,9 @@
 <li><code>long</code> <strong>keyCode</strong>: The <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx">Virtual-Key Code</a> for the <strong>controlType</strong>. If this value is 0, the scan code could not be converted to a key code.</li>
 </ul>
 <p>This function allows scripts to determine what keys are configured by the player. Typically the <strong>keyCode</strong> is passed to <code>xKeyPressed</code> to determine if it is pressed. Other functions that require a scan code would make use of <strong>scanCode</strong>.</p>
-<details class="example"><summary>Determine if the Activation Key is Pressed</summary><div class="highlight"><pre><span></span><code>Begin IsActivating
+<details class="example">
+<summary>Determine if the Activation Key is Pressed</summary>
+<div class="highlight"><pre><span></span><code>Begin IsActivating
 
 long scanCode
 long scanDevice
@@ -7236,7 +7238,9 @@ End
 <p class="admonition-title">Warning</p>
 <p>This functions depends on the user not deleting their <strong>mcpatch\installed</strong> file. If the user doesn't have this file (because they deleted it or don't have the MCP installed), this function returns a value of <code>-1</code>.</p>
 </div>
-<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code>begin DetectPickPocketOverhaul
+<details class="example">
+<summary>Example</summary>
+<div class="highlight"><pre><span></span><code>begin DetectPickPocketOverhaul
 
 short state
 
