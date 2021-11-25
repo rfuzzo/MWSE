@@ -2703,6 +2703,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getmagiceffectname" class="md-nav__link">
+    tes3.getMagicEffectName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getmagicsourceinstancebyserial" class="md-nav__link">
     tes3.getMagicSourceInstanceBySerial
   </a>
@@ -9448,6 +9455,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getmagiceffectname" class="md-nav__link">
+    tes3.getMagicEffectName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getmagicsourceinstancebyserial" class="md-nav__link">
     tes3.getMagicSourceInstanceBySerial
   </a>
@@ -11481,6 +11495,24 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>magicEffect</code> (<a href="../../types/tes3magicEffect">tes3magicEffect</a>)</li>
+</ul>
+<hr />
+<h3 id="tes3getmagiceffectname"><code>tes3.getMagicEffectName</code><a class="headerlink" href="#tes3getmagiceffectname" title="Permanent link">⚓︎</a></h3>
+<p>Returns the complex name of a magic effect, taking into account attribute or skill values.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">complexName</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getMagicEffectName</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>effect</code> (number): The effect ID to get the name of.</li>
+<li><code>attribute</code> (number): <em>Optional</em>. The attribute ID to use, if applicable.</li>
+<li><code>skill</code> (number): <em>Optional</em>. The skill ID to use, if applicable.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>complexName</code> (string)</li>
 </ul>
 <hr />
 <h3 id="tes3getmagicsourceinstancebyserial"><code>tes3.getMagicSourceInstanceBySerial</code><a class="headerlink" href="#tes3getmagicsourceinstancebyserial" title="Permanent link">⚓︎</a></h3>
