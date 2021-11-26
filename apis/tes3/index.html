@@ -2276,6 +2276,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3calculateprice" class="md-nav__link">
+    tes3.calculatePrice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3cancelanimationloop" class="md-nav__link">
     tes3.cancelAnimationLoop
   </a>
@@ -9028,6 +9035,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3calculateprice" class="md-nav__link">
+    tes3.calculatePrice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3cancelanimationloop" class="md-nav__link">
     tes3.cancelAnimationLoop
   </a>
@@ -10520,6 +10534,32 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>success</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="tes3calculateprice"><code>tes3.calculatePrice</code><a class="headerlink" href="#tes3calculateprice" title="Permanent link">⚓︎</a></h3>
+<p>Calculates a price, given a merchant and associated trading data. This is useful beyond accessing the object's <code>.value</code> field in that it raises the appropriate events to let other mods modify the values.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">price</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">calculatePrice</span><span class="p">({</span> <span class="n">object</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">basePrice</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">buying</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selling</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">merchant</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">bartering</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">repairing</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">training</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>object</code> (<a href="../../types/tes3object">tes3object</a>): <em>Optional</em>. The object to calculate the price for. If not provided, <code>basePrice</code> is required.</li>
+<li><code>basePrice</code> (number): <em>Optional</em>. The base price to calculate the end price for. This defaults to the <code>object</code> param's <code>value</code>, if provided. This parameter is required if <code>object</code> is not provided.</li>
+<li><code>buying</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, uses the logic for buying a service/item. This is exclusive with <code>selling</code>.</li>
+<li><code>selling</code> (boolean): If <code>true</code>, uses the logic for selling an item. This is exclusive with <code>buying</code>.</li>
+<li><code>merchant</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): The merchant to use for calculating the price.</li>
+<li><code>bartering</code> (boolean): If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> or <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event will be triggered.</li>
+<li><code>repairing</code> (boolean): If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event will be triggered.</li>
+<li><code>training</code> (boolean): If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcTrainingPrice">calcTrainingPrice</a> event will be triggered, passing the given <code>skill</code> ID.</li>
+<li><code>count</code> (number): <em>Default</em>: <code>1</code>. If <code>bartering</code>, the count passed to the <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> event.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. If <code>bartering</code> or <code>repairing</code>, the item data passed to the <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> or <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event.</li>
+<li><code>skill</code> (number): If <code>training</code>, the skill ID passed to the <a href="https://mwse.github.io/MWSE/events/calcTrainingPrice">calcTrainingPrice</a> event.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>price</code> (number): The calculated price, filtered by events.</li>
 </ul>
 <hr />
 <h3 id="tes3cancelanimationloop"><code>tes3.cancelAnimationLoop</code><a class="headerlink" href="#tes3cancelanimationloop" title="Permanent link">⚓︎</a></h3>
