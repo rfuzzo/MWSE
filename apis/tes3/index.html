@@ -2871,6 +2871,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getvanitymode" class="md-nav__link">
+    tes3.getVanityMode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getviewportsize" class="md-nav__link">
     tes3.getViewportSize
   </a>
@@ -9630,6 +9637,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getvanitymode" class="md-nav__link">
+    tes3.getVanityMode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getviewportsize" class="md-nav__link">
     tes3.getViewportSize
   </a>
@@ -11815,6 +11829,15 @@
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>)</li>
 </ul>
 <hr />
+<h3 id="tes3getvanitymode"><code>tes3.getVanityMode</code><a class="headerlink" href="#tes3getvanitymode" title="Permanent link">⚓︎</a></h3>
+<p>The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a tes3.setVanityMode() function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getVanityMode</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean): Is the vanity mode currently active?</li>
+</ul>
+<hr />
 <h3 id="tes3getviewportsize"><code>tes3.getViewportSize</code><a class="headerlink" href="#tes3getviewportsize" title="Permanent link">⚓︎</a></h3>
 <p>Returns both the viewport width and the viewport height. Note that this the real resolution of the screen. For a value scaled by MGE's menu scaling, see the same-named function in the tes3ui namespace. To get the scale used, check getViewportScale in the tes3ui namespace.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getViewportSize</span><span class="p">()</span>
@@ -12810,16 +12833,16 @@
 </ul>
 <hr />
 <h3 id="tes3setvanitymode"><code>tes3.setVanityMode</code><a class="headerlink" href="#tes3setvanitymode" title="Permanent link">⚓︎</a></h3>
-<p>Toggles the camera into third person mode. Returns true if changed to vanity mode.</p>
+<p>Toggles the camera into vanity mode. In vanity mode the camera is in third person and it is orbiting slowly around the player character. Returns true if changed to vanity mode.</p>
 <p>Note that unlike the vanity mode caused by not doing anything for a while, this vanity mode must be toggled to go off.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">changedVanityMode</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">setVanityMode</span><span class="p">({</span> <span class="n">enabled</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">checkVanityDisabled</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">toggle</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. </li>
-<li><code>checkVanityDisabled</code> (boolean): <em>Default</em>: <code>true</code>. </li>
-<li><code>toggle</code> (boolean): <em>Optional</em>. </li>
+<li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. This flag sets the vanity mode as enabled or disabled.</li>
+<li><code>checkVanityDisabled</code> (boolean): <em>Default</em>: <code>true</code>. This will prevent changing vanity mode according to vanityDisabled flag on tes3.mobilePlayer.</li>
+<li><code>toggle</code> (boolean): <em>Optional</em>. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.</li>
 </ul>
 </li>
 </ul>
