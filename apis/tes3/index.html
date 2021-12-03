@@ -10391,10 +10391,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>id</code> (tes3.effect): Id of the new effect. Maps to tes3.effect.* added with tes3.claimSpellEffectId. If the effect of this id already exists, an error will be thrown.</li>
+<li><code>id</code> (number): Id of the new effect. Maps to tes3.effect.* constants claimed with tes3.claimSpellEffectId(). If the effect of this id already exists, an error will be thrown.</li>
 <li><code>name</code> (string): <em>Default</em>: <code>Unnamed Effect</code>. Name of the effect.</li>
 <li><code>baseCost</code> (number): <em>Default</em>: <code>1</code>. Base magicka cost for the effect.</li>
-<li><code>school</code> (tes3.magicSchool): <em>Default</em>: <code>tes3.magicSchool.alteration</code>. The magic school the new effect will be assigned to. Maps to tes3.magicSchool.* constants</li>
+<li><code>school</code> (number): <em>Default</em>: <code>tes3.magicSchool.alteration</code>. The magic school the new effect will be assigned to. Maps to <a href="https://mwse.github.io/MWSE/references/magic-schools/">tes3.magicSchool.*</a> constants.</li>
 <li><code>size</code> (number): <em>Default</em>: <code>1</code>.</li>
 <li><code>sizeCap</code> (number): <em>Default</em>: <code>1</code>.</li>
 <li><code>speed</code> (number): <em>Default</em>: <code>1</code>.</li>
@@ -10415,23 +10415,23 @@
 <li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
 <li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
 <li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
-<li><code>allowEnchanting</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used in a custom enchantment?</li>
-<li><code>allowSpellmaking</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used in a custom spell?</li>
-<li><code>appliesOnce</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>canCastSelf</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect used with cast on self range?</li>
-<li><code>canCastTarget</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used with cast on target range?</li>
-<li><code>canCastTouch</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be used with cast on touch range?</li>
+<li><code>allowEnchanting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used in a custom enchantment.</li>
+<li><code>allowSpellmaking</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used in a custom spell.</li>
+<li><code>appliesOnce</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect applies once or is a ticking effect.</li>
+<li><code>canCastSelf</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used with cast on self range.</li>
+<li><code>canCastTarget</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used with cast on target range.</li>
+<li><code>canCastTouch</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used with cast on touch range.</li>
 <li><code>casterLinked</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>hasContinuousVFX</code> (boolean): <em>Default</em>: <code>true</code>. Will the effect's VFX be played during its whole duration?</li>
-<li><code>hasNoDuration</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>hasNoMagnitude</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>illegalDaedra</code> (boolean): <em>Default</em>: <code>true</code>. Is this effect illegal to use in public, because it summons Daedra? Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.</li>
-<li><code>isHarmful</code> (boolean): <em>Default</em>: <code>true</code>. Is this effect considered harmful and casting it can be considered as an attack?</li>
-<li><code>nonRecastable</code> (boolean): <em>Default</em>: <code>true</code>. Can this effect be recast while it already is in duration?</li>
-<li><code>targetsAttributes</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>targetsSkills</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. Can the effect be reflected?</li>
-<li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+<li><code>hasContinuousVFX</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the effect's VFX be played during its whole duration?</li>
+<li><code>hasNoDuration</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect doesn't have duration.</li>
+<li><code>hasNoMagnitude</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect doesn't have magnitude.</li>
+<li><code>illegalDaedra</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect is illegal to use in public, because it summons Daedra. Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.</li>
+<li><code>isHarmful</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect is considered harmful and casting it can be considered as an attack.</li>
+<li><code>nonRecastable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be recast while it already is in duration.</li>
+<li><code>targetsAttributes</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect targets a certain attribute or attributes.</li>
+<li><code>targetsSkills</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect targets a certain skill or skills.</li>
+<li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be reflected.</li>
+<li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect uses negative lighting.</li>
 <li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect.</li>
 <li><code>onCollision</code> (function): <em>Optional</em>. A function which will be called when a spell containing this spell effect collides with something.</li>
 </ul>
@@ -10486,7 +10486,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or id of the sound to look for.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to attach the sound to.</li>
-<li><code>mixChannel</code> (number): <em>Default</em>: <code>tes3.audioMixType.effects</code>. The channel to base volume off of. Maps to tes3.audioMixType constants.</li>
+<li><code>mixChannel</code> (number): <em>Default</em>: <code>tes3.audioMixType.effects</code>. The channel to base volume off of. Maps to <a href="https://mwse.github.io/MWSE/references/audio-mix-types/">tes3.audioMixType.*</a> constants.</li>
 <li><code>volume</code> (number): <em>Default</em>: <code>1.0</code>. A value between 0.0 and 1.0 to scale the volume off of.</li>
 </ul>
 </li>
@@ -10516,14 +10516,14 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference on which the magic source will be applied.</li>
 <li><code>source</code> (<a href="../../types/tes3object">tes3object</a>): <em>Optional</em>. A magic source to apply.</li>
 <li><code>name</code> (string): <em>Optional</em>. If applying alchemy as a source, you can specifiy a name for the magic source.</li>
 <li><code>effects</code> (table): <em>Optional</em>. A table of custom effects to apply as a potion. Maximal number of effects is 8.<ul>
 <li><code>id</code> (boolean): <em>Default</em>: <code>-1</code>. ID of the effect.</li>
-<li><code>skill</code> (tes3.skill.<em> constants): </em>Default*: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill.</li>
-<li><code>attribute</code> (tes3.attribute.<em> constants): </em>Default*: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute.</li>
-<li><code>range</code> (tes3.effectRange.<em> constants): </em>Default<em>: <code>tes3.effectRange.self</code>. The range of the effect. This maps to tes3.effectRange.</em> constants.</li>
+<li><code>skill</code> (number): <em>Default</em>: <code>-1</code>. This value maps to <a href="https://mwse.github.io/MWSE/references/skills/">tes3.skill.*</a> constants. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill.</li>
+<li><code>attribute</code> (number): <em>Default</em>: <code>-1</code>. This value maps to <a href="https://mwse.github.io/MWSE/references/attributes/">tes3.attribute.*</a> constants. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute.</li>
+<li><code>range</code> (number): <em>Default</em>: <code>tes3.effectRange.self</code>. The range of the effect. This maps to <a href="https://mwse.github.io/MWSE/references/effect-ranges/">tes3.effectRange.*</a> constants.</li>
 <li><code>radius</code> (number): <em>Default</em>: <code>0</code>. The radius of the effect.</li>
 <li><code>duration</code> (number): <em>Default</em>: <code>0</code>. Number of seconds the effect is going to be active.</li>
 <li><code>min</code> (number): <em>Default</em>: <code>0</code>. The minimal magintude of the effect per tick.</li>
@@ -10670,7 +10670,7 @@
 </ul>
 <hr />
 <h3 id="tes3claimspelleffectid"><code>tes3.claimSpellEffectId</code><a class="headerlink" href="#tes3claimspelleffectid" title="Permanent link">⚓︎</a></h3>
-<p>This function is used to claim a unique spell effect name and id. This is needed before actually creating a new effect by calling tes3.addMagicEffect. A claimed effect id can be retrieved as: tes3.effect.effectName (just like any regular spell effect).</p>
+<p>This function is used to claim a unique spell effect name and id. This is needed before actually creating a new effect by calling tes3.addMagicEffect(). A claimed effect id can be retrieved as: tes3.effect.effectName (just like any regular spell effect).</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -10694,7 +10694,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>objectType</code> (number): Maps to <code>tes3.objectType</code> constants. Used to filter object type to create.</li>
+<li><code>objectType</code> (number): Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants. Used to filter object type to create.</li>
 <li><code>getIfExists</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, an existing object of the same type and ID will be returned instead of creating a new one.</li>
 </ul>
 </li>
@@ -11409,7 +11409,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keybind</code> (number): Maps to tes3.keybind constants.</li>
+<li><code>keybind</code> (number): Maps to <a href="https://mwse.github.io/MWSE/references/keybinds/">tes3.keybind.*</a> constants.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
