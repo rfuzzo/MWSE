@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.4">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.62128196.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a4617e2.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -3878,6 +3878,20 @@
           <li class="md-nav__item">
   <a href="#getinfo" class="md-nav__link">
     getInfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getjournalinfo" class="md-nav__link">
+    getJournalInfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loadquestname" class="md-nav__link">
+    loadQuestName
   </a>
   
 </li>
@@ -7846,6 +7860,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#getjournalinfo" class="md-nav__link">
+    getJournalInfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loadquestname" class="md-nav__link">
+    loadQuestName
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7907,7 +7935,7 @@
 <p>For journal dialogues, the currently active journal index.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (number, nil)</li>
 </ul>
 <hr />
 <h3 id="modified"><code>modified</code><a class="headerlink" href="#modified" title="Permanent link">⚓︎</a></h3>
@@ -8009,6 +8037,28 @@
 <li><code>result</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>)</li>
 </ul>
 <hr />
+<h3 id="getjournalinfo"><code>getJournalInfo</code><a class="headerlink" href="#getjournalinfo" title="Permanent link">⚓︎</a></h3>
+<p>Retrieves the info object for a journal. By default this will return the info for the player's current journal index for this dialogue. An index can be provided to fetch a specific index's related info.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">journalInfo</span> <span class="o">=</span> <span class="n">tes3dialogue</span><span class="p">:</span><span class="n">getJournalInfo</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>index</code> (number): <em>Optional</em>. The index of the journal to fetch the info for. If not provided, the current player's journal index is used.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>journalInfo</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>)</li>
+</ul>
+<hr />
+<h3 id="loadquestname"><code>loadQuestName</code><a class="headerlink" href="#loadquestname" title="Permanent link">⚓︎</a></h3>
+<p>This method finds the info that contains the quest name, then loads and returns its text. This method accesses the disk, and may be slow to operate. For dialogues that aren't journal-based, this will be <code>nil</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">questName</span> <span class="o">=</span> <span class="n">tes3dialogue</span><span class="p">:</span><span class="n">loadQuestName</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>questName</code> (string, nil)</li>
+</ul>
+<hr />
 
               
             </article>
@@ -8079,10 +8129,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.ca141e46.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e0abf5b0.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6baa0517.min.js"></script>
       
     
   </body>
