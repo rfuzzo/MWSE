@@ -7590,7 +7590,7 @@
 
 <h1 id="weathertransitionfinished">weatherTransitionFinished<a class="headerlink" href="#weathertransitionfinished" title="Permanent link">⚓︎</a></h1>
 <p>The <strong>weatherTransitionFinished</strong> event occurs when the currently simulated weather finished transitioning to a new weather.</p>
-<p>Weather will continue transitioning in interiors, and may finish while in an interior. The transition may be interrupted at any time by the weatherChangedImmediate event, and this finish event will not be triggered.</p>
+<p>Weather will continue transitioning in interiors, and may finish while in an interior. The transition may be interrupted at any time by the <code>weatherChangedImmediate</code> event, and this finish event will not be triggered.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e weatherTransitionFinishedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">weatherTransitionFinishedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
