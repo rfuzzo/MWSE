@@ -1985,6 +1985,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mathepsilon" class="md-nav__link">
+    math.epsilon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathfepsilon" class="md-nav__link">
+    math.fepsilon
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     Functions
   </a>
@@ -1995,6 +2022,13 @@
           <li class="md-nav__item">
   <a href="#mathclamp" class="md-nav__link">
     math.clamp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathisclose" class="md-nav__link">
+    math.isclose
   </a>
   
 </li>
@@ -7603,6 +7637,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mathepsilon" class="md-nav__link">
+    math.epsilon
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathfepsilon" class="md-nav__link">
+    math.fepsilon
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     Functions
   </a>
@@ -7613,6 +7674,13 @@
           <li class="md-nav__item">
   <a href="#mathclamp" class="md-nav__link">
     math.clamp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathisclose" class="md-nav__link">
+    math.isclose
   </a>
   
 </li>
@@ -7658,6 +7726,21 @@
 
 <h1 id="math">math<a class="headerlink" href="#math" title="Permanent link">⚓︎</a></h1>
 <p>This library is an interface to the standard C math library. This library has been further extended by MWSE. The functions implemented by MWSE are listed here. It provides all its functions inside the table math.</p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
+<h3 id="mathepsilon"><code>math.epsilon</code><a class="headerlink" href="#mathepsilon" title="Permanent link">⚓︎</a></h3>
+<p>The <em>machine</em> epsilon available for double-precision numbers. This is the difference between 1.0 and the next representable value using lua numbers.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="mathfepsilon"><code>math.fepsilon</code><a class="headerlink" href="#mathfepsilon" title="Permanent link">⚓︎</a></h3>
+<p>The <em>machine</em> epsilon available for single-precision numbers. This is the difference between 1.0 and the next representable value for many Morrowind structures.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mathclamp"><code>math.clamp</code><a class="headerlink" href="#mathclamp" title="Permanent link">⚓︎</a></h3>
 <p>Returns a value, limited by upper and lower bounds.</p>
@@ -7668,6 +7751,22 @@
 <li><code>value</code> (number)</li>
 <li><code>min</code> (number)</li>
 <li><code>max</code> (number)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="mathisclose"><code>math.isclose</code><a class="headerlink" href="#mathisclose" title="Permanent link">⚓︎</a></h3>
+<p>This function compares <code>a</code> and <code>b</code> and returns true if they are close together. This can be useful when comparing floating-point numbers with some degree of tolerance.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">absoluteTolerance</span><span class="p">,</span> <span class="n">relativeTolerance</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>a</code> (number): First value.</li>
+<li><code>b</code> (number): Second value.</li>
+<li><code>absoluteTolerance</code> (number): <em>Default</em>: <code>math.epsilon</code>. The absolute difference allowed between the two numbers. A value of 0.01 will only allow the values to differ by 0.01.</li>
+<li><code>relativeTolerance</code> (number): <em>Default</em>: <code>1e-09</code>. The relative difference allowed between the two numbers. A value of 0.01 will only allow the values to differ by 1%.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
