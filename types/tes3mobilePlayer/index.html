@@ -5794,6 +5794,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getskillprogressrequirement" class="md-nav__link">
+    getSkillProgressRequirement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getskillstatistic" class="md-nav__link">
     getSkillStatistic
   </a>
@@ -5857,8 +5864,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#levelskill" class="md-nav__link">
-    levelSkill
+  <a href="#progressskilllevelifrequirementsmet" class="md-nav__link">
+    progressSkillLevelIfRequirementsMet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressskilltonextlevel" class="md-nav__link">
+    progressSkillToNextLevel
   </a>
   
 </li>
@@ -10563,6 +10577,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getskillprogressrequirement" class="md-nav__link">
+    getSkillProgressRequirement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getskillstatistic" class="md-nav__link">
     getSkillStatistic
   </a>
@@ -10626,8 +10647,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#levelskill" class="md-nav__link">
-    levelSkill
+  <a href="#progressskilllevelifrequirementsmet" class="md-nav__link">
+    progressSkillLevelIfRequirementsMet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressskilltonextlevel" class="md-nav__link">
+    progressSkillToNextLevel
   </a>
   
 </li>
@@ -12226,6 +12254,19 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>timestamp</code> (number)</li>
 </ul>
 <hr />
+<h3 id="getskillprogressrequirement"><code>getSkillProgressRequirement</code><a class="headerlink" href="#getskillprogressrequirement" title="Permanent link">⚓︎</a></h3>
+<p>Returns the total progress needed to progress the skill to the next level.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">progressNeeded</span> <span class="o">=</span> <span class="n">tes3mobilePlayer</span><span class="p">:</span><span class="n">getSkillProgressRequirement</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>skill</code> (number): The skill index to check.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>progressNeeded</code> (number)</li>
+</ul>
+<hr />
 <h3 id="getskillstatistic"><code>getSkillStatistic</code><a class="headerlink" href="#getskillstatistic" title="Permanent link">⚓︎</a></h3>
 <p>Fetches the statistic object of a skill with a given index. This is the way to access skills for any type of actor, as creatures have a limited version of the skill system. Note that creatures share a statistic between multiple skills (they only have combat, magic, and stealth stats), so many values will be the same.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getSkillStatistic</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
@@ -12323,13 +12364,26 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
-<h3 id="levelskill"><code>levelSkill</code><a class="headerlink" href="#levelskill" title="Permanent link">⚓︎</a></h3>
+<h3 id="progressskilllevelifrequirementsmet"><code>progressSkillLevelIfRequirementsMet</code><a class="headerlink" href="#progressskilllevelifrequirementsmet" title="Permanent link">⚓︎</a></h3>
 <p>Checks to see if a skill is ready to be leveled up, and performs any levelup logic.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3mobilePlayer</span><span class="p">:</span><span class="n">levelSkill</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobilePlayer</span><span class="p">:</span><span class="n">progressSkillLevelIfRequirementsMet</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>skill</code> (number): The skill index to check for leveling.</li>
+</ul>
+<hr />
+<h3 id="progressskilltonextlevel"><code>progressSkillToNextLevel</code><a class="headerlink" href="#progressskilltonextlevel" title="Permanent link">⚓︎</a></h3>
+<p>Increments the player's skill to the next level, while respecting all level up mechanics.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">newLevel</span> <span class="o">=</span> <span class="n">tes3mobilePlayer</span><span class="p">:</span><span class="n">progressSkillToNextLevel</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>skill</code> (number): The skill index to increase.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>newLevel</code> (number)</li>
 </ul>
 <hr />
 <h3 id="rechargepower"><code>rechargePower</code><a class="headerlink" href="#rechargepower" title="Permanent link">⚓︎</a></h3>
