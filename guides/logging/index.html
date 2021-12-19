@@ -13,7 +13,7 @@
     
     
       
-        <title>tes3iterator - Morrowind Script Extender</title>
+        <title>Logging - Morrowind Script Extender</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tes3iterator" class="md-skip">
+        <a href="#logging" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              tes3iterator
+              Logging
             
           </span>
         </div>
@@ -208,13 +208,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../guides/introduction/" class="md-tabs__link">
+      <a href="../introduction/" class="md-tabs__link md-tabs__link--active">
         Guides
       </a>
     </li>
@@ -256,15 +258,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../ioFile/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../types/ioFile/" class="md-tabs__link">
         Types
       </a>
     </li>
@@ -351,12 +351,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -403,7 +405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/introduction/" class="md-nav__link">
+      <a href="../introduction/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -417,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/introduction-to-lua/" class="md-nav__link">
+      <a href="../introduction-to-lua/" class="md-nav__link">
         Introduction to Lua
       </a>
     </li>
@@ -431,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/introduction-to-event-based-programming/" class="md-nav__link">
+      <a href="../introduction-to-event-based-programming/" class="md-nav__link">
         Introduction to Event Based Programming
       </a>
     </li>
@@ -445,7 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/development-workflows/" class="md-nav__link">
+      <a href="../development-workflows/" class="md-nav__link">
         Development Workflows
       </a>
     </li>
@@ -459,7 +461,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/creating-a-mod/" class="md-nav__link">
+      <a href="../creating-a-mod/" class="md-nav__link">
         Creating a Mod
       </a>
     </li>
@@ -471,11 +473,86 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../guides/logging/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Logging
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Logging
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#log-levels" class="md-nav__link">
+    Log Levels
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-colors" class="md-nav__link">
+    Log Colors
+  </a>
+  
+    <nav class="md-nav" aria-label="Log Colors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-level-colors" class="md-nav__link">
+    Log Level Colors:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-and-using-your-logger" class="md-nav__link">
+    Registering and using your Logger
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-an-mcm-to-control-log-level" class="md-nav__link">
+    Creating an MCM to control Log Level
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -487,7 +564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/mod-config/" class="md-nav__link">
+      <a href="../mod-config/" class="md-nav__link">
         Mod Configuration Menu
       </a>
     </li>
@@ -501,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/mod-translations/" class="md-nav__link">
+      <a href="../mod-translations/" class="md-nav__link">
         Mod Translations
       </a>
     </li>
@@ -515,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/tes3ui-events/" class="md-nav__link">
+      <a href="../tes3ui-events/" class="md-nav__link">
         TES3 UI Events Guide
       </a>
     </li>
@@ -529,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/tes3ui/" class="md-nav__link">
+      <a href="../tes3ui/" class="md-nav__link">
         TES3 UI Example
       </a>
     </li>
@@ -543,7 +620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/timers/" class="md-nav__link">
+      <a href="../timers/" class="md-nav__link">
         Timers
       </a>
     </li>
@@ -2153,14 +2230,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       
       
@@ -2577,7 +2652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ioFile/" class="md-nav__link">
+      <a href="../../types/ioFile/" class="md-nav__link">
         ioFile
       </a>
     </li>
@@ -2591,7 +2666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lfsLock/" class="md-nav__link">
+      <a href="../../types/lfsLock/" class="md-nav__link">
         lfsLock
       </a>
     </li>
@@ -2605,7 +2680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mwseLuaExecutor/" class="md-nav__link">
+      <a href="../../types/mwseLuaExecutor/" class="md-nav__link">
         mwseLuaExecutor
       </a>
     </li>
@@ -2619,7 +2694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mwseTimer/" class="md-nav__link">
+      <a href="../../types/mwseTimer/" class="md-nav__link">
         mwseTimer
       </a>
     </li>
@@ -2633,7 +2708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mwseTimerController/" class="md-nav__link">
+      <a href="../../types/mwseTimerController/" class="md-nav__link">
         mwseTimerController
       </a>
     </li>
@@ -2647,7 +2722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niAVObject/" class="md-nav__link">
+      <a href="../../types/niAVObject/" class="md-nav__link">
         niAVObject
       </a>
     </li>
@@ -2661,7 +2736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niAlphaProperty/" class="md-nav__link">
+      <a href="../../types/niAlphaProperty/" class="md-nav__link">
         niAlphaProperty
       </a>
     </li>
@@ -2675,7 +2750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niAmbientLight/" class="md-nav__link">
+      <a href="../../types/niAmbientLight/" class="md-nav__link">
         niAmbientLight
       </a>
     </li>
@@ -2689,7 +2764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niBillboardNode/" class="md-nav__link">
+      <a href="../../types/niBillboardNode/" class="md-nav__link">
         niBillboardNode
       </a>
     </li>
@@ -2703,7 +2778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niCamera/" class="md-nav__link">
+      <a href="../../types/niCamera/" class="md-nav__link">
         niCamera
       </a>
     </li>
@@ -2717,7 +2792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niCollisionSwitch/" class="md-nav__link">
+      <a href="../../types/niCollisionSwitch/" class="md-nav__link">
         niCollisionSwitch
       </a>
     </li>
@@ -2731,7 +2806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niColor/" class="md-nav__link">
+      <a href="../../types/niColor/" class="md-nav__link">
         niColor
       </a>
     </li>
@@ -2745,7 +2820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niColorA/" class="md-nav__link">
+      <a href="../../types/niColorA/" class="md-nav__link">
         niColorA
       </a>
     </li>
@@ -2759,7 +2834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niDirectionalLight/" class="md-nav__link">
+      <a href="../../types/niDirectionalLight/" class="md-nav__link">
         niDirectionalLight
       </a>
     </li>
@@ -2773,7 +2848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niDynamicEffect/" class="md-nav__link">
+      <a href="../../types/niDynamicEffect/" class="md-nav__link">
         niDynamicEffect
       </a>
     </li>
@@ -2787,7 +2862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niDynamicEffectLinkedList/" class="md-nav__link">
+      <a href="../../types/niDynamicEffectLinkedList/" class="md-nav__link">
         niDynamicEffectLinkedList
       </a>
     </li>
@@ -2801,7 +2876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niFogProperty/" class="md-nav__link">
+      <a href="../../types/niFogProperty/" class="md-nav__link">
         niFogProperty
       </a>
     </li>
@@ -2815,7 +2890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niFormatPrefs/" class="md-nav__link">
+      <a href="../../types/niFormatPrefs/" class="md-nav__link">
         niFormatPrefs
       </a>
     </li>
@@ -2829,7 +2904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niGeometry/" class="md-nav__link">
+      <a href="../../types/niGeometry/" class="md-nav__link">
         niGeometry
       </a>
     </li>
@@ -2843,7 +2918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niGeometryData/" class="md-nav__link">
+      <a href="../../types/niGeometryData/" class="md-nav__link">
         niGeometryData
       </a>
     </li>
@@ -2857,7 +2932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niLight/" class="md-nav__link">
+      <a href="../../types/niLight/" class="md-nav__link">
         niLight
       </a>
     </li>
@@ -2871,7 +2946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niLookAtController/" class="md-nav__link">
+      <a href="../../types/niLookAtController/" class="md-nav__link">
         niLookAtController
       </a>
     </li>
@@ -2885,7 +2960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niMaterialProperty/" class="md-nav__link">
+      <a href="../../types/niMaterialProperty/" class="md-nav__link">
         niMaterialProperty
       </a>
     </li>
@@ -2899,7 +2974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niNode/" class="md-nav__link">
+      <a href="../../types/niNode/" class="md-nav__link">
         niNode
       </a>
     </li>
@@ -2913,7 +2988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niObject/" class="md-nav__link">
+      <a href="../../types/niObject/" class="md-nav__link">
         niObject
       </a>
     </li>
@@ -2927,7 +3002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niObjectNET/" class="md-nav__link">
+      <a href="../../types/niObjectNET/" class="md-nav__link">
         niObjectNET
       </a>
     </li>
@@ -2941,7 +3016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niPackedColor/" class="md-nav__link">
+      <a href="../../types/niPackedColor/" class="md-nav__link">
         niPackedColor
       </a>
     </li>
@@ -2955,7 +3030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niPick/" class="md-nav__link">
+      <a href="../../types/niPick/" class="md-nav__link">
         niPick
       </a>
     </li>
@@ -2969,7 +3044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niPickRecord/" class="md-nav__link">
+      <a href="../../types/niPickRecord/" class="md-nav__link">
         niPickRecord
       </a>
     </li>
@@ -2983,7 +3058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niPixelData/" class="md-nav__link">
+      <a href="../../types/niPixelData/" class="md-nav__link">
         niPixelData
       </a>
     </li>
@@ -2997,7 +3072,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niPointLight/" class="md-nav__link">
+      <a href="../../types/niPointLight/" class="md-nav__link">
         niPointLight
       </a>
     </li>
@@ -3011,7 +3086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niProperty/" class="md-nav__link">
+      <a href="../../types/niProperty/" class="md-nav__link">
         niProperty
       </a>
     </li>
@@ -3025,7 +3100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niPropertyLinkedList/" class="md-nav__link">
+      <a href="../../types/niPropertyLinkedList/" class="md-nav__link">
         niPropertyLinkedList
       </a>
     </li>
@@ -3039,7 +3114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niRTTI/" class="md-nav__link">
+      <a href="../../types/niRTTI/" class="md-nav__link">
         niRTTI
       </a>
     </li>
@@ -3053,7 +3128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niSourceTexture/" class="md-nav__link">
+      <a href="../../types/niSourceTexture/" class="md-nav__link">
         niSourceTexture
       </a>
     </li>
@@ -3067,7 +3142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niSpotLight/" class="md-nav__link">
+      <a href="../../types/niSpotLight/" class="md-nav__link">
         niSpotLight
       </a>
     </li>
@@ -3081,7 +3156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niStencilProperty/" class="md-nav__link">
+      <a href="../../types/niStencilProperty/" class="md-nav__link">
         niStencilProperty
       </a>
     </li>
@@ -3095,7 +3170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niSwitchNode/" class="md-nav__link">
+      <a href="../../types/niSwitchNode/" class="md-nav__link">
         niSwitchNode
       </a>
     </li>
@@ -3109,7 +3184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTexturingProperty/" class="md-nav__link">
+      <a href="../../types/niTexturingProperty/" class="md-nav__link">
         niTexturingProperty
       </a>
     </li>
@@ -3123,7 +3198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTexturingPropertyMap/" class="md-nav__link">
+      <a href="../../types/niTexturingPropertyMap/" class="md-nav__link">
         niTexturingPropertyMap
       </a>
     </li>
@@ -3137,7 +3212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTimeController/" class="md-nav__link">
+      <a href="../../types/niTimeController/" class="md-nav__link">
         niTimeController
       </a>
     </li>
@@ -3151,7 +3226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTriBasedGeometry/" class="md-nav__link">
+      <a href="../../types/niTriBasedGeometry/" class="md-nav__link">
         niTriBasedGeometry
       </a>
     </li>
@@ -3165,7 +3240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTriBasedGeometryData/" class="md-nav__link">
+      <a href="../../types/niTriBasedGeometryData/" class="md-nav__link">
         niTriBasedGeometryData
       </a>
     </li>
@@ -3179,7 +3254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTriShape/" class="md-nav__link">
+      <a href="../../types/niTriShape/" class="md-nav__link">
         niTriShape
       </a>
     </li>
@@ -3193,7 +3268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niTriShapeData/" class="md-nav__link">
+      <a href="../../types/niTriShapeData/" class="md-nav__link">
         niTriShapeData
       </a>
     </li>
@@ -3207,7 +3282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../niVertexColorProperty/" class="md-nav__link">
+      <a href="../../types/niVertexColorProperty/" class="md-nav__link">
         niVertexColorProperty
       </a>
     </li>
@@ -3221,7 +3296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3actionData/" class="md-nav__link">
+      <a href="../../types/tes3actionData/" class="md-nav__link">
         tes3actionData
       </a>
     </li>
@@ -3235,7 +3310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3activator/" class="md-nav__link">
+      <a href="../../types/tes3activator/" class="md-nav__link">
         tes3activator
       </a>
     </li>
@@ -3249,7 +3324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3activeMagicEffect/" class="md-nav__link">
+      <a href="../../types/tes3activeMagicEffect/" class="md-nav__link">
         tes3activeMagicEffect
       </a>
     </li>
@@ -3263,7 +3338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3actor/" class="md-nav__link">
+      <a href="../../types/tes3actor/" class="md-nav__link">
         tes3actor
       </a>
     </li>
@@ -3277,7 +3352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3actorAnimationController/" class="md-nav__link">
+      <a href="../../types/tes3actorAnimationController/" class="md-nav__link">
         tes3actorAnimationController
       </a>
     </li>
@@ -3291,7 +3366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiConfig/" class="md-nav__link">
+      <a href="../../types/tes3aiConfig/" class="md-nav__link">
         tes3aiConfig
       </a>
     </li>
@@ -3305,7 +3380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackage/" class="md-nav__link">
+      <a href="../../types/tes3aiPackage/" class="md-nav__link">
         tes3aiPackage
       </a>
     </li>
@@ -3319,7 +3394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackageActivate/" class="md-nav__link">
+      <a href="../../types/tes3aiPackageActivate/" class="md-nav__link">
         tes3aiPackageActivate
       </a>
     </li>
@@ -3333,7 +3408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackageEscort/" class="md-nav__link">
+      <a href="../../types/tes3aiPackageEscort/" class="md-nav__link">
         tes3aiPackageEscort
       </a>
     </li>
@@ -3347,7 +3422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackageFollow/" class="md-nav__link">
+      <a href="../../types/tes3aiPackageFollow/" class="md-nav__link">
         tes3aiPackageFollow
       </a>
     </li>
@@ -3361,7 +3436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackageTravel/" class="md-nav__link">
+      <a href="../../types/tes3aiPackageTravel/" class="md-nav__link">
         tes3aiPackageTravel
       </a>
     </li>
@@ -3375,7 +3450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackageWander/" class="md-nav__link">
+      <a href="../../types/tes3aiPackageWander/" class="md-nav__link">
         tes3aiPackageWander
       </a>
     </li>
@@ -3389,7 +3464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPackageWanderIdleNode/" class="md-nav__link">
+      <a href="../../types/tes3aiPackageWanderIdleNode/" class="md-nav__link">
         tes3aiPackageWanderIdleNode
       </a>
     </li>
@@ -3403,7 +3478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3aiPlanner/" class="md-nav__link">
+      <a href="../../types/tes3aiPlanner/" class="md-nav__link">
         tes3aiPlanner
       </a>
     </li>
@@ -3417,7 +3492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3alchemy/" class="md-nav__link">
+      <a href="../../types/tes3alchemy/" class="md-nav__link">
         tes3alchemy
       </a>
     </li>
@@ -3431,7 +3506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3apparatus/" class="md-nav__link">
+      <a href="../../types/tes3apparatus/" class="md-nav__link">
         tes3apparatus
       </a>
     </li>
@@ -3445,7 +3520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3armor/" class="md-nav__link">
+      <a href="../../types/tes3armor/" class="md-nav__link">
         tes3armor
       </a>
     </li>
@@ -3459,7 +3534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3audioController/" class="md-nav__link">
+      <a href="../../types/tes3audioController/" class="md-nav__link">
         tes3audioController
       </a>
     </li>
@@ -3473,7 +3548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3baseObject/" class="md-nav__link">
+      <a href="../../types/tes3baseObject/" class="md-nav__link">
         tes3baseObject
       </a>
     </li>
@@ -3487,7 +3562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3birthsign/" class="md-nav__link">
+      <a href="../../types/tes3birthsign/" class="md-nav__link">
         tes3birthsign
       </a>
     </li>
@@ -3501,7 +3576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3bodyPart/" class="md-nav__link">
+      <a href="../../types/tes3bodyPart/" class="md-nav__link">
         tes3bodyPart
       </a>
     </li>
@@ -3515,7 +3590,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3bodyPartManager/" class="md-nav__link">
+      <a href="../../types/tes3bodyPartManager/" class="md-nav__link">
         tes3bodyPartManager
       </a>
     </li>
@@ -3529,7 +3604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3bodyPartManagerActiveBodyPart/" class="md-nav__link">
+      <a href="../../types/tes3bodyPartManagerActiveBodyPart/" class="md-nav__link">
         tes3bodyPartManagerActiveBodyPart
       </a>
     </li>
@@ -3543,7 +3618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3bodyPartManagerAttachNode/" class="md-nav__link">
+      <a href="../../types/tes3bodyPartManagerAttachNode/" class="md-nav__link">
         tes3bodyPartManagerAttachNode
       </a>
     </li>
@@ -3557,7 +3632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3book/" class="md-nav__link">
+      <a href="../../types/tes3book/" class="md-nav__link">
         tes3book
       </a>
     </li>
@@ -3571,7 +3646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3boundingBox/" class="md-nav__link">
+      <a href="../../types/tes3boundingBox/" class="md-nav__link">
         tes3boundingBox
       </a>
     </li>
@@ -3585,7 +3660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3cell/" class="md-nav__link">
+      <a href="../../types/tes3cell/" class="md-nav__link">
         tes3cell
       </a>
     </li>
@@ -3599,7 +3674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3cellExteriorData/" class="md-nav__link">
+      <a href="../../types/tes3cellExteriorData/" class="md-nav__link">
         tes3cellExteriorData
       </a>
     </li>
@@ -3613,7 +3688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3class/" class="md-nav__link">
+      <a href="../../types/tes3class/" class="md-nav__link">
         tes3class
       </a>
     </li>
@@ -3627,7 +3702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3clothing/" class="md-nav__link">
+      <a href="../../types/tes3clothing/" class="md-nav__link">
         tes3clothing
       </a>
     </li>
@@ -3641,7 +3716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3combatSession/" class="md-nav__link">
+      <a href="../../types/tes3combatSession/" class="md-nav__link">
         tes3combatSession
       </a>
     </li>
@@ -3655,7 +3730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3container/" class="md-nav__link">
+      <a href="../../types/tes3container/" class="md-nav__link">
         tes3container
       </a>
     </li>
@@ -3669,7 +3744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3containerInstance/" class="md-nav__link">
+      <a href="../../types/tes3containerInstance/" class="md-nav__link">
         tes3containerInstance
       </a>
     </li>
@@ -3683,7 +3758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3creature/" class="md-nav__link">
+      <a href="../../types/tes3creature/" class="md-nav__link">
         tes3creature
       </a>
     </li>
@@ -3697,7 +3772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3creatureInstance/" class="md-nav__link">
+      <a href="../../types/tes3creatureInstance/" class="md-nav__link">
         tes3creatureInstance
       </a>
     </li>
@@ -3711,7 +3786,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3dataHandler/" class="md-nav__link">
+      <a href="../../types/tes3dataHandler/" class="md-nav__link">
         tes3dataHandler
       </a>
     </li>
@@ -3725,7 +3800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3dialogue/" class="md-nav__link">
+      <a href="../../types/tes3dialogue/" class="md-nav__link">
         tes3dialogue
       </a>
     </li>
@@ -3739,7 +3814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3dialogueInfo/" class="md-nav__link">
+      <a href="../../types/tes3dialogueInfo/" class="md-nav__link">
         tes3dialogueInfo
       </a>
     </li>
@@ -3753,7 +3828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3directInputMouseState/" class="md-nav__link">
+      <a href="../../types/tes3directInputMouseState/" class="md-nav__link">
         tes3directInputMouseState
       </a>
     </li>
@@ -3767,7 +3842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3door/" class="md-nav__link">
+      <a href="../../types/tes3door/" class="md-nav__link">
         tes3door
       </a>
     </li>
@@ -3781,7 +3856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3effect/" class="md-nav__link">
+      <a href="../../types/tes3effect/" class="md-nav__link">
         tes3effect
       </a>
     </li>
@@ -3795,7 +3870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3enchantment/" class="md-nav__link">
+      <a href="../../types/tes3enchantment/" class="md-nav__link">
         tes3enchantment
       </a>
     </li>
@@ -3809,7 +3884,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3equipmentStack/" class="md-nav__link">
+      <a href="../../types/tes3equipmentStack/" class="md-nav__link">
         tes3equipmentStack
       </a>
     </li>
@@ -3823,7 +3898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3faction/" class="md-nav__link">
+      <a href="../../types/tes3faction/" class="md-nav__link">
         tes3faction
       </a>
     </li>
@@ -3837,7 +3912,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3factionRank/" class="md-nav__link">
+      <a href="../../types/tes3factionRank/" class="md-nav__link">
         tes3factionRank
       </a>
     </li>
@@ -3851,7 +3926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3factionReaction/" class="md-nav__link">
+      <a href="../../types/tes3factionReaction/" class="md-nav__link">
         tes3factionReaction
       </a>
     </li>
@@ -3865,7 +3940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3fader/" class="md-nav__link">
+      <a href="../../types/tes3fader/" class="md-nav__link">
         tes3fader
       </a>
     </li>
@@ -3879,7 +3954,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3game/" class="md-nav__link">
+      <a href="../../types/tes3game/" class="md-nav__link">
         tes3game
       </a>
     </li>
@@ -3893,7 +3968,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3gameFile/" class="md-nav__link">
+      <a href="../../types/tes3gameFile/" class="md-nav__link">
         tes3gameFile
       </a>
     </li>
@@ -3907,7 +3982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3gameSetting/" class="md-nav__link">
+      <a href="../../types/tes3gameSetting/" class="md-nav__link">
         tes3gameSetting
       </a>
     </li>
@@ -3921,7 +3996,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3globalScript/" class="md-nav__link">
+      <a href="../../types/tes3globalScript/" class="md-nav__link">
         tes3globalScript
       </a>
     </li>
@@ -3935,7 +4010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3globalVariable/" class="md-nav__link">
+      <a href="../../types/tes3globalVariable/" class="md-nav__link">
         tes3globalVariable
       </a>
     </li>
@@ -3949,7 +4024,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3ingredient/" class="md-nav__link">
+      <a href="../../types/tes3ingredient/" class="md-nav__link">
         tes3ingredient
       </a>
     </li>
@@ -3963,7 +4038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3inputConfig/" class="md-nav__link">
+      <a href="../../types/tes3inputConfig/" class="md-nav__link">
         tes3inputConfig
       </a>
     </li>
@@ -3977,7 +4052,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3inputController/" class="md-nav__link">
+      <a href="../../types/tes3inputController/" class="md-nav__link">
         tes3inputController
       </a>
     </li>
@@ -3991,7 +4066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3inventory/" class="md-nav__link">
+      <a href="../../types/tes3inventory/" class="md-nav__link">
         tes3inventory
       </a>
     </li>
@@ -4005,7 +4080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3inventoryTile/" class="md-nav__link">
+      <a href="../../types/tes3inventoryTile/" class="md-nav__link">
         tes3inventoryTile
       </a>
     </li>
@@ -4019,7 +4094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3item/" class="md-nav__link">
+      <a href="../../types/tes3item/" class="md-nav__link">
         tes3item
       </a>
     </li>
@@ -4033,7 +4108,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3itemData/" class="md-nav__link">
+      <a href="../../types/tes3itemData/" class="md-nav__link">
         tes3itemData
       </a>
     </li>
@@ -4047,7 +4122,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3itemStack/" class="md-nav__link">
+      <a href="../../types/tes3itemStack/" class="md-nav__link">
         tes3itemStack
       </a>
     </li>
@@ -4059,86 +4134,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          tes3iterator
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../types/tes3iterator/" class="md-nav__link">
         tes3iterator
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-    <nav class="md-nav" aria-label="Properties">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#current" class="md-nav__link">
-    current
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#head" class="md-nav__link">
-    head
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#size" class="md-nav__link">
-    size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tail" class="md-nav__link">
-    tail
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -4150,7 +4150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3iteratorNode/" class="md-nav__link">
+      <a href="../../types/tes3iteratorNode/" class="md-nav__link">
         tes3iteratorNode
       </a>
     </li>
@@ -4164,7 +4164,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3leveledCreature/" class="md-nav__link">
+      <a href="../../types/tes3leveledCreature/" class="md-nav__link">
         tes3leveledCreature
       </a>
     </li>
@@ -4178,7 +4178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3leveledItem/" class="md-nav__link">
+      <a href="../../types/tes3leveledItem/" class="md-nav__link">
         tes3leveledItem
       </a>
     </li>
@@ -4192,7 +4192,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3leveledListNode/" class="md-nav__link">
+      <a href="../../types/tes3leveledListNode/" class="md-nav__link">
         tes3leveledListNode
       </a>
     </li>
@@ -4206,7 +4206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3light/" class="md-nav__link">
+      <a href="../../types/tes3light/" class="md-nav__link">
         tes3light
       </a>
     </li>
@@ -4220,7 +4220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3lockNode/" class="md-nav__link">
+      <a href="../../types/tes3lockNode/" class="md-nav__link">
         tes3lockNode
       </a>
     </li>
@@ -4234,7 +4234,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3lockpick/" class="md-nav__link">
+      <a href="../../types/tes3lockpick/" class="md-nav__link">
         tes3lockpick
       </a>
     </li>
@@ -4248,7 +4248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3magicEffect/" class="md-nav__link">
+      <a href="../../types/tes3magicEffect/" class="md-nav__link">
         tes3magicEffect
       </a>
     </li>
@@ -4262,7 +4262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3magicEffectInstance/" class="md-nav__link">
+      <a href="../../types/tes3magicEffectInstance/" class="md-nav__link">
         tes3magicEffectInstance
       </a>
     </li>
@@ -4276,7 +4276,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3magicSourceInstance/" class="md-nav__link">
+      <a href="../../types/tes3magicSourceInstance/" class="md-nav__link">
         tes3magicSourceInstance
       </a>
     </li>
@@ -4290,7 +4290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3markData/" class="md-nav__link">
+      <a href="../../types/tes3markData/" class="md-nav__link">
         tes3markData
       </a>
     </li>
@@ -4304,7 +4304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3matrix33/" class="md-nav__link">
+      <a href="../../types/tes3matrix33/" class="md-nav__link">
         tes3matrix33
       </a>
     </li>
@@ -4318,7 +4318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3matrix44/" class="md-nav__link">
+      <a href="../../types/tes3matrix44/" class="md-nav__link">
         tes3matrix44
       </a>
     </li>
@@ -4332,7 +4332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3misc/" class="md-nav__link">
+      <a href="../../types/tes3misc/" class="md-nav__link">
         tes3misc
       </a>
     </li>
@@ -4346,7 +4346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobController/" class="md-nav__link">
+      <a href="../../types/tes3mobController/" class="md-nav__link">
         tes3mobController
       </a>
     </li>
@@ -4360,7 +4360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobileActor/" class="md-nav__link">
+      <a href="../../types/tes3mobileActor/" class="md-nav__link">
         tes3mobileActor
       </a>
     </li>
@@ -4374,7 +4374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobileCreature/" class="md-nav__link">
+      <a href="../../types/tes3mobileCreature/" class="md-nav__link">
         tes3mobileCreature
       </a>
     </li>
@@ -4388,7 +4388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobileNPC/" class="md-nav__link">
+      <a href="../../types/tes3mobileNPC/" class="md-nav__link">
         tes3mobileNPC
       </a>
     </li>
@@ -4402,7 +4402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobileObject/" class="md-nav__link">
+      <a href="../../types/tes3mobileObject/" class="md-nav__link">
         tes3mobileObject
       </a>
     </li>
@@ -4416,7 +4416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobilePlayer/" class="md-nav__link">
+      <a href="../../types/tes3mobilePlayer/" class="md-nav__link">
         tes3mobilePlayer
       </a>
     </li>
@@ -4430,7 +4430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobileProjectile/" class="md-nav__link">
+      <a href="../../types/tes3mobileProjectile/" class="md-nav__link">
         tes3mobileProjectile
       </a>
     </li>
@@ -4444,7 +4444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3mobileSpellProjectile/" class="md-nav__link">
+      <a href="../../types/tes3mobileSpellProjectile/" class="md-nav__link">
         tes3mobileSpellProjectile
       </a>
     </li>
@@ -4458,7 +4458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3moon/" class="md-nav__link">
+      <a href="../../types/tes3moon/" class="md-nav__link">
         tes3moon
       </a>
     </li>
@@ -4472,7 +4472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3nonDynamicData/" class="md-nav__link">
+      <a href="../../types/tes3nonDynamicData/" class="md-nav__link">
         tes3nonDynamicData
       </a>
     </li>
@@ -4486,7 +4486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3npc/" class="md-nav__link">
+      <a href="../../types/tes3npc/" class="md-nav__link">
         tes3npc
       </a>
     </li>
@@ -4500,7 +4500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3npcInstance/" class="md-nav__link">
+      <a href="../../types/tes3npcInstance/" class="md-nav__link">
         tes3npcInstance
       </a>
     </li>
@@ -4514,7 +4514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3object/" class="md-nav__link">
+      <a href="../../types/tes3object/" class="md-nav__link">
         tes3object
       </a>
     </li>
@@ -4528,7 +4528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3packedColor/" class="md-nav__link">
+      <a href="../../types/tes3packedColor/" class="md-nav__link">
         tes3packedColor
       </a>
     </li>
@@ -4542,7 +4542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3physicalObject/" class="md-nav__link">
+      <a href="../../types/tes3physicalObject/" class="md-nav__link">
         tes3physicalObject
       </a>
     </li>
@@ -4556,7 +4556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3playerAnimationController/" class="md-nav__link">
+      <a href="../../types/tes3playerAnimationController/" class="md-nav__link">
         tes3playerAnimationController
       </a>
     </li>
@@ -4570,7 +4570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3probe/" class="md-nav__link">
+      <a href="../../types/tes3probe/" class="md-nav__link">
         tes3probe
       </a>
     </li>
@@ -4584,7 +4584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3processManager/" class="md-nav__link">
+      <a href="../../types/tes3processManager/" class="md-nav__link">
         tes3processManager
       </a>
     </li>
@@ -4598,7 +4598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3projectileController/" class="md-nav__link">
+      <a href="../../types/tes3projectileController/" class="md-nav__link">
         tes3projectileController
       </a>
     </li>
@@ -4612,7 +4612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3quest/" class="md-nav__link">
+      <a href="../../types/tes3quest/" class="md-nav__link">
         tes3quest
       </a>
     </li>
@@ -4626,7 +4626,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3quickKey/" class="md-nav__link">
+      <a href="../../types/tes3quickKey/" class="md-nav__link">
         tes3quickKey
       </a>
     </li>
@@ -4640,7 +4640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3race/" class="md-nav__link">
+      <a href="../../types/tes3race/" class="md-nav__link">
         tes3race
       </a>
     </li>
@@ -4654,7 +4654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3raceBaseAttribute/" class="md-nav__link">
+      <a href="../../types/tes3raceBaseAttribute/" class="md-nav__link">
         tes3raceBaseAttribute
       </a>
     </li>
@@ -4668,7 +4668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3raceBodyParts/" class="md-nav__link">
+      <a href="../../types/tes3raceBodyParts/" class="md-nav__link">
         tes3raceBodyParts
       </a>
     </li>
@@ -4682,7 +4682,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3raceHeightWeight/" class="md-nav__link">
+      <a href="../../types/tes3raceHeightWeight/" class="md-nav__link">
         tes3raceHeightWeight
       </a>
     </li>
@@ -4696,7 +4696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3raceSkillBonus/" class="md-nav__link">
+      <a href="../../types/tes3raceSkillBonus/" class="md-nav__link">
         tes3raceSkillBonus
       </a>
     </li>
@@ -4710,7 +4710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3rangeInt/" class="md-nav__link">
+      <a href="../../types/tes3rangeInt/" class="md-nav__link">
         tes3rangeInt
       </a>
     </li>
@@ -4724,7 +4724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3rechargingItem/" class="md-nav__link">
+      <a href="../../types/tes3rechargingItem/" class="md-nav__link">
         tes3rechargingItem
       </a>
     </li>
@@ -4738,7 +4738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3reference/" class="md-nav__link">
+      <a href="../../types/tes3reference/" class="md-nav__link">
         tes3reference
       </a>
     </li>
@@ -4752,7 +4752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3referenceList/" class="md-nav__link">
+      <a href="../../types/tes3referenceList/" class="md-nav__link">
         tes3referenceList
       </a>
     </li>
@@ -4766,7 +4766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3region/" class="md-nav__link">
+      <a href="../../types/tes3region/" class="md-nav__link">
         tes3region
       </a>
     </li>
@@ -4780,7 +4780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3regionSound/" class="md-nav__link">
+      <a href="../../types/tes3regionSound/" class="md-nav__link">
         tes3regionSound
       </a>
     </li>
@@ -4794,7 +4794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3repairTool/" class="md-nav__link">
+      <a href="../../types/tes3repairTool/" class="md-nav__link">
         tes3repairTool
       </a>
     </li>
@@ -4808,7 +4808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3script/" class="md-nav__link">
+      <a href="../../types/tes3script/" class="md-nav__link">
         tes3script
       </a>
     </li>
@@ -4822,7 +4822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3scriptContext/" class="md-nav__link">
+      <a href="../../types/tes3scriptContext/" class="md-nav__link">
         tes3scriptContext
       </a>
     </li>
@@ -4836,7 +4836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3skill/" class="md-nav__link">
+      <a href="../../types/tes3skill/" class="md-nav__link">
         tes3skill
       </a>
     </li>
@@ -4850,7 +4850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3soulGemData/" class="md-nav__link">
+      <a href="../../types/tes3soulGemData/" class="md-nav__link">
         tes3soulGemData
       </a>
     </li>
@@ -4864,7 +4864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3sound/" class="md-nav__link">
+      <a href="../../types/tes3sound/" class="md-nav__link">
         tes3sound
       </a>
     </li>
@@ -4878,7 +4878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3soundGenerator/" class="md-nav__link">
+      <a href="../../types/tes3soundGenerator/" class="md-nav__link">
         tes3soundGenerator
       </a>
     </li>
@@ -4892,7 +4892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3spell/" class="md-nav__link">
+      <a href="../../types/tes3spell/" class="md-nav__link">
         tes3spell
       </a>
     </li>
@@ -4906,7 +4906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3spellList/" class="md-nav__link">
+      <a href="../../types/tes3spellList/" class="md-nav__link">
         tes3spellList
       </a>
     </li>
@@ -4920,7 +4920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3splashController/" class="md-nav__link">
+      <a href="../../types/tes3splashController/" class="md-nav__link">
         tes3splashController
       </a>
     </li>
@@ -4934,7 +4934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3splashControllerActiveSplash/" class="md-nav__link">
+      <a href="../../types/tes3splashControllerActiveSplash/" class="md-nav__link">
         tes3splashControllerActiveSplash
       </a>
     </li>
@@ -4948,7 +4948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3startScript/" class="md-nav__link">
+      <a href="../../types/tes3startScript/" class="md-nav__link">
         tes3startScript
       </a>
     </li>
@@ -4962,7 +4962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3static/" class="md-nav__link">
+      <a href="../../types/tes3static/" class="md-nav__link">
         tes3static
       </a>
     </li>
@@ -4976,7 +4976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3statistic/" class="md-nav__link">
+      <a href="../../types/tes3statistic/" class="md-nav__link">
         tes3statistic
       </a>
     </li>
@@ -4990,7 +4990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3statisticSkill/" class="md-nav__link">
+      <a href="../../types/tes3statisticSkill/" class="md-nav__link">
         tes3statisticSkill
       </a>
     </li>
@@ -5004,7 +5004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3transform/" class="md-nav__link">
+      <a href="../../types/tes3transform/" class="md-nav__link">
         tes3transform
       </a>
     </li>
@@ -5018,7 +5018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3travelDestinationNode/" class="md-nav__link">
+      <a href="../../types/tes3travelDestinationNode/" class="md-nav__link">
         tes3travelDestinationNode
       </a>
     </li>
@@ -5032,7 +5032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3uiElement/" class="md-nav__link">
+      <a href="../../types/tes3uiElement/" class="md-nav__link">
         tes3uiElement
       </a>
     </li>
@@ -5046,7 +5046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3uiEventData/" class="md-nav__link">
+      <a href="../../types/tes3uiEventData/" class="md-nav__link">
         tes3uiEventData
       </a>
     </li>
@@ -5060,7 +5060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3uiFontColor/" class="md-nav__link">
+      <a href="../../types/tes3uiFontColor/" class="md-nav__link">
         tes3uiFontColor
       </a>
     </li>
@@ -5074,7 +5074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3uiMenuController/" class="md-nav__link">
+      <a href="../../types/tes3uiMenuController/" class="md-nav__link">
         tes3uiMenuController
       </a>
     </li>
@@ -5088,7 +5088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3uiMenuInputController/" class="md-nav__link">
+      <a href="../../types/tes3uiMenuInputController/" class="md-nav__link">
         tes3uiMenuInputController
       </a>
     </li>
@@ -5102,7 +5102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3uiProperty/" class="md-nav__link">
+      <a href="../../types/tes3uiProperty/" class="md-nav__link">
         tes3uiProperty
       </a>
     </li>
@@ -5116,7 +5116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3vector2/" class="md-nav__link">
+      <a href="../../types/tes3vector2/" class="md-nav__link">
         tes3vector2
       </a>
     </li>
@@ -5130,7 +5130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3vector3/" class="md-nav__link">
+      <a href="../../types/tes3vector3/" class="md-nav__link">
         tes3vector3
       </a>
     </li>
@@ -5144,7 +5144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3vector4/" class="md-nav__link">
+      <a href="../../types/tes3vector4/" class="md-nav__link">
         tes3vector4
       </a>
     </li>
@@ -5158,7 +5158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weapon/" class="md-nav__link">
+      <a href="../../types/tes3weapon/" class="md-nav__link">
         tes3weapon
       </a>
     </li>
@@ -5172,7 +5172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3wearablePart/" class="md-nav__link">
+      <a href="../../types/tes3wearablePart/" class="md-nav__link">
         tes3wearablePart
       </a>
     </li>
@@ -5186,7 +5186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weather/" class="md-nav__link">
+      <a href="../../types/tes3weather/" class="md-nav__link">
         tes3weather
       </a>
     </li>
@@ -5200,7 +5200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherAsh/" class="md-nav__link">
+      <a href="../../types/tes3weatherAsh/" class="md-nav__link">
         tes3weatherAsh
       </a>
     </li>
@@ -5214,7 +5214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherBlight/" class="md-nav__link">
+      <a href="../../types/tes3weatherBlight/" class="md-nav__link">
         tes3weatherBlight
       </a>
     </li>
@@ -5228,7 +5228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherBlizzard/" class="md-nav__link">
+      <a href="../../types/tes3weatherBlizzard/" class="md-nav__link">
         tes3weatherBlizzard
       </a>
     </li>
@@ -5242,7 +5242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherClear/" class="md-nav__link">
+      <a href="../../types/tes3weatherClear/" class="md-nav__link">
         tes3weatherClear
       </a>
     </li>
@@ -5256,7 +5256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherCloudy/" class="md-nav__link">
+      <a href="../../types/tes3weatherCloudy/" class="md-nav__link">
         tes3weatherCloudy
       </a>
     </li>
@@ -5270,7 +5270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherController/" class="md-nav__link">
+      <a href="../../types/tes3weatherController/" class="md-nav__link">
         tes3weatherController
       </a>
     </li>
@@ -5284,7 +5284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherFoggy/" class="md-nav__link">
+      <a href="../../types/tes3weatherFoggy/" class="md-nav__link">
         tes3weatherFoggy
       </a>
     </li>
@@ -5298,7 +5298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherOvercast/" class="md-nav__link">
+      <a href="../../types/tes3weatherOvercast/" class="md-nav__link">
         tes3weatherOvercast
       </a>
     </li>
@@ -5312,7 +5312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherRain/" class="md-nav__link">
+      <a href="../../types/tes3weatherRain/" class="md-nav__link">
         tes3weatherRain
       </a>
     </li>
@@ -5326,7 +5326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherSnow/" class="md-nav__link">
+      <a href="../../types/tes3weatherSnow/" class="md-nav__link">
         tes3weatherSnow
       </a>
     </li>
@@ -5340,7 +5340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3weatherThunder/" class="md-nav__link">
+      <a href="../../types/tes3weatherThunder/" class="md-nav__link">
         tes3weatherThunder
       </a>
     </li>
@@ -5354,7 +5354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3worldController/" class="md-nav__link">
+      <a href="../../types/tes3worldController/" class="md-nav__link">
         tes3worldController
       </a>
     </li>
@@ -5368,7 +5368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3worldControllerRenderCamera/" class="md-nav__link">
+      <a href="../../types/tes3worldControllerRenderCamera/" class="md-nav__link">
         tes3worldControllerRenderCamera
       </a>
     </li>
@@ -5382,7 +5382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tes3worldControllerRenderCameraData/" class="md-nav__link">
+      <a href="../../types/tes3worldControllerRenderCameraData/" class="md-nav__link">
         tes3worldControllerRenderCameraData
       </a>
     </li>
@@ -7619,43 +7619,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#log-levels" class="md-nav__link">
+    Log Levels
   </a>
   
-    <nav class="md-nav" aria-label="Properties">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-colors" class="md-nav__link">
+    Log Colors
+  </a>
+  
+    <nav class="md-nav" aria-label="Log Colors">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#current" class="md-nav__link">
-    current
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#head" class="md-nav__link">
-    head
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#size" class="md-nav__link">
-    size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tail" class="md-nav__link">
-    tail
+  <a href="#log-level-colors" class="md-nav__link">
+    Log Level Colors:
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-and-using-your-logger" class="md-nav__link">
+    Registering and using your Logger
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-an-mcm-to-control-log-level" class="md-nav__link">
+    Creating an MCM to control Log Level
+  </a>
   
 </li>
       
@@ -7672,53 +7672,58 @@
               
                 
 
-<h1 id="tes3iterator">tes3iterator<a class="headerlink" href="#tes3iterator" title="Permanent link">⚓︎</a></h1>
-<p>A collection that can be iterated over Contains items in a simple linked list, and stores its head/tail.</p>
-<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
-<h3 id="current"><code>current</code><a class="headerlink" href="#current" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.</p>
-<p><strong>Returns</strong>:</p>
+<h1 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">⚓︎</a></h1>
+<p>The MWSE Logger library allows you to register a logger for your mod. It provides the following features:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3iteratorNode">tes3iteratorNode</a>)</li>
+<li>Mod-specific log levels</li>
+<li>Change log level via MCM</li>
+<li>Log messages can be color coded according to log level (via MWSE MCM)</li>
+<li>Optional setting to print messages to a separate log file</li>
 </ul>
-<hr />
-<h3 id="head"><code>head</code><a class="headerlink" href="#head" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The first node in the collection.</p>
-<p><strong>Returns</strong>:</p>
+<h2 id="log-levels">Log Levels<a class="headerlink" href="#log-levels" title="Permanent link">⚓︎</a></h2>
+<p>Log levels are ordered as follows: <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code>. Only logs at or below the current log level will be printed to the log file. For example, if log level is set to <code>INFO</code>, then <code>INFO</code>, <code>WARN</code> and <code>ERROR</code> messages will be logged, but <code>TRACE</code> and <code>DEBUG</code> messages will not.</p>
+<h2 id="log-colors">Log Colors<a class="headerlink" href="#log-colors" title="Permanent link">⚓︎</a></h2>
+<p>In the MWSE MCM, there is an option to enable log colors. This will display logs in different colors according to their log level when tailing the log in the console. However, it is recommended that non-modders keep this turned off, as it makes the log file harder to read in a regular text editor.</p>
+<h3 id="log-level-colors">Log Level Colors:<a class="headerlink" href="#log-level-colors" title="Permanent link">⚓︎</a></h3>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3iteratorNode">tes3iteratorNode</a>)</li>
+<li><code>TRACE</code>: Bright White</li>
+<li><code>DEBUG</code>: Green</li>
+<li><code>INFO</code>: White</li>
+<li><code>WARN</code>: Yellow</li>
+<li><code>ERROR</code>: Red</li>
 </ul>
-<hr />
-<h3 id="size"><code>size</code><a class="headerlink" href="#size" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The amount of items in the iterator.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (number)</li>
-</ul>
-<hr />
-<h3 id="tail"><code>tail</code><a class="headerlink" href="#tail" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The last node in the collection.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (<a href="../../types/tes3iteratorNode">tes3iteratorNode</a>)</li>
-</ul>
-<hr />
-<details class="example">
-<summary>Example: Iterating Lists</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Check player equipment</span>
-<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stack</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">equipment</span><span class="p">)</span> <span class="kr">do</span>
-    <span class="c1">-- stack is type tes3equipmentStack, as tes3.player.object.equipment is a list of tes3equipmentStack.</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Equipment object ID: %s&quot;</span><span class="p">,</span> <span class="n">stack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
-<span class="kr">end</span>
+<h2 id="registering-and-using-your-logger">Registering and using your Logger<a class="headerlink" href="#registering-and-using-your-logger" title="Permanent link">⚓︎</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">logger</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;logging.logger&quot;</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">new</span><span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Test Mod&quot;</span><span class="p">,</span>
+    <span class="n">logLevel</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">log</span><span class="p">:</span><span class="n">trace</span><span class="p">(</span><span class="s2">&quot;This is a trace message&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="p">:</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is a debug message&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="p">:</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This is an info message&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="p">:</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;This is a warn message&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="p">:</span><span class="nb">error</span><span class="p">(</span><span class="s2">&quot;This is an error message&quot;</span><span class="p">)</span>
 
-<span class="c1">-- tes3.player.object.spells is a tes3spellList with helper functions.</span>
-<span class="c1">-- The actual list is spells.iterator.</span>
-<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">spell</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">spells</span><span class="p">.</span><span class="n">iterator</span><span class="p">)</span> <span class="kr">do</span>
-    <span class="c1">-- spell is type tes3spell, as tes3.player.object.spells.iterator is a list of spell.</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Spell %s, cost %d&quot;</span><span class="p">,</span> <span class="n">spell</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">spell</span><span class="p">.</span><span class="n">magickaCost</span><span class="p">)</span>
-<span class="kr">end</span>
+<span class="n">log</span><span class="p">:</span><span class="n">setLogLevel</span><span class="p">(</span><span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
 </code></pre></div>
-</details>
+<h2 id="creating-an-mcm-to-control-log-level">Creating an MCM to control Log Level<a class="headerlink" href="#creating-an-mcm-to-control-log-level" title="Permanent link">⚓︎</a></h2>
+<p>In your MCM configl, create a dropdown with the following options:
+<div class="highlight"><pre><span></span><code><span class="n">settings</span><span class="p">:</span><span class="n">createDropdown</span><span class="p">{</span>
+  <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Logging Level&quot;</span><span class="p">,</span>
+  <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Set the log level.&quot;</span><span class="p">,</span>
+  <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">},</span>
+    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">},</span>
+    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span><span class="p">},</span>
+    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">},</span>
+    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span><span class="p">},</span>
+  <span class="p">},</span>
+  <span class="n">variable</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">mcm</span><span class="p">.</span><span class="n">createTableVariable</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;logLevel&quot;</span><span class="p">,</span> <span class="n">table</span> <span class="o">=</span> <span class="n">mcmConfig</span> <span class="p">},</span>
+  <span class="n">callback</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+    <span class="n">logger</span><span class="p">:</span><span class="n">setLogLevel</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">variable</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+  <span class="kr">end</span>
+<span class="p">}</span>
+</code></pre></div></p>
 
               
             </article>
@@ -7737,7 +7742,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../tes3itemStack/" class="md-footer__link md-footer__link--prev" aria-label="Previous: tes3itemStack" rel="prev">
+        <a href="../creating-a-mod/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Creating a Mod" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -7746,20 +7751,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              tes3itemStack
+              Creating a Mod
             </div>
           </div>
         </a>
       
       
         
-        <a href="../tes3iteratorNode/" class="md-footer__link md-footer__link--next" aria-label="Next: tes3iteratorNode" rel="next">
+        <a href="../mod-config/" class="md-footer__link md-footer__link--next" aria-label="Next: Mod Configuration Menu" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              tes3iteratorNode
+              Mod Configuration Menu
             </div>
           </div>
           <div class="md-footer__button md-icon">
