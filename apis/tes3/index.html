@@ -3163,6 +3163,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3removeitemdata" class="md-nav__link">
+    tes3.removeItemData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3removesound" class="md-nav__link">
     tes3.removeSound
   </a>
@@ -9935,6 +9942,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3removeitemdata" class="md-nav__link">
+    tes3.removeItemData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3removesound" class="md-nav__link">
     tes3.removeSound
   </a>
@@ -12479,6 +12493,27 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>removedCount</code> (number)</li>
+</ul>
+<hr />
+<h3 id="tes3removeitemdata"><code>tes3.removeItemData</code><a class="headerlink" href="#tes3removeitemdata" title="Permanent link">⚓︎</a></h3>
+<p>Removes and deletes item data from a given reference, or from their inventory. If no <code>itemData</code> is provided, it will be removed from the reference itself.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasRemoved</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">removeItemData</span><span class="p">({</span> <span class="n">from</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">force</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">ignoreOwnership</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>from</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference or mobile whose inventory will be modified.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to remove item data for.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The exact item data to remove. If no itemData is provided, the itemData from the reference itself will be removed.</li>
+<li><code>force</code> (boolean): If true, no checks are made to see if the item data should be deleted. It will always be purged.</li>
+<li><code>ignoreOwnership</code> (boolean): <em>Default</em>: <code>true</code>. If <code>force</code> is false, a check will be made to see if the item data is empty and can be deleted. By default this ignores any ownership data. Setting this to false will override that behavior.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the player or contents menu won't be updated.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasRemoved</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="tes3removesound"><code>tes3.removeSound</code><a class="headerlink" href="#tes3removesound" title="Permanent link">⚓︎</a></h3>
