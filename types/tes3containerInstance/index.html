@@ -8479,12 +8479,12 @@
 </ul>
 <hr />
 <h3 id="offersservice"><code>offersService</code><a class="headerlink" href="#offersservice" title="Permanent link">⚓︎</a></h3>
-<p>Checks if the actor will offer a service in dialogue. This an offer and may still be refused by dialogue checks. To also get the result of dialogue checks, use tes3.checkMerchantOffersService.</p>
+<p>Checks if the actor will offer a service in dialogue. This an offer and may still be refused by dialogue checks. To also get the result of dialogue checks, use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3checkmerchantoffersservice"><code>tes3.checkMerchantOffersService()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">offersService</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>service</code> (number): Use one of the tes3.merchantService.* constants.</li>
+<li><code>service</code> (number): Use one of the <a href="https://mwse.github.io/MWSE/references/merchant-service-types/"><code>tes3.merchantService.*</code></a> constants.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -8492,7 +8492,7 @@
 </ul>
 <hr />
 <h3 id="oninventoryclose"><code>onInventoryClose</code><a class="headerlink" href="#oninventoryclose" title="Permanent link">⚓︎</a></h3>
-<p>A callback function invoked when an inventory is closed. Typically not used outside of specific purposes. You may find tes3.reference's onCloseInventory() to be more convenient to use.</p>
+<p>A callback function invoked when an inventory is closed. Typically not used outside of specific purposes. You may find <code>tes3.reference</code>'s <code>onCloseInventory()</code> to be more convenient to use.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3actor</span><span class="p">:</span><span class="n">onInventoryClose</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8501,12 +8501,12 @@
 </ul>
 <hr />
 <h3 id="tradesitemtype"><code>tradesItemType</code><a class="headerlink" href="#tradesitemtype" title="Permanent link">⚓︎</a></h3>
-<p>Checks if the actor will buy and sell items of a given object type. e.g. actor:tradesItemType(tes3.objectType.repairItem)</p>
+<p>Checks if the actor will buy and sell items of a given object type. e.g. <code>actor:tradesItemType(tes3.objectType.repairItem)</code></p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">tradesItemType</span><span class="p">(</span><span class="n">objectType</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>objectType</code> (tes3objectType): tes3.objectType.* constants can be passed here.</li>
+<li><code>objectType</code> (tes3objectType): <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType.*</code></a> constants can be passed here.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

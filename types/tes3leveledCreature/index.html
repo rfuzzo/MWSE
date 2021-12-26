@@ -8081,14 +8081,14 @@
 </ul>
 <hr />
 <h3 id="calculatefromalllevels"><code>calculateFromAllLevels</code><a class="headerlink" href="#calculatefromalllevels" title="Permanent link">⚓︎</a></h3>
-<p>If true, the leveled list is picked from the entire level range, instead of just the highest.</p>
+<p>If <code>true</code>, the leveled list is picked from the entire level range, instead of just the highest.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="chancefornothing"><code>chanceForNothing</code><a class="headerlink" href="#chancefornothing" title="Permanent link">⚓︎</a></h3>
-<p>The percent chance, from 0 to 100, for no object to be chosen.</p>
+<p>The percent chance, from <code>0</code> to <code>100</code>, for no object to be chosen.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8137,7 +8137,7 @@
 </ul>
 <hr />
 <h3 id="list"><code>list</code><a class="headerlink" href="#list" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The collection that itself, containing tes3leveledListNodes.</p>
+<p><em>Read-only</em>. The collection that contains <a href="https://mwse.github.io/MWSE/types/tes3leveledListNode/"><code>tes3leveledListNode</code></a>s.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
@@ -8259,7 +8259,7 @@
 </ul>
 <hr />
 <h3 id="insert"><code>insert</code><a class="headerlink" href="#insert" title="Permanent link">⚓︎</a></h3>
-<p>This function inserts given creature in the creature leveled list. True is returned if the operation was successful.</p>
+<p>This function inserts given creature in the creature leveled list. Returns <code>true</code> if the operation was successful.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3leveledCreature</span><span class="p">:</span><span class="n">insert</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8282,7 +8282,7 @@
 </ul>
 <hr />
 <h3 id="remove"><code>remove</code><a class="headerlink" href="#remove" title="Permanent link">⚓︎</a></h3>
-<p>This function removes a creature from the creature leveled list. True is returned if the operation was successful.</p>
+<p>This function removes a creature from the creature leveled list. Returns <code>true</code> if the operation was successful.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3leveledCreature</span><span class="p">:</span><span class="n">remove</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>

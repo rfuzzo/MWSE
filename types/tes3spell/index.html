@@ -8214,7 +8214,7 @@
 </ul>
 <hr />
 <h3 id="effects"><code>effects</code><a class="headerlink" href="#effects" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. An array-style table of the tes3effect data on the object.</p>
+<p><em>Read-only</em>. An array-style table of the <a href="https://mwse.github.io/MWSE/types/tes3effect/"><code>tes3effect</code></a> data on the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -8416,7 +8416,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>effectId</code> (number): The tes3effect ID to look for.</li>
+<li><code>effectId</code> (number): The ID of a <code>tes3effect</code> object to look for.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -8429,11 +8429,11 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>): The actor to calculate for. A mobile actor is preferred, as passing only a tes3npc will not use up to date skill information.</li>
+<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>): The actor to calculate for. A mobile actor is preferred, as passing only a <code>tes3npc</code> will not use up to date skill information.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>effect</code> (<a href="../../types/tes3effect">tes3effect</a>, nil): The least proficient effect, or nil if the spell has no valid effects.</li>
+<li><code>effect</code> (<a href="../../types/tes3effect">tes3effect</a>, nil): The least proficient effect, or <code>nil</code> if the spell has no valid effects.</li>
 </ul>
 <hr />
 <h3 id="getleastproficientschool"><code>getLeastProficientSchool</code><a class="headerlink" href="#getleastproficientschool" title="Permanent link">⚓︎</a></h3>
@@ -8442,11 +8442,11 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>): The actor to calculate for. A mobile actor is preferred, as passing only a tes3npc will not use up to date skill information.</li>
+<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>): The actor to calculate for. A mobile actor is preferred, as passing only a <code>tes3npc</code> will not use up to date skill information.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>schoolID</code> (number, nil): The least proficient school ID, or nil if the spell has no valid effects.</li>
+<li><code>schoolID</code> (number, nil): The least proficient school ID, or <code>nil</code> if the spell has no valid effects.</li>
 </ul>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>

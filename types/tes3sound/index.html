@@ -7962,14 +7962,14 @@
 </ul>
 <hr />
 <h3 id="maxdistance"><code>maxDistance</code><a class="headerlink" href="#maxdistance" title="Permanent link">⚓︎</a></h3>
-<p>The maximum distance the sound will be played at. Defaults to 0. If both this and minDistance are 0, the values are ignored.</p>
+<p>The maximum distance the sound will be played at. Defaults to <code>0</code>. If both this and minDistance are <code>0</code>, the values are ignored.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="mindistance"><code>minDistance</code><a class="headerlink" href="#mindistance" title="Permanent link">⚓︎</a></h3>
-<p>The minimum distance the sound will be played at. Defaults to 0.</p>
+<p>The minimum distance the sound will be played at. Defaults to <code>0</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8042,7 +8042,7 @@
 </ul>
 <hr />
 <h3 id="islooping"><code>isLooping</code><a class="headerlink" href="#islooping" title="Permanent link">⚓︎</a></h3>
-<p>Returns true if the sound is actively looping.</p>
+<p>Returns <code>true</code> if the sound is actively looping.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3sound</span><span class="p">:</span><span class="n">isLooping</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -8051,7 +8051,7 @@
 </ul>
 <hr />
 <h3 id="isplaying"><code>isPlaying</code><a class="headerlink" href="#isplaying" title="Permanent link">⚓︎</a></h3>
-<p>Returns true if the sound is actively playing.</p>
+<p>Returns <code>true</code> if the sound is actively playing.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3sound</span><span class="p">:</span><span class="n">isPlaying</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -8060,12 +8060,12 @@
 </ul>
 <hr />
 <h3 id="play"><code>play</code><a class="headerlink" href="#play" title="Permanent link">⚓︎</a></h3>
-<p>This metod plays the sound.</p>
+<p>This method plays the sound.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3sound</span><span class="p">:</span><span class="n">play</span><span class="p">(</span><span class="n">playbackFlags</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">isNot3D</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>playbackFlags</code> (number): <em>Optional</em>. These match low-level DirectSound flags. Most mods don't need to modify this, though a value of 1 to loop may be useful. The rest of the flags can be read in the IDirectSoundBuffer8::Play documentation: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee418074(v=vs.85).</li>
+<li><code>playbackFlags</code> (number): <em>Optional</em>. These match low-level DirectSound flags. Most mods don't need to modify this, though a value of <code>1</code> to loop may be useful. The rest of the flags can be read in the IDirectSoundBuffer8::Play documentation: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee418074(v=vs.85).</li>
 <li><code>volume</code> (number): <em>Optional</em>.</li>
 <li><code>pitch</code> (number): <em>Optional</em>.</li>
 <li><code>isNot3D</code> (boolean): <em>Optional</em>.</li>

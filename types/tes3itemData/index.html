@@ -7795,7 +7795,7 @@
 </ul>
 <hr />
 <h3 id="condition"><code>condition</code><a class="headerlink" href="#condition" title="Permanent link">⚓︎</a></h3>
-<p>The condition/health of the item. Provides incorrect values on light items, which instead have a timeLeft property.</p>
+<p>The condition/health of the item. Provides incorrect values on light items, which instead have a <code>timeLeft</code> property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -7809,21 +7809,21 @@
 </ul>
 <hr />
 <h3 id="count"><code>count</code><a class="headerlink" href="#count" title="Permanent link">⚓︎</a></h3>
-<p>The total number of identical items represented by this data. Reserved for use by in-world references. It should always be 1 for items in inventories. Inventories utilize the stack count in tes3itemStack.</p>
+<p>The total number of identical items represented by this data. Reserved for use by in-world references. It should always be <code>1</code> for items in inventories. Inventories utilize the stack count in <a href="https://mwse.github.io/MWSE/types/tes3itemStack/"><code>tes3itemStack</code></a> object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
-<p>A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For data that doesn't persist, use tempData.</p>
+<p>A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For data that doesn't persist, use <code>tempData</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="owner"><code>owner</code><a class="headerlink" href="#owner" title="Permanent link">⚓︎</a></h3>
-<p>The script associated with the scriptVariables.</p>
+<p>The owner of the associated item. An item can have an owner or it can be faction-owned.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, nil)</li>
@@ -7865,7 +7865,7 @@
 </ul>
 <hr />
 <h3 id="timeleft"><code>timeLeft</code><a class="headerlink" href="#timeleft" title="Permanent link">⚓︎</a></h3>
-<p>The time remaining on a light. Provides incorrect values on non-light items, which instead have a condition property.</p>
+<p>The time remaining on a light. Provides incorrect values on non-light items, which instead have a <code>condition</code> property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>

@@ -10195,7 +10195,7 @@
 </ul>
 <hr />
 <h3 id="actiondata"><code>actionData</code><a class="headerlink" href="#actiondata" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Current action data. Pre-combat action data is stored in the actionBeforeCombat property.</p>
+<p><em>Read-only</em>. Current action data. Pre-combat action data is stored in the <code>actionBeforeCombat</code> property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3actionData">tes3actionData</a>)</li>
@@ -10209,14 +10209,14 @@
 </ul>
 <hr />
 <h3 id="activemagiceffectlist"><code>activeMagicEffectList</code><a class="headerlink" href="#activemagiceffectlist" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The active magic effects on the actor, from which all others can be accessed. A table with tes3activeMagicEffect items.</p>
+<p><em>Read-only</em>. The active magic effects on the actor, from which all others can be accessed. A table with <a href="https://mwse.github.io/MWSE/types/tes3activeMagicEffect/"><code>tes3activeMagicEffect</code></a> items.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
 </ul>
 <hr />
 <h3 id="actortype"><code>actorType</code><a class="headerlink" href="#actortype" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The type of the mobile actor. 0 is a creature, 1 is an NPC, 2 is the player.</p>
+<p><em>Read-only</em>. The type of the mobile actor. Maps to values in <a href="https://mwse.github.io/MWSE/references/actor-types/"><code>tes3.actorType</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -10272,7 +10272,7 @@
 </ul>
 <hr />
 <h3 id="armorrating"><code>armorRating</code><a class="headerlink" href="#armorrating" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the applyDamage function.</p>
+<p><em>Read-only</em>. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the <code>applyDamage</code> function.</p>
 <p>Armour mitigation calculation:
 x = damage / (damage + target.armorRating)
 damage *= max(fCombatArmorMinMult, x)
@@ -10304,7 +10304,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="attributes"><code>attributes</code><a class="headerlink" href="#attributes" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Access to a table of 8 tes3statistic objects for the actor's attributes.</p>
+<p><em>Read-only</em>. Access to a table of 8 <a href="https://mwse.github.io/MWSE/types/tes3statistic/"><code>tes3statistic</code></a> objects for the actor's attributes.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -10535,7 +10535,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="friendlyactors"><code>friendlyActors</code><a class="headerlink" href="#friendlyactors" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A collection of other tes3mobileActors that this actor considers friendly.</p>
+<p><em>Read-only</em>. A collection of other <code>tes3mobileActor</code>s that this actor considers friendly.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
@@ -10598,7 +10598,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="hostileactors"><code>hostileActors</code><a class="headerlink" href="#hostileactors" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A collection of other tes3mobileActors that this actor considers hostile.</p>
+<p><em>Read-only</em>. A collection of other <code>tes3mobileActor</code>s that this actor considers hostile.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3iterator">tes3iterator</a>)</li>
@@ -10843,7 +10843,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="mobtomobcollision"><code>mobToMobCollision</code><a class="headerlink" href="#mobtomobcollision" title="Permanent link">⚓︎</a></h3>
-<p>Allows modifying if this actor will collide with other actors. When true (default), the actor cannot move through other actors. When false, the actor is allowed to move through other actors, and other actors can move through it.</p>
+<p>Allows modifying if this actor will collide with other actors. When <code>true</code> (default), the actor cannot move through other actors. When <code>false</code>, the actor is allowed to move through other actors, and other actors can move through it.</p>
 <p>May be useful when free movement is required in crowded situations, or to temporarily let the player move past an actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10893,7 +10893,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="objecttype"><code>objectType</code><a class="headerlink" href="#objecttype" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The type of mobile object. Maps to values in tes3.objectType.</p>
+<p><em>Read-only</em>. The type of mobile object. Maps to values in <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -11272,7 +11272,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="applydamage"><code>applyDamage</code><a class="headerlink" href="#applydamage" title="Permanent link">⚓︎</a></h3>
-<p>Damages the actor, with options to control mitigation and difficulty scaling. Invokes the 'damage' and 'damaged' events, with 'script' source. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.</p>
+<p>Damages the actor, with options to control mitigation and difficulty scaling. Invokes the <a href="https://mwse.github.io/MWSE/events/damage/"><code>damage</code></a> and <a href="https://mwse.github.io/MWSE/events/damaged/"><code>damaged</code></a> events, with <code>tes3.damageSource.script</code> source. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">applyDamage</span><span class="p">({</span> <span class="n">damage</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyArmor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">resistAttribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyDifficulty</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">playerAttack</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">doNotChangeHealth</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11280,8 +11280,8 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>params</code> (table)<ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
 <li><code>applyArmor</code> (boolean): <em>Optional</em>. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.</li>
-<li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from tes3.effectAttributes.</li>
-<li><code>applyDifficulty</code> (boolean): <em>Optional</em>. If the game difficulty modifier should be applied. Must be used with the 'playerAttack' argument to apply the correct modifier.</li>
+<li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
+<li><code>applyDifficulty</code> (boolean): <em>Optional</em>. If the game difficulty modifier should be applied. Must be used with the <code>playerAttack</code> argument to apply the correct modifier.</li>
 <li><code>playerAttack</code> (boolean): <em>Optional</em>. If the attack came from the player. Used for difficulty calculation.</li>
 <li><code>doNotChangeHealth</code> (boolean): <em>Optional</em>. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.</li>
 </ul>
@@ -11293,7 +11293,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="applyfatiguedamage"><code>applyFatigueDamage</code><a class="headerlink" href="#applyfatiguedamage" title="Permanent link">⚓︎</a></h3>
-<p>Damages the actor's fatigue, with accompanying reaction from the reciever. Invokes the 'damageHandToHand' and 'damagedHandToHand' events, with 'script' source. Returns the actual fatigue damage done.</p>
+<p>Damages the actor's fatigue, with accompanying reaction from the reciever. Invokes the <a href="https://mwse.github.io/MWSE/events/damageHandToHand/"><code>damageHandToHand</code></a> and <a href="https://mwse.github.io/MWSE/events/damagedHandToHand/"><code>damagedHandToHand</code></a> events, with <code>tes3.damageSource.script</code> source. Returns the actual fatigue damage done.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">applyFatigueDamage</span><span class="p">(</span><span class="n">fatigueDamage</span><span class="p">,</span> <span class="n">swing</span><span class="p">,</span> <span class="n">alwaysPlayHitVoice</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11308,7 +11308,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="applyhealthdamage"><code>applyHealthDamage</code><a class="headerlink" href="#applyhealthdamage" title="Permanent link">⚓︎</a></h3>
-<p><strong>Deprecated, please use applyDamage instead.</strong></p>
+<p><strong>Deprecated, please use <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#applydamage"><code>applyDamage()</code></a> instead.</strong></p>
 <p>Damages the actor.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">applyHealthDamage</span><span class="p">(</span><span class="n">damage</span><span class="p">,</span> <span class="n">isPlayerAttack</span><span class="p">,</span> <span class="n">scaleWithDifficulty</span><span class="p">,</span> <span class="n">doNotChangeHealth</span><span class="p">)</span>
 </code></pre></div>
@@ -11333,7 +11333,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>params</code> (table)<ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
 <li><code>applyArmor</code> (boolean): <em>Optional</em>. If armor should mitigate the incoming damage.</li>
-<li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from tes3.effectAttributes.</li>
+<li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
 </ul>
 </li>
 </ul>
@@ -11343,7 +11343,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="equip"><code>equip</code><a class="headerlink" href="#equip" title="Permanent link">⚓︎</a></h3>
-<p>Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return true.</p>
+<p>Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return <code>true</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemEquipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">equip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectBestCondition</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectWorstCondition</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11351,9 +11351,9 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to equip.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to equip.</li>
-<li><code>addItem</code> (boolean): If true, the item will be added to the actor's inventory if needed.</li>
-<li><code>selectBestCondition</code> (boolean): If true, the item in the inventory with the best condition and best charge will be selected.</li>
-<li><code>selectWorstCondition</code> (boolean): If true, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
+<li><code>addItem</code> (boolean): If <code>true</code>, the item will be added to the actor's inventory if needed.</li>
+<li><code>selectBestCondition</code> (boolean): If <code>true</code>, the item in the inventory with the best condition and best charge will be selected.</li>
+<li><code>selectWorstCondition</code> (boolean): If <code>true</code>, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
 </ul>
 </li>
 </ul>
@@ -11363,7 +11363,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getactivemagiceffects"><code>getActiveMagicEffects</code><a class="headerlink" href="#getactivemagiceffects" title="Permanent link">⚓︎</a></h3>
-<p>Fetches a filtered list of the active magic effects on the actor. Returns a table with tes3activeMagicEffect items.</p>
+<p>Fetches a filtered list of the active magic effects on the actor. Returns a table with <a href="https://mwse.github.io/MWSE/types/tes3activeMagicEffect/"><code>tes3activeMagicEffect</code></a> items.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getActiveMagicEffects</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11398,7 +11398,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getpowerusetimestamp"><code>getPowerUseTimestamp</code><a class="headerlink" href="#getpowerusetimestamp" title="Permanent link">⚓︎</a></h3>
-<p>Finds the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp. The timestamp units are hours. The current time as a timestamp can be accessed at tes3.getSimulationTimestamp().</p>
+<p>Finds the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp. The timestamp units are hours. The current time as a timestamp can be accessed at <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp"><code>tes3.getSimulationTimestamp()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getPowerUseTimestamp</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11464,7 +11464,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getweaponspeed"><code>getWeaponSpeed</code><a class="headerlink" href="#getweaponspeed" title="Permanent link">⚓︎</a></h3>
-<p>Fetches the weapon speed of the actor's currently equipped weapon, or 1.0 if no weapon is equipped.</p>
+<p>Fetches the weapon speed of the actor's currently equipped weapon, or <code>1.0</code> if no weapon is equipped.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getWeaponSpeed</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -11527,7 +11527,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>power</code> (<a href="../../types/tes3spell">tes3spell</a>): The spell object for the power.</li>
-<li><code>timestamp</code> (number): The timestamp of the moment the power was casted, or 24 hours before the recharge point. The timestamp units are hours. The current time as a timestamp can be accessed at tes3.getSimulationTimestamp().</li>
+<li><code>timestamp</code> (number): The timestamp of the moment the power was casted, or 24 hours before the recharge point. The timestamp units are hours. The current time as a timestamp can be accessed at <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp"><code>tes3.getSimulationTimestamp()</code></a>.</li>
 </ul>
 <hr />
 <h3 id="startcombat"><code>startCombat</code><a class="headerlink" href="#startcombat" title="Permanent link">⚓︎</a></h3>
@@ -11550,7 +11550,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>force</code> (boolean): If false, the function won't stop combat if the actor has other valid hostile targets.</li>
+<li><code>force</code> (boolean): If <code>false</code>, the function won't stop combat if the actor has other valid hostile targets.</li>
 </ul>
 <hr />
 <h3 id="unequip"><code>unequip</code><a class="headerlink" href="#unequip" title="Permanent link">⚓︎</a></h3>
@@ -11573,7 +11573,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="updatederivedstatistics"><code>updateDerivedStatistics</code><a class="headerlink" href="#updatederivedstatistics" title="Permanent link">⚓︎</a></h3>
-<p>Updates statistics derived from attributes, which are magicka, fatigue, and encumbrance. Will also update the UI if used on the player. Normally handled automatically when you use tes3.modStatistic.</p>
+<p>Updates statistics derived from attributes, which are magicka, fatigue, and encumbrance. Will also update the UI if used on the player. Normally handled automatically when you use <code>tes3.modStatistic()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">updateDerivedStatistics</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>

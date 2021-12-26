@@ -8635,7 +8635,7 @@
 </ul>
 <hr />
 <h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
-<p>A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the tes3itemData structure. To store data that doesn't get serialized to/from the save, use tempData.</p>
+<p>A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the <code>tes3itemData</code> structure. To store data that doesn't get serialized to/from the save, use <code>tempData</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -8649,7 +8649,7 @@
 </ul>
 <hr />
 <h3 id="destination"><code>destination</code><a class="headerlink" href="#destination" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Returns the travel destination node for this reference, or nil. This can be used to determine where a given door links to.</p>
+<p><em>Read-only</em>. Returns the travel destination node for this reference, or <code>nil</code>. This can be used to determine where a given door links to.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3travelDestinationNode">tes3travelDestinationNode</a>, nil)</li>
@@ -8670,7 +8670,7 @@
 </ul>
 <hr />
 <h3 id="hasnocollision"><code>hasNoCollision</code><a class="headerlink" href="#hasnocollision" title="Permanent link">⚓︎</a></h3>
-<p>Sets the no-collision flag on this reference, and recalculates collision groups. Use the setNoCollisionFlag function to manage collision group recalculation instead.</p>
+<p>Sets the no-collision flag on this reference, and recalculates collision groups. Use the <a href="https://mwse.github.io/MWSE/types/tes3reference/?h=setnocollisionflag#setnocollisionflag"><code>setNoCollisionFlag()</code></a> function to manage collision group recalculation instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8684,7 +8684,7 @@
 </ul>
 <hr />
 <h3 id="isdead"><code>isDead</code><a class="headerlink" href="#isdead" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Returns true if the object is dead, false if they are alive, or nil if that couldn't be determined.</p>
+<p><em>Read-only</em>. Returns <code>true</code> if the object is dead, <code>false</code> if they are alive, or <code>nil</code> if that couldn't be determined.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean, nil)</li>
@@ -8719,14 +8719,14 @@
 </ul>
 <hr />
 <h3 id="itemdata"><code>itemData</code><a class="headerlink" href="#itemdata" title="Permanent link">⚓︎</a></h3>
-<p>Gets or sets the attached itemData for this reference. If set to nil, the item data will be unhooked but not deleted.</p>
+<p>Gets or sets the attached <code>itemData</code> for this reference. If set to <code>nil</code>, the item data will be unhooked but not deleted.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3itemData">tes3itemData</a>)</li>
 </ul>
 <hr />
 <h3 id="leveledbasereference"><code>leveledBaseReference</code><a class="headerlink" href="#leveledbasereference" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is nil.</p>
+<p><em>Read-only</em>. If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is <code>nil</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>, nil)</li>
@@ -8908,7 +8908,7 @@
 </ul>
 <hr />
 <h3 id="tempdata"><code>tempData</code><a class="headerlink" href="#tempdata" title="Permanent link">⚓︎</a></h3>
-<p>As with the data field, a generic lua table that data can be written to. No information in this table will persist into saves. For item references, this is the same table as on the tes3itemData structure.</p>
+<p>As with the <code>data</code> field, a generic lua table that data can be written to. No information in this table will persist into saves. For item references, this is the same table as on the <code>tes3itemData</code> structure.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -8962,7 +8962,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>removeLightFromParent</code> (boolean): <em>Default</em>: <code>false</code>. If true, the dynamic light is removed from its parent node as well.</li>
+<li><code>removeLightFromParent</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the dynamic light is removed from its parent node as well.</li>
 </ul>
 <hr />
 <h3 id="detachdynamiclightfromaffectednodes"><code>detachDynamicLightFromAffectedNodes</code><a class="headerlink" href="#detachdynamiclightfromaffectednodes" title="Permanent link">⚓︎</a></h3>
@@ -8976,7 +8976,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>success</code> (boolean): If true, the reference was successfully disabled.</li>
+<li><code>success</code> (boolean): If <code>true</code>, the reference was successfully disabled.</li>
 </ul>
 <hr />
 <h3 id="enable"><code>enable</code><a class="headerlink" href="#enable" title="Permanent link">⚓︎</a></h3>
@@ -8985,7 +8985,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>success</code> (boolean): If true, the reference was successfully enabled.</li>
+<li><code>success</code> (boolean): If <code>true</code>, the reference was successfully enabled.</li>
 </ul>
 <hr />
 <h3 id="getangleto"><code>getAngleTo</code><a class="headerlink" href="#getangleto" title="Permanent link">⚓︎</a></h3>
@@ -9050,13 +9050,13 @@
 </code></pre></div>
 <hr />
 <h3 id="setnocollisionflag"><code>setNoCollisionFlag</code><a class="headerlink" href="#setnocollisionflag" title="Permanent link">⚓︎</a></h3>
-<p>Sets if this reference has active collision. This is preferable to the hasNoCollision property, if are manipulating multiple objects at once and do not want to constantly recalculate collision groups.</p>
+<p>Sets if this reference has active collision. This is preferable to changing the <code>hasNoCollision</code> property, if you are manipulating multiple objects at once and do not want to constantly recalculate collision groups.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">setNoCollisionFlag</span><span class="p">(</span><span class="n">hasNoCollision</span><span class="p">,</span> <span class="n">updateCollisions</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>hasNoCollision</code> (boolean): If true, the reference no longer has collision.</li>
-<li><code>updateCollisions</code> (boolean): If true, collision groups for the active cells are recalculated.</li>
+<li><code>hasNoCollision</code> (boolean): If <code>true</code>, the reference no longer has collision.</li>
+<li><code>updateCollisions</code> (boolean): If <code>true</code>, collision groups for the active cells are recalculated.</li>
 </ul>
 <hr />
 <h3 id="testactionflag"><code>testActionFlag</code><a class="headerlink" href="#testactionflag" title="Permanent link">⚓︎</a></h3>

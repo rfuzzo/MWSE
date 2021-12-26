@@ -7814,7 +7814,7 @@
 <p>A game object which holds information about body parts.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="activebodyparts"><code>activeBodyParts</code><a class="headerlink" href="#activebodyparts" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The access to the reference's tes3bodyPartManagerActiveBodyPart objects. It's a 2-dimensional table, with first dimension indexes stored as tes3.activeBodyPartLayer.<em> namespace, while its second dimension indexes are stored as tes3.activeBodyPart.</em> namespace.</p>
+<p><em>Read-only</em>. The access to the reference's <a href="https://mwse.github.io/MWSE/types/tes3bodyPartManagerActiveBodyPart/"><code>tes3bodyPartManagerActiveBodyPart</code></a> objects. It's a 2-dimensional table, with first dimension index values from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace, while its second dimension indexes are values from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -7828,7 +7828,7 @@
 </ul>
 <hr />
 <h3 id="attachnodes"><code>attachNodes</code><a class="headerlink" href="#attachnodes" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The access to the reference's tes3bodyPartManagerAttachNode objects. Indexes of that table are stored in tes3.bodyPartAttachment.* namespace.</p>
+<p><em>Read-only</em>. The access to the reference's <a href="https://mwse.github.io/MWSE/types/tes3bodyPartManagerAttachNode/"><code>tes3bodyPartManagerAttachNode</code></a> objects. Indexes of that table are values from <a href="https://mwse.github.io/MWSE/references/body-part-attachments/"><code>tes3.bodyPartAttachment</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -7849,8 +7849,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>layer</code> (number): A value in tes3.activeBodyPartLayer.* constants.</li>
-<li><code>index</code> (number): A value in tes3.activeBodyPart.* constants.</li>
+<li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
+<li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 </ul>
 </li>
 </ul>
@@ -7879,8 +7879,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>layer</code> (number): A value in tes3.activeBodyPartLayer.* constants.</li>
-<li><code>index</code> (number): A value in tes3.activeBodyPart.* constants.</li>
+<li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
+<li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 </ul>
 </li>
 </ul>
@@ -7901,8 +7901,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>layer</code> (number): A value in tes3.activeBodyPartLayer.* constants.</li>
-<li><code>index</code> (number): A value in tes3.activeBodyPart.* constants.</li>
+<li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
+<li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 <li><code>overwriteData</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the current data should be overwritten.</li>
 <li><code>node</code> (<a href="../../types/niNode">niNode</a>): <em>Default</em>: <code>nil</code>. </li>
 </ul>
@@ -7916,9 +7916,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): A object whose body part to set.</li>
-<li><code>index</code> (number): A value in tes3.activeBodyPart.* constants.</li>
-<li><code>bodyPartId</code> (string): The unique ID of the tes3bodyPart object to set as a new body part for given object.</li>
+<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
+<li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
+<li><code>bodyPartId</code> (string): The unique ID of the <code>tes3bodyPart</code> object to set as a new body part for given object.</li>
 <li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which controls whether the body part is used in first person.</li>
 </ul>
 </li>
@@ -7931,9 +7931,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): A object whose body part to set.</li>
-<li><code>index</code> (number): A value in tes3.activeBodyPart.* constants.</li>
-<li><code>bodyPart</code> (<a href="../../types/tes3bodyPart">tes3bodyPart</a>): The tes3bodyPart object to set as a new body part for given object.</li>
+<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
+<li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
+<li><code>bodyPart</code> (<a href="../../types/tes3bodyPart">tes3bodyPart</a>): The <code>tes3bodyPart</code> object to set as a new body part for given object.</li>
 <li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which controls whether the body part is used in first person.</li>
 </ul>
 </li>
