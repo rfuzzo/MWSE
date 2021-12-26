@@ -693,6 +693,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1427,6 +1429,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../references/spell-sources/" class="md-nav__link">
+        Spell Sources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../references/spell-states/" class="md-nav__link">
         Spell States
       </a>
@@ -1530,7 +1546,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_59" type="checkbox" id="__nav_3_59" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_60" type="checkbox" id="__nav_3_60" >
       
       
       
@@ -1561,13 +1577,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_59">
+        <label class="md-nav__link" for="__nav_3_60">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_59">
+        <label class="md-nav__title" for="__nav_3_60">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1759,7 +1775,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_60" type="checkbox" id="__nav_3_60" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_61" type="checkbox" id="__nav_3_61" >
       
       
       
@@ -1768,13 +1784,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_60">
+        <label class="md-nav__link" for="__nav_3_61">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_60">
+        <label class="md-nav__title" for="__nav_3_61">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -10693,7 +10709,7 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>offersService</code> (boolean)</li>
-<li><code>refusalReply</code> (tes3DialogueInfo)</li>
+<li><code>refusalReply</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>)</li>
 </ul>
 <hr />
 <h3 id="tes3checkmerchanttradesitem"><code>tes3.checkMerchantTradesItem</code><a class="headerlink" href="#tes3checkmerchanttradesitem" title="Permanent link">⚓︎</a></h3>
@@ -12167,7 +12183,7 @@
 <li><code>buttons</code> (table): <em>Optional</em>. An array of strings to use for buttons.</li>
 <li><code>callback</code> (function)</li>
 <li><code>showInDialog</code> (boolean): <em>Optional</em>. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu. Defaults to true.</li>
-<li><code>duration</code> (float): <em>Optional</em>. Overrides how long the toast-style message remains visible.</li>
+<li><code>duration</code> (number): <em>Optional</em>. Overrides how long the toast-style message remains visible.</li>
 </ul>
 </li>
 <li><code>formatAdditions</code> (variadic): <em>Optional</em>. Only used if messageOrParams is a string.</li>
@@ -12715,8 +12731,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The door reference that will be updated.</li>
-<li><code>position</code> (tes3vector, table): The new coordinates of the transition.</li>
-<li><code>orientation</code> (tes3vector, table): The new rotation to use after transition.</li>
+<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The new coordinates of the transition.</li>
+<li><code>orientation</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The new rotation to use after transition.</li>
 <li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string): <em>Optional</em>. The cell to transition to, if transitioning to an interior.</li>
 </ul>
 </li>
