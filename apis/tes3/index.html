@@ -10494,14 +10494,14 @@
 <li><code>targetsSkills</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect targets a certain skill or skills.</li>
 <li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be reflected.</li>
 <li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect uses negative lighting.</li>
-<li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:<ul>
+<li>
+<p><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:</p>
+<ul>
 <li><code>effectId</code> (number)</li>
 <li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>)</li>
 <li><code>deltaTime (number): The time passed from the last tick of the spell.</code></li>
 <li><code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>)</li>
 <li><code>effectIndex (number): The index of the effect in the spell.</code></li>
-</ul>
-</li>
 </ul>
 <p>In addition, a function registerd as onTick can also call the following methods:</p>
 <pre><code>- trigger(`params`)
@@ -10528,8 +10528,10 @@
 **Parameters:**
 - `id` (string): The ID of the creature object to summon.
 </code></pre>
-<ul>
-<li><code>onCollision</code> (function): <em>Optional</em>. A function which will be called when a spell containing this spell effect collides with something.</li>
+</li>
+<li>
+<p><code>onCollision</code> (function): <em>Optional</em>. A function which will be called when a spell containing this spell effect collides with something.</p>
+</li>
 </ul>
 </li>
 </ul>
