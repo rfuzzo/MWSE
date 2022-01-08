@@ -10465,12 +10465,12 @@
 <li><code>z</code> (number): <em>Default</em>: <code>1</code>. Value of blue color channel. In range of 0 - 1.</li>
 </ul>
 </li>
-<li><code>icon</code> (string): <em>Optional</em>. Path to the effect icon. Must be a string no longer than 31 characters long.</li>
-<li><code>particleTexture</code> (string): <em>Optional</em>. Path to the particle texture to use for the effect. Must be a string no longer than 31 characters long.</li>
-<li><code>castSound</code> (string): <em>Optional</em>. The sound ID which will be played on casting a spell with this effect. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
-<li><code>boltSound</code> (string): <em>Optional</em>. The sound ID which will be played when a spell with this effect is in flight. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
-<li><code>hitSound</code> (string): <em>Optional</em>. The sound ID which will be played when a spell with this effect hits something. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
-<li><code>areaSound</code> (string): <em>Optional</em>. The sound ID which will be played on area of effect impact. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
+<li><code>icon</code> (string): Path to the effect icon. Must be a string no longer than 31 characters long.</li>
+<li><code>particleTexture</code> (string): Path to the particle texture to use for the effect. Must be a string no longer than 31 characters long.</li>
+<li><code>castSound</code> (string): The sound ID which will be played on casting a spell with this effect. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
+<li><code>boltSound</code> (string): The sound ID which will be played when a spell with this effect is in flight. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
+<li><code>hitSound</code> (string): The sound ID which will be played when a spell with this effect hits something. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
+<li><code>areaSound</code> (string): The sound ID which will be played on area of effect impact. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
 <li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
 <li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
 <li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
@@ -10492,7 +10492,53 @@
 <li><code>targetsSkills</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect targets a certain skill or skills.</li>
 <li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be reflected.</li>
 <li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect uses negative lighting.</li>
-<li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect.</li>
+<li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:</li>
+</ul>
+</li>
+<li><code>effectId</code> (number)</li>
+<li><code>sourceInstance</code> ((tes3magicSourceInstance)[https://mwse.github.io/MWSE/types/tes3magicSourceInstance/])</li>
+<li><code>deltaTime (number): The time passed from the last tick of the spell.</code></li>
+<li><code>effectInstance</code> ((tes3magicEffectInstance)[https://mwse.github.io/MWSE/types/tes3magicEffectInstance/])</li>
+<li><code>effectIndex (number): The index of the effect in the spell.</code></li>
+</ul>
+<p>In addition, a function registerd as onTick can also call the following methods:</p>
+<ul>
+<li>trigger(<code>params</code>)
+<strong>Parameters:</strong></li>
+<li>
+<p><code>params</code> (table)</p>
+<ul>
+<li><code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.</li>
+<li><code>isUncapped</code> (boolean): <em>Optional.</em></li>
+<li><code>attribute</code> (number): <em>Optional.</em></li>
+<li><code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
+<li><code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
+<li><code>resistanceCheck</code> (function):</li>
+</ul>
+</li>
+<li>
+<p>triggerBoundWeapon(<code>id</code>): Performs weapon summoning logic.
+<strong>Parameters:</strong></p>
+</li>
+<li>
+<p><code>id</code> (string): The ID of the weapon object to summon.</p>
+</li>
+<li>
+<p>triggerBoundWeapon(<code>params</code>): Performs armor summoning logic. It can summon one or two armor objects.
+<strong>Parameters:</strong></p>
+</li>
+<li><code>params</code> (table)</li>
+<li><code>id</code> (string): The ID of the armor object to summon.</li>
+<li>
+<p><code>id2</code> (string): <em>Optional.</em> The ID of the weapon object to summon.</p>
+</li>
+<li>
+<p>triggerSummon(<code>id</code>): Performs creature summoning logic.
+<strong>Parameters:</strong></p>
+</li>
+<li>
+<p><code>id</code> (string): The ID of the creature object to summon.</p>
+<ul>
 <li><code>onCollision</code> (function): <em>Optional</em>. A function which will be called when a spell containing this spell effect collides with something.</li>
 </ul>
 </li>
