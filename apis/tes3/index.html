@@ -10450,7 +10450,9 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li>
+<p><code>params</code> (table)</p>
+<ul>
 <li><code>id</code> (number): Id of the new effect. Maps to newly claimed <code>tes3.effect</code> constants with <code>tes3.claimSpellEffectId()</code>. If the effect of this id already exists, an error will be thrown.</li>
 <li><code>name</code> (string): <em>Default</em>: <code>Unnamed Effect</code>. Name of the effect.</li>
 <li><code>baseCost</code> (number): <em>Default</em>: <code>1</code>. Base magicka cost for the effect.</li>
@@ -10492,52 +10494,40 @@
 <li><code>targetsSkills</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect targets a certain skill or skills.</li>
 <li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be reflected.</li>
 <li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect uses negative lighting.</li>
-<li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:</li>
-</ul>
-</li>
+<li><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:<ul>
 <li><code>effectId</code> (number)</li>
 <li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>)</li>
 <li><code>deltaTime (number): The time passed from the last tick of the spell.</code></li>
 <li><code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>)</li>
 <li><code>effectIndex (number): The index of the effect in the spell.</code></li>
 </ul>
-<p>In addition, a function registerd as onTick can also call the following methods:</p>
-<ul>
-<li>trigger(<code>params</code>)
-<strong>Parameters:</strong></li>
-<li>
-<p><code>params</code> (table)</p>
-<ul>
-<li><code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.</li>
-<li><code>isUncapped</code> (boolean): <em>Optional.</em></li>
-<li><code>attribute</code> (number): <em>Optional.</em></li>
-<li><code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
-<li><code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
-<li><code>resistanceCheck</code> (function):</li>
+</li>
 </ul>
-</li>
-<li>
-<p>triggerBoundWeapon(<code>id</code>): Performs weapon summoning logic.
-<strong>Parameters:</strong></p>
-</li>
-<li>
-<p><code>id</code> (string): The ID of the weapon object to summon.</p>
-</li>
-<li>
-<p>triggerBoundWeapon(<code>params</code>): Performs armor summoning logic. It can summon one or two armor objects.
-<strong>Parameters:</strong></p>
-</li>
-<li><code>params</code> (table)</li>
-<li><code>id</code> (string): The ID of the armor object to summon.</li>
-<li>
-<p><code>id2</code> (string): <em>Optional.</em> The ID of the weapon object to summon.</p>
-</li>
-<li>
-<p>triggerSummon(<code>id</code>): Performs creature summoning logic.
-<strong>Parameters:</strong></p>
-</li>
-<li>
-<p><code>id</code> (string): The ID of the creature object to summon.</p>
+<p>In addition, a function registerd as onTick can also call the following methods:</p>
+<pre><code>- trigger(`params`)
+**Parameters:**
+- `params` (table)
+    - `negateOnExpiry` (boolean): *Optional. Default:* `true`.
+    - `isUncapped` (boolean): *Optional.*
+    - `attribute` (number): *Optional.*
+    - `type` (number): *Optional. Default:* `0`.
+    - `value` (number): *Optional. Default:* `0`.
+    - `resistanceCheck` (function):
+
+- triggerBoundWeapon(`id`): Performs weapon summoning logic.
+**Parameters:**
+- `id` (string): The ID of the weapon object to summon.
+
+- triggerBoundWeapon(`params`): Performs armor summoning logic. It can summon one or two armor objects.
+**Parameters:**
+- `params` (table)
+- `id` (string): The ID of the armor object to summon.
+- `id2` (string): *Optional.* The ID of the weapon object to summon.
+
+- triggerSummon(`id`): Performs creature summoning logic.
+**Parameters:**
+- `id` (string): The ID of the creature object to summon.
+</code></pre>
 <ul>
 <li><code>onCollision</code> (function): <em>Optional</em>. A function which will be called when a spell containing this spell effect collides with something.</li>
 </ul>
