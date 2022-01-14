@@ -10418,7 +10418,7 @@
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to add.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limit</code> (boolean): If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
-<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
 </ul>
@@ -10592,7 +10592,7 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to give the spell to. To manipulate an actor without specifying any particular reference, use <code>actor</code> instead.</li>
 <li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to add.</li>
-<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respsecting the adding of the spell. This can be useful to disable when batch-adding many spells. The batch should be ended with <code>tes3.updateMagicGUI</code> to reflect the changes.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respsecting the adding of the spell. This can be useful to disable when batch-adding many spells. The batch should be ended with <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui"><code>tes3.updateMagicGUI</code></a> to reflect the changes.</li>
 </ul>
 </li>
 </ul>
@@ -10762,13 +10762,13 @@
 </ul>
 <hr />
 <h3 id="tes3checkmerchantoffersservice"><code>tes3.checkMerchantOffersService</code><a class="headerlink" href="#tes3checkmerchantoffersservice" title="Permanent link">⚓︎</a></h3>
-<p>Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service if refused, the dialogue reply for the refusal may also returned (it may be nil, as there may not always be a reply available).</p>
+<p>Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">offersService</span><span class="p">,</span> <span class="n">refusalReply</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">checkMerchantOffersService</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">service</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
-<li><code>service</code> (number): <em>Optional</em>. The specific service to check for availability. Uses the tes3.merchantService.* constants.</li>
+<li><code>service</code> (number): <em>Optional</em>. The specific service to check for availability. Uses the <a href="https://mwse.github.io/MWSE/references/merchant-service-types/"><code>tes3.merchantService</code></a> constants.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10944,7 +10944,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keyCode</code> (number)</li>
+<li><code>keyCode</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="tes3dropitem"><code>tes3.dropItem</code><a class="headerlink" href="#tes3dropitem" title="Permanent link">⚓︎</a></h3>
@@ -10974,7 +10974,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keyCode</code> (number)</li>
+<li><code>keyCode</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="tes3fadein"><code>tes3.fadeIn</code><a class="headerlink" href="#tes3fadein" title="Permanent link">⚓︎</a></h3>
@@ -11093,8 +11093,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>topic</code> (string): <em>Optional</em>. The dialogue topic to look for.</li>
-<li><code>type</code> (number): <em>Optional</em>. The type of dialogue to look for. Uses tes3.dialogueType.* constants.</li>
-<li><code>page</code> (number): <em>Optional</em>. The page of dialogue to fetch. Uses tes3.dialoguePage.* constants.</li>
+<li><code>type</code> (number): <em>Optional</em>. The type of dialogue to look for. Uses <a href="https://mwse.github.io/MWSE/references/dialogue-types/"><code>tes3.dialogueType</code></a> constants.</li>
+<li><code>page</code> (number): <em>Optional</em>. The page of dialogue to fetch. Uses <a href="https://mwse.github.io/MWSE/references/dialogue-types/"><code>tes3.dialoguePage</code></a> constants.</li>
 </ul>
 </li>
 </ul>
@@ -11117,7 +11117,7 @@
 </ul>
 <hr />
 <h3 id="tes3findgmst"><code>tes3.findGMST</code><a class="headerlink" href="#tes3findgmst" title="Permanent link">⚓︎</a></h3>
-<p>Fetches the core game object that represents a game setting. While this function accepts a name, it is recommended to use the tes3.GMST constants.</p>
+<p>Fetches the core game object that represents a game setting. While this function accepts a name, it is recommended to use the <a href="https://mwse.github.io/MWSE/references/gmst/"><code>tes3.GMST</code></a> constants.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">gameSetting</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGMST</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11140,7 +11140,7 @@
 <span class="c1">-- Write our markdown header.</span>
 <span class="kd">local</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">assert</span><span class="p">(</span><span class="nb">io.open</span><span class="p">(</span><span class="s2">&quot;Data Files</span><span class="se">\\</span><span class="s2">MWSE</span><span class="se">\\</span><span class="s2">tmp</span><span class="se">\\</span><span class="s2">GMSTs.md&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">))</span>
 <span class="n">f</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# GMSTs</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">f</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Index | Type    | Identifier                       | Default Value</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Index | Type   | Identifier                       | Default Value</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">f</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;----- | ------- | -------------------------------- | --------------------------------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1">-- Go through all our GMSTs...</span>
@@ -11972,7 +11972,7 @@
 </ul>
 <hr />
 <h3 id="tes3getvanitymode"><code>tes3.getVanityMode</code><a class="headerlink" href="#tes3getvanitymode" title="Permanent link">⚓︎</a></h3>
-<p>The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a tes3.setVanityMode() function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.</p>
+<p>The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a <code>tes3.setVanityMode()</code> function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getVanityMode</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -11981,7 +11981,7 @@
 </ul>
 <hr />
 <h3 id="tes3getviewportsize"><code>tes3.getViewportSize</code><a class="headerlink" href="#tes3getviewportsize" title="Permanent link">⚓︎</a></h3>
-<p>Returns both the viewport width and the viewport height. Note that this the real resolution of the screen. For a value scaled by MGE's menu scaling, see the same-named function in the tes3ui namespace. To get the scale used, check getViewportScale in the tes3ui namespace.</p>
+<p>Returns both the viewport width and the viewport height. Note that this is the real resolution of the screen. For a value scaled by MGE's menu scaling, see the <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uigetviewportsize">same-named function</a> in the tes3ui namespace. To get the scale used, check <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uigetviewportscale">getViewportScale</a> in the tes3ui namespace.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getViewportSize</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -12142,6 +12142,7 @@
 <hr />
 <h3 id="tes3iterate"><code>tes3.iterate</code><a class="headerlink" href="#tes3iterate" title="Permanent link">⚓︎</a></h3>
 <p>This function returns a function that iterates over a tes3iterator object. This is useful for for loops.</p>
+<p>Note that tes3iterator objects support iteration with <code>pairs()</code> function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="err">=</span> <span class="nc">tes3</span><span class="p">.</span><span class="nf">iterate</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -12249,7 +12250,7 @@
 </ul>
 <hr />
 <h3 id="tes3makesafeobjecthandle"><code>tes3.makeSafeObjectHandle</code><a class="headerlink" href="#tes3makesafeobjecthandle" title="Permanent link">⚓︎</a></h3>
-<p>Returns a safe handle for the object. To use the object use :getObject(). To check if it still exists use :valid().</p>
+<p>Returns a safe handle for the object. To use the object use <code>:getObject()</code>. To check if it still exists use <code>:valid()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">object</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">makeSafeObjectHandle</span><span class="p">(</span><span class="n">unknown</span><span class="p">,</span> <span class="n">unknown</span><span class="p">,</span> <span class="n">unknown</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -12277,7 +12278,7 @@
 <li><code>message</code> (string)</li>
 <li><code>buttons</code> (table): <em>Optional</em>. An array of strings to use for buttons.</li>
 <li><code>callback</code> (function)</li>
-<li><code>showInDialog</code> (boolean): <em>Optional</em>. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu. Defaults to true.</li>
+<li><code>showInDialog</code> (boolean): <em>Default</em>: <code>true</code>. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.</li>
 <li><code>duration</code> (number): <em>Optional</em>. Overrides how long the toast-style message remains visible.</li>
 </ul>
 </li>
@@ -12375,7 +12376,7 @@
 <li><code>shield</code> (number): <em>Optional</em>. Sets the animation group id for the shield arm. This is used to combine different animations for each body section. Maps to <a href="https://mwse.github.io/MWSE/references/animation-groups/"><code>tes3.animationGroup</code></a> constants.</li>
 <li><code>startFlag</code> (number): <em>Default</em>: <code>tes3.animationStartFlag.immediate</code>. A flag for starting the group with, using <a href="https://mwse.github.io/MWSE/references/animation-start-flags/"><code>tes3.animationStartFlag</code></a> constants.</li>
 <li><code>loopCount</code> (number): <em>Default</em>: <code>-1</code>. If provided, the animation will repeat its loop section a given number of times. To make an animation play through once, set loopCount = 0. Defaults to infinite looping.</li>
-<li><code>mesh</code> (string): <em>Optional</em>. Deprecated. Please use tes3.loadAnimation (check its documentation) before calling playAnimation. You can also use loadAnimation to reset loaded animations to default.</li>
+<li><code>mesh</code> (string): <em>Optional</em>. Deprecated. Please use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3loadanimation"><code>tes3.loadAnimation</code></a> (check its documentation) before calling <code>playAnimation</code>. You can also use <code>loadAnimation</code> to reset loaded animations to default.</li>
 </ul>
 </li>
 </ul>
@@ -12466,7 +12467,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keyCode</code> (number)</li>
+<li><code>keyCode</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="tes3random"><code>tes3.random</code><a class="headerlink" href="#tes3random" title="Permanent link">⚓︎</a></h3>
@@ -12479,7 +12480,7 @@
 </ul>
 <hr />
 <h3 id="tes3raytest"><code>tes3.rayTest</code><a class="headerlink" href="#tes3raytest" title="Permanent link">⚓︎</a></h3>
-<p>Performs a ray test and returns various information related to the result(s). If findAll is set, the result will be a table of results, otherwise only the first result is returned.</p>
+<p>Performs a ray test and returns various information related to the result(s). If <code>findAll</code> is set, the result will be a table of results, otherwise only the first result is returned.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">direction</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">findAll</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">maxDistance</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sort</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">useModelBounds</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">useModelCoordinates</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">useBackTriangles</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">observeAppCullFlag</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">root</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">ignoreSkinned</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">returnColor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">returnNormal</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">returnSmoothNormal</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">returnTexture</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">ignore</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -12568,11 +12569,11 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keyCode</code> (number)</li>
+<li><code>keyCode</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="tes3removeeffects"><code>tes3.removeEffects</code><a class="headerlink" href="#tes3removeeffects" title="Permanent link">⚓︎</a></h3>
-<p>Removes magic effects from a given reference. Requires that either the effect or castType parameter be provided.</p>
+<p>Removes magic effects from a given reference. Requires that either the <code>effect</code> or <code>castType</code> parameter be provided.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">removeEffects</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">castType</span><span class="p">,</span> <span class="n">chance</span><span class="p">,</span> <span class="n">removeSpell</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -12581,8 +12582,42 @@
 <li><code>effect</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/magic-effects/"><code>tes3.effect</code></a> constants.</li>
 <li><code>castType</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/spell-types/"><code>tes3.spellType</code></a> constants.</li>
 <li><code>chance</code> (number): <em>Default</em>: <code>100</code>. The chance for the effect to be removed.</li>
-<li><code>removeSpell</code> (boolean): <em>Optional</em>. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if castType is not <code>tes3.spellType.spell.</code> This causes diseases and curses to be removed when dispelled.</li>
+<li><code>removeSpell</code> (boolean): <em>Optional</em>. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if <code>castType</code> is not <code>tes3.spellType.spell.</code> This causes diseases and curses to be removed when dispelled.</li>
 </ul>
+<details class="example">
+<summary>Example: Simulating a Dispel</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">example</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="c1">-- We only care about the player</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">objectType</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">return</span>
+    <span class="kr">end</span>
+
+    <span class="kd">local</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">.</span><span class="n">cell</span>
+
+    <span class="kr">if</span> <span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">isInterior</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cell</span><span class="p">.</span><span class="n">hasWater</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">return</span>
+    <span class="kr">end</span>
+
+    <span class="kd">local</span> <span class="n">waterLevel</span> <span class="o">=</span> <span class="n">cell</span><span class="p">.</span><span class="n">waterLevel</span>
+    <span class="kd">local</span> <span class="n">headPosition</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span> <span class="o">+</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">.</span><span class="n">height</span>
+
+    <span class="kd">local</span> <span class="n">underwater</span> <span class="o">=</span> <span class="n">headPosition</span> <span class="o">&lt;</span> <span class="n">waterLevel</span>
+
+    <span class="kr">if</span> <span class="n">underwater</span> <span class="kr">then</span>
+        <span class="c1">-- There is a 50 % chance that any Water Breathing effect will be removed from the player</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">removeEffects</span><span class="p">({</span>
+            <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span>
+            <span class="n">chance</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">waterBreathing</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="kr">function</span> <span class="p">()</span>
+    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcMoveSpeed&quot;</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3removeitem"><code>tes3.removeItem</code><a class="headerlink" href="#tes3removeitem" title="Permanent link">⚓︎</a></h3>
 <p>Removes an item from a given reference's inventory.</p>
@@ -12597,7 +12632,7 @@
 <li><code>deleteItemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Whether to delete the item data after remove succeeds. Automatically set if itemData is used. Does not need to be specified for normal usage.</li>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to remove.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
-<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
 </ul>
@@ -12650,7 +12685,7 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): Who to remove the spell from. To manipulate an actor without specifying any particular reference, use <code>actor</code> instead.</li>
 <li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell to remove.</li>
-<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respsecting the removal of the spell. This can be useful to disable when batch-removing many spells. The batch should be ended with <code>tes3.updateMagicGUI</code> to reflect the changes.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respecting the removal of the spell. This can be useful to disable when batch-removing many spells. The batch should be ended with <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui"><code>tes3.updateMagicGUI</code></a> to reflect the changes.</li>
 </ul>
 </li>
 </ul>
@@ -12842,7 +12877,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to enable/disable.</li>
 <li><code>toggle</code> (boolean): If true, the enabled state will be toggled.</li>
-<li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. If not toggling, will set true to enable or false to disable.</li>
+<li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. If not toggling, setting <code>enabled</code> to true will enable the reference or to false will disable the reference.</li>
 </ul>
 </li>
 </ul>
@@ -12866,7 +12901,7 @@
 </ul>
 <hr />
 <h3 id="tes3setitemisstolen"><code>tes3.setItemIsStolen</code><a class="headerlink" href="#tes3setitemisstolen" title="Permanent link">⚓︎</a></h3>
-<p>This function changes an item's stolen flag. Morrowind handles stealing by marking the base item (not the inventory stack) with with NPCs that you have stolen that item from. The NPC will recognize an item is stolen if they are marked as stolen on the base item.</p>
+<p>This function changes an item's stolen flag. Morrowind handles stealing by marking the base item (not the inventory stack) with NPCs that you have stolen that item from. The NPC will recognize an item as stolen if they are marked as stolen on the base item.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setItemIsStolen</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">stolen</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -12949,8 +12984,8 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference whose owner to set.</li>
 <li><code>remove</code> (boolean): <em>Optional</em>. If this parameter is set to true, reference's owner field will be removed.</li>
 <li><code>owner</code> (<a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, string): Assigns this NPC or a faction as the owner of the reference.</li>
-<li><code>requiredGlobal</code> (<a href="../../types/tes3globalVariable">tes3globalVariable</a>): <em>Optional</em>. If owner is set to NPC, requiredGlobal variable can be set.</li>
-<li><code>requiredRank</code> (number): <em>Default</em>: <code>0</code>. If owner is set to faction, requitedRank variable controls minimal rank in faction the player has to have to be able to freely take the reference.</li>
+<li><code>requiredGlobal</code> (<a href="../../types/tes3globalVariable">tes3globalVariable</a>): <em>Optional</em>. If <code>owner</code> is set to NPC, <code>requiredGlobal</code> variable can be set.</li>
+<li><code>requiredRank</code> (number): <em>Default</em>: <code>0</code>. If <code>owner</code> is set to faction, <code>requitedRank</code> variable controls minimal rank in faction the player has to have to be able to freely take the reference.</li>
 </ul>
 </li>
 </ul>
@@ -12983,8 +13018,8 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>object</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): </li>
-<li><code>sourceless</code> (boolean): <em>Default</em>: <code>true</code>. </li>
+<li><code>object</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): The object whose sourceless flag to modify.</li>
+<li><code>sourceless</code> (boolean): <em>Default</em>: <code>true</code>. Allows flagging an object as sourceless or undoing that action.</li>
 </ul>
 </li>
 </ul>
@@ -13125,7 +13160,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keyCode</code> (number)</li>
+<li><code>keyCode</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="tes3testlineofsight"><code>tes3.testLineOfSight</code><a class="headerlink" href="#tes3testlineofsight" title="Permanent link">⚓︎</a></h3>
@@ -13175,7 +13210,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to transfer.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limitCapacity</code> (boolean): <em>Default</em>: <code>true</code>. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
-<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <code>tes3ui.forcePlayerInventoryUpdate()</code> must manually be called after all inventory updates are finished.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
 </ul>
@@ -13226,7 +13261,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>keyCode</code> (number)</li>
+<li><code>keyCode</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="tes3unlock"><code>tes3.unlock</code><a class="headerlink" href="#tes3unlock" title="Permanent link">⚓︎</a></h3>

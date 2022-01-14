@@ -7809,7 +7809,7 @@ As usual in Lua libraries, a negative value counts from the end. </p>
 
     <span class="c1">-- returns all words in a string</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;%s %s %s %s&quot;</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;the number 423 is odd&quot;</span><span class="p">,</span> <span class="s2">&quot;({%a+} / .)*&quot;</span><span class="p">))</span>
-    <span class="c1">--&gt; the    number    is    odd</span>
+    <span class="c1">--&gt; the number  is  odd</span>
 
     <span class="c1">-- returns the first numeral in a string</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;the number 423 is odd&quot;</span><span class="p">,</span> <span class="s2">&quot;s &lt;- {%d+} / . s&quot;</span><span class="p">))</span>
