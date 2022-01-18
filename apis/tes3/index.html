@@ -10520,15 +10520,17 @@
 <p>In addition, a function registerd as <code>onTick</code> can also call the following methods:</p>
 <ul>
 <li>
-<p>trigger(<code>params</code>): Allowed the effect to run through the normal spell event system.</p>
-<p><strong>Parameters:</strong>
-- <code>params</code> (table)
-- <code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.
-- <code>isUncapped</code> (boolean): <em>Optional.</em>
-- <code>attribute</code> (number): <em>Optional. Default:</em> <code>tes3.effectAttribute.nonResistable</code> Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.
-- <code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.
-- <code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.
-- <code>onResist</code> (function): The function passed as <code>onResist</code> will be used on any of the game's spell resistance checks. The function should return boolean values.</p>
+<p>trigger(<code>params</code>): Allowed the effect to run through the normal spell event system.
+    <strong>Parameters:</strong></p>
+<ul>
+<li><code>params</code> (table)</li>
+<li><code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.</li>
+<li><code>isUncapped</code> (boolean): <em>Optional.</em></li>
+<li><code>attribute</code> (number): <em>Optional. Default:</em> <code>tes3.effectAttribute.nonResistable</code> Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
+<li><code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
+<li><code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
+<li><code>resistanceCheck</code> (function): The function passed as <code>resistanceCheck</code> will be used on any of the game's spell resistance checks. The function should return boolean values.</li>
+</ul>
 </li>
 <li>
 <p>triggerBoundWeapon(<code>id</code>): Performs weapon summoning logic.
