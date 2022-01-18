@@ -10509,38 +10509,46 @@
 <li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be reflected.</li>
 <li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect uses negative lighting.</li>
 <li>
-<p><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:</p>
+<p><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. A table <code>tickParams</code> will be passed to the callback function:</p>
 <ul>
+<li><code>tickParams</code> (table)</li>
 <li><code>effectId</code> (number)</li>
 <li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>): Access to the magic source of the effect instance. </li>
-<li><code>deltaTime</code> (number): The time passed from the last tick of the spell. Useful for scaling with the frame rate.</li>
+<li><code>deltaTime</code> (number): The time passed since the last tick of the spell.</li>
 <li><code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>): Access to the magic effect instance.</li>
 <li><code>effectIndex</code> (number): The index of the effect in the spell.</li>
 </ul>
 <p>In addition, a function registerd as <code>onTick</code> can also call the following methods:</p>
 <ul>
 <li>
-<p>trigger(<code>params</code>): Allowed the effect to run through the normal spell event system.
+<p>trigger(<code>triggerParams</code>): Allows the effect to run through the normal spell event system.
     <strong>Parameters:</strong></p>
 <ul>
-<li><code>params</code> (table)</li>
-<li><code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.</li>
+<li><code>triggerParams</code> (table)</li>
+<li><code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code> If this flag is <code>true</code>, the effect will be negated on expiry.</li>
 <li><code>isUncapped</code> (boolean): <em>Optional.</em></li>
-<li><code>attribute</code> (number): <em>Optional. Default:</em> <code>tes3.effectAttribute.nonResistable</code> Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
-<li><code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
-<li><code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.</li>
-<li><code>resistanceCheck</code> (function): The function passed as <code>resistanceCheck</code> will be used on any of the game's spell resistance checks. The function should return boolean values.</li>
+<li><code>attribute</code> (number): <em>Optional. Default:</em> <code>tes3.effectAttribute.nonResistable</code> The attribute used in resistance calculations agains this effect. Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
+<li><code>type</code> (number): <em>Optional. Default:</em> <code>tes3.effectEventType.boolean</code>. This flag controls how the effect behaves. For example, <code>tes3.effectEventType.modStatistic</code> will make the effect work as calling <code>tes3.modStatistic</code>.</li>
+<li><code>value</code> (number): <em>Optional. Default:</em> <code>0</code>. The variable this effect changes.</li>
+<li><code>resistanceCheck(resistParams)</code> (function): <em>Optional.</em> The function passed as <code>resistanceCheck</code> will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning <code>true</code> from this function will set your effect to expired, and depending on your trigger code may stop processing. This function passed here must returns boolean values.
+    <strong>Parameters</strong><ul>
+<li><code>resistParams</code> (table)</li>
+<li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>): Access to the magic source of the effect instance. </li>
+<li><code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>): Access to the magic effect instance.</li>
+<li><code>effectIndex</code> (number): The index of the effect in the spell.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p>triggerBoundWeapon(<code>id</code>): Performs weapon summoning logic.
+<p>triggerBoundWeapon(<code>id</code>): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID. 
     <strong>Parameters:</strong></p>
 <ul>
 <li><code>id</code> (string): The ID of the weapon object to summon.</li>
 </ul>
 </li>
 <li>
-<p>triggerBoundArmor(<code>params</code>): Performs armor summoning logic. It can summon one or two armor objects.
+<p>triggerBoundArmor(<code>params</code>): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
     <strong>Parameters:</strong></p>
 <ul>
 <li><code>params</code> (table)</li>
@@ -10549,7 +10557,7 @@
 </ul>
 </li>
 <li>
-<p>triggerSummon(<code>id</code>): Performs creature summoning logic.
+<p>triggerSummon(<code>id</code>): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
     <strong>Parameters:</strong></p>
 <ul>
 <li><code>id</code> (string): The ID of the creature object to summon.</li>
