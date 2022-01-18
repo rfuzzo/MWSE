@@ -695,6 +695,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1039,6 +1041,20 @@
     <li class="md-nav__item">
       <a href="../../references/effect-attributes/" class="md-nav__link">
         Effect Attributes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/effect-event-types/" class="md-nav__link">
+        Effect Event Types
       </a>
     </li>
   
@@ -1546,7 +1562,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_60" type="checkbox" id="__nav_3_60" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_61" type="checkbox" id="__nav_3_61" >
       
       
       
@@ -1577,13 +1593,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_60">
+        <label class="md-nav__link" for="__nav_3_61">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_60">
+        <label class="md-nav__title" for="__nav_3_61">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1775,7 +1791,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_61" type="checkbox" id="__nav_3_61" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_62" type="checkbox" id="__nav_3_62" >
       
       
       
@@ -1784,13 +1800,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_61">
+        <label class="md-nav__link" for="__nav_3_62">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_61">
+        <label class="md-nav__title" for="__nav_3_62">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -7006,6 +7022,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8106,6 +8124,20 @@
     <li class="md-nav__item">
       <a href="../../events/magicCasted/" class="md-nav__link">
         magicCasted
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/magicEffectsResolved/" class="md-nav__link">
+        magicEffectsResolved
       </a>
     </li>
   
@@ -10459,7 +10491,7 @@
 </ul>
 <hr />
 <h3 id="tes3addmagiceffect"><code>tes3.addMagicEffect</code><a class="headerlink" href="#tes3addmagiceffect" title="Permanent link">⚓︎</a></h3>
-<p>This function creates a new custom magic effect. The effect can be scripted through lua.</p>
+<p>This function creates a new custom magic effect. The effect can be scripted through lua. This function should be used inside <a href="https://mwse.github.io/MWSE/events/addMagicEffect/"><code>addMagicEffect</code></a> event callback.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addMagicEffect</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">baseCost</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">school</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sizeCap</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">speed</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">description</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">lighting</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">icon</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">particleTexture</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">castSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">boltSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">hitSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">areaSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">castVFX</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">boltVFX</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">hitVFX</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">areaVFX</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">allowEnchanting</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">allowSpellmaking</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">appliesOnce</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">canCastSelf</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">canCastTarget</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">canCastTouch</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">casterLinked</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">hasContinuousVFX</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">hasNoDuration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">hasNoMagnitude</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">illegalDaedra</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">isHarmful</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">nonRecastable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">targetsAttributes</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">targetsSkills</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">unreflectable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">usesNegativeLighting</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">onTick</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">onCollision</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -10471,8 +10503,8 @@
 <li><code>name</code> (string): <em>Default</em>: <code>Unnamed Effect</code>. Name of the effect.</li>
 <li><code>baseCost</code> (number): <em>Default</em>: <code>1</code>. Base magicka cost for the effect.</li>
 <li><code>school</code> (number): <em>Default</em>: <code>tes3.magicSchool.alteration</code>. The magic school the new effect will be assigned to. Maps to <a href="https://mwse.github.io/MWSE/references/magic-schools/"><code>tes3.magicSchool</code></a> constants.</li>
-<li><code>size</code> (number): <em>Default</em>: <code>1</code>.</li>
-<li><code>sizeCap</code> (number): <em>Default</em>: <code>1</code>.</li>
+<li><code>size</code> (number): <em>Default</em>: <code>1</code>. The size scale for the spells containing this magic effect.</li>
+<li><code>sizeCap</code> (number): <em>Default</em>: <code>1</code>. The maximum possible size of the projectile.</li>
 <li><code>speed</code> (number): <em>Default</em>: <code>1</code>.</li>
 <li><code>description</code> (string): <em>Default</em>: <code>No description available.</code>. Description for the effect.</li>
 <li><code>lighting</code> (table): <em>Optional</em>.<ul>
@@ -10481,16 +10513,16 @@
 <li><code>z</code> (number): <em>Default</em>: <code>1</code>. Value of blue color channel. In range of 0 - 1.</li>
 </ul>
 </li>
-<li><code>icon</code> (string): Path to the effect icon. Must be a string no longer than 31 characters long.</li>
+<li><code>icon</code> (string): Path to the effect icon. Must be a string no longer than 31 characters long. Use \ as path separator.</li>
 <li><code>particleTexture</code> (string): Path to the particle texture to use for the effect. Must be a string no longer than 31 characters long.</li>
 <li><code>castSound</code> (string): The sound ID which will be played on casting a spell with this effect. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
 <li><code>boltSound</code> (string): The sound ID which will be played when a spell with this effect is in flight. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
 <li><code>hitSound</code> (string): The sound ID which will be played when a spell with this effect hits something. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
 <li><code>areaSound</code> (string): The sound ID which will be played on area of effect impact. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
-<li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
-<li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
-<li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
-<li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>.</li>
+<li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect is cast.</li>
+<li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect is in flight.</li>
+<li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect hits something.</li>
+<li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect, with area of effect hits something.</li>
 <li><code>allowEnchanting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used in a custom enchantment.</li>
 <li><code>allowSpellmaking</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used in a custom spell.</li>
 <li><code>appliesOnce</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect applies once or is a ticking effect.</li>
@@ -10498,7 +10530,7 @@
 <li><code>canCastTarget</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used with cast on target range.</li>
 <li><code>canCastTouch</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used with cast on touch range.</li>
 <li><code>casterLinked</code> (boolean): <em>Default</em>: <code>true</code>.</li>
-<li><code>hasContinuousVFX</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the effect's VFX be played during its whole duration?</li>
+<li><code>hasContinuousVFX</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the effect's visual is continuously played during the whole duration of the effect.</li>
 <li><code>hasNoDuration</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect doesn't have duration.</li>
 <li><code>hasNoMagnitude</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect doesn't have magnitude.</li>
 <li><code>illegalDaedra</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect is illegal to use in public, because it summons Daedra. Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.</li>
@@ -10509,7 +10541,7 @@
 <li><code>unreflectable</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be reflected.</li>
 <li><code>usesNegativeLighting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect uses negative lighting.</li>
 <li>
-<p><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. A table <code>tickParams</code> will be passed to the callback function:</p>
+<p><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. A table <code>tickParams</code> will be passed to the callback function. Note: <code>dt</code>(frame time) scaling is handled automatically.</p>
 <ul>
 <li><code>tickParams</code> (table)</li>
 <li><code>effectId</code> (number)</li>
@@ -10528,9 +10560,9 @@
 <li><code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code> If this flag is <code>true</code>, the effect will be negated on expiry.</li>
 <li><code>isUncapped</code> (boolean): <em>Optional.</em></li>
 <li><code>attribute</code> (number): <em>Optional. Default:</em> <code>tes3.effectAttribute.nonResistable</code> The attribute used in resistance calculations agains this effect. Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
-<li><code>type</code> (number): <em>Optional. Default:</em> <code>tes3.effectEventType.boolean</code>. This flag controls how the effect behaves. For example, <code>tes3.effectEventType.modStatistic</code> will make the effect work as calling <code>tes3.modStatistic</code>.</li>
+<li><code>type</code> (number): <em>Optional. Default:</em> <code>tes3.effectEventType.boolean</code>. This flag controls how the effect behaves. For example, <code>tes3.effectEventType.modStatistic</code> will make the effect work as calling <code>tes3.modStatistic</code>. Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-event-types/"><code>tes3.effectEventType</code></a> namespace.</li>
 <li><code>value</code> (number): <em>Optional. Default:</em> <code>0</code>. The variable this effect changes.</li>
-<li><code>resistanceCheck(resistParams)</code> (function): <em>Optional.</em> The function passed as <code>resistanceCheck</code> will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning <code>true</code> from this function will set your effect to expired, and depending on your trigger code may stop processing. This function passed here must returns boolean values.
+<li><code>resistanceCheck(resistParams)</code> (function): <em>Optional.</em> The function passed as <code>resistanceCheck</code> will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning <code>true</code> from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must returns boolean values.
     <strong>Parameters</strong><ul>
 <li><code>resistParams</code> (table)</li>
 <li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>): Access to the magic source of the effect instance. </li>
@@ -10575,6 +10607,133 @@
 <ul>
 <li><code>effect</code> (<a href="../../types/tes3effect">tes3effect</a>)</li>
 </ul>
+<details class="example">
+<summary>Example: Fire Damage effect</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Claiming an ID is needed before actually</span>
+<span class="c1">-- creating an effect with that ID</span>
+<span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">(</span><span class="s2">&quot;customFireDmg&quot;</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onFireDmgTick</span><span class="p">(</span><span class="n">tickParams</span><span class="p">)</span>
+
+    <span class="c1">-- This will print current health for any actor our spell hit</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;%s, health: %s&quot;</span><span class="p">,</span> <span class="n">tickParams</span><span class="p">.</span><span class="n">effectInstance</span><span class="p">.</span><span class="n">target</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">tickParams</span><span class="p">.</span><span class="n">effectInstance</span><span class="p">.</span><span class="n">target</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">health</span><span class="p">.</span><span class="n">current</span><span class="p">)</span>
+
+    <span class="n">tickParams</span><span class="p">:</span><span class="n">trigger</span><span class="p">({</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effectEventType</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">,</span>
+        <span class="c1">-- The resistance attribute against Fire Damage should be Resist Fire</span>
+        <span class="n">attribute</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effectAttribute</span><span class="p">.</span><span class="n">resistFire</span><span class="p">,</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">tickParams</span><span class="p">.</span><span class="n">effectInstance</span><span class="p">.</span><span class="n">target</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">health</span><span class="p">,</span>
+        <span class="n">negateOnExpiry</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">isUncapped</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;magicEffectsResolved&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addMagicEffect</span><span class="p">({</span>
+        <span class="c1">-- The ID we claimed before is now available in tes3.effect namespace</span>
+        <span class="n">id</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">customFireDmg</span><span class="p">,</span>
+
+        <span class="c1">-- This information if just copied from the Construction Set --</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Fire Damage&quot;</span><span class="p">,</span>       
+        <span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;This spell effect produces a manifestation of elemental fire. Upon &quot;</span><span class="o">..</span>
+            <span class="s2">&quot;contact with an object, this manifestation explodes, causing damage.&quot;</span>
+        <span class="p">),</span>
+        <span class="n">baseCost</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">school</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">magicSchool</span><span class="p">.</span><span class="n">destruction</span><span class="p">,</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="mf">1.25</span><span class="p">,</span>
+        <span class="n">sizeCap</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">speed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">lighting</span> <span class="o">=</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">0.26</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">0.53</span> <span class="p">},</span>
+        <span class="n">usesNegativeLighting</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+
+        <span class="n">icon</span> <span class="o">=</span> <span class="s2">&quot;s</span><span class="se">\\</span><span class="s2">Tx_S_fire_damage.tga&quot;</span><span class="p">,</span>
+        <span class="n">particleTexture</span> <span class="o">=</span> <span class="s2">&quot;vfx_firealpha00A.tga&quot;</span><span class="p">,</span>
+        <span class="n">castSound</span> <span class="o">=</span> <span class="s2">&quot;destruction cast&quot;</span><span class="p">,</span>
+        <span class="n">castVFX</span> <span class="o">=</span> <span class="s2">&quot;VFX_DestructCast&quot;</span><span class="p">,</span>
+        <span class="n">boltSound</span> <span class="o">=</span> <span class="s2">&quot;destruction bolt&quot;</span><span class="p">,</span>
+        <span class="n">boltVFX</span> <span class="o">=</span> <span class="s2">&quot;VFX_DestructBolt&quot;</span><span class="p">,</span>
+        <span class="n">hitSound</span> <span class="o">=</span> <span class="s2">&quot;destruction hit&quot;</span><span class="p">,</span>
+        <span class="n">hitVFX</span> <span class="o">=</span> <span class="s2">&quot;VFX_DestructHit&quot;</span><span class="p">,</span>
+        <span class="n">areaSound</span> <span class="o">=</span> <span class="s2">&quot;destruction area&quot;</span><span class="p">,</span>
+        <span class="n">areaVFX</span> <span class="o">=</span> <span class="s2">&quot;VFX_DestructArea&quot;</span><span class="p">,</span>
+        <span class="c1">-- --</span>
+
+        <span class="n">appliesOnce</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">hasNoDuration</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">hasNoMagnitude</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">illegalDaedra</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">unreflectable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">casterLinked</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">nonRecastable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">targetsAttributes</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">targetsSkills</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+
+        <span class="n">onTick</span> <span class="o">=</span> <span class="n">onFireDmgTick</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">spell1</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">spell</span> <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">setSourceless</span><span class="p">(</span><span class="n">spell1</span><span class="p">)</span>
+    <span class="n">spell1</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;TEST SPELL - self&quot;</span>
+    <span class="n">spell1</span><span class="p">.</span><span class="n">magickaCost</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">spell1</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">customFireDmg</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">rangeType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effectRange</span><span class="p">.</span><span class="n">self</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">skill</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="kd">local</span> <span class="n">spell2</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">spell</span> <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">setSourceless</span><span class="p">(</span><span class="n">spell2</span><span class="p">)</span>
+    <span class="n">spell2</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;TEST SPELL - target&quot;</span>
+    <span class="n">spell2</span><span class="p">.</span><span class="n">magickaCost</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">spell2</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">customFireDmg</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">rangeType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effectRange</span><span class="p">.</span><span class="n">target</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">skill</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="kd">local</span> <span class="n">spell3</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">spell</span> <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">setSourceless</span><span class="p">(</span><span class="n">spell3</span><span class="p">)</span>
+    <span class="n">spell3</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;TEST SPELL - touch&quot;</span>
+    <span class="n">spell3</span><span class="p">.</span><span class="n">magickaCost</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">spell3</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">customFireDmg</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">rangeType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effectRange</span><span class="p">.</span><span class="n">touch</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">max</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">duration</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">skill</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">effect</span><span class="p">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span>
+        <span class="n">reference</span>  <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
+        <span class="n">spell</span> <span class="o">=</span> <span class="n">spell1</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span>
+        <span class="n">reference</span>  <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
+        <span class="n">spell</span> <span class="o">=</span> <span class="n">spell2</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span>
+        <span class="n">reference</span>  <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
+        <span class="n">spell</span> <span class="o">=</span> <span class="n">spell3</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3addsoulgem"><code>tes3.addSoulGem</code><a class="headerlink" href="#tes3addsoulgem" title="Permanent link">⚓︎</a></h3>
 <p>Causes a misc item to be recognized as a soul gem, so that it can be used for soul trapping.</p>
@@ -10804,7 +10963,7 @@
 </ul>
 <hr />
 <h3 id="tes3claimspelleffectid"><code>tes3.claimSpellEffectId</code><a class="headerlink" href="#tes3claimspelleffectid" title="Permanent link">⚓︎</a></h3>
-<p>This function is used to claim a unique spell effect name and id. This is needed before actually creating a new effect by calling <code>tes3.addMagicEffect()</code>. A claimed effect id can be retrieved as: <code>tes3.effect.effectName</code> (just like any regular spell effect).</p>
+<p>This function is used to claim a unique spell effect name and id. This is needed before actually creating a new effect by calling <code>tes3.addMagicEffect()</code>. A claimed effect id is then available as: <code>tes3.effect.effectName</code> (just like any other spell effect). For examples of this function in practice see <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3addmagiceffect"><code>tes3.addMagicEffect()</code></a> example.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
