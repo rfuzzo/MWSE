@@ -10512,23 +10512,23 @@
 <p><code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. Following table will be passed to the callback function:</p>
 <ul>
 <li><code>effectId</code> (number)</li>
-<li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>)</li>
-<li><code>deltaTime (number): The time passed from the last tick of the spell.</code></li>
-<li><code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>)</li>
-<li><code>effectIndex (number): The index of the effect in the spell.</code></li>
+<li><code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>): Access to the magic source of the effect instance. </li>
+<li><code>deltaTime</code> (number): The time passed from the last tick of the spell. Useful for scaling with the frame rate.</li>
+<li><code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>): Access to the magic effect instance.</li>
+<li><code>effectIndex</code> (number): The index of the effect in the spell.</li>
 </ul>
-<p>In addition, a function registerd as onTick can also call the following methods:</p>
+<p>In addition, a function registerd as <code>onTick</code> can also call the following methods:</p>
 <ul>
 <li>
-<p>trigger(<code>params</code>)</p>
+<p>trigger(<code>params</code>): Allowed the effect to run through the normal spell event system.</p>
 <p><strong>Parameters:</strong>
 - <code>params</code> (table)
-    - <code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.
-    - <code>isUncapped</code> (boolean): <em>Optional.</em>
-    - <code>attribute</code> (number): <em>Optional.</em>
-    - <code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.
-    - <code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.
-    - <code>resistanceCheck</code> (function):</p>
+- <code>negateOnExpiry</code> (boolean): <em>Optional. Default:</em> <code>true</code>.
+- <code>isUncapped</code> (boolean): <em>Optional.</em>
+- <code>attribute</code> (number): <em>Optional. Default:</em> <code>tes3.effectAttribute.nonResistable</code> Maps to values in <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.
+- <code>type</code> (number): <em>Optional. Default:</em> <code>0</code>.
+- <code>value</code> (number): <em>Optional. Default:</em> <code>0</code>.
+- <code>onResist</code> (function): The function passed as <code>onResist</code> will be used on any of the game's spell resistance checks. The function should return boolean values.</p>
 </li>
 <li>
 <p>triggerBoundWeapon(<code>id</code>): Performs weapon summoning logic.
@@ -10543,7 +10543,7 @@
 <ul>
 <li><code>params</code> (table)</li>
 <li><code>id</code> (string): The ID of the armor object to summon.</li>
-<li><code>id2</code> (string): <em>Optional.</em> The ID of the weapon object to summon.</li>
+<li><code>id2</code> (string): <em>Optional.</em> The ID of the additional armor object to summon.</li>
 </ul>
 </li>
 <li>
