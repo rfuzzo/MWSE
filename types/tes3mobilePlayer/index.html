@@ -12337,7 +12337,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>skillId</code> (number): The index of the skill statistic to fetch.</li>
+<li><code>skillId</code> (number): The index of the skill statistic to fetch. Maps to values in <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> namespace.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -12350,7 +12350,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>skillId</code> (number): The index of the skill statistic's value to fetch.</li>
+<li><code>skillId</code> (number): The index of the skill statistic's value to fetch. Maps to values in <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> namespace.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -12504,9 +12504,9 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to unequip.</li>
-<li><code>type</code> (number): <em>Optional</em>. The item type to unequip. Only used if no other parameter is provided.</li>
-<li><code>armorSlot</code> (number): <em>Optional</em>. The armor slot to unequip.</li>
-<li><code>clothingSlot</code> (number): <em>Optional</em>. The clothing slot to unequip.</li>
+<li><code>type</code> (number): <em>Optional</em>. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> can be passed here.</li>
+<li><code>armorSlot</code> (number): <em>Optional</em>. The armor slot to unequip. Maps to values in <a href="https://mwse.github.io/MWSE/references/armor-slots/"><code>tes3.armorSlot</code></a> namespace.</li>
+<li><code>clothingSlot</code> (number): <em>Optional</em>. The clothing slot to unequip. Maps to values in <a href="https://mwse.github.io/MWSE/references/clothing-slots/"><code>tes3.clothingSlot</code></a> namespace</li>
 </ul>
 </li>
 </ul>

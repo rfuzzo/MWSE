@@ -10614,7 +10614,6 @@
 <span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">(</span><span class="s2">&quot;customFireDmg&quot;</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onFireDmgTick</span><span class="p">(</span><span class="n">tickParams</span><span class="p">)</span>
-
     <span class="c1">-- This will print current health for any actor our spell hit</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;%s, health: %s&quot;</span><span class="p">,</span> <span class="n">tickParams</span><span class="p">.</span><span class="n">effectInstance</span><span class="p">.</span><span class="n">target</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">tickParams</span><span class="p">.</span><span class="n">effectInstance</span><span class="p">.</span><span class="n">target</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">health</span><span class="p">.</span><span class="n">current</span><span class="p">)</span>
 
@@ -10634,11 +10633,9 @@
         <span class="n">id</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">customFireDmg</span><span class="p">,</span>
 
         <span class="c1">-- This information if just copied from the Construction Set --</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Fire Damage&quot;</span><span class="p">,</span>       
-        <span class="n">description</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;This spell effect produces a manifestation of elemental fire. Upon &quot;</span><span class="o">..</span>
-            <span class="s2">&quot;contact with an object, this manifestation explodes, causing damage.&quot;</span>
-        <span class="p">),</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Fire Damage&quot;</span><span class="p">,</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;This spell effect produces a manifestation of elemental fire. Upon &quot;</span> <span class="o">..</span>
+        <span class="s2">&quot;contact with an object, this manifestation explodes, causing damage.&quot;</span><span class="p">),</span>
         <span class="n">baseCost</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
         <span class="n">school</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">magicSchool</span><span class="p">.</span><span class="n">destruction</span><span class="p">,</span>
         <span class="n">size</span> <span class="o">=</span> <span class="mf">1.25</span><span class="p">,</span>
@@ -10719,18 +10716,9 @@
     <span class="n">effect</span><span class="p">.</span><span class="n">skill</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="n">effect</span><span class="p">.</span><span class="n">attribute</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span>
-        <span class="n">reference</span>  <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
-        <span class="n">spell</span> <span class="o">=</span> <span class="n">spell1</span><span class="p">,</span>
-    <span class="p">})</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span>
-        <span class="n">reference</span>  <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
-        <span class="n">spell</span> <span class="o">=</span> <span class="n">spell2</span><span class="p">,</span>
-    <span class="p">})</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span>
-        <span class="n">reference</span>  <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
-        <span class="n">spell</span> <span class="o">=</span> <span class="n">spell3</span><span class="p">,</span>
-    <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span> <span class="n">spell</span> <span class="o">=</span> <span class="n">spell1</span> <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span> <span class="n">spell</span> <span class="o">=</span> <span class="n">spell2</span> <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span> <span class="n">spell</span> <span class="o">=</span> <span class="n">spell3</span> <span class="p">})</span>
 <span class="kr">end</span><span class="p">)</span>
 </code></pre></div>
 </details>
@@ -10825,7 +10813,7 @@
 </li>
 <li><code>createCopy</code> (boolean): <em>Optional</em>. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.</li>
 <li><code>fromStack</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>): <em>Optional</em>. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.</li>
-<li><code>castChance</code> (number): <em>Default</em>: <code>This parameter allows overriding the casting chance of the magic source.</code>.</li>
+<li><code>castChance</code> (number): <em>Optional</em>. This parameter allows overriding the casting chance of the magic source.</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The target of the magic.</li>
 <li><code>bypassResistances</code> (boolean): <em>Optional</em>. Is this effect going to bypass magic resistance?</li>
 </ul>
