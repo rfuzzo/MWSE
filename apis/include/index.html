@@ -7625,7 +7625,7 @@
 <h1 id="include">include<a class="headerlink" href="#include" title="Permanent link">⚓︎</a></h1>
 <p>Loads the given module. This functions identically to <code>require</code>, but will return <code>nil</code> instead of erroring if the module couldn't be found.</p>
 <p>The function starts by looking into the <code>package.loaded</code> table to determine whether <code>modname</code> is already loaded. If it is, then <code>include</code> returns the value stored at <code>package.loaded[modname]</code>. Otherwise, it tries to find a loader for the module.</p>
-<p>Intended use case for this function is for making interoperability between mods.</p>
+<p>Intended use case for this function is for making interoperability between mods. You shouldn't <code>include</code> your own file, since any errors in the <code>include</code>d file will just be printed in the log as error on the <code>include</code> line. In other words, include is only used to check if a certain optional mod is present.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">include</span><span class="p">(</span><span class="n">modname</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -7636,6 +7636,19 @@
 <ul>
 <li><code>result</code> (table, nil)</li>
 </ul>
+<details class="example">
+<summary>Example: Example</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">optionalModule</span> <span class="o">=</span> <span class="n">include</span><span class="p">(</span><span class="s2">&quot;optionalModule.file&quot;</span><span class="p">)</span>
+
+<span class="kr">if</span> <span class="n">optionalModule</span> <span class="kr">then</span>
+    <span class="c1">-- do stuff with the optinalModule</span>
+    <span class="n">optionalModule</span><span class="p">.</span><span class="n">foo</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="kr">else</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;[MyMod] To enjoy all of this mod&#39;s features, please install optionalModule.&quot;</span><span class="p">)</span>
+    <span class="c1">-- do some other stuff</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 
               
             </article>
