@@ -9221,7 +9221,7 @@
 </ul>
 <hr />
 <h3 id="updateequipment"><code>updateEquipment</code><a class="headerlink" href="#updateequipment" title="Permanent link">⚓︎</a></h3>
-<p>Causes the reference, if of an actor, to reevaluate its equipment choices and equip items it should.</p>
+<p>Causes the reference, if of an actor, to update the reference's bodyparts with the currently equipped ones.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">updateEquipment</span><span class="p">()</span>
 </code></pre></div>
 <hr />
@@ -9231,7 +9231,7 @@
 </code></pre></div>
 <hr />
 <h3 id="updatescenegraph"><code>updateSceneGraph</code><a class="headerlink" href="#updatescenegraph" title="Permanent link">⚓︎</a></h3>
-<p>Updates the reference's local rotation matrix, propagates position changes to the scene graph, and sets the reference's modified flag.</p>
+<p>Updates the reference's local rotation matrix, propagates position changes to the scene graph, and sets the reference's modified flag. You need to call this if the orientation or position was manually modified.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">updateSceneGraph</span><span class="p">()</span>
 </code></pre></div>
 <hr />

@@ -8234,7 +8234,7 @@
 <p>The mwscript library allows vanilla mwscript functions to be called. This is not always ideal, and this library is deprecated. Avoid using it if at all possible.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mwscriptactivate"><code>mwscript.activate</code><a class="headerlink" href="#mwscriptactivate" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the Activate mwscript function.</p>
+<p>Wrapper for the Activate mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/types/tes3reference/#activate"><code>reference:activate()</code></a> or <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3setaiactivate"><code>tes3.setAIActivate</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mwscript</span><span class="p">.</span><span class="n">activate</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8246,7 +8246,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptadditem"><code>mwscript.addItem</code><a class="headerlink" href="#mwscriptadditem" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the AddItem mwscript function.</p>
+<p>Wrapper for the AddItem mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3additem"><code>tes3.addItem()</code></a>, <a href="https://mwse.github.io/MWSE/types/tes3inventory/#additem"><code>inventory:addItem()</code></a>, and depending on your needs <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#equip"><code>mobileActor:equip()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">addItem</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8264,7 +8264,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptaddsoulgem"><code>mwscript.addSoulGem</code><a class="headerlink" href="#mwscriptaddsoulgem" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the AddSoulGem mwscript function.</p>
+<p>Wrapper for the AddSoulGem mwscript function. Replacement: use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3additem"><code>tes3.addItem()</code></a> with the <code>soul</code> parameter.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">addSoulGem</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">creature</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">soulgem</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8282,7 +8282,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptaddspell"><code>mwscript.addSpell</code><a class="headerlink" href="#mwscriptaddspell" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the AddItem mwscript function.</p>
+<p>Wrapper for the AddSpell mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3addspell"><code>tes3.addSpell()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3spellList/#add"><code>spellList:add()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">addSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8351,7 +8351,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptaitravel"><code>mwscript.aiTravel</code><a class="headerlink" href="#mwscriptaitravel" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the AITravel mwscript function.</p>
+<p>Wrapper for the AITravel mwscript function. Replacement: <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3setaitravel"><code>tes3.setAITravel()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">aiTravel</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">z</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8370,7 +8370,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptdisable"><code>mwscript.disable</code><a class="headerlink" href="#mwscriptdisable" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the Disable mwscript function.</p>
+<p>Wrapper for the Disable mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/types/tes3reference/#disable">reference:disable()</a> or <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3setenabled"><code>tes3.setEnabled()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">disable</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">modify</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8387,7 +8387,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptdrop"><code>mwscript.drop</code><a class="headerlink" href="#mwscriptdrop" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the Drop mwscript function.</p>
+<p>Wrapper for the Drop mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3dropitem"><code>tes3.dropItem()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3inventory/#dropitem"><code>inventory:dropItem()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">drop</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8405,7 +8405,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptenable"><code>mwscript.enable</code><a class="headerlink" href="#mwscriptenable" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the Enable mwscript function.</p>
+<p>Wrapper for the Enable mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3setenabled"><code>tes3.setEnabled()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3reference/#enable"><code>reference:enable()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">enable</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">modify</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8422,7 +8422,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptequip"><code>mwscript.equip</code><a class="headerlink" href="#mwscriptequip" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the Equip mwscript function.</p>
+<p>Wrapper for the Equip mwscript function. Replacements: <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#equip"><code>mobile:equip()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3combatSession/#changeequipment"><code>mobile.combatSession:changeEquipment()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">equip</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8843,7 +8843,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptwakeuppc"><code>mwscript.wakeUpPC</code><a class="headerlink" href="#mwscriptwakeuppc" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the WakeUpPC mwscript function.</p>
+<p>Wrapper for the WakeUpPC mwscript function. Replacement: <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3wakeup"><code>tes3.wakeUp()</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mwscript</span><span class="p">.</span><span class="n">wakeUpPC</span><span class="p">()</span>
 </code></pre></div>
 <hr />
