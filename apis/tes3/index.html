@@ -10482,7 +10482,7 @@
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to add.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limit</code> (boolean): If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
-<li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item added is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if the new item is worth equipping.</li>
+<li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item added is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if the new item is worth equipping. This does not affect the player.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
@@ -12822,7 +12822,7 @@
 <li><code>deleteItemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Whether to delete the item data after remove succeeds. Automatically set if itemData is used. Does not need to be specified for normal usage.</li>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to remove.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
-<li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item removed is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if it needs to equip a new item.</li>
+<li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item removed is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if it needs to equip a new item. This does not affect the player.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
@@ -13401,7 +13401,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to transfer.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limitCapacity</code> (boolean): <em>Default</em>: <code>true</code>. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
-<li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping.</li>
+<li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
