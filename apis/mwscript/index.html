@@ -8514,7 +8514,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptgetdistance"><code>mwscript.getDistance</code><a class="headerlink" href="#mwscriptgetdistance" title="Permanent link">⚓︎</a></h3>
-<p>Use <a href="https://mwse.github.io/MWSE/types/tes3reference/#position"><code>tes3reference.position</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#position"><code>tes3mobileActor.position</code></a> to compute the distance or depending on the desired effect, <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#playerdistance"><code>tes3mobileActor.playerDistance</code></a>. Wrapper for the GetDistance mwscript function. Replacement: any reference or mobile actor has <a href="https://mwse.github.io/MWSE/types/tes3reference/#position"><code>position</code></a> field, while the distance can be computed. In addition, mobile actor has <a href=""><code>mobile.playerDistance</code></a> field.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/types/tes3reference/#position"><code>tes3reference.position</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#position"><code>tes3mobileActor.position</code></a> to compute the distance or depending on the desired effect, <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#playerdistance"><code>tes3mobileActor.playerDistance</code></a>. Wrapper for the GetDistance mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">getDistance</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">target</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8575,7 +8575,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptgetreference"><code>mwscript.getReference</code><a class="headerlink" href="#mwscriptgetreference" title="Permanent link">⚓︎</a></h3>
-<p>Returns the script target for the currently running Morrowind script, if any.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/types/tes3globalScript/#reference"><code>tes3globalScript.reference</code></a> instead. Returns the script target for the currently running Morrowind script, if any.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">getReference</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -8706,7 +8706,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptremoveitem"><code>mwscript.removeItem</code><a class="headerlink" href="#mwscriptremoveitem" title="Permanent link">⚓︎</a></h3>
-<p>Use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removeitem"><code>tes3.removeItem()</code></a>, <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removeitemdata">tes3.removeItemData()</a> or <a href="https://mwse.github.io/MWSE/types/tes3inventory/#removeitem"><code>tes3inventory:removeItem()</code></a> instead. Wrapper for the RemoveItem mwscript function.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removeitem"><code>tes3.removeItem()</code></a>, <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removeitemdata"><code>tes3.removeItemData()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3inventory/#removeitem"><code>tes3inventory:removeItem()</code></a> instead. Wrapper for the RemoveItem mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">removeItem</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8724,7 +8724,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptremovespell"><code>mwscript.removeSpell</code><a class="headerlink" href="#mwscriptremovespell" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the RemoveSpell mwscript function.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removespell"><code>tes3.removeSpell()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3spellList/#remove"><code>tes3spellList:remove()</code></a> instead. Wrapper for the RemoveSpell mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">removeSpell</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8774,7 +8774,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptstartcombat"><code>mwscript.startCombat</code><a class="headerlink" href="#mwscriptstartcombat" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the StartCombat mwscript function.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#startcombat"><code>tes3mobileActor:startCombat()</code></a> instead. Wrapper for the StartCombat mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">startCombat</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">target</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8791,7 +8791,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptstartscript"><code>mwscript.startScript</code><a class="headerlink" href="#mwscriptstartscript" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the StartCombat mwscript function.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/apis/tes3/?h=script#tes3runlegacyscript"><code>tes3.runLegacyScript()</code></a> instead. Wrapper for the StartCombat mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">startScript</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">script</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8808,7 +8808,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptstopcombat"><code>mwscript.stopCombat</code><a class="headerlink" href="#mwscriptstopcombat" title="Permanent link">⚓︎</a></h3>
-<p>Wrapper for the StopCombat mwscript function.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#stopcombat"><code>tes3mobileActor:stopCombat()</code></a> instead. Wrapper for the StopCombat mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">stopCombat</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">target</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -8842,7 +8842,7 @@
 </ul>
 <hr />
 <h3 id="mwscriptstopsound"><code>mwscript.stopSound</code><a class="headerlink" href="#mwscriptstopsound" title="Permanent link">⚓︎</a></h3>
-<p>Use <a href="https://mwse.github.io/MWSE/types/tes3sound/#stop"><code>tes3sound:stop()</code></a> instead. Wrapper for the StopSound mwscript function.</p>
+<p>Use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removesound"><code>tes3.removeSound()</code></a> or <a href="https://mwse.github.io/MWSE/types/tes3sound/#stop"><code>tes3sound:stop()</code></a> instead. Wrapper for the StopSound mwscript function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">stopSound</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sound</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
