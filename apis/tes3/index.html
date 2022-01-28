@@ -10950,6 +10950,33 @@
 <ul>
 <li><code>executed</code> (boolean)</li>
 </ul>
+<details class="example">
+<summary>Example: This is an example of how to use tes3.cast instead of mwscript.explodeSpell</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- The following code can be tested in-game by pressing Alt + l or Alt + k</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isAltDown</span> <span class="kr">then</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;mwscript.explodeSpell&quot;</span><span class="p">)</span>
+        <span class="n">mwscript</span><span class="p">.</span><span class="n">explodeSpell</span><span class="p">({</span>
+            <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">game</span><span class="p">.</span><span class="n">playerTarget</span><span class="p">,</span>
+            <span class="n">spell</span> <span class="o">=</span> <span class="s2">&quot;proj_trap_spell&quot;</span>
+        <span class="p">})</span>
+    <span class="kr">end</span>
+<span class="kr">end</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">l</span> <span class="p">})</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isAltDown</span> <span class="kr">then</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;tes3.cast&quot;</span><span class="p">)</span>
+        <span class="c1">-- This will behave the same as will mwscript.explodeSpell()</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">cast</span><span class="p">({</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">game</span><span class="p">.</span><span class="n">playerTarget</span><span class="p">,</span>
+            <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">game</span><span class="p">.</span><span class="n">playerTarget</span><span class="p">,</span>
+            <span class="n">spell</span> <span class="o">=</span> <span class="s2">&quot;proj_trap_spell&quot;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="kr">end</span>
+<span class="kr">end</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">k</span> <span class="p">})</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3checkmerchantoffersservice"><code>tes3.checkMerchantOffersService</code><a class="headerlink" href="#tes3checkmerchantoffersservice" title="Permanent link">⚓︎</a></h3>
 <p>Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).</p>
