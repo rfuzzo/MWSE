@@ -10410,7 +10410,7 @@
     <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">:</span><span class="n">exerciseSkill</span><span class="p">(</span><span class="n">skill</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="kr">end</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;spellCastedFailure&quot;</span><span class="p">,</span> <span class="n">OnSpellFailed</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">spellCastedFailure</span><span class="p">,</span> <span class="n">OnSpellFailed</span><span class="p">)</span>
 </code></pre></div>
 </details>
 <hr />
@@ -10660,7 +10660,7 @@
     <span class="p">})</span>
 <span class="kr">end</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;magicEffectsResolved&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">magicEffectsResolved</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">addMagicEffect</span><span class="p">({</span>
         <span class="c1">-- The ID we claimed before is now available in tes3.effect namespace</span>
         <span class="n">id</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">customFireDmg</span><span class="p">,</span>
@@ -10703,7 +10703,7 @@
     <span class="p">})</span>
 <span class="kr">end</span><span class="p">)</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
     <span class="kd">local</span> <span class="n">spell1</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">spell</span> <span class="p">})</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">setSourceless</span><span class="p">(</span><span class="n">spell1</span><span class="p">)</span>
     <span class="n">spell1</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;TEST SPELL - self&quot;</span>
@@ -10954,7 +10954,7 @@
 <summary>Example: This is an example of how to use tes3.cast instead of mwscript.explodeSpell</summary>
 <div class="highlight"><pre><span></span><code><span class="c1">-- The following code can be tested in-game by pressing Alt + l or Alt + k</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isAltDown</span> <span class="kr">then</span>
         <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;mwscript.explodeSpell&quot;</span><span class="p">)</span>
         <span class="n">mwscript</span><span class="p">.</span><span class="n">explodeSpell</span><span class="p">({</span>
@@ -10964,7 +10964,7 @@
     <span class="kr">end</span>
 <span class="kr">end</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">l</span> <span class="p">})</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isAltDown</span> <span class="kr">then</span>
         <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;tes3.cast&quot;</span><span class="p">)</span>
         <span class="c1">-- This will behave the same as will mwscript.explodeSpell()</span>
@@ -11012,15 +11012,12 @@
 <hr />
 <h3 id="tes3claimspelleffectid"><code>tes3.claimSpellEffectId</code><a class="headerlink" href="#tes3claimspelleffectid" title="Permanent link">⚓︎</a></h3>
 <p>This function is used to claim a unique spell effect name and id. This is needed before actually creating a new effect by calling <code>tes3.addMagicEffect()</code>. A claimed effect id is then available as: <code>tes3.effect.effectName</code> (just like any other spell effect). For examples of this function in practice see <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3addmagiceffect"><code>tes3.addMagicEffect()</code></a> example.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>name</code> (string): The name of the new spell effect. Must be unique. An error will be thrown if it's non-unique.</li>
 <li><code>id</code> (number): A unique number representing the new spell effect. An error will be thrown if it's non-unique.</li>
-</ul>
-</li>
 </ul>
 <hr />
 <h3 id="tes3clearmarklocation"><code>tes3.clearMarkLocation</code><a class="headerlink" href="#tes3clearmarklocation" title="Permanent link">⚓︎</a></h3>
@@ -12830,8 +12827,8 @@
     <span class="kr">end</span>
 <span class="kr">end</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="kr">function</span> <span class="p">()</span>
-    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;calcMoveSpeed&quot;</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="kr">function</span> <span class="p">()</span>
+    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">calcMoveSpeed</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
 <span class="kr">end</span><span class="p">)</span>
 </code></pre></div>
 </details>

@@ -7722,7 +7722,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onInitialized</span><span class="p">()</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">addSoulGem</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="s2">&quot;vivec_soul_container&quot;</span> <span class="p">})</span>
 <span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">onInitialized</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="n">onInitialized</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onFilterSoulGemTarget</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Make it so Vivec can only be trapped by a special container.</span>
@@ -7730,7 +7730,7 @@
         <span class="kr">return</span> <span class="n">e</span><span class="p">.</span><span class="n">soulGem</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="s2">&quot;vivec_soul_container&quot;</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;filterSoulGemTarget&quot;</span><span class="p">,</span> <span class="n">onFilterSoulGemTarget</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">filterSoulGemTarget</span><span class="p">,</span> <span class="n">onFilterSoulGemTarget</span><span class="p">)</span>
 </code></pre></div>
 </div>
 

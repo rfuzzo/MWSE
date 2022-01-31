@@ -7731,7 +7731,7 @@
 <span class="kr">end</span>
 
 <span class="c1">-- Filter by the scan code to get Z key presses only.</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">myOnKeyCallback</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">z</span> <span class="p">}</span> <span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">,</span> <span class="n">myOnKeyCallback</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">z</span> <span class="p">}</span> <span class="p">)</span>
 </code></pre></div>
 </div>
 
