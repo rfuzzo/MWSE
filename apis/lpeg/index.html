@@ -8236,7 +8236,7 @@ and quite efficient; see examples in the full documentation for details.</p>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="c1">-- matches a word followed by end-of-string</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;az&quot;</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="kd">local</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;az&quot;</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
 
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span>      <span class="c1">--&gt; 6</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">lpeg</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">))</span>  <span class="c1">--&gt; 6</span>
@@ -8295,7 +8295,7 @@ string.</p>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="c1">-- matches a word followed by end-of-string</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;az&quot;</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="kd">local</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;az&quot;</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
 
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span>      <span class="c1">--&gt; 6</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">lpeg</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">))</span>  <span class="c1">--&gt; 6</span>
