@@ -8383,7 +8383,7 @@
 <hr />
 <h3 id="playvisualeffect"><code>playVisualEffect</code><a class="headerlink" href="#playvisualeffect" title="Permanent link">⚓︎</a></h3>
 <p>This function plays an animation for an effect from the <code>tes3magicSourceInstance</code> object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3magicSourceInstance</span><span class="p">:</span><span class="n">playVisualEffect</span><span class="p">({</span> <span class="n">effectIndex</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">visual</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3magicSourceInstance</span><span class="p">:</span><span class="n">playVisualEffect</span><span class="p">({</span> <span class="n">effectIndex</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">visual</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8391,7 +8391,7 @@
 <li><code>effectIndex</code> (number): The index in the effect whose visual will be played, a number in range [0, 7].</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): A table or a <code>tes3vector3</code> holding <code>x</code>, <code>y</code> and <code>z</code> coordinates at which the visual effect will be played.</li>
 <li><code>visual</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): The visual effect to be played.</li>
-<li><code>duration</code> (number): <em>Default</em>: <code>1</code>. For how long the visual effect will be played. Measured in seconds.</li>
+<li><code>scale</code> (number): <em>Default</em>: <code>1</code>. The scale of the effect. Only applies to effects that are designed to be scaled.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, string): A reference on which the visual effect will be played.</li>
 </ul>
 </li>
