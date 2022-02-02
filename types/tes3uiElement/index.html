@@ -697,6 +697,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -957,6 +959,20 @@
     <li class="md-nav__item">
       <a href="../../references/code-patch-features/" class="md-nav__link">
         Code Patch Features
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/content-types/" class="md-nav__link">
+        Content Types
       </a>
     </li>
   
@@ -1562,7 +1578,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_61" type="checkbox" id="__nav_3_61" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_62" type="checkbox" id="__nav_3_62" >
       
       
       
@@ -1593,13 +1609,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_61">
+        <label class="md-nav__link" for="__nav_3_62">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_61">
+        <label class="md-nav__title" for="__nav_3_62">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1791,7 +1807,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_62" type="checkbox" id="__nav_3_62" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_63" type="checkbox" id="__nav_3_63" >
       
       
       
@@ -1800,13 +1816,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_62">
+        <label class="md-nav__link" for="__nav_3_63">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_62">
+        <label class="md-nav__title" for="__nav_3_63">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -5166,6 +5182,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#contenttype" class="md-nav__link">
+    contentType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#disabled" class="md-nav__link">
     disabled
   </a>
@@ -8475,6 +8498,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#contenttype" class="md-nav__link">
+    contentType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#disabled" class="md-nav__link">
     disabled
   </a>
@@ -9177,6 +9207,13 @@
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="contenttype"><code>contentType</code><a class="headerlink" href="#contenttype" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. The type of content this <code>tes3uiElement</code> represents. Maps to values in <a href="https://mwse.github.io/MWSE/references/content-types/"><code>tes3.contentType</code></a>.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (string)</li>
+</ul>
+<hr />
 <h3 id="disabled"><code>disabled</code><a class="headerlink" href="#disabled" title="Permanent link">⚓︎</a></h3>
 <p>Disables user actions on this element. Widgets may stop accepting mouse and keyboard input while disabled.</p>
 <p><strong>Returns</strong>:</p>
@@ -9412,7 +9449,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9437,7 +9474,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9450,7 +9487,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9470,7 +9507,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>current</code> (number): <em>Optional</em>. The initial current value.</li>
 <li><code>max</code> (number): <em>Optional</em>. The initial maximum value.</li>
 </ul>
@@ -9492,7 +9529,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9505,7 +9542,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9518,7 +9555,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>path</code> (string): An image path. This path is relative to <code>Data Files</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -9532,7 +9569,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>idle</code> (string): The path to the idle image. This path is relative to <code>Data Files</code>.</li>
 <li><code>over</code> (string): The path to the mouse hover image. This path is relative to <code>Data Files</code>.</li>
 <li><code>path</code> (string): The path to the mouse pressed image. This path is relative to <code>Data Files</code>.</li>
@@ -9548,7 +9585,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>text</code> (string): The text to display.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -9562,7 +9599,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>text</code> (string): A model path. This path is relative to <code>Data Files</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -9579,7 +9616,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9592,7 +9629,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>color</code> (table): <em>Optional</em>. The fill colour for the element.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -9615,7 +9652,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>current</code> (number): The initial value for the slider.</li>
 <li><code>max</code> (number): The maximum value for the slider.</li>
 <li><code>step</code> (number): <em>Optional</em>. Amount changed by left and right arrow buttons.</li>
@@ -9641,7 +9678,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>current</code> (number): The initial value for the slider.</li>
 <li><code>max</code> (number): The maximum value for the slider.</li>
 <li><code>step</code> (number): <em>Optional</em>. Amount changed by left and right arrow buttons. The default is 1.</li>
@@ -9662,7 +9699,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9675,7 +9712,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>text</code> (string): <em>Optional</em>. The text to display.</li>
 <li><code>state</code> (number): <em>Optional</em>. The initial interaction state. Defaults to normal.</li>
 </ul>
@@ -9690,7 +9727,7 @@ Custom events used with register:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9710,7 +9747,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): <em>Optional</em>. A registered identifier to help find this element later.</li>
+<li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9733,7 +9770,7 @@ Custom widget methods:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (number): The id to search for.</li>
+<li><code>id</code> (string, number): The id to search for.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
