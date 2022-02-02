@@ -10787,6 +10787,33 @@
 <ul>
 <li><code>wasAdded</code> (boolean)</li>
 </ul>
+<details class="example">
+<summary>Example: Make the Dwemer Tube a Soul gem. Also, make sure Fargoth's soul alway ends up in it if the player has one avilable.</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onInitialized</span><span class="p">()</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">addSoulGem</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="s2">&quot;misc_dwrv_artifact60&quot;</span> <span class="p">})</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="n">onInitialized</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onFilterSoulGemTarget</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">reference</span><span class="p">.</span><span class="n">baseObject</span><span class="p">.</span><span class="n">id</span><span class="p">:</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;fargoth&quot;</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="n">e</span><span class="p">.</span><span class="n">soulGem</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="s2">&quot;misc_dwrv_artifact60&quot;</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">filterSoulGemTarget</span><span class="p">,</span> <span class="n">onFilterSoulGemTarget</span><span class="p">)</span>
+
+<span class="c1">-- calcSoulValue event allows assigning a new soul value to creatures</span>
+<span class="c1">-- If the event was triggered for an NPC, it allows assigning a value</span>
+<span class="c1">-- thus allowing soul-trapping the actor.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcSoulValueCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">actor</span><span class="p">.</span><span class="n">id</span><span class="p">:</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;fargoth&quot;</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">69</span>
+        <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Getting Fargoth&#39;s value.&quot;</span><span class="p">)</span>
+        <span class="kr">return</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">calcSoulValue</span><span class="p">,</span> <span class="n">calcSoulValueCallback</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3addspell"><code>tes3.addSpell</code><a class="headerlink" href="#tes3addspell" title="Permanent link">⚓︎</a></h3>
 <p>Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.</p>
