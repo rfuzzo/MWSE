@@ -699,6 +699,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1517,8 +1521,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../../references/ui-events/" class="md-nav__link">
+        UI Events
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../references/ui-properties/" class="md-nav__link">
         UI Properties
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/ui-states/" class="md-nav__link">
+        UI States
       </a>
     </li>
   
@@ -1578,7 +1610,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_62" type="checkbox" id="__nav_3_62" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_64" type="checkbox" id="__nav_3_64" >
       
       
       
@@ -1609,13 +1641,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_62">
+        <label class="md-nav__link" for="__nav_3_64">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_62">
+        <label class="md-nav__title" for="__nav_3_64">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1807,7 +1839,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_63" type="checkbox" id="__nav_3_63" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_65" type="checkbox" id="__nav_3_65" >
       
       
       
@@ -1816,13 +1848,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_63">
+        <label class="md-nav__link" for="__nav_3_65">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_63">
+        <label class="md-nav__title" for="__nav_3_65">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -2212,6 +2244,20 @@
       
       
       
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
         
           
         
@@ -5019,6 +5065,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../tes3uiButton/" class="md-nav__link">
+        tes3uiButton
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -5780,6 +5840,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../tes3uiFillBar/" class="md-nav__link">
+        tes3uiFillBar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../tes3uiFontColor/" class="md-nav__link">
         tes3uiFontColor
       </a>
@@ -5822,8 +5896,78 @@
   
   
     <li class="md-nav__item">
+      <a href="../tes3uiParagraphInput/" class="md-nav__link">
+        tes3uiParagraphInput
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../tes3uiProperty/" class="md-nav__link">
         tes3uiProperty
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3uiScrollPane/" class="md-nav__link">
+        tes3uiScrollPane
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3uiSlider/" class="md-nav__link">
+        tes3uiSlider
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3uiTextInput/" class="md-nav__link">
+        tes3uiTextInput
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3uiTextSelect/" class="md-nav__link">
+        tes3uiTextSelect
       </a>
     </li>
   
@@ -9411,10 +9555,10 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="widget"><code>widget</code><a class="headerlink" href="#widget" title="Permanent link">⚓︎</a></h3>
-<p>Access to custom properties specific to a widget. These properties are documented in the widget create* function descriptions.</p>
+<p>Access to element specific properties. This will be <code>nil</code> if there are no element specific properties. See the return types and the create* functions for more details.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (<a href="../../types/tes3uiButton">tes3uiButton</a>, <a href="../../types/tes3uiFillBar">tes3uiFillBar</a>, <a href="../../types/tes3uiParagraphInput">tes3uiParagraphInput</a>, <a href="../../types/tes3uiSlider">tes3uiSlider</a>, <a href="../../types/tes3uiScrollPane">tes3uiScrollPane</a>, <a href="../../types/tes3uiTextInput">tes3uiTextInput</a>, <a href="../../types/tes3uiTextSelect">tes3uiTextSelect</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="width"><code>width</code><a class="headerlink" href="#width" title="Permanent link">⚓︎</a></h3>
@@ -9458,18 +9602,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createbutton"><code>createButton</code><a class="headerlink" href="#createbutton" title="Permanent link">⚓︎</a></h3>
 <p>Creates a clickable button. Register the <code>mouseClick</code> event to capture a button press.</p>
-<pre><code>Custom widget properties:
-    | `number`_ `element.widget.state`: Interaction state. 1 = normal, 2 = disabled, 4 = active. Controls which colour set to use for text.
-    | `table`_ (float[3]) `element.widget.idle`: Text colour for normal state, no mouse interaction.
-    | `table`_ (float[3]) `element.widget.over`: Text colour for normal state, on mouseOver.
-    | `table`_ (float[3]) `element.widget.pressed`: Text colour for normal state, on mouseDown.
-    | `table`_ (float[3]) `element.widget.idleDisabled`: Text colour for disabled state, no mouse interaction.
-    | `table`_ (float[3]) `element.widget.overDisabled`: Text colour for disabled state, on mouseOver.
-    | `table`_ (float[3]) `element.widget.pressedDisabled`: Text colour for disabled state, on mouseDown.
-    | `table`_ (float[3]) `element.widget.idleActive`: Text colour for active state, no mouse interaction.
-    | `table`_ (float[3]) `element.widget.overActive`: Text colour for active state, on mouseOver.
-    | `table`_ (float[3]) `element.widget.pressedActive`: Text colour for active state, on mouseDown.
-</code></pre>
+<p>Button specific properties can be accessed through the <code>widget</code> property. The widget type for buttons is <a href="https://mwse.github.io/MWSE/types/tes3uiButton/"><code>tes3uiButton</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createButton</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9496,20 +9629,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createfillbar"><code>createFillBar</code><a class="headerlink" href="#createfillbar" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontal quantity indicator bar.</p>
-<pre><code>Custom widget properties:
-    | `number`_ (integer) `element.widget.current`: Current (filled) value.
-    | `number`_ (integer) `element.widget.max`: Maximum value.
-    | `boolean`_ `element.widget.showText`: If text of the format "current/max" is shown. Default is `true`.
-    | `table`_ (float[3]) `element.widget.fillColor`: Colour of filled area.
-    | `number`_ (float) `element.widget.fillAlpha`: Alpha transparency of filled area.
-</code></pre>
+<p>Fillbar specific properties can be accessed through the <code>widget</code> property. The widget type for fillbars is <a href="https://mwse.github.io/MWSE/types/tes3uiFillBar/"><code>tes3uiFillBar</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createFillBar</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
-<li><code>current</code> (number): <em>Optional</em>. The initial current value.</li>
-<li><code>max</code> (number): <em>Optional</em>. The initial maximum value.</li>
+<li><code>current</code> (number): <em>Optional</em>. The current value of the fillbar.</li>
+<li><code>max</code> (number): <em>Optional</em>. The maximum value of the fillbar.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9518,13 +9645,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createhorizontalscrollpane"><code>createHorizontalScrollPane</code><a class="headerlink" href="#createhorizontalscrollpane" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontally scrolling pane.</p>
-<pre><code>Custom widget properties:
-    | `number`_ `element.widget.positionX`: Horizontal scroll offset in pixels.
-    | `boolean`_ `element.widget.scrollbarVisible`: Set if the scrollbar is displayed.
-
-Custom widget methods:
-    | `element.widget:contentsChanged()`: Call to update scroll bar slider and limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after a menu:updateLayout(). Only required if the content size changes.
-</code></pre>
+<p>Scroll pane specific properties can be accessed through the <code>widget</code> property. The widget type for scroll panes is <a href="https://mwse.github.io/MWSE/types/tes3uiScrollPane/"><code>tes3uiScrollPane</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createHorizontalScrollPane</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9609,9 +9730,7 @@ Custom widget methods:
 <hr />
 <h3 id="createparagraphinput"><code>createParagraphInput</code><a class="headerlink" href="#createparagraphinput" title="Permanent link">⚓︎</a></h3>
 <p>Creates a multi-line text input element, with line wrapping on. To receive input the keyboard must be captured with <code>tes3ui.acquireTextInput(element)</code>. Read the input with the <code>text</code> property. Write an initial value to edit by setting the <code>text</code> property.</p>
-<pre><code>Custom widget properties:
-    | `number`_ (integer) `element.widget.lengthLimit`: Maximum input length. Default is `1023`.
-</code></pre>
+<p>Paragraph input specific properties can be accessed through the <code>widget</code> property. The widget type for paragraph inputs is <a href="https://mwse.github.io/MWSE/types/tes3uiParagraphInput/"><code>tes3uiParagraphInput</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createParagraphInput</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9639,24 +9758,16 @@ Custom widget methods:
 <hr />
 <h3 id="createslider"><code>createSlider</code><a class="headerlink" href="#createslider" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontal slider.</p>
-<pre><code>Custom widget properties:
-    | `number`_ (integer) `element.widget.current`: Current value.
-    | `number`_ (integer) `element.widget.max`: Maximum value.
-    | `number`_ (integer) `element.widget.step`: Amount changed by left and right arrow buttons.
-    | `number`_ (integer) `element.widget.jump`: Amount changed by clicking inside the slider area.
-
-Custom events used with register:
-    | `"PartScrollBar_changed"`: Triggers on value change; moving the slider is not enough if the value is the same.
-</code></pre>
+<p>Slider specific properties can be accessed through the <code>widget</code> property. The widget type for sliders is <a href="https://mwse.github.io/MWSE/types/tes3uiSlider/"><code>tes3uiSlider</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSlider</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">jump</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
-<li><code>current</code> (number): The initial value for the slider.</li>
-<li><code>max</code> (number): The maximum value for the slider.</li>
-<li><code>step</code> (number): <em>Optional</em>. Amount changed by left and right arrow buttons.</li>
-<li><code>jump</code> (number): <em>Optional</em>. Amount changed by clicking inside the slider area.</li>
+<li><code>current</code> (number): The current value of the slider.</li>
+<li><code>max</code> (number): The maximum value of the slider.</li>
+<li><code>step</code> (number): <em>Default</em>: <code>1</code>. The change in value when clicking the left and right arrow buttons.</li>
+<li><code>jump</code> (number): <em>Default</em>: <code>5</code>. The change in value when clicking into the empty areas next to the slider handle.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9665,24 +9776,16 @@ Custom events used with register:
 <hr />
 <h3 id="createslidervertical"><code>createSliderVertical</code><a class="headerlink" href="#createslidervertical" title="Permanent link">⚓︎</a></h3>
 <p>Creates a vertical slider.</p>
-<pre><code>Custom widget properties:
-    | `number`_ (integer) `element.widget.current`: Current value.
-    | `number`_ (integer) `element.widget.max`: Maximum value.
-    | `number`_ (integer) `element.widget.step`: Amount changed by up and down arrow buttons.
-    | `number`_ (integer) `element.widget.jump`: Amount changed by clicking inside the slider area.
-
-Custom events used with register:
-    | `"PartScrollBar_changed"`: Triggers on value change; moving the slider is not enough if the value is the same.
-</code></pre>
+<p>Slider specific properties can be accessed through the <code>widget</code> property. The widget type for sliders is <a href="https://mwse.github.io/MWSE/types/tes3uiSlider/"><code>tes3uiSlider</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSliderVertical</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">jump</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
-<li><code>current</code> (number): The initial value for the slider.</li>
-<li><code>max</code> (number): The maximum value for the slider.</li>
-<li><code>step</code> (number): <em>Optional</em>. Amount changed by left and right arrow buttons. The default is 1.</li>
-<li><code>jump</code> (number): <em>Optional</em>. Amount changed by clicking inside the slider area. The default is 5.</li>
+<li><code>current</code> (number): The current value of the slider.</li>
+<li><code>max</code> (number): The maximum value of the slider.</li>
+<li><code>step</code> (number): <em>Default</em>: <code>1</code>. The change in value when clicking the left and right arrow buttons.</li>
+<li><code>jump</code> (number): <em>Default</em>: <code>5</code>. The change in value when clicking into the empty areas next to the slider handle.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9691,10 +9794,7 @@ Custom events used with register:
 <hr />
 <h3 id="createtextinput"><code>createTextInput</code><a class="headerlink" href="#createtextinput" title="Permanent link">⚓︎</a></h3>
 <p>Creates a single line text input element. To receive input the keyboard must be captured with <code>tes3ui.acquireTextInput(element)</code>. Read the input with the <code>text</code> property. Write an initial value to display by setting the <code>text</code> property; that value will be cleared on the first keypress.</p>
-<pre><code>Custom widget properties:
-    | `boolean`_ `element.widget.eraseOnFirstKey`: Clears the initial value if the first keypress is not an edit action. Default is `true`.
-    | `number`_ (integer) `element.widget.lengthLimit"`: Maximum input length, or `nil` for no limit. If you are setting names, the engine limits most identifiers to 31 characters. Default is `nil`.
-</code></pre>
+<p>Text input specific properties can be accessed through the <code>widget</code> property. The widget type for text inputs is <a href="https://mwse.github.io/MWSE/types/tes3uiTextInput/"><code>tes3uiTextInput</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextInput</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9707,18 +9807,19 @@ Custom events used with register:
 </ul>
 <hr />
 <h3 id="createtextselect"><code>createTextSelect</code><a class="headerlink" href="#createtextselect" title="Permanent link">⚓︎</a></h3>
-<p>Creates a selectable line of text, with configurable hover, click, and disabled colours. Can be used to create a list box by placing them in a ScrollPane. <code>state</code> sets the initial interaction state.</p>
+<p>Creates a selectable line of text, with configurable hover, click, and disabled colours. Can be used to create a list box by placing them in a ScrollPane.</p>
+<p>Text select specific properties can be accessed through the <code>widget</code> property. The widget type for text selects is <a href="https://mwse.github.io/MWSE/types/tes3uiTextSelect/"><code>tes3uiTextSelect</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextSelect</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>text</code> (string): <em>Optional</em>. The text to display.</li>
-<li><code>state</code> (number): <em>Optional</em>. The initial interaction state. Defaults to normal.</li>
+<li><code>state</code> (number): <em>Default</em>: <code>tes3.uiState.normal</code>. The initial interaction state.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (tes3uiWidgetTextSelect)</li>
+<li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
 </ul>
 <hr />
 <h3 id="createthinborder"><code>createThinBorder</code><a class="headerlink" href="#createthinborder" title="Permanent link">⚓︎</a></h3>
@@ -9736,13 +9837,7 @@ Custom events used with register:
 <hr />
 <h3 id="createverticalscrollpane"><code>createVerticalScrollPane</code><a class="headerlink" href="#createverticalscrollpane" title="Permanent link">⚓︎</a></h3>
 <p>Creates a vertically scrolling pane. Useful as a list box.</p>
-<pre><code>Custom widget properties:
-    | `number`_ `element.widget.positionY`: Vertical scroll offset in pixels.
-    | `boolean`_ `element.widget.scrollbarVisible`: Set if the scrollbar is displayed.
-
-Custom widget methods:
-    | `element.widget:contentsChanged()`: Call to update scroll bar slider and limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after a menu:updateLayout(). Only required if the content size changes.
-</code></pre>
+<p>Scroll pane specific properties can be accessed through the <code>widget</code> property. The widget type for scroll panes is <a href="https://mwse.github.io/MWSE/types/tes3uiScrollPane/"><code>tes3uiScrollPane</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createVerticalScrollPane</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9874,57 +9969,58 @@ This is required because there is no identifying type information stored with th
 </code></pre></div>
 <hr />
 <h3 id="register"><code>register</code><a class="headerlink" href="#register" title="Permanent link">⚓︎</a></h3>
-<p>Sets an <code>event</code> handler, which can add or override an existing event handler. The use of <code>registerBefore</code> or <code>registerAfter</code> is recommended if you do not want to replace the existing event handler. The eventID can be a standard <code>event</code> name, or an event specific to an element class. The callback receives an argument with the event data. See below for details.</p>
+<p>Sets an <code>event</code> handler, which can add or override an existing event handler. The use of <code>registerBefore</code> or <code>registerAfter</code> is recommended if you do not want to replace the existing event handler. The eventID can be a standard <code>event</code> name, or an event specific to an element class. These can be accessed through <a href="https://mwse.github.io/MWSE/references/ui-events/"><code>tes3.uiEvent</code></a> for convenience. The callback receives an argument with the event data. See below for details.</p>
 <p>The original Morrowind callback is captured and can be invoked with the <code>forwardEvent</code> method on the event argument. If there is an existing Lua callback, it is replaced.</p>
-<p>Lua UI event specification:</p>
-<p>Events can be bound to elements via the <code>Element</code>_ <code>register</code> method, which takes an event name. Event names can be one of the standard events listed here, or a widget-specific event.</p>
-<p>Standard events:
-    <strong>mouseLeave</strong>
+<pre><code>Standard events:
+    **mouseLeave**
         Mouse cursor moving outside an element. Triggers once.
-    <strong>mouseOver</strong>
+    **mouseOver**
         Mouse cursor moving over an element. Triggers once.
-    <strong>mouseDown</strong>
+    **mouseDown**
         Left mouse button down over an element.
-    <strong>mouseClick</strong>
+    **mouseClick**
         Left mouse button up over an element, after a mouseDown over the element.
-    <strong>mouseScrollUp</strong>
+    **mouseScrollUp**
         ..
-    <strong>mouseScrollDown</strong>
+    **mouseScrollDown**
         Mouse wheel scrolling.
-    <strong>mouseDoubleClick</strong>
+    **mouseDoubleClick**
         Standard double-click.
-    <strong>mouseStillIdle</strong>
+    **mouseStillIdle**
         Mouse cursor positioned outside an element. Triggers every frame.
-    <strong>mouseStillOver</strong>
+    **mouseStillOver**
         Mouse cursor positioned over an element. Triggers every frame.
-    <strong>mouseStillPressed</strong>
+    **mouseStillPressed**
         Mouse cursor positioned over an element, after a mouseDown over the element. Triggers every frame.
-    <strong>mouseStillPressedOutside</strong>
+    **mouseStillPressedOutside**
         Apparently not working in the engine. Mouse cursor positioned outside an element, after a mouseDown over the element. Triggers every frame.
-    <strong>mouseRelease</strong>
+    **mouseRelease**
         Left mouse button up over an element.
-    <strong>keyPress</strong>
+    **keyPress**
         A raw key press.
-    <strong>keyEnter</strong>
+    **keyEnter**
         The Return key is pressed.
-    <strong>help</strong>
-        On mouseover, but also marking the element as having a tooltip. Create a tooltip within the callback using the <code>tes3ui.createTooltipMenu</code>_ function.
-    <strong>focus</strong>
+    **help**
+        On mouseover, but also marking the element as having a tooltip. Create a tooltip within the callback using the `tes3ui.createTooltipMenu` function.
+    **focus**
         When a menu is clicked on, and moved on top of other menus.
-    <strong>unfocus</strong>
+    **unfocus**
         Just before another menu is clicked on, or a widget in that menu receives an event, or when the menu mode is toggled off. You may return false from this event to prevent the menu from being deselected, and to prevent leaving menu mode.
-    <strong>preUpdate</strong>
+    **preUpdate**
         Before the menu layout is updated.
-    <strong>update</strong>
+    **update**
         After the menu layout is updated.
-    <strong>destroy</strong>
-        When the UI element is destroyed, before any data or children are destroyed.</p>
-<p><strong>Widget-specific events</strong>
-    To be documented.</p>
+    **destroy**
+        When the UI element is destroyed, before any data or children are destroyed.
+
+Widget-specific events:
+    Slider:
+        **PartScrollBar_changed**
+            Triggers on value change; moving the slider is not enough if the value is the same.
+</code></pre>
 <h2 id="event-forwarding">Event forwarding<a class="headerlink" href="#event-forwarding" title="Permanent link">⚓︎</a></h2>
 <p>The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the <code>forwardEvent</code> method.  Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback. </p>
 <p><strong>Example</strong></p>
-<p>.. code-block:: lua</p>
 <pre><code>local function onClick(e)
     -- pre-event code
     e.source:forwardEvent(e)
@@ -9936,36 +10032,37 @@ button:register("mouseClick", onClick)
 </code></pre>
 <h2 id="event-handler">Event handler<a class="headerlink" href="#event-handler" title="Permanent link">⚓︎</a></h2>
 <p>The standard type signature for events.</p>
-<p><code>boolean</code>_ eventHandler(<strong>EventData</strong> e)
-    Returns: <code>optional</code>
-        Returning <code>false</code> may cancel an interaction for certain events. e.g. unfocus</p>
-<pre><code>EventData:
-    **source** (`Element`_)
-        The source element of the event.
+<pre><code>`boolean`_ eventHandler(**EventData** e)
+    Returns: `optional`
+        Returning `false` may cancel an interaction for certain events. e.g. unfocus
 
-    **id** (`number`_)
-        The numeric id of the event type.
+    EventData:
+        **source** (`Element`_)
+            The source element of the event.
 
-    **widget** (`Element`_)
-        The widget element that the source belongs to, if the element is a sub-part of a widget. May not be accurate if the element is not a sub-part.
+        **id** (`number`_)
+            The numeric id of the event type.
 
-    **data0** (`number`_)
-        ..
+        **widget** (`Element`_)
+            The widget element that the source belongs to, if the element is a sub-part of a widget. May not be accurate if the element is not a sub-part.
 
-    **data1** (`number`_)
-        Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer. For keyboard events, data0 is the `scan code`_.
+        **data0** (`number`_)
+            ..
 
-    **relativeX** (`number`_)
-        ..
+        **data1** (`number`_)
+            Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer. For keyboard events, data0 is the `scan code`_.
 
-    **relativeY** (`number`_)
-        For mouse events only. X and Y coordinates of the pointer relative to the top-left of the element.
+        **relativeX** (`number`_)
+            ..
+
+        **relativeY** (`number`_)
+            For mouse events only. X and Y coordinates of the pointer relative to the top-left of the element.
 </code></pre>
 <div class="highlight"><pre><span></span><code><span class="n">tes3uiElement</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="n">eventID</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>eventID</code> (string): The event id.</li>
+<li><code>eventID</code> (string): The event id. Maps to values in <a href="https://mwse.github.io/MWSE/references/ui-events/"><code>tes3.uiEvent</code></a>.</li>
 <li><code>callback</code> (function): The callback function.</li>
 </ul>
 <hr />
@@ -10134,7 +10231,7 @@ Returns `true` if the operation succeeded, or `false` if at least one argument w
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../tes3travelDestinationNode/" class="md-footer__link md-footer__link--prev" aria-label="Previous: tes3travelDestinationNode" rel="prev">
+        <a href="../tes3uiButton/" class="md-footer__link md-footer__link--prev" aria-label="Previous: tes3uiButton" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -10143,7 +10240,7 @@ Returns `true` if the operation succeeded, or `false` if at least one argument w
               <span class="md-footer__direction">
                 Previous
               </span>
-              tes3travelDestinationNode
+              tes3uiButton
             </div>
           </div>
         </a>
