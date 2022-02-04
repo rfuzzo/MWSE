@@ -8067,15 +8067,12 @@
 <hr />
 <h3 id="timerregister"><code>timer.register</code><a class="headerlink" href="#timerregister" title="Permanent link">⚓︎</a></h3>
 <p>Registers a named timer with a callback to persist between game sessions. Bear in mind that nothing in MWSE is sandboxed, so all the registered timers are in the global namespace. Consider prefixing your timer with mod name or something else to avoid name collisions. For instance, <code>iceCreamMod:myTimer</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">timer</span><span class="p">.</span><span class="n">register</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">fn</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">timer</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>name</code> (string): Name of the registered timer.</li>
 <li><code>fn</code> (function): A callback function for the timer.</li>
-</ul>
-</li>
 </ul>
 <details class="example">
 <summary>Example: Show a Message After 1 Day</summary>
