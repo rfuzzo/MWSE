@@ -703,6 +703,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -767,6 +769,20 @@
     <li class="md-nav__item">
       <a href="../../references/actor-types/" class="md-nav__link">
         Actor Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/ai-behavior-states/" class="md-nav__link">
+        AI Behavior States
       </a>
     </li>
   
@@ -1610,7 +1626,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_64" type="checkbox" id="__nav_3_64" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_65" type="checkbox" id="__nav_3_65" >
       
       
       
@@ -1641,13 +1657,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_64">
+        <label class="md-nav__link" for="__nav_3_65">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_64">
+        <label class="md-nav__title" for="__nav_3_65">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1839,7 +1855,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_65" type="checkbox" id="__nav_3_65" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_66" type="checkbox" id="__nav_3_66" >
       
       
       
@@ -1848,13 +1864,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_65">
+        <label class="md-nav__link" for="__nav_3_66">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_65">
+        <label class="md-nav__title" for="__nav_3_66">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -3400,13 +3416,6 @@
           <li class="md-nav__item">
   <a href="#animationattackstate" class="md-nav__link">
     animationAttackState
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#attackdirection" class="md-nav__link">
-    attackDirection
   </a>
   
 </li>
@@ -7976,13 +7985,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#attackdirection" class="md-nav__link">
-    attackDirection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#attackswing" class="md-nav__link">
     attackSwing
   </a>
@@ -8074,7 +8076,7 @@
 <p>A substructure of mobile actors that provides information about the current or previous action.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="aibehaviorstate"><code>aiBehaviorState</code><a class="headerlink" href="#aibehaviorstate" title="Permanent link">⚓︎</a></h3>
-<p>The behavior state of the <a href="https://mwse.github.io/MWSE/types/tes3actionData">tes3actionData</a>.</p>
+<p>The behavior state of the <a href="https://mwse.github.io/MWSE/types/tes3actionData">tes3actionData</a>. This maps to values in <a href="https://mwse.github.io/MWSE/references/ai-behavior-states/"><code>tes3.aiBehaviorState</code></a> namespace.</p>
 <table>
 <thead>
 <tr>
@@ -8123,14 +8125,7 @@
 </ul>
 <hr />
 <h3 id="animationattackstate"><code>animationAttackState</code><a class="headerlink" href="#animationattackstate" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (number)</li>
-</ul>
-<hr />
-<h3 id="attackdirection"><code>attackDirection</code><a class="headerlink" href="#attackdirection" title="Permanent link">⚓︎</a></h3>
-<p><strong>Deprecated. Use <code>tes3actionData.physicalAttackType</code> instead.</strong> When attacking, the direction swung with the weapon. This shows if the actor was thrusting, swinging, or chopping.</p>
+<p>The actor's animation state. Maps to values in <a href="https://mwse.github.io/MWSE/references/animation-states/"><code>tes3.animationState</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8144,14 +8139,14 @@
 </ul>
 <hr />
 <h3 id="currentanimationgroup"><code>currentAnimationGroup</code><a class="headerlink" href="#currentanimationgroup" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Actor's current animation group. Maps to values in <a href="https://mwse.github.io/MWSE/references/animation-groups/"><code>tes3.animationGroup</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="hittarget"><code>hitTarget</code><a class="headerlink" href="#hittarget" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The actor's attack target. The target will be saved in <code>hitTarget</code> field until a new attack is made.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
@@ -8179,7 +8174,7 @@
 </ul>
 <hr />
 <h3 id="physicaldamage"><code>physicalDamage</code><a class="headerlink" href="#physicaldamage" title="Permanent link">⚓︎</a></h3>
-<p>When attacking, this is the value of the weapon damage that was rolled. This value doesn't take into account the actor's strength, or other additional damage.</p>
+<p>When attacking, this is the value of the weapon damage that was rolled. This value takes into account the actor's strength, attack swing and weapon condition, but it doesn't include difficulty nor target's armor. This value is updated on a attack. After the attack this value will still contain the damage rolled. It will be refreshed on new attack.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8193,7 +8188,7 @@
 </ul>
 <hr />
 <h3 id="target"><code>target</code><a class="headerlink" href="#target" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The actor's attack target.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
