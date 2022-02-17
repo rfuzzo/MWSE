@@ -6,9 +6,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.2.3, mkdocs-material-8.1.11" name="generator"/>
+<meta content="mkdocs-1.2.3, mkdocs-material-8.2.1" name="generator"/>
 <title>tes3bodyPartManager - Morrowind Script Extender</title>
-<link href="../../assets/stylesheets/main.50e68009.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.e8d9bf0c.min.css" rel="stylesheet"/>
 <link href="../../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
@@ -2752,15 +2752,12 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="getactivebodypart"><code>getActiveBodyPart</code><a class="headerlink" href="#getactivebodypart" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches active body part of a actor at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">({</span> <span class="n">layer</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
-</ul>
-</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -2782,15 +2779,12 @@
 <hr/>
 <h3 id="getactivebodypartnode"><code>getActiveBodyPartNode</code><a class="headerlink" href="#getactivebodypartnode" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPartNode</span><span class="p">({</span> <span class="n">layer</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPartNode</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
-</ul>
-</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -2804,47 +2798,38 @@
 <hr/>
 <h3 id="setactivepartdata"><code>setActivePartData</code><a class="headerlink" href="#setactivepartdata" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a niNode derived object as active body part at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setActivePartData</span><span class="p">({</span> <span class="n">layer</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">overwriteData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">node</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setActivePartData</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">overwriteData</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 <li><code>overwriteData</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the current data should be overwritten.</li>
 <li><code>node</code> (<a href="../../types/niNode">niNode</a>): <em>Default</em>: <code>nil</code>. </li>
 </ul>
-</li>
-</ul>
 <hr/>
 <h3 id="setbodypartbyidforobject"><code>setBodyPartByIdForObject</code><a class="headerlink" href="#setbodypartbyidforobject" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a new body part for a given object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">({</span> <span class="n">object</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">bodyPartId</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">isFirstPerson</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPartId</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 <li><code>bodyPartId</code> (string): The unique ID of the <code>tes3bodyPart</code> object to set as a new body part for given object.</li>
 <li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which controls whether the body part is used in first person.</li>
 </ul>
-</li>
-</ul>
 <hr/>
 <h3 id="setbodypartforobject"><code>setBodyPartForObject</code><a class="headerlink" href="#setbodypartforobject" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a new body part for a given object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">({</span> <span class="n">object</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">bodyPart</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">isFirstPerson</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPart</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 <li><code>bodyPart</code> (<a href="../../types/tes3bodyPart">tes3bodyPart</a>): The <code>tes3bodyPart</code> object to set as a new body part for given object.</li>
 <li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which controls whether the body part is used in first person.</li>
-</ul>
-</li>
 </ul>
 <hr/>
 <h3 id="updateforreference"><code>updateForReference</code><a class="headerlink" href="#updateforreference" title="Permanent link">⚓︎</a></h3>
@@ -2910,8 +2895,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
-<script src="../../assets/javascripts/bundle.5a9542cf.min.js"></script>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script>
+<script src="../../assets/javascripts/bundle.8aa65030.min.js"></script>
 <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
 </body>
 </html>
