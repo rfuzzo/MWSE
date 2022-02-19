@@ -326,11 +326,6 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../audio-mix-types/">
-        Audio Mix Types
-      </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="../body-part-attachments/">
         Body Part Attachments
       </a>
@@ -368,6 +363,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../damage-sources/">
         Damage Sources
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../dialogue-pages/">
+        Dialogue Pages
       </a>
 </li>
 <li class="md-nav__item md-nav__item--active">
@@ -2558,6 +2558,10 @@
 </thead>
 <tbody>
 <tr>
+<td>0</td>
+<td>Topic</td>
+</tr>
+<tr>
 <td>1</td>
 <td>Voice</td>
 </tr>
@@ -2569,159 +2573,9 @@
 <td>3</td>
 <td>Service</td>
 </tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Each of these Dialogue Types has some subfields, which are stored in tes3.dialoguePage.* namespace. Available types are:</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their identifier in the <code>tes3.dialoguePage.voice.*</code> namespace. For example, <code>tes3.dialoguePage.voice.attack</code> has a value of <code>5</code>.</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Voice</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Hello</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Idle</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Intruder</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Thief</td>
-</tr>
 <tr>
 <td>4</td>
-<td>Hit</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Attack</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Flee</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their identifier in the <code>tes3.dialoguePage.greeting.*</code> namespace. For example, <code>tes3.dialoguePage.greeting.greeting4</code> has a value of <code>4</code>.</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Greeting</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Greeting 0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Greeting 1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Greeting 2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Greeting 3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Greeting 4</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Greeting 5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Greeting 6</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Greeting 7</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Greeting 8</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Greeting 9</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their identifier in the <code>tes3.dialoguePage.service.*</code> namespace. For example, <code>tes3.dialoguePage.service.infoRefusal</code> has a value of <code>0</code>.</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Service</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Info Refusal</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Admire Success</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Admire Fail</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Initimidate Success</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Initimidate Fail</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Taunt Success</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Taunt Fail</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Service Refusal</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Bribe Success</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Bribe Fail</td>
+<td>Journal</td>
 </tr>
 </tbody>
 </table>
@@ -2735,7 +2589,7 @@
 </main>
 <footer class="md-footer">
 <nav aria-label="Footer" class="md-footer__inner md-grid">
-<a aria-label="Previous: Damage Sources" class="md-footer__link md-footer__link--prev" href="../damage-sources/" rel="prev">
+<a aria-label="Previous: Dialogue Pages" class="md-footer__link md-footer__link--prev" href="../dialogue-pages/" rel="prev">
 <div class="md-footer__button md-icon">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
 </div>
@@ -2744,7 +2598,7 @@
 <span class="md-footer__direction">
                 Previous
               </span>
-              Damage Sources
+              Dialogue Pages
             </div>
 </div>
 </a>
