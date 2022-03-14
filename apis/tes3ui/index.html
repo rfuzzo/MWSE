@@ -3233,29 +3233,24 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string)</li>
-<li><code>isCommand</code> (boolean)</li>
+<li><code>isCommand</code> (boolean): Passing <code>true</code> will make the text in the console selectable by using up arrow key. If it is a valid command, then pressing enter will call it.</li>
 </ul>
 <details class="example">
-<summary>Example: Print the type of each of the player's skills to the console</summary>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">printNames</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">skillTypeNames</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Major"</span><span class="p">,</span>
-        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Minor"</span><span class="p">,</span>
-        <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Miscellaneous"</span>
-    <span class="p">}</span>
+<summary>Example: This example describes how this function behaves with isCommand = true.</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">example</span><span class="p">()</span>
+    <span class="c1">-- This will make "player-&gt;ModStrength 10" appear in the console coloured brown.</span>
+    <span class="c1">-- It can't be selected by using up arrow key.</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">logToConsole</span><span class="p">(</span><span class="s2">"player-&gt;ModStrength 10"</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
 
-    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">skillId</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">skill</span><span class="p">)</span> <span class="kr">do</span>
-        <span class="kd">local</span> <span class="n">skillStat</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">:</span><span class="n">getSkillStatistic</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
-        <span class="kd">local</span> <span class="n">name</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSkillName</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
-        <span class="kd">local</span> <span class="n">typeName</span> <span class="o">=</span> <span class="n">skillTypeNames</span><span class="p">[</span><span class="n">skillStat</span><span class="p">.</span><span class="n">type</span><span class="p">]</span>
-
-        <span class="n">tes3ui</span><span class="p">.</span><span class="n">logToConsole</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%s, type: %s skill"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">typeName</span><span class="p">),</span> <span class="kc">false</span><span class="p">)</span>
-    <span class="kr">end</span>
+    <span class="c1">-- This will make "player-&gt;ModWillpower 10" appear in the console coloured blue.</span>
+    <span class="c1">-- It CAN be selected by using up arrow key, and when the enter is pressed,</span>
+    <span class="c1">-- it will call that function.</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">logToConsole</span><span class="p">(</span><span class="s2">"player-&gt;ModWillpower 10"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
 
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">"Done! Open the console to see the result."</span><span class="p">)</span>
 <span class="kr">end</span>
 
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">printNames</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
 </code></pre></div>
 </details>
 <hr/>
