@@ -416,6 +416,11 @@
       </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../references/inventory-tile-types/">
+        Inventory Tile Types
+      </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../references/justify-text/">
         Justify Text
       </a>
@@ -473,6 +478,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../references/object-types/">
         Object Types
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../references/part-indices/">
+        Part Indices
       </a>
 </li>
 <li class="md-nav__item">
@@ -576,13 +586,13 @@
       </a>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_65" id="__nav_3_65" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_65">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_67" id="__nav_3_67" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_67">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="MWSE-mwscript" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_65">
+<label class="md-nav__title" for="__nav_3_67">
 <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -651,13 +661,13 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_66" id="__nav_3_66" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_66">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_68" id="__nav_3_68" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_68">
           Other
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="Other" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_66">
+<label class="md-nav__title" for="__nav_3_68">
 <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -3035,20 +3045,26 @@
 <hr/>
 <h3 id="mgedisablehud"><code>mge.disableHUD</code><a class="headerlink" href="#mgedisablehud" title="Permanent link">⚓︎</a></h3>
 <p>Disables a HUD element. If a HUD ID is provided, this is a warpper for MGEDisableHUD, otherwise it is a wrapper for MGENIDDisableHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgedisableshader"><code>mge.disableShader</code><a class="headerlink" href="#mgedisableshader" title="Permanent link">⚓︎</a></h3>
 <p>Disables a shader. Wrapper for mwscript's MGEDisableShader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableShader</span><span class="p">(</span><span class="n">shader</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableShader</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>shader</code> (string)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgedisablezoom"><code>mge.disableZoom</code><a class="headerlink" href="#mgedisablezoom" title="Permanent link">⚓︎</a></h3>
@@ -3058,12 +3074,15 @@
 <hr/>
 <h3 id="mgeenablecamerashake"><code>mge.enableCameraShake</code><a class="headerlink" href="#mgeenablecamerashake" title="Permanent link">⚓︎</a></h3>
 <p>Enables MGE XE's camera shake effect. Wrapper for mwscript's MGEEnableCameraShake.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableCameraShake</span><span class="p">(</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">acceleration</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableCameraShake</span><span class="p">({</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>magnitude</code> (number): <em>Optional</em>.</li>
 <li><code>acceleration</code> (number): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgeenabled"><code>mge.enabled</code><a class="headerlink" href="#mgeenabled" title="Permanent link">⚓︎</a></h3>
@@ -3077,20 +3096,26 @@
 <hr/>
 <h3 id="mgeenablehud"><code>mge.enableHUD</code><a class="headerlink" href="#mgeenablehud" title="Permanent link">⚓︎</a></h3>
 <p>Enables a HUD element. If a HUD ID is provided, this is a warpper for MGEEnableHUD, otherwise it is a wrapper for MGENIDEnableHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgeenableshader"><code>mge.enableShader</code><a class="headerlink" href="#mgeenableshader" title="Permanent link">⚓︎</a></h3>
 <p>Enables a shader. Wrapper for mwscript's MGEEnableShader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableShader</span><span class="p">(</span><span class="n">shader</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableShader</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>shader</code> (string)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgeenablezoom"><code>mge.enableZoom</code><a class="headerlink" href="#mgeenablezoom" title="Permanent link">⚓︎</a></h3>
@@ -3100,20 +3125,26 @@
 <hr/>
 <h3 id="mgefreehud"><code>mge.freeHUD</code><a class="headerlink" href="#mgefreehud" title="Permanent link">⚓︎</a></h3>
 <p>Frees a HUD element. If a HUD ID is provided, this is a warpper for MGEFreeHUD, otherwise it is a wrapper for MGENIDFreeHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">freeHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">freeHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgefullscreenhud"><code>mge.fullscreenHUD</code><a class="headerlink" href="#mgefullscreenhud" title="Permanent link">⚓︎</a></h3>
 <p>Makes a HUD element fullscreen. If a HUD ID is provided, this is a warpper for MGEFullscreenHUD, otherwise it is a wrapper for MGENIDFullscreenHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">fullscreenHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">fullscreenHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgegetscreenheight"><code>mge.getScreenHeight</code><a class="headerlink" href="#mgegetscreenheight" title="Permanent link">⚓︎</a></h3>
@@ -3195,165 +3226,213 @@
 <hr/>
 <h3 id="mgemodscreenrotation"><code>mge.modScreenRotation</code><a class="headerlink" href="#mgemodscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGERotateScreenBy.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">modScreenRotation</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">modScreenRotation</span><span class="p">({</span> <span class="n">rotation</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>rotation</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgepositionhud"><code>mge.positionHUD</code><a class="headerlink" href="#mgepositionhud" title="Permanent link">⚓︎</a></h3>
 <p>Positions a HUD element. If a HUD ID is provided, this is a warpper for MGEPositionHUD, otherwise it is a wrapper for MGENIDPositionHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">positionHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">positionHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
 <li><code>x</code> (number)</li>
 <li><code>y</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgescalehud"><code>mge.scaleHUD</code><a class="headerlink" href="#mgescalehud" title="Permanent link">⚓︎</a></h3>
 <p>Scales a HUD element. If a HUD ID is provided, this is a warpper for MGEScaleHUD, otherwise it is a wrapper for MGENIDScaleHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">scaleHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">scaleHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
 <li><code>x</code> (number)</li>
 <li><code>y</code> (number)</li>
 </ul>
+</li>
+</ul>
 <hr/>
 <h3 id="mgeselecthud"><code>mge.selectHUD</code><a class="headerlink" href="#mgeselecthud" title="Permanent link">⚓︎</a></h3>
 <p>Selects a HUD element, to assume for future HUD calls.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">selectHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">selectHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>hud</code> (string)</li>
+<li><code>params</code> (table)<ul>
+<li><code>hud</code> (string): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesetcamerashakeacceleration"><code>mge.setCameraShakeAcceleration</code><a class="headerlink" href="#mgesetcamerashakeacceleration" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGECameraShakeZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setCameraShakeAcceleration</span><span class="p">(</span><span class="n">acceleration</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setCameraShakeAcceleration</span><span class="p">({</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>acceleration</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesetcamerashakemagnitude"><code>mge.setCameraShakeMagnitude</code><a class="headerlink" href="#mgesetcamerashakemagnitude" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGESetCameraShakeMagnitude.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setCameraShakeMagnitude</span><span class="p">(</span><span class="n">magnitude</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setCameraShakeMagnitude</span><span class="p">({</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>magnitude</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesethudeffect"><code>mge.setHUDEffect</code><a class="headerlink" href="#mgesethudeffect" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect for a HUD element. If a HUD ID is provided, this is a warpper for MGEChangeHUDEffect, otherwise it is a wrapper for MGENIDChangeHUDEffect.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffect</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">effect</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffect</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
 <li><code>effect</code> (string)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesethudeffectfloat"><code>mge.setHUDEffectFloat</code><a class="headerlink" href="#mgesethudeffectfloat" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect float variable for a HUD element. This is a wrapper for MGENIDSetHUDEffectFloat.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectFloat</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectFloat</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
 <li><code>variable</code> (string)</li>
 <li><code>value</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesethudeffectlong"><code>mge.setHUDEffectLong</code><a class="headerlink" href="#mgesethudeffectlong" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect long variable for a HUD element. This is a wrapper for MGENIDSetHUDEffectLong.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectLong</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectLong</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
 <li><code>variable</code> (string)</li>
 <li><code>value</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesethudeffectvector4"><code>mge.setHUDEffectVector4</code><a class="headerlink" href="#mgesethudeffectvector4" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect vector variable for a HUD element. This is a wrapper for MGENIDSetHUDEffectVec.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectVector4</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectVector4</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string): <em>Optional</em>.</li>
 <li><code>variable</code> (string)</li>
 <li><code>value</code> (table): A table of 4 values.</li>
 </ul>
+</li>
+</ul>
 <hr/>
 <h3 id="mgesethudtexture"><code>mge.setHUDTexture</code><a class="headerlink" href="#mgesethudtexture" title="Permanent link">⚓︎</a></h3>
 <p>Sets the texture for a given HUD element. If a HUD ID is provided, this is a warpper for MGEChangeHUDTexture, otherwise it is a wrapper for MGENIDChangeHUDTexture.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDTexture</span><span class="p">(</span><span class="n">hud</span><span class="p">,</span> <span class="n">texture</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDTexture</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">texture</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string)</li>
 <li><code>texture</code> (string)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesetscreenrotation"><code>mge.setScreenRotation</code><a class="headerlink" href="#mgesetscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGERotateScreen.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setScreenRotation</span><span class="p">(</span><span class="n">rotation</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setScreenRotation</span><span class="p">({</span> <span class="n">rotation</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>rotation</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesetshaderfloat"><code>mge.setShaderFloat</code><a class="headerlink" href="#mgesetshaderfloat" title="Permanent link">⚓︎</a></h3>
 <p>Sets a shader's float variable. Wrapper for mwscript's MGEShaderSetFloat.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderFloat</span><span class="p">(</span><span class="n">shader</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderFloat</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>shader</code> (string)</li>
 <li><code>variable</code> (string)</li>
 <li><code>value</code> (number)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgesetshaderlong"><code>mge.setShaderLong</code><a class="headerlink" href="#mgesetshaderlong" title="Permanent link">⚓︎</a></h3>
 <p>Sets a shader's long variable. Wrapper for mwscript's MGEShaderSetLong.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderLong</span><span class="p">(</span><span class="n">shader</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderLong</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>shader</code> (string)</li>
 <li><code>variable</code> (string)</li>
 <li><code>value</code> (number)</li>
 </ul>
+</li>
+</ul>
 <hr/>
 <h3 id="mgesetshadervector4"><code>mge.setShaderVector4</code><a class="headerlink" href="#mgesetshadervector4" title="Permanent link">⚓︎</a></h3>
 <p>Sets a shader's vector variable. Wrapper for mwscript's MGEShaderSetVector.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderVector4</span><span class="p">(</span><span class="n">shader</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderVector4</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>shader</code> (string)</li>
 <li><code>variable</code> (string)</li>
 <li><code>value</code> (table): A table of 4 values.</li>
 </ul>
+</li>
+</ul>
 <hr/>
 <h3 id="mgesetzoom"><code>mge.setZoom</code><a class="headerlink" href="#mgesetzoom" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEZoom, or MGESetZoom if set to animate.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setZoom</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">animate</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setZoom</span><span class="p">({</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">animate</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>amount</code> (number)</li>
 <li><code>animate</code> (boolean): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgestartscreenrotation"><code>mge.startScreenRotation</code><a class="headerlink" href="#mgestartscreenrotation" title="Permanent link">⚓︎</a></h3>
@@ -3378,29 +3457,38 @@
 <hr/>
 <h3 id="mgeunselecthud"><code>mge.unselectHUD</code><a class="headerlink" href="#mgeunselecthud" title="Permanent link">⚓︎</a></h3>
 <p>Cancels selection for a HUD element. Wrapper for mwscript's MGECancelWithHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">unselectHUD</span><span class="p">(</span><span class="n">hud</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">unselectHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>hud</code> (string)</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgezoomin"><code>mge.zoomIn</code><a class="headerlink" href="#mgezoomin" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEZoomIn, or MGEZoomInBy if an amount is provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">zoomIn</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">zoomIn</span><span class="p">({</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>amount</code> (number): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="mgezoomout"><code>mge.zoomOut</code><a class="headerlink" href="#mgezoomout" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEZoomOut, or MGEZoomOutBy if an amount is provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">zoomOut</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">zoomOut</span><span class="p">({</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>amount</code> (number): <em>Optional</em>.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 </article>
