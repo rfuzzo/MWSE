@@ -1681,6 +1681,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#tes3showspellmakingmenu">
+    tes3.showSpellmakingMenu
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#tes3skipanimationframe">
     tes3.skipAnimationFrame
   </a>
@@ -4426,6 +4431,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#tes3showrestmenu">
     tes3.showRestMenu
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tes3showspellmakingmenu">
+    tes3.showSpellmakingMenu
   </a>
 </li>
 <li class="md-nav__item">
@@ -7492,6 +7502,23 @@
 <li><code>showMessage</code> (boolean): <em>Default</em>: <code>true</code>. Should a messagebox be shown if the player can't open resting menu because some condition isn't met.</li>
 <li><code>resting</code> (boolean): <em>Default</em>: <code>true</code>. Should this be a rest?</li>
 <li><code>waiting</code> (boolean): <em>Optional</em>. Or, is this a wait?</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>success</code> (boolean)</li>
+</ul>
+<hr/>
+<h3 id="tes3showspellmakingmenu"><code>tes3.showSpellmakingMenu</code><a class="headerlink" href="#tes3showspellmakingmenu" title="Permanent link">⚓︎</a></h3>
+<p>This function opens the spellmaking menu and returns true on success.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">showSpellmakingMenu</span><span class="p">({</span> <span class="n">serviceActor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">useDialogActor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Optional</em>. The actor to use for calculating the service price. If none is provided, an open dialog menu's service actor will be used instead.</li>
+<li><code>useDialogActor</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, the dialog menu service actor will be ignored. If false, a serviceActor must be provided.</li>
 </ul>
 </li>
 </ul>
