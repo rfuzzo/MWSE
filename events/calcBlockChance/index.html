@@ -2618,7 +2618,7 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="calcblockchance">calcBlockChance<a class="headerlink" href="#calcblockchance" title="Permanent link">⚓︎</a></h1>
-<p>This event is raised when determining the block chance for an actor. This does not affect ranged or magic attacks and ignores attacks outside of the normal blocking angles, like being attacked from behind.</p>
+<p>This event is raised when determining the block chance for an actor. This does not affect ranged or magic attacks and ignores attacks outside of the normal blocking angles, like being attacked from behind. Blocking is disabled in some situations, like being paralyzed or attacking.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e calcBlockChanceEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">calcBlockChanceCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
