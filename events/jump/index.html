@@ -2240,6 +2240,11 @@
     Event Data
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+    Examples
+  </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -2620,6 +2625,11 @@
     Event Data
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#examples">
+    Examples
+  </a>
+</li>
 </ul>
 </nav>
 </div>
@@ -2652,6 +2662,54 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. Mobile's related reference.</li>
 <li><code>velocity</code> (<a href="../../types/tes3vector3">tes3vector3</a>): The velocity of the jump.</li>
 </ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Example: Disable jumping while encumbered</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onJump</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- Check if the actor that is trying to jump is the player.</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span> <span class="kr">then</span>
+        <span class="c1">-- Define the threshold at which we no longer want to be able to jump.</span>
+        <span class="c1">-- This is set to 50% of the player's maximum encumbrance.</span>
+        <span class="kd">local</span> <span class="n">encumbranceThreshold</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">encumbrance</span><span class="p">.</span><span class="n">base</span> <span class="o">*</span> <span class="mf">0.5</span>
+
+        <span class="c1">-- Check if the current encumbrance is higher than our defined threshold and prevent jumping.</span>
+        <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">encumbrance</span><span class="p">.</span><span class="n">current</span> <span class="o">&gt;</span> <span class="n">encumbranceThreshold</span> <span class="kr">then</span>
+            <span class="c1">-- Show a message to the player to inform them that jumping is not possible.</span>
+            <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">"You are unable to jump."</span><span class="p">)</span>
+
+            <span class="c1">-- Block the vanilla jump logic and prevent other jump events from being triggered.</span>
+            <span class="kr">return</span> <span class="kc">false</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">jump</span><span class="p">,</span> <span class="n">onJump</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example: Double jump height</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onJump</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- Multiply the velocity on the Z-Axis (Up/Down) by 2.</span>
+    <span class="n">e</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">z</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">jump</span><span class="p">,</span> <span class="n">onJump</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example: Force player jump height</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onJump</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- Check if the actor that is trying to jump is the player.</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span> <span class="kr">then</span>
+        <span class="c1">-- Define the fixed height of the jump.</span>
+        <span class="kd">local</span> <span class="n">jumpHeight</span> <span class="o">=</span> <span class="mi">300</span>
+
+        <span class="c1">-- Multiply the normalized direction vector of the jump by the fixed jump height.</span>
+        <span class="c1">-- This will make jumps initiated during movement behave like they normally do.</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">velocity</span><span class="p">:</span><span class="n">normalized</span><span class="p">()</span> <span class="o">*</span> <span class="n">jumpHeight</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">jump</span><span class="p">,</span> <span class="n">onJump</span><span class="p">)</span>
+</code></pre></div>
+</div>
 </article>
 </div>
 </div>
