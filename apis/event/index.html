@@ -732,6 +732,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#eventisregistered">
+    event.isRegistered
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#eventregister">
     event.register
   </a>
@@ -2651,6 +2656,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#eventisregistered">
+    event.isRegistered
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#eventregister">
     event.register
   </a>
@@ -2686,6 +2696,21 @@
 <ul>
 <li><code>eventId</code> (string)</li>
 <li><code>options</code> (table): <em>Optional</em>.</li>
+</ul>
+<hr/>
+<h3 id="eventisregistered"><code>event.isRegistered</code><a class="headerlink" href="#eventisregistered" title="Permanent link">⚓︎</a></h3>
+<p>Returns true for a function previously registered to an event with <code>event.register()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="n">isRegistered</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>eventId</code> (string)</li>
+<li><code>callback</code> (function)</li>
+<li><code>options</code> (table): <em>Optional</em>.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr/>
 <h3 id="eventregister"><code>event.register</code><a class="headerlink" href="#eventregister" title="Permanent link">⚓︎</a></h3>
