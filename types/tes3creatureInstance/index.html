@@ -3681,15 +3681,12 @@
 <hr/>
 <h3 id="hasitemequipped"><code>hasItemEquipped</code><a class="headerlink" href="#hasitemequipped" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the actor has provided item equipped.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">hasItemEquipped</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">hasItemEquipped</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemData</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to perform a check for.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>.</li>
-</ul>
-</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
