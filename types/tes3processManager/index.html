@@ -1550,10 +1550,10 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#functions">
-    Functions
+<a class="md-nav__link" href="#methods">
+    Methods
   </a>
-<nav aria-label="Functions" class="md-nav">
+<nav aria-label="Methods" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#checkalarmradius">
@@ -2347,6 +2347,11 @@
       </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../events/magicEffectRemoved/">
+        magicEffectRemoved
+      </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../events/magicEffectsResolved/">
         magicEffectsResolved
       </a>
@@ -2683,10 +2688,10 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#functions">
-    Functions
+<a class="md-nav__link" href="#methods">
+    Methods
   </a>
-<nav aria-label="Functions" class="md-nav">
+<nav aria-label="Methods" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link" href="#checkalarmradius">
@@ -2739,22 +2744,22 @@
 <li><code>result</code> (number)</li>
 </ul>
 <hr/>
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="checkalarmradius"><code>checkAlarmRadius</code><a class="headerlink" href="#checkalarmradius" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">tes3processManager</span><span class="p">.</span><span class="n">checkAlarmRadius</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">container</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3processManager</span><span class="p">:</span><span class="n">checkAlarmRadius</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">container</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): </li>
-<li><code>container</code> (<a href="../../types/tes3aiPlanner">tes3aiPlanner</a>): </li>
+<li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): The actor to perform a check for.</li>
+<li><code>container</code> (<a href="../../types/tes3iterator">tes3iterator</a>): Container is a actor's AI planner e.g. <code>mobile.aiPlanner</code>.</li>
 </ul>
 </li>
 </ul>
 <hr/>
 <h3 id="checknearbyenemiesallowrest"><code>checkNearbyEnemiesAllowRest</code><a class="headerlink" href="#checknearbyenemiesallowrest" title="Permanent link">⚓︎</a></h3>
 <p>Performs a check whether any potential nearby enemies allow the player to rest.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3processManager</span><span class="p">.</span><span class="n">checkNearbyEnemiesAllowRest</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3processManager</span><span class="p">:</span><span class="n">checkNearbyEnemiesAllowRest</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -2762,12 +2767,13 @@
 </ul>
 <hr/>
 <h3 id="checkplayerdistance"><code>checkPlayerDistance</code><a class="headerlink" href="#checkplayerdistance" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">tes3processManager</span><span class="p">.</span><span class="n">checkPlayerDistance</span><span class="p">()</span>
+<p>Forces a new distance check for actor AI behaviour.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3processManager</span><span class="p">:</span><span class="n">checkPlayerDistance</span><span class="p">()</span>
 </code></pre></div>
 <hr/>
 <h3 id="detectpresence"><code>detectPresence</code><a class="headerlink" href="#detectpresence" title="Permanent link">⚓︎</a></h3>
 <p>This function performs a check for presence of a given mobile actor.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3processManager</span><span class="p">.</span><span class="n">detectPresence</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3processManager</span><span class="p">:</span><span class="n">detectPresence</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -2780,7 +2786,7 @@
 <hr/>
 <h3 id="detectsneak"><code>detectSneak</code><a class="headerlink" href="#detectsneak" title="Permanent link">⚓︎</a></h3>
 <p>This function performs a check whether a detector can detect another actor sneaking.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isDetected</span> <span class="o">=</span> <span class="n">tes3processManager</span><span class="p">.</span><span class="n">detectSneak</span><span class="p">({</span> <span class="n">detector</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">target</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isDetected</span> <span class="o">=</span> <span class="n">tes3processManager</span><span class="p">:</span><span class="n">detectSneak</span><span class="p">({</span> <span class="n">detector</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">target</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
