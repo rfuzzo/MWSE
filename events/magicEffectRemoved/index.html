@@ -2681,7 +2681,7 @@
         <span class="kd">local</span> <span class="n">sourceName</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">source</span><span class="p">.</span><span class="n">name</span>
 
         <span class="c1">-- Show a message containing the effect and spell/enchantment/alchemy names to the player.</span>
-        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"Effect '%s' from '%s' has been removed."</span><span class="p">,</span> <span class="n">effectName</span><span class="p">,</span> <span class="n">sourceName</span><span class="p">))</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">"Effect '%s' from '%s' has been removed."</span><span class="p">,</span> <span class="n">effectName</span><span class="p">,</span> <span class="n">sourceName</span><span class="p">)</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">magicEffectRemoved</span><span class="p">,</span> <span class="n">onMagicEffectRemoved</span><span class="p">)</span>
