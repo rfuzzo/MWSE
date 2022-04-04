@@ -2660,7 +2660,7 @@
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
 <li><code>caster</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The caster of the magic source that contained the magic effect. Can be <code>nil</code>.</li>
-<li><code>effect</code> (<a href="../../types/tes3effect">tes3effect</a>): <em>Read-only</em>. The specific effect that triggered the event. This is equal to <code>e.source.effects[effectIndex]</code>. Can be <code>nil</code>.</li>
+<li><code>effect</code> (<a href="../../types/tes3effect">tes3effect</a>): <em>Read-only</em>. The specific effect that triggered the event. This is equal to <code>e.source.effects[e.effectIndex]</code>. Can be <code>nil</code>.</li>
 <li><code>effectIndex</code> (number): <em>Read-only</em>. The index of the effect in the magic source's effects list.</li>
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor the magic effect is removed from.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference of the mobile actor the magic effect is removed from.</li>
