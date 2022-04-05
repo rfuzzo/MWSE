@@ -5365,8 +5365,8 @@
 <li><code>effect</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The physical object to use as the VFX. To use an enchantment-style VFX, supply the enchantment parameter instead.</li>
 <li><code>serial</code> (number): <em>Optional</em>. An associated tes3magicSourceInstance serial. If a serial is assigned to the VFX, the effect expiring will also remove the VFX. This is not used when creating an enchantment-style VFX.</li>
 <li><code>repeatCount</code> (number): <em>Optional</em>. A repeat count for the VFX. If provided, the key timing for the associated effect will be used, multiplied by this value, to determine the total lifespan of the VFX. This is not used when creating an enchantment-style VFX.</li>
-<li><code>lifespan</code> (number): <em>Optional</em>. The desired lifespan for the VFX. If not provided, the VFX will die of old age.</li>
-<li><code>scale</code> (number): <em>Default</em>: <code>1.5</code>. The scale used to resize the given VFX. The default value will match the size used by most magical effect logic. This is not used when creating an enchantment-style VFX.</li>
+<li><code>lifespan</code> (number): <em>Optional</em>. The desired lifespan for the VFX. If not provided, the VFX will never die of old age.</li>
+<li><code>scale</code> (number): <em>Default</em>: <code>1</code>. The scale used to resize the given VFX. The default value will match the size used by most magical effect logic. This is not used when creating an enchantment-style VFX.</li>
 <li><code>verticalOffset</code> (number): <em>Default</em>: <code>0</code>. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. If provided the VFX will be attached relative to a position, and not follow a reference.</li>
 <li><code>avObject</code> (<a href="../../types/niAVObject">niAVObject</a>): <em>Optional</em>. </li>
