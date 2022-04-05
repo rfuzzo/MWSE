@@ -956,6 +956,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#tes3createvisualeffect">
+    tes3.createVisualEffect
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#tes3decrementkillcount">
     tes3.decrementKillCount
   </a>
@@ -1538,6 +1543,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#tes3removespell">
     tes3.removeSpell
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tes3removevisualeffect">
+    tes3.removeVisualEffect
   </a>
 </li>
 <li class="md-nav__item">
@@ -3739,6 +3749,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#tes3createvisualeffect">
+    tes3.createVisualEffect
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#tes3decrementkillcount">
     tes3.decrementKillCount
   </a>
@@ -4321,6 +4336,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#tes3removespell">
     tes3.removeSpell
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tes3removevisualeffect">
+    tes3.removeVisualEffect
   </a>
 </li>
 <li class="md-nav__item">
@@ -5333,6 +5353,30 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>newReference</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
+</ul>
+<hr/>
+<h3 id="tes3createvisualeffect"><code>tes3.createVisualEffect</code><a class="headerlink" href="#tes3createvisualeffect" title="Permanent link">⚓︎</a></h3>
+<p>Creates a tracked visual effect. Most VFX assignments are persistent, and only expire when their lifespan expires, an associated reference is destroyed, or a given spell serial is retired.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">vfx</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createVisualEffect</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">repeatCount</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">lifespan</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">verticalOffset</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">avObject</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">enchantment</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>effect</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The physical object to use as the VFX. To use an enchantment-style VFX, supply the enchantment parameter instead.</li>
+<li><code>serial</code> (number): <em>Optional</em>. An associated tes3magicSourceInstance serial. If a serial is assigned to the VFX, the effect expiring will also remove the VFX. This is not used when creating an enchantment-style VFX.</li>
+<li><code>repeatCount</code> (number): <em>Optional</em>. A repeat count for the VFX. If provided, the key timing for the associated effect will be used, multiplied by this value, to determine the total lifespan of the VFX. This is not used when creating an enchantment-style VFX.</li>
+<li><code>lifespan</code> (number): <em>Optional</em>. The desired lifespan for the VFX. If not provided, the VFX will die of old age.</li>
+<li><code>scale</code> (number): <em>Default</em>: <code>1.5</code>. The scale used to resize the given VFX. The default value will match the size used by most magical effect logic. This is not used when creating an enchantment-style VFX.</li>
+<li><code>verticalOffset</code> (number): <em>Default</em>: <code>0</code>. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.</li>
+<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. If provided the VFX will be attached relative to a position, and not follow a reference.</li>
+<li><code>avObject</code> (<a href="../../types/niAVObject">niAVObject</a>): <em>Optional</em>. </li>
+<li><code>enchantment</code> (number): <em>Optional</em>. The magic effect ID to use to create an enchantment wrapper VFX. This will use most of the same VFX logic, but cannot be applied to a position or specific niAVObject.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>vfx</code> (tes3vfx): A handle to the VFX that was created. This can be passed to <code>tes3.removeVisualEffect</code> to remove it from the reference.</li>
 </ul>
 <hr/>
 <h3 id="tes3decrementkillcount"><code>tes3.decrementKillCount</code><a class="headerlink" href="#tes3decrementkillcount" title="Permanent link">⚓︎</a></h3>
@@ -7108,6 +7152,25 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>wasRemoved</code> (boolean): True if the spell was successfully removed. This can be false if the spell comes from a race or birthsign.</li>
+</ul>
+<hr/>
+<h3 id="tes3removevisualeffect"><code>tes3.removeVisualEffect</code><a class="headerlink" href="#tes3removevisualeffect" title="Permanent link">⚓︎</a></h3>
+<p>Removes one or more visual effects created either through magical effects or <code>tes3.createVisualEffect()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">removedCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">removeVisualEffect</span><span class="p">({</span> <span class="n">vfx</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">avObject</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>vfx</code> (tes3vfx): <em>Optional</em>. If provided, the specific VFX handle will be deleted.</li>
+<li><code>avObject</code> (<a href="../../types/niAVObject">niAVObject</a>): <em>Optional</em>. If provided, any VFXs associated with the given niAVObject will be deleted.</li>
+<li><code>serial</code> (number): <em>Optional</em>. The magic source instance serial number to remove effects for. This must be paired with a reference as well.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, string): <em>Optional</em>. The reference to remove all visual effects from. A serial may also be provided.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>removedCount</code> (number): The amount of VFX removed by this function call.</li>
 </ul>
 <hr/>
 <h3 id="tes3runlegacyscript"><code>tes3.runLegacyScript</code><a class="headerlink" href="#tes3runlegacyscript" title="Permanent link">⚓︎</a></h3>
