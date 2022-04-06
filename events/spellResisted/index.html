@@ -2676,6 +2676,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Example: Learn resisted spells</p>
+<p>Makes actors learn the spell they resisted.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onSpellResisted</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- We only want this to apply to spells. This event can also trigger for other sources like potions/enchantments.</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">source</span><span class="p">.</span><span class="n">objectType</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">spell</span> <span class="kr">then</span>

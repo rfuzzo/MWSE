@@ -2738,6 +2738,7 @@ As usual in Lua libraries, a negative value counts from the end. </p>
 </ul>
 <details class="example">
 <summary>Example: Simple Find</summary>
+<p>Use re.find to get the position of the first numeral in a string.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">re</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">"re"</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -2767,6 +2768,7 @@ As usual in Lua libraries, a negative value counts from the end. </p>
 </ul>
 <details class="example">
 <summary>Example: Simple Substitution</summary>
+<p>Use re.gsub to replace all vowels in a string with '.'.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">re</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">"re"</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -2796,6 +2798,7 @@ As usual in Lua libraries, a negative value counts from the end. </p>
 </ul>
 <details class="example">
 <summary>Example: Simple Match</summary>
+<p>Use re.match to find all the words in a string, then find the first numeral.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">re</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">"re"</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>

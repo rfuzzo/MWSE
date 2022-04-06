@@ -3049,6 +3049,7 @@
 </ul>
 <details class="example">
 <summary>Example: Basic Usage</summary>
+<p>Using the UI event system, cause a given element to capture the mouse drag.</p>
 <div class="highlight"><pre><span></span><code><span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">"mouseDown"</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Capture must be inside a mouse event.</span>
     <span class="n">tes3ui</span><span class="p">.</span><span class="n">captureMouseDrag</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
@@ -3125,6 +3126,7 @@
 </ul>
 <details class="example">
 <summary>Example: Add an item tooltip to a new element</summary>
+<p>This demonstrates adding an item tooltip to a button using the help event.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"- Item -"</span><span class="p">}</span>
 <span class="kd">local</span> <span class="n">item</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">"iron_shield"</span><span class="p">)</span>
 

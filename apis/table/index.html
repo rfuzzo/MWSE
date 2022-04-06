@@ -3015,6 +3015,8 @@
 </ul>
 <details class="example">
 <summary>Example: Iterate over all scene nodes attached to player.</summary>
+<p>In the example below, function onLoaded() will be called when the game has been successfully loaded.</p>
+<p>For each scene nodes attached to the player, its type (node.RTTI.name) and name (node.name), will be printed to MWSE.log.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">()</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Player's scene graph:"</span><span class="p">)</span>
     <span class="kr">for</span> <span class="n">node</span> <span class="kr">in</span> <span class="n">table</span><span class="p">.</span><span class="n">traverse</span><span class="p">({</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">sceneNode</span><span class="p">})</span> <span class="kr">do</span>

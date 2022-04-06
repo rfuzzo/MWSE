@@ -2739,6 +2739,7 @@
 <hr/>
 <details class="example">
 <summary>Example: Iterating Lists</summary>
+<p>In this example, a list is iterated using the pairs iterator function. The node can be used directly.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Check player equipment. Equipment list contains only equipped items.</span>
 <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stack</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">equipment</span><span class="p">)</span> <span class="kr">do</span>
     <span class="c1">-- stack is type tes3equipmentStack, as tes3.player.object.equipment is a list of tes3equipmentStack objects.</span>

@@ -2675,6 +2675,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Example: Disable jumping while encumbered</p>
+<p>Disables jumping for the player if their current encumbrance is over 50%.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onJump</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Check if the actor that is trying to jump is the player.</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span> <span class="kr">then</span>
@@ -2697,6 +2698,7 @@
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example: Double jump height</p>
+<p>Double the height of every jump.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onJump</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Multiply the velocity on the Z-Axis (Up/Down) by 2.</span>
     <span class="n">e</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">z</span> <span class="o">*</span> <span class="mi">2</span>
@@ -2706,6 +2708,7 @@
 </div>
 <div class="admonition example">
 <p class="admonition-title">Example: Force player jump height</p>
+<p>Forces the jump height of the player to a fixed value, not taking into account attributes, skills, fatigue, encumbrance and other factors.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onJump</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Check if the actor that is trying to jump is the player.</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span> <span class="kr">then</span>

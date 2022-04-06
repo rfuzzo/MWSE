@@ -2800,6 +2800,7 @@
 </ul>
 <details class="example">
 <summary>Example: Show a Message After 1 Day</summary>
+<p>The timer registered in the example is registered and persistent. That renders starting the timer on every loaded event unnecessary. Its state is saved, and it continues where it stopped after loading a save.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessage</span><span class="p">()</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">"One day later..."</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -2837,6 +2838,7 @@
 </ul>
 <details class="example">
 <summary>Example: Show a Countdown Message</summary>
+<p>In this example, whenever the player activates an item they will be shown a 10 second countdown. Because it is a simulation timer, it will not tick down while the menu is open, nor is it sensitive to the game timescale/clock.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timeLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onTimerExpired</span><span class="p">()</span> 

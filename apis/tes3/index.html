@@ -4605,6 +4605,7 @@
 </ul>
 <details class="example">
 <summary>Example: Convert magic school from event data to a respective skill</summary>
+<p>The example below gives the player 100 experience for failing to cast a spell. Here we can see how tes3.magicSchoolSkill is used.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">OnSpellFailed</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="kd">local</span> <span class="n">skill</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">magicSchoolSkill</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">expGainSchool</span><span class="p">]</span> <span class="c1">-- Note: e.expGainSchool is a value in tes3.magicSchool constants table</span>
@@ -4852,6 +4853,7 @@
 </ul>
 <details class="example">
 <summary>Example: Fire Damage effect</summary>
+<p>An implementation of the vanilla Fire Damage effect. Also, three spells are constructed with newly created magic effect, which are added to the player. You can test this in-game.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Claiming an ID is needed before actually</span>
 <span class="c1">-- creating an effect with that ID</span>
 <span class="n">tes3</span><span class="p">.</span><span class="n">claimSpellEffectId</span><span class="p">(</span><span class="s2">"customFireDmg"</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>
@@ -5280,6 +5282,7 @@
 </ul>
 <details class="example">
 <summary>Example: Creates a tes3misc object</summary>
+<p>The example below create a misc item object that could be used to create a placeable reference later on.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">miscItemId</span> <span class="o">=</span> <span class="s2">"create_misc_item_id"</span>
 <span class="kd">local</span> <span class="n">miscItemName</span> <span class="o">=</span> <span class="s2">"create_misc_item_name"</span>
 
@@ -5315,6 +5318,7 @@
 </details>
 <details class="example">
 <summary>Example: Creates a tes3static object</summary>
+<p>The example below create a static object that could be used to create a placeable reference later on.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">staticId</span> <span class="o">=</span> <span class="s2">"create_static_id"</span>
 
 <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span> <span class="s2">"creating a static of id %s"</span><span class="p">,</span> <span class="n">staticId</span> <span class="p">)</span>
@@ -5602,6 +5606,7 @@
 </ul>
 <details class="example">
 <summary>Example: Document all GMST Default Values</summary>
+<p>This example reads the default values of all GMSTs, and writes them to a markdown file for users to read.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Converter table for a GMST's type to something more user-friendly.</span>
 <span class="kd">local</span> <span class="n">typeNames</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">s</span> <span class="o">=</span> <span class="s2">"string"</span><span class="p">,</span>
@@ -5643,6 +5648,7 @@
 </details>
 <details class="example">
 <summary>Example: Retrieve value of a GMST</summary>
+<p>This example shows how to read a value of a GMST and how to change it.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">oldGMST</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGMST</span><span class="p">(</span><span class="s2">"sServiceTrainingTitle"</span><span class="p">).</span><span class="n">value</span>
 
 <span class="c1">-- oldGMST is now "Training"</span>
@@ -5902,6 +5908,7 @@
 </details>
 <details class="example">
 <summary>Example: Get magnitude after resistances are applied.</summary>
+<p>You can treat the function as if it returns a single value.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEffectMagnitude</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">effect</span><span class="p">.</span><span class="n">fortifyAttribute</span><span class="p">,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">attribute</span><span class="p">.</span><span class="n">speed</span><span class="p">}</span>
 <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"fortify speed: %f"</span><span class="p">,</span> <span class="n">magnitude</span><span class="p">))</span>
 </code></pre></div>
@@ -5928,6 +5935,7 @@
 </ul>
 <details class="example">
 <summary>Example: Get Player’s Equipped Light</summary>
+<p>In this example, we print the object ID of the player’s equipped light source.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">equippedLightStack</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEquippedItem</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">light</span> <span class="p">})</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">equippedLightStack</span><span class="p">)</span> <span class="kr">then</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Equipped light: %s"</span><span class="p">,</span> <span class="n">equippedLightStack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
@@ -5938,6 +5946,7 @@
 </details>
 <details class="example">
 <summary>Example: Get Player’s Shield</summary>
+<p>This example shows the player’s shield.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">equippedShieldStack</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEquippedItem</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">armor</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">armorSlot</span><span class="p">.</span><span class="n">shield</span> <span class="p">})</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">equippedShieldStack</span><span class="p">)</span> <span class="kr">then</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Equipped shield: %s"</span><span class="p">,</span> <span class="n">equippedShieldStack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
@@ -6786,6 +6795,7 @@
 </ul>
 <details class="example">
 <summary>Example: Decrease Health of an Actor</summary>
+<p>In this simple example, the current health of an actor, the player, is decreased by 10. To simulate actual combat damage, you should use tes3mobileActor.applyDamage.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span>
     <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">"health"</span><span class="p">,</span>
@@ -6795,6 +6805,7 @@
 </details>
 <details class="example">
 <summary>Example: Restore Magicka without Overflowing</summary>
+<p>Magicka is restored without exceeding the magicka pool using the limitToBase flag.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span>
     <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">"magicka"</span><span class="p">,</span>
@@ -6987,6 +6998,7 @@
 </ul>
 <details class="example">
 <summary>Example: Get Activation Target</summary>
+<p>This example performs a ray test to match the normal activation target test. Unlike <code>tes3.getPlayerTarget()</code> this will return objects not normally available for activation.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hitResult</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyePosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyeVector</span><span class="p">()</span> <span class="p">})</span>
 <span class="kd">local</span> <span class="n">hitReference</span> <span class="o">=</span> <span class="n">hitResult</span> <span class="ow">and</span> <span class="n">hitResult</span><span class="p">.</span><span class="n">reference</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">hitReference</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="kr">then</span>
@@ -6998,6 +7010,7 @@
 </details>
 <details class="example">
 <summary>Example: Get Camera Target</summary>
+<p>This example performs a ray test to see what the camera is currently looking at.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">hitResult</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">({</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraPosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraVector</span><span class="p">()</span> <span class="p">})</span>
 <span class="kd">local</span> <span class="n">hitReference</span> <span class="o">=</span> <span class="n">hitResult</span> <span class="ow">and</span> <span class="n">hitResult</span><span class="p">.</span><span class="n">reference</span>
 <span class="kr">if</span> <span class="p">(</span><span class="n">hitReference</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="kr">then</span>
@@ -7009,6 +7022,7 @@
 </details>
 <details class="example">
 <summary>Example: Multiple Results</summary>
+<p>This example performs a ray test and displays all results in the entire ray test, rather than ending at the first object hit.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">results</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraPosition</span><span class="p">(),</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCameraVector</span><span class="p">(),</span> <span class="n">findAll</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">}</span>
 <span class="kr">if</span> <span class="n">results</span> <span class="kr">then</span>
     <span class="kr">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">hit</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="kr">do</span>
@@ -7019,6 +7033,7 @@
 </details>
 <details class="example">
 <summary>Example: Save rayTest result for use at a later point</summary>
+<p>If you plan to use the results of rayTest, you should make sure it still exists. For example, an object which was in a list of results of rayTest can get unloaded when the player changes cells and become invalid, so it shouldn't be accessed.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="c1">-- result can get invalidated</span>
     <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyePosition</span><span class="p">(),</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyeVector</span><span class="p">(),</span>
@@ -7062,6 +7077,7 @@
 </ul>
 <details class="example">
 <summary>Example: Simulating a Dispel</summary>
+<p>In this example there is a 50 % chance that any Water Breathing magic effects will be removed from the player when he/she is underwater.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">example</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
         <span class="c1">-- We only care about the player</span>
     <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">objectType</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">)</span> <span class="kr">then</span>
