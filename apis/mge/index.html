@@ -842,6 +842,21 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#mgegetweatherdlfog">
+    mge.getWeatherDLFog
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgegetweatherppllight">
+    mge.getWeatherPPLLight
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgegetweatherscattering">
+    mge.getWeatherScattering
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#mgegetzoom">
     mge.getZoom
   </a>
@@ -929,6 +944,21 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#mgesetshadervector4">
     mge.setShaderVector4
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgesetweatherdlfog">
+    mge.setWeatherDLFog
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgesetweatherppllight">
+    mge.setWeatherPPLLight
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgesetweatherscattering">
+    mge.setWeatherScattering
   </a>
 </li>
 <li class="md-nav__item">
@@ -2936,6 +2966,21 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#mgegetweatherdlfog">
+    mge.getWeatherDLFog
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgegetweatherppllight">
+    mge.getWeatherPPLLight
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgegetweatherscattering">
+    mge.getWeatherScattering
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#mgegetzoom">
     mge.getZoom
   </a>
@@ -3023,6 +3068,21 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#mgesetshadervector4">
     mge.setShaderVector4
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgesetweatherdlfog">
+    mge.setWeatherDLFog
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgesetweatherppllight">
+    mge.setWeatherPPLLight
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mgesetweatherscattering">
+    mge.setWeatherScattering
   </a>
 </li>
 <li class="md-nav__item">
@@ -3235,6 +3295,41 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr/>
+<h3 id="mgegetweatherdlfog"><code>mge.getWeatherDLFog</code><a class="headerlink" href="#mgegetweatherdlfog" title="Permanent link">⚓︎</a></h3>
+<p>Gets distant land fog parameters for a specific weather. See <a href="https://mwse.github.io/MWSE/apis/mge/#mgesetweatherdlfog"><code>mge.setWeatherDLFog()</code></a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">parameters</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getWeatherDLFog</span><span class="p">(</span><span class="n">weatherID</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>weatherID</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> enumeration.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>parameters</code> (table): An array-style table with <code>fogDistMultiplier</code> and <code>fogOffsetPercent</code> parameters.</li>
+</ul>
+<hr/>
+<h3 id="mgegetweatherppllight"><code>mge.getWeatherPPLLight</code><a class="headerlink" href="#mgegetweatherppllight" title="Permanent link">⚓︎</a></h3>
+<p>Gets per-pixel lighting parameters for a specific weather. See <a href="https://mwse.github.io/MWSE/apis/mge/#mgesetweatherppllight"><code>mge.setWeatherPPLLight()</code></a>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">parameters</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getWeatherPPLLight</span><span class="p">(</span><span class="n">weatherID</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>weatherID</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> enumeration.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>parameters</code> (table): An array-style table with <code>sunMultiplier</code> and <code>ambientMultiplier</code> parameters.</li>
+</ul>
+<hr/>
+<h3 id="mgegetweatherscattering"><code>mge.getWeatherScattering</code><a class="headerlink" href="#mgegetweatherscattering" title="Permanent link">⚓︎</a></h3>
+<p>Returns an array-style table with 3 distant land atmospheric scattering colours.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scattering</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getWeatherScattering</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>scattering</code> (table)</li>
 </ul>
 <hr/>
 <h3 id="mgegetzoom"><code>mge.getZoom</code><a class="headerlink" href="#mgegetzoom" title="Permanent link">⚓︎</a></h3>
@@ -3465,6 +3560,54 @@
 <li><code>value</code> (table): A table of 4 values.</li>
 </ul>
 </li>
+</ul>
+<hr/>
+<h3 id="mgesetweatherdlfog"><code>mge.setWeatherDLFog</code><a class="headerlink" href="#mgesetweatherdlfog" title="Permanent link">⚓︎</a></h3>
+<p>Sets distant land fog parameters for a specific weather. <code>fogDistMultiplier</code> is multiplied by the "Above water fog" distance to get the fog distance for that weather. It has a range of [0, 2]. <code>fogOffsetPercent</code> is the percentage of fog applied at zero distance from the camera. It has a range of [0, 90].</p>
+<p>Note: "Above water fog" is a setting specific to MGE XE. It can be found on the Distant Land page, under Fog category.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">setWeatherDLFog</span><span class="p">(</span><span class="n">weatherID</span><span class="p">,</span> <span class="n">fogDistMultiplier</span><span class="p">,</span> <span class="n">fogOffsetPercent</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>weatherID</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> enumeration.</li>
+<li><code>fogDistMultiplier</code> (number)</li>
+<li><code>fogOffsetPercent</code> (number)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr/>
+<h3 id="mgesetweatherppllight"><code>mge.setWeatherPPLLight</code><a class="headerlink" href="#mgesetweatherppllight" title="Permanent link">⚓︎</a></h3>
+<p>Sets light multipliers used in per-pixel lighting for a specific weather. <code>sunMultiplier</code> affects sunlight, while <code>ambientMultiplier</code> affects ambient lighting.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">setWeatherPPLLight</span><span class="p">(</span><span class="n">weatherID</span><span class="p">,</span> <span class="n">sunMultiplier</span><span class="p">,</span> <span class="n">ambientMultiplier</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>weatherID</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> enumeration.</li>
+<li><code>sunMultiplier</code> (number)</li>
+<li><code>ambientMultiplier</code> (number)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr/>
+<h3 id="mgesetweatherscattering"><code>mge.setWeatherScattering</code><a class="headerlink" href="#mgesetweatherscattering" title="Permanent link">⚓︎</a></h3>
+<p>Sets distant land atmospheric scattering colours.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">setWeatherScattering</span><span class="p">({</span> <span class="n">outscatter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">inscatter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>outscatter</code> (table): An array-style table with 3 numbers for red, green and blue color channels. The values can range from 0 to 1.</li>
+<li><code>inscatter</code> (table): An array-style table with 3 numbers for red, green and blue color channels. The values can range from 0 to 1.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>success</code> (boolean)</li>
 </ul>
 <hr/>
 <h3 id="mgesetzoom"><code>mge.setZoom</code><a class="headerlink" href="#mgesetzoom" title="Permanent link">⚓︎</a></h3>
