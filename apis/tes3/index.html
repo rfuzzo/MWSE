@@ -6206,15 +6206,19 @@
 <hr/>
 <h3 id="tes3getowner"><code>tes3.getOwner</code><a class="headerlink" href="#tes3getowner" title="Permanent link">⚓︎</a></h3>
 <p>Returns the object's owner, or nil if the object is unowned.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">object</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getOwner</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">owner</span><span class="p">,</span> <span class="n">requirement</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getOwner</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>object</code> (<a href="../../types/tes3object">tes3object</a>)</li>
+<li><code>owner</code> (<a href="../../types/tes3faction">tes3faction</a>, <a href="../../types/tes3npc">tes3npc</a>, nil)</li>
+<li><code>requirement</code> (number, <a href="../../types/tes3globalVariable">tes3globalVariable</a>, nil): The faction rank required if the owner is a faction, or the global variable needing to be set if the owner is an NPC.</li>
 </ul>
 <hr/>
 <h3 id="tes3getplayeractivationdistance"><code>tes3.getPlayerActivationDistance</code><a class="headerlink" href="#tes3getplayeractivationdistance" title="Permanent link">⚓︎</a></h3>
