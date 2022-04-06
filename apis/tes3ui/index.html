@@ -3386,18 +3386,48 @@
 </ul>
 <hr/>
 <h3 id="tes3uishowinventoryselectmenu"><code>tes3ui.showInventorySelectMenu</code><a class="headerlink" href="#tes3uishowinventoryselectmenu" title="Permanent link">⚓︎</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showInventorySelectMenu</span><span class="p">({</span> <span class="n">actorRef</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">title</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">noResultsText</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">noResultsCallback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">leaveMenuMode</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>This function opens the inventory select menu which lets the player select items from an inventory. These items can be selected from any actor's inventory and can be filtered with the <code>filter</code> callback. The selected item can be retrieved in the function assigned to <code>callback</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showInventorySelectMenu</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">title</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">leaveMenuMode</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">noResultsText</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">noResultsCallback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
-<li><code>actorRef</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Default</em>: <code>tes3player</code>. </li>
-<li><code>callback</code> (function): <em>Optional</em>. </li>
-<li><code>filter</code> (function, string): <em>Optional</em>. </li>
-<li><code>title</code> (string): </li>
-<li><code>noResultsText</code> (string): <em>Optional</em>. </li>
-<li><code>noResultsCallback</code> (function): <em>Optional</em>. </li>
-<li><code>leaveMenuMode</code> (boolean): <em>Optional</em>. Is the menu going to be closed or open after closing Inventory Select Menu. By default, it will be in the state before this function was called.</li>
+<li>
+<p><code>params</code> (table)</p>
+<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Default</em>: <code>tes3player</code>. The reference of a <code>tes3actor</code> whose inventory will be used.</li>
+<li><code>title</code> (string): The text used for the title of the inventory select menu.</li>
+<li><code>leaveMenuMode</code> (boolean): <em>Optional</em>. Determines if menu mode should be exited after closing the inventory select menu. By default, it will be in the state it was in before this function was called.</li>
+<li><code>noResultsText</code> (string): <em>Optional</em>. The text used for the message that gets shown to the player if no items have been found in the inventory.</li>
+<li><code>noResultsCallback</code> (function): <em>Optional</em>. A function which is called when no items have been found in the inventory, right before the message containing <code>noResultsText</code> is shown.</li>
+<li>
+<p><code>filter</code> (function, string): <em>Optional</em>. This determines which items should be shown in the inventory select menu. Accepts either a string or a function.</p>
+<p>If assigning a string it has to be one of the following values:
+- <code>alembic</code>: Only (<a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a>) items of type <code>tes3.apparatusType.alembic</code> will be shown. 
+- <code>calcinator</code>: Only (<a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a>) items of type <code>tes3.apparatusType.calcinator</code> will be shown. 
+- <code>enchanted</code>: Only enchanted items will be shown. 
+- <code>ingredients</code>: Only (<a href="https://mwse.github.io/MWSE/types/tes3ingredient/">tes3ingredient</a>) items will be shown. 
+- <code>mortar</code>: Only (<a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a>) items of type <code>tes3.apparatusType.mortarAndPestle</code> will be shown. 
+- <code>quickUse</code>: Only items available for quick use will be shown.
+- <code>retort</code>: Only (<a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a>) items of type <code>tes3.apparatusType.retort</code> will be shown. 
+- <code>soulgemFilled</code>: Only filled soulgems will be shown.</p>
+<p>If assigning a function it will be called when determining if an item should be added to the inventory select menu. A table <code>filterParams</code> will be passed to this function. Returning <code>true</code> from this function will add the item to the inventory select menu, whereas returning <code>false</code> will prevent it from being added.
+- <code>filterParams</code> (table)
+    - <code>item</code> (<a href="https://mwse.github.io/MWSE/types/tes3item/">tes3item</a>): The item that is being filtered.
+    - <code>itemData</code> (<a href="https://mwse.github.io/MWSE/types/tes3itemData/">tes3itemData</a>): The item data of the item that is being filtered. Can be <code>nil</code>.</p>
+</li>
+<li>
+<p><code>callback</code> (function): <em>Optional</em>. A function which will be called once the inventory select menu has been closed, including when no item has been selected. A table <code>callbackParams</code> will be passed to this function.</p>
+<ul>
+<li><code>callbackParams</code> (table)<ul>
+<li><code>item</code> (<a href="https://mwse.github.io/MWSE/types/tes3item/">tes3item</a>): The item that has been selected. Can be <code>nil</code>.</li>
+<li><code>itemData</code> (<a href="https://mwse.github.io/MWSE/types/tes3itemData/">tes3itemData</a>): The item data of the item that has been selected. Can be <code>nil</code>.</li>
+<li><code>count</code> (number): The number of items that have been selected. Only valid if <code>item</code> is not <code>nil</code>.</li>
+<li><code>inventory</code> (<a href="https://mwse.github.io/MWSE/types/tes3inventory/">tes3inventory</a>): The inventory containing the items.</li>
+<li><code>actor</code> (<a href="https://mwse.github.io/MWSE/types/tes3actor/">tes3actor</a>): The actor containing the inventory.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
