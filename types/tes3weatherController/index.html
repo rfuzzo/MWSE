@@ -3305,14 +3305,14 @@
 </ul>
 <hr/>
 <h3 id="currentfogcolor"><code>currentFogColor</code><a class="headerlink" href="#currentfogcolor" title="Permanent link">⚓︎</a></h3>
-<p>The current fog color.</p>
+<p>The current fog color. The values can range from 0 to 1.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
 </ul>
 <hr/>
 <h3 id="currentskycolor"><code>currentSkyColor</code><a class="headerlink" href="#currentskycolor" title="Permanent link">⚓︎</a></h3>
-<p>The current sky color.</p>
+<p>The current sky color. The values can range from 0 to 1.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
@@ -3494,7 +3494,7 @@
 </ul>
 <hr/>
 <h3 id="starsfadingduration"><code>starsFadingDuration</code><a class="headerlink" href="#starsfadingduration" title="Permanent link">⚓︎</a></h3>
-<p>The stars will fade in <code>starsPostSunsetStart</code> hours after the sunset. They fade out <code>starsPreSunriseFinish</code> hours before sunrise. This value represents the duration of the fadeing. This corresponds to the setting of the same name in Morrowind.ini file.</p>
+<p>The stars will fade in <code>starsPostSunsetStart</code> hours after the sunset. They fade out <code>starsPreSunriseFinish</code> hours before sunrise. This value represents the duration of the fading. This corresponds to the setting of the same name in Morrowind.ini file.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -3522,7 +3522,7 @@
 </ul>
 <hr/>
 <h3 id="sunglarefadercolor"><code>sunglareFaderColor</code><a class="headerlink" href="#sunglarefadercolor" title="Permanent link">⚓︎</a></h3>
-<p>The sunglare fader color.</p>
+<p>The sunglare fader color. The values can range from 0 to 1.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
@@ -3606,7 +3606,7 @@
 </ul>
 <hr/>
 <h3 id="underwatercolor"><code>underwaterColor</code><a class="headerlink" href="#underwatercolor" title="Permanent link">⚓︎</a></h3>
-<p>The underwater color, represented as a vector.</p>
+<p>The underwater color, represented as a vector. The values can range from 0 to 1.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
@@ -3655,10 +3655,10 @@
 </ul>
 <hr/>
 <h3 id="weathers"><code>weathers</code><a class="headerlink" href="#weathers" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Array-style table for the different weather types. Each object in the table is a tes3weather.</p>
+<p><em>Read-only</em>. Array-style table for the different weather types. Each object in the table is a <a href="https://mwse.github.io/MWSE/types/tes3weather/">tes3weather</a>. The indexes in the table correspond to the <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> enumeration.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (table<number, tes3weather="">)</number,></li>
 </ul>
 <hr/>
 <h3 id="windvelocitycurrweather"><code>windVelocityCurrWeather</code><a class="headerlink" href="#windvelocitycurrweather" title="Permanent link">⚓︎</a></h3>
@@ -3692,7 +3692,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>weatherId</code> (number)</li>
+<li><code>weatherId</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> namespace.</li>
 </ul>
 <hr/>
 <h3 id="switchtransition"><code>switchTransition</code><a class="headerlink" href="#switchtransition" title="Permanent link">⚓︎</a></h3>
@@ -3701,7 +3701,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>weatherId</code> (number)</li>
+<li><code>weatherId</code> (number): Maps to values in <a href="https://mwse.github.io/MWSE/references/weather-types/"><code>tes3.weather</code></a> namespace.</li>
 </ul>
 <hr/>
 <h3 id="updatevisuals"><code>updateVisuals</code><a class="headerlink" href="#updatevisuals" title="Permanent link">⚓︎</a></h3>
