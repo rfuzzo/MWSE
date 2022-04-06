@@ -1432,6 +1432,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#effectivemagnitude">
+    effectiveMagnitude
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#lastusedarmor">
     lastUsedArmor
   </a>
@@ -2711,6 +2716,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#effectivemagnitude">
+    effectiveMagnitude
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#lastusedarmor">
     lastUsedArmor
   </a>
@@ -2792,6 +2802,13 @@
 <li><code>result</code> (number)</li>
 </ul>
 <hr/>
+<h3 id="effectivemagnitude"><code>effectiveMagnitude</code><a class="headerlink" href="#effectivemagnitude" title="Permanent link">⚓︎</a></h3>
+<p>The effective magnitude of the effect, after all resistances are applied.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr/>
 <h3 id="lastusedarmor"><code>lastUsedArmor</code><a class="headerlink" href="#lastusedarmor" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. No description yet available.</p>
 <p><strong>Returns</strong>:</p>
@@ -2828,21 +2845,21 @@
 </ul>
 <hr/>
 <h3 id="magnitude"><code>magnitude</code><a class="headerlink" href="#magnitude" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The magnitude of the effect, before any resistances are applied.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr/>
 <h3 id="resistedpercent"><code>resistedPercent</code><a class="headerlink" href="#resistedpercent" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The percentage of the magic effect that has been resisted. A value of <code>100</code> indicates that the magic effect has been completely resisted, whereas a value of <code>0</code> indicates it has not been resisted and is applied with its full magnitude. Values over <code>100</code> cause the magic effect to heal the actor instead of harming it, if it is a damaging magic effect.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr/>
 <h3 id="state"><code>state</code><a class="headerlink" href="#state" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The state of this magic effect. Maps to <a href="https://mwse.github.io/MWSE/references/spell-states/"><code>tes3.spellState</code></a> constants.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
