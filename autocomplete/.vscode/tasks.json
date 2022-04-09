@@ -4,6 +4,16 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "Build EmmyLua Aliases",
+			"type": "shell",
+			"group": "build",
+			"command": ".\\lua\\lua.exe",
+			"args": [
+				".\\builders\\aliasesemmy.lua"
+			],
+			"problemMatcher": []
+		},
+		{
 			"label": "Build Autocomplete",
 			"type": "shell",
 			"group": "build",
@@ -45,6 +55,7 @@
 				"isDefault": true
 			},
 			"dependsOn": [
+				"Build EmmyLua Aliases",
 				"Build Autocomplete",
 				"Build mkdocs"
 			],
