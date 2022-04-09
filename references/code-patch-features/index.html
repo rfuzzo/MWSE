@@ -6,10 +6,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.3.0, mkdocs-material-8.2.8" name="generator"/>
+<meta content="mkdocs-1.3.0, mkdocs-material-8.2.9" name="generator"/>
 <title>Code Patch Features - Morrowind Script Extender</title>
-<link href="../../assets/stylesheets/main.644de097.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.120efc48.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.9647289d.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -34,7 +34,7 @@
 <img alt="logo" src="../../assets/images/logo.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
 </label>
 <div class="md-header__title" data-md-component="header-title">
 <div class="md-header__ellipsis">
@@ -59,11 +59,11 @@
 </label>
 <input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
 <label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
 </label>
 </form>
 <label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
 </label>
 <div class="md-search" data-md-component="search" role="dialog">
 <label class="md-search__overlay" for="__search"></label>
@@ -71,15 +71,15 @@
 <form class="md-search__form" name="search">
 <input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
 <label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </label>
 <nav aria-label="Search" class="md-search__options">
 <a aria-label="Share" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"></path></svg>
 </a>
 <button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
 </button>
 </nav>
 <div class="md-search__suggest" data-md-component="search-suggest"></div>
@@ -307,7 +307,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../armor-slots/">
-        Armor Types
+        Armor Slots
       </a>
 </li>
 <li class="md-nav__item">
@@ -318,6 +318,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../attachment-types/">
         Attachment Types
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../attribute-names/">
+        Attribute Names
       </a>
 </li>
 <li class="md-nav__item">
@@ -337,7 +342,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../clothing-slots/">
-        Clothing Types
+        Clothing Slots
       </a>
 </li>
 <li class="md-nav__item md-nav__item--active">
@@ -437,8 +442,13 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../language/">
-        Language
+<a class="md-nav__link" href="../language-codes/">
+        Language Codes
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../languages/">
+        Languages
       </a>
 </li>
 <li class="md-nav__item">
@@ -462,8 +472,8 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../merchant-service-types/">
-        Merchant Service Types
+<a class="md-nav__link" href="../merchant-services/">
+        Merchant Services
       </a>
 </li>
 <li class="md-nav__item">
@@ -473,7 +483,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../niTypes/">
-        niTypes
+        NI Types
       </a>
 </li>
 <li class="md-nav__item">
@@ -502,6 +512,11 @@
       </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../skill-names/">
+        Skill Names
+      </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../skill-raise-sources/">
         Skill Raise Sources
       </a>
@@ -518,7 +533,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../sound-generator-types/">
-        Sound Generator Types
+        Sound Gen Types
       </a>
 </li>
 <li class="md-nav__item">
@@ -527,8 +542,13 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../specialization-types/">
-        Specialization Types
+<a class="md-nav__link" href="../specialization-names/">
+        Specialization Names
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../specializations/">
+        Specializations
       </a>
 </li>
 <li class="md-nav__item">
@@ -578,17 +598,17 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../weather-types/">
-        Weather Types
+        Weathers
       </a>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_66" id="__nav_3_66" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_66">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_70" id="__nav_3_70" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_70">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="MWSE-mwscript" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_66">
+<label class="md-nav__title" for="__nav_3_70">
 <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -657,13 +677,13 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_67" id="__nav_3_67" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_67">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_71" id="__nav_3_71" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_71">
           Other
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="Other" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_67">
+<label class="md-nav__title" for="__nav_3_71">
 <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -2612,815 +2632,815 @@
 <h1 id="code-patch-features">Code Patch Features<a class="headerlink" href="#code-patch-features" title="Permanent link">⚓︎</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their identifier in the <code>tes3.codePatchFeature.*</code> namespace. For example, <code>tes3.codePatchFeature.blindFix</code> has a value of <code>25</code>.</p>
+<p>These values are available in Lua by their index in the <code>tes3.codePatchFeature</code> table. For example, <code>tes3.codePatchFeature.incorrectInventorySoundsFix</code> has a value of <code>113</code>.</p>
 </div>
 <table>
 <thead>
 <tr>
-<th>ID</th>
-<th>Code Patch Feature</th>
+<th>Index</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>Savegame Corruption Fix</td>
+<td>savegameCorruptionFix</td>
+<td><code>1</code></td>
 </tr>
 <tr>
-<td>2</td>
-<td>Mercantile Fix</td>
+<td>mercantileFix</td>
+<td><code>2</code></td>
 </tr>
 <tr>
-<td>3</td>
-<td>Unarmored Fix</td>
+<td>unarmoredFix</td>
+<td><code>3</code></td>
 </tr>
 <tr>
-<td>4</td>
-<td>Calendar Fix</td>
+<td>calendarFix</td>
+<td><code>4</code></td>
 </tr>
 <tr>
-<td>5</td>
-<td>Merchant Equipping Fix</td>
+<td>merchantEquippingFix</td>
+<td><code>5</code></td>
 </tr>
 <tr>
-<td>6</td>
-<td>Restore Drain Attributes Fix</td>
+<td>restoreDrainAttributesFix</td>
+<td><code>6</code></td>
 </tr>
 <tr>
-<td>7</td>
-<td>Stream Music Master Volume Fix</td>
+<td>streamMusicMasterVolumeFix</td>
+<td><code>7</code></td>
 </tr>
 <tr>
-<td>8</td>
-<td>Calm Spells Fix</td>
+<td>calmSpellsFix</td>
+<td><code>8</code></td>
 </tr>
 <tr>
-<td>9</td>
-<td>Vampire Stats Fix</td>
+<td>vampireStatsFix</td>
+<td><code>9</code></td>
 </tr>
 <tr>
-<td>10</td>
-<td>Reflected Spells Fix</td>
+<td>reflectedSpellsFix</td>
+<td><code>10</code></td>
 </tr>
 <tr>
-<td>11</td>
-<td>Show Transparent Clothes In The Inventory</td>
+<td>showTransparentClothesInTheInventory</td>
+<td><code>11</code></td>
 </tr>
 <tr>
-<td>12</td>
-<td>Enchant Glow In Fog Fix</td>
+<td>enchantGlowInFogFix</td>
+<td><code>12</code></td>
 </tr>
 <tr>
-<td>13</td>
-<td>Show Npc Health Bar On Healing</td>
+<td>showNPCHealthBarOnHealing</td>
+<td><code>13</code></td>
 </tr>
 <tr>
-<td>14</td>
-<td>Enchanting Increases Item Value</td>
+<td>enchantingIncreasesItemValue</td>
+<td><code>14</code></td>
 </tr>
 <tr>
-<td>15</td>
-<td>Allow Stealing From K Oed Np Cs</td>
+<td>allowStealingFromKOedNPCs</td>
+<td><code>15</code></td>
 </tr>
 <tr>
-<td>16</td>
-<td>Spellmaking Max Magnitude Increase</td>
+<td>spellmakingMaxMagnitudeIncrease</td>
+<td><code>16</code></td>
 </tr>
 <tr>
-<td>17</td>
-<td>Spellmaking Max Duration Reduced</td>
+<td>spellmakingMaxDurationReduced</td>
+<td><code>17</code></td>
 </tr>
 <tr>
-<td>18</td>
-<td>Exhaust Np Cs With Damage Fatigue</td>
+<td>exhaustNPCsWithDamageFatigue</td>
+<td><code>18</code></td>
 </tr>
 <tr>
-<td>19</td>
-<td>Disposition Fix</td>
+<td>dispositionFix</td>
+<td><code>19</code></td>
 </tr>
 <tr>
-<td>20</td>
-<td>Spell Magnitude Fix</td>
+<td>spellMagnitudeFix</td>
+<td><code>20</code></td>
 </tr>
 <tr>
-<td>21</td>
-<td>Dispel Fix</td>
+<td>dispelFix</td>
+<td><code>21</code></td>
 </tr>
 <tr>
-<td>22</td>
-<td>Creature Armor Damage Fix</td>
+<td>creatureArmorDamageFix</td>
+<td><code>22</code></td>
 </tr>
 <tr>
-<td>23</td>
-<td>Inventory Bugs Fix</td>
+<td>inventoryBugsFix</td>
+<td><code>23</code></td>
 </tr>
 <tr>
-<td>24</td>
-<td>Npc Potion Use Ai</td>
+<td>npcPotionUseAI</td>
+<td><code>24</code></td>
 </tr>
 <tr>
-<td>25</td>
-<td>Blind Fix</td>
+<td>blindFix</td>
+<td><code>25</code></td>
 </tr>
 <tr>
-<td>26</td>
-<td>Gloss Map Fix</td>
+<td>glossMapFix</td>
+<td><code>26</code></td>
 </tr>
 <tr>
-<td>27</td>
-<td>Lighting Fixes Group</td>
+<td>lightingFixesGroup</td>
+<td><code>27</code></td>
 </tr>
 <tr>
-<td>29</td>
-<td>Particle Effects Fix</td>
+<td>particleEffectsFix</td>
+<td><code>29</code></td>
 </tr>
 <tr>
-<td>30</td>
-<td>Projectile Aiming Fix</td>
+<td>projectileAimingFix</td>
+<td><code>30</code></td>
 </tr>
 <tr>
-<td>32</td>
-<td>Waterwalk Fix</td>
+<td>waterwalkFix</td>
+<td><code>32</code></td>
 </tr>
 <tr>
-<td>33</td>
-<td>Training Price Stats Fix</td>
+<td>trainingPriceStatsFix</td>
+<td><code>33</code></td>
 </tr>
 <tr>
-<td>34</td>
-<td>Travel Price Fix</td>
+<td>travelPriceFix</td>
+<td><code>34</code></td>
 </tr>
 <tr>
-<td>35</td>
-<td>Allow Reflection Effects On Skinned Models</td>
+<td>allowReflectionEffectsOnSkinnedModels</td>
+<td><code>35</code></td>
 </tr>
 <tr>
-<td>36</td>
-<td>Createmaps Fillmap Fix</td>
+<td>createmapsFillmapFix</td>
+<td><code>36</code></td>
 </tr>
 <tr>
-<td>37</td>
-<td>Delayed Spell Crash Fix</td>
+<td>delayedSpellCrashFix</td>
+<td><code>37</code></td>
 </tr>
 <tr>
-<td>38</td>
-<td>Loud Interface Gameplay Sounds Fix</td>
+<td>loudInterfaceGameplaySoundsFix</td>
+<td><code>38</code></td>
 </tr>
 <tr>
-<td>39</td>
-<td>Better Quality Splash And Title Screens</td>
+<td>betterQualitySplashAndTitleScreens</td>
+<td><code>39</code></td>
 </tr>
 <tr>
-<td>40</td>
-<td>Strength Based Hand To Hand Damage</td>
+<td>strengthBasedHandToHandDamage</td>
+<td><code>40</code></td>
 </tr>
 <tr>
-<td>41</td>
-<td>Spellmaker Enchant Multiple Effects</td>
+<td>spellmakerEnchantMultipleEffects</td>
+<td><code>41</code></td>
 </tr>
 <tr>
-<td>42</td>
-<td>Spellmaker Area Effect Cost</td>
+<td>spellmakerAreaEffectCost</td>
+<td><code>42</code></td>
 </tr>
 <tr>
-<td>43</td>
-<td>Arrow Enchanting</td>
+<td>arrowEnchanting</td>
+<td><code>43</code></td>
 </tr>
 <tr>
-<td>44</td>
-<td>Fortify Maximum Health</td>
+<td>fortifyMaximumHealth</td>
+<td><code>44</code></td>
 </tr>
 <tr>
-<td>45</td>
-<td>Toggle Sneak</td>
+<td>toggleSneak</td>
+<td><code>45</code></td>
 </tr>
 <tr>
-<td>46</td>
-<td>Place At Drop Fix</td>
+<td>placeAtDropFix</td>
+<td><code>46</code></td>
 </tr>
 <tr>
-<td>47</td>
-<td>Spell Deselection Bug Fix</td>
+<td>spellDeselectionBugFix</td>
+<td><code>47</code></td>
 </tr>
 <tr>
-<td>48</td>
-<td>Levelup Stats Bug Fix</td>
+<td>levelupStatsBugFix</td>
+<td><code>48</code></td>
 </tr>
 <tr>
-<td>49</td>
-<td>Bound Items Expiry Fix</td>
+<td>boundItemsExpiryFix</td>
+<td><code>49</code></td>
 </tr>
 <tr>
-<td>50</td>
-<td>Stable Enchantment Sort</td>
+<td>stableEnchantmentSort</td>
+<td><code>50</code></td>
 </tr>
 <tr>
-<td>51</td>
-<td>Fog Of War Fix</td>
+<td>fogOfWarFix</td>
+<td><code>51</code></td>
 </tr>
 <tr>
-<td>52</td>
-<td>Intimidate Fix</td>
+<td>intimidateFix</td>
+<td><code>52</code></td>
 </tr>
 <tr>
-<td>53</td>
-<td>Magicka Display Accuracy</td>
+<td>magickaDisplayAccuracy</td>
+<td><code>53</code></td>
 </tr>
 <tr>
-<td>54</td>
-<td>Hi Def Cutscene Support</td>
+<td>hiDefCutsceneSupport</td>
+<td><code>54</code></td>
 </tr>
 <tr>
-<td>55</td>
-<td>Alchemy Naming Stacking Fix</td>
+<td>alchemyNamingStackingFix</td>
+<td><code>55</code></td>
 </tr>
 <tr>
-<td>56</td>
-<td>Spellmaker Enchant Edit Effect Fix</td>
+<td>spellmakerEnchantEditEffectFix</td>
+<td><code>56</code></td>
 </tr>
 <tr>
-<td>57</td>
-<td>Allow Scroll Enchant Price Modifier</td>
+<td>allowScrollEnchantPriceModifier</td>
+<td><code>57</code></td>
 </tr>
 <tr>
-<td>58</td>
-<td>Save File Limit Warning</td>
+<td>saveFileLimitWarning</td>
+<td><code>58</code></td>
 </tr>
 <tr>
-<td>64</td>
-<td>Multiple Attribute Fortify Potions</td>
+<td>multipleAttributeFortifyPotions</td>
+<td><code>64</code></td>
 </tr>
 <tr>
-<td>65</td>
-<td>Soulgem Value Rebalance</td>
+<td>soulgemValueRebalance</td>
+<td><code>65</code></td>
 </tr>
 <tr>
-<td>66</td>
-<td>On Use Ring Extra Slot</td>
+<td>onUseRingExtraSlot</td>
+<td><code>66</code></td>
 </tr>
 <tr>
-<td>67</td>
-<td>Npc Ai Casts Zero Cost Powers</td>
+<td>npcAICastsZeroCostPowers</td>
+<td><code>67</code></td>
 </tr>
 <tr>
-<td>68</td>
-<td>Permanent Barter Disposition Changes</td>
+<td>permanentBarterDispositionChanges</td>
+<td><code>68</code></td>
 </tr>
 <tr>
-<td>69</td>
-<td>Enchanted Item Cooldown</td>
+<td>enchantedItemCooldown</td>
+<td><code>69</code></td>
 </tr>
 <tr>
-<td>70</td>
-<td>Hidden Traps</td>
+<td>hiddenTraps</td>
+<td><code>70</code></td>
 </tr>
 <tr>
-<td>71</td>
-<td>Swift Casting</td>
+<td>swiftCasting</td>
+<td><code>71</code></td>
 </tr>
 <tr>
-<td>72</td>
-<td>Blight Storm Disease Fix</td>
+<td>blightStormDiseaseFix</td>
+<td><code>72</code></td>
 </tr>
 <tr>
-<td>73</td>
-<td>Racial Variation In Speed Fix</td>
+<td>racialVariationInSpeedFix</td>
+<td><code>73</code></td>
 </tr>
 <tr>
-<td>74</td>
-<td>Game Formula Restoration</td>
+<td>gameFormulaRestoration</td>
+<td><code>74</code></td>
 </tr>
 <tr>
-<td>75</td>
-<td>Creature Armor Rating Fix</td>
+<td>creatureArmorRatingFix</td>
+<td><code>75</code></td>
 </tr>
 <tr>
-<td>76</td>
-<td>Disable Weapon Transition On Unequip</td>
+<td>disableWeaponTransitionOnUnequip</td>
+<td><code>76</code></td>
 </tr>
 <tr>
-<td>77</td>
-<td>Pickpocket Overhaul</td>
+<td>pickpocketOverhaul</td>
+<td><code>77</code></td>
 </tr>
 <tr>
-<td>79</td>
-<td>Slowfall On Companions Fix</td>
+<td>slowfallOnCompanionsFix</td>
+<td><code>79</code></td>
 </tr>
 <tr>
-<td>80</td>
-<td>Drain Intelligence Exploit Fix</td>
+<td>drainIntelligenceExploitFix</td>
+<td><code>80</code></td>
 </tr>
 <tr>
-<td>81</td>
-<td>Mouseover Menu Display Fixes</td>
+<td>mouseoverMenuDisplayFixes</td>
+<td><code>81</code></td>
 </tr>
 <tr>
-<td>82</td>
-<td>Shortcut Key Improvements</td>
+<td>shortcutKeyImprovements</td>
+<td><code>82</code></td>
 </tr>
 <tr>
-<td>83</td>
-<td>Detect Water Level Fix</td>
+<td>detectWaterLevelFix</td>
+<td><code>83</code></td>
 </tr>
 <tr>
-<td>84</td>
-<td>Service Refusal Filtering</td>
+<td>serviceRefusalFiltering</td>
+<td><code>84</code></td>
 </tr>
 <tr>
-<td>85</td>
-<td>Armor Indicator Fix</td>
+<td>armorIndicatorFix</td>
+<td><code>85</code></td>
 </tr>
 <tr>
-<td>86</td>
-<td>Detect Life Spell Variant</td>
+<td>detectLifeSpellVariant</td>
+<td><code>86</code></td>
 </tr>
 <tr>
-<td>87</td>
-<td>Scripted Music Uninterruptible</td>
+<td>scriptedMusicUninterruptible</td>
+<td><code>87</code></td>
 </tr>
 <tr>
-<td>88</td>
-<td>Argonian Clothing Choice</td>
+<td>argonianClothingChoice</td>
+<td><code>88</code></td>
 </tr>
 <tr>
-<td>89</td>
-<td>Vanity Camera Lock</td>
+<td>vanityCameraLock</td>
+<td><code>89</code></td>
 </tr>
 <tr>
-<td>90</td>
-<td>Alchemy Potion Weight Rebalance</td>
+<td>alchemyPotionWeightRebalance</td>
+<td><code>90</code></td>
 </tr>
 <tr>
-<td>91</td>
-<td>Item Recharging Rebalance</td>
+<td>itemRechargingRebalance</td>
+<td><code>91</code></td>
 </tr>
 <tr>
-<td>92</td>
-<td>Summoned Creature Crash Fix</td>
+<td>summonedCreatureCrashFix</td>
+<td><code>92</code></td>
 </tr>
 <tr>
-<td>93</td>
-<td>Repair Item Fixes</td>
+<td>repairItemFixes</td>
+<td><code>93</code></td>
 </tr>
 <tr>
-<td>94</td>
-<td>Book And Scroll Scaling Fix</td>
+<td>bookAndScrollScalingFix</td>
+<td><code>94</code></td>
 </tr>
 <tr>
-<td>95</td>
-<td>Voiceover Script Functions Fix</td>
+<td>voiceoverScriptFunctionsFix</td>
+<td><code>95</code></td>
 </tr>
 <tr>
-<td>96</td>
-<td>Weapon Reach Issues</td>
+<td>weaponReachIssues</td>
+<td><code>96</code></td>
 </tr>
 <tr>
-<td>97</td>
-<td>Initializing Data Fix</td>
+<td>initializingDataFix</td>
+<td><code>97</code></td>
 </tr>
 <tr>
-<td>98</td>
-<td>Animated Container Crash Fix</td>
+<td>animatedContainerCrashFix</td>
+<td><code>98</code></td>
 </tr>
 <tr>
-<td>99</td>
-<td>Light Spell Fix</td>
+<td>lightSpellFix</td>
+<td><code>99</code></td>
 </tr>
 <tr>
-<td>100</td>
-<td>Allow Faction Leaving</td>
+<td>allowFactionLeaving</td>
+<td><code>100</code></td>
 </tr>
 <tr>
-<td>101</td>
-<td>Slow Movement Anim Fix</td>
+<td>slowMovementAnimFix</td>
+<td><code>101</code></td>
 </tr>
 <tr>
-<td>102</td>
-<td>Mod Removal Fixes</td>
+<td>modRemovalFixes</td>
+<td><code>102</code></td>
 </tr>
 <tr>
-<td>103</td>
-<td>Play Sound Vp Volume Fix</td>
+<td>playSoundVPVolumeFix</td>
+<td><code>103</code></td>
 </tr>
 <tr>
-<td>104</td>
-<td>Fix Enchant Options On Ranged</td>
+<td>fixEnchantOptionsOnRanged</td>
+<td><code>104</code></td>
 </tr>
 <tr>
-<td>105</td>
-<td>Prevent Empty Messages</td>
+<td>preventEmptyMessages</td>
+<td><code>105</code></td>
 </tr>
 <tr>
-<td>106</td>
-<td>Hidden Locks</td>
+<td>hiddenLocks</td>
+<td><code>106</code></td>
 </tr>
 <tr>
-<td>107</td>
-<td>Dont Loot On Dispose</td>
+<td>dontLootOnDispose</td>
+<td><code>107</code></td>
 </tr>
 <tr>
-<td>108</td>
-<td>Attribute Uncap</td>
+<td>attributeUncap</td>
+<td><code>108</code></td>
 </tr>
 <tr>
-<td>109</td>
-<td>Hit Fader Fix</td>
+<td>hitFaderFix</td>
+<td><code>109</code></td>
 </tr>
 <tr>
-<td>110</td>
-<td>Skill Uncap</td>
+<td>skillUncap</td>
+<td><code>110</code></td>
 </tr>
 <tr>
-<td>111</td>
-<td>Weapon Resistance Change</td>
+<td>weaponResistanceChange</td>
+<td><code>111</code></td>
 </tr>
 <tr>
-<td>112</td>
-<td>Disintegrate Fix</td>
+<td>disintegrateFix</td>
+<td><code>112</code></td>
 </tr>
 <tr>
-<td>113</td>
-<td>Incorrect Inventory Sounds Fix</td>
+<td>incorrectInventorySoundsFix</td>
+<td><code>113</code></td>
 </tr>
 <tr>
-<td>114</td>
-<td>Separate Axe Inventory Sounds</td>
+<td>separateAxeInventorySounds</td>
+<td><code>114</code></td>
 </tr>
 <tr>
-<td>115</td>
-<td>Confiscated Item Fix</td>
+<td>confiscatedItemFix</td>
+<td><code>115</code></td>
 </tr>
 <tr>
-<td>116</td>
-<td>Water Environment Sound Fix</td>
+<td>waterEnvironmentSoundFix</td>
+<td><code>116</code></td>
 </tr>
 <tr>
-<td>117</td>
-<td>Talked To Pc Extension</td>
+<td>talkedToPCExtension</td>
+<td><code>117</code></td>
 </tr>
 <tr>
-<td>118</td>
-<td>Dropping From Inventory Fix</td>
+<td>droppingFromInventoryFix</td>
+<td><code>118</code></td>
 </tr>
 <tr>
-<td>119</td>
-<td>Creature Voiceover Enable</td>
+<td>creatureVoiceoverEnable</td>
+<td><code>119</code></td>
 </tr>
 <tr>
-<td>120</td>
-<td>Lock Level Scripting</td>
+<td>lockLevelScripting</td>
+<td><code>120</code></td>
 </tr>
 <tr>
-<td>121</td>
-<td>Self Enchanting Fix</td>
+<td>selfEnchantingFix</td>
+<td><code>121</code></td>
 </tr>
 <tr>
-<td>122</td>
-<td>Ammunition Fix</td>
+<td>ammunitionFix</td>
+<td><code>122</code></td>
 </tr>
 <tr>
-<td>123</td>
-<td>Place Item Fix</td>
+<td>placeItemFix</td>
+<td><code>123</code></td>
 </tr>
 <tr>
-<td>124</td>
-<td>Creature Magicka Fatigue Fix</td>
+<td>creatureMagickaFatigueFix</td>
+<td><code>124</code></td>
 </tr>
 <tr>
-<td>125</td>
-<td>Position Position Cell Fix</td>
+<td>positionPositionCellFix</td>
+<td><code>125</code></td>
 </tr>
 <tr>
-<td>126</td>
-<td>Telekinesis Fix</td>
+<td>telekinesisFix</td>
+<td><code>126</code></td>
 </tr>
 <tr>
-<td>127</td>
-<td>Map Texture Conflict Fix</td>
+<td>mapTextureConflictFix</td>
+<td><code>127</code></td>
 </tr>
 <tr>
-<td>128</td>
-<td>Rain Snow Collision</td>
+<td>rainSnowCollision</td>
+<td><code>128</code></td>
 </tr>
 <tr>
-<td>130</td>
-<td>Over The Shoulder First Person Camera</td>
+<td>overTheShoulderFirstPersonCamera</td>
+<td><code>130</code></td>
 </tr>
 <tr>
-<td>130</td>
-<td>Over The Shoulder Third Person Camera</td>
+<td>overTheShoulderThirdPersonCamera</td>
+<td><code>130</code></td>
 </tr>
 <tr>
-<td>131</td>
-<td>Bump Reflect Map Local Lighting</td>
+<td>bumpReflectMapLocalLighting</td>
+<td><code>131</code></td>
 </tr>
 <tr>
-<td>132</td>
-<td>Improved Animation Support</td>
+<td>improvedAnimationSupport</td>
+<td><code>132</code></td>
 </tr>
 <tr>
-<td>133</td>
-<td>Reduce Camera Clipping</td>
+<td>reduceCameraClipping</td>
+<td><code>133</code></td>
 </tr>
 <tr>
-<td>134</td>
-<td>Npc Minor Behaviour Fixes</td>
+<td>npcMinorBehaviourFixes</td>
+<td><code>134</code></td>
 </tr>
 <tr>
-<td>135</td>
-<td>Ammo Fixes</td>
+<td>ammoFixes</td>
+<td><code>135</code></td>
 </tr>
 <tr>
-<td>136</td>
-<td>Resolution Options Fix</td>
+<td>resolutionOptionsFix</td>
+<td><code>136</code></td>
 </tr>
 <tr>
-<td>137</td>
-<td>Slowfall Overhaul</td>
+<td>slowfallOverhaul</td>
+<td><code>137</code></td>
 </tr>
 <tr>
-<td>138</td>
-<td>Cell Changed Fix</td>
+<td>cellChangedFix</td>
+<td><code>138</code></td>
 </tr>
 <tr>
-<td>139</td>
-<td>Barter Gold Reset Fix</td>
+<td>barterGoldResetFix</td>
+<td><code>139</code></td>
 </tr>
 <tr>
-<td>140</td>
-<td>Improved Loading Speed</td>
+<td>improvedLoadingSpeed</td>
+<td><code>140</code></td>
 </tr>
 <tr>
-<td>141</td>
-<td>Script Expression Parser Fix</td>
+<td>scriptExpressionParserFix</td>
+<td><code>141</code></td>
 </tr>
 <tr>
-<td>142</td>
-<td>Two Handed Weapon Removes Shield</td>
+<td>twoHandedWeaponRemovesShield</td>
+<td><code>142</code></td>
 </tr>
 <tr>
-<td>143</td>
-<td>Get Set Angle Enhancement</td>
+<td>getSetAngleEnhancement</td>
+<td><code>143</code></td>
 </tr>
 <tr>
-<td>144</td>
-<td>Better Recharging</td>
+<td>betterRecharging</td>
+<td><code>144</code></td>
 </tr>
 <tr>
-<td>145</td>
-<td>Quality Based Potion Icons Models</td>
+<td>qualityBasedPotionIconsModels</td>
+<td><code>145</code></td>
 </tr>
 <tr>
-<td>146</td>
-<td>Arrow Denocker</td>
+<td>arrowDenocker</td>
+<td><code>146</code></td>
 </tr>
 <tr>
-<td>147</td>
-<td>Healthy Appetite</td>
+<td>healthyAppetite</td>
+<td><code>147</code></td>
 </tr>
 <tr>
-<td>148</td>
-<td>Spellmaker Enchanting Improvement</td>
+<td>spellmakerEnchantingImprovement</td>
+<td><code>148</code></td>
 </tr>
 <tr>
-<td>149</td>
-<td>Safe Dispose Corpse</td>
+<td>safeDisposeCorpse</td>
+<td><code>149</code></td>
 </tr>
 <tr>
-<td>150</td>
-<td>Shield Hit Location Fix</td>
+<td>shieldHitLocationFix</td>
+<td><code>150</code></td>
 </tr>
 <tr>
-<td>151</td>
-<td>Self Enchanting Success Chance</td>
+<td>selfEnchantingSuccessChance</td>
+<td><code>151</code></td>
 </tr>
 <tr>
-<td>152</td>
-<td>First Person Swim Animations</td>
+<td>firstPersonSwimAnimations</td>
+<td><code>152</code></td>
 </tr>
 <tr>
-<td>153</td>
-<td>Mouse Cursor Movement Fix</td>
+<td>mouseCursorMovementFix</td>
+<td><code>153</code></td>
 </tr>
 <tr>
-<td>154</td>
-<td>Script Data Fix</td>
+<td>scriptDataFix</td>
+<td><code>154</code></td>
 </tr>
 <tr>
-<td>155</td>
-<td>Sneaking Boots Penalty Fix</td>
+<td>sneakingBootsPenaltyFix</td>
+<td><code>155</code></td>
 </tr>
 <tr>
-<td>156</td>
-<td>Spellmaking Matches Editor</td>
+<td>spellmakingMatchesEditor</td>
+<td><code>156</code></td>
 </tr>
 <tr>
-<td>157</td>
-<td>Allow Gloves With Bracers</td>
+<td>allowGlovesWithBracers</td>
+<td><code>157</code></td>
 </tr>
 <tr>
-<td>158</td>
-<td>Get Weapon Type Fix</td>
+<td>getWeaponTypeFix</td>
+<td><code>158</code></td>
 </tr>
 <tr>
-<td>159</td>
-<td>Probe Quality Fix</td>
+<td>probeQualityFix</td>
+<td><code>159</code></td>
 </tr>
 <tr>
-<td>160</td>
-<td>Remove Item Weight Fix</td>
+<td>removeItemWeightFix</td>
+<td><code>160</code></td>
 </tr>
 <tr>
-<td>161</td>
-<td>Get Spell Effects Tweak</td>
+<td>getSpellEffectsTweak</td>
+<td><code>161</code></td>
 </tr>
 <tr>
-<td>162</td>
-<td>See All Standard Potion Effects</td>
+<td>seeAllStandardPotionEffects</td>
+<td><code>162</code></td>
 </tr>
 <tr>
-<td>163</td>
-<td>Bow Sound Glitch Fix</td>
+<td>bowSoundGlitchFix</td>
+<td><code>163</code></td>
 </tr>
 <tr>
-<td>164</td>
-<td>Fix Reading Vars From A Global Script</td>
+<td>fixReadingVarsFromAGlobalScript</td>
+<td><code>164</code></td>
 </tr>
 <tr>
-<td>165</td>
-<td>Ai Activate Enhancement</td>
+<td>aiActivateEnhancement</td>
+<td><code>165</code></td>
 </tr>
 <tr>
-<td>166</td>
-<td>Scriptable Potion Use</td>
+<td>scriptablePotionUse</td>
+<td><code>166</code></td>
 </tr>
 <tr>
-<td>167</td>
-<td>Container Respawn Timescale</td>
+<td>containerRespawnTimescale</td>
+<td><code>167</code></td>
 </tr>
 <tr>
-<td>168</td>
-<td>Avoid Blame For Neutral Npc Deaths</td>
+<td>avoidBlameForNeutralNPCDeaths</td>
+<td><code>168</code></td>
 </tr>
 <tr>
-<td>169</td>
-<td>Multiple Summons Overlap Fix</td>
+<td>multipleSummonsOverlapFix</td>
+<td><code>169</code></td>
 </tr>
 <tr>
-<td>170</td>
-<td>Barter Haggle Fix</td>
+<td>barterHaggleFix</td>
+<td><code>170</code></td>
 </tr>
 <tr>
-<td>171</td>
-<td>Menu Mode World Interaction Fix</td>
+<td>menuModeWorldInteractionFix</td>
+<td><code>171</code></td>
 </tr>
 <tr>
-<td>172</td>
-<td>Enchanted Item Rebalance</td>
+<td>enchantedItemRebalance</td>
+<td><code>172</code></td>
 </tr>
 <tr>
-<td>173</td>
-<td>Npc Rank Change Fix</td>
+<td>npcRankChangeFix</td>
+<td><code>173</code></td>
 </tr>
 <tr>
-<td>174</td>
-<td>Add Item With Levelled Items</td>
+<td>addItemWithLevelledItems</td>
+<td><code>174</code></td>
 </tr>
 <tr>
-<td>175</td>
-<td>Move World Z Fix</td>
+<td>moveWorldZFix</td>
+<td><code>175</code></td>
 </tr>
 <tr>
-<td>176</td>
-<td>Spell Effect Tooltip Fix</td>
+<td>spellEffectTooltipFix</td>
+<td><code>176</code></td>
 </tr>
 <tr>
-<td>177</td>
-<td>Get Effect Remove Effects Fix</td>
+<td>getEffectRemoveEffectsFix</td>
+<td><code>177</code></td>
 </tr>
 <tr>
-<td>178</td>
-<td>Load Warning Crash Fix</td>
+<td>loadWarningCrashFix</td>
+<td><code>178</code></td>
 </tr>
 <tr>
-<td>179</td>
-<td>Followers Defend Immediately</td>
+<td>followersDefendImmediately</td>
+<td><code>179</code></td>
 </tr>
 <tr>
-<td>180</td>
-<td>Equip Script Fix</td>
+<td>equipScriptFix</td>
+<td><code>180</code></td>
 </tr>
 <tr>
-<td>181</td>
-<td>Doppler Audio Fix</td>
+<td>dopplerAudioFix</td>
+<td><code>181</code></td>
 </tr>
 <tr>
-<td>182</td>
-<td>Auto Stack Ammunition</td>
+<td>autoStackAmmunition</td>
+<td><code>182</code></td>
 </tr>
 <tr>
-<td>183</td>
-<td>Sea Water Sound Falloff Fix</td>
+<td>seaWaterSoundFalloffFix</td>
+<td><code>183</code></td>
 </tr>
 <tr>
-<td>184</td>
-<td>Actor Collision Box Fix</td>
+<td>actorCollisionBoxFix</td>
+<td><code>184</code></td>
 </tr>
 <tr>
-<td>185</td>
-<td>Sliding After Jumping Fix</td>
+<td>slidingAfterJumpingFix</td>
+<td><code>185</code></td>
 </tr>
 <tr>
-<td>186</td>
-<td>Falling Creatures Collision Fix</td>
+<td>fallingCreaturesCollisionFix</td>
+<td><code>186</code></td>
 </tr>
 <tr>
-<td>256</td>
-<td>Map Expansion For Tamriel Rebuilt</td>
+<td>mapExpansionForTamrielRebuilt</td>
+<td><code>256</code></td>
 </tr>
 <tr>
-<td>257</td>
-<td>Main Menu Wider Textures</td>
+<td>mainMenuWiderTextures</td>
+<td><code>257</code></td>
 </tr>
 <tr>
-<td>258</td>
-<td>Disable Map Smoothing</td>
+<td>disableMapSmoothing</td>
+<td><code>258</code></td>
 </tr>
 <tr>
-<td>259</td>
-<td>Display More Accurate Item Weight</td>
+<td>displayMoreAccurateItemWeight</td>
+<td><code>259</code></td>
 </tr>
 <tr>
-<td>260</td>
-<td>Polish Keyboard Support</td>
+<td>polishKeyboardSupport</td>
+<td><code>260</code></td>
 </tr>
 <tr>
-<td>261</td>
-<td>Unrestrict Menu Size</td>
+<td>unrestrictMenuSize</td>
+<td><code>261</code></td>
 </tr>
 <tr>
-<td>262</td>
-<td>Larger Service Chargen Menus</td>
+<td>largerServiceChargenMenus</td>
+<td><code>262</code></td>
 </tr>
 <tr>
-<td>263</td>
-<td>Japanese Localization</td>
+<td>japaneseLocalization</td>
+<td><code>263</code></td>
 </tr>
 <tr>
-<td>264</td>
-<td>Russian Fixes</td>
+<td>russianFixes</td>
+<td><code>264</code></td>
 </tr>
 <tr>
-<td>265</td>
-<td>Journal Text Colour Configuration</td>
+<td>journalTextColourConfiguration</td>
+<td><code>265</code></td>
 </tr>
 <tr>
-<td>266</td>
-<td>Polish Character Corrections</td>
+<td>polishCharacterCorrections</td>
+<td><code>266</code></td>
 </tr>
 <tr>
-<td>267</td>
-<td>Ui Display Quality Fix</td>
+<td>uiDisplayQualityFix</td>
+<td><code>267</code></td>
 </tr>
 <tr>
-<td>268</td>
-<td>Spell Select By Name</td>
+<td>spellSelectByName</td>
+<td><code>268</code></td>
 </tr>
 <tr>
-<td>269</td>
-<td>Better Ingredient And Item Selector</td>
+<td>betterIngredientAndItemSelector</td>
+<td><code>269</code></td>
 </tr>
 <tr>
-<td>270</td>
-<td>Better Typography</td>
+<td>betterTypography</td>
+<td><code>270</code></td>
 </tr>
 <tr>
-<td>271</td>
-<td>Persuasion Improvement</td>
+<td>persuasionImprovement</td>
+<td><code>271</code></td>
 </tr>
 <tr>
-<td>272</td>
-<td>Improved Inventory Filters</td>
+<td>improvedInventoryFilters</td>
+<td><code>272</code></td>
 </tr>
 <tr>
-<td>273</td>
-<td>Ownership Tooltip</td>
+<td>ownershipTooltip</td>
+<td><code>273</code></td>
 </tr>
 <tr>
-<td>274</td>
-<td>Better Spell Merchants</td>
+<td>betterSpellMerchants</td>
+<td><code>274</code></td>
 </tr>
 <tr>
-<td>275</td>
-<td>Levelup Skills Tooltip</td>
+<td>levelupSkillsTooltip</td>
+<td><code>275</code></td>
 </tr>
 <tr>
-<td>276</td>
-<td>Convenient Defaults</td>
+<td>convenientDefaults</td>
+<td><code>276</code></td>
 </tr>
 <tr>
-<td>277</td>
-<td>Better Haggling</td>
+<td>betterHaggling</td>
+<td><code>277</code></td>
 </tr>
 </tbody>
 </table>
@@ -3428,22 +3448,22 @@
 </div>
 </div>
 <a class="md-top md-icon" data-md-component="top" data-md-state="hidden" href="#">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
             Back to top
           </a>
 </main>
 <footer class="md-footer">
 <nav aria-label="Footer" class="md-footer__inner md-grid">
-<a aria-label="Previous: Clothing Types" class="md-footer__link md-footer__link--prev" href="../clothing-slots/" rel="prev">
+<a aria-label="Previous: Clothing Slots" class="md-footer__link md-footer__link--prev" href="../clothing-slots/" rel="prev">
 <div class="md-footer__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </div>
 <div class="md-footer__title">
 <div class="md-ellipsis">
 <span class="md-footer__direction">
                 Previous
               </span>
-              Clothing Types
+              Clothing Slots
             </div>
 </div>
 </a>
@@ -3457,7 +3477,7 @@
             </div>
 </div>
 <div class="md-footer__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
 </div>
 </a>
 </nav>
@@ -3478,8 +3498,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
-<script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+<script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
 <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
 </body>
 </html>

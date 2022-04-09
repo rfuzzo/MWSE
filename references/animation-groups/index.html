@@ -6,10 +6,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.3.0, mkdocs-material-8.2.8" name="generator"/>
+<meta content="mkdocs-1.3.0, mkdocs-material-8.2.9" name="generator"/>
 <title>Animation Groups - Morrowind Script Extender</title>
-<link href="../../assets/stylesheets/main.644de097.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/main.120efc48.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.9647289d.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -34,7 +34,7 @@
 <img alt="logo" src="../../assets/images/logo.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
 </label>
 <div class="md-header__title" data-md-component="header-title">
 <div class="md-header__ellipsis">
@@ -59,11 +59,11 @@
 </label>
 <input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
 <label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
 </label>
 </form>
 <label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
 </label>
 <div class="md-search" data-md-component="search" role="dialog">
 <label class="md-search__overlay" for="__search"></label>
@@ -71,15 +71,15 @@
 <form class="md-search__form" name="search">
 <input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
 <label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </label>
 <nav aria-label="Search" class="md-search__options">
 <a aria-label="Share" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"></path></svg>
 </a>
 <button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
 </button>
 </nav>
 <div class="md-search__suggest" data-md-component="search-suggest"></div>
@@ -308,7 +308,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../armor-slots/">
-        Armor Types
+        Armor Slots
       </a>
 </li>
 <li class="md-nav__item">
@@ -319,6 +319,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../attachment-types/">
         Attachment Types
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../attribute-names/">
+        Attribute Names
       </a>
 </li>
 <li class="md-nav__item">
@@ -338,7 +343,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../clothing-slots/">
-        Clothing Types
+        Clothing Slots
       </a>
 </li>
 <li class="md-nav__item">
@@ -437,8 +442,13 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../language/">
-        Language
+<a class="md-nav__link" href="../language-codes/">
+        Language Codes
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../languages/">
+        Languages
       </a>
 </li>
 <li class="md-nav__item">
@@ -462,8 +472,8 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../merchant-service-types/">
-        Merchant Service Types
+<a class="md-nav__link" href="../merchant-services/">
+        Merchant Services
       </a>
 </li>
 <li class="md-nav__item">
@@ -473,7 +483,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../niTypes/">
-        niTypes
+        NI Types
       </a>
 </li>
 <li class="md-nav__item">
@@ -502,6 +512,11 @@
       </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../skill-names/">
+        Skill Names
+      </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../skill-raise-sources/">
         Skill Raise Sources
       </a>
@@ -518,7 +533,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../sound-generator-types/">
-        Sound Generator Types
+        Sound Gen Types
       </a>
 </li>
 <li class="md-nav__item">
@@ -527,8 +542,13 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../specialization-types/">
-        Specialization Types
+<a class="md-nav__link" href="../specialization-names/">
+        Specialization Names
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../specializations/">
+        Specializations
       </a>
 </li>
 <li class="md-nav__item">
@@ -578,17 +598,17 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../weather-types/">
-        Weather Types
+        Weathers
       </a>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_66" id="__nav_3_66" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_66">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_70" id="__nav_3_70" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_70">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="MWSE-mwscript" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_66">
+<label class="md-nav__title" for="__nav_3_70">
 <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -657,13 +677,13 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_67" id="__nav_3_67" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_67">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_71" id="__nav_3_71" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_71">
           Other
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="Other" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_67">
+<label class="md-nav__title" for="__nav_3_71">
 <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -2612,615 +2632,615 @@
 <h1 id="animation-groups">Animation Groups<a class="headerlink" href="#animation-groups" title="Permanent link">⚓︎</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their identifier in the <code>tes3.animationGroup.*</code> namespace. For example, <code>tes3.animationGroup.idleCrossbow</code> has a value of <code>0xF</code>.</p>
+<p>These values are available in Lua by their index in the <code>tes3.animationGroup</code> table. For example, <code>tes3.animationGroup.swimKnockOut</code> has a value of <code>41</code>.</p>
 </div>
 <table>
 <thead>
 <tr>
-<th>ID</th>
-<th>Animation Group</th>
+<th>Index</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0x0</td>
-<td>Idle</td>
+<td>idle</td>
+<td><code>0</code></td>
 </tr>
 <tr>
-<td>0x1</td>
-<td>Idle 2</td>
+<td>idle2</td>
+<td><code>1</code></td>
 </tr>
 <tr>
-<td>0x2</td>
-<td>Idle 3</td>
+<td>idle3</td>
+<td><code>2</code></td>
 </tr>
 <tr>
-<td>0x3</td>
-<td>Idle 4</td>
+<td>idle4</td>
+<td><code>3</code></td>
 </tr>
 <tr>
-<td>0x4</td>
-<td>Idle 5</td>
+<td>idle5</td>
+<td><code>4</code></td>
 </tr>
 <tr>
-<td>0x5</td>
-<td>Idle 6</td>
+<td>idle6</td>
+<td><code>5</code></td>
 </tr>
 <tr>
-<td>0x6</td>
-<td>Idle 7</td>
+<td>idle7</td>
+<td><code>6</code></td>
 </tr>
 <tr>
-<td>0x7</td>
-<td>Idle 8</td>
+<td>idle8</td>
+<td><code>7</code></td>
 </tr>
 <tr>
-<td>0x8</td>
-<td>Idle 9</td>
+<td>idle9</td>
+<td><code>8</code></td>
 </tr>
 <tr>
-<td>0x9</td>
-<td>Idle Hand To Hand</td>
+<td>idleHandToHand</td>
+<td><code>9</code></td>
 </tr>
 <tr>
-<td>0xA</td>
-<td>Idle 1 H</td>
+<td>idle1h</td>
+<td><code>10</code></td>
 </tr>
 <tr>
-<td>0xB</td>
-<td>Idle 2 C</td>
+<td>idle2c</td>
+<td><code>11</code></td>
 </tr>
 <tr>
-<td>0xC</td>
-<td>Idle 2 W</td>
+<td>idle2w</td>
+<td><code>12</code></td>
 </tr>
 <tr>
-<td>0xD</td>
-<td>Idle Swim</td>
+<td>idleSwim</td>
+<td><code>13</code></td>
 </tr>
 <tr>
-<td>0xE</td>
-<td>Idle Spell</td>
+<td>idleSpell</td>
+<td><code>14</code></td>
 </tr>
 <tr>
-<td>0xF</td>
-<td>Idle Crossbow</td>
+<td>idleCrossbow</td>
+<td><code>15</code></td>
 </tr>
 <tr>
-<td>0x10</td>
-<td>Idle Sneak</td>
+<td>idleSneak</td>
+<td><code>16</code></td>
 </tr>
 <tr>
-<td>0x11</td>
-<td>Idle Storm</td>
+<td>idleStorm</td>
+<td><code>17</code></td>
 </tr>
 <tr>
-<td>0x12</td>
-<td>Torch</td>
+<td>torch</td>
+<td><code>18</code></td>
 </tr>
 <tr>
-<td>0x13</td>
-<td>Hit 1</td>
+<td>hit1</td>
+<td><code>19</code></td>
 </tr>
 <tr>
-<td>0x14</td>
-<td>Hit 2</td>
+<td>hit2</td>
+<td><code>20</code></td>
 </tr>
 <tr>
-<td>0x15</td>
-<td>Hit 3</td>
+<td>hit3</td>
+<td><code>21</code></td>
 </tr>
 <tr>
-<td>0x16</td>
-<td>Hit 4</td>
+<td>hit4</td>
+<td><code>22</code></td>
 </tr>
 <tr>
-<td>0x17</td>
-<td>Hit 5</td>
+<td>hit5</td>
+<td><code>23</code></td>
 </tr>
 <tr>
-<td>0x18</td>
-<td>Swim Hit 1</td>
+<td>swimHit1</td>
+<td><code>24</code></td>
 </tr>
 <tr>
-<td>0x19</td>
-<td>Swim Hit 2</td>
+<td>swimHit2</td>
+<td><code>25</code></td>
 </tr>
 <tr>
-<td>0x1A</td>
-<td>Swim Hit 3</td>
+<td>swimHit3</td>
+<td><code>26</code></td>
 </tr>
 <tr>
-<td>0x1B</td>
-<td>Death 1</td>
+<td>death1</td>
+<td><code>27</code></td>
 </tr>
 <tr>
-<td>0x1C</td>
-<td>Death 2</td>
+<td>death2</td>
+<td><code>28</code></td>
 </tr>
 <tr>
-<td>0x1D</td>
-<td>Death 3</td>
+<td>death3</td>
+<td><code>29</code></td>
 </tr>
 <tr>
-<td>0x1E</td>
-<td>Death 4</td>
+<td>death4</td>
+<td><code>30</code></td>
 </tr>
 <tr>
-<td>0x1F</td>
-<td>Death 5</td>
+<td>death5</td>
+<td><code>31</code></td>
 </tr>
 <tr>
-<td>0x20</td>
-<td>Death Knock Down</td>
+<td>deathKnockDown</td>
+<td><code>32</code></td>
 </tr>
 <tr>
-<td>0x21</td>
-<td>Death Knock Out</td>
+<td>deathKnockOut</td>
+<td><code>33</code></td>
 </tr>
 <tr>
-<td>0x22</td>
-<td>Knock Down</td>
+<td>knockDown</td>
+<td><code>34</code></td>
 </tr>
 <tr>
-<td>0x23</td>
-<td>Knock Out</td>
+<td>knockOut</td>
+<td><code>35</code></td>
 </tr>
 <tr>
-<td>0x24</td>
-<td>Swim Death</td>
+<td>swimDeath</td>
+<td><code>36</code></td>
 </tr>
 <tr>
-<td>0x25</td>
-<td>Swim Death 2</td>
+<td>swimDeath2</td>
+<td><code>37</code></td>
 </tr>
 <tr>
-<td>0x26</td>
-<td>Swim Death 3</td>
+<td>swimDeath3</td>
+<td><code>38</code></td>
 </tr>
 <tr>
-<td>0x27</td>
-<td>Swim Death Knock Down</td>
+<td>swimDeathKnockDown</td>
+<td><code>39</code></td>
 </tr>
 <tr>
-<td>0x28</td>
-<td>Swim Death Knock Out</td>
+<td>swimDeathKnockOut</td>
+<td><code>40</code></td>
 </tr>
 <tr>
-<td>0x29</td>
-<td>Swim Knock Out</td>
+<td>swimKnockOut</td>
+<td><code>41</code></td>
 </tr>
 <tr>
-<td>0x2A</td>
-<td>Swim Knock Down</td>
+<td>swimKnockDown</td>
+<td><code>42</code></td>
 </tr>
 <tr>
-<td>0x2B</td>
-<td>Swim Walk Forward</td>
+<td>swimWalkForward</td>
+<td><code>43</code></td>
 </tr>
 <tr>
-<td>0x2C</td>
-<td>Swim Walk Back</td>
+<td>swimWalkBack</td>
+<td><code>44</code></td>
 </tr>
 <tr>
-<td>0x2D</td>
-<td>Swim Walk Left</td>
+<td>swimWalkLeft</td>
+<td><code>45</code></td>
 </tr>
 <tr>
-<td>0x2E</td>
-<td>Swim Walk Right</td>
+<td>swimWalkRight</td>
+<td><code>46</code></td>
 </tr>
 <tr>
-<td>0x2F</td>
-<td>Swim Run Forward</td>
+<td>swimRunForward</td>
+<td><code>47</code></td>
 </tr>
 <tr>
-<td>0x30</td>
-<td>Swim Run Back</td>
+<td>swimRunBack</td>
+<td><code>48</code></td>
 </tr>
 <tr>
-<td>0x31</td>
-<td>Swim Run Left</td>
+<td>swimRunLeft</td>
+<td><code>49</code></td>
 </tr>
 <tr>
-<td>0x32</td>
-<td>Swim Run Right</td>
+<td>swimRunRight</td>
+<td><code>50</code></td>
 </tr>
 <tr>
-<td>0x33</td>
-<td>Swim Turn Left</td>
+<td>swimTurnLeft</td>
+<td><code>51</code></td>
 </tr>
 <tr>
-<td>0x34</td>
-<td>Swim Turn Right</td>
+<td>swimTurnRight</td>
+<td><code>52</code></td>
 </tr>
 <tr>
-<td>0x35</td>
-<td>Walk Forward</td>
+<td>walkForward</td>
+<td><code>53</code></td>
 </tr>
 <tr>
-<td>0x36</td>
-<td>Walk Back</td>
+<td>walkBack</td>
+<td><code>54</code></td>
 </tr>
 <tr>
-<td>0x37</td>
-<td>Walk Left</td>
+<td>walkLeft</td>
+<td><code>55</code></td>
 </tr>
 <tr>
-<td>0x38</td>
-<td>Walk Right</td>
+<td>walkRight</td>
+<td><code>56</code></td>
 </tr>
 <tr>
-<td>0x39</td>
-<td>Turn Left</td>
+<td>turnLeft</td>
+<td><code>57</code></td>
 </tr>
 <tr>
-<td>0x3A</td>
-<td>Turn Right</td>
+<td>turnRight</td>
+<td><code>58</code></td>
 </tr>
 <tr>
-<td>0x3B</td>
-<td>Run Forward</td>
+<td>runForward</td>
+<td><code>59</code></td>
 </tr>
 <tr>
-<td>0x3C</td>
-<td>Run Back</td>
+<td>runBack</td>
+<td><code>60</code></td>
 </tr>
 <tr>
-<td>0x3D</td>
-<td>Run Left</td>
+<td>runLeft</td>
+<td><code>61</code></td>
 </tr>
 <tr>
-<td>0x3E</td>
-<td>Run Right</td>
+<td>runRight</td>
+<td><code>62</code></td>
 </tr>
 <tr>
-<td>0x3F</td>
-<td>Sneak Forward</td>
+<td>sneakForward</td>
+<td><code>63</code></td>
 </tr>
 <tr>
-<td>0x40</td>
-<td>Sneak Back</td>
+<td>sneakBack</td>
+<td><code>64</code></td>
 </tr>
 <tr>
-<td>0x41</td>
-<td>Sneak Left</td>
+<td>sneakLeft</td>
+<td><code>65</code></td>
 </tr>
 <tr>
-<td>0x42</td>
-<td>Sneak Right</td>
+<td>sneakRight</td>
+<td><code>66</code></td>
 </tr>
 <tr>
-<td>0x43</td>
-<td>Jump</td>
+<td>jump</td>
+<td><code>67</code></td>
 </tr>
 <tr>
-<td>0x44</td>
-<td>Walk Forward Hand To Hand</td>
+<td>walkForwardHandToHand</td>
+<td><code>68</code></td>
 </tr>
 <tr>
-<td>0x45</td>
-<td>Walk Back Hand To Hand</td>
+<td>walkBackHandToHand</td>
+<td><code>69</code></td>
 </tr>
 <tr>
-<td>0x46</td>
-<td>Walk Left Hand To Hand</td>
+<td>walkLeftHandToHand</td>
+<td><code>70</code></td>
 </tr>
 <tr>
-<td>0x47</td>
-<td>Walk Right Hand To Hand</td>
+<td>walkRightHandToHand</td>
+<td><code>71</code></td>
 </tr>
 <tr>
-<td>0x48</td>
-<td>Turn Left Hand To Hand</td>
+<td>turnLeftHandToHand</td>
+<td><code>72</code></td>
 </tr>
 <tr>
-<td>0x49</td>
-<td>Turn Right Hand To Hand</td>
+<td>turnRightHandToHand</td>
+<td><code>73</code></td>
 </tr>
 <tr>
-<td>0x4A</td>
-<td>Run Forward Hand To Hand</td>
+<td>runForwardHandToHand</td>
+<td><code>74</code></td>
 </tr>
 <tr>
-<td>0x4B</td>
-<td>Run Back Hand To Hand</td>
+<td>runBackHandToHand</td>
+<td><code>75</code></td>
 </tr>
 <tr>
-<td>0x4C</td>
-<td>Run Left Hand To Hand</td>
+<td>runLeftHandToHand</td>
+<td><code>76</code></td>
 </tr>
 <tr>
-<td>0x4D</td>
-<td>Run Right Hand To Hand</td>
+<td>runRightHandToHand</td>
+<td><code>77</code></td>
 </tr>
 <tr>
-<td>0x4E</td>
-<td>Sneak Forward Hand To Hand</td>
+<td>sneakForwardHandToHand</td>
+<td><code>78</code></td>
 </tr>
 <tr>
-<td>0x4F</td>
-<td>Sneak Back Hand To Hand</td>
+<td>sneakBackHandToHand</td>
+<td><code>79</code></td>
 </tr>
 <tr>
-<td>0x50</td>
-<td>Sneak Left Hand To Hand</td>
+<td>sneakLeftHandToHand</td>
+<td><code>80</code></td>
 </tr>
 <tr>
-<td>0x51</td>
-<td>Sneak Right Hand To Hand</td>
+<td>sneakRightHandToHand</td>
+<td><code>81</code></td>
 </tr>
 <tr>
-<td>0x52</td>
-<td>Jump Hand To Hand</td>
+<td>jumpHandToHand</td>
+<td><code>82</code></td>
 </tr>
 <tr>
-<td>0x53</td>
-<td>Walk Forward 1 H</td>
+<td>walkForward1h</td>
+<td><code>83</code></td>
 </tr>
 <tr>
-<td>0x54</td>
-<td>Walk Back 1 H</td>
+<td>walkBack1h</td>
+<td><code>84</code></td>
 </tr>
 <tr>
-<td>0x55</td>
-<td>Walk Left 1 H</td>
+<td>walkLeft1h</td>
+<td><code>85</code></td>
 </tr>
 <tr>
-<td>0x56</td>
-<td>Walk Right 1 H</td>
+<td>walkRight1h</td>
+<td><code>86</code></td>
 </tr>
 <tr>
-<td>0x57</td>
-<td>Turn Left 1 H</td>
+<td>turnLeft1h</td>
+<td><code>87</code></td>
 </tr>
 <tr>
-<td>0x58</td>
-<td>Turn Right 1 H</td>
+<td>turnRight1h</td>
+<td><code>88</code></td>
 </tr>
 <tr>
-<td>0x59</td>
-<td>Run Forward 1 H</td>
+<td>runForward1h</td>
+<td><code>89</code></td>
 </tr>
 <tr>
-<td>0x5A</td>
-<td>Run Back 1 H</td>
+<td>runBack1h</td>
+<td><code>90</code></td>
 </tr>
 <tr>
-<td>0x5B</td>
-<td>Run Left 1 H</td>
+<td>runLeft1h</td>
+<td><code>91</code></td>
 </tr>
 <tr>
-<td>0x5C</td>
-<td>Run Right 1 H</td>
+<td>runRight1h</td>
+<td><code>92</code></td>
 </tr>
 <tr>
-<td>0x5D</td>
-<td>Sneak Forward 1 H</td>
+<td>sneakForward1h</td>
+<td><code>93</code></td>
 </tr>
 <tr>
-<td>0x5E</td>
-<td>Sneak Back 1 H</td>
+<td>sneakBack1h</td>
+<td><code>94</code></td>
 </tr>
 <tr>
-<td>0x5F</td>
-<td>Sneak Left 1 H</td>
+<td>sneakLeft1h</td>
+<td><code>95</code></td>
 </tr>
 <tr>
-<td>0x60</td>
-<td>Sneak Right 1 H</td>
+<td>sneakRight1h</td>
+<td><code>96</code></td>
 </tr>
 <tr>
-<td>0x61</td>
-<td>Jump 1 H</td>
+<td>jump1h</td>
+<td><code>97</code></td>
 </tr>
 <tr>
-<td>0x62</td>
-<td>Walk Forward 2 C</td>
+<td>walkForward2c</td>
+<td><code>98</code></td>
 </tr>
 <tr>
-<td>0x63</td>
-<td>Walk Back 2 C</td>
+<td>walkBack2c</td>
+<td><code>99</code></td>
 </tr>
 <tr>
-<td>0x64</td>
-<td>Walk Left 2 C</td>
+<td>walkLeft2c</td>
+<td><code>100</code></td>
 </tr>
 <tr>
-<td>0x65</td>
-<td>Walk Right 2 C</td>
+<td>walkRight2c</td>
+<td><code>101</code></td>
 </tr>
 <tr>
-<td>0x66</td>
-<td>Turn Left 2 C</td>
+<td>turnLeft2c</td>
+<td><code>102</code></td>
 </tr>
 <tr>
-<td>0x67</td>
-<td>Turn Right 2 C</td>
+<td>turnRight2c</td>
+<td><code>103</code></td>
 </tr>
 <tr>
-<td>0x68</td>
-<td>Run Forward 2 C</td>
+<td>runForward2c</td>
+<td><code>104</code></td>
 </tr>
 <tr>
-<td>0x69</td>
-<td>Run Back 2 C</td>
+<td>runBack2c</td>
+<td><code>105</code></td>
 </tr>
 <tr>
-<td>0x6A</td>
-<td>Run Left 2 C</td>
+<td>runLeft2c</td>
+<td><code>106</code></td>
 </tr>
 <tr>
-<td>0x6B</td>
-<td>Run Right 2 C</td>
+<td>runRight2c</td>
+<td><code>107</code></td>
 </tr>
 <tr>
-<td>0x6C</td>
-<td>Sneak Forward 2 C</td>
+<td>sneakForward2c</td>
+<td><code>108</code></td>
 </tr>
 <tr>
-<td>0x6D</td>
-<td>Sneak Back 2 C</td>
+<td>sneakBack2c</td>
+<td><code>109</code></td>
 </tr>
 <tr>
-<td>0x6E</td>
-<td>Sneak Left 2 C</td>
+<td>sneakLeft2c</td>
+<td><code>110</code></td>
 </tr>
 <tr>
-<td>0x6F</td>
-<td>Sneak Right 2 C</td>
+<td>sneakRight2c</td>
+<td><code>111</code></td>
 </tr>
 <tr>
-<td>0x70</td>
-<td>Jump 2 C</td>
+<td>jump2c</td>
+<td><code>112</code></td>
 </tr>
 <tr>
-<td>0x71</td>
-<td>Walk Forward 2 W</td>
+<td>walkForward2w</td>
+<td><code>113</code></td>
 </tr>
 <tr>
-<td>0x72</td>
-<td>Walk Back 2 W</td>
+<td>walkBack2w</td>
+<td><code>114</code></td>
 </tr>
 <tr>
-<td>0x73</td>
-<td>Walk Left 2 W</td>
+<td>walkLeft2w</td>
+<td><code>115</code></td>
 </tr>
 <tr>
-<td>0x74</td>
-<td>Walk Right 2 W</td>
+<td>walkRight2w</td>
+<td><code>116</code></td>
 </tr>
 <tr>
-<td>0x75</td>
-<td>Turn Left 2 W</td>
+<td>turnLeft2w</td>
+<td><code>117</code></td>
 </tr>
 <tr>
-<td>0x76</td>
-<td>Turn Right 2 W</td>
+<td>turnRight2w</td>
+<td><code>118</code></td>
 </tr>
 <tr>
-<td>0x77</td>
-<td>Run Forward 2 W</td>
+<td>runForward2w</td>
+<td><code>119</code></td>
 </tr>
 <tr>
-<td>0x78</td>
-<td>Run Back 2 W</td>
+<td>runBack2w</td>
+<td><code>120</code></td>
 </tr>
 <tr>
-<td>0x79</td>
-<td>Run Left 2 W</td>
+<td>runLeft2w</td>
+<td><code>121</code></td>
 </tr>
 <tr>
-<td>0x7A</td>
-<td>Run Right 2 W</td>
+<td>runRight2w</td>
+<td><code>122</code></td>
 </tr>
 <tr>
-<td>0x7B</td>
-<td>Sneak Forward 2 W</td>
+<td>sneakForward2w</td>
+<td><code>123</code></td>
 </tr>
 <tr>
-<td>0x7C</td>
-<td>Sneak Back 2 W</td>
+<td>sneakBack2w</td>
+<td><code>124</code></td>
 </tr>
 <tr>
-<td>0x7D</td>
-<td>Sneak Left 2 W</td>
+<td>sneakLeft2w</td>
+<td><code>125</code></td>
 </tr>
 <tr>
-<td>0x7E</td>
-<td>Sneak Right 2 W</td>
+<td>sneakRight2w</td>
+<td><code>126</code></td>
 </tr>
 <tr>
-<td>0x7F</td>
-<td>Jump 2 W</td>
+<td>jump2w</td>
+<td><code>127</code></td>
 </tr>
 <tr>
-<td>0x80</td>
-<td>Spell Cast</td>
+<td>spellCast</td>
+<td><code>128</code></td>
 </tr>
 <tr>
-<td>0x81</td>
-<td>Spell Turn Left</td>
+<td>spellTurnLeft</td>
+<td><code>129</code></td>
 </tr>
 <tr>
-<td>0x82</td>
-<td>Spell Turn Right</td>
+<td>spellTurnRight</td>
+<td><code>130</code></td>
 </tr>
 <tr>
-<td>0x83</td>
-<td>Attack 1</td>
+<td>attack1</td>
+<td><code>131</code></td>
 </tr>
 <tr>
-<td>0x84</td>
-<td>Attack 2</td>
+<td>attack2</td>
+<td><code>132</code></td>
 </tr>
 <tr>
-<td>0x85</td>
-<td>Attack 3</td>
+<td>attack3</td>
+<td><code>133</code></td>
 </tr>
 <tr>
-<td>0x86</td>
-<td>Swim Attack 1</td>
+<td>swimAttack1</td>
+<td><code>134</code></td>
 </tr>
 <tr>
-<td>0x87</td>
-<td>Swim Attack 2</td>
+<td>swimAttack2</td>
+<td><code>135</code></td>
 </tr>
 <tr>
-<td>0x88</td>
-<td>Swim Attack 3</td>
+<td>swimAttack3</td>
+<td><code>136</code></td>
 </tr>
 <tr>
-<td>0x89</td>
-<td>Hand To Hand</td>
+<td>handToHand</td>
+<td><code>137</code></td>
 </tr>
 <tr>
-<td>0x8A</td>
-<td>Crossbow</td>
+<td>crossbow</td>
+<td><code>138</code></td>
 </tr>
 <tr>
-<td>0x8B</td>
-<td>Bow And Arrow</td>
+<td>bowAndArrow</td>
+<td><code>139</code></td>
 </tr>
 <tr>
-<td>0x8C</td>
-<td>Throw Weapon</td>
+<td>throwWeapon</td>
+<td><code>140</code></td>
 </tr>
 <tr>
-<td>0x8D</td>
-<td>Weapon One Hand</td>
+<td>weaponOneHand</td>
+<td><code>141</code></td>
 </tr>
 <tr>
-<td>0x8E</td>
-<td>Weapon Two Hand</td>
+<td>weaponTwoHand</td>
+<td><code>142</code></td>
 </tr>
 <tr>
-<td>0x8F</td>
-<td>Weapon Two Wide</td>
+<td>weaponTwoWide</td>
+<td><code>143</code></td>
 </tr>
 <tr>
-<td>0x90</td>
-<td>Shield</td>
+<td>shield</td>
+<td><code>144</code></td>
 </tr>
 <tr>
-<td>0x91</td>
-<td>Pick Probe</td>
+<td>pickProbe</td>
+<td><code>145</code></td>
 </tr>
 <tr>
-<td>0x92</td>
-<td>Inventory Hand To Hand</td>
+<td>inventoryHandToHand</td>
+<td><code>146</code></td>
 </tr>
 <tr>
-<td>0x93</td>
-<td>Inventory Weapon One Hand</td>
+<td>inventoryWeaponOneHand</td>
+<td><code>147</code></td>
 </tr>
 <tr>
-<td>0x94</td>
-<td>Inventory Weapon Two Hand</td>
+<td>inventoryWeaponTwoHand</td>
+<td><code>148</code></td>
 </tr>
 <tr>
-<td>0x95</td>
-<td>Inventory Weapon Two Wide</td>
+<td>inventoryWeaponTwoWide</td>
+<td><code>149</code></td>
 </tr>
 </tbody>
 </table>
@@ -3228,7 +3248,7 @@
 </div>
 </div>
 <a class="md-top md-icon" data-md-component="top" data-md-state="hidden" href="#">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
             Back to top
           </a>
 </main>
@@ -3236,7 +3256,7 @@
 <nav aria-label="Footer" class="md-footer__inner md-grid">
 <a aria-label="Previous: AI Packages" class="md-footer__link md-footer__link--prev" href="../ai-packages/" rel="prev">
 <div class="md-footer__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </div>
 <div class="md-footer__title">
 <div class="md-ellipsis">
@@ -3257,7 +3277,7 @@
             </div>
 </div>
 <div class="md-footer__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
 </div>
 </a>
 </nav>
@@ -3278,8 +3298,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
-<script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+<script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
 <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
 </body>
 </html>

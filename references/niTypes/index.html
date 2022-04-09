@@ -6,10 +6,10 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.3.0, mkdocs-material-8.2.8" name="generator"/>
-<title>niTypes - Morrowind Script Extender</title>
-<link href="../../assets/stylesheets/main.644de097.min.css" rel="stylesheet"/>
-<link href="../../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<meta content="mkdocs-1.3.0, mkdocs-material-8.2.9" name="generator"/>
+<title>NI Types - Morrowind Script Extender</title>
+<link href="../../assets/stylesheets/main.120efc48.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.9647289d.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
 <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
@@ -22,7 +22,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#nitypes">
+<a class="md-skip" href="#ni-types">
           Skip to content
         </a>
 </div>
@@ -34,7 +34,7 @@
 <img alt="logo" src="../../assets/images/logo.png"/>
 </a>
 <label class="md-header__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
 </label>
 <div class="md-header__title" data-md-component="header-title">
 <div class="md-header__ellipsis">
@@ -46,7 +46,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              niTypes
+              NI Types
             
           </span>
 </div>
@@ -59,11 +59,11 @@
 </label>
 <input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="" data-md-color-scheme="slate" id="__palette_2" name="__palette" type="radio"/>
 <label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"></path></svg>
 </label>
 </form>
 <label class="md-header__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
 </label>
 <div class="md-search" data-md-component="search" role="dialog">
 <label class="md-search__overlay" for="__search"></label>
@@ -71,15 +71,15 @@
 <form class="md-search__form" name="search">
 <input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
 <label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </label>
 <nav aria-label="Search" class="md-search__options">
 <a aria-label="Share" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"></path></svg>
 </a>
 <button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
 </button>
 </nav>
 <div class="md-search__suggest" data-md-component="search-suggest"></div>
@@ -307,7 +307,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../armor-slots/">
-        Armor Types
+        Armor Slots
       </a>
 </li>
 <li class="md-nav__item">
@@ -318,6 +318,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../attachment-types/">
         Attachment Types
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../attribute-names/">
+        Attribute Names
       </a>
 </li>
 <li class="md-nav__item">
@@ -337,7 +342,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../clothing-slots/">
-        Clothing Types
+        Clothing Slots
       </a>
 </li>
 <li class="md-nav__item">
@@ -436,8 +441,13 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../language/">
-        Language
+<a class="md-nav__link" href="../language-codes/">
+        Language Codes
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../languages/">
+        Languages
       </a>
 </li>
 <li class="md-nav__item">
@@ -461,8 +471,8 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../merchant-service-types/">
-        Merchant Service Types
+<a class="md-nav__link" href="../merchant-services/">
+        Merchant Services
       </a>
 </li>
 <li class="md-nav__item">
@@ -473,7 +483,7 @@
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
 <a class="md-nav__link md-nav__link--active" href="./">
-        niTypes
+        NI Types
       </a>
 </li>
 <li class="md-nav__item">
@@ -502,6 +512,11 @@
       </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../skill-names/">
+        Skill Names
+      </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../skill-raise-sources/">
         Skill Raise Sources
       </a>
@@ -518,7 +533,7 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../sound-generator-types/">
-        Sound Generator Types
+        Sound Gen Types
       </a>
 </li>
 <li class="md-nav__item">
@@ -527,8 +542,13 @@
       </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../specialization-types/">
-        Specialization Types
+<a class="md-nav__link" href="../specialization-names/">
+        Specialization Names
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../specializations/">
+        Specializations
       </a>
 </li>
 <li class="md-nav__item">
@@ -578,17 +598,17 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../weather-types/">
-        Weather Types
+        Weathers
       </a>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_66" id="__nav_3_66" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_66">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_70" id="__nav_3_70" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_70">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="MWSE-mwscript" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_66">
+<label class="md-nav__title" for="__nav_3_70">
 <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -657,13 +677,13 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_67" id="__nav_3_67" type="checkbox"/>
-<label class="md-nav__link" for="__nav_3_67">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_71" id="__nav_3_71" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_71">
           Other
           <span class="md-nav__icon md-icon"></span>
 </label>
 <nav aria-label="Other" class="md-nav" data-md-level="2">
-<label class="md-nav__title" for="__nav_3_67">
+<label class="md-nav__title" for="__nav_3_71">
 <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -2609,466 +2629,466 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="nitypes">niTypes<a class="headerlink" href="#nitypes" title="Permanent link">⚓︎</a></h1>
+<h1 id="ni-types">NI Types<a class="headerlink" href="#ni-types" title="Permanent link">⚓︎</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their identifier in the <code>tes3.niType.*</code> namespace. For example, <code>tes3.niType.NiAVObject</code> has a value of <code>0x7DE7CC</code>.</p>
+<p>These values are available in Lua by their index in the <code>tes3.niType</code> table. For example, <code>tes3.niType.NiBltSource</code> has a value of <code>8249608</code>.</p>
 </div>
 <table>
 <thead>
 <tr>
-<th>ID</th>
-<th>niType</th>
+<th>Index</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0x7DD794</td>
-<td>AvoidNode</td>
-</tr>
-<tr>
-<td>0x7D1D48</td>
-<td>BrickNiExtraData</td>
-</tr>
-<tr>
-<td>0x7C8AF8</td>
-<td>BSMirroredNode</td>
-</tr>
-<tr>
-<td>0x7DECC0</td>
-<td>NiAccumulator</td>
-</tr>
-<tr>
-<td>0x7DDF48</td>
-<td>NiAlphaAccumulator</td>
-</tr>
-<tr>
-<td>0x7DF0A0</td>
-<td>NiAlphaController</td>
-</tr>
-<tr>
-<td>0x7DDF7C</td>
-<td>NiAlphaProperty</td>
-</tr>
-<tr>
-<td>0x7DDF8C</td>
-<td>NiAmbientLight</td>
-</tr>
-<tr>
-<td>0x7DE064</td>
-<td>NiAutoNormalParticles</td>
-</tr>
-<tr>
-<td>0x7DE044</td>
-<td>NiAutoNormalParticlesData</td>
-</tr>
-<tr>
-<td>0x7DE7CC</td>
-<td>NiAVObject</td>
-</tr>
-<tr>
-<td>0x7DE0A0</td>
-<td>NiBillboardNode</td>
-</tr>
-<tr>
-<td>0x7DE108</td>
-<td>NiBltSource</td>
-</tr>
-<tr>
-<td>0x7DE91C</td>
-<td>NiBSAnimationManager</td>
-</tr>
-<tr>
-<td>0x7DE98C</td>
-<td>NiBSAnimationNode</td>
-</tr>
-<tr>
-<td>0x7DF978</td>
-<td>NiBSPArrayController</td>
-</tr>
-<tr>
-<td>0x7DED3C</td>
-<td>NiBSParticleNode</td>
-</tr>
-<tr>
-<td>0x7DE13C</td>
-<td>NiBSPNode</td>
-</tr>
-<tr>
-<td>0x7DDEF8</td>
-<td>NiCamera</td>
-</tr>
-<tr>
-<td>0x7DDF20</td>
-<td>NiClusterAccumulator</td>
-</tr>
-<tr>
-<td>0x7DE150</td>
-<td>NiCollisionSwitch</td>
-</tr>
-<tr>
-<td>0x7DF100</td>
-<td>NiColorData</td>
-</tr>
-<tr>
-<td>0x7DE16C</td>
-<td>NiDirectionalLight</td>
-</tr>
-<tr>
-<td>0x7DE194</td>
-<td>NiDitherProperty</td>
-</tr>
-<tr>
-<td>0x7DD89C</td>
-<td>NiDX8Renderer</td>
-</tr>
-<tr>
-<td>0x7DEA08</td>
-<td>NiDynamicEffect</td>
-</tr>
-<tr>
-<td>0x7DDE68</td>
-<td>NiExtraData</td>
-</tr>
-<tr>
-<td>0x7DF138</td>
-<td>NiFlipController</td>
-</tr>
-<tr>
-<td>0x7DF9B8</td>
-<td>NiFloatController</td>
-</tr>
-<tr>
-<td>0x7DF084</td>
-<td>NiFloatData</td>
-</tr>
-<tr>
-<td>0x7DE1E8</td>
-<td>NiFltAnimationNode</td>
-</tr>
-<tr>
-<td>0x7DE1F0</td>
-<td>NiFogProperty</td>
-</tr>
-<tr>
-<td>0x7DEA2C</td>
-<td>NiGeometry</td>
-</tr>
-<tr>
-<td>0x7DE93C</td>
-<td>NiGeometryData</td>
-</tr>
-<tr>
-<td>0x7DF180</td>
-<td>NiGeomMorpherController</td>
-</tr>
-<tr>
-<td>0x7DF1B0</td>
-<td>NiGravity</td>
-</tr>
-<tr>
-<td>0x7DF000</td>
-<td>NiKeyframeController</td>
-</tr>
-<tr>
-<td>0x7DEFC8</td>
-<td>NiKeyframeData</td>
-</tr>
-<tr>
-<td>0x7DF058</td>
-<td>NiKeyframeManager</td>
-</tr>
-<tr>
-<td>0x7DECF8</td>
-<td>NiLight</td>
-</tr>
-<tr>
-<td>0x7DF1F8</td>
-<td>NiLightColorController</td>
-</tr>
-<tr>
-<td>0x7DE228</td>
-<td>NiLines</td>
-</tr>
-<tr>
-<td>0x7DE20C</td>
-<td>NiLinesData</td>
-</tr>
-<tr>
-<td>0x7DE270</td>
-<td>NiLODNode</td>
-</tr>
-<tr>
-<td>0x7DF244</td>
-<td>NiLookAtController</td>
-</tr>
-<tr>
-<td>0x7DF278</td>
-<td>NiMaterialColorController</td>
-</tr>
-<tr>
-<td>0x7DE288</td>
-<td>NiMaterialProperty</td>
-</tr>
-<tr>
-<td>0x7DF148</td>
-<td>NiMorphData</td>
-</tr>
-<tr>
-<td>0x7DFA08</td>
-<td>NiMorpherController</td>
-</tr>
-<tr>
-<td>0x7DDEB8</td>
-<td>NiNode</td>
-</tr>
-<tr>
-<td>0x7DE734</td>
-<td>NiObject</td>
-</tr>
-<tr>
-<td>0x7DE76C</td>
-<td>NiObjectNET</td>
-</tr>
-<tr>
-<td>0x7DE0C4</td>
-<td>NiPalette</td>
-</tr>
-<tr>
-<td>0x7DF2AC</td>
-<td>NiParticleBomb</td>
-</tr>
-<tr>
-<td>0x7DFA8C</td>
-<td>NiParticleCollider</td>
-</tr>
-<tr>
-<td>0x7DF2DC</td>
-<td>NiParticleColorModifier</td>
-</tr>
-<tr>
-<td>0x7DF304</td>
-<td>NiParticleGrowFade</td>
-</tr>
-<tr>
-<td>0x7DFA58</td>
-<td>NiParticleModifier</td>
-</tr>
-<tr>
-<td>0x7DF340</td>
-<td>NiParticleRotation</td>
-</tr>
-<tr>
-<td>0x7DE004</td>
-<td>NiParticles</td>
-</tr>
-<tr>
-<td>0x7DDFEC</td>
-<td>NiParticlesData</td>
-</tr>
-<tr>
-<td>0x7DEF64</td>
-<td>NiParticleSystemController</td>
-</tr>
-<tr>
-<td>0x7DF394</td>
-<td>NiPathController</td>
-</tr>
-<tr>
-<td>0x7DE0EC</td>
-<td>NiPixelData</td>
-</tr>
-<tr>
-<td>0x7DF3CC</td>
-<td>NiPlanarCollider</td>
-</tr>
-<tr>
-<td>0x7DE2A8</td>
-<td>NiPointLight</td>
-</tr>
-<tr>
-<td>0x7DF1D4</td>
-<td>NiPosData</td>
-</tr>
-<tr>
-<td>0x7DE720</td>
-<td>NiProperty</td>
-</tr>
-<tr>
-<td>0x7DEE14</td>
-<td>NiRenderedCubeMap</td>
-</tr>
-<tr>
-<td>0x7DE2BC</td>
-<td>NiRenderedTexture</td>
-</tr>
-<tr>
-<td>0x7DEA9C</td>
-<td>NiRenderer</td>
-</tr>
-<tr>
-<td>0x7DE2F0</td>
-<td>NiRendererSpecificProperty</td>
-</tr>
-<tr>
-<td>0x7DF3E0</td>
-<td>NiRollController</td>
-</tr>
-<tr>
-<td>0x7DE324</td>
-<td>NiRotatingParticles</td>
-</tr>
-<tr>
-<td>0x7DE308</td>
-<td>NiRotatingParticlesData</td>
-</tr>
-<tr>
-<td>0x7DDEE0</td>
-<td>NiScreenPolygon</td>
-</tr>
-<tr>
-<td>0x7DF3F8</td>
-<td>NiSequenceStreamHelper</td>
-</tr>
-<tr>
-<td>0x7DE364</td>
-<td>NiShadeProperty</td>
-</tr>
-<tr>
-<td>0x7DDFBC</td>
-<td>NiSkinData</td>
-</tr>
-<tr>
-<td>0x7DDFD0</td>
-<td>NiSkinInstance</td>
-</tr>
-<tr>
-<td>0x7DDE84</td>
-<td>NiSkinPartition</td>
-</tr>
-<tr>
-<td>0x7DE388</td>
-<td>NiSortAdjustNode</td>
-</tr>
-<tr>
-<td>0x7DE3C0</td>
-<td>NiSourceTexture</td>
-</tr>
-<tr>
-<td>0x7DE3DC</td>
-<td>NiSpecularProperty</td>
-</tr>
-<tr>
-<td>0x7DF420</td>
-<td>NiSphericalCollider</td>
-</tr>
-<tr>
-<td>0x7DE400</td>
-<td>NiSpotLight</td>
-</tr>
-<tr>
-<td>0x7DE418</td>
-<td>NiStencilProperty</td>
-</tr>
-<tr>
-<td>0x7DE42C</td>
-<td>NiStringExtraData</td>
-</tr>
-<tr>
-<td>0x7DE1AC</td>
-<td>NiSwitchNode</td>
-</tr>
-<tr>
-<td>0x7DF038</td>
-<td>NiTextKeyExtraData</td>
-</tr>
-<tr>
-<td>0x7DE7E0</td>
-<td>NiTexture</td>
-</tr>
-<tr>
-<td>0x7DE484</td>
-<td>NiTextureEffect</td>
-</tr>
-<tr>
-<td>0x7DE440</td>
-<td>NiTexturingProperty</td>
-</tr>
-<tr>
-<td>0x7DEDB4</td>
-<td>NiTimeController</td>
-</tr>
-<tr>
-<td>0x7DE94C</td>
-<td>NiTriBasedGeom</td>
-</tr>
-<tr>
-<td>0x7DEE7C</td>
-<td>NiTriBasedGeomData</td>
-</tr>
-<tr>
-<td>0x7DE550</td>
-<td>NiTriShape</td>
-</tr>
-<tr>
-<td>0x7DE490</td>
-<td>NiTriShapeData</td>
-</tr>
-<tr>
-<td>0x7DE568</td>
-<td>NiTriShapeDynamicData</td>
-</tr>
-<tr>
-<td>0x7DE5A8</td>
-<td>NiTriStrips</td>
-</tr>
-<tr>
-<td>0x7DE588</td>
-<td>NiTriStripsData</td>
-</tr>
-<tr>
-<td>0x7DF4A4</td>
-<td>NiUVController</td>
-</tr>
-<tr>
-<td>0x7DF47C</td>
-<td>NiUVData</td>
-</tr>
-<tr>
-<td>0x7DE5D0</td>
-<td>NiVertexColorProperty</td>
-</tr>
-<tr>
-<td>0x7DE5E8</td>
-<td>NiVertWeightsExtraData</td>
-</tr>
-<tr>
-<td>0x7DF4D8</td>
-<td>NiVisController</td>
-</tr>
-<tr>
-<td>0x7DF4C0</td>
-<td>NiVisData</td>
-</tr>
-<tr>
-<td>0x7DE604</td>
-<td>NiWireframeProperty</td>
-</tr>
-<tr>
-<td>0x7DE630</td>
-<td>NiZBufferProperty</td>
-</tr>
-<tr>
-<td>0x7C7438</td>
 <td>OffscreenSceneGraph_MasterPropertyAccumulator</td>
+<td><code>8156216</code></td>
 </tr>
 <tr>
-<td>0x7DD7AC</td>
-<td>RootCollisionNode</td>
+<td>BSMirroredNode</td>
+<td><code>8162040</code></td>
 </tr>
 <tr>
-<td>0x7CE280</td>
 <td>TES3ObjectExtraData</td>
+<td><code>8184448</code></td>
+</tr>
+<tr>
+<td>BrickNiExtraData</td>
+<td><code>8199496</code></td>
+</tr>
+<tr>
+<td>AvoidNode</td>
+<td><code>8247188</code></td>
+</tr>
+<tr>
+<td>RootCollisionNode</td>
+<td><code>8247212</code></td>
+</tr>
+<tr>
+<td>NiDX8Renderer</td>
+<td><code>8247452</code></td>
+</tr>
+<tr>
+<td>NiExtraData</td>
+<td><code>8248936</code></td>
+</tr>
+<tr>
+<td>NiSkinPartition</td>
+<td><code>8248964</code></td>
+</tr>
+<tr>
+<td>NiNode</td>
+<td><code>8249016</code></td>
+</tr>
+<tr>
+<td>NiScreenPolygon</td>
+<td><code>8249056</code></td>
+</tr>
+<tr>
+<td>NiCamera</td>
+<td><code>8249080</code></td>
+</tr>
+<tr>
+<td>NiClusterAccumulator</td>
+<td><code>8249120</code></td>
+</tr>
+<tr>
+<td>NiAlphaAccumulator</td>
+<td><code>8249160</code></td>
+</tr>
+<tr>
+<td>NiAlphaProperty</td>
+<td><code>8249212</code></td>
+</tr>
+<tr>
+<td>NiAmbientLight</td>
+<td><code>8249228</code></td>
+</tr>
+<tr>
+<td>NiSkinData</td>
+<td><code>8249276</code></td>
+</tr>
+<tr>
+<td>NiSkinInstance</td>
+<td><code>8249296</code></td>
+</tr>
+<tr>
+<td>NiParticlesData</td>
+<td><code>8249324</code></td>
+</tr>
+<tr>
+<td>NiParticles</td>
+<td><code>8249348</code></td>
+</tr>
+<tr>
+<td>NiAutoNormalParticlesData</td>
+<td><code>8249412</code></td>
+</tr>
+<tr>
+<td>NiAutoNormalParticles</td>
+<td><code>8249444</code></td>
+</tr>
+<tr>
+<td>NiBillboardNode</td>
+<td><code>8249504</code></td>
+</tr>
+<tr>
+<td>NiPalette</td>
+<td><code>8249540</code></td>
+</tr>
+<tr>
+<td>NiPixelData</td>
+<td><code>8249580</code></td>
+</tr>
+<tr>
+<td>NiBltSource</td>
+<td><code>8249608</code></td>
+</tr>
+<tr>
+<td>NiBSPNode</td>
+<td><code>8249660</code></td>
+</tr>
+<tr>
+<td>NiCollisionSwitch</td>
+<td><code>8249680</code></td>
+</tr>
+<tr>
+<td>NiDirectionalLight</td>
+<td><code>8249708</code></td>
+</tr>
+<tr>
+<td>NiDitherProperty</td>
+<td><code>8249748</code></td>
+</tr>
+<tr>
+<td>NiSwitchNode</td>
+<td><code>8249772</code></td>
+</tr>
+<tr>
+<td>NiFltAnimationNode</td>
+<td><code>8249832</code></td>
+</tr>
+<tr>
+<td>NiFogProperty</td>
+<td><code>8249840</code></td>
+</tr>
+<tr>
+<td>NiLinesData</td>
+<td><code>8249868</code></td>
+</tr>
+<tr>
+<td>NiLines</td>
+<td><code>8249896</code></td>
+</tr>
+<tr>
+<td>NiLODNode</td>
+<td><code>8249968</code></td>
+</tr>
+<tr>
+<td>NiMaterialProperty</td>
+<td><code>8249992</code></td>
+</tr>
+<tr>
+<td>NiPointLight</td>
+<td><code>8250024</code></td>
+</tr>
+<tr>
+<td>NiRenderedTexture</td>
+<td><code>8250044</code></td>
+</tr>
+<tr>
+<td>NiRendererSpecificProperty</td>
+<td><code>8250096</code></td>
+</tr>
+<tr>
+<td>NiRotatingParticlesData</td>
+<td><code>8250120</code></td>
+</tr>
+<tr>
+<td>NiRotatingParticles</td>
+<td><code>8250148</code></td>
+</tr>
+<tr>
+<td>NiShadeProperty</td>
+<td><code>8250212</code></td>
+</tr>
+<tr>
+<td>NiSortAdjustNode</td>
+<td><code>8250248</code></td>
+</tr>
+<tr>
+<td>NiSourceTexture</td>
+<td><code>8250304</code></td>
+</tr>
+<tr>
+<td>NiSpecularProperty</td>
+<td><code>8250332</code></td>
+</tr>
+<tr>
+<td>NiSpotLight</td>
+<td><code>8250368</code></td>
+</tr>
+<tr>
+<td>NiStencilProperty</td>
+<td><code>8250392</code></td>
+</tr>
+<tr>
+<td>NiStringExtraData</td>
+<td><code>8250412</code></td>
+</tr>
+<tr>
+<td>NiTexturingProperty</td>
+<td><code>8250432</code></td>
+</tr>
+<tr>
+<td>NiTextureEffect</td>
+<td><code>8250500</code></td>
+</tr>
+<tr>
+<td>NiTriShapeData</td>
+<td><code>8250512</code></td>
+</tr>
+<tr>
+<td>NiTriShape</td>
+<td><code>8250704</code></td>
+</tr>
+<tr>
+<td>NiTriShapeDynamicData</td>
+<td><code>8250728</code></td>
+</tr>
+<tr>
+<td>NiTriStripsData</td>
+<td><code>8250760</code></td>
+</tr>
+<tr>
+<td>NiTriStrips</td>
+<td><code>8250792</code></td>
+</tr>
+<tr>
+<td>NiVertexColorProperty</td>
+<td><code>8250832</code></td>
+</tr>
+<tr>
+<td>NiVertWeightsExtraData</td>
+<td><code>8250856</code></td>
+</tr>
+<tr>
+<td>NiWireframeProperty</td>
+<td><code>8250884</code></td>
+</tr>
+<tr>
+<td>NiZBufferProperty</td>
+<td><code>8250928</code></td>
+</tr>
+<tr>
+<td>NiProperty</td>
+<td><code>8251168</code></td>
+</tr>
+<tr>
+<td>NiObject</td>
+<td><code>8251188</code></td>
+</tr>
+<tr>
+<td>NiObjectNET</td>
+<td><code>8251244</code></td>
+</tr>
+<tr>
+<td>NiAVObject</td>
+<td><code>8251340</code></td>
+</tr>
+<tr>
+<td>NiTexture</td>
+<td><code>8251360</code></td>
+</tr>
+<tr>
+<td>NiBSAnimationManager</td>
+<td><code>8251676</code></td>
+</tr>
+<tr>
+<td>NiGeometryData</td>
+<td><code>8251708</code></td>
+</tr>
+<tr>
+<td>NiTriBasedGeom</td>
+<td><code>8251724</code></td>
+</tr>
+<tr>
+<td>NiBSAnimationNode</td>
+<td><code>8251788</code></td>
+</tr>
+<tr>
+<td>NiDynamicEffect</td>
+<td><code>8251912</code></td>
+</tr>
+<tr>
+<td>NiGeometry</td>
+<td><code>8251948</code></td>
+</tr>
+<tr>
+<td>NiRenderer</td>
+<td><code>8252060</code></td>
+</tr>
+<tr>
+<td>NiAccumulator</td>
+<td><code>8252608</code></td>
+</tr>
+<tr>
+<td>NiLight</td>
+<td><code>8252664</code></td>
+</tr>
+<tr>
+<td>NiBSParticleNode</td>
+<td><code>8252732</code></td>
+</tr>
+<tr>
+<td>NiTimeController</td>
+<td><code>8252852</code></td>
+</tr>
+<tr>
+<td>NiRenderedCubeMap</td>
+<td><code>8252948</code></td>
+</tr>
+<tr>
+<td>NiTriBasedGeomData</td>
+<td><code>8253052</code></td>
+</tr>
+<tr>
+<td>NiParticleSystemController</td>
+<td><code>8253284</code></td>
+</tr>
+<tr>
+<td>NiKeyframeData</td>
+<td><code>8253384</code></td>
+</tr>
+<tr>
+<td>NiKeyframeController</td>
+<td><code>8253440</code></td>
+</tr>
+<tr>
+<td>NiTextKeyExtraData</td>
+<td><code>8253496</code></td>
+</tr>
+<tr>
+<td>NiKeyframeManager</td>
+<td><code>8253528</code></td>
+</tr>
+<tr>
+<td>NiFloatData</td>
+<td><code>8253572</code></td>
+</tr>
+<tr>
+<td>NiAlphaController</td>
+<td><code>8253600</code></td>
+</tr>
+<tr>
+<td>NiColorData</td>
+<td><code>8253696</code></td>
+</tr>
+<tr>
+<td>NiFlipController</td>
+<td><code>8253752</code></td>
+</tr>
+<tr>
+<td>NiMorphData</td>
+<td><code>8253768</code></td>
+</tr>
+<tr>
+<td>NiGeomMorpherController</td>
+<td><code>8253824</code></td>
+</tr>
+<tr>
+<td>NiGravity</td>
+<td><code>8253872</code></td>
+</tr>
+<tr>
+<td>NiPosData</td>
+<td><code>8253908</code></td>
+</tr>
+<tr>
+<td>NiLightColorController</td>
+<td><code>8253944</code></td>
+</tr>
+<tr>
+<td>NiLookAtController</td>
+<td><code>8254020</code></td>
+</tr>
+<tr>
+<td>NiMaterialColorController</td>
+<td><code>8254072</code></td>
+</tr>
+<tr>
+<td>NiParticleBomb</td>
+<td><code>8254124</code></td>
+</tr>
+<tr>
+<td>NiParticleColorModifier</td>
+<td><code>8254172</code></td>
+</tr>
+<tr>
+<td>NiParticleGrowFade</td>
+<td><code>8254212</code></td>
+</tr>
+<tr>
+<td>NiParticleRotation</td>
+<td><code>8254272</code></td>
+</tr>
+<tr>
+<td>NiPathController</td>
+<td><code>8254356</code></td>
+</tr>
+<tr>
+<td>NiPlanarCollider</td>
+<td><code>8254412</code></td>
+</tr>
+<tr>
+<td>NiRollController</td>
+<td><code>8254432</code></td>
+</tr>
+<tr>
+<td>NiSequenceStreamHelper</td>
+<td><code>8254456</code></td>
+</tr>
+<tr>
+<td>NiSphericalCollider</td>
+<td><code>8254496</code></td>
+</tr>
+<tr>
+<td>NiUVData</td>
+<td><code>8254588</code></td>
+</tr>
+<tr>
+<td>NiUVController</td>
+<td><code>8254628</code></td>
+</tr>
+<tr>
+<td>NiVisData</td>
+<td><code>8254656</code></td>
+</tr>
+<tr>
+<td>NiVisController</td>
+<td><code>8254680</code></td>
+</tr>
+<tr>
+<td>NiBSPArrayController</td>
+<td><code>8255864</code></td>
+</tr>
+<tr>
+<td>NiFloatController</td>
+<td><code>8255928</code></td>
+</tr>
+<tr>
+<td>NiMorpherController</td>
+<td><code>8256008</code></td>
+</tr>
+<tr>
+<td>NiParticleModifier</td>
+<td><code>8256088</code></td>
+</tr>
+<tr>
+<td>NiParticleCollider</td>
+<td><code>8256140</code></td>
 </tr>
 </tbody>
 </table>
@@ -3076,7 +3096,7 @@
 </div>
 </div>
 <a class="md-top md-icon" data-md-component="top" data-md-state="hidden" href="#">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
             Back to top
           </a>
 </main>
@@ -3084,7 +3104,7 @@
 <nav aria-label="Footer" class="md-footer__inner md-grid">
 <a aria-label="Previous: Music Situations" class="md-footer__link md-footer__link--prev" href="../music-situations/" rel="prev">
 <div class="md-footer__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
 </div>
 <div class="md-footer__title">
 <div class="md-ellipsis">
@@ -3105,7 +3125,7 @@
             </div>
 </div>
 <div class="md-footer__button md-icon">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
 </div>
 </a>
 </nav>
@@ -3126,8 +3146,8 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
-<script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+<script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
 <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
 </body>
 </html>
