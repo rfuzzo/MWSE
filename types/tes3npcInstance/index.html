@@ -1542,8 +1542,18 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#autocalc">
+    autoCalc
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#bartergold">
     barterGold
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#basedisposition">
+    baseDisposition
   </a>
 </li>
 <li class="md-nav__item">
@@ -1612,6 +1622,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#female">
+    female
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#health">
     health
   </a>
@@ -1642,6 +1657,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#isguard">
+    isGuard
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#isinstance">
     isInstance
   </a>
@@ -1664,6 +1684,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#magicka">
     magicka
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mesh">
+    mesh
   </a>
 </li>
 <li class="md-nav__item">
@@ -1719,6 +1744,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#reference">
     reference
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reputation">
+    reputation
   </a>
 </li>
 <li class="md-nav__item">
@@ -2970,8 +3000,18 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#autocalc">
+    autoCalc
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#bartergold">
     barterGold
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#basedisposition">
+    baseDisposition
   </a>
 </li>
 <li class="md-nav__item">
@@ -3040,6 +3080,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#female">
+    female
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#health">
     health
   </a>
@@ -3070,6 +3115,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#isguard">
+    isGuard
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#isinstance">
     isInstance
   </a>
@@ -3092,6 +3142,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#magicka">
     magicka
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mesh">
+    mesh
   </a>
 </li>
 <li class="md-nav__item">
@@ -3147,6 +3202,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#reference">
     reference
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reputation">
+    reputation
   </a>
 </li>
 <li class="md-nav__item">
@@ -3288,8 +3348,22 @@
 <li><code>result</code> (table)</li>
 </ul>
 <hr/>
+<h3 id="autocalc"><code>autoCalc</code><a class="headerlink" href="#autocalc" title="Permanent link">⚓︎</a></h3>
+<p>Direct access to the actor autocalc flag.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr/>
 <h3 id="bartergold"><code>barterGold</code><a class="headerlink" href="#bartergold" title="Permanent link">⚓︎</a></h3>
 <p>Friendly access to actor's barter gold amount.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr/>
+<h3 id="basedisposition"><code>baseDisposition</code><a class="headerlink" href="#basedisposition" title="Permanent link">⚓︎</a></h3>
+<p>The actor's base disposition.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -3373,7 +3447,7 @@
 </ul>
 <hr/>
 <h3 id="factionindex"><code>factionIndex</code><a class="headerlink" href="#factionindex" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Deprecated. Use <code>reputation</code> instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -3384,6 +3458,13 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr/>
+<h3 id="female"><code>female</code><a class="headerlink" href="#female" title="Permanent link">⚓︎</a></h3>
+<p>Direct access to the actor female flag.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr/>
 <h3 id="health"><code>health</code><a class="headerlink" href="#health" title="Permanent link">⚓︎</a></h3>
@@ -3428,6 +3509,13 @@
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr/>
+<h3 id="isguard"><code>isGuard</code><a class="headerlink" href="#isguard" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If true, the actor is a guard.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr/>
 <h3 id="isinstance"><code>isInstance</code><a class="headerlink" href="#isinstance" title="Permanent link">⚓︎</a></h3>
 <p>Always returns true.</p>
 <p><strong>Returns</strong>:</p>
@@ -3461,6 +3549,13 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr/>
+<h3 id="mesh"><code>mesh</code><a class="headerlink" href="#mesh" title="Permanent link">⚓︎</a></h3>
+<p>The path to the object's mesh.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (string)</li>
 </ul>
 <hr/>
 <h3 id="mobile"><code>mobile</code><a class="headerlink" href="#mobile" title="Permanent link">⚓︎</a></h3>
@@ -3538,6 +3633,13 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
+</ul>
+<hr/>
+<h3 id="reputation"><code>reputation</code><a class="headerlink" href="#reputation" title="Permanent link">⚓︎</a></h3>
+<p>The actor's reputation.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
 </ul>
 <hr/>
 <h3 id="scale"><code>scale</code><a class="headerlink" href="#scale" title="Permanent link">⚓︎</a></h3>
