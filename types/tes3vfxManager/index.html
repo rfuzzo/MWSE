@@ -1782,9 +1782,40 @@
 </li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          tes3vfxManager
+          <span class="md-nav__icon md-icon"></span>
+</label>
 <a class="md-nav__link md-nav__link--active" href="./">
         tes3vfxManager
       </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#properties">
+    Properties
+  </a>
+<nav aria-label="Properties" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data">
+    data
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#worldvfxroot">
+    worldVFXRoot
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../tes3weapon/">
@@ -2633,6 +2664,31 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#properties">
+    Properties
+  </a>
+<nav aria-label="Properties" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data">
+    data
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#worldvfxroot">
+    worldVFXRoot
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -2641,6 +2697,21 @@
 <article class="md-content__inner md-typeset">
 <h1 id="tes3vfxmanager">tes3vfxManager<a class="headerlink" href="#tes3vfxmanager" title="Permanent link">⚓︎</a></h1>
 <p>A manager for VFX lifetime and rendering. VFXs can be created through script with <code>tes3.createVisualEffect</code> and destroyed with <code>tes3.removeVisualEffect</code>.</p>
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
+<h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
+<p>A collection of active managed visual effects.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (table)</li>
+</ul>
+<hr/>
+<h3 id="worldvfxroot"><code>worldVFXRoot</code><a class="headerlink" href="#worldvfxroot" title="Permanent link">⚓︎</a></h3>
+<p>The root node that general VFXs are attached to.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>
+</ul>
+<hr/>
 </article>
 </div>
 </div>
