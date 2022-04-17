@@ -36,17 +36,16 @@ local function getFileList()
 	return files
 end
 
----@param prefix string Should look like: `"tes3.enumName.subEnumName"` or `"tes3.enumName"`.
+---@param prefix string Should look like: `"tes3.enumName.subEnumName"` or `"tes3.enumName"`. For example, `"tes3.activeBodyPart"` or `"tes3.dialoguePage.greeting"`.
 ---@param keys table<number, string> These are the keys of the table to build.
----@return string alias The compiled table that conforms to EmmyLua ---@alias annotation.
+---@return string alias The compiled table that conforms to EmmyLua `---@alias` annotation.
 local function buildTable(prefix, keys)
 	local out = {}
-	local firstLine = string.format("---@alias %s \"%s.%s\"\n", prefix, prefix, keys[1])
+	local firstLine = string.format("---@alias %s\n", prefix)
 	table.insert(out, firstLine)
 
-	-- Skip the first line, since it was handled before.
-	for i = 2, #keys, 1 do
-		local line = string.format("---| \"%s.%s\"\n", prefix, keys[i])
+	for _, key in ipairs(keys) do
+		local line = string.format("---| \"%s.%s\"\n", prefix, key) -- In v3.x this will have to be "---| `%s.%s`\n"
 		table.insert(out, line)
 	end
 
@@ -59,7 +58,7 @@ end
 ---@param fileName string Needs to be the file name without extension. For example, "objectType".
 ---@return string out The EmmyLua alias annotation for the file.
 local function build(fileName)
-	common.log("Building alias for: tes3." .. fileName .. ".lua" .. " ...")
+	common.log("Building alias for: tes3." .. fileName .. ".lua ...")
 
 	local out = {}
 
@@ -85,7 +84,7 @@ local function build(fileName)
 end
 
 ---Builds EmmyLua aliases for provided `tes3.` enumeration files.
----@param files table<number, string> The values of the table need to be valid file names without extension. For example, "objectType".
+---@param files table<number, string> The values of the table need to be valid file names without extension. For example, `"objectType"`.
 ---@return string out The EmmyLua alias annotation for provided files.
 local function buildFiles(files)
 	local out = {}
