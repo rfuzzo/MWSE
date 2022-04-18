@@ -2874,11 +2874,12 @@
 <hr/>
 <h3 id="finditemstack"><code>findItemStack</code><a class="headerlink" href="#finditemstack" title="Permanent link">⚓︎</a></h3>
 <p>Searches for an item stack in the inventory.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inventory</span><span class="p">:</span><span class="n">findItemStack</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inventory</span><span class="p">:</span><span class="n">findItemStack</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemData</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item to search for.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to search for.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. If provided, it will check for the specific data as well.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
