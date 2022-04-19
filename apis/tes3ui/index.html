@@ -3142,8 +3142,8 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>id</code> (string, number): The menu’s ID. The menu can be later accessed by tes3ui.findMenu(id).</li>
-<li><code>dragFrame</code> (boolean): Constructs a draggable and resizeable frame and background for the menu. It is similar to the stats, inventory, magic and map menus in the standard UI. After construction, position and minimum dimensions should be set.</li>
-<li><code>fixedFrame</code> (boolean): Constructs a fixed (non-draggable) frame and background for the menu. The layout system should automatically centre and size it to fit whatever is added to the menu.</li>
+<li><code>dragFrame</code> (boolean): <em>Default</em>: <code>false</code>. Constructs a draggable and resizeable frame and background for the menu. It is similar to the stats, inventory, magic and map menus in the standard UI. After construction, position and minimum dimensions should be set.</li>
+<li><code>fixedFrame</code> (boolean): <em>Default</em>: <code>false</code>. Constructs a fixed (non-draggable) frame and background for the menu. The layout system should automatically centre and size it to fit whatever is added to the menu.</li>
 <li><code>loadable</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, calls to loadMenuPosition will fail.</li>
 </ul>
 </li>
@@ -3335,7 +3335,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string)</li>
-<li><code>isCommand</code> (boolean): Passing <code>true</code> will make the text in the console selectable by using up arrow key. If it is a valid command, then pressing enter will call it.</li>
+<li><code>isCommand</code> (boolean): <em>Default</em>: <code>false</code>. Passing <code>true</code> will make the text in the console selectable by using up arrow key. If it is a valid command, then pressing enter will call it.</li>
 </ul>
 <details class="example">
 <summary>Example: This example describes how this function behaves with isCommand = true.</summary>

@@ -6409,9 +6409,9 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to equip.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to equip.</li>
-<li><code>addItem</code> (boolean): If <code>true</code>, the item will be added to the actor's inventory if needed.</li>
-<li><code>selectBestCondition</code> (boolean): If <code>true</code>, the item in the inventory with the best condition and best charge will be selected.</li>
-<li><code>selectWorstCondition</code> (boolean): If <code>true</code>, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
+<li><code>addItem</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the item will be added to the actor's inventory if needed.</li>
+<li><code>selectBestCondition</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the item in the inventory with the best condition and best charge will be selected.</li>
+<li><code>selectWorstCondition</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
 </ul>
 </li>
 </ul>
@@ -6437,7 +6437,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <li>
 <p><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Only valid if an item has been assigned to <code>source</code>. The item data of the specific item to equip.</p>
 </li>
-<li><code>equipItem</code> (boolean): <em>Optional</em>. Only valid if an item has been assigned to <code>source</code>. If <code>true</code>, the item assigned to <code>source</code> will be equipped. Requires the actor to have the item in their inventory. If <code>false</code>, <code>itemData</code> must not be nil.</li>
+<li><code>equipItem</code> (boolean): <em>Default</em>: <code>false</code>. Only valid if an item has been assigned to <code>source</code>. If <code>true</code>, the item assigned to <code>source</code> will be equipped. Requires the actor to have the item in their inventory. If <code>false</code>, <code>itemData</code> must not be nil.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. Only valid if this actor is the player. If <code>false</code>, the player GUI will not be updated to reflect the change to equipped magic.</li>
 </ul>
 </li>
@@ -6714,7 +6714,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>unequipItem</code> (boolean): <em>Optional</em>. Only valid if the currently equipped magic is from an equippable item enchantment. If <code>true</code>, the item containing the enchantment will be unequipped.</li>
+<li><code>unequipItem</code> (boolean): <em>Default</em>: <code>false</code>. Only valid if the currently equipped magic is from an equippable item enchantment. If <code>true</code>, the item containing the enchantment will be unequipped.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. Only valid if this actor is the player. If <code>false</code>, the player GUI will not be updated to reflect the change to equipped magic.</li>
 </ul>
 </li>

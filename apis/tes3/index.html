@@ -4756,7 +4756,7 @@
 <li><code>soul</code> (<a href="../../types/tes3creature">tes3creature</a>, <a href="../../types/tes3npc">tes3npc</a>): <em>Optional</em>. For creating filled soul gems.</li>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The maximum number of items to add.</li>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
-<li><code>limit</code> (boolean): If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
+<li><code>limit</code> (boolean): <em>Default</em>: <code>false</code>. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
 <li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item added is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if the new item is worth equipping. This does not affect the player.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
@@ -5125,7 +5125,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>hours</code> (number): How many hours to progress.</li>
-<li><code>resting</code> (boolean): <em>Optional</em>. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.</li>
+<li><code>resting</code> (boolean): <em>Default</em>: <code>false</code>. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.</li>
 <li><code>updateEnvironment</code> (boolean): <em>Default</em>: <code>true</code>. Controls if the weather system is updated for each hour passed.</li>
 </ul>
 </li>
@@ -5155,11 +5155,11 @@
 <li><code>max</code> (number): <em>Default</em>: <code>0</code>. The maximal magnitude of the effect per tick.</li>
 </ul>
 </li>
-<li><code>createCopy</code> (boolean): <em>Optional</em>. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.</li>
+<li><code>createCopy</code> (boolean): <em>Default</em>: <code>false</code>. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.</li>
 <li><code>fromStack</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>): <em>Optional</em>. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.</li>
 <li><code>castChance</code> (number): <em>Optional</em>. This parameter allows overriding the casting chance of the magic source.</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The target of the magic.</li>
-<li><code>bypassResistances</code> (boolean): <em>Optional</em>. Is this effect going to bypass magic resistance?</li>
+<li><code>bypassResistances</code> (boolean): <em>Default</em>: <code>false</code>. Is this effect going to bypass magic resistance?</li>
 </ul>
 </li>
 </ul>
@@ -5194,11 +5194,11 @@
 <li><code>object</code> (<a href="../../types/tes3object">tes3object</a>): <em>Optional</em>. The object to calculate the price for. If not provided, <code>basePrice</code> is required.</li>
 <li><code>basePrice</code> (number): <em>Optional</em>. The base price to calculate the end price for. This defaults to the <code>object</code> param's <code>value</code>, if provided. This parameter is required if <code>object</code> is not provided.</li>
 <li><code>buying</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, uses the logic for buying a service/item. This is exclusive with <code>selling</code>.</li>
-<li><code>selling</code> (boolean): If <code>true</code>, uses the logic for selling an item. This is exclusive with <code>buying</code>.</li>
+<li><code>selling</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, uses the logic for selling an item. This is exclusive with <code>buying</code>.</li>
 <li><code>merchant</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): The merchant to use for calculating the price.</li>
-<li><code>bartering</code> (boolean): If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> or <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event will be triggered.</li>
-<li><code>repairing</code> (boolean): If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event will be triggered.</li>
-<li><code>training</code> (boolean): If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcTrainingPrice">calcTrainingPrice</a> event will be triggered, passing the given <code>skill</code> ID.</li>
+<li><code>bartering</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> or <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event will be triggered.</li>
+<li><code>repairing</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event will be triggered.</li>
+<li><code>training</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, a <a href="https://mwse.github.io/MWSE/events/calcTrainingPrice">calcTrainingPrice</a> event will be triggered, passing the given <code>skill</code> ID.</li>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. If <code>bartering</code>, the count passed to the <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> event.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. If <code>bartering</code> or <code>repairing</code>, the item data passed to the <a href="https://mwse.github.io/MWSE/events/calcBarterPrice">calcBarterPrice</a> or <a href="https://mwse.github.io/MWSE/events/calcRepairPrice">calcRepairPrice</a> event.</li>
 <li><code>skill</code> (number): If <code>training</code>, the skill ID passed to the <a href="https://mwse.github.io/MWSE/events/calcTrainingPrice">calcTrainingPrice</a> event.</li>
@@ -5231,7 +5231,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.</li>
 <li><code>checkForSolidGround</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is underwater. If underwater, false is returned.</li>
-<li><code>showMessage</code> (boolean): If true, a messagebox will be shown if the player can't rest because some condition isn't met.</li>
+<li><code>showMessage</code> (boolean): <em>Default</em>: <code>false</code>. If true, a messagebox will be shown if the player can't rest because some condition isn't met.</li>
 </ul>
 </li>
 </ul>
@@ -5251,9 +5251,9 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The caster reference.</li>
 <li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The target reference. Optional only if the caster is the player.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>, string): The spell the caster uses.</li>
-<li><code>instant</code> (boolean): When true, the spell is cast instantly. No animation is performed.</li>
+<li><code>instant</code> (boolean): <em>Default</em>: <code>false</code>. When true, the spell is cast instantly. No animation is performed.</li>
 <li><code>alwaysSucceeds</code> (boolean): <em>Default</em>: <code>true</code>. When true, the spell cannot fail and does not consume magicka. When false, it is cast using the actor's spell skill, and requires and takes enough magicka to cast. Only applies when 'instant' is true.</li>
-<li><code>bypassResistances</code> (boolean): The spell will bypass the target's resistances. Only applies when 'instant' is true.</li>
+<li><code>bypassResistances</code> (boolean): <em>Default</em>: <code>false</code>. The spell will bypass the target's resistances. Only applies when 'instant' is true.</li>
 </ul>
 </li>
 </ul>
@@ -5508,7 +5508,7 @@
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The reference whose inventory will be modified.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to drop.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to drop. Without this, the first matching item in the inventory will drop.</li>
-<li><code>matchNoItemData</code> (boolean): If true, matches an item without item data. This can be used when you want to drop an item that isn't equipped (equipped items always have item data).</li>
+<li><code>matchNoItemData</code> (boolean): <em>Default</em>: <code>false</code>. If true, matches an item without item data. This can be used when you want to drop an item that isn't equipped (equipped items always have item data).</li>
 <li><code>count</code> (number): <em>Default</em>: <code>1</code>. The number of items to drop.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the player or contents menu won't be updated.</li>
 </ul>
@@ -6396,7 +6396,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>useDoors</code> (boolean): <em>Optional</em>.</li>
+<li><code>useDoors</code> (boolean): <em>Default</em>: <code>false</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -6658,19 +6658,19 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>actual</code> (table): The key object that is being compared.<ul>
-<li><code>keyCode</code> (number): Value of the actual key scan code, such as the letter <code>p</code>. Maps to <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode.*</code></a>.</li>
-<li><code>isShiftDown</code> (boolean): Value of whether the shift key is pressed.</li>
-<li><code>isControlDown</code> (boolean): Value of whether the control key is pressed.</li>
-<li><code>isAltDown</code> (boolean): Value of whether the alt key is pressed.</li>
-<li><code>isSuperDown</code> (boolean): Value of whether the super (Windows key) key is pressed.</li>
+<li><code>keyCode</code> (number): <em>Default</em>: <code>false</code>. Value of the actual key scan code, such as the letter <code>p</code>. Maps to <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode.*</code></a>.</li>
+<li><code>isShiftDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the shift key is pressed.</li>
+<li><code>isControlDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the control key is pressed.</li>
+<li><code>isAltDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the alt key is pressed.</li>
+<li><code>isSuperDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the super (Windows key) key is pressed.</li>
 </ul>
 </li>
 <li><code>expected</code> (table): The key object that is being compared against.<ul>
-<li><code>keyCode</code> (number): Value of the expected key scan code, such as the letter <code>p</code>. Maps to <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode.*</code></a>.</li>
-<li><code>isShiftDown</code> (boolean): Value of whether the shift key is expected to be pressed.</li>
-<li><code>isControlDown</code> (boolean): Value of whether the control key is expected to be pressed.</li>
-<li><code>isAltDown</code> (boolean): Value of whether the alt key is expected to be pressed.</li>
-<li><code>isSuperDown</code> (boolean): Value of whether the super (Windows key) key is pressed.</li>
+<li><code>keyCode</code> (number): <em>Default</em>: <code>false</code>. Value of the expected key scan code, such as the letter <code>p</code>. Maps to <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode.*</code></a>.</li>
+<li><code>isShiftDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the shift key is expected to be pressed.</li>
+<li><code>isControlDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the control key is expected to be pressed.</li>
+<li><code>isAltDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the alt key is expected to be pressed.</li>
+<li><code>isSuperDown</code> (boolean): <em>Default</em>: <code>false</code>. Value of whether the super (Windows key) key is pressed.</li>
 </ul>
 </li>
 </ul>
@@ -6881,8 +6881,8 @@
 <li><code>base</code> (number): <em>Optional</em>. If set, the base value will be modified.</li>
 <li><code>current</code> (number): <em>Optional</em>. If set, the current value will be modified.</li>
 <li><code>value</code> (number): <em>Optional</em>. If set, both the base and current value will be modified.</li>
-<li><code>limit</code> (boolean): If set, the attribute won't rise above 100 or fall below 0.</li>
-<li><code>limitToBase</code> (boolean): If set, the attribute's current value won't rise above its base value. Useful for health, magicka, and fatigue.</li>
+<li><code>limit</code> (boolean): <em>Default</em>: <code>false</code>. If set, the attribute won't rise above 100 or fall below 0.</li>
+<li><code>limitToBase</code> (boolean): <em>Default</em>: <code>false</code>. If set, the attribute's current value won't rise above its base value. Useful for health, magicka, and fatigue.</li>
 </ul>
 </li>
 </ul>
@@ -6989,7 +6989,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or id of the sound to look for.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference to attach the sound to.</li>
-<li><code>loop</code> (boolean): If true, the sound will loop.</li>
+<li><code>loop</code> (boolean): <em>Default</em>: <code>false</code>. If true, the sound will loop.</li>
 <li><code>mixChannel</code> (number): <em>Default</em>: <code>tes3.soundMix.effects</code>. The channel to base volume off of. Maps to <a href="https://mwse.github.io/MWSE/references/sound-mix-types/"><code>tes3.soundMix</code></a> constants.</li>
 <li><code>volume</code> (number): <em>Default</em>: <code>1.0</code>. A value between 0.0 and 1.0 to scale the volume off of.</li>
 <li><code>pitch</code> (number): <em>Default</em>: <code>1.0</code>. The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].</li>
@@ -7030,8 +7030,8 @@
 <li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): <em>Optional</em>. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The position to move the reference to.</li>
 <li><code>orientation</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. The new orientation of the reference.</li>
-<li><code>forceCellChange</code> (boolean): <em>Optional</em>. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.</li>
-<li><code>suppressFader</code> (boolean): <em>Optional</em>. When moving the player, can be used to prevent the fade in and out visual effect.</li>
+<li><code>forceCellChange</code> (boolean): <em>Default</em>: <code>false</code>. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.</li>
+<li><code>suppressFader</code> (boolean): <em>Default</em>: <code>false</code>. When moving the player, can be used to prevent the fade in and out visual effect.</li>
 <li><code>teleportCompanions</code> (boolean): <em>Default</em>: <code>true</code>. If used on the player, determines if companions should also be teleported.</li>
 </ul>
 </li>
@@ -7068,19 +7068,19 @@
 <li><code>params</code> (table)<ul>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Position of the ray origin.</li>
 <li><code>direction</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): Direction of the ray. Does not have to be unit length.</li>
-<li><code>findAll</code> (boolean): If true, the ray test won't stop after the first result.</li>
+<li><code>findAll</code> (boolean): <em>Default</em>: <code>false</code>. If true, the ray test won't stop after the first result.</li>
 <li><code>maxDistance</code> (number): <em>Optional</em>. The maximum distance that the test will run.</li>
 <li><code>sort</code> (boolean): <em>Default</em>: <code>true</code>. If true, the results will be sorted by distance from the origin position.</li>
-<li><code>useModelBounds</code> (boolean): If true, model bounds will be tested for intersection. Otherwise triangles will be used.</li>
-<li><code>useModelCoordinates</code> (boolean): If true, model coordinates will be used instead of world coordinates.</li>
-<li><code>useBackTriangles</code> (boolean): Include intersections with back-facing triangles.</li>
+<li><code>useModelBounds</code> (boolean): <em>Default</em>: <code>false</code>. If true, model bounds will be tested for intersection. Otherwise triangles will be used.</li>
+<li><code>useModelCoordinates</code> (boolean): <em>Default</em>: <code>false</code>. If true, model coordinates will be used instead of world coordinates.</li>
+<li><code>useBackTriangles</code> (boolean): <em>Default</em>: <code>false</code>. Include intersections with back-facing triangles.</li>
 <li><code>observeAppCullFlag</code> (boolean): <em>Default</em>: <code>true</code>. Ignore intersections with culled (hidden) models.</li>
 <li><code>root</code> (node<em>): </em>Default*: <code>tes3.game.worldSceneGraphRoot</code>. Node pointer to node scene.</li>
-<li><code>ignoreSkinned</code> (boolean): Ignore results from skinned objects.</li>
-<li><code>returnColor</code> (boolean): Calculate and return the vertex color at intersections.</li>
+<li><code>ignoreSkinned</code> (boolean): <em>Default</em>: <code>false</code>. Ignore results from skinned objects.</li>
+<li><code>returnColor</code> (boolean): <em>Default</em>: <code>false</code>. Calculate and return the vertex color at intersections.</li>
 <li><code>returnNormal</code> (boolean): <em>Default</em>: <code>true</code>. Calculate and return the vertex normal at intersections.</li>
-<li><code>returnSmoothNormal</code> (boolean): Use normal interpolation for calculating vertex normals.</li>
-<li><code>returnTexture</code> (boolean): Calculate and return the texture coordinate at intersections.</li>
+<li><code>returnSmoothNormal</code> (boolean): <em>Default</em>: <code>false</code>. Use normal interpolation for calculating vertex normals.</li>
+<li><code>returnTexture</code> (boolean): <em>Default</em>: <code>false</code>. Calculate and return the texture coordinate at intersections.</li>
 <li><code>ignore</code> (table): <em>Optional</em>. An array of references and/or scene graph nodes to cull from the result(s).</li>
 </ul>
 </li>
@@ -7237,7 +7237,7 @@
 <li><code>from</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference or mobile whose inventory will be modified.</li>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to remove item data for.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The exact item data to remove. If no itemData is provided, the itemData from the reference itself will be removed.</li>
-<li><code>force</code> (boolean): If true, no checks are made to see if the item data should be deleted. It will always be purged.</li>
+<li><code>force</code> (boolean): <em>Default</em>: <code>false</code>. If true, no checks are made to see if the item data should be deleted. It will always be purged.</li>
 <li><code>ignoreOwnership</code> (boolean): <em>Default</em>: <code>true</code>. If <code>force</code> is false, a check will be made to see if the item data is empty and can be deleted. By default this ignores any ownership data. Setting this to false will override that behavior.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the player or contents menu won't be updated.</li>
 </ul>
@@ -7350,7 +7350,7 @@
 <li><code>soundPath</code> (string): A path to a valid sound file.</li>
 <li><code>pitch</code> (number): <em>Default</em>: <code>1</code>. A pitch shift to adjust the sound with.</li>
 <li><code>volume</code> (number): <em>Default</em>: <code>1</code>. The volume to play the sound at, relative to the voice mix channel.</li>
-<li><code>forceSubtitle</code> (boolean): If true a subtitle will be shown, even if subtitles are disabled.</li>
+<li><code>forceSubtitle</code> (boolean): <em>Default</em>: <code>false</code>. If true a subtitle will be shown, even if subtitles are disabled.</li>
 <li><code>subtitle</code> (string): <em>Optional</em>. The subtitle to show if subtitles are enabled, or if forceSubtitle is set.</li>
 </ul>
 </li>
@@ -7481,7 +7481,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to enable/disable.</li>
-<li><code>toggle</code> (boolean): If true, the enabled state will be toggled.</li>
+<li><code>toggle</code> (boolean): <em>Default</em>: <code>false</code>. If true, the enabled state will be toggled.</li>
 <li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. If not toggling, setting <code>enabled</code> to true will enable the reference or to false will disable the reference.</li>
 </ul>
 </li>
@@ -7526,7 +7526,7 @@
 <li><code>id</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string)</li>
 <li><code>index</code> (number)</li>
 <li><code>speaker</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
-<li><code>showMessage</code> (boolean): If set, a message may be shown to the player.</li>
+<li><code>showMessage</code> (boolean): <em>Default</em>: <code>false</code>. If set, a message may be shown to the player.</li>
 </ul>
 </li>
 </ul>
@@ -7587,7 +7587,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference whose owner to set.</li>
-<li><code>remove</code> (boolean): <em>Optional</em>. If this parameter is set to true, reference's owner field will be removed.</li>
+<li><code>remove</code> (boolean): <em>Default</em>: <code>false</code>. If this parameter is set to true, reference's owner field will be removed.</li>
 <li><code>owner</code> (<a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, string): Assigns this NPC or a faction as the owner of the reference.</li>
 <li><code>requiredGlobal</code> (<a href="../../types/tes3globalVariable">tes3globalVariable</a>): <em>Optional</em>. If <code>owner</code> is set to NPC, <code>requiredGlobal</code> variable can be set.</li>
 <li><code>requiredRank</code> (number): <em>Default</em>: <code>0</code>. If <code>owner</code> is set to faction, <code>requitedRank</code> variable controls minimal rank in faction the player has to have to be able to freely take the reference.</li>
@@ -7602,12 +7602,12 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>enabled</code> (boolean): <em>Optional</em>. Setting this to false will disable any kind of control.</li>
-<li><code>attack</code> (boolean): <em>Optional</em>. If this is false, it will block player from attacking.</li>
-<li><code>jumping</code> (boolean): <em>Optional</em>. If this is false, it will block player from jumping.</li>
-<li><code>magic</code> (boolean): <em>Optional</em>. If this is false, it will block player from using magic.</li>
-<li><code>vanity</code> (boolean): <em>Optional</em>. If this is false, it will block player from going to vanity mode.</li>
-<li><code>viewSwitch</code> (boolean): <em>Optional</em>. If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.</li>
+<li><code>enabled</code> (boolean): <em>Default</em>: <code>false</code>. Setting this to false will disable any kind of control.</li>
+<li><code>attack</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player from attacking.</li>
+<li><code>jumping</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player from jumping.</li>
+<li><code>magic</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player from using magic.</li>
+<li><code>vanity</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player from going to vanity mode.</li>
+<li><code>viewSwitch</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.</li>
 </ul>
 </li>
 </ul>
@@ -7639,7 +7639,7 @@
 <li><code>attribute</code> (number): <em>Optional</em>. The attribute to set.</li>
 <li><code>base</code> (number): <em>Optional</em>. If set, the base value will be set.</li>
 <li><code>current</code> (number): <em>Optional</em>. If set, the current value will be set.</li>
-<li><code>limit</code> (boolean): If set, the attribute won't rise above 100 or fall below 0.</li>
+<li><code>limit</code> (boolean): <em>Default</em>: <code>false</code>. If set, the attribute won't rise above 100 or fall below 0.</li>
 <li><code>name</code> (string): <em>Optional</em>. A generic name of an attribute to set.</li>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
 <li><code>skill</code> (number): <em>Optional</em>. The skill to set.</li>
@@ -7675,7 +7675,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. This flag sets the vanity mode as enabled or disabled.</li>
 <li><code>checkVanityDisabled</code> (boolean): <em>Default</em>: <code>true</code>. This will prevent changing vanity mode according to vanityDisabled flag on tes3.mobilePlayer.</li>
-<li><code>toggle</code> (boolean): <em>Optional</em>. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.</li>
+<li><code>toggle</code> (boolean): <em>Default</em>: <code>false</code>. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.</li>
 </ul>
 </li>
 </ul>
@@ -7720,7 +7720,7 @@
 <li><code>checkIsWerewolf</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is Werewolf. If they are, then the player will be prompted to wait instead of rest.</li>
 <li><code>showMessage</code> (boolean): <em>Default</em>: <code>true</code>. Should a messagebox be shown if the player can't open resting menu because some condition isn't met.</li>
 <li><code>resting</code> (boolean): <em>Default</em>: <code>true</code>. Should this be a rest?</li>
-<li><code>waiting</code> (boolean): <em>Optional</em>. Or, is this a wait?</li>
+<li><code>waiting</code> (boolean): <em>Default</em>: <code>false</code>. Or, is this a wait?</li>
 </ul>
 </li>
 </ul>
@@ -7850,7 +7850,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>criminal</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>.</li>
-<li><code>forceDetection</code> (boolean): Can be set to true to ignore normal detection checks.</li>
+<li><code>forceDetection</code> (boolean): <em>Default</em>: <code>false</code>. Can be set to true to ignore normal detection checks.</li>
 <li><code>type</code> (number): <em>Default</em>: <code>tes3.crimeType.stealing</code>. Maps to <a href="https://mwse.github.io/MWSE/references/crime-types/"><code>tes3.crimeType</code></a> constants.</li>
 <li><code>value</code> (number): Penalty for the crime. Defaults to 25 for pickpocketing.</li>
 <li><code>victim</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>.</li>
@@ -7924,7 +7924,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <li><code>params</code> (table)<ul>
 <li><code>id</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string)</li>
 <li><code>index</code> (number)</li>
-<li><code>showMessage</code> (boolean): If set, a message may be shown to the player.</li>
+<li><code>showMessage</code> (boolean): <em>Default</em>: <code>false</code>. If set, a message may be shown to the player.</li>
 </ul>
 </li>
 </ul>
