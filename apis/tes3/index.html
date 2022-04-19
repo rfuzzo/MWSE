@@ -1416,6 +1416,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#tes3isluamodactive">
+    tes3.isLuaModActive
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#tes3ismodactive">
     tes3.isModActive
   </a>
@@ -4249,6 +4254,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#tes3isluamodactive">
+    tes3.isLuaModActive
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#tes3ismodactive">
     tes3.isModActive
   </a>
@@ -6673,6 +6683,27 @@
 <ul>
 <li><code>equal</code> (boolean)</li>
 </ul>
+<hr/>
+<h3 id="tes3isluamodactive"><code>tes3.isLuaModActive</code><a class="headerlink" href="#tes3isluamodactive" title="Permanent link">⚓︎</a></h3>
+<p>Determines if the player has a given lua mod active. The key passed to this function is the path to where its main.lua file is, relative to the MWSE\mods folder. Slashes are automatically replaced with periods, and the key is case-insensitive.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isActive</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">isLuaModActive</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>key</code> (string): The key to check..</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>isActive</code> (boolean): True if the mod is active, otherwise false.</li>
+</ul>
+<details class="example">
+<summary>Example: Determine if a Specific Lua Mod is Active</summary>
+<p>In this example, we determine if <a href="https://www.nexusmods.com/morrowind/mods/47996">Chameleon</a> is active. The mod provides no interop files to try to <code>include</code>, and is a simple main.lua file. This makes it hard to otherwise detect.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span> <span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">isLuaModActive</span><span class="p">(</span><span class="s2">"Danae.Chameleon"</span><span class="p">))</span> <span class="kr">then</span>
+    <span class="c1">-- Perform some compatibility actions here.</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr/>
 <h3 id="tes3ismodactive"><code>tes3.isModActive</code><a class="headerlink" href="#tes3ismodactive" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the player has a given ESP or ESM file active.</p>
