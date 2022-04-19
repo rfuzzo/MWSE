@@ -5269,13 +5269,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li>
 <p><code>source</code> (<a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3item">tes3item</a>, string): The source of the magic to equip.</p>
-<p>Spells must be castable. Castable spells have a <code>castType</code> of <code>tes3.spellType.spell</code> or <code>tes3.spellType.power</code>.</p>
-<p>Items must have a castable enchantment. Castable enchantments have a <code>castType</code> of <code>tes3.enchantmentType.onUse</code> or <code>tes3.enchantmentType.castOnce</code>.</p>
+<p>Spells must be castable. Castable spells have a <code>castType</code> of <code>tes3.spellType.spell</code> or <code>tes3.spellType.power</code>. The actor is not required to know this spell.</p>
+<p>Items must have a castable enchantment. Castable enchantments have a <code>castType</code> of <code>tes3.enchantmentType.onUse</code> or <code>tes3.enchantmentType.castOnce</code>. The actor is not required to have this item in their inventory, unless <code>equipItem</code> is <code>true</code>.</p>
 </li>
 <li>
 <p><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Only valid if an item has been assigned to <code>source</code>. The item data of the specific item to equip.</p>
 </li>
-<li><code>equipItem</code> (boolean): <em>Optional</em>. Only valid if an item has been assigned to <code>source</code>. If <code>true</code>, the item assigned to <code>source</code> will be equipped. If <code>false</code>, <code>itemData</code> must not be nil.</li>
+<li><code>equipItem</code> (boolean): <em>Optional</em>. Only valid if an item has been assigned to <code>source</code>. If <code>true</code>, the item assigned to <code>source</code> will be equipped. Requires the actor to have the item in their inventory. If <code>false</code>, <code>itemData</code> must not be nil.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. Only valid if this actor is the player. If <code>false</code>, the player GUI will not be updated to reflect the change to equipped magic.</li>
 </ul>
 </li>
