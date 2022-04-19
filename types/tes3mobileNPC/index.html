@@ -2311,6 +2311,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#equipmagic">
+    equipMagic
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#getactivemagiceffects">
     getActiveMagicEffects
   </a>
@@ -2408,6 +2413,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#unequip">
     unequip
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#unequipmagic">
+    unequipMagic
   </a>
 </li>
 <li class="md-nav__item">
@@ -4409,6 +4419,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#equipmagic">
+    equipMagic
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#getactivemagiceffects">
     getActiveMagicEffects
   </a>
@@ -4506,6 +4521,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#unequip">
     unequip
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#unequipmagic">
+    unequipMagic
   </a>
 </li>
 <li class="md-nav__item">
@@ -5714,6 +5734,33 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>itemEquipped</code> (boolean)</li>
 </ul>
 <hr/>
+<h3 id="equipmagic"><code>equipMagic</code><a class="headerlink" href="#equipmagic" title="Permanent link">⚓︎</a></h3>
+<p>Equips a spell or enchantment, optionally equipping the enchanted item if needed. Returns <code>false</code> if the item could not be equipped.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">equipMagic</span><span class="p">({</span> <span class="n">source</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">equipItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li>
+<p><code>params</code> (table)</p>
+<ul>
+<li>
+<p><code>source</code> (<a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3item">tes3item</a>, string): The source of the magic to equip.</p>
+<p>Spells must be castable. Castable spells have a <code>castType</code> of <code>tes3.spellType.spell</code> or <code>tes3.spellType.power</code>.</p>
+<p>Items must have a castable enchantment. Castable enchantments have a <code>castType</code> of <code>tes3.enchantmentType.onUse</code> or <code>tes3.enchantmentType.castOnce</code>.</p>
+</li>
+<li>
+<p><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. Only valid if an item has been assigned to <code>source</code>. The item data of the specific item to equip.</p>
+</li>
+<li><code>equipItem</code> (boolean): Only valid if an item has been assigned to <code>source</code>. If <code>true</code>, the item assigned to <code>source</code> will be equipped. If <code>false</code>, <code>itemData</code> must not be nil.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. Only valid if this actor is the player. If <code>false</code>, the player GUI will not be updated to reflect the change to equipped magic.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr/>
 <h3 id="getactivemagiceffects"><code>getActiveMagicEffects</code><a class="headerlink" href="#getactivemagiceffects" title="Permanent link">⚓︎</a></h3>
 <p>Fetches a filtered list of the active magic effects on the actor. Returns a table with <a href="https://mwse.github.io/MWSE/types/tes3activeMagicEffect/"><code>tes3activeMagicEffect</code></a> items.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getActiveMagicEffects</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
@@ -5927,6 +5974,19 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>itemUnequipped</code> (boolean)</li>
+</ul>
+<hr/>
+<h3 id="unequipmagic"><code>unequipMagic</code><a class="headerlink" href="#unequipmagic" title="Permanent link">⚓︎</a></h3>
+<p>Unequips the currently equipped magic, optionally unequipping the enchanted item if needed.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">unequipMagic</span><span class="p">({</span> <span class="n">unequipItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>unequipItem</code> (boolean): Only valid if the currently equipped magic is from an equippable item enchantment. If <code>true</code>, the item containing the enchantment will be unequipped.</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. Only valid if this actor is the player. If <code>false</code>, the player GUI will not be updated to reflect the change to equipped magic.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h3 id="updatederivedstatistics"><code>updateDerivedStatistics</code><a class="headerlink" href="#updatederivedstatistics" title="Permanent link">⚓︎</a></h3>
