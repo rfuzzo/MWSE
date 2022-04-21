@@ -2574,6 +2574,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3closespellmakingmenu" class="md-nav__link">
+    tes3.closeSpellmakingMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3createobject" class="md-nav__link">
     tes3.createObject
   </a>
@@ -9855,6 +9862,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3closespellmakingmenu" class="md-nav__link">
+    tes3.closeSpellmakingMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3createobject" class="md-nav__link">
     tes3.createObject
   </a>
@@ -11739,6 +11753,11 @@
 <h3 id="tes3closerestmenu"><code>tes3.closeRestMenu</code><a class="headerlink" href="#tes3closerestmenu" title="Permanent link">⚓︎</a></h3>
 <p>This function closes the resting menu.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">closeRestMenu</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h3 id="tes3closespellmakingmenu"><code>tes3.closeSpellmakingMenu</code><a class="headerlink" href="#tes3closespellmakingmenu" title="Permanent link">⚓︎</a></h3>
+<p>This function closes the spellmaking menu.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">closeSpellmakingMenu</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="tes3createobject"><code>tes3.createObject</code><a class="headerlink" href="#tes3createobject" title="Permanent link">⚓︎</a></h3>
@@ -14113,7 +14132,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>): <em>Optional</em>. The actor to use for calculating the service price.</li>
+<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Optional</em>. The actor to use for calculating the service price.</li>
 </ul>
 </li>
 </ul>
@@ -14148,7 +14167,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Optional</em>. The actor to use for calculating the service price. If none is provided, an open dialog menu's service actor will be used instead.</li>
+<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Optional</em>. The actor to use for calculating the service price. If none is provided, an open dialog menu's service actor will be used instead.</li>
 <li><code>useDialogActor</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, the dialog menu service actor will be ignored. If false, a serviceActor must be provided.</li>
 </ul>
 </li>
