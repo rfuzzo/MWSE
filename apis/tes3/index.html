@@ -2553,6 +2553,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3closealchemymenu" class="md-nav__link">
+    tes3.closeAlchemyMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3closerepairservicemenu" class="md-nav__link">
+    tes3.closeRepairServiceMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3closerestmenu" class="md-nav__link">
+    tes3.closeRestMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3createobject" class="md-nav__link">
     tes3.createObject
   </a>
@@ -9813,6 +9834,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3closealchemymenu" class="md-nav__link">
+    tes3.closeAlchemyMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3closerepairservicemenu" class="md-nav__link">
+    tes3.closeRepairServiceMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3closerestmenu" class="md-nav__link">
+    tes3.closeRestMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3createobject" class="md-nav__link">
     tes3.createObject
   </a>
@@ -11682,6 +11724,21 @@
 <h3 id="tes3clearmarklocation"><code>tes3.clearMarkLocation</code><a class="headerlink" href="#tes3clearmarklocation" title="Permanent link">⚓︎</a></h3>
 <p>This function deletes the player's mark location.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">clearMarkLocation</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h3 id="tes3closealchemymenu"><code>tes3.closeAlchemyMenu</code><a class="headerlink" href="#tes3closealchemymenu" title="Permanent link">⚓︎</a></h3>
+<p>This function closes the alchemy menu.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">closeAlchemyMenu</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h3 id="tes3closerepairservicemenu"><code>tes3.closeRepairServiceMenu</code><a class="headerlink" href="#tes3closerepairservicemenu" title="Permanent link">⚓︎</a></h3>
+<p>This function closes the repair service menu.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">closeRepairServiceMenu</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h3 id="tes3closerestmenu"><code>tes3.closeRestMenu</code><a class="headerlink" href="#tes3closerestmenu" title="Permanent link">⚓︎</a></h3>
+<p>This function closes the resting menu.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">closeRestMenu</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="tes3createobject"><code>tes3.createObject</code><a class="headerlink" href="#tes3createobject" title="Permanent link">⚓︎</a></h3>
@@ -14045,14 +14102,21 @@
 </ul>
 <hr />
 <h3 id="tes3showalchemymenu"><code>tes3.showAlchemyMenu</code><a class="headerlink" href="#tes3showalchemymenu" title="Permanent link">⚓︎</a></h3>
-<p>This function opens alchemy menu.</p>
+<p>This function opens the alchemy menu.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">showAlchemyMenu</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="tes3showrepairservicemenu"><code>tes3.showRepairServiceMenu</code><a class="headerlink" href="#tes3showrepairservicemenu" title="Permanent link">⚓︎</a></h3>
-<p>Opens the service repair menu.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">showRepairServiceMenu</span><span class="p">()</span>
+<p>This function opens the repair service menu.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">showRepairServiceMenu</span><span class="p">({</span> <span class="n">serviceActor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>): <em>Optional</em>. The actor to use for calculating the service price.</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h3 id="tes3showrestmenu"><code>tes3.showRestMenu</code><a class="headerlink" href="#tes3showrestmenu" title="Permanent link">⚓︎</a></h3>
 <p>This function opens the resting menu and returns true on success. If the player can't rest currently, it returns false.</p>
