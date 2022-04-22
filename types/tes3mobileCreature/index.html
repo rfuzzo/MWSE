@@ -4783,6 +4783,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#canact" class="md-nav__link">
+    canAct
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell" class="md-nav__link">
     cell
   </a>
@@ -4937,6 +4944,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hasfreeaction" class="md-nav__link">
+    hasFreeAction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#health" class="md-nav__link">
     health
   </a>
@@ -5007,6 +5021,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#isattackingorcasting" class="md-nav__link">
+    isAttackingOrCasting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscrittable" class="md-nav__link">
     isCrittable
   </a>
@@ -5070,6 +5091,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#isparalyzed" class="md-nav__link">
+    isParalyzed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#isplayerdetected" class="md-nav__link">
     isPlayerDetected
   </a>
@@ -5079,6 +5107,13 @@
           <li class="md-nav__item">
   <a href="#isplayerhidden" class="md-nav__link">
     isPlayerHidden
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isreadyingweapon" class="md-nav__link">
+    isReadyingWeapon
   </a>
   
 </li>
@@ -5673,13 +5708,6 @@
           <li class="md-nav__item">
   <a href="#getweaponspeed" class="md-nav__link">
     getWeaponSpeed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hasfreeaction" class="md-nav__link">
-    hasFreeAction
   </a>
   
 </li>
@@ -9464,6 +9492,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#canact" class="md-nav__link">
+    canAct
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell" class="md-nav__link">
     cell
   </a>
@@ -9618,6 +9653,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hasfreeaction" class="md-nav__link">
+    hasFreeAction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#health" class="md-nav__link">
     health
   </a>
@@ -9688,6 +9730,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#isattackingorcasting" class="md-nav__link">
+    isAttackingOrCasting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iscrittable" class="md-nav__link">
     isCrittable
   </a>
@@ -9751,6 +9800,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#isparalyzed" class="md-nav__link">
+    isParalyzed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#isplayerdetected" class="md-nav__link">
     isPlayerDetected
   </a>
@@ -9760,6 +9816,13 @@
           <li class="md-nav__item">
   <a href="#isplayerhidden" class="md-nav__link">
     isPlayerHidden
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isreadyingweapon" class="md-nav__link">
+    isReadyingWeapon
   </a>
   
 </li>
@@ -10359,13 +10422,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hasfreeaction" class="md-nav__link">
-    hasFreeAction
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#hasusedpower" class="md-nav__link">
     hasUsedPower
   </a>
@@ -10595,6 +10651,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (<a href="../../types/tes3vector2">tes3vector2</a>)</li>
 </ul>
 <hr />
+<h3 id="canact"><code>canAct</code><a class="headerlink" href="#canact" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If true, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="cell"><code>cell</code><a class="headerlink" href="#cell" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Fetches the cell that the actor is in.</p>
 <p><strong>Returns</strong>:</p>
@@ -10749,6 +10812,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
+<h3 id="hasfreeaction"><code>hasFreeAction</code><a class="headerlink" href="#hasfreeaction" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If true, the actor isn't knocked down or stunned.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="health"><code>health</code><a class="headerlink" href="#health" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Access to the actor's health statistic.</p>
 <p><strong>Returns</strong>:</p>
@@ -10819,6 +10889,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
+<h3 id="isattackingorcasting"><code>isAttackingOrCasting</code><a class="headerlink" href="#isattackingorcasting" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If true, the actor is attacking, casting magic or using a lockpick or probe.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="iscrittable"><code>isCrittable</code><a class="headerlink" href="#iscrittable" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Friendly access to the actor's flag that controls if the actor can be critically hit.</p>
 <p><strong>Returns</strong>:</p>
@@ -10882,6 +10959,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="isparalyzed"><code>isParalyzed</code><a class="headerlink" href="#isparalyzed" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If true, the actor is affected by the magic effect paralyze.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="isplayerdetected"><code>isPlayerDetected</code><a class="headerlink" href="#isplayerdetected" title="Permanent link">⚓︎</a></h3>
 <p>Direct access to the actor's flag showing the player was detected on the last detection check.</p>
 <p><strong>Returns</strong>:</p>
@@ -10891,6 +10975,13 @@ if damage &lt; 1 then damage = 1 end</p>
 <hr />
 <h3 id="isplayerhidden"><code>isPlayerHidden</code><a class="headerlink" href="#isplayerhidden" title="Permanent link">⚓︎</a></h3>
 <p>Direct access to the actor's flag showing the player was hidden on the last detection check.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="isreadyingweapon"><code>isReadyingWeapon</code><a class="headerlink" href="#isreadyingweapon" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If true, the actor is drawing or sheathing their weapon.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -11593,15 +11684,6 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
-</ul>
-<hr />
-<h3 id="hasfreeaction"><code>hasFreeAction</code><a class="headerlink" href="#hasfreeaction" title="Permanent link">⚓︎</a></h3>
-<p>If true, the actor isn't paralyzed, dead, stunned, or otherwise unable to take action.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">hasFreeAction</span><span class="p">()</span>
-</code></pre></div>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="hasusedpower"><code>hasUsedPower</code><a class="headerlink" href="#hasusedpower" title="Permanent link">⚓︎</a></h3>
