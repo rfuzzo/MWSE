@@ -716,6 +716,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1394,6 +1396,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../references/palettes/" class="md-nav__link">
+        Palettes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../references/part-indices/" class="md-nav__link">
         Part Indices
       </a>
@@ -1707,7 +1723,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_70" type="checkbox" id="__nav_3_70" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_71" type="checkbox" id="__nav_3_71" >
       
       
       
@@ -1738,13 +1754,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_70">
+        <label class="md-nav__link" for="__nav_3_71">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_70">
+        <label class="md-nav__title" for="__nav_3_71">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -1936,7 +1952,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_71" type="checkbox" id="__nav_3_71" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_72" type="checkbox" id="__nav_3_72" >
       
       
       
@@ -1945,13 +1961,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_71">
+        <label class="md-nav__link" for="__nav_3_72">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_71">
+        <label class="md-nav__title" for="__nav_3_72">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -12391,7 +12407,8 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>effectiveMagnitude, magnitude</code> (number, number)</li>
+<li><code>effectiveMagnitude</code> (number): The effective magnitude after all the actor's resistances are applied.</li>
+<li><code>magnitude</code> (number): The magnitude before any of the actor's resistances are applied.</li>
 </ul>
 <details class="example">
 <summary>Example: Get both magnitudes.</summary>
@@ -13111,7 +13128,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>key</code> (string): The key to check..</li>
+<li><code>key</code> (string): The key to check.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -13499,7 +13516,7 @@
 <li><code>useModelCoordinates</code> (boolean): <em>Default</em>: <code>false</code>. If true, model coordinates will be used instead of world coordinates.</li>
 <li><code>useBackTriangles</code> (boolean): <em>Default</em>: <code>false</code>. Include intersections with back-facing triangles.</li>
 <li><code>observeAppCullFlag</code> (boolean): <em>Default</em>: <code>true</code>. Ignore intersections with culled (hidden) models.</li>
-<li><code>root</code> (node<em>): </em>Default*: <code>tes3.game.worldSceneGraphRoot</code>. Node pointer to node scene.</li>
+<li><code>root</code> (<a href="../../types/niNode">niNode</a>): <em>Default</em>: <code>tes3.game.worldSceneGraphRoot</code>. Node pointer to node scene.</li>
 <li><code>ignoreSkinned</code> (boolean): <em>Default</em>: <code>false</code>. Ignore results from skinned objects.</li>
 <li><code>returnColor</code> (boolean): <em>Default</em>: <code>false</code>. Calculate and return the vertex color at intersections.</li>
 <li><code>returnNormal</code> (boolean): <em>Default</em>: <code>true</code>. Calculate and return the vertex normal at intersections.</li>
