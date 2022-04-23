@@ -8982,16 +8982,15 @@
 <hr />
 <h3 id="tes3uigetpalette"><code>tes3ui.getPalette</code><a class="headerlink" href="#tes3uigetpalette" title="Permanent link">⚓︎</a></h3>
 <p>Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].</p>
-<p><strong>Standard Color Names</strong>: <code>active_color</code>, <code>active_over_color</code>, <code>active_pressed_color</code>, <code>answer_color</code>, <code>answer_over_color</code>, <code>answer_pressed_color</code>, <code>background_color</code>, <code>big_answer_color</code>, <code>big_answer_over_color</code>, <code>big_answer_pressed_color</code>, <code>big_header_color</code>, <code>big_link_color</code>, <code>big_link_over_color</code>, <code>big_link_pressed_color</code>, <code>big_normal_color</code>, <code>big_normal_over_color</code>, <code>big_normal_pressed_color</code>, <code>big_notify_color</code>, <code>black_color</code>, <code>count_color</code>, <code>disabled_color</code>, <code>disabled_over_color</code>, <code>disabled_pressed_color</code>, <code>fatigue_color</code>, <code>focus_color</code>, <code>header_color</code>, <code>health_color</code>, <code>health_npc_color</code>, <code>journal_finished_quest_color</code>, <code>journal_finished_quest_over_color</code>, <code>journal_finished_quest_pressed_color</code>, <code>journal_link_color</code>, <code>journal_link_over_color</code>, <code>journal_link_pressed_color</code>, <code>journal_topic_color</code>, <code>journal_topic_over_color</code>, <code>journal_topic_pressed_color</code>, <code>link_color</code>, <code>link_over_color</code>, <code>link_pressed_color</code>, <code>magic_color</code>, <code>magic_fill_color</code>, <code>misc_color</code>, <code>negative_color</code>, <code>normal_color</code>, <code>normal_over_color</code>, <code>normal_pressed_color</code>, <code>notify_color</code>, <code>positive_color</code>, <code>weapon_fill_color</code>, <code>white_color</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getPalette</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getPalette</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>name</code> (string): The name of the palette color.</li>
+<li><code>name</code> (string): The name of the palette color. Maps to values in <a href="https://mwse.github.io/MWSE/references/palettes/"><code>tes3.palette</code></a> enumeration.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>palette</code> (number[]): An array containing the RGB color values, in the range [0.0, 1.0].</li>
 </ul>
 <hr />
 <h3 id="tes3uigetserviceactor"><code>tes3ui.getServiceActor</code><a class="headerlink" href="#tes3uigetserviceactor" title="Permanent link">⚓︎</a></h3>
