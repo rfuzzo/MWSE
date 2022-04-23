@@ -2921,6 +2921,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#duration" class="md-nav__link">
     duration
   </a>
@@ -8330,6 +8337,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#duration" class="md-nav__link">
     duration
   </a>
@@ -8428,42 +8442,49 @@
 <p>A Timer is a class used to keep track of callback that should be invoked at a later time.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="callback"><code>callback</code><a class="headerlink" href="#callback" title="Permanent link">⚓︎</a></h3>
-<p>The callback that will be invoked when the timer elapses.</p>
+<p><em>Read-only</em>. The callback that will be invoked when the timer elapses.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (function)</li>
 </ul>
 <hr />
+<h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
+<p>Arbitrary json-serializable data stored in the timer. This defaults to <code>nil</code>, but can be set at the time of timer creation, or changed later.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (table, nil)</li>
+</ul>
+<hr />
 <h3 id="duration"><code>duration</code><a class="headerlink" href="#duration" title="Permanent link">⚓︎</a></h3>
-<p>The amount of time left on the timer.</p>
+<p><em>Read-only</em>. The amount of time left on the timer.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="iterations"><code>iterations</code><a class="headerlink" href="#iterations" title="Permanent link">⚓︎</a></h3>
-<p>The amount of iterations left for the timer.</p>
+<p><em>Read-only</em>. The amount of iterations left for the timer.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="state"><code>state</code><a class="headerlink" href="#state" title="Permanent link">⚓︎</a></h3>
-<p>The state of the timer, matching <code>timer.active</code>, <code>timer.paused</code>, or <code>timer.expired</code>.</p>
+<p><em>Read-only</em>. The state of the timer, matching <code>timer.active</code>, <code>timer.paused</code>, or <code>timer.expired</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="timeleft"><code>timeLeft</code><a class="headerlink" href="#timeleft" title="Permanent link">⚓︎</a></h3>
-<p>The amount of time left before this timer will complete.</p>
+<p><em>Read-only</em>. The amount of time left before this timer will complete.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="timing"><code>timing</code><a class="headerlink" href="#timing" title="Permanent link">⚓︎</a></h3>
-<p>When this timer ends, or the time remaining if the timer is paused.</p>
+<p><em>Read-only</em>. When this timer ends, or the time remaining if the timer is paused.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>

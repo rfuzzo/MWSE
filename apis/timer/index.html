@@ -8476,7 +8476,7 @@
 <hr />
 <h3 id="timerstart"><code>timer.start</code><a class="headerlink" href="#timerstart" title="Permanent link">⚓︎</a></h3>
 <p>Creates a timer.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">persist</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">persist</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8486,6 +8486,7 @@
 <li><code>callback</code> (function): The callback function that will execute when the timer expires.</li>
 <li><code>iterations</code> (number): <em>Default</em>: <code>1</code>. The number of iterations to run. Use <code>-1</code> for infinite looping.</li>
 <li><code>persist</code> (boolean): <em>Default</em>: <code>true</code>. Registering a timer with persist flag set to <code>true</code> will serialize the callback string in the save to persist between sessions. Only a registered timer will persist between sessions. See <code>timer.register()</code>.</li>
+<li><code>data</code> (table): <em>Optional</em>. Data to be attached to the timer. If this is a persistent timer, the data must be json-serializable, matching the same limitations as data stored on references.</li>
 </ul>
 </li>
 </ul>
