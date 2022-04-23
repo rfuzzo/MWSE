@@ -12217,7 +12217,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>cells</code> (table)</li>
+<li><code>cells</code> (<a href="../../types/tes3cell">tes3cell</a>[])</li>
 </ul>
 <hr />
 <h3 id="tes3getanimationgroups"><code>tes3.getAnimationGroups</code><a class="headerlink" href="#tes3getanimationgroups" title="Permanent link">⚓︎</a></h3>
@@ -12233,7 +12233,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>animData</code> (table)</li>
+<li><code>animData</code> (number[])</li>
 </ul>
 <hr />
 <h3 id="tes3getanimationtiming"><code>tes3.getAnimationTiming</code><a class="headerlink" href="#tes3getanimationtiming" title="Permanent link">⚓︎</a></h3>
@@ -12249,7 +12249,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (number[])</li>
 </ul>
 <hr />
 <h3 id="tes3getarchivelist"><code>tes3.getArchiveList</code><a class="headerlink" href="#tes3getarchivelist" title="Permanent link">⚓︎</a></h3>
@@ -12258,7 +12258,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>archives</code> (table)</li>
+<li><code>archives</code> (<a href="../../types/tes3archive">tes3archive</a>[])</li>
 </ul>
 <hr />
 <h3 id="tes3getattachment"><code>tes3.getAttachment</code><a class="headerlink" href="#tes3getattachment" title="Permanent link">⚓︎</a></h3>
@@ -12357,11 +12357,11 @@
 <hr />
 <h3 id="tes3getcursorposition"><code>tes3.getCursorPosition</code><a class="headerlink" href="#tes3getcursorposition" title="Permanent link">⚓︎</a></h3>
 <p>Returns a table with values x and y that contain the current cursor position.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">table</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCursorPosition</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCursorPosition</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>table</code> (table)</li>
+<li><code>position</code> (<a href="../../types/tes3vector2">tes3vector2</a>)</li>
 </ul>
 <hr />
 <h3 id="tes3getdaysinmonth"><code>tes3.getDaysInMonth</code><a class="headerlink" href="#tes3getdaysinmonth" title="Permanent link">⚓︎</a></h3>
@@ -12600,7 +12600,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>killMap</code> (table)</li>
+<li><code>killMap</code> (table<tes3actor, number>)</li>
 </ul>
 <hr />
 <h3 id="tes3getlanguage"><code>tes3.getLanguage</code><a class="headerlink" href="#tes3getlanguage" title="Permanent link">⚓︎</a></h3>
@@ -12715,7 +12715,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>modList</code> (table)</li>
+<li><code>modList</code> (string[])</li>
 </ul>
 <hr />
 <h3 id="tes3getobject"><code>tes3.getObject</code><a class="headerlink" href="#tes3getobject" title="Permanent link">⚓︎</a></h3>
