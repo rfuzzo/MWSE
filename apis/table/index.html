@@ -8583,11 +8583,12 @@
 <hr />
 <h3 id="tableempty"><code>table.empty</code><a class="headerlink" href="#tableempty" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if the table is empty, otherwise, it returns false.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">deepCheck</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
+<li><code>deepCheck</code> (boolean): <em>Default</em>: <code>false</code>. If true, subtables will also be checked to see if they are empty.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
