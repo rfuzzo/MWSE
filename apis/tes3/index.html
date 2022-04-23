@@ -12023,7 +12023,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>mobileList</code> (table)</li>
+<li><code>mobileList</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>[])</li>
 </ul>
 <hr />
 <h3 id="tes3findbirthsign"><code>tes3.findBirthsign</code><a class="headerlink" href="#tes3findbirthsign" title="Permanent link">⚓︎</a></h3>
@@ -13295,7 +13295,7 @@
 <ul>
 <li><code>messageOrParams</code> (string, table)<ul>
 <li><code>message</code> (string)</li>
-<li><code>buttons</code> (table): <em>Optional</em>. An array of strings to use for buttons.</li>
+<li><code>buttons</code> (string[]): <em>Optional</em>. An array of strings to use for buttons.</li>
 <li><code>callback</code> (function)</li>
 <li><code>showInDialog</code> (boolean): <em>Default</em>: <code>true</code>. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.</li>
 <li><code>duration</code> (number): <em>Optional</em>. Overrides how long the toast-style message remains visible.</li>
@@ -13522,7 +13522,7 @@
 <li><code>returnNormal</code> (boolean): <em>Default</em>: <code>true</code>. Calculate and return the vertex normal at intersections.</li>
 <li><code>returnSmoothNormal</code> (boolean): <em>Default</em>: <code>false</code>. Use normal interpolation for calculating vertex normals.</li>
 <li><code>returnTexture</code> (boolean): <em>Default</em>: <code>false</code>. Calculate and return the texture coordinate at intersections.</li>
-<li><code>ignore</code> (table): <em>Optional</em>. An array of references and/or scene graph nodes to cull from the result(s).</li>
+<li><code>ignore</code> (<a href="../../types/tes3reference">tes3reference</a>[], <a href="../../types/niNode">niNode</a>[]): <em>Optional</em>. An array of references and/or scene graph nodes to cull from the result(s).</li>
 </ul>
 </li>
 </ul>
@@ -13877,7 +13877,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
-<li><code>idles</code> (table)</li>
+<li><code>idles</code> (number[])</li>
 <li><code>range</code> (number): <em>Optional</em>.</li>
 <li><code>duration</code> (number): <em>Optional</em>.</li>
 <li><code>time</code> (number): <em>Optional</em>.</li>
