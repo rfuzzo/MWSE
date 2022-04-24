@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6205,6 +6205,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8185,6 +8187,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8418,8 +8434,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="jsondecode"><code>json.decode</code><a class="headerlink" href="#jsondecode" title="Permanent link">⚓︎</a></h3>
 <p>Decode string into a table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">nullValue</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = json.decode(s, position, nullValue)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>
@@ -8433,8 +8449,8 @@
 <hr />
 <h3 id="jsonencode"><code>json.encode</code><a class="headerlink" href="#jsonencode" title="Permanent link">⚓︎</a></h3>
 <p>Create a string representing the object. Object can be a table, a string, a number, a boolean, nil, json.null or any object with a function __tojson in its metatable. A table can only use strings and numbers as keys and its values have to be valid objects as well. It raises an error for any invalid data types or reference cycles.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = json.encode(object, state)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>object</code> (table)</li>
@@ -8447,8 +8463,8 @@
 <hr />
 <h3 id="jsonloadfile"><code>json.loadfile</code><a class="headerlink" href="#jsonloadfile" title="Permanent link">⚓︎</a></h3>
 <p>Loads the contents of a file through json.decode. Files loaded from Data Files\MWSE\{fileName}.json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loadfile</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = json.loadfile(fileName)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>fileName</code> (string)</li>
@@ -8460,8 +8476,8 @@
 <hr />
 <h3 id="jsonquotestring"><code>json.quotestring</code><a class="headerlink" href="#jsonquotestring" title="Permanent link">⚓︎</a></h3>
 <p>Quote a UTF-8 string and escape critical characters using JSON escape sequences. This function is only necessary when you build your own __tojson functions.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">quotestring</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = json.quotestring(s)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>
@@ -8473,8 +8489,8 @@
 <hr />
 <h3 id="jsonsavefile"><code>json.savefile</code><a class="headerlink" href="#jsonsavefile" title="Permanent link">⚓︎</a></h3>
 <p>Saves a serializable table to Data Files\MWSE\{fileName}.json, using json.encode.</p>
-<div class="highlight"><pre><span></span><code><span class="n">json</span><span class="p">.</span><span class="n">savefile</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">object</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+json.savefile(fileName, object, config)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>fileName</code> (string)</li>
@@ -8555,7 +8571,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6604,6 +6604,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8584,6 +8586,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -9609,8 +9625,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local string = tes3baseObject:__tojson()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
@@ -9618,8 +9634,8 @@
 <hr />
 <h3 id="hasitemequipped"><code>hasItemEquipped</code><a class="headerlink" href="#hasitemequipped" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the actor has provided item equipped.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">hasItemEquipped</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemData</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3actor:hasItemEquipped(item, itemData)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to perform a check for.</li>
@@ -9632,8 +9648,8 @@
 <hr />
 <h3 id="offersservice"><code>offersService</code><a class="headerlink" href="#offersservice" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the actor will offer a service in dialogue. This an offer and may still be refused by dialogue checks. To also get the result of dialogue checks, use <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3checkmerchantoffersservice"><code>tes3.checkMerchantOffersService()</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">offersService</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3actor:offersService(service)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>service</code> (number): Use one of the values in the <a href="https://mwse.github.io/MWSE/references/merchant-services/"><code>tes3.merchantService.*</code></a> table.</li>
@@ -9645,8 +9661,8 @@
 <hr />
 <h3 id="oninventoryclose"><code>onInventoryClose</code><a class="headerlink" href="#oninventoryclose" title="Permanent link">⚓︎</a></h3>
 <p>A callback function invoked when an inventory is closed. Typically not used outside of specific purposes. You may find <code>tes3.reference</code>'s <code>onCloseInventory()</code> to be more convenient to use.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3actor</span><span class="p">:</span><span class="n">onInventoryClose</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3actor:onInventoryClose(reference)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
@@ -9654,13 +9670,13 @@
 <hr />
 <h3 id="reevaluateequipment"><code>reevaluateEquipment</code><a class="headerlink" href="#reevaluateequipment" title="Permanent link">⚓︎</a></h3>
 <p>Causes the NPC to reevaluate his/hers equipment choices and equip the best available.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3npcInstance</span><span class="p">:</span><span class="n">reevaluateEquipment</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+tes3npcInstance:reevaluateEquipment()</code></p>
 <hr />
 <h3 id="tradesitemtype"><code>tradesItemType</code><a class="headerlink" href="#tradesitemtype" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the actor will buy and sell items of a given object type. e.g. <code>actor:tradesItemType(tes3.objectType.repairItem)</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3actor</span><span class="p">:</span><span class="n">tradesItemType</span><span class="p">(</span><span class="n">objectType</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3actor:tradesItemType(objectType)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>objectType</code> (number): Accepts values from <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> namespace.</li>
@@ -9743,7 +9759,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

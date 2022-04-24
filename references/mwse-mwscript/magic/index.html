@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9647289d.min.css">
@@ -6237,6 +6237,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8217,6 +8219,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8485,21 +8501,17 @@
 <p>Adds a new effect to the given spell, enchantment, or potion.</p>
 <details class="example">
 <summary>Example</summary>
-<div class="highlight"><pre><span></span><code>begin Example_xAddEffect
-
-short result
-
-; Fire Damage (14), On Touch (1), Duration (30), Magnitude (1 to 5)
-setx result to xAddEffect 1279610963 &quot;fire bite&quot; 14 0 1 0 30 1 5
-
-if ( result != 0 )
-    MessageBox &quot;Your &#39;Fire Bite&#39; spell has been upgraded!&quot;
-endif
-
-StopScript Example_xAddEffect
-
-end
-</code></pre></div>
+<p>```
+begin Example_xAddEffect</p>
+<p>short result</p>
+<p>; Fire Damage (14), On Touch (1), Duration (30), Magnitude (1 to 5)
+setx result to xAddEffect 1279610963 "fire bite" 14 0 1 0 30 1 5</p>
+<p>if ( result != 0 )
+    MessageBox "Your 'Fire Bite' spell has been upgraded!"
+endif</p>
+<p>StopScript Example_xAddEffect</p>
+<p>end
+```</p>
 </details>
 <hr />
 <h2 id="xcreatespell"><code>xCreateSpell</code><a class="headerlink" href="#xcreatespell" title="Permanent link">⚓︎</a></h2>
@@ -8563,19 +8575,16 @@ end
 </div>
 <details class="example">
 <summary>Example</summary>
-<div class="highlight"><pre><span></span><code>begin Example_xGetAlchemyInfo
-
-long numEffects
-long flags
-
-setx numEffects flags to xGetAlchemyInfo &quot;potion_skooma_01&quot;
-
-MessageBox &quot;flags: %g&quot; flags
-MessageBox &quot;numEffects: %g&quot; numEffects
-MessageBox &quot;potion_skooma_01&quot;
-
-end
-</code></pre></div>
+<p>```
+begin Example_xGetAlchemyInfo</p>
+<p>long numEffects
+long flags</p>
+<p>setx numEffects flags to xGetAlchemyInfo "potion_skooma_01"</p>
+<p>MessageBox "flags: %g" flags
+MessageBox "numEffects: %g" numEffects
+MessageBox "potion_skooma_01"</p>
+<p>end
+```</p>
 </details>
 <hr />
 <h2 id="xgetbaseeffectinfo"><code>xGetBaseEffectInfo</code><a class="headerlink" href="#xgetbaseeffectinfo" title="Permanent link">⚓︎</a></h2>
@@ -8641,19 +8650,16 @@ end
 <p>This function allows scripts to determine the effects of a given ingredient programmatically. Scripts can alter these values as well using <code>xSetIngredientEffect</code>.</p>
 <details class="example">
 <summary>Example</summary>
-<div class="highlight"><pre><span></span><code>begin Example_xGetIngredientEffect
-
-long effect
-long skillAttribute
-
-setx effect skillAttribute to xGetIngredientEffect &quot;food_kwama_egg_01&quot; 1
-
-MessageBox &quot;skill / attribute: %g&quot; skillAttribute
-MessageBox &quot;effect: %g&quot; effectID
-MessageBox &quot;food_kwama_egg_01&quot;
-
-end
-</code></pre></div>
+<p>```
+begin Example_xGetIngredientEffect</p>
+<p>long effect
+long skillAttribute</p>
+<p>setx effect skillAttribute to xGetIngredientEffect "food_kwama_egg_01" 1</p>
+<p>MessageBox "skill / attribute: %g" skillAttribute
+MessageBox "effect: %g" effectID
+MessageBox "food_kwama_egg_01"</p>
+<p>end
+```</p>
 </details>
 <hr />
 <h2 id="xgetspellinfo"><code>xGetSpellInfo</code><a class="headerlink" href="#xgetspellinfo" title="Permanent link">⚓︎</a></h2>
@@ -8737,27 +8743,28 @@ end
 <p>This function allows scripts to modify the effects of an ingredient programmatically.</p>
 <p>To instead retrieve these values, use  <code>xGetIngredientEffect</code>.</p>
 <p>??? example Set an ingredient's first effect.
-    <div class="highlight"><pre><span></span><code>begin WheatAllergy
-
-long ingred
+    ```
+    begin WheatAllergy</p>
+<pre><code>long ingred
 long index
 long effect
 long attrib
 
-setx ingred to xStringBuild &quot;ingred_bread_01&quot;
+setx ingred to xStringBuild "ingred_bread_01"
 set index to 1 ; First Slot
 set effect to 22 ; Damage Attribute
 set attrib to 0 ; Strength
 xSetIngredientEffect ingred index effect attrib
 
-; in this case, we could&#39;ve also used literals
-xSetIngredientEffect &quot;ingred_bread_01&quot; 1 22 0
+; in this case, we could've also used literals
+xSetIngredientEffect "ingred_bread_01" 1 22 0
 
 ; needs to run only once per session
 StopScript WheatAllergy
 
 end
-</code></pre></div></p>
+```
+</code></pre>
 <hr />
 <h2 id="xsetspellinfo"><code>xSetSpellInfo</code><a class="headerlink" href="#xsetspellinfo" title="Permanent link">⚓︎</a></h2>
 <p><strong>Parameters:</strong></p>
@@ -8846,7 +8853,7 @@ end
     <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

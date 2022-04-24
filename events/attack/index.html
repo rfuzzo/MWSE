@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6096,6 +6096,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8124,6 +8126,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8278,11 +8294,11 @@
 
 <h1 id="attack">attack<a class="headerlink" href="#attack" title="Permanent link">⚓︎</a></h1>
 <p>This event is invoked whenever an actor makes an attack with their fists or a weapon, or a creature makes any attack. It occurs at the release time of the attack, such as the downstroke of a melee weapon or when an arrow is shot. Lockpicks and probes do not invoke this event.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">--- @param e attackEventData</span>
-<span class="kd">local</span> <span class="kr">function</span> <span class="nf">attackCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">attack</span><span class="p">,</span> <span class="n">attackCallback</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+--- @param e attackEventData
+local function attackCallback(e)
+end
+event.register(tes3.event.attack, attackCallback)</code></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This event can be filtered based on the <strong><code>reference</code></strong> event data.</p>
@@ -8301,19 +8317,20 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Example: Show a Message when the Player Attacks</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">myOnAttackCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="c1">-- Someone other than the player is attacking.</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">reference</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="kr">return</span>
-    <span class="kr">end</span>
-
-    <span class="c1">-- We hit someone!</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">targetReference</span> <span class="o">~=</span> <span class="kc">nil</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;You hit %s!&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">targetReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">name</span> <span class="ow">or</span> <span class="n">e</span><span class="p">.</span><span class="n">targetReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">attack</span><span class="p">,</span> <span class="n">myOnAttackCallback</span><span class="p">)</span>
-</code></pre></div>
+<p>```lua
+local function myOnAttackCallback(e)
+    -- Someone other than the player is attacking.
+    if (e.reference ~= tes3.player) then
+        return
+    end</p>
+<pre><code>-- We hit someone!
+if (e.targetReference ~= nil) then
+    tes3.messageBox("You hit %s!", e.targetReference.object.name or e.targetReference.object.id)
+end
+</code></pre>
+<p>end
+event.register(tes3.event.attack, myOnAttackCallback)</p>
+<p>```</p>
 </div>
 
               
@@ -8388,7 +8405,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

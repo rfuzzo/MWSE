@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6205,6 +6205,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8185,6 +8187,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8418,8 +8434,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mathclamp"><code>math.clamp</code><a class="headerlink" href="#mathclamp" title="Permanent link">⚓︎</a></h3>
 <p>Returns a value, limited by upper and lower bounds.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = math.clamp(value, min, max)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (number)</li>
@@ -8433,8 +8449,8 @@
 <hr />
 <h3 id="mathisclose"><code>math.isclose</code><a class="headerlink" href="#mathisclose" title="Permanent link">⚓︎</a></h3>
 <p>This function compares <code>a</code> and <code>b</code> and returns true if they are close together. This can be useful when comparing floating-point numbers with some degree of tolerance.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">absoluteTolerance</span><span class="p">,</span> <span class="n">relativeTolerance</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = math.isclose(a, b, absoluteTolerance, relativeTolerance)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>a</code> (number): First value.</li>
@@ -8449,8 +8465,8 @@
 <hr />
 <h3 id="mathlerp"><code>math.lerp</code><a class="headerlink" href="#mathlerp" title="Permanent link">⚓︎</a></h3>
 <p>Performs linear interpolation between values v0 and v1. Returns a value that is t percent between them.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">lerp</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = math.lerp(v0, v1, t)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>v0</code> (number): First value.</li>
@@ -8465,8 +8481,8 @@
 <h3 id="mathremap"><code>math.remap</code><a class="headerlink" href="#mathremap" title="Permanent link">⚓︎</a></h3>
 <p>Returns a value, scaled from expected values [lowIn, highIn] to [lowOut, highOut].</p>
 <p>For example, a value of 7 remapped from [0,10] to [0,100] would be 70.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">remap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">lowIn</span><span class="p">,</span> <span class="n">highIn</span><span class="p">,</span> <span class="n">lowOut</span><span class="p">,</span> <span class="n">highOut</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = math.remap(value, lowIn, highIn, lowOut, highOut)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (number)</li>
@@ -8482,8 +8498,8 @@
 <hr />
 <h3 id="mathround"><code>math.round</code><a class="headerlink" href="#mathround" title="Permanent link">⚓︎</a></h3>
 <p>Rounds a number to a given count of digits.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = math.round(value, digits)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (number)</li>
@@ -8567,7 +8583,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

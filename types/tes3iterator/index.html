@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6184,6 +6184,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8164,6 +8166,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8383,8 +8399,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="size"><code>size</code><a class="headerlink" href="#size" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Returns the amount of items in the iterator.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3iterator</span><span class="p">:</span><span class="n">size</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3iterator:size()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8393,26 +8409,25 @@
 <details class="example">
 <summary>Example: Iterating Lists</summary>
 <p>In this example, a list is iterated using the pairs iterator function. The node can be used directly.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Check player equipment. Equipment list contains only equipped items.</span>
-<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">stack</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">equipment</span><span class="p">)</span> <span class="kr">do</span>
-    <span class="c1">-- stack is type tes3equipmentStack, as tes3.player.object.equipment is a list of tes3equipmentStack objects.</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Equipment object ID: %s&quot;</span><span class="p">,</span> <span class="n">stack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
-<span class="kr">end</span>
-
-<span class="c1">-- This will iterate over all the items in player&#39;s inventory including equipped items.</span>
-<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">itemStack</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">inventory</span><span class="p">)</span> <span class="kr">do</span>
-    <span class="c1">-- itemStack is of tes3itemStack type</span>
-    <span class="kd">local</span> <span class="n">item</span> <span class="o">=</span> <span class="n">itemStack</span><span class="p">.</span><span class="n">object</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;The player has %s of %s in inventory.&quot;</span><span class="p">,</span> <span class="n">itemStack</span><span class="p">.</span><span class="n">count</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
-<span class="kr">end</span>
-
-<span class="c1">-- tes3.player.object.spells is a tes3spellList with helper functions.</span>
-<span class="c1">-- The actual list is spells.iterator.</span>
-<span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">spell</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">spells</span><span class="p">.</span><span class="n">iterator</span><span class="p">)</span> <span class="kr">do</span>
-    <span class="c1">-- spell is type tes3spell, as tes3.player.object.spells.iterator is a list of tes3spell objects.</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Spell %s, cost %d&quot;</span><span class="p">,</span> <span class="n">spell</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">spell</span><span class="p">.</span><span class="n">magickaCost</span><span class="p">)</span>
-<span class="kr">end</span>
-</code></pre></div>
+<p>```lua
+-- Check player equipment. Equipment list contains only equipped items.
+for _, stack in pairs(tes3.player.object.equipment) do
+    -- stack is type tes3equipmentStack, as tes3.player.object.equipment is a list of tes3equipmentStack objects.
+    mwse.log("Equipment object ID: %s", stack.object.id)
+end</p>
+<p>-- This will iterate over all the items in player's inventory including equipped items.
+for _, itemStack in pairs(tes3.player.object.inventory) do
+    -- itemStack is of tes3itemStack type
+    local item = itemStack.object
+    mwse.log("The player has %s of %s in inventory.", itemStack.count, item.id)
+end</p>
+<p>-- tes3.player.object.spells is a tes3spellList with helper functions.
+-- The actual list is spells.iterator.
+for _, spell in pairs(tes3.player.object.spells.iterator) do
+    -- spell is type tes3spell, as tes3.player.object.spells.iterator is a list of tes3spell objects.
+    mwse.log("Spell %s, cost %d", spell.name, spell.magickaCost)
+end</p>
+<p>```</p>
 </details>
 
               
@@ -8487,7 +8502,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

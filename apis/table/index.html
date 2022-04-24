@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6255,6 +6255,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8235,6 +8237,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8504,8 +8520,8 @@
 <h3 id="tablebininsert"><code>table.bininsert</code><a class="headerlink" href="#tablebininsert" title="Permanent link">⚓︎</a></h3>
 <p>Inserts a given value through BinaryInsert into the table sorted by [, comp].</p>
 <p>If 'comp' is given, then it must be a function that receives two table elements, and returns true when the first is less than the second, e.g. comp = function(a, b) return a &gt; b end, will give a sorted table, with the biggest value on position 1. [, comp] behaves as in table.sort(table, value [, comp]) returns the index where 'value' was inserted</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">bininsert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.bininsert(t, value, comp)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8523,8 +8539,8 @@
 <p>If compval is given: then it must be a function that takes one value and returns a second value2, to be compared with the input value, e.g.: compvalue = function( value ) return value[1] end</p>
 <p>If reversed is set to true: then the search assumes that the table is sorted in reverse order (largest value at position 1) note when reversed is given compval must be given as well, it can be nil/_ in this case</p>
 <p>Return value: on success: a table holding matching indices (e.g. { startindice,endindice } ) on failure: nil</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">binsearch</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">compval</span><span class="p">,</span> <span class="n">reversed</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.binsearch(t, value, compval, reversed)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8539,8 +8555,8 @@
 <hr />
 <h3 id="tablechoice"><code>table.choice</code><a class="headerlink" href="#tablechoice" title="Permanent link">⚓︎</a></h3>
 <p>Returns a random element from the given table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.choice(t)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8553,8 +8569,8 @@
 <h3 id="tableclear"><code>table.clear</code><a class="headerlink" href="#tableclear" title="Permanent link">⚓︎</a></h3>
 <p>This clears all keys and values from a table, but preserves the allocated array/hash sizes. This is useful when a table, which is linked from multiple places, needs to be cleared and/or when recycling a table for use by the same context. This avoids managing backlinks, saves an allocation and the overhead of incremental array/hash part growth.</p>
 <p>Please note this function is meant for very specific situations. In most cases it's better to replace the (usually single) link with a new table and let the garbage collection do its work.</p>
-<div class="highlight"><pre><span></span><code><span class="n">table</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+table.clear(table)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>table</code> (table): The table to clear.</li>
@@ -8562,8 +8578,8 @@
 <hr />
 <h3 id="tablecopy"><code>table.copy</code><a class="headerlink" href="#tablecopy" title="Permanent link">⚓︎</a></h3>
 <p>Shallowly copies a table's contents to a destination table. If no destination table is provided, a new table will be created. Note that sub tables will not be copied, and will still refer to the same data.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.copy(from, to)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>from</code> (table)</li>
@@ -8576,8 +8592,8 @@
 <hr />
 <h3 id="tablecopymissing"><code>table.copymissing</code><a class="headerlink" href="#tablecopymissing" title="Permanent link">⚓︎</a></h3>
 <p>Copies a table's contents from one table to another, including subtitles. If a non-table key is already defined, it will not be overwritten. Metatables are not copied.</p>
-<div class="highlight"><pre><span></span><code><span class="n">table</span><span class="p">.</span><span class="n">copymissing</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">from</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+table.copymissing(to, from)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>to</code> (table)</li>
@@ -8586,8 +8602,8 @@
 <hr />
 <h3 id="tabledeepcopy"><code>table.deepcopy</code><a class="headerlink" href="#tabledeepcopy" title="Permanent link">⚓︎</a></h3>
 <p>Copies a table's contents. All subtables will also be copied, as will any metatable.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.deepcopy(t)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8599,8 +8615,8 @@
 <hr />
 <h3 id="tableempty"><code>table.empty</code><a class="headerlink" href="#tableempty" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if the table is empty, otherwise, it returns false.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">deepCheck</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.empty(t, deepCheck)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8613,8 +8629,8 @@
 <hr />
 <h3 id="tablefind"><code>table.find</code><a class="headerlink" href="#tablefind" title="Permanent link">⚓︎</a></h3>
 <p>Returns the key for a given value, or nil if the table does not contain the value.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.find(t, value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8627,8 +8643,8 @@
 <hr />
 <h3 id="tableinvert"><code>table.invert</code><a class="headerlink" href="#tableinvert" title="Permanent link">⚓︎</a></h3>
 <p>Returns a copy of <code>t</code> with the keys and values flipped.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">invert</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.invert(t)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8640,8 +8656,8 @@
 <hr />
 <h3 id="tablekeys"><code>table.keys</code><a class="headerlink" href="#tablekeys" title="Permanent link">⚓︎</a></h3>
 <p>Returns an array-style table of all keys in the given table, t. Optionally, it will sort the returned table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">keys</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">keys</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local keys = table.keys(t, sort)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table): The table to get keys for.</li>
@@ -8654,8 +8670,8 @@
 <hr />
 <h3 id="tablenew"><code>table.new</code><a class="headerlink" href="#tablenew" title="Permanent link">⚓︎</a></h3>
 <p>This creates a pre-sized table. This is useful for big tables if the final table size is known and automatic table resizing is too expensive.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">newTable</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">narray</span><span class="p">,</span> <span class="n">nhash</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local newTable = table.new(narray, nhash)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>narray</code> (number): A hint for how many elements the table will have as a sequence.</li>
@@ -8668,8 +8684,8 @@
 <hr />
 <h3 id="tableremovevalue"><code>table.removevalue</code><a class="headerlink" href="#tableremovevalue" title="Permanent link">⚓︎</a></h3>
 <p>Removes a value from a given table. Returns true if the value was successfully removed.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">removevalue</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.removevalue(t, value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8682,8 +8698,8 @@
 <hr />
 <h3 id="tablesize"><code>table.size</code><a class="headerlink" href="#tablesize" title="Permanent link">⚓︎</a></h3>
 <p>Returns the number of elements inside the table. Unlike the length operator (#) this will work with any table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.size(t)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
@@ -8696,8 +8712,8 @@
 <h3 id="tabletraverse"><code>table.traverse</code><a class="headerlink" href="#tabletraverse" title="Permanent link">⚓︎</a></h3>
 <p>This function is used to iterate over values and its subtables in the table.</p>
 <p>Each "node" is an object with a children table of other "nodes", each of which might have their own children. For example, a sceneNode is made up of niNodes, and each niNodes can have a list of niNode children. This is best used for recursive data structures like UI elements and sceneNodes etc.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = table.traverse(t, k)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table): A table to transverse.</li>
@@ -8711,21 +8727,21 @@
 <summary>Example: Iterate over all scene nodes attached to player.</summary>
 <p>In the example below, function onLoaded() will be called when the game has been successfully loaded.</p>
 <p>For each scene nodes attached to the player, its type (node.RTTI.name) and name (node.name), will be printed to MWSE.log.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">()</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Player&#39;s scene graph:&quot;</span><span class="p">)</span>
-    <span class="kr">for</span> <span class="n">node</span> <span class="kr">in</span> <span class="n">table</span><span class="p">.</span><span class="n">traverse</span><span class="p">({</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">sceneNode</span><span class="p">})</span> <span class="kr">do</span>
-        <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;%s : %s&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">RTTI</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">onLoaded</span><span class="p">)</span>
-</code></pre></div>
+<p>```lua
+local function onLoaded()
+    mwse.log("Player's scene graph:")
+    for node in table.traverse({tes3.player.sceneNode}) do
+        mwse.log("%s : %s", node.RTTI.name, node.name)
+    end
+end</p>
+<p>event.register(tes3.event.loaded, onLoaded)</p>
+<p>```</p>
 </details>
 <hr />
 <h3 id="tablevalues"><code>table.values</code><a class="headerlink" href="#tablevalues" title="Permanent link">⚓︎</a></h3>
 <p>Returns an array-style table of all values in the given table, t. Optionally, it will sort the returned table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">values</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">values</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local values = table.values(t, sort)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table): The table to get values for.</li>
@@ -8809,7 +8825,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

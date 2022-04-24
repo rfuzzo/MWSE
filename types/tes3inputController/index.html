@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6282,6 +6282,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8262,6 +8264,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8600,8 +8616,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="isaltdown"><code>isAltDown</code><a class="headerlink" href="#isaltdown" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if either alt modifier key is pressed.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isAltDown</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isPressed = tes3inputController:isAltDown()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isPressed</code> (boolean): True if either alt key is pressed.</li>
@@ -8609,8 +8625,8 @@
 <hr />
 <h3 id="iscapslockactive"><code>isCapsLockActive</code><a class="headerlink" href="#iscapslockactive" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if the caps lock mode is active.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isCapsLockActive</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isPressed = tes3inputController:isCapsLockActive()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isPressed</code> (boolean): True if caps lock is active.</li>
@@ -8618,8 +8634,8 @@
 <hr />
 <h3 id="iscontroldown"><code>isControlDown</code><a class="headerlink" href="#iscontroldown" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if either control modifier key is pressed.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isControlDown</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isPressed = tes3inputController:isControlDown()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isPressed</code> (boolean): True if either control key is pressed.</li>
@@ -8627,8 +8643,8 @@
 <hr />
 <h3 id="iskeydown"><code>isKeyDown</code><a class="headerlink" href="#iskeydown" title="Permanent link">⚓︎</a></h3>
 <p>Performs a key down test for a given scan key code.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isKeyDown</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:isKeyDown(key)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>key</code> (number): The scan code to test. Constants available through <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a>.</li>
@@ -8640,8 +8656,8 @@
 <hr />
 <h3 id="iskeypressedthisframe"><code>isKeyPressedThisFrame</code><a class="headerlink" href="#iskeypressedthisframe" title="Permanent link">⚓︎</a></h3>
 <p>Checks to see if a given scan code is pressed, and wasn't pressed last frame.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isKeyPressedThisFrame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:isKeyPressedThisFrame(key)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>key</code> (number): The scan code to test. Constants available through <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a>.</li>
@@ -8653,8 +8669,8 @@
 <hr />
 <h3 id="iskeyreleasedthisframe"><code>isKeyReleasedThisFrame</code><a class="headerlink" href="#iskeyreleasedthisframe" title="Permanent link">⚓︎</a></h3>
 <p>Checks to see if a given scan code is released, and was pressed last frame.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isKeyReleasedThisFrame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:isKeyReleasedThisFrame(key)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>key</code> (number): The scan code to test. Constants available through <a href="https://mwse.github.io/MWSE/references/scan-codes/"><code>tes3.scanCode</code></a>.</li>
@@ -8666,8 +8682,8 @@
 <hr />
 <h3 id="ismousebuttondown"><code>isMouseButtonDown</code><a class="headerlink" href="#ismousebuttondown" title="Permanent link">⚓︎</a></h3>
 <p>Returns the mouse down state for a given mouse button.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isMouseButtonDown</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:isMouseButtonDown(button)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>button</code> (number): The mouse button to test. Must be between <code>0</code> and <code>7</code>.</li>
@@ -8679,8 +8695,8 @@
 <hr />
 <h3 id="ismousebuttonpressedthisframe"><code>isMouseButtonPressedThisFrame</code><a class="headerlink" href="#ismousebuttonpressedthisframe" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if a mouse button was up last frame, and down this frame.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isMouseButtonPressedThisFrame</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:isMouseButtonPressedThisFrame(button)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>button</code> (number): The mouse button to test. Must be between <code>0</code> and <code>7</code>.</li>
@@ -8692,8 +8708,8 @@
 <hr />
 <h3 id="ismousebuttonreleasedthisframe"><code>isMouseButtonReleasedThisFrame</code><a class="headerlink" href="#ismousebuttonreleasedthisframe" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if a mouse button was down last frame, and up this frame.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isMouseButtonReleasedThisFrame</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:isMouseButtonReleasedThisFrame(button)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>button</code> (number): The mouse button to test. Must be between <code>0</code> and <code>7</code>.</li>
@@ -8705,8 +8721,8 @@
 <hr />
 <h3 id="isshiftdown"><code>isShiftDown</code><a class="headerlink" href="#isshiftdown" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if either shift modifier key is pressed. It does not take into account caps lock.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isShiftDown</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isPressed = tes3inputController:isShiftDown()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isPressed</code> (boolean): True if either shift key is pressed.</li>
@@ -8714,8 +8730,8 @@
 <hr />
 <h3 id="issuperdown"><code>isSuperDown</code><a class="headerlink" href="#issuperdown" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if either super/windows modifier key is pressed.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">isSuperDown</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isPressed = tes3inputController:isSuperDown()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isPressed</code> (boolean): True if either super/windows key is pressed.</li>
@@ -8723,8 +8739,8 @@
 <hr />
 <h3 id="keybindtest"><code>keybindTest</code><a class="headerlink" href="#keybindtest" title="Permanent link">⚓︎</a></h3>
 <p>Performs a test for a given keybind, and optionally a transition state.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inputController</span><span class="p">:</span><span class="n">keybindTest</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3inputController:keybindTest(key, transition)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>key</code> (number): The keybind to test. Constants available through <a href="https://mwse.github.io/MWSE/references/keybinds/"><code>tes3.keybind</code></a>.</li>
@@ -8808,7 +8824,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

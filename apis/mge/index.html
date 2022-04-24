@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6486,6 +6486,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8466,6 +8468,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8965,18 +8981,18 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mgeclearhud"><code>mge.clearHUD</code><a class="headerlink" href="#mgeclearhud" title="Permanent link">⚓︎</a></h3>
 <p>Clears elements from the HUD. Wrapper for MGEWipeHUDElements.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">clearHUD</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.clearHUD()</code></p>
 <hr />
 <h3 id="mgedisablecamerashake"><code>mge.disableCameraShake</code><a class="headerlink" href="#mgedisablecamerashake" title="Permanent link">⚓︎</a></h3>
 <p>Disables MGE XE's camera shake effect. Wrapper for mwscript's MGEDisableCameraShake.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableCameraShake</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.disableCameraShake()</code></p>
 <hr />
 <h3 id="mgedisablehud"><code>mge.disableHUD</code><a class="headerlink" href="#mgedisablehud" title="Permanent link">⚓︎</a></h3>
 <p>Disables a HUD element. If a HUD ID is provided, this is a warpper for MGEDisableHUD, otherwise it is a wrapper for MGENIDDisableHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.disableHUD({ hud = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8987,8 +9003,8 @@
 <hr />
 <h3 id="mgedisableshader"><code>mge.disableShader</code><a class="headerlink" href="#mgedisableshader" title="Permanent link">⚓︎</a></h3>
 <p>Disables a shader. Wrapper for mwscript's MGEDisableShader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableShader</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.disableShader({ shader = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8999,13 +9015,13 @@
 <hr />
 <h3 id="mgedisablezoom"><code>mge.disableZoom</code><a class="headerlink" href="#mgedisablezoom" title="Permanent link">⚓︎</a></h3>
 <p>Disables the MGE XE zoom effect. Wrapper for MGEDisableZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">disableZoom</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.disableZoom()</code></p>
 <hr />
 <h3 id="mgeenablecamerashake"><code>mge.enableCameraShake</code><a class="headerlink" href="#mgeenablecamerashake" title="Permanent link">⚓︎</a></h3>
 <p>Enables MGE XE's camera shake effect. Wrapper for mwscript's MGEEnableCameraShake.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableCameraShake</span><span class="p">({</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.enableCameraShake({ magnitude = ..., acceleration = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9017,8 +9033,8 @@
 <hr />
 <h3 id="mgeenabled"><code>mge.enabled</code><a class="headerlink" href="#mgeenabled" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the MGE XE interface is enabled.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">enabled</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">enabled</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local enabled = mge.enabled()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>enabled</code> (boolean)</li>
@@ -9026,8 +9042,8 @@
 <hr />
 <h3 id="mgeenablehud"><code>mge.enableHUD</code><a class="headerlink" href="#mgeenablehud" title="Permanent link">⚓︎</a></h3>
 <p>Enables a HUD element. If a HUD ID is provided, this is a warpper for MGEEnableHUD, otherwise it is a wrapper for MGENIDEnableHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.enableHUD({ hud = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9038,8 +9054,8 @@
 <hr />
 <h3 id="mgeenableshader"><code>mge.enableShader</code><a class="headerlink" href="#mgeenableshader" title="Permanent link">⚓︎</a></h3>
 <p>Enables a shader. Wrapper for mwscript's MGEEnableShader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableShader</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.enableShader({ shader = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9050,13 +9066,13 @@
 <hr />
 <h3 id="mgeenablezoom"><code>mge.enableZoom</code><a class="headerlink" href="#mgeenablezoom" title="Permanent link">⚓︎</a></h3>
 <p>Enables the MGE XE zoom effect. Wrapper for MGEEnableZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">enableZoom</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.enableZoom()</code></p>
 <hr />
 <h3 id="mgefreehud"><code>mge.freeHUD</code><a class="headerlink" href="#mgefreehud" title="Permanent link">⚓︎</a></h3>
 <p>Frees a HUD element. If a HUD ID is provided, this is a warpper for MGEFreeHUD, otherwise it is a wrapper for MGENIDFreeHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">freeHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.freeHUD({ hud = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9067,8 +9083,8 @@
 <hr />
 <h3 id="mgefullscreenhud"><code>mge.fullscreenHUD</code><a class="headerlink" href="#mgefullscreenhud" title="Permanent link">⚓︎</a></h3>
 <p>Makes a HUD element fullscreen. If a HUD ID is provided, this is a warpper for MGEFullscreenHUD, otherwise it is a wrapper for MGENIDFullscreenHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">fullscreenHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.fullscreenHUD({ hud = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9079,8 +9095,8 @@
 <hr />
 <h3 id="mgegetscreenheight"><code>mge.getScreenHeight</code><a class="headerlink" href="#mgegetscreenheight" title="Permanent link">⚓︎</a></h3>
 <p>Gets the window's vertical resolution. Wrapper for mwscript's MGEGetHeight.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getScreenHeight</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.getScreenHeight()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9088,8 +9104,8 @@
 <hr />
 <h3 id="mgegetscreenrotation"><code>mge.getScreenRotation</code><a class="headerlink" href="#mgegetscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEGetScreenRotation.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getScreenRotation</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.getScreenRotation()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9097,8 +9113,8 @@
 <hr />
 <h3 id="mgegetscreenwidth"><code>mge.getScreenWidth</code><a class="headerlink" href="#mgegetscreenwidth" title="Permanent link">⚓︎</a></h3>
 <p>Gets the window's horizontal resolution. Wrapper for mwscript's MGEGetWidth.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getScreenWidth</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.getScreenWidth()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9106,8 +9122,8 @@
 <hr />
 <h3 id="mgegetuiscale"><code>mge.getUIScale</code><a class="headerlink" href="#mgegetuiscale" title="Permanent link">⚓︎</a></h3>
 <p>Returns the UI scaling used.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getUIScale</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.getUIScale()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9115,8 +9131,8 @@
 <hr />
 <h3 id="mgegetversion"><code>mge.getVersion</code><a class="headerlink" href="#mgegetversion" title="Permanent link">⚓︎</a></h3>
 <p>Gets the MGE version. Wrapper for MGEGetVersion.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getVersion</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.getVersion()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9124,8 +9140,8 @@
 <hr />
 <h3 id="mgegetweatherdlfog"><code>mge.getWeatherDLFog</code><a class="headerlink" href="#mgegetweatherdlfog" title="Permanent link">⚓︎</a></h3>
 <p>Gets distant land fog parameters for a specific weather. See <a href="https://mwse.github.io/MWSE/apis/mge/#mgesetweatherdlfog"><code>mge.setWeatherDLFog()</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">parameters</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getWeatherDLFog</span><span class="p">(</span><span class="n">weatherID</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local parameters = mge.getWeatherDLFog(weatherID)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>weatherID</code> (number): Maps to values in the <a href="https://mwse.github.io/MWSE/references/weathers/"><code>tes3.weather</code></a> table.</li>
@@ -9137,8 +9153,8 @@
 <hr />
 <h3 id="mgegetweatherppllight"><code>mge.getWeatherPPLLight</code><a class="headerlink" href="#mgegetweatherppllight" title="Permanent link">⚓︎</a></h3>
 <p>Gets per-pixel lighting parameters for a specific weather. See <a href="https://mwse.github.io/MWSE/apis/mge/#mgesetweatherppllight"><code>mge.setWeatherPPLLight()</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">parameters</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getWeatherPPLLight</span><span class="p">(</span><span class="n">weatherID</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local parameters = mge.getWeatherPPLLight(weatherID)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>weatherID</code> (number): Maps to values in the <a href="https://mwse.github.io/MWSE/references/weathers/"><code>tes3.weather</code></a> table.</li>
@@ -9150,8 +9166,8 @@
 <hr />
 <h3 id="mgegetweatherscattering"><code>mge.getWeatherScattering</code><a class="headerlink" href="#mgegetweatherscattering" title="Permanent link">⚓︎</a></h3>
 <p>Returns an array-style table with 3 distant land atmospheric scattering colours.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scattering</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getWeatherScattering</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local scattering = mge.getWeatherScattering()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>scattering</code> (table)</li>
@@ -9159,8 +9175,8 @@
 <hr />
 <h3 id="mgegetzoom"><code>mge.getZoom</code><a class="headerlink" href="#mgegetzoom" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEGetZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getZoom</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.getZoom()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9168,8 +9184,8 @@
 <hr />
 <h3 id="mgeloadhud"><code>mge.loadHUD</code><a class="headerlink" href="#mgeloadhud" title="Permanent link">⚓︎</a></h3>
 <p>Loads a HUD element. This is a warpper for MGELoadHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">loadHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">texture</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">enable</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.loadHUD({ hud = ..., texture = ..., enable = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9182,8 +9198,8 @@
 <hr />
 <h3 id="mgelog"><code>mge.log</code><a class="headerlink" href="#mgelog" title="Permanent link">⚓︎</a></h3>
 <p>This function writes information to the mgeXE.log file in the user's installation directory. Wrapper for mwscript's MGELog function.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+mge.log(message)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>message</code> (string)</li>
@@ -9191,8 +9207,8 @@
 <hr />
 <h3 id="mgemodscreenrotation"><code>mge.modScreenRotation</code><a class="headerlink" href="#mgemodscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGERotateScreenBy.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">modScreenRotation</span><span class="p">({</span> <span class="n">rotation</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.modScreenRotation({ rotation = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9203,8 +9219,8 @@
 <hr />
 <h3 id="mgepositionhud"><code>mge.positionHUD</code><a class="headerlink" href="#mgepositionhud" title="Permanent link">⚓︎</a></h3>
 <p>Positions a HUD element. If a HUD ID is provided, this is a warpper for MGEPositionHUD, otherwise it is a wrapper for MGENIDPositionHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">positionHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.positionHUD({ hud = ..., x = ..., y = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9217,8 +9233,8 @@
 <hr />
 <h3 id="mgescalehud"><code>mge.scaleHUD</code><a class="headerlink" href="#mgescalehud" title="Permanent link">⚓︎</a></h3>
 <p>Scales a HUD element. If a HUD ID is provided, this is a warpper for MGEScaleHUD, otherwise it is a wrapper for MGENIDScaleHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">scaleHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">x</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.scaleHUD({ hud = ..., x = ..., y = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9231,8 +9247,8 @@
 <hr />
 <h3 id="mgeselecthud"><code>mge.selectHUD</code><a class="headerlink" href="#mgeselecthud" title="Permanent link">⚓︎</a></h3>
 <p>Selects a HUD element, to assume for future HUD calls.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">selectHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.selectHUD({ hud = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9243,8 +9259,8 @@
 <hr />
 <h3 id="mgesetcamerashakeacceleration"><code>mge.setCameraShakeAcceleration</code><a class="headerlink" href="#mgesetcamerashakeacceleration" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGECameraShakeZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setCameraShakeAcceleration</span><span class="p">({</span> <span class="n">acceleration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setCameraShakeAcceleration({ acceleration = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9255,8 +9271,8 @@
 <hr />
 <h3 id="mgesetcamerashakemagnitude"><code>mge.setCameraShakeMagnitude</code><a class="headerlink" href="#mgesetcamerashakemagnitude" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGESetCameraShakeMagnitude.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setCameraShakeMagnitude</span><span class="p">({</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setCameraShakeMagnitude({ magnitude = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9267,8 +9283,8 @@
 <hr />
 <h3 id="mgesethudeffect"><code>mge.setHUDEffect</code><a class="headerlink" href="#mgesethudeffect" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect for a HUD element. If a HUD ID is provided, this is a warpper for MGEChangeHUDEffect, otherwise it is a wrapper for MGENIDChangeHUDEffect.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffect</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setHUDEffect({ hud = ..., effect = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9280,8 +9296,8 @@
 <hr />
 <h3 id="mgesethudeffectfloat"><code>mge.setHUDEffectFloat</code><a class="headerlink" href="#mgesethudeffectfloat" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect float variable for a HUD element. This is a wrapper for MGENIDSetHUDEffectFloat.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectFloat</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setHUDEffectFloat({ hud = ..., variable = ..., value = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9294,8 +9310,8 @@
 <hr />
 <h3 id="mgesethudeffectlong"><code>mge.setHUDEffectLong</code><a class="headerlink" href="#mgesethudeffectlong" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect long variable for a HUD element. This is a wrapper for MGENIDSetHUDEffectLong.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectLong</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setHUDEffectLong({ hud = ..., variable = ..., value = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9308,8 +9324,8 @@
 <hr />
 <h3 id="mgesethudeffectvector4"><code>mge.setHUDEffectVector4</code><a class="headerlink" href="#mgesethudeffectvector4" title="Permanent link">⚓︎</a></h3>
 <p>Sets the effect vector variable for a HUD element. This is a wrapper for MGENIDSetHUDEffectVec.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDEffectVector4</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setHUDEffectVector4({ hud = ..., variable = ..., value = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9322,8 +9338,8 @@
 <hr />
 <h3 id="mgesethudtexture"><code>mge.setHUDTexture</code><a class="headerlink" href="#mgesethudtexture" title="Permanent link">⚓︎</a></h3>
 <p>Sets the texture for a given HUD element. If a HUD ID is provided, this is a warpper for MGEChangeHUDTexture, otherwise it is a wrapper for MGENIDChangeHUDTexture.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setHUDTexture</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">texture</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setHUDTexture({ hud = ..., texture = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9335,8 +9351,8 @@
 <hr />
 <h3 id="mgesetscreenrotation"><code>mge.setScreenRotation</code><a class="headerlink" href="#mgesetscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGERotateScreen.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setScreenRotation</span><span class="p">({</span> <span class="n">rotation</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setScreenRotation({ rotation = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9347,8 +9363,8 @@
 <hr />
 <h3 id="mgesetshaderfloat"><code>mge.setShaderFloat</code><a class="headerlink" href="#mgesetshaderfloat" title="Permanent link">⚓︎</a></h3>
 <p>Sets a shader's float variable. Wrapper for mwscript's MGEShaderSetFloat.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderFloat</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setShaderFloat({ shader = ..., variable = ..., value = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9361,8 +9377,8 @@
 <hr />
 <h3 id="mgesetshaderlong"><code>mge.setShaderLong</code><a class="headerlink" href="#mgesetshaderlong" title="Permanent link">⚓︎</a></h3>
 <p>Sets a shader's long variable. Wrapper for mwscript's MGEShaderSetLong.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderLong</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setShaderLong({ shader = ..., variable = ..., value = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9375,8 +9391,8 @@
 <hr />
 <h3 id="mgesetshadervector4"><code>mge.setShaderVector4</code><a class="headerlink" href="#mgesetshadervector4" title="Permanent link">⚓︎</a></h3>
 <p>Sets a shader's vector variable. Wrapper for mwscript's MGEShaderSetVector.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setShaderVector4</span><span class="p">({</span> <span class="n">shader</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setShaderVector4({ shader = ..., variable = ..., value = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9390,8 +9406,8 @@
 <h3 id="mgesetweatherdlfog"><code>mge.setWeatherDLFog</code><a class="headerlink" href="#mgesetweatherdlfog" title="Permanent link">⚓︎</a></h3>
 <p>Sets distant land fog parameters for a specific weather. <code>fogDistMultiplier</code> is multiplied by the "Above water fog" distance to get the fog distance for that weather. It has a range of [0, 2]. <code>fogOffsetPercent</code> is the percentage of fog applied at zero distance from the camera. It has a range of [0, 90].</p>
 <p>Note: "Above water fog" is a setting specific to MGE XE. It can be found on the Distant Land page, under Fog category.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">setWeatherDLFog</span><span class="p">(</span><span class="n">weatherID</span><span class="p">,</span> <span class="n">fogDistMultiplier</span><span class="p">,</span> <span class="n">fogOffsetPercent</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.setWeatherDLFog(weatherID, fogDistMultiplier, fogOffsetPercent)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>weatherID</code> (number): Maps to values in the <a href="https://mwse.github.io/MWSE/references/weathers/"><code>tes3.weather</code></a> table.</li>
@@ -9405,8 +9421,8 @@
 <hr />
 <h3 id="mgesetweatherppllight"><code>mge.setWeatherPPLLight</code><a class="headerlink" href="#mgesetweatherppllight" title="Permanent link">⚓︎</a></h3>
 <p>Sets light multipliers used in per-pixel lighting for a specific weather. <code>sunMultiplier</code> affects sunlight, while <code>ambientMultiplier</code> affects ambient lighting.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">setWeatherPPLLight</span><span class="p">(</span><span class="n">weatherID</span><span class="p">,</span> <span class="n">sunMultiplier</span><span class="p">,</span> <span class="n">ambientMultiplier</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mge.setWeatherPPLLight(weatherID, sunMultiplier, ambientMultiplier)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>weatherID</code> (number): Maps to values in the <a href="https://mwse.github.io/MWSE/references/weathers/"><code>tes3.weather</code></a> table.</li>
@@ -9420,8 +9436,8 @@
 <hr />
 <h3 id="mgesetweatherscattering"><code>mge.setWeatherScattering</code><a class="headerlink" href="#mgesetweatherscattering" title="Permanent link">⚓︎</a></h3>
 <p>Sets distant land atmospheric scattering colours.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">setWeatherScattering</span><span class="p">({</span> <span class="n">outscatter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">inscatter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+local success = mge.setWeatherScattering({ outscatter = ..., inscatter = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9437,8 +9453,8 @@
 <hr />
 <h3 id="mgesetzoom"><code>mge.setZoom</code><a class="headerlink" href="#mgesetzoom" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEZoom, or MGESetZoom if set to animate.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setZoom</span><span class="p">({</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">animate</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.setZoom({ amount = ..., animate = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9450,28 +9466,28 @@
 <hr />
 <h3 id="mgestartscreenrotation"><code>mge.startScreenRotation</code><a class="headerlink" href="#mgestartscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Enables MGE XE's screen spin effect. Wrapper for mwscript's MGEScreenSpin.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">startScreenRotation</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.startScreenRotation()</code></p>
 <hr />
 <h3 id="mgestopscreenrotation"><code>mge.stopScreenRotation</code><a class="headerlink" href="#mgestopscreenrotation" title="Permanent link">⚓︎</a></h3>
 <p>Disables MGE XE's screen spin effect. Wrapper for mwscript's MGEStopSpinSpin.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">stopScreenRotation</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.stopScreenRotation()</code></p>
 <hr />
 <h3 id="mgestopzoom"><code>mge.stopZoom</code><a class="headerlink" href="#mgestopzoom" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEStopZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">stopZoom</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.stopZoom()</code></p>
 <hr />
 <h3 id="mgetogglezoom"><code>mge.toggleZoom</code><a class="headerlink" href="#mgetogglezoom" title="Permanent link">⚓︎</a></h3>
 <p>Toggles the MGE XE zoom effect. Wrapper for MGEToggleZoom.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">toggleZoom</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mge.toggleZoom()</code></p>
 <hr />
 <h3 id="mgeunselecthud"><code>mge.unselectHUD</code><a class="headerlink" href="#mgeunselecthud" title="Permanent link">⚓︎</a></h3>
 <p>Cancels selection for a HUD element. Wrapper for mwscript's MGECancelWithHUD.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">unselectHUD</span><span class="p">({</span> <span class="n">hud</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.unselectHUD({ hud = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9482,8 +9498,8 @@
 <hr />
 <h3 id="mgezoomin"><code>mge.zoomIn</code><a class="headerlink" href="#mgezoomin" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEZoomIn, or MGEZoomInBy if an amount is provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">zoomIn</span><span class="p">({</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.zoomIn({ amount = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9494,8 +9510,8 @@
 <hr />
 <h3 id="mgezoomout"><code>mge.zoomOut</code><a class="headerlink" href="#mgezoomout" title="Permanent link">⚓︎</a></h3>
 <p>Wrapper for MGEZoomOut, or MGEZoomOutBy if an amount is provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">zoomOut</span><span class="p">({</span> <span class="n">amount</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+mge.zoomOut({ amount = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9577,7 +9593,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6185,6 +6185,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8165,6 +8167,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8363,8 +8379,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="osclock"><code>os.clock</code><a class="headerlink" href="#osclock" title="Permanent link">⚓︎</a></h3>
 <p>Return CPU time since Lua started in seconds.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">os.clock</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = os.clock()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8372,8 +8388,8 @@
 <hr />
 <h3 id="oscreateprocess"><code>os.createProcess</code><a class="headerlink" href="#oscreateprocess" title="Permanent link">⚓︎</a></h3>
 <p>Passes command to be executed by an operating system. Unlike <code>os.execute</code>, this will not display a console prompt that interrupts the game and cannot run direct shell commands.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">createProcess</span><span class="p">({</span> <span class="n">command</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">async</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
-</code></pre></div>
+<p><code>lua
+local executor = os.createProcess({ command = ..., async = ... })</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8389,8 +8405,8 @@
 <hr />
 <h3 id="osexecute"><code>os.execute</code><a class="headerlink" href="#osexecute" title="Permanent link">⚓︎</a></h3>
 <p>Passes command to be executed by an operating system shell. To open a program to run in the background and monitor its output, use <code>os.createProcess</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">exitCode</span> <span class="o">=</span> <span class="nb">os.execute</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local exitCode = os.execute(command)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>command</code> (string): The command to run.</li>
@@ -8402,8 +8418,8 @@
 <hr />
 <h3 id="osgetclipboardtext"><code>os.getClipboardText</code><a class="headerlink" href="#osgetclipboardtext" title="Permanent link">⚓︎</a></h3>
 <p>Returns the current clipboard text, if any is available.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getClipboardText</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = os.getClipboardText()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string, nil)</li>
@@ -8411,8 +8427,8 @@
 <hr />
 <h3 id="osopenurl"><code>os.openURL</code><a class="headerlink" href="#osopenurl" title="Permanent link">⚓︎</a></h3>
 <p>Opens the given <code>url</code> in the default browser. This has an advantage over using <code>os.execute("show https://my.url")</code> in that it does not create a command prompt window.</p>
-<div class="highlight"><pre><span></span><code><span class="n">os</span><span class="p">.</span><span class="n">openURL</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+os.openURL(url)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>url</code> (string): The URL to open.</li>
@@ -8420,8 +8436,8 @@
 <hr />
 <h3 id="ossetclipboardtext"><code>os.setClipboardText</code><a class="headerlink" href="#ossetclipboardtext" title="Permanent link">⚓︎</a></h3>
 <p>Sets the current clipboard text. If nil is passed, the clipboard will be cleared instead. If either operation fails, the function returns false.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">setClipboardText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = os.setClipboardText(text)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string, nil): <em>Optional</em>. The text to put in the clipboard. If nil is provided instead, then the clipboard will be cleared.</li>
@@ -8504,7 +8520,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

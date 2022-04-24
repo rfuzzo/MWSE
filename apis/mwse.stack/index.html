@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6241,6 +6241,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8221,6 +8223,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8475,18 +8491,18 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mwsestackclear"><code>mwse.stack.clear</code><a class="headerlink" href="#mwsestackclear" title="Permanent link">⚓︎</a></h3>
 <p>Purges all elements from the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">clear</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mwse.stack.clear()</code></p>
 <hr />
 <h3 id="mwsestackdump"><code>mwse.stack.dump</code><a class="headerlink" href="#mwsestackdump" title="Permanent link">⚓︎</a></h3>
 <p>Prints all values on the stack in hex format to the log file.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">dump</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+mwse.stack.dump()</code></p>
 <hr />
 <h3 id="mwsestackempty"><code>mwse.stack.empty</code><a class="headerlink" href="#mwsestackempty" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the stack is empty.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.empty()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8494,8 +8510,8 @@
 <hr />
 <h3 id="mwsestackpopfloat"><code>mwse.stack.popFloat</code><a class="headerlink" href="#mwsestackpopfloat" title="Permanent link">⚓︎</a></h3>
 <p>Pops a value of mwscript type "float" off of the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">unnamed1</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popFloat</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local unnamed1 = mwse.stack.popFloat()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>unnamed</code> (number): <em>Optional</em>.</li>
@@ -8503,8 +8519,8 @@
 <hr />
 <h3 id="mwsestackpoplong"><code>mwse.stack.popLong</code><a class="headerlink" href="#mwsestackpoplong" title="Permanent link">⚓︎</a></h3>
 <p>Pops a value of mwscript type "long" off of the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">unnamed1</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popLong</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local unnamed1 = mwse.stack.popLong()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>unnamed</code> (number): <em>Optional</em>.</li>
@@ -8512,8 +8528,8 @@
 <hr />
 <h3 id="mwsestackpopobject"><code>mwse.stack.popObject</code><a class="headerlink" href="#mwsestackpopobject" title="Permanent link">⚓︎</a></h3>
 <p>Pops a value of mwscript type "long" off of the stack, and tries to reinterpret as a game object.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">unnamed1</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popObject</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local unnamed1 = mwse.stack.popObject()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>unnamed</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): <em>Optional</em>.</li>
@@ -8521,8 +8537,8 @@
 <hr />
 <h3 id="mwsestackpopshort"><code>mwse.stack.popShort</code><a class="headerlink" href="#mwsestackpopshort" title="Permanent link">⚓︎</a></h3>
 <p>Pops a value of mwscript type "short" off of the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">unnamed1</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popShort</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local unnamed1 = mwse.stack.popShort()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>unnamed</code> (number): <em>Optional</em>.</li>
@@ -8530,8 +8546,8 @@
 <hr />
 <h3 id="mwsestackpopstring"><code>mwse.stack.popString</code><a class="headerlink" href="#mwsestackpopstring" title="Permanent link">⚓︎</a></h3>
 <p>Pops a value of mwscript type "long" off of the stack, and tries to reinterpret as a string.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">unnamed1</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popString</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local unnamed1 = mwse.stack.popString()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>unnamed</code> (string): <em>Optional</em>.</li>
@@ -8539,8 +8555,8 @@
 <hr />
 <h3 id="mwsestackpushfloat"><code>mwse.stack.pushFloat</code><a class="headerlink" href="#mwsestackpushfloat" title="Permanent link">⚓︎</a></h3>
 <p>Pushes a value of mwscript type "float" onto the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushFloat</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.pushFloat(value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (number)</li>
@@ -8552,8 +8568,8 @@
 <hr />
 <h3 id="mwsestackpushlong"><code>mwse.stack.pushLong</code><a class="headerlink" href="#mwsestackpushlong" title="Permanent link">⚓︎</a></h3>
 <p>Pushes a value of mwscript type "long" onto the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushLong</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.pushLong(value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (number)</li>
@@ -8565,8 +8581,8 @@
 <hr />
 <h3 id="mwsestackpushobject"><code>mwse.stack.pushObject</code><a class="headerlink" href="#mwsestackpushobject" title="Permanent link">⚓︎</a></h3>
 <p>Pushes a value of mwscript type "long" onto the stack, which matches the address of a given game object.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushObject</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.pushObject(value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>)</li>
@@ -8578,8 +8594,8 @@
 <hr />
 <h3 id="mwsestackpushshort"><code>mwse.stack.pushShort</code><a class="headerlink" href="#mwsestackpushshort" title="Permanent link">⚓︎</a></h3>
 <p>Pushes a value of mwscript type "short" onto the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushShort</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.pushShort(value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (number)</li>
@@ -8591,8 +8607,8 @@
 <hr />
 <h3 id="mwsestackpushstring"><code>mwse.stack.pushString</code><a class="headerlink" href="#mwsestackpushstring" title="Permanent link">⚓︎</a></h3>
 <p>Adds a string to mwse's string storage, and pushes a value of mwscript type "long" onto the stack that represents the string.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushString</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.pushString(value)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (string)</li>
@@ -8604,8 +8620,8 @@
 <hr />
 <h3 id="mwsestacksize"><code>mwse.stack.size</code><a class="headerlink" href="#mwsestacksize" title="Permanent link">⚓︎</a></h3>
 <p>Returns the number of elements currently on the stack.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stack.size()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8684,7 +8700,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

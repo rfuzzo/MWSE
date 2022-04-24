@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.9647289d.min.css">
@@ -6215,6 +6215,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8195,6 +8197,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8565,109 +8581,90 @@
 <details class="example">
 <summary>Simple Filtered Loop</summary>
 <p>This example demonstrates how to loop through all potions the player is carrying.</p>
-<div class="highlight"><pre><span></span><code>begin Example_xContentListFiltered
-
-long id
+<p>```
+begin Example_xContentListFiltered</p>
+<p>long id
 long count
 long type
 long value
 float weight
-long name
-
-long next
-long filter
-
-long ref
-long loop
-
-setx ref to xGetRef &quot;player&quot;
-
-set filter to 2 ; ALCH
-
-set loop to 1
+long name</p>
+<p>long next
+long filter</p>
+<p>long ref
+long loop</p>
+<p>setx ref to xGetRef "player"</p>
+<p>set filter to 2 ; ALCH</p>
+<p>set loop to 1
 whilex ( loop )
-    setx id count type value weight name next to ref-&gt;xContentListFiltered next filter
+    setx id count type value weight name next to ref-&gt;xContentListFiltered next filter</p>
+<pre><code>xLogMessage "id: %s" id
+xLogMessage "    count: %d" count
+xLogMessage "    type: %l" type
+xLogMessage "    value: %d" value
+xLogMessage "    weight: %.2f" weight
+xLogMessage "    name: %s" name
+xLogMessage "    next: %d" next
 
-    xLogMessage &quot;id: %s&quot; id
-    xLogMessage &quot;    count: %d&quot; count
-    xLogMessage &quot;    type: %l&quot; type
-    xLogMessage &quot;    value: %d&quot; value
-    xLogMessage &quot;    weight: %.2f&quot; weight
-    xLogMessage &quot;    name: %s&quot; name
-    xLogMessage &quot;    next: %d&quot; next
-
-    set loop to next
-endwhile
-
-StopScript Example_xContentListFiltered
-
-end
-</code></pre></div>
+set loop to next
+</code></pre>
+<p>endwhile</p>
+<p>StopScript Example_xContentListFiltered</p>
+<p>end
+```</p>
 </details>
 <details class="example">
 <summary>Transfer Ingredients</summary>
 <p>This example shows how to efficiently transfer all ingredients and potions from the player to another container. A placeholder variable, such as "_", can be used to ignore return values that are not needed for your script.</p>
-<div class="highlight"><pre><span></span><code>begin TransferIngreds
-
-long _
+<p>```
+begin TransferIngreds</p>
+<p>long _
 long id
-long count
-
-long src
-long dst
-
-setx src to xGetRef &quot;player&quot;
-setx dst to xGetRef &quot;ingred_storage&quot;
-
-set count to 1
+long count</p>
+<p>long src
+long dst</p>
+<p>setx src to xGetRef "player"
+setx dst to xGetRef "ingred_storage"</p>
+<p>set count to 1
 whilex ( count )
     ; get the next ingred and count
-    setx id count _ _ _ _ _ to src-&gt;xContentListFiltered _ 2050 ; INGR + ALCH
+    setx id count _ <em> _ </em> _ to src-&gt;xContentListFiltered _ 2050 ; INGR + ALCH</p>
+<pre><code>; remove the ingred from source
+src-&gt;xRemoveItem id count
 
-    ; remove the ingred from source
-    src-&gt;xRemoveItem id count
+; add the ingred to destination
+dst-&gt;xAddItem id count
 
-    ; add the ingred to destination
-    dst-&gt;xAddItem id count
-
-    ; continue with next ingredient
-    set count to _
-endwhile
-
-src-&gt;PlaySound3D &quot;Item Ingredient Down&quot;
-
-StopScript TransferIngreds
-
-end
-</code></pre></div>
+; continue with next ingredient
+set count to _
+</code></pre>
+<p>endwhile</p>
+<p>src-&gt;PlaySound3D "Item Ingredient Down"</p>
+<p>StopScript TransferIngreds</p>
+<p>end
+```</p>
 </details>
 <details class="example">
 <summary>Get first item of a specific type.</summary>
 <p>This example shows how to efficiently check if the player is carrying any weapons at all. No explicit loop is needed here, so evaluating the weapon id alone will suffice.</p>
-<div class="highlight"><pre><span></span><code>begin NoWeaponsAllowed
-
-; local script on a door
-
-long pcRef
-long weapID
-
-if ( OnActivate == 0 )
+<p>```
+begin NoWeaponsAllowed</p>
+<p>; local script on a door</p>
+<p>long pcRef
+long weapID</p>
+<p>if ( OnActivate == 0 )
     return
-endif
-
-setx pcRef to xGetRef &quot;player&quot;
-setx weapID to pcRef-&gt;xContentListFiltered 0 2097152 ; Weapon
-
-if ( weapID != 0 )
-    MessageBox &quot;No weapons are allowed inside the royal chamber!&quot;
-    PlaySound3D &quot;Door Heavy Close&quot;
+endif</p>
+<p>setx pcRef to xGetRef "player"
+setx weapID to pcRef-&gt;xContentListFiltered 0 2097152 ; Weapon</p>
+<p>if ( weapID != 0 )
+    MessageBox "No weapons are allowed inside the royal chamber!"
+    PlaySound3D "Door Heavy Close"
     return
-endif
-
-Activate
-
-end
-</code></pre></div>
+endif</p>
+<p>Activate</p>
+<p>end
+```</p>
 </details>
 <hr />
 <h2 id="xequipmentlist"><code>xEquipmentList</code><a class="headerlink" href="#xequipmentlist" title="Permanent link">⚓︎</a></h2>
@@ -8701,9 +8698,9 @@ end
 <details class="example">
 <summary>Simple Equipment Loop</summary>
 <p>This example demonstrates how to do a simple loop through all equipped items (on the player in this instance).</p>
-<div class="highlight"><pre><span></span><code>Begin loopEquippedItems
-
-long id
+<p>```
+Begin loopEquippedItems</p>
+<p>long id
 long count
 long type
 long subtype
@@ -8711,34 +8708,28 @@ long value
 long weight
 long name
 long enchantId
-long node
-
-long loop
-
-long ref
-
-setx ref to xGetRef &quot;player&quot;
-
-set loop to 1
+long node</p>
+<p>long loop</p>
+<p>long ref</p>
+<p>setx ref to xGetRef "player"</p>
+<p>set loop to 1
 whilex ( loop )
-    setx id count type subtype value weight name enchantId node to ref-&gt;xEquipmentList node 0 0
+    setx id count type subtype value weight name enchantId node to ref-&gt;xEquipmentList node 0 0</p>
+<pre><code>; Code to be run for each looped item.
 
-    ; Code to be run for each looped item.
-
-    set loop to node
-endwhile
-
-End
-</code></pre></div>
+set loop to node
+</code></pre>
+<p>endwhile</p>
+<p>End
+```</p>
 </details>
 <details class="example">
 <summary>Get Equipped Weapon's Enchantment</summary>
 <p>This example shows how to get the enchantment objectId for the currently equipped weapon. Looping isn't required as the player can never have more than one equipped weapon.</p>
-<div class="highlight"><pre><span></span><code>begin GetPlayerWeaponInfo
-
-long ref
-
-long id
+<p>```
+begin GetPlayerWeaponInfo</p>
+<p>long ref</p>
+<p>long id
 long count
 long type
 long subtype
@@ -8746,26 +8737,21 @@ long value
 long weight
 long name
 long ench
-long node
-
-; get the player reference
-setx ref to xGetRef &quot;player&quot;
-
-; get info about his weapon
-setx id count type subtype value weight name ench node to ref-&gt;xEquipmentList 0 1346454871 0
-
-ifx ( name )
-    xMessageFix &quot;Weapon: %s&quot; name
-    MessageBox &quot;Weapon: ________________________________&quot;
-endif
-
-ifx ( ench )
-    xMessageFix &quot;Enchantment: %s&quot; ench
-    MessageBox &quot;Enchantment: ________________________________&quot;
-endif
-
-end
-</code></pre></div>
+long node</p>
+<p>; get the player reference
+setx ref to xGetRef "player"</p>
+<p>; get info about his weapon
+setx id count type subtype value weight name ench node to ref-&gt;xEquipmentList 0 1346454871 0</p>
+<p>ifx ( name )
+    xMessageFix "Weapon: %s" name
+    MessageBox "Weapon: <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____"
+endif</p>
+<p>ifx ( ench )
+    xMessageFix "Enchantment: %s" ench
+    MessageBox "Enchantment: <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____"
+endif</p>
+<p>end
+```</p>
 </details>
 <hr />
 <h2 id="xfirstitem"><code>xFirstItem</code><a class="headerlink" href="#xfirstitem" title="Permanent link">⚓︎</a></h2>
@@ -8945,7 +8931,7 @@ end
     <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

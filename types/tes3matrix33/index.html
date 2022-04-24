@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6309,6 +6309,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8289,6 +8291,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8633,8 +8649,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="copy"><code>copy</code><a class="headerlink" href="#copy" title="Permanent link">⚓︎</a></h3>
 <p>Creates a copy of the matrix.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">copy</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3matrix33:copy()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>)</li>
@@ -8642,8 +8658,8 @@
 <hr />
 <h3 id="fromeulerxyz"><code>fromEulerXYZ</code><a class="headerlink" href="#fromeulerxyz" title="Permanent link">⚓︎</a></h3>
 <p>Fills the matrix with values from euler coordinates.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">fromEulerXYZ</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:fromEulerXYZ(x, y, z)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>x</code> (number)</li>
@@ -8653,8 +8669,8 @@
 <hr />
 <h3 id="fromeulerzyx"><code>fromEulerZYX</code><a class="headerlink" href="#fromeulerzyx" title="Permanent link">⚓︎</a></h3>
 <p>Fills the matrix with values from euler coordinates.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">fromEulerZYX</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:fromEulerZYX(z, y, x)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>z</code> (number)</li>
@@ -8664,8 +8680,8 @@
 <hr />
 <h3 id="fromquaternion"><code>fromQuaternion</code><a class="headerlink" href="#fromquaternion" title="Permanent link">⚓︎</a></h3>
 <p>Fill the matrix by converting a quaternion.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">fromQuaternion</span><span class="p">(</span><span class="n">quaternion</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:fromQuaternion(quaternion)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>quaternion</code> (<a href="../../types/niQuaternion">niQuaternion</a>)</li>
@@ -8673,8 +8689,8 @@
 <hr />
 <h3 id="invert"><code>invert</code><a class="headerlink" href="#invert" title="Permanent link">⚓︎</a></h3>
 <p>Inverts the matrix.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">invert</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local matrix, valid = tes3matrix33:invert()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>matrix</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>)</li>
@@ -8683,8 +8699,8 @@
 <hr />
 <h3 id="reorthogonalize"><code>reorthogonalize</code><a class="headerlink" href="#reorthogonalize" title="Permanent link">⚓︎</a></h3>
 <p>Reorthogonalizes the matrix.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">reorthogonalize</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3matrix33:reorthogonalize()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8692,8 +8708,8 @@
 <hr />
 <h3 id="toeulerxyz"><code>toEulerXYZ</code><a class="headerlink" href="#toeulerxyz" title="Permanent link">⚓︎</a></h3>
 <p>Converts the matrix to a vector with 3 Euler angles.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isUnique</span><span class="p">,</span> <span class="n">vector3</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toEulerXYZ</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isUnique, vector3 = tes3matrix33:toEulerXYZ()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isUnique</code> (boolean)</li>
@@ -8702,8 +8718,8 @@
 <hr />
 <h3 id="toeulerzyx"><code>toEulerZYX</code><a class="headerlink" href="#toeulerzyx" title="Permanent link">⚓︎</a></h3>
 <p>Converts the matrix to a vector with 3 Euler angles.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isUnique</span><span class="p">,</span> <span class="n">vector3</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toEulerZYX</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local isUnique, vector3 = tes3matrix33:toEulerZYX()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isUnique</code> (boolean)</li>
@@ -8712,13 +8728,13 @@
 <hr />
 <h3 id="toidentity"><code>toIdentity</code><a class="headerlink" href="#toidentity" title="Permanent link">⚓︎</a></h3>
 <p>Converts the matrix to the identity matrix's values.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toIdentity</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:toIdentity()</code></p>
 <hr />
 <h3 id="toquaternion"><code>toQuaternion</code><a class="headerlink" href="#toquaternion" title="Permanent link">⚓︎</a></h3>
 <p>Convert the matrix into a quaternion.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toQuaternion</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3matrix33:toQuaternion()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niQuaternion">niQuaternion</a>)</li>
@@ -8726,8 +8742,8 @@
 <hr />
 <h3 id="torotation"><code>toRotation</code><a class="headerlink" href="#torotation" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toRotation</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:toRotation(angle, x, y, z)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>angle</code> (number)</li>
@@ -8738,8 +8754,8 @@
 <hr />
 <h3 id="torotationx"><code>toRotationX</code><a class="headerlink" href="#torotationx" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toRotationX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:toRotationX(x)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>x</code> (number)</li>
@@ -8747,8 +8763,8 @@
 <hr />
 <h3 id="torotationy"><code>toRotationY</code><a class="headerlink" href="#torotationy" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toRotationY</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:toRotationY(y)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>y</code> (number)</li>
@@ -8756,8 +8772,8 @@
 <hr />
 <h3 id="torotationz"><code>toRotationZ</code><a class="headerlink" href="#torotationz" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toRotationZ</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:toRotationZ(z)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>z</code> (number)</li>
@@ -8765,13 +8781,13 @@
 <hr />
 <h3 id="tozero"><code>toZero</code><a class="headerlink" href="#tozero" title="Permanent link">⚓︎</a></h3>
 <p>Zeroes out all values in the matrix.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3matrix33</span><span class="p">:</span><span class="n">toZero</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+tes3matrix33:toZero()</code></p>
 <hr />
 <h3 id="transpose"><code>transpose</code><a class="headerlink" href="#transpose" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">:</span><span class="n">transpose</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = tes3matrix33:transpose()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>)</li>
@@ -8780,8 +8796,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
 <p>Creates a new 3 by 3 matrix from 3 provided vectors, 9 numbers or creates an empty matrix if nothing is provided.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2, x, y, z)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>x0</code> (number): <em>Optional</em>.</li>
@@ -8875,7 +8891,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

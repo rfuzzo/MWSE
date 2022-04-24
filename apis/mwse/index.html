@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6261,6 +6261,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8241,6 +8243,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8522,12 +8538,13 @@
 </ul>
 <details class="example">
 <summary>Example: Check if the user has minimal required MWSE build installed.</summary>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ensure we have the features we need.</span>
-<span class="kr">if</span> <span class="p">(</span><span class="n">mwse</span><span class="p">.</span><span class="n">buildDate</span> <span class="o">==</span> <span class="kc">nil</span> <span class="ow">or</span> <span class="n">mwse</span><span class="p">.</span><span class="n">buildDate</span> <span class="o">&lt;</span> <span class="mi">20210817</span><span class="p">)</span> <span class="kr">then</span>
-    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;[Example] Build date of %s does not meet minimum build date of 20210817.&quot;</span><span class="p">,</span> <span class="n">mwse</span><span class="p">.</span><span class="n">buildDate</span><span class="p">)</span>
-    <span class="kr">return</span>
-<span class="kr">end</span>
-</code></pre></div>
+<p>```lua
+-- Ensure we have the features we need.
+if (mwse.buildDate == nil or mwse.buildDate &lt; 20210817) then
+    mwse.log("[Example] Build date of %s does not meet minimum build date of 20210817.", mwse.buildDate)
+    return
+end</p>
+<p>```</p>
 </details>
 <hr />
 <h3 id="mwsegametimers"><code>mwse.gameTimers</code><a class="headerlink" href="#mwsegametimers" title="Permanent link">⚓︎</a></h3>
@@ -8563,8 +8580,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mwseclearscriptoverride"><code>mwse.clearScriptOverride</code><a class="headerlink" href="#mwseclearscriptoverride" title="Permanent link">⚓︎</a></h3>
 <p>Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of <code>mwse.overrideScript</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">clearScriptOverride</span><span class="p">(</span><span class="n">scriptId</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.clearScriptOverride(scriptId)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>scriptId</code> (string)</li>
@@ -8576,8 +8593,8 @@
 <hr />
 <h3 id="mwsegetversion"><code>mwse.getVersion</code><a class="headerlink" href="#mwsegetversion" title="Permanent link">⚓︎</a></h3>
 <p>Equivalent to mwse.version.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getVersion</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.getVersion()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8585,8 +8602,8 @@
 <hr />
 <h3 id="mwsegetvirtualmemoryusage"><code>mwse.getVirtualMemoryUsage</code><a class="headerlink" href="#mwsegetvirtualmemoryusage" title="Permanent link">⚓︎</a></h3>
 <p>Returns the amount of memory used, in bytes.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getVirtualMemoryUsage</span><span class="p">()</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.getVirtualMemoryUsage()</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8595,8 +8612,8 @@
 <h3 id="mwseloadconfig"><code>mwse.loadConfig</code><a class="headerlink" href="#mwseloadconfig" title="Permanent link">⚓︎</a></h3>
 <p>Loads a config table from Data Files\MWSE\config\{fileName}.json.</p>
 <p>If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadConfig</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.loadConfig(fileName, defaults)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>fileName</code> (string): The non-extensioned name of the config file.</li>
@@ -8609,8 +8626,8 @@
 <hr />
 <h3 id="mwseloadtranslations"><code>mwse.loadTranslations</code><a class="headerlink" href="#mwseloadtranslations" title="Permanent link">⚓︎</a></h3>
 <p>Loads translations from the i18n folder for a given mod. This is locale-aware, using the result from <code>tes3.getLanguage()</code>. See the <a href="https://mwse.github.io/MWSE/guides/mod-translations/">mod translations guide</a> for more information.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local i18n = mwse.loadTranslations(mod)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>mod</code> (string): Name of the folder that your main.lua mod can be found in.</li>
@@ -8623,8 +8640,8 @@
 <h3 id="mwselog"><code>mwse.log</code><a class="headerlink" href="#mwselog" title="Permanent link">⚓︎</a></h3>
 <p>This function writes information to the mwse.log file in the user's installation directory.</p>
 <p>The message accepts formatting and additional parameters matching string.format's usage.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">formatValues</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+mwse.log(message, formatValues)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>message</code> (string)</li>
@@ -8633,8 +8650,8 @@
 <hr />
 <h3 id="mwselongtostring"><code>mwse.longToString</code><a class="headerlink" href="#mwselongtostring" title="Permanent link">⚓︎</a></h3>
 <p>Converts a TES3 object type (e.g. from tes3.objectType) into an uppercase, 4-character string.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">longToString</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.longToString(type)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (number)</li>
@@ -8646,8 +8663,8 @@
 <hr />
 <h3 id="mwseoverridescript"><code>mwse.overrideScript</code><a class="headerlink" href="#mwseoverridescript" title="Permanent link">⚓︎</a></h3>
 <p>Configures MWSE to execute a given function instead when a script would run.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">overrideScript</span><span class="p">(</span><span class="n">scriptId</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.overrideScript(scriptId, callback)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>scriptId</code> (string)</li>
@@ -8660,8 +8677,8 @@
 <hr />
 <h3 id="mwsesaveconfig"><code>mwse.saveConfig</code><a class="headerlink" href="#mwsesaveconfig" title="Permanent link">⚓︎</a></h3>
 <p>Saves a config table to Data Files\MWSE\config\{fileName}.json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">saveConfig</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">object</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.saveConfig(fileName, object, config)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>fileName</code> (string)</li>
@@ -8675,8 +8692,8 @@
 <hr />
 <h3 id="mwsestringtolong"><code>mwse.stringToLong</code><a class="headerlink" href="#mwsestringtolong" title="Permanent link">⚓︎</a></h3>
 <p>Converts an uppercase, 4-character string into a TES3 object type.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stringToLong</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
-</code></pre></div>
+<p><code>lua
+local result = mwse.stringToLong(tag)</code></p>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>tag</code> (string)</li>
@@ -8759,7 +8776,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -6108,6 +6108,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8088,6 +8090,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/vfxCreated/" class="md-nav__link">
+        vfxCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/weaponReadied/" class="md-nav__link">
         weaponReadied
       </a>
@@ -8222,233 +8238,111 @@
 
 <h1 id="tes3-ui-example">TES3 UI Example<a class="headerlink" href="#tes3-ui-example" title="Permanent link">⚓︎</a></h1>
 <p>This example allows you to rename the object you are targetting. When the '/' key is pressed, a custom input window is opened.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">--[[</span>
-<span class="cm">    Mod: TES3UI TextInput</span>
-<span class="cm">    Author: Hrnchamd</span>
-<span class="cm">]]</span><span class="c1">--</span>
+<p>```lua linenums="1"
+--[[
+    Mod: TES3UI TextInput
+    Author: Hrnchamd
+]]--</p>
+<p>local this = {}</p>
+<p>function this.init()
+    this.id_menu = tes3ui.registerID("example:MenuTextInput")
+    this.id_input = tes3ui.registerID("example:MenuTextInput_Text")
+    this.id_ok = tes3ui.registerID("example:MenuTextInput_Ok")
+    this.id_cancel = tes3ui.registerID("example:MenuTextInput_Cancel")
+end</p>
+<p>-- Create window and layout. Called by onCommand.
+function this.createWindow()
+    -- Return if window is already open
+    if (tes3ui.findMenu(this.id_menu) ~= nil) then
+        return
+    end</p>
+<pre><code>-- Create window and frame
+local menu = tes3ui.createMenu{ id = this.id_menu, fixedFrame = true }
 
-<span class="kd">local</span> <span class="n">this</span> <span class="o">=</span> <span class="p">{}</span>
+-- To avoid low contrast, text input windows should not use menu transparency settings
+menu.alpha = 1.0
 
+-- Create layout
+local input_label = menu:createLabel{ text = "Rename your item" }
+input_label.borderBottom = 5
 
-<span class="kr">function</span> <span class="nc">this</span><span class="p">.</span><span class="nf">init</span><span class="p">()</span>
-    <span class="n">this</span><span class="p">.</span><span class="n">id_menu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">registerID</span><span class="p">(</span><span class="s2">&quot;example:MenuTextInput&quot;</span><span class="p">)</span>
-    <span class="n">this</span><span class="p">.</span><span class="n">id_input</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">registerID</span><span class="p">(</span><span class="s2">&quot;example:MenuTextInput_Text&quot;</span><span class="p">)</span>
-    <span class="n">this</span><span class="p">.</span><span class="n">id_ok</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">registerID</span><span class="p">(</span><span class="s2">&quot;example:MenuTextInput_Ok&quot;</span><span class="p">)</span>
-    <span class="n">this</span><span class="p">.</span><span class="n">id_cancel</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">registerID</span><span class="p">(</span><span class="s2">&quot;example:MenuTextInput_Cancel&quot;</span><span class="p">)</span>
-<span class="kr">end</span>
+local input_block = menu:createBlock{}
+input_block.width = 300
+input_block.autoHeight = true
+input_block.childAlignX = 0.5  -- centre content alignment
 
+local border = input_block:createThinBorder{}
+border.width = 300
+border.height = 30
+border.childAlignX = 0.5
+border.childAlignY = 0.5
 
-<span class="c1">-- Create window and layout. Called by onCommand.</span>
-<span class="kr">function</span> <span class="nc">this</span><span class="p">.</span><span class="nf">createWindow</span><span class="p">()</span>
-    <span class="c1">-- Return if window is already open</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="n">tes3ui</span><span class="p">.</span><span class="n">findMenu</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">id_menu</span><span class="p">)</span> <span class="o">~=</span> <span class="kc">nil</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="kr">return</span>
-    <span class="kr">end</span>
+local input = border:createTextInput{ id = this.id_input }
+input.text = this.item.name  -- initial text
+input.borderLeft = 5
+input.borderRight = 5
+input.widget.lengthLimit = 31  -- TextInput custom properties
+input.widget.eraseOnFirstKey = true
 
-    <span class="c1">-- Create window and frame</span>
-    <span class="kd">local</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createMenu</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">id_menu</span><span class="p">,</span> <span class="n">fixedFrame</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">}</span>
+local button_block = menu:createBlock{}
+button_block.widthProportional = 1.0  -- width is 100% parent width
+button_block.autoHeight = true
+button_block.childAlignX = 1.0  -- right content alignment
 
-    <span class="c1">-- To avoid low contrast, text input windows should not use menu transparency settings</span>
-    <span class="n">menu</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+local button_cancel = button_block:createButton{ id = this.id_cancel, text = tes3.findGMST("sCancel").value }
+local button_ok = button_block:createButton{ id = this.id_ok, text = tes3.findGMST("sOK").value }
 
-    <span class="c1">-- Create layout</span>
-    <span class="kd">local</span> <span class="n">input_label</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createLabel</span><span class="p">{</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Rename your item&quot;</span> <span class="p">}</span>
-    <span class="n">input_label</span><span class="p">.</span><span class="n">borderBottom</span> <span class="o">=</span> <span class="mi">5</span>
+-- Events
+button_cancel:register("mouseClick", this.onCancel)
+menu:register("keyEnter", this.onOK) -- only works when text input is not captured
+input:register("keyEnter", this.onOK)
+button_ok:register("mouseClick", this.onOK)
 
-    <span class="kd">local</span> <span class="n">input_block</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createBlock</span><span class="p">{}</span>
-    <span class="n">input_block</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">300</span>
-    <span class="n">input_block</span><span class="p">.</span><span class="n">autoHeight</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="n">input_block</span><span class="p">.</span><span class="n">childAlignX</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1">-- centre content alignment</span>
+-- Final setup
+menu:updateLayout()
+tes3ui.enterMenuMode(this.id_menu)
+tes3ui.acquireTextInput(input) -- automatically reset when menu is closed
+</code></pre>
+<p>end</p>
+<p>-- OK button callback.
+function this.onOK(e)
+    local menu = tes3ui.findMenu(this.id_menu)</p>
+<pre><code>if (menu) then
+    -- Copy text *before* the menu is destroyed
+    local name = menu:findChild(this.id_input).text
 
-    <span class="kd">local</span> <span class="n">border</span> <span class="o">=</span> <span class="n">input_block</span><span class="p">:</span><span class="n">createThinBorder</span><span class="p">{}</span>
-    <span class="n">border</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">300</span>
-    <span class="n">border</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">30</span>
-    <span class="n">border</span><span class="p">.</span><span class="n">childAlignX</span> <span class="o">=</span> <span class="mf">0.5</span>
-    <span class="n">border</span><span class="p">.</span><span class="n">childAlignY</span> <span class="o">=</span> <span class="mf">0.5</span>
+    tes3ui.leaveMenuMode()
+    menu:destroy()
 
-    <span class="kd">local</span> <span class="n">input</span> <span class="o">=</span> <span class="n">border</span><span class="p">:</span><span class="n">createTextInput</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">id_input</span> <span class="p">}</span>
-    <span class="n">input</span><span class="p">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">name</span>  <span class="c1">-- initial text</span>
-    <span class="n">input</span><span class="p">.</span><span class="n">borderLeft</span> <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">input</span><span class="p">.</span><span class="n">borderRight</span> <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">input</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">lengthLimit</span> <span class="o">=</span> <span class="mi">31</span>  <span class="c1">-- TextInput custom properties</span>
-    <span class="n">input</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">eraseOnFirstKey</span> <span class="o">=</span> <span class="kc">true</span>
-
-    <span class="kd">local</span> <span class="n">button_block</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createBlock</span><span class="p">{}</span>
-    <span class="n">button_block</span><span class="p">.</span><span class="n">widthProportional</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1">-- width is 100% parent width</span>
-    <span class="n">button_block</span><span class="p">.</span><span class="n">autoHeight</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="n">button_block</span><span class="p">.</span><span class="n">childAlignX</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1">-- right content alignment</span>
-
-    <span class="kd">local</span> <span class="n">button_cancel</span> <span class="o">=</span> <span class="n">button_block</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">id_cancel</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGMST</span><span class="p">(</span><span class="s2">&quot;sCancel&quot;</span><span class="p">).</span><span class="n">value</span> <span class="p">}</span>
-    <span class="kd">local</span> <span class="n">button_ok</span> <span class="o">=</span> <span class="n">button_block</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">id_ok</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGMST</span><span class="p">(</span><span class="s2">&quot;sOK&quot;</span><span class="p">).</span><span class="n">value</span> <span class="p">}</span>
-
-    <span class="c1">-- Events</span>
-    <span class="n">button_cancel</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseClick&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">onCancel</span><span class="p">)</span>
-    <span class="n">menu</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyEnter&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">onOK</span><span class="p">)</span> <span class="c1">-- only works when text input is not captured</span>
-    <span class="n">input</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyEnter&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">onOK</span><span class="p">)</span>
-    <span class="n">button_ok</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseClick&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">onOK</span><span class="p">)</span>
-
-    <span class="c1">-- Final setup</span>
-    <span class="n">menu</span><span class="p">:</span><span class="n">updateLayout</span><span class="p">()</span>
-    <span class="n">tes3ui</span><span class="p">.</span><span class="n">enterMenuMode</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">id_menu</span><span class="p">)</span>
-    <span class="n">tes3ui</span><span class="p">.</span><span class="n">acquireTextInput</span><span class="p">(</span><span class="n">input</span><span class="p">)</span> <span class="c1">-- automatically reset when menu is closed</span>
-<span class="kr">end</span>
-
-
-<span class="c1">-- OK button callback.</span>
-<span class="kr">function</span> <span class="nc">this</span><span class="p">.</span><span class="nf">onOK</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findMenu</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">id_menu</span><span class="p">)</span>
-
-    <span class="kr">if</span> <span class="p">(</span><span class="n">menu</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="c1">-- Copy text *before* the menu is destroyed</span>
-        <span class="kd">local</span> <span class="n">name</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">findChild</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">id_input</span><span class="p">).</span><span class="n">text</span>
-
-        <span class="n">tes3ui</span><span class="p">.</span><span class="n">leaveMenuMode</span><span class="p">()</span>
-        <span class="n">menu</span><span class="p">:</span><span class="n">destroy</span><span class="p">()</span>
-
-        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">{</span> <span class="n">message</span> <span class="o">=</span> <span class="n">this</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">..</span> <span class="s2">&quot; renamed to &quot;</span> <span class="o">..</span> <span class="n">name</span> <span class="p">}</span>
-        <span class="n">this</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-
-<span class="c1">-- Cancel button callback.</span>
-<span class="kr">function</span> <span class="nc">this</span><span class="p">.</span><span class="nf">onCancel</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findMenu</span><span class="p">(</span><span class="n">this</span><span class="p">.</span><span class="n">id_menu</span><span class="p">)</span>
-
-    <span class="kr">if</span> <span class="p">(</span><span class="n">menu</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="n">tes3ui</span><span class="p">.</span><span class="n">leaveMenuMode</span><span class="p">()</span>
-        <span class="n">menu</span><span class="p">:</span><span class="n">destroy</span><span class="p">()</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-
-<span class="c1">-- Keydown callback.</span>
-<span class="kr">function</span> <span class="nc">this</span><span class="p">.</span><span class="nf">onCommand</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerTarget</span><span class="p">()</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">baseObject</span> <span class="ow">or</span> <span class="n">t</span><span class="p">.</span><span class="n">object</span> <span class="c1">-- Select actor base object</span>
-
-        <span class="kr">if</span> <span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="kr">then</span>
-            <span class="n">this</span><span class="p">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">t</span>
-            <span class="n">this</span><span class="p">.</span><span class="n">createWindow</span><span class="p">()</span>
-        <span class="kr">end</span>
-    <span class="kr">end</span>
-<span class="kr">end</span>
-
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">init</span><span class="p">)</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="n">this</span><span class="p">.</span><span class="n">onCommand</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="mi">53</span> <span class="p">})</span> <span class="c1">-- &quot;/&quot; key</span>
-</code></pre></div>
-</td></tr></table>
+    tes3.messageBox{ message = this.item.name .. " renamed to " .. name }
+    this.item.name = name
+end
+</code></pre>
+<p>end</p>
+<p>-- Cancel button callback.
+function this.onCancel(e)
+    local menu = tes3ui.findMenu(this.id_menu)</p>
+<pre><code>if (menu) then
+    tes3ui.leaveMenuMode()
+    menu:destroy()
+end
+</code></pre>
+<p>end</p>
+<p>-- Keydown callback.
+function this.onCommand(e)
+    local t = tes3.getPlayerTarget()
+    if (t) then
+        t = t.object.baseObject or t.object -- Select actor base object</p>
+<pre><code>    if (t.name) then
+        this.item = t
+        this.createWindow()
+    end
+end
+</code></pre>
+<p>end</p>
+<p>event.register("initialized", this.init)
+event.register("keyDown", this.onCommand, { filter = 53 }) -- "/" key
+```</p>
 
               
             </article>
@@ -8522,7 +8416,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       
