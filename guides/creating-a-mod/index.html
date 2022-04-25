@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -8394,7 +8394,7 @@
 <p>For example, consider the <code>loaded</code> event. This event is triggered whenever the player loads a save game. If you register a function to be called when this event occurs, your function will be called when the player loads a save game. By cleverly using Morrowind's events, powerful functionality can be created.</p>
 <p>In our file, <em>main.lua</em>, we will register an event to trigger our code. It is convention to register your mod's events inside of another event, the <code>initialized</code> event. The <code>initialized</code> event represents the point when the game and it's mods have been loaded. You can imagine this as the point which the title screen is first shown.</p>
 <p>So, first, we will create the <code>initialized</code> event.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
@@ -8402,7 +8402,7 @@
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function to call on the initialized event.</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- The function to call on the initialized event.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">initialized</span><span class="p">()</span> <span class="c1">-- 1.</span>
 
     <span class="c1">-- Print a &quot;Ready!&quot; statement to the MWSE.log file.</span>
@@ -8411,14 +8411,15 @@
 
 <span class="c1">-- Register our initialized function to the initialized event.</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span> <span class="c1">--3.</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <ol>
 <li>Declare a function to call whenever the <code>initialized</code> event is triggered.</li>
 <li>It is convention to print a statement stating your mod is initialized at the end of your initialized event function. This is used for debugging.</li>
 <li>Register our <code>initialized</code> function to the <code>initialized</code> event.</li>
 </ol>
 <p>Now, we want to register an event for what we are actually interested in. In this guide, we are creating a mod that displays a unique messagebox every time the player draws a two-handed weapon. There is an event for that! It is called the <code>weaponReadied</code> event.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -8433,7 +8434,7 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function to call on the showMessageboxOnWeaponReadied event.</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- The function to call on the showMessageboxOnWeaponReadied event.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessageboxOnWeaponReadied</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="c1">-- 1.</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;I just drew some weapon.&quot;</span><span class="p">)</span> <span class="c1">-- 2.</span>
 <span class="kr">end</span>
@@ -8449,7 +8450,8 @@
 
 <span class="c1">-- Register our initialized function to the initialized event.</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <ol>
 <li>Declare a function to call whenever the <code>weaponReadied</code> event is triggered.</li>
 <li>Add a simple messagebox command.</li>
@@ -8459,7 +8461,7 @@
 <p>The details of which events are available and what event data is exposed to them can be found on the <a href="../events">events</a> page.</p>
 <h2 id="validating-the-event-showing-a-messagebox">Validating the Event &amp; Showing a Messagebox<a class="headerlink" href="#validating-the-event-showing-a-messagebox" title="Permanent link">⚓︎</a></h2>
 <p>Now that the required events have been set up, the <code>showMessageboxOnWeaponReadied</code> function should be updated to restrict the types of actions that our code applies to. For the purposes of this guide, the function will only apply to two-handed weapons, and only to the player. The updated function is as follows:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -8474,7 +8476,7 @@
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function to call on the showMessageboxOnWeaponReadied event.</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- The function to call on the showMessageboxOnWeaponReadied event.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessageboxOnWeaponReadied</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Exit the function is the actor is not the player.</span>
     <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">reference</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">)</span> <span class="kr">then</span> <span class="c1">--1.</span>
@@ -8490,7 +8492,8 @@
         <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;I just drew &quot;</span> <span class="o">..</span> <span class="n">weaponStack</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">name</span> <span class="o">..</span> <span class="s2">&quot;, destroyer of worlds!&quot;</span><span class="p">)</span> <span class="c1">--4.</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <ol>
 <li>We must check that the event was triggered by the player. Without this step, the code would be executed for all actors, including NPCs and creatures! <code>e.reference</code> is an property of the <code>weaponedReadied</code> event. <code>tes3.player</code> is an easy way to access the player reference.</li>
 <li>Store a copy of the weaponStack reference in a local variable to prevent typing <code>e.weaponStack</code> more than once. </li>
@@ -8508,7 +8511,7 @@
 </ul>
 <p>At this point, you can continue reading the MWSE-Lua documentation. Documentation is constantly being improved upon, so ask a question in the <a href="https://discordapp.com/invite/QDEBbaP">Morrowind Modding Discord</a> if you need help.</p>
 <p>Here is the final code in <em>main.lua</em> for the demo mod:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -8535,7 +8538,7 @@
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function to call on the showMessageboxOnWeaponReadied event.</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- The function to call on the showMessageboxOnWeaponReadied event.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessageboxOnWeaponReadied</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Exit the function is the actor is not the player.</span>
     <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">reference</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">)</span> <span class="kr">then</span>
@@ -8563,7 +8566,8 @@
 
 <span class="c1">-- Register our initialized function to the initialized event.</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 
               
             </article>

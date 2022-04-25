@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.10">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
     
     
       
@@ -17,7 +17,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.df45aa19.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
@@ -8338,14 +8338,15 @@
 <p>To begin, let's look at some source code that we want to enable translations for. It is a simple mod that displays a message when the player hits the Z key.</p>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\main.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
-<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="n">onPressZ</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">z</span> <span class="p">})</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <p>Here we just want to allow translators to provide a different string instead of <code>"Hello world!"</code>. To do this, we need to make an <strong>i18n</strong> folder in our project to define our language files in. For example:</p>
 <ul>
@@ -8364,63 +8365,69 @@
 </ul>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\i18n\deu.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hallo Welt!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\i18n\eng.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\i18n\fra.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bonjour le monde!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\i18n\pol.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Witaj świecie!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\i18n\rus.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Привет, мир!&quot;</span><span class="p">,</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <div class="admonition example">
 <p class="admonition-title"><strong>The Hello World Mod\main.lua</strong></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="s2">&quot;The Hello World Mod&quot;</span><span class="p">)</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="s2">&quot;The Hello World Mod&quot;</span><span class="p">)</span>
 
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">))</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="n">onPressZ</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">z</span> <span class="p">})</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 </div>
 <p>This code looks pretty simple, but what is really happening here? <code>mwse.loadTranslations("The Hello World Mod")</code> loads content from <strong>The Hello World Mod\i18n\eng.lua</strong> as well as an optional additional file, based on the player's game language. This can be <strong>deu.lua</strong>, <strong>fra.lua</strong>, or <strong>rus.lua</strong>. When the <code>i18n</code> translation result is called, it returns the translation for the player's current language with the key <code>"Hello world!"</code>.</p>
 <h2 id="translation-files">Translation Files<a class="headerlink" href="#translation-files" title="Permanent link">⚓︎</a></h2>
@@ -8450,35 +8457,37 @@ Instead, use something like:
 <div class="admonition example">
 <p class="admonition-title">Pluralization</p>
 <p><strong>i18n\eng.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
         <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %{count} %{item}s.&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <strong>main.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="s2">&quot;Iron Dagger Counter&quot;</span><span class="p">)</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="s2">&quot;Iron Dagger Counter&quot;</span><span class="p">)</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onPressZ</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">dagger</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron dagger&quot;</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">daggerCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getItemCount</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span> <span class="p">})</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;keyDown&quot;</span><span class="p">,</span> <span class="n">onPressZ</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">z</span> <span class="p">})</span>
-</code></pre></div></td></tr></table></div></p>
+</code></pre></div>
+</td></tr></table></p>
 </div>
 <p>Here, the correct language will be chosen depending on the context of <code>daggerCount</code>. If the player has no iron daggers, <code>"You have no Iron Daggers."</code> will be displayed. If the player has exactly 1 iron dagger, <code>"You have 1 Iron Dagger."</code>. Finally, in any other case, the <code>other</code> key is used.</p>
 <p>A few other pluralization fields are available: <code>few</code> and <code>many</code>. <code>few</code> is used when <code>value % 100</code> is between 3 and 10. <code>many</code> is used when <code>value % 100</code> is between 11 and 99.</p>
@@ -8487,73 +8496,79 @@ Instead, use something like:
 <div class="admonition example">
 <p class="admonition-title">Named Style</p>
 <p><strong>i18n\eng.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
         <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %{count} %{item}s.&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <strong>main.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
-</code></pre></div></td></tr></table></div></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+</code></pre></div>
+</td></tr></table></p>
 </div>
 <div class="admonition example">
 <p class="admonition-title"><code>string.format</code> Style</p>
 <p><strong>i18n\eng.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %ss.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %s.&quot;</span><span class="p">,</span>
         <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %d %ss.&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <strong>main.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">if</span> <span class="p">(</span><span class="n">daggerCount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="kr">then</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">if</span> <span class="p">(</span><span class="n">daggerCount</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="kr">then</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 <span class="kr">else</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
 <span class="kr">end</span>
-</code></pre></div></td></tr></table></div></p>
+</code></pre></div>
+</td></tr></table></p>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Named with <code>string.format</code> Style</p>
 <p><strong>i18n\eng.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %&lt;item&gt;d.&quot;</span><span class="p">,</span>
         <span class="n">other</span> <span class="o">=</span> <span class="s2">&quot;You have %&lt;count&gt;d %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div>
+</td></tr></table>
 <strong>main.lua</strong>:
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
-</code></pre></div></td></tr></table></div></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">i18n</span><span class="p">(</span><span class="s2">&quot;itemCountNotification&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="n">count</span> <span class="o">=</span> <span class="n">daggerCount</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">dagger</span><span class="p">.</span><span class="n">name</span> <span class="p">}))</span>
+</code></pre></div>
+</td></tr></table></p>
 </div>
 
               
