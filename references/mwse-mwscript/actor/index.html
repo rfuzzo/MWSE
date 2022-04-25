@@ -8745,24 +8745,28 @@
 <p>.. note:: Unlike the vanilla activate function, the reference is the actor that will activate something, rather than the object to activate.</p>
 <details class="example">
 <summary>Force the PC to Activate</summary>
-<p>```
-begin test</p>
-<p>long targetRef
-long pcRef</p>
-<p>; Don't force pickup if we're not sneaking.
+<div class="highlight"><pre><span></span><code>begin test
+
+long targetRef
+long pcRef
+
+; Don&#39;t force pickup if we&#39;re not sneaking.
 if ( GetPCSneaking == 0 )
     return
-endif</p>
-<p>; Get a reference to what the player is looking at.
+endif
+
+; Get a reference to what the player is looking at.
 setx targetRef to xGetPCTarget
 if ( targetRef == 0 )
     return
-endif</p>
-<p>; Get a reference to the player, and force them to activate what they are looking at.
-setx pcRef to xGetRef "player"
-pcRef-&gt;xActivate targetRef</p>
-<p>end
-```</p>
+endif
+
+; Get a reference to the player, and force them to activate what they are looking at.
+setx pcRef to xGetRef &quot;player&quot;
+pcRef-&gt;xActivate targetRef
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xaddspell"><code>xAddSpell</code><a class="headerlink" href="#xaddspell" title="Permanent link">⚓︎</a></h2>

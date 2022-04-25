@@ -8829,16 +8829,19 @@
 <details class="example">
 <summary>Distance from PC Target</summary>
 <p>This example calculates the distance between the PC and what they are looking at.</p>
-<p>```
-begin DistanceToTarget</p>
-<p>long pcRef
+<div class="highlight"><pre><span></span><code>begin DistanceToTarget
+
+long pcRef
 long targetRef
-float distance</p>
-<p>setx pcRef to xGetRef "player"
-setx targetRef to xGetPCTarget</p>
-<p>setx distance to pcRef-&gt;xDistance targetRef</p>
-<p>end
-```</p>
+float distance
+
+setx pcRef to xGetRef &quot;player&quot;
+setx targetRef to xGetPCTarget
+
+setx distance to pcRef-&gt;xDistance targetRef
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xexplodespell"><code>xExplodeSpell</code><a class="headerlink" href="#xexplodespell" title="Permanent link">⚓︎</a></h2>
@@ -8929,18 +8932,25 @@ setx targetRef to xGetPCTarget</p>
 <p>This is a wrapper function around <code>GetItemCount</code> that allows variable input.</p>
 <details class="example">
 <summary>Example</summary>
-<p>```
-begin Example_xGetItemCount</p>
-<p>long ref</p>
-<p>long id
-long count</p>
-<p>setx ref to xGetRef "player"</p>
-<p>setx id to xStringBuild "Gold_001"</p>
-<p>setx count to ref-&gt;xGetItemCount id</p>
-<p>MessageBox "Total Gold: %g" count</p>
-<p>StopScript Example_xGetItemCount</p>
-<p>end
-```</p>
+<div class="highlight"><pre><span></span><code>begin Example_xGetItemCount
+
+long ref
+
+long id
+long count
+
+setx ref to xGetRef &quot;player&quot;
+
+setx id to xStringBuild &quot;Gold_001&quot;
+
+setx count to ref-&gt;xGetItemCount id
+
+MessageBox &quot;Total Gold: %g&quot; count
+
+StopScript Example_xGetItemCount
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xgetlocklevel"><code>xGetLockLevel</code><a class="headerlink" href="#xgetlocklevel" title="Permanent link">⚓︎</a></h2>
@@ -8994,36 +9004,43 @@ long count</p>
 </div>
 <details class="example">
 <summary>Get Model by Object ID</summary>
-<p>```
-begin Example_xGetModelById</p>
-<p>long model</p>
-<p>setx model to xGetModel "ingred_bonemeal_01"
+<div class="highlight"><pre><span></span><code>begin Example_xGetModelById
+
+long model
+
+setx model to xGetModel &quot;ingred_bonemeal_01&quot;
 if ( model == 0 )
     return
-endif</p>
-<p>xMessageFix "Model: %s" model
-MessageBox "Model: <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____"</p>
-<p>end
-```</p>
+endif
+
+xMessageFix &quot;Model: %s&quot; model
+MessageBox &quot;Model: ________________________________&quot;
+
+end
+</code></pre></div>
 </details>
 <details class="example">
 <summary>Get Model by Reference</summary>
-<p>```
-begin Example_xGetModelByRef</p>
-<p>long ref
-long model</p>
-<p>setx ref to xGetPCTarget
+<div class="highlight"><pre><span></span><code>begin Example_xGetModelByRef
+
+long ref
+long model
+
+setx ref to xGetPCTarget
 if ( ref == 0 )
     return
-endif</p>
-<p>setx model to ref-&gt;xGetModel 0
+endif
+
+setx model to ref-&gt;xGetModel 0
 if ( model == 0 )
     return
-endif</p>
-<p>xMessageFix "Model: %s" model
-MessageBox "Model: <strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong><strong><em>_</em></strong>____"</p>
-<p>end
-```</p>
+endif
+
+xMessageFix &quot;Model: %s&quot; model
+MessageBox &quot;Model: ________________________________&quot;
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xgetname"><code>xGetName</code><a class="headerlink" href="#xgetname" title="Permanent link">⚓︎</a></h2>
@@ -9060,91 +9077,98 @@ MessageBox "Model: <strong><em>_</em></strong><strong><em>_</em></strong><strong
 </div>
 <details class="example">
 <summary>Boobytrapped Mages Guild and Telvanni faction containers</summary>
-<p>```
-begin boobycontainers
+<div class="highlight"><pre><span></span><code>begin boobycontainers
 ;if the player tries to open a container owned by either MG or GHT that he
-;doesn't have the required rank to legally take items from, then instead of
-;the container opening, the player will be zapped.</p>
-<p>short framecount
+;doesn&#39;t have the required rank to legally take items from, then instead of
+;the container opening, the player will be zapped.
+
+short framecount
 short temp
 short player_rank
 long pctarget
 long type
 long own_id
-long own_cond</p>
-<p>if ( MenuMode )
+long own_cond
+
+if ( MenuMode )
     return
-endif</p>
-<p>set framecount to ( framecount + 1 )
+endif
+
+set framecount to ( framecount + 1 )
 if ( framecount &lt; 30 )
     return
 endif
-set framecount to 0</p>
-<p>setx pctarget to xGetPCTarget
+set framecount to 0
+
+setx pctarget to xGetPCTarget
 ifx ( pctarget )
     setx type to pctarget-&gt;xRefType
-    if ( type != 1414418243 ) ;if it's not a container ref type
+    if ( type != 1414418243 ) ;if it&#39;s not a container ref type
         return
     endif
     setx type own_id own_cond to pctarget-&gt;xGetOwnerInfo
-    if ( type != 1413693766 ) ;if it's not a faction ownership type
-        return
-    endif</p>
-<pre><code>setx temp to xStringCompare own_id "Mages Guild" ;if the owner of the container is MG, temp will be 0
-ifx ( temp ) ;not MG
-    setx temp to xStringCompare own_id "Telvanni"
-    ifx ( temp )
-        ;owner is not MG and not GHT, either
+    if ( type != 1413693766 ) ;if it&#39;s not a faction ownership type
         return
     endif
-    ;owner is GHT
-    set player_rank to GetPCRank "Telvanni" ;doesn't hurt here, but remember 0 and -1 are both possible return values of this function
-else
-    ;owner is MG
-    set player_rank to GetPCRank "Mages Guild"
-endif
 
-set temp to 0
-if ( player_rank &gt;= own_cond ) ;player is of the right rank in whichever faction to be able to claim the container's contents
-    set temp to 1
-endif
-ifx ( temp )
-    ;originally, there was only a return here.
-    ;the following block is needed in case activation was already blocked by the OnActivate call (the 2nd instance of it, now) on a previous run, but the player since raised in rank enough; without this line, the player will no longer get the trap, but the container may not open (as it normally should), either
+    setx temp to xStringCompare own_id &quot;Mages Guild&quot; ;if the owner of the container is MG, temp will be 0
+    ifx ( temp ) ;not MG
+        setx temp to xStringCompare own_id &quot;Telvanni&quot;
+        ifx ( temp )
+            ;owner is not MG and not GHT, either
+            return
+        endif
+        ;owner is GHT
+        set player_rank to GetPCRank &quot;Telvanni&quot; ;doesn&#39;t hurt here, but remember 0 and -1 are both possible return values of this function
+    else
+        ;owner is MG
+        set player_rank to GetPCRank &quot;Mages Guild&quot;
+    endif
+
+    set temp to 0
+    if ( player_rank &gt;= own_cond ) ;player is of the right rank in whichever faction to be able to claim the container&#39;s contents
+        set temp to 1
+    endif
+    ifx ( temp )
+        ;originally, there was only a return here.
+        ;the following block is needed in case activation was already blocked by the OnActivate call (the 2nd instance of it, now) on a previous run, but the player since raised in rank enough; without this line, the player will no longer get the trap, but the container may not open (as it normally should), either
+        xSetRef pctarget
+        set temp to OnActivate
+        ifx ( temp )
+            pctarget-&gt;Activate
+        endif
+        return
+    endif
+
+    ;if reached here, player doesn&#39;t meet rank requirement
     xSetRef pctarget
-    set temp to OnActivate
-    ifx ( temp )
-        pctarget-&gt;Activate
+    if ( OnActivate ) ;merely CALLING this function will block any further normal activation attempts. it makes the object&#39;s activation temporarily only possible through the Activate function
+        MessageBox &quot;A trap is sprung!&quot;
+        set temp to - ( player-&gt;GetFatigue + 1 )
+        player-&gt;ModCurrentFatigue temp ;makes player fall down (&quot;knocked out&quot;) briefly - causes current fatigue to be -1
+        player-&gt;PlaySound &quot;destruction hit&quot;
     endif
-    return
 endif
 
-;if reached here, player doesn't meet rank requirement
-xSetRef pctarget
-if ( OnActivate ) ;merely CALLING this function will block any further normal activation attempts. it makes the object's activation temporarily only possible through the Activate function
-    MessageBox "A trap is sprung!"
-    set temp to - ( player-&gt;GetFatigue + 1 )
-    player-&gt;ModCurrentFatigue temp ;makes player fall down ("knocked out") briefly - causes current fatigue to be -1
-    player-&gt;PlaySound "destruction hit"
-endif
-</code></pre>
-<p>endif</p>
-<p>end
-```</p>
+end
+</code></pre></div>
 </details>
 <details class="example">
 <summary>World entity destruction with ownership penalty</summary>
-<p>```
-begin entitydestruction</p>
-<p>;allows the player to destroy objects in the world by striking at them with
-;a weapon (or barehanded). but if the player wouldn't have been (legally) allowed to pick up that
-;object, he gets a bounty as if he stole it (with respect to the GMST that controls the bounty amount for theft).</p>
-<p>;the value of containers is assumed to be only the value of all the items within them.
-;the value of doors is assumed to be 100 septims, and of activators, 200 septims.</p>
-<p>;this script doesn't take into account whether player is detected (sneaking, invisible),
-;etc. well, he's doing a loud and incriminating action, anyway.
-;it doesn't do faction expulsion, either...</p>
-<p>short framecount
+<div class="highlight"><pre><span></span><code>begin entitydestruction
+
+;allows the player to destroy objects in the world by striking at them with
+;a weapon (or barehanded). but if the player wouldn&#39;t have been (legally) allowed to pick up that
+;object, he gets a bounty as if he stole it (with respect to the GMST that controls the bounty amount for theft).
+
+;the value of containers is assumed to be only the value of all the items within them.
+;the value of doors is assumed to be 100 septims, and of activators, 200 septims.
+
+;this script doesn&#39;t take into account whether player is detected (sneaking, invisible),
+;etc. well, he&#39;s doing a loud and incriminating action, anyway.
+;it doesn&#39;t do faction expulsion, either...
+
+short framecount
 short update_col
 long temp
 long pctarget
@@ -9157,34 +9181,45 @@ long ownerid
 long condition
 float glob
 ;note: in this script, existing vars are often reused, so that a bunch of
-;vars are also used for other purposes than their name suggests.</p>
-<p>;for example, because it is the only float and there's no problem with
-;overwriting it, 'glob' is used to (temporarily) hold both the result of
-;a reading of a global var, and also of reading a float GMST.</p>
-<p>if ( MenuMode )
+;vars are also used for other purposes than their name suggests.
+
+;for example, because it is the only float and there&#39;s no problem with
+;overwriting it, &#39;glob&#39; is used to (temporarily) hold both the result of
+;a reading of a global var, and also of reading a float GMST.
+
+
+if ( MenuMode )
     return
-endif</p>
-<p>set framecount to ( framecount + 1 )
+endif
+
+set framecount to ( framecount + 1 )
 if ( framecount &lt; timing1 )
     return
 endif
-set framecount to 0</p>
-<p>if ( player-&gt;GetWeaponDrawn == 0 )
+set framecount to 0
+
+if ( player-&gt;GetWeaponDrawn == 0 )
     return
-endif</p>
-<p>if ( player-&gt;GetWeaponType == 0 )
+endif
+
+if ( player-&gt;GetWeaponType == 0 )
     return ;ignore lockpicks and probes; unfortuantely this also applies to Short Blades...
-endif</p>
-<p>setx temp to xKeyPressed 1 ;left mouse button
-setx pctarget to xGetPCTarget</p>
-<p>setx temp to xAnd temp pctarget;if player looking at something AND pressing LMB, temp will be 1</p>
-<p>if ( temp == 0 )
+endif
+
+setx temp to xKeyPressed 1 ;left mouse button
+setx pctarget to xGetPCTarget
+
+setx temp to xAnd temp pctarget;if player looking at something AND pressing LMB, temp will be 1
+
+if ( temp == 0 )
     return
-endif</p>
-<p>;you should also be able to just use 'if ( player-&gt;GetSoundPlaying "weapon swish" )' instead, to check
+endif
+
+;you should also be able to just use &#39;if ( player-&gt;GetSoundPlaying &quot;weapon swish&quot; )&#39; instead, to check
 ;if the player is making a strike, at least on machines where GetSoundPlaying works fine.
-;you'd also be able to automatically support all swinging weapons, then.</p>
-<p>setx type to pctarget-&gt;xRefType
+;you&#39;d also be able to automatically support all swinging weapons, then.
+
+setx type to pctarget-&gt;xRefType
 set value to 0
 set nextref to 0
 if ( type == 1598246990 ) ;NPC
@@ -9192,7 +9227,7 @@ if ( type == 1598246990 ) ;NPC
 elseif ( type == 1095062083 ) ;creature
     return
 elseif ( type == 1414418243 ) ;container
-    set nextref to 1 ;flag that we need to tally the container's total value
+    set nextref to 1 ;flag that we need to tally the container&#39;s total value
     set update_col to 1
 elseif ( type == 1380929348 ) ;door      (this script allows player to destroy load doors too, careful)
     set value to 100
@@ -9200,31 +9235,34 @@ elseif ( type == 1380929348 ) ;door      (this script allows player to destroy l
 elseif ( type == 1230259009 ) ;activator
     set value to 200
     set update_col to 1
-endif</p>
-<p>set invvalue to 0
+endif
+
+
+set invvalue to 0
 set invcount to 0
 setx type ownerid condition to pctarget-&gt;xGetOwnerInfo
 if ( type == 0 ) ;no owner
-    set value to 1 ;in case 'value' wasn't determined yet - there's no need to calculate it below
+    set value to 1 ;in case &#39;value&#39; wasn&#39;t determined yet - there&#39;s no need to calculate it below
 elseif ( type == 1598246990 ) ;NPC owner
     set invvalue to 1 ;(temp flag)
 elseif ( type == 1413693766 ) ;faction owner
     set invcount to 1 ;(temp flag)
 else
-    MessageBox "ERROR?!" ;this should never happen
+    MessageBox &quot;ERROR?!&quot; ;this should never happen
     return
-endif</p>
-<p>ifx ( invvalue ) ;NPC owner
+endif
+
+ifx ( invvalue ) ;NPC owner
     setx temp to xGetRef ownerid
     ifx ( temp )
         xSetRef temp
         set temp to GetHealth
     else
-        set temp to 0 ;if can't find the owner, assume he's dead
+        set temp to 0 ;if can&#39;t find the owner, assume he&#39;s dead
     endif
-    if ( temp &lt;= 0 ) ;if he's dead, then it's all legal...
+    if ( temp &lt;= 0 ) ;if he&#39;s dead, then it&#39;s all legal...
         set type to 0 ;no ownership
-        set value to 1 ;no need to calculate 'value'
+        set value to 1 ;no need to calculate &#39;value&#39;
     else
         ifx ( condition )
             setx temp glob to xGetGlobal condition
@@ -9235,65 +9273,72 @@ endif</p>
                     set value to 1
                 endif
             else
-                MessageBox "Got a problem..."
+                MessageBox &quot;Got a problem...&quot;
             endif
         endif
     endif
-endif</p>
-<p>ifx ( invcount ) ;faction owner
-    ;setx temp to xGetPCRank ownerid ;(this function doesn't exist yet)
-    set temp to 0 ;temp filler since can't use above line. this makes the player count as of the lowest rank in the faction.</p>
-<pre><code>if ( temp &gt;= condition ) ;if player is of the required rank or above...
-    ;then it's legal
-    set type to 0
-    set value to 1
 endif
-</code></pre>
-<p>endif</p>
-<p>ifx ( value )
+
+ifx ( invcount ) ;faction owner
+    ;setx temp to xGetPCRank ownerid ;(this function doesn&#39;t exist yet)
+    set temp to 0 ;temp filler since can&#39;t use above line. this makes the player count as of the lowest rank in the faction.
+
+    if ( temp &gt;= condition ) ;if player is of the required rank or above...
+        ;then it&#39;s legal
+        set type to 0
+        set value to 1
+    endif
+endif
+
+
+ifx ( value )
 else
-    ;if value is still 0, we're looking at an item (or a container)</p>
-<pre><code>ifx ( nextref ) ;container
-    set nextref to 0
-    setx temp invcount temp invvalue temp temp nextref to pctarget-&gt;xContentList nextref ;values we don't care about get stored in temp and overwritten
-    whilex ( invcount ) ;might take a short... while, if container has tons of stacks in it
-        set temp to ( invcount * invvalue )
-        set value to ( value + temp )
-        ifx ( nextref )
-            setx temp invcount temp invvalue temp temp nextref to pctarget-&gt;xContentList nextref
-        else
-            set invcount to 0 ;break the loop
-        endif
-    endwhile
-else ;looking at an item
-    setx value to pctarget-&gt;xGetValue
+    ;if value is still 0, we&#39;re looking at an item (or a container)
+
+    ifx ( nextref ) ;container
+        set nextref to 0
+        setx temp invcount temp invvalue temp temp nextref to pctarget-&gt;xContentList nextref ;values we don&#39;t care about get stored in temp and overwritten
+        whilex ( invcount ) ;might take a short... while, if container has tons of stacks in it
+            set temp to ( invcount * invvalue )
+            set value to ( value + temp )
+            ifx ( nextref )
+                setx temp invcount temp invvalue temp temp nextref to pctarget-&gt;xContentList nextref
+            else
+                set invcount to 0 ;break the loop
+            endif
+        endwhile
+    else ;looking at an item
+        setx value to pctarget-&gt;xGetValue
+    endif
+
 endif
-</code></pre>
-<p>endif</p>
-<p>pctarget-&gt;Disable ;'destroy' the target
-player-&gt;PlaySound "critical damage"
+
+pctarget-&gt;Disable ;&#39;destroy&#39; the target
+player-&gt;PlaySound &quot;critical damage&quot;
 if ( type ) ;if it was determined to be illegal...
     setx glob to xGetGS 1173 ;GMST fCrimeStealing (default: 1.0)
     set value to ( value * glob )
     ModPCCrimeLevel value
-endif</p>
-<p>if ( update_col )
+endif
+
+if ( update_col )
     set update_col to 0
-    ;in the event that that the player just disable'd a door or a large
+    ;in the event that that the player just disable&#39;d a door or a large
     ;container or activator, its collision will normally remain until the
-    ;cell is re-loaded, and the player won't be able to go through th
+    ;cell is re-loaded, and the player won&#39;t be able to go through th
     ;space it used to occupy.
     ;this part of the script solves that issue, making use of the fact that
     ;the FixMe function also reloads some stuff in the active cell, such as
-    ;object coliisions.</p>
-<pre><code>;unfortunately, it also seems to always teleport the player, and,
-;ironically, sometimes cause him to get stuck. therefore, this line is commented out.
+    ;object coliisions.
 
-;FixMe
-</code></pre>
-<p>endif</p>
-<p>end
-```</p>
+    ;unfortunately, it also seems to always teleport the player, and,
+    ;ironically, sometimes cause him to get stuck. therefore, this line is commented out.
+
+    ;FixMe
+endif
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xgetquality"><code>xGetQuality</code><a class="headerlink" href="#xgetquality" title="Permanent link">⚓︎</a></h2>
@@ -9330,22 +9375,26 @@ endif</p>
 <p>This function returns the stack size of a given reference. For example if used on a reference to iron arrows, xGetStackSize will tell you how many arrows there are in that stack.</p>
 <details class="example">
 <summary>Get player target's stack size.</summary>
-<p>```
-begin Example_xGetStackSize</p>
-<p>long ref
-long size</p>
-<p>setx ref to xGetPCTarget
+<div class="highlight"><pre><span></span><code>begin Example_xGetStackSize
+
+long ref
+long size
+
+setx ref to xGetPCTarget
 if ( ref == 0 )
     return
-endif</p>
-<p>setx size to ref-&gt;xGetStackSize</p>
-<p>if ( size &gt; 1 )
-    MessageBox "Target stack size is %g." size
+endif
+
+setx size to ref-&gt;xGetStackSize
+
+if ( size &gt; 1 )
+    MessageBox &quot;Target stack size is %g.&quot; size
 else
-    MessageBox "Target is a single item."
-endif</p>
-<p>end
-```</p>
+    MessageBox &quot;Target is a single item.&quot;
+endif
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xgettrap"><code>xGetTrap</code><a class="headerlink" href="#xgettrap" title="Permanent link">⚓︎</a></h2>
@@ -9406,20 +9455,23 @@ endif</p>
 <p>Returns a reference to the calling object.</p>
 <details class="example">
 <summary>Detect if target from local script.</summary>
-<p>```
-begin Example_xMyRef</p>
-<p>long myRef
-long targetRef</p>
-<p>setx targetRef to xGetPCTarget
+<div class="highlight"><pre><span></span><code>begin Example_xMyRef
+
+long myRef
+long targetRef
+
+setx targetRef to xGetPCTarget
 if ( targetRef == 0 )
     return
-endif</p>
-<p>setx myRef to xMyRef
+endif
+
+setx myRef to xMyRef
 if ( myRef == targetRef )
-    MessageBox "I'm being targetted!"
-endif</p>
-<p>end
-```</p>
+    MessageBox &quot;I&#39;m being targetted!&quot;
+endif
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xposition"><code>xPosition</code><a class="headerlink" href="#xposition" title="Permanent link">⚓︎</a></h2>

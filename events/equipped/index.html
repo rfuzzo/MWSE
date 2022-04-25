@@ -8280,11 +8280,11 @@
 
 <h1 id="equipped">equipped<a class="headerlink" href="#equipped" title="Permanent link">⚓︎</a></h1>
 <p>The <strong>equipped</strong> event fires after an actor has successfully equipped an item. This event is preceded by the <a href="https://mwse.github.io/MWSE/events/equip">equip</a> event.</p>
-<p><code>lua
---- @param e equippedEventData
-local function equippedCallback(e)
-end
-event.register(tes3.event.equipped, equippedCallback)</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e equippedEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">equippedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">equipped</span><span class="p">,</span> <span class="n">equippedCallback</span><span class="p">)</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This event can be filtered based on the <strong><code>item</code></strong> event data.</p>

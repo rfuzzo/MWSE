@@ -8393,8 +8393,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="stringendswith"><code>string.endswith</code><a class="headerlink" href="#stringendswith" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if a string ends with a given pattern.</p>
-<p><code>lua
-local result = string.endswith(s, pattern)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>
@@ -8513,8 +8513,8 @@ local result = string.endswith(s, pattern)</code></p>
 </tr>
 </tbody>
 </table>
-<p><code>lua
-local result = string.format(format, values)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">string.format</span><span class="p">(</span><span class="n">format</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>format</code> (string): The format string to use for the output.</li>
@@ -8527,8 +8527,8 @@ local result = string.format(format, values)</code></p>
 <hr />
 <h3 id="stringinsert"><code>string.insert</code><a class="headerlink" href="#stringinsert" title="Permanent link">⚓︎</a></h3>
 <p>Returns a string where one string has been inserted into another at a given position.</p>
-<p><code>lua
-local inserted = string.insert(s1, s2, position)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">inserted</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s1</code> (string): The string to insert into.</li>
@@ -8543,8 +8543,8 @@ local inserted = string.insert(s1, s2, position)</code></p>
 <h3 id="stringmultifind"><code>string.multifind</code><a class="headerlink" href="#stringmultifind" title="Permanent link">⚓︎</a></h3>
 <p>Performs the logic of find, using a table of patterns.</p>
 <p>If any of the available patterns match, the matching pattern is returned followed by the normal results of the find.</p>
-<p><code>lua
-string.multifind(s, pattern, index, plain)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">string</span><span class="p">.</span><span class="n">multifind</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">plain</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string): The string to perform finds on.</li>
@@ -8555,8 +8555,8 @@ string.multifind(s, pattern, index, plain)</code></p>
 <hr />
 <h3 id="stringsplit"><code>string.split</code><a class="headerlink" href="#stringsplit" title="Permanent link">⚓︎</a></h3>
 <p>Returns an array-style table with <code>str</code> split by <code>sep</code>. The <code>sep</code>erator is not part of the results. By default the <code>sep</code>erator is <code>%s</code>, splitting the given <code>str</code>ing by spaces.</p>
-<p><code>lua
-local split = string.split(str, sep)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">split</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">sep</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>str</code> (string): The string to split.</li>
@@ -8569,8 +8569,8 @@ local split = string.split(str, sep)</code></p>
 <hr />
 <h3 id="stringstartswith"><code>string.startswith</code><a class="headerlink" href="#stringstartswith" title="Permanent link">⚓︎</a></h3>
 <p>Returns true if a string begins with a given pattern.</p>
-<p><code>lua
-local result = string.startswith(s, pattern)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>
@@ -8583,8 +8583,8 @@ local result = string.startswith(s, pattern)</code></p>
 <hr />
 <h3 id="stringtrim"><code>string.trim</code><a class="headerlink" href="#stringtrim" title="Permanent link">⚓︎</a></h3>
 <p>Returns a copy of the string, with whitespace removed from the start and end.</p>
-<p><code>lua
-local trimmed = string.trim(s)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">trimmed</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">trim</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>

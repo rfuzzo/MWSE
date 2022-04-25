@@ -8314,36 +8314,57 @@
 </div>
 <h2 id="creating-a-config-package">Creating a Config Package<a class="headerlink" href="#creating-a-config-package" title="Permanent link">⚓︎</a></h2>
 <p>The mod config system operates through a single package that is registered. Below is the simplest code required to get a mod's name into the mod config list:</p>
-<p>```lua linenums="1"
--- Define our mod config package. For now, there's nothing interesting.
-local modConfigPackage = {}</p>
-<p>-- The callback to create the mod config GUI when our mod was clicked.
-function modConfigPackage.onCreate(container)
-    container:createLabel({ text = "Hello world!" })
-end</p>
-<p>-- When the mod config menu is ready to start accepting registrations, register this mod.
-local function registerModConfig()
-    mwse.registerModConfig("My Awesome Mod", modConfigPackage)
-end
-event.register("modConfigReady", registerModConfig)
-```</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Define our mod config package. For now, there&#39;s nothing interesting.</span>
+<span class="kd">local</span> <span class="n">modConfigPackage</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1">-- The callback to create the mod config GUI when our mod was clicked.</span>
+<span class="kr">function</span> <span class="nc">modConfigPackage</span><span class="p">.</span><span class="nf">onCreate</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+    <span class="n">container</span><span class="p">:</span><span class="n">createLabel</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Hello world!&quot;</span> <span class="p">})</span>
+<span class="kr">end</span>
+
+<span class="c1">-- When the mod config menu is ready to start accepting registrations, register this mod.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">registerModConfig</span><span class="p">()</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">registerModConfig</span><span class="p">(</span><span class="s2">&quot;My Awesome Mod&quot;</span><span class="p">,</span> <span class="n">modConfigPackage</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;modConfigReady&quot;</span><span class="p">,</span> <span class="n">registerModConfig</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
 <p>After loading up the game, you should see "My Awesome Mod" in the mod config menu, with a single "Hello world!" in its configuration pane.</p>
 <h2 id="handling-close-state">Handling Close State<a class="headerlink" href="#handling-close-state" title="Permanent link">⚓︎</a></h2>
 <p>It may be desirable to put off saving config options until after the close button has been clicked, or until after the user switched to a new mod. The optional <code>modConfigPackage.onClose</code> callback is called in both cases.</p>
-<p><code>lua linenums="1"
--- The callback to do any cleanup needed when our menu is about to be destroyed.
-function modConfigPackage.onClose(container)
-    tes3.messageBox("Goodbye!")
-end</code></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The callback to do any cleanup needed when our menu is about to be destroyed.</span>
+<span class="kr">function</span> <span class="nc">modConfigPackage</span><span class="p">.</span><span class="nf">onClose</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Goodbye!&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="hiding-from-the-config-menu">Hiding from the Config Menu<a class="headerlink" href="#hiding-from-the-config-menu" title="Permanent link">⚓︎</a></h2>
 <p>It may become desirable to hide a mod from the config menu. For example, you may not wish it to be displayed until after the player is in-game if settings are stored in the save game file instead of another file. This can be done by setting the <code>modConfigPackage.hidden</code> field to <code>true</code>. In the below example, we'll hide the mod from the config menu until the game has loaded.</p>
-<p>```lua linenums="1"
-local modConfigPackage = { hidden = true }</p>
-<p>local function enableModConfigOnLoaded()
-    modConfigPackage.hidden = false
-end
-event.register("loaded", enableModConfigOnLoaded)
-```</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">modConfigPackage</span> <span class="o">=</span> <span class="p">{</span> <span class="n">hidden</span> <span class="o">=</span> <span class="kc">true</span> <span class="p">}</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">enableModConfigOnLoaded</span><span class="p">()</span>
+    <span class="n">modConfigPackage</span><span class="p">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">,</span> <span class="n">enableModConfigOnLoaded</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
 
               
             </article>

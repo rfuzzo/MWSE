@@ -8365,8 +8365,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="eventclear"><code>event.clear</code><a class="headerlink" href="#eventclear" title="Permanent link">⚓︎</a></h3>
 <p>Removes all callbacks registered for a given event.</p>
-<p><code>lua
-event.clear(eventId, options)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>eventId</code> (string)</li>
@@ -8375,8 +8375,8 @@ event.clear(eventId, options)</code></p>
 <hr />
 <h3 id="eventisregistered"><code>event.isRegistered</code><a class="headerlink" href="#eventisregistered" title="Permanent link">⚓︎</a></h3>
 <p>Returns true for a function previously registered to an event with <code>event.register()</code>.</p>
-<p><code>lua
-local result = event.isRegistered(eventId, callback, options)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="n">isRegistered</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>eventId</code> (string)</li>
@@ -8390,8 +8390,8 @@ local result = event.isRegistered(eventId, callback, options)</code></p>
 <hr />
 <h3 id="eventregister"><code>event.register</code><a class="headerlink" href="#eventregister" title="Permanent link">⚓︎</a></h3>
 <p>Registers a function to be called when an event is raised.</p>
-<p><code>lua
-event.register(eventId, callback, options)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>eventId</code> (string)</li>
@@ -8401,8 +8401,8 @@ event.register(eventId, callback, options)</code></p>
 <hr />
 <h3 id="eventtrigger"><code>event.trigger</code><a class="headerlink" href="#eventtrigger" title="Permanent link">⚓︎</a></h3>
 <p>Triggers an event. This can be used to trigger custom events with specific data.</p>
-<p><code>lua
-event.trigger(eventId, payload, options)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>eventId</code> (string)</li>
@@ -8412,8 +8412,8 @@ event.trigger(eventId, payload, options)</code></p>
 <hr />
 <h3 id="eventunregister"><code>event.unregister</code><a class="headerlink" href="#eventunregister" title="Permanent link">⚓︎</a></h3>
 <p>Unregisters a function previously registered for an event with <code>event.register()</code>.</p>
-<p><code>lua
-event.unregister(eventId, callback, options)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>eventId</code> (string)</li>

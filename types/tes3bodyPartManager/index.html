@@ -8518,8 +8518,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="getactivebodypart"><code>getActiveBodyPart</code><a class="headerlink" href="#getactivebodypart" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches active body part of a actor at a given layer and position.</p>
-<p><code>lua
-local result = tes3bodyPartManager:getActiveBodyPart(layer, index)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
@@ -8532,8 +8532,8 @@ local result = tes3bodyPartManager:getActiveBodyPart(layer, index)</code></p>
 <hr />
 <h3 id="getactivebodypartforitem"><code>getActiveBodyPartForItem</code><a class="headerlink" href="#getactivebodypartforitem" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches active body part of a actor for the given item.</p>
-<p><code>lua
-local result = tes3bodyPartManager:getActiveBodyPartForItem(item)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPartForItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item to fetch the active body part for.</li>
@@ -8545,8 +8545,8 @@ local result = tes3bodyPartManager:getActiveBodyPartForItem(item)</code></p>
 <hr />
 <h3 id="getactivebodypartnode"><code>getActiveBodyPartNode</code><a class="headerlink" href="#getactivebodypartnode" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.</p>
-<p><code>lua
-local result = tes3bodyPartManager:getActiveBodyPartNode(layer, index)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPartNode</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
@@ -8559,13 +8559,13 @@ local result = tes3bodyPartManager:getActiveBodyPartNode(layer, index)</code></p
 <hr />
 <h3 id="removeequippedlayers"><code>removeEquippedLayers</code><a class="headerlink" href="#removeequippedlayers" title="Permanent link">⚓︎</a></h3>
 <p>The method removes all currently equipped layers from the actor.</p>
-<p><code>lua
-tes3bodyPartManager:removeEquippedLayers()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">removeEquippedLayers</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="setactivepartdata"><code>setActivePartData</code><a class="headerlink" href="#setactivepartdata" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a niNode derived object as active body part at a given layer and position.</p>
-<p><code>lua
-tes3bodyPartManager:setActivePartData(layer, index, overwriteData, node)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setActivePartData</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">overwriteData</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
@@ -8576,8 +8576,8 @@ tes3bodyPartManager:setActivePartData(layer, index, overwriteData, node)</code><
 <hr />
 <h3 id="setbodypartbyidforobject"><code>setBodyPartByIdForObject</code><a class="headerlink" href="#setbodypartbyidforobject" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a new body part for a given object.</p>
-<p><code>lua
-tes3bodyPartManager:setBodyPartByIdForObject(object, index, bodyPartId, isFirstPerson)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPartId</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
@@ -8588,8 +8588,8 @@ tes3bodyPartManager:setBodyPartByIdForObject(object, index, bodyPartId, isFirstP
 <hr />
 <h3 id="setbodypartforobject"><code>setBodyPartForObject</code><a class="headerlink" href="#setbodypartforobject" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a new body part for a given object.</p>
-<p><code>lua
-tes3bodyPartManager:setBodyPartForObject(object, index, bodyPart, isFirstPerson)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPart</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
@@ -8600,8 +8600,8 @@ tes3bodyPartManager:setBodyPartForObject(object, index, bodyPart, isFirstPerson)
 <hr />
 <h3 id="updateforreference"><code>updateForReference</code><a class="headerlink" href="#updateforreference" title="Permanent link">⚓︎</a></h3>
 <p>The method updates all body parts for a given reference.</p>
-<p><code>lua
-tes3bodyPartManager:updateForReference(reference)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">updateForReference</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The reference whose body parts to update.</li>

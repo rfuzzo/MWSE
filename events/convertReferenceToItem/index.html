@@ -8280,11 +8280,11 @@
 
 <h1 id="convertreferencetoitem">convertReferenceToItem<a class="headerlink" href="#convertreferencetoitem" title="Permanent link">⚓︎</a></h1>
 <p>This event is raised when an in-world <code>tes3reference</code> for an item is about to be converted to fit into a <code>tes3itemStack</code>.</p>
-<p><code>lua
---- @param e convertReferenceToItemEventData
-local function convertReferenceToItemCallback(e)
-end
-event.register(tes3.event.convertReferenceToItem, convertReferenceToItemCallback)</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e convertReferenceToItemEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">convertReferenceToItemCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">convertReferenceToItem</span><span class="p">,</span> <span class="n">convertReferenceToItemCallback</span><span class="p">)</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>

@@ -8280,11 +8280,11 @@
 
 <h1 id="journal">journal<a class="headerlink" href="#journal" title="Permanent link">⚓︎</a></h1>
 <p>The journal event is invoked when a journal state progresses.</p>
-<p><code>lua
---- @param e journalEventData
-local function journalCallback(e)
-end
-event.register(tes3.event.journal, journalCallback)</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e journalEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">journalCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">journal</span><span class="p">,</span> <span class="n">journalCallback</span><span class="p">)</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>

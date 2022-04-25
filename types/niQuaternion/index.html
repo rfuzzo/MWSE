@@ -8490,8 +8490,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="copy"><code>copy</code><a class="headerlink" href="#copy" title="Permanent link">⚓︎</a></h3>
 <p>Creates a copy of the quaternion.</p>
-<p><code>lua
-local result = niQuaternion:copy()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niQuaternion</span><span class="p">:</span><span class="n">copy</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niQuaternion">niQuaternion</a>)</li>
@@ -8499,8 +8499,8 @@ local result = niQuaternion:copy()</code></p>
 <hr />
 <h3 id="fromaxisangle"><code>fromAxisAngle</code><a class="headerlink" href="#fromaxisangle" title="Permanent link">⚓︎</a></h3>
 <p>Fill the quaternion by converting an angle-axis rotation. The angle must be within the interval [0, PI] and the axis must be unit length.</p>
-<p><code>lua
-niQuaternion:fromAxisAngle(angle, axis)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niQuaternion</span><span class="p">:</span><span class="n">fromAxisAngle</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>angle</code> (number)</li>
@@ -8509,8 +8509,8 @@ niQuaternion:fromAxisAngle(angle, axis)</code></p>
 <hr />
 <h3 id="fromrotation"><code>fromRotation</code><a class="headerlink" href="#fromrotation" title="Permanent link">⚓︎</a></h3>
 <p>Fill the quaternion by converting a rotation matrix.</p>
-<p><code>lua
-niQuaternion:fromRotation(matrix)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niQuaternion</span><span class="p">:</span><span class="n">fromRotation</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>matrix</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>)</li>
@@ -8518,8 +8518,8 @@ niQuaternion:fromRotation(matrix)</code></p>
 <hr />
 <h3 id="slerp"><code>slerp</code><a class="headerlink" href="#slerp" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the spherical linear interpolate between this quaternion and another.</p>
-<p><code>lua
-local result = niQuaternion:slerp(target, transition)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niQuaternion</span><span class="p">:</span><span class="n">slerp</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>target</code> (<a href="../../types/niQuaternion">niQuaternion</a>): The quaternion to interpolate towards.</li>
@@ -8532,8 +8532,8 @@ local result = niQuaternion:slerp(target, transition)</code></p>
 <hr />
 <h3 id="toaxisangle"><code>toAxisAngle</code><a class="headerlink" href="#toaxisangle" title="Permanent link">⚓︎</a></h3>
 <p>Convert this quaternion into an angle-axis rotation.</p>
-<p><code>lua
-local angle, axis = niQuaternion:toAxisAngle()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">niQuaternion</span><span class="p">:</span><span class="n">toAxisAngle</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>angle</code> (number)</li>
@@ -8542,8 +8542,8 @@ local angle, axis = niQuaternion:toAxisAngle()</code></p>
 <hr />
 <h3 id="torotation"><code>toRotation</code><a class="headerlink" href="#torotation" title="Permanent link">⚓︎</a></h3>
 <p>Convert this quaternion into a rotation matrix.</p>
-<p><code>lua
-local result = niQuaternion:toRotation()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niQuaternion</span><span class="p">:</span><span class="n">toRotation</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>)</li>

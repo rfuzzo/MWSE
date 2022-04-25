@@ -8953,8 +8953,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<p><code>lua
-local string = tes3baseObject:__tojson()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
@@ -8962,8 +8962,8 @@ local string = tes3baseObject:__tojson()</code></p>
 <hr />
 <h3 id="filter"><code>filter</code><a class="headerlink" href="#filter" title="Permanent link">⚓︎</a></h3>
 <p>This method filters the associated dialogue info for given arguments and returns true if the dialogue info filtering passes. This method rises <a href="https://mwse.github.io/MWSE/events/infoFilter/"><code>infoFilter</code></a> event.</p>
-<p><code>lua
-local result = tes3dialogueInfo:filter(actor, reference, source, dialogue)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3dialogueInfo</span><span class="p">:</span><span class="n">filter</span><span class="p">(</span><span class="n">actor</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>actor</code> (<a href="../../types/tes3object">tes3object</a>)</li>
@@ -8978,8 +8978,8 @@ local result = tes3dialogueInfo:filter(actor, reference, source, dialogue)</code
 <hr />
 <h3 id="runscript"><code>runScript</code><a class="headerlink" href="#runscript" title="Permanent link">⚓︎</a></h3>
 <p>This method runs the dialogue info's associated script on a given reference.</p>
-<p><code>lua
-tes3dialogueInfo:runScript(reference)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3dialogueInfo</span><span class="p">:</span><span class="n">runScript</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The reference on which to run the script on.</li>

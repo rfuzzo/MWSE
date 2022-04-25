@@ -8236,8 +8236,8 @@
 <p>Loads the given module. This functions identically to <code>require</code>, but will return <code>nil</code> instead of erroring if the module couldn't be found. If there is another error is found inside the included file, it will still cause an error in the <code>include</code>ing file.</p>
 <p>The function starts by looking into the <code>package.loaded</code> table to determine whether <code>modname</code> is already loaded. If it is, then <code>include</code> returns the value stored at <code>package.loaded[modname]</code>. Otherwise, it tries to find a loader for the module.</p>
 <p>Intended use case for this function is for making interoperability between mods.</p>
-<p><code>lua
-local result = include(modname)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">include</span><span class="p">(</span><span class="n">modname</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>modname</code> (string)</li>
@@ -8249,16 +8249,16 @@ local result = include(modname)</code></p>
 <details class="example">
 <summary>Example: Example</summary>
 <p>How to check whether a user has an optional module installed.</p>
-<p>```lua</p>
-<p>local optionalModule = include("optionalModule.file")</p>
-<p>if optionalModule then
-    -- do stuff with the optinalModule
-    optionalModule.foo("bar")
-else
-    mwse.log("[MyMod] To enjoy all of this mod's features, please install optionalModule.")
-    -- do some other stuff
-end</p>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">optionalModule</span> <span class="o">=</span> <span class="n">include</span><span class="p">(</span><span class="s2">&quot;optionalModule.file&quot;</span><span class="p">)</span>
+
+<span class="kr">if</span> <span class="n">optionalModule</span> <span class="kr">then</span>
+    <span class="c1">-- do stuff with the optinalModule</span>
+    <span class="n">optionalModule</span><span class="p">.</span><span class="n">foo</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="kr">else</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;[MyMod] To enjoy all of this mod&#39;s features, please install optionalModule.&quot;</span><span class="p">)</span>
+    <span class="c1">-- do some other stuff</span>
+<span class="kr">end</span>
+</code></pre></div>
 </details>
 
               

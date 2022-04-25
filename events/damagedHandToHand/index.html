@@ -8280,11 +8280,11 @@
 
 <h1 id="damagedhandtohand">damagedHandToHand<a class="headerlink" href="#damagedhandtohand" title="Permanent link">⚓︎</a></h1>
 <p>The damagedHandToHand event triggers after an actor takes fatigue damage from hand-to-hand combat. It does not trigger on health damage, but the <code>damaged</code> event will.</p>
-<p><code>lua
---- @param e damagedHandToHandEventData
-local function damagedHandToHandCallback(e)
-end
-event.register(tes3.event.damagedHandToHand, damagedHandToHandCallback)</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e damagedHandToHandEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">damagedHandToHandCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">damagedHandToHand</span><span class="p">,</span> <span class="n">damagedHandToHandCallback</span><span class="p">)</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>

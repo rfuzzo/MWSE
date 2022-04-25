@@ -8371,8 +8371,8 @@ http://www.inf.puc-rio.br/~roberto/lpeg/re.html</p>
 <p>Compiles the given string and returns an equivalent lpeg pattern.</p>
 <p>The given string may define either an expression or a grammar. The optional defs table provides 
 extra Lua values to be used by the pattern.</p>
-<p><code>lua
-local result = re.compile(s, defs)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">defs</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string): The string to compile.</li>
@@ -8389,8 +8389,8 @@ local result = re.compile(s, defs)</code></p>
 Otherwise, returns nil.</p>
 <p>An optional numeric argument init makes the search starts at that position in the subject string.
 As usual in Lua libraries, a negative value counts from the end. </p>
-<p><code>lua
-local result = re.find(subject, pattern, init)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>subject</code> (string): The string to search.</li>
@@ -8404,21 +8404,23 @@ local result = re.find(subject, pattern, init)</code></p>
 <details class="example">
 <summary>Example: Simple Find</summary>
 <p>Use re.find to get the position of the first numeral in a string.</p>
-<p>```lua
-local re = require("re")</p>
-<p>local function onLoaded(e)</p>
-<pre><code>-- find the position of the first numeral in a string
-mwse.log("%d %d", re.find("the number 423 is odd", "[0-9]+"))  --&gt; 12 14
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.loaded, onLoaded)</p>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">re</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;re&quot;</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1">-- find the position of the first numeral in a string</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;%d %d&quot;</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;the number 423 is odd&quot;</span><span class="p">,</span> <span class="s2">&quot;[0-9]+&quot;</span><span class="p">))</span>  <span class="c1">--&gt; 12 14</span>
+
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">onLoaded</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="regsub"><code>re.gsub</code><a class="headerlink" href="#regsub" title="Permanent link">⚓︎</a></h3>
 <p>Does a global substitution, replacing all occurrences of pattern in the given subject by replacement.</p>
-<p><code>lua
-local result = re.gsub(subject, pattern, replacement)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">gsub</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">replacement</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>subject</code> (string): The string to search.</li>
@@ -8432,22 +8434,24 @@ local result = re.gsub(subject, pattern, replacement)</code></p>
 <details class="example">
 <summary>Example: Simple Substitution</summary>
 <p>Use re.gsub to replace all vowels in a string with '.'.</p>
-<p>```lua
-local re = require("re")</p>
-<p>local function onLoaded(e)</p>
-<pre><code>-- returns a string with all vowels replaced by .
-mwse.log(re.gsub("hello World", "[aeiou]", "."))
---&gt; h.ll. W.rld
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.loaded, onLoaded)</p>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">re</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;re&quot;</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1">-- returns a string with all vowels replaced by .</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">gsub</span><span class="p">(</span><span class="s2">&quot;hello World&quot;</span><span class="p">,</span> <span class="s2">&quot;[aeiou]&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">))</span>
+    <span class="c1">--&gt; h.ll. W.rld</span>
+
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">onLoaded</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="rematch"><code>re.match</code><a class="headerlink" href="#rematch" title="Permanent link">⚓︎</a></h3>
 <p>Matches the given pattern against the given subject, returning all captures.</p>
-<p><code>lua
-local result = re.match(subject, pattern)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>subject</code> (string): The string to search.</li>
@@ -8460,26 +8464,28 @@ local result = re.match(subject, pattern)</code></p>
 <details class="example">
 <summary>Example: Simple Match</summary>
 <p>Use re.match to find all the words in a string, then find the first numeral.</p>
-<p>```lua
-local re = require("re")</p>
-<p>local function onLoaded(e)</p>
-<pre><code>-- returns all words in a string
-mwse.log("%s %s %s %s", re.match("the number 423 is odd", "({%a+} / .)*"))
---&gt; the number  is  odd
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">re</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;re&quot;</span><span class="p">)</span>
 
--- returns the first numeral in a string
-mwse.log(re.match("the number 423 is odd", "s &lt;- {%d+} / . s"))
---&gt; 423
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.loaded, onLoaded)</p>
-<p>```</p>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1">-- returns all words in a string</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;%s %s %s %s&quot;</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;the number 423 is odd&quot;</span><span class="p">,</span> <span class="s2">&quot;({%a+} / .)*&quot;</span><span class="p">))</span>
+    <span class="c1">--&gt; the number  is  odd</span>
+
+    <span class="c1">-- returns the first numeral in a string</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;the number 423 is odd&quot;</span><span class="p">,</span> <span class="s2">&quot;s &lt;- {%d+} / . s&quot;</span><span class="p">))</span>
+    <span class="c1">--&gt; 423</span>
+
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">onLoaded</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="reupdatelocale"><code>re.updatelocale</code><a class="headerlink" href="#reupdatelocale" title="Permanent link">⚓︎</a></h3>
 <p>Updates the pre-defined character classes to the current locale.</p>
-<p><code>lua
-re.updatelocale()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">re</span><span class="p">.</span><span class="n">updatelocale</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 
               

@@ -8324,41 +8324,69 @@
 <p>Timers are a way to keep track with the passage of time. They are volatile, meaning that they do not persist between saved games.</p>
 <h2 id="creating-a-basic-timer">Creating a Basic Timer<a class="headerlink" href="#creating-a-basic-timer" title="Permanent link">⚓︎</a></h2>
 <p>To create a timer, pass a table of options to <code>timer.start()</code>.</p>
-<p>```lua linenums="1"
--- The function we want to run when the timer completes.
-local function onTimerComplete()
-    tes3.messageBox("30 seconds have passed!")
-end</p>
-<p>-- Create our timer to fire the above function after 30 seconds.
-timer.start({ duration = 30, callback = onTimerComplete })
-```</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function we want to run when the timer completes.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onTimerComplete</span><span class="p">()</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;30 seconds have passed!&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Create our timer to fire the above function after 30 seconds.</span>
+<span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span> <span class="p">})</span>
+</code></pre></div></td></tr></table></div>
 <p>In the above example, we create a message box after 30 seconds.</p>
 <h2 id="repeating-a-timer">Repeating a Timer<a class="headerlink" href="#repeating-a-timer" title="Permanent link">⚓︎</a></h2>
 <p>Timers can repeat, based on an <strong>iterations</strong> parameter. This can be used to define a timer that will trigger multiple times.</p>
-<p>```lua linenums="1"
--- The function we want to run when the timer completes.
-local function onTimerComplete()
-    tes3.messageBox("A minute has passed!")
-end</p>
-<p>-- Create our timer to fire the above function every minute for 5 minutes.
-timer.start({ duration = 60, callback = onTimerComplete, iterations = 5 })
-```</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function we want to run when the timer completes.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onTimerComplete</span><span class="p">()</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;A minute has passed!&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Create our timer to fire the above function every minute for 5 minutes.</span>
+<span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">})</span>
+</code></pre></div></td></tr></table></div>
 <p>Additionally, a value of <code>-1</code> will create a timer that will repeat forever.</p>
 <h2 id="controlling-timer-state">Controlling Timer State<a class="headerlink" href="#controlling-timer-state" title="Permanent link">⚓︎</a></h2>
 <p>A timer's state (read through the <code>.state</code> property), can be <code>timer.active</code>, <code>timer.paused</code>, or <code>timer.expired</code>. An <em>active</em> timer is running normally. A <em>paused</em> timer doesn't run, but can be resumed to pick back up where it left off. An <em>expired</em> timer has finished running (and has no more iterations).</p>
 <p>A timer can be told to pause, resume, reset, or cancel.</p>
-<p>```lua linenums="1"
--- Create a timer.
-local myTimer = timer.start({ duration = 60, callback = onTimerComplete })</p>
-<p>-- Pause the timer. It can be resumed again using myTimer:resume()
-myTimer:pause()</p>
-<p>-- Resume the timer. It's now active again.
-myTimer:resume()</p>
-<p>-- Reset the timer. It will take 60 seconds from right now to finish.
-myTimer:reset()</p>
-<p>-- Cancel the timer. We will no longer care about it.
-myTimer:cancel()
-```</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Create a timer.</span>
+<span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span> <span class="p">})</span>
+
+<span class="c1">-- Pause the timer. It can be resumed again using myTimer:resume()</span>
+<span class="n">myTimer</span><span class="p">:</span><span class="n">pause</span><span class="p">()</span>
+
+<span class="c1">-- Resume the timer. It&#39;s now active again.</span>
+<span class="n">myTimer</span><span class="p">:</span><span class="n">resume</span><span class="p">()</span>
+
+<span class="c1">-- Reset the timer. It will take 60 seconds from right now to finish.</span>
+<span class="n">myTimer</span><span class="p">:</span><span class="n">reset</span><span class="p">()</span>
+
+<span class="c1">-- Cancel the timer. We will no longer care about it.</span>
+<span class="n">myTimer</span><span class="p">:</span><span class="n">cancel</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
 <h2 id="creating-different-types-of-timers">Creating Different Types of Timers<a class="headerlink" href="#creating-different-types-of-timers" title="Permanent link">⚓︎</a></h2>
 <p>Three different types of timers are available, though an advanced user can create their own types of timers and manage their clock cycles. The default types are:</p>
 <ul>
@@ -8366,14 +8394,22 @@ myTimer:cancel()
 <li><strong>Simulate</strong>, defined by <code>timer.simulate</code>. Simulate timers operate much like real timers, incrementing seconds but only when the game is simulating (i.e. not in menu mode). This is the default type of timer.</li>
 <li><strong>Game</strong>, defined by <code>timer.game</code>. Game timers operate by game hour, matching game time.</li>
 </ul>
-<p>```lua linenums="1"
--- Create a timer that ends after 60 seconds.
-local myTimer = timer.start({ duration = 60, callback = onTimerComplete, type = timer.real })</p>
-<p>-- Create a timer that ends after 30 unpaused seconds.
-local myTimer = timer.start({ duration = 30, callback = onTimerComplete, type = timer.simulate })</p>
-<p>-- Create a timer that ends after 4 game hours.
-local myTimer = timer.start({ duration = 4, callback = onTimerComplete, type = timer.game })
-```</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Create a timer that ends after 60 seconds.</span>
+<span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">real</span> <span class="p">})</span>
+
+<span class="c1">-- Create a timer that ends after 30 unpaused seconds.</span>
+<span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">simulate</span> <span class="p">})</span>
+
+<span class="c1">-- Create a timer that ends after 4 game hours.</span>
+<span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">game</span> <span class="p">})</span>
+</code></pre></div></td></tr></table></div>
 
               
             </article>

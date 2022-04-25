@@ -8883,8 +8883,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<p><code>lua
-local string = tes3baseObject:__tojson()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
@@ -8892,8 +8892,8 @@ local string = tes3baseObject:__tojson()</code></p>
 <hr />
 <h3 id="getactiveeffectcount"><code>getActiveEffectCount</code><a class="headerlink" href="#getactiveeffectcount" title="Permanent link">⚓︎</a></h3>
 <p>Returns the amount of effects the <code>tes3enchantment</code> object has.</p>
-<p><code>lua
-local count = tes3enchantment:getActiveEffectCount()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">count</span> <span class="o">=</span> <span class="n">tes3enchantment</span><span class="p">:</span><span class="n">getActiveEffectCount</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>count</code> (number)</li>
@@ -8901,8 +8901,8 @@ local count = tes3enchantment:getActiveEffectCount()</code></p>
 <hr />
 <h3 id="getfirstindexofeffect"><code>getFirstIndexOfEffect</code><a class="headerlink" href="#getfirstindexofeffect" title="Permanent link">⚓︎</a></h3>
 <p>Returns the index of a first effect of a given effectId in the parent <code>tes3enchantment</code> object.</p>
-<p><code>lua
-local index = tes3enchantment:getFirstIndexOfEffect(effectId)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">index</span> <span class="o">=</span> <span class="n">tes3enchantment</span><span class="p">:</span><span class="n">getFirstIndexOfEffect</span><span class="p">(</span><span class="n">effectId</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>effectId</code> (number): The effectId to perform a check for. Maps to <a href="https://mwse.github.io/MWSE/references/magic-effects/"><code>tes3.effect</code></a> constants, including magic effects added with <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3addmagiceffect"><code>tes3.addMagicEffect()</code></a>.</li>

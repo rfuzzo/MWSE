@@ -12080,8 +12080,8 @@ if damage &lt; 1 then damage = 1 end</p>
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="applydamage"><code>applyDamage</code><a class="headerlink" href="#applydamage" title="Permanent link">⚓︎</a></h3>
 <p>Damages the actor, with options to control mitigation and difficulty scaling. Invokes the <a href="https://mwse.github.io/MWSE/events/damage/"><code>damage</code></a> and <a href="https://mwse.github.io/MWSE/events/damaged/"><code>damaged</code></a> events, with <code>tes3.damageSource.script</code> source. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.</p>
-<p><code>lua
-local result = tes3mobileActor:applyDamage({ damage = ..., applyArmor = ..., resistAttribute = ..., applyDifficulty = ..., playerAttack = ..., doNotChangeHealth = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">applyDamage</span><span class="p">({</span> <span class="n">damage</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyArmor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">resistAttribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyDifficulty</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">playerAttack</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">doNotChangeHealth</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -12101,8 +12101,8 @@ local result = tes3mobileActor:applyDamage({ damage = ..., applyArmor = ..., res
 <hr />
 <h3 id="applyfatiguedamage"><code>applyFatigueDamage</code><a class="headerlink" href="#applyfatiguedamage" title="Permanent link">⚓︎</a></h3>
 <p>Damages the actor's fatigue, with accompanying reaction from the reciever. Invokes the <a href="https://mwse.github.io/MWSE/events/damageHandToHand/"><code>damageHandToHand</code></a> and <a href="https://mwse.github.io/MWSE/events/damagedHandToHand/"><code>damagedHandToHand</code></a> events, with <code>tes3.damageSource.script</code> source. Returns the actual fatigue damage done.</p>
-<p><code>lua
-local result = tes3mobileActor:applyFatigueDamage(fatigueDamage, swing, alwaysPlayHitVoice)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">applyFatigueDamage</span><span class="p">(</span><span class="n">fatigueDamage</span><span class="p">,</span> <span class="n">swing</span><span class="p">,</span> <span class="n">alwaysPlayHitVoice</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>fatigueDamage</code> (number): The amount of fatigue damage to apply.</li>
@@ -12117,8 +12117,8 @@ local result = tes3mobileActor:applyFatigueDamage(fatigueDamage, swing, alwaysPl
 <h3 id="applyhealthdamage"><code>applyHealthDamage</code><a class="headerlink" href="#applyhealthdamage" title="Permanent link">⚓︎</a></h3>
 <p><strong>Deprecated, please use <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#applydamage"><code>applyDamage()</code></a> instead.</strong></p>
 <p>Damages the actor.</p>
-<p><code>lua
-local result = tes3mobileActor:applyHealthDamage(damage, isPlayerAttack, scaleWithDifficulty, doNotChangeHealth)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">applyHealthDamage</span><span class="p">(</span><span class="n">damage</span><span class="p">,</span> <span class="n">isPlayerAttack</span><span class="p">,</span> <span class="n">scaleWithDifficulty</span><span class="p">,</span> <span class="n">doNotChangeHealth</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
@@ -12133,8 +12133,8 @@ local result = tes3mobileActor:applyHealthDamage(damage, isPlayerAttack, scaleWi
 <hr />
 <h3 id="calceffectivedamage"><code>calcEffectiveDamage</code><a class="headerlink" href="#calceffectivedamage" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the damage that would be inflicted to an actor after armor and/or resistance. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.</p>
-<p><code>lua
-local result = tes3mobileActor:calcEffectiveDamage({ damage = ..., applyArmor = ..., resistAttribute = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">calcEffectiveDamage</span><span class="p">({</span> <span class="n">damage</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyArmor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">resistAttribute</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -12151,8 +12151,8 @@ local result = tes3mobileActor:calcEffectiveDamage({ damage = ..., applyArmor = 
 <hr />
 <h3 id="equip"><code>equip</code><a class="headerlink" href="#equip" title="Permanent link">⚓︎</a></h3>
 <p>Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return <code>true</code>.</p>
-<p><code>lua
-local itemEquipped = tes3mobileActor:equip({ item = ..., itemData = ..., addItem = ..., selectBestCondition = ..., selectWorstCondition = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemEquipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">equip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectBestCondition</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">selectWorstCondition</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -12171,8 +12171,8 @@ local itemEquipped = tes3mobileActor:equip({ item = ..., itemData = ..., addItem
 <hr />
 <h3 id="equipmagic"><code>equipMagic</code><a class="headerlink" href="#equipmagic" title="Permanent link">⚓︎</a></h3>
 <p>Equips a spell or enchantment, optionally equipping the enchanted item if needed. Returns <code>false</code> if the item could not be equipped.</p>
-<p><code>lua
-local result = tes3mobileActor:equipMagic({ source = ..., itemData = ..., equipItem = ..., updateGUI = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">equipMagic</span><span class="p">({</span> <span class="n">source</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">equipItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>
@@ -12198,8 +12198,8 @@ local result = tes3mobileActor:equipMagic({ source = ..., itemData = ..., equipI
 <hr />
 <h3 id="getactivemagiceffects"><code>getActiveMagicEffects</code><a class="headerlink" href="#getactivemagiceffects" title="Permanent link">⚓︎</a></h3>
 <p>Fetches a filtered list of the active magic effects on the actor. Returns a table with <a href="https://mwse.github.io/MWSE/types/tes3activeMagicEffect/"><code>tes3activeMagicEffect</code></a> items.</p>
-<p><code>lua
-local result = tes3mobileActor:getActiveMagicEffects({ effect = ..., serial = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getActiveMagicEffects</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table): <em>Optional</em>.<ul>
@@ -12215,8 +12215,8 @@ local result = tes3mobileActor:getActiveMagicEffects({ effect = ..., serial = ..
 <hr />
 <h3 id="getbootsweight"><code>getBootsWeight</code><a class="headerlink" href="#getbootsweight" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Gets the weight of the boots equipped on the actor, or 0 if no boots are equipped.</p>
-<p><code>lua
-local result = tes3mobileActor:getBootsWeight()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getBootsWeight</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -12224,8 +12224,8 @@ local result = tes3mobileActor:getBootsWeight()</code></p>
 <hr />
 <h3 id="getfatigueterm"><code>getFatigueTerm</code><a class="headerlink" href="#getfatigueterm" title="Permanent link">⚓︎</a></h3>
 <p>Gets the fatigue-based skill scaling term used by many game mechanics, based on the actor's current and maximum fatigue. It is equal to <code>max(0, fFatigueBase - fFatigueMult * max(0, 1 - fatigue.current/fatigue.base))</code></p>
-<p><code>lua
-local result = tes3mobileActor:getFatigueTerm()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getFatigueTerm</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -12233,8 +12233,8 @@ local result = tes3mobileActor:getFatigueTerm()</code></p>
 <hr />
 <h3 id="getpowerusetimestamp"><code>getPowerUseTimestamp</code><a class="headerlink" href="#getpowerusetimestamp" title="Permanent link">⚓︎</a></h3>
 <p>Finds the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp. The timestamp units are hours. The current time as a timestamp can be accessed at <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp"><code>tes3.getSimulationTimestamp()</code></a>.</p>
-<p><code>lua
-local timestamp = tes3mobileActor:getPowerUseTimestamp(power)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getPowerUseTimestamp</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>power</code> (<a href="../../types/tes3spell">tes3spell</a>): The spell object for the power.</li>
@@ -12246,8 +12246,8 @@ local timestamp = tes3mobileActor:getPowerUseTimestamp(power)</code></p>
 <hr />
 <h3 id="getskillstatistic"><code>getSkillStatistic</code><a class="headerlink" href="#getskillstatistic" title="Permanent link">⚓︎</a></h3>
 <p>Fetches the statistic object of a skill with a given index. This is the way to access skills for any type of actor, as creatures have a limited version of the skill system. Note that creatures share a statistic between multiple skills (they only have combat, magic, and stealth stats), so many values will be the same.</p>
-<p><code>lua
-local result = tes3mobileActor:getSkillStatistic(skillId)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getSkillStatistic</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>skillId</code> (number): The index of the skill statistic to fetch. Maps to values in <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> namespace.</li>
@@ -12259,8 +12259,8 @@ local result = tes3mobileActor:getSkillStatistic(skillId)</code></p>
 <hr />
 <h3 id="getskillvalue"><code>getSkillValue</code><a class="headerlink" href="#getskillvalue" title="Permanent link">⚓︎</a></h3>
 <p>Fetches the current value of a skill with a given index. This is the way to access skills for any type of actor, as creatures have a limited version of the skill system. Note that creatures share a statistic between multiple skills (they only have combat, magic, and stealth stats), so many values will be the same.</p>
-<p><code>lua
-local result = tes3mobileActor:getSkillValue(skillId)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getSkillValue</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>skillId</code> (number): The index of the skill statistic's value to fetch. Maps to values in <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> namespace.</li>
@@ -12272,8 +12272,8 @@ local result = tes3mobileActor:getSkillValue(skillId)</code></p>
 <hr />
 <h3 id="getviewtoactor"><code>getViewToActor</code><a class="headerlink" href="#getviewtoactor" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<p><code>lua
-local result = tes3mobileActor:getViewToActor()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getViewToActor</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -12281,8 +12281,8 @@ local result = tes3mobileActor:getViewToActor()</code></p>
 <hr />
 <h3 id="getviewtopoint"><code>getViewToPoint</code><a class="headerlink" href="#getviewtopoint" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<p><code>lua
-local result = tes3mobileActor:getViewToPoint()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getViewToPoint</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -12290,8 +12290,8 @@ local result = tes3mobileActor:getViewToPoint()</code></p>
 <hr />
 <h3 id="getviewtopointwithfacing"><code>getViewToPointWithFacing</code><a class="headerlink" href="#getviewtopointwithfacing" title="Permanent link">⚓︎</a></h3>
 <p>No description yet available.</p>
-<p><code>lua
-local result = tes3mobileActor:getViewToPointWithFacing()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getViewToPointWithFacing</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -12299,8 +12299,8 @@ local result = tes3mobileActor:getViewToPointWithFacing()</code></p>
 <hr />
 <h3 id="getweaponspeed"><code>getWeaponSpeed</code><a class="headerlink" href="#getweaponspeed" title="Permanent link">⚓︎</a></h3>
 <p>Fetches the weapon speed of the actor's currently equipped weapon, or <code>1.0</code> if no weapon is equipped.</p>
-<p><code>lua
-local result = tes3mobileActor:getWeaponSpeed()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">getWeaponSpeed</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -12308,8 +12308,8 @@ local result = tes3mobileActor:getWeaponSpeed()</code></p>
 <hr />
 <h3 id="hasusedpower"><code>hasUsedPower</code><a class="headerlink" href="#hasusedpower" title="Permanent link">⚓︎</a></h3>
 <p>Check if a power has been used and is recharging.</p>
-<p><code>lua
-local result = tes3mobileActor:hasUsedPower(power)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">hasUsedPower</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>power</code> (<a href="../../types/tes3spell">tes3spell</a>): The spell object for the power.</li>
@@ -12321,8 +12321,8 @@ local result = tes3mobileActor:hasUsedPower(power)</code></p>
 <hr />
 <h3 id="isaffectedbyobject"><code>isAffectedByObject</code><a class="headerlink" href="#isaffectedbyobject" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the actor is currently being affected by a given alchemy, enchantment, or spell.</p>
-<p><code>lua
-local result = tes3mobileActor:isAffectedByObject(object)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">isAffectedByObject</span><span class="p">(</span><span class="n">object</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>object</code> (<a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3spell">tes3spell</a>): The magic to check for.</li>
@@ -12334,13 +12334,13 @@ local result = tes3mobileActor:isAffectedByObject(object)</code></p>
 <hr />
 <h3 id="kill"><code>kill</code><a class="headerlink" href="#kill" title="Permanent link">⚓︎</a></h3>
 <p>Kills the actor by setting its health to 0.</p>
-<p><code>lua
-tes3mobileActor:kill()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">kill</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="rechargepower"><code>rechargePower</code><a class="headerlink" href="#rechargepower" title="Permanent link">⚓︎</a></h3>
 <p>Makes a power immediately available for casting again.</p>
-<p><code>lua
-local result = tes3mobileActor:rechargePower(power)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">rechargePower</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>power</code> (<a href="../../types/tes3spell">tes3spell</a>): The spell object for the power.</li>
@@ -12352,8 +12352,8 @@ local result = tes3mobileActor:rechargePower(power)</code></p>
 <hr />
 <h3 id="setpowerusetimestamp"><code>setPowerUseTimestamp</code><a class="headerlink" href="#setpowerusetimestamp" title="Permanent link">⚓︎</a></h3>
 <p>Sets the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp.</p>
-<p><code>lua
-tes3mobileActor:setPowerUseTimestamp(power, timestamp)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">setPowerUseTimestamp</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>power</code> (<a href="../../types/tes3spell">tes3spell</a>): The spell object for the power.</li>
@@ -12362,8 +12362,8 @@ tes3mobileActor:setPowerUseTimestamp(power, timestamp)</code></p>
 <hr />
 <h3 id="startcombat"><code>startCombat</code><a class="headerlink" href="#startcombat" title="Permanent link">⚓︎</a></h3>
 <p>Forces the actor into combat with another actor.</p>
-<p><code>lua
-tes3mobileActor:startCombat(target)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">startCombat</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>target</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
@@ -12371,13 +12371,13 @@ tes3mobileActor:startCombat(target)</code></p>
 <hr />
 <h3 id="startdialogue"><code>startDialogue</code><a class="headerlink" href="#startdialogue" title="Permanent link">⚓︎</a></h3>
 <p>Starts dialogue with this actor for the player.</p>
-<p><code>lua
-tes3mobileActor:startDialogue()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">startDialogue</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="stopcombat"><code>stopCombat</code><a class="headerlink" href="#stopcombat" title="Permanent link">⚓︎</a></h3>
 <p>Ends combat for the actor.</p>
-<p><code>lua
-tes3mobileActor:stopCombat(force)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">stopCombat</span><span class="p">(</span><span class="n">force</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>force</code> (boolean): If <code>false</code>, the function won't stop combat if the actor has other valid hostile targets.</li>
@@ -12385,8 +12385,8 @@ tes3mobileActor:stopCombat(force)</code></p>
 <hr />
 <h3 id="unequip"><code>unequip</code><a class="headerlink" href="#unequip" title="Permanent link">⚓︎</a></h3>
 <p>Unequips one or more items from the actor.</p>
-<p><code>lua
-local itemUnequipped = tes3mobileActor:unequip({ item = ..., type = ..., armorSlot = ..., clothingSlot = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemUnequipped</span> <span class="o">=</span> <span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">unequip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">armorSlot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">clothingSlot</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -12404,8 +12404,8 @@ local itemUnequipped = tes3mobileActor:unequip({ item = ..., type = ..., armorSl
 <hr />
 <h3 id="unequipmagic"><code>unequipMagic</code><a class="headerlink" href="#unequipmagic" title="Permanent link">⚓︎</a></h3>
 <p>Unequips the currently equipped magic, optionally unequipping the enchanted item if needed.</p>
-<p><code>lua
-tes3mobileActor:unequipMagic({ unequipItem = ..., updateGUI = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">unequipMagic</span><span class="p">({</span> <span class="n">unequipItem</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -12417,8 +12417,8 @@ tes3mobileActor:unequipMagic({ unequipItem = ..., updateGUI = ... })</code></p>
 <hr />
 <h3 id="updatederivedstatistics"><code>updateDerivedStatistics</code><a class="headerlink" href="#updatederivedstatistics" title="Permanent link">⚓︎</a></h3>
 <p>Updates statistics derived from attributes, which are magicka, fatigue, and encumbrance. Will also update the UI if used on the player. Normally handled automatically when you use <code>tes3.modStatistic()</code>.</p>
-<p><code>lua
-tes3mobileActor:updateDerivedStatistics(attribute)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">updateDerivedStatistics</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>attribute</code> (<a href="../../types/tes3statistic">tes3statistic</a>): <em>Optional</em>. Limits the update to statistics derived from this attribute.  e.g. <code>mobile:updateDerivedStatistics(mobile.strength)</code>. If not present, all derived statistics will be updated.</li>
@@ -12426,8 +12426,8 @@ tes3mobileActor:updateDerivedStatistics(attribute)</code></p>
 <hr />
 <h3 id="updateopacity"><code>updateOpacity</code><a class="headerlink" href="#updateopacity" title="Permanent link">⚓︎</a></h3>
 <p>Updates the actor's visual opacity. Used after modifying applied chameleon or invisiblity effects.</p>
-<p><code>lua
-tes3mobileActor:updateOpacity()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3mobileActor</span><span class="p">:</span><span class="n">updateOpacity</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 
               

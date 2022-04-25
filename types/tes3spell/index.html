@@ -9051,8 +9051,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<p><code>lua
-local string = tes3baseObject:__tojson()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
@@ -9060,8 +9060,8 @@ local string = tes3baseObject:__tojson()</code></p>
 <hr />
 <h3 id="calculatecastchance"><code>calculateCastChance</code><a class="headerlink" href="#calculatecastchance" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the chance that a caster can cast a given spell.</p>
-<p><code>lua
-local result = tes3spell:calculateCastChance({ checkMagicka = ..., caster = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">calculateCastChance</span><span class="p">({</span> <span class="n">checkMagicka</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">caster</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9077,8 +9077,8 @@ local result = tes3spell:calculateCastChance({ checkMagicka = ..., caster = ... 
 <hr />
 <h3 id="getactiveeffectcount"><code>getActiveEffectCount</code><a class="headerlink" href="#getactiveeffectcount" title="Permanent link">⚓︎</a></h3>
 <p>Gets the number of active effects in the spell effect table.</p>
-<p><code>lua
-local result = tes3spell:getActiveEffectCount()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getActiveEffectCount</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9086,8 +9086,8 @@ local result = tes3spell:getActiveEffectCount()</code></p>
 <hr />
 <h3 id="getfirstindexofeffect"><code>getFirstIndexOfEffect</code><a class="headerlink" href="#getfirstindexofeffect" title="Permanent link">⚓︎</a></h3>
 <p>Gets the first index of an effect ID in the spell effect table.</p>
-<p><code>lua
-local result = tes3spell:getFirstIndexOfEffect(effectId)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getFirstIndexOfEffect</span><span class="p">(</span><span class="n">effectId</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>effectId</code> (number): The ID of a <code>tes3effect</code> object to look for.</li>
@@ -9099,8 +9099,8 @@ local result = tes3spell:getFirstIndexOfEffect(effectId)</code></p>
 <hr />
 <h3 id="getleastproficienteffect"><code>getLeastProficientEffect</code><a class="headerlink" href="#getleastproficienteffect" title="Permanent link">⚓︎</a></h3>
 <p>Returns the effect of the spell that a given actor is least proficient with.</p>
-<p><code>lua
-local effect = tes3spell:getLeastProficientEffect(actor)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getLeastProficientEffect</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>): The actor to calculate for. A mobile actor is preferred, as passing only a <code>tes3npc</code> will not use up to date skill information.</li>
@@ -9112,8 +9112,8 @@ local effect = tes3spell:getLeastProficientEffect(actor)</code></p>
 <hr />
 <h3 id="getleastproficientschool"><code>getLeastProficientSchool</code><a class="headerlink" href="#getleastproficientschool" title="Permanent link">⚓︎</a></h3>
 <p>Returns the school of the least proficient effect on the spell, for a given actor.</p>
-<p><code>lua
-local schoolID = tes3spell:getLeastProficientSchool(actor)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">schoolID</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getLeastProficientSchool</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>): The actor to calculate for. A mobile actor is preferred, as passing only a <code>tes3npc</code> will not use up to date skill information.</li>

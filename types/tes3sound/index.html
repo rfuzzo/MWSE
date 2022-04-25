@@ -8708,8 +8708,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<p><code>lua
-local result = tes3sound:__tojson()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3sound</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -8717,8 +8717,8 @@ local result = tes3sound:__tojson()</code></p>
 <hr />
 <h3 id="islooping"><code>isLooping</code><a class="headerlink" href="#islooping" title="Permanent link">⚓︎</a></h3>
 <p>Returns <code>true</code> if the sound is actively looping.</p>
-<p><code>lua
-local result = tes3sound:isLooping()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3sound</span><span class="p">:</span><span class="n">isLooping</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8726,8 +8726,8 @@ local result = tes3sound:isLooping()</code></p>
 <hr />
 <h3 id="isplaying"><code>isPlaying</code><a class="headerlink" href="#isplaying" title="Permanent link">⚓︎</a></h3>
 <p>Returns <code>true</code> if the sound is actively playing.</p>
-<p><code>lua
-local result = tes3sound:isPlaying()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3sound</span><span class="p">:</span><span class="n">isPlaying</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8735,8 +8735,8 @@ local result = tes3sound:isPlaying()</code></p>
 <hr />
 <h3 id="play"><code>play</code><a class="headerlink" href="#play" title="Permanent link">⚓︎</a></h3>
 <p>This method plays the sound.</p>
-<p><code>lua
-tes3sound:play(playbackFlags, volume, pitch, isNot3D)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3sound</span><span class="p">:</span><span class="n">play</span><span class="p">(</span><span class="n">playbackFlags</span><span class="p">,</span> <span class="n">volume</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">isNot3D</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>playbackFlags</code> (number): <em>Optional</em>. These match low-level DirectSound flags. Most mods don't need to modify this, though a value of <code>1</code> to loop may be useful. The rest of the flags can be read in the IDirectSoundBuffer8::Play documentation: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee418074(v=vs.85).</li>
@@ -8747,8 +8747,8 @@ tes3sound:play(playbackFlags, volume, pitch, isNot3D)</code></p>
 <hr />
 <h3 id="stop"><code>stop</code><a class="headerlink" href="#stop" title="Permanent link">⚓︎</a></h3>
 <p>This stops playing the sound.</p>
-<p><code>lua
-tes3sound:stop()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3sound</span><span class="p">:</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 
               

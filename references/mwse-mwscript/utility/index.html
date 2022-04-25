@@ -8504,23 +8504,27 @@
 <p>This function allows scripts to determine what keys are configured by the player. Typically the <strong>keyCode</strong> is passed to <code>xKeyPressed</code> to determine if it is pressed. Other functions that require a scan code would make use of <strong>scanCode</strong>.</p>
 <details class="example">
 <summary>Determine if the Activation Key is Pressed</summary>
-<p>```
-Begin IsActivating</p>
-<p>long scanCode
+<div class="highlight"><pre><span></span><code>Begin IsActivating
+
+long scanCode
 long scanDevice
-long keyCode</p>
-<p>; Get input information for the Activate key.
-setx scanCode scanDevice keyCode to xGetKeyBind 5</p>
-<p>ifx (keyCode)
+long keyCode
+
+; Get input information for the Activate key.
+setx scanCode scanDevice keyCode to xGetKeyBind 5
+
+ifx (keyCode)
     ; Activation key was successfully obtained, get its state.
     setx isPressed to xKeyPressed keyCode
     if (isPressed)
-        MessageBox "Activation key pressed!"
+        MessageBox &quot;Activation key pressed!&quot;
     endif
-endif</p>
-<p>StopScript "IsActivating"</p>
-<p>End
-```</p>
+endif
+
+StopScript &quot;IsActivating&quot;
+
+End
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xgetmcpfeaturestate"><code>xGetMCPFeatureState</code><a class="headerlink" href="#xgetmcpfeaturestate" title="Permanent link">⚓︎</a></h2>
@@ -8543,15 +8547,18 @@ endif</p>
 </div>
 <details class="example">
 <summary>Example</summary>
-<p>```
-begin DetectPickPocketOverhaul</p>
-<p>short state</p>
-<p>setx state to xGetMCPFeatureState 77</p>
-<p>if (state) then
-    MessageBox "Pickpocket overhaul is enabled in MCP."
-endif</p>
-<p>end
-```</p>
+<div class="highlight"><pre><span></span><code>begin DetectPickPocketOverhaul
+
+short state
+
+setx state to xGetMCPFeatureState 77
+
+if (state) then
+    MessageBox &quot;Pickpocket overhaul is enabled in MCP.&quot;
+endif
+
+end
+</code></pre></div>
 </details>
 <hr />
 <h2 id="xkeypressed"><code>xKeyPressed</code><a class="headerlink" href="#xkeypressed" title="Permanent link">⚓︎</a></h2>

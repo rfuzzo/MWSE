@@ -8379,8 +8379,8 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="osclock"><code>os.clock</code><a class="headerlink" href="#osclock" title="Permanent link">⚓︎</a></h3>
 <p>Return CPU time since Lua started in seconds.</p>
-<p><code>lua
-local result = os.clock()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="nb">os.clock</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8388,8 +8388,8 @@ local result = os.clock()</code></p>
 <hr />
 <h3 id="oscreateprocess"><code>os.createProcess</code><a class="headerlink" href="#oscreateprocess" title="Permanent link">⚓︎</a></h3>
 <p>Passes command to be executed by an operating system. Unlike <code>os.execute</code>, this will not display a console prompt that interrupts the game and cannot run direct shell commands.</p>
-<p><code>lua
-local executor = os.createProcess({ command = ..., async = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executor</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">createProcess</span><span class="p">({</span> <span class="n">command</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">async</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8405,8 +8405,8 @@ local executor = os.createProcess({ command = ..., async = ... })</code></p>
 <hr />
 <h3 id="osexecute"><code>os.execute</code><a class="headerlink" href="#osexecute" title="Permanent link">⚓︎</a></h3>
 <p>Passes command to be executed by an operating system shell. To open a program to run in the background and monitor its output, use <code>os.createProcess</code>.</p>
-<p><code>lua
-local exitCode = os.execute(command)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">exitCode</span> <span class="o">=</span> <span class="nb">os.execute</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>command</code> (string): The command to run.</li>
@@ -8418,8 +8418,8 @@ local exitCode = os.execute(command)</code></p>
 <hr />
 <h3 id="osgetclipboardtext"><code>os.getClipboardText</code><a class="headerlink" href="#osgetclipboardtext" title="Permanent link">⚓︎</a></h3>
 <p>Returns the current clipboard text, if any is available.</p>
-<p><code>lua
-local result = os.getClipboardText()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getClipboardText</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string, nil)</li>
@@ -8427,8 +8427,8 @@ local result = os.getClipboardText()</code></p>
 <hr />
 <h3 id="osopenurl"><code>os.openURL</code><a class="headerlink" href="#osopenurl" title="Permanent link">⚓︎</a></h3>
 <p>Opens the given <code>url</code> in the default browser. This has an advantage over using <code>os.execute("show https://my.url")</code> in that it does not create a command prompt window.</p>
-<p><code>lua
-os.openURL(url)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">os</span><span class="p">.</span><span class="n">openURL</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>url</code> (string): The URL to open.</li>
@@ -8436,8 +8436,8 @@ os.openURL(url)</code></p>
 <hr />
 <h3 id="ossetclipboardtext"><code>os.setClipboardText</code><a class="headerlink" href="#ossetclipboardtext" title="Permanent link">⚓︎</a></h3>
 <p>Sets the current clipboard text. If nil is passed, the clipboard will be cleared instead. If either operation fails, the function returns false.</p>
-<p><code>lua
-local result = os.setClipboardText(text)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">setClipboardText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string, nil): <em>Optional</em>. The text to put in the clipboard. If nil is provided instead, then the clipboard will be cleared.</li>

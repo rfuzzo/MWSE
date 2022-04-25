@@ -8280,11 +8280,11 @@
 
 <h1 id="bodypartassigned">bodyPartAssigned<a class="headerlink" href="#bodypartassigned" title="Permanent link">⚓︎</a></h1>
 <p>Allows reading and overwriting body part assignments.</p>
-<p><code>lua
---- @param e bodyPartAssignedEventData
-local function bodyPartAssignedCallback(e)
-end
-event.register(tes3.event.bodyPartAssigned, bodyPartAssignedCallback)</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e bodyPartAssignedEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">bodyPartAssignedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">bodyPartAssigned</span><span class="p">,</span> <span class="n">bodyPartAssignedCallback</span><span class="p">)</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This event supports blocking by setting <code>e.block</code> to <code>true</code> or returning <code>false</code>. Blocking the event prevents vanilla behavior from happening. For example, blocking an <code>equip</code> event prevents the item from being equipped.</p>

@@ -8828,8 +8828,8 @@
 <h3 id="tes3uiacquiretextinput"><code>tes3ui.acquireTextInput</code><a class="headerlink" href="#tes3uiacquiretextinput" title="Permanent link">⚓︎</a></h3>
 <p>Sends all text input to the specified element.  Calling this function with a nil argument will release text input and allow keybinds to work. Suppresses most keybinds while active, except the Journal open/close keybind (it's up to the individual menu implementation).</p>
 <p>Only one element can have control of input, and there is no automatic restoration of control if one element takes control from another. Be careful of conflicts with other users of this function.</p>
-<p><code>lua
-tes3ui.acquireTextInput(element)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">acquireTextInput</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>element</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): <em>Optional</em>.</li>
@@ -8838,8 +8838,8 @@ tes3ui.acquireTextInput(element)</code></p>
 <h3 id="tes3uicapturemousedrag"><code>tes3ui.captureMouseDrag</code><a class="headerlink" href="#tes3uicapturemousedrag" title="Permanent link">⚓︎</a></h3>
 <p>When used in a mouse event, causes the element to capture further mouse events even when the cursor goes outside the element. Setting mouse capture should always be accompanied by releasing it on a complementary event. This is commonly used for dragging, so that it can continue even if the mouse moves slightly outside the element.</p>
 <p>The capture is always removed when the element is destroyed. The capture may also be removed when the mouse is released, but this is not reliable, as the engine forgets what to do if there is input from any other controller while the mouse is held down.</p>
-<p><code>lua
-tes3ui.captureMouseDrag(capture)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">captureMouseDrag</span><span class="p">(</span><span class="n">capture</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>capture</code> (boolean): Turns on mouse capture for the element currently processing a mouse event if true, sending all further mouse events to that element. Turns off capture if false.</li>
@@ -8847,22 +8847,22 @@ tes3ui.captureMouseDrag(capture)</code></p>
 <details class="example">
 <summary>Example: Basic Usage</summary>
 <p>Using the UI event system, cause a given element to capture the mouse drag.</p>
-<p>```lua
-element:register("mouseDown", function(e)
-    -- Capture must be inside a mouse event.
-    tes3ui.captureMouseDrag(true)
-end)</p>
-<p>element:register("mouseRelease", function(e)
-    -- Release may be anywhere.
-    tes3ui.captureMouseDrag(false)
-end)</p>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- Capture must be inside a mouse event.</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">captureMouseDrag</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseRelease&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- Release may be anywhere.</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">captureMouseDrag</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="tes3uiclosejournal"><code>tes3ui.closeJournal</code><a class="headerlink" href="#tes3uiclosejournal" title="Permanent link">⚓︎</a></h3>
 <p>Closes the Journal.</p>
-<p><code>lua
-local result = tes3ui.closeJournal()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">closeJournal</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -8872,8 +8872,8 @@ local result = tes3ui.closeJournal()</code></p>
 <p>Creates a help layer menu. Help layer menus include notifications and tooltips that are always above the rest of the interface. The game realizes this using a separate menu root and set of functions.</p>
 <p>Note, to create tooltips with the correct behaviour, use tes3ui.createTooltipMenu.</p>
 <p>Unlike standard menus, help layer menus are always created with a fixed frame.</p>
-<p><code>lua
-local result = tes3ui.createHelpLayerMenu({ id = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createHelpLayerMenu</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8888,8 +8888,8 @@ local result = tes3ui.createHelpLayerMenu({ id = ... })</code></p>
 <hr />
 <h3 id="tes3uicreatemenu"><code>tes3ui.createMenu</code><a class="headerlink" href="#tes3uicreatemenu" title="Permanent link">⚓︎</a></h3>
 <p>Creates a top-level menu.</p>
-<p><code>lua
-local result = tes3ui.createMenu({ id = ..., dragFrame = ..., fixedFrame = ..., loadable = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createMenu</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">dragFrame</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">fixedFrame</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">loadable</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8907,8 +8907,8 @@ local result = tes3ui.createMenu({ id = ..., dragFrame = ..., fixedFrame = ..., 
 <hr />
 <h3 id="tes3uicreatetooltipmenu"><code>tes3ui.createTooltipMenu</code><a class="headerlink" href="#tes3uicreatetooltipmenu" title="Permanent link">⚓︎</a></h3>
 <p>Creates a tooltip menu, which can be an empty menu or an item tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.</p>
-<p><code>lua
-local result = tes3ui.createTooltipMenu({ item = ..., itemData = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8924,20 +8924,20 @@ local result = tes3ui.createTooltipMenu({ item = ..., itemData = ... })</code></
 <details class="example">
 <summary>Example: Add an item tooltip to a new element</summary>
 <p>This demonstrates adding an item tooltip to a button using the help event.</p>
-<p>```lua
-local button = menu:createButton{text = "- Item -"}
-local item = tes3.getObject("iron_shield")</p>
-<p>button:register("help", function(e)
-    local tooltip = tes3ui.createTooltipMenu{item = item}
-    tooltip:createLabel{text = "Additional custom text"}
-end)</p>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;- Item -&quot;</span><span class="p">}</span>
+<span class="kd">local</span> <span class="n">item</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron_shield&quot;</span><span class="p">)</span>
+
+<span class="n">button</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">tooltip</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">{</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="p">}</span>
+    <span class="n">tooltip</span><span class="p">:</span><span class="n">createLabel</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Additional custom text&quot;</span><span class="p">}</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="tes3uientermenumode"><code>tes3ui.enterMenuMode</code><a class="headerlink" href="#tes3uientermenumode" title="Permanent link">⚓︎</a></h3>
 <p>Requests menu mode be activated on a menu with a given id.</p>
-<p><code>lua
-local result = tes3ui.enterMenuMode(id)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">enterMenuMode</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number)</li>
@@ -8949,8 +8949,8 @@ local result = tes3ui.enterMenuMode(id)</code></p>
 <hr />
 <h3 id="tes3uifindhelplayermenu"><code>tes3ui.findHelpLayerMenu</code><a class="headerlink" href="#tes3uifindhelplayermenu" title="Permanent link">⚓︎</a></h3>
 <p>Locates a help layer menu through its id. Help layer menus include notifications and tooltips that are always above the rest of the interface. The game realizes this using a separate menu root and set of functions.</p>
-<p><code>lua
-local result = tes3ui.findHelpLayerMenu(id)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findHelpLayerMenu</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number)</li>
@@ -8962,8 +8962,8 @@ local result = tes3ui.findHelpLayerMenu(id)</code></p>
 <hr />
 <h3 id="tes3uifindmenu"><code>tes3ui.findMenu</code><a class="headerlink" href="#tes3uifindmenu" title="Permanent link">⚓︎</a></h3>
 <p>Locates a top-level menu through its id.</p>
-<p><code>lua
-local result = tes3ui.findMenu(id)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findMenu</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>id</code> (string, number): The ID of the menu to locate.</li>
@@ -8975,13 +8975,13 @@ local result = tes3ui.findMenu(id)</code></p>
 <hr />
 <h3 id="tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate</code><a class="headerlink" href="#tes3uiforceplayerinventoryupdate" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the inventory tile GUI elements. Unlike tes3ui.updateInventoryTiles, this will force-resync the player's inventory to the GUI, rather than updating what is already in the GUI system.</p>
-<p><code>lua
-tes3ui.forcePlayerInventoryUpdate()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">forcePlayerInventoryUpdate</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uigetinventoryselecttype"><code>tes3ui.getInventorySelectType</code><a class="headerlink" href="#tes3uigetinventoryselecttype" title="Permanent link">⚓︎</a></h3>
 <p>Determines what sort of search is being done when performing an inventory selection, e.g. "alembic" or "ingredient" or "soulGemFilled".</p>
-<p><code>lua
-local result = tes3ui.getInventorySelectType()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getInventorySelectType</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -8989,8 +8989,8 @@ local result = tes3ui.getInventorySelectType()</code></p>
 <hr />
 <h3 id="tes3uigetmenuontop"><code>tes3ui.getMenuOnTop</code><a class="headerlink" href="#tes3uigetmenuontop" title="Permanent link">⚓︎</a></h3>
 <p>Returns the top-most, active menu.</p>
-<p><code>lua
-local result = tes3ui.getMenuOnTop()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getMenuOnTop</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
@@ -8998,8 +8998,8 @@ local result = tes3ui.getMenuOnTop()</code></p>
 <hr />
 <h3 id="tes3uigetpalette"><code>tes3ui.getPalette</code><a class="headerlink" href="#tes3uigetpalette" title="Permanent link">⚓︎</a></h3>
 <p>Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].</p>
-<p><code>lua
-local palette = tes3ui.getPalette(name)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">palette</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getPalette</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>name</code> (string): The name of the palette color. Maps to values in <a href="https://mwse.github.io/MWSE/references/palettes/"><code>tes3.palette</code></a> enumeration.</li>
@@ -9011,8 +9011,8 @@ local palette = tes3ui.getPalette(name)</code></p>
 <hr />
 <h3 id="tes3uigetserviceactor"><code>tes3ui.getServiceActor</code><a class="headerlink" href="#tes3uigetserviceactor" title="Permanent link">⚓︎</a></h3>
 <p>Returns the mobile actor currently providing services to the player.</p>
-<p><code>lua
-local result = tes3ui.getServiceActor()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getServiceActor</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
@@ -9020,8 +9020,8 @@ local result = tes3ui.getServiceActor()</code></p>
 <hr />
 <h3 id="tes3uigetviewportscale"><code>tes3ui.getViewportScale</code><a class="headerlink" href="#tes3uigetviewportscale" title="Permanent link">⚓︎</a></h3>
 <p>Returns the UI scale, set in MGE.</p>
-<p><code>lua
-local scale = tes3ui.getViewportScale()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getViewportScale</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>scale</code> (number): The UI scale value set from MGE.</li>
@@ -9029,8 +9029,8 @@ local scale = tes3ui.getViewportScale()</code></p>
 <hr />
 <h3 id="tes3uigetviewportsize"><code>tes3ui.getViewportSize</code><a class="headerlink" href="#tes3uigetviewportsize" title="Permanent link">⚓︎</a></h3>
 <p>Returns both the viewport width and the viewport height. Note that this value is not necessarily the real resolution of the screen. For that value, see the <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3getviewportsize"><code>same-named function</code></a> in the tes3 namespace. To get the scale used, check <code>getViewportScale</code>.</p>
-<p><code>lua
-local width, height = tes3ui.getViewportSize()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getViewportSize</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>width</code> (number): The scaled width of the viewport.</li>
@@ -9039,8 +9039,8 @@ local width, height = tes3ui.getViewportSize()</code></p>
 <hr />
 <h3 id="tes3uileavemenumode"><code>tes3ui.leaveMenuMode</code><a class="headerlink" href="#tes3uileavemenumode" title="Permanent link">⚓︎</a></h3>
 <p>Requests menu mode be deactivated on a menu with a given id.</p>
-<p><code>lua
-local result = tes3ui.leaveMenuMode()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">leaveMenuMode</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -9048,8 +9048,8 @@ local result = tes3ui.leaveMenuMode()</code></p>
 <hr />
 <h3 id="tes3uilog"><code>tes3ui.log</code><a class="headerlink" href="#tes3uilog" title="Permanent link">⚓︎</a></h3>
 <p>Logs a message to the console. The message accepts formatting and additional parameters matching string.format's usage.</p>
-<p><code>lua
-tes3ui.log(message, formatValues)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">formatValues</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>message</code> (string)</li>
@@ -9057,32 +9057,32 @@ tes3ui.log(message, formatValues)</code></p>
 </ul>
 <details class="example">
 <summary>Example: Print the type of each of the player's skills to the console</summary>
-<p>```lua</p>
-<p>local function printNames(e)
-    local skillTypeNames = {
-        [0] = "Major",
-        [1] = "Minor",
-        [2] = "Miscellaneous"
-    }</p>
-<pre><code>for _, skillId in pairs(tes3.skill) do
-    local skillStat = tes3.mobilePlayer:getSkillStatistic(skillId)
-    local name = tes3.getSkillName(skillId)
-    local typeName = skillTypeNames[skillStat.type]
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">printNames</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">skillTypeNames</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Major&quot;</span><span class="p">,</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Minor&quot;</span><span class="p">,</span>
+        <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Miscellaneous&quot;</span>
+    <span class="p">}</span>
 
-    tes3ui.log("%s, type: %s skill", name, typeName)
-end
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">skillId</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">skill</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="kd">local</span> <span class="n">skillStat</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">:</span><span class="n">getSkillStatistic</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
+        <span class="kd">local</span> <span class="n">name</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSkillName</span><span class="p">(</span><span class="n">skillId</span><span class="p">)</span>
+        <span class="kd">local</span> <span class="n">typeName</span> <span class="o">=</span> <span class="n">skillTypeNames</span><span class="p">[</span><span class="n">skillStat</span><span class="p">.</span><span class="n">type</span><span class="p">]</span>
 
-tes3.messageBox("Done! Open the console to see the result.")
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.keyDown, printNames, { filter = tes3.scanCode.u })</p>
-<p>```</p>
+        <span class="n">tes3ui</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;%s, type: %s skill&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">typeName</span><span class="p">)</span>
+    <span class="kr">end</span>
+
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Done! Open the console to see the result.&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">printNames</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="tes3uilogtoconsole"><code>tes3ui.logToConsole</code><a class="headerlink" href="#tes3uilogtoconsole" title="Permanent link">⚓︎</a></h3>
 <p>Logs a message to the console.</p>
-<p><code>lua
-tes3ui.logToConsole(text, isCommand)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">logToConsole</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">isCommand</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string)</li>
@@ -9090,26 +9090,26 @@ tes3ui.logToConsole(text, isCommand)</code></p>
 </ul>
 <details class="example">
 <summary>Example: This example describes how this function behaves with isCommand = true.</summary>
-<p>```lua</p>
-<p>local function example()
-    -- This will make "player-&gt;ModStrength 10" appear in the console coloured brown.
-    -- It can't be selected by using up arrow key.
-    tes3ui.logToConsole("player-&gt;ModStrength 10", false)</p>
-<pre><code>-- This will make "player-&gt;ModWillpower 10" appear in the console coloured blue.
--- It CAN be selected by using up arrow key, and when the enter is pressed,
--- it will call that function.
-tes3ui.logToConsole("player-&gt;ModWillpower 10", true)
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">example</span><span class="p">()</span>
+    <span class="c1">-- This will make &quot;player-&gt;ModStrength 10&quot; appear in the console coloured brown.</span>
+    <span class="c1">-- It can&#39;t be selected by using up arrow key.</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">logToConsole</span><span class="p">(</span><span class="s2">&quot;player-&gt;ModStrength 10&quot;</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
 
-tes3.messageBox("Done! Open the console to see the result.")
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.keyDown, example, { filter = tes3.scanCode.u })</p>
-<p>```</p>
+    <span class="c1">-- This will make &quot;player-&gt;ModWillpower 10&quot; appear in the console coloured blue.</span>
+    <span class="c1">-- It CAN be selected by using up arrow key, and when the enter is pressed,</span>
+    <span class="c1">-- it will call that function.</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">logToConsole</span><span class="p">(</span><span class="s2">&quot;player-&gt;ModWillpower 10&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Done! Open the console to see the result.&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="tes3uilookupid"><code>tes3ui.lookupID</code><a class="headerlink" href="#tes3uilookupid" title="Permanent link">⚓︎</a></h3>
-<p><code>lua
-local executed = tes3ui.lookupID(unknown)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">lookupID</span><span class="p">(</span><span class="n">unknown</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>unnamed</code></li>
@@ -9121,8 +9121,8 @@ local executed = tes3ui.lookupID(unknown)</code></p>
 <hr />
 <h3 id="tes3uimenumode"><code>tes3ui.menuMode</code><a class="headerlink" href="#tes3uimenumode" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the game is in menu mode.</p>
-<p><code>lua
-local result = tes3ui.menuMode()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">menuMode</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -9130,14 +9130,14 @@ local result = tes3ui.menuMode()</code></p>
 <hr />
 <h3 id="tes3uirefreshtooltip"><code>tes3ui.refreshTooltip</code><a class="headerlink" href="#tes3uirefreshtooltip" title="Permanent link">⚓︎</a></h3>
 <p>Causes the tooltip to be redisplayed. This will not use a configured delay. This will not function if the help menu does not currently exist, or if it is not currently visible.</p>
-<p><code>lua
-tes3ui.refreshTooltip()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">refreshTooltip</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiregisterid"><code>tes3ui.registerID</code><a class="headerlink" href="#tes3uiregisterid" title="Permanent link">⚓︎</a></h3>
 <p>Registers a UI element name, returning a UI_ID. Once a property is registered, this function always returns the same UI_ID. These UI_IDs are used by the API to locate elements that may not exist (a weak reference), instead of by element name.</p>
 <p>The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.</p>
-<p><code>lua
-local result = tes3ui.registerID(s)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">registerID</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>
@@ -9150,8 +9150,8 @@ local result = tes3ui.registerID(s)</code></p>
 <h3 id="tes3uiregisterproperty"><code>tes3ui.registerProperty</code><a class="headerlink" href="#tes3uiregisterproperty" title="Permanent link">⚓︎</a></h3>
 <p>Registers a property name, returning a Property. Once a property is registered, this function always returns the same Property.</p>
 <p>The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.</p>
-<p><code>lua
-local result = tes3ui.registerProperty(s)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">registerProperty</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string)</li>
@@ -9163,16 +9163,16 @@ local result = tes3ui.registerProperty(s)</code></p>
 <hr />
 <h3 id="tes3uishowbookmenu"><code>tes3ui.showBookMenu</code><a class="headerlink" href="#tes3uishowbookmenu" title="Permanent link">⚓︎</a></h3>
 <p>Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a <code>&lt;BR&gt;</code> statement to be displayed properly. See <a href="https://mwse.github.io/MWSE/events/bookGetText/#examples"><code>bookGetText</code></a> for an example of properly formatted book text.</p>
-<p><code>lua
-tes3ui.showBookMenu(text)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showBookMenu</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string)</li>
 </ul>
 <hr />
 <h3 id="tes3uishowdialoguemessage"><code>tes3ui.showDialogueMessage</code><a class="headerlink" href="#tes3uishowdialoguemessage" title="Permanent link">⚓︎</a></h3>
-<p><code>lua
-tes3ui.showDialogueMessage({ text = ..., style = ..., answerIndex = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showDialogueMessage</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">style</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">answerIndex</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -9185,8 +9185,8 @@ tes3ui.showDialogueMessage({ text = ..., style = ..., answerIndex = ... })</code
 <hr />
 <h3 id="tes3uishowinventoryselectmenu"><code>tes3ui.showInventorySelectMenu</code><a class="headerlink" href="#tes3uishowinventoryselectmenu" title="Permanent link">⚓︎</a></h3>
 <p>This function opens the inventory select menu which lets the player select items from an inventory. These items can be selected from any actor's inventory and can be filtered with the <code>filter</code> callback. The selected item can be retrieved in the function assigned to <code>callback</code>.</p>
-<p><code>lua
-tes3ui.showInventorySelectMenu({ reference = ..., title = ..., leaveMenuMode = ..., noResultsText = ..., noResultsCallback = ..., filter = ..., callback = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showInventorySelectMenu</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">title</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">leaveMenuMode</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">noResultsText</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">noResultsCallback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li>
@@ -9238,21 +9238,21 @@ tes3ui.showInventorySelectMenu({ reference = ..., title = ..., leaveMenuMode = .
 <hr />
 <h3 id="tes3uishowscrollmenu"><code>tes3ui.showScrollMenu</code><a class="headerlink" href="#tes3uishowscrollmenu" title="Permanent link">⚓︎</a></h3>
 <p>Displays the scroll menu with arbitrary text. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a <code>&lt;BR&gt;</code> statement to be displayed properly. See <a href="https://mwse.github.io/MWSE/events/bookGetText/#examples"><code>bookGetText</code></a> for an example of properly formatted scroll text.</p>
-<p><code>lua
-tes3ui.showScrollMenu(text)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showScrollMenu</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>text</code> (string)</li>
 </ul>
 <hr />
 <h3 id="tes3uistealhelpmenu"><code>tes3ui.stealHelpMenu</code><a class="headerlink" href="#tes3uistealhelpmenu" title="Permanent link">⚓︎</a></h3>
-<p><code>lua
-tes3ui.stealHelpMenu()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">stealHelpMenu</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uisuppresstooltip"><code>tes3ui.suppressTooltip</code><a class="headerlink" href="#tes3uisuppresstooltip" title="Permanent link">⚓︎</a></h3>
 <p>Controls hiding of world object tooltips.</p>
-<p><code>lua
-tes3ui.suppressTooltip(suppress)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">suppressTooltip</span><span class="p">(</span><span class="n">suppress</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>suppress</code> (boolean): Turns on suppression if true, immediately hiding any active tooltip and further world object tooltips. Turns off suppression if false.</li>
@@ -9260,43 +9260,43 @@ tes3ui.suppressTooltip(suppress)</code></p>
 <hr />
 <h3 id="tes3uiupdatebartermenutiles"><code>tes3ui.updateBarterMenuTiles</code><a class="headerlink" href="#tes3uiupdatebartermenutiles" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the barter menu's tile GUI elements.</p>
-<p><code>lua
-tes3ui.updateBarterMenuTiles()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateBarterMenuTiles</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdatecontentsmenutiles"><code>tes3ui.updateContentsMenuTiles</code><a class="headerlink" href="#tes3uiupdatecontentsmenutiles" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the contents menu's tile GUI elements.</p>
-<p><code>lua
-tes3ui.updateContentsMenuTiles()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateContentsMenuTiles</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdatedialogdisposition"><code>tes3ui.updateDialogDisposition</code><a class="headerlink" href="#tes3uiupdatedialogdisposition" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the dialog disposition GUI element.</p>
-<p><code>lua
-tes3ui.updateDialogDisposition()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateDialogDisposition</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdateenchantingmenu"><code>tes3ui.updateEnchantingMenu</code><a class="headerlink" href="#tes3uiupdateenchantingmenu" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the enchanting menu GUI.</p>
-<p><code>lua
-tes3ui.updateEnchantingMenu()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateEnchantingMenu</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdateinventorycharacterimage"><code>tes3ui.updateInventoryCharacterImage</code><a class="headerlink" href="#tes3uiupdateinventorycharacterimage" title="Permanent link">⚓︎</a></h3>
 <p>Tells the game to update the character image in the player's inventory. It will update immediately if the inventory is open, or the next time the inventory is opened otherwise.</p>
-<p><code>lua
-tes3ui.updateInventoryCharacterImage()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateInventoryCharacterImage</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdateinventoryselecttiles"><code>tes3ui.updateInventorySelectTiles</code><a class="headerlink" href="#tes3uiupdateinventoryselecttiles" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the inventory selection GUI elements.</p>
-<p><code>lua
-tes3ui.updateInventorySelectTiles()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateInventorySelectTiles</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdateinventorytiles"><code>tes3ui.updateInventoryTiles</code><a class="headerlink" href="#tes3uiupdateinventorytiles" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the inventory tile GUI elements.</p>
-<p><code>lua
-tes3ui.updateInventoryTiles()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateInventoryTiles</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="tes3uiupdatespellmakingmenu"><code>tes3ui.updateSpellmakingMenu</code><a class="headerlink" href="#tes3uiupdatespellmakingmenu" title="Permanent link">⚓︎</a></h3>
 <p>Forces the game to update the spellmaking menu GUI.</p>
-<p><code>lua
-tes3ui.updateSpellmakingMenu()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">updateSpellmakingMenu</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 
               

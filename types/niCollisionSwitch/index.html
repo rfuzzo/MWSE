@@ -8995,8 +8995,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="attachchild"><code>attachChild</code><a class="headerlink" href="#attachchild" title="Permanent link">⚓︎</a></h3>
 <p>Attachs the child to the children list of the node.</p>
-<p><code>lua
-niNode:attachChild(child, useFirstAvailable)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niNode</span><span class="p">:</span><span class="n">attachChild</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">useFirstAvailable</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>child</code> (<a href="../../types/niAVObject">niAVObject</a>)</li>
@@ -9005,8 +9005,8 @@ niNode:attachChild(child, useFirstAvailable)</code></p>
 <hr />
 <h3 id="attachproperty"><code>attachProperty</code><a class="headerlink" href="#attachproperty" title="Permanent link">⚓︎</a></h3>
 <p>Attach a property to this object.</p>
-<p><code>lua
-niAVObject:attachProperty(property)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">attachProperty</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>property</code> (<a href="../../types/niProperty">niProperty</a>)</li>
@@ -9014,13 +9014,13 @@ niAVObject:attachProperty(property)</code></p>
 <hr />
 <h3 id="cleartransforms"><code>clearTransforms</code><a class="headerlink" href="#cleartransforms" title="Permanent link">⚓︎</a></h3>
 <p>Resets the object's local transform.</p>
-<p><code>lua
-niAVObject:clearTransforms()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">clearTransforms</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
 <p>Creates a copy of this object.</p>
-<p><code>lua
-local result = niObject:clone()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niObject">niObject</a>)</li>
@@ -9028,8 +9028,8 @@ local result = niObject:clone()</code></p>
 <hr />
 <h3 id="detachchild"><code>detachChild</code><a class="headerlink" href="#detachchild" title="Permanent link">⚓︎</a></h3>
 <p>Detaches the child from the children list of the node. Returns the detached child.</p>
-<p><code>lua
-local result = niNode:detachChild(child)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">:</span><span class="n">detachChild</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>child</code> (<a href="../../types/niAVObject">niAVObject</a>)</li>
@@ -9041,8 +9041,8 @@ local result = niNode:detachChild(child)</code></p>
 <hr />
 <h3 id="detachchildat"><code>detachChildAt</code><a class="headerlink" href="#detachchildat" title="Permanent link">⚓︎</a></h3>
 <p>Detaches the child at the specified index from the children list of the node. Returns the detached child.</p>
-<p><code>lua
-local result = niNode:detachChildAt(index)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">:</span><span class="n">detachChildAt</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>index</code> (number)</li>
@@ -9054,8 +9054,8 @@ local result = niNode:detachChildAt(index)</code></p>
 <hr />
 <h3 id="detachproperty"><code>detachProperty</code><a class="headerlink" href="#detachproperty" title="Permanent link">⚓︎</a></h3>
 <p>Detaches and returns a property from the object which matches the given property type.</p>
-<p><code>lua
-local result = niAVObject:detachProperty(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niAVObject</span><span class="p">:</span><span class="n">detachProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (number)</li>
@@ -9067,8 +9067,8 @@ local result = niAVObject:detachProperty(type)</code></p>
 <hr />
 <h3 id="geteffect"><code>getEffect</code><a class="headerlink" href="#geteffect" title="Permanent link">⚓︎</a></h3>
 <p>Gets the effect for the given type.</p>
-<p><code>lua
-local result = niNode:getEffect(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">:</span><span class="n">getEffect</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (number)</li>
@@ -9080,8 +9080,8 @@ local result = niNode:getEffect(type)</code></p>
 <hr />
 <h3 id="getobjectbyname"><code>getObjectByName</code><a class="headerlink" href="#getobjectbyname" title="Permanent link">⚓︎</a></h3>
 <p>Searches this node and all child nodes recursively for a node with a name that matches the argument.</p>
-<p><code>lua
-local result = niAVObject:getObjectByName(name)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niAVObject</span><span class="p">:</span><span class="n">getObjectByName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>name</code> (string)</li>
@@ -9093,8 +9093,8 @@ local result = niAVObject:getObjectByName(name)</code></p>
 <hr />
 <h3 id="getproperty"><code>getProperty</code><a class="headerlink" href="#getproperty" title="Permanent link">⚓︎</a></h3>
 <p>Gets an attached property by property type.</p>
-<p><code>lua
-local result = niAVObject:getProperty(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niAVObject</span><span class="p">:</span><span class="n">getProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (number)</li>
@@ -9106,8 +9106,8 @@ local result = niAVObject:getProperty(type)</code></p>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.</p>
-<p><code>lua
-local result = niObject:isInstanceOfType(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (number)</li>
@@ -9119,8 +9119,8 @@ local result = niObject:isInstanceOfType(type)</code></p>
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the object is of a given type. Types can be found in the tes3.niType table.</p>
-<p><code>lua
-local result = niObject:isOfType(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (number)</li>
@@ -9132,8 +9132,8 @@ local result = niObject:isOfType(type)</code></p>
 <hr />
 <h3 id="prependcontroller"><code>prependController</code><a class="headerlink" href="#prependcontroller" title="Permanent link">⚓︎</a></h3>
 <p>Add a controller to the object as the first controller.</p>
-<p><code>lua
-niObjectNET:prependController(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">prependController</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (<a href="../../types/niTimeController">niTimeController</a>)</li>
@@ -9141,13 +9141,13 @@ niObjectNET:prependController(type)</code></p>
 <hr />
 <h3 id="removeallcontrollers"><code>removeAllControllers</code><a class="headerlink" href="#removeallcontrollers" title="Permanent link">⚓︎</a></h3>
 <p>Removes all controllers.</p>
-<p><code>lua
-niObjectNET:removeAllControllers()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">removeAllControllers</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="removecontroller"><code>removeController</code><a class="headerlink" href="#removecontroller" title="Permanent link">⚓︎</a></h3>
 <p>Removes a controller from the object.</p>
-<p><code>lua
-niObjectNET:removeController(type)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">removeController</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>type</code> (<a href="../../types/niTimeController">niTimeController</a>)</li>
@@ -9155,18 +9155,18 @@ niObjectNET:removeController(type)</code></p>
 <hr />
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
 <p>Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, or bounds.</p>
-<p><code>lua
-niAVObject:update()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="updateeffects"><code>updateEffects</code><a class="headerlink" href="#updateeffects" title="Permanent link">⚓︎</a></h3>
 <p>Update all attached effects.</p>
-<p><code>lua
-niAVObject:updateEffects()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">updateEffects</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="updateproperties"><code>updateProperties</code><a class="headerlink" href="#updateproperties" title="Permanent link">⚓︎</a></h3>
 <p>Update all attached properties.</p>
-<p><code>lua
-niAVObject:updateProperties()</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">updateProperties</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 
               

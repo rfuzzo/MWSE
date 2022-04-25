@@ -8735,11 +8735,11 @@
 <h3 id="mwse-version-checking">MWSE Version Checking<a class="headerlink" href="#mwse-version-checking" title="Permanent link">⚓︎</a></h3>
 <p>A special use case of <code>xStringParse</code> is to check the version of MWSE. If a value of zero is returned, the version of MWSE is older than version 2.0.</p>
 <p>To do this, <strong>pattern</strong> must be <code>MWSE_VERSION</code>. <strong>source</strong> is instead a <code>long</code>, to compare to the return value. If the version returned is greater than or equal to <strong>source</strong>, the second return value is 1.</p>
-<p>```
-long version
-long versionAbove2p0</p>
-<p>setx version versionAbove2p0 to xStringParse "MWSE_VERSION" 2000000
-```</p>
+<div class="highlight"><pre><span></span><code>long version
+long versionAbove2p0
+
+setx version versionAbove2p0 to xStringParse &quot;MWSE_VERSION&quot; 2000000
+</code></pre></div>
 <p>The version returned is spaced. Version 2.0.0 is 2000000 while the hypothetical version 2.34.9 would be 2034009.</p>
 
               

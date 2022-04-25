@@ -8300,39 +8300,46 @@
 <summary>Example</summary>
 <p>In this example we will create some values, log them, send them to Lua, confirm that we got the values, send more values back, and confirm our results. This demonstrates how to send information back and forth between the <code>xLuaRunScript</code> call and Lua.</p>
 <p>First, our mwscript:</p>
-<p>```
-Begin luaexec</p>
-<p>short myShort
+<div class="highlight"><pre><span></span><code>Begin luaexec
+
+short myShort
 long myLong
 float myFloat
-long myString</p>
-<p>short retShort
+long myString
+
+short retShort
 long retLong
 float retFloat
-long retString</p>
-<p>set myShort to 1
+long retString
+
+set myShort to 1
 setx myLong to xRandomLong 0 2147483647
 setx myFloat to xRandomFloat 0 1
-setx myString to xStringBuild "Hello World!"</p>
-<p>xLogMessage "[luaexec|mwscript] Sending values: %d, %d, %f, '%s'" myShort myLong myFloat myString</p>
-<p>setx retShort retLong retFloat retString to xLuaRunScript "test_mod\luaexec" myShort myLong myFloat myString</p>
-<p>xLogMessage "[luaexec|mwscript] Got results: %d, %d, %f, '%s'" retShort, retLong, retFloat, retString</p>
-<p>StopScript luaexec</p>
-<p>End
-```</p>
+setx myString to xStringBuild &quot;Hello World!&quot;
+
+xLogMessage &quot;[luaexec|mwscript] Sending values: %d, %d, %f, &#39;%s&#39;&quot; myShort myLong myFloat myString
+
+setx retShort retLong retFloat retString to xLuaRunScript &quot;test_mod\\luaexec&quot; myShort myLong myFloat myString
+
+xLogMessage &quot;[luaexec|mwscript] Got results: %d, %d, %f, &#39;%s&#39;&quot; retShort, retLong, retFloat, retString
+
+StopScript luaexec
+
+End
+</code></pre></div>
 <p>Next, we have our Lua file (<em>Data Files\mods\test_mod\luaexec.lua</em>) that gets the data, prints it, and sends more back.</p>
-<p>```lua
-local myShort = mwse.stack.popShort()
-local myLong = mwse.stack.popLong()
-local myFloat = mwse.stack.popFloat()
-local myString = mwse.stack.popString()
-print(string.format("[luaexec|lua] Got values: %d, %d, %f, '%s'", myShort, myLong, myFloat, myString))</p>
-<p>mwse.stack.pushString("poop")
-mwse.stack.pushFloat(3.14)
-mwse.stack.pushLong(512)
-mwse.stack.pushShort(4)
-print("[luaexec|lua] Sending back values: 4, 512, 3.14, 'poop'")
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">myShort</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popShort</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">myLong</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popLong</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">myFloat</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popFloat</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">myString</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">popString</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;[luaexec|lua] Got values: %d, %d, %f, &#39;%s&#39;&quot;</span><span class="p">,</span> <span class="n">myShort</span><span class="p">,</span> <span class="n">myLong</span><span class="p">,</span> <span class="n">myFloat</span><span class="p">,</span> <span class="n">myString</span><span class="p">))</span>
+
+<span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushString</span><span class="p">(</span><span class="s2">&quot;poop&quot;</span><span class="p">)</span>
+<span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushFloat</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushLong</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">mwse</span><span class="p">.</span><span class="n">stack</span><span class="p">.</span><span class="n">pushShort</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[luaexec|lua] Sending back values: 4, 512, 3.14, &#39;poop&#39;&quot;</span><span class="p">)</span>
+</code></pre></div>
 </details>
 
               

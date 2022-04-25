@@ -8234,31 +8234,54 @@
 
 <h1 id="tes3-ui-events-guide">TES3 UI Events Guide<a class="headerlink" href="#tes3-ui-events-guide" title="Permanent link">⚓︎</a></h1>
 <p>These example functions allows you to access magic effect tooltips, as seen on the bottom right of the HUD and on the magic menu.</p>
-<p>```lua linenums="1"
-local function magicEffectTooltip()
-    local helpMenu = tes3ui.findHelpLayerMenu("HelpMenu")
-    if (helpMenu) then
-        local t = string.format("&lt;&lt; %s &gt;&gt;", e.source.contentPath)
-        helpMenu:createLabel{text = t}
-        helpMenu:updateLayout()
-    end
-end</p>
-<p>local function editMagicEffectTooltips()
-    multi = tes3ui.findMenu("MenuMulti")
-    iconBar = multi:findChild("MenuMulti_magic_icons_1")</p>
-<pre><code>for _, x in pairs(iconBar.children) do
-    x:registerAfter("help", magicEffectTooltip)
-end
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">magicEffectTooltip</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">helpMenu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findHelpLayerMenu</span><span class="p">(</span><span class="s2">&quot;HelpMenu&quot;</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">helpMenu</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kd">local</span> <span class="n">t</span> <span class="o">=</span> <span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;&lt;&lt; %s &gt;&gt;&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">source</span><span class="p">.</span><span class="n">contentPath</span><span class="p">)</span>
+        <span class="n">helpMenu</span><span class="p">:</span><span class="n">createLabel</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="p">}</span>
+        <span class="n">helpMenu</span><span class="p">:</span><span class="n">updateLayout</span><span class="p">()</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
 
-multi = tes3ui.findMenu("MenuMagic")
-iconBar = multi:findChild("MagicMenu_t_icon_row_1")
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">editMagicEffectTooltips</span><span class="p">()</span>
+    <span class="n">multi</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findMenu</span><span class="p">(</span><span class="s2">&quot;MenuMulti&quot;</span><span class="p">)</span>
+    <span class="n">iconBar</span> <span class="o">=</span> <span class="n">multi</span><span class="p">:</span><span class="n">findChild</span><span class="p">(</span><span class="s2">&quot;MenuMulti_magic_icons_1&quot;</span><span class="p">)</span>
 
-for _, x in pairs(iconBar.children) do
-    x:registerAfter("help", magicEffectTooltip)
-end
-</code></pre>
-<p>end
-```</p>
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">x</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">iconBar</span><span class="p">.</span><span class="n">children</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="n">x</span><span class="p">:</span><span class="n">registerAfter</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">magicEffectTooltip</span><span class="p">)</span>
+    <span class="kr">end</span>
+
+    <span class="n">multi</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findMenu</span><span class="p">(</span><span class="s2">&quot;MenuMagic&quot;</span><span class="p">)</span>
+    <span class="n">iconBar</span> <span class="o">=</span> <span class="n">multi</span><span class="p">:</span><span class="n">findChild</span><span class="p">(</span><span class="s2">&quot;MagicMenu_t_icon_row_1&quot;</span><span class="p">)</span>
+
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">x</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">iconBar</span><span class="p">.</span><span class="n">children</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="n">x</span><span class="p">:</span><span class="n">registerAfter</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="n">magicEffectTooltip</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</code></pre></div></td></tr></table></div>
 
               
             </article>

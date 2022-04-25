@@ -8581,8 +8581,8 @@ http://www.inf.puc-rio.br/~roberto/lpeg/</p>
 <p>Returns a pattern that matches only if the input string at the current position is preceded by pattern p.</p>
 <p>Pattern p must match only strings with some fixed length, and it cannot contain captures.</p>
 <p>Like the and predicate, this pattern never consumes any input, independently of success or failure.</p>
-<p><code>lua
-local result = lpeg.B(p)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">B</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The input pattern.</li>
@@ -8595,8 +8595,8 @@ local result = lpeg.B(p)</code></p>
 <h3 id="lpegc"><code>lpeg.C</code><a class="headerlink" href="#lpegc" title="Permanent link">⚓︎</a></h3>
 <p>Create a simple capture pattern, which captures the substring of the subject that matches pattern p.</p>
 <p>The captured value is a string. If p has other captures, their values are returned after this one.</p>
-<p><code>lua
-local result = lpeg.C(p)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">C</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to capture against.</li>
@@ -8610,8 +8610,8 @@ local result = lpeg.C(p)</code></p>
 <p>Create an argument capture.</p>
 <p>This pattern matches the empty string and produces the value given as the nth extra argument given 
 in the call to lpeg.match.</p>
-<p><code>lua
-local result = lpeg.Carg(n)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Carg</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>n</code> (number): The argument to produce.</li>
@@ -8630,8 +8630,8 @@ means that the entire pattern corresponding to the capture has matched. An Outer
 that the capture is not inside another complete capture.</p>
 <p>In the same way that LPeg does not specify when it evaluates captures, it does not specify whether 
 it reuses values previously produced by the group or re-evaluates them.</p>
-<p><code>lua
-local result = lpeg.Cb(name)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cb</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>name</code> (value): The group capture to produce.</li>
@@ -8644,8 +8644,8 @@ local result = lpeg.Cb(name)</code></p>
 <h3 id="lpegcc"><code>lpeg.Cc</code><a class="headerlink" href="#lpegcc" title="Permanent link">⚓︎</a></h3>
 <p>Create a constant capture.</p>
 <p>This pattern matches the empty string and produces all given values as its captured values.</p>
-<p><code>lua
-local result = lpeg.Cc(unknown)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cc</span><span class="p">(</span><span class="n">unknown</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>unnamed</code> (values): <em>Optional</em>. The values to produce.</li>
@@ -8666,8 +8666,8 @@ you may prefix a constant capture to p.) For each subsequent capture, LPeg calls
 accumulator as the first argument and all values produced by the capture as extra arguments; the 
 first result from this call becomes the new value for the accumulator. The final value of the 
 accumulator becomes the captured value.</p>
-<p><code>lua
-local result = lpeg.Cf(p, f)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to fold with f.</li>
@@ -8685,8 +8685,8 @@ name is given) or named with the given name (which can be any non-nil Lua value)
 <p>An anonymous group serves to join values from several captures into a single capture. A named 
 group has a different behavior. In most situations, a named group returns no values at all. Its 
 values are only relevant for a following back capture or when used inside a table capture.</p>
-<p><code>lua
-local result = lpeg.Cg(p, name)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to capture with.</li>
@@ -8710,8 +8710,8 @@ and current position i, the returned number must be in the range [i, len(s) + 1]
 returns true, the match succeeds without consuming any input. (So, to return true is equivalent to 
 return i.) If the call returns false, nil, or no value, the match fails.</p>
 <p>Any extra values returned by f become the values produced by the capture. </p>
-<p><code>lua
-local result = lpeg.Cmt(p, f)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cmt</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to capture with.</li>
@@ -8726,8 +8726,8 @@ local result = lpeg.Cmt(p, f)</code></p>
 <p>Create a position capture.</p>
 <p>It matches the empty string and captures the position in the subject where the match occurs. The 
 captured value is a number.</p>
-<p><code>lua
-local result = lpeg.Cp()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cp</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (pattern)</li>
@@ -8738,8 +8738,8 @@ local result = lpeg.Cp()</code></p>
 <p>For any capture inside p with a value, the substring that matched the capture is replaced by the 
 capture value (which should be a string). The final captured value is the string resulting from all
 replacements.</p>
-<p><code>lua
-local result = lpeg.Cs(p)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to capture with.</li>
@@ -8755,8 +8755,8 @@ local result = lpeg.Cs(p)</code></p>
 this table in successive integer keys, starting at 1. Moreover, for each named capture group 
 created by p, the first value of the group is put into the table with the group name as its key. 
 The captured value is only the table.</p>
-<p><code>lua
-local result = lpeg.Ct(p)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Ct</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to capture with.</li>
@@ -8773,8 +8773,8 @@ and xdigit, each one containing a correspondent pattern. Each pattern matches an
 that belongs to its class.</p>
 <p>If called with an argument table, then it creates those fields inside the given table and returns 
 that table. </p>
-<p><code>lua
-local result = lpeg.locale(t)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">locale</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table): <em>Optional</em>. The table to update.</li>
@@ -8795,8 +8795,8 @@ match the pattern with a prefix of the given subject string (at position init), 
 arbitrary substring of the subject. So, if we want to find a pattern anywhere in a string, we must
 either write a loop in Lua or write a pattern that matches anywhere. This second approach is easy 
 and quite efficient; see examples in the full documentation for details.</p>
-<p><code>lua
-local result = lpeg.match(p, subject, init)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">init</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The pattern to match.</li>
@@ -8810,19 +8810,21 @@ local result = lpeg.match(p, subject, init)</code></p>
 <details class="example">
 <summary>Example: Simple Match</summary>
 <p>Create a pattern that matches a word followed by the end of the string, and use it to match strings.</p>
-<p>```lua
-local lpeg = require("lpeg")</p>
-<p>local function onLoaded(e)</p>
-<pre><code>-- matches a word followed by end-of-string
-local p = lpeg.R("az")^1 * -1
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">lpeg</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;lpeg&quot;</span><span class="p">)</span>
 
-mwse.log(p:match("hello"))      --&gt; 6
-mwse.log(lpeg.match(p, "hello"))  --&gt; 6
-mwse.log(p:match("1 hello"))      --&gt; nil
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.loaded, onLoaded)</p>
-<p>```</p>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1">-- matches a word followed by end-of-string</span>
+    <span class="kd">local</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;az&quot;</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span>      <span class="c1">--&gt; 6</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">lpeg</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">))</span>  <span class="c1">--&gt; 6</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;1 hello&quot;</span><span class="p">))</span>      <span class="c1">--&gt; nil</span>
+
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">onLoaded</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="lpegp"><code>lpeg.P</code><a class="headerlink" href="#lpegp" title="Permanent link">⚓︎</a></h3>
@@ -8840,8 +8842,8 @@ operation in the full documentation for details.</p>
 for details.</p>
 <p>If the argument is a function, returns a pattern equivalent to a match-time capture over the empty 
 string.</p>
-<p><code>lua
-local result = lpeg.P(value)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">P</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (multiple): The value to convert to a pattern.</li>
@@ -8855,8 +8857,8 @@ local result = lpeg.P(value)</code></p>
 <p>Returns a pattern that matches any single character belonging to one of the given ranges.</p>
 <p>Each range is a string xy of length 2, representing all characters with code between the codes of x and y (both inclusive).</p>
 <p>As an example, the pattern lpeg.R("09") matches any digit, and lpeg.R("az", "AZ") matches any ASCII letter.</p>
-<p><code>lua
-local result = lpeg.R(p)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>p</code> (pattern): The input pattern.</li>
@@ -8868,19 +8870,21 @@ local result = lpeg.R(p)</code></p>
 <details class="example">
 <summary>Example: Simple Match</summary>
 <p>Create a pattern using lpeg.R that matches a word followed by the end of the string.</p>
-<p>```lua
-local lpeg = require("lpeg")</p>
-<p>local function onLoaded(e)</p>
-<pre><code>-- matches a word followed by end-of-string
-local p = lpeg.R("az")^1 * -1
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">lpeg</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;lpeg&quot;</span><span class="p">)</span>
 
-mwse.log(p:match("hello"))      --&gt; 6
-mwse.log(lpeg.match(p, "hello"))  --&gt; 6
-mwse.log(p:match("1 hello"))      --&gt; nil
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.loaded, onLoaded)</p>
-<p>```</p>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onLoaded</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1">-- matches a word followed by end-of-string</span>
+    <span class="kd">local</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;az&quot;</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">))</span>      <span class="c1">--&gt; 6</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">lpeg</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">))</span>  <span class="c1">--&gt; 6</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">:</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;1 hello&quot;</span><span class="p">))</span>      <span class="c1">--&gt; nil</span>
+
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">onLoaded</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="lpegs"><code>lpeg.S</code><a class="headerlink" href="#lpegs" title="Permanent link">⚓︎</a></h3>
@@ -8889,8 +8893,8 @@ mwse.log(p:match("1 hello"))      --&gt; nil
 <p>Note that, if s is a character (that is, a string of length 1), then lpeg.P(s) is equivalent to 
 lpeg.S(s) which is equivalent to lpeg.R(s..s). Note also that both lpeg.S("") and lpeg.R() are 
 patterns that always fail.</p>
-<p><code>lua
-local result = lpeg.S(s)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">S</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>s</code> (string): The input string.</li>
@@ -8906,8 +8910,8 @@ local result = lpeg.S(s)</code></p>
 need to change this limit; before changing it you should try to rewrite your pattern to avoid the need for 
 extra space. Nevertheless, a few useful patterns may overflow. Also, with recursive grammars, subjects with
 deep recursion may also need larger limits.</p>
-<p><code>lua
-lpeg.setmaxstack(max)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">lpeg</span><span class="p">.</span><span class="n">setmaxstack</span><span class="p">(</span><span class="n">max</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>max</code> (number): The new stack size.</li>
@@ -8915,8 +8919,8 @@ lpeg.setmaxstack(max)</code></p>
 <hr />
 <h3 id="lpegtype"><code>lpeg.type</code><a class="headerlink" href="#lpegtype" title="Permanent link">⚓︎</a></h3>
 <p>If the given value is a pattern, return the string "pattern". Otherwise return nil.</p>
-<p><code>lua
-local result = lpeg.type(value)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>value</code> (value): The item to evaulate.</li>
@@ -8930,8 +8934,8 @@ local result = lpeg.type(value)</code></p>
 <p>Create a non-terminal (a variable) for a grammar.</p>
 <p>The created non-terminal refers to the rule indexed by v in the enclosing grammar. See Grammars
 in the full documentation for details.</p>
-<p><code>lua
-local result = lpeg.V(v)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">V</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>v</code> (string): The index of the desired rule.</li>
@@ -8943,8 +8947,8 @@ local result = lpeg.V(v)</code></p>
 <hr />
 <h3 id="lpegversion"><code>lpeg.version</code><a class="headerlink" href="#lpegversion" title="Permanent link">⚓︎</a></h3>
 <p>Return a string with the running version of lpeg.</p>
-<p><code>lua
-local result = lpeg.version()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">version</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>

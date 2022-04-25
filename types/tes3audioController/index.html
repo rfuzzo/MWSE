@@ -8683,8 +8683,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="changemusictrack"><code>changeMusicTrack</code><a class="headerlink" href="#changemusictrack" title="Permanent link">⚓︎</a></h3>
 <p>Changes currently playing music track according to provided parameters.</p>
-<p><code>lua
-tes3audioController:changeMusicTrack({ filename = ..., crossfade = ..., volume = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3audioController</span><span class="p">:</span><span class="n">changeMusicTrack</span><span class="p">({</span> <span class="n">filename</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">crossfade</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">volume</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8697,8 +8697,8 @@ tes3audioController:changeMusicTrack({ filename = ..., crossfade = ..., volume =
 <hr />
 <h3 id="getmixvolume"><code>getMixVolume</code><a class="headerlink" href="#getmixvolume" title="Permanent link">⚓︎</a></h3>
 <p>Final volume of a provided type of audio, after master volume and its own volume adjustments. Music volume is an exception since it isn't affected by master volume.</p>
-<p><code>lua
-local volume = tes3audioController:getMixVolume(mix)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">volume</span> <span class="o">=</span> <span class="n">tes3audioController</span><span class="p">:</span><span class="n">getMixVolume</span><span class="p">(</span><span class="n">mix</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>mix</code> (number): The type of sound mix to perform a check for. Accepts values from <a href="https://mwse.github.io/MWSE/references/sound-mix-types/"><code>tes3.soundMix</code></a> namespace.</li>

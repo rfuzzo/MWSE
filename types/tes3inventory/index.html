@@ -8484,8 +8484,8 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="additem"><code>addItem</code><a class="headerlink" href="#additem" title="Permanent link">⚓︎</a></h3>
 <p>Adds an item into the inventory directly. This should not be used, in favor of the <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3additem"><code>tes3.addItem()</code></a> function.</p>
-<p><code>lua
-tes3inventory:addItem({ mobile = ..., item = ..., itemData = ..., count = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3inventory</span><span class="p">:</span><span class="n">addItem</span><span class="p">({</span> <span class="n">mobile</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8499,8 +8499,8 @@ tes3inventory:addItem({ mobile = ..., item = ..., itemData = ..., count = ... })
 <hr />
 <h3 id="calculateweight"><code>calculateWeight</code><a class="headerlink" href="#calculateweight" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the weight of all items in the container.</p>
-<p><code>lua
-local result = tes3inventory:calculateWeight()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inventory</span><span class="p">:</span><span class="n">calculateWeight</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -8508,8 +8508,8 @@ local result = tes3inventory:calculateWeight()</code></p>
 <hr />
 <h3 id="contains"><code>contains</code><a class="headerlink" href="#contains" title="Permanent link">⚓︎</a></h3>
 <p>Checks to see if the inventory contains an item.</p>
-<p><code>lua
-local result = tes3inventory:contains(item, itemData)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inventory</span><span class="p">:</span><span class="n">contains</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemData</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to check for.</li>
@@ -8522,8 +8522,8 @@ local result = tes3inventory:contains(item, itemData)</code></p>
 <hr />
 <h3 id="dropitem"><code>dropItem</code><a class="headerlink" href="#dropitem" title="Permanent link">⚓︎</a></h3>
 <p>Checks to see if the inventory contains an item. This should not be used, instead use the <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3dropitem"><code>tes3.dropItem()</code></a> function.</p>
-<p><code>lua
-tes3inventory:dropItem(mobile, item, itemData, count, position, orientation, ignoreItemData)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3inventory</span><span class="p">:</span><span class="n">dropItem</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">itemData</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">ignoreItemData</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The mobile actor whose stats will be updated.</li>
@@ -8537,8 +8537,8 @@ tes3inventory:dropItem(mobile, item, itemData, count, position, orientation, ign
 <hr />
 <h3 id="finditemstack"><code>findItemStack</code><a class="headerlink" href="#finditemstack" title="Permanent link">⚓︎</a></h3>
 <p>Searches for an item stack in the inventory.</p>
-<p><code>lua
-local result = tes3inventory:findItemStack(item, itemData)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3inventory</span><span class="p">:</span><span class="n">findItemStack</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itemData</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to search for.</li>
@@ -8551,8 +8551,8 @@ local result = tes3inventory:findItemStack(item, itemData)</code></p>
 <hr />
 <h3 id="removeitem"><code>removeItem</code><a class="headerlink" href="#removeitem" title="Permanent link">⚓︎</a></h3>
 <p>Removes an item from the inventory directly. This should not be used, in favor of the <a href="https://mwse.github.io/MWSE/apis/tes3/#tes3removeitem"><code>tes3.removeItem()</code></a> function.</p>
-<p><code>lua
-tes3inventory:removeItem({ mobile = ..., item = ..., itemData = ..., count = ..., deleteItemData = ... })</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3inventory</span><span class="p">:</span><span class="n">removeItem</span><span class="p">({</span> <span class="n">mobile</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">deleteItemData</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
@@ -8567,8 +8567,8 @@ tes3inventory:removeItem({ mobile = ..., item = ..., itemData = ..., count = ...
 <hr />
 <h3 id="resolveleveleditems"><code>resolveLeveledItems</code><a class="headerlink" href="#resolveleveleditems" title="Permanent link">⚓︎</a></h3>
 <p>Resolves all contained leveled lists and adds the randomized items to the inventory. This should generally not be called directly.</p>
-<p><code>lua
-tes3inventory:resolveLeveledItems(mobile)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3inventory</span><span class="p">:</span><span class="n">resolveLeveledItems</span><span class="p">(</span><span class="n">mobile</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Optional</em>. The mobile actor whose stats will be updated.</li>

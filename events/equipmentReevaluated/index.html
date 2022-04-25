@@ -8280,11 +8280,11 @@
 
 <h1 id="equipmentreevaluated">equipmentReevaluated<a class="headerlink" href="#equipmentreevaluated" title="Permanent link">⚓︎</a></h1>
 <p>The <strong>equipmentReevaluated</strong> event fires after an actor has gone through its items and determined if anything in its inventory is better than what it currently has equipped. This event can be used to force equip new, custom equipment slots if needed.</p>
-<p><code>lua
---- @param e equipmentReevaluatedEventData
-local function equipmentReevaluatedCallback(e)
-end
-event.register(tes3.event.equipmentReevaluated, equipmentReevaluatedCallback)</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param e equipmentReevaluatedEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">equipmentReevaluatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">equipmentReevaluated</span><span class="p">,</span> <span class="n">equipmentReevaluatedCallback</span><span class="p">)</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This event can be filtered based on the <strong><code>item</code></strong> event data.</p>

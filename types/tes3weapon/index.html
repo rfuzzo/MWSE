@@ -9364,17 +9364,17 @@
 </ul>
 <details class="example">
 <summary>Example: Print the name of the skill the attacker's weapon uses</summary>
-<p>```lua</p>
-<p>local function showMessage(e)
-    if e.mobile.readiedWeapon then
-        local id = e.mobile.readiedWeapon.object.skillId
-        local name = tes3.getSkillName(id)</p>
-<pre><code>    tes3.messageBox(name)
-end
-</code></pre>
-<p>end</p>
-<p>event.register(tes3.event.attackStart, showMessage)</p>
-<p>```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessage</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">readiedWeapon</span> <span class="kr">then</span>
+        <span class="kd">local</span> <span class="n">id</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">mobile</span><span class="p">.</span><span class="n">readiedWeapon</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skillId</span>
+        <span class="kd">local</span> <span class="n">name</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSkillName</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">attackStart</span><span class="p">,</span> <span class="n">showMessage</span><span class="p">)</span>
+</code></pre></div>
 </details>
 <hr />
 <h3 id="slashmax"><code>slashMax</code><a class="headerlink" href="#slashmax" title="Permanent link">⚓︎</a></h3>
@@ -9471,8 +9471,8 @@ end
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<p><code>lua
-local string = tes3baseObject:__tojson()</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+</code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
@@ -9480,8 +9480,8 @@ local string = tes3baseObject:__tojson()</code></p>
 <hr />
 <h3 id="getmaterialflag"><code>getMaterialFlag</code><a class="headerlink" href="#getmaterialflag" title="Permanent link">⚓︎</a></h3>
 <p>Access to the material flag bitfield. Known material flags can be accessed via other weapon properties.</p>
-<p><code>lua
-local result = tes3weapon:getMaterialFlag(flagBit)</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3weapon</span><span class="p">:</span><span class="n">getMaterialFlag</span><span class="p">(</span><span class="n">flagBit</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>flagBit</code> (number)</li>
@@ -9493,8 +9493,8 @@ local result = tes3weapon:getMaterialFlag(flagBit)</code></p>
 <hr />
 <h3 id="setmaterialflag"><code>setMaterialFlag</code><a class="headerlink" href="#setmaterialflag" title="Permanent link">⚓︎</a></h3>
 <p>Access to the material flag bitfield. Known material flags can be accessed via other weapon properties.</p>
-<p><code>lua
-tes3weapon:setMaterialFlag(flagBit, value)</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3weapon</span><span class="p">:</span><span class="n">setMaterialFlag</span><span class="p">(</span><span class="n">flagBit</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>flagBit</code> (number)</li>
