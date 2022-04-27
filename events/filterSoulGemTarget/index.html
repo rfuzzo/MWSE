@@ -8530,7 +8530,7 @@
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onFilterSoulGemTarget</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Make it so Vivec can only be trapped by a special container.</span>
     <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">reference</span><span class="p">.</span><span class="n">baseObject</span><span class="p">.</span><span class="n">id</span><span class="p">:</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;vivec&quot;</span><span class="p">)</span> <span class="kr">then</span>
-        <span class="kr">return</span> <span class="n">e</span><span class="p">.</span><span class="n">soulGem</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="s2">&quot;misc_dwrv_artifact60&quot;</span>
+        <span class="n">e</span><span class="p">.</span><span class="n">filter</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">soulGem</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="s2">&quot;misc_dwrv_artifact60&quot;</span><span class="p">)</span>
     <span class="kr">end</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">filterSoulGemTarget</span><span class="p">,</span> <span class="n">onFilterSoulGemTarget</span><span class="p">)</span>
