@@ -90,6 +90,10 @@ namespace TES3 {
 		bool setOverrideLayerKeyframes(KeyframeDefinition* animData);
 		bool hasOverrideAnimations() const;
 
+		void setAnimationLayer(TES3::KeyframeDefinition* keyframe, int layerIndex);
+		bool hasSpecialAnimations() const;
+		void clearAnimationLayer(int layerIndex);
+
 		std::reference_wrapper<decltype(currentAnimGroup)> getCurrentAnimGroups();
 		std::reference_wrapper<decltype(currentNodeIndices)> getCurrentNodeIndices();
 		std::reference_wrapper<decltype(loopCounts)> getLoopCounts();

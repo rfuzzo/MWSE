@@ -4250,6 +4250,9 @@ namespace mwse::lua {
 		return std::make_tuple(animData->currentAnimGroup[0], animData->currentAnimGroup[1], animData->currentAnimGroup[2]);
 	}
 
+	const auto TES3_ModelLoader_loadAnimKF = reinterpret_cast<TES3::KeyframeDefinition * (__thiscall*)(void*, const char*, const char*)>(0x4EE200);
+	const auto TES3_ActorAnimData_updateAnimAttachment = reinterpret_cast<void(__thiscall*)(TES3::ActorAnimationController*)>(0x53DEB0);
+
 	void loadAnimation(sol::table params) {
 		TES3::Reference* reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -4261,10 +4264,17 @@ namespace mwse::lua {
 			return;
 		}
 
-		// Change the animation temporarily. Passing nullptr resets the animation to base.
-		const char* modelFile = getOptionalParam<const char*>(params, "file", nullptr);
-		reference->setModelPath(modelFile, true);
+		// Reset actor animations.
+		// This is the desired effect when the file argument is nil.
+		// It is also required to replace an anim layer, because merging needs to start with fresh data.
+		const int layerIndex = 0;
+		if (animData->hasSpecialAnimations()) {
+			auto player = TES3::WorldController::get()->getMobilePlayer();
+			TES3_ActorAnimData_updateAnimAttachment(player->animationController.asPlayer);
+			animData->clearAnimationLayer(layerIndex);
+		}
 
+		const char* modelFile = getOptionalParam<const char*>(params, "file", nullptr);
 		if (modelFile == nullptr) {
 			// Reset animation control.
 			auto mact = reference->getAttachedMobileActor();
@@ -4273,9 +4283,17 @@ namespace mwse::lua {
 			}
 		}
 		else {
-			animData = reference->getAttachedAnimationData();
-			if (!animData->hasOverrideAnimations()) {
-				throw std::logic_error("Animation file failed to load.");
+			// Load animation file and set layer 0.
+			auto modelLoader = TES3::DataHandler::get()->nonDynamicData->meshData;
+			auto keyframe = TES3_ModelLoader_loadAnimKF(modelLoader, modelFile, "MWSE Anim");
+
+			if (keyframe) {
+				auto player = TES3::WorldController::get()->getMobilePlayer();
+				TES3_ActorAnimData_updateAnimAttachment(player->animationController.asPlayer);
+				animData->setAnimationLayer(keyframe, layerIndex);
+			}
+			else {
+				throw std::invalid_argument("Couldn't load animation from 'file' parameter.");
 			}
 		}
 	}
@@ -4292,10 +4310,11 @@ namespace mwse::lua {
 			return;
 		}
 
-		// Allow loading an animation temporarily.
+		// Deprecated argument.
 		const char* modelFile = getOptionalParam<const char*>(params, "mesh", nullptr);
-		if (modelFile != nullptr) {
-			reference->setModelPath(modelFile, true);
+		if (modelFile) {
+			params["file"] = modelFile;
+			loadAnimation(params);
 			animData = reference->getAttachedAnimationData();
 		}
 
@@ -4309,12 +4328,12 @@ namespace mwse::lua {
 			throw std::invalid_argument("Invalid 'lowerGroup' parameter provided: must be between 0 and 149.");
 		}
 
-		int upperGroup = getOptionalParam<int>(params, "upper", lowerGroup);
+		int upperGroup = getOptionalParam<int>(params, "upper", group);
 		if (upperGroup < -1 || upperGroup > 149) {
 			throw std::invalid_argument("Invalid 'upperGroup' parameter provided: must be between 0 and 149.");
 		}
 
-		int shieldGroup = getOptionalParam<int>(params, "shield", upperGroup);
+		int shieldGroup = getOptionalParam<int>(params, "shield", group);
 		if (shieldGroup < -1 || shieldGroup > 149) {
 			throw std::invalid_argument("Invalid 'shieldGroup' parameter provided: must be between 0 and 149.");
 		}

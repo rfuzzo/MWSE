@@ -154,6 +154,8 @@ namespace TES3 {
 		// Override for references to raise an event when their scene node is created.
 		NI::Node * getSceneGraphNode();
 
+		void loadReloadBaseAnimations();
+
 		unsigned int getSourceModId() const;
 		unsigned int getSourceFormId() const;
 		unsigned int getTargetModId() const;
