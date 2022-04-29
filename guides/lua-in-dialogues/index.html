@@ -526,13 +526,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basic-usage" class="md-nav__link">
-    Basic Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#environment" class="md-nav__link">
     Environment
   </a>
@@ -540,8 +533,35 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#executing-a-lua-file" class="md-nav__link">
     Executing a Lua File
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preventing-default-scripts" class="md-nav__link">
+    Preventing Default Scripts
   </a>
   
 </li>
@@ -8496,13 +8516,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basic-usage" class="md-nav__link">
-    Basic Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#environment" class="md-nav__link">
     Environment
   </a>
@@ -8510,8 +8523,35 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#executing-a-lua-file" class="md-nav__link">
     Executing a Lua File
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preventing-default-scripts" class="md-nav__link">
+    Preventing Default Scripts
   </a>
   
 </li>
@@ -8532,6 +8572,7 @@
 
 <h1 id="lua-in-dialogues">Lua in Dialogues<a class="headerlink" href="#lua-in-dialogues" title="Permanent link">⚓︎</a></h1>
 <p>It is possible to use lua inside the mwscript results pane in the dialogue menu of the Construction Set.</p>
+<p>Additional functions are available to extend the usefulness of this feature, including <code>tes3ui.choice</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The execution order of the Results pane is not mixed. All lua commands will be executed before the mwscript is parsed and executed.</p>
@@ -8539,17 +8580,6 @@
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The keyboard shortcut Control+A does not work in the Construction Set. Right-clicking still allows selecting all text for quick replacement.</p>
-</div>
-<h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">⚓︎</a></h2>
-<p>To write lines with lua, prefix them with a mwscript comment starting with <code>;lua</code>. This allows the lua commands to be backwards-compatible for users that do not have MWSE, including users of OpenMW.</p>
-<div class="admonition example">
-<p class="admonition-title">Example: Goodbye with a Message</p>
-<div class="highlight"><pre><span></span><code>; The next line will execute lua.
-;lua tes3.messageBox(&quot;This will run as lua!&quot;)
-
-; The next line will just be normal mwscript.
-goodbye
-</code></pre></div>
 </div>
 <h2 id="environment">Environment<a class="headerlink" href="#environment" title="Permanent link">⚓︎</a></h2>
 <p>All commands from the same results text share the same lua environment. This allows persistent values between lines. To do this however, the <code>local</code> keyword cannot be used. This does not pollute the normal global namespace.</p>
@@ -8565,7 +8595,23 @@ goodbye
 <div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Reference: %s; Dialogue/INFO: %s/%s;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
 </code></pre></div>
 </div>
-<h2 id="executing-a-lua-file">Executing a Lua File<a class="headerlink" href="#executing-a-lua-file" title="Permanent link">⚓︎</a></h2>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">⚓︎</a></h2>
+<h2 id="basics">Basics<a class="headerlink" href="#basics" title="Permanent link">⚓︎</a></h2>
+<p>To write lines with lua, prefix them with a mwscript comment starting with <code>;lua</code>. This allows the lua commands to be backwards-compatible for users that do not have MWSE, including users of OpenMW.</p>
+<div class="admonition example">
+<p class="admonition-title">Example: Goodbye with a Message</p>
+<div class="highlight"><pre><span></span><code>; The next line will execute lua.
+;lua tes3.messageBox(&quot;This will run as lua!&quot;)
+
+; The next line will just be normal mwscript.
+goodbye
+</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All lua logic is contained to a single line. This a limitation of the approach to keep things as compatible as possible.</p>
+</div>
+<h3 id="executing-a-lua-file">Executing a Lua File<a class="headerlink" href="#executing-a-lua-file" title="Permanent link">⚓︎</a></h3>
 <p>It may be useful to move the majority of your script logic to an actual .lua file, and use <code>dofile</code>.</p>
 <div class="admonition example">
 <p class="admonition-title">Example: Execute Lua File from Dialogue</p>
@@ -8576,17 +8622,36 @@ goodbye
 <div class="admonition example">
 <p class="admonition-title">Example: Passing Results Context to a Lua Module</p>
 <p>Define your module with a function to be called:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">myModule</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">myDialogueModule</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="kr">function</span> <span class="nc">myModule</span><span class="p">.</span><span class="nf">myFunction</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+<span class="c1">--- A function designed to be called from a dialogue result.</span>
+<span class="c1">--- @param reference tes3reference The reference the dialogue is running on.</span>
+<span class="c1">--- @param dialogue tes3dialogue The parent dialogue for our info.</span>
+<span class="c1">--- @param info tes3dialogueInfo The specific INFO object that is being executed.</span>
+<span class="kr">function</span> <span class="nc">myDialogueModule</span><span class="p">.</span><span class="nf">myFunction</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Reference: %s; Dialogue/INFO: %s/%s;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
 <span class="kr">end</span>
 
-<span class="kr">return</span> <span class="n">myModule</span>
+<span class="kr">return</span> <span class="n">myDialogueModule</span>
 </code></pre></div>
 <p>Call your module from the dialogue result:</p>
 <div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">myDialogueModule</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;myMod.myDialogueModule&quot;</span><span class="p">)</span>
 <span class="p">;</span><span class="n">lua</span> <span class="n">myDialogueModule</span><span class="p">.</span><span class="n">myFunction</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h2 id="preventing-default-scripts">Preventing Default Scripts<a class="headerlink" href="#preventing-default-scripts" title="Permanent link">⚓︎</a></h2>
+<p>For better compatibility with OpenMW, it can be useful to prevent any vanilla result behavior from happening. This can be done by setting the environment variable <code>noMorrowindScript</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example: Preventing Morrowind Script</p>
+<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">noMorrowindScript</span> <span class="o">=</span> <span class="kc">true</span>
+</code></pre></div>
+</div>
+<p>This will not prevent other associated events, but will prevent the mwscript from the result box from being executed. This can be done conditionally as well.</p>
+<div class="admonition example">
+<p class="admonition-title">Example: Sometimes Preventing Morrowind Script</p>
+<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">myDialogueModule</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;myMod.myDialogueModule&quot;</span><span class="p">)</span>
+<span class="p">;</span><span class="n">lua</span> <span class="n">myDialogueModule</span><span class="p">.</span><span class="n">myFunction</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+<span class="p">;</span><span class="n">lua</span> <span class="kr">if</span> <span class="p">(</span><span class="n">myDialogueModule</span><span class="p">.</span><span class="n">wasSuccessful</span><span class="p">())</span> <span class="kr">then</span> <span class="n">noMorrowindScript</span> <span class="o">=</span> <span class="kc">true</span> <span class="kr">end</span>
 </code></pre></div>
 </div>
 

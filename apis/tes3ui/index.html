@@ -2404,6 +2404,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3uichoice" class="md-nav__link">
+    tes3ui.choice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3uiclosejournal" class="md-nav__link">
     tes3ui.closeJournal
   </a>
@@ -2420,6 +2427,13 @@
           <li class="md-nav__item">
   <a href="#tes3uicreatemenu" class="md-nav__link">
     tes3ui.createMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3uicreateresponsetext" class="md-nav__link">
+    tes3ui.createResponseText
   </a>
   
 </li>
@@ -8776,6 +8790,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3uichoice" class="md-nav__link">
+    tes3ui.choice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3uiclosejournal" class="md-nav__link">
     tes3ui.closeJournal
   </a>
@@ -8792,6 +8813,13 @@
           <li class="md-nav__item">
   <a href="#tes3uicreatemenu" class="md-nav__link">
     tes3ui.createMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3uicreateresponsetext" class="md-nav__link">
+    tes3ui.createResponseText
   </a>
   
 </li>
@@ -9083,6 +9111,16 @@
 </code></pre></div>
 </details>
 <hr />
+<h3 id="tes3uichoice"><code>tes3ui.choice</code><a class="headerlink" href="#tes3uichoice" title="Permanent link">⚓︎</a></h3>
+<p>Creates a simple dialogue choice, as per the <code>Choice</code> mwscript function.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>text</code> (string): The text to display for the choice.</li>
+<li><code>index</code> (number): The choice index associated with the given text.</li>
+</ul>
+<hr />
 <h3 id="tes3uiclosejournal"><code>tes3ui.closeJournal</code><a class="headerlink" href="#tes3uiclosejournal" title="Permanent link">⚓︎</a></h3>
 <p>Closes the Journal.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">closeJournal</span><span class="p">()</span>
@@ -9127,6 +9165,20 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
+</ul>
+<hr />
+<h3 id="tes3uicreateresponsetext"><code>tes3ui.createResponseText</code><a class="headerlink" href="#tes3uicreateresponsetext" title="Permanent link">⚓︎</a></h3>
+<p>Creates a respond text. This function is used for the mwscript <code>Choice</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">createResponseText</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>text</code> (string): The text to display.</li>
+<li><code>type</code> (number): <em>Optional</em>. The type for the response. Defaults to <code>choice</code> responses.</li>
+<li><code>index</code> (number): <em>Optional</em>. The answer index for the response. Only used for <code>choice</code> responses.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="tes3uicreatetooltipmenu"><code>tes3ui.createTooltipMenu</code><a class="headerlink" href="#tes3uicreatetooltipmenu" title="Permanent link">⚓︎</a></h3>
