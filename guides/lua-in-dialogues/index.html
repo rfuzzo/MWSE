@@ -533,15 +533,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#executing-a-lua-file" class="md-nav__link">
-    Executing a Lua File
+  <a href="#environment" class="md-nav__link">
+    Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#environment" class="md-nav__link">
-    Environment
+  <a href="#executing-a-lua-file" class="md-nav__link">
+    Executing a Lua File
   </a>
   
 </li>
@@ -8503,15 +8503,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#executing-a-lua-file" class="md-nav__link">
-    Executing a Lua File
+  <a href="#environment" class="md-nav__link">
+    Environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#environment" class="md-nav__link">
-    Environment
+  <a href="#executing-a-lua-file" class="md-nav__link">
+    Executing a Lua File
   </a>
   
 </li>
@@ -8551,13 +8551,6 @@
 goodbye
 </code></pre></div>
 </div>
-<h2 id="executing-a-lua-file">Executing a Lua File<a class="headerlink" href="#executing-a-lua-file" title="Permanent link">⚓︎</a></h2>
-<p>It may be useful only use this as a way to get back to a normal lua file, by use of <code>dofile</code>.</p>
-<div class="admonition example">
-<p class="admonition-title">Example: Execute Lua File from Dialogue</p>
-<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="nb">dofile</span><span class="p">(</span><span class="s2">&quot;myMod.onSomeDialogueResult&quot;</span><span class="p">)</span>
-</code></pre></div>
-</div>
 <h2 id="environment">Environment<a class="headerlink" href="#environment" title="Permanent link">⚓︎</a></h2>
 <p>All commands from the same results text share the same lua environment. This allows persistent values between lines. To do this however, the <code>local</code> keyword cannot be used. This does not pollute the normal global namespace.</p>
 <div class="admonition example">
@@ -8570,6 +8563,30 @@ goodbye
 <div class="admonition example">
 <p class="admonition-title">Example: Print Results Context</p>
 <div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Reference: %s; Dialogue/INFO: %s/%s;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h2 id="executing-a-lua-file">Executing a Lua File<a class="headerlink" href="#executing-a-lua-file" title="Permanent link">⚓︎</a></h2>
+<p>It may be useful to move the majority of your script logic to an actual .lua file, and use <code>dofile</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example: Execute Lua File from Dialogue</p>
+<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="nb">dofile</span><span class="p">(</span><span class="s2">&quot;myMod.onSomeDialogueResult&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>The environment variables are not inherited with <code>dofile</code>. To pass the data, it is best to make a call from a module.</p>
+<div class="admonition example">
+<p class="admonition-title">Example: Passing Results Context to a Lua Module</p>
+<p>Define your module with a function to be called:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">myModule</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="kr">function</span> <span class="nc">myModule</span><span class="p">.</span><span class="nf">myFunction</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Reference: %s; Dialogue/INFO: %s/%s;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">return</span> <span class="n">myModule</span>
+</code></pre></div>
+<p>Call your module from the dialogue result:</p>
+<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">myDialogueModule</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;myMod.myDialogueModule&quot;</span><span class="p">)</span>
+<span class="p">;</span><span class="n">lua</span> <span class="n">myDialogueModule</span><span class="p">.</span><span class="n">myFunction</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
 </code></pre></div>
 </div>
 
