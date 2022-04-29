@@ -2522,6 +2522,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3applytextdefines" class="md-nav__link">
+    tes3.applyTextDefines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3begintransform" class="md-nav__link">
     tes3.beginTransform
   </a>
@@ -10066,6 +10073,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3applytextdefines" class="md-nav__link">
+    tes3.applyTextDefines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3begintransform" class="md-nav__link">
     tes3.beginTransform
   </a>
@@ -11858,6 +11872,23 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>instance</code> (<a href="../../types/tes3magicSourceInstance">tes3magicSourceInstance</a>)</li>
+</ul>
+<hr />
+<h3 id="tes3applytextdefines"><code>tes3.applyTextDefines</code><a class="headerlink" href="#tes3applytextdefines" title="Permanent link">⚓︎</a></h3>
+<p>Returns a string with all the <a href="https://en.uesp.net/wiki/Morrowind_Mod:Text_Defines">text defines</a> replaced in the input string. This can be used to replicate the behavior of book and dialogue text.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">applyTextDefines</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>text</code> (string): The input string to do text replacements for.</li>
+<li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>): The actor to use for replacements like <code>%Name</code> and <code>%Faction</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="tes3begintransform"><code>tes3.beginTransform</code><a class="headerlink" href="#tes3begintransform" title="Permanent link">⚓︎</a></h3>
