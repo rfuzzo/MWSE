@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.11">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.12">
     
     
       
@@ -17,10 +17,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8c5ef100.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.27ad92d8.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
         
       
     
@@ -8612,44 +8612,42 @@
 <p>Timers are a way to keep track with the passage of time. They are volatile, meaning that they do not persist between saved games.</p>
 <h2 id="creating-a-basic-timer">Creating a Basic Timer<a class="headerlink" href="#creating-a-basic-timer" title="Permanent link">⚓︎</a></h2>
 <p>To create a timer, pass a table of options to <code>timer.start()</code>.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- The function we want to run when the timer completes.</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function we want to run when the timer completes.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onTimerComplete</span><span class="p">()</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;30 seconds have passed!&quot;</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="c1">-- Create our timer to fire the above function after 30 seconds.</span>
 <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span> <span class="p">})</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>In the above example, we create a message box after 30 seconds.</p>
 <h2 id="repeating-a-timer">Repeating a Timer<a class="headerlink" href="#repeating-a-timer" title="Permanent link">⚓︎</a></h2>
 <p>Timers can repeat, based on an <strong>iterations</strong> parameter. This can be used to define a timer that will trigger multiple times.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- The function we want to run when the timer completes.</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- The function we want to run when the timer completes.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onTimerComplete</span><span class="p">()</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;A minute has passed!&quot;</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="c1">-- Create our timer to fire the above function every minute for 5 minutes.</span>
 <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="mi">5</span> <span class="p">})</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <p>Additionally, a value of <code>-1</code> will create a timer that will repeat forever.</p>
 <h2 id="controlling-timer-state">Controlling Timer State<a class="headerlink" href="#controlling-timer-state" title="Permanent link">⚓︎</a></h2>
 <p>A timer's state (read through the <code>.state</code> property), can be <code>timer.active</code>, <code>timer.paused</code>, or <code>timer.expired</code>. An <em>active</em> timer is running normally. A <em>paused</em> timer doesn't run, but can be resumed to pick back up where it left off. An <em>expired</em> timer has finished running (and has no more iterations).</p>
 <p>A timer can be told to pause, resume, reset, or cancel.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -8662,7 +8660,7 @@
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create a timer.</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Create a timer.</span>
 <span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span> <span class="p">})</span>
 
 <span class="c1">-- Pause the timer. It can be resumed again using myTimer:resume()</span>
@@ -8676,8 +8674,7 @@
 
 <span class="c1">-- Cancel the timer. We will no longer care about it.</span>
 <span class="n">myTimer</span><span class="p">:</span><span class="n">cancel</span><span class="p">()</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 <h2 id="creating-different-types-of-timers">Creating Different Types of Timers<a class="headerlink" href="#creating-different-types-of-timers" title="Permanent link">⚓︎</a></h2>
 <p>Three different types of timers are available, though an advanced user can create their own types of timers and manage their clock cycles. The default types are:</p>
 <ul>
@@ -8685,14 +8682,14 @@
 <li><strong>Simulate</strong>, defined by <code>timer.simulate</code>. Simulate timers operate much like real timers, incrementing seconds but only when the game is simulating (i.e. not in menu mode). This is the default type of timer.</li>
 <li><strong>Game</strong>, defined by <code>timer.game</code>. Game timers operate by game hour, matching game time.</li>
 </ul>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">-- Create a timer that ends after 60 seconds.</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- Create a timer that ends after 60 seconds.</span>
 <span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">real</span> <span class="p">})</span>
 
 <span class="c1">-- Create a timer that ends after 30 unpaused seconds.</span>
@@ -8700,8 +8697,7 @@
 
 <span class="c1">-- Create a timer that ends after 4 game hours.</span>
 <span class="kd">local</span> <span class="n">myTimer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">onTimerComplete</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">game</span> <span class="p">})</span>
-</code></pre></div>
-</td></tr></table>
+</code></pre></div></td></tr></table></div>
 
               
             </article>
@@ -8775,7 +8771,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.748e2769.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ed9748b7.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       
