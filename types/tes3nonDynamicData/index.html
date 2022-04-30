@@ -8987,7 +8987,7 @@
 <p><em>Read-only</em>. A collection of all actively loaded mods.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (<a href="../../types/tes3gameFile">tes3gameFile</a>[])</li>
 </ul>
 <hr />
 <h3 id="birthsigns"><code>birthsigns</code><a class="headerlink" href="#birthsigns" title="Permanent link">⚓︎</a></h3>
@@ -9040,10 +9040,10 @@
 </ul>
 <hr />
 <h3 id="magiceffects"><code>magicEffects</code><a class="headerlink" href="#magiceffects" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. A table of references to all 143 magic effects.</p>
+<p><em>Read-only</em>. A table of references to all magic effects. This is a dictionary, as the effect list may have gaps.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (table&lt;number, <a href="../../types/tes3magicEffect">tes3magicEffect</a>&gt;)</li>
 </ul>
 <hr />
 <h3 id="objects"><code>objects</code><a class="headerlink" href="#objects" title="Permanent link">⚓︎</a></h3>
@@ -9078,7 +9078,7 @@
 <p><em>Read-only</em>. A table of references to all 27 skills.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (<a href="../../types/tes3skill">tes3skill</a>[])</li>
 </ul>
 <hr />
 <h3 id="soundgenerators"><code>soundGenerators</code><a class="headerlink" href="#soundgenerators" title="Permanent link">⚓︎</a></h3>
