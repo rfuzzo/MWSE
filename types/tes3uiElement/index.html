@@ -5900,6 +5900,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#texture" class="md-nav__link">
+    texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#type" class="md-nav__link">
     type
   </a>
@@ -9543,6 +9550,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#texture" class="md-nav__link">
+    texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#type" class="md-nav__link">
     type
   </a>
@@ -10269,6 +10283,13 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <li><code>result</code> (string)</li>
 </ul>
 <hr />
+<h3 id="texture"><code>texture</code><a class="headerlink" href="#texture" title="Permanent link">⚓︎</a></h3>
+<p>The underlying texture for the element. This assumes that the element is of an element type. Setting this value will change the element to an image type.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/niSourceTexture">niSourceTexture</a>)</li>
+</ul>
+<hr />
 <h3 id="type"><code>type</code><a class="headerlink" href="#type" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. The type of content this <code>tes3uiElement</code> represents. This is an expanded set of the options available from the <code>contentType</code> property. Maps to values in <a href="https://mwse.github.io/MWSE/references/tes3uiElement-types/"><code>tes3.uiElementType</code></a>.</p>
 <p><strong>Returns</strong>:</p>
@@ -10318,11 +10339,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="createblock"><code>createBlock</code><a class="headerlink" href="#createblock" title="Permanent link">⚓︎</a></h3>
 <p>Creates an empty block container inside the element. Used to group and layout elements.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createBlock</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createBlock</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10332,11 +10356,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createbutton"><code>createButton</code><a class="headerlink" href="#createbutton" title="Permanent link">⚓︎</a></h3>
 <p>Creates a clickable button. Register the <code>mouseClick</code> event to capture a button press.</p>
 <p>Button specific properties can be accessed through the <code>widget</code> property. The widget type for buttons is <a href="https://mwse.github.io/MWSE/types/tes3uiButton/"><code>tes3uiButton</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createButton</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createButton</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10345,11 +10372,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createdivider"><code>createDivider</code><a class="headerlink" href="#createdivider" title="Permanent link">⚓︎</a></h3>
 <p>Creates a textured horizontal divider line, as used in the magic and stat menus. Scales automatically to the container width.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createDivider</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createDivider</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10359,13 +10389,16 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createfillbar"><code>createFillBar</code><a class="headerlink" href="#createfillbar" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontal quantity indicator bar.</p>
 <p>Fillbar specific properties can be accessed through the <code>widget</code> property. The widget type for fillbars is <a href="https://mwse.github.io/MWSE/types/tes3uiFillBar/"><code>tes3uiFillBar</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createFillBar</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createFillBar</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">max</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>current</code> (number): <em>Optional</em>. The current value of the fillbar.</li>
 <li><code>max</code> (number): <em>Optional</em>. The maximum value of the fillbar.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10375,11 +10408,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createhorizontalscrollpane"><code>createHorizontalScrollPane</code><a class="headerlink" href="#createhorizontalscrollpane" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontally scrolling pane.</p>
 <p>Scroll pane specific properties can be accessed through the <code>widget</code> property. The widget type for scroll panes is <a href="https://mwse.github.io/MWSE/types/tes3uiScrollPane/"><code>tes3uiScrollPane</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createHorizontalScrollPane</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createHorizontalScrollPane</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10388,11 +10424,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createhypertext"><code>createHypertext</code><a class="headerlink" href="#createhypertext" title="Permanent link">⚓︎</a></h3>
 <p>Creates a text area with clickable words as links. Usage is still under research.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createHypertext</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createHypertext</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10401,12 +10440,15 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createimage"><code>createImage</code><a class="headerlink" href="#createimage" title="Permanent link">⚓︎</a></h3>
 <p>Creates an image element from a texture file. The texture must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024); the final display size can be trimmed by setting width and height.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createImage</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createImage</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">path</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>path</code> (string): An image path. This path is relative to <code>Data Files</code>.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10415,14 +10457,17 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createimagebutton"><code>createImageButton</code><a class="headerlink" href="#createimagebutton" title="Permanent link">⚓︎</a></h3>
 <p>Creates an interactive button composed of images for the <strong>idle</strong>, <strong>over</strong>, and <strong>pressed</strong> states. The texture must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024); the final display size can be trimmed by setting width and height.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createImageButton</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">idle</span><span class="p">,</span> <span class="n">over</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createImageButton</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">idle</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">over</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">path</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>idle</code> (string): The path to the idle image. This path is relative to <code>Data Files</code>.</li>
 <li><code>over</code> (string): The path to the mouse hover image. This path is relative to <code>Data Files</code>.</li>
 <li><code>path</code> (string): The path to the mouse pressed image. This path is relative to <code>Data Files</code>.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10431,12 +10476,15 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createlabel"><code>createLabel</code><a class="headerlink" href="#createlabel" title="Permanent link">⚓︎</a></h3>
 <p>Creates a text label. It defaults to displaying all text on a single line. To get a multi-line label, set <code>wrap_text</code> to <code>true</code>. The element is created with <code>autoWidth</code> and <code>autoHeight</code> turned on.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createLabel</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createLabel</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
-<li><code>text</code> (string): The text to display.</li>
+<li><code>text</code> (string): <em>Default</em>: <code>(nil)</code>. The text to display.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10445,12 +10493,15 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createnif"><code>createNif</code><a class="headerlink" href="#createnif" title="Permanent link">⚓︎</a></h3>
 <p>Creates a NIF model from a file. Still under research.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createNif</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createNif</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>text</code> (string): A model path. This path is relative to <code>Data Files</code>.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10460,11 +10511,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createparagraphinput"><code>createParagraphInput</code><a class="headerlink" href="#createparagraphinput" title="Permanent link">⚓︎</a></h3>
 <p>Creates a multi-line text input element, with line wrapping on. To receive input the keyboard must be captured with <code>tes3ui.acquireTextInput(element)</code>. Read the input with the <code>text</code> property. Write an initial value to edit by setting the <code>text</code> property.</p>
 <p>Paragraph input specific properties can be accessed through the <code>widget</code> property. The widget type for paragraph inputs is <a href="https://mwse.github.io/MWSE/types/tes3uiParagraphInput/"><code>tes3uiParagraphInput</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createParagraphInput</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createParagraphInput</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10473,12 +10527,16 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createrect"><code>createRect</code><a class="headerlink" href="#createrect" title="Permanent link">⚓︎</a></h3>
 <p>Creates a filled rectangle. The rectangle is displayed as filled with the element's colour. It supports alpha compositing.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createRect</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createRect</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">randomizeColor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
-<li><code>color</code> (table): <em>Optional</em>. The fill colour for the element.</li>
+<li><code>color</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. The fill color for the element.</li>
+<li><code>randomizeColor</code> (boolean): <em>Default</em>: <code>false</code>. If true, the creation color will be randomized.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10488,15 +10546,18 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createslider"><code>createSlider</code><a class="headerlink" href="#createslider" title="Permanent link">⚓︎</a></h3>
 <p>Creates a horizontal slider.</p>
 <p>Slider specific properties can be accessed through the <code>widget</code> property. The widget type for sliders is <a href="https://mwse.github.io/MWSE/types/tes3uiSlider/"><code>tes3uiSlider</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSlider</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">jump</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSlider</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">max</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">step</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">jump</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>current</code> (number): The current value of the slider.</li>
 <li><code>max</code> (number): The maximum value of the slider.</li>
 <li><code>step</code> (number): <em>Default</em>: <code>1</code>. The change in value when clicking the left and right arrow buttons.</li>
 <li><code>jump</code> (number): <em>Default</em>: <code>5</code>. The change in value when clicking into the empty areas next to the slider handle.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10506,15 +10567,18 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createslidervertical"><code>createSliderVertical</code><a class="headerlink" href="#createslidervertical" title="Permanent link">⚓︎</a></h3>
 <p>Creates a vertical slider.</p>
 <p>Slider specific properties can be accessed through the <code>widget</code> property. The widget type for sliders is <a href="https://mwse.github.io/MWSE/types/tes3uiSlider/"><code>tes3uiSlider</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSliderVertical</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">max</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">jump</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createSliderVertical</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">max</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">step</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">jump</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>current</code> (number): The current value of the slider.</li>
 <li><code>max</code> (number): The maximum value of the slider.</li>
 <li><code>step</code> (number): <em>Default</em>: <code>1</code>. The change in value when clicking the left and right arrow buttons.</li>
 <li><code>jump</code> (number): <em>Default</em>: <code>5</code>. The change in value when clicking into the empty areas next to the slider handle.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10524,11 +10588,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createtextinput"><code>createTextInput</code><a class="headerlink" href="#createtextinput" title="Permanent link">⚓︎</a></h3>
 <p>Creates a single line text input element. To receive input the keyboard must be captured with <code>tes3ui.acquireTextInput(element)</code>. Read the input with the <code>text</code> property. Write an initial value to display by setting the <code>text</code> property; that value will be cleared on the first keypress.</p>
 <p>Text input specific properties can be accessed through the <code>widget</code> property. The widget type for text inputs is <a href="https://mwse.github.io/MWSE/types/tes3uiTextInput/"><code>tes3uiTextInput</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextInput</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextInput</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10538,13 +10605,16 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createtextselect"><code>createTextSelect</code><a class="headerlink" href="#createtextselect" title="Permanent link">⚓︎</a></h3>
 <p>Creates a selectable line of text, with configurable hover, click, and disabled colours. Can be used to create a list box by placing them in a ScrollPane.</p>
 <p>Text select specific properties can be accessed through the <code>widget</code> property. The widget type for text selects is <a href="https://mwse.github.io/MWSE/types/tes3uiTextSelect/"><code>tes3uiTextSelect</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextSelect</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createTextSelect</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">state</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>text</code> (string): <em>Optional</em>. The text to display.</li>
 <li><code>state</code> (number): <em>Default</em>: <code>tes3.uiState.normal</code>. The initial interaction state.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10553,11 +10623,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createthinborder"><code>createThinBorder</code><a class="headerlink" href="#createthinborder" title="Permanent link">⚓︎</a></h3>
 <p>Creates a styled thin border element. Any content should be created as children of this border.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createThinBorder</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createThinBorder</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10567,11 +10640,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h3 id="createverticalscrollpane"><code>createVerticalScrollPane</code><a class="headerlink" href="#createverticalscrollpane" title="Permanent link">⚓︎</a></h3>
 <p>Creates a vertically scrolling pane. Useful as a list box.</p>
 <p>Scroll pane specific properties can be accessed through the <code>widget</code> property. The widget type for scroll panes is <a href="https://mwse.github.io/MWSE/types/tes3uiScrollPane/"><code>tes3uiScrollPane</code></a>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createVerticalScrollPane</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3uiElement</span><span class="p">:</span><span class="n">createVerticalScrollPane</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
