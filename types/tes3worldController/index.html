@@ -10369,15 +10369,12 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="applyenchanteffect"><code>applyEnchantEffect</code><a class="headerlink" href="#applyenchanteffect" title="Permanent link">⚓︎</a></h3>
 <p>This function applies an enchantment's effects to a scene node.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3worldController</span><span class="p">.</span><span class="n">applyEnchantEffect</span><span class="p">({</span> <span class="n">node</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">enchantment</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3worldController</span><span class="p">.</span><span class="n">applyEnchantEffect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">enchantment</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>node</code> (<a href="../../types/niNode">niNode</a>): A scene node to which to apply the enchantment's effects.</li>
 <li><code>enchantment</code> (<a href="../../types/tes3enchantment">tes3enchantment</a>): The enchantment's effects to apply.</li>
-</ul>
-</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
