@@ -6417,6 +6417,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -7167,6 +7169,20 @@
     <li class="md-nav__item">
       <a href="../../events/determinedAction/" class="md-nav__link">
         determinedAction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/dialogueEnvironmentCreated/" class="md-nav__link">
+        dialogueEnvironmentCreated
       </a>
     </li>
   
@@ -8641,6 +8657,29 @@
 <div class="admonition example">
 <p class="admonition-title">Example: Print Results Context</p>
 <div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Reference: %s; Dialogue/INFO: %s/%s;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>The environment can also be extended through the <a href="https://mwse.github.io/MWSE/events/dialogueEnvironmentCreated/"><code>dialogueEnvironmentCreated</code></a> event. This allows libraries to extend what functionality is available to dialogue scripters more easily.</p>
+<div class="admonition example">
+<p class="admonition-title">Example: Extending the Dialogue Environment</p>
+<p>In your library's main.lua file, create the event hook:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onDialogueEnvironmentCreated</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- Cache the environment variables outside the function for easier access.</span>
+    <span class="c1">-- Dialogue scripters shouldn&#39;t have to constantly pass these to the functions anyway.</span>
+    <span class="kd">local</span> <span class="n">env</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">environment</span>
+    <span class="kd">local</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">reference</span>
+    <span class="kd">local</span> <span class="n">dialogue</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">dialogue</span>
+    <span class="kd">local</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">info</span>
+
+    <span class="c1">-- Define the &quot;global&quot; function.</span>
+    <span class="kr">function</span> <span class="nc">env</span><span class="p">.</span><span class="nf">DisplayDialogueContext</span><span class="p">()</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Reference: %s; Dialogue/INFO: %s/%s;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">dialogueEnvironmentCreated</span><span class="p">,</span> <span class="n">onDialogueEnvironmentCreated</span><span class="p">)</span>
+</code></pre></div>
+<p>Then, any dialogue scripts can make use of the new function:</p>
+<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="n">lua</span> <span class="n">DisplayDialogueContext</span><span class="p">()</span>
 </code></pre></div>
 </div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">⚓︎</a></h2>
