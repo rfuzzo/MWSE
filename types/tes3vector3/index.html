@@ -8995,7 +8995,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="copy"><code>copy</code><a class="headerlink" href="#copy" title="Permanent link">⚓︎</a></h3>
 <p>Creates a copy of the vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">copy</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9004,7 +9004,7 @@
 <hr />
 <h3 id="cross"><code>cross</code><a class="headerlink" href="#cross" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the cross product with another vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">cross</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">cross</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9017,7 +9017,7 @@
 <hr />
 <h3 id="distance"><code>distance</code><a class="headerlink" href="#distance" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the distance to another vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">distance</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">distance</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9030,7 +9030,7 @@
 <hr />
 <h3 id="dot"><code>dot</code><a class="headerlink" href="#dot" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the dot product with another vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">dot</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">dot</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9043,7 +9043,7 @@
 <hr />
 <h3 id="heightdifference"><code>heightDifference</code><a class="headerlink" href="#heightdifference" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the vertical distance to another vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">heightDifference</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">heightDifference</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9056,7 +9056,7 @@
 <hr />
 <h3 id="interpolate"><code>interpolate</code><a class="headerlink" href="#interpolate" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the interpolated position against the target vector using the <code>distance</code> parameter.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">interpolate</span><span class="p">(</span><span class="n">targetPoint</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">interpolate</span><span class="p">(</span><span class="n">targetPoint</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9070,7 +9070,7 @@
 <hr />
 <h3 id="length"><code>length</code><a class="headerlink" href="#length" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the length of the vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">length</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">length</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9079,7 +9079,7 @@
 <hr />
 <h3 id="lerp"><code>lerp</code><a class="headerlink" href="#lerp" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the interpolated vector between this vector and another, given a transition.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">lerpedVector</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">lerp</span><span class="p">(</span><span class="n">toVector</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">lerpedVector</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">lerp</span><span class="p">(</span><span class="n">toVector</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9093,12 +9093,12 @@
 <hr />
 <h3 id="negate"><code>negate</code><a class="headerlink" href="#negate" title="Permanent link">⚓︎</a></h3>
 <p>Negates all values in the vector.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3vector3</span><span class="p">:</span><span class="n">negate</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">negate</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="normalize"><code>normalize</code><a class="headerlink" href="#normalize" title="Permanent link">⚓︎</a></h3>
 <p>Normalize the vector in-place, or set its components to zero if normalization is not possible. Returns <code>true</code> if the vector was successfully normalized.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">normalize</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">normalize</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9107,7 +9107,7 @@
 <hr />
 <h3 id="normalized"><code>normalized</code><a class="headerlink" href="#normalized" title="Permanent link">⚓︎</a></h3>
 <p>Get a normalized copy of the vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">normalized</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">normalized</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9116,7 +9116,7 @@
 <hr />
 <h3 id="outerproduct"><code>outerProduct</code><a class="headerlink" href="#outerproduct" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the outer product with another vector.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">outerProduct</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">outerProduct</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9129,7 +9129,7 @@
 <hr />
 <h3 id="tocolor"><code>toColor</code><a class="headerlink" href="#tocolor" title="Permanent link">⚓︎</a></h3>
 <p>Converts the vector to <code>niColor</code> object.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3vector3</span><span class="p">:</span><span class="n">toColor</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">toColor</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>

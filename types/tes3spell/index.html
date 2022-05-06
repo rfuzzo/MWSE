@@ -9369,7 +9369,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9378,7 +9378,7 @@
 <hr />
 <h3 id="calculatecastchance"><code>calculateCastChance</code><a class="headerlink" href="#calculatecastchance" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the chance that a caster can cast a given spell.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">calculateCastChance</span><span class="p">({</span> <span class="n">checkMagicka</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">caster</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">calculateCastChance</span><span class="p">({</span> <span class="n">checkMagicka</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">caster</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9395,7 +9395,7 @@
 <hr />
 <h3 id="createcopy"><code>createCopy</code><a class="headerlink" href="#createcopy" title="Permanent link">⚓︎</a></h3>
 <p>Creates a copy of this object.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">newObject</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">createCopy</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addToObjectList</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sourceless</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">newObject</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createCopy</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addToObjectList</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sourceless</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9413,7 +9413,7 @@
 <hr />
 <h3 id="getactiveeffectcount"><code>getActiveEffectCount</code><a class="headerlink" href="#getactiveeffectcount" title="Permanent link">⚓︎</a></h3>
 <p>Gets the number of active effects in the spell effect table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getActiveEffectCount</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveEffectCount</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9422,7 +9422,7 @@
 <hr />
 <h3 id="getfirstindexofeffect"><code>getFirstIndexOfEffect</code><a class="headerlink" href="#getfirstindexofeffect" title="Permanent link">⚓︎</a></h3>
 <p>Gets the first index of an effect ID in the spell effect table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getFirstIndexOfEffect</span><span class="p">(</span><span class="n">effectId</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getFirstIndexOfEffect</span><span class="p">(</span><span class="n">effectId</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9435,7 +9435,7 @@
 <hr />
 <h3 id="getleastproficienteffect"><code>getLeastProficientEffect</code><a class="headerlink" href="#getleastproficienteffect" title="Permanent link">⚓︎</a></h3>
 <p>Returns the effect of the spell that a given actor is least proficient with.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getLeastProficientEffect</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">effect</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getLeastProficientEffect</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9448,7 +9448,7 @@
 <hr />
 <h3 id="getleastproficientschool"><code>getLeastProficientSchool</code><a class="headerlink" href="#getleastproficientschool" title="Permanent link">⚓︎</a></h3>
 <p>Returns the school of the least proficient effect on the spell, for a given actor.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">schoolID</span> <span class="o">=</span> <span class="n">tes3spell</span><span class="p">:</span><span class="n">getLeastProficientSchool</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">schoolID</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getLeastProficientSchool</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>

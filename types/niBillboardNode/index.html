@@ -9442,7 +9442,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="attachchild"><code>attachChild</code><a class="headerlink" href="#attachchild" title="Permanent link">⚓︎</a></h3>
 <p>Attachs the child to the children list of the node.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niNode</span><span class="p">:</span><span class="n">attachChild</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">useFirstAvailable</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">attachChild</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">useFirstAvailable</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9452,7 +9452,7 @@
 <hr />
 <h3 id="attachproperty"><code>attachProperty</code><a class="headerlink" href="#attachproperty" title="Permanent link">⚓︎</a></h3>
 <p>Attach a property to this object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">attachProperty</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">attachProperty</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9461,12 +9461,12 @@
 <hr />
 <h3 id="cleartransforms"><code>clearTransforms</code><a class="headerlink" href="#cleartransforms" title="Permanent link">⚓︎</a></h3>
 <p>Resets the object's local transform.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">clearTransforms</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">clearTransforms</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
 <p>Creates a copy of this object.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9475,7 +9475,7 @@
 <hr />
 <h3 id="detachchild"><code>detachChild</code><a class="headerlink" href="#detachchild" title="Permanent link">⚓︎</a></h3>
 <p>Detaches the child from the children list of the node. Returns the detached child.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">:</span><span class="n">detachChild</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachChild</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9488,7 +9488,7 @@
 <hr />
 <h3 id="detachchildat"><code>detachChildAt</code><a class="headerlink" href="#detachchildat" title="Permanent link">⚓︎</a></h3>
 <p>Detaches the child at the specified index from the children list of the node. Returns the detached child.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">:</span><span class="n">detachChildAt</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachChildAt</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9501,7 +9501,7 @@
 <hr />
 <h3 id="detachproperty"><code>detachProperty</code><a class="headerlink" href="#detachproperty" title="Permanent link">⚓︎</a></h3>
 <p>Detaches and returns a property from the object which matches the given property type.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niAVObject</span><span class="p">:</span><span class="n">detachProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9514,7 +9514,7 @@
 <hr />
 <h3 id="geteffect"><code>getEffect</code><a class="headerlink" href="#geteffect" title="Permanent link">⚓︎</a></h3>
 <p>Gets the effect for the given type.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">:</span><span class="n">getEffect</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getEffect</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9527,7 +9527,7 @@
 <hr />
 <h3 id="getgamereference"><code>getGameReference</code><a class="headerlink" href="#getgamereference" title="Permanent link">⚓︎</a></h3>
 <p>Searches for an niExtraData on this object to see if it has one that holds a related reference.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">niObjectNET</span><span class="p">:</span><span class="n">getGameReference</span><span class="p">(</span><span class="n">searchParents</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getGameReference</span><span class="p">(</span><span class="n">searchParents</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9540,7 +9540,7 @@
 <hr />
 <h3 id="getobjectbyname"><code>getObjectByName</code><a class="headerlink" href="#getobjectbyname" title="Permanent link">⚓︎</a></h3>
 <p>Searches this node and all child nodes recursively for a node with a name that matches the argument.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niAVObject</span><span class="p">:</span><span class="n">getObjectByName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getObjectByName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9553,7 +9553,7 @@
 <hr />
 <h3 id="getproperty"><code>getProperty</code><a class="headerlink" href="#getproperty" title="Permanent link">⚓︎</a></h3>
 <p>Gets an attached property by property type.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niAVObject</span><span class="p">:</span><span class="n">getProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9566,7 +9566,7 @@
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9579,7 +9579,7 @@
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the object is of a given type. Types can be found in the tes3.niType table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9592,7 +9592,7 @@
 <hr />
 <h3 id="prependcontroller"><code>prependController</code><a class="headerlink" href="#prependcontroller" title="Permanent link">⚓︎</a></h3>
 <p>Add a controller to the object as the first controller.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">prependController</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">prependController</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9601,12 +9601,12 @@
 <hr />
 <h3 id="removeallcontrollers"><code>removeAllControllers</code><a class="headerlink" href="#removeallcontrollers" title="Permanent link">⚓︎</a></h3>
 <p>Removes all controllers.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">removeAllControllers</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">removeAllControllers</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="removecontroller"><code>removeController</code><a class="headerlink" href="#removecontroller" title="Permanent link">⚓︎</a></h3>
 <p>Removes a controller from the object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">removeController</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">removeController</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9615,7 +9615,7 @@
 <hr />
 <h3 id="rotatetocamera"><code>rotateToCamera</code><a class="headerlink" href="#rotatetocamera" title="Permanent link">⚓︎</a></h3>
 <p>Updates the world transform to point at a camera. Used automatically during rendering. This method is only needed when you need to get the world transform without rendering.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niBillboardNode</span><span class="p">:</span><span class="n">rotateToCamera</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">rotateToCamera</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9624,7 +9624,7 @@
 <hr />
 <h3 id="savebinary"><code>saveBinary</code><a class="headerlink" href="#savebinary" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object, and writes it to the given file.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">saveBinary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">saveBinary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9637,7 +9637,7 @@
 <hr />
 <h3 id="setflag"><code>setFlag</code><a class="headerlink" href="#setflag" title="Permanent link">⚓︎</a></h3>
 <p>Sets a given flag in the niObjectNET flag data. The specifics use of the flag is dependent on the real underlying type.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niObjectNET</span><span class="p">:</span><span class="n">setFlag</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setFlag</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9647,17 +9647,17 @@
 <hr />
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
 <p>Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, or bounds.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="updateeffects"><code>updateEffects</code><a class="headerlink" href="#updateeffects" title="Permanent link">⚓︎</a></h3>
 <p>Update all attached effects.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">updateEffects</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateEffects</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="updateproperties"><code>updateProperties</code><a class="headerlink" href="#updateproperties" title="Permanent link">⚓︎</a></h3>
 <p>Update all attached properties.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niAVObject</span><span class="p">:</span><span class="n">updateProperties</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateProperties</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 

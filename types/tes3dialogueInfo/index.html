@@ -9271,7 +9271,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9280,7 +9280,7 @@
 <hr />
 <h3 id="filter"><code>filter</code><a class="headerlink" href="#filter" title="Permanent link">⚓︎</a></h3>
 <p>This method filters the associated dialogue info for given arguments and returns true if the dialogue info filtering passes. This method rises <a href="https://mwse.github.io/MWSE/events/infoFilter/"><code>infoFilter</code></a> event.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3dialogueInfo</span><span class="p">:</span><span class="n">filter</span><span class="p">(</span><span class="n">actor</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">filter</span><span class="p">(</span><span class="n">actor</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dialogue</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9296,7 +9296,7 @@
 <hr />
 <h3 id="finddialogue"><code>findDialogue</code><a class="headerlink" href="#finddialogue" title="Permanent link">⚓︎</a></h3>
 <p>This method searches for the dialogue that this info belongs to.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">dialogue</span> <span class="o">=</span> <span class="n">tes3dialogueInfo</span><span class="p">:</span><span class="n">findDialogue</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">dialogue</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">findDialogue</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9305,7 +9305,7 @@
 <hr />
 <h3 id="runscript"><code>runScript</code><a class="headerlink" href="#runscript" title="Permanent link">⚓︎</a></h3>
 <p>This method runs the dialogue info's associated script on a given reference.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3dialogueInfo</span><span class="p">:</span><span class="n">runScript</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">runScript</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>

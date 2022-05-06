@@ -8780,12 +8780,12 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="clear"><code>clear</code><a class="headerlink" href="#clear" title="Permanent link">⚓︎</a></h3>
 <p>Unbinds the quick key, removing any data in it.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3quickKey</span><span class="p">:</span><span class="n">clear</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">clear</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="getitem"><code>getItem</code><a class="headerlink" href="#getitem" title="Permanent link">⚓︎</a></h3>
 <p>Gets the item associated with the given quick key. If the quick key is not marked as an item, this will return <code>nil</code>. This is equivalent to fetching the <code>item</code> and <code>itemData</code> properties, after checking to make sure the <code>type</code> is set to item.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">tes3quickKey</span><span class="p">:</span><span class="n">getItem</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getItem</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -8795,7 +8795,7 @@
 <hr />
 <h3 id="getmagic"><code>getMagic</code><a class="headerlink" href="#getmagic" title="Permanent link">⚓︎</a></h3>
 <p>Gets the magic associated with the given quick key. If the quick key is not marked as magic, this will return <code>nil</code>. This is equivalent to fetching either the <code>spell</code> or <code>item</code> properties and the <code>itemData</code> property, after checking to make sure the <code>type</code> is set to magic.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">tes3quickKey</span><span class="p">:</span><span class="n">getMagic</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getMagic</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -8805,7 +8805,7 @@
 <hr />
 <h3 id="setitem"><code>setItem</code><a class="headerlink" href="#setitem" title="Permanent link">⚓︎</a></h3>
 <p>Sets the binding of the quick key to a given item source.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3quickKey</span><span class="p">:</span><span class="n">setItem</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setItem</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8815,7 +8815,7 @@
 <hr />
 <h3 id="setmagic"><code>setMagic</code><a class="headerlink" href="#setmagic" title="Permanent link">⚓︎</a></h3>
 <p>Sets the binding of the quick key to a given magic source. This must be a spell, or an item with an on-use enchantment.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3quickKey</span><span class="p">:</span><span class="n">setMagic</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setMagic</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>

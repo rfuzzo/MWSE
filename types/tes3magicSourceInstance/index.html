@@ -9229,7 +9229,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9238,7 +9238,7 @@
 <hr />
 <h3 id="geteffectinstance"><code>getEffectInstance</code><a class="headerlink" href="#geteffectinstance" title="Permanent link">⚓︎</a></h3>
 <p>Gets the magic effect instance for a given effect index and target reference. Effect instances may not all be active on a target, due to reflect, absorption, dispels, different durations and other factors.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3magicSourceInstance</span><span class="p">:</span><span class="n">getEffectInstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getEffectInstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9252,7 +9252,7 @@
 <hr />
 <h3 id="getmagnitudeforindex"><code>getMagnitudeForIndex</code><a class="headerlink" href="#getmagnitudeforindex" title="Permanent link">⚓︎</a></h3>
 <p>Gets the magnitude from the casting source for a given effect index.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3magicSourceInstance</span><span class="p">:</span><span class="n">getMagnitudeForIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getMagnitudeForIndex</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9265,7 +9265,7 @@
 <hr />
 <h3 id="playvisualeffect"><code>playVisualEffect</code><a class="headerlink" href="#playvisualeffect" title="Permanent link">⚓︎</a></h3>
 <p>This function plays an animation for an effect from the <code>tes3magicSourceInstance</code> object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3magicSourceInstance</span><span class="p">:</span><span class="n">playVisualEffect</span><span class="p">({</span> <span class="n">effectIndex</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">visual</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">playVisualEffect</span><span class="p">({</span> <span class="n">effectIndex</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">visual</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>

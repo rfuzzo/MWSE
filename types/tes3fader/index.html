@@ -8813,17 +8813,17 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="activate"><code>activate</code><a class="headerlink" href="#activate" title="Permanent link">⚓︎</a></h3>
 <p>Activates a deactivated fader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">activate</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">activate</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="deactivate"><code>deactivate</code><a class="headerlink" href="#deactivate" title="Permanent link">⚓︎</a></h3>
 <p>Deactivates an activated fader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">deactivate</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">deactivate</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="fadein"><code>fadeIn</code><a class="headerlink" href="#fadein" title="Permanent link">⚓︎</a></h3>
 <p>Transitions the fader to a value of <code>1</code> over a given duration.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">fadeIn</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fadeIn</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8835,7 +8835,7 @@
 <hr />
 <h3 id="fadeout"><code>fadeOut</code><a class="headerlink" href="#fadeout" title="Permanent link">⚓︎</a></h3>
 <p>Transitions the fader to a value of <code>0</code> over a given duration.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">fadeOut</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fadeOut</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8847,7 +8847,7 @@
 <hr />
 <h3 id="fadeto"><code>fadeTo</code><a class="headerlink" href="#fadeto" title="Permanent link">⚓︎</a></h3>
 <p>Transitions the fader to a value over a given duration.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">fadeTo</span><span class="p">({</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fadeTo</span><span class="p">({</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8860,7 +8860,7 @@
 <hr />
 <h3 id="setcolor"><code>setColor</code><a class="headerlink" href="#setcolor" title="Permanent link">⚓︎</a></h3>
 <p>Applies a coloring effect to the fader.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3fader</span><span class="p">:</span><span class="n">setColor</span><span class="p">({</span> <span class="n">color</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">flag</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">setColor</span><span class="p">({</span> <span class="n">color</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">flag</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8877,7 +8877,7 @@
 <hr />
 <h3 id="settexture"><code>setTexture</code><a class="headerlink" href="#settexture" title="Permanent link">⚓︎</a></h3>
 <p>This method allows changing the texture of the fader.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">setTexture</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setTexture</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8886,12 +8886,12 @@
 <hr />
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
 <p>Updates the fader for the current frame.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="updatematerialproperty"><code>updateMaterialProperty</code><a class="headerlink" href="#updatematerialproperty" title="Permanent link">⚓︎</a></h3>
 <p>Updates the fader for the current frame.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3fader</span><span class="p">:</span><span class="n">updateMaterialProperty</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateMaterialProperty</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>

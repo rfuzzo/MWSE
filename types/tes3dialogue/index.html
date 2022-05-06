@@ -8991,7 +8991,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9000,7 +9000,7 @@
 <hr />
 <h3 id="addtojournal"><code>addToJournal</code><a class="headerlink" href="#addtojournal" title="Permanent link">⚓︎</a></h3>
 <p>Adds the dialogue to the player's journal, if applicable, at a given index.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3dialogue</span><span class="p">:</span><span class="n">addToJournal</span><span class="p">({</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">addToJournal</span><span class="p">({</span> <span class="n">index</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9017,7 +9017,7 @@
 <hr />
 <h3 id="getinfo"><code>getInfo</code><a class="headerlink" href="#getinfo" title="Permanent link">⚓︎</a></h3>
 <p>Fetches the info that a given actor would produce for the dialogue.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3dialogue</span><span class="p">:</span><span class="n">getInfo</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getInfo</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9033,7 +9033,7 @@
 <hr />
 <h3 id="getjournalinfo"><code>getJournalInfo</code><a class="headerlink" href="#getjournalinfo" title="Permanent link">⚓︎</a></h3>
 <p>Retrieves the info object for a journal. By default this will return the info for the player's current journal index for this dialogue. An index can be provided to fetch a specific index's related info.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">journalInfo</span> <span class="o">=</span> <span class="n">tes3dialogue</span><span class="p">:</span><span class="n">getJournalInfo</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">journalInfo</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getJournalInfo</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9046,7 +9046,7 @@
 <hr />
 <h3 id="loadquestname"><code>loadQuestName</code><a class="headerlink" href="#loadquestname" title="Permanent link">⚓︎</a></h3>
 <p>This method finds the info that contains the quest name, then loads and returns its text. This method accesses the disk, and may be slow to operate. For dialogues that aren't journal-based, this will be <code>nil</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">questName</span> <span class="o">=</span> <span class="n">tes3dialogue</span><span class="p">:</span><span class="n">loadQuestName</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">questName</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">loadQuestName</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>

@@ -8822,7 +8822,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="getactivebodypart"><code>getActiveBodyPart</code><a class="headerlink" href="#getactivebodypart" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches active body part of a actor at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8836,7 +8836,7 @@
 <hr />
 <h3 id="getactivebodypartforitem"><code>getActiveBodyPartForItem</code><a class="headerlink" href="#getactivebodypartforitem" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches active body part of a actor for the given item.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPartForItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveBodyPartForItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8849,7 +8849,7 @@
 <hr />
 <h3 id="getactivebodypartnode"><code>getActiveBodyPartNode</code><a class="headerlink" href="#getactivebodypartnode" title="Permanent link">⚓︎</a></h3>
 <p>The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">getActiveBodyPartNode</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveBodyPartNode</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8863,12 +8863,12 @@
 <hr />
 <h3 id="removeequippedlayers"><code>removeEquippedLayers</code><a class="headerlink" href="#removeequippedlayers" title="Permanent link">⚓︎</a></h3>
 <p>The method removes all currently equipped layers from the actor.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">removeEquippedLayers</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">removeEquippedLayers</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="setactivepartdata"><code>setActivePartData</code><a class="headerlink" href="#setactivepartdata" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a niNode derived object as active body part at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setActivePartData</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">overwriteData</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setActivePartData</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">overwriteData</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8880,7 +8880,7 @@
 <hr />
 <h3 id="setbodypartbyidforobject"><code>setBodyPartByIdForObject</code><a class="headerlink" href="#setbodypartbyidforobject" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a new body part for a given object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPartId</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPartId</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8892,7 +8892,7 @@
 <hr />
 <h3 id="setbodypartforobject"><code>setBodyPartForObject</code><a class="headerlink" href="#setbodypartforobject" title="Permanent link">⚓︎</a></h3>
 <p>The method sets a new body part for a given object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPart</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPart</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -8904,7 +8904,7 @@
 <hr />
 <h3 id="updateforreference"><code>updateForReference</code><a class="headerlink" href="#updateforreference" title="Permanent link">⚓︎</a></h3>
 <p>The method updates all body parts for a given reference.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3bodyPartManager</span><span class="p">:</span><span class="n">updateForReference</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateForReference</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>

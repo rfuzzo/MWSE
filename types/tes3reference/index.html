@@ -10021,7 +10021,7 @@
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="__tojson"><code>__tojson</code><a class="headerlink" href="#__tojson" title="Permanent link">⚓︎</a></h3>
 <p>Serializes the object to json.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">tes3baseObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">string</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">__tojson</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10030,7 +10030,7 @@
 <hr />
 <h3 id="activate"><code>activate</code><a class="headerlink" href="#activate" title="Permanent link">⚓︎</a></h3>
 <p>Causes this reference to activate another. This will lead them to go through doors, pick up items, etc.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">activate</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">activate</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10039,7 +10039,7 @@
 <hr />
 <h3 id="clearactionflag"><code>clearActionFlag</code><a class="headerlink" href="#clearactionflag" title="Permanent link">⚓︎</a></h3>
 <p>Unsets a bit in the reference's action data attachment</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">clearActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">clearActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10048,7 +10048,7 @@
 <hr />
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
 <p>Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10057,12 +10057,12 @@
 <hr />
 <h3 id="delete"><code>delete</code><a class="headerlink" href="#delete" title="Permanent link">⚓︎</a></h3>
 <p>Disables the reference, removes all its attachments, resets its scale, and sets the reference to be deleted.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">delete</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">delete</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="deletedynamiclightattachment"><code>deleteDynamicLightAttachment</code><a class="headerlink" href="#deletedynamiclightattachment" title="Permanent link">⚓︎</a></h3>
 <p>Deletes the dynamic light attachment, if it exists. This will automatically detach the dynamic light from affected nodes.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">deleteDynamicLightAttachment</span><span class="p">(</span><span class="n">removeLightFromParent</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">deleteDynamicLightAttachment</span><span class="p">(</span><span class="n">removeLightFromParent</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10071,12 +10071,12 @@
 <hr />
 <h3 id="detachdynamiclightfromaffectednodes"><code>detachDynamicLightFromAffectedNodes</code><a class="headerlink" href="#detachdynamiclightfromaffectednodes" title="Permanent link">⚓︎</a></h3>
 <p>Removes the dynamic light from any affected scene graph nodes, but will not delete the associated attachment.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">detachDynamicLightFromAffectedNodes</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">detachDynamicLightFromAffectedNodes</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="disable"><code>disable</code><a class="headerlink" href="#disable" title="Permanent link">⚓︎</a></h3>
 <p>Hides the reference, detaches all dynamic lights and sounds, and stops any mobile simulation. Sets the reference as modified implicitly.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">disable</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">disable</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10085,7 +10085,7 @@
 <hr />
 <h3 id="enable"><code>enable</code><a class="headerlink" href="#enable" title="Permanent link">⚓︎</a></h3>
 <p>Shows the reference, reattaches all dynamic lights and sounds, and restarts any mobile simulation if the player is close enough. Sets the reference as modified implicitly.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">enable</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">enable</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10094,7 +10094,7 @@
 <hr />
 <h3 id="getangleto"><code>getAngleTo</code><a class="headerlink" href="#getangleto" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the angle from this reference's current facing to the target reference.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">getAngleTo</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getAngleTo</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10107,7 +10107,7 @@
 <hr />
 <h3 id="getattacheddynamiclight"><code>getAttachedDynamicLight</code><a class="headerlink" href="#getattacheddynamiclight" title="Permanent link">⚓︎</a></h3>
 <p>Fetches the dynamic light attachment.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">getAttachedDynamicLight</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getAttachedDynamicLight</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10118,7 +10118,7 @@
 <p>Fetches the dynamic light attachment. If there isn't one, a new one will be created with the given light and value.</p>
 <p>If no light is supplied as an argument, a point light of radius 512 will be automatically created.</p>
 <p>If the light is not attached to any part of the scene graph yet, the point light will be placed as a child of the "attachLight" subnode of the model, or a child of the model if "attachLight" is not found.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">getOrCreateAttachedDynamicLight</span><span class="p">(</span><span class="n">light</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getOrCreateAttachedDynamicLight</span><span class="p">(</span><span class="n">light</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10132,7 +10132,7 @@
 <hr />
 <h3 id="oncloseinventory"><code>onCloseInventory</code><a class="headerlink" href="#oncloseinventory" title="Permanent link">⚓︎</a></h3>
 <p>A function that tells the game that an inventory has been closed, if you are simulating inventory operations. It has the capability of un-cloning an inventory if it has not been modified. Typically not used outside of specific purposes.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">onCloseInventory</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">onCloseInventory</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10141,7 +10141,7 @@
 <hr />
 <h3 id="setactionflag"><code>setActionFlag</code><a class="headerlink" href="#setactionflag" title="Permanent link">⚓︎</a></h3>
 <p>Sets a bit in the reference's action data attachment</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">setActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10150,12 +10150,12 @@
 <hr />
 <h3 id="setdynamiclighting"><code>setDynamicLighting</code><a class="headerlink" href="#setdynamiclighting" title="Permanent link">⚓︎</a></h3>
 <p>Sets the dynamic lighting state of the reference using the global data handler.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">setDynamicLighting</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setDynamicLighting</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="setnocollisionflag"><code>setNoCollisionFlag</code><a class="headerlink" href="#setnocollisionflag" title="Permanent link">⚓︎</a></h3>
 <p>Sets if this reference has active collision. This is preferable to changing the <code>hasNoCollision</code> property, if you are manipulating multiple objects at once and do not want to constantly recalculate collision groups.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">setNoCollisionFlag</span><span class="p">(</span><span class="n">hasNoCollision</span><span class="p">,</span> <span class="n">updateCollisions</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setNoCollisionFlag</span><span class="p">(</span><span class="n">hasNoCollision</span><span class="p">,</span> <span class="n">updateCollisions</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10165,7 +10165,7 @@
 <hr />
 <h3 id="testactionflag"><code>testActionFlag</code><a class="headerlink" href="#testactionflag" title="Permanent link">⚓︎</a></h3>
 <p>Returns the flag's value in the reference's action data attachment.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3reference</span><span class="p">:</span><span class="n">testActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">testActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10178,17 +10178,17 @@
 <hr />
 <h3 id="updateequipment"><code>updateEquipment</code><a class="headerlink" href="#updateequipment" title="Permanent link">⚓︎</a></h3>
 <p>Causes the reference, if of an actor, to update the reference's bodyparts with the currently equipped ones.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">updateEquipment</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateEquipment</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="updatelighting"><code>updateLighting</code><a class="headerlink" href="#updatelighting" title="Permanent link">⚓︎</a></h3>
 <p>Updates the lighting of the reference using the global data handler.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">updateLighting</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateLighting</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="updatescenegraph"><code>updateSceneGraph</code><a class="headerlink" href="#updatescenegraph" title="Permanent link">⚓︎</a></h3>
 <p>Updates the reference's local rotation matrix, propagates position changes to the scene graph, and sets the reference's modified flag. You need to call this if the orientation or position was manually modified.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3reference</span><span class="p">:</span><span class="n">updateSceneGraph</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateSceneGraph</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 
