@@ -2154,6 +2154,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#debugclearlogcacheforfile" class="md-nav__link">
+    debug.clearLogCacheForFile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#debuglog" class="md-nav__link">
     debug.log
   </a>
@@ -3086,6 +3093,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/niBezFloatKey/" class="md-nav__link">
+        niBezFloatKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/niBezPosKey/" class="md-nav__link">
         niBezPosKey
       </a>
@@ -3102,20 +3123,6 @@
     <li class="md-nav__item">
       <a href="../../types/niBezRotKey/" class="md-nav__link">
         niBezRotKey
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../types/niBezScaleKey/" class="md-nav__link">
-        niBezScaleKey
       </a>
     </li>
   
@@ -3228,6 +3235,20 @@
     <li class="md-nav__item">
       <a href="../../types/niDynamicEffectLinkedList/" class="md-nav__link">
         niDynamicEffectLinkedList
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/niEulerRotKey/" class="md-nav__link">
+        niEulerRotKey
       </a>
     </li>
   
@@ -3576,20 +3597,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../types/niScaleKey/" class="md-nav__link">
-        niScaleKey
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../types/niSourceTexture/" class="md-nav__link">
         niSourceTexture
       </a>
@@ -3646,6 +3653,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/niTCBFloatKey/" class="md-nav__link">
+        niTCBFloatKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/niTCBPosKey/" class="md-nav__link">
         niTCBPosKey
       </a>
@@ -3662,20 +3683,6 @@
     <li class="md-nav__item">
       <a href="../../types/niTCBRotKey/" class="md-nav__link">
         niTCBRotKey
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../types/niTCBScaleKey/" class="md-nav__link">
-        niTCBScaleKey
       </a>
     </li>
   
@@ -8583,6 +8590,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#debugclearlogcacheforfile" class="md-nav__link">
+    debug.clearLogCacheForFile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#debuglog" class="md-nav__link">
     debug.log
   </a>
@@ -8611,6 +8625,15 @@
 <h1 id="debug">debug<a class="headerlink" href="#debug" title="Permanent link">⚓︎</a></h1>
 <p>This is an extension of Lua Debug library.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="debugclearlogcacheforfile"><code>debug.clearLogCacheForFile</code><a class="headerlink" href="#debugclearlogcacheforfile" title="Permanent link">⚓︎</a></h3>
+<p>Clears any prefix information from cache for use with <code>debug.log</code>. This is useful if your file loads dynamically via <code>dofile</code>, and is subject to change during development.</p>
+<div class="highlight"><pre><span></span><code><span class="n">debug</span><span class="p">.</span><span class="n">clearLogCacheForFile</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>file</code> (string?): The path to the file. If omitted, the calling file will have its associated log cache removed.</li>
+</ul>
+<hr />
 <h3 id="debuglog"><code>debug.log</code><a class="headerlink" href="#debuglog" title="Permanent link">⚓︎</a></h3>
 <p>Logs a message to <code>MWSE.log</code> file. The output format is <code>[path] "msg" = msg</code>, where the <code>path</code> is the path and line at which the function was called.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">debug</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>

@@ -3032,6 +3032,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../niBezFloatKey/" class="md-nav__link">
+        niBezFloatKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../niBezPosKey/" class="md-nav__link">
         niBezPosKey
       </a>
@@ -3048,20 +3062,6 @@
     <li class="md-nav__item">
       <a href="../niBezRotKey/" class="md-nav__link">
         niBezRotKey
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../niBezScaleKey/" class="md-nav__link">
-        niBezScaleKey
       </a>
     </li>
   
@@ -3174,6 +3174,20 @@
     <li class="md-nav__item">
       <a href="../niDynamicEffectLinkedList/" class="md-nav__link">
         niDynamicEffectLinkedList
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niEulerRotKey/" class="md-nav__link">
+        niEulerRotKey
       </a>
     </li>
   
@@ -3333,6 +3347,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#refcount" class="md-nav__link">
+    refCount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     references
   </a>
@@ -3356,6 +3377,13 @@
           <li class="md-nav__item">
   <a href="#rotationtype" class="md-nav__link">
     rotationType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtti" class="md-nav__link">
+    RTTI
   </a>
   
 </li>
@@ -3418,6 +3446,13 @@
           <li class="md-nav__item">
   <a href="#isoftype" class="md-nav__link">
     isOfType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#savebinary" class="md-nav__link">
+    saveBinary
   </a>
   
 </li>
@@ -3680,20 +3715,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../niScaleKey/" class="md-nav__link">
-        niScaleKey
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../niSourceTexture/" class="md-nav__link">
         niSourceTexture
       </a>
@@ -3750,6 +3771,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../niTCBFloatKey/" class="md-nav__link">
+        niTCBFloatKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../niTCBPosKey/" class="md-nav__link">
         niTCBPosKey
       </a>
@@ -3766,20 +3801,6 @@
     <li class="md-nav__item">
       <a href="../niTCBRotKey/" class="md-nav__link">
         niTCBRotKey
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../niTCBScaleKey/" class="md-nav__link">
-        niTCBScaleKey
       </a>
     </li>
   
@@ -8708,6 +8729,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#refcount" class="md-nav__link">
+    refCount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#references" class="md-nav__link">
     references
   </a>
@@ -8731,6 +8759,13 @@
           <li class="md-nav__item">
   <a href="#rotationtype" class="md-nav__link">
     rotationType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtti" class="md-nav__link">
+    RTTI
   </a>
   
 </li>
@@ -8797,6 +8832,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#savebinary" class="md-nav__link">
+    saveBinary
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8841,6 +8883,13 @@
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
+<h3 id="refcount"><code>refCount</code><a class="headerlink" href="#refcount" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. The number of references that exist for this object. When this value reaches zero, the object will be deleted.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
 <h3 id="references"><code>references</code><a class="headerlink" href="#references" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.</p>
 <p><strong>Returns</strong>:</p>
@@ -8869,8 +8918,15 @@
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
+<h3 id="rtti"><code>RTTI</code><a class="headerlink" href="#rtti" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. The runtime type information for this object. This is an alias for the <code>.runTimeTypeInformation</code> property.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/niRTTI">niRTTI</a>)</li>
+</ul>
+<hr />
 <h3 id="runtimetypeinformation"><code>runTimeTypeInformation</code><a class="headerlink" href="#runtimetypeinformation" title="Permanent link">⚓︎</a></h3>
-<p>The runtime type information for this object.</p>
+<p><em>Read-only</em>. The runtime type information for this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niRTTI">niRTTI</a>)</li>
@@ -8887,7 +8943,7 @@
 <p><em>Read-only</em>. The available scale keys.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/niScaleKey">niScaleKey</a>[])</li>
+<li><code>result</code> (<a href="../../types/niFloatKey">niFloatKey</a>[])</li>
 </ul>
 <hr />
 <h3 id="scaletype"><code>scaleType</code><a class="headerlink" href="#scaletype" title="Permanent link">⚓︎</a></h3>
@@ -8931,6 +8987,19 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="savebinary"><code>saveBinary</code><a class="headerlink" href="#savebinary" title="Permanent link">⚓︎</a></h3>
+<p>Serializes the object, and writes it to the given file.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">niObject</span><span class="p">:</span><span class="n">saveBinary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>path</code> (string): The path to write the file at, relative to the Morrowind installation folder.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>success</code> (boolean): If true the object was successfully serialized.</li>
 </ul>
 <hr />
 
