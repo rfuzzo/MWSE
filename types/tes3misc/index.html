@@ -5137,6 +5137,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#createcopy" class="md-nav__link">
+    createCopy
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9070,6 +9077,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#createcopy" class="md-nav__link">
+    createCopy
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9332,6 +9346,24 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>string</code> (string)</li>
+</ul>
+<hr />
+<h3 id="createcopy"><code>createCopy</code><a class="headerlink" href="#createcopy" title="Permanent link">⚓︎</a></h3>
+<p>Creates a copy of this object.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">newObject</span> <span class="o">=</span> <span class="n">tes3misc</span><span class="p">:</span><span class="n">createCopy</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">addToObjectList</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sourceless</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>id</code> (string): <em>Optional</em>. The new object's ID. If one is not provided, a randomly generated one will be used.</li>
+<li><code>addToObjectList</code> (boolean): <em>Default</em>: <code>true</code>. If true, the object will be added to the data handler. If this is false, the new object may not have a randomly generated ID. Do not use this without knowing the implications.</li>
+<li><code>sourceless</code> (boolean): <em>Default</em>: <code>false</code>. If true, the object will be made sourceless, and will not be serialized to the save game. If the object is copied outside of a save game, the object will <strong>always</strong> be sourceless.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>newObject</code> (<a href="../../types/tes3misc">tes3misc</a>)</li>
 </ul>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
