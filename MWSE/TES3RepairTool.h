@@ -18,11 +18,15 @@ namespace TES3 {
 		short unknown_0xB2;
 		float quality; // 0xB4
 
+		RepairTool() = delete;
+		~RepairTool() = delete;
+
 		//
 		// Custom functions.
 		//
 
 		void setIconPath(const char* path);
+		void setName(const char* newName);
 
 	};
 	static_assert(sizeof(RepairTool) == 0xB8, "TES3::RepairTool failed size validation");

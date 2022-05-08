@@ -34,16 +34,22 @@ namespace TES3 {
 	};
 
 	struct Container : ContainerBase {
-		char * model;
 		char * name;
+		char * model;
 		Script * script;
 		float capacity;
+
+		Container();
+		~Container();
 
 	};
 	static_assert(sizeof(Container) == 0x7C, "TES3::Container failed size validation");
 
 	struct ContainerInstance : ContainerBase {
 		Container * container;
+
+		ContainerInstance() = delete;
+		~ContainerInstance() = delete;
 
 		//
 		// Custom functions.

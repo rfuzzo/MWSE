@@ -6,43 +6,34 @@
 #include "TES3IteratedList.h"
 
 #include "NINode.h"
+#include "NICollisionGroup.h"
 
 namespace TES3 {
-	struct Object_0x751248 {
-		int unknown_0x0;
-		int unknown_0x4;
-		int unknown_0x8;
-		int unknown_0xC;
-		int unknown_0x10;
-		int unknown_0x14;
-	};
-	static_assert(sizeof(Object_0x751248) == 0x18, "TES3::Object_0x751248 failed size validation");
-
-	struct MobController_0x0 {
-		Object_0x751248 unknown_0x0;
-		Object_0x751248 unknown_0x18;
-	};
-	static_assert(sizeof(MobController_0x0) == 0x30, "TES3::MobController_0x0 failed size validation");
-
 	struct ProcessManager {
 		MobilePlayer * mobilePlayer; // 0x0
 		IteratedList<AIPlanner*> aiPlanners; // 0x4
 		bool unknown_0x18;
 		bool unknown_0x19; // Maybe force new actions?
 		CriticalSection criticalSection; // 0x1C
-		unsigned char unknown[0x7EC]; // 0x40
+		unsigned char unknown[0x18]; // 0x40
+		unsigned int plannerCount; // 0x58
+		AIPlanner * planners[500]; // 0x5C
 		float aiDistance; // 0x82C
+
+		ProcessManager() = delete;
+		~ProcessManager() = delete;
 
 		//
 		// Related this-call functions.
 		//
 
 		bool detectPresence(MobileActor * actor, bool unknown = true);
-		bool detectSneak(MobileActor* detector, MobileActor* target, bool unknown = true);
-		void checkRadius(MobileActor * actor, IteratedList<AIPlanner*> * container);
+		bool detectSneak(MobileActor * detector, MobileActor * target, bool unknown = true);
+		void findActorsInProximity(Vector3 * position, float range, IteratedList<MobileActor*>* outputList);
+		void checkAlarmRadius(MobileActor * actor, IteratedList<AIPlanner*> * container);
 		void checkPlayerDistance();
 
-		bool canRest();
+		bool checkNearbyEnemiesAllowRest();
 
 		float getAIDistanceScale() const;
 		void setAIDistanceScale(float scalar);
@@ -54,11 +45,20 @@ namespace TES3 {
 		IteratedList<MobileProjectile*> activeProjectiles; // 0x0
 		NI::Pointer<NI::Node> worldProjectileRoot; // 0x14
 		CriticalSection criticalSection; // 0x18
+
+		ProjectileController() = delete;
+		~ProjectileController() = delete;
+
+		//
+		// Custom functions.
+		//
+
+		void resolveCollisions(float deltaTime);
 	};
 	static_assert(sizeof(ProjectileController) == 0x3C, "TES3::ProjectileController failed size validation");
 
 	struct MobController {
-		MobController_0x0 * unknown_0x0;
+		NI::CollisionGroup * mobCollisionGroup;
 		int unknown_0x4;
 		int unknown_0x8;
 		float gravity; // 0xC
@@ -70,9 +70,12 @@ namespace TES3 {
 		ProcessManager * processManager; // 0x24
 		ProjectileController* projectileController; // 0x28
 		bool unknown_0x2C;
-		IteratedList<void*> unknown_0x30;
-		CriticalSection unknown_0x44;
-		CriticalSection unknown_0x68;
+		IteratedList<Reference*> listPropReferences;
+		CriticalSection criticalSection_Props;
+		CriticalSection criticalSection_Mobs;
+
+		MobController() = delete;
+		~MobController() = delete;
 
 		//
 		// Related this-call functions.
@@ -85,6 +88,13 @@ namespace TES3 {
 
 		void addPlayerAsCollider();
 
+		//
+		// Custom functions.
+		//
+
+		bool hasMobileCollision(const MobileActor* mobile);
+		void enableMobileCollision(MobileActor* mobile);
+		void disableMobileCollision(MobileActor* mobile);
 	};
 	static_assert(sizeof(MobController) == 0x8C, "TES3::MobController failed size validation");
 }

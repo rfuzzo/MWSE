@@ -51,6 +51,7 @@ namespace TES3 {
 			LuaData();
 
 			sol::table data;
+			sol::table tempData;
 		};
 		LuaData * luaData;
 
@@ -72,12 +73,21 @@ namespace TES3 {
 		// Custom functions.
 		//
 
-		Actor * getSoulActor();
+		TES3::BaseObject* getOwner() const;
+		void setOwner_lua(sol::object value);
+
+		sol::object getOwnerRequirement_lua(sol::this_state ts) const;
+		void setOwnerRequirement_lua(sol::object value);
+
+		Actor * getSoul() const;
+		void setSoul_lua(sol::object actor);
 
 		void setLuaDataTable(sol::object data);
+		void setLuaTempDataTable(sol::object data);
 		sol::table getOrCreateLuaDataTable();
+		sol::table getOrCreateLuaTempDataTable();
 
 		std::shared_ptr<mwse::lua::ScriptContext> createContext();
-
+		bool setScriptShortValue(const char* name, short value);
 	};
 }

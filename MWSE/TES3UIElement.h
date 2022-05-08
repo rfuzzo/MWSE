@@ -72,6 +72,9 @@ namespace TES3 {
 			String rawText;
 			String contentPath;
 
+			Element() = delete;
+			~Element() = delete;
+
 			//
 			// Widget creation/destruction methods
 			//
@@ -103,11 +106,13 @@ namespace TES3 {
 			//
 
 			Element* findChild(UI_ID id) const;
+			Element* findChild(const char* id) const;
 			Element* findChild_lua(sol::object id) const;
 			int getIndexOfChild(const Element *child) const;
 			Element* getContentElement();
 			Element* getTopLevelParent();
 			Element* performLayout(bool bUpdateTimestamp = true);
+			void reattachToParent(Element* parent);
 			bool reorderChildren(int insertBefore, int moveFrom, int count);
 			bool getAutoHeight() const;
 			void setAutoHeight(bool bAuto);
@@ -135,7 +140,6 @@ namespace TES3 {
 			void setProperty(Property prop, PropertyAccessCallback value);
 			void setText(const char *);
 			void setIcon(const char *);
-			void setIcon(String);
 
 			//
 			// Other related this-call functions.
@@ -157,7 +161,8 @@ namespace TES3 {
 			// TODO: Add std collection access to the container so this doesn't need to be copied to a table.
 			sol::table getProperties_lua(sol::this_state ts) const;
 
-			std::string getContentTypeString() const;
+			const char* getContentTypeString() const;
+			const char* getGeneralTypeString() const;
 
 			sol::object makeWidget(sol::this_state ts);
 			std::string getWidgetText() const;
@@ -193,7 +198,7 @@ namespace TES3 {
 			bool getConsumeMouseEvents() const;
 			void setConsumeMouseEvents_lua(sol::optional<bool> value = true);
 			const char* getContentPath() const;
-			void setContentPath_lua(sol::optional<const char*> value);
+			void setContentPath_lua(sol::optional<std::string> value);
 			bool getDisabled() const;
 			void setDisabled(bool value);
 			std::string getFlowDirectionString() const;
@@ -267,11 +272,14 @@ namespace TES3 {
 			void registerBefore_lua(const std::string& eventID, sol::protected_function callback, sol::optional<double> priority);
 			void registerAfter_lua(const std::string& eventID, sol::protected_function callback, sol::optional<double> priority);
 			void register_lua(const std::string& eventID, sol::object callback);
-			void unregisterBefore_lua(const std::string& eventID, sol::protected_function callback);
-			void unregisterAfter_lua(const std::string& eventID, sol::protected_function callback);
-			void unregister_lua(const std::string& eventID);
+			bool unregisterBefore_lua(const std::string& eventID, sol::protected_function callback);
+			bool unregisterAfter_lua(const std::string& eventID, sol::protected_function callback);
+			bool unregister_lua(const std::string& eventID);
 			void forwardEvent_lua(sol::table eventData) const;
 			void triggerEvent_lua(sol::object params);
+
+			void saveMenuPosition();
+			bool loadMenuPosition();
 
 			bool reorderChildren_lua(sol::object insertBefore, sol::object moveFrom, int count);
 			void updateLayout_lua(sol::optional<bool> updateTimestamp = true);

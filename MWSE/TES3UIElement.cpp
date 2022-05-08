@@ -5,12 +5,14 @@
 #include "TES3UIElement.h"
 #include "TES3UIWidgets.h"
 
+#include "TES3Inventory.h"
 #include "TES3ItemData.h"
 #include "TES3GameFile.h"
 #include "TES3MobileObject.h"
 #include "TES3Object.h"
 
 #include "LuaUtil.h"
+#include "MemoryUtilLua.h"
 #include "TES3Util.h"
 #include "TES3UIManagerLua.h"
 
@@ -167,6 +169,10 @@ namespace TES3 {
 			return TES3_ui_findChildElement(this, id);
 		}
 
+		Element* Element::findChild(const char* id) const {
+			return TES3_ui_findChildElement(this, registerID(id));
+		}
+
 		Element* Element::findChild_lua(sol::object id) const {
 			return findChild(mwse::lua::getUIIDFromObject(id));
 		}
@@ -194,6 +200,11 @@ namespace TES3 {
 
 		Element* Element::performLayout(bool bUpdateTimestamp) {
 			return TES3_ui_performLayout(this, bUpdateTimestamp);
+		}
+
+		const auto TES3_ui_reattachToParent = reinterpret_cast<void(__thiscall*)(Element*, Element*)>(0x57B850);
+		void Element::reattachToParent(Element* parent) {
+			TES3_ui_reattachToParent(this, parent);
 		}
 
 		bool Element::reorderChildren(int insertBefore, int moveFrom, int count) {
@@ -334,10 +345,6 @@ namespace TES3 {
 			TES3_ui_setIcon(this, path);
 		}
 
-		void Element::setIcon(String path) {
-			TES3_ui_setIconString(this, path);
-		}
-
 		void Element::updateSceneGraph() {
 			TES3_ui_updateSceneGraph(this);
 		}
@@ -385,7 +392,7 @@ namespace TES3 {
 			return result;
 		}
 
-		std::string Element::getContentTypeString() const {
+		const char* Element::getContentTypeString() const {
 			switch (contentType) {
 			case TES3::UI::Property::model:
 				return "model";
@@ -419,6 +426,35 @@ namespace TES3 {
 				uiidParagraphInputText = registerID("PartParagraphInput_text_input");
 				init = true;
 			}
+		}
+
+		const char* Element::getGeneralTypeString() const {
+			deferredPropInit();
+
+			Property part = getProperty(PropertyType::Property, Property::is_part).propertyValue;
+			if (part == propButton) {
+				return "button";
+			}
+			else if (part == propFillbar) {
+				return "fillbar";
+			}
+			else if (part == propParagraphInput) {
+				return "paragraphInput";
+			}
+			else if (part == propScrollBar) {
+				return "scrollBar";
+			}
+			else if (part == propScrollPaneH || part == propScrollPaneV) {
+				return "scrollPane";
+			}
+			else if (part == propTextInput) {
+				return "textInput";
+			}
+			else if (part == propTextSelect) {
+				return "textSelect";
+			}
+
+			return getContentTypeString();
 		}
 
 		sol::object Element::makeWidget(sol::this_state ts) {
@@ -461,10 +497,10 @@ namespace TES3 {
 				return WidgetButton::fromElement(this)->getText();
 			}
 			else if (part == propParagraphInput) {
-				return WidgetParagraphInput::fromElement(this)->getText();
+				return std::move(WidgetParagraphInput::fromElement(this)->getText());
 			}
 			else if (part == propTextInput) {
-				return WidgetTextInput::fromElement(this)->getText();
+				return std::move(WidgetTextInput::fromElement(this)->getText());
 			}
 
 			return getText();
@@ -501,9 +537,8 @@ namespace TES3 {
 				setWidgetText(nullptr);
 			}
 			// If it's a string, just set it normally.
-			else if (value.is<std::string>()) {
-				std::string& text = value.as<std::string&>();
-				setWidgetText(text.c_str());
+			else if (value.is<const char*>()) {
+				setWidgetText(value.as<const char*>());
 			}
 			// Otherwise try to convert it to a string.
 			else {
@@ -634,8 +669,18 @@ namespace TES3 {
 			return contentPath.cString;
 		}
 
-		void Element::setContentPath_lua(sol::optional<const char*> value) {
-			setIcon(value.value_or(""));
+		void Element::setContentPath_lua(sol::optional<std::string> value) {
+			if (value) {
+				std::string& path = value.value();
+
+				// Sanitize path.
+				std::replace(path.begin(), path.end(), '/', '\\');
+
+				setIcon(path.c_str());
+			}
+			else {
+				setIcon("");
+			}
 		}
 
 		bool Element::getDisabled() const {
@@ -960,20 +1005,14 @@ namespace TES3 {
 				}
 			}
 			else {
-				if (typeCast.value() == "tes3itemData") {
-					return sol::make_object(state, static_cast<TES3::ItemData*>(ptr));
+				// New types are added to the mwse.memory.convertTo table, defined in MemoryUtilLua.cpp
+				sol::protected_function converter = mwse::lua::convertTo[typeCast.value()];
+				if (converter) {
+					return converter(DWORD(ptr));
 				}
-				else if (typeCast.value() == "tes3gameFile") {
-					return sol::make_object(state, static_cast<TES3::GameFile*>(ptr));
-				}
-				else if (typeCast.value() == "tes3inventoryTile") {
-					return sol::make_object(state, static_cast<TES3::UI::InventoryTile*>(ptr));
-				}
-				else if (typeCast.value() == "tes3uiElement") {
-					return sol::make_object(state, static_cast<TES3::UI::Element*>(ptr));
-				}
-				return sol::nil;
 			}
+
+			return sol::nil;
 		}
 
 		void Element::setPropertyObject_lua(sol::object key, sol::object value) {
@@ -1059,28 +1098,28 @@ namespace TES3 {
 			}
 		}
 
-		void Element::unregisterBefore_lua(const std::string& eventID, sol::protected_function callback) {
+		bool Element::unregisterBefore_lua(const std::string& eventID, sol::protected_function callback) {
 			auto prop = getStandardEventFromName(eventID);
 			if (!prop) {
 				prop = TES3::UI::registerProperty(eventID.c_str());
 			}
-			mwse::lua::unregisterBeforeUIEvent(this, prop.value(), callback);
+			return mwse::lua::unregisterBeforeUIEvent(this, prop.value(), callback);
 		}
 
-		void Element::unregisterAfter_lua(const std::string& eventID, sol::protected_function callback) {
+		bool Element::unregisterAfter_lua(const std::string& eventID, sol::protected_function callback) {
 			auto prop = getStandardEventFromName(eventID);
 			if (!prop) {
 				prop = TES3::UI::registerProperty(eventID.c_str());
 			}
-			mwse::lua::unregisterAfterUIEvent(this, prop.value(), callback);
+			return mwse::lua::unregisterAfterUIEvent(this, prop.value(), callback);
 		}
 
-		void Element::unregister_lua(const std::string& eventID) {
+		bool Element::unregister_lua(const std::string& eventID) {
 			auto prop = getStandardEventFromName(eventID);
 			if (!prop) {
 				prop = TES3::UI::registerProperty(eventID.c_str());
 			}
-			mwse::lua::unregisterUIEvent(this, prop.value());
+			return mwse::lua::unregisterUIEvent(this, prop.value());
 		}
 
 		void Element::forwardEvent_lua(sol::table eventData) const {
@@ -1104,6 +1143,24 @@ namespace TES3 {
 			}
 
 			mwse::lua::triggerEvent(this, prop.value(), 0, 0);
+		}
+
+		const auto TES3_ui_saveMenuPosition = reinterpret_cast<void(__cdecl*)(Element*)>(0x596FA0);
+		void Element::saveMenuPosition() {
+			auto topLevelParent = getTopLevelParent();
+			if (this != topLevelParent) {
+				throw std::runtime_error("This function only works on top-level elements.");
+			}
+			TES3_ui_saveMenuPosition(this);
+		}
+
+		const auto TES3_ui_loadMenuPosition = reinterpret_cast<bool(__cdecl*)(Element*, short)>(0x5972C0);
+		bool Element::loadMenuPosition() {
+			auto topLevelParent = getTopLevelParent();
+			if (this != topLevelParent) {
+				throw std::runtime_error("This function only works on top-level elements.");
+			}
+			return TES3_ui_loadMenuPosition(this, 0);
 		}
 
 		bool Element::reorderChildren_lua(sol::object insertBefore, sol::object moveFrom, int count) {
@@ -1185,7 +1242,7 @@ namespace TES3 {
 		}
 
 		Element* Element::createImage_lua(sol::optional<sol::table> params) {
-			std::string path = mwse::lua::getOptionalParam<const char*>(params, "path", nullptr);
+			std::string path = mwse::lua::getOptionalParam<const char*>(params, "path", "");
 			if (path.empty()) {
 				throw std::invalid_argument("createImage: path argument is required.");
 			}
@@ -1209,7 +1266,7 @@ namespace TES3 {
 		}
 
 		Element* Element::createNif_lua(sol::optional<sol::table> params) {
-			std::string path = mwse::lua::getOptionalParam<const char*>(params, "path", nullptr);
+			std::string path = mwse::lua::getOptionalParam<const char*>(params, "path", "");
 			if (path.empty()) {
 				throw std::invalid_argument("createNif: path argument is required.");
 			}
@@ -1234,9 +1291,9 @@ namespace TES3 {
 			if (!randomColor) {
 				auto color = mwse::lua::getOptionalParamVector3(params, "color");
 				if (color) {
-					colourRed = color.value().x;
-					colourGreen = color.value().y;
-					colourBlue = color.value().z;
+					element->colourRed = color.value().x;
+					element->colourGreen = color.value().y;
+					element->colourBlue = color.value().z;
 					element->flagUsesRGBA = true;
 				}
 			}

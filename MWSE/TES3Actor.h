@@ -35,7 +35,7 @@ namespace TES3 {
 	static_assert(sizeof(ActorVirtualTable) == 0x180, "TES3::ActorVirtualTable failed size validation");
 
 	struct Actor : PhysicalObject {
-		ActorAnimationData * animationData; // 0x30
+		ActorAnimationController * animationController; // 0x30
 		unsigned int actorFlags; // 0x34
 		int cloneCount; // 0x38
 		Inventory inventory; // 0x3C
@@ -59,14 +59,15 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
-		Object* equipItem(Object* item, ItemData* itemData, EquipmentStack** out_equipmentStack, MobileActor* mobileActor);
-		EquipmentStack* unequipItem(Object* item, bool deleteStack, MobileActor* mobileActor, bool updateGUI, ItemData* itemData);
-		void unequipAllItems(MobileActor * mobileActor);
-		void postUnequipUIRefresh(MobileActor* mobileActor);
+		Object* equipItem(Object* item, ItemData* itemData, EquipmentStack** out_equipmentStack, MobileActor* mobileActor); // mobileActor is optional
+		EquipmentStack* unequipItem(Object* item, bool deleteStack, MobileActor* mobileActor, bool updateGUI, ItemData* itemData); // mobileActor is optional
+		void unequipAllItems(MobileActor* mobileActor); // mobileActor is optional
+		void postUnequipUIRefresh(MobileActor* mobileActor); // mobileActor is optional
 		EquipmentStack* getEquippedItem(Object* item);
 		EquipmentStack* getEquippedItemExact(Object* item, ItemData* itemData);
 		EquipmentStack* getEquippedArmorBySlot(ArmorSlot::value_type slot);
 		EquipmentStack* getEquippedClothingBySlot(ClothingSlot::value_type slot);
+		EquipmentStack* getEquippedWeapon();
 
 		//
 		// Custom functions.
@@ -76,12 +77,16 @@ namespace TES3 {
 		bool isClone() const;
 
 		bool tradesItemType(ObjectType::ObjectType type);
+		bool offersService(unsigned int service);
 
 		int getBloodType() const;
 		void setBloodType(int value);
 
-		void onCloseInventory_lua(sol::optional<TES3::Reference*> reference, sol::optional<int> unknown);
+		SpellList* getSpellList();
 
+		void onCloseInventory_lua(TES3::Reference* reference, sol::optional<int> unknown);
+
+		bool hasItemEquipped_lua(sol::object itemOrItemId, sol::optional<TES3::ItemData*> itemData);
 	};
 	static_assert(sizeof(Actor) == 0x6C, "TES3::Actor failed size validation");
 }

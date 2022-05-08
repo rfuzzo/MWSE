@@ -24,17 +24,18 @@ namespace TES3 {
 		float weight; // 0xB0
 		long value; // 0xB4
 
+		Apparatus() = delete;
+		~Apparatus() = delete;
+
 		//
 		// Custom functions.
 		//
 
-		// Isn't defined by the vtable, have to overwrite here.
-		void setName(const char* n);
-
 		void setIconPath(const char* path);
+		void setName(const char* newName);
 
 	};
-	static_assert(sizeof(Apparatus) == 0xB8, "TES3::Apparatus  failed size validation");
+	static_assert(sizeof(Apparatus) == 0xB8, "TES3::Apparatus failed size validation");
 }
 
 MWSE_SOL_CUSTOMIZED_PUSHER_DECLARE_TES3(TES3::Apparatus)

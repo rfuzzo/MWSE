@@ -19,6 +19,9 @@ namespace TES3 {
 		IteratedList<DialogueInfo*> info;
 		int journalIndex;
 
+		Dialogue() = delete;
+		~Dialogue() = delete;
+
 		//
 		// Virtual table overrides.
 		//
@@ -30,8 +33,13 @@ namespace TES3 {
 		//
 
 		bool addToJournal(int index, MobileActor* actor);
-		bool setJournalIndex(int index);
 
+		sol::optional<const char*> getQuestName() const;
+		sol::optional<int> getJournalIndex() const;
+		bool setJournalIndex(int index);
+		bool setJournalIndexAndMarkModified(int index);
+
+		DialogueInfo* getJournalInfoForIndex(int index) const;
 		DialogueInfo* getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag);
 		DialogueInfo* getFilteredInfo(Actor* actor, Reference* reference, bool flag);
 
@@ -43,6 +51,7 @@ namespace TES3 {
 
 		bool addToJournal_lua(sol::table params);
 		DialogueInfo* getDeepFilteredInfo_lua(sol::table params);
+		DialogueInfo* getJournalInfo(sol::optional<int> index) const;
 
 		//
 		// Other related static functions.

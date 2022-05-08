@@ -39,6 +39,9 @@ namespace TES3 {
 			unsigned int flags; // 0x4
 			Vector3 translation; // 0x8
 			Matrix33 rotation; // 0x14
+
+			AttachNode() = delete;
+			~AttachNode() = delete;
 		};
 		struct ActiveBodyPart {
 			enum class Layer : int {
@@ -81,12 +84,23 @@ namespace TES3 {
 			BodyPart* bodyPart; // 0x4
 			NI::Pointer<NI::Node> node; // 0x8
 			unsigned int flags; // 0xC
+
+			ActiveBodyPart() = delete;
+			~ActiveBodyPart() = delete;
+
+			BodyPart* getBodyPart() const;
+			void setBodyPart(BodyPart* value);
+
+			static constexpr auto INVALID_VALUE = reinterpret_cast<void*>(0xFFFFFFFF);
 		};
 		AttachNode attachNodes[25]; // 0x0
 		int unknown_0x578;
 		ActiveBodyPart activeBodyParts[3][27]; // 0x57C
 		float animationPhase; // 0xA8C
 		Reference* reference; // 0xA90
+
+		BodyPartManager() = delete;
+		~BodyPartManager() = delete;
 
 		//
 		// Related this-call functions.

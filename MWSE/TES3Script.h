@@ -14,18 +14,27 @@ namespace TES3 {
 		struct WeaponHitFlags {
 			Weapon * weapon; // 0x0
 			unsigned char flags; // 0x4 // 0x10 is hit, 0x20 is hit attempt.
+
+			WeaponHitFlags() = delete;
+			~WeaponHitFlags() = delete;
 		};
 		short * shortVarValues; // 0x0
 		long * longVarValues; // 0x4
 		float * floatVarValues; // 0x8
 		int unknown_0xC;
 		IteratedList<WeaponHitFlags*> * hitWeapons; // 0x10
+
+		ScriptVariables() = delete;
+		~ScriptVariables() = delete;
 	};
 	static_assert(sizeof(ScriptVariables) == 0x14, "TES3::ScriptVariables failed size validation");
 
 	struct GlobalScript {
 		Reference * reference; // 0x0
 		Script * script; // 0x4
+
+		GlobalScript() = delete;
+		~GlobalScript() = delete;
 
 		//
 		// Custom functions.
@@ -39,6 +48,9 @@ namespace TES3 {
 	struct StartScript : BaseObject {
 		char id[32]; // 0x10
 		Script * script; // 0x30
+
+		StartScript() = delete;
+		~StartScript() = delete;
 	};
 	static_assert(sizeof(StartScript) == 0x34, "TES3::StartScript failed size validation");
 
@@ -57,19 +69,22 @@ namespace TES3 {
 		void * machineCode; // 0x58
 		ScriptVariables varValues; // 0x5C
 
+		Script() = delete;
+		~Script() = delete;
+
 		//
 		// Other related this-call functions.
 		//
 
-		void getScriptParams(bool unknown = true);
 		float executeScriptOpCode(unsigned int opCode, char charParam, BaseObject * objectParam);
 
-		char getLocalVarIndexAndType(const char*, unsigned int*);
+		char getLocalVarIndexAndType(const char* name, unsigned int* out_index);
+		sol::optional<unsigned int> getShortVarIndex(const char* name) const;
 
-		short getShortValue(unsigned int, bool);
-		int getLongValue(unsigned int, bool);
-		float getFloatValue(unsigned int, bool);
-		
+		short getShortValue(unsigned int index, bool useLocalVars);
+		int getLongValue(unsigned int index, bool useLocalVars);
+		float getFloatValue(unsigned int index, bool useLocalVars);
+
 		void doCommand(ScriptCompiler * compiler, const char* command, int source = TES3::CompilerSource::Default, Reference * reference = nullptr, ScriptVariables * variables = nullptr, DialogueInfo * info = nullptr, Dialogue * dialogue = nullptr);
 
 		void execute(Reference* reference, ScriptVariables* data, DialogueInfo* info, Reference* reference2);

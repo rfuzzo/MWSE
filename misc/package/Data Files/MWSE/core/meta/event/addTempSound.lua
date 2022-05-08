@@ -1,0 +1,14 @@
+--- @meta
+--- @diagnostic disable:undefined-doc-name
+
+--- 
+--- @class addTempSoundEventData
+--- @field block boolean If set to `true`, vanilla logic will be suppressed. Returning `false` will set this to `true`.
+--- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
+--- @field flags number *Read-only*. A flag whether the sound is looping or not. 0 means the sound doesn't loop, 1 means the sound loops.
+--- @field isVoiceover boolean A flag whether the sound is a voiced line, which are usually found in the Sound\Vo data folder.
+--- @field path string The path to the sound to play, relative to Data Files\Sounds
+--- @field pitch number Pitch of the sound.
+--- @field reference tes3reference The reference which is emiting the sound.
+--- @field sound tes3sound 
+--- @field volume number The volume of the sound. Volume = 1 means 100 % loudness. Values lower than 1 make the sound quiter.

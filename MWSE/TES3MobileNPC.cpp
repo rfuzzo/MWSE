@@ -7,7 +7,7 @@
 #include "LuaCalcMovementSpeedEvent.h"
 #include "LuaCalcHitArmorPieceEvent.h"
 
-#include "TES3ActorAnimationData.h"
+#include "TES3ActorAnimationController.h"
 #include "TES3AudioController.h"
 #include "TES3Class.h"
 #include "TES3DataHandler.h"
@@ -16,8 +16,6 @@
 #include "TES3ItemData.h"
 #include "TES3MobilePlayer.h"
 #include "TES3WorldController.h"
-
-#define TES3_MobileNPC_calcWalkSpeed 0x526F70
 
 namespace TES3 {
 	float MobileNPC::applyArmorRating(float damage, float swing, bool damageEquipment) {
@@ -107,7 +105,7 @@ namespace TES3 {
 		if (hitArmorStack) {
 			hitArmorClass = reinterpret_cast<Armor*>(hitArmorStack->object)->getWeightClass();
 			if (damageEquipment) {
-				auto stackVars = hitArmorStack->variables;
+				auto stackVars = hitArmorStack->itemData;
 				stackVars->condition -= armorDamage;
 				if (stackVars->condition <= 0) {
 					stackVars->condition = 0;
@@ -153,9 +151,10 @@ namespace TES3 {
 		return adjustedDamage;
 	}
 
+	const auto TES3_MobileNPC_calcWalkSpeed = reinterpret_cast<float(__thiscall*)(MobileNPC*)>(0x526F70);
 	float MobileNPC::calculateWalkSpeed() {
 		// Call the original function to get the default walk value.
-		float speed = reinterpret_cast<float(__thiscall *)(MobileNPC*)>(TES3_MobileNPC_calcWalkSpeed)(this);
+		float speed = TES3_MobileNPC_calcWalkSpeed(this);
 
 		// Launch our event, and overwrite the speed with what was given back to us.
 		if (mwse::lua::event::CalculateMovementSpeed::getEventEnabled()) {
@@ -202,7 +201,7 @@ namespace TES3 {
 	}
 
 	float MobileNPC::calculateMovementSpeedFromAnimationData() {
-		return animationData.asActor->calculateMovementSpeed();
+		return animationController.asActor->calculateMovementSpeed();
 	}
 
 	std::reference_wrapper<SkillStatistic[27]> MobileNPC::getSkillStatistics() {

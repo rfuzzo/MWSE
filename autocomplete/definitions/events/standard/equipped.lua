@@ -1,33 +1,33 @@
 return {
-	description = "The equipped event fires after an actor has successfully equipped an item.",
+	type = "event",
+	description = [[The **equipped** event fires after an actor has successfully equipped an item. This event is preceded by the [equip](https://mwse.github.io/MWSE/events/equip) event.]],
+	related = { "equip", "equipped", "unequipped" },
 	eventData = {
+		reference = {
+			type = "tes3reference",
+			readOnly = true,
+			description = "The reference to the mobile actor that has equipped the item.",
+		},
 		actor = {
 			type = "tes3actor",
-			readonly = true,
+			readOnly = true,
 			description = "The actor that has equipped the item.",
 		},
 		mobile = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor that has equipped the item.",
-		},
-		reference = {
-			type = "tes3reference",
-			readonly = true,
-			description = "actor’s associated reference.",
 		},
 		item = {
 			type = "tes3baseObject",
-			readonly = true,
+			readOnly = true,
 			description = "The object that has been equipped.",
 		},
 		itemData = {
 			type = "tes3itemData",
-			readonly = true,
+			readOnly = true,
 			description = "The item data of item.",
 		},
 	},
-	links = {
-        ["equip"] = "lua/event/equip",
-    },
+	filter = "item",
 }

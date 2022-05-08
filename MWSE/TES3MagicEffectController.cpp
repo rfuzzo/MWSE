@@ -28,13 +28,17 @@ namespace TES3 {
 	unsigned int MagicEffectController::effectNameGMSTs[MAX_EFFECT_COUNT] = {};
 	unsigned int MagicEffectController::effectFlags[MAX_EFFECT_COUNT] = {};
 	unsigned int MagicEffectController::effectCounters[MAX_EFFECT_COUNT][5] = {};
+	MagicSourceInstance* MagicEffectController::cachedSpellEffectEventSourceInstance = {};
+	MagicEffectInstance* MagicEffectController::cachedSpellEffectEventEffectInstance = {};
+	int MagicEffectController::cachedSpellEffectEventEffectIndex = {};
+	unsigned int MagicEffectController::cachedSpellEffectEventResistAttribute = {};
 
 	MagicEffectController::MagicEffectController() {
 
 	}
 
 	MagicEffectController::~MagicEffectController() {
-		for (auto itt : effectObjects) {
+		for (auto& itt : effectObjects) {
 			delete itt.second;
 		}
 	}
@@ -124,10 +128,10 @@ namespace TES3 {
 		InvalidMagicEffect->flags = 0;
 		strcpy_s(InvalidMagicEffect->particleTexture, "vfx_default.tga");
 		strcpy_s(InvalidMagicEffect->icon, "s\\Tx_S_sEfft_Unusd02.tga");
-		strcpy_s(InvalidMagicEffect->castSoundEffect, "Conjuration Cast");
-		strcpy_s(InvalidMagicEffect->boltSoundEffect, "Conjuration Bolt");
-		strcpy_s(InvalidMagicEffect->hitSoundEffect, "Conjuration Hit");
-		strcpy_s(InvalidMagicEffect->areaSoundEffect, "Conjuration Area");
+		strcpy_s(InvalidMagicEffect->castSoundEffectID, "Conjuration Cast");
+		strcpy_s(InvalidMagicEffect->boltSoundEffectID, "Conjuration Bolt");
+		strcpy_s(InvalidMagicEffect->hitSoundEffectID, "Conjuration Hit");
+		strcpy_s(InvalidMagicEffect->areaSoundEffectID, "Conjuration Area");
 		InvalidMagicEffect->speed = 1.0f;
 		InvalidMagicEffect->size = 1.0f;
 		InvalidMagicEffect->sizeCap = 50.0f;
@@ -143,7 +147,7 @@ namespace TES3 {
 	void __stdcall ResolveAllLinks() {
 		auto nonDynamicData = DataHandler::get()->nonDynamicData;
 		auto controller = nonDynamicData->magicEffects;
-		for (auto itt : controller->effectObjects) {
+		for (auto& itt : controller->effectObjects) {
 			itt.second->resolveLinks(nonDynamicData);
 		}
 
@@ -273,7 +277,7 @@ namespace TES3 {
 	}
 
 	const auto TES3_TriggerSpellBoundWeaponEvent = reinterpret_cast<void(__cdecl *)(MagicSourceInstance *, float, MagicEffectInstance *, int, const char*)>(0x465B70);
-	void triggerSpellBoundWeaponEvent(sol::table data, std::string& id) {
+	void triggerSpellBoundWeaponEvent(sol::table data, const std::string& id) {
 		MagicSourceInstance * sourceInstance = data["sourceInstance"];
 		float deltaTime = data["deltaTime"];
 		MagicEffectInstance * effectInstance = data["effectInstance"];
@@ -297,7 +301,18 @@ namespace TES3 {
 		return false;
 	}
 
-	const auto TES3_TriggerSpellEffectEvent = reinterpret_cast<bool(__cdecl *)(MagicSourceInstance *, float, MagicEffectInstance *, int, bool, bool, void *, DWORD, unsigned int, bool(__cdecl *)(MagicSourceInstance *, MagicEffectInstance *, int))>(0x518460);
+	const auto TES3_MagicSourceInstance_SpellEffectEvent = reinterpret_cast<bool(__cdecl*)(MagicSourceInstance*, float, MagicEffectInstance*, int, bool, bool, void*, DWORD, unsigned int, bool(__cdecl*)(MagicSourceInstance*, MagicEffectInstance*, int))>(0x518460);
+	bool __cdecl MagicEffectController::spellEffectEvent(MagicSourceInstance* sourceInstance, float deltaTime, MagicEffectInstance* effectInstance, int effectIndex, bool negateOnExpiry, bool isUncapped, void* attribute, DWORD attributeTypeInfo, unsigned int resistAttribute, MagicEffectController::spellEffectEventResistTestFunction resistFunction) {
+		// Cache the parameters of the spell effect event.
+		MagicEffectController::cachedSpellEffectEventSourceInstance = sourceInstance;
+		MagicEffectController::cachedSpellEffectEventEffectInstance = effectInstance;
+		MagicEffectController::cachedSpellEffectEventEffectIndex = effectIndex;
+		MagicEffectController::cachedSpellEffectEventResistAttribute = resistAttribute;
+
+		// Call the original function.
+		return TES3_MagicSourceInstance_SpellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, negateOnExpiry, isUncapped, attribute, attributeTypeInfo, resistAttribute, resistFunction);
+	}
+
 	std::tuple<bool, sol::object> triggerSpellEffectEvent(sol::table self, sol::optional<sol::table> maybe_data, sol::this_state s) {
 		sol::state_view state = s;
 
@@ -316,10 +331,9 @@ namespace TES3 {
 
 		// Provide values to modify.
 		union {
-			int asInt;
+			int asInt = 0;
 			float asFloat;
 		} genericEventValue;
-		genericEventValue.asInt = 0;
 		Statistic * statisticEventValue = nullptr;
 		void * eventValue = nullptr;
 
@@ -354,7 +368,7 @@ namespace TES3 {
 		}
 
 		// Run the actual event trigger.
-		bool eventResult = TES3_TriggerSpellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, negateOnExpiry, isUncapped, eventValue, eventType, attribute, resistFunction);
+		bool eventResult = MagicEffectController::spellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, negateOnExpiry, isUncapped, eventValue, eventType, attribute, resistFunction);
 
 		// Figure out our return type.
 		sol::object modifiedValue = sol::nil;
@@ -402,7 +416,7 @@ namespace TES3 {
 					// We still need the main effect event function to be called for visual effects and durations to be handled.
 					int flags = (DataHandler::get()->nonDynamicData->magicEffects->getEffectFlags(effectId) >> 12) & 0xFFFFFF01;
 					int value = 0;
-					TES3_TriggerSpellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, true, flags, &value, 0x7886F0, 0x1C, nullptr);
+					MagicEffectController::spellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, true, flags, &value, 0x7886F0, 0x1C, nullptr);
 					return;
 				}
 			}
@@ -419,7 +433,7 @@ namespace TES3 {
 			if (itt == magicEffectController->effectLuaTickFunctions.end()) {
 				int flags = (DataHandler::get()->nonDynamicData->magicEffects->getEffectFlags(effectId) >> 12) & 0xFFFFFF01;
 				int value = 0;
-				TES3_TriggerSpellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, true, flags, &value, 0x7886F0, 0x1C, nullptr);
+				MagicEffectController::spellEffectEvent(sourceInstance, deltaTime, effectInstance, effectIndex, true, flags, &value, 0x7886F0, 0x1C, nullptr);
 				return;
 			}
 
@@ -452,7 +466,7 @@ namespace TES3 {
 		auto macp = WorldController::get()->getMobilePlayer();
 		auto spellList = macp->getCombatSpellList();
 
-		for (auto effectItt : magicEffectController->effectObjects) {
+		for (auto& effectItt : magicEffectController->effectObjects) {
 			auto effect = effectItt.second;
 			bool hasEffect = false;
 			if (effect->flags & EffectFlag::AllowEnchanting) {
@@ -506,7 +520,7 @@ namespace TES3 {
 		auto macp = WorldController::get()->getMobilePlayer();
 		auto spellList = macp->getCombatSpellList();
 
-		for (auto effectItt : magicEffectController->effectObjects) {
+		for (auto& effectItt : magicEffectController->effectObjects) {
 			auto effect = effectItt.second;
 			bool hasEffect = false;
 			if (effect->flags & EffectFlag::AllowSpellmaking) {
@@ -541,7 +555,7 @@ namespace TES3 {
 		TES3_UI_SortSpellmakingMenu();
 	}
 
-	GameSetting temporaryNameGMST;
+	static GameSetting temporaryNameGMST;
 	GameSetting * __fastcall getSpellNameGMST(DataHandler * dataHandler, DWORD EDX, int gmstId) {
 		if (gmstId < 0) {
 			temporaryNameGMST.value.asString = (char*)dataHandler->nonDynamicData->magicEffects->effectCustomNames[gmstId * -1].c_str();
@@ -555,26 +569,29 @@ namespace TES3 {
 		return getSpellNameGMST(DataHandler::get(), EDX, gmstId)->value.asString;
 	}
 
-	const auto TES3_MagicSourceInstance_ProjectileHit = reinterpret_cast<void(__thiscall*)(MagicSourceInstance*, MobileObject::Collision*)>(0x5175C0);
-	void __fastcall OnSpellProjectileHit(MagicSourceInstance * self, DWORD EDX, MobileObject::Collision * collision) {
-		TES3_MagicSourceInstance_ProjectileHit(self, collision);
-
+	void __fastcall OnSpellProjectileHit(MagicSourceInstance * instance, DWORD EDX, MobileObject::Collision * collision) {
 		auto magicEffectController = DataHandler::get()->nonDynamicData->magicEffects;
-		auto effects = self->sourceCombo.getSourceEffects();
+		magicEffectController->spellProjectileHit(instance, collision);
+	}
+
+	void MagicEffectController::spellProjectileHit(MagicSourceInstance * instance, MobileObject::Collision * collision) {
+		instance->projectileHit(collision);
+
+		auto effects = instance->sourceCombo.getSourceEffects();
 		for (size_t i = 0; i < 8; i++) {
 			auto effectId = effects[i].effectID;
 			if (effectId == -1) {
 				break;
 			}
 
-			auto itt = magicEffectController->effectLuaCollisionFunctions.find(effectId);
-			if (itt != magicEffectController->effectLuaCollisionFunctions.end()) {
+			auto itt = effectLuaCollisionFunctions.find(effectId);
+			if (itt != effectLuaCollisionFunctions.end()) {
 				auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
 
 				sol::table params = stateHandle.state.create_table();
 				params["effectId"] = effectId;
 				params["effectIndex"] = i;
-				params["sourceInstance"] = self;
+				params["sourceInstance"] = instance;
 				params["collision"] = collision;
 
 				sol::protected_function_result result = itt->second(params);
@@ -621,6 +638,115 @@ namespace TES3 {
 
 		// Resolve links.
 		mwse::genCallUnprotected(0x4BB6E7, (DWORD)ResolveAllLinks, 0x1C);
+
+		// Replace all spellEffectEvent calls.
+		mwse::genCallEnforced(0x4644F6, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4642E3, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45FBAD, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460F3C, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F894, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462D93, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4628BB, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462AA5, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462C05, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F4E9, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F619, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4632C3, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x464CE1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4662C4, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F7BA, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4600CC, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4601D6, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4602CA, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460356, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x46114C, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4613A6, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461FCD, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4622D9, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4623BB, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4624C6, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462586, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x46267A, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462735, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4629E3, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x46352C, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4635DC, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4636C0, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463886, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463966, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463A32, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463AE2, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463B62, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4669A2, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F362, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F3E2, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F462, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F9F2, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460858, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460ACF, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460C3F, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460D8F, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4612B0, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x46165E, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461705, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461869, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461A49, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462085, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462105, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4621D5, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x464C02, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x464F72, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x465242, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x465BC2, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F1C1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F221, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F284, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F301, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45F741, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45FF71, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x45FFD1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460031, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460171, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460411, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460471, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4604D1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460531, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460591, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4605F1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460651, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4606B1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460711, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460771, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x460EC1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4614E1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x46155D, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4618F4, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461964, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4619D4, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461AD4, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461B44, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461BB4, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461C09, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461C89, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461D09, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461D89, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461E09, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461E89, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x461F09, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462461, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462E51, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462EB1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462F11, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462F71, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x462FD1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463031, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463091, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4630F1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463151, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x4631B1, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x46325C, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x464271, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
+		mwse::genCallEnforced(0x463BD5, 0x518460, reinterpret_cast<DWORD>(spellEffectEvent));
 
 		// Trigger any events on spell collision.
 		mwse::genCallEnforced(0x573775, 0x5175C0, (DWORD)OnSpellProjectileHit);

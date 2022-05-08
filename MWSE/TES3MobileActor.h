@@ -88,14 +88,15 @@ namespace TES3 {
 	}
 
 	struct ActiveMagicEffect {
-		unsigned int magicInstanceSerial; // 0x8
-		short magicInstanceEffectIndex; // 0xC
-		short magicEffectID; // 0xE
-		bool isHarmful; // 0x10
-		bool isSummon; // 0x11
-		unsigned short duration; // 0x14
-		unsigned short magnitudeMin; // 0x16
-		unsigned char skillOrAttributeID; // 0x18
+		unsigned int magicInstanceSerial; // 0x0
+		unsigned char magicInstanceEffectIndex; // 0x4
+		unsigned char padding_0x5;
+		short magicEffectID; // 0x6
+		bool isHarmful; // 0x8
+		bool isSummon; // 0x9
+		unsigned short duration; // 0xA
+		unsigned short unresistedMagnitude; // 0xC
+		signed char skillOrAttributeID; // 0xE
 
 		//
 		// Custom functions.
@@ -105,7 +106,7 @@ namespace TES3 {
 		int getMagnitude() const;
 
 		//
-		// Lua interface functions
+		// Lua interface functions.
 		//
 
 		ActiveMagicEffect* getNext_legacy() const;
@@ -113,14 +114,23 @@ namespace TES3 {
 	};
 	static_assert(sizeof(ActiveMagicEffect) == 0x10, "TES3::ActiveMagicEffect failed size validation");
 
-	struct MobileActor : MobileObject {
-#pragma pack(push, 4)
-		struct PowerUsage {
-			int unknown_0x0;
-			double castTimestamp; // 0x4
-		};
-#pragma pack(pop)
+	struct ActiveMagicEffectLua : ActiveMagicEffect {
+		MobileActor * mobile;
 
+		ActiveMagicEffectLua(const ActiveMagicEffect& e, MobileActor * mobileActor)
+			: ActiveMagicEffect(e), mobile(mobileActor) {}
+
+		//
+		// Lua interface functions.
+		//
+
+		MagicEffectInstance * getEffectInstance() const;
+
+		ActiveMagicEffect* getFirst_legacy() const;
+		ActiveMagicEffect* getNext_legacy();
+	};
+
+	struct MobileActor : MobileObject {
 		IteratedList<MobileActor*> listTargetActors; // 0x80
 		IteratedList<MobileActor*> listFriendlyActors; // 0x94
 		float scanTimer; // 0xA8
@@ -142,9 +152,9 @@ namespace TES3 {
 		Deque<ActiveMagicEffect> activeMagicEffects; // 0x1C4
 		int unknown_0x1D0;
 		Collision collision_1D4;
-		HashMap<Spell*, PowerUsage> powers;
+		HashMap<Spell*, double> powers; // 0x214
 		char unknown_0x224;
-		signed char prevAIBehaviourState;
+		signed char prevAIBehaviourState; // 0x225
 		char unknown_0x226;
 		signed char nextActionWeight; // 0x227
 		MobileActorType actorType; // 0x228
@@ -157,9 +167,9 @@ namespace TES3 {
 		Reference* moreCollidingReferences[2]; // 0x238
 		int unknown_0x240;
 		union {
-			ActorAnimationData * asActor;
-			PlayerAnimationData * asPlayer;
-		} animationData; // 0x244
+			ActorAnimationController * asActor;
+			PlayerAnimationController * asPlayer;
+		} animationController; // 0x244
 		CrimeController crimesB; // 0x248
 		Statistic attributes[8]; // 0x254
 		Statistic health; // 0x2B4
@@ -196,6 +206,9 @@ namespace TES3 {
 		int unknown_0x3A0;
 		Vector3 unknown_0x3A4;
 
+		MobileActor() = delete;
+		~MobileActor() = delete;
+
 		//
 		// vTable accessor functions.
 		//
@@ -210,15 +223,18 @@ namespace TES3 {
 
 		float applyArmorRating(float damage, float swing, bool damageEquipment);
 		float calculateArmorRating(int * armorItemCount = nullptr) const;
-		void applyHitModifiers(MobileActor * attacker, MobileActor * defender, float unknown, float swing, MobileProjectile * projectile = nullptr, bool unknown2 = false);
+		float getArmorRating_lua() const;
+		void applyPhysicalHit(MobileActor* attacker, MobileActor* defender, float damage, float swing, MobileProjectile* projectile = nullptr, bool alwaysPlayHitVoice = false);
 
-		void setCurrentSpell(const Spell* spell);
+		void setCurrentMagicFromSpell(Spell* spell);
+		void setCurrentMagicFromSourceCombo(MagicSourceCombo sourceCombo);
+		void setCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack);
 
 		//
 		// Other related this-call functions.
 		//
 
-		Cell* getCell();
+		Cell* getCell() const;
 
 		float getFatigueTerm() const;
 
@@ -228,20 +244,31 @@ namespace TES3 {
 		float getViewToActor(const TES3::MobileActor* mobile) const;
 
 		float getBootsWeight() const;
+		float getWeaponSpeed() const;
 
 		void startCombat(MobileActor*);
 		void stopCombat(bool);
 		void stopCombat_lua(sol::optional<bool>);
 		bool isDead() const;
 		void onDeath();
-		bool applyHealthDamage(float damage, bool flipDifficultyScale, bool scaleWithDifficulty, bool takeHealth);
-		bool hasFreeAction() const;
+		void kill();
+		bool applyHealthDamage(float damage, bool isPlayerAttack, bool scaleWithDifficulty, bool doNotChangeHealth);
+		float applyFatigueDamage(float damage, float swing, bool alwaysPlayHitVoice = false);
+		void applyJumpFatigueCost() const;
+		float applyDamage_lua(sol::table params);
+		float calcEffectiveDamage_lua(sol::table params);
+		bool isNotKnockedDown() const;
+		bool isReadyingWeapon() const;
+		bool isParalyzed() const;
+		bool isAttackingOrCasting() const;
+		bool canAct() const;
 		float calculateRunSpeed();
 		float calculateSwimSpeed();
 		float calculateSwimRunSpeed();
 		float calculateFlySpeed();
 
 		void updateDerivedStatistics(Statistic * baseStatistic);
+		void updateDerivedStatistics_lua(sol::optional<Statistic*> baseStatistic);
 
 		int determineModifiedPrice(int basePrice, bool buying);
 
@@ -252,13 +279,13 @@ namespace TES3 {
 		bool isAffectedByEnchantment(Enchantment * enchantment) const;
 		bool isAffectedBySpell(Spell * spell) const;
 
+		SpellList* getSpellList();
 		IteratedList<Spell*> * getCombatSpellList();
 
 		bool isActive();
-		void setCurrentMagicSourceFiltered(Object * magic);
-		void setActionTarget(MobileActor * target);
+		void forceSpellCast(MobileActor * target);
 
-		void dropItem(Object * item, ItemData * itemData = nullptr, int count = 1, bool exact = true);
+		void dropItem(Object * item, ItemData * itemData = nullptr, int count = 1, bool ignoreItemData = true);
 
 		// Always returns false for non-MACH.
 		bool persuade(int random, int persuasionIndex);
@@ -280,10 +307,19 @@ namespace TES3 {
 		void setMobileActorMovementFlag(ActorMovement::Flag, bool);
 
 		bool equipItem(Object* item, ItemData * itemData = nullptr, bool addItem = false, bool selectBestCondition = false, bool selectWorstCondition = false);
+		bool equip_lua(sol::object arg);
+		bool unequip_lua(sol::table args);
+		bool equipMagic(Object* source, ItemData* itemData = nullptr, bool equipItem = false, bool updateGUI = true);
+		bool equipMagic_lua(sol::table params);
+		void unequipMagic(bool unequipItem = false, bool updateGUI = true);
+		void unequipMagic_lua(sol::optional<sol::table> params);
+
+		bool getWeaponReady() const;
+		void setWeaponReady(bool value);
 
 		void updateOpacity();
 
-		ActorAnimationData* getAnimationData() const;
+		ActorAnimationController* getAnimationController() const;
 		BaseObject* getCurrentSpell() const;
 
 		std::reference_wrapper<Statistic[8]> getAttributes();
@@ -388,8 +424,8 @@ namespace TES3 {
 		void setMovementFlagRunning(bool value);
 		bool getMovementFlagSneaking() const;
 		void setMovementFlagSneaking(bool value);
-		bool getMovementFlagJumped() const;
-		void setMovementFlagJumped(bool value);
+		bool getMovementFlagFalling() const;
+		void setMovementFlagFalling(bool value);
 		bool getMovementFlagSwimming() const;
 		void setMovementFlagSwimming(bool value);
 		bool getMovementFlagTurnLeft() const;
@@ -405,13 +441,19 @@ namespace TES3 {
 
 		bool hasUsedPower(Spell* power) const;
 		bool rechargePower(Spell* power);
-		sol::optional<double> getPowerUseTimestamp(Spell* spell) const;
+		sol::optional<double> getPowerUseTimestamp(Spell* power) const;
+		void setPowerUseTimestamp(Spell* power, double timestamp);
 
+		bool getMobToMobCollision() const;
+		void setMobToMobCollision(bool collide);
+
+		sol::table getActiveMagicEffectsList_lua(sol::optional<sol::table> params);
 		ActiveMagicEffect* getActiveMagicEffects_legacy() const;
 		int getActiveMagicEffectCount_legacy() const;
 	};
 	static_assert(sizeof(MobileActor) == 0x3B0, "TES3::MobileActor failed size validation");
-	static_assert(sizeof(MobileActor::PowerUsage) == 0xC, "TES3::MobileActor::PowerUsage failed size validation");
+	static_assert(sizeof(decltype(MobileActor::powers)::Node) == 0x18, "TES3::MobileActor::powers::Node failed size validation");
+	static_assert(offsetof(decltype(MobileActor::powers)::Node, value) == 0x8, "TES3::MobileActor::powers::Node::value failed offset validation");
 }
 
 MWSE_SOL_CUSTOMIZED_PUSHER_DECLARE_TES3_MOBILEOBJECT(TES3::MobileActor)

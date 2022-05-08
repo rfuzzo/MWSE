@@ -1,14 +1,15 @@
 return {
+	type = "event",
 	description = "This event triggers when an actor dies.",
 	eventData = {
 		mobile = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor that has died.",
 		},
 		reference = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "mobile’s associated reference.",
 		},
 	},

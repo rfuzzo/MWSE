@@ -75,6 +75,9 @@ namespace TES3 {
 		int device;
 		int unknown_0x08;
 		int unknown_0x0C;
+
+		InputConfig() = delete;
+		~InputConfig() = delete;
 	};
 	static_assert(sizeof(InputConfig) == 0x10, "TES3::InputConfig failed size validation");
 
@@ -90,15 +93,24 @@ namespace TES3 {
 		struct GamepadState {
 			DIJOYSTATE current;
 			DIJOYSTATE previous;
+
+			GamepadState() = delete;
+			~GamepadState() = delete;
 		};
 		struct DeviceAxisSupport {
 			unsigned int axesSupported;
 			unsigned int deviceTypeFlag;
+
+			DeviceAxisSupport() = delete;
+			~DeviceAxisSupport() = delete;
 		};
 		struct Unknown_0x1B28 {
 			int unknown_0x0;
 			int unknown_0x4;
 			int unknown_0x8;
+
+			Unknown_0x1B28() = delete;
+			~Unknown_0x1B28() = delete;
 		};
 		unsigned int creationFlags; // 0x0
 		LPDIRECTINPUT8 directInputInterface; // 0x4
@@ -125,6 +137,9 @@ namespace TES3 {
 		char unknown_0x1B3B;
 		InputConfig inputMaps[34]; // 0x1B3C
 
+		InputController() = delete;
+		~InputController() = delete;
+
 		//
 		// Other related this-call functions.
 		//
@@ -144,6 +159,12 @@ namespace TES3 {
 		bool isMouseButtonDown(unsigned char button) const;
 		bool isMouseButtonPressedThisFrame(unsigned char button) const;
 		bool isMouseButtonReleasedThisFrame(unsigned char button) const;
+
+		bool isAltDown() const;
+		bool isCapsLockActive() const;
+		bool isControlDown() const;
+		bool isShiftDown() const;
+		bool isSuperDown() const;
 
 		bool keybindTest_lua(unsigned int key, sol::optional<unsigned int> transition) const;
 

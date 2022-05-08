@@ -13,9 +13,14 @@ namespace TES3 {
 		unsigned int merchantFlags; // 0x8
 		IteratedList<TravelDestination*> * travelDestinations; // 0xC
 
+		AIConfig() = delete;
+		~AIConfig() = delete;
+
 		//
 		// Custom functions.
 		//
+
+		bool tradesItemType(ObjectType::ObjectType objectType) const;
 
 		bool getServiceFlag(unsigned int) const;
 		void setServiceFlag(unsigned int, bool);

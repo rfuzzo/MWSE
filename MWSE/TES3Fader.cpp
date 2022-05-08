@@ -19,8 +19,8 @@ namespace TES3 {
 		float distance = 1130.0f;
 		if (worldController && worldController->nodeCursor) {
 			float adjustedDistance = worldController->nodeCursor->localTranslate.y - worldController->projectionDistance;
-			float distanceDifference = adjustedDistance * 0.0625;
-			distance = adjustedDistance * 0.5 + worldController->projectionDistance + distanceDifference * faderCount++;
+			float distanceDifference = adjustedDistance * 0.0625f;
+			distance = adjustedDistance * 0.5f + worldController->projectionDistance + distanceDifference * faderCount++;
 		}
 
 		TES3_Fader_ctor(this, distance, true);
@@ -35,7 +35,10 @@ namespace TES3 {
 
 	const auto TES3_Fader_dtor = reinterpret_cast<void(__thiscall*)(Fader*)>(0x409210);
 	Fader::~Fader() {
-		TES3_Fader_dtor(this);
+		// Fader destructor tries to detach itself from the camera in the WorldController. Avoid this on exit to prevent a crash.
+		if (TES3::WorldController::get() != nullptr) {
+			TES3_Fader_dtor(this);
+		}
 	}
 
 	const auto TES3_Fader_activate = reinterpret_cast<void(__thiscall*)(Fader*)>(0x409890);

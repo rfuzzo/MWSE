@@ -18,11 +18,15 @@ namespace TES3 {
 		unsigned short maxCondition; // 0xB4
 		short unknown_0xB6;
 
+		Lockpick() = delete;
+		~Lockpick() = delete;
+
 		//
 		// Custom functions.
 		//
 
 		void setIconPath(const char* path);
+		void setName(const char* newName);
 
 	};
 	static_assert(sizeof(Lockpick) == 0xB8, "TES3::Lockpick failed size validation");

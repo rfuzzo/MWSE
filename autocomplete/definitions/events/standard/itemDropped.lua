@@ -1,9 +1,10 @@
 return {
+	type = "event",
 	description = "This event fires when an item is dropped.",
 	eventData = {
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "The reference.",
 		},
 	},

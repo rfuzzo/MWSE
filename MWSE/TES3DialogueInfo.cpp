@@ -5,9 +5,14 @@
 
 #include "TES3Actor.h"
 #include "TES3Class.h"
+#include "TES3DataHandler.h"
 #include "TES3Faction.h"
 #include "TES3Race.h"
 #include "TES3Cell.h"
+
+#include "MemoryUtil.h"
+
+#include "BitUtil.h"
 
 namespace TES3 {
 	const auto TES3_DialogueInfo_getText = reinterpret_cast<const char* (__thiscall*)(DialogueInfo*)>(0x4B1B80);
@@ -48,14 +53,71 @@ namespace TES3 {
 		TES3_DialogueInfo_runScript(this, reference);
 	}
 
+	auto& TES3_DialogueInfo_lastLoadedText = *reinterpret_cast<char**>(0x7CA5AC);
+	char* DialogueInfo::getLastLoadedText() {
+		return TES3_DialogueInfo_lastLoadedText;
+	}
+
+	void DialogueInfo::setLastLoadedText(const char* text) {
+		if (TES3_DialogueInfo_lastLoadedText) {
+			mwse::tes3::_delete(TES3_DialogueInfo_lastLoadedText);
+			TES3_DialogueInfo_lastLoadedText = nullptr;
+		}
+
+		if (text) {
+			auto length = strlen(text);
+			TES3_DialogueInfo_lastLoadedText = reinterpret_cast<char*>(mwse::tes3::_new(length + 1));
+			TES3_DialogueInfo_lastLoadedText[length] = '\0';
+			strcpy(TES3_DialogueInfo_lastLoadedText, text);
+		}
+	}
+
+	auto& TES3_DialogueInfo_lastLoadedScript = *reinterpret_cast<char**>(0x7CA5A8);
+	char* DialogueInfo::getLastLoadedScript() {
+		return TES3_DialogueInfo_lastLoadedScript;
+	}
+
+	void DialogueInfo::setLastLoadedScript(const char* text) {
+		if (TES3_DialogueInfo_lastLoadedScript) {
+			mwse::tes3::_delete(TES3_DialogueInfo_lastLoadedScript);
+			TES3_DialogueInfo_lastLoadedScript = nullptr;
+		}
+
+		if (text) {
+			auto length = strlen(text);
+			TES3_DialogueInfo_lastLoadedScript = reinterpret_cast<char*>(mwse::tes3::_new(length + 1));
+			TES3_DialogueInfo_lastLoadedScript[length] = '\0';
+			strcpy(TES3_DialogueInfo_lastLoadedScript, text);
+		}
+	}
+
 	sol::optional<std::string> DialogueInfo::getID() {
+		// If we're already loaded for some reason, don't reload.
+		if (loadLinkNode) {
+			return loadLinkNode->name;
+		}
+
+		// Hit the IO to find it...
 		if (loadId()) {
 			std::string id = loadLinkNode->name;
 			unloadId();
 			return std::move(id);
 		}
 
-		return sol::optional<std::string>();
+		return {};
+	}
+
+	sol::optional<int> DialogueInfo::getJournalIndex_lua() const {
+		if (type == DialogueType::Journal) {
+			return journalIndex;
+		}
+		return {};
+	}
+
+	void DialogueInfo::setJournalIndex_lua(int value) {
+		if (type == DialogueType::Journal) {
+			journalIndex = value;
+		}
 	}
 
 	BaseObject* DialogueInfo::getFilterObject(TES3::DialogueInfoFilterType type) {
@@ -107,18 +169,46 @@ namespace TES3 {
 		return static_cast<Faction*>(getFilterObject(TES3::DialogueInfoFilterType::PCFaction));
 	}
 
-	std::string DialogueInfo::getLongIDFromFile() {
-		if (loadId()) {
-			std::string id = loadLinkNode->name;
-			unloadId();
-			return id;
+	sol::optional<bool> DialogueInfo::isQuestName() const {
+		if (type != DialogueType::Journal) {
+			return {};
 		}
-		return "";
+
+		return BIT_TEST(objectFlags, TES3::ObjectFlag::QuestNameBit);
+	}
+
+	sol::optional<bool> DialogueInfo::isQuestFinished() const {
+		if (type != DialogueType::Journal) {
+			return {};
+		}
+
+		return BIT_TEST(objectFlags, TES3::ObjectFlag::QuestFinishedBit);
+	}
+
+	sol::optional<bool> DialogueInfo::isQuestRestart() const {
+		if (type != DialogueType::Journal) {
+			return {};
+		}
+
+		return BIT_TEST(objectFlags, TES3::ObjectFlag::QuestRestartBit);
+	}
+
+	Dialogue* DialogueInfo::findDialogue() const {
+		for (const auto& dialogue : *TES3::DataHandler::get()->nonDynamicData->dialogues) {
+			if (dialogue->type == type) {
+				for (const auto& info : dialogue->info) {
+					if (info == this) {
+						return dialogue;
+					}
+				}
+			}
+		}
+		return nullptr;
 	}
 
 	std::string DialogueInfo::toJson() {
 		std::ostringstream ss;
-		ss << "\"tes3dialogueInfo:" << getLongIDFromFile() << "\"";
+		ss << "\"tes3dialogueInfo:" << getID().value_or("<invalid>") << "\"";
 		return std::move(ss.str());
 	}
 }

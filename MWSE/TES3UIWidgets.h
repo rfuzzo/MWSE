@@ -40,6 +40,7 @@ namespace TES3 {
 			void setText(const char* text);
 
 			WidgetButton() = delete;
+			~WidgetButton() = delete;
 			static WidgetButton* fromElement(Element* e);
 			static const WidgetButton* fromElement(const Element* e);
 		private:
@@ -58,9 +59,11 @@ namespace TES3 {
 			sol::table getFillColour_lua(sol::this_state ts);
 			void setFillColour(const float(&c)[3]);
 			void setFillColour_lua(sol::table c);
+			float getFillAlpha();
 			void setFillAlpha(float a);
 
 			WidgetFillbar() = delete;
+			~WidgetFillbar() = delete;
 			static WidgetFillbar* fromElement(Element* e);
 			static const WidgetFillbar* fromElement(const Element* e);
 		private:
@@ -75,6 +78,7 @@ namespace TES3 {
 			void setText(const char* text);
 
 			WidgetParagraphInput() = delete;
+			~WidgetParagraphInput() = delete;
 			static WidgetParagraphInput* fromElement(Element* e);
 			static const WidgetParagraphInput* fromElement(const Element* e);
 		private:
@@ -92,6 +96,7 @@ namespace TES3 {
 			void setJumpX(int value);
 
 			WidgetScrollBar() = delete;
+			~WidgetScrollBar() = delete;
 			static WidgetScrollBar* fromElement(Element* e);
 			static const WidgetScrollBar* fromElement(const Element* e);
 		private:
@@ -109,6 +114,7 @@ namespace TES3 {
 			void contentPaneChanged();
 
 			WidgetScrollPane() = delete;
+			~WidgetScrollPane() = delete;
 			static WidgetScrollPane* fromElement(Element* e);
 			static const WidgetScrollPane* fromElement(const Element* e);
 		private:
@@ -128,6 +134,7 @@ namespace TES3 {
 			void setText(const char* text);
 
 			WidgetTextInput() = delete;
+			~WidgetTextInput() = delete;
 			static WidgetTextInput* fromElement(Element* e);
 			static const WidgetTextInput* fromElement(const Element* e);
 		private:
@@ -167,6 +174,7 @@ namespace TES3 {
 			void setColourActivePressed_lua(sol::table);
 
 			WidgetTextSelect() = delete;
+			~WidgetTextSelect() = delete;
 			static WidgetTextSelect* fromElement(Element* e);
 			static const WidgetTextSelect* fromElement(const Element* e);
 		private:

@@ -115,9 +115,12 @@ namespace TES3 {
 		int unknown_0xFC;
 		int unknown_0x100;
 		int unknown_0x104;
-		int unknown_0x108;
+		LoadScreenManager* loadScreenManager; // 0x108
 		char unknown_0x10C;
 		char unknown_0x10D[3]; // Padding.
+
+		Game() = delete;
+		~Game() = delete;
 
 		//
 		// Extra static data fields.

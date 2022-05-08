@@ -6,17 +6,49 @@
 		{
 			"label": "Build Autocomplete",
 			"type": "shell",
-			"command": "lua .\\luacompleterc\\build.lua",
-			"group": "build"
+			"group": "build",
+			"command": ".\\lua\\lua.exe",
+			"args": [
+				".\\builders\\emmy.lua"
+			],
+			"problemMatcher": []
 		},
 		{
-			"label": "Build Autodocs",
+			"label": "Build mkdocs",
 			"type": "shell",
-			"command": "lua .\\readthedocs\\build.lua",
+			"command": ".\\lua\\lua.exe",
+			"args": [
+				".\\builders\\mkdocs.lua"
+			],
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build ReadTheDocs",
+			"type": "shell",
+			"command": ".\\lua\\lua.exe",
+			"args": [
+				".\\builders\\readthedocs.lua"
+			],
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build All",
+			"command": "echo",
+			"args": [
+				"Build complete!"
+			],
+			"type": "shell",
 			"group": {
 				"kind": "build",
 				"isDefault": true
-			}
+			},
+			"dependsOn": [
+				"Build Autocomplete",
+				"Build mkdocs"
+			],
+			"problemMatcher": []
 		}
 	]
 }

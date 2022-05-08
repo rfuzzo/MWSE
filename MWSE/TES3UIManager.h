@@ -13,14 +13,16 @@ namespace TES3 {
 		Element* createHelpLayerMenu(UI_ID id);
 		Element* createHelpLayerMenu_lua(sol::table params);
 		Element* createTooltipMenu(UI_ID id);
-		Element* createTooltipMenu_lua();
+		Element* createTooltipMenu_lua(sol::optional<sol::table> params);
 		void refreshTooltip();
 		Element* findMenu(UI_ID id);
+		Element* findMenu(const char* id);
 		Element* findMenu_lua(sol::object id);
 		Element* findHelpLayerMenu(UI_ID id);
 		Element* findHelpLayerMenu_lua(sol::object id);
 		Element* getMenuOnTop();
 		bool enterMenuMode(UI_ID id);
+		bool enterMenuMode(const char* id);
 		bool enterMenuMode_lua(sol::object id);
 		bool leaveMenuMode();
 		bool closeJournal();
@@ -33,6 +35,9 @@ namespace TES3 {
 
 		MobileActor* getServiceActor();
 		void updateDialogDisposition();
+
+		std::tuple<unsigned int, unsigned int> getViewportSize_lua();
+		float getViewportScale();
 
 		const char* getInventorySelectType();
 		void stealHelpMenu();
@@ -54,13 +59,22 @@ namespace TES3 {
 		void showRestMenu(bool resting = true, bool scripted = true);
 		void showRestMenu_lua(sol::optional<bool> resting);
 
+		void __cdecl showSpellmakingMenu();
+		void showSpellmakingMenuWithOverride(MobileActor* serviceActorOverride);
+		MobileActor* __cdecl getSpellmakingServiceActor();
+
 		void updateFillBar(UI_ID id, float current, float max);
 		void updateHealthFillBar(float current, float max);
 		void updateMagickaFillBar(float current, float max);
 		void updateFatigueFillBar(float current, float max);
+		void updateCurrentMagicFillBar(float current, float max);
+		void updateCurrentMagicFromSpell(char* iconPath, const char* spellName, Spell* spell);
+		void updateCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack);
 		void updateEncumbranceBar();
 		void updatePlayerAttribute(float current, int attributeId);
 		void updateStatsPane();
+		void updateMagicMenuEnchantedItemSelection();
+		void updateMagicMenuSelection();
 		void updateSpellmakingMenu();
 		void updateEnchantingMenu();
 		int& getHaggleAmount();
@@ -73,12 +87,18 @@ namespace TES3 {
 		int updateSelectInventoryTiles();
 		sol::optional<int> updateInventorySelectTiles_lua();
 		void forcePlayerInventoryUpdate();
+		void updateInventoryWindowTitle();
+		void updateInventoryCharacterImage();
 
 		bool isInMenuMode();
 
 		sol::table getPalette_lua(sol::this_state ts, const char* name);
 
 		void showInventorySelectMenu_lua(sol::table params);
+
+		void __cdecl createResponseText(Element* parent, const char* text, int type, int answerIndex = -1);
+		void createResponseText_lua(sol::table params);
+		void choice(const char* text, int index);
 
 		//
 		// Helper functions.

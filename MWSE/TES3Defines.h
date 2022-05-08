@@ -7,7 +7,7 @@ namespace TES3 {
 	struct Activator;
 	struct ActiveMagicEffect;
 	struct Actor;
-	struct ActorAnimationData;
+	struct ActorAnimationController;
 	struct ActorVirtualTable;
 	struct AIConfig;
 	struct AIPackage;
@@ -35,9 +35,9 @@ namespace TES3 {
 	struct Book;
 	struct BoundingBox;
 	struct Cell;
-	struct CellExteriorData;
 	struct Class;
 	struct Clothing;
+	struct ClothingSlotData;
 	struct CombatSession;
 	struct Container;
 	struct ContainerInstance;
@@ -47,6 +47,7 @@ namespace TES3 {
 	struct CrimeEvent;
 	struct CrimeEventList;
 	struct CriticalSection;
+	struct CutscenePlayer;
 	struct DataHandler;
 	struct Dialogue;
 	struct DialogueConditional;
@@ -77,23 +78,25 @@ namespace TES3 {
 	struct LeveledItem;
 	struct LeveledListNode;
 	struct Light;
+	struct LoadScreenManager;
 	struct LockAttachmentNode;
 	struct Lockpick;
 	struct MagicEffect;
 	struct MagicEffectInstance;
+	struct MagicInstanceController;
 	struct MagicSourceCombo;
 	struct MagicSourceInstance;
 	struct MapNote;
 	struct Matrix33;
 	struct Misc;
 	struct MobController;
-	struct MobileActor_vTable;
 	struct MobileActor;
+	struct MobileActor_vTable;
 	struct MobileCreature;
-	struct MobileNPC_vTable;
 	struct MobileNPC;
-	struct MobileObject_vTable;
+	struct MobileNPC_vTable;
 	struct MobileObject;
+	struct MobileObject_vTable;
 	struct MobilePlayer;
 	struct MobileProjectile;
 	struct MobileSpellProjectile;
@@ -107,7 +110,7 @@ namespace TES3 {
 	struct OwnershipAttachmentNode;
 	struct PhysicalObject;
 	struct PhysicalObjectVirtualTable;
-	struct PlayerAnimationData;
+	struct PlayerAnimationController;
 	struct PlayerBounty;
 	struct Probe;
 	struct ProcessManager;
@@ -121,6 +124,7 @@ namespace TES3 {
 	struct Script;
 	struct ScriptCompiler;
 	struct ScriptVariables;
+	struct ShadowManager;
 	struct Skill;
 	struct SkillStatistic;
 	struct SoulGemData;
@@ -128,7 +132,6 @@ namespace TES3 {
 	struct SoundBuffer;
 	struct SoundGenerator;
 	struct Spell;
-	struct SpellInstanceController;
 	struct SpellList;
 	struct StartScript;
 	struct Static;
@@ -138,6 +141,8 @@ namespace TES3 {
 	struct Vector2;
 	struct Vector3;
 	struct Vector4;
+	struct VFX;
+	struct VFXManager;
 	struct WaterController;
 	struct Weapon;
 	struct WearablePart;
@@ -158,7 +163,7 @@ namespace TES3 {
 	namespace VirtualTableAddress {
 		enum VirtualTableAddress : unsigned int {
 			Activator = 0x747FC4,
-			ActorAnimData = 0x74ADE8,
+			ActorAnimController = 0x74ADE8,
 			ActorWearsObjects = 0x7478E0,
 			AIPackageActivate = 0x74ADC4,
 			AIPackageBase = 0x74AD58,
@@ -217,7 +222,7 @@ namespace TES3 {
 			Object = 0x74A444,
 			PathGrid = 0x74A8F8,
 			PhysicalObject = 0x74A2FC,
-			PlayerAnimData = 0x74AE30,
+			PlayerAnimController = 0x74AE30,
 			Probe = 0x748FA0,
 			Quest = 0x7469E0,
 			Race = 0x749378,

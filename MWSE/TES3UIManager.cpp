@@ -10,6 +10,7 @@
 #include "TES3UIManager.h"
 #include "TES3UIMenuController.h"
 
+#include "TES3Game.h"
 #include "TES3GameSetting.h"
 #include "TES3ItemData.h"
 #include "TES3NPC.h"
@@ -18,6 +19,8 @@
 #include "TES3WorldController.h"
 
 #include "LuaShowRestWaitMenuEvent.h"
+
+#include "TES3UIManagerLua.h"
 
 namespace TES3 {
 	namespace UI {
@@ -32,7 +35,6 @@ namespace TES3 {
 
 		const auto TES3_ui_registerID = reinterpret_cast<UI_ID (__cdecl *)(const char *)>(0x58DF10);
 		const auto TES3_ui_createChildElement = reinterpret_cast<Element* (__thiscall *)(Element*)>(0x582B50);
-		const auto TES3_ui_reattachToParent = reinterpret_cast<void (__thiscall *)(Element*, Element*)>(0x57B850);
 		const auto TES3_ui_createMenu = reinterpret_cast<Element* (__cdecl *)(UI_ID)>(0x595400);
 		const auto TES3_ui_createTooltipMenu = reinterpret_cast<Element* (__cdecl *)(UI_ID)>(0x595A40);
 		const auto TES3_ui_findMenu = reinterpret_cast<Element* (__cdecl*)(UI_ID)>(0x595370);
@@ -42,7 +44,7 @@ namespace TES3 {
 		const auto TES3_ui_onMenuUnfocus = reinterpret_cast<EventCallback>(0x58F790);
 		const auto TES3_ui_ScrollbarArrow_onClick = reinterpret_cast<EventCallback>(0x647A60);
 		const auto TES3_ui_requestMenuModeOn = reinterpret_cast<bool (__cdecl*)(UI_ID)>(0x595230);
-		const auto TES3_ui_requestMenuModeOff = reinterpret_cast<bool (__cdecl*)(UI_ID)>(0x595270);
+		const auto TES3_ui_requestMenuModeOff = reinterpret_cast<bool (__cdecl*)()>(0x595270);
 		const auto TES3_ui_getServiceActor = reinterpret_cast<MobileActor* (__cdecl*)()>(0x5BFEA0);
 		const auto TES3_ui_updateDialogDisposition = reinterpret_cast<void (__cdecl*)()>(0x5C0780);
 
@@ -87,6 +89,10 @@ namespace TES3 {
 				menu->createDragFrame(id, 1);
 			}
 
+			if (params.get_or("loadable", true)) {
+				menu->setProperty(Property::savable_menu, Property::boolean_true);
+			}
+
 			return menu;
 		}
 
@@ -110,8 +116,27 @@ namespace TES3 {
 			return TES3_ui_createTooltipMenu(id);
 		}
 
-		Element* createTooltipMenu_lua() {
-			return createTooltipMenu(TES3::UI::UI_ID(TES3::UI::Property::HelpMenu));
+		Element* createTooltipMenu_lua(sol::optional<sol::table> params) {
+			using mwse::lua::getOptionalParam;
+			using mwse::lua::getOptionalParamObject;
+
+			auto menu = createTooltipMenu(TES3::UI::UI_ID(TES3::UI::Property::HelpMenu));
+
+			if (!params) {
+				// Empty tooltip creation.
+				return menu;
+			}
+
+			auto item = getOptionalParamObject<TES3::Item>(params, "item");
+			if (item) {
+				auto itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
+				auto count = itemData ? itemData->count : 0;
+
+				WorldController::get()->menuController->menuInputController->displayObjectTooltip(item, itemData, count);
+				return menu;
+			}
+
+			throw std::invalid_argument("createTooltipMenu: Could not find object matching arguments.");
 		}
 
 		void refreshTooltip() {
@@ -120,6 +145,10 @@ namespace TES3 {
 
 		Element* findMenu(UI_ID id) {
 			return TES3_ui_findMenu(id);
+		}
+
+		Element* findMenu(const char* id) {
+			return findMenu(registerID(id));
 		}
 
 		Element* findMenu_lua(sol::object id) {
@@ -142,18 +171,25 @@ namespace TES3 {
 			return TES3_ui_requestMenuModeOn(id);
 		}
 
+		bool enterMenuMode(const char* id) {
+			return TES3_ui_requestMenuModeOn(registerID(id));
+		}
+
 		bool enterMenuMode_lua(sol::object id) {
 			return enterMenuMode(mwse::lua::getUIIDFromObject(id));
 		}
 
 		bool leaveMenuMode() {
-			return TES3_ui_requestMenuModeOff(0);
+			return TES3_ui_requestMenuModeOff();
 		}
 
 		const auto TES3_ui_closeJournal = reinterpret_cast<bool(__cdecl*)()>(0x5D6A10);
 		bool closeJournal() {
-			if (!TES3_ui_closeJournal()) return false;
-			while (TES3_ui_closeJournal());
+			if (!TES3_ui_closeJournal()) {
+				return false;
+			}
+			// Loop to exit out of all sub-sections of the journal.
+			while (TES3_ui_closeJournal()) {}
 			return true;
 		}
 
@@ -219,6 +255,15 @@ namespace TES3 {
 			TES3_ui_updateDialogDisposition();
 		}
 
+		std::tuple<unsigned int, unsigned int> getViewportSize_lua() {
+			auto& viewportCameraData = TES3::WorldController::get()->menuCamera.cameraData;
+			return { viewportCameraData.viewportWidth, viewportCameraData.viewportHeight };
+		}
+
+		float getViewportScale() {
+			return float(TES3::Game::get()->windowWidth) / float(TES3::WorldController::get()->worldCamera.cameraData.viewportWidth);
+		}
+
 		const char* getInventorySelectType() {
 			const char* callbackType = "unknown";
 			auto callbackAddress = *reinterpret_cast<DWORD*>(0x7D3CA0);
@@ -240,20 +285,20 @@ namespace TES3 {
 			Element *help = TES3_ui_findHelpLayerMenu(static_cast<UI_ID>(Property::HelpMenu));
 			if (help) {
 				// Remove menu from help layer child vector.
-				Element **p = help->parent->vectorChildren.begin;
+				Element **p = help->parent->vectorChildren.begin, **end = help->parent->vectorChildren.end;
 				while (*p != help) {
 					++p;
 				}
-				for (size_t n = (help->parent->vectorChildren.end - p) + 1; n; --n) {
+				for (; p < end - 1; ++p) {
 					*p = *(p + 1);
 				}
-				help->parent->vectorChildren.end--;
 				*p = 0;
+				help->parent->vectorChildren.end--;
 
 				// Place menu in main layer.
-				TES3_ui_reattachToParent(help, *TES3_uiMainRoot);
+				help->reattachToParent(*TES3_uiMainRoot);
 
-				// Add an empty dummy menu to staisfy game code that expects the help menu.
+				// Add an empty dummy menu to satisfy game code that expects the help menu.
 				createTooltipMenu(static_cast<UI_ID>(Property::HelpMenu));
 			}
 		}
@@ -369,6 +414,53 @@ namespace TES3 {
 			showRestMenu(resting.value_or(true));
 		}
 
+		const auto TES3_ShowSpellmakingMenu = reinterpret_cast<void(__cdecl*)()>(0x621450);
+		auto& TES3_HasServiceActor = *reinterpret_cast<bool*>(0x7D69FC);
+		static std::optional<MobileActor*> TES3_SpellmakingMenu_ServiceActorOverride = {};
+		void __cdecl showSpellmakingMenu() {
+			// Clear our override.
+			TES3_SpellmakingMenu_ServiceActorOverride = {};
+
+			TES3_ShowSpellmakingMenu();
+		}
+
+		void showSpellmakingMenuWithOverride(MobileActor* serviceActorOverride) {
+			// Set our override and change the service actor flag.
+			TES3_SpellmakingMenu_ServiceActorOverride = serviceActorOverride;
+			TES3_HasServiceActor = serviceActorOverride != nullptr;
+
+			TES3_ShowSpellmakingMenu();
+		}
+
+		MobileActor* __cdecl getSpellmakingServiceActor() {
+			// If we have an override, make use of it.
+			if (TES3_SpellmakingMenu_ServiceActorOverride) {
+				return TES3_SpellmakingMenu_ServiceActorOverride.value();
+			}
+
+			// Otherwise use the existing logic.
+			return getServiceActor();
+		}
+
+		const auto TES3_MobileMobile_ModGoldHeld = reinterpret_cast<void(__thiscall*)(MobileActor*, int)>(0x52B480);
+		void __fastcall patchSpellmakingMenuRemoveNoCost(MobileActor* self, DWORD _EDX_, int goldDelta) {
+			if (goldDelta == 0) {
+				return;
+			}
+			TES3_MobileMobile_ModGoldHeld(self, goldDelta);
+		}
+
+		Element* __cdecl patchSpellmakingMenuExitMenuModeIfNoDialogMenu(TES3::UI::UI_ID dialogMenuId) {
+			auto dialogMenu = findMenu(dialogMenuId);
+
+			// If no dialog menu exists, close menu mode.
+			if (!dialogMenu) {
+				leaveMenuMode();
+			}
+
+			return dialogMenu;
+		}
+
 		const auto TES3_UpdateFillBar = reinterpret_cast<void(__cdecl*)(UI_ID, float, float)>(0x6262D0);
 		void updateFillBar(UI_ID id, float current, float max) {
 			TES3_UpdateFillBar(id, current, max);
@@ -389,6 +481,21 @@ namespace TES3 {
 			TES3_UpdateFatigueFillBar(current, max);
 		}
 
+		const auto TES3_UI_UpdateCurrentMagicFillBar = reinterpret_cast<void(__cdecl*)(float, float)>(0x5F5500);
+		void updateCurrentMagicFillBar(float current, float max) {
+			TES3_UI_UpdateCurrentMagicFillBar(current, max);
+		}
+
+		const auto TES3_UI_UpdateCurrentMagicFromSpell = reinterpret_cast<void(__cdecl*)(char*, const char*, Spell*)>(0x5F4E70);
+		void updateCurrentMagicFromSpell(char* iconPath, const char* spellName, Spell* spell) {
+			TES3_UI_UpdateCurrentMagicFromSpell(iconPath, spellName, spell);
+		}
+
+		const auto TES3_UI_UpdateCurrentMagicFromEquipmentStack = reinterpret_cast<void(__cdecl*)(char*, const char*, EquipmentStack*)>(0x5F4DB0);
+		void updateCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack) {
+			TES3_UI_UpdateCurrentMagicFromEquipmentStack(nullptr, nullptr, equipmentStack);
+		}
+
 		const auto TES3_UpdateEncumbrance = reinterpret_cast<void(__cdecl*)()>(0x5CD1B0);
 		void updateEncumbranceBar() {
 			TES3_UpdateEncumbrance();
@@ -402,6 +509,31 @@ namespace TES3 {
 		const auto TES3_UpdateStatsPane = reinterpret_cast<void(__cdecl*)()>(0x6266D0);
 		void updateStatsPane() {
 			TES3_UpdateStatsPane();
+		}
+
+		const auto TES3_UI_MagicMenu_UpdateEnchantedItemSelection = reinterpret_cast<void(__cdecl*)()>(0x5E2E80);
+		void updateMagicMenuEnchantedItemSelection() {
+			TES3_UI_MagicMenu_UpdateEnchantedItemSelection();
+		}
+
+		const auto& TES3_UI_ID_MenuMagic = *reinterpret_cast<TES3::UI::UI_ID*>(0x7D431E);
+		const auto& TES3_UI_ID_MenuMagic_ActiveItem = *reinterpret_cast<TES3::UI::Property*>(0x7D4448);
+		const auto TES3_UI_MagicMenu_UpdateSpellSelection = reinterpret_cast<void(__cdecl*)(Element*)>(0x5E1AB0);
+		const auto TES3_UI_MenuMagic_GetItemFromCurrentMagic = reinterpret_cast<Element*(__cdecl*)(PropertyValue*)>(0x5E16A0);
+		void updateMagicMenuSelection() {
+			UI::Element* magicMenu = UI::findMenu(TES3_UI_ID_MenuMagic);
+			if (magicMenu) {
+				Element* item = TES3_UI_MenuMagic_GetItemFromCurrentMagic(0);
+				TES3_UI_MagicMenu_UpdateSpellSelection(item);
+				updateMagicMenuEnchantedItemSelection();
+				if (item) {
+					magicMenu->setText(item->getText());
+				}
+				else {
+					magicMenu->setText(TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sNone]->value.asString);
+				}
+				magicMenu->setProperty(TES3_UI_ID_MenuMagic_ActiveItem, item);
+			}
 		}
 
 		const auto TES3_UI_UpdateSpellmakingMenu = reinterpret_cast<void(__cdecl*)()>(0x622020);
@@ -470,6 +602,16 @@ namespace TES3 {
 			worldController->inventoryData->clearIcons(2);
 			worldController->inventoryData->addInventoryItems(&playerMobile->npcInstance->inventory, 2);
 			TES3::UI::updateInventoryMenuTiles();
+		}
+
+		const auto TES3_UI_UpdateInventoryWindowTitle = reinterpret_cast<void(__cdecl*)()>(0x5CE080);
+		void updateInventoryWindowTitle() {
+			TES3_UI_UpdateInventoryWindowTitle();
+		}
+
+		void updateInventoryCharacterImage() {
+			const auto TES3_updateInventoryCharacterImage = reinterpret_cast<void(__cdecl*)(bool)>(0x5CD2A0);
+			TES3_updateInventoryCharacterImage(false);
 		}
 
 		bool isInMenuMode() {
@@ -571,6 +713,15 @@ namespace TES3 {
 			{ "soulgemFilled", reinterpret_cast<EventCallback*>(0x5C6B00) },
 		};
 
+		static sol::protected_function noValidItemsCallback = sol::nil;
+		static const char* noValidItemsTextOverride = nullptr;
+		Element* __cdecl messagePlayerForNoValidItems(const char* message, const char* image = nullptr, bool showInDialog = true) {
+			if (noValidItemsCallback.valid()) {
+				noValidItemsCallback();
+			}
+			return showMessageBox(noValidItemsTextOverride ? noValidItemsTextOverride : message, image, showInDialog);
+		}
+
 		void showInventorySelectMenu_lua(sol::table params) {
 			// Get our actor.
 			TES3::Reference* actorRef = mwse::lua::getOptionalParamExecutionReference(params);
@@ -616,12 +767,8 @@ namespace TES3 {
 			}
 
 			// Allow overwriting of our "no item found" text.
-			auto sInventorySelectNoItems = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sInventorySelectNoItems];
-			const char* oldNoResultsText = sInventorySelectNoItems->value.asString;
-			const char* noResultsText = mwse::lua::getOptionalParam<const char*>(params, "noResultsText", nullptr);
-			if (noResultsText != nullptr) {
-				sInventorySelectNoItems->value.asString = (char*)noResultsText;
-			}
+			noValidItemsTextOverride = mwse::lua::getOptionalParam<const char*>(params, "noResultsText", nullptr);
+			noValidItemsCallback = mwse::lua::getOptionalParam<sol::protected_function>(params, "noResultsCallback", sol::nil);
 
 			// Do we close the menu after?
 			inventorySelectLuaCallbackCloseAfter = mwse::lua::getOptionalParam<bool>(params, "leaveMenuMode", !TES3::WorldController::get()->flagMenuMode);
@@ -630,16 +777,36 @@ namespace TES3 {
 			*reinterpret_cast<EventCallback**>(0x7D3CA0) = filter;
 			showSelectMenu(actor, callback, titleText);
 
-			// Restore the previous results text.
-			if (noResultsText != nullptr) {
-				sInventorySelectNoItems->value.asString = (char*)oldNoResultsText;
-			}
+			// Reset our overrides.
+			noValidItemsTextOverride = nullptr;
+			noValidItemsCallback = sol::nil;
 
 			// If the menu was successfully shown, enter menu mode.
 			auto MenuInventorySelect = *reinterpret_cast<UI_ID*>(0x7D3C14);
 			if (TES3::UI::findMenu(MenuInventorySelect)) {
 				TES3::UI::enterMenuMode(MenuInventorySelect);
 			}
+		}
+
+		const auto TES3_UI_createResponseText = reinterpret_cast<void(__cdecl*)(Element*, const char*, int, int)>(0x5C00D0);
+		void createResponseText(Element* parent, const char* text, int type, int answerIndex) {
+			TES3_UI_createResponseText(parent, text, type, answerIndex);
+		}
+
+		void createResponseText_lua(sol::table params) {
+			sol::optional<std::string> text = params["text"];
+			auto type = mwse::lua::getOptionalParam(params, "type", 2);
+			auto index = mwse::lua::getOptionalParam(params, "index", -1);
+
+			if (!text) {
+				throw std::invalid_argument("Invalid 'text' parameter provided.");
+			}
+
+			createResponseText(nullptr, text.value().c_str(), type, index);
+		}
+
+		void choice(const char* text, int index) {
+			createResponseText(nullptr, text, 2, index);
 		}
 
 		void pushNewUIID(DWORD address, const char* name) {
@@ -686,6 +853,17 @@ namespace TES3 {
 			return {};
 		}
 
+		void __fastcall patchElementDeletion(TES3::UI::Element* self, DWORD _UNUSED_, TES3::UI::PropertyValue* propValue, TES3::UI::Property prop, TES3::UI::PropertyType propType, const TES3::UI::Element* element, bool checkInherited) {
+			// Call overwritten code.
+			auto destroyEvent = reinterpret_cast<void(__cdecl*)(TES3::UI::Element*)>(self->getProperty(propValue, prop, propType, element, checkInherited)->ptrValue);
+			if (destroyEvent) {
+				destroyEvent(self);
+			}
+
+			// Clean up any lua event registration.
+			mwse::lua::cleanupEventRegistrations(self);
+		}
+
 		void hook() {
 			// Patch mousewheel event dispatch to not redirect to the top-level element,
 			// allowing mousewheel to apply to more than the first scrollpane in a menu
@@ -697,7 +875,24 @@ namespace TES3 {
 			mwse::genCallEnforced(0x585E1E, 0x584850, *reinterpret_cast<DWORD*>(&patch));
 			mwse::genCallEnforced(0x5863AE, 0x584850, *reinterpret_cast<DWORD*>(&patch));
 
-			// Provide some UI IDs for elements that don't have them, like tooltips:
+			// Patch item selection no items message to allow callbacks and changed text.
+			mwse::genCallEnforced(0x5D37CF, 0x5F90C0, reinterpret_cast<DWORD>(messagePlayerForNoValidItems));
+
+			// Patch element resetting to clear up any custom event handlers.
+			mwse::genCallEnforced(0x578517, 0x581440, reinterpret_cast<DWORD>(patchElementDeletion), 0x578528 - 0x578517);
+
+			// Patch SpellmakingMenu to allow service actor overrides.
+			mwse::genCallEnforced(0x5BF5AD, 0x621450, reinterpret_cast<DWORD>(showSpellmakingMenu));
+			mwse::genCallEnforced(0x622337, 0x5BFEA0, reinterpret_cast<DWORD>(getSpellmakingServiceActor));
+			mwse::genCallEnforced(0x6229C5, 0x5BFEA0, reinterpret_cast<DWORD>(getSpellmakingServiceActor));
+			mwse::genCallEnforced(0x6229D4, 0x5BFEA0, reinterpret_cast<DWORD>(getSpellmakingServiceActor));
+			mwse::genCallEnforced(0x6229C0, 0x52B480, reinterpret_cast<DWORD>(patchSpellmakingMenuRemoveNoCost));
+			mwse::genCallEnforced(0x621CBB, 0x595370, reinterpret_cast<DWORD>(patchSpellmakingMenuExitMenuModeIfNoDialogMenu));
+			mwse::genCallEnforced(0x622DAA, 0x595370, reinterpret_cast<DWORD>(patchSpellmakingMenuExitMenuModeIfNoDialogMenu));
+			mwse::writeValueEnforced<BYTE>(0x62295A, 0x75, 0x7D);
+
+			// Provide some UI IDs for elements that don't have them:
+			// Tooltips (HelpMenu)
 			pushNewUIID(0x590F59, "HelpMenu_titleBlock");
 			pushNewUIID(0x590FBD, "HelpMenu_icon");
 			pushNewUIID(0x5911DC, "HelpMenu_name");
@@ -736,7 +931,30 @@ namespace TES3 {
 			pushNewUIID(0x5915E6, "HelpMenu_locked");
 			pushNewUIID(0x591614, "HelpMenu_trapped");
 
-			// Enchantment Menu
+			// Spellmaking Menu (MenuSpellmaking)
+			pushNewUIID(0x620C0A, "MenuSpellmaking_TopLayout");
+			pushNewUIID(0x620C50, "MenuSpellmaking_TopLeftLayout");
+			pushNewUIID(0x620C90, "MenuSpellmaking_SpellNameLayout");
+			pushNewUIID(0x620CDD, "MenuSpellmaking_SpellNameLabel");
+			pushNewUIID(0x620D2F, "MenuSpellmaking_SpellNameBorder");
+			pushNewUIID(0x620DFC, "MenuSpellmaking_TopRightLayout");
+			pushNewUIID(0x620E44, "MenuSpellmaking_SpellPointCostLayout");
+			pushNewUIID(0x620E9C, "MenuSpellmaking_SpellPointCostLabel");
+			pushNewUIID(0x620F04, "MenuSpellmaking_SpellChanceLayout");
+			pushNewUIID(0x620F5C, "MenuSpellmaking_SpellChanceLabel");
+			pushNewUIID(0x620FC2, "MenuSpellmaking_CenterLayout");
+			pushNewUIID(0x620FD0, "MenuSpellmaking_EffectsLayout");
+			pushNewUIID(0x621037, "MenuSpellmaking_EffectsLabel");
+			pushNewUIID(0x6210BB, "MenuSpellmaking_SpellEffectsLayout");
+			pushNewUIID(0x62110F, "MenuSpellmaking_SpellEffectsLabel");
+			pushNewUIID(0x6211B1, "MenuSpellmaking_BottomLayout");
+			pushNewUIID(0x6211F3, "MenuSpellmaking_BottomSpacer");
+			pushNewUIID(0x621233, "MenuSpellmaking_PriceLayout");
+			pushNewUIID(0x621280, "MenuSpellmaking_PriceLabel");
+			pushNewUIID(0x6212D9, "MenuSpellmaking_PriceValueLabel");
+			pushNewUIID(0x621329, "MenuSpellmaking_ButtonLayout");
+
+			// Enchantment Menu (MenuEnchantment)
 			pushNewUIID(0x5C1A89, "MenuEnchantment_topRow");
 			pushNewUIID(0x5C1AC5, "MenuEnchantment_selectablesContainer");
 			pushNewUIID(0x5C1B99, "MenuEnchantment_nameLabel");
@@ -760,6 +978,72 @@ namespace TES3 {
 			pushNewUIID(0x5C26F5, "MenuEnchantment_priceContainer");
 			pushNewUIID(0x5C2752, "MenuEnchantment_priceLabel");
 			pushNewUIID(0x5C2852, "MenuEnchantment_buttonContainer");
+
+			// Inventory Menu (MenuInventory)
+			pushNewUIID(0x5CA225, "MenuInventory_top_layout");
+			pushNewUIID(0x5CA67B, "MenuInventory_bottom_layout");
+			pushNewUIID(0x5CA68B, "MenuInventory_character_layout");
+			pushNewUIID(0x5CA818, "MenuInventory_items_layout");
+
+			// Status Menu (MenuStat)
+			pushNewUIID(0x624F7F, "MenuStat_layout");
+			pushNewUIID(0x62562F, "MenuStat_general_frame");
+			pushNewUIID(0x6256FF, "MenuStat_level_name");
+			pushNewUIID(0x625818, "MenuStat_race_name");
+			pushNewUIID(0x625934, "MenuStat_class_name");
+			pushNewUIID(0x6259E8, "MenuStat_attributes_frame");
+			pushNewUIID(0x625AC6, "MenuStat_attribute_strength_name");
+			pushNewUIID(0x625B9B, "MenuStat_attribute_intellegence_name"); // Spelling mistake for consistency with other ids
+			pushNewUIID(0x625C8C, "MenuStat_attribute_willpower_name");
+			pushNewUIID(0x625D7E, "MenuStat_attribute_agility_name");
+			pushNewUIID(0x625E71, "MenuStat_attribute_speed_name");
+			pushNewUIID(0x625F64, "MenuStat_attribute_endurance_name");
+			pushNewUIID(0x626056, "MenuStat_attribute_personality_name");
+			pushNewUIID(0x626149, "MenuStat_attribute_luck_name");
+			pushNewUIID(0x626757, "MenuStat_major_title");
+			pushNewUIID(0x626817, "MenuStat_major_name");
+			pushNewUIID(0x6268AC, "MenuStat_major_value");
+			pushNewUIID(0x626994, "MenuStat_divider");
+			pushNewUIID(0x6269D4, "MenuStat_minor_title");
+			pushNewUIID(0x626A95, "MenuStat_minor_name");
+			pushNewUIID(0x626B2B, "MenuStat_minor_value");
+			pushNewUIID(0x626C13, "MenuStat_divider");
+			pushNewUIID(0x626C53, "MenuStat_misc_title");
+			pushNewUIID(0x626D3E, "MenuStat_misc_name");
+			pushNewUIID(0x626DC1, "MenuStat_misc_value");
+			pushNewUIID(0x626EB3, "MenuStat_divider");
+			pushNewUIID(0x626EF6, "MenuStat_faction_title");
+			pushNewUIID(0x626FFB, "MenuStat_divider");
+			pushNewUIID(0x6270D2, "MenuStat_divider");
+			pushNewUIID(0x627171, "MenuStat_reputation_name");
+			pushNewUIID(0x6271DC, "MenuStat_reputation_value");
+			pushNewUIID(0x627249, "MenuStat_Bounty_name");
+
+			// Magic Menu (MenuMagic)
+			pushNewUIID(0x5E0DD3, "MagicMenu_spells_layout");
+			pushNewUIID(0x5E0E45, "MagicMenu_power_title");
+			pushNewUIID(0x5E0E5F, "MagicMenu_power_layout");
+			pushNewUIID(0x5E0F28, "MagicMenu_divider");
+			pushNewUIID(0x5E0FB5, "MagicMenu_spell_title");
+			pushNewUIID(0x5E0FE2, "MagicMenu_spell_cost_title");
+			pushNewUIID(0x5E0FFC, "MagicMenu_spell_layout");
+			pushNewUIID(0x5E1127, "MagicMenu_divider");
+			pushNewUIID(0x5E11B4, "MagicMenu_item_title");
+			pushNewUIID(0x5E11E1, "MagicMenu_item_cost_title");
+			pushNewUIID(0x5E11FB, "MagicMenu_item_layout");
+
+			// HUD (MenuMulti)
+			pushNewUIID(0x5F333F, "MenuMulti_bottom_row_left");
+			pushNewUIID(0x5F339A, "MenuMulti_npc");
+			pushNewUIID(0x5F34DC, "MenuMulti_fillbars");
+			pushNewUIID(0x5F38EA, "MenuMulti_icons");
+			pushNewUIID(0x5F391D, "MenuMulti_icons_spacer");
+			pushNewUIID(0x5F393E, "MenuMulti_icons_layout");
+			pushNewUIID(0x5F39DF, "MenuMulti_weapon_border");
+			pushNewUIID(0x5F3C70, "MenuMulti_magic_border");
+			pushNewUIID(0x5F3F83, "MenuMulti_bottom_row_right");
+			pushNewUIID(0x5F4168, "MenuMulti_map");
+			pushNewUIID(0x5F4226, "MenuMap_layout");
 		}
 	}
 }

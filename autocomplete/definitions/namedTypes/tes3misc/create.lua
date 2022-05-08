@@ -1,6 +1,7 @@
 return {
 	type = "function",
-	description = [[Creates a new misc item object, which will be stored as part of the current saved game.]],
+	deprecated = true,
+	description = [[Use [`tes3.createObject()`](https://mwse.github.io/MWSE/apis/tes3/#tes3createobject) instead. This function creates a new misc item object, which will be stored as part of the current saved game.]],
 	arguments = {{
 		name = "params",
 		type = "table",

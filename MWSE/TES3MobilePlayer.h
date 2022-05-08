@@ -53,7 +53,7 @@ namespace TES3 {
 		bool castReady; // 0x5BE
 		char unknown_0x5BF;
 		bool playerInJail; // 0x5C0
-		bool playerIsTravelling; // 0x5C1
+		bool playerIsTraveling; // 0x5C1
 		char unknown_0x5C2; // Undefined.
 		char unknown_0x5C3; // Undefined.
 		int telekinesis; // 0x5C4
@@ -84,14 +84,17 @@ namespace TES3 {
 		int humanStatsBackup; // 0x688
 		GlobalVariable * knownWerewolf; // 0x690
 
+		MobilePlayer() = delete;
+		~MobilePlayer() = delete;
+
 		//
 		// Other related this-call functions.
 		//
 
 		void exerciseSkill(int skillId, float progress);
-		void levelSkill(int skillId);
+		float getSkillProgressRequirement(int skillId) const;
+		void progressSkillLevelIfRequirementsMet(int skillId);
 		void onDeath();
-		bool is3rdPerson();
 		int getGold();
 		void wakeUp();
 
@@ -99,6 +102,9 @@ namespace TES3 {
 		void setBounty(int value);
 		void modBounty(int delta);
 
+		bool is3rdPerson();
+		float getCameraHeight() const;
+		void setCameraHeight_lua(sol::optional<float> height);
 		int getVanityState() const;
 		void setVanityState(int state);
 
@@ -106,9 +112,11 @@ namespace TES3 {
 		// Custom functions.
 		//
 
-		void setFlagSneak(bool value);
+		int progressSkillToNextLevel(int skillId);
 
-		PlayerAnimationData* getPlayerAnimationData() const;
+		void setMovementFlagSneaking(bool value);
+
+		PlayerAnimationController* getPlayerAnimationController() const;
 
 		std::reference_wrapper<int[8]> getLevelupsPerAttribute();
 		std::reference_wrapper<int[3]> getLevelupsPerSpecialization();

@@ -1,29 +1,31 @@
 return {
+	type = "event",
 	description = "This event fires immediately after a dialogue response is processed.",
+	related = { "infoGetText", "infoLinkResolve", "infoResponse", "infoFilter", "postInfoResponse" },
 	eventData = {
 		["command"] = {
 			type = "string",
-			readonly = true,
+			readOnly = true,
 			description = "The command.",
 		},
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "The reference.",
 		},
 		["variables"] = {
 			type = "tes3scriptVariables",
-			readonly = true,
+			readOnly = true,
 			description = "The script variables.",
 		},
 		["dialogue"] = {
 			type = "tes3dialogue",
-			readonly = true,
+			readOnly = true,
 			description = "The dialogue object.",
 		},
 		["info"] = {
 			type = "tes3dialogueInfo",
-			readonly = true,
+			readOnly = true,
 			description = "The dialogue info object.",
 		},
 	},

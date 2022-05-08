@@ -1,19 +1,20 @@
 return {
+	type = "event",
 	description = "This event fires when an item in the contents menu is filtered.",
 	eventData = {
 		["tile"] = {
-			type = "tes3uiInventoryTile",
-			readonly = true,
+			type = "tes3inventoryTile",
+			readOnly = true,
 			description = "The inventory tile being filtered.",
 		},
 		["item"] = {
 			type = "tes3item",
-			readonly = true,
+			readOnly = true,
 			description = "The item being filtered.",
 		},
 		["itemData"] = {
 			type = "tes3itemData",
-			readonly = true,
+			readOnly = true,
 			description = "The item data for the item being filtered.",
 		},
 	},

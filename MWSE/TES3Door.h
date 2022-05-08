@@ -13,6 +13,9 @@ namespace TES3 {
 		Sound * openSound; // 0x78
 		Sound * closeSound; // 0x7C
 
+		Door() = delete;
+		~Door() = delete;
+
 		//
 		// Custom functions.
 		//

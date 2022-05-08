@@ -1,11 +1,14 @@
 #include "TES3MobileProjectile.h"
 
 #include "LuaManager.h"
+#include "LuaUtil.h"
 
 #include "LuaMobileProjectileActorCollisionEvent.h"
 #include "LuaMobileProjectileObjectCollisionEvent.h"
 #include "LuaMobileProjectileTerrainCollisionEvent.h"
 #include "LuaMobileObjectCollisionEvent.h"
+
+#include "TES3Reference.h"
 
 namespace TES3 {
 	const auto TES3_MobileProjectile_onActorCollision = reinterpret_cast<bool(__thiscall*)(MobileProjectile*, int)>(0x573860);
@@ -21,7 +24,8 @@ namespace TES3 {
 		bool result = TES3_MobileProjectile_onActorCollision(this, collisionIndex);
 
 		// Fire off our hit event.
-		if (mwse::lua::event::MobileProjectileActorCollisionEvent::getEventEnabled()) {
+		//! TODO: Make this into projectileHitMobile event with backup projectileHitActor for backwards compatibility.
+		if (mwse::lua::event::MobileProjectileActorCollisionEvent::getEventEnabled() && hitReference->baseObject->isActor()) {
 			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileProjectileActorCollisionEvent(this, hitReference, point, pos, vel));
 		}
 
@@ -80,6 +84,15 @@ namespace TES3 {
 		}
 
 		return result;
+	}
+
+	Vector3 MobileProjectile::getProjectileVelocity() const {
+		return velocity;
+	}
+
+	void MobileProjectile::setProjectileVelocity_lua(sol::stack_object value) {
+		// Use our util class to support vectors or a table.
+		mwse::lua::setVectorFromLua(velocity, value);
 	}
 
 }

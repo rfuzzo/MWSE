@@ -64,8 +64,14 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
-		float calculateCastChance(Reference* caster, bool checkMagicka = true, int* weakestSchoolId = 0);
-		float calculateCastChance(MobileActor* caster, bool checkMagicka = true, int* weakestSchoolId = 0);
+		Effect* getLeastProficientEffect(const NPC* npc);
+		Effect* getLeastProficientEffect(const MobileActor* mobile);
+		Effect* getLeastProficientEffect_lua(sol::stack_object object);
+		int getLeastProficientSchool(const NPC* npc);
+		int getLeastProficientSchool(const MobileActor* mobile);
+		int getLeastProficientSchool_lua(sol::stack_object object);
+		float calculateCastChance(Reference* caster, bool checkMagicka = true, int* weakestSchoolId = nullptr);
+		float calculateCastChance(MobileActor* caster, bool checkMagicka = true, int* weakestSchoolId = nullptr);
 		float castChanceOnCast(MobileActor* caster, bool checkMagicka, int* weakestSchoolId);
 
 		//
@@ -82,10 +88,15 @@ namespace TES3 {
 		bool getAlwaysSucceeds() const;
 		void setAlwaysSucceeds(bool value);
 
+		int getValue() const;
+
 		size_t getActiveEffectCount();
 		int getFirstIndexOfEffect(int effectId);
 
+		int calculateBasePuchaseCost() const;
 		float calculateCastChance_lua(sol::table params);
+
+		bool isActiveCast() const;
 
 		std::reference_wrapper<Effect[8]> getEffects();
 

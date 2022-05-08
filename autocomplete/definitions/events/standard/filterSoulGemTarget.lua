@@ -1,20 +1,30 @@
 return {
+	type = "event",
 	description = "This event fires when a soul gem target is filtered",
 	eventData = {
 		["soulGem"] = {
 			type = "tes3misc",
-			readonly = true,
+			readOnly = true,
 			description = "The soul gem object.",
 		},
 		["mobile"] = {
 			type = "tes3mobileActor",
-			readonly = true,
-			description = "The mobile actor.",
+			readOnly = true,
+			description = "The mobile actor whose soul is to be soultrapped.",
 		},
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "The reference.",
+		},
+		["filter"] = {
+			type = "boolean",
+			description = "Setting this to `false` or `nil` will prevent the `mobile`'s soul to end up in the `soulGem`. Setting this to `true` will make the opposite."
+		}
+	},
+	examples = {
+		["example"] = {
+			title = "Example"
 		},
 	},
 }

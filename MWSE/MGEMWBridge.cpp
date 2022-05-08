@@ -15,7 +15,7 @@
 #include "TES3MobilePlayer.h"
 #include "TES3Moon.h"
 #include "TES3NPC.h"
-#include "TES3PlayerAnimationData.h"
+#include "TES3PlayerAnimationController.h"
 #include "TES3UIManager.h"
 #include "TES3WaterController.h"
 #include "TES3Weapon.h"
@@ -403,7 +403,8 @@ namespace mge {
 	const BYTE* MWBridge::getInteriorSun() {
 		auto interior = TES3::DataHandler::get()->currentInteriorCell;
 		if (interior) {
-			return reinterpret_cast<const BYTE*>(&interior->VariantData.interior.sunColor);
+			return reinterpret_cast<const BYTE*>(&interior->variantData.interior.sunColor);
+
 		}
 
 		return nullptr;
@@ -414,7 +415,7 @@ namespace mge {
 	float MWBridge::getInteriorFogDens() {
 		auto interior = TES3::DataHandler::get()->currentInteriorCell;
 		if (interior) {
-			return interior->VariantData.interior.fogDensity;
+			return interior->variantData.interior.fogDensity;
 		}
 
 		return 0.0f;
@@ -424,7 +425,7 @@ namespace mge {
 
 	DWORD MWBridge::PlayerPositionPointer() {
 		// Note: This used to point to the AudioController listenerPosition.
-		return DWORD(&TES3::WorldController::get()->getMobilePlayer()->position);
+		return DWORD(&TES3::WorldController::get()->getMobilePlayer()->positionAtLastLightUpdate);
 	}
 
 	//-----------------------------------------------------------------------------
@@ -455,7 +456,7 @@ namespace mge {
 			return nullptr;
 		}
 
-		return reinterpret_cast<D3DXVECTOR3*>(&macp->animationData.asPlayer->cameraOffset);
+		return reinterpret_cast<D3DXVECTOR3*>(&macp->animationController.asPlayer->cameraOffset);
 	}
 
 	//-----------------------------------------------------------------------------
@@ -470,7 +471,7 @@ namespace mge {
 			return false;
 		}
 
-		return macp->animationData.asPlayer->is3rdPerson;
+		return macp->animationController.asPlayer->is3rdPerson;
 	}
 
 	//-----------------------------------------------------------------------------

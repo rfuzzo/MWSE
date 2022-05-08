@@ -22,6 +22,24 @@ namespace TES3 {
 		Conditional5
 	};
 
+	namespace ObjectFlag {
+		typedef unsigned int value_type;
+
+		enum DialogueInfoFlag : value_type {
+			QuestName = 0x40,
+			QuestFinished = 0x100,
+			QuestRestart = 0x200,
+			HasResultText = 0x2000,
+		};
+
+		enum DialogueInfoFlagBit {
+			QuestNameBit = 6,
+			QuestFinishedBit = 8,
+			QuestRestartBit = 9,
+			HasResultTextBit = 13,
+		};
+	}
+
 	struct DialogueInfoFilterNode {
 		DialogueInfoFilterType tag;
 		DialogueInfoFilterNode* next;
@@ -36,6 +54,9 @@ namespace TES3 {
 			const char* scriptText;
 			DialogueConditional* conditional;
 		};
+
+		DialogueInfoFilterNode() = delete;
+		~DialogueInfoFilterNode() = delete;
 	};
 
 	struct DialogueInfo : BaseObject {
@@ -46,13 +67,19 @@ namespace TES3 {
 		};
 		LoadLinkNode * loadLinkNode; // 0x10
 		DialogueType type; // 0x14
-		int disposition; // 0x18
+		union {
+			int disposition; // 0x18
+			int journalIndex; // 0x18
+		};
 		signed char npcRank; // 0x1C
 		signed char npcSex; // 0x1D
 		signed char pcRank; // 0x1E
 		DialogueInfoFilterNode* conditions; // 0x20
 		long espFileOffset; // 0x24
 		Actor* firstHeardFrom; // 0x28
+
+		DialogueInfo() = delete;
+		~DialogueInfo() = delete;
 
 		//
 		// Other related this-call functions.
@@ -67,10 +94,23 @@ namespace TES3 {
 		void runScript(Reference * reference);
 
 		//
+		// Access to associated data.
+		//
+
+		static char* getLastLoadedText();
+		static void setLastLoadedText(const char* text);
+
+		static char* getLastLoadedScript();
+		static void setLastLoadedScript(const char* text);
+
+		//
 		// Custom functions.
 		//
 
 		sol::optional<std::string> getID();
+
+		sol::optional<int> getJournalIndex_lua() const;
+		void setJournalIndex_lua(int value);
 
 		BaseObject* getFilterObject(TES3::DialogueInfoFilterType type);
 
@@ -81,8 +121,11 @@ namespace TES3 {
 		Cell* getFilterNPCCell();
 		Faction* getFilterPCFaction();
 
-		// Loads the string of numbers from disk and returns them.
-		std::string getLongIDFromFile();
+		sol::optional<bool> isQuestName() const;
+		sol::optional<bool> isQuestFinished() const;
+		sol::optional<bool> isQuestRestart() const;
+
+		Dialogue* findDialogue() const;
 
 		std::string toJson();
 

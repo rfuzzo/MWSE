@@ -34,6 +34,9 @@ namespace TES3 {
 	struct NPCBase : Actor {
 		// No data, this is only used for shared functions.
 
+		NPCBase() = delete;
+		~NPCBase() = delete;
+
 		//
 		// Related this-call functions.
 		//
@@ -49,6 +52,9 @@ namespace TES3 {
 		void setIsEssential_legacy(bool value);
 		bool getRespawns_legacy() const;
 		void setRespawns_legacy(bool value);
+
+		float getWeight() const;
+		float getHeight() const;
 
 	};
 
@@ -78,6 +84,9 @@ namespace TES3 {
 		void * aiPackageList; // 0xDC
 		AIConfig aiConfig; // 0xE0
 
+		NPC() = delete;
+		~NPC() = delete;
+
 		//
 		// Custom functions.
 		//
@@ -85,6 +94,7 @@ namespace TES3 {
 		std::reference_wrapper<unsigned char[8]> getAttributes();
 		std::reference_wrapper<unsigned char[27]> getSkills();
 
+		sol::optional<int> getSoulValue();
 	};
 	static_assert(sizeof(NPC) == 0xF0, "TES3::NPC failed size validation");
 
@@ -95,11 +105,15 @@ namespace TES3 {
 		char unknown_0x73; // Padding.
 		AIPackageConfig * aiPackageConfig; // 0x74
 
+		NPCInstance() = delete;
+		~NPCInstance() = delete;
+
 		//
 		// Related this-call functions.
 		//
 
 		int getDisposition(bool clamp = false);
+		void reevaluateEquipment();
 
 		//
 		// Custom functions.
@@ -117,6 +131,8 @@ namespace TES3 {
 
 		std::reference_wrapper<unsigned char[8]> getAttributes();
 		std::reference_wrapper<unsigned char[27]> getSkills();
+
+		sol::optional<int> getBaseSoulValue();
 
 		Class* getBaseClass();
 		Faction* getBaseFaction();

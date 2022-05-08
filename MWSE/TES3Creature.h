@@ -56,7 +56,6 @@ namespace TES3 {
 	}
 
 	struct CreatureBase : Actor {
-
 		//
 		// Custom functions.
 		//
@@ -96,6 +95,9 @@ namespace TES3 {
 		void * aiPackageList; // 0xE0
 		AIConfig * aiConfig; // 0xE4
 
+		Creature();
+		~Creature();
+
 		//
 		// Custom functions.
 		//
@@ -120,6 +122,9 @@ namespace TES3 {
 		NI::Pointer<NI::Node> sgNode_84;
 		AIPackageConfig * aiPackageConfig; // 0x88
 
+		CreatureInstance() = delete;
+		~CreatureInstance() = delete;
+
 		//
 		// Base creature access functions.
 		//
@@ -131,6 +136,7 @@ namespace TES3 {
 		Creature* getBaseSoundGenerator() const;
 		int getBaseCreatureType() const;
 		SpellList* getBaseSpells() const;
+		void reevaluateEquipment();
 
 		int getBaseSoulValue() const;
 		void setBaseSoulValue(int value);

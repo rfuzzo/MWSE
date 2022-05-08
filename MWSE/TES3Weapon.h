@@ -30,9 +30,14 @@ namespace TES3 {
 	namespace WeaponMaterialFlag {
 		typedef unsigned int value_type;
 
-		enum WeaponMaterialFlag : value_type {
+		enum Flag : value_type {
 			IgnoresNormalWeaponResistance = 0x1,
 			Silver = 0x2
+		};
+
+		enum FlagBit {
+			IgnoresNormalWeaponResistanceBit = 0,
+			SilverBit = 1
 		};
 	}
 
@@ -58,6 +63,9 @@ namespace TES3 {
 		unsigned int materialFlags; // 0x70
 		Enchantment * enchantment; // 0x74
 
+		Weapon();
+		~Weapon();
+
 		//
 		// Custom functions.
 		//
@@ -67,16 +75,17 @@ namespace TES3 {
 		bool isMelee() const;
 		bool isRanged() const;
 		bool isAmmo() const;
+		bool isProjectile() const;
 		bool hasDurability() const;
 		void setDurability(int value);
 
-		bool getMaterialFlag(WeaponMaterialFlag::WeaponMaterialFlag) const;
-		void setMaterialFlag(WeaponMaterialFlag::WeaponMaterialFlag, bool);
+		bool getMaterialFlag(WeaponMaterialFlag::FlagBit flag) const;
+		void setMaterialFlag(WeaponMaterialFlag::FlagBit flag, bool value);
 
 		bool getIgnoresNormalWeaponResistance() const;
-		void setIgnoresNormalWeaponResistance(bool);
+		void setIgnoresNormalWeaponResistance(bool value);
 		bool getIsSilver() const;
-		void setIsSilver(bool);
+		void setIsSilver(bool value);
 
 		int getSkillId() const;
 		Skill* getSkill() const;

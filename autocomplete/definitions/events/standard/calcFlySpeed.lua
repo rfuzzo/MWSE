@@ -1,14 +1,20 @@
 return {
-	description = "One of the movement events, calcFlySpeed is used when calculating movement speeds when levitating or otherwise flying.",
+	type = "event",
+	description = [[One of the movement events, **calcFlySpeed** is used when calculating movement speeds when levitating or otherwise flying.
+
+The movement event flow is described below:
+
+- Flying: **calcFlySpeed** -> [calcMoveSpeed](https://mwse.github.io/MWSE/events/calcMoveSpeed)]],
+	related = { "calcMoveSpeed", "calcWalkSpeed", "calcRunSpeed", "calcFlySpeed", "calcSwimSpeed", "calcSwimRunSpeed" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor whose speed is being calculated.",
 		},
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "mobile’s related reference.",
 		},
 		["speed"] = {
@@ -17,11 +23,8 @@ return {
 		},
 		["type"] = {
 			type = "number",
-			readonly = true,
+			readOnly = true,
 			description = "The type of movement that was calculated. This is always 5 for this event.",
 		},
 	},
-	links = {
-        ["calcMoveSpeed"] = "lua/event/calcMoveSpeed",
-    },
 }

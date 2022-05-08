@@ -1,10 +1,12 @@
 #include "TES3ItemData.h"
 
-#include "TES3Actor.h"
+#include "TES3Creature.h"
 #include "TES3DataHandler.h"
 #include "TES3Enchantment.h"
+#include "TES3GlobalVariable.h"
 #include "TES3Light.h"
 #include "TES3Misc.h"
+#include "TES3Script.h"
 #include "TES3Weapon.h"
 
 #include "LuaManager.h"
@@ -45,7 +47,9 @@ namespace TES3 {
 	//
 
 	ItemData::LuaData::LuaData() {
-		data = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().state.create_table();
+		auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+		data = stateHandle.state.create_table();
+		tempData = stateHandle.state.create_table();
 	}
 
 	ItemData::ItemData() {
@@ -91,7 +95,7 @@ namespace TES3 {
 			itemData->condition = object->getUses();
 			break;
 		case TES3::ObjectType::Light:
-			itemData->timeLeft = static_cast<Light*>(object)->time;
+			itemData->timeLeft = float(static_cast<Light*>(object)->time);
 			break;
 		case TES3::ObjectType::Misc:
 			itemData->count = static_cast<Misc*>(object)->getGoldStackCount();
@@ -114,13 +118,79 @@ namespace TES3 {
 
 		if (itemData->luaData) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			return itemData->luaData->data.empty();
+			static sol::protected_function fnTableEmpty = stateHandle.state["table"]["empty"];
+			if (!fnTableEmpty(itemData->luaData->data, true) || !fnTableEmpty(itemData->luaData->tempData, true)) {
+				return false;
+			}
 		}
 
 		return true;
 	}
 
-	Actor * ItemData::getSoulActor() {
+	TES3::BaseObject* ItemData::getOwner() const {
+		return owner;
+	}
+
+	void ItemData::setOwner_lua(sol::object value) {
+		if (value == sol::nil) {
+			owner = nullptr;
+		}
+		else if (value.is<TES3::BaseObject*>()) {
+			auto newOwner = value.as<TES3::BaseObject*>();
+
+			// We only support NPC and Faction owners.
+			if (newOwner->objectType != TES3::ObjectType::NPC && newOwner->objectType != TES3::ObjectType::Faction) {
+				throw std::exception("Ownership must be an NPC or a faction.");
+			}
+
+			// If the owner type is changing, reset the requirement.
+			if (owner->objectType != newOwner->objectType) {
+				requiredVariable = nullptr;
+			}
+
+			owner = newOwner;
+		}
+	}
+
+	sol::object ItemData::getOwnerRequirement_lua(sol::this_state ts) const {
+		if (owner == nullptr) {
+			return sol::nil;
+		}
+		else if (owner->objectType == TES3::ObjectType::Faction) {
+			sol::state_view state = ts;
+			return sol::make_object(state, requiredRank);
+		}
+		else if (owner->objectType == TES3::ObjectType::NPC) {
+			sol::state_view state = ts;
+			return sol::make_object(state, requiredVariable);
+		}
+
+		return sol::nil;
+	}
+
+	void ItemData::setOwnerRequirement_lua(sol::object value) {
+		if (owner == nullptr) {
+			throw std::exception("An owner must be set before the requirement can be set.");
+		}
+		else if (owner->objectType == TES3::ObjectType::Faction) {
+			if (value.is<int>()) {
+				requiredRank = value.as<int>();
+			}
+			else {
+				throw std::exception("Faction ownership used. Requirement must be a rank (number).");
+			}
+		}
+		else if (owner->objectType == TES3::ObjectType::NPC) {
+			if (value.is<TES3::GlobalVariable*>()) {
+				requiredVariable = value.as<TES3::GlobalVariable*>();
+			}
+			else {
+				throw std::exception("NPC ownership used. Requirement must be a global variable.");
+			}
+		}
+	}
+
+	Actor* ItemData::getSoul() const {
 		__try {
 			if (soul != nullptr && charge != -1.0f && soul->isActor()) {
 				return soul;
@@ -133,10 +203,23 @@ namespace TES3 {
 		return nullptr;
 	}
 
+	void ItemData::setSoul_lua(sol::object actor) {
+		if (charge == -1.0f) {
+			return;
+		}
+		else if (actor.is<TES3::Creature*>()) {
+			soul = actor.as<TES3::Creature*>();
+		}
+		else if (actor.is<TES3::CreatureInstance*>()) {
+			soul = actor.as<TES3::CreatureInstance*>()->baseCreature;
+		}
+	}
+
 	void ItemData::setLuaDataTable(sol::object data) {
 		if (data == sol::nil) {
 			if (luaData != nullptr) {
 				luaData->data = sol::nil;
+				luaData->tempData = sol::nil;
 				delete luaData;
 				luaData = nullptr;
 			}
@@ -152,6 +235,26 @@ namespace TES3 {
 		}
 	}
 
+	void ItemData::setLuaTempDataTable(sol::object data) {
+		if (data == sol::nil) {
+			if (luaData != nullptr) {
+				luaData->data = sol::nil;
+				luaData->tempData = sol::nil;
+				delete luaData;
+				luaData = nullptr;
+			}
+		}
+		else if (data.is<sol::table>()) {
+			if (luaData == nullptr) {
+				luaData = new TES3::ItemData::LuaData();
+			}
+			luaData->tempData = data;
+		}
+		else {
+			throw std::exception("Invalid data type assignment. Must be a table or nil.");
+		}
+	}
+
 	sol::table ItemData::getOrCreateLuaDataTable() {
 		if (luaData == nullptr) {
 			luaData = new ItemData::LuaData();
@@ -160,7 +263,26 @@ namespace TES3 {
 		return luaData->data;
 	}
 
+	sol::table ItemData::getOrCreateLuaTempDataTable() {
+		if (luaData == nullptr) {
+			luaData = new ItemData::LuaData();
+		}
+
+		return luaData->tempData;
+	}
+
 	std::shared_ptr<mwse::lua::ScriptContext> ItemData::createContext() {
 		return std::make_shared<mwse::lua::ScriptContext>(script, scriptData);
+	}
+
+	bool ItemData::setScriptShortValue(const char* name, short value) {
+		if (script) {
+			auto varIndex = script->getShortVarIndex(name);
+			if (varIndex.has_value()) {
+				scriptData->shortVarValues[varIndex.value()] = value;
+				return true;
+			}
+		}
+		return false;
 	}
 }

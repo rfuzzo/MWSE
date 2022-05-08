@@ -9,18 +9,28 @@
 
 #include "NIAmbientLight.h"
 #include "NIAVObject.h"
+#include "NIBillboardNode.h"
 #include "NICamera.h"
 #include "NICollisionSwitch.h"
+#include "NIColorData.h"
 #include "NIDirectionalLight.h"
 #include "NIExtraData.h"
+#include "NIKeyframeController.h"
+#include "NILookAtController.h"
 #include "NINode.h"
 #include "NIObjectNET.h"
+#include "NIParticleModifier.h"
+#include "NIParticles.h"
+#include "NIParticleSystemController.h"
 #include "NIPixelData.h"
 #include "NIPointLight.h"
+#include "NIPosData.h"
 #include "NIProperty.h"
+#include "NISkinInstance.h"
 #include "NISourceTexture.h"
 #include "NISpotLight.h"
 #include "NISwitchNode.h"
+#include "NITimeController.h"
 #include "NITriShape.h"
 
 #include "LuaObjectInvalidatedEvent.h"
@@ -80,6 +90,26 @@ namespace NI {
 		return stream.save(filename);
 	}
 
+	std::string Object::toString() const {
+		std::ostringstream ss;
+		const char* name = nullptr;
+		if (isInstanceOfType(NI::RTTIStaticPtr::NiObjectNET)) {
+			name = static_cast<const ObjectNET*>(this)->name;
+		}
+		ss << getRunTimeTypeInformation()->toString() << ":" << (name ? name : "(unnamed)");
+		return std::move(ss.str());
+	}
+
+	std::string Object::toJson() const {
+		std::ostringstream ss;
+		const char* name = nullptr;
+		if (isInstanceOfType(NI::RTTIStaticPtr::NiObjectNET)) {
+			name = static_cast<const ObjectNET*>(this)->name;
+		}
+		ss << "\"" << getRunTimeTypeInformation()->toString() << ":" << (name ? name : "(unnamed)") << "\"";
+		return std::move(ss.str());
+	}
+
 	static std::unordered_map<const Object*, sol::object> niObjectCache;
 
 	sol::object Object::getOrCreateLuaObject(lua_State* L) {
@@ -114,11 +144,17 @@ namespace NI {
 			case RTTIStaticPtr::NiAVObject:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<AVObject*>(this)));
 				break;
+			case RTTIStaticPtr::NiBillboardNode:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<BillboardNode*>(this)));
+				break;
 			case RTTIStaticPtr::NiCamera:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<Camera*>(this)));
 				break;
 			case RTTIStaticPtr::NiCollisionSwitch:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<CollisionSwitch*>(this)));
+				break;
+			case RTTIStaticPtr::NiColorData:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ColorData*>(this)));
 				break;
 			case RTTIStaticPtr::NiDirectionalLight:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<DirectionalLight*>(this)));
@@ -128,6 +164,18 @@ namespace NI {
 				break;
 			case RTTIStaticPtr::NiFogProperty:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<FogProperty*>(this)));
+				break;
+			case RTTIStaticPtr::NiGravity:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<Gravity*>(this)));
+				break;
+			case RTTIStaticPtr::NiKeyframeController:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<KeyframeController*>(this)));
+				break;
+			case RTTIStaticPtr::NiKeyframeData:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<KeyframeData*>(this)));
+				break;
+			case RTTIStaticPtr::NiLookAtController:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<LookAtController*>(this)));
 				break;
 			case RTTIStaticPtr::NiMaterialProperty:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<MaterialProperty*>(this)));
@@ -141,14 +189,59 @@ namespace NI {
 			case RTTIStaticPtr::NiObjectNET:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<ObjectNET*>(this)));
 				break;
+			case RTTIStaticPtr::NiParticleBomb:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleBomb*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticleCollider:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleCollider*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticleColorModifier:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleColorModifier*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticleGrowFade:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleGrowFade*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticleModifier:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleModifier*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticleRotation:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleRotation*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticles:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<Particles*>(this)));
+				break;
+			case RTTIStaticPtr::NiParticleSystemController:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleSystemController*>(this)));
+				break;
+			case RTTIStaticPtr::NiPlanarCollider:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<PlanarCollider*>(this)));
+				break;
 			case RTTIStaticPtr::NiPixelData:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<PixelData*>(this)));
 				break;
 			case RTTIStaticPtr::NiPointLight:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<PointLight*>(this)));
 				break;
+			case RTTIStaticPtr::NiPosData:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<PosData*>(this)));
+				break;
+			case RTTIStaticPtr::NiRotatingParticles:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<RotatingParticles*>(this)));
+				break;
+			case RTTIStaticPtr::NiSkinData:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<SkinData*>(this)));
+				break;
+			case RTTIStaticPtr::NiSkinInstance:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<SkinInstance*>(this)));
+				break;
+			case RTTIStaticPtr::NiSkinPartition:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<SkinPartition*>(this)));
+				break;
 			case RTTIStaticPtr::NiSourceTexture:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<SourceTexture*>(this)));
+				break;
+			case RTTIStaticPtr::NiSphericalCollider:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<SphericalCollider*>(this)));
 				break;
 			case RTTIStaticPtr::NiSpotLight:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<SpotLight*>(this)));
@@ -170,6 +263,9 @@ namespace NI {
 				break;
 			case RTTIStaticPtr::NiTextKeyExtraData:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<TextKeyExtraData*>(this)));
+				break;
+			case RTTIStaticPtr::NiTimeController:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<TimeController*>(this)));
 				break;
 			case RTTIStaticPtr::NiTriShape:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<TriShape*>(this)));

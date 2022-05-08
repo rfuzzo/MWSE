@@ -44,6 +44,7 @@ namespace TES3 {
 		//
 		// WidgetButton
 		//
+
 		static Property propButtonState;
 		static Property propButtonIdle[4], propButtonOver[4], propButtonPressed[4];
 		static Property propButtonDisabled[4], propButtonDisabledOver[4], propButtonDisabledPressed[4];
@@ -124,6 +125,7 @@ namespace TES3 {
 		//
 		// WidgetFillbar
 		//
+
 		static Property propFillbarCurrent, propFillbarMax;
 		static Property propFillbarShowText;
 		static Property propFillbarCol[4];
@@ -218,6 +220,10 @@ namespace TES3 {
 			setColourProperty(*this, propFillbarCol, c);
 		}
 
+		float WidgetFillbar::getFillAlpha() {
+			return getProperty(PropertyType::Float, propFillbarCol[3]).floatValue;
+		}
+
 		void WidgetFillbar::setFillAlpha(float a) {
 			setProperty(propFillbarCol[3], a);
 		}
@@ -225,6 +231,7 @@ namespace TES3 {
 		//
 		// WidgetParagraphInput
 		//
+
 		static Property propParagraphInputMaxLength;
 		static UI_ID uiidParagraphInputText;
 
@@ -258,7 +265,7 @@ namespace TES3 {
 
 		std::string WidgetParagraphInput::getText() const {
 			auto textInput = WidgetTextInput::fromElement(findChild(uiidParagraphInputText));
-			return textInput->getText();
+			return std::move(textInput->getText());
 		}
 
 		void WidgetParagraphInput::setText(const char* text) {
@@ -270,6 +277,7 @@ namespace TES3 {
 		//
 		// WidgetScrollBar
 		//
+
 		static Property propScrollBarCurrent, propScrollBarMax;
 		static Property propScrollStepX, propScrollJumpX;
 
@@ -322,6 +330,7 @@ namespace TES3 {
 		//
 		// WidgetScrollPane
 		//
+
 		static UI_ID uiidScrollPaneHScroll, uiidScrollPaneVScroll;
 
 		const auto TES3_WidgetScrollPane_getContentPane = reinterpret_cast<TES3::UI::Element*(__cdecl*)(WidgetScrollPane*)>(0x649CA0);
@@ -404,6 +413,7 @@ namespace TES3 {
 		//
 		// WidgetTextInput
 		//
+
 		static Property propTextInputLengthLimit, propTextInputNoLimit;
 		static Property propTextInputEraseOnFirstKey;
 
@@ -478,7 +488,7 @@ namespace TES3 {
 			if (i != std::string::npos) {
 				editText.erase(i, 1);
 			}
-			return editText;
+			return std::move(editText);
 		}
 		void WidgetTextInput::setText(const char* text) {
 			// Use standard setText without adding a caret.

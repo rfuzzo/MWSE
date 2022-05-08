@@ -1,5 +1,7 @@
 return {
+	type = "event",
 	description = "The load event fires when the game is about to load. This event allows scripts to block loading.",
+	related = { "load", "loaded" },
 	eventData = {
 		["filename"] = {
 			type = "string",
@@ -7,14 +9,15 @@ return {
 		},
 		["quickload"] = {
 			type = "boolean",
-			readonly = true,
+			readOnly = true,
 			description = "If true, the load came from the quickload system.",
 		},
 		["newGame"] = {
 			type = "boolean",
-			readonly = true,
+			readOnly = true,
 			description = "If true, a new game is being started.",
 		},
 	},
 	filter = "filename",
+	blockable = true,
 }

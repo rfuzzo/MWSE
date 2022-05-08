@@ -35,21 +35,28 @@ namespace TES3 {
 			float fovDegrees; // 0x8
 			float nearPlaneDistance; // 0xC
 			float farPlaneDistance; // 0x10
-			int viewportWidth; // 0x14
-			int viewportHeight; // 0x18
+			unsigned int viewportWidth; // 0x14
+			unsigned int viewportHeight; // 0x18
+
+			CameraData() = delete;
+			~CameraData() = delete;
 
 			//
 			// Other related this-call functions.
 			//
 
+			float getFOV() const;
 			void setFOV(float degrees);
 
 		};
 		void* vTable; // 0x0
-		NI::Object* renderer; // 0x4
-		NI::Object* root; // 0x8
+		NI::Renderer* renderer; // 0x4
+		NI::Node* root; // 0x8
 		NI::Node* cameraRoot; // 0xC
 		CameraData cameraData; // 0x10
+
+		WorldControllerRenderCamera() = delete;
+		~WorldControllerRenderCamera() = delete;
 
 		//
 		// Custom functions.
@@ -84,6 +91,9 @@ namespace TES3 {
 		int unknown_0x78;
 		NI::Pointer<NI::AlphaProperty> alphaProperty; // 0x7C
 		NI::Pointer<NI::VertexColorProperty> vertexColorProperty; // 0x80
+
+		WorldControllerRenderTarget() = delete;
+		~WorldControllerRenderTarget() = delete;
 	};
 	static_assert(sizeof(WorldControllerRenderTarget) == 0x84, "TES3::WorldControllerRenderTarget failed size validation");
 
@@ -98,20 +108,11 @@ namespace TES3 {
 		int unknown_0x44;
 		int unknown_0x48;
 		int unknown_0x4C;
-		int unknown_0x50;
-		int unknown_0x54;
-		int unknown_0x58;
-		int unknown_0x5C;
-		int unknown_0x60;
-		int unknown_0x64;
-		int unknown_0x68;
-		int unknown_0x6C;
-		int unknown_0x70;
-		int unknown_0x74;
-		int unknown_0x78;
-		int unknown_0x7C;
+
+		MouseController() = delete;
+		~MouseController() = delete;
 	};
-	static_assert(sizeof(MouseController) == 0x80, "TES3::MouseController failed size validation");
+	static_assert(sizeof(MouseController) == 0x50, "TES3::MouseController failed size validation");
 
 #define MWSE_CUSTOM_KILLCOUNTER true
 	struct KillCounter {
@@ -128,6 +129,9 @@ namespace TES3 {
 #else
 		IteratedList<Node*>* killedActors; // 0x8
 #endif
+
+		KillCounter() = delete;
+		~KillCounter() = delete;
 
 		//
 		// Custom functions.
@@ -158,12 +162,17 @@ namespace TES3 {
 		int unknown_0x1C;
 		int unknown_0x20;
 
+		InventoryData() = delete;
+		~InventoryData() = delete;
+
 		//
 		// Other related this-call functions.
 		//
 
 		_declspec(dllexport) void clearIcons(int type);
 		_declspec(dllexport) void addInventoryItems(Inventory* inventory, int type);
+		_declspec(dllexport) UI::InventoryTile* findTile(Item* item, ItemData* itemData, int type);
+		_declspec(dllexport) void mergeTile(UI::InventoryTile* tile);
 
 	};
 	static_assert(sizeof(InventoryData) == 0x24, "TES3::InventoryData failed size validation");
@@ -176,6 +185,13 @@ namespace TES3 {
 		int unknown_0x2C;
 		int unknown_0x30;
 		void* rawFontData; // 0x34 // The raw .fnt file contents.
+
+		Font() = delete;
+		~Font() = delete;
+
+		void substituteTextMacros(const Actor* actor, const char* text) const;
+
+		char* getSubstituteResult() const;
 	};
 	static_assert(sizeof(Font) == 0x38, "TES3::Font failed size validation");
 
@@ -183,6 +199,9 @@ namespace TES3 {
 		bool changedSinceLastSync; // 0x0
 		char* data; // 0x4
 		unsigned int length; // 0x8
+
+		JournalHTML() = delete;
+		~JournalHTML() = delete;
 
 		//
 		// Other related this-call functions.
@@ -206,6 +225,9 @@ namespace TES3 {
 			NI::Pointer<NI::Node> node; // 0x0
 			float age; // 0x4
 			float maxAge; // 0x8
+
+			ActiveSplash() = delete;
+			~ActiveSplash() = delete;
 		};
 		int bloodMeshCount; // 0x0
 		int bloodTextureCount; // 0x4
@@ -214,9 +236,28 @@ namespace TES3 {
 		NI::Pointer<NI::SourceTexture> bloodTextures[8]; // 0x30
 		NI::Pointer<NI::TexturingProperty> bloodTextureProperties[8]; // 0x50
 		IteratedList<ActiveSplash*>* activeSplashes; // 0x70
+
+		SplashController() = delete;
+		~SplashController() = delete;
+
+		std::reference_wrapper<NI::Pointer<NI::Node>[4]> getBloodMeshes();
+		std::reference_wrapper<float[6]> getBloodSplashDurations();
+		std::reference_wrapper<NI::Pointer<NI::SourceTexture>[8]> getBloodTextures();
+		std::reference_wrapper<NI::Pointer<NI::TexturingProperty>[8]> getBloodTextureProperties();
+
 	};
 	static_assert(sizeof(SplashController) == 0x74, "TES3::SplashController failed size validation");
 	static_assert(sizeof(SplashController::ActiveSplash) == 0xC, "TES3::SplashController::ActiveSplash failed size validation");
+
+	struct RechargingItem {
+		Object* item; // 0x0
+		Enchantment* enchantment; // 0x4
+		ItemData* itemData; // 0x8
+
+		RechargingItem() = delete;
+		~RechargingItem() = delete;
+	};
+	static_assert(sizeof(RechargingItem) == 0xC, "TES3::RechargingItem failed size validation");
 
 	struct ShadowManager {
 		bool unknown_0x0;
@@ -240,17 +281,17 @@ namespace TES3 {
 	static_assert(sizeof(ShadowManager) == 0x70, "TES3::ShadowManager failed size validation");
 
 	struct WorldController {
-		int unknown_0x0;
-		int unknown_0x4;
-		float unknown_0x8;
-		float unknown_0xC;
+		int framesSinceLastFPSMeasure; // 0x0
+		int framesPerFPSMeasure; // 0x4, defaults to 3
+		float lightFlickerSimTickRate; // 0x8, defaults to 15.0
+		float minFPS; // 0xC, defaults to 5.0
 		float maxFPS; // 0x10
-		int unknown_0x14;
-		int unknown_0x18;
-		int unknown_0x1C;
+		float framesPerSecond; // 0x14
+		float lightFlickerSimTicksToSimulate; // 0x18
+		float lightFlickerSimTicksSmoothed; // 0x1C
 		unsigned int systemTimeMillis; // 0x20
 		unsigned int lastFrameTimeMillis; // 0x24
-		int unknown_0x28;
+		unsigned int lastFPSMeasureTimeMillis; // 0x28
 		float deltaTime; // 0x2C
 		NI::Renderer * renderer; // 0x30
 		AudioController * audioController; // 0x34
@@ -259,20 +300,20 @@ namespace TES3 {
 		Font * fonts[3]; // 0x40
 		InputController * inputController; // 0x4C
 		MouseController * mouseController; // 0x50
-		Script * scriptGlobals; // 0x54
+		Script * scriptCompileAndRun; // 0x54
 		WeatherController * weatherController; // 0x58
 		MobController * mobController; // 0x5C
 		KillCounter * playerKills; // 0x60
-		JournalHTML* journalHTML; // 0x64
-		SplashController* splashController; // 0x68
+		JournalHTML * journalHTML; // 0x64
+		SplashController * splashController; // 0x68
 		IteratedList<Quest*> * journalController; // 0x6C
-		SpellInstanceController * spellInstanceController; // 0x70
-		int unknown_0x74;
+		MagicInstanceController * magicInstanceController; // 0x70
+		VFXManager * vfxManager; // 0x74
 		int viewWidth; // 0x78
 		int viewHeight; // 0x7C
-		int unknown_0x80;
+		int bitDepth; // 0x80
 		int bShadows; // 0x84
-		int helpDelay; // 0x88
+		float helpDelay; // 0x88
 		unsigned char hudStyle; // 0x8C
 		float menuAlpha; // 0x90
 		bool cursorOff; // 0x94
@@ -295,9 +336,9 @@ namespace TES3 {
 		bool flagEventMenuModeOff; // 0xD5
 		bool flagMenuMode; // 0xD6
 		char unknown_0xD7;
-		char unknown_0xD8;
+		bool collisionEnabled; // 0xD8
 		char unknown_0xD9;
-		char unknown_0xDA;
+		bool disableAI; // 0xDA
 		bool stopGameLoop; // 0xDB
 		char unknown_0xDC;
 		char unknown_0xDD;
@@ -306,7 +347,7 @@ namespace TES3 {
 		bool flagTeleportingDisabled; // 0xE0
 		bool flagLevitationDisabled; // 0xE1
 		bool useBestAttack; // 0xE2
-		bool canUseQuickSaveAndRest; // 0xE3
+		bool quickSaveWhenResting; // 0xE3
 		char unknown_0xE4;
 		char unknown_0xE5;
 		char unknown_0xE6;
@@ -323,7 +364,7 @@ namespace TES3 {
 		WorldControllerRenderTarget mapRenderTarget; // 0x22C
 		WorldControllerRenderCamera shadowCamera; // 0x2B0
 		ShadowManager* shadowManager; // 0x2DC
-		void* fogOfWarController; // 0x2E0
+		void* mapController; // 0x2E0
 		UI::MenuController * menuController; // 0x2E4
 		InventoryData * inventoryData; // 0x2E8
 		Sound * soundWeaponSwish; // 0x2EC
@@ -342,12 +383,12 @@ namespace TES3 {
 		Sound * soundMenuClick; // 0x320
 		Sound * soundMenuSize; // 0x324
 		Sound * soundItemRepair; // 0x328
-		int unknown_0x32C;
+		Cell * startingCell; // 0x32C
 		float deadFloatScale; // 0x330
 		int unknown_0x334;
 		IteratedList<GlobalScript*> * globalScripts; // 0x338
-		IteratedList<MobileActor*> * allActors; // 0x33C
-		IteratedList<void*> * chargableItems; // 0x340
+		IteratedList<MobileActor*> * allMobileActors; // 0x33C
+		IteratedList<RechargingItem*> * rechargingItems; // 0x340
 		bool showSubtitles; // 0x344
 		int countMusicTracksBattle; // 0x348
 		int countMusicTracksExplore; // 0x34C
@@ -361,8 +402,12 @@ namespace TES3 {
 		NI::Pointer<NI::TextureEffect> enchantedItemEffect; // 0x36C
 		NI::Pointer<NI::SourceTexture>* enchantedItemEffectTextures; // 0x370 // 32 elements in length.
 
+
+		WorldController() = delete;
+		~WorldController() = delete;
+
 		// Get singleton.
-		_declspec (dllexport) static WorldController * get();
+		_declspec (dllexport) static WorldController* get();
 
 		//
 		// Other related this-call functions.
@@ -373,13 +418,16 @@ namespace TES3 {
 		_declspec(dllexport) void playItemUpDownSound(BaseObject* item, ItemSoundState state = ItemSoundState::Up, Reference* reference = nullptr);
 		_declspec(dllexport) float getSimulationTimestamp();
 		_declspec(dllexport) void processGlobalScripts();
+		_declspec(dllexport) void startGlobalScript(Script* script, const Reference* reference = nullptr);
+		_declspec(dllexport) void stopGlobalScript(Script* script);
+		_declspec(dllexport) bool isGlobalScriptRunning(const Script* script) const;
 
 		_declspec(dllexport) unsigned short getDaysInMonth(int);
 		_declspec(dllexport) unsigned short getCumulativeDaysForMonth(int month);
 		_declspec(dllexport) const char* getNameForMonth(int month);
 		_declspec(dllexport) double getHighPrecisionSimulationTimestamp();
 
-		_declspec(dllexport) bool applyEnchantEffect(NI::Node* node, Enchantment * enchantment);
+		_declspec(dllexport) bool applyEnchantEffect(NI::Node* node, Enchantment* enchantment);
 
 		_declspec(dllexport) void updateTiming();
 		_declspec(dllexport) void updateEnvironmentLightingWeather();
@@ -389,6 +437,8 @@ namespace TES3 {
 		float getAIDistanceScale() const;
 		void setAIDistanceScale(float scale);
 
+		void rechargerAddItem(Object* item, ItemData* itemData, Enchantment* enchantment);
+
 		//
 		// Custom functions.
 		//
@@ -396,6 +446,11 @@ namespace TES3 {
 		_declspec(dllexport) void tickClock();
 		_declspec(dllexport) void checkForDayWrapping();
 
+		//
+		// Helpful static variables.
+		//
+
+		static float simulationTimeScalar;
 	};
 	static_assert(sizeof(WorldController) == 0x374, "TES3::WorldController failed size validation");
 	static_assert(offsetof(WorldController, inputController) == 0x4C, "TES3::WorldController failed offset validation");

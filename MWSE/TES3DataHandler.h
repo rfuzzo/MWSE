@@ -35,9 +35,13 @@ namespace TES3 {
 		HashMap<const char*, NI::Node*>* NIFs; // 0x0
 		HashMap<const char*, KeyframeDefinition*>* KFs; // 0x4
 
+		MeshData() = delete;
+		~MeshData() = delete;
+
 		// Path is relative to Data Files.
-		NI::AVObject* loadMesh(const char* path);
-		KeyframeDefinition* loadKeyFrame(const char* path, const char* animation);
+		NI::Node* loadMesh(const char* path);
+		NI::Pointer<NI::Node> loadMeshUncached(const char* path);
+		KeyframeDefinition* loadKeyframes(const char* path, const char* animation);
 	};
 
 	template <typename OT>
@@ -111,7 +115,7 @@ namespace TES3 {
 		NI::Pointer<NI::Node> baseBeastSkeletons[3]; // 0x0xAE44
 		KeyframeDefinition* baseBeastAnimations[3]; // 0xAE50
 		NI::Pointer<NI::Property> collisionWireframeProperty; // 0xAE5C
-		StlList<GameFile*>* TESFiles; // 0xAE60 
+		StlList<GameFile*>* gameFiles; // 0xAE60 
 #ifdef MWSE_RAISED_FILE_LIMIT
 		unsigned char freed_0xAE64[0x400]; // Unused space free for plundering.
 #else
@@ -122,7 +126,7 @@ namespace TES3 {
 		ObjectMapContainer<Dialogue>* allDialoguesById; // 0xB26C
 		char dataFilesPath[260]; // 0xB270
 		char unknown_0xB374;
-		bool isSaving; // 0xB375
+		bool isSavingOrLoading; // 0xB375
 		bool isModifyingMasters; // 0xB376
 		char unknown_0xB377;
 		char unknown_0xB378;
@@ -132,6 +136,9 @@ namespace TES3 {
 		NI::Pointer<NI::SourceTexture> mapTexture; // 0xB380
 		Reference * playerSaveGame; // 0xB384
 		CriticalSection criticalSection; // 0xB388
+
+		NonDynamicData() = delete;
+		~NonDynamicData() = delete;
 
 		//
 		// Other related this-call functions.
@@ -147,7 +154,9 @@ namespace TES3 {
 		Script* findScriptByName(const char*);
 		GlobalVariable* findGlobalVariable(const char*);
 		Dialogue* findDialogue(const char*);
+		bool addSound(Sound*);
 		Sound* findSound(const char*);
+		Class* findClass(const char*);
 		Faction* findFaction(const char*);
 		Reference* findClosestExteriorReferenceOfObject(PhysicalObject* object, Vector3* position, bool searchForExteriorDoorMarker = false, int ignored = -1);
 		bool addNewObject(BaseObject*);
@@ -172,6 +181,8 @@ namespace TES3 {
 		//
 
 		std::reference_wrapper<Skill[27]> getSkills();
+
+		nonstd::span<GameFile*> getActiveMods();
 
 		sol::table getMagicEffects_lua(sol::this_state ts);
 
@@ -199,13 +210,16 @@ namespace TES3 {
 	static_assert(offsetof(NonDynamicData, GMSTs) == 0x18, "TES3::NonDynamicData failed offset validation");
 	static_assert(offsetof(NonDynamicData, skills) == 0x4C, "TES3::NonDynamicData failed offset validation");
 	static_assert(offsetof(NonDynamicData, magicEffects) == 0x5C8, "TES3::NonDynamicData failed offset validation");
-	static_assert(offsetof(NonDynamicData, TESFiles) == 0xAE60, "TES3::NonDynamicData failed offset validation");
+	static_assert(offsetof(NonDynamicData, gameFiles) == 0xAE60, "TES3::NonDynamicData failed offset validation");
 
 	struct SoundEvent {
 		Reference* reference;
 		Sound* sound;
 		SoundBuffer* soundBuffer;
 		unsigned char unknown_0xC;
+
+		SoundEvent() = delete;
+		~SoundEvent() = delete;
 	};
 	static_assert(sizeof(SoundEvent) == 0x10, "TES3::SoundEvent failed size validation");
 
@@ -228,6 +242,9 @@ namespace TES3 {
 			unsigned char loadingFlags;
 			Cell * cell;
 			void * landRenderData;
+
+			ExteriorCellData() = delete;
+			~ExteriorCellData() = delete;
 		};
 
 		NonDynamicData * nonDynamicData; // 0x0
@@ -317,6 +334,9 @@ namespace TES3 {
 		int exteriorCellDataBufferSize; // 0xB550
 		void * exteriorCellDataBuffer; // 0xB554
 
+		DataHandler() = delete;
+		~DataHandler() = delete;
+
 		//
 		// Custom static data.
 		//
@@ -344,16 +364,25 @@ namespace TES3 {
 		NI::Pointer<NI::SourceTexture> loadSourceTexture(const char* path);
 
 		void updateLightingForReference(Reference * reference);
+		void updateLightingForExteriorCells();
 		void setDynamicLightingForReference(Reference* reference);
 
 		void updateCollisionGroupsForActiveCells(bool force = true, bool isResettingData = false, bool resetCollisionGroups = true);
 		void updateCollisionGroupsForActiveCells_raw(bool force = true);
+
+		bool isCellInMemory(const Cell* cell, bool unknown) const;
 
 		//
 		// Custom functions.
 		//
 
 		std::reference_wrapper<ExteriorCellData* [9]> getExteriorCellData_lua();
+
+		//
+		// Debug values.
+		//
+
+		static const char* currentlyLoadingMesh;
 
 	};
 	static_assert(sizeof(DataHandler) == 0xB558, "TES3::DataHandler failed size validation");

@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Preforms a ray test and returns various information related to the result(s). If findAll is set, the result will be a table of results, otherwise only the first result is returned.]],
+	description = [[Performs a ray test and returns various information related to the result(s). If `findAll` is set, the result will be a table of results, otherwise only the first result is returned.]],
 	arguments = {{
 		name = "params",
 		type = "table",
@@ -14,19 +14,19 @@ return {
 			{ name = "useModelCoordinates", type = "boolean", default = false, description = "If true, model coordinates will be used instead of world coordinates." },
 			{ name = "useBackTriangles", type = "boolean", default = false, description = "Include intersections with back-facing triangles." },
 			{ name = "observeAppCullFlag", type = "boolean", default = true, description = "Ignore intersections with culled (hidden) models." },
-			{ name = "root", type = "node*", default = "tes3.game.worldSceneGraphRoot", description = "Node pointer to node scene."},
+			{ name = "root", type = "niNode", default = "tes3.game.worldSceneGraphRoot", description = "Node pointer to node scene."},
 			{ name = "ignoreSkinned", type = "boolean", default = false, description = "Ignore results from skinned objects."},
 			{ name = "returnColor", type = "boolean", default = false, description = "Calculate and return the vertex color at intersections." },
 			{ name = "returnNormal", type = "boolean", default = true, description = "Calculate and return the vertex normal at intersections." },
 			{ name = "returnSmoothNormal", type = "boolean", default = false, description = "Use normal interpolation for calculating vertex normals." },
 			{ name = "returnTexture", type = "boolean", default = false, description = "Calculate and return the texture coordinate at intersections." },
-			{ name = "ignore", type = "table", description = "An array of references and/or scene graph nodes to cull from the result(s).", optional = true },
+			{ name = "ignore", type = "tes3reference[]|niNode[]", description = "An array of references and/or scene graph nodes to cull from the result(s).", optional = true },
 		},
 	}},
 	examples = {
 		["GetActivationTarget"] = {
 			title = "Get Activation Target",
-			description = "This example performs a ray test to match the normal activation target test. Unlike ``tes3.getPlayerTarget()`` this will return objects not normally available for activation.",
+			description = "This example performs a ray test to match the normal activation target test. Unlike `tes3.getPlayerTarget()` this will return objects not normally available for activation.",
 		},
 		["GetCameraTarget"] = {
 			title = "Get Camera Target",
@@ -35,6 +35,10 @@ return {
 		["MultipleResults"] = {
 			title = "Multiple Results",
 			description = "This example performs a ray test and displays all results in the entire ray test, rather than ending at the first object hit.",
+		},
+		["rayTestForLater"] = {
+					title = "Save rayTest result for use at a later point",
+					description = "If you plan to use the results of rayTest, you should make sure it still exists. For example, an object which was in a list of results of rayTest can get unloaded when the player changes cells and become invalid, so it shouldn't be accessed.",
 		},
 	},
 	returns = "result",

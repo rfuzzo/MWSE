@@ -4,14 +4,13 @@
 
 #include "LuaCalcMovementSpeedEvent.h"
 
-#include "TES3ActorAnimationData.h"
-
-#define TES3_MobileCreature_calcWalkSpeed 0x55AAF0
+#include "TES3ActorAnimationController.h"
 
 namespace TES3 {
+	const auto TES3_MobileCreature_calcWalkSpeed = reinterpret_cast<float(__thiscall*)(MobileCreature*)>(0x55AAF0);
 	float MobileCreature::calculateWalkSpeed() {
 		// Call the original function to get the default walk value.
-		float speed = reinterpret_cast<float(__thiscall *)(MobileCreature*)>(TES3_MobileCreature_calcWalkSpeed)(this);
+		float speed = TES3_MobileCreature_calcWalkSpeed(this);
 
 		// Launch our event, and overwrite the speed with what was given back to us.
 		if (mwse::lua::event::CalculateMovementSpeed::getEventEnabled()) {
@@ -27,7 +26,7 @@ namespace TES3 {
 	}
 
 	float MobileCreature::calculateMovementSpeedFromAnimationData() {
-		return animationData.asActor->calculateMovementSpeed();
+		return animationController.asActor->calculateMovementSpeed();
 	}
 
 	std::reference_wrapper<Statistic[3]> MobileCreature::getSkillStatistics() {

@@ -4,9 +4,15 @@
 
 #include "BuildDate.h"
 #include "MWSEDefs.h"
+#include "UTF8Convert.h"
 #include "WindowsUtil.h"
 
 #include "LuaTimer.h"
+
+#include "Log.h"
+
+#include "TES3WorldController.h"
+#include "TES3InputController.h"
 
 namespace mwse::lua {
 #ifdef APPVEYOR_BUILD_NUMBER
@@ -29,8 +35,20 @@ namespace mwse::lua {
 		return LuaManager::getInstance().overrideScript(scriptId, target);
 	}
 
-	sol::object breakpoint() {
+	bool clearScriptOverride(const char* scriptId) {
+		return LuaManager::getInstance().clearScriptOverride(scriptId);
+	}
+
+	void forceCursorOn() {
+		TES3::WorldController::get()->inputController->mouse->SetCooperativeLevel(GetActiveWindow(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+		TES3::WorldController::get()->inputController->keyboard->SetCooperativeLevel(GetActiveWindow(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 		while (ShowCursor(TRUE) < 0);
+	}
+
+	sol::object breakpoint(sol::optional<const char*> message) {
+		if (message.value_or(nullptr)) {
+			mwse::log::getLog() << "[MWSE] Hit breakpoint: " << message.value() << std::endl;
+		}
 		return sol::nil;
 	}
 
@@ -55,9 +73,12 @@ namespace mwse::lua {
 		// Basic function binding.
 		lua_mwse["breakpoint"] = breakpoint;
 		lua_mwse["crash"] = crash;
+		lua_mwse["forceCursorOn"] = forceCursorOn;
 		lua_mwse["getVersion"] = getVersion;
 		lua_mwse["getVirtualMemoryUsage"] = getVirtualMemoryUsage;
+		lua_mwse["iconv"] = iconv;
 		lua_mwse["overrideScript"] = overrideScript;
+		lua_mwse["clearScriptOverride"] = clearScriptOverride;
 		lua_mwse["virtualKeyPressed"] = getIsVirtualKeyPressed;
 	}
 }

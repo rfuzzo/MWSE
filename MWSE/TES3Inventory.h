@@ -8,17 +8,52 @@
 #include "TES3Vectors.h"
 
 namespace TES3 {
+	enum class QuickKeyType : unsigned int {
+		None = 0,
+		Item = 1,
+		Magic = 2,
+	};
+
+	struct QuickKey {
+		QuickKeyType type; // 0x0
+		Spell* spell; // 0x4
+		Item* item; // 0x8
+		ItemData* itemData; // 0xC
+
+		QuickKey() = delete;
+		~QuickKey() = delete;
+
+		std::tuple<TES3::BaseObject*, TES3::ItemData*> getMagic();
+		void setMagic(TES3::BaseObject* object, sol::optional<TES3::ItemData*> itemData);
+
+		std::tuple<TES3::Item*, TES3::ItemData*> getItem();
+		void setItem(TES3::Item* object, sol::optional<TES3::ItemData*> itemData);
+
+		void clear();
+
+		static QuickKey* getQuickKey(unsigned int slot);
+		static nonstd::span<QuickKey, 9> getQuickKeys();
+	};
+	static_assert(sizeof(QuickKey) == 0x10, "TES3::QuickKey failed size validation");
+
 	struct ItemStack {
 		int count; // 0x0
 		Object * object; // 0x4
 		NI::TArray<ItemData*> * variables; // 0x8
 
+		ItemStack() = delete;
+		~ItemStack() = delete;
 	};
 	static_assert(sizeof(ItemStack) == 0xC, "TES3::ItemStack failed size validation");
 
 	struct EquipmentStack {
 		Object * object; // 0x0
-		ItemData * variables; // 0x4
+		ItemData * itemData; // 0x4
+
+		static void* operator new(size_t size);
+		static void operator delete(void* block);
+
+		EquipmentStack();
 
 		//
 		// Other related helper functions.
@@ -31,19 +66,20 @@ namespace TES3 {
 	struct Inventory {
 		unsigned int flags; // 0x0
 		IteratedList<ItemStack*> itemStacks; // 0x4
-		int unknown_0x18;
+		Light * internalLight; // 0x18
 
 		//
 		// Other related this-call functions.
 		//
 
-		ItemStack* findItemStack(Object* item);
+		ItemStack* findItemStack(Object* item, ItemData* itemData = nullptr);
 
 		int addItem(MobileActor * mobile, Item * item, int count, bool overwriteCount, ItemData ** itemDataRef);
 		int addItemWithoutData(MobileActor * mobile, Item * item, int count, bool something);
 		ItemData* addItemByReference(MobileActor * mobile, Reference * reference, int * out_count);
+		void removeItemData(Item* item, ItemData* itemData);
 		void removeItemWithData(MobileActor * mobile, Item * item, ItemData * itemData, int count, bool deleteStackData);
-		void dropItem(MobileActor* mobileActor, Item * item, ItemData * itemData, int count, Vector3 position, Vector3 orientation, bool unknown = false);
+		void dropItem(MobileActor* mobileActor, Item * item, ItemData * itemData, int count, Vector3 position, Vector3 orientation, bool ignoreItemData = false);
 
 		void resolveLeveledLists(MobileActor* mobile = nullptr);
 
@@ -51,15 +87,20 @@ namespace TES3 {
 		// Custom functions.
 		//
 
+		// This makes the assumption that there are no free-floating inventories in memory, and that they only exist in actors.
+		// This is true everywhere but when checking if the game needs to declone inventories.
+		Actor* getActor();
+
 		bool containsItem(Item * item, ItemData * data = nullptr);
 
-		float calculateContainedWeight();
+		float calculateContainedWeight() const;
 
 		int getSoulGemCount();
 
 		int addItem_lua(sol::table params);
 		void removeItem_lua(sol::table params);
 		bool contains_lua(sol::object itemOrItemId, sol::optional<TES3::ItemData*> itemData);
+		ItemStack* findItemStack_lua(sol::object itemOrItemId, sol::optional<TES3::ItemData*> itemData);
 		void resolveLeveledLists_lua(sol::optional<MobileActor*> mobile);
 
 		//

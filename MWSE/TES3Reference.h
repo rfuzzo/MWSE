@@ -31,6 +31,8 @@ namespace TES3 {
 			};
 		};
 
+		constexpr static auto INVALID_ATTACHMENT = reinterpret_cast<Attachment*>(0x3F800000);
+
 		//
 		// Basic operators.
 		//
@@ -63,10 +65,11 @@ namespace TES3 {
 		void ensureScriptDataIsInstanced();
 
 		void detachDynamicLightFromAffectedNodes();
-		void deleteDynamicLightAttachment();
+		void deleteDynamicLightAttachment(sol::optional<bool> removeLightFromParent = false);
 
+		void setModelPath(const char* path, bool temporary = false);
+		void reloadAnimation(const char* path);
 		bool updateBipedParts();
-		void setModelPath(const char* path);
 
 		//
 		// Other utility functions.
@@ -78,6 +81,10 @@ namespace TES3 {
 
 		void setDeleted(bool deleted);
 		void setDeletedWithSafety();
+
+		bool getNoCollision() const;
+		void setNoCollision(bool set, bool updateCells = true);
+		void setNoCollision_lua(bool set, sol::optional<bool> updateCells);
 
 		void setReferenceActive(bool skipDeleted = true);
 		void setReferenceInactive(bool skipDeleted = true);
@@ -103,24 +110,25 @@ namespace TES3 {
 		void relocate(Cell * cell, const Vector3 * position, float rotation);
 		void relocateNoRotation(Cell* cell, const Vector3* position);
 		bool clone();
+		bool onCloseInventory();
 
 		bool insertAttachment(Attachment* attachment);
-		Attachment* getAttachment(AttachmentType::AttachmentType type);
-		MobileObject* getAttachedMobileObject();
-		MobileActor* getAttachedMobileActor();
-		MobileCreature* getAttachedMobileCreature();
-		MobileNPC* getAttachedMobileNPC();
-		MobileProjectile* getAttachedMobileProjectile();
-		ItemData* getAttachedItemData();
+		Attachment* getAttachment(AttachmentType::AttachmentType type) const;
+		MobileObject* getAttachedMobileObject() const;
+		MobileActor* getAttachedMobileActor() const;
+		MobileCreature* getAttachedMobileCreature() const;
+		MobileNPC* getAttachedMobileNPC() const;
+		MobileProjectile* getAttachedMobileProjectile() const;
+		ItemData* getAttachedItemData() const;
 		void setAttachedItemData(ItemData * itemData);
 		ItemData* getOrCreateAttachedItemData();
 		LockAttachmentNode* getAttachedLockNode();
-		AnimationData* getAttachedAnimationData();
-		BodyPartManager* getAttachedBodyPartManager();
-		TravelDestination* getAttachedTravelDestination();
+		AnimationData* getAttachedAnimationData() const;
+		BodyPartManager* getAttachedBodyPartManager() ;
+		TravelDestination* getAttachedTravelDestination() const;
 
 		LightAttachmentNode* getAttachedDynamicLight();
-		LightAttachmentNode* getOrCreateAttachedDynamicLight(NI::PointLight *, float);
+		LightAttachmentNode* getOrCreateAttachedDynamicLight_lua(sol::optional<NI::PointLight*> light, sol::optional<float> value);
 		NI::Pointer<NI::Light> getAttachedNiLight();
 
 		bool isLeveledSpawn();
@@ -141,6 +149,15 @@ namespace TES3 {
 		// Override for references to raise an event when their scene node is created.
 		NI::Node * getSceneGraphNode();
 
+		unsigned int getSourceModId() const;
+		unsigned int getSourceFormId() const;
+		unsigned int getTargetModId() const;
+		unsigned int getTargetFormId() const;
+
+		sol::optional<bool> isDead() const;
+
+		bool isTemporaryInventoryScriptReference() const;
+
 		//
 		// Lua interface functions.
 		//
@@ -153,7 +170,9 @@ namespace TES3 {
 		// Return a table of name-keyed attachments for this object.
 		sol::table getAttachments_lua(sol::this_state ts);
 
+		bool getSupportsLuaData() const;
 		sol::table getLuaTable();
+		sol::table getLuaTempTable();
 
 		// For lua activation, reverse param order.
 		void activate_lua(Reference* target);

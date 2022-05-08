@@ -1,14 +1,15 @@
 return {
+	type = "event",
 	description = "This event is invoked whenever an actor is checking if they can detect another actor sneaking.",
 	eventData = {
 		["detector"] = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor that is doing the detecting.",
 		},
 		["target"] = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor that is possibly being detected.",
 		},
 		["isDetected"] = {

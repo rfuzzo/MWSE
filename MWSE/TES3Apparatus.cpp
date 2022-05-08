@@ -1,19 +1,18 @@
 #include "TES3Apparatus.h"
 
 namespace TES3 {
-	void Apparatus::setName(const char* n) {
-		auto length = strlen(n);
-		if (length >= 32) {
-			throw std::invalid_argument("Name cannot be 32 or more characters.");
-		}
-		strncpy_s(name, n, length);
-	}
-
 	void Apparatus::setIconPath(const char* path) {
 		if (strlen(path) >= 32) {
 			throw std::invalid_argument("Path cannot be 32 or more characters.");
 		}
-		strncpy_s(texture, path, 32);
+		strncpy_s(texture, path, sizeof(texture));
+	}
+
+	void Apparatus::setName(const char* newName) {
+		if (strlen(newName) >= 32) {
+			throw std::invalid_argument("Name cannot be 32 or more characters.");
+		}
+		strncpy_s(name, newName, sizeof(name));
 	}
 }
 

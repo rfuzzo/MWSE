@@ -64,6 +64,7 @@ namespace TES3 {
 			MobileObject = 'TCAM',
 			MobilePlayer = 'PCAM',
 			MobileProjectile = 'JRPM',
+			MobileSpellProjectile = 'PSPM',
 			NPC = '_CPN',
 			NPCClone = 'CCPN',
 			PathGrid = 'DRGP',
@@ -249,7 +250,11 @@ namespace TES3 {
 		BaseObject * getBaseObject() const;
 
 		bool isActor() const;
-		const char* getSourceFilename();
+		bool isItem() const;
+		const char* getSourceFilename() const;
+
+		bool getLinksResolved() const;
+		void setLinksResolved(bool value);
 
 		bool getDisabled() const;
 		bool getDeleted() const;
@@ -260,7 +265,9 @@ namespace TES3 {
 		bool getBlocked() const;
 		void setBlocked(bool value);
 
-		std::string toJson();
+		bool getSupportsLuaData() const;
+
+		std::string toJson() const;
 
 		bool getSourceless() const;
 		void setSourceless(bool sourceless) const;
@@ -342,11 +349,38 @@ namespace TES3 {
 
 		bool getIsLocationMarker() const;
 
+		bool getSupportsLuaData() const;
+
 		NI::Node * getSceneGraphNode();
 
 		//
 		// Custom functions.
 		//
+
+		template <typename T>
+		T* createCopy_lua(sol::optional<sol::table> params) const {
+			auto created = new T();
+			created->copy(this);
+
+			// Set provided or generated ID.
+			auto id = mwse::lua::getOptionalParam<const char*>(params, "id", nullptr);
+			if (id) {
+				created->setID(id);
+			}
+			else {
+				created->setID("");
+			}
+
+			if (mwse::lua::getOptionalParam(params, "addToObjectList", true)) {
+				TES3::DataHandler::get()->nonDynamicData->addNewObject(created);
+			}
+
+			if (mwse::lua::getOptionalParam(params, "sourceless", false) || TES3::WorldController::get()->getMobilePlayer() == nullptr) {
+				setSourceless(true);
+			}
+
+			return created;
+		}
 
 		Object * skipDeletedObjects();
 		ReferenceList* getOwningCollection();

@@ -1,14 +1,21 @@
 return {
-	description = "One of the movement events, calcSwimSpeed is used when calculating the movement speed while in water.",
+	type = "event",
+	description = [[One of the movement events, **calcSwimSpeed** is used when calculating the movement speed while in water when running.
+
+The movement event flow is described below:
+
+- Swimming: [calcWalkSpeed](https://mwse.github.io/MWSE/events/calcWalkSpeed) -> **calcSwimSpeed** -> [calcMoveSpeed](https://mwse.github.io/MWSE/events/calcMoveSpeed)
+- Swimming (while running): [calcWalkSpeed](https://mwse.github.io/MWSE/events/calcWalkSpeed) -> **calcSwimSpeed** -> [calcSwimRunSpeed](https://mwse.github.io/MWSE/events/calcSwimRunSpeed) -> [calcMoveSpeed](https://mwse.github.io/MWSE/events/calcMoveSpeed)]],
+	related = { "calcMoveSpeed", "calcWalkSpeed", "calcRunSpeed", "calcFlySpeed", "calcSwimSpeed", "calcSwimRunSpeed" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor whose speed is being calculated.",
 		},
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "mobile’s related reference.",
 		},
 		["speed"] = {
@@ -17,14 +24,8 @@ return {
 		},
 		["type"] = {
 			type = "number",
-			readonly = true,
+			readOnly = true,
 			description = "The type of movement that was calculated. This is always 3 for this event.",
 		},
 	},
-	links = {
-        ["calcMoveSpeed"] = "lua/event/calcMoveSpeed",
-        ["calcWalkSpeed"] = "lua/event/calcWalkSpeed",
-        ["calcSwimSpeed"] = "lua/event/calcSwimSpeed",
-        ["calcSwimRunSpeed"] = "lua/event/calcSwimRunSpeed",
-    },
 }

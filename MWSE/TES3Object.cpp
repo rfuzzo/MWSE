@@ -113,11 +113,40 @@ namespace TES3 {
 		}
 	}
 
-	const char* BaseObject::getSourceFilename() {
+	bool BaseObject::isItem() const {
+		switch (objectType) {
+		case TES3::ObjectType::Alchemy:
+		case TES3::ObjectType::Ammo:
+		case TES3::ObjectType::Apparatus:
+		case TES3::ObjectType::Armor:
+		case TES3::ObjectType::Book:
+		case TES3::ObjectType::Clothing:
+		case TES3::ObjectType::Ingredient:
+		case TES3::ObjectType::Light:
+		case TES3::ObjectType::Lockpick:
+		case TES3::ObjectType::Misc:
+		case TES3::ObjectType::Probe:
+		case TES3::ObjectType::Repair:
+		case TES3::ObjectType::Weapon:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	const char* BaseObject::getSourceFilename() const {
 		if (sourceMod) {
 			return sourceMod->filename;
 		}
 		return nullptr;
+	}
+
+	bool BaseObject::getLinksResolved() const {
+		return BIT_TEST(objectFlags, TES3::ObjectFlag::LinksResolvedBit);
+	}
+
+	void BaseObject::setLinksResolved(bool value) {
+		BIT_SET(objectFlags, TES3::ObjectFlag::LinksResolvedBit, value);
 	}
 
 	bool BaseObject::getDisabled() const {
@@ -144,7 +173,21 @@ namespace TES3 {
 		BIT_SET(objectFlags, TES3::ObjectFlag::BlockedBit, value);
 	}
 
-	std::string BaseObject::toJson() {
+	bool BaseObject::getSupportsLuaData() const {
+		// Gold does all kinds of funky things. No ItemData creation on it is allowed.
+		if (objectType == ObjectType::Misc && static_cast<const Misc*>(this)->isGold()) {
+			return false;
+		}
+
+		// Projectiles cannot have custom data, it breaks the equip interface.
+		if (objectType == ObjectType::Weapon || objectType == ObjectType::Ammo) {
+			return !static_cast<const Weapon*>(this)->isProjectile();
+		}
+
+		return true;
+	}
+
+	std::string BaseObject::toJson() const {
 		std::ostringstream ss;
 		ss << "\"tes3baseObject:" << getObjectID() << "\"";
 		return std::move(ss.str());
@@ -575,6 +618,20 @@ namespace TES3 {
 		return vTable.object->isLocationMarker(this);
 	}
 
+	bool Object::getSupportsLuaData() const {
+		// Do our base object checks.
+		if (!BaseObject::getSupportsLuaData()) {
+			return false;
+		}
+
+		// Prevent markers from supporting lua data.
+		if (getIsLocationMarker()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	NI::Node * Object::getSceneGraphNode() {
 		return vTable.object->getSceneGraphNode(this);
 	}
@@ -637,11 +694,17 @@ namespace TES3 {
 	}
 
 	Reference* PhysicalObject::getReference() const {
-		auto mobile = getMobile();
-		if (mobile == nullptr) {
-			return nullptr;
+		if (auto thisRef = reinterpret_cast<Reference*>(referenceToThis); thisRef && thisRef->objectType == ObjectType::Reference) {
+			return thisRef;
 		}
-		return mobile->reference;
+		else {
+			auto mobile = getMobile();
+			if (mobile) {
+				return mobile->reference;
+			}
+		}
+
+		return nullptr;
 	}
 }
 

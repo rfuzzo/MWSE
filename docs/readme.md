@@ -1,17 +1,23 @@
 # MWSE Documentation
 
-Looking for MWSE documentation? Please [click here](https://mwse.readthedocs.io/).
+Looking for MWSE documentation? Please [click here](https://mwse.github.io/MWSE/).
 
 
 ## Synopsis
 
-The docs for this project are created for [Read the Docs](https://readthedocs.org/) using [Sphinx](http://www.sphinx-doc.org/). Documentation is done in the [reStructuredText](http://docutils.sourceforge.net/rst.html) format. Once a doc is pushed to this repository it will automatically be updated at [the documentation site](https://mwse.readthedocs.io/).
+The docs for this project are created for [GitHub Pages](https://pages.github.com/) using [mkdoc](https://www.mkdocs.org). Documentation is done in the Markdown format. Once a doc is pushed to this repository it will automatically be updated at [the documentation site](https://mwse.github.io/MWSE/).
 
 
 ## Autocomplete Definitions
 
-Some portions of the docs, include Lua type information, events, and APIs, are auto-generated using the content in the autocomplete root folder. Edit these definitions instead, and run the `autocomplete\readthedocs\build.lua` file to regenerate the needed files.
+Some portions of the docs, include Lua type information, events, and APIs, are auto-generated using the content in the autocomplete root folder. Edit these definitions instead, and run the configured vscode build task in the autocomplete folder to regenerate the needed files.
 
+There are three basic types of definitions:
+- [event definitions](https://github.com/MWSE/MWSE/blob/docs-contributions-guide/docs/event-definitions-guide.md)
+- [type definitions](https://github.com/MWSE/MWSE/blob/docs-contributions-guide/docs/type-definitions-guide.md)
+- [function definitions](https://github.com/MWSE/MWSE/blob/docs-contributions-guide/docs/function-definitions-guide.md)
+
+Clicking on the links above will take you to a guide for writing mentioned definitions.
 
 ## Building
 
@@ -20,14 +26,19 @@ Documentation can also be built locally for testing or personal use. To do this 
 The following modules need to be installed:
 
 ```bat
-pip install sphinx sphinx-autobuild sphinx_rtd_theme
+pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin mkdocs-mermaid2-plugin
 ```
 
-Once this is done, docs can be built using:
+Another build task is available in vscode to live test the docs locally.
 
-```bat
-cd docs
-.\make.bat html
-```
+## Developing Tips
 
-The created files will be found in the `docs\build\html` folder.
+When writing the examples, always use `tes3.*` constants when available. Also, consider suggesting when a certain function accepts values from `tes3.*` namespace. If writing about color properties, mention the color range, e.g. (0 - 1) or (0 - 255). Note that some older areas of the documentation might not follow the conventions established in the guides above. Those can be updated if editing the affected definitions.
+
+Some parts of the documentation are written by hand. Namely, those in:
+- docs\source\references
+- docs\source\guides
+
+### Admonitions
+
+The following admonition classes are available: `abstract`, `attention`, `bug`, `caution`, `check`, `cite`, `danger`, `done`, `error`, `example`, `fail`, `failure`, `faq`, `help`, `hint`, `important`, `info`, `missing`, `note`, `question`, `quote`, `success`, `summary`, `tip`, `tldr`, `todo`, `warning`.

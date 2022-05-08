@@ -1,40 +1,42 @@
 return {
+	type = "event",
 	description = "This event fires when a trap is being disarmed.",
 	eventData = {
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "The reference that triggered the event (container, door, etc.).",
 		},
 		["lockData"] = {
-			type = "tes3lockAttachmentNode",
-			readonly = true,
+			type = "tes3lockNode",
+			readOnly = true,
 			description = "The lock data of the reference.",
 		},
 		["disarmer"] = {
-			type = "tes3mobileNpc",
-			readonly = true,
+			type = "tes3mobileNPC",
+			readOnly = true,
 			description = "The Mobile NPC doing the disarming.",
 		},
 		["tool"] = {
 			type = "tes3item",
-			readonly = true,
+			readOnly = true,
 			description = "The item the disarmer is using to disarm the trap.",
 		},
 		["toolItemData"] = {
 			type = "tes3itemData",
-			readonly = true,
+			readOnly = true,
 			description = "The item data for the tool.",
 		},
 		["chance"] = {
 			type = "number",
-			readonly = true,
+			readOnly = true,
 			description = "The chance the trap disarm will be successful.",
 		},
 		["trapPresent"] = {
-			type = "bool",
-			readonly = true,
+			type = "boolean",
+			readOnly = true,
 			description = "Indicates if a trap is present on the reference.",
 		},
-	}
+	},
+	blockable = true,
 }

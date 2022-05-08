@@ -8,12 +8,21 @@
 
 namespace TES3 {
 	namespace UI {
-		const auto TES3_ui_resetBufferedInput = reinterpret_cast<void(__thiscall*)(MenuInputController *)>(0x58E9C0);
+		const auto TES3_MenuInputController_flushBufferedTextEvents = reinterpret_cast<void(__thiscall*)(MenuInputController*)>(0x58E9C0);
+		void MenuInputController::flushBufferedTextEvents() {
+			TES3_MenuInputController_flushBufferedTextEvents(this);
+		}
+
+		Element* MenuInputController::getTextInputElement() {
+			return textInputFocus;
+		}
+
 		void MenuInputController::acquireTextInput(Element* element) {
 			// Set target for buffered text input
 			textInputFocus = element;
+
 			// Reset text buffer to avoid previous input appearing immediately
-			TES3_ui_resetBufferedInput(this);
+			flushBufferedTextEvents();
 		}
 
 		// Storage of the last data used for displayObjectTooltip, for use with updateObjectTooltip.
@@ -66,8 +75,21 @@ namespace TES3 {
 				return;
 			}
 
+			// Preserve the lifespan.
+			auto PartHelpMenu_lifespan = *reinterpret_cast<TES3::UI::Property*>(0x7D7B8C);
+			auto lifespan = helpMenu->getProperty(TES3::UI::PropertyType::Float, PartHelpMenu_lifespan).floatValue;
+
 			// Rebuild the tooltip.
 			displayObjectTooltip(lastTooltipObject, lastTooltipItemData, lastTooltipCount);
+
+			// We have to refetch the help menu because something lua-side may have mucked with it.
+			helpMenu = TES3::UI::findHelpLayerMenu(mainHelpLayerMenu);
+			if (helpMenu == nullptr) {
+				return;
+			}
+
+			// Restore lifespan, so that help delay isn't retriggered.
+			helpMenu->setProperty(PartHelpMenu_lifespan, lifespan);
 		}
 
 		const auto TES3_MenuController_setInventoryMenuEnabled = reinterpret_cast<void(__thiscall*)(MenuController *, bool)>(0x5968D0);

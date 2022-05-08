@@ -10,13 +10,38 @@
 #include "LuaManager.h"
 
 namespace TES3 {
+	Sound::Sound() {
+		ctor();
+	}
+
+	Sound::~Sound() {
+		dtor();
+	}
+
+	const auto TES3_Sound_ctor = reinterpret_cast<Sound*(__thiscall*)(Sound*)>(0x510490);
+	Sound* Sound::ctor() {
+		return TES3_Sound_ctor(this);
+	}
+
+	const auto TES3_Sound_dtor = reinterpret_cast<void(__thiscall*)(Sound*)>(0x510500);
+	void Sound::dtor() {
+		TES3_Sound_dtor(this);
+	}
+
 	char* Sound::getObjectID() {
 		return id;
 	}
 
+	void Sound::setObjectID(const char* _id) {
+		if (strnlen_s(_id, 32) >= 32) {
+			throw std::invalid_argument("ID cannot be 32 or more characters.");
+		}
+		strncpy_s(id, _id, 32);
+	}
+
 	bool Sound::play(int playbackFlags, unsigned char volume, float pitch, bool isNot3D) {
-		unsigned int master = TES3::WorldController::get()->audioController->volumeMaster;
-		unsigned int finalVolume = master * volume / 250;
+		auto master = TES3::WorldController::get()->audioController->volumeMaster;
+		auto finalVolume = master * volume / 250;
 		return playRaw(playbackFlags, finalVolume, pitch, isNot3D);
 	}
 
@@ -62,13 +87,55 @@ namespace TES3 {
 		TES3_Sound_setVolumeRaw(this, volume);
 	}
 
-	const auto TES3_Sound_isPlaying = reinterpret_cast<bool(__thiscall *)(Sound*)>(0x510B80);
-	bool Sound::isPlaying() {
+	const auto TES3_Sound_isPlaying = reinterpret_cast<bool(__thiscall*)(const Sound*)>(0x510B80);
+	bool Sound::isPlaying() const {
 		return TES3_Sound_isPlaying(this);
+	}
+
+	const auto TES3_Sound_isLooping = reinterpret_cast<bool(__thiscall*)(const Sound*)>(0x510BA0);
+	bool Sound::isLooping() const {
+		return TES3_Sound_isLooping(this);
 	}
 	
 	const char* Sound::getFilename() const {
 		return filename;
+	}
+
+	void Sound::setFilename(const char* _filename) {
+		if (strnlen_s(_filename, 32) >= 32) {
+			throw std::invalid_argument("Filename cannot be 32 or more characters.");
+		}
+		strncpy_s(filename, _filename, 32);
+	}
+
+	unsigned char Sound::getMinDistance() const {
+		return minDistance;
+	}
+
+	void Sound::setMinDistance(unsigned char value) {
+		minDistance = value;
+	}
+
+	void Sound::setMinDistance_lua(double value) {
+		if (value > 255.0 || value < 0.0) {
+			throw std::invalid_argument("tes3sound.setMinDistance: Value must be between 0 and 255.");
+		}
+		setMinDistance(value);
+	}
+
+	unsigned char Sound::getMaxDistance() const {
+		return maxDistance;
+	}
+
+	void Sound::setMaxDistance(unsigned char value) {
+		maxDistance = value;
+	}
+
+	void Sound::setMaxDistance_lua(double value) {
+		if (value > 255.0 || value < 0.0) {
+			throw std::invalid_argument("tes3sound.setMaxDistance: Value must be between 0 and 255.");
+		}
+		setMaxDistance(value);
 	}
 
 	float Sound::getVolume() {
@@ -98,12 +165,11 @@ namespace TES3 {
 	}
 
 	bool Sound::play_lua(sol::optional<sol::table> params) {
-		bool loop = mwse::lua::getOptionalParam<bool>(params, "loop", false);
-		unsigned char volume = mwse::lua::getOptionalParam<double>(params, "volume", 1.0) * 250;
-		float pitch = mwse::lua::getOptionalParam<double>(params, "pitch", 1.0);
+		auto loop = mwse::lua::getOptionalParam(params, "loop", false);
+		auto volume = mwse::lua::getOptionalParam(params, "volume", 1.0f) * 250.0f;
+		auto pitch = mwse::lua::getOptionalParam(params, "pitch", 1.0f);
 		return play(loop ? TES3::SoundPlayFlags::Loop : 0, volume, pitch, true);
 	}
-
 }
 
 MWSE_SOL_CUSTOMIZED_PUSHER_DEFINE_TES3(TES3::Sound)

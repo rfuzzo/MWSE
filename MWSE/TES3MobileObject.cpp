@@ -12,6 +12,10 @@
 #include "TES3MobileProjectile.h"
 #include "TES3MobileSpellProjectile.h"
 #include "TES3Reference.h"
+#include "TES3WorldController.h"
+
+#include "LuaMobileActorActivatedEvent.h"
+#include "LuaMobileActorDeactivatedEvent.h"
 
 #include "Log.h"
 
@@ -43,11 +47,9 @@ namespace TES3 {
 	}
 #pragma optimize( "", on )
 
-#define TES3_vTable_MobileCreature 0x74AFA4
-#define TES3_vTable_MobileNPC 0x74AE6C
-#define TES3_vTable_MobilePlayer 0x74B174
-#define TES3_vTable_MobileProjectile 0x74B2B4
-#define TES3_vTable_SpellProjectile 0x74B360
+	void MobileObject::setFacing(float facingInRadians) {
+		vTable.mobileObject->setFacing(this, facingInRadians);
+	}
 
 	const auto TES3_MobileObject_onActorCollision = reinterpret_cast<bool(__thiscall*)(MobileObject*, int)>(0x5615A0);
 	bool MobileObject::onActorCollision(int collisionIndex) {
@@ -137,9 +139,38 @@ namespace TES3 {
 		vTable.mobileObject->enterLeaveSimulation(this, entering);
 	}
 
+	const auto TES3_MobileObject_setFootPoint = reinterpret_cast<void(__thiscall*)(MobileObject*, const Vector3*)>(0x561960);
+	void MobileObject::setFootPoint(const Vector3* point) {
+		TES3_MobileObject_setFootPoint(this, point);
+	}
+
+	const auto TES3_MobileObject_setInstantVelocity = reinterpret_cast<void(__thiscall*)(MobileObject*, const Vector3*)>(0x55EBA0);
+	void MobileObject::setInstantVelocity(const Vector3* velocity) {
+		TES3_MobileObject_setInstantVelocity(this, velocity);
+	}
+
+	const auto TES3_MobileObject_updateConstantVelocity = reinterpret_cast<void(__thiscall*)(MobileObject*, const Vector3*)>(0x55E7A0);
+	void MobileObject::updateConstantVelocity(const Vector3* velocity) {
+		TES3_MobileObject_updateConstantVelocity(this, velocity);
+	}
+
 	const auto TES3_MobileObject_enterLeaveSimulationByDistance = reinterpret_cast<void(__thiscall *)(MobileObject*)>(0x55FFC0);
 	void MobileObject::enterLeaveSimulationByDistance() {
+		// Store previous AI state information.
+		const auto isMobileActor = isActor();
+		const auto wasActive = isMobileActor ? static_cast<MobileActor*>(this)->getFlagActiveAI() : false;
+
+		// Call original function.
 		TES3_MobileObject_enterLeaveSimulationByDistance(this);
+
+		// Fire off mobile activation events if necessary.
+		const auto nowActive = isMobileActor ? static_cast<MobileActor*>(this)->getFlagActiveAI() : false;
+		if (mwse::lua::event::MobileActorActivatedEvent::getEventEnabled() && nowActive && !wasActive) {
+			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileActorActivatedEvent(this));
+		}
+		else if (mwse::lua::event::MobileActorDeactivatedEvent::getEventEnabled() && !nowActive && wasActive) {
+			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileActorDeactivatedEvent(this->reference));
+		}
 	}
 
 	const auto TES3_MobileObject_getInventory = reinterpret_cast<IteratedList<ItemStack*> * (__thiscall*)(const MobileObject*)>(0x521620);
@@ -152,27 +183,33 @@ namespace TES3 {
 		return TES3_MobileObject_getBasePositionIsUnderwater(this);
 	}
 
+	Vector3 MobileObject::getBoundSize() const {
+		return Vector3(boundSize.x, boundSize.y, height);
+	}
+
+	void MobileObject::setBoundSize(const Vector3& value) {
+		boundSize.x = value.x;
+		boundSize.y = value.y;
+		height = value.z;
+	}
+
 	Vector3* MobileObject::getImpulseVelocity() {
 		return &impulseVelocity;
 	}
 
 	void MobileObject::setImpulseVelocityFromLua(sol::stack_object value) {
 		// Use our util class to support vectors or a table.
-		mwse::lua::setVectorFromLua(&impulseVelocity, value);
+		mwse::lua::setVectorFromLua(impulseVelocity, value);
 	}
 
 	Vector3* MobileObject::getPosition() {
-		return &position;
+		// Delegate to reference.
+		return &reference->position;
 	}
 
 	void MobileObject::setPositionFromLua(sol::stack_object value) {
-		// Use our util class to support vectors or a table.
-		mwse::lua::setVectorFromLua(&position, value);
-
-		// Update the reference if possible.
-		if (reference) {
-			reference->setPositionFromLua(value);
-		}
+		// Delegate to reference.
+		reference->setPositionFromLua(value);
 	}
 
 	Vector3* MobileObject::getVelocity() {
@@ -181,7 +218,20 @@ namespace TES3 {
 
 	void MobileObject::setVelocityFromLua(sol::stack_object value) {
 		// Use our util class to support vectors or a table.
-		mwse::lua::setVectorFromLua(&velocity, value);
+		mwse::lua::setVectorFromLua(velocity, value);
+	}
+
+	bool MobileObject::getMovementCollisionFlag() const {
+		return bool(actorFlags & MobileActorFlag::CollisionActive);
+	}
+
+	void MobileObject::setMovementCollisionFlag(bool collide) {
+		if (collide) {
+			actorFlags |= MobileActorFlag::CollisionActive;
+		}
+		else {
+			actorFlags &= ~MobileActorFlag::CollisionActive;
+		}
 	}
 
 	sol::table MobileObject::getCollisions_lua(sol::this_state ts) const {
@@ -220,19 +270,19 @@ namespace TES3 {
 
 		sol::object ref = sol::nil;
 		switch ((unsigned int)vTable.mobileObject) {
-		case TES3_vTable_MobileCreature:
+		case VirtualTableAddress::MobileCreature:
 			ref = sol::make_object(L, static_cast<const TES3::MobileCreature*>(this));
 			break;
-		case TES3_vTable_MobileNPC:
+		case VirtualTableAddress::MobileNPC:
 			ref = sol::make_object_userdata(L, static_cast<const TES3::MobileNPC*>(this));
 			break;
-		case TES3_vTable_MobilePlayer:
+		case VirtualTableAddress::MobilePlayer:
 			ref = sol::make_object(L, static_cast<const TES3::MobilePlayer*>(this));
 			break;
-		case TES3_vTable_MobileProjectile:
+		case VirtualTableAddress::MobileProjectile:
 			ref = sol::make_object_userdata(L, static_cast<const TES3::MobileProjectile*>(this));
 			break;
-		case TES3_vTable_SpellProjectile:
+		case VirtualTableAddress::SpellProjectile:
 			ref = sol::make_object(L, static_cast<const TES3::MobileSpellProjectile*>(this));
 			break;
 		}

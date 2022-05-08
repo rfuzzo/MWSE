@@ -1,19 +1,20 @@
 return {
+	type = "event",
 	description = "This event is called when determining the price of traveling, and can be used to modify the given price.",
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",
-			readonly = true,
+			readOnly = true,
 			description = "The mobile actor of the merchant the player is interacting with.",
 		},
 		["reference"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "mobile’s related reference.",
 		},
 		["basePrice"] = {
 			type = "number",
-			readonly = true,
+			readOnly = true,
 			description = "The price before adjustment.",
 		},
 		["price"] = {
@@ -22,13 +23,13 @@ return {
 		},
 		["destination"] = {
 			type = "tes3reference",
-			readonly = true,
+			readOnly = true,
 			description = "The travel marker that marks the destination.",
 		},
 		["companions"] = {
-			type = "table",
-			readonly = true,
-			description = "A table of companions (tes3references) that will travel with the player, or nil if no companions are present."
+			type = "tes3reference[]|nil",
+			readOnly = true,
+			description = "Companions that will travel with the player, or `nil` if no companions are present."
 		},
 	},
 }

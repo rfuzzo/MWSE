@@ -20,6 +20,9 @@ namespace NI {
 		// Custom functions.
 		//
 
+		float getDimmer() const;
+		void setDimmer(float value);
+
 		Color& getAmbientColor();
 		void setAmbientColor(const Color& color);
 		void setAmbientColor_lua(sol::object object);

@@ -52,7 +52,42 @@
     <ClInclude Include="ArrayUtil.h" />
     <ClInclude Include="BitUtil.h" />
     <ClInclude Include="BSAnimationManager.h" />
-    <ClInclude Include="BSAnimationNode.h" />
+    <ClInclude Include="LuaActiveMagicEffectIconsUpdatedEvent.h" />
+    <ClInclude Include="LuaCalcBlockChanceEvent.h" />
+    <ClInclude Include="LuaDialogueEnvironmentCreatedEvent.h" />
+    <ClInclude Include="LuaJumpEvent.h" />
+    <ClInclude Include="LuaCalcSpellmakingPriceEvent.h" />
+    <ClInclude Include="LuaCalcSpellmakingSpellPointCostEvent.h" />
+    <ClInclude Include="LuaEquipmentReevaluatedEvent.h" />
+    <ClInclude Include="LuaKeyframesLoadEvent.h" />
+    <ClInclude Include="LuaMagicEffectRemovedEvent.h" />
+    <ClInclude Include="LuaMeshLoadEvent.h" />
+    <ClInclude Include="LuaSpellResistedEvent.h" />
+    <ClInclude Include="LuaVFXCreatedEvent.h" />
+    <ClInclude Include="MathUtil.h" />
+    <ClInclude Include="NIColorData.h" />
+    <ClInclude Include="NIColorKey.h" />
+    <ClInclude Include="NIPosData.h" />
+    <ClInclude Include="NIQuaternion.h" />
+    <ClInclude Include="NIQuaternionLua.h" />
+    <ClInclude Include="NIScreenPolygon.h" />
+    <ClInclude Include="TES3AnimationDataLua.h" />
+    <ClInclude Include="TES3ArchiveLua.h" />
+    <ClInclude Include="TES3CutscenePlayer.h" />
+    <ClInclude Include="TES3LoadScreenManager.h" />
+    <ClInclude Include="LuaAbsorbedMagicEvent.h" />
+    <ClInclude Include="LuaAttackStartEvent.h" />
+    <ClInclude Include="LuaDamagedHandToHandEvent.h" />
+    <ClInclude Include="LuaDamageHandToHandEvent.h" />
+    <ClInclude Include="LuaEnchantedItemCreatedEvent.h" />
+    <ClInclude Include="LuaEnchantedItemCreateFailedEvent.h" />
+    <ClInclude Include="LuaEnchantChargeUseEvent.h" />
+    <ClInclude Include="LuaExecutor.h" />
+    <ClInclude Include="LuaInfoLinkResolveEvent.h" />
+    <ClInclude Include="LuaPotionBrewSkillCheckEvent.h" />
+    <ClInclude Include="LuaSpellMagickaUseEvent.h" />
+    <ClInclude Include="NIBillboardNode.h" />
+    <ClInclude Include="NIBSAnimationNode.h" />
     <ClInclude Include="LuaBarterOfferEvent.h" />
     <ClInclude Include="LuaBodyPartAssignedEvent.h" />
     <ClInclude Include="LuaCalcHitArmorPieceEvent.h" />
@@ -181,6 +216,7 @@
     <ClInclude Include="MWSEUtilLua.h" />
     <ClInclude Include="NIBinaryStream.h" />
     <ClInclude Include="NIBound.h" />
+    <ClInclude Include="NICollisionGroup.h" />
     <ClInclude Include="NIDX8Renderer.h" />
     <ClInclude Include="NIExtraData.h" />
     <ClInclude Include="NIExtraDataLua.h" />
@@ -189,28 +225,34 @@
     <ClInclude Include="NIGeometryData.h" />
     <ClInclude Include="NIGeometryDataLua.h" />
     <ClInclude Include="NIKeyframeController.h" />
-    <ClInclude Include="NiKeyframeManager.h" />
+    <ClInclude Include="NIKeyframeManager.h" />
     <ClInclude Include="NILines.h" />
     <ClInclude Include="NILinesData.h" />
+    <ClInclude Include="NILookAtController.h" />
     <ClInclude Include="NIParticleModifier.h" />
+    <ClInclude Include="NIParticles.h" />
+    <ClInclude Include="NIParticlesLua.h" />
     <ClInclude Include="NIParticleSystemController.h" />
     <ClInclude Include="NIPerParticleData.h" />
     <ClInclude Include="NIRect.h" />
     <ClInclude Include="NIRenderedTexture.h" />
     <ClInclude Include="NIRenderer.h" />
     <ClInclude Include="NISkinInstance.h" />
-    <ClInclude Include="NISkinPartition.h" />
+    <ClInclude Include="NISkinInstanceLua.h" />
     <ClInclude Include="NITArray.h" />
     <ClInclude Include="NITextureEffect.h" />
     <ClInclude Include="NITextureEffectLua.h" />
     <ClInclude Include="NITextureLua.h" />
+    <ClInclude Include="NITriangle.h" />
     <ClInclude Include="NiTriBasedGeometry.h" />
     <ClInclude Include="NiTriBasedGeometryData.h" />
-    <ClInclude Include="NiTriShapeData.h" />
+    <ClInclude Include="NITriShapeData.h" />
     <ClInclude Include="NIUVController.h" />
     <ClInclude Include="NIUVData.h" />
     <ClInclude Include="NIViewer.h" />
+    <ClInclude Include="LuaPotionBrewFailedEvent.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TES3ActorAnimationControllerLua.h" />
     <ClInclude Include="TES3Allocator.h" />
     <ClInclude Include="TES3Archive.h" />
     <ClInclude Include="TES3Birthsign.h" />
@@ -274,9 +316,10 @@
     <ClInclude Include="TES3AttachmentLua.h" />
     <ClInclude Include="TES3MobControllerLua.h" />
     <ClInclude Include="TES3MobileSpellProjectile.h" />
+    <ClInclude Include="TES3PlayerAnimationControllerLua.h" />
     <ClInclude Include="TES3ScriptCompiler.h" />
     <ClInclude Include="TES3SoulGemData.h" />
-    <ClInclude Include="TES3SpellInstanceController.h" />
+    <ClInclude Include="TES3MagicInstanceController.h" />
     <ClInclude Include="TES3StdString.h" />
     <ClInclude Include="TES3StlList.h" />
     <ClInclude Include="TES3Stream.h" />
@@ -316,7 +359,7 @@
     <ClInclude Include="TES3MobileObject.h" />
     <ClInclude Include="TES3MobileObjectLua.h" />
     <ClInclude Include="TES3ObjectLua.h" />
-    <ClInclude Include="TES3PlayerAnimationData.h" />
+    <ClInclude Include="TES3PlayerAnimationController.h" />
     <ClInclude Include="TES3Quest.h" />
     <ClInclude Include="TES3SoundGenerator.h" />
     <ClInclude Include="StackLua.h" />
@@ -324,7 +367,7 @@
     <ClInclude Include="TES3ActionDataLua.h" />
     <ClInclude Include="TES3Activator.h" />
     <ClInclude Include="TES3ActivatorLua.h" />
-    <ClInclude Include="TES3ActorAnimationData.h" />
+    <ClInclude Include="TES3ActorAnimationController.h" />
     <ClInclude Include="TES3Alchemy.h" />
     <ClInclude Include="TES3AlchemyLua.h" />
     <ClInclude Include="TES3Apparatus.h" />
@@ -455,6 +498,7 @@
     <ClInclude Include="TES3UtilLua.h" />
     <ClInclude Include="TES3Vectors.h" />
     <ClInclude Include="TES3VectorsLua.h" />
+    <ClInclude Include="TES3VFXManagerLua.h" />
     <ClInclude Include="TES3Weapon.h" />
     <ClInclude Include="TES3WeaponLua.h" />
     <ClInclude Include="TES3WearablePart.h" />
@@ -477,6 +521,8 @@
     <ClInclude Include="TES3GameFile.h" />
     <ClInclude Include="TES3UIManagerLua.h" />
     <ClInclude Include="UIUtil.h" />
+    <ClInclude Include="UTF8Convert.h" />
+    <ClInclude Include="TES3VFXManager.h" />
     <ClInclude Include="VirtualMachine.h" />
     <ClInclude Include="VMExecuteInterface.h" />
     <ClInclude Include="VMHookInterface.h" />
@@ -596,16 +642,20 @@
     <ClCompile Include="CodePatchUtil.cpp" />
     <ClCompile Include="DynamicLuaObject.cpp" />
     <ClCompile Include="FileUtil.cpp" />
+    <ClCompile Include="LuaAbsorbedMagicEvent.cpp" />
     <ClCompile Include="LuaActivateEvent.cpp" />
     <ClCompile Include="LuaActivationTargetChangedEvent.cpp" />
+    <ClCompile Include="LuaActiveMagicEffectIconsUpdatedEvent.cpp" />
     <ClCompile Include="LuaAddTopicEvent.cpp" />
     <ClCompile Include="LuaAttackEvent.cpp" />
+    <ClCompile Include="LuaAttackStartEvent.cpp" />
     <ClCompile Include="LuaBarterOfferEvent.cpp" />
     <ClCompile Include="LuaBaseEvent.cpp" />
     <ClCompile Include="LuaBodyPartAssignedEvent.cpp" />
     <ClCompile Include="LuaBookGetTextEvent.cpp" />
     <ClCompile Include="LuaButtonPressedEvent.cpp" />
     <ClCompile Include="LuaCalcArmorRatingEvent.cpp" />
+    <ClCompile Include="LuaCalcBlockChanceEvent.cpp" />
     <ClCompile Include="LuaCalcHitArmorPieceEvent.cpp" />
     <ClCompile Include="LuaCalcHitChanceEvent.cpp" />
     <ClCompile Include="LuaCalcMovementSpeedEvent.cpp" />
@@ -613,6 +663,8 @@
     <ClCompile Include="LuaCalcRestInterruptEvent.cpp" />
     <ClCompile Include="LuaCalcBarterPriceEvent.cpp" />
     <ClCompile Include="LuaCalcSoulValueEvent.cpp" />
+    <ClCompile Include="LuaCalcSpellmakingPriceEvent.cpp" />
+    <ClCompile Include="LuaCalcSpellmakingSpellPointCostEvent.cpp" />
     <ClCompile Include="LuaCalcSpellPriceEvent.cpp" />
     <ClCompile Include="LuaCalcSunDamageScalarEvent.cpp" />
     <ClCompile Include="LuaCalcTrainingPriceEvent.cpp" />
@@ -628,16 +680,24 @@
     <ClCompile Include="LuaConvertReferenceToItemEvent.cpp" />
     <ClCompile Include="LuaCrimeWitnessedEvent.cpp" />
     <ClCompile Include="LuaDamagedEvent.cpp" />
+    <ClCompile Include="LuaDamagedHandToHandEvent.cpp" />
     <ClCompile Include="LuaDamageEvent.cpp" />
+    <ClCompile Include="LuaDamageHandToHandEvent.cpp" />
     <ClCompile Include="LuaDeathEvent.cpp" />
     <ClCompile Include="LuaDetectSneakEvent.cpp" />
     <ClCompile Include="LuaDetermineActionEvent.cpp" />
     <ClCompile Include="LuaDeterminedActionEvent.cpp" />
+    <ClCompile Include="LuaDialogueEnvironmentCreatedEvent.cpp" />
     <ClCompile Include="LuaDisableableEventManager.cpp" />
     <ClCompile Include="LuaDisarmTrapEvent.cpp" />
+    <ClCompile Include="LuaEnchantedItemCreatedEvent.cpp" />
+    <ClCompile Include="LuaEnchantedItemCreateFailedEvent.cpp" />
+    <ClCompile Include="LuaEnchantChargeUseEvent.cpp" />
     <ClCompile Include="LuaEquipEvent.cpp" />
     <ClCompile Include="LuaBodyPartsUpdatedEvent.cpp" />
+    <ClCompile Include="LuaEquipmentReevaluatedEvent.cpp" />
     <ClCompile Include="LuaEquippedEvent.cpp" />
+    <ClCompile Include="LuaExecutor.cpp" />
     <ClCompile Include="LuaFilterBarterMenuEvent.cpp" />
     <ClCompile Include="LuaFilterContentsMenuEvent.cpp" />
     <ClCompile Include="LuaFilterInventoryEvent.cpp" />
@@ -650,13 +710,16 @@
     <ClCompile Include="LuaGenericUiPreEvent.cpp" />
     <ClCompile Include="LuaInfoFilterEvent.cpp" />
     <ClCompile Include="LuaInfoGetTextEvent.cpp" />
+    <ClCompile Include="LuaInfoLinkResolveEvent.cpp" />
     <ClCompile Include="LuaInfoResponseEvent.cpp" />
     <ClCompile Include="LuaIsGuardEvent.cpp" />
     <ClCompile Include="LuaItemDroppedEvent.cpp" />
     <ClCompile Include="LuaItemTileUpdatedEvent.cpp" />
     <ClCompile Include="LuaJournalEvent.cpp" />
+    <ClCompile Include="LuaJumpEvent.cpp" />
     <ClCompile Include="LuaKeyDownEvent.cpp" />
     <ClCompile Include="LuaKeyEvent.cpp" />
+    <ClCompile Include="LuaKeyframesLoadEvent.cpp" />
     <ClCompile Include="LuaKeyUpEvent.cpp" />
     <ClCompile Include="LuaLeveledCreaturePickedEvent.cpp" />
     <ClCompile Include="LuaLeveledItemPickedEvent.cpp" />
@@ -664,8 +727,10 @@
     <ClCompile Include="LuaLoadedGameEvent.cpp" />
     <ClCompile Include="LuaLoadGameEvent.cpp" />
     <ClCompile Include="LuaMagicCastedEvent.cpp" />
+    <ClCompile Include="LuaMagicEffectRemovedEvent.cpp" />
     <ClCompile Include="LuaMenuStateEvent.cpp" />
     <ClCompile Include="LuaMeshLoadedEvent.cpp" />
+    <ClCompile Include="LuaMeshLoadEvent.cpp" />
     <ClCompile Include="LuaMobileActorActivatedEvent.cpp" />
     <ClCompile Include="LuaMobileActorDeactivatedEvent.cpp" />
     <ClCompile Include="LuaMobileObjectWaterImpactEvent.cpp" />
@@ -687,6 +752,8 @@
     <ClCompile Include="LuaPlayItemSoundEvent.cpp" />
     <ClCompile Include="LuaPostInfoResponseEvent.cpp" />
     <ClCompile Include="LuaPotionBrewedEvent.cpp" />
+    <ClCompile Include="LuaPotionBrewFailedEvent.cpp" />
+    <ClCompile Include="LuaPotionBrewSkillCheckEvent.cpp" />
     <ClCompile Include="LuaPowerRechargedEvent.cpp" />
     <ClCompile Include="LuaPreLevelUpEvent.cpp" />
     <ClCompile Include="LuaPreventRestEvent.cpp" />
@@ -707,6 +774,8 @@
     <ClCompile Include="LuaSpellCastedEvent.cpp" />
     <ClCompile Include="LuaSpellCastEvent.cpp" />
     <ClCompile Include="LuaSpellCreatedEvent.cpp" />
+    <ClCompile Include="LuaSpellMagickaUseEvent.cpp" />
+    <ClCompile Include="LuaSpellResistedEvent.cpp" />
     <ClCompile Include="LuaSpellResistEvent.cpp" />
     <ClCompile Include="LuaSpellTickEvent.cpp" />
     <ClCompile Include="LuaAddTempSound.cpp" />
@@ -716,6 +785,7 @@
     <ClCompile Include="LuaUiSpellTooltipEvent.cpp" />
     <ClCompile Include="LuaUnequippedEvent.cpp" />
     <ClCompile Include="LuaUtil.cpp" />
+    <ClCompile Include="LuaVFXCreatedEvent.cpp" />
     <ClCompile Include="LuaWeaponReadiedEvent.cpp" />
     <ClCompile Include="LuaWeaponUnreadiedEvent.cpp" />
     <ClCompile Include="LuaWeatherChangedImmediateEvent.cpp" />
@@ -725,9 +795,12 @@
     <ClCompile Include="MWSEConfig.cpp" />
     <ClCompile Include="MWSEUtilLua.cpp" />
     <ClCompile Include="NIAmbientLight.cpp" />
+    <ClCompile Include="NIBillboardNode.cpp" />
     <ClCompile Include="NIBinaryStream.cpp" />
     <ClCompile Include="NICamera.cpp" />
+    <ClCompile Include="NICollisionGroup.cpp" />
     <ClCompile Include="NICollisionSwitch.cpp" />
+    <ClCompile Include="NIColorData.cpp" />
     <ClCompile Include="NIDirectionalLight.cpp" />
     <ClCompile Include="NIDynamicEffectLua.cpp" />
     <ClCompile Include="NIExtraData.cpp" />
@@ -736,10 +809,22 @@
     <ClCompile Include="NIGeometry.cpp" />
     <ClCompile Include="NIGeometryData.cpp" />
     <ClCompile Include="NIGeometryDataLua.cpp" />
+    <ClCompile Include="NIKeyframeController.cpp" />
+    <ClCompile Include="NIKeyframeManager.cpp" />
     <ClCompile Include="NILinesData.cpp" />
+    <ClCompile Include="NILookAtController.cpp" />
+    <ClCompile Include="NIParticleModifier.cpp" />
+    <ClCompile Include="NIParticles.cpp" />
+    <ClCompile Include="NIParticlesLua.cpp" />
+    <ClCompile Include="NIParticleSystemController.cpp" />
+    <ClCompile Include="NIPosData.cpp" />
     <ClCompile Include="NIProperty.cpp" />
+    <ClCompile Include="NIQuaternion.cpp" />
+    <ClCompile Include="NIQuaternionLua.cpp" />
     <ClCompile Include="NIRenderedTexture.cpp" />
     <ClCompile Include="NIRenderer.cpp" />
+    <ClCompile Include="NISkinInstance.cpp" />
+    <ClCompile Include="NISkinInstanceLua.cpp" />
     <ClCompile Include="NISpotLight.cpp" />
     <ClCompile Include="NISwitchNode.cpp" />
     <ClCompile Include="NIRTTI.cpp" />
@@ -747,16 +832,22 @@
     <ClCompile Include="NiTextureEffectLua.cpp" />
     <ClCompile Include="NITextureLua.cpp" />
     <ClCompile Include="NITimeController.cpp" />
-    <ClCompile Include="NiTriBasedGeometryData.cpp" />
+    <ClCompile Include="NITriangle.cpp" />
+    <ClCompile Include="NITriBasedGeometryData.cpp" />
     <ClCompile Include="NITriShape.cpp" />
+    <ClCompile Include="NITriShapeData.cpp" />
     <ClCompile Include="NIUVController.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TES3Activator.cpp" />
+    <ClCompile Include="TES3ActorAnimationControllerLua.cpp" />
+    <ClCompile Include="TES3AnimationDataLua.cpp" />
     <ClCompile Include="TES3AnimationGroup.cpp" />
     <ClCompile Include="TES3Apparatus.cpp" />
+    <ClCompile Include="TES3Archive.cpp" />
+    <ClCompile Include="TES3ArchiveLua.cpp" />
     <ClCompile Include="TES3Attachment.cpp" />
     <ClCompile Include="TES3AIConfig.cpp" />
     <ClCompile Include="TES3Birthsign.cpp" />
@@ -828,12 +919,14 @@
     <ClCompile Include="TES3Item.cpp" />
     <ClCompile Include="TES3ItemData.cpp" />
     <ClCompile Include="TES3MagicEffect.cpp" />
+    <ClCompile Include="TES3MagicEffectInstance.cpp" />
     <ClCompile Include="TES3Misc.cpp" />
     <ClCompile Include="TES3MobControllerLua.cpp" />
     <ClCompile Include="TES3MobileActorLua.cpp" />
     <ClCompile Include="TES3MobileSpellProjectile.cpp" />
     <ClCompile Include="TES3Moon.cpp" />
-    <ClCompile Include="TES3PlayerAnimationData.cpp" />
+    <ClCompile Include="TES3PlayerAnimationController.cpp" />
+    <ClCompile Include="TES3PlayerAnimationControllerLua.cpp" />
     <ClCompile Include="TES3Probe.cpp" />
     <ClCompile Include="TES3Quest.cpp" />
     <ClCompile Include="TES3Race.cpp" />
@@ -843,7 +936,7 @@
     <ClCompile Include="TES3Skill.cpp" />
     <ClCompile Include="TES3SoulGemData.cpp" />
     <ClCompile Include="TES3SoundGenerator.cpp" />
-    <ClCompile Include="TES3SpellInstanceController.cpp" />
+    <ClCompile Include="TES3MagicInstanceController.cpp" />
     <ClCompile Include="TES3Static.cpp" />
     <ClCompile Include="TES3StdString.cpp" />
     <ClCompile Include="TES3AttachmentLua.cpp" />
@@ -858,7 +951,7 @@
     <ClCompile Include="TES3ActionDataLua.cpp" />
     <ClCompile Include="TES3ActivatorLua.cpp" />
     <ClCompile Include="TES3Actor.cpp" />
-    <ClCompile Include="TES3ActorAnimationData.cpp" />
+    <ClCompile Include="TES3ActorAnimationController.cpp" />
     <ClCompile Include="TES3AlchemyLua.cpp" />
     <ClCompile Include="TES3ApparatusLua.cpp" />
     <ClCompile Include="TES3Armor.cpp" />
@@ -945,8 +1038,11 @@
     <ClCompile Include="TES3UtilLua.cpp" />
     <ClCompile Include="TES3Vectors.cpp" />
     <ClCompile Include="TES3VectorsLua.cpp" />
+    <ClCompile Include="TES3VFXManager.cpp" />
+    <ClCompile Include="TES3VFXManagerLua.cpp" />
     <ClCompile Include="TES3Weapon.cpp" />
     <ClCompile Include="TES3WeaponLua.cpp" />
+    <ClCompile Include="TES3WearablePart.cpp" />
     <ClCompile Include="TES3Weather.cpp" />
     <ClCompile Include="TES3WeatherController.cpp" />
     <ClCompile Include="TES3WeatherControllerLua.cpp" />
@@ -956,6 +1052,7 @@
     <ClCompile Include="TES3WorldController.cpp" />
     <ClCompile Include="TES3WorldControllerLua.cpp" />
     <ClCompile Include="UIUtil.cpp" />
+    <ClCompile Include="UTF8Convert.cpp" />
     <ClCompile Include="WindowsUtil.cpp" />
     <ClCompile Include="xGetDeleted.cpp" />
     <ClCompile Include="xGetGS.cpp" />
@@ -1232,14 +1329,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>

@@ -22,6 +22,8 @@
 #include "TES3BodyPartManager.h"
 #include "TES3Cell.h"
 #include "TES3Class.h"
+#include "TES3Container.h"
+#include "TES3Creature.h"
 #include "TES3Game.h"
 #include "TES3GameSetting.h"
 #include "TES3ItemData.h"
@@ -37,20 +39,9 @@
 #include "TES3UIManager.h"
 
 #include "BitUtil.h"
-
-#define TES3_Reference_activate 0x4E9610
-#define TES3_Reference_setActionFlag 0x4E55A0
-#define TES3_Reference_clearActionFlag 0x4E55E0
-#define TES3_Reference_testActionFlag 0x4E5520
-#define TES3_Reference_setActionReference 0x4E5610
-#define TES3_Reference_getActionReference 0x4E5650
-
-#define TES3_Reference_addItemDataAttachment 0x4E5360
+#include "MathUtil.h"
 
 namespace TES3 {
-	const auto TES3_Reference_setMobileActor = reinterpret_cast<MobileActor* (__thiscall*)(Reference*, MobileActor*)>(0x4E5770);
-	const auto TES3_Reference_removeAttachment = reinterpret_cast<void(__thiscall*)(Reference*, Attachment*)>(0x4E4C10);
-
 	Reference::Reference() {
 		// Do not add code here. Always place new logic in the ctor function, which gets called in Morrowind.exe.
 		ctor();
@@ -75,9 +66,10 @@ namespace TES3 {
 		TES3_Reference_dtor(this);
 	}
 
+	const auto TES3_Reference_activate = reinterpret_cast<void(__thiscall*)(Reference*, Reference*, int)>(0x4E9610);
 	void Reference::activate(Reference* activator, int unknown) {
 		// If our event data says to block, don't let the object activate.
-		if (mwse::lua::event::ActivateEvent::getEventEnabled()) {
+		if (mwse::lua::event::ActivateEvent::getEventEnabled() && !isTemporaryInventoryScriptReference()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
 			sol::object response = stateHandle.triggerEvent(new mwse::lua::event::ActivateEvent(activator, this));
 			if (response.get_type() == sol::type::table) {
@@ -88,31 +80,37 @@ namespace TES3 {
 			}
 		}
 
-		reinterpret_cast<void(__thiscall *)(Reference*, Reference*, int)>(TES3_Reference_activate)(this, activator, unknown);
+		TES3_Reference_activate(this, activator, unknown);
 	}
 
+	const auto TES3_Reference_setActionFlag = reinterpret_cast<void(__thiscall*)(Reference*, int)>(0x4E55A0);
 	void Reference::setActionFlag(int flag) {
-		reinterpret_cast<void(__thiscall *)(Reference*, int)>(TES3_Reference_setActionFlag)(this, flag);
+		TES3_Reference_setActionFlag(this, flag);
 	}
 
+	const auto TES3_Reference_clearActionFlag = reinterpret_cast<void(__thiscall*)(Reference*, int)>(0x4E55E0);
 	void Reference::clearActionFlag(int flag) {
-		reinterpret_cast<void(__thiscall *)(Reference*, int)>(TES3_Reference_clearActionFlag)(this, flag);
+		TES3_Reference_clearActionFlag(this, flag);
 	}
 
+	const auto TES3_Reference_testActionFlag = reinterpret_cast<bool(__thiscall*)(Reference*, int)>(0x4E5520);
 	bool Reference::testActionFlag(int flag) {
-		return (reinterpret_cast<signed char(__thiscall *)(Reference*, int)>(TES3_Reference_testActionFlag)(this, flag) != 0);
+		return TES3_Reference_testActionFlag(this, flag);
 	}
 
+	const auto TES3_Reference_setActionReference = reinterpret_cast<void(__thiscall*)(Reference*, Reference*)>(0x4E5610);
 	void Reference::setActionReference(Reference* reference) {
-		reinterpret_cast<void (__thiscall *)(Reference*, Reference*)>(TES3_Reference_setActionReference)(this, reference);
+		TES3_Reference_setActionReference(this, reference);
 	}
 
+	const auto TES3_Reference_getActionReference = reinterpret_cast<Reference * (__thiscall*)(Reference*)>(0x4E5650);
 	Reference* Reference::getActionReference() {
-		return reinterpret_cast<Reference* (__thiscall *)(Reference*)>(TES3_Reference_getActionReference)(this);
+		return TES3_Reference_getActionReference(this);
 	}
 
+	const auto TES3_Reference_addItemDataAttachment = reinterpret_cast<ItemDataAttachment * (__thiscall*)(Reference*, ItemData*)>(0x4E5360);
 	ItemDataAttachment* Reference::addItemDataAttachment(ItemData* data) {
-		return reinterpret_cast<ItemDataAttachment* (__thiscall *)(Reference*, ItemData*)>(TES3_Reference_addItemDataAttachment)(this, data);
+		return TES3_Reference_addItemDataAttachment(this, data);
 	}
 
 	Vector3* Reference::getOrCreateOrientationFromAttachment() {
@@ -137,6 +135,7 @@ namespace TES3 {
 		return TES3_Reference_getScriptVariables(this);
 	}
 
+	const auto TES3_Reference_removeAttachment = reinterpret_cast<void(__thiscall*)(Reference*, Attachment*)>(0x4E4C10);
 	void Reference::removeAttachment(TES3::Attachment * attachment) {
 		TES3_Reference_removeAttachment(this, attachment);
 	}
@@ -157,7 +156,14 @@ namespace TES3 {
 	}
 
 	const auto TES3_Reference_deleteDynamicLightAttachment = reinterpret_cast<void(__thiscall*)(Reference*)>(0x4E50F0);
-	void Reference::deleteDynamicLightAttachment() {
+	void Reference::deleteDynamicLightAttachment(sol::optional<bool> removeLightFromParent) {
+		if (removeLightFromParent.value_or(false)) {
+			auto attachedLight = getAttachedDynamicLight();
+			if (attachedLight) {
+				auto light = attachedLight->light;
+				light->parentNode->detachChildHandled(light);
+			}
+		}
 		detachDynamicLightFromAffectedNodes();
 		TES3_Reference_deleteDynamicLightAttachment(this);
 	}
@@ -167,10 +173,28 @@ namespace TES3 {
 		return attachment ? attachment->data : nullptr;
 	}
 
-	LightAttachmentNode* Reference::getOrCreateAttachedDynamicLight(NI::PointLight * light, float value) {
+	LightAttachmentNode* Reference::getOrCreateAttachedDynamicLight_lua(sol::optional<NI::PointLight*> light_arg, sol::optional<float> phase_arg) {
 		auto attachmentNode = getAttachedDynamicLight();
 		if (attachmentNode) {
 			return attachmentNode;
+		}
+
+		// Convenience feature. Create an easily visible light by default.
+		NI::Pointer<NI::PointLight> light = light_arg.value_or(nullptr);
+		if (light == nullptr) {
+			light = NI::PointLight::create();
+			light->setRadius(512);
+		}
+
+		// If the light is not part of the scene graph yet, automatically attach the light.
+		// It can be placed under the attachLight subnode, as in light entities, or the scene node otherwise.
+		if (light->parentNode == nullptr && sceneNode != nullptr) {
+			auto attachPoint = sceneNode->getObjectByNameAndType<NI::Node>("AttachLight");
+			if (attachPoint == nullptr) {
+				attachPoint = sceneNode;
+			}
+			attachPoint->attachChild(light, true);
+			attachPoint->update();
 		}
 
 		auto attachment = mwse::tes3::_new<TES3::LightAttachment>();
@@ -180,7 +204,7 @@ namespace TES3 {
 		attachmentNode = mwse::tes3::_new<TES3::LightAttachmentNode>();
 		memset(attachmentNode, 0, sizeof(TES3::LightAttachmentNode));
 		attachmentNode->light = light;
-		attachmentNode->flickerPhase = value;
+		attachmentNode->flickerPhase = phase_arg.value_or(0.0f);
 		attachment->data = attachmentNode;
 		
 		insertAttachment(attachment);
@@ -229,16 +253,45 @@ namespace TES3 {
 
 
 	const auto TES3_MobilePlayer_sub566500 = reinterpret_cast<void(__thiscall*)(MobilePlayer*)>(0x566500);
-	void Reference::setModelPath(const char* path) {
-		// Cache the old model path, then set
-		auto baseObject = static_cast<TES3::Object*>(getBaseObject());
-		baseObject->setModelPath(path);
 
-		// Do nothing if the reference is not rendered.
-		if (!sceneNode) {
-			return;
+	void Reference::setModelPath(const char* path, bool temporary) {
+		auto baseObject = static_cast<TES3::Object*>(getBaseObject());
+		char** modelSlot = nullptr;
+		char* oldModel = nullptr;
+
+		if (temporary) {
+			// Save original model path. getModelPath() does not return the raw path that we want to temporarily modify.
+			if (baseObject->objectType == ObjectType::NPC) {
+				modelSlot = &static_cast<TES3::NPC*>(baseObject)->model;
+			}
+			else if (baseObject->objectType == ObjectType::Creature) {
+				modelSlot = &static_cast<TES3::Creature*>(baseObject)->model;
+			}
+			else if (baseObject->objectType == ObjectType::Container) {
+				modelSlot = &static_cast<TES3::Container*>(baseObject)->model;
+			}
+			if (modelSlot) {
+				std::swap(*modelSlot, oldModel);
+			}
 		}
 
+		baseObject->setModelPath(path);
+
+		// Update model if it is currently part of the scenegraph.
+		if (sceneNode) {
+			reloadAnimation(path);
+		}
+
+		// Reset model path if desired.
+		if (modelSlot) {
+			std::swap(*modelSlot, oldModel);
+			if (oldModel) {
+				mwse::tes3::free(oldModel);
+			}
+		}
+	}
+
+	void Reference::reloadAnimation(const char* path) {
 		auto parentNode = sceneNode->parentNode;
 
 		resetVisualNode();
@@ -256,14 +309,26 @@ namespace TES3 {
 		if (mobile != nullptr) {
 			if (mobile->actorType == TES3::MobileActorType::Player) {
 				auto firstPersonRef = macp->firstPersonReference;
+
 				if (firstPersonRef->sceneNode) {
-					auto parent = firstPersonRef->sceneNode->parentNode;
-					firstPersonRef->resetVisualNode();
-					auto firstPersonSceneNode = firstPersonRef->getSceneGraphNode();
-					parent->attachChild(firstPersonSceneNode, true);
-					firstPersonSceneNode->updateEffects();
-					firstPersonSceneNode->updateProperties();
-					firstPersonSceneNode->update();
+					if (this == firstPersonRef && path != nullptr) {
+						auto animData = getAttachedAnimationData();
+						auto modelLoader = TES3::DataHandler::get()->nonDynamicData->meshData;
+						auto keyframes = modelLoader->loadKeyframes(path, "MWSE Anim");
+
+						if (animData && keyframes) {
+							animData->setOverrideLayerKeyframes(keyframes);
+						}
+					}
+					else {
+						auto parent = firstPersonRef->sceneNode->parentNode;
+						firstPersonRef->resetVisualNode();
+						auto firstPersonSceneNode = firstPersonRef->getSceneGraphNode();
+						parent->attachChild(firstPersonSceneNode, true);
+						firstPersonSceneNode->updateEffects();
+						firstPersonSceneNode->updateProperties();
+						firstPersonSceneNode->update();
+					}
 				}
 
 				if (macp->is3rdPerson()) {
@@ -355,7 +420,10 @@ namespace TES3 {
 		// Enable simulation for creatures/NPCs.
 		if (baseObject->objectType == TES3::ObjectType::Creature || baseObject->objectType == TES3::ObjectType::NPC) {
 			TES3::WorldController::get()->mobController->addMob(this);
-			getAttachedMobileActor()->enterLeaveSimulationByDistance();
+			auto mobile = getAttachedMobileActor();
+			if (mobile) {
+				mobile->enterLeaveSimulationByDistance();
+			}
 		}
 		// Activators, containers, and statics need collision.
 		else if (baseObject->objectType == TES3::ObjectType::Activator || baseObject->objectType == TES3::ObjectType::Container || baseObject->objectType == TES3::ObjectType::Static) {
@@ -432,6 +500,10 @@ namespace TES3 {
 	}
 
 	void Reference::setDeleted(bool deleted) {
+		if (deleted == getDeleted()) {
+			return;
+		}
+
 		// Deactivate the reference if needed.
 		if (objectType == ObjectType::Reference) {
 			// Are we marking a reference deleted in an active cell?
@@ -448,16 +520,39 @@ namespace TES3 {
 		BIT_SET(objectFlags, ObjectFlag::DeleteBit, deleted);
 	}
 
+	bool Reference::getNoCollision() const {
+		return BIT_TEST(objectFlags, ObjectFlag::NoCollisionBit);
+	}
+
+	void Reference::setNoCollision(bool set, bool updateCollisions) {
+		if (getNoCollision() == set) {
+			return;
+		}
+
+		BIT_SET(objectFlags, ObjectFlag::NoCollisionBit, set);
+
+		if (updateCollisions) {
+			TES3::DataHandler::get()->updateCollisionGroupsForActiveCells();
+		}
+	}
+
+	void Reference::setNoCollision_lua (bool set, sol::optional<bool> updateCollisions) {
+		setNoCollision(set, updateCollisions.value_or(true));
+	}
+
 	void Reference::setDeletedWithSafety() {
 		disable();
+
 		if (baseObject) {
 			// This always seems to return 0 and do nothing.
 			// But we'll keep it for consistency.
 			baseObject->vTable.object->unknown_0x12C(baseObject);
 		}
+
 		removeAllAttachments();
 		setScale(1.0f);
 		setDeleted(true);
+		setObjectModified(true);
 	}
 
 	Vector3 * Reference::getPosition() {
@@ -559,11 +654,11 @@ namespace TES3 {
 
 	bool Reference::getEmptyInventoryFlag() {
 		return BIT_TEST(objectFlags, ObjectFlag::EmptyInventoryBit);
-    }
+	}
 
-    void Reference::setEmptyInventoryFlag(bool set) {
+	void Reference::setEmptyInventoryFlag(bool set) {
 		BIT_SET(objectFlags, ObjectFlag::EmptyInventoryBit, set);
-    }
+	}
 
 	void Reference::attemptUnlockDisarm(MobileNPC * disarmer, Item * tool, ItemData * toolItemData) {
 		if (baseObject->objectType != ObjectType::Door && baseObject->objectType != ObjectType::Container) {
@@ -744,6 +839,59 @@ namespace TES3 {
 		return newNode;
 	}
 
+#if MWSE_RAISED_FILE_LIMIT
+	// New offsets and masks.
+	constexpr DWORD ModBits = 10;
+	constexpr DWORD FormBits = sizeof(DWORD) * CHAR_BIT - ModBits;
+	constexpr DWORD ModMask = ((1 << ModBits) - 1) << FormBits;
+	constexpr DWORD FormMask = (1 << FormBits) - 1;
+	constexpr DWORD ModCount = 1 << ModBits;
+#else
+	// Vanilla offsets and masks.
+	constexpr DWORD ModBits = 8;
+	constexpr DWORD FormBits = sizeof(DWORD) * CHAR_BIT - ModBits;
+	constexpr DWORD ModMask = ((1 << ModBits) - 1) << FormBits;
+	constexpr DWORD FormMask = (1 << FormBits) - 1;
+	constexpr DWORD ModCount = 1 << ModBits;
+#endif
+
+	unsigned int Reference::getSourceModId() const {
+		return sourceID >> FormBits;
+	}
+
+	unsigned int Reference::getSourceFormId() const {
+		return sourceID & FormMask;
+	}
+
+	unsigned int Reference::getTargetModId() const {
+		return targetID >> FormBits;
+	}
+
+	unsigned int Reference::getTargetFormId() const {
+		return targetID & FormMask;
+	}
+
+	sol::optional<bool> Reference::isDead() const {
+		auto mobile = getAttachedMobileActor();
+		if (mobile) {
+			return mobile->isDead();
+		}
+
+		switch (baseObject->objectType) {
+		case ObjectType::Creature:
+			return static_cast<Creature*>(getBaseObject())->health <= 1;
+		case ObjectType::NPC:
+			return static_cast<NPC*>(getBaseObject())->health <= 1;
+		}
+
+		return {};
+	}
+
+	bool Reference::isTemporaryInventoryScriptReference() const {
+		const auto TES3_Inventory_temporaryReference = reinterpret_cast<Reference*>(0x7CA098);
+		return this == TES3_Inventory_temporaryReference;
+	}
+
 	Inventory * Reference::getInventory() {
 		// Only actors have equipment.
 		if (baseObject->objectType != ObjectType::Container &&
@@ -766,13 +914,113 @@ namespace TES3 {
 		return &reinterpret_cast<Actor*>(baseObject)->equipment;
 	}
 
+	void __cdecl TES3_game_relocateReference_replacement(Reference* reference, Cell* cell, const Vector3* position, float rotationInDegrees) {
+		// Parameter guards.
+		if (!cell || !position) {
+			return;
+		}
+
+		// Recalculate rotation to always be between [0,2pi].
+		constexpr auto math2Pi = (mwse::math::M_PI * 2);
+		auto rotationInRadians = fmod(rotationInDegrees * (mwse::math::M_PI / 180.f), math2Pi);
+		if (rotationInRadians < 0)
+			rotationInRadians += math2Pi;
+
+		// Get reused variables.
+		auto dataHandler = TES3::DataHandler::get();
+		const auto isCellInMemory = dataHandler->isCellInMemory(cell, false);
+
+		do {
+			// Update reference position/orientation.
+			reference->position = *position;
+			reference->orientation.z = rotationInRadians;
+
+			// Update scene node.
+			auto sceneNode = reference->getSceneGraphNode();
+			if (sceneNode) {
+				Matrix33 rotationMatrix;
+				reference->updateSceneMatrix(&rotationMatrix, false);
+				sceneNode->setLocalRotationMatrix(&rotationMatrix);
+				sceneNode->localTranslate = *position;
+				sceneNode->update();
+			}
+
+			if (cell != reference->getCell()) {
+				if (sceneNode || isCellInMemory) {
+					if (isCellInMemory) {
+						if (reference->baseObject->objectType != ObjectType::Static) {
+							cell->getOrCreateActivatorsNode()->attachChild(reference->getSceneGraphNode(), true);
+						}
+					}
+					else {
+						reference->resetVisualNode();
+					}
+				}
+
+				const auto global_dontSaveObject = *reinterpret_cast<bool*>(0x7CEBDD);
+				if (!global_dontSaveObject) {
+					reference->setObjectModified(true);
+				}
+
+				cell->setObjectModified(true);
+				cell->addReference(reference);
+			}
+
+			// Update mobile.
+			auto mobile = reference->getAttachedMobileActor();
+			if (mobile) {
+				cell->getOrCreateActivatorsNode()->attachChild(reference->getSceneGraphNode(), true);
+				mobile->setFootPoint(position);
+				mobile->setFacing(rotationInRadians);
+				mobile->vTable.mobileObject->setActorFlag40(mobile, true);
+				mobile->actorFlags &= ~MobileActorFlag::GroundCollision;
+				mobile->unknown_0x230 = 1;
+				mobile->collidingReference = nullptr;
+				mobile->enterLeaveSimulationByDistance();
+				if (isCellInMemory) {
+					WorldController::get()->mobController->addMob(reference);
+				}
+				else {
+					WorldController::get()->mobController->removeMob(reference);
+				}
+			}
+			else if (isCellInMemory) {
+				// Create mobile if needed.
+				if (sceneNode) {
+					if (reference->baseObject->objectType == ObjectType::Creature || reference->baseObject->objectType == ObjectType::NPC) {
+						WorldController::get()->mobController->addMob(reference);
+						mobile = reference->getAttachedMobileActor();
+						if (mobile) {
+							mobile->setFootPoint(position);
+							mobile->setFacing(rotationInRadians);
+							mobile->vTable.mobileObject->setActorFlag40(mobile, true);
+							mobile->actorFlags &= ~MobileActorFlag::GroundCollision;
+							mobile->unknown_0x230 = 1;
+							mobile->collidingReference = nullptr;
+							mobile->enterLeaveSimulationByDistance();
+
+						}
+					}
+				}
+			}
+
+			// Skip if we're not looking at leveled creatures.
+			if (reference->baseObject->objectType != ObjectType::LeveledCreature) {
+				break;
+			}
+
+			// Move on to the leveled source reference.
+			reference = reference->getLeveledBaseReference();
+		} while (reference);
+	}
+
 	const auto TES3_game_relocateReference = reinterpret_cast<void(__cdecl*)(Reference*, Cell*, const Vector3*, float)>(0x50EDD0);
 	void Reference::relocate(Cell * cell, const Vector3 * position, float rotation) {
 		// Store old cell.
 		const auto oldCell = getCell();
 
 		// Fire off original function.
-		TES3_game_relocateReference(this, cell, position, rotation);
+		TES3_game_relocateReference_replacement(this, cell, position, rotation);
 		
 		// Determine if cell active state changed.
 		const auto oldCellActive = oldCell ? oldCell->getCellActive() : false;
@@ -786,9 +1034,17 @@ namespace TES3 {
 	}
 
 	void Reference::relocateNoRotation(Cell* cell, const Vector3* position) {
-		const auto z = orientation.z;
-		relocate(cell, position, z);
-		orientation.z = z;
+		// Save current rotation and restore it once relocate has finished.
+		Vector3 cachedOrientation = *getOrientation();
+
+		// The orientation member may not be reliable (SetAngle bug), so calculate it manually.
+		if (sceneNode) {
+			sceneNode->localRotation->toEulerXYZ(&cachedOrientation);
+		}
+
+		relocate(cell, position, cachedOrientation.z * (180.0f / mwse::math::M_PI));
+
+		setOrientation(&cachedOrientation);
 	}
 
 	bool Reference::clone() {
@@ -809,6 +1065,18 @@ namespace TES3 {
 		baseObject->setObjectModified(true);
 		setObjectModified(true);
 
+		return true;
+	}
+
+	bool Reference::onCloseInventory() {
+		// Check to make sure that the contained object is of the right type.
+		ObjectType::ObjectType baseType = baseObject->objectType;
+		if (baseType != ObjectType::Container && baseType != ObjectType::Creature && baseType != ObjectType::NPC) {
+			return false;
+		}
+
+		Actor* actor = reinterpret_cast<Actor*>(baseObject);
+		actor->vTable.actor->onCloseInventory(actor, this, 0);
 		return true;
 	}
 
@@ -835,7 +1103,7 @@ namespace TES3 {
 		return true;
 	}
 
-	Attachment * Reference::getAttachment(AttachmentType::AttachmentType type) {
+	Attachment * Reference::getAttachment(AttachmentType::AttachmentType type) const {
 		Attachment* attachment = attachments;
 		while (attachment && attachment->type != type) {
 			attachment = attachment->next;
@@ -843,7 +1111,7 @@ namespace TES3 {
 		return attachment;
 	}
 
-	MobileObject* Reference::getAttachedMobileObject() {
+	MobileObject* Reference::getAttachedMobileObject() const {
 		auto attachment = getAttachment(AttachmentType::ActorData);
 		if (attachment) {
 			return static_cast<MobileActorAttachment*>(attachment)->data;
@@ -851,11 +1119,11 @@ namespace TES3 {
 		return nullptr;
 	}
 
-	MobileActor* Reference::getAttachedMobileActor() {
+	MobileActor* Reference::getAttachedMobileActor() const {
 		return static_cast<MobileActor*>(getAttachedMobileObject());
 	}
 
-	MobileCreature* Reference::getAttachedMobileCreature() {
+	MobileCreature* Reference::getAttachedMobileCreature() const {
 		auto mobile = getAttachedMobileActor();
 		if (mobile == nullptr || mobile->actorType != MobileActorType::Creature) {
 			return nullptr;
@@ -863,7 +1131,7 @@ namespace TES3 {
 		return static_cast<MobileCreature*>(mobile);
 	}
 
-	MobileNPC* Reference::getAttachedMobileNPC() {
+	MobileNPC* Reference::getAttachedMobileNPC() const {
 		auto mobile = getAttachedMobileActor();
 		if (mobile == nullptr || (mobile->actorType != MobileActorType::NPC && mobile->actorType != MobileActorType::Player)) {
 			return nullptr;
@@ -871,11 +1139,11 @@ namespace TES3 {
 		return static_cast<MobileNPC*>(mobile);
 	}
 
-	MobileProjectile* Reference::getAttachedMobileProjectile() {
+	MobileProjectile* Reference::getAttachedMobileProjectile() const {
 		return static_cast<MobileProjectile*>(getAttachedMobileObject());
 	}
 
-	ItemData* Reference::getAttachedItemData() {
+	ItemData* Reference::getAttachedItemData() const {
 		auto attachment = static_cast<TES3::ItemDataAttachment*>(getAttachment(TES3::AttachmentType::Variables));
 		if (attachment) {
 			return attachment->data;
@@ -885,7 +1153,15 @@ namespace TES3 {
 
 	const auto TES3_Reference_setAttachedItemData = reinterpret_cast<void(__thiscall*)(Reference*, ItemData*)>(0x4E5360);
 	void Reference::setAttachedItemData(ItemData * itemData) {
-		TES3_Reference_setAttachedItemData(this, itemData);
+		if (itemData) {
+			TES3_Reference_setAttachedItemData(this, itemData);
+		}
+		else {
+			auto itemDataAttachment = getAttachment(AttachmentType::Variables);
+			if (itemDataAttachment) {
+				removeAttachment(itemDataAttachment);
+			}
+		}
 	}
 
 	ItemData* Reference::getOrCreateAttachedItemData() {
@@ -907,7 +1183,7 @@ namespace TES3 {
 		return nullptr;
 	}
 	
-	AnimationData* Reference::getAttachedAnimationData() {
+	AnimationData* Reference::getAttachedAnimationData() const {
 		auto attachment = static_cast<TES3::AnimationAttachment*>(getAttachment(TES3::AttachmentType::Animation));
 		if (attachment) {
 			return attachment->data;
@@ -923,7 +1199,7 @@ namespace TES3 {
 		return nullptr;
 	}
 
-	TravelDestination* Reference::getAttachedTravelDestination() {
+	TravelDestination* Reference::getAttachedTravelDestination() const {
 		auto attachment = static_cast<TES3::TravelDestinationAttachment*>(getAttachment(TES3::AttachmentType::TravelDestination));
 		if (attachment) {
 			return attachment->data;
@@ -968,26 +1244,36 @@ namespace TES3 {
 		return result;
 	}
 
-	sol::table Reference::getLuaTable() {
+	bool Reference::getSupportsLuaData() const {
 		auto itemData = getAttachedItemData();
 
 		// Prevent adding a lua table if there's more than one item involved.
 		if (itemData && itemData->count > 1) {
+			return false;
+		}
+
+		// Does the base object support it?
+		if (!baseObject->getSupportsLuaData()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	sol::table Reference::getLuaTable() {
+		if (!getSupportsLuaData()) {
 			return sol::nil;
 		}
 
-		// Create the item data if it doesn't already exist.
-		if (itemData == nullptr) {
-			// Gold does all kinds of funky things. No ItemData creation on it is allowed.
-			if (baseObject->objectType == ObjectType::Misc && static_cast<Misc*>(baseObject)->isGold()) {
-				return sol::nil;
-			}
+		return getOrCreateAttachedItemData()->getOrCreateLuaDataTable();
+	}
 
-			itemData = ItemData::createForObject(baseObject);
-			setAttachedItemData(itemData);
+	sol::table Reference::getLuaTempTable() {
+		if (!getSupportsLuaData()) {
+			return sol::nil;
 		}
 
-		return itemData->getOrCreateLuaDataTable();
+		return getOrCreateAttachedItemData()->getOrCreateLuaTempDataTable();
 	}
 
 	void Reference::activate_lua(Reference* target) {

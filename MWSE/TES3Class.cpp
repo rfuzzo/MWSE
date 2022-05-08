@@ -1,8 +1,11 @@
 #include "TES3Class.h"
 
-#define TES3_Class_loadDescription 0x4A81D0
-#define TES3_Class_setDescription 0x4A8200
-#define TES3_Class_freeDescription 0x4A8450
+#include "TES3MobilePlayer.h"
+#include "TES3NPC.h"
+#include "TES3Reference.h"
+#include "TES3UIElement.h"
+#include "TES3UIManager.h"
+#include "TES3WorldController.h"
 
 namespace TES3 {
 	const char* Class::getObjectID() const {
@@ -22,16 +25,30 @@ namespace TES3 {
 			throw std::invalid_argument("Path cannot be 32 or more characters.");
 		}
 		strncpy_s(name, _name, 32);
+
+		// Update GUI if we're changing the player's class name.
+		auto macp = TES3::WorldController::get()->getMobilePlayer();
+		if (macp && macp->reference->baseObject->getClass() == this) {
+			auto menuStats = TES3::UI::findMenu(*reinterpret_cast<TES3::UI::UI_ID*>(0x7D6B9C));
+			if (menuStats) {
+				auto menuStats_class = menuStats->findChild(*reinterpret_cast<TES3::UI::UI_ID*>(0x7D6A4E));
+				if (menuStats_class) {
+					menuStats_class->setText(name);
+					menuStats->timingUpdate();
+				}
+			}
+		}
 	}
 
-	char * Class::loadDescription() {
-		return reinterpret_cast<char *(__thiscall *)(Class*)>(TES3_Class_loadDescription)(this);
+	const auto TES3_Class_loadDescription = reinterpret_cast<char*(__thiscall*)(Class*)>(0x4A81D0);
+	char* Class::loadDescription() {
+		return TES3_Class_loadDescription(this);
 	}
 
 	sol::optional<std::string> Class::getOrLoadDescription() {
 		// If the description is already loaded, just return it.
 		if (description) {
-			return description;
+			return { description };
 		}
 
 		// Otherwise we need to load it from disk, then free it.
@@ -48,12 +65,14 @@ namespace TES3 {
 		return {};
 	}
 
+	const auto TES3_Class_setDescription = reinterpret_cast<void(__thiscall*)(Class*, const char*)>(0x4A8200);
 	void Class::setDescription(const char * description) {
-		reinterpret_cast<void(__thiscall *)(Class*, const char*)>(TES3_Class_setDescription)(this, description);
+		TES3_Class_setDescription(this, description);
 	}
 
+	const auto TES3_Class_freeDescription = reinterpret_cast<void(__thiscall*)(Class*)>(0x4A8450);
 	void Class::freeDescription() {
-		reinterpret_cast<void(__thiscall *)(Class*)>(TES3_Class_freeDescription)(this);
+		TES3_Class_freeDescription(this);
 	}
 
 	std::reference_wrapper<int[2]> Class::getAttributes() {

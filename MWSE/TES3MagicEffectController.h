@@ -3,6 +3,7 @@
 #include "TES3Defines.h"
 
 #include "TES3MagicEffect.h"
+#include "TES3MobileObject.h"
 
 namespace TES3 {
 	constexpr int MAX_EFFECT_COUNT = SHRT_MAX;
@@ -63,6 +64,7 @@ namespace TES3 {
 		static void setEffectFlag(int id, EffectFlag::FlagBit flag, bool value);
 
 		static void InstallCustomMagicEffectController();
+		void spellProjectileHit(MagicSourceInstance * instance, MobileObject::Collision * collision);
 
 		// Implemented.
 		std::unordered_map<int, MagicEffect*> effectObjects;
@@ -72,5 +74,13 @@ namespace TES3 {
 		static unsigned int effectNameGMSTs[MAX_EFFECT_COUNT];
 		static unsigned int effectFlags[MAX_EFFECT_COUNT];
 		static unsigned int effectCounters[MAX_EFFECT_COUNT][5];
+
+		// Spell effect event related.
+		typedef bool(__cdecl* spellEffectEventResistTestFunction)(MagicSourceInstance*, MagicEffectInstance*, int);
+		static bool __cdecl spellEffectEvent(MagicSourceInstance* sourceInstance, float deltaTime, MagicEffectInstance* effectInstance, int effectIndex, bool negateOnExpiry, bool isUncapped, void* attribute, DWORD attributeTypeInfo, unsigned int resistAttribute, spellEffectEventResistTestFunction resistFunction);
+		static MagicSourceInstance* cachedSpellEffectEventSourceInstance;
+		static MagicEffectInstance* cachedSpellEffectEventEffectInstance;
+		static int cachedSpellEffectEventEffectIndex;
+		static unsigned int cachedSpellEffectEventResistAttribute;
 	};
 }

@@ -5,27 +5,38 @@
 
 #include "TES3Book.h"
 
-namespace mwse {
-	namespace lua {
-		namespace event {
-			BookGetTextEvent::BookGetTextEvent(TES3::Book * book) :
-				ObjectFilteredEvent("bookGetText", book),
-				m_Book(book)
-			{
+namespace mwse::lua::event {
+	BookGetTextEvent::BookGetTextEvent(TES3::Book* book) :
+		ObjectFilteredEvent("bookGetText", book),
+		m_Book(book)
+	{
 
-			}
-
-			sol::table BookGetTextEvent::createEventTable() {
-				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-				sol::state& state = stateHandle.state;
-				sol::table eventData = state.create_table();
-
-				eventData["book"] = m_Book;
-
-				return eventData;
-			}
-
-			bool BookGetTextEvent::m_EventEnabled = false;
-		}
 	}
+
+	sol::table BookGetTextEvent::createEventTable() {
+		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
+		sol::state& state = stateHandle.state;
+		sol::table eventData = state.create_table();
+
+		eventData["book"] = m_Book;
+		eventData["loadOriginalText"] = getOriginalText;
+
+		return eventData;
+	}
+
+	const char* BookGetTextEvent::getOriginalText(sol::table self) {
+		// Did we already find the text?
+		sol::optional<const char*> cacheHit = self["_loadedOriginalText"];
+		if (cacheHit) {
+			return cacheHit.value();
+		}
+
+		setEventEnabled(false);
+		auto text = self.get<TES3::Book*>("book")->getBookText();
+		self["_loadedOriginalText"] = text;
+		setEventEnabled(true);
+		return text;
+	}
+
+	bool BookGetTextEvent::m_EventEnabled = false;
 }

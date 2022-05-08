@@ -23,6 +23,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <future>
 
 // Required C includes.
 #include <cmath>
@@ -35,14 +36,6 @@
 #include <wtypes.h>
 #include <psapi.h>
 #include <dbghelp.h>
-
-// Remove annoying defines from windows.h
-#undef near
-#undef far
-#undef NEAR
-#undef FAR
-#define NEAR
-#define FAR
 
 // 3rd party library: span-lite
 // URL: https://github.com/martinmoene/span-lite
@@ -60,15 +53,16 @@
 #include <strmif.h>
 #include <dinput.h>
 #include <dsound.h>
-#undef PlaySound
-
-// We mostly want PI definitions here.
-// TODO: Do this better with constexprs.
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 // Evil devil-spawn legacy boost requirements.
 #include <boost/regex.hpp>
 
 // Core lua binding library.
 #include <sol/sol.hpp>
+
+// Undefine anything we don't care about otherwise.
+#undef far
+#undef near
+#undef NEAR
+#undef FAR
+#undef PlaySound

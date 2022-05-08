@@ -203,7 +203,9 @@ namespace TES3 {
 	enum class EffectRange : unsigned char {
 		Self,
 		Touch,
-		Target
+		Target,
+
+		Invalid = 0xFF,
 	};
 
 	namespace MagicSchool {
@@ -221,17 +223,17 @@ namespace TES3 {
 	}
 
 	struct MagicEffect : BaseObject {
-		long id; // 0x10
+		int id; // 0x10
 		char * description; // 0x14
-		long descriptionFileOffset; // 0x18
+		int descriptionFileOffset; // 0x18
 		char icon[32]; // 0x1C
 		char particleTexture[32]; // 0x3C
 								  // Only a few effects have data in their sound effect strings.
 								  // Maybe it's inferred from school if missing?
-		char castSoundEffect[32]; // 0x5C
-		char boltSoundEffect[32]; // 0x7C
-		char hitSoundEffect[32]; // 0x9C
-		char areaSoundEffect[32]; // 0xBC
+		char castSoundEffectID[32]; // 0x5C
+		char boltSoundEffectID[32]; // 0x7C
+		char hitSoundEffectID[32]; // 0x9C
+		char areaSoundEffectID[32]; // 0xBC
 		PhysicalObject * castEffect; // 0xDC
 		PhysicalObject * boltEffect; // 0xE0
 		PhysicalObject * hitEffect; // 0xE4
@@ -239,9 +241,9 @@ namespace TES3 {
 		int school; // 0xEC
 		float baseMagickaCost; // 0xF0
 		unsigned int flags; // 0xF4
-		long lightingRed; // 0xF8
-		long lightingGreen; // 0xFC
-		long lightingBlue; // 0x0100
+		int lightingRed; // 0xF8
+		int lightingGreen; // 0xFC
+		int lightingBlue; // 0x0100
 		float size; // 0x0104
 		float speed; // 0x0108
 		float sizeCap; // 0x010C
@@ -261,23 +263,26 @@ namespace TES3 {
 		// Custom functions
 		//
 		const char* getName() const;
+		std::string getComplexName(int attribute = -1, int skill = -1) const;
 		int getNameGMST() const;
-		void setDescription( const char *value );
+		void setDescription(const char* value);
 		const char* getDescription() const noexcept;
 
 		const char* getIcon() const;
 		void setIcon(const char* path);
-
+		std::string getBigIcon() const;
 		const char* getParticleTexture() const;
 		void setParticleTexture(const char* path);
-		const char* getCastSoundEffect() const;
-		void setCastSoundEffect(const char* path);
-		const char* getBoltSoundEffect() const;
-		void setBoltSoundEffect(const char* path);
-		const char* getHitSoundEffect() const;
-		void setHitSoundEffect(const char* path);
-		const char* getAreaSoundEffect() const;
-		void setAreaSoundEffect(const char* path);
+
+		Sound* getCastSoundEffect() const;
+		void setCastSoundEffect(Sound* sound);
+		Sound* getBoltSoundEffect() const;
+		void setBoltSoundEffect(Sound* sound);
+		Sound* getHitSoundEffect() const;
+		void setHitSoundEffect(Sound* sound);
+		Sound* getAreaSoundEffect() const;
+		void setAreaSoundEffect(Sound* sound);
+		Sound* getSpellFailureSoundEffect() const;
 
 		unsigned int getEffectFlags() const;
 		void setEffectFlags(unsigned int flags) const;
@@ -318,6 +323,8 @@ namespace TES3 {
 		bool getAllowEnchanting() const;
 		void setAllowEnchanting(bool value);
 
+		int getSkillForSchool() const;
+
 	};
 	static_assert(sizeof(MagicEffect) == 0x0110, "TES3::EffectID:: failed size validation");
 
@@ -331,12 +338,37 @@ namespace TES3 {
 		int magnitudeMin; // 0x10
 		int magnitudeMax; // 0x14
 
+		Effect();
+		Effect(const Effect& from);
+		Effect(const sol::table& from);
+
+		Effect& operator=(const Effect& vector);
+		Effect& operator=(const sol::table table);
+		Effect& operator=(const sol::object object);
+
+		bool operator==(const Effect& vector) const;
+		bool operator!=(const Effect& vector) const;
+
+		//
+		// Other related this-call functions.
+		//
+
+		float calculateCost() const;
+
 		//
 		// Custom functions
 		//
 
 		MagicEffect * getEffectData() const;
-		bool matchesEffectsWith(const Effect *);
+		bool matchesEffectsWith(const Effect *) const;
+
+		signed char getSkillID() const;
+		void setSkillID(signed char id);
+		void setSkillID_lua(sol::optional<signed char> id);
+
+		signed char geAttributeID() const;
+		void seAttributeID(signed char id);
+		void seAttributeID_lua(sol::optional<signed char> id);
 
 		sol::optional<std::string> toString() const;
 
