@@ -11987,13 +11987,13 @@
 <hr />
 <h3 id="tes3calculatechargeuse"><code>tes3.calculateChargeUse</code><a class="headerlink" href="#tes3calculatechargeuse" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the actual charge use of an enchantment by a mobile actor, after skills are applied. Invokes the enchantChargeUse event to account for modded charge usage. Takes into account the MCP charge use rebalance patch, if activated.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">chargeUse</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">calculateChargeUse</span><span class="p">({</span> <span class="n">object</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">mobile</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">chargeUse</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">calculateChargeUse</span><span class="p">({</span> <span class="n">mobile</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">enchantment</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>object</code> (<a href="../../types/tes3enchantment">tes3enchantment</a>): The enchantment to check.</li>
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): The mobile actor that would be casting the enchantment.</li>
+<li><code>enchantment</code> (<a href="../../types/tes3enchantment">tes3enchantment</a>): The enchantment to check.</li>
 </ul>
 </li>
 </ul>
@@ -12001,6 +12001,13 @@
 <ul>
 <li><code>chargeUse</code> (number): Actual charge use.</li>
 </ul>
+<details class="example">
+<summary>Example: How to check the charge use of the player's currently selected enchantment</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">ench</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">.</span><span class="n">currentSpell</span>
+<span class="kd">local</span> <span class="n">charge</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">calculateChargeUse</span><span class="p">{</span> <span class="n">mobile</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">,</span> <span class="n">enchantment</span> <span class="o">=</span> <span class="n">ench</span> <span class="p">}</span>
+<span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">{</span> <span class="n">message</span> <span class="o">=</span> <span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;%s uses %d charge&quot;</span><span class="p">,</span> <span class="n">ench</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">charge</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3calculateprice"><code>tes3.calculatePrice</code><a class="headerlink" href="#tes3calculateprice" title="Permanent link">⚓︎</a></h3>
 <p>Calculates a price, given a merchant and associated trading data. This is useful beyond accessing the object's <code>.value</code> field in that it raises the appropriate events to let other mods modify the values.</p>
