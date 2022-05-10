@@ -9278,14 +9278,15 @@
 </ul>
 <hr />
 <h3 id="tes3uicreatetooltipmenu"><code>tes3ui.createTooltipMenu</code><a class="headerlink" href="#tes3uicreatetooltipmenu" title="Permanent link">⚓︎</a></h3>
-<p>Creates a tooltip menu, which can be an empty menu or an item tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>Creates a tooltip menu, which can be an empty menu, an item tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to create a tooltip for. If not specified, the tooltip will be empty.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data for the item.</li>
+<li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>): <em>Optional</em>. The spell to create a tooltip for.</li>
 </ul>
 </li>
 </ul>
