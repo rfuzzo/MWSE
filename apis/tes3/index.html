@@ -12046,7 +12046,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference on which the magic source will be applied.</li>
 <li><code>source</code> (<a href="../../types/tes3object">tes3object</a>): <em>Optional</em>. A magic source to apply.</li>
-<li><code>name</code> (string): <em>Optional</em>. If applying alchemy as a source, you can specifiy a name for the magic source.</li>
+<li><code>name</code> (string): <em>Optional</em>. While optional for other uses, if applying alchemy as a source, you must specifiy a name for the magic source.</li>
 <li><code>effects</code> (table): <em>Optional</em>. A table of custom effects to apply as a potion. Maximal number of effects is 8.<ul>
 <li><code>id</code> (boolean): <em>Default</em>: <code>-1</code>. ID of the effect.</li>
 <li><code>skill</code> (number): <em>Default</em>: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> constants.</li>
@@ -12296,8 +12296,15 @@
 <hr />
 <h3 id="tes3closedialoguemenu"><code>tes3.closeDialogueMenu</code><a class="headerlink" href="#tes3closedialoguemenu" title="Permanent link">⚓︎</a></h3>
 <p>This function closes the dialogue menu.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasClosed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">closeDialogueMenu</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasClosed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">closeDialogueMenu</span><span class="p">({</span> <span class="n">force</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>force</code> (boolean): <em>Default</em>: <code>true</code>. Normally, the menu can't be closed in certain circumstances, such as when the player is making a dialogue choice. If true, these usual restrictions will be ignored.</li>
+</ul>
+</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>wasClosed</code> (boolean): If true, the menu was previously open, and is now closed.</li>
