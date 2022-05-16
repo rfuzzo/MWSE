@@ -2645,6 +2645,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3closecontentsmenu" class="md-nav__link">
+    tes3.closeContentsMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3closedialoguemenu" class="md-nav__link">
+    tes3.closeDialogueMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3closerepairservicemenu" class="md-nav__link">
     tes3.closeRepairServiceMenu
   </a>
@@ -3697,6 +3711,20 @@
           <li class="md-nav__item">
   <a href="#tes3showalchemymenu" class="md-nav__link">
     tes3.showAlchemyMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3showcontentsmenu" class="md-nav__link">
+    tes3.showContentsMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3showdialoguemenu" class="md-nav__link">
+    tes3.showDialogueMenu
   </a>
   
 </li>
@@ -10274,6 +10302,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3closecontentsmenu" class="md-nav__link">
+    tes3.closeContentsMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3closedialoguemenu" class="md-nav__link">
+    tes3.closeDialogueMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3closerepairservicemenu" class="md-nav__link">
     tes3.closeRepairServiceMenu
   </a>
@@ -11331,6 +11373,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3showcontentsmenu" class="md-nav__link">
+    tes3.showContentsMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3showdialoguemenu" class="md-nav__link">
+    tes3.showDialogueMenu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3showrepairservicemenu" class="md-nav__link">
     tes3.showRepairServiceMenu
   </a>
@@ -12228,6 +12284,24 @@
 <p>This function closes the alchemy menu.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">closeAlchemyMenu</span><span class="p">()</span>
 </code></pre></div>
+<hr />
+<h3 id="tes3closecontentsmenu"><code>tes3.closeContentsMenu</code><a class="headerlink" href="#tes3closecontentsmenu" title="Permanent link">⚓︎</a></h3>
+<p>This function closes the contents menu.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasClosed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">closeContentsMenu</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasClosed</code> (boolean): If true, the menu was previously open, and is now closed.</li>
+</ul>
+<hr />
+<h3 id="tes3closedialoguemenu"><code>tes3.closeDialogueMenu</code><a class="headerlink" href="#tes3closedialoguemenu" title="Permanent link">⚓︎</a></h3>
+<p>This function closes the dialogue menu.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasClosed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">closeDialogueMenu</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasClosed</code> (boolean): If true, the menu was previously open, and is now closed.</li>
+</ul>
 <hr />
 <h3 id="tes3closerepairservicemenu"><code>tes3.closeRepairServiceMenu</code><a class="headerlink" href="#tes3closerepairservicemenu" title="Permanent link">⚓︎</a></h3>
 <p>This function closes the repair service menu.</p>
@@ -14609,6 +14683,40 @@
 <p>This function opens the alchemy menu.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">showAlchemyMenu</span><span class="p">()</span>
 </code></pre></div>
+<hr />
+<h3 id="tes3showcontentsmenu"><code>tes3.showContentsMenu</code><a class="headerlink" href="#tes3showcontentsmenu" title="Permanent link">⚓︎</a></h3>
+<p>This function opens the contents menu. This menu is used for containers, companion inventories, and pickpocket attempts.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasShown</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">showContentsMenu</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">pickpocket</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The reference to open the contents of.</li>
+<li><code>pickpocket</code> (boolean): <em>Default</em>: <code>false</code>. If true, the contents menu will open in the context of an attempted pickpocketing.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasShown</code> (boolean): If true, the contents menu was successfully shown.</li>
+</ul>
+<hr />
+<h3 id="tes3showdialoguemenu"><code>tes3.showDialogueMenu</code><a class="headerlink" href="#tes3showdialoguemenu" title="Permanent link">⚓︎</a></h3>
+<p>This function opens the dialogue menu. This behaves similar to the <code>ForceGreeting</code> mwscript command.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasShown</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">showDialogueMenu</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">checkAllowWerewolfForceGreeting</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): The reference to open dialogue with.</li>
+<li><code>checkAllowWerewolfForceGreeting</code> (boolean): <em>Default</em>: <code>true</code>. If true, the <code>AllowWerewolfForceGreeting</code> variable must exist on the reference's script to allow opening a dialogue while the player is a werewolf. This can be set to false to override the vanilla behavior.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasShown</code> (boolean): If true, the dialogue window was successfully shown.</li>
+</ul>
 <hr />
 <h3 id="tes3showrepairservicemenu"><code>tes3.showRepairServiceMenu</code><a class="headerlink" href="#tes3showrepairservicemenu" title="Permanent link">⚓︎</a></h3>
 <p>This function opens the repair service menu.</p>
