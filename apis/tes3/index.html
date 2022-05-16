@@ -2533,6 +2533,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3addtopic" class="md-nav__link">
+    tes3.addTopic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3adjustsoundvolume" class="md-nav__link">
     tes3.adjustSoundVolume
   </a>
@@ -10155,6 +10162,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3addtopic" class="md-nav__link">
+    tes3.addTopic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3adjustsoundvolume" class="md-nav__link">
     tes3.adjustSoundVolume
   </a>
@@ -11916,6 +11930,23 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>wasAdded</code> (boolean): True if the spell was successfully added. This can be false if the actor's race or birthsign already contains the spell.</li>
+</ul>
+<hr />
+<h3 id="tes3addtopic"><code>tes3.addTopic</code><a class="headerlink" href="#tes3addtopic" title="Permanent link">⚓︎</a></h3>
+<p>Adds a topic to the valid topic list for the player. This doesn't create a dynamic new topic.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasAdded</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addTopic</span><span class="p">({</span> <span class="n">topic</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>topic</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string): The topic to add</li>
+<li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If true, the GUI will be updated respecting the adding of the topic.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasAdded</code> (boolean): True if the topic was successfully added. This can be false if the topic already existed in the player's list.</li>
 </ul>
 <hr />
 <h3 id="tes3adjustsoundvolume"><code>tes3.adjustSoundVolume</code><a class="headerlink" href="#tes3adjustsoundvolume" title="Permanent link">⚓︎</a></h3>
