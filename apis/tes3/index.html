@@ -13099,16 +13099,20 @@
 <hr />
 <h3 id="tes3getitemisstolen"><code>tes3.getItemIsStolen</code><a class="headerlink" href="#tes3getitemisstolen" title="Permanent link">⚓︎</a></h3>
 <p>This function checks item's stolen flag.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isStolen</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getItemIsStolen</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">from</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isStolen</span><span class="p">,</span> <span class="n">stolenFrom</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getItemIsStolen</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">from</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item to check.</li>
-<li><code>from</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): Where the item was stolen from.</li>
+<li><code>from</code> (<a href="../../types/tes3creature">tes3creature</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, nil): <em>Optional</em>. Where the item was stolen from. If not provided, the function will return true if the item was stolen from anyone.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>isStolen</code> (boolean)</li>
+<li><code>isStolen</code> (boolean): If true the item is stolen.</li>
+<li><code>stolenFrom</code> (<a href="../../types/tes3creature">tes3creature</a>[], <a href="../../types/tes3npc">tes3npc</a>[], <a href="../../types/tes3faction">tes3faction</a>[]): A list of who and what the item has been stolen from.</li>
 </ul>
 <hr />
 <h3 id="tes3getjournalindex"><code>tes3.getJournalIndex</code><a class="headerlink" href="#tes3getjournalindex" title="Permanent link">⚓︎</a></h3>
@@ -14497,13 +14501,16 @@
 <hr />
 <h3 id="tes3setitemisstolen"><code>tes3.setItemIsStolen</code><a class="headerlink" href="#tes3setitemisstolen" title="Permanent link">⚓︎</a></h3>
 <p>This function changes an item's stolen flag. Morrowind handles stealing by marking the base item (not the inventory stack) with NPCs that you have stolen that item from. The NPC will recognize an item as stolen if they are marked as stolen on the base item.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setItemIsStolen</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="n">stolen</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setItemIsStolen</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">from</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">stolen</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item whose stolen flag to modify.</li>
-<li><code>from</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): The location the item is stolen from.</li>
+<li><code>from</code> (<a href="../../types/tes3creature">tes3creature</a>, <a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, nil): Who or what to set/clear the stolen state for. If not provided, the stolen state can be cleared (but not set) for all objects.</li>
 <li><code>stolen</code> (boolean): <em>Default</em>: <code>true</code>. If this parameter is set to true, the item will be flagged as stolen. Otherwise, the item's stolen flag will be removed.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="tes3setjournalindex"><code>tes3.setJournalIndex</code><a class="headerlink" href="#tes3setjournalindex" title="Permanent link">⚓︎</a></h3>
