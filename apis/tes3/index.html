@@ -12326,7 +12326,7 @@
 </code></pre></div>
 <hr />
 <h3 id="tes3createobject"><code>tes3.createObject</code><a class="headerlink" href="#tes3createobject" title="Permanent link">⚓︎</a></h3>
-<p>Create an object and returns it. The created object will be part of the saved game. Supported object types are those that have their own create function, such as tes3activator for example.</p>
+<p>Create an object and returns it. The created object will be part of the saved game. Currently supported object types are: <code>tes3.objectType.activator</code>, <code>.alchemy</code>, <code>.ammo</code>, <code>.container</code>, <code>.misc</code>, <code>.sound</code>, <code>.spell</code>, <code>.static</code>, <code>.enchantment</code>, <code>.weapon</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">createdObject</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">getIfExists</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -14069,7 +14069,7 @@
 <li><code>useModelCoordinates</code> (boolean): <em>Default</em>: <code>false</code>. If true, model coordinates will be used instead of world coordinates.</li>
 <li><code>useBackTriangles</code> (boolean): <em>Default</em>: <code>false</code>. Include intersections with back-facing triangles.</li>
 <li><code>observeAppCullFlag</code> (boolean): <em>Default</em>: <code>true</code>. Ignore intersections with culled (hidden) models.</li>
-<li><code>root</code> (<a href="../../types/niNode">niNode</a>): <em>Default</em>: <code>tes3.game.worldSceneGraphRoot</code>. Node pointer to node scene.</li>
+<li><code>root</code> (<a href="../../types/niNode">niNode</a>): <em>Default</em>: <code>tes3.game.worldRoot</code>. Node pointer to node scene.</li>
 <li><code>ignoreSkinned</code> (boolean): <em>Default</em>: <code>false</code>. Ignore results from skinned objects.</li>
 <li><code>returnColor</code> (boolean): <em>Default</em>: <code>false</code>. Calculate and return the vertex color at intersections.</li>
 <li><code>returnNormal</code> (boolean): <em>Default</em>: <code>true</code>. Calculate and return the vertex normal at intersections.</li>
@@ -14121,22 +14121,26 @@
 <details class="example">
 <summary>Example: Save rayTest result for use at a later point</summary>
 <p>If you plan to use the results of rayTest, you should make sure it still exists. For example, an object which was in a list of results of rayTest can get unloaded when the player changes cells and become invalid, so it shouldn't be accessed.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="c1">-- result can get invalidated</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">rayTest</span><span class="p">{</span> <span class="c1">-- the result can get invalidated</span>
     <span class="n">position</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyePosition</span><span class="p">(),</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerEyeVector</span><span class="p">(),</span>
     <span class="n">ignore</span> <span class="o">=</span> <span class="p">{</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span> <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">local</span> <span class="n">ref</span>
+<span class="kd">local</span> <span class="n">refHandle</span>
 
 <span class="kr">if</span> <span class="n">result</span> <span class="kr">then</span>
-    <span class="n">ref</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">makeSafeObjectHandle</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">reference</span><span class="p">)</span>
+    <span class="n">refHandle</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">makeSafeObjectHandle</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">reference</span><span class="p">)</span>
 <span class="kr">end</span>
 
-<span class="c1">-- Before using ref, now we can chack if it is valid</span>
-<span class="kr">if</span> <span class="n">ref</span><span class="p">:</span><span class="n">valid</span><span class="p">()</span> <span class="kr">then</span>
-    <span class="c1">-- Now we can safely do something with ref</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">myFunction</span><span class="p">()</span>
+    <span class="c1">-- Before using the reference, we need to check that it&#39;s still valid.</span>
+    <span class="c1">-- References get unloaded on cell changes etc.</span>
+    <span class="kr">if</span> <span class="n">refHandle</span><span class="p">:</span><span class="n">valid</span><span class="p">()</span> <span class="kr">then</span>
+        <span class="c1">-- Now we can safely do something with our stored reference.</span>
+        <span class="kd">local</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">refHandle</span><span class="p">:</span><span class="n">getObject</span><span class="p">()</span>
 
+    <span class="kr">end</span>
 <span class="kr">end</span>
 </code></pre></div>
 </details>
