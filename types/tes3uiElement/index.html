@@ -6033,6 +6033,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#copy" class="md-nav__link">
+    copy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#createblock" class="md-nav__link">
     createBlock
   </a>
@@ -6201,6 +6208,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getpropertycallback" class="md-nav__link">
+    getPropertyCallback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getpropertyfloat" class="md-nav__link">
     getPropertyFloat
   </a>
@@ -6222,6 +6236,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getpropertyproperty" class="md-nav__link">
+    getPropertyProperty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gettoplevelmenu" class="md-nav__link">
     getTopLevelMenu
   </a>
@@ -6231,6 +6252,13 @@
           <li class="md-nav__item">
   <a href="#loadmenuposition" class="md-nav__link">
     loadMenuPosition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move
   </a>
   
 </li>
@@ -6298,6 +6326,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#setpropertycallback" class="md-nav__link">
+    setPropertyCallback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#setpropertyfloat" class="md-nav__link">
     setPropertyFloat
   </a>
@@ -6314,6 +6349,13 @@
           <li class="md-nav__item">
   <a href="#setpropertyobject" class="md-nav__link">
     setPropertyObject
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setpropertyproperty" class="md-nav__link">
+    setPropertyProperty
   </a>
   
 </li>
@@ -9706,6 +9748,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#copy" class="md-nav__link">
+    copy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#createblock" class="md-nav__link">
     createBlock
   </a>
@@ -9874,6 +9923,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getpropertycallback" class="md-nav__link">
+    getPropertyCallback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getpropertyfloat" class="md-nav__link">
     getPropertyFloat
   </a>
@@ -9895,6 +9951,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getpropertyproperty" class="md-nav__link">
+    getPropertyProperty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gettoplevelmenu" class="md-nav__link">
     getTopLevelMenu
   </a>
@@ -9904,6 +9967,13 @@
           <li class="md-nav__item">
   <a href="#loadmenuposition" class="md-nav__link">
     loadMenuPosition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move" class="md-nav__link">
+    move
   </a>
   
 </li>
@@ -9971,6 +10041,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#setpropertycallback" class="md-nav__link">
+    setPropertyCallback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#setpropertyfloat" class="md-nav__link">
     setPropertyFloat
   </a>
@@ -9987,6 +10064,13 @@
           <li class="md-nav__item">
   <a href="#setpropertyobject" class="md-nav__link">
     setPropertyObject
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setpropertyproperty" class="md-nav__link">
+    setPropertyProperty
   </a>
   
 </li>
@@ -10438,6 +10522,21 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
+<h3 id="copy"><code>copy</code><a class="headerlink" href="#copy" title="Permanent link">⚓︎</a></h3>
+<p>Copies this element to a new parent. This function can have unintended consequences. The specifics of what exact elements are being copied is important.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">copy</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">copyChildren</span><span class="p">,</span> <span class="n">copyProperties</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>to</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): Where to create the copy.</li>
+<li><code>copyChildren</code> (boolean): <em>Default</em>: <code>true</code>. If true, all children will also be copied to the newly created element.</li>
+<li><code>copyProperties</code> (boolean): <em>Default</em>: <code>true</code>. If true, all properties will be copied to the newly created element.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>copy</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): The created copy.</li>
+</ul>
+<hr />
 <h3 id="createblock"><code>createBlock</code><a class="headerlink" href="#createblock" title="Permanent link">⚓︎</a></h3>
 <p>Creates an empty block container inside the element. Used to group and layout elements.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createBlock</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
@@ -10811,6 +10910,19 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="getpropertycallback"><code>getPropertyCallback</code><a class="headerlink" href="#getpropertycallback" title="Permanent link">⚓︎</a></h3>
+<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. The callback is an address inside Morrowind.exe that will be called when the appropriate callback is invoked.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyCallback</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>propName</code> (string): The property name.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
 <h3 id="getpropertyfloat"><code>getPropertyFloat</code><a class="headerlink" href="#getpropertyfloat" title="Permanent link">⚓︎</a></h3>
 <p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns 0 if the property key did not have data.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyFloat</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
@@ -10860,6 +10972,19 @@ This is required because there is no identifying type information stored with th
 <li><code>result</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>, <a href="../../types/tes3mobileObject">tes3mobileObject</a>, any)</li>
 </ul>
 <hr />
+<h3 id="getpropertyproperty"><code>getPropertyProperty</code><a class="headerlink" href="#getpropertyproperty" title="Permanent link">⚓︎</a></h3>
+<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. This function gets a property whose value is, itself, a property.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyProperty</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>propName</code> (string): The property name.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
 <h3 id="gettoplevelmenu"><code>getTopLevelMenu</code><a class="headerlink" href="#gettoplevelmenu" title="Permanent link">⚓︎</a></h3>
 <p>Finds the parent menu containing the element. Useful for finding the correct menu to run layout updates on.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getTopLevelMenu</span><span class="p">()</span>
@@ -10873,6 +10998,19 @@ This is required because there is no identifying type information stored with th
 <p>Restores the menu's position and size information from the Morrowind.ini file. This may only be called on top-level parents.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">loadMenuPosition</span><span class="p">()</span>
 </code></pre></div>
+<hr />
+<h3 id="move"><code>move</code><a class="headerlink" href="#move" title="Permanent link">⚓︎</a></h3>
+<p>Copies this element to a new parent, then destroys this element. This function can have unintended consequences. The specifics of what exact elements are being copied is important.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">move</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>to</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): Where to create the copy.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>copy</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): The created copy.</li>
+</ul>
 <hr />
 <h3 id="register"><code>register</code><a class="headerlink" href="#register" title="Permanent link">⚓︎</a></h3>
 <p>Sets an <code>event</code> handler, which can add or override an existing event handler. The use of <code>registerBefore</code> or <code>registerAfter</code> is recommended if you do not want to replace the existing event handler. The eventID can be a standard <code>event</code> name, or an event specific to an element class. These can be accessed through <a href="https://mwse.github.io/MWSE/references/ui-events/"><code>tes3.uiEvent</code></a> for convenience. The callback receives an argument with the event data. See below for details.</p>
@@ -11025,6 +11163,16 @@ Returns `true` if the operation succeeded, or `false` if at least one argument w
 <li><code>value</code> (boolean): The value to set.</li>
 </ul>
 <hr />
+<h3 id="setpropertycallback"><code>setPropertyCallback</code><a class="headerlink" href="#setpropertycallback" title="Permanent link">⚓︎</a></h3>
+<p>Properties are named variables attached to an element. Sets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. The callback is an address inside Morrowind.exe that will be called when the appropriate callback is invoked.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyCallback</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>propName</code> (string): The property name.</li>
+<li><code>value</code> (number): The value to set.</li>
+</ul>
+<hr />
 <h3 id="setpropertyfloat"><code>setPropertyFloat</code><a class="headerlink" href="#setpropertyfloat" title="Permanent link">⚓︎</a></h3>
 <p>Sets a property value with <code>prop</code> as the property key. Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyFloat</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
@@ -11053,6 +11201,16 @@ Returns `true` if the operation succeeded, or `false` if at least one argument w
 <ul>
 <li><code>propName</code> (string): The property name.</li>
 <li><code>value</code> (object): The value to set.</li>
+</ul>
+<hr />
+<h3 id="setpropertyproperty"><code>setPropertyProperty</code><a class="headerlink" href="#setpropertyproperty" title="Permanent link">⚓︎</a></h3>
+<p>Properties are named variables attached to an element. Sets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. This function sets a property whose value is, itself, a property.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyProperty</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>propName</code> (string): The property name.</li>
+<li><code>value</code> (number): The value to set.</li>
 </ul>
 <hr />
 <h3 id="sortchildren"><code>sortChildren</code><a class="headerlink" href="#sortchildren" title="Permanent link">⚓︎</a></h3>
