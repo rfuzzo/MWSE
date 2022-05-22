@@ -12434,13 +12434,13 @@
 </ul>
 <hr />
 <h3 id="tes3createvisualeffect"><code>tes3.createVisualEffect</code><a class="headerlink" href="#tes3createvisualeffect" title="Permanent link">⚓︎</a></h3>
-<p>Creates a tracked visual effect. Most VFX assignments are persistent, and only expire when their lifespan expires, an associated reference is destroyed, or a given spell serial is retired.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">vfx</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createVisualEffect</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">repeatCount</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">lifespan</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">verticalOffset</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">avObject</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">enchantment</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>Creates an arbitrary and automatically tracked visual effect. Most VFX assignments are persistent, and only expire when their lifespan ends, an associated reference is destroyed, or a given spell serial is retired.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">vfx</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createVisualEffect</span><span class="p">({</span> <span class="n">object</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">repeatCount</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">lifespan</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">verticalOffset</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">position</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">avObject</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">magicEffectId</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>effect</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The physical object to use as the VFX. To use an enchantment-style VFX, supply the enchantment parameter instead.</li>
+<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The physical object to use as the VFX. To use an enchantment-style VFX, supply the magicEffectId parameter instead.</li>
 <li><code>serial</code> (number): <em>Optional</em>. An associated tes3magicSourceInstance serial. If a serial is assigned to the VFX, the effect expiring will also remove the VFX. This is not used when creating an enchantment-style VFX.</li>
 <li><code>repeatCount</code> (number): <em>Optional</em>. A repeat count for the VFX. If provided, the key timing for the associated effect will be used, multiplied by this value, to determine the total lifespan of the VFX. This is not used when creating an enchantment-style VFX.</li>
 <li><code>lifespan</code> (number): <em>Optional</em>. The desired lifespan for the VFX. If not provided, the VFX will never die of old age.</li>
@@ -12448,7 +12448,7 @@
 <li><code>verticalOffset</code> (number): <em>Default</em>: <code>0</code>. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. If provided the VFX will be attached relative to a position, and not follow a reference.</li>
 <li><code>avObject</code> (<a href="../../types/niAVObject">niAVObject</a>): <em>Optional</em>. </li>
-<li><code>enchantment</code> (number): <em>Optional</em>. The magic effect ID to use to create an enchantment wrapper VFX. This will use most of the same VFX logic, but cannot be applied to a position or specific niAVObject.</li>
+<li><code>magicEffectId</code> (number): <em>Optional</em>. The magic effect ID to use to create an enchantment-style VFX. This will use most of the same VFX logic, but cannot be applied to a position or specific niAVObject.</li>
 </ul>
 </li>
 </ul>
