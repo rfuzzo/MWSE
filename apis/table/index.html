@@ -2464,6 +2464,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tablegetset" class="md-nav__link">
+    table.getset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tableinvert" class="md-nav__link">
     table.invert
   </a>
@@ -8813,6 +8820,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tablegetset" class="md-nav__link">
+    table.getset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tableinvert" class="md-nav__link">
     table.invert
   </a>
@@ -9016,6 +9030,21 @@
 <li><code>t</code> (table)</li>
 <li><code>key</code> (any): The key to use to access the table.</li>
 <li><code>defaultValue</code> (any): The default value if the key didn't exist in the table.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (any)</li>
+</ul>
+<hr />
+<h3 id="tablegetset"><code>table.getset</code><a class="headerlink" href="#tablegetset" title="Permanent link">⚓︎</a></h3>
+<p>Gets a value in a table. If the key doesn't exist in the table, a specified default value will be set in the table and returned instead.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">getset</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>t</code> (table)</li>
+<li><code>key</code> (any): The key to use to access the table.</li>
+<li><code>defaultValue</code> (any): The default value to set and return if the key didn't exist in the table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
