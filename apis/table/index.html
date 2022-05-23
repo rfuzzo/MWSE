@@ -9009,12 +9009,13 @@
 <hr />
 <h3 id="tableget"><code>table.get</code><a class="headerlink" href="#tableget" title="Permanent link">⚓︎</a></h3>
 <p>Gets a value in a table. If the key doesn't exist in the table, a specified default value will be returned instead.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>t</code> (table)</li>
-<li><code>default</code> (any): The default value if the key didn't exist in the table.</li>
+<li><code>key</code> (any): The key to use to access the table.</li>
+<li><code>defaultValue</code> (any): The default value if the key didn't exist in the table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
