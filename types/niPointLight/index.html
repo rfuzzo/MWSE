@@ -3772,6 +3772,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#createboundingbox" class="md-nav__link">
+    createBoundingBox
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detachproperty" class="md-nav__link">
     detachProperty
   </a>
@@ -3920,6 +3927,13 @@
           <li class="md-nav__item">
   <a href="#detachaffectednode" class="md-nav__link">
     detachAffectedNode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    new
   </a>
   
 </li>
@@ -9309,6 +9323,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#createboundingbox" class="md-nav__link">
+    createBoundingBox
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detachproperty" class="md-nav__link">
     detachProperty
   </a>
@@ -9457,6 +9478,13 @@
           <li class="md-nav__item">
   <a href="#detachaffectednode" class="md-nav__link">
     detachAffectedNode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    new
   </a>
   
 </li>
@@ -9734,6 +9762,15 @@
 <li><code>result</code> (<a href="../../types/niObject">niObject</a>)</li>
 </ul>
 <hr />
+<h3 id="createboundingbox"><code>createBoundingBox</code><a class="headerlink" href="#createboundingbox" title="Permanent link">⚓︎</a></h3>
+<p>Calculates and creates a bounding box for the object. The existing bounding box, if any, will not be used, a fresh one will always be calculated.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">boundingBox</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createBoundingBox</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>boundingBox</code> (<a href="../../types/tes3boundingBox">tes3boundingBox</a>): The newly created bounding box.</li>
+</ul>
+<hr />
 <h3 id="detachproperty"><code>detachProperty</code><a class="headerlink" href="#detachproperty" title="Permanent link">⚓︎</a></h3>
 <p>Detaches and returns a property from the object which matches the given property type.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachProperty</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
@@ -9922,6 +9959,15 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>node</code> (<a href="../../types/niNode">niNode</a>): The node to remove from the affected nodes list.</li>
+</ul>
+<hr />
+<h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
+<p>Creates a new NiPointLight.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">light</span> <span class="o">=</span> <span class="n">niPointLight</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>light</code> (<a href="../../types/niPointLight">niPointLight</a>)</li>
 </ul>
 <hr />
 

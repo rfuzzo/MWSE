@@ -3884,6 +3884,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#createboundingbox" class="md-nav__link">
+    createBoundingBox
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detachchild" class="md-nav__link">
     detachChild
   </a>
@@ -4019,6 +4026,26 @@
           <li class="md-nav__item">
   <a href="#updateproperties" class="md-nav__link">
     updateProperties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    new
   </a>
   
 </li>
@@ -9212,6 +9239,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#createboundingbox" class="md-nav__link">
+    createBoundingBox
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detachchild" class="md-nav__link">
     detachChild
   </a>
@@ -9347,6 +9381,26 @@
           <li class="md-nav__item">
   <a href="#updateproperties" class="md-nav__link">
     updateProperties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    new
   </a>
   
 </li>
@@ -9585,6 +9639,15 @@
 <li><code>result</code> (<a href="../../types/niObject">niObject</a>)</li>
 </ul>
 <hr />
+<h3 id="createboundingbox"><code>createBoundingBox</code><a class="headerlink" href="#createboundingbox" title="Permanent link">⚓︎</a></h3>
+<p>Calculates and creates a bounding box for the object. The existing bounding box, if any, will not be used, a fresh one will always be calculated.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">boundingBox</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createBoundingBox</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>boundingBox</code> (<a href="../../types/tes3boundingBox">tes3boundingBox</a>): The newly created bounding box.</li>
+</ul>
+<hr />
 <h3 id="detachchild"><code>detachChild</code><a class="headerlink" href="#detachchild" title="Permanent link">⚓︎</a></h3>
 <p>Detaches the child from the children list of the node. Returns the detached child.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachChild</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
@@ -9785,6 +9848,16 @@
 <p>Update all attached properties.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateProperties</span><span class="p">()</span>
 </code></pre></div>
+<hr />
+<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
+<h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
+<p>Creates a new, empty NiNode.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">node</span> <span class="o">=</span> <span class="n">niNode</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>node</code> (<a href="../../types/niNode">niNode</a>)</li>
+</ul>
 <hr />
 
               
