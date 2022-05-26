@@ -10674,7 +10674,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <hr />
 <h3 id="createimagebutton"><code>createImageButton</code><a class="headerlink" href="#createimagebutton" title="Permanent link">⚓︎</a></h3>
 <p>Creates an interactive button composed of images for the <strong>idle</strong>, <strong>over</strong>, and <strong>pressed</strong> states. The texture must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024); the final display size can be trimmed by setting width and height.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createImageButton</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">idle</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">over</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">path</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createImageButton</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">idle</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">over</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">pressed</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10682,7 +10682,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <li><code>id</code> (string, number): <em>Optional</em>. An identifier to help find this element later.</li>
 <li><code>idle</code> (string): The path to the idle image. This path is relative to <code>Data Files</code>.</li>
 <li><code>over</code> (string): The path to the mouse hover image. This path is relative to <code>Data Files</code>.</li>
-<li><code>path</code> (string): The path to the mouse pressed image. This path is relative to <code>Data Files</code>.</li>
+<li><code>pressed</code> (string): The path to the mouse pressed image. This path is relative to <code>Data Files</code>.</li>
 </ul>
 </li>
 </ul>
