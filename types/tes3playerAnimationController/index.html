@@ -8747,7 +8747,7 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="calculateattackswing"><code>calculateAttackSwing</code><a class="headerlink" href="#calculateattackswing" title="Permanent link">⚓︎</a></h3>
-<p>Calculates how much the attack has been charged. Returns a value ranging from <code>0.0</code> to <code>1.0</code>. A value of <code>0.0</code> indicates there is no attack being charged, whereas a value of <code>1.0</code> indicates that the attack is fully charged.</p>
+<p>Calculates how much an attack is currently being charged. Returns a value ranging from <code>0.0</code> to <code>1.0</code>. A value of <code>1.0</code> indicates that the attack is fully charged. Will always return <code>0.0</code> when not currently charging an attack.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">calculateAttackSwing</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
