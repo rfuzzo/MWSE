@@ -2660,6 +2660,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3uishowjournal" class="md-nav__link">
+    tes3ui.showJournal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3uishowscrollmenu" class="md-nav__link">
     tes3ui.showScrollMenu
   </a>
@@ -9209,6 +9216,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3uishowjournal" class="md-nav__link">
+    tes3ui.showJournal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3uishowscrollmenu" class="md-nav__link">
     tes3ui.showScrollMenu
   </a>
@@ -9357,7 +9371,7 @@
 </code></pre></div>
 <hr />
 <h3 id="tes3uiclosejournal"><code>tes3ui.closeJournal</code><a class="headerlink" href="#tes3uiclosejournal" title="Permanent link">⚓︎</a></h3>
-<p>Closes the Journal.</p>
+<p>Closes the journal menu.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">closeJournal</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -9778,6 +9792,15 @@
 </li>
 </ul>
 </li>
+</ul>
+<hr />
+<h3 id="tes3uishowjournal"><code>tes3ui.showJournal</code><a class="headerlink" href="#tes3uishowjournal" title="Permanent link">⚓︎</a></h3>
+<p>Opens the journal menu. This can return false if the player hasn't gone through character generation, or if the journal was already open.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">wasShown</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">showJournal</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>wasShown</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="tes3uishowscrollmenu"><code>tes3ui.showScrollMenu</code><a class="headerlink" href="#tes3uishowscrollmenu" title="Permanent link">⚓︎</a></h3>
