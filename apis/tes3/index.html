@@ -12358,7 +12358,7 @@
 </code></pre></div>
 <hr />
 <h3 id="tes3createobject"><code>tes3.createObject</code><a class="headerlink" href="#tes3createobject" title="Permanent link">⚓︎</a></h3>
-<p>Create an object and returns it. The created object will be part of the saved game. Currently supported object types are: <code>tes3.objectType.activator</code>, <code>.alchemy</code>, <code>.ammo</code>, <code>.container</code>, <code>.misc</code>, <code>.sound</code>, <code>.spell</code>, <code>.static</code>, <code>.enchantment</code>, <code>.weapon</code>.</p>
+<p>Create an object and returns it. The created object will be part of the saved game. Currently supported object types are: <code>tes3.objectType.activator</code>, <code>.alchemy</code>, <code>.ammo</code>, <code>.book</code>, <code>.clothing</code>, <code>.container</code>, <code>.enchantment</code>, <code>.miscItem</code>, <code>.sound</code>, <code>.spell</code>, <code>.static</code>, and <code>.weapon</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">createdObject</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">objectType</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">getIfExists</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -13761,7 +13761,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>filter</code> (number): Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants.</li>
+<li><code>filter</code> (number, number[], nil): Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
