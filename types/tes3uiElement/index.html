@@ -6201,6 +6201,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getluadata" class="md-nav__link">
+    getLuaData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getpropertybool" class="md-nav__link">
     getPropertyBool
   </a>
@@ -6314,6 +6321,13 @@
           <li class="md-nav__item">
   <a href="#savemenuposition" class="md-nav__link">
     saveMenuPosition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setluadata" class="md-nav__link">
+    setLuaData
   </a>
   
 </li>
@@ -9948,6 +9962,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getluadata" class="md-nav__link">
+    getLuaData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getpropertybool" class="md-nav__link">
     getPropertyBool
   </a>
@@ -10061,6 +10082,13 @@
           <li class="md-nav__item">
   <a href="#savemenuposition" class="md-nav__link">
     saveMenuPosition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setluadata" class="md-nav__link">
+    setLuaData
   </a>
   
 </li>
@@ -10930,6 +10958,19 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
 </ul>
 <hr />
+<h3 id="getluadata"><code>getLuaData</code><a class="headerlink" href="#getluadata" title="Permanent link">⚓︎</a></h3>
+<p>Gets an arbitrary lua value from the UI element. Each element has the capability to store keyed lua data, as if it were a table, using this function and <code>setLuaData</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getLuaData</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>key</code> (string): The key for the lua data.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (any)</li>
+</ul>
+<hr />
 <h3 id="getpropertybool"><code>getPropertyBool</code><a class="headerlink" href="#getpropertybool" title="Permanent link">⚓︎</a></h3>
 <p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns <code>false</code> if the property key did not have data.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyBool</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
@@ -11185,6 +11226,16 @@ Returns `true` if the operation succeeded, or `false` if at least one argument w
 <p>Saves the menu's position and size information to the Morrowind.ini file. This may only be called on top-level parents. Note that most menus save their position automatically.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">saveMenuPosition</span><span class="p">()</span>
 </code></pre></div>
+<hr />
+<h3 id="setluadata"><code>setLuaData</code><a class="headerlink" href="#setluadata" title="Permanent link">⚓︎</a></h3>
+<p>Sets an arbitrary lua value for the UI element. Each element has the capability to store keyed lua data, as if it were a table, using this function and <code>getLuaData</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setLuaData</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>key</code> (string): The key for the lua data.</li>
+<li><code>value</code> (any): The value to set.</li>
+</ul>
 <hr />
 <h3 id="setpropertybool"><code>setPropertyBool</code><a class="headerlink" href="#setpropertybool" title="Permanent link">⚓︎</a></h3>
 <p>Sets a property value with <code>prop</code> as the property key. Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.</p>
