@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.16">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.0">
     
     
       
@@ -17,11 +17,12 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1c3799f8.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fd896c8a.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cc9b2e1e.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
         
+      
       
     
     
@@ -11663,7 +11664,7 @@
 <hr />
 <h3 id="tes3additem"><code>tes3.addItem</code><a class="headerlink" href="#tes3additem" title="Permanent link">⚓︎</a></h3>
 <p>Adds an item to a given reference's inventory or mobile's inventory.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">addedCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addItem</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">soul</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reevaluateEquipment</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">addedCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addItem</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">soul</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reevaluateEquipment</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">equipProjectiles</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -11676,6 +11677,7 @@
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limit</code> (boolean): <em>Default</em>: <code>false</code>. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
 <li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item added is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if the new item is worth equipping. This does not affect the player.</li>
+<li><code>equipProjectiles</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
@@ -14894,7 +14896,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <hr />
 <h3 id="tes3transferitem"><code>tes3.transferItem</code><a class="headerlink" href="#tes3transferitem" title="Permanent link">⚓︎</a></h3>
 <p>Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">transferredCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">transferItem</span><span class="p">({</span> <span class="n">from</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">to</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limitCapacity</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reevaluateEquipment</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">transferredCount</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">transferItem</span><span class="p">({</span> <span class="n">from</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">to</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limitCapacity</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reevaluateEquipment</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">equipProjectiles</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -14907,6 +14909,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 <li><code>playSound</code> (boolean): <em>Default</em>: <code>true</code>. If false, the up/down sound for the item won't be played.</li>
 <li><code>limitCapacity</code> (boolean): <em>Default</em>: <code>true</code>. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.</li>
 <li><code>reevaluateEquipment</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.</li>
+<li><code>equipProjectiles</code> (boolean): <em>Default</em>: <code>true</code>. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though <a href="https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate"><code>tes3ui.forcePlayerInventoryUpdate()</code></a> must manually be called after all inventory updates are finished.</li>
 </ul>
 </li>
@@ -15034,10 +15037,13 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 
               
             </article>
+            
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+          <a href="#" class="md-top md-top--hidden md-icon" data-md-component="top">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
           </a>
@@ -15046,7 +15052,8 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
         <a href="../table/" class="md-footer__link md-footer__link--prev" aria-label="Previous: table" rel="prev">
@@ -15101,10 +15108,10 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      <script src="../../assets/javascripts/bundle.0f659f14.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       
