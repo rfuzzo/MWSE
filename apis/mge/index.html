@@ -2354,15 +2354,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgegetguiscale" class="md-nav__link">
-    mge.getGUIScale
+  <a href="#mgegetlightingmode" class="md-nav__link">
+    mge.getLightingMode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgegetlightingmode" class="md-nav__link">
-    mge.getLightingMode
+  <a href="#mgegetuiscale" class="md-nav__link">
+    mge.getUIScale
   </a>
   
 </li>
@@ -2396,15 +2396,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgesetguiscale" class="md-nav__link">
-    mge.setGUIScale
+  <a href="#mgesetlightingmode" class="md-nav__link">
+    mge.setLightingMode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgesetlightingmode" class="md-nav__link">
-    mge.setLightingMode
+  <a href="#mgesetuiscale" class="md-nav__link">
+    mge.setUIScale
   </a>
   
 </li>
@@ -8935,15 +8935,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgegetguiscale" class="md-nav__link">
-    mge.getGUIScale
+  <a href="#mgegetlightingmode" class="md-nav__link">
+    mge.getLightingMode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgegetlightingmode" class="md-nav__link">
-    mge.getLightingMode
+  <a href="#mgegetuiscale" class="md-nav__link">
+    mge.getUIScale
   </a>
   
 </li>
@@ -8977,15 +8977,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgesetguiscale" class="md-nav__link">
-    mge.setGUIScale
+  <a href="#mgesetlightingmode" class="md-nav__link">
+    mge.setLightingMode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mgesetlightingmode" class="md-nav__link">
-    mge.setLightingMode
+  <a href="#mgesetuiscale" class="md-nav__link">
+    mge.setUIScale
   </a>
   
 </li>
@@ -9057,15 +9057,6 @@
 <li><code>enabled</code> (boolean)</li>
 </ul>
 <hr />
-<h3 id="mgegetguiscale"><code>mge.getGUIScale</code><a class="headerlink" href="#mgegetguiscale" title="Permanent link">⚓︎</a></h3>
-<p>Returns the GUI scaling used by MGE XE.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getGUIScale</span><span class="p">()</span>
-</code></pre></div>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>scale</code> (number)</li>
-</ul>
-<hr />
 <h3 id="mgegetlightingmode"><code>mge.getLightingMode</code><a class="headerlink" href="#mgegetlightingmode" title="Permanent link">⚓︎</a></h3>
 <p>Returns the lighting mode used by MGE XE. These values map to <code>mge.lightingMode.*</code> constants.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getLightingMode</span><span class="p">()</span>
@@ -9073,6 +9064,15 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>mode</code> (number): Maps to the <code>mge.lightingMode.*</code> constants.</li>
+</ul>
+<hr />
+<h3 id="mgegetuiscale"><code>mge.getUIScale</code><a class="headerlink" href="#mgegetuiscale" title="Permanent link">⚓︎</a></h3>
+<p>Returns the GUI scaling used by MGE XE.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getUIScale</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>scale</code> (number)</li>
 </ul>
 <hr />
 <h3 id="mgegetversion"><code>mge.getVersion</code><a class="headerlink" href="#mgegetversion" title="Permanent link">⚓︎</a></h3>
@@ -9099,15 +9099,6 @@
 <div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">saveConfig</span><span class="p">()</span>
 </code></pre></div>
 <hr />
-<h3 id="mgesetguiscale"><code>mge.setGUIScale</code><a class="headerlink" href="#mgesetguiscale" title="Permanent link">⚓︎</a></h3>
-<p>Sets the GUI scaling used by MGE XE.</p>
-<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setGUIScale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>scale</code> (number)</li>
-</ul>
-<hr />
 <h3 id="mgesetlightingmode"><code>mge.setLightingMode</code><a class="headerlink" href="#mgesetlightingmode" title="Permanent link">⚓︎</a></h3>
 <p>Sets the lighting mode used by MGE XE. The values passed can be used from the <code>mge.lightingMode.*</code> constants.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setLightingMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
@@ -9115,6 +9106,15 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>mode</code> (number): Maps from the <code>mge.lightingMode.*</code> constants.</li>
+</ul>
+<hr />
+<h3 id="mgesetuiscale"><code>mge.setUIScale</code><a class="headerlink" href="#mgesetuiscale" title="Permanent link">⚓︎</a></h3>
+<p>Sets the GUI scaling used by MGE XE.</p>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setUIScale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>scale</code> (number)</li>
 </ul>
 <hr />
 
