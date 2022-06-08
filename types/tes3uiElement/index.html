@@ -2921,6 +2921,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -6691,6 +6693,20 @@
     <li class="md-nav__item">
       <a href="../tes3uiTextSelect/" class="md-nav__link">
         tes3uiTextSelect
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3uiWidget/" class="md-nav__link">
+        tes3uiWidget
       </a>
     </li>
   
@@ -10666,7 +10682,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <p>Access to element specific properties. This will be <code>nil</code> if there are no element specific properties. See the return types and the create* functions for more details.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3uiButton">tes3uiButton</a>, <a href="../../types/tes3uiFillBar">tes3uiFillBar</a>, <a href="../../types/tes3uiParagraphInput">tes3uiParagraphInput</a>, <a href="../../types/tes3uiSlider">tes3uiSlider</a>, <a href="../../types/tes3uiScrollPane">tes3uiScrollPane</a>, <a href="../../types/tes3uiTextInput">tes3uiTextInput</a>, <a href="../../types/tes3uiTextSelect">tes3uiTextSelect</a>, nil)</li>
+<li><code>result</code> (<a href="../../types/tes3uiWidget">tes3uiWidget</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="width"><code>width</code><a class="headerlink" href="#width" title="Permanent link">⚓︎</a></h3>
@@ -11089,91 +11105,82 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="getpropertybool"><code>getPropertyBool</code><a class="headerlink" href="#getpropertybool" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns <code>false</code> if the property key did not have data.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyBool</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as a boolean value, defaulting to false if the property was not set.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyBool</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to get.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (boolean)</li>
+<li><code>value</code> (boolean): The value of the property, defaulting to false if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="getpropertycallback"><code>getPropertyCallback</code><a class="headerlink" href="#getpropertycallback" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. The callback is an address inside Morrowind.exe that will be called when the appropriate callback is invoked.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyCallback</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as a number value, defaulting to <code>0</code> if the property was not set. This function can be dangerous to use, and can lead to crashes if not properly understood.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyCallback</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to get.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>value</code> (number): The value of the property, defaulting to <code>0</code> if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="getpropertyfloat"><code>getPropertyFloat</code><a class="headerlink" href="#getpropertyfloat" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns 0 if the property key did not have data.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyFloat</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as a floating-point value, defaulting to <code>0</code> if the property was not set.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyFloat</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to get.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>value</code> (number): The value of the property, defaulting to <code>0</code> if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="getpropertyint"><code>getPropertyInt</code><a class="headerlink" href="#getpropertyint" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns 0 if the property key did not have data.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyInt</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as an integer value, defaulting to <code>0</code> if the property was not set.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyInt</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to get.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>value</code> (number): The value of the property, defaulting to <code>0</code> if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="getpropertyobject"><code>getPropertyObject</code><a class="headerlink" href="#getpropertyobject" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. Returns <code>nil</code> if the property key did not have data, or if it could not guess the type of the property value.</p>
-<pre><code>For `getPropertyObject`, an expected return value not derived from `tes3baseObject` requires the usertype to be provided as well. Currently accepted usertypes are:
-`tes3itemData`
-`tes3itemStack`
-`tes3gameFile`
-`tes3inventoryTile`
-`tes3uiElement`
-
-This is required because there is no identifying type information stored with the pointer. If the usertype is incorrect, there are no safety checks keeping the game from crashing.
-</code></pre>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyObject</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">expectedUsertype</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as an object value, defaulting to <code>nil</code> if the property was not set. This function can be dangerous to use, and can lead to crashes if not properly understood.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyObject</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">typeCast</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
-<li><code>expectedUsertype</code> (string): <em>Optional</em>. A Lua usertype name, if expecting a non-standard object type.</li>
+<li><code>property</code> (number, string): The property to get.</li>
+<li><code>typeCast</code> (string, nil): <em>Default</em>: <code>tes3baseObject</code>. The casting of the property to get.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>, <a href="../../types/tes3mobileObject">tes3mobileObject</a>, any)</li>
+<li><code>value</code> (number): The value of the property, defaulting to <code>nil</code> if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="getpropertyproperty"><code>getPropertyProperty</code><a class="headerlink" href="#getpropertyproperty" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. This function gets a property whose value is, itself, a property.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyProperty</span><span class="p">(</span><span class="n">propName</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property whose value is, itself, a property, defaulting to <code>0</code> if the property was not set.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyProperty</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to get.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>value</code> (number): The value of the property, defaulting to <code>0</code> if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="gettoplevelmenu"><code>getTopLevelMenu</code><a class="headerlink" href="#gettoplevelmenu" title="Permanent link">⚓︎</a></h3>
@@ -11355,63 +11362,63 @@ Returns `true` if the operation succeeded, or `false` if at least one argument w
 </ul>
 <hr />
 <h3 id="setpropertybool"><code>setPropertyBool</code><a class="headerlink" href="#setpropertybool" title="Permanent link">⚓︎</a></h3>
-<p>Sets a property value with <code>prop</code> as the property key. Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyBool</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function sets a property to a boolean value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyBool</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to set.</li>
 <li><code>value</code> (boolean): The value to set.</li>
 </ul>
 <hr />
 <h3 id="setpropertycallback"><code>setPropertyCallback</code><a class="headerlink" href="#setpropertycallback" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Sets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. The callback is an address inside Morrowind.exe that will be called when the appropriate callback is invoked.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyCallback</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function sets a property to a callback value, represented as a number. This function can be dangerous to use, and can lead to crashes if not properly understood.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyCallback</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to set.</li>
 <li><code>value</code> (number): The value to set.</li>
 </ul>
 <hr />
 <h3 id="setpropertyfloat"><code>setPropertyFloat</code><a class="headerlink" href="#setpropertyfloat" title="Permanent link">⚓︎</a></h3>
-<p>Sets a property value with <code>prop</code> as the property key. Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyFloat</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function sets a property to a floating-point value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyFloat</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to set.</li>
 <li><code>value</code> (number): The value to set.</li>
 </ul>
 <hr />
 <h3 id="setpropertyint"><code>setPropertyInt</code><a class="headerlink" href="#setpropertyint" title="Permanent link">⚓︎</a></h3>
-<p>Sets a property value with <code>prop</code> as the property key. Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyInt</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function sets a property to an integer value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyInt</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to set.</li>
 <li><code>value</code> (number): The value to set.</li>
 </ul>
 <hr />
 <h3 id="setpropertyobject"><code>setPropertyObject</code><a class="headerlink" href="#setpropertyobject" title="Permanent link">⚓︎</a></h3>
 <p>Sets a property value with <code>prop</code> as the property key. Properties are named variables attached to an element. Gets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyObject</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyObject</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
+<li><code>property</code> (number, string): The property to get.</li>
 <li><code>value</code> (object): The value to set.</li>
 </ul>
 <hr />
 <h3 id="setpropertyproperty"><code>setPropertyProperty</code><a class="headerlink" href="#setpropertyproperty" title="Permanent link">⚓︎</a></h3>
-<p>Properties are named variables attached to an element. Sets a property value with <code>propName</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. This function sets a property whose value is, itself, a property.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyProperty</span><span class="p">(</span><span class="n">propName</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<p>Properties are named variables attached to an element. Sets a property value with <code>property</code> as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. This function sets a property whose value is, itself, a property.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPropertyProperty</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>propName</code> (string): The property name.</li>
-<li><code>value</code> (number): The value to set.</li>
+<li><code>property</code> (number, string): The property to get.</li>
+<li><code>value</code> (number, string): The value to set.</li>
 </ul>
 <hr />
 <h3 id="sortchildren"><code>sortChildren</code><a class="headerlink" href="#sortchildren" title="Permanent link">⚓︎</a></h3>
