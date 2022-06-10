@@ -2552,6 +2552,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tablewrapindex" class="md-nav__link">
+    table.wrapindex
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2643,6 +2650,10 @@
       
       
       
+        
+          
+        
+          
         
           
         
@@ -5920,6 +5931,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../types/tes3uiCycleButton/" class="md-nav__link">
+        tes3uiCycleButton
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3uiCycleButtonOption/" class="md-nav__link">
+        tes3uiCycleButtonOption
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../types/tes3uiElement/" class="md-nav__link">
         tes3uiElement
       </a>
@@ -9068,6 +9107,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tablewrapindex" class="md-nav__link">
+    table.wrapindex
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9353,6 +9399,20 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>values</code> (table): An array of all table values.</li>
+</ul>
+<hr />
+<h3 id="tablewrapindex"><code>table.wrapindex</code><a class="headerlink" href="#tablewrapindex" title="Permanent link">⚓︎</a></h3>
+<p>This function is used for calculating relative access into an array, such that accessing an element one past the array's size will instead return the position of the first element. Providing an index one before the start (note that this is <code>0</code>, not <code>-1</code>) will instead give the index to the last element in the array.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">index</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">wrapindex</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>t</code> (table): The table whose size will determine the new wrapped index.</li>
+<li><code>index</code> (number): The initial provided index. If this is before or after the array, it will be cycled around.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>index</code> (number)</li>
 </ul>
 <hr />
 
