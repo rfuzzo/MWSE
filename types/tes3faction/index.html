@@ -4791,8 +4791,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getlowestjoinedreaction" class="md-nav__link">
+    getLowestJoinedReaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getrankname" class="md-nav__link">
     getRankName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getreactionwithfaction" class="md-nav__link">
+    getReactionWithFaction
   </a>
   
 </li>
@@ -6826,6 +6840,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -7604,6 +7620,20 @@
     <li class="md-nav__item">
       <a href="../../events/dialogueEnvironmentCreated/" class="md-nav__link">
         dialogueEnvironmentCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/disposition/" class="md-nav__link">
+        disposition
       </a>
     </li>
   
@@ -9183,8 +9213,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getlowestjoinedreaction" class="md-nav__link">
+    getLowestJoinedReaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getrankname" class="md-nav__link">
     getRankName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getreactionwithfaction" class="md-nav__link">
+    getReactionWithFaction
   </a>
   
 </li>
@@ -9369,6 +9413,16 @@
 <li><code>string</code> (string)</li>
 </ul>
 <hr />
+<h3 id="getlowestjoinedreaction"><code>getLowestJoinedReaction</code><a class="headerlink" href="#getlowestjoinedreaction" title="Permanent link">⚓︎</a></h3>
+<p>For this faction, this function finds the worst reaction for another faction that the player has joined. It returns that reaction and its associated faction, or <code>nil</code> for both values if the no relationship is applicable.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">reaction</span><span class="p">,</span> <span class="n">faction</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getLowestJoinedReaction</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>reaction</code> (number, nil): The reaction, if any, that is worst for the player.</li>
+<li><code>faction</code> (<a href="../../types/tes3faction">tes3faction</a>, nil): The faction association, if any, that is worst for the player.</li>
+</ul>
+<hr />
 <h3 id="getrankname"><code>getRankName</code><a class="headerlink" href="#getrankname" title="Permanent link">⚓︎</a></h3>
 <p>This function fetches the player-facing name of a rank in the faction.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getRankName</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
@@ -9380,6 +9434,19 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
+</ul>
+<hr />
+<h3 id="getreactionwithfaction"><code>getReactionWithFaction</code><a class="headerlink" href="#getreactionwithfaction" title="Permanent link">⚓︎</a></h3>
+<p>Returns a reaction value for another faction, or <code>nil</code> if no relationship exists between the two factions.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">reaction</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getReactionWithFaction</span><span class="p">(</span><span class="n">faction</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>faction</code> (<a href="../../types/tes3faction">tes3faction</a>): Another faction to get a reaction for.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>reaction</code> (number, nil): The reaction, if any, with the other faction.</li>
 </ul>
 <hr />
 <h3 id="setrankname"><code>setRankName</code><a class="headerlink" href="#setrankname" title="Permanent link">⚓︎</a></h3>
