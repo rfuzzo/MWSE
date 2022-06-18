@@ -8892,16 +8892,19 @@
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">⚓︎</a></h2>
 <ul>
 <li>Allows Morrowind to run when not in focus.</li>
+<li>Allows movies to be played with letterboxing.</li>
 <li>Allows NiFlipController to specify its affected map correctly.</li>
 <li>Allows NiLinesData to be loaded from meshes.</li>
 <li>Allows NiUVController to specify its texture correctly.</li>
 <li>Creates crash dump files and logging information to help diagnose mod issues.</li>
 <li><code>Disable</code> mwscript function updates collision information so the player won't collide with invisible references.</li>
 <li>Improves load times when using Mod Organizer 2.</li>
-<li>Optimizes <code>DontThreadLoad</code> ini file access to not always fetch from the file system.</li>
-<li>Optimizes <code>ShowMap</code> and <code>FillMap</code> to not be absurdly slow.</li>
 <li>Optimizes access to global variables.</li>
 <li>Optimizes access to player kill count, via <code>GetDeadCount</code> or dialogue filtering.</li>
+<li>Optimizes disposition calculation when dialogue filtering.</li>
+<li>Optimizes <code>DontThreadLoad</code> ini file access to not always fetch from the file system.</li>
+<li>Optimizes journal updating.</li>
+<li>Optimizes <code>ShowMap</code> and <code>FillMap</code> to not be absurdly slow.</li>
 <li>Raises mod limit from 256 to 1024.</li>
 </ul>
 <h2 id="bug-fixes">Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permanent link">⚓︎</a></h2>
@@ -8911,6 +8914,9 @@
 <li>Correctly initialize MobileProjectile tag/objectType. Useful to modders.</li>
 <li><code>Enable</code> and <code>Disable</code> mwscript functions no longer can cause crashes with script variables unset.</li>
 <li>Fixes book and weapon enchantment copying. Useful to modders.</li>
+<li>Fixes crash when releasing a clone of a light with no reference.</li>
+<li>Fixes crash when saving active VFXs when none are serializable.</li>
+<li>Fixes crash when saving menu position if the derived key name is too long.</li>
 <li>Fixes crash when updating cell markers at the border of the drawable map area.</li>
 <li>Fixes crash with paper doll equipping/unequipping.</li>
 <li>Fixes crash with uncloned actors removing items.</li>
