@@ -3336,6 +3336,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3ischargenfinished" class="md-nav__link">
+    tes3.isCharGenFinished
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3iskeyequal" class="md-nav__link">
     tes3.isKeyEqual
   </a>
@@ -8097,6 +8104,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8623,6 +8632,20 @@
     <li class="md-nav__item">
       <a href="../../events/cellDeactivated/" class="md-nav__link">
         cellDeactivated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/charGenFinished/" class="md-nav__link">
+        charGenFinished
       </a>
     </li>
   
@@ -11212,6 +11235,13 @@
           <li class="md-nav__item">
   <a href="#tes3isaffectedby" class="md-nav__link">
     tes3.isAffectedBy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3ischargenfinished" class="md-nav__link">
+    tes3.isCharGenFinished
   </a>
   
 </li>
@@ -13880,7 +13910,7 @@
 </ul>
 <hr />
 <h3 id="tes3is3rdperson"><code>tes3.is3rdPerson</code><a class="headerlink" href="#tes3is3rdperson" title="Permanent link">⚓︎</a></h3>
-<p>Returns if the game is in 3rd person.</p>
+<p>Returns true if the game is in 3rd person.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">state</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">is3rdPerson</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -13905,6 +13935,15 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>isAffectedBy</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="tes3ischargenfinished"><code>tes3.isCharGenFinished</code><a class="headerlink" href="#tes3ischargenfinished" title="Permanent link">⚓︎</a></h3>
+<p>Returns true if the character generation process has been finished for the current player character.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">isCharGenFinished</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="tes3iskeyequal"><code>tes3.isKeyEqual</code><a class="headerlink" href="#tes3iskeyequal" title="Permanent link">⚓︎</a></h3>
