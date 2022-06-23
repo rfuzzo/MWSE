@@ -6607,6 +6607,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -6762,6 +6764,20 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../attackHit/" class="md-nav__link">
+        attackHit
+      </a>
     </li>
   
 
@@ -8891,7 +8907,9 @@
 -->
 
 <h1 id="attack">attack<a class="headerlink" href="#attack" title="Permanent link">⚓︎</a></h1>
-<p>This event is invoked whenever an actor makes an attack with their fists or a weapon, or a creature makes any attack. It occurs at the release time of the attack, such as the downstroke of a melee weapon or when an arrow is shot. Lockpicks and probes do not invoke this event.</p>
+<p>This event is invoked whenever an actor commits to an attack with their fists or a weapon, or a creature makes any attack. It occurs at the release time of the attack, such as the downstroke of a melee weapon or when an arrow is shot. For the player, it is when the attack button is released. A target is not required to be present for this event. For the actual moment the attack hits, use the <code>attackHit</code> event.</p>
+<p>This event has specific combat mechanics occuring at this point. This is the time when the target has a chance to use its block skill, when on-strike enchantments may be applied, and when elemental shields do reflected damage. There is still a small period of time while the attack animation completes before the hit, so it is still possible for a target to move out of range (normally only seen with short weapons).</p>
+<p>Lockpicks and probes do not invoke this event.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e attackEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">attackCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -8909,8 +8927,8 @@
 <ul>
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor making the attack.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. A shortcut to the reference that is attacking.</li>
-<li><code>targetMobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor being attacked.</li>
-<li><code>targetReference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. A shortcut to the reference being attacked.</li>
+<li><code>targetMobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor being attacked. May be nil, e.g. if nothing was targeted.</li>
+<li><code>targetReference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. A shortcut to the reference being attacked. May be nil, e.g. if nothing was targeted.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
@@ -8967,13 +8985,13 @@
       
       
         
-        <a href="../attackStart/" class="md-footer__link md-footer__link--next" aria-label="Next: attackStart" rel="next">
+        <a href="../attackHit/" class="md-footer__link md-footer__link--next" aria-label="Next: attackHit" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              attackStart
+              attackHit
             </div>
           </div>
           <div class="md-footer__button md-icon">
