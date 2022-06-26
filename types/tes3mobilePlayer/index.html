@@ -5387,6 +5387,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#canjump" class="md-nav__link">
+    canJump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canjumpmidair" class="md-nav__link">
+    canJumpMidair
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#castready" class="md-nav__link">
     castReady
   </a>
@@ -6583,8 +6597,29 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#applyjumpfatiguecost" class="md-nav__link">
+    applyJumpFatigueCost
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#calceffectivedamage" class="md-nav__link">
     calcEffectiveDamage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculatejumpvelocity" class="md-nav__link">
+    calculateJumpVelocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dojump" class="md-nav__link">
+    doJump
   </a>
   
 </li>
@@ -10744,6 +10779,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#canjump" class="md-nav__link">
+    canJump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canjumpmidair" class="md-nav__link">
+    canJumpMidair
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#castready" class="md-nav__link">
     castReady
   </a>
@@ -11940,8 +11989,29 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#applyjumpfatiguecost" class="md-nav__link">
+    applyJumpFatigueCost
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#calceffectivedamage" class="md-nav__link">
     calcEffectiveDamage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculatejumpvelocity" class="md-nav__link">
+    calculateJumpVelocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dojump" class="md-nav__link">
+    doJump
   </a>
   
 </li>
@@ -12409,7 +12479,21 @@ if damage &lt; 1 then damage = 1 end</p>
 </details>
 <hr />
 <h3 id="canact"><code>canAct</code><a class="headerlink" href="#canact" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If true, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="canjump"><code>canJump</code><a class="headerlink" href="#canjump" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, jumping, falling, swimming or flying.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="canjumpmidair"><code>canJumpMidair</code><a class="headerlink" href="#canjumpmidair" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump midair. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, swimming or flying. For more information on midair jumping see <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#dojump"><code>tes3mobileActor:doJump()</code></a>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -13632,6 +13716,11 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="applyjumpfatiguecost"><code>applyJumpFatigueCost</code><a class="headerlink" href="#applyjumpfatiguecost" title="Permanent link">⚓︎</a></h3>
+<p>Reduces the actor's current fatigue by the amount a regular jump would currently cost.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">applyJumpFatigueCost</span><span class="p">()</span>
+</code></pre></div>
+<hr />
 <h3 id="calceffectivedamage"><code>calcEffectiveDamage</code><a class="headerlink" href="#calceffectivedamage" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the damage that would be inflicted to an actor after armor and/or resistance. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">calcEffectiveDamage</span><span class="p">({</span> <span class="n">damage</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyArmor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">resistAttribute</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
@@ -13648,6 +13737,40 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="calculatejumpvelocity"><code>calculateJumpVelocity</code><a class="headerlink" href="#calculatejumpvelocity" title="Permanent link">⚓︎</a></h3>
+<p>Calculates the starting velocity of a jump.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">calculateJumpVelocity</span><span class="p">({</span> <span class="n">direction</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>direction</code> (<a href="../../types/tes3vector2">tes3vector2</a>): <em>Optional</em>. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+</ul>
+<hr />
+<h3 id="dojump"><code>doJump</code><a class="headerlink" href="#dojump" title="Permanent link">⚓︎</a></h3>
+<p>Forces the actor to jump. If <code>velocity</code> or other parameters with non-default values are specified it will be treated as a non-default jump during the <a href="https://mwse.github.io/MWSE/events/jump"><code>jump</code></a> event. Returns <code>false</code> if the actor is currently unable to jump or the jump has been cancelled, otherwise returns <code>true</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">doJump</span><span class="p">({</span> <span class="n">velocity</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">applyFatigueCost</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">allowMidairJumping</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>velocity</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.</li>
+<li><code>applyFatigueCost</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if <code>false</code>.</li>
+<li><code>allowMidairJumping</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="equip"><code>equip</code><a class="headerlink" href="#equip" title="Permanent link">⚓︎</a></h3>
