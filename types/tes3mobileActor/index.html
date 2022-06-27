@@ -11854,14 +11854,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="scaninterval"><code>scanInterval</code><a class="headerlink" href="#scaninterval" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. No description yet available.</p>
+<p>The time interval in seconds between specific actor AI checks. These checks include checking for hostile actors and engaging combat, as well as checking if the actor should equip a light source if it is too dark. The specified time in seconds will always be increased by one second when checking, therefore a value of <code>0.0</code> will actually cause the actor AI checks to occur every second instead of every frame. Setting this to lower values than the default increases the impact on performance. The default value for a newly created actor depends on the total amount of all currently active <a href="https://mwse.github.io/MWSE/types/tes3aiPlanner"><code>tes3aiPlanner</code></a>, meaning the checks will be executed at different intervals for each actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="scantimer"><code>scanTimer</code><a class="headerlink" href="#scantimer" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. No description yet available.</p>
+<p><em>Read-only</em>. The time in seconds since the last time the checks specified in <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#scaninterval"><code>scanInterval</code></a> were executed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
