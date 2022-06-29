@@ -5807,6 +5807,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#isknockeddown" class="md-nav__link">
+    isKnockedDown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isknockedout" class="md-nav__link">
+    isKnockedOut
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ismovingback" class="md-nav__link">
     isMovingBack
   </a>
@@ -11199,6 +11213,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#isknockeddown" class="md-nav__link">
+    isKnockedDown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isknockedout" class="md-nav__link">
+    isKnockedOut
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ismovingback" class="md-nav__link">
     isMovingBack
   </a>
@@ -12479,21 +12507,21 @@ if damage &lt; 1 then damage = 1 end</p>
 </details>
 <hr />
 <h3 id="canact"><code>canAct</code><a class="headerlink" href="#canact" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If <code>true</code>, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="canjump"><code>canJump</code><a class="headerlink" href="#canjump" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, jumping, falling, swimming or flying.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, jumping, falling, swimming or flying.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="canjumpmidair"><code>canJumpMidair</code><a class="headerlink" href="#canjumpmidair" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump midair. This is equal to checking if the actor is not dead, knocked down, stunned, paralyzed, swimming or flying. For more information on midair jumping see <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#dojump"><code>tes3mobileActor:doJump()</code></a>.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump midair. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, swimming or flying. For more information on midair jumping see <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#dojump"><code>tes3mobileActor:doJump()</code></a>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -12745,7 +12773,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="hasfreeaction"><code>hasFreeAction</code><a class="headerlink" href="#hasfreeaction" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If true, the actor isn't knocked down or stunned.</p>
+<p><em>Read-only</em>. If true, the actor isn't knocked down or knocked out.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -12857,7 +12885,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="isattackingorcasting"><code>isAttackingOrCasting</code><a class="headerlink" href="#isattackingorcasting" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If true, the actor is attacking, casting magic or using a lockpick or probe.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is attacking, casting magic or using a lockpick or probe.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -12905,6 +12933,20 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="isknockeddown"><code>isKnockedDown</code><a class="headerlink" href="#isknockeddown" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If <code>true</code>, the actor is knocked down. An actor can be knocked down after being attacked or falling.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="isknockedout"><code>isKnockedOut</code><a class="headerlink" href="#isknockedout" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If <code>true</code>, the actor is knocked out. An actor can be knocked out if their fatigue has been reduced below zero.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="ismovingback"><code>isMovingBack</code><a class="headerlink" href="#ismovingback" title="Permanent link">⚓︎</a></h3>
 <p>Direct access to the actor's current movement flags, showing if the actor is moving backwards.</p>
 <p><strong>Returns</strong>:</p>
@@ -12934,7 +12976,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="isparalyzed"><code>isParalyzed</code><a class="headerlink" href="#isparalyzed" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If true, the actor is affected by the magic effect paralyze.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is affected by the magic effect paralyze.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -12955,7 +12997,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="isreadyingweapon"><code>isReadyingWeapon</code><a class="headerlink" href="#isreadyingweapon" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If true, the actor is drawing or sheathing their weapon.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is drawing or sheathing their weapon.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
