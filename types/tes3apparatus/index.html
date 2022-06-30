@@ -9548,7 +9548,7 @@
 </ul>
 <hr />
 <h3 id="sourcemod"><code>sourceMod</code><a class="headerlink" href="#sourcemod" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The filename of the mod that owns this object.</p>
+<p><em>Read-only</em>. The filename (including the extension) of the mod that owns this object. It has <code>nil</code> value if the object was anything other than loaded from an ESP or ESM file.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
@@ -9569,7 +9569,7 @@
 </ul>
 <hr />
 <h3 id="type"><code>type</code><a class="headerlink" href="#type" title="Permanent link">⚓︎</a></h3>
-<p>The type of the apparatus.</p>
+<p>The type of the apparatus. Maps to values in <a href="https://mwse.github.io/MWSE/references/apparatus-types/"><code>tes3.apparatusType</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
