@@ -6,7 +6,9 @@
 #include "TES3Actor.h"
 #include "TES3Class.h"
 #include "TES3DataHandler.h"
+#include "TES3Dialogue.h"
 #include "TES3Faction.h"
+#include "TES3MobileNPC.h"
 #include "TES3Race.h"
 #include "TES3Cell.h"
 
@@ -94,7 +96,7 @@ namespace TES3 {
 	sol::optional<std::string> DialogueInfo::getID() {
 		// If we're already loaded for some reason, don't reload.
 		if (loadLinkNode) {
-			return loadLinkNode->name;
+			return { loadLinkNode->name };
 		}
 
 		// Hit the IO to find it...

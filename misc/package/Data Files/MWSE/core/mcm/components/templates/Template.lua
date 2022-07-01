@@ -31,6 +31,27 @@ function Template:saveOnClose(configPath, config)
 	end
 end
 
+function Template:onSearchInternal(searchText)
+	local searchLabels = table.get(self, "searchChildLabels", true)
+	local searchDescriptions = table.get(self, "searchChildDescriptions", false)
+
+	-- Go through and search children.
+	if (searchLabels or searchDescriptions) then
+
+	end
+
+	-- Do we have a custom search handler?
+	if (self.onSearch and self.onSearch(searchText)) then
+		return true
+	end
+
+	return false
+end
+
+function Template:setCustomSearchHandler(callback)
+	self.onSearch = callback
+end
+
 function Template:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.heightProportional = 1.0
@@ -116,7 +137,7 @@ function Template:createTabsBlock(parentBlock)
 	outerTabsBlock.widthProportional = 1.0
 
 	-- Create a tab for each page (no need if only one page)
-	if table.getn(self.pages) > 1 then
+	if #self.pages > 1 then
 
 		-- Previous Button
 		local prevButton = outerTabsBlock:createButton{ id = tes3ui.registerID("MCM_PreviousButton"), text = "<--" }
@@ -211,6 +232,11 @@ function Template:register()
 		self:create(container)
 		mcm.onClose = self.onClose
 	end
+
+	mcm.onSearch = function(searchText)
+		return self:onSearchInternal(searchText)
+	end
+
 	mwse.registerModConfig(self.name, mcm)
 	mwse.log("%s mod config registered", self.name)
 end

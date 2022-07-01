@@ -13,6 +13,7 @@
 #include "LuaDamageEvent.h"
 #include "LuaDamageHandToHandEvent.h"
 #include "LuaDeathEvent.h"
+#include "LuaJumpEvent.h"
 #include "LuaMobileObjectCollisionEvent.h"
 
 #include "TES3Actor.h"
@@ -25,7 +26,7 @@
 #include "TES3MagicEffectController.h"
 #include "TES3MagicEffectInstance.h"
 #include "TES3MagicInstanceController.h"
-#include "TES3MobController.h"
+#include "TES3MobManager.h"
 #include "TES3MobilePlayer.h"
 #include "TES3ItemData.h"
 #include "TES3Spell.h"
@@ -206,7 +207,7 @@ namespace TES3 {
 
 			if (updateGUI) {
 				// Get the icon path of the spell's first effect.
-				char* iconPath = "";
+				const char* iconPath = "";
 				Effect* effects = spell->effects;
 				if (effects) {
 					TES3::MagicEffect* effect = DataHandler::get()->nonDynamicData->getMagicEffect(effects[0].effectID);
@@ -222,7 +223,8 @@ namespace TES3 {
 		}
 		else if (source->isItem()) {
 			auto item = static_cast<Item*>(source);
-			EquipmentStack* equipmentStack = nullptr;
+			EquipmentStack equipmentStack;
+			EquipmentStack* equipmentStackPointer = &equipmentStack;
 
 			// Ignore items without enchantments that can be casted.
 			auto enchantment = item->getEnchantment();
@@ -233,8 +235,7 @@ namespace TES3 {
 			if (item->objectType == ObjectType::Book)
 			{
 				// Create a basic equipment stack for enchanted scrolls.
-				equipmentStack = new EquipmentStack();
-				equipmentStack->object = source;
+				equipmentStack.object = source;
 			}
 			else {
 				if (equipItem) {
@@ -248,20 +249,20 @@ namespace TES3 {
 
 					// Get the equipment stack from the actor.
 					if (itemData) {
-						equipmentStack = actor->getEquippedItemExact(item, itemData);
+						equipmentStackPointer = actor->getEquippedItemExact(item, itemData);
 					}
 					else {
-						equipmentStack = actor->getEquippedItem(item);
+						equipmentStackPointer = actor->getEquippedItem(item);
 					}
 
 
-					if (!equipmentStack) {
+					if (!equipmentStackPointer) {
 						// Equip the item if desired.
 						this->equipItem(item, itemData);
-						equipmentStack = actor->getEquippedItem(item);
+						equipmentStackPointer = actor->getEquippedItem(item);
 
 						// Return if the item could not be equipped.
-						if (!equipmentStack) {
+						if (!equipmentStackPointer) {
 							return false;
 						}
 					}
@@ -272,18 +273,17 @@ namespace TES3 {
 					}
 
 					// Create an equipment stack for items that should not be equipped automatically.
-					equipmentStack = new EquipmentStack();
-					equipmentStack->object = source;
-					equipmentStack->itemData = itemData;
+					equipmentStack.object = source;
+					equipmentStack.itemData = itemData;
 				}
 			}
 
 			// Equip the item enchantment.
-			setCurrentMagicFromEquipmentStack(equipmentStack);
+			setCurrentMagicFromEquipmentStack(equipmentStackPointer);
 
 			// Update the GUI if desired.
 			if (updateGUI) {
-				UI::updateCurrentMagicFromEquipmentStack(equipmentStack);
+				UI::updateCurrentMagicFromEquipmentStack(equipmentStackPointer);
 				UI::updateMagicMenuSelection();
 			}
 		}
@@ -455,13 +455,12 @@ namespace TES3 {
 	}
 
 	float MobileActor::applyDamage_lua(sol::table params) {
-		bool applyArmor = params["applyArmor"].get_or(false);
-		bool applyDifficulty = params["applyDifficulty"].get_or(false);
+		auto applyArmor = params.get_or("applyArmor", false);
+		auto applyDifficulty = params.get_or("applyDifficulty", false);
 		sol::optional<float> damage = params["damage"];
-		bool doNotChangeHealth = params["doNotChangeHealth"].get_or(false);
+		auto doNotChangeHealth = params.get_or("doNotChangeHealth", false);
 		sol::optional<bool> playerAttack = params["playerAttack"];
-		sol::optional<int> resistAttribute = params["resistAttribute"];
-		int resistIndex = resistAttribute.value_or(-1);
+		auto resistIndex = params.get_or("resistAttribute", -1);
 
 		if (applyDifficulty && !playerAttack) {
 			throw std::invalid_argument("'applyDifficulty' requires a 'playerAttack' parameter.");
@@ -469,21 +468,17 @@ namespace TES3 {
 		if (!damage) {
 			throw std::invalid_argument("Invalid 'damage' parameter provided.");
 		}
-		if (resistAttribute) {
-			if (resistIndex < TES3::MagicEffectAttribute::AttackBonus || resistIndex > TES3::MagicEffectAttribute::Invisibility) {
-				// Disable resistAttribute for effect attributes that are > Invisibility.
-				resistAttribute.reset();
-			}
-		}
 
-		float adjustedDamage = damage.value();
+		auto adjustedDamage = damage.value();
+
 		// Apply armor mitigation. Includes damaging armor condition, hit sounds, and player armor skill experience.
 		if (applyArmor) {
 			adjustedDamage = applyArmorRating(adjustedDamage, 1.0f, true);
 		}
+
 		// Effect attribute based resistance/weakness.
-		if (resistAttribute) {
-			adjustedDamage *= std::max(0, 100 - this->effectAttributes[resistIndex]) / 100.0f;
+		if (resistIndex >= TES3::MagicEffectAttribute::AttackBonus && resistIndex <= TES3::MagicEffectAttribute::Invisibility) {
+			adjustedDamage *= std::max(0, 100 - effectAttributes[resistIndex]) / 100.0f;
 		}
 
 		auto prevSource = mwse::lua::event::DamageEvent::m_Source;
@@ -495,37 +490,31 @@ namespace TES3 {
 	}
 
 	float MobileActor::calcEffectiveDamage_lua(sol::table params) {
-		bool applyArmor = params["applyArmor"].get_or(false);
+		auto applyArmor = params.get_or("applyArmor", false);
 		sol::optional<float> damage = params["damage"];
-		sol::optional<int> resistAttribute = params["resistAttribute"];
-		int resistIndex = resistAttribute.value_or(-1);
+		auto resistIndex = params.get_or("resistAttribute", -1);
 
 		if (!damage) {
 			throw std::invalid_argument("Invalid 'damage' parameter provided.");
 		}
-		if (resistAttribute) {
-			if (resistIndex < TES3::MagicEffectAttribute::AttackBonus || resistIndex > TES3::MagicEffectAttribute::Invisibility) {
-				// Disable resistAttribute for effect attributes that are > Invisibility.
-				resistAttribute.reset();
-			}
-		}
 
 		// Emulate armor mitigation.
-		float adjustedDamage = damage.value();
+		auto adjustedDamage = damage.value();
 		if (applyArmor) {
 			if (adjustedDamage > 0.001f) {
-				float fCombatArmorMinMult = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::fCombatArmorMinMult]->value.asFloat;
-				float armor = calculateArmorRating();
-				float reducer = std::max(fCombatArmorMinMult, adjustedDamage / (armor + adjustedDamage));
+				auto fCombatArmorMinMult = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::fCombatArmorMinMult]->value.asFloat;
+				auto armor = calculateArmorRating();
+				auto reducer = std::max(fCombatArmorMinMult, adjustedDamage / (armor + adjustedDamage));
 				adjustedDamage = std::max(1.0f, reducer * adjustedDamage);
 			}
 			else {
 				adjustedDamage = 0;
 			}
 		}
+
 		// Effect attribute based resistance/weakness.
-		if (resistAttribute) {
-			adjustedDamage *= std::max(0, 100 - this->effectAttributes[resistIndex]) / 100.0f;
+		if (resistIndex >= TES3::MagicEffectAttribute::AttackBonus && resistIndex <= TES3::MagicEffectAttribute::Invisibility) {
+			adjustedDamage *= std::max(0, 100 - effectAttributes[resistIndex]) / 100.0f;
 		}
 
 		return adjustedDamage;
@@ -562,9 +551,67 @@ namespace TES3 {
 		TES3_MobileActor_applyJumpFatigueCost(this);
 	}
 
-	const auto TES3_MobileActor_isNotKnockedDown = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x527580);
-	bool MobileActor::isNotKnockedDown() const {
-		return TES3_MobileActor_isNotKnockedDown(this);
+	bool MobileActor::doJump(Vector3 velocity, bool applyFatigueCost, bool isDefaultJump) {
+		// Allow the event to override the velocity or block the jump.
+		if (mwse::lua::event::JumpEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			sol::object eventResult = stateHandle.triggerEvent(new mwse::lua::event::JumpEvent(this, velocity, applyFatigueCost, isDefaultJump));
+			if (eventResult.valid()) {
+				sol::table eventData = eventResult;
+				if (eventData.get_or("block", false)) {
+					return false;
+				}
+				velocity = mwse::lua::getOptionalParam<Vector3>(eventData, "velocity", velocity);
+				applyFatigueCost = mwse::lua::getOptionalParam<bool>(eventData, "applyFatigueCost", applyFatigueCost);
+			}
+		}
+
+		// Execute the actual jumping logic.
+		Vector3 zeroVector;
+		setInstantVelocity(&zeroVector);
+		updateConstantVelocity(&velocity);
+		vTable.mobileActor->setJumping(this, true);
+		if (applyFatigueCost) {
+			applyJumpFatigueCost();
+		}
+		return true;
+	}
+
+	bool MobileActor::doJump_lua(sol::optional<sol::table> params) {
+		sol::optional<Vector3> velocity = mwse::lua::getOptionalParamVector3(params, "velocity");
+		bool applyFatigueCost = mwse::lua::getOptionalParam(params, "applyFatigueCost", true);
+		bool allowMidairJumping = mwse::lua::getOptionalParam(params, "allowMidairJumping", false);
+		bool isDefaultJump = false;
+
+		// Prevent jumping if it would break logic.
+		if (!canJump(allowMidairJumping)) {
+			return false;
+		}
+
+		// Get the default jumping velocity if none has been provided.
+		bool isVelocityValid = velocity.has_value();
+		if (!isVelocityValid) {
+			Vector2 zeroVector;
+			velocity = calculateJumpVelocity(zeroVector);
+			isDefaultJump = applyFatigueCost && !allowMidairJumping;
+		}
+
+		return doJump(velocity.value(), applyFatigueCost, isDefaultJump);
+	}
+
+	const auto TES3_MobileActor_isNotKnockedDownOrOut = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x527580);
+	bool MobileActor::isNotKnockedDownOrOut() const {
+		return TES3_MobileActor_isNotKnockedDownOrOut(this);
+	}
+
+	const auto TES3_MobileActor_isKnockedDown = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x5275D0);
+	bool MobileActor::isKnockedDown() const {
+		return TES3_MobileActor_isKnockedDown(this);
+	}
+
+	const auto TES3_MobileActor_isKnockedOut = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x5275F0);
+	bool MobileActor::isKnockedOut() const {
+		return TES3_MobileActor_isKnockedOut(this);
 	}
 
 	const auto TES3_MobileActor_isAttackingOrCasting = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x5567D0);
@@ -573,7 +620,8 @@ namespace TES3 {
 	}
 
 	bool MobileActor::isReadyingWeapon() const {
-		return actionData.animStateAttack == AttackAnimationState::ReadyingWeap || actionData.animStateAttack == AttackAnimationState::UnreadyWeap;
+		return actionData.animStateAttack == AttackAnimationState::ReadyingWeap ||
+			actionData.animStateAttack == AttackAnimationState::UnreadyWeap;
 	}
 
 	bool MobileActor::isParalyzed() const {
@@ -581,7 +629,30 @@ namespace TES3 {
 	}
 
 	bool MobileActor::canAct() const {
-		return !isDead() && isNotKnockedDown() && !isAttackingOrCasting() && !isParalyzed() && !isReadyingWeapon();
+		return !isDead() &&
+			isNotKnockedDownOrOut() &&
+			!isAttackingOrCasting() &&
+			!isParalyzed() &&
+			!isReadyingWeapon();
+	}
+
+	bool MobileActor::canJump(bool allowMidairJumping) const {
+		return WorldController::get()->collisionEnabled &&
+			!isDead() &&
+			isNotKnockedDownOrOut() &&
+			!isParalyzed() &&
+			!getMovementFlagSwimming() &&
+			!getMovementFlagFlying() &&
+			(allowMidairJumping || (!getMovementFlagJumping() && !getMovementFlagFalling())) &&
+			(!getMobileActorMovementFlag(ActorMovement::Unknown) || thisFrameDeltaPosition.length() <= 0.0099999998);
+	}
+
+	bool MobileActor::canJump_lua() const {
+		return canJump(false);
+	}
+
+	bool MobileActor::canJumpMidair_lua() const {
+		return canJump(true);
 	}
 
 	const auto TES3_MobileActor_calculateRunSpeed = reinterpret_cast<float(__thiscall*)(MobileActor*)>(0x527050);
@@ -659,6 +730,60 @@ namespace TES3 {
 		return speed;
 	}
 
+	Vector3 MobileActor::calculateJumpVelocity(Vector2 direction) {
+		GameSetting** GMSTs = DataHandler::get()->nonDynamicData->GMSTs;
+		float fJumpEncumbranceBase = GMSTs[TES3::GMST::fJumpEncumbranceBase]->value.asFloat;
+		float fJumpEncumbranceMultiplier = GMSTs[TES3::GMST::fJumpEncumbranceMultiplier]->value.asFloat;
+		float fJumpAcrobaticsBase = GMSTs[TES3::GMST::fJumpAcrobaticsBase]->value.asFloat;
+		float fJumpAcroMultiplier = GMSTs[TES3::GMST::fJumpAcroMultiplier]->value.asFloat;
+		float fJumpRunMultiplier = GMSTs[TES3::GMST::fJumpRunMultiplier]->value.asFloat;
+		float acrobaticsSkill = getSkillValue(TES3::SkillID::Acrobatics);
+		int jumpEffectMagnitude = getEffectAttributeJump();
+
+		// Calculate acrobatics jump height coefficients.
+		float lowCoefficient = acrobaticsSkill;
+		float highCoefficient = 0.0f;
+		if (acrobaticsSkill > 50.0f) {
+			lowCoefficient = 50.0f;
+			highCoefficient = acrobaticsSkill - 50.0f;
+		}
+
+		// Calculate the impact of encumbrance on jump height.
+		float encumbranceTerm = fJumpEncumbranceBase + fJumpEncumbranceMultiplier * (1 - encumbrance.getNormalized());
+
+		// Calculate the jump height.
+		float jumpHeight = fJumpAcrobaticsBase + pow(lowCoefficient / 15.0f, fJumpAcroMultiplier);
+		jumpHeight += 3.0f * highCoefficient * fJumpAcroMultiplier;
+		jumpHeight += jumpEffectMagnitude * 64;
+		jumpHeight *= encumbranceTerm;
+		if (getMovementFlagRunning()) {
+			jumpHeight *= fJumpRunMultiplier;
+		}
+		jumpHeight *= getFatigueTerm();
+		jumpHeight -= WorldController::get()->mobManager->gravity.z;
+		jumpHeight /= 3.0f;
+
+		// Velocity is unavailable outside of the physics loop.
+		// For now this is solved by letting the caller provide a direction vector.
+		// The code snippet below is the actual logic and velocity that is required to automatically determine the direction.
+		/*if (getMovementFlagWalking() || getMovementFlagRunning()) {
+			Vector3 localVelocity = reference->sceneNode->getLocalVelocity();
+			Vector3 direction = Vector3(localVelocity.x, localVelocity.y, 0).normalized();*/
+		if (direction.length() > 0) {
+			direction.normalize();
+			return Vector3(direction.x, direction.y, 1.0f) * jumpHeight * 0.707f;
+		}
+		else
+		{
+			return Vector3(0.0f, 0.0f, jumpHeight);
+		}
+	}
+
+	Vector3 MobileActor::calculateJumpVelocity_lua(sol::optional<sol::table> params) {
+		Vector2 direction = mwse::lua::getOptionalParam<Vector2>(params, "direction", Vector2());
+		return calculateJumpVelocity(direction);
+	}
+
 	const auto TES3_MobileActor_calcDerivedStats = reinterpret_cast<void(__thiscall*)(const MobileActor*, Statistic*)>(0x527BC0);
 	void MobileActor::updateDerivedStatistics(Statistic * baseStatistic) {
 		TES3_MobileActor_calcDerivedStats(this, baseStatistic);
@@ -696,6 +821,11 @@ namespace TES3 {
 	const auto TES3_MobileActor_isAffectedBySpell = reinterpret_cast<bool(__thiscall*)(const MobileActor*, Spell*)>(0x52D0E0);
 	bool MobileActor::isAffectedBySpell(Spell * spell) const {
 		return TES3_MobileActor_isAffectedBySpell(this, spell);
+	}
+
+	const auto TES3_MobileActor_isDiseased = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x54DB80);
+	bool MobileActor::isDiseased() const {
+		return TES3_MobileActor_isDiseased(this);
 	}
 
 	const auto TES3_MobileActor_getSpellList = reinterpret_cast<SpellList * (__thiscall*)(const MobileActor*)>(0x52B3D0);
@@ -1483,20 +1613,20 @@ namespace TES3 {
 
 	bool MobileActor::getMobToMobCollision() const {
 		if (actorFlags & TES3::MobileActorFlag::ActiveInSimulation) {
-			auto mobController = TES3::WorldController::get()->mobController;
-			return mobController->hasMobileCollision(this);
+			auto mobManager = TES3::WorldController::get()->mobManager;
+			return mobManager->hasMobileCollision(this);
 		}
 		return false;
 	}
 
 	void MobileActor::setMobToMobCollision(bool collide) {
 		if (actorFlags & TES3::MobileActorFlag::ActiveInSimulation) {
-			auto mobController = TES3::WorldController::get()->mobController;
+			auto mobManager = TES3::WorldController::get()->mobManager;
 			if (collide) {
-				mobController->enableMobileCollision(this);
+				mobManager->enableMobileCollision(this);
 			}
 			else {
-				mobController->disableMobileCollision(this);
+				mobManager->disableMobileCollision(this);
 			}
 		}
 	}

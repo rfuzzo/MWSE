@@ -1,5 +1,6 @@
 return {
 	type = "function",
-	description = [[Returns an array-style table with 3 distant land atmospheric scattering colours.]],
-	returns = {{ name = "scattering", type = "table" }},
+	deprecated = true,
+	description = [[Gets the in- and out-scatter values from MGE. These are returned in a table with the `inscatter` and `outscatter` keys. The result table can be modified, then sent back to `setScattering`.]],
+	returns = "table<string, number>",
 }

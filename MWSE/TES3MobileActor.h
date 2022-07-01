@@ -134,7 +134,7 @@ namespace TES3 {
 		IteratedList<MobileActor*> listTargetActors; // 0x80
 		IteratedList<MobileActor*> listFriendlyActors; // 0x94
 		float scanTimer; // 0xA8
-		int scanInterval; // 0xAC
+		float scanInterval; // 0xAC
 		float greetTimer; // 0xB0
 		Vector3 unknown_0xB4;
 		char unknown_0xC0;
@@ -257,15 +257,24 @@ namespace TES3 {
 		void applyJumpFatigueCost() const;
 		float applyDamage_lua(sol::table params);
 		float calcEffectiveDamage_lua(sol::table params);
-		bool isNotKnockedDown() const;
+		bool doJump(Vector3 velocity, bool applyFatigueCost = true, bool isDefaultJump = false);
+		bool doJump_lua(sol::optional<sol::table> params);
+		bool isNotKnockedDownOrOut() const;
+		bool isKnockedDown() const;
+		bool isKnockedOut() const;
 		bool isReadyingWeapon() const;
 		bool isParalyzed() const;
 		bool isAttackingOrCasting() const;
 		bool canAct() const;
+		bool canJump(bool allowMidairJumping = false) const;
+		bool canJump_lua() const;
+		bool canJumpMidair_lua() const;
 		float calculateRunSpeed();
 		float calculateSwimSpeed();
 		float calculateSwimRunSpeed();
 		float calculateFlySpeed();
+		Vector3 calculateJumpVelocity(Vector2 direction);
+		Vector3 calculateJumpVelocity_lua(sol::optional<sol::table> params);
 
 		void updateDerivedStatistics(Statistic * baseStatistic);
 		void updateDerivedStatistics_lua(sol::optional<Statistic*> baseStatistic);
@@ -278,6 +287,8 @@ namespace TES3 {
 		bool isAffectedByAlchemy(Alchemy * alchemy) const;
 		bool isAffectedByEnchantment(Enchantment * enchantment) const;
 		bool isAffectedBySpell(Spell * spell) const;
+
+		bool isDiseased() const;
 
 		SpellList* getSpellList();
 		IteratedList<Spell*> * getCombatSpellList();

@@ -1,12 +1,12 @@
 return {
 	type = "function",
-	description = [[Wrapper for MGEZoom, or MGESetZoom if set to animate.]],
-	arguments = {{
+	deprecated = true,
+	description = [[Sets the zoom to a specified amount. Use `mge.camera.zoom = amount` instead.]],
+	arguments = { {
 		name = "params",
 		type = "table",
 		tableParams = {
 			{ name = "amount", type = "number" },
-			{ name = "animate", type = "boolean", optional = true, default = false },
 		},
-	}},
+	} },
 }

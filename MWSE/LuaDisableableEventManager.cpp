@@ -10,6 +10,7 @@
 #include "LuaAddTempSoundEvent.h"
 #include "LuaAddTopicEvent.h"
 #include "LuaAttackEvent.h"
+#include "LuaAttackHitEvent.h"
 #include "LuaAttackStartEvent.h"
 #include "LuaBarterOfferEvent.h"
 #include "LuaBodyPartAssignedEvent.h"
@@ -38,6 +39,7 @@
 #include "LuaCombatStartEvent.h"
 #include "LuaCombatStopEvent.h"
 #include "LuaCombatStoppedEvent.h"
+#include "LuaConsoleReferenceChangedEvent.h"
 #include "LuaContainerClosedEvent.h"
 #include "LuaConvertReferenceToItemEvent.h"
 #include "LuaCrimeWitnessedEvent.h"
@@ -51,6 +53,7 @@
 #include "LuaDeterminedActionEvent.h"
 #include "LuaDialogueEnvironmentCreatedEvent.h"
 #include "LuaDisarmTrapEvent.h"
+#include "LuaDispositionEvent.h"
 #include "LuaEnchantChargeUseEvent.h"
 #include "LuaEnchantedItemCreatedEvent.h"
 #include "LuaEnchantedItemCreateFailedEvent.h"
@@ -75,6 +78,7 @@
 #include "LuaItemTileUpdatedEvent.h"
 #include "LuaJournalEvent.h"
 #include "LuaJumpEvent.h"
+#include "LuaKeybindTestedEvent.h"
 #include "LuaKeyDownEvent.h"
 #include "LuaKeyEvent.h"
 #include "LuaKeyframesLoadEvent.h"
@@ -147,7 +151,7 @@ namespace mwse::lua::event {
 	void DisableableEventManager::bindToLua() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<DisableableEventManager>("mwseDisableableEventManager");
@@ -161,6 +165,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["addSound"] = sol::property(&AddSoundEvent::getEventEnabled, &AddSoundEvent::setEventEnabled);
 		usertypeDefinition["addTempSound"] = sol::property(&AddTempSoundEvent::getEventEnabled, &AddTempSoundEvent::setEventEnabled);
 		usertypeDefinition["attack"] = sol::property(&AttackEvent::getEventEnabled, &AttackEvent::setEventEnabled);
+		usertypeDefinition["attackHit"] = sol::property(&AttackHitEvent::getEventEnabled, &AttackHitEvent::setEventEnabled);
 		usertypeDefinition["attackStart"] = sol::property(&AttackStartEvent::getEventEnabled, &AttackStartEvent::setEventEnabled);
 		usertypeDefinition["barterOffer"] = sol::property(&BarterOfferEvent::getEventEnabled, &BarterOfferEvent::setEventEnabled);
 		usertypeDefinition["bodyPartAssigned"] = sol::property(&BodyPartAssignedEvent::getEventEnabled, &BodyPartAssignedEvent::setEventEnabled);
@@ -196,6 +201,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["combatStarted"] = sol::property(&CombatStartedEvent::getEventEnabled, &CombatStartedEvent::setEventEnabled);
 		usertypeDefinition["combatStop"] = sol::property(&CombatStopEvent::getEventEnabled, &CombatStopEvent::setEventEnabled);
 		usertypeDefinition["combatStopped"] = sol::property(&CombatStoppedEvent::getEventEnabled, &CombatStoppedEvent::setEventEnabled);
+		usertypeDefinition["consoleReferenceChanged"] = sol::property(&ConsoleReferenceChangedEvent::getEventEnabled, &ConsoleReferenceChangedEvent::setEventEnabled);
 		usertypeDefinition["containerClosed"] = sol::property(&ContainerClosedEvent::getEventEnabled, &ContainerClosedEvent::setEventEnabled);
 		usertypeDefinition["convertReferenceToItem"] = sol::property(&ConvertReferenceToItemEvent::getEventEnabled, &ConvertReferenceToItemEvent::setEventEnabled);
 		usertypeDefinition["crimeWitnessed"] = sol::property(&CrimeWitnessedEvent::getEventEnabled, &CrimeWitnessedEvent::setEventEnabled);
@@ -208,6 +214,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["determineAction"] = sol::property(&DetermineActionEvent::getEventEnabled, &DetermineActionEvent::setEventEnabled);
 		usertypeDefinition["determinedAction"] = sol::property(&DeterminedActionEvent::getEventEnabled, &DeterminedActionEvent::setEventEnabled);
 		usertypeDefinition["dialogueEnvironmentCreated"] = sol::property(&DialogueEnvironmentCreatedEvent::getEventEnabled, &DialogueEnvironmentCreatedEvent::setEventEnabled);
+		usertypeDefinition["disposition"] = sol::property(&DispositionEvent::getEventEnabled, &DispositionEvent::setEventEnabled);
 		usertypeDefinition["enchantChargeUse"] = sol::property(&EnchantChargeUseEvent::getEventEnabled, &EnchantChargeUseEvent::setEventEnabled);
 		usertypeDefinition["enchantedItemCreated"] = sol::property(&EnchantedItemCreatedEvent::getEventEnabled, &EnchantedItemCreatedEvent::setEventEnabled);
 		usertypeDefinition["enchantedItemCreateFailed"] = sol::property(&EnchantedItemCreateFailedEvent::getEventEnabled, &EnchantedItemCreateFailedEvent::setEventEnabled);
@@ -230,6 +237,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["itemTileUpdated"] = sol::property(&ItemTileUpdatedEvent::getEventEnabled, &ItemTileUpdatedEvent::setEventEnabled);
 		usertypeDefinition["journal"] = sol::property(&JournalEvent::getEventEnabled, &JournalEvent::setEventEnabled);
 		usertypeDefinition["jump"] = sol::property(&JumpEvent::getEventEnabled, &JumpEvent::setEventEnabled);
+		usertypeDefinition["keybindTested"] = sol::property(&KeybindTestedEvent::getEventEnabled, &KeybindTestedEvent::setEventEnabled);
 		usertypeDefinition["keyDown"] = sol::property(&KeyDownEvent::getEventEnabled, &KeyDownEvent::setEventEnabled);
 		usertypeDefinition["keyframesLoad"] = sol::property(&KeyframesLoadEvent::getEventEnabled, &KeyframesLoadEvent::setEventEnabled);
 		usertypeDefinition["keyUp"] = sol::property(&KeyUpEvent::getEventEnabled, &KeyUpEvent::setEventEnabled);

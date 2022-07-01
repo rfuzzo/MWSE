@@ -9,9 +9,11 @@
 #include "TES3UIVector.h"
 
 #include "NIDefines.h"
+#include "NICamera.h"
 #include "NIDirectionalLight.h"
 #include "NIRenderedTexture.h"
 #include "NIProperty.h"
+#include "NIRenderer.h"
 #include "NISourceTexture.h"
 #include "NITextureEffect.h"
 
@@ -29,9 +31,18 @@ namespace TES3 {
 	};
 
 	struct WorldControllerRenderCamera {
+		struct VirtualTable {
+			void* unknown_0x0;
+			void* unknown_0x4;
+			void* unknown_0x8;
+			void* unknown_0xC;
+			void* unknown_0x10;
+			void* unknown_0x14;
+			void* unknown_0x18;
+		};
 		struct CameraData {
-			NI::Camera* camera; // 0x0
-			NI::Node* unknown_0x4;
+			NI::Pointer<NI::Camera> camera; // 0x0
+			NI::Pointer<NI::Node> unknown_0x4;
 			float fovDegrees; // 0x8
 			float nearPlaneDistance; // 0xC
 			float farPlaneDistance; // 0x10
@@ -50,9 +61,9 @@ namespace TES3 {
 
 		};
 		void* vTable; // 0x0
-		NI::Renderer* renderer; // 0x4
-		NI::Node* root; // 0x8
-		NI::Node* cameraRoot; // 0xC
+		NI::Pointer<NI::Renderer> renderer; // 0x4
+		NI::Pointer<NI::Node> root; // 0x8
+		NI::Pointer<NI::Node> cameraRoot; // 0xC
 		CameraData cameraData; // 0x10
 
 		WorldControllerRenderCamera() = delete;
@@ -65,6 +76,7 @@ namespace TES3 {
 		NI::Camera* getCamera() const;
 
 	};
+	static_assert(sizeof(WorldControllerRenderCamera::VirtualTable) == 0x1C, "TES3::WorldControllerRenderCamera::VirtualTable failed size validation");
 	static_assert(sizeof(WorldControllerRenderCamera::CameraData) == 0x1C, "TES3::WorldControllerRenderCamera::CameraData failed size validation");
 	static_assert(sizeof(WorldControllerRenderCamera) == 0x2C, "TES3::WorldControllerRenderCamera failed size validation");
 
@@ -281,7 +293,7 @@ namespace TES3 {
 		MouseController * mouseController; // 0x50
 		Script * scriptCompileAndRun; // 0x54
 		WeatherController * weatherController; // 0x58
-		MobController * mobController; // 0x5C
+		MobManager * mobManager; // 0x5C
 		KillCounter * playerKills; // 0x60
 		JournalHTML * journalHTML; // 0x64
 		SplashController * splashController; // 0x68
@@ -433,7 +445,7 @@ namespace TES3 {
 	};
 	static_assert(sizeof(WorldController) == 0x374, "TES3::WorldController failed size validation");
 	static_assert(offsetof(WorldController, inputController) == 0x4C, "TES3::WorldController failed offset validation");
-	static_assert(offsetof(WorldController, mobController) == 0x5C, "TES3::WorldController failed offset validation");
+	static_assert(offsetof(WorldController, mobManager) == 0x5C, "TES3::WorldController failed offset validation");
 	static_assert(offsetof(WorldController, gvarGameHour) == 0xA8, "TES3::WorldController failed offset validation");
 	static_assert(offsetof(WorldController, flagMenuMode) == 0xD6, "TES3::WorldController failed offset validation");
 	static_assert(offsetof(WorldController, menuController) == 0x2E4, "TES3::WorldController failed offset validation");

@@ -49,6 +49,7 @@
 #include "TES3WorldController.h"
 
 #include "BitUtil.h"
+#include "LuaUtil.h"
 #include "MemoryUtil.h"
 
 #include "LuaManager.h"
@@ -127,6 +128,16 @@ namespace TES3 {
 		case TES3::ObjectType::Misc:
 		case TES3::ObjectType::Probe:
 		case TES3::ObjectType::Repair:
+		case TES3::ObjectType::Weapon:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	bool BaseObject::isWeaponOrAmmo() const {
+		switch (objectType) {
+		case TES3::ObjectType::Ammo:
 		case TES3::ObjectType::Weapon:
 			return true;
 		default:
@@ -632,12 +643,12 @@ namespace TES3 {
 		return true;
 	}
 
-	NI::Node * Object::getSceneGraphNode() {
+	NI::Node* Object::getSceneGraphNode() {
 		return vTable.object->getSceneGraphNode(this);
 	}
 
-	Object * Object::skipDeletedObjects() {
-		TES3::Object * object = this;
+	Object* Object::skipDeletedObjects() {
+		TES3::Object* object = this;
 		while (object && (object->objectFlags & TES3::ObjectFlag::Delete) == TES3::ObjectFlag::Delete)
 		{
 			object = object->nextInCollection;
@@ -651,6 +662,31 @@ namespace TES3 {
 
 	void Object::setScale_lua(float scale) {
 		setScale(scale);
+	}
+
+	// This helper function exists to avoid invoking template instantiations from LuaUtil.h in TES3Object.h.
+	void Object::finishCreateCopy_lua(Object* created, sol::optional<sol::table> params) {
+		// Set provided or generated ID.
+		auto id = mwse::lua::getOptionalParam<const char*>(params, "id", nullptr);
+		if (id) {
+			created->setID(id);
+		}
+		else {
+			created->setID("");
+		}
+
+		if (mwse::lua::getOptionalParam(params, "addToObjectList", true)) {
+			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(created)) {
+				delete created;
+				created = nullptr;
+				throw std::runtime_error("tes3object:createCopy(): Could not add the newly created object to the data handler.");
+			}
+		}
+
+		// If created outside of a save game, mark the object as sourceless.
+		if (mwse::lua::getOptionalParam(params, "sourceless", false) || TES3::WorldController::get()->getMobilePlayer() == nullptr) {
+			created->setSourceless(true);
+		}
 	}
 
 	//

@@ -46,7 +46,7 @@ namespace mwse::lua {
 		usertypeDefinition["readiedAmmoCount"] = &TES3::MobileActor::readiedAmmoCount;
 		usertypeDefinition["readiedShield"] = &TES3::MobileActor::readiedShield;
 		usertypeDefinition["readiedWeapon"] = &TES3::MobileActor::readiedWeapon;
-		usertypeDefinition["scanInterval"] = sol::readonly_property(&TES3::MobileActor::scanInterval);
+		usertypeDefinition["scanInterval"] = &TES3::MobileActor::scanInterval;
 		usertypeDefinition["scanTimer"] = sol::readonly_property(&TES3::MobileActor::scanTimer);
 		usertypeDefinition["torchSlot"] = &TES3::MobileActor::torchSlot;
 		usertypeDefinition["width"] = sol::readonly_property(&TES3::MobileActor::widthInUnits);
@@ -127,7 +127,10 @@ namespace mwse::lua {
 		usertypeDefinition["applyHealthDamage"] = &TES3::MobileActor::applyHealthDamage;
 		usertypeDefinition["applyFatigueDamage"] = &TES3::MobileActor::applyFatigueDamage;
 		usertypeDefinition["applyDamage"] = &TES3::MobileActor::applyDamage_lua;
+		usertypeDefinition["applyJumpFatigueCost"] = &TES3::MobileActor::applyJumpFatigueCost;
 		usertypeDefinition["calcEffectiveDamage"] = &TES3::MobileActor::calcEffectiveDamage_lua;
+		usertypeDefinition["calculateJumpVelocity"] = &TES3::MobileActor::calculateJumpVelocity_lua;
+		usertypeDefinition["doJump"] = &TES3::MobileActor::doJump_lua;
 		usertypeDefinition["equip"] = &TES3::MobileActor::equip_lua;
 		usertypeDefinition["equipMagic"] = &TES3::MobileActor::equipMagic_lua;
 		usertypeDefinition["getActiveMagicEffects"] = &TES3::MobileActor::getActiveMagicEffectsList_lua;
@@ -158,9 +161,14 @@ namespace mwse::lua {
 		// Functions exposed as properties.
 		usertypeDefinition["armorRating"] = sol::property(&TES3::MobileActor::getArmorRating_lua);
 		usertypeDefinition["canAct"] = sol::readonly_property(&TES3::MobileActor::canAct);
+		usertypeDefinition["canJump"] = sol::readonly_property(&TES3::MobileActor::canJump_lua);
+		usertypeDefinition["canJumpMidair"] = sol::readonly_property(&TES3::MobileActor::canJumpMidair_lua);
 		usertypeDefinition["cell"] = sol::property(&TES3::MobileActor::getCell);
-		usertypeDefinition["hasFreeAction"] = sol::readonly_property(&TES3::MobileActor::isNotKnockedDown);
+		usertypeDefinition["hasFreeAction"] = sol::readonly_property(&TES3::MobileActor::isNotKnockedDownOrOut);
 		usertypeDefinition["isAttackingOrCasting"] = sol::readonly_property(&TES3::MobileActor::isAttackingOrCasting);
+		usertypeDefinition["isDiseased"] = sol::readonly_property(&TES3::MobileActor::isDiseased);
+		usertypeDefinition["isKnockedDown"] = sol::readonly_property(&TES3::MobileActor::isKnockedDown);
+		usertypeDefinition["isKnockedOut"] = sol::readonly_property(&TES3::MobileActor::isKnockedOut);
 		usertypeDefinition["isParalyzed"] = sol::readonly_property(&TES3::MobileActor::isParalyzed);
 		usertypeDefinition["isReadyingWeapon"] = sol::readonly_property(&TES3::MobileActor::isReadyingWeapon);
 		usertypeDefinition["mobToMobCollision"] = sol::property(&TES3::MobileActor::getMobToMobCollision, &TES3::MobileActor::setMobToMobCollision);

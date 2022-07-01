@@ -2,7 +2,6 @@
 
 #include "TES3Defines.h"
 
-#include "TES3Dialogue.h"
 #include "TES3MobileNPC.h"
 #include "TES3StdString.h"
 #include "TES3Vectors.h"
@@ -107,6 +106,8 @@ namespace TES3 {
 		void setCameraHeight_lua(sol::optional<float> height);
 		int getVanityState() const;
 		void setVanityState(int state);
+
+		void addTopic(Dialogue* topic);
 
 		//
 		// Custom functions.

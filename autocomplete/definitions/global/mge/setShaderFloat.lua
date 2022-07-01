@@ -1,13 +1,14 @@
 return {
 	type = "function",
-	description = [[Sets a shader's float variable. Wrapper for mwscript's MGEShaderSetFloat.]],
-	arguments = {{
+	deprecated = true,
+	description = "Sets a shader float value. Use the named variable interface on the shader handle instead.",
+	arguments = { {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "shader", type = "string" },
+			{ name = "name", type = "string" },
 			{ name = "variable", type = "string" },
 			{ name = "value", type = "number" },
 		},
-	}},
+	} },
 }

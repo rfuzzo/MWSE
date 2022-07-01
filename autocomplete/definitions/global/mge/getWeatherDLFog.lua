@@ -1,9 +1,12 @@
 return {
 	type = "function",
-	description = [[Gets distant land fog parameters for a specific weather. See [`mge.setWeatherDLFog()`](https://mwse.github.io/MWSE/apis/mge/#mgesetweatherdlfog).]],
+	deprecated = true,
+	description = [[Gets the weather distant land fog. Use `mge.weather.getDistantFog()` instead.]],
 	arguments = {
-		{ name = "weatherID", type = "number", description = "Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weathers/) table." },
+		{ name = "weather", type = "number" },
 	},
-	returns = {{ name = "parameters", type = "table", description = "An array-style table with `fogDistMultiplier` and `fogOffsetPercent` parameters." }},
-
+	returns = {
+		{ name = "mult", type = "number" },
+		{ name = "offset", type = "number" },
+	},
 }

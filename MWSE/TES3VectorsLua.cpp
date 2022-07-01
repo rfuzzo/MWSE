@@ -11,7 +11,7 @@ namespace mwse::lua {
 	void bindTES3Vectors() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Binding for TES3::Range<int>.
 		{
@@ -51,6 +51,8 @@ namespace mwse::lua {
 			// Basic function binding.
 			usertypeDefinition["copy"] = &TES3::Vector2::copy;
 			usertypeDefinition["length"] = &TES3::Vector2::length;
+			usertypeDefinition["normalize"] = &TES3::Vector2::normalize;
+			usertypeDefinition["normalized"] = &TES3::Vector2::normalized;
 		}
 
 		// Binding for TES3::Vector3.
@@ -121,10 +123,10 @@ namespace mwse::lua {
 			usertypeDefinition["__tojson"] = &TES3::Vector4::toJson;
 
 			// Basic property bindings.
-			usertypeDefinition["w"] = &TES3::Vector4::w;
 			usertypeDefinition["x"] = &TES3::Vector4::x;
 			usertypeDefinition["y"] = &TES3::Vector4::y;
 			usertypeDefinition["z"] = &TES3::Vector4::z;
+			usertypeDefinition["w"] = &TES3::Vector4::w;
 
 			// Basic function binding.
 			usertypeDefinition["copy"] = &TES3::Vector4::copy;

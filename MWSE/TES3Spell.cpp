@@ -35,7 +35,7 @@ namespace TES3 {
 		}
 
 		Effect* highestEffect = nullptr;
-		float highestCost = FLT_MAX;
+		float highestCost = std::numeric_limits<float>::max();
 		for (auto i = 7; i >= 0; i--) {
 			auto effect = &effects[i];
 			if (effect->effectID == EffectID::None) {
@@ -201,7 +201,7 @@ namespace TES3 {
 
 	size_t Spell::getActiveEffectCount() {
 		size_t count = 0;
-		for (size_t i = 0; i < 8; i++) {
+		for (size_t i = 0; i < 8; ++i) {
 			if (effects[i].effectID != TES3::EffectID::None) {
 				count++;
 			}
@@ -210,7 +210,7 @@ namespace TES3 {
 	}
 
 	int Spell::getFirstIndexOfEffect(int effectId) {
-		for (size_t i = 0; i < 8; i++) {
+		for (size_t i = 0; i < 8; ++i) {
 			if (effects[i].effectID == effectId) {
 				return i;
 			}

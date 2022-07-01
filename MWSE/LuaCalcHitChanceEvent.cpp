@@ -4,12 +4,12 @@
 #include "LuaUtil.h"
 
 #include "TES3MobileActor.h"
+#include "TES3MobileProjectile.h"
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	CalcHitChanceEvent::CalcHitChanceEvent(TES3::MobileActor* attacker, int hitChance) :
-		ObjectFilteredEvent("calcHitChance", attacker->reference->baseObject),
-		m_Attacker(attacker),
+	CalcHitChanceEvent::CalcHitChanceEvent(int hitChance) :
+		ObjectFilteredEvent("calcHitChance", m_Attacker->reference->baseObject),
 		m_HitChance(hitChance)
 	{
 
@@ -17,8 +17,8 @@ namespace mwse::lua::event {
 
 	sol::table CalcHitChanceEvent::createEventTable() {
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
-		sol::table eventData = state.create_table();
+		auto& state = stateHandle.state;
+		auto eventData = state.create_table();
 
 		eventData["attackerMobile"] = m_Attacker;
 		eventData["attacker"] = m_Attacker->reference;
@@ -29,10 +29,16 @@ namespace mwse::lua::event {
 			eventData["target"] = target->reference;
 		}
 
+		if (m_Projectile) {
+			eventData["projectile"] = m_Projectile;
+		}
+
 		eventData["hitChance"] = m_HitChance;
 
 		return eventData;
 	}
 
 	bool CalcHitChanceEvent::m_EventEnabled = false;
+	TES3::MobileActor* CalcHitChanceEvent::m_Attacker = nullptr;
+	TES3::MobileProjectile* CalcHitChanceEvent::m_Projectile = nullptr;
 }

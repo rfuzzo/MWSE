@@ -21,12 +21,10 @@ namespace mwse::lua {
 	using TES3::UI::Element;
 	using TES3::UI::UI_ID;
 
-	const UI_ID idNull = static_cast<UI_ID>(TES3::UI::Property::null);
-
 	void bindTES3UIElement() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<Element>("tes3uiElement");
@@ -113,17 +111,27 @@ namespace mwse::lua {
 		usertypeDefinition["layoutOriginFractionY"] = sol::property(&Element::getAbsolutePosAlignY_lua, &Element::setAbsolutePosAlignY_lua);
 		usertypeDefinition["layoutWidthFraction"] = sol::property(&Element::getWidthProportional_lua, &Element::setWidthProportional_lua);
 
-		// Custom property accessor functions.
+		// Property metatadata getters.
 		usertypeDefinition["hasProperty"] = &Element::hasProperty_lua;
 		usertypeDefinition["getPropertyType"] = &Element::getPropertyType_lua;
+
+		// Custom property accessor functions.
 		usertypeDefinition["getPropertyBool"] = &Element::getPropertyBool_lua;
+		usertypeDefinition["getPropertyCallback"] = &Element::getPropertyCallback_lua;
 		usertypeDefinition["getPropertyFloat"] = &Element::getPropertyFloat_lua;
 		usertypeDefinition["getPropertyInt"] = &Element::getPropertyInt_lua;
 		usertypeDefinition["getPropertyObject"] = &Element::getPropertyObject_lua;
+		usertypeDefinition["getPropertyProperty"] = &Element::getPropertyProperty_lua;
 		usertypeDefinition["setPropertyBool"] = &Element::setPropertyBool_lua;
+		usertypeDefinition["setPropertyCallback"] = &Element::setPropertyCallback_lua;
 		usertypeDefinition["setPropertyFloat"] = &Element::setPropertyFloat_lua;
 		usertypeDefinition["setPropertyInt"] = &Element::setPropertyInt_lua;
 		usertypeDefinition["setPropertyObject"] = &Element::setPropertyObject_lua;
+		usertypeDefinition["setPropertyProperty"] = &Element::setPropertyProperty_lua;
+
+		// Custom lua property accessor functions.
+		usertypeDefinition["getLuaData"] = &Element::getLuaData;
+		usertypeDefinition["setLuaData"] = &Element::setLuaData;
 
 		// Event functions.
 		usertypeDefinition["registerBefore"] = &Element::registerBefore_lua;
@@ -162,10 +170,12 @@ namespace mwse::lua {
 		usertypeDefinition["createRect"] = &Element::createRect_lua;
 		usertypeDefinition["createSlider"] = &Element::createSlider_lua;
 		usertypeDefinition["createSliderVertical"] = &Element::createSliderVertical_lua;
-		usertypeDefinition["createTextInput"] = &Element::createTextInput_lua;
 		usertypeDefinition["createTextSelect"] = &Element::createTextSelect_lua;
 		usertypeDefinition["createThinBorder"] = &Element::createThinBorder_lua;
 		usertypeDefinition["createVerticalScrollPane"] = &Element::createVerticalScrollPane_lua;
+
+		// Internal functions. These typically have a wrapper function defined in lua.
+		usertypeDefinition["_createTextInput"] = &Element::createTextInput_lua;
 
 		usertypeDefinition["destroy"] = &Element::destroy;
 	}

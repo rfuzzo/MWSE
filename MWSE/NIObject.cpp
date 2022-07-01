@@ -62,8 +62,20 @@ namespace NI {
 		return vTable.asObject->getRTTI(this);
 	}
 
-	Object * Object::createClone() {
-		return reinterpret_cast<Object * (__thiscall *)(Object *)>(0x6E9910)(this);
+	bool Object::registerStreamables(Stream* stream) {
+		return vTable.asObject->registerStreamables(this, stream);
+	}
+
+	void Object::loadBinary(Stream* stream) {
+		vTable.asObject->loadBinary(this, stream);
+	}
+
+	bool Object::isEqual(Object* other) const {
+		return vTable.asObject->isEqual(this, other);
+	}
+
+	Object* Object::createClone() {
+		return reinterpret_cast<Object * (__thiscall*)(Object*)>(0x6E9910)(this);
 	}
 
 	void Object::release() {

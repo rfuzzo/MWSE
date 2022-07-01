@@ -48,7 +48,7 @@
 #include "TES3MagicEffectInstance.h"
 #include "TES3MagicInstanceController.h"
 #include "TES3Misc.h"
-#include "TES3MobController.h"
+#include "TES3MobManager.h"
 #include "TES3MobileActor.h"
 #include "TES3MobileCreature.h"
 #include "TES3MobilePlayer.h"
@@ -73,10 +73,13 @@
 
 // Lua binding files. These are split out rather than kept here to help with compile times.
 #include "MemoryUtilLua.h"
+#include "MGEPostShadersLua.h"
+#include "MGEUtilLua.h"
 #include "StackLua.h"
 #include "ScriptUtilLua.h"
 #include "StringUtilLua.h"
 #include "TES3UtilLua.h"
+
 #include "TES3ActionDataLua.h"
 #include "TES3ActivatorLua.h"
 #include "TES3ActorAnimationControllerLua.h"
@@ -118,7 +121,7 @@
 #include "TES3MagicEffectLua.h"
 #include "TES3MagicSourceInstanceLua.h"
 #include "TES3MiscLua.h"
-#include "TES3MobControllerLua.h"
+#include "TES3MobManagerLua.h"
 #include "TES3MobileActorLua.h"
 #include "TES3MobileCreatureLua.h"
 #include "TES3MobileNPCLua.h"
@@ -153,6 +156,7 @@
 #include "TES3WorldControllerLua.h"
 
 #include "NICameraLua.h"
+#include "NICollisionGroupLua.h"
 #include "NICollisionSwitchLua.h"
 #include "NIColorLua.h"
 #include "NIExtraDataLua.h"
@@ -179,6 +183,7 @@
 #include "LuaActiveMagicEffectIconsUpdatedEvent.h"
 #include "LuaAddTopicEvent.h"
 #include "LuaAttackEvent.h"
+#include "LuaAttackHitEvent.h"
 #include "LuaBarterOfferEvent.h"
 #include "LuaCalcBarterPriceEvent.h"
 #include "LuaCalcBlockChanceEvent.h"
@@ -215,7 +220,6 @@
 #include "LuaInfoResponseEvent.h"
 #include "LuaItemDroppedEvent.h"
 #include "LuaItemTileUpdatedEvent.h"
-#include "LuaJumpEvent.h"
 #include "LuaKeyDownEvent.h"
 #include "LuaKeyUpEvent.h"
 #include "LuaLeveledCreaturePickedEvent.h"
@@ -349,7 +353,7 @@ namespace mwse::lua {
 		else if (target.is<std::string>()) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
 			auto stateHandle = luaManager.getThreadSafeStateHandle();
-			sol::state& state = stateHandle.state;
+			auto& state = stateHandle.state;
 			sol::object result = state.safe_script_file("./Data Files/MWSE/mods/" + target.as<std::string>() + ".lua");
 			if (result.get_type() == sol::type::table) {
 				scriptOverrides[(unsigned long)script] = result;
@@ -378,7 +382,7 @@ namespace mwse::lua {
 	void LuaManager::lua_print(sol::object message) {
 		auto& luaManager = mwse::lua::LuaManager::getInstance();
 		auto stateHandle = luaManager.getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		static sol::protected_function luaTostring = state["tostring"];
 		std::string result = luaTostring(message);
@@ -418,9 +422,9 @@ namespace mwse::lua {
 		usertypeDefinition["context"] = sol::readonly_property(&LuaScript::getContext);
 
 		// Create the base of API tables.
-		luaState["mwse"] = luaState.create_table();
-		luaState["mwscript"] = luaState.create_table();
-		luaState["mge"] = luaState.create_table();
+		auto luaMWSE = luaState.create_named_table("mwse");
+		luaMWSE.create_named("activeLuaMods");
+		luaState.create_named_table("mwscript");
 
 		// Bind config.
 		Configuration::bindToLua();
@@ -437,6 +441,8 @@ namespace mwse::lua {
 		LuaExecutor::defineLuaBindings();
 
 		// Extend math library.
+		luaState["math"]["nfhuge"] = std::numeric_limits<float>::min();
+		luaState["math"]["fhuge"] = std::numeric_limits<float>::max();
 		luaState["math"]["epsilon"] = std::numeric_limits<double>::epsilon();
 		luaState["math"]["fepsilon"] = std::numeric_limits<float>::epsilon();
 
@@ -482,7 +488,7 @@ namespace mwse::lua {
 		bindTES3MagicEffectInstance();
 		bindTES3MagicSourceInstance();
 		bindTES3Misc();
-		bindTES3MobController();
+		bindTES3MobManager();
 		bindTES3MobileActor();
 		bindTES3MobileCreature();
 		bindTES3MobileNPC();
@@ -519,6 +525,7 @@ namespace mwse::lua {
 
 		// Bind NI data types.
 		bindNICamera();
+		bindNICollisionGroup();
 		bindNICollisionSwitch();
 		bindNIColor();
 		bindNIDynamicEffect();
@@ -564,7 +571,7 @@ namespace mwse::lua {
 
 		// Get and run the execute function.
 		auto stateHandle = manager.getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 		sol::protected_function execute;
 		if (searchResult->second.is<sol::function>()) {
 			execute = searchResult->second.as<sol::function>();
@@ -635,7 +642,7 @@ namespace mwse::lua {
 		// Grab the new player pointers for lua.
 		// Update tes3.player and tes3.mobilePlayer.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 		state["tes3"]["mobilePlayer"] = macp;
 		state["tes3"]["player"] = player;
 		state["tes3"]["player1stPerson"] = macp->firstPersonReference;
@@ -650,7 +657,7 @@ namespace mwse::lua {
 
 		// Grab the new player pointers for lua.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 		state["tes3"]["player"] = player;
 
 		return player;
@@ -660,18 +667,22 @@ namespace mwse::lua {
 	// Hook: Finished initializing game code.
 	//
 
-	void __fastcall FinishInitialization(TES3::IteratedList<void*>* itt) {
+	bool __fastcall FinishInitialization(TES3::Game* game) {
 		// Call overwritten code.
-		itt->clear();
+		const auto TES3Game_loadAllPlugins = reinterpret_cast<bool(__thiscall*)(TES3::Game*)>(0x419CE0);
+		TES3Game_loadAllPlugins(game);
 
 		// Hook up shorthand access to data handler, world controller, and game.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 		state["tes3"]["dataHandler"] = TES3::DataHandler::get();
 		state["tes3"]["worldController"] = TES3::WorldController::get();
 		state["tes3"]["game"] = TES3::Game::get();
 
 		stateHandle.triggerEvent(new event::GenericEvent("initialized"));
+
+		// Return success.
+		return true;
 	}
 
 	//
@@ -702,7 +713,7 @@ namespace mwse::lua {
 		}
 
 		// Has our cell changed?
-		TES3::DataHandler* dataHandler = TES3::DataHandler::get();
+		auto dataHandler = TES3::DataHandler::get();
 		if (dataHandler->currentCell != TES3::DataHandler::previousVisitedCell) {
 			if (event::CellChangedEvent::getEventEnabled()) {
 				luaManager.getThreadSafeStateHandle().triggerEvent(new event::CellChangedEvent(dataHandler->currentCell, TES3::DataHandler::previousVisitedCell));
@@ -867,9 +878,9 @@ namespace mwse::lua {
 		tes3::startNewGame();
 	}
 
-	void __fastcall OnNewGameViaStartingCell(TES3::MobController* mobController) {
+	void __fastcall OnNewGameViaStartingCell(TES3::MobManager* mobManager) {
 		// Call overwritten code.
-		mobController->checkPlayerDistance();
+		mobManager->checkPlayerDistance();
 
 		// Fire off the loaded/cellChanged events.
 		LuaManager& luaManager = LuaManager::getInstance();
@@ -914,6 +925,17 @@ namespace mwse::lua {
 	void __fastcall OnAttackStart(TES3::ActorAnimationController* animController, DWORD _UNUSED_, float swing) {
 		// Call our wrapper for the function so that events are triggered.
 		animController->startAttackAnimation(swing);
+	}
+
+	void __fastcall OnAttackStrike(TES3::MobileActor* mobileActor) {
+		// Invoke event before the action.
+		if (event::AttackHitEvent::getEventEnabled()) {
+			LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::AttackHitEvent(mobileActor));
+		}
+
+		// Call original function.
+		const auto TES3_MACT_combatWeaponStrike = reinterpret_cast<void(__thiscall*)(TES3::MobileActor*)>(0x556F40);
+		TES3_MACT_combatWeaponStrike(mobileActor);
 	}
 
 	//
@@ -1025,7 +1047,7 @@ namespace mwse::lua {
 		// Go through the keys to see if any of the states have changed, and launch an event based on that.
 		LuaManager& luaManager = LuaManager::getInstance();
 		auto stateHandle = luaManager.getThreadSafeStateHandle();
-		for (BYTE i = 0; i < UINT8_MAX; i++) {
+		for (BYTE i = 0; i < UINT8_MAX; ++i) {
 			if (event::KeyDownEvent::getEventEnabled() && inputController->isKeyPressedThisFrame(i)) {
 				stateHandle.triggerEvent(new event::KeyDownEvent(i, controlDown, shiftDown, altDown, superDown));
 
@@ -1045,7 +1067,7 @@ namespace mwse::lua {
 		}
 
 		// Do the same with mouse buttons.
-		for (BYTE i = 0; i < 8; i++) {
+		for (BYTE i = 0; i < 8; ++i) {
 			if (event::MouseButtonDownEvent::getEventEnabled() && inputController->isMouseButtonPressedThisFrame(i)) {
 				stateHandle.triggerEvent(new event::MouseButtonDownEvent(i, controlDown, shiftDown, altDown, superDown));
 			}
@@ -1163,7 +1185,7 @@ namespace mwse::lua {
 	// Projectile expire event.
 	//
 
-	void __fastcall OnProjectileExpire(void* mobController, DWORD _UNUSED_, TES3::Reference* reference) {
+	void __fastcall OnProjectileExpire(TES3::MobManager* mobManager, DWORD _UNUSED_, TES3::Reference* reference) {
 		// Get the fired projectile, and trigger an event for it.
 		if (event::ProjectileExpireEvent::getEventEnabled()) {
 			TES3::MobileProjectile* projectile = reference->getAttachedMobileProjectile();
@@ -1171,7 +1193,8 @@ namespace mwse::lua {
 		}
 
 		// Call overwritten function.
-		reinterpret_cast<void(__thiscall*)(void*, TES3::Reference*)>(0x5637F0)(mobController, reference);
+		const auto removeMob = reinterpret_cast<void(__thiscall*)(TES3::MobManager*, TES3::Reference*)>(0x5637F0);
+		removeMob(mobManager, reference);
 	}
 
 	//
@@ -1198,7 +1221,7 @@ namespace mwse::lua {
 	//
 
 	void __cdecl ReenableMenuDialogue() {
-		TES3::UI::Element* dialog = TES3::UI::findMenu(TES3::UI::registerID("MenuDialog"));
+		TES3::UI::Element* dialog = TES3::UI::findMenu("MenuDialog");
 		if (dialog != nullptr) {
 			// Call the original function
 			reinterpret_cast<void(__cdecl*)()>(0x5C0B60)();
@@ -2334,7 +2357,7 @@ namespace mwse::lua {
 
 		OnSkillTrained_SkillId = -1;
 		auto macp = TES3::WorldController::get()->getMobilePlayer();
-		for (int i = TES3::SkillID::FirstSkill; i <= TES3::SkillID::LastSkill; i++) {
+		for (int i = TES3::SkillID::FirstSkill; i <= TES3::SkillID::LastSkill; ++i) {
 			if (&macp->skills[i] == skill) {
 				OnSkillTrained_SkillId = i;
 				break;
@@ -2369,7 +2392,7 @@ namespace mwse::lua {
 
 		// Do some precomputing for storing and calculating active lua mods.
 		sol::table luaMWSE = luaState["mwse"];
-		auto activeLuaMods = luaMWSE.create_named("activeLuaMods");
+		auto activeLuaMods = luaMWSE["activeLuaMods"];
 		auto luaDirectoryLength = strnlen_s(path, 260);
 		auto luaFilenameLength = strnlen_s(filename, 260);
 
@@ -2582,7 +2605,7 @@ namespace mwse::lua {
 		// See if we have any non-comments/non-whitespace.
 		bool hasNonCommentContent = false;
 		bool inComment = false;
-		for (auto i = 0u; i <= commandLength; i++) {
+		for (auto i = 0u; i <= commandLength; ++i) {
 			auto c = command[i];
 			switch (c) {
 			case '\t':
@@ -2684,7 +2707,7 @@ namespace mwse::lua {
 					auto message = ss.str();
 					log::getLog() << "[LuaManager] ERROR: " << message << std::endl;
 
-					reinterpret_cast<void(__cdecl*)(const char*)>(0x477400)(message.c_str());
+					mwse::tes3::logAndShowError(message.c_str());
 
 					posStart = posEnd;
 					continue;
@@ -2781,23 +2804,34 @@ namespace mwse::lua {
 	// Event: Calculate hit chance.
 	//
 
-	int __fastcall OnCalculateHitChance(TES3::MobileActor* attacker, int hitChance) {
+	const auto TES3_CombatHitRoll = reinterpret_cast<bool(__cdecl*)(TES3::MobileActor*, TES3::MobileProjectile*, unsigned int*)>(0x555290);
+	bool __cdecl OnCalculateHitChanceWrapper(TES3::MobileActor* attacker, TES3::MobileProjectile* projectile, unsigned int* out_serialCreated) {
+		event::CalcHitChanceEvent::m_Attacker = attacker;
+		event::CalcHitChanceEvent::m_Projectile = projectile;
+		return TES3_CombatHitRoll(attacker, projectile, out_serialCreated);
+	}
+
+	int __fastcall OnCalculateHitChance(int initialHitChance) {
+		auto hitChance = initialHitChance;
+
 		// Allow the event to override the text.
 		if (mwse::lua::event::CalcHitChanceEvent::getEventEnabled()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object eventResult = stateHandle.triggerEvent(new mwse::lua::event::CalcHitChanceEvent(attacker, hitChance));
+			sol::object eventResult = stateHandle.triggerEvent(new mwse::lua::event::CalcHitChanceEvent(hitChance));
 			if (eventResult.valid()) {
 				sol::table eventData = eventResult;
-				hitChance = getOptionalParam<int>(eventData, "hitChance", hitChance);
+				hitChance = getOptionalParam<int>(eventData, "hitChance", initialHitChance);
 			}
 		}
 
 		// Overwritten code for this hook.
 		if (TES3::WorldController::get()->menuController->unknown_0x24 % 1) {
 			char* buffer = mwse::tes3::getThreadSafeStringBuffer();
-			sprintf(buffer, "Attack Chance %d%%, for %s to hit %s", hitChance, attacker->reference->baseObject->getObjectID(), attacker->actionData.hitTarget->reference->baseObject->getObjectID());
-			const auto TES3_ConsoleLogResult = reinterpret_cast<void(__cdecl*)(const char*, bool)>(0x5B2C20);
-			TES3_ConsoleLogResult(buffer, false);
+			const auto attacker = event::CalcHitChanceEvent::m_Attacker;
+			const auto attackerId = attacker->reference->baseObject->getObjectID();
+			const auto targetId = attacker->actionData.hitTarget->reference->baseObject->getObjectID();
+			sprintf(buffer, "Attack Chance %d%%, for %s to hit %s", hitChance, attackerId, targetId);
+			TES3::UI::logToConsole(buffer, false);
 		}
 
 		return hitChance;
@@ -2805,8 +2839,7 @@ namespace mwse::lua {
 
 	__declspec(naked) void patchCalculateHitChance() {
 		__asm {
-			mov ecx, esi		// Size: 0x2
-			mov edx, [ebp + 0x8]	// Size: 0x3
+			mov ecx, [ebp + 0x8]	// Size: 0x3
 			nop // Replaced with a call generation. Can't do so here, because offsets aren't accurate.
 			nop // ^
 			nop // ^
@@ -2815,7 +2848,7 @@ namespace mwse::lua {
 			mov [ebp + 0x8], eax	// Size: 0x3
 		}
 	}
-	const size_t patchCalculateHitChance_size = 0xD;
+	const size_t patchCalculateHitChance_size = 0xB;
 
 	//
 	// Event: Calculate block chance.
@@ -2862,24 +2895,7 @@ namespace mwse::lua {
 	//
 
 	void __fastcall OnJump(TES3::MobileActor* mobile, TES3::Vector3* velocity) {
-		// Allow the event to override the text.
-		if (mwse::lua::event::JumpEvent::getEventEnabled()) {
-			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object eventResult = stateHandle.triggerEvent(new mwse::lua::event::JumpEvent(mobile, *velocity));
-			if (eventResult.valid()) {
-				sol::table eventData = eventResult;
-				if (eventData.get_or("block", false)) {
-					return;
-				}
-				velocity = &getOptionalParam<TES3::Vector3>(eventData, "velocity", *velocity);
-			}
-		}
-
-		// Overwritten code for this hook.
-		mobile->setInstantVelocity(&TES3::Vector3());
-		mobile->updateConstantVelocity(velocity);
-		mobile->vTable.mobileActor->setJumping(mobile, true);
-		mobile->applyJumpFatigueCost();
+		mobile->doJump(*velocity, true, true);
 	}
 
 	__declspec(naked) void patchJump() {
@@ -3303,7 +3319,7 @@ namespace mwse::lua {
 
 	// Data we use to keep track of the currently saving item data record.
 	TES3::IteratedList<TES3::ItemStack*>* currentlySavingInventoryIterator = nullptr;
-	unsigned int currentlySavingInventoyItemDataIndex = 0;
+	unsigned int currentlySavingInventoryItemDataIndex = 0;
 
 	// Get a hold of the inventory we're looking at.
 	TES3::IteratedList<TES3::ItemStack*>::Node* __fastcall GetFirstSavedItemStack(TES3::IteratedList<TES3::ItemStack*>* iterator) {
@@ -3313,7 +3329,7 @@ namespace mwse::lua {
 
 	// Get a hold of the current index in ItemData storage we're looking at.
 	int __fastcall WriteItemDataIndex(TES3::GameFile* gameFile, DWORD _UNUSED_, unsigned int tag, const unsigned int* data, unsigned int size) {
-		currentlySavingInventoyItemDataIndex = *data;
+		currentlySavingInventoryItemDataIndex = *data;
 		return gameFile->writeChunkData(tag, data, size);
 	}
 
@@ -3326,7 +3342,7 @@ namespace mwse::lua {
 		// Overwritten code.
 		int result = gameFile->writeChunkData(tag, data, size);
 
-		TES3::ItemData* itemData = currentlySavingInventoryIterator->current->data->variables->at(currentlySavingInventoyItemDataIndex);
+		TES3::ItemData* itemData = currentlySavingInventoryIterator->current->data->variables->at(currentlySavingInventoryItemDataIndex);
 		if (itemData->luaData) {
 			sol::table table = itemData->luaData->data;
 
@@ -3364,7 +3380,7 @@ namespace mwse::lua {
 			if (success) {
 				// Get our lua table, and replace it with our new table.
 				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-				sol::state& state = stateHandle.state;
+				auto& state = stateHandle.state;
 				auto threadID = GetCurrentThreadId();
 				auto saveLoadItemData = saveLoadItemDataMap[threadID];
 				if (saveLoadItemData && saveLoadItemData->luaData == nullptr) {
@@ -3399,7 +3415,7 @@ namespace mwse::lua {
 
 			// If it is empty, don't bother saving it.
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::state& state = stateHandle.state;
+			auto& state = stateHandle.state;
 			if (!fnTableEmpty(table, true)) {
 				// Convert the table to json for storage.
 				std::string json = fnEncodeForSave(table);
@@ -3433,7 +3449,7 @@ namespace mwse::lua {
 			if (success) {
 				// Get our lua table, and replace it with our new table.
 				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-				sol::state& state = stateHandle.state;
+				auto& state = stateHandle.state;
 				auto itemData = saveLoadReferenceMap[GetCurrentThreadId()]->getAttachedItemData();
 				if (itemData) {
 					if (itemData->luaData == nullptr) {
@@ -3896,6 +3912,17 @@ namespace mwse::lua {
 		bindStringUtil();
 		bindTES3Util();
 
+		// Bind MGE.
+		if (isMGEAPIAvailable()) {
+			// MGE API available from 0.14+.
+			bindMGEPostShaders();
+			bindMGEUtil();
+		}
+		else {
+			// Keep legacy MWScript based commands available.
+			bindLegacyMGEScriptUtil();
+		}
+
 		// Alter existing libraries.
 		luaState["os"]["exit"] = customOSExit;
 
@@ -3914,9 +3941,8 @@ namespace mwse::lua {
 		genCallEnforced(0x5661A0, 0x4E5770, reinterpret_cast<DWORD>(OnPlayerReferenceAssigned));
 		genCallEnforced(0x4C0180, 0x4E4510, reinterpret_cast<DWORD>(OnPlayerReferenceCreated));
 
-		// Event: initialized. Hook just before we return successfully from where game data is loaded.
-		genCallEnforced(0x4BB440, 0x47E280, reinterpret_cast<DWORD>(FinishInitialization));
-		genCallEnforced(0x4BBC07, 0x47E280, reinterpret_cast<DWORD>(FinishInitialization));
+		// Event: initialized. Hook initial plugin loading and merging function.
+		genCallEnforced(0x418F88, 0x419CE0, reinterpret_cast<DWORD>(FinishInitialization));
 
 		// Event: enterFrame. This hook can be in a couple of locations, because of MCP.
 		genCallEnforced(0x41ABB0, 0x40F610, reinterpret_cast<DWORD>(EnterFrame));
@@ -4071,6 +4097,9 @@ namespace mwse::lua {
 		genCallEnforced(0x5414CD, TES3_ActorAnimController_attackCheckMeleeHit, reinterpret_cast<DWORD>(OnAttack));
 		genCallEnforced(0x569E78, TES3_ActorAnimController_attackCheckMeleeHit, reinterpret_cast<DWORD>(OnAttack));
 
+		// Event: Melee strike
+		genCallEnforced(0x5419D7, 0x556F40, reinterpret_cast<DWORD>(OnAttackStrike));
+
 		// Event: Begin physical attack
 		genCallEnforced(0x54A4BA, 0x5411C0, reinterpret_cast<DWORD>(OnAttackStart));
 		genCallEnforced(0x569DFB, 0x5411C0, reinterpret_cast<DWORD>(OnAttackStart));
@@ -4130,7 +4159,7 @@ namespace mwse::lua {
 		overrideVirtualTableEnforced(TES3::VirtualTableAddress::MobileProjectile, 0x8C, 0x573790, *reinterpret_cast<DWORD*>(&mobileProjectileCollideWater));
 		overrideVirtualTableEnforced(TES3::VirtualTableAddress::MobileProjectile, 0x90, 0x561600, *reinterpret_cast<DWORD*>(&mobileObjectCollideActivator));
 
-		// Mobile Projectile Expire
+		// Event: Mobile Projectile Expire
 		genCallEnforced(0x57548A, 0x5637F0, reinterpret_cast<DWORD>(OnProjectileExpire));
 
 		// Event: UI Event
@@ -4491,40 +4520,40 @@ namespace mwse::lua {
 		genCallEnforced(0x570E48, 0x570600, *reinterpret_cast<DWORD*>(&processManagerDetectSneak));
 
 		// Event: Mobile added to controller.
-		auto mobControllerAddMob = &TES3::MobController::addMob;
-		genCallEnforced(0x4665D5, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x484F3D, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x4C6954, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x4DC965, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x4EBCBF, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x5090BF, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x50990C, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x509A6E, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x50EFE3, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x529C3B, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x54DE92, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x57356C, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x5752C6, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x57595B, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
-		genCallEnforced(0x635390, 0x5636A0, *reinterpret_cast<DWORD*>(&mobControllerAddMob));
+		auto mobManagerAddMob = &TES3::MobManager::addMob;
+		genCallEnforced(0x4665D5, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x484F3D, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x4C6954, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x4DC965, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x4EBCBF, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x5090BF, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x50990C, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x509A6E, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x50EFE3, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x529C3B, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x54DE92, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x57356C, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x5752C6, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x57595B, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
+		genCallEnforced(0x635390, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
 
 		// Event: Mobile removed from controller.
-		auto mobControllerRemoveMob = &TES3::MobController::removeMob;
-		genCallEnforced(0x4668D8, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x484E24, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x4E47C1, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x4E8911, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x4EBD8C, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x50919F, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x523A1F, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x523AE5, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x52E980, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x52EA6D, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x52EDE5, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x574FDB, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x57509A, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x57548A, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
-		genCallEnforced(0x575647, 0x5637F0, *reinterpret_cast<DWORD*>(&mobControllerRemoveMob));
+		auto mobManagerRemoveMob = &TES3::MobManager::removeMob;
+		genCallEnforced(0x4668D8, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x484E24, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x4E47C1, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x4E8911, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x4EBD8C, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x50919F, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x523A1F, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x523AE5, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x52E980, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x52EA6D, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x52EDE5, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x574FDB, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x57509A, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x57548A, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
+		genCallEnforced(0x575647, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
 
 		// Event Mobile added/removed from simulation by recalculated distance.
 		auto mobileEnterLeaveSimulationByDistance = &TES3::MobileObject::enterLeaveSimulationByDistance;
@@ -4676,9 +4705,13 @@ namespace mwse::lua {
 		genCallEnforced(0x49B550, 0x485E40, reinterpret_cast<DWORD>(OnItemDropped)); // Vanilla function.
 
 		// Event: Calculate hit chance.
-		genNOPUnprotected(0x55549B, 0x5C);
+		constexpr auto patchCalcHitChanceAvailableSize = 0x5554F7u - 0x55549Bu;
+		static_assert(patchCalculateHitChance_size <= patchCalcHitChanceAvailableSize, "calcHitChance patch too large!");
+		genNOPUnprotected(0x55549B, patchCalcHitChanceAvailableSize);
 		writePatchCodeUnprotected(0x55549B, (BYTE*)&patchCalculateHitChance, patchCalculateHitChance_size);
-		genCallUnprotected(0x5554A0, reinterpret_cast<DWORD>(OnCalculateHitChance));
+		genCallUnprotected(0x55549B + 0x3, reinterpret_cast<DWORD>(OnCalculateHitChance));
+		genCallUnprotected(0x556867, reinterpret_cast<DWORD>(OnCalculateHitChanceWrapper));
+		genCallUnprotected(0x573BE6, reinterpret_cast<DWORD>(OnCalculateHitChanceWrapper));
 
 		// Event: Calculate block chance.
 		genNOPUnprotected(0x555AC3, 0x555B15 - 0x555AC3);
@@ -5251,7 +5284,7 @@ namespace mwse::lua {
 		overrideVirtualTableEnforced(TES3::VirtualTableAddress::NPCInstance, offsetof(TES3::ObjectVirtualTable, reevaluateEquipment), 0x4D9A20, *reinterpret_cast<DWORD*>(&NPCInstance_reevaluateEquipment));
 		genCallEnforced(0x4D83AB, 0x4D9A20, *reinterpret_cast<DWORD*>(&NPCInstance_reevaluateEquipment));
 
-		// Event:: vfxCreated
+		// Event: vfxCreated
 		auto TES3_VFXManager_createForMagicEffect = &TES3::VFXManager::createForMagicEffect;
 		genCallEnforced(0x41CCB0, 0x4696A0, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createForMagicEffect));
 		auto TES3_VFXManager_createForSource = &TES3::VFXManager::createForSource;
@@ -5263,6 +5296,74 @@ namespace mwse::lua {
 		genCallEnforced(0x516093, 0x468470, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createAtPosition));
 		auto TES3_VFXManager_createForAVObject = &TES3::VFXManager::createForAVObject;
 		genCallEnforced(0x516227, 0x468560, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createForAVObject));
+
+		// Event: consoleReferenceChanged
+		genCallEnforced(0x590414, 0x5B2F00, reinterpret_cast<DWORD>(TES3::UI::setConsoleReference));
+		genCallEnforced(0x5B2EEE, 0x5B2F00, reinterpret_cast<DWORD>(TES3::UI::setConsoleReference));
+
+		// Event: barterOffer
+		genCallEnforced(0x5A70CF, 0x5A66C0, reinterpret_cast<DWORD>(GameBarterOffer));
+		genCallEnforced(0x5A6777, reinterpret_cast<DWORD>(OnExerciseSkill), reinterpret_cast<DWORD>(GameBarterOffer_BufferSkillGain));
+
+		// Event: keybindTested
+		auto TES3_InputController_testKeybind = &TES3::InputController::keybindTest;
+		genCallEnforced(0x41AC14, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41AC86, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41ADE4, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41AEC6, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41AF9A, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41B083, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41B170, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41B1B0, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41B1E4, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41B232, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41B2D3, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x41CC7E, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x425325, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x5425C8, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x54266F, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x542685, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568A85, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568ABB, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568AEC, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568B02, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568B16, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568B2C, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568B71, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568BAD, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568C46, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568CDF, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568D79, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568E35, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568F16, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568F60, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x568FA9, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x569005, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x56927F, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x569538, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x56965F, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x5697BE, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x56985A, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x5699A4, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x5699BA, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x569E2B, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x569E40, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x569EC9, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x569FC3, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x5B7B49, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind));
+		genCallEnforced(0x745AA8, 0x406F40, *reinterpret_cast<DWORD*>(&TES3_InputController_testKeybind)); // MCP-89: Vanity keyboard lock.
+
+		// Event: Disposition
+		auto TES3_NPCInstance_getDisposition = &TES3::NPCInstance::getDisposition;
+		genCallEnforced(0x4D5D26, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x4D5D3D, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x4D5D58, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x4D5D75, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x4D5D8F, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x4D5DB4, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x4D5DCD, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x5077EA, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+		genCallEnforced(0x54DC88, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
 
 		// UI framework hooks
 		TES3::UI::hook();
@@ -5281,10 +5382,6 @@ namespace mwse::lua {
 		genCallEnforced(0x4EEFAA, 0x4F0CA0, *reinterpret_cast<DWORD*>(&baseObjectDestructor));
 		genCallEnforced(0x4F026F, 0x4F0CA0, *reinterpret_cast<DWORD*>(&baseObjectDestructor));
 		genCallEnforced(0x4F0C83, 0x4F0CA0, *reinterpret_cast<DWORD*>(&baseObjectDestructor));
-
-		// Raise event for barter attempts.
-		genCallEnforced(0x5A70CF, 0x5A66C0, reinterpret_cast<DWORD>(GameBarterOffer));
-		genCallEnforced(0x5A6777, reinterpret_cast<DWORD>(OnExerciseSkill), reinterpret_cast<DWORD>(GameBarterOffer_BufferSkillGain));
 
 		// Allow area-of-effect magic effects and tes3.findActorsInProximity to hit/find incapacitated actors.
 		genJumpUnprotected(0x570341, 0x57034C);
@@ -5309,8 +5406,8 @@ namespace mwse::lua {
 		// Initialize extra flag members in MobileProjectile::ctor.
 		writeByteUnprotected(0x5723BC, 0x89);
 		// The explode logic is deferred to execute at the same point as projectile simulation to preserve consistency.
-		auto projectileControllerResolveCollisions = &TES3::ProjectileController::resolveCollisions;
-		genCallEnforced(0x5638F8, 0x5753A0, *reinterpret_cast<DWORD*>(&projectileControllerResolveCollisions));
+		auto projectileManagerResolveCollisions = &TES3::ProjectileManager::resolveCollisions;
+		genCallEnforced(0x5638F8, 0x5753A0, *reinterpret_cast<DWORD*>(&projectileManagerResolveCollisions));
 
 		// Warn about MGE being disabled.
 		if (!InstructionStore::getInstance().isOpcode(OpCode::xGetGS)) {
@@ -5372,8 +5469,8 @@ namespace mwse::lua {
 		if (buttonPressedCallback != sol::nil) {
 			sol::protected_function callback = buttonPressedCallback;
 			buttonPressedCallback = sol::nil;
-			sol::state& state = stateHandle.state;
-			sol::table eventData = state.create_table();
+			auto& state = stateHandle.state;
+			auto eventData = state.create_table();
 			eventData["button"] = tes3::ui::getButtonPressedIndex();
 			tes3::ui::resetButtonPressedIndex();
 

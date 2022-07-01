@@ -1,11 +1,12 @@
 return {
 	type = "function",
-	description = [[Disables a shader. Wrapper for mwscript's MGEDisableShader.]],
-	arguments = {{
+	deprecated = true,
+	description = "Disables a loaded shader.",
+	arguments = { {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "shader", type = "string" }
+			{ name = "name", type = "string" },
 		},
-	}},
+	} },
 }

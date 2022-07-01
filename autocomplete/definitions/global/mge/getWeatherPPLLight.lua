@@ -1,8 +1,12 @@
 return {
 	type = "function",
-	description = [[Gets per-pixel lighting parameters for a specific weather. See [`mge.setWeatherPPLLight()`](https://mwse.github.io/MWSE/apis/mge/#mgesetweatherppllight).]],
+	deprecated = true,
+	description = [[Gets the weather per pixel light settings. Use `mge.weather.getPerPixelLighting()` instead.]],
 	arguments = {
-		{ name = "weatherID", type = "number", description = "Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weathers/) table." },
+		{ name = "weather", type = "number" },
 	},
-	returns = {{ name = "parameters", type = "table", description = "An array-style table with `sunMultiplier` and `ambientMultiplier` parameters." }},
+	returns = {
+		{ name = "mult", type = "number" },
+		{ name = "offset", type = "number" },
+	},
 }

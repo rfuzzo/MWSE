@@ -1,11 +1,14 @@
 #include "TES3Class.h"
 
+#include "TES3Archive.h"
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
 #include "TES3Reference.h"
 #include "TES3UIElement.h"
 #include "TES3UIManager.h"
 #include "TES3WorldController.h"
+
+#include "TES3Util.h"
 
 namespace TES3 {
 	const char* Class::getObjectID() const {
@@ -73,6 +76,15 @@ namespace TES3 {
 	const auto TES3_Class_freeDescription = reinterpret_cast<void(__thiscall*)(Class*)>(0x4A8450);
 	void Class::freeDescription() {
 		TES3_Class_freeDescription(this);
+	}
+
+	std::string Class::getLevelUpImage() const {
+		char buffer[64] = {};
+		sprintf(buffer, "textures\\levelup\\%s.bmp", id);
+		if (mwse::tes3::resolveAssetPath(buffer) != TES3::FileLoadSource::Missing) {
+			return buffer;
+		}
+		return "textures\\levelup\\Warrior.bmp";
 	}
 
 	std::reference_wrapper<int[2]> Class::getAttributes() {
@@ -252,7 +264,7 @@ namespace TES3 {
 	sol::table Class::getMajorSkills_lua(sol::this_state ts) {
 		sol::state_view state = ts;
 		sol::table result = state.create_table();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; ++i) {
 			result[i + 1] = skills[i * 2 + 1];
 		}
 		return result;
@@ -261,7 +273,7 @@ namespace TES3 {
 	sol::table Class::getMinorSkills_lua(sol::this_state ts) {
 		sol::state_view state = ts;
 		sol::table result = state.create_table();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; ++i) {
 			result[i + 1] = skills[i * 2];
 		}
 		return result;

@@ -5,26 +5,18 @@
 	"tasks": [
 		{
 			"label": "mkdocs - Start Server",
+			"type": "shell",
+			"command": "python",
 			"args": [
+				"-m",
+				"mkdocs",
 				"serve"
 			],
-			"type": "shell",
-			"command": "mkdocs",
 			"problemMatcher": [],
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			}
-		},
-		{
-			"label": "mkdocs - Deploy",
-			"args": [
-				"gh-deploy"
-			],
-			"type": "shell",
-			"command": "mkdocs",
-			"problemMatcher": [],
-			"group": "build"
 		}
 	]
 }
