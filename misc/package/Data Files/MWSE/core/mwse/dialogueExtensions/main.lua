@@ -1,3 +1,75 @@
+local dialogueMenuUIID = nil
+local goodbyeButtonUIID = nil
+local barterButtonUIID = nil
+local shareButtonUIID = nil
+local enchantingButtonUIID = nil
+local persuasionButtonUIID = nil
+local repairButtonUIID = nil
+local spellmakingButtonUIID = nil
+local spellsButtonUIID = nil
+local trainingButtonUIID = nil
+local travelButtonUIID = nil
+
+local alchemyMenuUIID = nil
+local barterMenuUIID = nil
+local classMenuUIID = nil
+local companionShareMenuUIID = nil
+local enchantingMenuUIID = nil
+local persuastionMenuUIID = nil
+local raceMenuUIID = nil
+local repairMenuUIID = nil
+local spellmakingMenuUIID = nil
+local spellsServiceMenuUIID = nil
+local trainingMenuUIID = nil
+local travelMenuUIID = nil
+
+local function onInitialized()
+	dialogueMenuUIID = tes3ui.registerID("MenuDialog")
+	goodbyeButtonUIID = tes3ui.registerID("MenuDialog_button_bye")
+	barterButtonUIID = tes3ui.registerID("MenuDialog_service_barter")
+	shareButtonUIID = tes3ui.registerID("MenuDialog_service_companion")
+	enchantingButtonUIID = tes3ui.registerID("MenuDialog_service_enchanting")
+	persuasionButtonUIID = tes3ui.registerID("MenuDialog_persuasion")
+	repairButtonUIID = tes3ui.registerID("MenuDialog_service_repair")
+	spellmakingButtonUIID = tes3ui.registerID("MenuDialog_service_spellmaking")
+	spellsButtonUIID = tes3ui.registerID("MenuDialog_service_spells")
+	trainingButtonUIID = tes3ui.registerID("MenuDialog_service_training")
+	travelButtonUIID = tes3ui.registerID("MenuDialog_service_travel")
+
+	alchemyMenuUIID = tes3ui.registerID("MenuAlchemy")
+	barterMenuUIID = tes3ui.registerID("MenuBarter")
+	classMenuUIID = tes3ui.registerID("MenuClassChoice")
+	companionShareMenuUIID = tes3ui.registerID("MenuContents")
+	enchantingMenuUIID = tes3ui.registerID("MenuEnchantment")
+	persuastionMenuUIID = tes3ui.registerID("MenuPersuasion")
+	raceMenuUIID = tes3ui.registerID("MenuRaceSex")
+	repairMenuUIID = tes3ui.registerID("MenuServiceRepair")
+	spellmakingMenuUIID = tes3ui.registerID("MenuSpellmaking")
+	spellsServiceMenuUIID = tes3ui.registerID("MenuServiceSpells")
+	trainingMenuUIID = tes3ui.registerID("MenuServiceTraining")
+	travelMenuUIID = tes3ui.registerID("MenuServiceTravel")
+end
+event.register(tes3.event.initialized, onInitialized)
+
+--- The function opens a menu within dialogue window. Returns true if the menu is open or was opened.
+---@param menuID number The id of the menu to open.
+---@param buttonID number The id of the button that opens the menu from dialogue menu window.
+---@return boolean opened
+local function openMenu(menuID, buttonID)
+	local menu = tes3ui.findMenu(menuID)
+	if menu then
+		return true
+	end
+
+	local dialogueMenu = tes3ui.findMenu(dialogueMenuUIID)
+	if dialogueMenu then
+		local button = dialogueMenu:findChild(buttonID)
+		button:triggerEvent(tes3.uiEvent.mouseClick)
+		return true
+	end
+	return false
+end
+
 --- @param e dialogueEnvironmentCreatedEventData
 local function onDialogueEnvironmentCreated(e)
 	-- Cache the environment variables outside the function for easier access.
@@ -11,8 +83,8 @@ local function onDialogueEnvironmentCreated(e)
 	-- These are default environment functions available to dialogue scripters.
 	-- They should be designed in a way that is easy for them to be called.
 
-	function env.CloseDialogue()
-		error("Not yet implemented.")
+	function env.CloseDialogue(force)
+		return tes3.closeDialogueMenu({ force = force })
 	end
 
 	function env.FollowPlayer()
@@ -34,87 +106,24 @@ local function onDialogueEnvironmentCreated(e)
 	end
 
 	function env.OpenBarterMenu()
-		error("Not yet implemented.")
+		return openMenu(barterMenuUIID, barterButtonUIID)
 	end
 
 	function env.OpenClassMenu()
 		error("Not yet implemented.")
 	end
 
-	function env.OpenCompanionInventory(filter, filterValue)
-		local passedFilter
-
-		if type(filter) == "function" then
-			passedFilter = filter
-		else
-			passedFilter = filter and tes3.inventorySelectFilter[filter] or function(e)
-				local damageableItems = {
-					[tes3.objectType.weapon] = true,
-					[tes3.objectType.armor] = true,
-				}
-
-				if filter == "weapon" and (e.item.objectType == tes3.objectType.weapon) then
-					return true
-				elseif filter == "repairItem" and (e.item.objectType == tes3.objectType.repairItem) then
-					return true
-				elseif filter == "probe" and (e.item.objectType == tes3.objectType.probe) then
-					return true
-				elseif filter == "miscItem" and (e.item.objectType == tes3.objectType.miscItem) then
-					return true
-				elseif filter == "lockpick" and (e.item.objectType == tes3.objectType.lockpick) then
-					return true
-				elseif filter == "light" and (e.item.objectType == tes3.objectType.light) then
-					return true
-				elseif filter == "clothing" and (e.item.objectType == tes3.objectType.clothing) then
-					return true
-				elseif filter == "book" and (e.item.objectType == tes3.objectType.book) then
-					return true
-				elseif filter == "armor" and (e.item.objectType == tes3.objectType.armor) then
-					return true
-				elseif filter == "apparatus" and (e.item.objectType == tes3.objectType.apparatus) then
-					return true
-				elseif filter == "ammunition" and (e.item.objectType == tes3.objectType.ammunition) then
-					return true
-				elseif filter == "alchemy" and (e.item.objectType == tes3.objectType.alchemy) then
-					return true
-				elseif filter == "damagedItems" and
-				damageableItems[e.item.objectType] and
-				e.itemData and
-				(e.itemData.condition < e.item.maxCondition) then
-					return true
-				elseif filter == "value" and
-				(e.item.value <= filterValue) then
-					return true
-				else
-					return false
-				end
-			end
-		end
-
-		tes3ui.showInventorySelectMenu({
-			reference = reference,
-			title = reference.object.name,
-			callback = function(e)
-				if e.item then
-					tes3.transferItem({
-						from = mobile,
-						to = tes3.player,
-						item = e.item,
-						itemData = e.itemData,
-						count = e.count,
-					})
-				end
-			end,
-			filter = passedFilter
-		})
+	function env.OpenCompanionInventory()
+		return openMenu(companionShareMenuUIID, shareButtonUIID)
 	end
 
 	function env.OpenEnchantMenu()
-		error("Not yet implemented.")
+		return openMenu(enchantingMenuUIID, enchantingButtonUIID)
 	end
 
 	function env.OpenPersuasionMenu()
-		error("Not yet implemented.")
+		-- This menu is opened under the mouse cursor
+		return openMenu(persuastionMenuUIID, persuasionButtonUIID)
 	end
 
 	function env.OpenRaceMenu()
@@ -122,23 +131,30 @@ local function onDialogueEnvironmentCreated(e)
 	end
 
 	function env.OpenRepairMenu()
-		tes3.showRepairServiceMenu({ serviceActor = mobile })
+		return openMenu(repairMenuUIID, repairButtonUIID)
 	end
 
 	function env.OpenSpellmakingMenu()
-		tes3.showSpellmakingMenu({ serviceActor = mobile })
+		return openMenu(spellmakingMenuUIID, spellmakingButtonUIID)
 	end
 
 	function env.OpenSpellMenu()
-		error("Not yet implemented.")
+		return openMenu(spellsServiceMenuUIID, spellsButtonUIID)
 	end
 
 	function env.OpenTrainingMenu()
-		error("Not yet implemented.")
+		return openMenu(trainingMenuUIID, trainingButtonUIID)
 	end
 
+
 	function env.OpenTravelMenu()
-		error("Not yet implemented.")
+		-- Opening travel menu by using :triggerEvent crashes the game if used
+		-- on a NPC that doesn't provide travelling services. Handle that.
+		local travelDestinations = reference.object.aiConfig.travelDestinations
+		if travelDestinations == nil then
+			return false
+		end
+		return openMenu(travelMenuUIID, travelButtonUIID)
 	end
 end
 event.register(tes3.event.dialogueEnvironmentCreated, onDialogueEnvironmentCreated, { priority = 100 })
