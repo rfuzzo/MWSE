@@ -1,11 +1,12 @@
 return {
 	type = "function",
-	description = [[Wrapper for MGEZoomOut, or MGEZoomOutBy if an amount is provided.]],
-	arguments = {{
+	deprecated = true,
+	description = [[Zooms in by the specified amount. Use `mge.camera.zoomOut()` instead.]],
+	arguments = { {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "amount", type = "number", optional = true }
+			{ name = "amount", type = "number" },
 		},
-	}},
+	} },
 }

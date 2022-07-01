@@ -1,10 +1,10 @@
 return {
 	type = "function",
-	description = [[Sets light multipliers used in per-pixel lighting for a specific weather. `sunMultiplier` affects sunlight, while `ambientMultiplier` affects ambient lighting.]],
+	deprecated = true,
+	description = [[Sets the weather per pixel light settings. Use `mge.weather.setPerPixelLighting()` instead.]],
 	arguments = {
-		{ name = "weatherID", type = "number", description = "Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) enumeration." },
-		{ name = "sunMultiplier", type = "number" },
-		{ name = "ambientMultiplier", type = "number" }
+		{ name = "weather", type = "number" },
+		{ name = "mult", type = "number" },
+		{ name = "offset", type = "number" },
 	},
-	returns = {{ name = "result", type = "number" }},
 }

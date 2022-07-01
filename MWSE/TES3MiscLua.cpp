@@ -17,7 +17,7 @@ namespace mwse::lua {
 	void bindTES3Misc() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		{
 			// Start our usertype.
@@ -74,6 +74,7 @@ namespace mwse::lua {
 
 			// utility function bindings
 			usertypeDefinition["create"] = &createMiscItem;
+			usertypeDefinition["createCopy"] = &TES3::Misc::createCopy_lua<TES3::Misc>;
 		}
 	}
 }

@@ -21,17 +21,12 @@ namespace TES3 {
 		};
 	}
 
-	struct PackedColor {
-		unsigned char r; // 0x0
-		unsigned char g; // 0x1
-		unsigned char b; // 0x2
-		unsigned char a; // 0x3
-	};
-	static_assert(sizeof(PackedColor) == 0x4, "TES3::PackedColor failed size validation");
-
 	struct MapNote {
 		Vector3 position; // 0x0
 		char * text; // 0xC
+
+		MapNote() = delete;
+		~MapNote() = delete;
 	};
 	static_assert(sizeof(MapNote) == 0x10, "TES3::MapNote failed size validation");
 
@@ -44,6 +39,9 @@ namespace TES3 {
 			PathGrid* parentGrid; // 0x10
 			int index; // 0x14
 			NI::Pointer<NI::Node> debugNode; // 0x18
+
+			Node() = delete;
+			~Node() = delete;
 		};
 
 		NI::Pointer<NI::Node> sceneNode; // 0x10
@@ -57,6 +55,9 @@ namespace TES3 {
 		IteratedList<Node*> nodes; // 0x20
 		unsigned int fileOffset; // 0x34
 		char unknown_0x38;
+
+		PathGrid() = delete;
+		~PathGrid() = delete;
 	};
 	static_assert(sizeof(PathGrid) == 0x3C, "TES3::PathGrid failed size validation");
 	static_assert(sizeof(PathGrid::Node) == 0x1C, "TES3::PathGrid::Node failed size validation");
@@ -66,6 +67,9 @@ namespace TES3 {
 			struct Coordinates {
 				int gridX;
 				int gridY;
+
+				Coordinates() = delete;
+				~Coordinates() = delete;
 			};
 			unsigned char flags;
 			Reference * reference;
@@ -74,11 +78,17 @@ namespace TES3 {
 				const char* targetCellName;
 				Coordinates* targetCellXY;
 			} duringLoad;
+
+			MovedRef() = delete;
+			~MovedRef() = delete;
 		};
 		struct SourceMod {
 			GameFile * sourceFile;
 			unsigned int fileOffsetCellRecord;
 			unsigned int fileOffsetTempRefs;
+
+			SourceMod() = delete;
+			~SourceMod() = delete;
 		};
 		struct MappingVisuals {
 			int unknown_0x0;
@@ -87,6 +97,9 @@ namespace TES3 {
 			int unknown_0xC;
 			int unknown_0x10;
 			NI::Pointer<NI::SourceTexture> texture; // 0x14
+
+			MappingVisuals() = delete;
+			~MappingVisuals() = delete;
 		};
 
 		char * name; // 0x10
@@ -94,15 +107,15 @@ namespace TES3 {
 		unsigned int cellFlags; // 0x18
 		union {
 			struct {
-				TES3::PackedColor regionMapColor; // 0x0
+				NI::PackedColor regionMapColor; // 0x0
 				void * landscape; // 0x4
 				int gridX; // 0x8
 				int gridY; // 0xC
 			} exterior;
 			struct {
-				PackedColor ambientColor; // 0x0
-				PackedColor sunColor; // 0x4
-				PackedColor fogColor; // 0x8
+				NI::PackedColor ambientColor; // 0x0
+				NI::PackedColor sunColor; // 0x4
+				NI::PackedColor fogColor; // 0x8
 				float fogDensity; // 0xC
 			} interior;
 		} variantData; // 0x1C
@@ -122,6 +135,9 @@ namespace TES3 {
 			float waterLevel;
 			Region * region;
 		} waterLevelOrRegion; // 0x90
+
+		Cell() = delete;
+		~Cell() = delete;
 
 		//
 		// Other related this-call functions.
@@ -162,9 +178,9 @@ namespace TES3 {
 
 		Region * getRegion() const;
 
-		TES3::PackedColor* getAmbientColor();
-		TES3::PackedColor* getFogColor();
-		TES3::PackedColor* getSunColor();
+		NI::PackedColor* getAmbientColor();
+		NI::PackedColor* getFogColor();
+		NI::PackedColor* getSunColor();
 
 		bool getBehavesAsExterior() const;
 		void setBehavesAsExterior(bool value);

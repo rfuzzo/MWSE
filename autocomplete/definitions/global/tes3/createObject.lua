@@ -1,10 +1,11 @@
 return {
 	type = "function",
-	description = [[Create an object and returns it. The created object will be part of the saved game. Supported object types are those that have their own create function, such as tes3activator for example.]],
+	description = [[Create an object and returns it. The created object will be part of the saved game. Currently supported object types are: `tes3.objectType.activator`, `.alchemy`, `.ammo`, `.book`, `.clothing`, `.container`, `.enchantment`, `.miscItem`, `.sound`, `.spell`, `.static`, and `.weapon`.]],
 	arguments = {{
 		name = "params",
 		type = "table",
 		tableParams = {
+			{ name = "id", type = "string", optional = true, description = "The id of the new object." },
 			{ name = "objectType", type = "number", description = "Maps to [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) constants. Used to filter object type to create." },
 			{ name = "getIfExists", type = "boolean", default = true, description = "If `true`, an existing object of the same type and ID will be returned instead of creating a new one." },
 		},

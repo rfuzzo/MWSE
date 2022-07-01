@@ -27,6 +27,19 @@ namespace TES3 {
 		return speed;
 	}
 
+	float ActorAnimationController::calculateAttackSwing() {
+		if (mobileActor->actionData.animStateAttack != AttackAnimationState::SwingUp) {
+			return 0.0;
+		}
+
+		if (startTime == 0.0 || maxAttackTiming == 0.0 || startTime == maxAttackTiming)
+		{
+			return 1.0;
+		}
+		
+		return std::clamp(mobileActor->actionData.swingTimer / (maxAttackTiming - startTime), 0.0f, 1.0f);
+	}
+
 	const auto TES3_ActorAnimationController_getOpacity = reinterpret_cast<float(__thiscall*)(ActorAnimationController*)>(0x542130);
 	float ActorAnimationController::getOpacity() {
 		return TES3_ActorAnimationController_getOpacity(this);
@@ -35,6 +48,11 @@ namespace TES3 {
 	const auto TES3_ActorAnimationController_setOpacity = reinterpret_cast<void(__thiscall*)(ActorAnimationController*, float)>(0x542030);
 	void ActorAnimationController::setOpacity(float value) {
 		TES3_ActorAnimationController_setOpacity(this, value);
+	}
+
+	const auto TES3_ActorAnimController_startCastAnimation = reinterpret_cast<void(__thiscall*)(ActorAnimationController*)>(0x541A90);
+	void ActorAnimationController::startCastAnimation() {
+		TES3_ActorAnimController_startCastAnimation(this);
 	}
 
 	const auto TES3_ActorAnimController_startAttackAnimation = reinterpret_cast<void(__thiscall*)(ActorAnimationController*, float)>(0x5411C0);

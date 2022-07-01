@@ -2,16 +2,18 @@
 
 #include "LuaManager.h"
 #include "TES3ObjectLua.h"
+#include "LuaUtil.h"
 
 #include "TES3Enchantment.h"
 #include "TES3Script.h"
 #include "TES3Weapon.h"
+#include "TES3WorldController.h"
 
 namespace mwse::lua {
 	void bindTES3Weapon() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::Weapon>("tes3weapon");
@@ -55,6 +57,7 @@ namespace mwse::lua {
 		usertypeDefinition["weight"] = &TES3::Weapon::weight;
 
 		// Basic function binding.
+		usertypeDefinition["createCopy"] = &TES3::Weapon::createCopy_lua<TES3::Weapon>;
 		usertypeDefinition["getMaterialFlag"] = &TES3::Weapon::getMaterialFlag;
 		usertypeDefinition["setMaterialFlag"] = &TES3::Weapon::setMaterialFlag;
 

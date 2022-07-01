@@ -62,18 +62,44 @@ local function formatDescription(description)
 	return "--- " .. formatLineBreaks(description)
 end
 
-local function getAllPossibleVariationsOfType(type)
+local function getAllPossibleVariationsOfType(type, package)
 	if (not type) then
 		return nil
 	end
 
+	if (type:startswith("table<")) then
+		local keyType, valueType = type:match("table<(.+), (.+)>")
+		return string.format("table<%s, %s>", getAllPossibleVariationsOfType(keyType, package), getAllPossibleVariationsOfType(valueType, package))
+	end
+
 	local types = {}
 	for _, t in ipairs(string.split(type, "|")) do
-		local class = classes[t]
+		local strippedType = common.makeComplexType(t)
+		local class = classes[strippedType.type]
 		if (class) then
-			table.insert(types, class.allDescendentKeys or t)
+			if (class.allDescendentKeys) then
+				for _, descendentType in ipairs(string.split(class.allDescendentKeys, "|")) do
+					table.insert(types, common.makeTypeString(descendentType, strippedType.isOptional, strippedType.isArray))
+				end
+			else
+				table.insert(types, t)
+			end
 		else
 			table.insert(types, t)
+		end
+	end
+
+	if (package.optional or package.default ~= nil) then
+		-- If we only have one type, just add ? to it.
+		if (#types == 1) then
+			if (not types[1]:endswith("?")) then
+				types[1] = types[1] .. "?"
+			end
+		else
+			-- Otherwise add `nil` to the list if it isn't already there.
+			if (not table.find(types, "nil")) then
+				table.insert(types, "nil")
+			end
 		end
 	end
 
@@ -107,18 +133,18 @@ local function writeFunction(package, file, namespaceOverride)
 			type = package.namespace .. ".params"
 			description = "This table accepts the following values:"
 			for _, tableArgument in ipairs(argument.tableParams) do
-				description = description .. string.format("\n\n`%s`: %s — %s", tableArgument.name or "unknown", getAllPossibleVariationsOfType(tableArgument.type) or "any", formatLineBreaks(common.getDescriptionString(tableArgument)))
+				description = description .. string.format("\n\n`%s`: %s — %s", tableArgument.name or "unknown", getAllPossibleVariationsOfType(tableArgument.type, tableArgument) or "any", formatLineBreaks(common.getDescriptionString(tableArgument)))
 			end
 		end
 		if (argument.type == "variadic") then
-			file:write(string.format("--- @vararg %s %s\n", getAllPossibleVariationsOfType(argument.variadicType) or "any", formatLineBreaks(description)))
+			file:write(string.format("--- @vararg %s %s\n", getAllPossibleVariationsOfType(argument.variadicType, argument) or "any", formatLineBreaks(description)))
 		else
-			file:write(string.format("--- @param %s %s %s\n", argument.name or "unknown", getAllPossibleVariationsOfType(type), formatLineBreaks(description)))
+			file:write(string.format("--- @param %s %s %s\n", argument.name or "unknown", getAllPossibleVariationsOfType(type, argument), formatLineBreaks(description)))
 		end
 	end
 
 	for _, returnPackage in ipairs(common.getConsistentReturnValues(package) or {}) do
-		file:write(string.format("--- @return %s %s %s\n", getAllPossibleVariationsOfType(returnPackage.type) or "any", returnPackage.name or "result", formatLineBreaks(common.getDescriptionString(returnPackage))))
+		file:write(string.format("--- @return %s %s %s\n", getAllPossibleVariationsOfType(returnPackage.type, returnPackage) or "any", returnPackage.name or "result", formatLineBreaks(common.getDescriptionString(returnPackage))))
 	end
 
 	file:write(string.format("function %s(%s) end\n\n", namespaceOverride or package.namespace, table.concat(getParamNames(package), ", ")))
@@ -127,7 +153,7 @@ local function writeFunction(package, file, namespaceOverride)
 		file:write(string.format("---Table parameter definitions for `%s`.\n", package.namespace))
 		file:write(string.format("--- @class %s.params\n", package.namespace))
 		for _, param in ipairs(package.arguments[1].tableParams) do
-			file:write(string.format("--- @field %s %s %s\n", param.name, getAllPossibleVariationsOfType(param.type), formatLineBreaks(common.getDescriptionString(param))))
+			file:write(string.format("--- @field %s %s %s\n", param.name, getAllPossibleVariationsOfType(param.type, param), formatLineBreaks(common.getDescriptionString(param))))
 		end
 		file:write("\n")
 	end
@@ -155,13 +181,39 @@ local function buildParentChain(className)
 	return className
 end
 
+local function buildExternalRequires(package, file)
+	local fileBlacklist = {
+		["init"] = true,
+	}
+	local directory = lfs.join(common.pathAutocomplete, "..", "misc", "package", "Data Files", "MWSE", "core", "lib", package.key)
+	for entry in lfs.dir(directory) do
+		local extension = entry:match("[^.]+$")
+		if (extension == "lua") then
+			local filename = entry:match("[^/]+$"):sub(1, -1 * (#extension + 2))
+			if (not fileBlacklist[filename]) then
+				file:write(string.format('%s.%s = require("%s.%s")\n', package.key, filename, package.key, filename))
+			end
+		end
+	end
+end
+
 local function build(package)
 	-- Load our base package.
 	common.log("Building " .. package.type .. ": " .. package.key .. " ...")
 
 	-- Get the package.
-	local outPath = lfs.join(metaFolder, package.type, package.key .. ".lua")
+	local outDir = lfs.join(metaFolder, package.type)
+	local parent = package.parent
+	while (parent) do
+		outDir = lfs.join(outDir, parent.key)
+		parent = parent.parent
+	end
+	local outPath = lfs.join(outDir, package.key .. ".lua")
+
+	-- Write our file. Mark as autogenerated.
 	local file = assert(io.open(outPath, "w"))
+	file:write("-- This file is autogenerated. Do not edit this file manually. Your changes will be ignored.\n")
+	file:write("-- More information: https://github.com/MWSE/MWSE/tree/master/docs\n\n")
 
 	-- Mark the file as a meta file.
 	file:write("--- @meta\n")
@@ -172,7 +224,7 @@ local function build(package)
 	if (package.type == "lib") then
 		file:write(formatDescription(common.getDescriptionString(package)) .. "\n")
 		writeExamples(package, file)
-		file:write(string.format("--- @class %slib\n", package.key))
+		file:write(string.format("--- @class %slib\n", package.namespace))
 	elseif (package.type == "class") then
 		file:write(formatDescription(common.getDescriptionString(package)) .. "\n")
 		writeExamples(package, file)
@@ -188,15 +240,15 @@ local function build(package)
 	-- Write out fields.
 	for _, value in ipairs(package.values or {}) do
 		if (not value.deprecated) then
-			file:write(string.format("--- @field %s %s %s\n", value.key, getAllPossibleVariationsOfType(value.valuetype) or "any", formatLineBreaks(common.getDescriptionString(value))))
+			file:write(string.format("--- @field %s %s %s\n", value.key, getAllPossibleVariationsOfType(value.valuetype, value) or "any", formatLineBreaks(common.getDescriptionString(value))))
 		end
 	end
 
 	-- Custom case: Write out event overrides.
 	if (package.type == "lib" and package.key == "event") then
-		file:write(string.format("--- @field register fun(eventId: string, callback: fun(e: table), options: table)\n"))
+		file:write(string.format("--- @field register fun(eventId: string, callback: fun(e: table), options: table?)\n"))
 		for _, key in ipairs(table.keys(events, true)) do
-			file:write(string.format("--- @field register fun(eventId: '\"%s\"', callback: fun(e: %sEventData), options: table)\n", key, key))
+			file:write(string.format("--- @field register fun(eventId: '\"%s\"', callback: fun(e: %sEventData), options: table?)\n", key, key))
 		end
 	end
 
@@ -214,14 +266,14 @@ local function build(package)
 		for _, key in ipairs(eventDataKeys) do
 			local data = eventData[key]
 			if (not data.deprecated) then
-				file:write(string.format("--- @field %s %s %s\n", key, getAllPossibleVariationsOfType(data.type) or "any", formatLineBreaks(common.getDescriptionString(data))))
+				file:write(string.format("--- @field %s %s %s\n", key, getAllPossibleVariationsOfType(data.type, data) or "any", formatLineBreaks(common.getDescriptionString(data))))
 			end
 		end
 	end
 
 	-- Finalize the main class definition.
 	if (package.type == "lib" or package.type == "class") then
-		file:write(string.format("%s = {}\n\n", package.key))
+		file:write(string.format("%s = {}\n\n", package.namespace))
 	end
 
 	-- Write out functions.
@@ -233,6 +285,18 @@ local function build(package)
 	if (package.type == "class") then
 		for _, value in ipairs(package.methods or {}) do
 			writeFunction(value, file, package.key .. ":" .. value.key)
+		end
+	end
+
+	-- Bring in external packages and build sub-libraries.
+	if (package.type == "lib") then
+		buildExternalRequires(package, file)
+
+		if (package.libs) then
+			lfs.mkdir(lfs.join(outDir, package.key))
+			for _, lib in pairs(package.libs) do
+				build(lib)
+			end
 		end
 	end
 

@@ -5,7 +5,7 @@
 #include "TES3GameFile.h"
 #include "TES3GameSetting.h"
 #include "TES3GlobalVariable.h"
-#include "TES3MobController.h"
+#include "TES3MobManager.h"
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
 #include "TES3Reference.h"
@@ -263,7 +263,7 @@ namespace TES3 {
 						totalKills += countBuffer;
 					}
 					else {
-						reinterpret_cast<void(__cdecl*)(const char*, const char*)>(0x477400)("Unable to locate Killed Object '%s'.", idBuffer);
+						mwse::tes3::logAndShowError("Unable to locate Killed Object '%s'.", idBuffer);
 					}
 				}
 				break;
@@ -291,7 +291,7 @@ namespace TES3 {
 		}
 
 		// Create the record header.
-		BaseObject recordHolder;
+		BaseObject recordHolder = {};
 		recordHolder.objectType = (ObjectType::ObjectType)'TSLK';
 		recordHolder.writeFileHeader(file);
 
@@ -336,6 +336,19 @@ namespace TES3 {
 	const auto TES3_InventoryData_mergeTile = reinterpret_cast<void(__thiscall*)(InventoryData*, UI::InventoryTile*)>(0x632FC0);
 	void InventoryData::mergeTile(UI::InventoryTile* tile) {
 		TES3_InventoryData_mergeTile(this, tile);
+	}
+
+	//
+	// Font
+	//
+
+	const auto TES3_Font_substituteTextMacros = reinterpret_cast<void(__thiscall*)(const Font*, const Actor*, const char*)>(0x40BE50);
+	void Font::substituteTextMacros(const Actor* actor, const char* text) const {
+		TES3_Font_substituteTextMacros(this, actor, text);
+	}
+
+	char* Font::getSubstituteResult() const {
+		return *reinterpret_cast<char**>(0x7C6568);
 	}
 
 	//
@@ -467,6 +480,21 @@ namespace TES3 {
 		TES3_WorldController_processGlobalScripts(this);
 	}
 
+	const auto TES3_WorldController_addGlobalScript = reinterpret_cast<void(__thiscall*)(WorldController*, Script*, const Reference*)>(0x40FA80);
+	void WorldController::startGlobalScript(Script* script, const Reference* reference) {
+		TES3_WorldController_addGlobalScript(this, script, reference);
+	}
+
+	const auto TES3_WorldController_removeGlobalScript = reinterpret_cast<void(__thiscall*)(WorldController*, Script*)>(0x40FB00);
+	void WorldController::stopGlobalScript(Script* script) {
+		TES3_WorldController_removeGlobalScript(this, script);
+	}
+
+	const auto TES3_WorldController_isGlobalScriptRunning = reinterpret_cast<bool(__thiscall*)(const WorldController*, const Script*)>(0x40FB90);
+	bool WorldController::isGlobalScriptRunning(const Script* script) const {
+		return TES3_WorldController_isGlobalScriptRunning(this, script);
+	}
+
 	const auto TES3_Data_daysInMonth = reinterpret_cast<unsigned short*>(0x775E40);
 	unsigned short WorldController::getDaysInMonth(int month) {
 		if (month < 0 || month > 11) {
@@ -515,12 +543,12 @@ namespace TES3 {
 	}
 
 	float WorldController::getAIDistance() const {
-		return mobController->processManager->aiDistance;
+		return mobManager->processManager->aiDistance;
 	}
 
 	void WorldController::setAIDistance(float value) {
-		mobController->processManager->aiDistance = value;
-		aiDistanceScale = mobController->processManager->getAIDistanceScale();
+		mobManager->processManager->aiDistance = value;
+		aiDistanceScale = mobManager->processManager->getAIDistanceScale();
 	}
 
 	float WorldController::getAIDistanceScale() const {
@@ -529,7 +557,7 @@ namespace TES3 {
 
 	void WorldController::setAIDistanceScale(float scale) {
 		aiDistanceScale = scale;
-		mobController->processManager->setAIDistanceScale(scale);
+		mobManager->processManager->setAIDistanceScale(scale);
 	}
 
 	const auto TES3_WorldController_rechargerAddItem = reinterpret_cast<void(__thiscall*)(WorldController*, Object*, Enchantment*, ItemData*)>(0x410790);

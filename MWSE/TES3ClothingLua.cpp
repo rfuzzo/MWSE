@@ -7,12 +7,13 @@
 #include "TES3Clothing.h"
 #include "TES3Enchantment.h"
 #include "TES3Script.h"
+#include "TES3WorldController.h"
 
 namespace mwse::lua {
 	void bindTES3Clothing() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::Clothing>("tes3clothing");
@@ -28,6 +29,9 @@ namespace mwse::lua {
 		usertypeDefinition["slot"] = &TES3::Clothing::slot;
 		usertypeDefinition["value"] = &TES3::Clothing::value;
 		usertypeDefinition["weight"] = &TES3::Clothing::weight;
+
+		// Basic function binding.
+		usertypeDefinition["createCopy"] = &TES3::Clothing::createCopy_lua<TES3::Clothing>;
 
 		// Functions exposed as properties.
 		usertypeDefinition["enchantment"] = sol::property(&TES3::Clothing::getEnchantment, &TES3::Clothing::setEnchantment);

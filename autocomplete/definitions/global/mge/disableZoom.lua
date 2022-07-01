@@ -1,4 +1,5 @@
 return {
 	type = "function",
-	description = [[Disables the MGE XE zoom effect. Wrapper for MGEDisableZoom.]],
+	deprecated = true,
+	description = [[Disables camera zoom. Use `mge.camera.zoomEnabled = false` instead.]],
 }

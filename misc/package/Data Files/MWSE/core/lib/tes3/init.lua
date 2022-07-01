@@ -35,16 +35,20 @@ tes3.enchantmentType = require("tes3.enchantmentType")
 tes3.event = require("tes3.event")
 tes3.flowDirection = require("tes3.flowDirection")
 tes3.gmst = require("tes3.gmst")
+tes3.inventorySelectFilter = require("tes3.inventorySelectFilter")
 tes3.inventoryTileType = require("tes3.inventoryTileType")
 tes3.justifyText = require("tes3.justifyText")
 tes3.keybind = require("tes3.keybind")
 tes3.keyTransition = require("tes3.keyTransition")
+tes3.language = require("tes3.language")
+tes3.languageCode = require("tes3.languageCode")
 tes3.magicSchool = require("tes3.magicSchool")
 tes3.magicSourceType = require("tes3.magicSourceType")
 tes3.merchantService = require("tes3.merchantService")
 tes3.musicSituation = require("tes3.musicSituation")
 tes3.niType = require("tes3.niType")
 tes3.objectType = require("tes3.objectType")
+tes3.palette  = require("tes3.palette")
 tes3.partIndex = require("tes3.partIndex")
 tes3.physicalAttackType = require("tes3.physicalAttackType")
 tes3.quickKeyType = require("tes3.quickKeyType")
@@ -62,9 +66,11 @@ tes3.spellSource = require("tes3.spellSource")
 tes3.spellState = require("tes3.spellState")
 tes3.spellType = require("tes3.spellType")
 tes3.texturingPropertyMap = require("tes3.texturingPropertyMap")
+tes3.uiElementType = require("tes3.uiElementType")
 tes3.uiEvent = require("tes3.uiEvent")
 tes3.uiProperty = require("tes3.uiProperty")
 tes3.uiState = require("tes3.uiState")
+tes3.vfxContext = require("tes3.vfxContext")
 tes3.voiceover = require("tes3.voiceover")
 tes3.weaponType = require("tes3.weaponType")
 tes3.weather = require("tes3.weather")
@@ -146,15 +152,15 @@ end
 
 -- Function to compare two keybind objects for equality. Useful in key events.
 function tes3.isKeyEqual(params)
-    if (params.actual.keyCode ~= params.expected.keyCode
-        or (params.actual.isShiftDown or false) ~= (params.expected.isShiftDown or false)
-        or (params.actual.isControlDown or false) ~= (params.expected.isControlDown or false)
-        or (params.actual.isAltDown or false) ~= (params.expected.isAltDown or false)
-        or (params.actual.isSuperDown or false) ~= (params.expected.isSuperDown or false)) then
-        return false
-    end
+	if (params.actual.keyCode ~= params.expected.keyCode
+		or (params.actual.isShiftDown or false) ~= (params.expected.isShiftDown or false)
+		or (params.actual.isControlDown or false) ~= (params.expected.isControlDown or false)
+		or (params.actual.isAltDown or false) ~= (params.expected.isAltDown or false)
+		or (params.actual.isSuperDown or false) ~= (params.expected.isSuperDown or false)) then
+		return false
+	end
 
-    return true
+	return true
 end
 
 -- Iterator to use TES3::Iterator in a for loop.
@@ -187,6 +193,11 @@ end
 -- Shortcut to check if we're in the main menu.
 function tes3.onMainMenu()
 	return tes3.worldController.charGenState.value == 0
+end
+
+-- Checks to see if a lua mod is active.
+function tes3.isLuaModActive(key)
+	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()] == true
 end
 
 return tes3

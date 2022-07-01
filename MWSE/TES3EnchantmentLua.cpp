@@ -15,7 +15,7 @@ namespace mwse::lua {
 	void bindTES3Enchantment() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::Enchantment>("tes3enchantment");
@@ -40,5 +40,6 @@ namespace mwse::lua {
 
 		// utility function bindings
 		usertypeDefinition["create"] = &createEnchantment;
+		usertypeDefinition["createCopy"] = &TES3::Enchantment::createCopy_lua<TES3::Enchantment>;
 	}
 }

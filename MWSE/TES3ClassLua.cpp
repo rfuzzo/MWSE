@@ -9,7 +9,7 @@ namespace mwse::lua {
 	void bindTES3Class() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::Class>("tes3class");
@@ -58,6 +58,7 @@ namespace mwse::lua {
 		usertypeDefinition["majorSkills"] = sol::readonly_property(&TES3::Class::getMajorSkills_lua);
 		usertypeDefinition["minorSkills"] = sol::readonly_property(&TES3::Class::getMinorSkills_lua);
 		usertypeDefinition["name"] = sol::property(&TES3::Class::getName, &TES3::Class::setName);
+		usertypeDefinition["image"] = sol::property(&TES3::Class::getName, &TES3::Class::getLevelUpImage);
 
 		// Description may need to be loaded from disk, handle it specially.
 		usertypeDefinition["description"] = sol::property(&TES3::Class::getOrLoadDescription, &TES3::Class::setDescription_lua);

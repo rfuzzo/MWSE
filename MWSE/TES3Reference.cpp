@@ -32,7 +32,7 @@
 #include "TES3MobileCreature.h"
 #include "TES3MobilePlayer.h"
 #include "TES3MobileProjectile.h"
-#include "TES3MobController.h"
+#include "TES3MobManager.h"
 #include "TES3NPC.h"
 #include "TES3WorldController.h"
 
@@ -69,7 +69,7 @@ namespace TES3 {
 	const auto TES3_Reference_activate = reinterpret_cast<void(__thiscall*)(Reference*, Reference*, int)>(0x4E9610);
 	void Reference::activate(Reference* activator, int unknown) {
 		// If our event data says to block, don't let the object activate.
-		if (mwse::lua::event::ActivateEvent::getEventEnabled()) {
+		if (mwse::lua::event::ActivateEvent::getEventEnabled() && !isTemporaryInventoryScriptReference()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
 			sol::object response = stateHandle.triggerEvent(new mwse::lua::event::ActivateEvent(activator, this));
 			if (response.get_type() == sol::type::table) {
@@ -339,12 +339,12 @@ namespace TES3 {
 				}
 
 				macp->aiPlanner->assignMobileActor(macp);
-				worldController->mobController->addPlayerAsCollider();
+				worldController->mobManager->addPlayerAsCollider();
 				TES3_MobilePlayer_sub566500(macp);
 			}
 			else {
 				mobile->vTable.mobileObject->enterLeaveSimulation(mobile, true);
-				TES3::WorldController::get()->mobController->addMob(this);
+				TES3::WorldController::get()->mobManager->addMob(this);
 			}
 		}
 	}
@@ -419,7 +419,7 @@ namespace TES3 {
 
 		// Enable simulation for creatures/NPCs.
 		if (baseObject->objectType == TES3::ObjectType::Creature || baseObject->objectType == TES3::ObjectType::NPC) {
-			TES3::WorldController::get()->mobController->addMob(this);
+			TES3::WorldController::get()->mobManager->addMob(this);
 			auto mobile = getAttachedMobileActor();
 			if (mobile) {
 				mobile->enterLeaveSimulationByDistance();
@@ -468,7 +468,7 @@ namespace TES3 {
 			auto mact = getAttachedMobileObject();
 			if (mact) {
 				mact->enterLeaveSimulation(false);
-				TES3::WorldController::get()->mobController->removeMob(this);
+				TES3::WorldController::get()->mobManager->removeMob(this);
 			}
 		}
 		// Update lights for objects.
@@ -552,6 +552,7 @@ namespace TES3 {
 		removeAllAttachments();
 		setScale(1.0f);
 		setDeleted(true);
+		setObjectModified(true);
 	}
 
 	Vector3 * Reference::getPosition() {
@@ -623,6 +624,31 @@ namespace TES3 {
 		}
 
 		setObjectModified(true);
+	}
+
+	Matrix33 Reference::getRotationMatrix() {
+		if (sceneNode) {
+			return *sceneNode->localRotation;
+		}
+		Matrix33 rotation;
+		Vector3* orientation = getOrientation();
+		rotation.fromEulerXYZ(orientation->x, orientation->y, orientation->z);
+		return rotation;
+	}
+
+	Vector3 Reference::getForwardDirectionVector() {
+		Matrix33 rotation = getRotationMatrix();
+		return Vector3(rotation.m0.y, rotation.m1.y, rotation.m2.y);
+	}
+
+	Vector3 Reference::getRightDirectionVector() {
+		Matrix33 rotation = getRotationMatrix();
+		return Vector3(rotation.m0.x, rotation.m1.x, rotation.m2.x);
+	}
+
+	Vector3 Reference::getUpDirectionVector() {
+		Matrix33 rotation = getRotationMatrix();
+		return Vector3(rotation.m0.z, rotation.m1.z, rotation.m2.z);
 	}
 
 	float Reference::getFacing() {
@@ -886,6 +912,11 @@ namespace TES3 {
 		return {};
 	}
 
+	bool Reference::isTemporaryInventoryScriptReference() const {
+		const auto TES3_Inventory_temporaryReference = reinterpret_cast<Reference*>(0x7CA098);
+		return this == TES3_Inventory_temporaryReference;
+	}
+
 	Inventory * Reference::getInventory() {
 		// Only actors have equipment.
 		if (baseObject->objectType != ObjectType::Container &&
@@ -972,17 +1003,17 @@ namespace TES3 {
 				mobile->collidingReference = nullptr;
 				mobile->enterLeaveSimulationByDistance();
 				if (isCellInMemory) {
-					WorldController::get()->mobController->addMob(reference);
+					WorldController::get()->mobManager->addMob(reference);
 				}
 				else {
-					WorldController::get()->mobController->removeMob(reference);
+					WorldController::get()->mobManager->removeMob(reference);
 				}
 			}
 			else if (isCellInMemory) {
 				// Create mobile if needed.
 				if (sceneNode) {
 					if (reference->baseObject->objectType == ObjectType::Creature || reference->baseObject->objectType == ObjectType::NPC) {
-						WorldController::get()->mobController->addMob(reference);
+						WorldController::get()->mobManager->addMob(reference);
 						mobile = reference->getAttachedMobileActor();
 						if (mobile) {
 							mobile->setFootPoint(position);
@@ -1043,14 +1074,13 @@ namespace TES3 {
 
 	bool Reference::clone() {
 		// Check to make sure that the contained object is of the right type.
-		ObjectType::ObjectType baseType = baseObject->objectType;
-		if (baseType != ObjectType::Container && baseType != ObjectType::Creature && baseType != ObjectType::NPC) {
+		if (!baseObject->isActor()) {
 			return false;
 		}
 
 		// Check to see if the base object is not an instance.
-		Actor * actor = reinterpret_cast<Actor*>(baseObject);
-		if (!(actor->actorFlags & TES3::ActorFlag::IsBase)) {
+		auto actor = static_cast<Actor*>(baseObject);
+		if (!actor->isBaseActor()) {
 			return false;
 		}
 

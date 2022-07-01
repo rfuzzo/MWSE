@@ -251,6 +251,7 @@ namespace TES3 {
 
 		bool isActor() const;
 		bool isItem() const;
+		bool isWeaponOrAmmo() const;
 		const char* getSourceFilename() const;
 
 		bool getLinksResolved() const;
@@ -356,6 +357,15 @@ namespace TES3 {
 		//
 		// Custom functions.
 		//
+
+		template <typename T>
+		T* createCopy_lua(sol::optional<sol::table> params) const {
+			auto created = new T();
+			created->copy(this);
+			finishCreateCopy_lua(created, params);	// May delete created and throw std::runtime_error.
+			return created;
+		}
+		static void finishCreateCopy_lua(Object* created, sol::optional<sol::table> params);
 
 		Object * skipDeletedObjects();
 		ReferenceList* getOwningCollection();

@@ -8,7 +8,11 @@
 #include "MWSEDefs.h"
 #include "BuildDate.h"
 
+#include "NICopyTransformController.h"
+#include "NIStream.h"
+
 #include "LuaManager.h"
+#include "MGEApi.h"
 #include "TES3Game.h"
 
 TES3MACHINE* mge_virtual_machine = NULL;
@@ -53,6 +57,10 @@ const auto TES3_Game_ctor = reinterpret_cast<TES3::Game * (__thiscall*)(TES3::Ga
 TES3::Game* __fastcall OnGameStructCreated(TES3::Game* game) {
 	// Install necessary patches.
 	mwse::patch::installPatches();
+
+	// Install NetImmerse extensions.
+	auto registered = *reinterpret_cast<TES3::HashMap<int, int>**>(0x7DDE5C);
+	NI::Stream::registerLoader(NI::CopyTransformController::CopyTransformController_Name, &NI::CopyTransformController::loader);
 
 	// Call overloaded function.
 	return TES3_Game_ctor(game);
@@ -167,7 +175,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 
 			// Print them to the log.
 			log << std::dec;
-			for (auto i = 0U; i < enabledFeatures.size(); i++) {
+			for (auto i = 0U; i < enabledFeatures.size(); ++i) {
 				if (i != 0) log << ", ";
 				log << enabledFeatures[i];
 			}
@@ -219,8 +227,18 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 // MGE XE exports
 extern "C"
 {
+	__declspec(dllexport) bool MGEInterface(mge::MGEAPI*);
 	__declspec(dllexport) TES3MACHINE* MWSEGetVM();
 	__declspec(dllexport) bool MWSEAddInstruction(OPCODE op, INSTRUCTION* ins);
+}
+
+bool MGEInterface(mge::MGEAPI* api) {
+	if (api->getAPIVersion() >= 1) {
+		mge::api = static_cast<mge::MGEAPIv1*>(api);
+		mge::macros = mge::api->macroFunctions();
+		return true;
+	}
+	return false;
 }
 
 TES3MACHINE* MWSEGetVM()

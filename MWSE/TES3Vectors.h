@@ -28,6 +28,7 @@ namespace TES3 {
 		Vector2 operator-(const Vector2&) const;
 		Vector2 operator*(const Vector2&) const;
 		Vector2 operator*(const float) const;
+		Vector2 operator/(const float) const;
 
 		friend std::ostream& operator<<(std::ostream& str, const Vector2& vector);
 		std::string toString() const;
@@ -36,6 +37,8 @@ namespace TES3 {
 		Vector2 copy() const;
 
 		float length() const;
+		bool normalize();
+		Vector2 normalized() const;
 	};
 	static_assert(sizeof(Vector2) == 0x8, "TES3::Vector2 failed size validation");
 
@@ -60,6 +63,7 @@ namespace TES3 {
 		Vector3 operator-(const Vector3&) const;
 		Vector3 operator*(const Vector3&) const;
 		Vector3 operator*(const float) const;
+		Vector3 operator/(const float) const;
 
 		friend std::ostream& operator<<(std::ostream& str, const Vector3& vector);
 		std::string toString() const;
@@ -90,20 +94,21 @@ namespace TES3 {
 	static_assert(sizeof(Vector3) == 0xC, "TES3::Vector3 failed size validation");
 
 	struct Vector4 {
-		float w;
 		float x;
 		float y;
 		float z;
+		float w;
 
 		Vector4();
-		Vector4(float w, float x, float y, float z);
+		Vector4(float x, float y, float z, float w);
 
 		bool operator==(const Vector4& other) const;
 		bool operator!=(const Vector4& other) const;
 		Vector4 operator+(const Vector4& other) const;
 		Vector4 operator-(const Vector4& other) const;
 		Vector4 operator*(const Vector4& other) const;
-		Vector4 operator*(float scalar) const;
+		Vector4 operator*(const float scalar) const;
+		Vector4 operator/(const float scalar) const;
 
 		friend std::ostream& operator<<(std::ostream& str, const Matrix33& matrix);
 		std::string toString() const;
@@ -221,6 +226,7 @@ namespace TES3 {
 		Vector3 maximum;
 
 		BoundingBox();
+		BoundingBox(const Vector3& min, const Vector3& max);
 		BoundingBox(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
 
 		bool operator==(const BoundingBox& other) const;

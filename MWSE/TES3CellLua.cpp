@@ -6,24 +6,26 @@
 #include "TES3Cell.h"
 #include "TES3Region.h"
 
+#include "NIColor.h"
+
 namespace mwse::lua {
 	auto iterateReferencesFiltered(const TES3::Cell* cell, const std::unordered_set<unsigned int> desiredTypes) {
 		// Prepare the lists we care about.
-		std::queue<TES3::Reference*> referenceListQueue;
-		if (cell->actors.size() > 0) {
-			referenceListQueue.push(cell->actors.front());
+		std::queue<const TES3::ReferenceList*> referenceListQueue;
+		if (!cell->actors.empty()) {
+			referenceListQueue.push(&cell->actors);
 		}
-		if (cell->persistentRefs.size() > 0) {
-			referenceListQueue.push(cell->persistentRefs.front());
+		if (!cell->persistentRefs.empty()) {
+			referenceListQueue.push(&cell->persistentRefs);
 		}
-		if (cell->temporaryRefs.size() > 0) {
-			referenceListQueue.push(cell->temporaryRefs.front());
+		if (!cell->temporaryRefs.empty()) {
+			referenceListQueue.push(&cell->temporaryRefs);
 		}
 
 		// Get the first reference we care about.
 		TES3::Reference* reference = nullptr;
 		if (!referenceListQueue.empty()) {
-			reference = referenceListQueue.front();
+			reference = referenceListQueue.front()->front();
 			referenceListQueue.pop();
 		}
 
@@ -33,7 +35,7 @@ namespace mwse::lua {
 
 				// If we hit the end of the list, check for the next list.
 				if (reference == nullptr && !referenceListQueue.empty()) {
-					reference = referenceListQueue.front();
+					reference = referenceListQueue.front()->front();
 					referenceListQueue.pop();
 				}
 			}
@@ -48,7 +50,7 @@ namespace mwse::lua {
 			// Get the next reference. If we're at the end of the list, go to the next one
 			reference = reinterpret_cast<TES3::Reference*>(reference->nextInCollection);
 			if (reference == nullptr && !referenceListQueue.empty()) {
-				reference = referenceListQueue.front();
+				reference = referenceListQueue.front()->front();
 				referenceListQueue.pop();
 			}
 
@@ -82,26 +84,7 @@ namespace mwse::lua {
 	void bindTES3Cell() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
-
-		// Binding for TES3::PackedColor
-		{
-			// Start our usertype.
-			auto usertypeDefinition = state.new_usertype<TES3::PackedColor>("tes3packedColor");
-			usertypeDefinition["new"] = sol::no_constructor;
-
-			// Basic property binding.
-			usertypeDefinition["r"] = &TES3::PackedColor::r;
-			usertypeDefinition["g"] = &TES3::PackedColor::g;
-			usertypeDefinition["b"] = &TES3::PackedColor::b;
-			usertypeDefinition["a"] = &TES3::PackedColor::a;
-
-			// 
-			usertypeDefinition["red"] = &TES3::PackedColor::r;
-			usertypeDefinition["green"] = &TES3::PackedColor::g;
-			usertypeDefinition["blue"] = &TES3::PackedColor::b;
-			usertypeDefinition["alpha"] = &TES3::PackedColor::a;
-		}
+		auto& state = stateHandle.state;
 
 		// Binding for TES3::Cell
 		{

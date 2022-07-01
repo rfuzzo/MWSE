@@ -15,11 +15,12 @@
 #include "TES3InputController.h"
 #include "TES3ItemData.h"
 #include "TES3MobileActor.h"
-#include "TES3MobController.h"
+#include "TES3MobManager.h"
 #include "TES3Quest.h"
 #include "TES3Script.h"
 #include "TES3Sound.h"
 #include "TES3UIMenuController.h"
+#include "TES3VFXManager.h"
 #include "TES3WeatherController.h"
 #include "TES3WorldController.h"
 
@@ -27,7 +28,7 @@ namespace mwse::lua {
 	void bindTES3WorldController() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Binding for TES3::WorldControllerRenderCamera::CameraData.
 		{
@@ -155,7 +156,7 @@ namespace mwse::lua {
 			usertypeDefinition["menuController"] = sol::readonly_property(&TES3::WorldController::menuController);
 			usertypeDefinition["menuSizeSound"] = &TES3::WorldController::soundMenuSize;
 			usertypeDefinition["missSound"] = &TES3::WorldController::soundMiss;
-			usertypeDefinition["mobController"] = sol::readonly_property(&TES3::WorldController::mobController);
+			usertypeDefinition["mobManager"] = sol::readonly_property(&TES3::WorldController::mobManager);
 			usertypeDefinition["month"] = sol::readonly_property(&TES3::WorldController::gvarMonth);
 			usertypeDefinition["monthsToRespawn"] = sol::readonly_property(&TES3::WorldController::gvarMonthsToRespawn);
 			usertypeDefinition["mouseSensitivityX"] = &TES3::WorldController::horzSensitivity;
@@ -181,6 +182,7 @@ namespace mwse::lua {
 			usertypeDefinition["timescale"] = sol::readonly_property(&TES3::WorldController::gvarTimescale);
 			usertypeDefinition["transitionFader"] = sol::readonly_property(&TES3::WorldController::transitionFader);
 			usertypeDefinition["useBestAttack"] = &TES3::WorldController::useBestAttack;
+			usertypeDefinition["vfxManager"] = sol::readonly_property(&TES3::WorldController::vfxManager);
 			usertypeDefinition["viewHeight"] = &TES3::WorldController::viewHeight;
 			usertypeDefinition["viewWidth"] = &TES3::WorldController::viewWidth;
 			usertypeDefinition["weaponSwishSound"] = &TES3::WorldController::soundWeaponSwish;
@@ -200,6 +202,7 @@ namespace mwse::lua {
 			usertypeDefinition["flagEventMenuModeOff"] = &TES3::WorldController::flagEventMenuModeOff;
 			usertypeDefinition["flagEventMenuModeOn"] = &TES3::WorldController::flagEventMenuModeOn;
 			usertypeDefinition["flagMenuMode"] = &TES3::WorldController::flagMenuMode;
+			usertypeDefinition["mobController"] = sol::readonly_property(&TES3::WorldController::mobManager);
 		}
 	}
 }

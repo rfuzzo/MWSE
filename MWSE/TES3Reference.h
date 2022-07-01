@@ -89,16 +89,21 @@ namespace TES3 {
 		void setReferenceActive(bool skipDeleted = true);
 		void setReferenceInactive(bool skipDeleted = true);
 
-		Vector3 * getPosition();
+		Vector3* getPosition();
 		void setPosition(const Vector3 * newPosition);
 
-		Vector3 * getOrientation();
+		Vector3* getOrientation();
 		void setOrientation(const Vector3 * newOrientation);
 
 		float getFacing();
 		void setFacing(float facing);
 
 		float getAngleToReference(Reference* reference);
+
+		Matrix33 getRotationMatrix();
+		Vector3 getForwardDirectionVector();
+		Vector3 getRightDirectionVector();
+		Vector3 getUpDirectionVector();
 
 		TravelDestination * setTravelDestination(const Vector3 * position, const Vector3 * orientation, Cell * cell = nullptr);
 
@@ -155,6 +160,8 @@ namespace TES3 {
 		unsigned int getTargetFormId() const;
 
 		sol::optional<bool> isDead() const;
+
+		bool isTemporaryInventoryScriptReference() const;
 
 		//
 		// Lua interface functions.

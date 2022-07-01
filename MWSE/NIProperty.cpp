@@ -42,7 +42,6 @@ namespace NI {
 	//
 
 	AlphaProperty::AlphaProperty() {
-		Property::Property();
 		vTable.asProperty = (Property_vTable*)0x7465A8;
 		setFlag(false, 0);
 		setFlagBitField(6, 0xF, 1);
@@ -85,7 +84,6 @@ namespace NI {
 		ambient = value;
 		revisionID++;
 	}
-
 
 	Color MaterialProperty::getDiffuse() {
 		return diffuse;
@@ -316,10 +314,23 @@ namespace NI {
 		}
 	}
 
+	unsigned int TexturingProperty::getUsedMapCount() const {
+		unsigned int count = 0;
+		for (auto map : maps) {
+			if (map && map->texture) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	bool TexturingProperty::canAddMap() const {
+		return getUsedMapCount() < MAX_MAP_COUNT;
+	}
 
 	unsigned int TexturingProperty::getDecalCount() const {
 		auto count = 0;
-		for (auto i = (unsigned int)MapType::DECAL_FIRST; i <= (unsigned int)MapType::DECAL_LAST; i++) {
+		for (auto i = (unsigned int)MapType::DECAL_FIRST; i <= (unsigned int)MapType::DECAL_LAST; ++i) {
 			if (i >= maps.size()) {
 				break;
 			}
@@ -332,6 +343,9 @@ namespace NI {
 	}
 
 	bool TexturingProperty::canAddDecalMap() const {
+		if (!canAddMap()) {
+			return false;
+		}
 		return getDecalCount() < MAX_DECAL_COUNT;
 	}
 
@@ -405,7 +419,6 @@ namespace NI {
 	//
 
 	ZBufferProperty::ZBufferProperty() {
-		Property::Property();
 		vTable.asProperty = (Property_vTable*)0x74652C;
 		setFlag(false, 0);
 		setFlag(false, 1);

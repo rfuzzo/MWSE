@@ -24,7 +24,7 @@ namespace mwse::lua {
 	void bindTES3ActionData() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::ActionData>("tes3actionData");
@@ -41,6 +41,7 @@ namespace mwse::lua {
 		usertypeDefinition["physicalAttackType"] = &TES3::ActionData::physicalAttackType;
 		usertypeDefinition["physicalDamage"] = &TES3::ActionData::physicalDamage;
 		usertypeDefinition["stolenFrom"] = &TES3::ActionData::stolenFromFactionOrNPC;
+		usertypeDefinition["swingTimer"] = &TES3::ActionData::swingTimer;
 		usertypeDefinition["target"] = &TES3::ActionData::target;
 		usertypeDefinition["walkDestination"] = &TES3::ActionData::walkDestination;
 

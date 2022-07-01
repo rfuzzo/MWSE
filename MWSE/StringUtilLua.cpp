@@ -6,7 +6,7 @@
 namespace mwse::lua {
 	void bindStringUtil() {
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		//
 		// Extend mwse library with extra functions to replace %L in MWSE.
@@ -38,7 +38,7 @@ namespace mwse::lua {
 			try {
 				return { mwse::string::store::get(value).c_str() };
 			}
-			catch (std::exception& e) {
+			catch (std::exception&) {
 				return {};
 			}
 		};

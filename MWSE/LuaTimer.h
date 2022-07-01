@@ -1,7 +1,7 @@
 #pragma once
 
 namespace mwse::lua {
-	struct Timer;
+	class Timer;
 	class LuaManager;
 
 	enum class TimerState {
@@ -33,7 +33,7 @@ namespace mwse::lua {
 		double getClock() const;
 
 		// Create a new timer with fixed data.
-		std::shared_ptr<Timer> createTimer(double duration, sol::object callback, int iterations = 1, bool persist = true);
+		std::shared_ptr<Timer> createTimer(double duration, sol::object callback, int iterations = 1, bool persist = true, sol::table data = sol::nil);
 
 		// Move a timer from the active list to the inactive list, and mark it paused.
 		bool pauseTimer(std::shared_ptr<Timer> timer);
@@ -70,7 +70,8 @@ namespace mwse::lua {
 	};
 
 	// A logicless structure containing timer data.
-	struct Timer : public std::enable_shared_from_this<Timer> {
+	class Timer : public std::enable_shared_from_this<Timer> {
+	public:
 		// A handle back to the associated controller.
 		std::weak_ptr<TimerController> controller;
 
@@ -91,6 +92,9 @@ namespace mwse::lua {
 
 		// Callback for timer completion.
 		sol::object callback;
+
+		// Arbitrary stored lua data.
+		sol::table data;
 
 		// Is the timer persistent?
 		bool isPersistent;

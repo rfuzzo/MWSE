@@ -14,6 +14,16 @@
 #include "TES3Skill.h"
 
 namespace TES3 {
+	const auto TES3_Armor_ctor = reinterpret_cast<void(__thiscall*)(Armor*)>(0x4A0360);
+	Armor::Armor() {
+		TES3_Armor_ctor(this);
+	}
+
+	const auto TES3_Armor_dtor = reinterpret_cast<void(__thiscall*)(Armor*)>(0x4A0450);
+	Armor::~Armor() {
+		TES3_Armor_dtor(this);
+	}
+
 	const auto TES3_Armor_calculateArmorRating = reinterpret_cast<float(__thiscall *)(Armor*, MobileActor*)>(0x4A1120);
 	float Armor::calculateArmorRating(MobileActor * actor) {
 		// Allow the event to override the value.
@@ -23,7 +33,7 @@ namespace TES3 {
 			if (eventResult.valid()) {
 				sol::table eventData = eventResult;
 
-				sol::optional<int> value = eventData["armorRating"];
+				sol::optional<float> value = eventData["armorRating"];
 				if (eventData.get_or("block", false) && value) {
 					return value.value();
 				}
@@ -62,7 +72,7 @@ namespace TES3 {
 			if (eventResult.valid()) {
 				sol::table eventData = eventResult;
 
-				sol::optional<int> value = eventData["armorRating"];
+				sol::optional<float> value = eventData["armorRating"];
 				if (eventData.get_or("block", false) && value) {
 					return value.value();
 				}

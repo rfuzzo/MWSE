@@ -5,6 +5,7 @@
 
 #include "TES3Alchemy.h"
 #include "TES3Cell.h"
+#include "TES3Dialogue.h"
 #include "TES3Enchantment.h"
 #include "TES3MobilePlayer.h"
 #include "TES3Apparatus.h"
@@ -18,7 +19,7 @@ namespace mwse::lua {
 	void bindTES3MobilePlayer() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Binding for TES3::MobilePlayer
 		{

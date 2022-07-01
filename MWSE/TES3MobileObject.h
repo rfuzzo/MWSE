@@ -79,7 +79,8 @@ namespace TES3 {
 			Swimming = 0x800,
 			Jumping = 0x1000,
 			Flying = 0x2000,
-			Falling = 0x4000
+			Falling = 0x4000,
+			Unknown = 0x8000
 		};
 
 		enum FlagBit {
@@ -253,6 +254,9 @@ namespace TES3 {
 		float unknown_0x74;
 		LightData * lightMagicEffectData; // 0x78
 		unsigned char countCollisionResults; // 0x7C
+
+		MobileObject() = delete;
+		~MobileObject() = delete;
 
 		//
 		// vTable accessor functions.

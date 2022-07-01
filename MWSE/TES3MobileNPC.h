@@ -18,10 +18,14 @@ namespace TES3 {
 		char unknown_0x56A; // Undefined.
 		char unknown_0x56B; // Undefined.
 
+		MobileNPC() = delete;
+		~MobileNPC() = delete;
+
 		//
 		// vTable accessor functions.
 		//
 
+		// NOTE: The events from this function require the wrapper of a call to applyPhysicalHit. Consider before making use of.
 		float applyArmorRating(float damage, float swing, bool damageEquipment);
 
 		//

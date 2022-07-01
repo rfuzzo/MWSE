@@ -11,6 +11,9 @@ namespace TES3::UI {
 			int data0;
 			int data1;
 			Element* element;
+
+			Event() = delete;
+			~Event() = delete;
 		};
 
 		NI::Pick pick; // 0x0
@@ -42,6 +45,9 @@ namespace TES3::UI {
 		bool chargenBirthsignDone; // 0xA4
 		Reference* mouseoverWorldObject; // 0xA8
 
+		MenuInputController() = delete;
+		~MenuInputController() = delete;
+
 		Element* getTextInputElement();
 		void acquireTextInput(Element* element);
 		void displayObjectTooltip(TES3::Object* object, TES3::ItemData* itemData, int count = 0);
@@ -66,6 +72,9 @@ namespace TES3::UI {
 		int r;
 		int g;
 		int b;
+
+		FontColor() = delete;
+		~FontColor() = delete;
 	};
 	static_assert(sizeof(FontColor) == 0xC, "TES3::UI::FontColor failed size validation");
 
@@ -120,7 +129,9 @@ namespace TES3::UI {
 		negative,
 		count,
 
-		MAX_ID = count
+		COLOR_COUNT,
+
+		MAX_ID = count,
 	};
 
 	struct MenuController {
@@ -145,13 +156,16 @@ namespace TES3::UI {
 		char unknown_0x39;
 		char padding_0x3A[2];
 		UI_ID unknown_0x3C;
-		FontColor fontColors[FontColorId::MAX_ID + 1];
+		FontColor fontColors[FontColorId::COLOR_COUNT];
 		void* unknown_0x28C;
 		void* unknown_0x290;
 		int unknown_0x294;
 		int unknown_0x298;
 		float unknown_0x29C;
 		char unknown_0x2A0;
+
+		MenuController() = delete;
+		~MenuController() = delete;
 
 		//
 		// Other related this-call functions.

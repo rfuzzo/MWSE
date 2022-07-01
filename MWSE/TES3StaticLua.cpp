@@ -7,15 +7,14 @@
 #include "LuaObject.h"
 
 namespace mwse::lua {
-	auto createStatic(sol::table params)
-	{
+	auto createStatic(sol::table params) {
 		return makeObjectCreator(TES3::ObjectType::Static)->create(params, false);
 	}
 
 	void bindTES3Static() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::Static>("tes3static");
@@ -33,5 +32,6 @@ namespace mwse::lua {
 
 		// utility function bindings
 		usertypeDefinition["create"] = &createStatic;
+		usertypeDefinition["createCopy"] = &TES3::Static::createCopy_lua<TES3::Static>;
 	}
 }

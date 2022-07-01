@@ -18,8 +18,9 @@ namespace TES3 {
 			Flies = 0x20,
 			Walks = 0x40,
 			Essential = 0x80,
-			SkeletonBlood = 0x400,
-			MetalBlood = 0x800,
+
+			// Blood is stored 10 bits in, and stored in 3 bits for 8 total options.
+			BloodMask = 0x1C00,
 
 			DefaultFlags = Walks | IsBase,
 		};
@@ -33,8 +34,9 @@ namespace TES3 {
 			FliesBit = 5,
 			WalksBit = 6,
 			EssentialBit = 7,
-			SkeletonBloodBit = 10,
-			MetalBloodBit = 11,
+
+			BloodBitsFirst = 10,
+			BloodBitsLast = 12,
 		};
 	}
 
@@ -56,7 +58,6 @@ namespace TES3 {
 	}
 
 	struct CreatureBase : Actor {
-
 		//
 		// Custom functions.
 		//
@@ -96,6 +97,9 @@ namespace TES3 {
 		void * aiPackageList; // 0xE0
 		AIConfig * aiConfig; // 0xE4
 
+		Creature();
+		~Creature();
+
 		//
 		// Custom functions.
 		//
@@ -119,6 +123,9 @@ namespace TES3 {
 		int field_80;
 		NI::Pointer<NI::Node> sgNode_84;
 		AIPackageConfig * aiPackageConfig; // 0x88
+
+		CreatureInstance() = delete;
+		~CreatureInstance() = delete;
 
 		//
 		// Base creature access functions.

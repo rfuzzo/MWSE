@@ -9,7 +9,7 @@ namespace mwse::lua {
 	void bindNIExtraData() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Binding for NI::ExtraData.
 		{
@@ -26,7 +26,7 @@ namespace mwse::lua {
 		{
 			// Start our usertype.
 			auto usertypeDefinition = state.new_usertype<NI::StringExtraData>("niStringExtraData");
-			usertypeDefinition["new"] = sol::no_constructor;
+			usertypeDefinition["new"] = sol::constructors<NI::StringExtraData(const char*)>();
 
 			// Define inheritance structures. These must be defined in order from top to bottom. The complete chain must be defined.
 			usertypeDefinition[sol::base_classes] = sol::bases<NI::ExtraData, NI::Object>();

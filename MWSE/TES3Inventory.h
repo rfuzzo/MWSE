@@ -20,6 +20,9 @@ namespace TES3 {
 		Item* item; // 0x8
 		ItemData* itemData; // 0xC
 
+		QuickKey() = delete;
+		~QuickKey() = delete;
+
 		std::tuple<TES3::BaseObject*, TES3::ItemData*> getMagic();
 		void setMagic(TES3::BaseObject* object, sol::optional<TES3::ItemData*> itemData);
 
@@ -37,12 +40,20 @@ namespace TES3 {
 		int count; // 0x0
 		Object * object; // 0x4
 		NI::TArray<ItemData*> * variables; // 0x8
+
+		ItemStack() = delete;
+		~ItemStack() = delete;
 	};
 	static_assert(sizeof(ItemStack) == 0xC, "TES3::ItemStack failed size validation");
 
 	struct EquipmentStack {
 		Object * object; // 0x0
 		ItemData * itemData; // 0x4
+
+		static void* operator new(size_t size);
+		static void operator delete(void* block);
+
+		EquipmentStack();
 
 		//
 		// Other related helper functions.
@@ -61,7 +72,7 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
-		ItemStack* findItemStack(Object* item);
+		ItemStack* findItemStack(Object* item, ItemData* itemData = nullptr);
 
 		int addItem(MobileActor * mobile, Item * item, int count, bool overwriteCount, ItemData ** itemDataRef);
 		int addItemWithoutData(MobileActor * mobile, Item * item, int count, bool something);
@@ -89,6 +100,7 @@ namespace TES3 {
 		int addItem_lua(sol::table params);
 		void removeItem_lua(sol::table params);
 		bool contains_lua(sol::object itemOrItemId, sol::optional<TES3::ItemData*> itemData);
+		ItemStack* findItemStack_lua(sol::object itemOrItemId, sol::optional<TES3::ItemData*> itemData);
 		void resolveLeveledLists_lua(sol::optional<MobileActor*> mobile);
 
 		//

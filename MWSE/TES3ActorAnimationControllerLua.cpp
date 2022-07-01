@@ -10,7 +10,7 @@ namespace mwse::lua {
 	void bindTES3ActorAnimationController() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Start our usertype.
 		auto usertypeDefinition = state.new_usertype<TES3::ActorAnimationController>("tes3actorAnimationController");
@@ -42,5 +42,8 @@ namespace mwse::lua {
 
 		// Custom properties.
 		usertypeDefinition["weaponSpeed"] = sol::property(&TES3::ActorAnimationController::getWeaponAnimSpeed, &TES3::ActorAnimationController::setWeaponAnimSpeed);
+
+		// Basic function binding.
+		usertypeDefinition["calculateAttackSwing"] = &TES3::ActorAnimationController::calculateAttackSwing;
 	}
 }

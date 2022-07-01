@@ -33,7 +33,7 @@ namespace mwse::lua {
 	void bindTES3DataHandler() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Binding for TES3::NonDynamicData
 		{
@@ -49,6 +49,7 @@ namespace mwse::lua {
 			usertypeDefinition["dialogues"] = sol::readonly_property(&TES3::NonDynamicData::dialogues);
 			usertypeDefinition["factions"] = sol::readonly_property(&TES3::NonDynamicData::factions);
 			usertypeDefinition["globals"] = sol::readonly_property(&TES3::NonDynamicData::globals);
+			usertypeDefinition["isSavingOrLoading"] = sol::readonly_property(&TES3::NonDynamicData::isSavingOrLoading);
 			usertypeDefinition["lastLoadedFile"] = sol::readonly_property(&TES3::NonDynamicData::unknown_0x08);
 			usertypeDefinition["mapTexture"] = &TES3::NonDynamicData::mapTexture;
 			usertypeDefinition["objects"] = sol::readonly_property(&TES3::NonDynamicData::list);

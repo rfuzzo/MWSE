@@ -40,6 +40,9 @@ namespace TES3 {
 		char * description; // 0x8C
 		unsigned int descriptionOffset; // 0x90
 
+		Class() = delete;
+		~Class() = delete;
+
 		//
 		// Virtual table overrides.
 		//
@@ -57,6 +60,8 @@ namespace TES3 {
 		sol::optional<std::string> getOrLoadDescription();
 		void setDescription(const char*);
 		void freeDescription();
+
+		std::string getLevelUpImage() const;
 
 		std::reference_wrapper<int[2]> getAttributes();
 		std::reference_wrapper<int[10]> getSkills();

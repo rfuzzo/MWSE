@@ -15,8 +15,8 @@ namespace mwse::lua::event {
 
 	sol::table InfoGetTextEvent::createEventTable() {
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
-		sol::table eventData = state.create_table();
+		auto& state = stateHandle.state;
+		auto eventData = state.create_table();
 
 		eventData["info"] = m_DialogueInfo;
 		eventData["loadOriginalText"] = getOriginalText;
@@ -24,11 +24,18 @@ namespace mwse::lua::event {
 		return eventData;
 	}
 
-	std::string InfoGetTextEvent::getOriginalText(sol::table self) {
+	const char* InfoGetTextEvent::getOriginalText(sol::table self) {
+		// Did we already find the text?
+		sol::optional<const char*> cacheHit = self["_loadedOriginalText"];
+		if (cacheHit) {
+			return cacheHit.value();
+		}
+
 		setEventEnabled(false);
-		std::string text = self.get<TES3::DialogueInfo*>("info")->getText();
+		auto text = self.get<TES3::DialogueInfo*>("info")->getText();
+		self["_loadedOriginalText"] = text;
 		setEventEnabled(true);
-		return std::move(text);
+		return text;
 	}
 
 	bool InfoGetTextEvent::m_EventEnabled = false;

@@ -7,8 +7,10 @@
 #include "TES3Actor.h"
 #include "TES3BodyPartManager.h"
 #include "TES3Cell.h"
+#include "TES3Class.h"
 #include "TES3CutscenePlayer.h"
 #include "TES3DataHandler.h"
+#include "TES3Dialogue.h"
 #include "TES3Game.h"
 #include "TES3GameFile.h"
 #include "TES3GameSetting.h"
@@ -46,7 +48,7 @@ namespace mwse::patch {
 	//
 
 	void PatchScriptOpEnable() {
-		TES3::ScriptVariables* scriptVars = mwscript::getLocalScriptVariables();
+		auto scriptVars = mwscript::getLocalScriptVariables();
 		if (scriptVars) {
 			scriptVars->unknown_0xC &= 0xFE;
 		}
@@ -59,7 +61,7 @@ namespace mwse::patch {
 	static bool PatchScriptOpDisable_ForceCollisionUpdate = false;
 
 	void PatchScriptOpDisable() {
-		TES3::ScriptVariables* scriptVars = mwscript::getLocalScriptVariables();
+		auto scriptVars = mwscript::getLocalScriptVariables();
 		if (scriptVars) {
 			scriptVars->unknown_0xC |= 0x1;
 		}
@@ -89,10 +91,10 @@ namespace mwse::patch {
 	//
 
 	void PatchUnifyAthleticsTraining() {
-		TES3::WorldController* worldController = TES3::WorldController::get();
-		TES3::MobilePlayer* mobilePlayer = worldController->getMobilePlayer();
+		auto worldController = TES3::WorldController::get();
+		auto mobilePlayer = worldController->getMobilePlayer();
 
-		TES3::Skill* athletics = &TES3::DataHandler::get()->nonDynamicData->skills[TES3::SkillID::Athletics];
+		auto athletics = &TES3::DataHandler::get()->nonDynamicData->skills[TES3::SkillID::Athletics];
 
 		// If we're running, use the first progress.
 		if (mobilePlayer->movementFlags & TES3::ActorMovement::Running) {
@@ -110,7 +112,7 @@ namespace mwse::patch {
 	//
 
 	void PatchUnifySneakTraining() {
-		TES3::NonDynamicData* nonDynamicData = TES3::DataHandler::get()->nonDynamicData;
+		auto nonDynamicData = TES3::DataHandler::get()->nonDynamicData;
 
 		// Decrement sneak use delay counter.
 		*reinterpret_cast<float*>(0x7D16E0) = *reinterpret_cast<float*>(0x7D16E0) - nonDynamicData->GMSTs[TES3::GMST::fSneakUseDelay]->value.asFloat;
@@ -333,7 +335,7 @@ namespace mwse::patch {
 	//
 
 	TES3::Reference::ReferenceData* __fastcall PatchFixupActorSelfReference(TES3::Reference* self) {
-		bool isClone = self->baseObject->isActor() && static_cast<TES3::Actor*>(self->baseObject)->isClone();
+		auto isClone = self->baseObject->isActor() && static_cast<TES3::Actor*>(self->baseObject)->isClone();
 
 		if (isClone && self->baseObject->referenceToThis == nullptr) {
 			self->baseObject->referenceToThis = self;
@@ -425,14 +427,22 @@ namespace mwse::patch {
 	}
 
 	//
-	// Patch: Fix empty menu positions from saving to the ini.
+	// Patch: Fix crash when saving menu position if the derived key name is too long.
 	//
 
-	BOOL __stdcall PatchNonEmptyWritePrivateProfileStringA(LPCSTR lpAppName, LPCSTR lpKeyName, LPCSTR lpString, LPCSTR lpFileName) {
-		if (lpString == nullptr || strnlen_s(lpString, 1) == 0) {
-			return FALSE;
+	__declspec(naked) void PatchSaveMenuPositionRightPad() {
+		__asm {
+			// Clamp eax <= 32
+			cmp eax, 32
+			jbe clamped
+			mov eax, 32
+		clamped:
+			// Null terminate padding so that key length+padding length is at least 32
+			lea ecx, [esp+4+0x64]
+			sub ecx, eax
+			mov byte ptr [ecx], 0
+			ret
 		}
-		return WritePrivateProfileStringA(lpAppName, lpKeyName, lpString, lpFileName);
 	}
 
 	//
@@ -539,6 +549,58 @@ namespace mwse::patch {
 				return;
 			}
 		}
+	}
+
+	//
+	// Patch: Fix crash when releasing a clone of a light with no reference.
+	//
+	// This is mostly useful for creating VFXs using a light object as a base.
+	//
+
+	TES3::Attachment* __fastcall PatchReleaseLightEntityForReference(const TES3::Reference* reference) {
+		if (reference == nullptr) {
+			return nullptr;
+		}
+
+		return reference->getAttachment(TES3::AttachmentType::Light);
+	}
+
+	//
+	// Patch: Cache values between dialogue filters.
+	// 
+	// Current additional caching:
+	//  * speaker's dialogue
+	//
+
+	int __fastcall PatchDialogueFilterCacheGetDisposition(TES3::MobileNPC* npc) {
+		if (TES3::Dialogue::cachedActorDisposition) {
+			return TES3::Dialogue::cachedActorDisposition.value();
+		}
+
+		// Always allow the default behavior if something we hit a weird context.
+		return npc->getDisposition();
+	}
+
+	//
+	// Patch: Support custom class images.
+	//
+
+	__declspec(naked) void PatchAddCustomClassImageSupportSetup() {
+		__asm {
+			mov ecx, esi			// Size: 0x2. The Class*.
+			mov edx, ebx			// Size: 0x2. The parent element pointer.
+			nop						// Size: 0x5. Replaced with a call generation. Can't do so here, because offsets aren't accurate.
+			nop						// ^
+			nop						// ^
+			nop						// ^
+			nop						// ^
+		}
+	}
+	constexpr auto PatchAddCustomClassImageSupport_size = 0x9;
+
+	TES3::UI::Element* __fastcall PatchAddCustomClassImageSupport(const TES3::Class* charClass, TES3::UI::Element* parent) {
+		auto result = charClass->getLevelUpImage();
+		return parent->createImage(TES3::UI::ID_NULL, result.c_str(), false);
 	}
 
 	//
@@ -758,8 +820,9 @@ namespace mwse::patch {
 		// Patch: Correctly initialize MobileProjectile tag/objectType
 		genCallEnforced(0x572444, 0x4EE8A0, reinterpret_cast<DWORD>(PatchInitializeMobileProjectileType));
 
-		// Patch: Prevent the game from saving empty menu names to the INI file.
-		genCallUnprotected(0x5972AA, reinterpret_cast<DWORD>(PatchNonEmptyWritePrivateProfileStringA), 0x6);
+		// Patch: Fix crash when saving menu position if the derived key name is too long.
+		genCallUnprotected(0x597061, reinterpret_cast<DWORD>(PatchSaveMenuPositionRightPad), 0x6);
+		genNOPUnprotected(0x59706C, 0x59706F - 0x59706C);
 
 		// Patch: Fix book enchantment copying.
 		genNOPUnprotected(0x4A2618, 0x4A26D8 - 0x4A2618);
@@ -785,8 +848,36 @@ namespace mwse::patch {
 		writePatchCodeUnprotected(0x4B2FD7, (BYTE*)&PatchSwapJournalUpdateCheckForSpeakerOrder, PatchSwapJournalUpdateCheckForSpeakerOrder_size);
 		genCallUnprotected(0x4B2FD7 + 0xD, 0x4B1B80);
 
-		// Patch: Don't save no valid visual effects.
+		// Patch: Don't save VFX manager if there are no valid visual effects.
 		genCallEnforced(0x4BD149, 0x469CC0, reinterpret_cast<DWORD>(PatchSaveVisualEffects));
+
+		// Patch: Fix crash when releasing a clone of a light with no reference.
+		genCallEnforced(0x4D260C, 0x4E5170, reinterpret_cast<DWORD>(PatchReleaseLightEntityForReference));
+
+		// Patch: Cache values between dialogue filters.
+		auto Dialogue_getFilteredInfo = &TES3::Dialogue::getFilteredInfo;
+		genCallEnforced(0x40B8EE, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x4B2F51, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5290B2, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x52931A, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF01C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF17C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF25C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF33C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF43C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF51C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5BF62C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5C05F7, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5C0A48, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x5C0A67, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallEnforced(0x6004E9, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		genCallUnprotected(0x4B1646, reinterpret_cast<DWORD>(PatchDialogueFilterCacheGetDisposition), 0x6);
+		genCallUnprotected(0x4B167B, reinterpret_cast<DWORD>(PatchDialogueFilterCacheGetDisposition), 0x6);
+
+		// Patch: Support custom class images.
+		genNOPUnprotected(0x5AF047, 0x5AF583 - 0x5AF047);
+		writePatchCodeUnprotected(0x5AF047, (BYTE*)&PatchAddCustomClassImageSupportSetup, PatchAddCustomClassImageSupport_size);
+		genCallUnprotected(0x5AF047 + 0x4, reinterpret_cast<DWORD>(PatchAddCustomClassImageSupport), 0x9);
 	}
 
 	void installPostLuaPatches() {
@@ -961,7 +1052,7 @@ namespace mwse::patch {
 		}
 
 		// Open the file.
-		HANDLE hFile = CreateFile("MWSE_MiniDump.dmp", GENERIC_READ | GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		auto hFile = CreateFile("MWSE_MiniDump.dmp", GENERIC_READ | GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 		if ((hFile != NULL) && (hFile != INVALID_HANDLE_VALUE)) {
 			// Create the minidump.
@@ -976,13 +1067,13 @@ namespace mwse::patch {
 			mci.CallbackRoutine = (MINIDUMP_CALLBACK_ROUTINE)miniDumpCallback;
 			mci.CallbackParam = 0;
 
-			MINIDUMP_TYPE mdt = (MINIDUMP_TYPE)(MiniDumpWithDataSegs |
+			auto mdt = (MINIDUMP_TYPE)(MiniDumpWithDataSegs |
 				MiniDumpWithHandleData |
 				MiniDumpWithFullMemoryInfo |
 				MiniDumpWithThreadInfo |
 				MiniDumpWithUnloadedModules);
 
-			BOOL rv = MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, mdt, (pep != 0) ? &mdei : 0, 0, &mci);
+			auto rv = MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, mdt, (pep != 0) ? &mdei : 0, 0, &mci);
 
 			if (!rv) {
 				log::getLog() << "MiniDump creation failed. Error: 0x" << std::hex << GetLastError() << std::endl;

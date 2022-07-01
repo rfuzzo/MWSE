@@ -5,12 +5,13 @@
 
 #include "TES3Container.h"
 #include "TES3Script.h"
+#include "TES3WorldController.h"
 
 namespace mwse::lua {
 	void bindTES3Container() {
 		// Get our lua state.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 
 		// Binding for TES3::Container.
 		{
@@ -24,6 +25,9 @@ namespace mwse::lua {
 
 			// Basic property binding.
 			usertypeDefinition["capacity"] = &TES3::Container::capacity;
+
+			// Basic function binding.
+			usertypeDefinition["createCopy"] = &TES3::Container::createCopy_lua<TES3::Container>;
 
 			// Friendly access to actor flags.
 			usertypeDefinition["organic"] = sol::property(&TES3::Container::getIsOrganic, &TES3::Container::setIsOrganic);

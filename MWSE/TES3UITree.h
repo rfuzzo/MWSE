@@ -3,40 +3,46 @@
 #include "TES3Defines.h"
 #include "TES3UIDefines.h"
 
-namespace TES3 {
-	namespace UI {
-		struct TreeItem {
-			short key;
-			PropertyValue value;
-			PropertyType valueType;
+namespace TES3::UI {
+	struct TreeItem {
+		Property key;
+		PropertyValue value;
+		PropertyType valueType;
 
-			//
-			// Custom functions.
-			//
+		TreeItem() = delete;
 
-			const char* getName();
-			PropertyType getType() const;
+		//
+		// Custom functions.
+		//
 
-			sol::object getValue_lua(sol::this_state ts) const;
+		const char* getName();
+		PropertyType getType() const;
 
-		};
-		static_assert(sizeof(TreeItem) == 0xC, "TES3::UI::TreeNode failed size validation");
+		sol::object getValue_lua(sol::this_state ts) const;
 
-		struct TreeNode {
-			TreeNode * branchLess;
-			TreeNode * nextLeafOrRoot;
-			TreeNode * branchGreaterThanOrEqual;
-			TreeItem item;
-			int unknown_18;
-		};
-		static_assert(sizeof(TreeNode) == 0x1C, "TES3::UI::TreeNode failed size validation");
+	};
+	static_assert(sizeof(TreeItem) == 0xC, "TES3::UI::TreeNode failed size validation");
 
-		struct Tree {
-			char tag;
-			TreeNode * root;
-			char unknown_8;
-			size_t itemCount;
-		};
-		static_assert(sizeof(Tree) == 0x10, "TES3::UI::Tree failed size validation");
-	}
+	struct TreeNode {
+		TreeNode * branchLess;
+		TreeNode * nextLeafOrRoot;
+		TreeNode * branchGreaterThanOrEqual;
+		TreeItem item;
+		int unknown_18;
+
+		TreeNode() = delete;
+		~TreeNode() = delete;
+	};
+	static_assert(sizeof(TreeNode) == 0x1C, "TES3::UI::TreeNode failed size validation");
+
+	struct Tree {
+		char tag;
+		TreeNode * root;
+		char unknown_8;
+		size_t itemCount;
+
+		Tree() = delete;
+		~Tree() = delete;
+	};
+	static_assert(sizeof(Tree) == 0x10, "TES3::UI::Tree failed size validation");
 }

@@ -134,7 +134,7 @@ namespace TES3 {
 		IteratedList<MobileActor*> listTargetActors; // 0x80
 		IteratedList<MobileActor*> listFriendlyActors; // 0x94
 		float scanTimer; // 0xA8
-		int scanInterval; // 0xAC
+		float scanInterval; // 0xAC
 		float greetTimer; // 0xB0
 		Vector3 unknown_0xB4;
 		char unknown_0xC0;
@@ -206,6 +206,9 @@ namespace TES3 {
 		int unknown_0x3A0;
 		Vector3 unknown_0x3A4;
 
+		MobileActor() = delete;
+		~MobileActor() = delete;
+
 		//
 		// vTable accessor functions.
 		//
@@ -223,7 +226,9 @@ namespace TES3 {
 		float getArmorRating_lua() const;
 		void applyPhysicalHit(MobileActor* attacker, MobileActor* defender, float damage, float swing, MobileProjectile* projectile = nullptr, bool alwaysPlayHitVoice = false);
 
-		void setCurrentSpell(const Spell* spell);
+		void setCurrentMagicFromSpell(Spell* spell);
+		void setCurrentMagicFromSourceCombo(MagicSourceCombo sourceCombo);
+		void setCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack);
 
 		//
 		// Other related this-call functions.
@@ -252,11 +257,24 @@ namespace TES3 {
 		void applyJumpFatigueCost() const;
 		float applyDamage_lua(sol::table params);
 		float calcEffectiveDamage_lua(sol::table params);
-		bool hasFreeAction() const;
+		bool doJump(Vector3 velocity, bool applyFatigueCost = true, bool isDefaultJump = false);
+		bool doJump_lua(sol::optional<sol::table> params);
+		bool isNotKnockedDownOrOut() const;
+		bool isKnockedDown() const;
+		bool isKnockedOut() const;
+		bool isReadyingWeapon() const;
+		bool isParalyzed() const;
+		bool isAttackingOrCasting() const;
+		bool canAct() const;
+		bool canJump(bool allowMidairJumping = false) const;
+		bool canJump_lua() const;
+		bool canJumpMidair_lua() const;
 		float calculateRunSpeed();
 		float calculateSwimSpeed();
 		float calculateSwimRunSpeed();
 		float calculateFlySpeed();
+		Vector3 calculateJumpVelocity(Vector2 direction);
+		Vector3 calculateJumpVelocity_lua(sol::optional<sol::table> params);
 
 		void updateDerivedStatistics(Statistic * baseStatistic);
 		void updateDerivedStatistics_lua(sol::optional<Statistic*> baseStatistic);
@@ -270,11 +288,12 @@ namespace TES3 {
 		bool isAffectedByEnchantment(Enchantment * enchantment) const;
 		bool isAffectedBySpell(Spell * spell) const;
 
+		bool isDiseased() const;
+
 		SpellList* getSpellList();
 		IteratedList<Spell*> * getCombatSpellList();
 
 		bool isActive();
-		void setCurrentMagicSourceFiltered(Object * magic);
 		void forceSpellCast(MobileActor * target);
 
 		void dropItem(Object * item, ItemData * itemData = nullptr, int count = 1, bool ignoreItemData = true);
@@ -301,6 +320,10 @@ namespace TES3 {
 		bool equipItem(Object* item, ItemData * itemData = nullptr, bool addItem = false, bool selectBestCondition = false, bool selectWorstCondition = false);
 		bool equip_lua(sol::object arg);
 		bool unequip_lua(sol::table args);
+		bool equipMagic(Object* source, ItemData* itemData = nullptr, bool equipItem = false, bool updateGUI = true);
+		bool equipMagic_lua(sol::table params);
+		void unequipMagic(bool unequipItem = false, bool updateGUI = true);
+		void unequipMagic_lua(sol::optional<sol::table> params);
 
 		bool getWeaponReady() const;
 		void setWeaponReady(bool value);

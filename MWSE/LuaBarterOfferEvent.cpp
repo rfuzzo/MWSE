@@ -23,7 +23,7 @@ namespace mwse::lua::event {
 
 	sol::table getBuySellTable(const char* baseId) {
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
+		auto& state = stateHandle.state;
 		sol::table results = state.create_table();
 
 		std::string scrollpaneId = baseId;
@@ -32,12 +32,12 @@ namespace mwse::lua::event {
 		std::string thingId = baseId;
 		thingId += "_Thing";
 
-		auto menu = TES3::UI::findMenu(TES3::UI::registerID(baseId));
+		auto menu = TES3::UI::findMenu(baseId);
 		if (menu) {
 			auto thingyProperty = TES3::UI::registerProperty(thingId.c_str());
-			auto contents = static_cast<TES3::UI::WidgetScrollPane*>(menu->findChild(TES3::UI::registerID(scrollpaneId.c_str())))->getContentPane();
-			for (auto columnItt = contents->vectorChildren.begin; columnItt != contents->vectorChildren.end; columnItt++) {
-				for (auto tileItt = (*columnItt)->vectorChildren.begin; tileItt != (*columnItt)->vectorChildren.end; tileItt++) {
+			auto contents = static_cast<TES3::UI::WidgetScrollPane*>(menu->findChild(scrollpaneId.c_str()))->getContentPane();
+			for (auto columnItt = contents->vectorChildren.begin; columnItt != contents->vectorChildren.end; ++columnItt) {
+				for (auto tileItt = (*columnItt)->vectorChildren.begin; tileItt != (*columnItt)->vectorChildren.end; ++tileItt) {
 					auto tile = reinterpret_cast<TES3::UI::InventoryTile*>((*tileItt)->getProperty(TES3::UI::PropertyType::Pointer, thingyProperty).ptrValue);
 					if (!tile) {
 						continue;
@@ -55,8 +55,8 @@ namespace mwse::lua::event {
 
 	sol::table BarterOfferEvent::createEventTable() {
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-		sol::state& state = stateHandle.state;
-		sol::table eventData = state.create_table();
+		auto& state = stateHandle.state;
+		auto eventData = state.create_table();
 
 		eventData["mobile"] = m_MobileActor;
 		eventData["success"] = m_Success;

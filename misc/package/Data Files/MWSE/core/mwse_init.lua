@@ -41,7 +41,7 @@ function require(name)
 
 	local msg = {}
 	local loader, param
-	for _, searcher in ipairs(package.searchers) do
+	for _, searcher in ipairs(package.searchers) do ---@diagnostic disable-line
 		loader, param = searcher(name)
 		if type(loader) == "function" then break end
 		if type(loader) == "string" then
@@ -53,6 +53,7 @@ function require(name)
 
 	if loader == nil then
 		error("module '" .. name .. "' not found: " .. table.concat(msg), 2)
+		return
 	end
 
 	local res = loader(name, param)
@@ -85,7 +86,7 @@ function include(name)
 
 	local msg = {}
 	local loader, param
-	for _, searcher in ipairs(package.searchers) do
+	for _, searcher in ipairs(package.searchers) do ---@diagnostic disable-line
 		loader, param = searcher(name)
 		if type(loader) == "function" then break end
 		if type(loader) == "string" then
@@ -154,7 +155,8 @@ end
 -- Global includes
 -------------------------------------------------
 
-_G.tes3 = require("tes3.init")
+_G.tes3 = require("tes3")
+_G.mge = require("mge")
 _G.event = require("event")
 _G.json = require("dkjson")
 
@@ -235,11 +237,7 @@ end
 -------------------------------------------------
 
 -- Seed random number generator.
--- There are reports that the first few results aren't random enough. Try and likely fail to make people happy.
 math.randomseed(os.time())
-for i = 1, 10 do
-	math.random()
-end
 
 function math.lerp(v0, v1, t)
 	return (1 - t) * v0 + t * v1;
@@ -431,6 +429,33 @@ function table.swap(t, key, value)
 	return old
 end
 
+function table.get(t, key, default)
+	local value = t[key]
+	if (value == nil) then
+		return default
+	end
+	return value
+end
+
+function table.getset(t, key, default)
+	local value = t[key]
+	if (value ~= nil) then
+		return value
+	end
+
+	t[key] = default
+	return default
+end
+
+function table.wrapindex(t, index)
+	local size = #t
+	local newIndex = index % size
+	if (newIndex == 0) then
+		newIndex = size
+	end
+	return newIndex
+end
+
 
 -------------------------------------------------
 -- Extend base table: Add binary search/insert
@@ -577,6 +602,10 @@ getmetatable("").trim = string.trim
 
 local function getNthLine(fileName, n)
 	local f = io.open(fileName, "r")
+	if (f == nil) then
+		return
+	end
+
 	local i = 1
 	for line in f:lines() do
 		if i == n then
@@ -589,6 +618,33 @@ local function getNthLine(fileName, n)
 end
 
 debug.logCache = {}
+
+function debug.clearLogCacheForFile(file)
+	if (file == nil) then
+		local info = debug.getinfo(2, "Sl")
+
+		if not info.source:find("^@") then
+			error("'debug.log' called from invalid source")
+		end
+
+		-- strip the '@' tag
+		file = info.source:sub(2):lower():gsub("data files\\mwse\\", "")
+	else
+		file = file:lower():lower():gsub("data files\\mwse\\", "")
+	end
+
+	local toRemove = {}
+	for entry in pairs(debug.logCache) do
+		local cachedFile, cachedLine = entry:match("^(.+):(%d+)$")
+		if (cachedFile == file) then
+			table.insert(toRemove, entry)
+		end
+	end
+
+	for _, remove in ipairs(toRemove) do
+		debug.logCache[remove] = nil
+	end
+end
 
 function debug.log(value)
 	local info = debug.getinfo(2, "Sl")
@@ -660,21 +716,21 @@ end
 
 -- Visit all files in a directory tree (recursively).
 function lfs.walkdir(root)
-    local function iter(dir)
-        dir = dir or root
-        for name in lfs.dir(dir) do
-            if not name:find("%.$") then
-                local path = dir .. name
-                local mode = lfs.attributes(path, "mode")
-                if mode == "file" then
-                    coroutine.yield(path, dir, name)
-                elseif mode == "directory" then
-                    iter(path .. "\\")
-                end
-            end
-        end
-    end
-    return coroutine.wrap(iter)
+	local function iter(dir)
+		dir = dir or root
+		for name in lfs.dir(dir) do
+			if not name:find("%.$") then
+				local path = dir .. name
+				local mode = lfs.attributes(path, "mode")
+				if mode == "file" then
+					coroutine.yield(path, dir, name)
+				elseif mode == "directory" then
+					iter(path .. "\\")
+				end
+			end
+		end
+	end
+	return coroutine.wrap(iter)
 end
 
 
@@ -720,16 +776,6 @@ function json.encode(object, state)
 	end
 
 	return originalEncode(object, state)
-end
-
-
--------------------------------------------------
--- Extend our base API: mge
--------------------------------------------------
-
-function mge.getUIScale()
-	-- MGE XE uses uniform scaling, so we only need check the width.
-	return mge.getScreenWidth() / tes3.worldController.viewWidth
 end
 
 
@@ -823,95 +869,6 @@ tes3.installDirectory = lfs.currentdir()
 local safeObjectHandle = require("mwse_safeObjectHandle")
 function tes3.makeSafeObjectHandle(object)
 	return safeObjectHandle.new(object)
-end
-
-
--------------------------------------------------
--- Extend our base API: tes3ui
--------------------------------------------------
-
-function tes3ui.log(str, ...)
-	tes3ui.logToConsole(tostring(str):format(...), false)
-end
-
-
--------------------------------------------------
--- Usertype Extensions: tes3uiElement
--------------------------------------------------
-
--- Create a button composed of images that has a mouse over and mouse pressed state.
-function tes3uiElement:createImageButton(params)
-	-- Get the button block params.
-	local blockParams = params.blockParams or {
-		id = params.id,
-	}
-	local idleParams = params.idleParams or {
-		id = params.idleId,
-		path = params.idle,
-	}
-	local overParams = params.overParams or {
-		id = params.overId,
-		path = params.over,
-	}
-	local pressedParams = params.pressedParams or {
-		id = params.pressedId,
-		path = params.pressed,
-	}
-
-	-- Create our parent block.
-	local buttonBlock = self:createBlock(blockParams)
-	buttonBlock.autoWidth = true
-	buttonBlock.autoHeight = true
-
-	-- Create our child buttons using the params provided.
-	local buttonIdle = buttonBlock:createImage(idleParams)
-	local buttonOver = buttonBlock:createImage(overParams)
-	local buttonPressed = buttonBlock:createImage(pressedParams)
-
-	-- Prevent any of the above-created buttons from consuming the mouse events.
-	buttonIdle.consumeMouseEvents = false
-	buttonOver.consumeMouseEvents = false
-	buttonPressed.consumeMouseEvents = false
-
-	-- Hide the over/pressed buttons for now.
-	buttonOver.visible = false
-	buttonPressed.visible = false
-
-	-- Create the functions to hide/show buttons based on mouse state.
-	buttonBlock:register("mouseOver", function()
-		buttonIdle.visible = false
-		buttonOver.visible = true
-		buttonPressed.visible = false
-	end)
-	buttonBlock:register("mouseLeave", function()
-		buttonIdle.visible = true
-		buttonOver.visible = false
-		buttonPressed.visible = false
-	end)
-	buttonBlock:register("mouseDown", function()
-		buttonIdle.visible = false
-		buttonOver.visible = false
-		buttonPressed.visible = true
-	end)
-	buttonBlock:register("mouseRelease", function()
-		buttonIdle.visible = false
-		buttonOver.visible = true
-		buttonPressed.visible = false
-	end)
-
-	-- Return the created block.
-	return buttonBlock
-end
-
-function tes3uiElement:sortChildren(fn)
-	-- Sort our children list.
-	local children = self.children
-	table.sort(children, fn)
-
-	-- Rearrange children.
-	for i, child in ipairs(children) do
-		self:reorderChildren(i, child, 1)
-	end
 end
 
 
