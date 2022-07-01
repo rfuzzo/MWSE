@@ -1,55 +1,27 @@
-local dialogueMenuUIID = nil
-local goodbyeButtonUIID = nil
-local barterButtonUIID = nil
-local shareButtonUIID = nil
-local enchantingButtonUIID = nil
-local persuasionButtonUIID = nil
-local repairButtonUIID = nil
-local spellmakingButtonUIID = nil
-local spellsButtonUIID = nil
-local trainingButtonUIID = nil
-local travelButtonUIID = nil
+local dialogueMenuUIID = tes3ui.registerID("MenuDialog")
+local goodbyeButtonUIID = tes3ui.registerID("MenuDialog_button_bye")
+local barterButtonUIID = tes3ui.registerID("MenuDialog_service_barter")
+local shareButtonUIID = tes3ui.registerID("MenuDialog_service_companion")
+local enchantingButtonUIID = tes3ui.registerID("MenuDialog_service_enchanting")
+local persuasionButtonUIID = tes3ui.registerID("MenuDialog_persuasion")
+local repairButtonUIID = tes3ui.registerID("MenuDialog_service_repair")
+local spellmakingButtonUIID = tes3ui.registerID("MenuDialog_service_spellmaking")
+local spellsButtonUIID = tes3ui.registerID("MenuDialog_service_spells")
+local trainingButtonUIID = tes3ui.registerID("MenuDialog_service_training")
+local travelButtonUIID = tes3ui.registerID("MenuDialog_service_travel")
 
-local alchemyMenuUIID = nil
-local barterMenuUIID = nil
-local classMenuUIID = nil
-local companionShareMenuUIID = nil
-local enchantingMenuUIID = nil
-local persuastionMenuUIID = nil
-local raceMenuUIID = nil
-local repairMenuUIID = nil
-local spellmakingMenuUIID = nil
-local spellsServiceMenuUIID = nil
-local trainingMenuUIID = nil
-local travelMenuUIID = nil
-
-local function onInitialized()
-	dialogueMenuUIID = tes3ui.registerID("MenuDialog")
-	goodbyeButtonUIID = tes3ui.registerID("MenuDialog_button_bye")
-	barterButtonUIID = tes3ui.registerID("MenuDialog_service_barter")
-	shareButtonUIID = tes3ui.registerID("MenuDialog_service_companion")
-	enchantingButtonUIID = tes3ui.registerID("MenuDialog_service_enchanting")
-	persuasionButtonUIID = tes3ui.registerID("MenuDialog_persuasion")
-	repairButtonUIID = tes3ui.registerID("MenuDialog_service_repair")
-	spellmakingButtonUIID = tes3ui.registerID("MenuDialog_service_spellmaking")
-	spellsButtonUIID = tes3ui.registerID("MenuDialog_service_spells")
-	trainingButtonUIID = tes3ui.registerID("MenuDialog_service_training")
-	travelButtonUIID = tes3ui.registerID("MenuDialog_service_travel")
-
-	alchemyMenuUIID = tes3ui.registerID("MenuAlchemy")
-	barterMenuUIID = tes3ui.registerID("MenuBarter")
-	classMenuUIID = tes3ui.registerID("MenuClassChoice")
-	companionShareMenuUIID = tes3ui.registerID("MenuContents")
-	enchantingMenuUIID = tes3ui.registerID("MenuEnchantment")
-	persuastionMenuUIID = tes3ui.registerID("MenuPersuasion")
-	raceMenuUIID = tes3ui.registerID("MenuRaceSex")
-	repairMenuUIID = tes3ui.registerID("MenuServiceRepair")
-	spellmakingMenuUIID = tes3ui.registerID("MenuSpellmaking")
-	spellsServiceMenuUIID = tes3ui.registerID("MenuServiceSpells")
-	trainingMenuUIID = tes3ui.registerID("MenuServiceTraining")
-	travelMenuUIID = tes3ui.registerID("MenuServiceTravel")
-end
-event.register(tes3.event.initialized, onInitialized)
+local alchemyMenuUIID = tes3ui.registerID("MenuAlchemy")
+local barterMenuUIID = tes3ui.registerID("MenuBarter")
+local classMenuUIID = tes3ui.registerID("MenuClassChoice")
+local companionShareMenuUIID = tes3ui.registerID("MenuContents")
+local enchantingMenuUIID = tes3ui.registerID("MenuEnchantment")
+local persuastionMenuUIID = tes3ui.registerID("MenuPersuasion")
+local raceMenuUIID = tes3ui.registerID("MenuRaceSex")
+local repairMenuUIID = tes3ui.registerID("MenuServiceRepair")
+local spellmakingMenuUIID = tes3ui.registerID("MenuSpellmaking")
+local spellsServiceMenuUIID = tes3ui.registerID("MenuServiceSpells")
+local trainingMenuUIID = tes3ui.registerID("MenuServiceTraining")
+local travelMenuUIID = tes3ui.registerID("MenuServiceTravel")
 
 --- The function opens a menu within dialogue window. Returns true if the menu is open or was opened.
 ---@param menuID number The id of the menu to open.
