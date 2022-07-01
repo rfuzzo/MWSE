@@ -9032,7 +9032,7 @@
 <span class="c1">-- Print &quot;foo&quot; to the MWSE log, prefixed with the function above.</span>
 <span class="n">myFunctionName</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>For a broader introduction to the Lua scripting language, refer to the <a href="../introduction-to-lua">Introduction to Lua</a> guide. </p>
+<p>For a broader introduction to the Lua scripting language, refer to the <a href="../introduction-to-lua">Introduction to Lua</a> guide.</p>
 <h2 id="morrowind-object-types">Morrowind Object Types<a class="headerlink" href="#morrowind-object-types" title="Permanent link">⚓︎</a></h2>
 <p>MWSE provides many bindings to more directly manipulate the object types that the Morrowind engine uses. In this example, we find the skooma object, and rename it <em>No-No Juice</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Tell MWSE that we want to find the skooma object.</span>
@@ -9054,11 +9054,11 @@
 <span class="kr">end</span>
 
 <span class="c1">-- Tell MWSE that we want our callback to be invoked when a key is pressed.</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">myKeyEvent</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">,</span> <span class="n">myKeyEvent</span><span class="p">)</span>
 </code></pre></div>
 <p>We can also pass filters to events. For the key event, the filter is the key that was pressed/released.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- If we use this instead of the above registration, we filter to key 22 (U).</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;key&quot;</span><span class="p">,</span> <span class="n">myKeyEvent</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="mi">22</span> <span class="p">})</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">key</span><span class="p">,</span> <span class="n">myKeyEvent</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
 </code></pre></div>
 <p>For a broader introduction to event based programming, refer to the <a href="../introduction-to-event-based-programming">Introduction to Event Based Programming</a> guide.</p>
 <p>The details of which events are available and what event data is exposed to them can be found on the events page.</p>
@@ -9082,7 +9082,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">myLoadedGameCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;Loaded game: %s&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span>
 <span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">,</span> <span class="n">myLoadedGameCallback</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">myLoadedGameCallback</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="script-overrides-and-openmw-semi-compatibility">Script Overrides and OpenMW Semi-Compatibility<a class="headerlink" href="#script-overrides-and-openmw-semi-compatibility" title="Permanent link">⚓︎</a></h2>
 <p>Another feature of MWSE-Lua is the ability to override the normal execution of mwscript. This means that if we have a script in an esp file called <code>myScript</code> we can do the following code to override its behavior:</p>

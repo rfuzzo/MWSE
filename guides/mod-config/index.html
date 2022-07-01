@@ -8979,7 +8979,7 @@
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">registerModConfig</span><span class="p">()</span>
     <span class="n">mwse</span><span class="p">.</span><span class="n">registerModConfig</span><span class="p">(</span><span class="s2">&quot;My Awesome Mod&quot;</span><span class="p">,</span> <span class="n">modConfigPackage</span><span class="p">)</span>
 <span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;modConfigReady&quot;</span><span class="p">,</span> <span class="n">registerModConfig</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">modConfigReady</span><span class="p">,</span> <span class="n">registerModConfig</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>After loading up the game, you should see "My Awesome Mod" in the mod config menu, with a single "Hello world!" in its configuration pane.</p>
 <h2 id="handling-close-state">Handling Close State<a class="headerlink" href="#handling-close-state" title="Permanent link">⚓︎</a></h2>
@@ -9004,7 +9004,7 @@
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">enableModConfigOnLoaded</span><span class="p">()</span>
     <span class="n">modConfigPackage</span><span class="p">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="kr">end</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;loaded&quot;</span><span class="p">,</span> <span class="n">enableModConfigOnLoaded</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">enableModConfigOnLoaded</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
               

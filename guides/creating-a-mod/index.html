@@ -9007,14 +9007,14 @@
 <p>This guide will demonstrate the most basic steps of creating a mod for <em>The Elder Scrolls III: Morrowind</em> using MWSE 2.1 Lua.</p>
 <p>To facilitate this, this guide will explain how to create a mod that displays a unique messagebox every time the player draws a two-handed weapon.</p>
 <h2 id="development-workflow">Development Workflow<a class="headerlink" href="#development-workflow" title="Permanent link">⚓︎</a></h2>
-<p>A Development Workflow is the environment and processes used to facilitate software development. This guide assumes that you have setup a development environment. </p>
+<p>A Development Workflow is the environment and processes used to facilitate software development. This guide assumes that you have setup a development environment.</p>
 <p>If you have not set up a development environment, or do not know how to, please refer to the <a href="../development-workflows">Development Workflow</a> guide to set one up.</p>
 <h2 id="introduction-to-the-lua-scripting-language">Introduction to the Lua Scripting Language<a class="headerlink" href="#introduction-to-the-lua-scripting-language" title="Permanent link">⚓︎</a></h2>
-<p>If you have basic knowledge of the Lua scripting language, you may skip this section. If you are not familiar with the Lua scripting language, please take a moment to read the <a href="../introduction-to-lua">Introduction to Lua</a> guide. </p>
+<p>If you have basic knowledge of the Lua scripting language, you may skip this section. If you are not familiar with the Lua scripting language, please take a moment to read the <a href="../introduction-to-lua">Introduction to Lua</a> guide.</p>
 <h2 id="introduction-to-event-based-programming">Introduction to Event Based Programming<a class="headerlink" href="#introduction-to-event-based-programming" title="Permanent link">⚓︎</a></h2>
 <p>If you have basic knowledge of event based programming, you may skip this section. If you are not familiar with event based programming, please take a moment to read the <a href="../introduction-to-event-based-programming">Introduction to Event Based Programming</a> guide.</p>
 <h2 id="creating-the-mod-file-structure">Creating the Mod File Structure<a class="headerlink" href="#creating-the-mod-file-structure" title="Permanent link">⚓︎</a></h2>
-<p>Now that you have setup a development workflow, you are ready to create a mod. </p>
+<p>Now that you have setup a development workflow, you are ready to create a mod.</p>
 <p>Next, the folder structure for MWSE must be created:</p>
 <ul>
 <li>In the Morrowind "Data Files" directory, create a folder named "MWSE". This is the folder that contains any MWSE code.</li>
@@ -9025,13 +9025,13 @@
 <ul>
 <li><strong>Morrowind\Data Files\MWSE\mods\MWSE-Guide-Demo</strong></li>
 </ul>
-<p>Now that the folder structure is complete, you must create a code file to run your code in. </p>
+<p>Now that the folder structure is complete, you must create a code file to run your code in.</p>
 <ul>
-<li>In "MWSE-Guide-Demo", create a file named <em>main.lua</em>. This file will contain the Lua code for the mod. </li>
+<li>In "MWSE-Guide-Demo", create a file named <em>main.lua</em>. This file will contain the Lua code for the mod.</li>
 </ul>
 <p><strong>The main file of your mod must be named main.lua</strong>. This file should configure and initialize any other code files in your mod. The name <em>main.lua</em> is required by MWSE.</p>
 <h2 id="registering-an-event">Registering an Event<a class="headerlink" href="#registering-an-event" title="Permanent link">⚓︎</a></h2>
-<p>The Morrowind game engine, through MWSE, provides a variety of <em>events</em> that can be used to trigger code. An <em>event</em> is a trigger that will notify any registered functions of it's occurrence. </p>
+<p>The Morrowind game engine, through MWSE, provides a variety of <em>events</em> that can be used to trigger code. An <em>event</em> is a trigger that will notify any registered functions of it's occurrence.</p>
 <p>For example, consider the <code>loaded</code> event. This event is triggered whenever the player loads a save game. If you register a function to be called when this event occurs, your function will be called when the player loads a save game. By cleverly using Morrowind's events, powerful functionality can be created.</p>
 <p>In our file, <em>main.lua</em>, we will register an event to trigger our code. It is convention to register your mod's events inside of another event, the <code>initialized</code> event. The <code>initialized</code> event represents the point when the game and it's mods have been loaded. You can imagine this as the point which the title screen is first shown.</p>
 <p>So, first, we will create the <code>initialized</code> event.</p>
@@ -9051,7 +9051,7 @@
 <span class="kr">end</span>
 
 <span class="c1">-- Register our initialized function to the initialized event.</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span> <span class="c1">--3.</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span> <span class="c1">--3.</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>Declare a function to call whenever the <code>initialized</code> event is triggered.</li>
@@ -9081,15 +9081,15 @@
 
 <span class="c1">-- The function to call on the initialized event.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">initialized</span><span class="p">()</span>
-    <span class="c1">-- Register our function to the onReadied event.</span>
-    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weaponReadied&quot;</span><span class="p">,</span> <span class="n">showMessageboxOnWeaponReadied</span><span class="p">)</span> <span class="c1">--3.</span>
+    <span class="c1">-- Register our function to the weaponReadied event.</span>
+    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">weaponReadied</span><span class="p">,</span> <span class="n">showMessageboxOnWeaponReadied</span><span class="p">)</span> <span class="c1">--3.</span>
 
     <span class="c1">-- Print a &quot;Ready!&quot; statement to the MWSE.log file.</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[MWSE Guide Demo: INFO] MWSE Guide Demo Initialized&quot;</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="c1">-- Register our initialized function to the initialized event.</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>Declare a function to call whenever the <code>weaponReadied</code> event is triggered.</li>
@@ -9134,13 +9134,13 @@
 </code></pre></div></td></tr></table></div>
 <ol>
 <li>We must check that the event was triggered by the player. Without this step, the code would be executed for all actors, including NPCs and creatures! <code>e.reference</code> is an property of the <code>weaponedReadied</code> event. <code>tes3.player</code> is an easy way to access the player reference.</li>
-<li>Store a copy of the weaponStack reference in a local variable to prevent typing <code>e.weaponStack</code> more than once. </li>
+<li>Store a copy of the weaponStack reference in a local variable to prevent typing <code>e.weaponStack</code> more than once.</li>
 <li>The first part of this if condition checks that the reference exists. This should be done to prevent null reference exceptions. The second part of this if condition performs our validation: it ensures that the weapon being readied is a two-handed weapon.</li>
 <li>Show a messagebox with some custom object information. <code>.name</code> is available on any object.</li>
 </ol>
 <p>The mod should be tested again. When drawing a two-handed weapon, you should now see a custom messagebox!</p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">⚓︎</a></h2>
-<p>This guide provided a simple introduction to modding <em>The Elder Scrolls III: Morrowind</em> using MWSE 2.1 Lua. </p>
+<p>This guide provided a simple introduction to modding <em>The Elder Scrolls III: Morrowind</em> using MWSE 2.1 Lua.</p>
 <p>This guide:</p>
 <ul>
 <li>explained the required folder structure to create a MWSE-Lua mod.</li>
@@ -9196,14 +9196,14 @@
 <span class="c1">-- The function to call on the initialized event.</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">initialized</span><span class="p">()</span>
     <span class="c1">-- Register our function to the onReadied event.</span>
-    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;weaponReadied&quot;</span><span class="p">,</span> <span class="n">showMessageboxOnWeaponReadied</span><span class="p">)</span>
+    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">weaponReadied</span><span class="p">,</span> <span class="n">showMessageboxOnWeaponReadied</span><span class="p">)</span>
 
     <span class="c1">-- Print a &quot;Ready!&quot; statement to the MWSE.log file.</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[MWSE Guide Demo: INFO] MWSE Guide Demo Initialized&quot;</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="c1">-- Register our initialized function to the initialized event.</span>
-<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;initialized&quot;</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="n">initialized</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
               
