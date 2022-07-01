@@ -140,6 +140,7 @@ return {
 	["spellTick"] = "spellTick",
 	["topicAdded"] = "topicAdded",
 	["trapDisarm"] = "trapDisarm",
+	["travelFinished"] = "travelFinished",
 	["uiActivated"] = "uiActivated",
 	["uiEvent"] = "uiEvent",
 	["uiObjectTooltip"] = "uiObjectTooltip",

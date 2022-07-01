@@ -147,6 +147,7 @@
 --- @field register fun(eventId: '"spellTick"', callback: fun(e: spellTickEventData), options: table?)
 --- @field register fun(eventId: '"topicAdded"', callback: fun(e: topicAddedEventData), options: table?)
 --- @field register fun(eventId: '"trapDisarm"', callback: fun(e: trapDisarmEventData), options: table?)
+--- @field register fun(eventId: '"travelFinished"', callback: fun(e: travelFinishedEventData), options: table?)
 --- @field register fun(eventId: '"uiActivated"', callback: fun(e: uiActivatedEventData), options: table?)
 --- @field register fun(eventId: '"uiEvent"', callback: fun(e: uiEventEventData), options: table?)
 --- @field register fun(eventId: '"uiObjectTooltip"', callback: fun(e: uiObjectTooltipEventData), options: table?)

@@ -147,6 +147,7 @@ spellResisted                 | `"spellResisted"`                 | [`spellResis
 spellTick                     | `"spellTick"`                     | [`spellTick`](https://mwse.github.io/MWSE/events/spellTick)
 topicAdded                    | `"topicAdded"`                    | [`topicAdded`](https://mwse.github.io/MWSE/events/topicAdded)
 trapDisarm                    | `"trapDisarm"`                    | [`trapDisarm`](https://mwse.github.io/MWSE/events/trapDisarm)
+travelFinished                | `"travelFinished"`                | [`travelFinished`](https://mwse.github.io/MWSE/events/travelFinished)
 uiActivated                   | `"uiActivated"`                   | [`uiActivated`](https://mwse.github.io/MWSE/events/uiActivated)
 uiEvent                       | `"uiEvent"`                       | [`uiEvent`](https://mwse.github.io/MWSE/events/uiEvent)
 uiObjectTooltip               | `"uiObjectTooltip"`               | [`uiObjectTooltip`](https://mwse.github.io/MWSE/events/uiObjectTooltip)
