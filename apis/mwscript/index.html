@@ -2553,6 +2553,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwscriptsetdelete" class="md-nav__link">
+    mwscript.setDelete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwscriptsetlevel" class="md-nav__link">
     mwscript.setLevel
   </a>
@@ -9410,6 +9417,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwscriptsetdelete" class="md-nav__link">
+    mwscript.setDelete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwscriptsetlevel" class="md-nav__link">
     mwscript.setLevel
   </a>
@@ -9994,6 +10008,23 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="mwscriptsetdelete"><code>mwscript.setDelete</code><a class="headerlink" href="#mwscriptsetdelete" title="Permanent link">⚓︎</a></h3>
+<p>Marks the <code>reference</code> as deleted, and modified. Deleted reference isn't rendered nor is its local mwscript run.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">mwscript</span><span class="p">.</span><span class="n">setDelete</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">delete</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The target reference for this command to be executed on. Defaults to the normal script execution reference.</li>
+<li><code>delete</code> (boolean): <em>Default</em>: <code>true</code>. Setting this to true deletes the reference and triggers <code>referenceDeactivated</code> event. Setting this to false effectively undeletes/activates the reference and triggers <code>referenceActivated</code> event.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>executed</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="mwscriptsetlevel"><code>mwscript.setLevel</code><a class="headerlink" href="#mwscriptsetlevel" title="Permanent link">⚓︎</a></h3>

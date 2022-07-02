@@ -4486,13 +4486,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#selectedalchemy" class="md-nav__link">
-    selectedAlchemy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#selecteditem" class="md-nav__link">
     selectedItem
   </a>
@@ -9080,13 +9073,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#selectedalchemy" class="md-nav__link">
-    selectedAlchemy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#selecteditem" class="md-nav__link">
     selectedItem
   </a>
@@ -9183,10 +9169,14 @@
 </ul>
 <hr />
 <h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (table)</li>
+</ul>
 <hr />
 <h3 id="distance"><code>distance</code><a class="headerlink" href="#distance" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The combat distance.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9200,7 +9190,7 @@
 </ul>
 <hr />
 <h3 id="mobile"><code>mobile</code><a class="headerlink" href="#mobile" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. No description yet available.</p>
+<p><em>Read-only</em>. Convenience access back to the associated actor.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
@@ -9214,17 +9204,10 @@
 </ul>
 <hr />
 <h3 id="selectedaction"><code>selectedAction</code><a class="headerlink" href="#selectedaction" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The next action.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
-</ul>
-<hr />
-<h3 id="selectedalchemy"><code>selectedAlchemy</code><a class="headerlink" href="#selectedalchemy" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (<a href="../../types/tes3alchemy">tes3alchemy</a>)</li>
 </ul>
 <hr />
 <h3 id="selecteditem"><code>selectedItem</code><a class="headerlink" href="#selecteditem" title="Permanent link">⚓︎</a></h3>
@@ -9242,14 +9225,14 @@
 </ul>
 <hr />
 <h3 id="selectedspell"><code>selectedSpell</code><a class="headerlink" href="#selectedspell" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>This field containg the spell the actor is currently casting. If not in casting state this field has <code>nil</code> value.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3spell">tes3spell</a>)</li>
 </ul>
 <hr />
 <h3 id="selectedweapon"><code>selectedWeapon</code><a class="headerlink" href="#selectedweapon" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. No description yet available.</p>
+<p><em>Read-only</em>. The weapon the actor is using in this combat session.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>)</li>
