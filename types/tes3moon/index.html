@@ -9148,65 +9148,68 @@
 
 <h1 id="tes3moon">tes3moon<a class="headerlink" href="#tes3moon" title="Permanent link">⚓︎</a></h1>
 <p>A structure that keeps track of information related two the game's two moons.</p>
+<p>Moon move in an arc shape along the sky. The arc's start is at in-game North and ends in the South. The arc's plane can be rotated from North-South axis, by <code>axisOffset</code> property.</p>
+<p>Each moon has 8 phases, which differ by the amount of the moon that is visible and the part covered in black. During waxing the moon appears in the sky during the first part of the night, before midnight. After the full phase, the moons usually rise during the later part of the night, after midnight. Much like the Earth's moon. Absolutely the first moment the moon can appear is controlled by <code>fadeInStart</code> property, while the latest moment the moon sets is controlled by <code>fadeOutFinish</code> property.</p>
+<p>Most of the properties exposed here correspond to the setting of the same name in [Moons] section of the Morrowind.ini file.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="axisoffset"><code>axisOffset</code><a class="headerlink" href="#axisoffset" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The rotation of the moon's path arc from the North-South axis, in degrees.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="dailyincrement"><code>dailyIncrement</code><a class="headerlink" href="#dailyincrement" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Looks like this property controls when the moon raises during each phase of its cycle. Also seems to impact the progression of moon phases. The units of this property are most likely game hours.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fadeendangle"><code>fadeEndAngle</code><a class="headerlink" href="#fadeendangle" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>This angle represents the angle from the water plane, in degrees. If a moon arrives at that point in the sky it will start disappearing. A moon can dissapear even before its <code>fadeOutStart</code> hour if it reaches this angle.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fadeinfinish"><code>fadeInFinish</code><a class="headerlink" href="#fadeinfinish" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The game hour at which the moon finishes fading in.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fadeinstart"><code>fadeInStart</code><a class="headerlink" href="#fadeinstart" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The game hour at which the moon starts to be visible in the sky.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fadeoutfinish"><code>fadeOutFinish</code><a class="headerlink" href="#fadeoutfinish" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The game hour at which has completely faded out.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fadeoutstart"><code>fadeOutStart</code><a class="headerlink" href="#fadeoutstart" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The game hour at which the moon starts fading out.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="fadestartangle"><code>fadeStartAngle</code><a class="headerlink" href="#fadestartangle" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The angle, in degrees, from the water plane at which the moon first appears in the sky.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="index"><code>index</code><a class="headerlink" href="#index" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The index of the moon, 0 for Masser, 1 for Secunda</p>
+<p><em>Read-only</em>. The index of the moon, 0 for Masser, 1 for Secunda.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9220,7 +9223,49 @@
 </ul>
 <hr />
 <h3 id="phase"><code>phase</code><a class="headerlink" href="#phase" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>The moon's current phase. The phase controls which of the moon's textures is currently being used.</p>
+<table>
+<thead>
+<tr>
+<th>Moon's phase</th>
+<th>Used texture's suffix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>_new</td>
+</tr>
+<tr>
+<td>1</td>
+<td>_one_wax</td>
+</tr>
+<tr>
+<td>2</td>
+<td>_half_wax</td>
+</tr>
+<tr>
+<td>3</td>
+<td>_three_wax</td>
+</tr>
+<tr>
+<td>4</td>
+<td>_full</td>
+</tr>
+<tr>
+<td>5</td>
+<td>_three_wan</td>
+</tr>
+<tr>
+<td>6</td>
+<td>_half_wan</td>
+</tr>
+<tr>
+<td>7</td>
+<td>_one_wan</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9234,14 +9279,14 @@
 </ul>
 <hr />
 <h3 id="speed"><code>speed</code><a class="headerlink" href="#speed" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Controls the speed of the moons across the sky. This corresponds to the setting of the same name in [Moons] section of the Morrowind.ini file.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="texture"><code>texture</code><a class="headerlink" href="#texture" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The texture to use for the moon.</p>
+<p><em>Read-only</em>. The texture to use for the moon. These look like "Textures\tx_masser". The actual texture that is used is determined by the current moon phase.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (string)</li>
