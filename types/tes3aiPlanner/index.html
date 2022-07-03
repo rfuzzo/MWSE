@@ -9050,14 +9050,14 @@
 </ul>
 <hr />
 <h3 id="nextopenpackageindex"><code>nextOpenPackageIndex</code><a class="headerlink" href="#nextopenpackageindex" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. </p>
+<p><em>Read-only</em>. This is the index in <code>.packages</code> table that represents the currently active AI package.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="packages"><code>packages</code><a class="headerlink" href="#packages" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The table with <code>tes3aiPackage</code> objects assigned to this mobile actor.</p>
+<p><em>Read-only</em>. The table with <code>tes3aiPackage</code> objects assigned to this mobile actor. These packages are executed as instruction in the order they are defined. When the last one is executed, the cycle is repeated from the start. Has 32 entries, where any can be nil.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3aiPackage">tes3aiPackage</a>[])</li>

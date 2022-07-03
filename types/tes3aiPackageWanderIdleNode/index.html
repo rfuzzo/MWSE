@@ -8968,14 +8968,56 @@
 <p>An AI Wander package idle node game object. Contains information on the chance that the actor will wander at that idle node.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="chance"><code>chance</code><a class="headerlink" href="#chance" title="Permanent link">⚓︎</a></h3>
-<p>A chance that the actor will wander at this idle node.</p>
+<p>A chance that the actor will play corresponding idle animation while standing when parent tes3aiPackageWander is active.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="index"><code>index</code><a class="headerlink" href="#index" title="Permanent link">⚓︎</a></h3>
-<p>The index of this idle node.</p>
+<p>The index of this idle node. Determines the chance that certain idle animation will be played.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Animation description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Looking around</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Looking behind</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Scratching head and then shaking it</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Shifting clothing or armor on shoulder</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Yawn, strech, look around</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Looks at fingers and then looks around furitevely</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Puts right fist above heart and bows head</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Reaches for the weapon</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
