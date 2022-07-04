@@ -6,8 +6,8 @@
 
 --- This event fires once the player arrives at a travel destination via a travel service.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/events/travelFinished).
---- @class travelFinishedEventData
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/events/traveled).
+--- @class traveledEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
 --- @field basePrice number *Read-only*. The base cost of traveling the service.
 --- @field cell tes3cell *Read-only*. The destination cell of the travel.
