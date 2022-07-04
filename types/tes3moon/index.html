@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -9164,7 +9164,7 @@
 
 <h1 id="tes3moon">tes3moon<a class="headerlink" href="#tes3moon" title="Permanent link">⚓︎</a></h1>
 <p>A structure that keeps track of information related two the game's two moons.</p>
-<p>Moon move in an arc shape along the sky. The arc's start is at in-game North and ends in the South. The arc's plane can be rotated from North-South axis, by <code>axisOffset</code> property.</p>
+<p>Moon move in an arc shape along the sky. The arc's start is at in-game North and ends in the South. The arc's plane can be rotated from North-South axis, by <code>axisOffset</code> property. If moons overlap, Secunda is always rendered in front of Masser, so the Masser is covered by Secunda.</p>
 <p>Each moon has 8 phases, which differ by the amount of the moon that is visible and the part covered in black. During waxing the moon appears in the sky during the first part of the night, before midnight. After the full phase, the moons usually rise during the later part of the night, after midnight. Much like the Earth's moon. Absolutely the first moment the moon can appear is controlled by <code>fadeInStart</code> property, while the latest moment the moon sets is controlled by <code>fadeOutFinish</code> property.</p>
 <p>Most of the properties exposed here correspond to the setting of the same name in [Moons] section of the Morrowind.ini file.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
@@ -9392,7 +9392,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       

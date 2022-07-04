@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -10022,14 +10022,15 @@
 </ul>
 <hr />
 <h3 id="tes3uishowdialoguemessage"><code>tes3ui.showDialogueMessage</code><a class="headerlink" href="#tes3uishowdialoguemessage" title="Permanent link">⚓︎</a></h3>
+<p>This function creates a dialogue message. The message can have three styles. The style <code>2</code> makes a selectable text. That way by calling this function multiple time you can create a selection of responses.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3ui</span><span class="p">.</span><span class="n">showDialogueMessage</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">style</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">answerIndex</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>text</code> (string): <em>Default</em>: ``. The text of the shown message.</li>
-<li><code>style</code> (number): <em>Default</em>: <code>0</code>. </li>
-<li><code>answerIndex</code> (number): <em>Default</em>: <code>0</code>. </li>
+<li><code>style</code> (number): <em>Default</em>: <code>0</code>. This argument controls the text color of the message. Value <code>0</code> makes the message text the same color as the text in the dialogue window. Value <code>1</code> makes the text white, and also print a newline after the message. Value <code>2</code> turns the message into a selectable text inside the dialogue window. Value <code>3</code> looks the same as <code>1</code> but there isn't a newline after each message. Value <code>4</code> is the same as value <code>1</code>. All the other values work as <code>0</code>.</li>
+<li><code>answerIndex</code> (number): <em>Default</em>: <code>0</code>. This number can be used later to identify which response was selected.</li>
 </ul>
 </li>
 </ul>
@@ -10054,10 +10055,10 @@
 <ul>
 <li><code>alembic</code>: Only <a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a> items of type <code>tes3.apparatusType.alembic</code> will be shown.</li>
 <li><code>calcinator</code>: Only <a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a> items of type <code>tes3.apparatusType.calcinator</code> will be shown.</li>
-<li><code>enchanted</code>: Only enchanted items will be shown.</li>
+<li><code>enchanted</code>: Only non-enchanted items will be shown. That's because that filter is usually used in the enchanting menu to select items viable for enchanting.</li>
 <li><code>ingredients</code>: Only <a href="https://mwse.github.io/MWSE/types/tes3ingredient/">tes3ingredient</a> items will be shown.</li>
 <li><code>mortar</code>: Only <a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a> items of type <code>tes3.apparatusType.mortarAndPestle</code> will be shown.</li>
-<li><code>quickUse</code>: Only items available for quick use will be shown.</li>
+<li><code>quickUse</code>: Only items that can be assigned as quick keys will be shown.</li>
 <li><code>retort</code>: Only <a href="https://mwse.github.io/MWSE/types/tes3apparatus/">tes3apparatus</a> items of type <code>tes3.apparatusType.retort</code> will be shown.</li>
 <li><code>soulgemFilled</code>: Only filled soulgems will be shown.</li>
 </ul>
@@ -10086,6 +10087,108 @@
 </ul>
 </li>
 </ul>
+<details class="example">
+<summary>Example: Bribe an NPC with items from your inventory</summary>
+<p>This code allows the player to give an item to the actor the player is currently looking at.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- This is a working example. You are encouraged to create a new file</span>
+<span class="c1">-- main.lua, paste this code and see the results in-game!</span>
+<span class="c1">-- Use `u` key to bribe an actor you are looking at with items from your inventory.</span>
+
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">bribe</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">actorReference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getPlayerTarget</span><span class="p">()</span>
+    <span class="c1">-- This function returns nil value if the player isn&#39;t aiming at a reference,</span>
+    <span class="c1">-- so we skip that case</span>
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">actorReference</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
+
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">showInventorySelectMenu</span><span class="p">({</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span>
+        <span class="c1">-- .. is Lua operator of concatenation. It joins 2 strings together.</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Bribe &quot;</span> <span class="o">..</span> <span class="n">actorReference</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">callback</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">item</span> <span class="kr">then</span>
+                <span class="c1">-- If e.item exist, that means that the player picked an</span>
+                <span class="c1">-- item in the  menu. It up to us to do something with it.</span>
+                <span class="n">tes3</span><span class="p">.</span><span class="n">transferItem</span><span class="p">({</span>
+                    <span class="n">from</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span>
+                    <span class="n">to</span> <span class="o">=</span> <span class="n">actorReference</span><span class="p">,</span>
+                    <span class="n">item</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">item</span><span class="p">,</span>
+                    <span class="n">itemData</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">itemData</span><span class="p">,</span>
+                    <span class="n">count</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">count</span><span class="p">,</span>
+                <span class="p">})</span>
+                <span class="c1">-- Here we calculate the total gold value of the transfered item(s), since that</span>
+                <span class="c1">-- can be a stack of items. e.count holds the amount of the items selected.</span>
+                <span class="kd">local</span> <span class="n">itemWorth</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">e</span><span class="p">.</span><span class="n">count</span>
+
+                <span class="c1">-- At last! Now the actual persuasion part. We use `modifier` argument.</span>
+                <span class="c1">-- The higher the value we pass there the higher the disposition change.</span>
+                <span class="n">tes3</span><span class="p">.</span><span class="n">persuade</span><span class="p">({</span>
+                    <span class="n">actor</span> <span class="o">=</span> <span class="n">actorReference</span><span class="p">,</span>
+                    <span class="n">modifier</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="n">itemWorth</span><span class="p">)</span>
+                <span class="p">})</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span><span class="p">,</span>
+        <span class="c1">-- At first it&#39;s counter intuitive that this filter selects all the non-enchanted items</span>
+        <span class="c1">-- This illusion disappears soon as we relize that the game uses this filter in the</span>
+        <span class="c1">-- enchanting menu to select items viable for enchanting.</span>
+        <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">inventorySelectFilter</span><span class="p">.</span><span class="n">enchanted</span>
+    <span class="p">})</span>
+
+<span class="kr">end</span>
+
+<span class="c1">-- We registered our bribe function on keyDown event, and filtered it for `u` key,</span>
+<span class="c1">-- so our bribe function is only called once `u` key is pressed</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">bribe</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Example: Filter functions</summary>
+<p>A few possible filtering functions.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- This example has a few implementations of filter functions that</span>
+<span class="c1">-- can be passed to `filter` argument of tes3.showInventorySelectMenu().</span>
+
+<span class="c1">-- This function will filter only weapon items.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">weaponFilter</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">objectType</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">weapon</span> <span class="kr">then</span>
+        <span class="c1">-- The filter function needs to return `true`</span>
+        <span class="c1">-- for a certain item to appear in the menu.</span>
+        <span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">else</span>
+        <span class="kr">return</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="c1">-- This is a dictinary of items that can be damaged (have a condition)</span>
+<span class="kd">local</span> <span class="n">damageableItems</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">weapon</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">armor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1">-- This function will filter only items that aren&#39;t at full condition.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">damagedItemsFilter</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- The first check is whether the item is in our</span>
+    <span class="c1">-- dictionary of items with condition</span>
+    <span class="kr">if</span> <span class="n">damageableItems</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">objectType</span><span class="p">]</span> <span class="ow">and</span>
+    <span class="c1">-- Only damaged items have this field. If it does</span>
+    <span class="c1">-- not exist the item is in perfect condition.</span>
+    <span class="n">e</span><span class="p">.</span><span class="n">itemData</span> <span class="ow">and</span>
+    <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">itemData</span><span class="p">.</span><span class="n">condition</span> <span class="o">&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">maxCondition</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">else</span>
+        <span class="kr">return</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kd">local</span> <span class="n">myFilterValue</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="c1">-- This function will filter only items that have a value less than `myFilterValue`</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">valueFilter</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">item</span><span class="p">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">myFilterValue</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="kc">true</span>
+    <span class="kr">else</span>
+        <span class="kr">return</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3uishowjournal"><code>tes3ui.showJournal</code><a class="headerlink" href="#tes3uishowjournal" title="Permanent link">⚓︎</a></h3>
 <p>Opens the journal menu. This can return false if the player hasn't gone through character generation, or if the journal was already open.</p>
@@ -10249,7 +10352,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       
