@@ -741,6 +741,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -833,6 +837,20 @@
     <li class="md-nav__item">
       <a href="../../references/ai-packages/" class="md-nav__link">
         AI Packages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/animation-body-sections/" class="md-nav__link">
+        Animation Body Sections
       </a>
     </li>
   
@@ -1239,6 +1257,20 @@
     <li class="md-nav__item">
       <a href="../../references/inventory-tile-types/" class="md-nav__link">
         Inventory Tile Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/item-sound-states/" class="md-nav__link">
+        Item Sound States
       </a>
     </li>
   
@@ -1788,7 +1820,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_74" type="checkbox" id="__nav_3_74" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_76" type="checkbox" id="__nav_3_76" >
       
       
       
@@ -1819,13 +1851,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_74">
+        <label class="md-nav__link" for="__nav_3_76">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_74">
+        <label class="md-nav__title" for="__nav_3_76">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -2017,7 +2049,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_75" type="checkbox" id="__nav_3_75" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
       
       
       
@@ -2026,13 +2058,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_75">
+        <label class="md-nav__link" for="__nav_3_77">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_75">
+        <label class="md-nav__title" for="__nav_3_77">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -6627,8 +6659,6 @@
         
           
         
-          
-        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8860,20 +8890,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../weatherTransitionImmediate/" class="md-nav__link">
-        weatherTransitionImmediate
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../weatherTransitionStarted/" class="md-nav__link">
         weatherTransitionStarted
       </a>
@@ -8941,6 +8957,7 @@
 -->
 
 <h1 id="playitemsound">playItemSound<a class="headerlink" href="#playitemsound" title="Permanent link">⚓︎</a></h1>
+<p>This event is triggered when the game is about to play a sound from an item. Can be blocked to play custom sound instead.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e playItemSoundEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">playItemSoundCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -8960,9 +8977,9 @@
 </div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>item</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): </li>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): </li>
-<li><code>state</code> (number): </li>
+<li><code>item</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): <em>Read-only</em>. The item for which the sound is about to be played.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The actor reference that picked or dropped the item that's now about to play the sound.</li>
+<li><code>state</code> (number): <em>Read-only</em>. Maps to values in <a href="https://mwse.github.io/MWSE/references/item-sound-states/">tes3.itemSoundState</a> namespace.</li>
 </ul>
 
               

@@ -741,6 +741,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -833,6 +837,20 @@
     <li class="md-nav__item">
       <a href="../../references/ai-packages/" class="md-nav__link">
         AI Packages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/animation-body-sections/" class="md-nav__link">
+        Animation Body Sections
       </a>
     </li>
   
@@ -1239,6 +1257,20 @@
     <li class="md-nav__item">
       <a href="../../references/inventory-tile-types/" class="md-nav__link">
         Inventory Tile Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/item-sound-states/" class="md-nav__link">
+        Item Sound States
       </a>
     </li>
   
@@ -1788,7 +1820,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_74" type="checkbox" id="__nav_3_74" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_76" type="checkbox" id="__nav_3_76" >
       
       
       
@@ -1819,13 +1851,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_74">
+        <label class="md-nav__link" for="__nav_3_76">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_74">
+        <label class="md-nav__title" for="__nav_3_76">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -2017,7 +2049,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_75" type="checkbox" id="__nav_3_75" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
       
       
       
@@ -2026,13 +2058,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_75">
+        <label class="md-nav__link" for="__nav_3_77">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_75">
+        <label class="md-nav__title" for="__nav_3_77">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -6627,8 +6659,6 @@
         
           
         
-          
-        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -8860,20 +8890,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../weatherTransitionImmediate/" class="md-nav__link">
-        weatherTransitionImmediate
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../weatherTransitionStarted/" class="md-nav__link">
         weatherTransitionStarted
       </a>
@@ -8941,6 +8957,7 @@
 -->
 
 <h1 id="soundobjectplay">soundObjectPlay<a class="headerlink" href="#soundobjectplay" title="Permanent link">⚓︎</a></h1>
+<p>This event triggers before certain object sounds are about to be played. For example, item pickup sounds.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e soundObjectPlayEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">soundObjectPlayCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -8960,11 +8977,11 @@
 </div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>flags</code> (number): </li>
+<li><code>flags</code> (number): A flag whether the sound is looping or not. 0 means the sound doesn't loop, 1 means the sound loops.</li>
 <li><code>isNot3D</code> (boolean): </li>
-<li><code>pitch</code> (number): </li>
-<li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>): </li>
-<li><code>volume</code> (number): </li>
+<li><code>pitch</code> (number): The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].</li>
+<li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>): The sound about to be played.</li>
+<li><code>volume</code> (number): The volume of the sound. In range [1, 250].</li>
 </ul>
 
               
