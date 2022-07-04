@@ -23,7 +23,7 @@ event.register(tes3.event.traveled, traveledCallback)
 * `cell` ([tes3cell](../../types/tes3cell)): *Read-only*. The destination cell of the travel.
 * `companions` ([tes3mobileActor](../../types/tes3mobileActor)[], nil): *Read-only*. Companions that have traveled with the player, or `nil` if no companions were present.
 * `destination` ([tes3reference](../../types/tes3reference)): *Read-only*. The travel marker that marks the destination at which the player arrived at.
-* `hoursPassed` (number): *Read-only*. The time passed during travel, in hours.
+* `hoursPassed` (number): *Read-only*. The time passed during travel, in in-game hours.
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the merchant that transported the player.
 * `previousCell` ([tes3cell](../../types/tes3cell)): *Read-only*. The starting cell of the travel.
 * `price` (number): *Read-only*. The actual cost of the service.

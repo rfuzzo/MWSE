@@ -13,7 +13,7 @@
 --- @field cell tes3cell *Read-only*. The destination cell of the travel.
 --- @field companions tes3mobileActor[]|tes3mobileCreature[]|tes3mobileNPC[]|tes3mobilePlayer[]|nil *Read-only*. Companions that have traveled with the player, or `nil` if no companions were present.
 --- @field destination tes3reference *Read-only*. The travel marker that marks the destination at which the player arrived at.
---- @field hoursPassed number *Read-only*. The time passed during travel, in hours.
+--- @field hoursPassed number *Read-only*. The time passed during travel, in in-game hours.
 --- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor of the merchant that transported the player.
 --- @field previousCell tes3cell *Read-only*. The starting cell of the travel.
 --- @field price number *Read-only*. The actual cost of the service.

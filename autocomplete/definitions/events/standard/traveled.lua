@@ -35,7 +35,7 @@ return {
 		["hoursPassed"] = {
 			type = "number",
 			readOnly = true,
-			description = "The time passed during travel, in hours."
+			description = "The time passed during travel, in in-game hours."
 		},
 		["cell"] = {
 			type = "tes3cell",
