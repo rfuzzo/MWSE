@@ -8983,7 +8983,8 @@
     <span class="p">)</span>
 <span class="kr">end</span>
 
-<span class="c1">-- The fader needs to be created during `fadersCreated` event, so our createFader function is registered for that event.</span>
+<span class="c1">-- The fader needs to be created during `fadersCreated` event,</span>
+<span class="c1">-- so our createFader() function is registered for that event.</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">fadersCreated</span><span class="p">,</span> <span class="n">createFader</span><span class="p">)</span>
 
 
@@ -9012,11 +9013,13 @@
     <span class="kr">else</span>
         <span class="kr">return</span>
     <span class="kr">end</span>
-    <span class="c1">-- This method sets the current opacity of our fader to the value of `opacity` variable</span>
+    <span class="c1">-- This method sets the current opacity of our fader</span>
+    <span class="c1">-- to the value of `opacity` variable</span>
     <span class="n">fader</span><span class="p">:</span><span class="n">updateMaterialProperty</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
 
     <span class="c1">-- The &quot;\n&quot; sign means insert a new line here.</span>
-    <span class="c1">-- The &quot;%.1f&quot; code means insert the opacity&#39;s value in this text. The &quot;.1&quot; part means show 1 decimal after the decimal point.</span>
+    <span class="c1">-- The &quot;%.1f&quot; code means insert the opacity&#39;s value in this text.</span>
+    <span class="c1">-- The &quot;.1&quot; part means show 1 decimal after the decimal point.</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Fader opacity increased.</span><span class="se">\n</span><span class="s2">Current opacity: %.1f&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
 <span class="kr">end</span>
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">increaseOpacity</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">l</span> <span class="p">})</span>

@@ -9159,7 +9159,7 @@
 -->
 
 <h1 id="tes3fader">tes3fader<a class="headerlink" href="#tes3fader" title="Permanent link">⚓︎</a></h1>
-<p>An object that applies a graphical effect on the screen, such as screen glare or damage coloring.</p>
+<p>An object that applies a graphical effect on the screen, such as screen glare or damage coloring. For an example of how to set up a custom fader, see <a href="https://mwse.github.io/MWSE/events/fadersCreated/">fadersCreated</a> event.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="active"><code>active</code><a class="headerlink" href="#active" title="Permanent link">⚓︎</a></h3>
 <p>The activation state for the fader. Setting this effectively calls activate/deactivate.</p>
@@ -9217,14 +9217,14 @@
 </ul>
 <hr />
 <h3 id="setcolor"><code>setColor</code><a class="headerlink" href="#setcolor" title="Permanent link">⚓︎</a></h3>
-<p>Applies a coloring effect to the fader.</p>
+<p>Applies a coloring effect to the fader. A fader without a texture will apply a colouring effect over the screen. The colour set here can completely change the color of the fader's texture.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">setColor</span><span class="p">({</span> <span class="n">color</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">flag</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>color</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The RGB values to set.</li>
-<li><code>flag</code> (boolean)</li>
+<li><code>color</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The RGB values to set in [0.0, 1.0] range.</li>
+<li><code>flag</code> (boolean): <em>Default</em>: <code>false</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9243,17 +9243,17 @@
 </ul>
 <hr />
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
-<p>Updates the fader for the current frame.</p>
+<p>Updates the fader for the current frame. This method needs to be called each frame for fader to be present.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="updatematerialproperty"><code>updateMaterialProperty</code><a class="headerlink" href="#updatematerialproperty" title="Permanent link">⚓︎</a></h3>
-<p>Updates the fader for the current frame.</p>
+<p>Updates the fader's alpha. The fader needs to be active.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateMaterialProperty</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>value</code> (number)</li>
+<li><code>value</code> (number): The opacity of the fader in range [0.0, 1.0]</li>
 </ul>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
