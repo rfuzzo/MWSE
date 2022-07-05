@@ -1,6 +1,11 @@
 local timeBeforeTravel = 0
 local payload = {}
 
+local function travelEnd()
+	payload.cell = tes3.mobilePlayer.cell
+	event.trigger(tes3.event.traveled, payload, { filter = payload.cell })
+end
+
 ---@param e calcTravelPriceEventData
 local function travelStart(e)
 	if (not tes3.mobilePlayer.traveling) then -- Get time before traveling
@@ -17,10 +22,7 @@ local function travelStart(e)
 		-- first opening of the Travel Menu. Once again after a destination has been
 		-- selected, but before the player was teleported. This event is triggered
 		-- after the player is teleported to the destination.
-		timer.frame.delayOneFrame(function()
-			payload.cell = tes3.mobilePlayer.cell
-			event.trigger(tes3.event.traveled, payload)
-		end)
+		event.register(tes3.event.simulate, travelEnd, { doOnce = true })
 	end
 end
 

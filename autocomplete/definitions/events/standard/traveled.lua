@@ -48,6 +48,7 @@ return {
 			description = "The starting cell of the travel."
 		}
 	},
+	filter = "cell",
 	examples = {
 		["travelAccident"] = {
 			title = "A travel accident",
