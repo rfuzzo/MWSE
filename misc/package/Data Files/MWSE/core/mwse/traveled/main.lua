@@ -26,6 +26,15 @@ local function travelStart(e)
 	end
 end
 
+local function clear()
+	if event.isRegistered(tes3.event.simulate, travelEnd, { doOnce = true }) then
+		event.unregister(tes3.event.simulate, travelEnd, { doOnce = true })
+		payload = {}
+		timeBeforeTravel = 0
+	end
+end
+
 event.register(tes3.event.initialized, function()
 	event.register(tes3.event.calcTravelPrice, travelStart, { priority = -100 })
+	event.register(tes3.event.loaded, clear)
 end)
