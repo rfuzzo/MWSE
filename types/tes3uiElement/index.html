@@ -10922,13 +10922,16 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="copy"><code>copy</code><a class="headerlink" href="#copy" title="Permanent link">⚓︎</a></h3>
 <p>Copies this element to a new parent. This function can have unintended consequences. The specifics of what exact elements are being copied is important.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">copy</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">copyChildren</span><span class="p">,</span> <span class="n">copyProperties</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">copy</span><span class="p">({</span> <span class="n">to</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">copyChildren</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">copyProperties</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>to</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): Where to create the copy.</li>
-<li><code>copyChildren</code> (boolean): <em>Default</em>: <code>true</code>. If true, all children will also be copied to the newly created element.</li>
-<li><code>copyProperties</code> (boolean): <em>Default</em>: <code>true</code>. If true, all properties will be copied to the newly created element.</li>
+<li><code>params</code> (table)<ul>
+<li><code>to</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): The element to create the copy in. Will be the parent of the newly created element.</li>
+<li><code>copyChildren</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, all children will also be copied to the newly created element.</li>
+<li><code>copyProperties</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, all properties will be copied to the newly created element.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
