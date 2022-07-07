@@ -2647,6 +2647,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3cancastspells" class="md-nav__link">
+    tes3.canCastSpells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3cancelanimationloop" class="md-nav__link">
     tes3.cancelAnimationLoop
   </a>
@@ -3272,6 +3279,13 @@
           <li class="md-nav__item">
   <a href="#tes3getspecializationname" class="md-nav__link">
     tes3.getSpecializationName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3getspells" class="md-nav__link">
+    tes3.getSpells
   </a>
   
 </li>
@@ -10576,6 +10590,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3cancastspells" class="md-nav__link">
+    tes3.canCastSpells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3cancelanimationloop" class="md-nav__link">
     tes3.cancelAnimationLoop
   </a>
@@ -11201,6 +11222,13 @@
           <li class="md-nav__item">
   <a href="#tes3getspecializationname" class="md-nav__link">
     tes3.getSpecializationName
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tes3getspells" class="md-nav__link">
+    tes3.getSpells
   </a>
   
 </li>
@@ -12450,6 +12478,19 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>price</code> (number): The calculated price, filtered by events.</li>
+</ul>
+<hr />
+<h3 id="tes3cancastspells"><code>tes3.canCastSpells</code><a class="headerlink" href="#tes3cancastspells" title="Permanent link">⚓︎</a></h3>
+<p>Returns <code>true</code> if the <code>target</code> actor can cast spells, otherwise returns <code>false</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">canCastSpells</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileObject">tes3mobileObject</a>, <a href="../../types/tes3physicalObject">tes3physicalObject</a>): The actor to check.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="tes3cancelanimationloop"><code>tes3.cancelAnimationLoop</code><a class="headerlink" href="#tes3cancelanimationloop" title="Permanent link">⚓︎</a></h3>
@@ -13799,6 +13840,23 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>name</code> (string)</li>
+</ul>
+<hr />
+<h3 id="tes3getspells"><code>tes3.getSpells</code><a class="headerlink" href="#tes3getspells" title="Permanent link">⚓︎</a></h3>
+<p>Gets the spells of an actor. This can be filtered by <code>spellType</code> and set to include or exclude basic, racial and birthsign spells.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSpells</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">spellType</span><span class="p">,</span> <span class="n">getActorSpells</span><span class="p">,</span> <span class="n">getRaceSpells</span><span class="p">,</span> <span class="n">getBirthsignSpells</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileObject">tes3mobileObject</a>, <a href="../../types/tes3physicalObject">tes3physicalObject</a>): The actor to get the spells of.</li>
+<li><code>spellType</code> (number): <em>Default</em>: <code>-1</code>. The spell type to filter for. Only spells with this spell type will be returned. A value of <code>-1</code> will return spells of all types. Maps to values in the <a href="https://mwse.github.io/MWSE/references/spell-types/"><code>tes3.spellType</code></a> table.</li>
+<li><code>getActorSpells</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, the spells of the actor itself will be included in the result. This includes every spell except racial and birthsign spells.</li>
+<li><code>getRaceSpells</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, the spells of the actor's race will be included in the result.</li>
+<li><code>getBirthsignSpells</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, the spells of the actor's birthsign will be included in the result.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3spell">tes3spell</a>[])</li>
 </ul>
 <hr />
 <h3 id="tes3gettopmenu"><code>tes3.getTopMenu</code><a class="headerlink" href="#tes3gettopmenu" title="Permanent link">⚓︎</a></h3>
