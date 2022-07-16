@@ -6087,6 +6087,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ignorelayoutx" class="md-nav__link">
+    ignoreLayoutX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ignorelayouty" class="md-nav__link">
+    ignoreLayoutY
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#imagescalex" class="md-nav__link">
     imageScaleX
   </a>
@@ -9952,6 +9966,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ignorelayoutx" class="md-nav__link">
+    ignoreLayoutX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ignorelayouty" class="md-nav__link">
+    ignoreLayoutY
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#imagescalex" class="md-nav__link">
     imageScaleX
   </a>
@@ -10587,72 +10615,74 @@
 <p>Elements can have custom data attached using their <code>Property</code>_ key-value store, and specific Elements have specific <code>element.widget</code> accessors to control behaviour.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="absoluteposalignx"><code>absolutePosAlignX</code><a class="headerlink" href="#absoluteposalignx" title="Permanent link">⚓︎</a></h3>
-<p>Sets element position to a point relative to the parent element. 0.0 = left/top content edge, 1.0 = right/bottom content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.</p>
-<pre><code>Bug note: Elements may not respond to widthProportional/heightProportional sizing after either of these properties are set. If you need to use both you should consider testing if it works first.
-</code></pre>
+<p>The horizontal alignment of the element relative to it's parent element. Can be <code>nil</code>. If <code>nil</code>, deactivates behaviour associated with this property. Valid values range from <code>0.0</code> to <code>1.0</code>. Sets the element's <code>positionX</code> to a point relative to the parent element. A value of <code>0.0</code> is equal to the parent element's left content edge, whereas a value of <code>1.0</code> is equal to the parent element's right content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.</p>
+<p>Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx"><code>tes3uiElement.ignoreLayoutX</code></a>.</p>
+<p>Elements may not respond to <code>widthProportional</code> sizing after this property is set. If you need to use both you should consider testing if it works first.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="absoluteposaligny"><code>absolutePosAlignY</code><a class="headerlink" href="#absoluteposaligny" title="Permanent link">⚓︎</a></h3>
-<p>See absolutePosAlignX.</p>
+<p>The vertical alignment of the element relative to it's parent element. Can be <code>nil</code>. If <code>nil</code>, deactivates behaviour associated with this property. Valid values range from <code>0.0</code> to <code>1.0</code>. Sets the element's <code>positionY</code> to a point relative to the parent element. A value of <code>0.0</code> is equal to the parent element's top content edge, whereas a value of <code>1.0</code> is equal to the parent element's bottom content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.</p>
+<p>Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty"><code>tes3uiElement.ignoreLayoutY</code></a>.</p>
+<p>Elements may not respond to <code>heightProportional</code> sizing after this property is set. If you need to use both you should consider testing if it works first.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="alpha"><code>alpha</code><a class="headerlink" href="#alpha" title="Permanent link">⚓︎</a></h3>
-<p>Element alpha colour, using range [0.0, 1.0]. Used to composite elements. If you wish to hide an element completely, use <code>disable</code> instead.</p>
+<p>The element's alpha color. Valid values range from <code>0.0</code> to <code>1.0</code>. Used to composite elements. If you wish to hide an element completely, use <code>disable</code> instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="autoheight"><code>autoHeight</code><a class="headerlink" href="#autoheight" title="Permanent link">⚓︎</a></h3>
-<p>When <code>true</code>, automatically expands element dimensions to fit child elements. Dimensions are restricted by <code>minWidth</code>, <code>minHeight</code>, <code>maxWidth</code> and <code>maxHeight</code> properties.</p>
+<p>If <code>true</code>, automatically expands element dimensions to fit child elements. Ignores child elements that have <code>ignoreLayoutY</code> set to <code>true</code>. Dimensions are restricted by <code>minWidth</code>, <code>minHeight</code>, <code>maxWidth</code> and <code>maxHeight</code> properties.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="autowidth"><code>autoWidth</code><a class="headerlink" href="#autowidth" title="Permanent link">⚓︎</a></h3>
-<p>When <code>true</code>, automatically expands element dimensions to fit child elements. Dimensions are restricted by <code>minWidth</code>, <code>minHeight</code>, <code>maxWidth</code> and <code>maxHeight</code> properties.</p>
+<p>If <code>true</code>, automatically expands element dimensions to fit child elements. Ignores child elements that have <code>ignoreLayoutX</code> set to <code>true</code>. Dimensions are restricted by <code>minWidth</code>, <code>minHeight</code>, <code>maxWidth</code> and <code>maxHeight</code> properties.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="borderallsides"><code>borderAllSides</code><a class="headerlink" href="#borderallsides" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Border size in pixels. Border is the extra empty space around an element. Individual border sizes default to using the borderAllSides setting.</p>
+<p>Integer number. The border size in pixels. Border is the extra empty space around an element. Individual border sizes default to using the borderAllSides setting.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="borderbottom"><code>borderBottom</code><a class="headerlink" href="#borderbottom" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Bottom border size in pixels. When this is set to <code>-1</code>, the borderAllSides setting is used for this side instead.</p>
+<p>Integer number. The bottom border size in pixels. When this is set to <code>-1</code>, the <code>borderAllSides</code> setting is used for this side instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="borderleft"><code>borderLeft</code><a class="headerlink" href="#borderleft" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Left border size in pixels. When this is set to <code>-1</code>, the borderAllSides setting is used for this side instead.</p>
+<p>Integer number. The left border size in pixels. When this is set to <code>-1</code>, the <code>borderAllSides</code> setting is used for this side instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="borderright"><code>borderRight</code><a class="headerlink" href="#borderright" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Left border size in pixels. When this is set to <code>-1</code>, the borderAllSides setting is used for this side instead.</p>
+<p>Integer number. The left border size in pixels. When this is set to <code>-1</code>, the <code>borderAllSides</code> setting is used for this side instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="bordertop"><code>borderTop</code><a class="headerlink" href="#bordertop" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Top border size in pixels. When this is set to <code>-1</code>, the borderAllSides setting is used for this side instead.</p>
+<p>Integer number. The top border size in pixels. When this is set to <code>-1</code>, the <code>borderAllSides</code> setting is used for this side instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -10696,7 +10726,7 @@
 </ul>
 <hr />
 <h3 id="color"><code>color</code><a class="headerlink" href="#color" title="Permanent link">⚓︎</a></h3>
-<p>The RGB color of the element. An array of 3 numbers with values ranging from <code>0.0</code> to <code>1.0</code>. For menus and rects, it sets the background colour. For text, it sets the text colour. For images, it multiplies the image by the colour.</p>
+<p>The RGB color of the element. An array of 3 numbers with values ranging from <code>0.0</code> to <code>1.0</code>. For menus and rects, it sets the background color. For text, it sets the text color. For images, it multiplies the image by the color.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number[])</li>
@@ -10763,6 +10793,22 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="ignorelayoutx"><code>ignoreLayoutX</code><a class="headerlink" href="#ignorelayoutx" title="Permanent link">⚓︎</a></h3>
+<p>If <code>true</code>, the element's <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#positionx"><code>tes3uiElement.positionX</code></a> can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposalignx"><code>tes3uiElement.absolutePosAlignX</code></a>.</p>
+<p>Elements that bypass parent layout will be ignored when automatically determing the parent's width. See <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#autowidth"><code>tes3uiElement.autoWidth</code></a> for more information.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="ignorelayouty"><code>ignoreLayoutY</code><a class="headerlink" href="#ignorelayouty" title="Permanent link">⚓︎</a></h3>
+<p>If <code>true</code>, the element's <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#positiony"><code>tes3uiElement.positionY</code></a> can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposaligny"><code>tes3uiElement.absolutePosAlignY</code></a>.</p>
+<p>Elements that bypass parent layout will be ignored when automatically determing the parent's height. See <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#autoheight"><code>tes3uiElement.autoHeight</code></a> for more information.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="imagescalex"><code>imageScaleX</code><a class="headerlink" href="#imagescalex" title="Permanent link">⚓︎</a></h3>
@@ -10864,14 +10910,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="positionx"><code>positionX</code><a class="headerlink" href="#positionx" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Element X position relative to its parent's top-left content area. For top-level menus there is a difference: (0, 0) is the centre of the screen.</p>
+<p>Integer number. The element's horizontal position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx"><code>tes3uiElement.ignoreLayoutX</code></a> is <code>true</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="positiony"><code>positionY</code><a class="headerlink" href="#positiony" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. Element Y position relative to its parent's top-left content area. For top-level menus there is a difference: (0, 0) is the centre of the screen.</p>
+<p>Integer number. The element's vertical position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty"><code>tes3uiElement.ignoreLayoutY</code></a> is <code>true</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -10961,7 +11007,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="wraptext"><code>wrapText</code><a class="headerlink" href="#wraptext" title="Permanent link">⚓︎</a></h3>
-<p>Controls text wrapping. Setting this to <code>true</code> will also set <code>layoutHeightFraction</code> to <code>1.0</code>, which is required for wrapping text to adjust to its container size.</p>
+<p>Controls text wrapping. Setting this to <code>true</code> will also set <code>heightProportional</code> to <code>1.0</code>, which is required for wrapping text to adjust to its container size.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -11215,7 +11261,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="createrect"><code>createRect</code><a class="headerlink" href="#createrect" title="Permanent link">⚓︎</a></h3>
-<p>Creates a filled rectangle. The rectangle is displayed as filled with the element's colour. It supports alpha compositing.</p>
+<p>Creates a filled rectangle. The rectangle is displayed as filled with the element's color. It supports alpha compositing.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createRect</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">randomizeColor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11296,7 +11342,7 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="createtextselect"><code>createTextSelect</code><a class="headerlink" href="#createtextselect" title="Permanent link">⚓︎</a></h3>
-<p>Creates a selectable line of text, with configurable hover, click, and disabled colours. Can be used to create a list box by placing them in a ScrollPane.</p>
+<p>Creates a selectable line of text, with configurable hover, click, and disabled colors. Can be used to create a list box by placing them in a ScrollPane.</p>
 <p>Text select specific properties can be accessed through the <code>widget</code> property. The widget type for text selects is <a href="https://mwse.github.io/MWSE/types/tes3uiTextSelect/"><code>tes3uiTextSelect</code></a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createTextSelect</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">text</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">state</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
