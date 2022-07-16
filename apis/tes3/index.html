@@ -15314,23 +15314,22 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
 </ul>
 <hr />
 <h3 id="tes3triggercrime"><code>tes3.triggerCrime</code><a class="headerlink" href="#tes3triggercrime" title="Permanent link">⚓︎</a></h3>
-<p>Emulates the player committing a crime.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">triggerCrime</span><span class="p">({</span> <span class="n">criminal</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">forceDetection</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">victim</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>Emulates the player committing a crime. Returns <code>true</code> if the crime was witnessed by an actor.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">triggerCrime</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">victim</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">forceDetection</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>criminal</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>.</li>
-<li><code>forceDetection</code> (boolean): <em>Default</em>: <code>false</code>. Can be set to true to ignore normal detection checks.</li>
-<li><code>type</code> (number): <em>Default</em>: <code>tes3.crimeType.stealing</code>. Maps to <a href="https://mwse.github.io/MWSE/references/crime-types/"><code>tes3.crimeType</code></a> constants.</li>
-<li><code>value</code> (number): Penalty for the crime. Defaults to 25 for pickpocketing.</li>
-<li><code>victim</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>.</li>
+<li><code>type</code> (number): <em>Default</em>: <code>tes3.crimeType.theft</code>. The type of crime to be committed. Maps to values in the <a href="https://mwse.github.io/MWSE/references/crime-types/"><code>tes3.crimeType</code></a> table.</li>
+<li><code>victim</code> (<a href="../../types/tes3mobileNPC">tes3mobileNPC</a>, <a href="../../types/tes3actor">tes3actor</a>, <a href="../../types/tes3faction">tes3faction</a>): <em>Default</em>: <code>tes3.mobilePlayer</code>. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a <code>type</code> of <code>tes3.crimeType.trespass</code> or <code>tes3.crimeType.werewolf</code>.</li>
+<li><code>value</code> (number): <em>Default</em>: <code>0</code>. Only valid if <code>type</code> is <code>tes3.crimeType.theft</code>. The value of the stolen objects.</li>
+<li><code>forceDetection</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, bypasses regular detection logic and forces all nearby actors to detect the crime.</li>
 </ul>
 </li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>executed</code> (boolean)</li>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="tes3undotransform"><code>tes3.undoTransform</code><a class="headerlink" href="#tes3undotransform" title="Permanent link">⚓︎</a></h3>
