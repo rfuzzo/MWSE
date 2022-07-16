@@ -10616,7 +10616,7 @@
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="absoluteposalignx"><code>absolutePosAlignX</code><a class="headerlink" href="#absoluteposalignx" title="Permanent link">⚓︎</a></h3>
 <p>The horizontal alignment of the element relative to it's parent element. Can be <code>nil</code>. If <code>nil</code>, deactivates behaviour associated with this property. Valid values range from <code>0.0</code> to <code>1.0</code>. Sets the element's <code>positionX</code> to a point relative to the parent element. A value of <code>0.0</code> is equal to the parent element's left content edge, whereas a value of <code>1.0</code> is equal to the parent element's right content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.</p>
-<p>Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx"><code>tes3uiElement.ignoreLayoutX</code></a>.</p>
+<p>Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx"><code>ignoreLayoutX</code></a>.</p>
 <p>Elements may not respond to <code>widthProportional</code> sizing after this property is set. If you need to use both you should consider testing if it works first.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10625,7 +10625,7 @@
 <hr />
 <h3 id="absoluteposaligny"><code>absolutePosAlignY</code><a class="headerlink" href="#absoluteposaligny" title="Permanent link">⚓︎</a></h3>
 <p>The vertical alignment of the element relative to it's parent element. Can be <code>nil</code>. If <code>nil</code>, deactivates behaviour associated with this property. Valid values range from <code>0.0</code> to <code>1.0</code>. Sets the element's <code>positionY</code> to a point relative to the parent element. A value of <code>0.0</code> is equal to the parent element's top content edge, whereas a value of <code>1.0</code> is equal to the parent element's bottom content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.</p>
-<p>Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty"><code>tes3uiElement.ignoreLayoutY</code></a>.</p>
+<p>Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty"><code>ignoreLayoutY</code></a>.</p>
 <p>Elements may not respond to <code>heightProportional</code> sizing after this property is set. If you need to use both you should consider testing if it works first.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10796,16 +10796,16 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="ignorelayoutx"><code>ignoreLayoutX</code><a class="headerlink" href="#ignorelayoutx" title="Permanent link">⚓︎</a></h3>
-<p>If <code>true</code>, the element's <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#positionx"><code>tes3uiElement.positionX</code></a> can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposalignx"><code>tes3uiElement.absolutePosAlignX</code></a>.</p>
-<p>Elements that bypass parent layout will be ignored when automatically determing the parent's width. See <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#autowidth"><code>tes3uiElement.autoWidth</code></a> for more information.</p>
+<p>If <code>true</code>, the element's <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#positionx"><code>positionX</code></a> can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposalignx"><code>absolutePosAlignX</code></a>.</p>
+<p>Elements that bypass parent layout will be ignored when automatically determing the parent's width. See <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#autowidth"><code>autoWidth</code></a> for more information.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="ignorelayouty"><code>ignoreLayoutY</code><a class="headerlink" href="#ignorelayouty" title="Permanent link">⚓︎</a></h3>
-<p>If <code>true</code>, the element's <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#positiony"><code>tes3uiElement.positionY</code></a> can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposaligny"><code>tes3uiElement.absolutePosAlignY</code></a>.</p>
-<p>Elements that bypass parent layout will be ignored when automatically determing the parent's height. See <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#autoheight"><code>tes3uiElement.autoHeight</code></a> for more information.</p>
+<p>If <code>true</code>, the element's <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#positiony"><code>positionY</code></a> can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposaligny"><code>absolutePosAlignY</code></a>.</p>
+<p>Elements that bypass parent layout will be ignored when automatically determing the parent's height. See <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#autoheight"><code>autoHeight</code></a> for more information.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -10910,14 +10910,14 @@ Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 </ul>
 <hr />
 <h3 id="positionx"><code>positionX</code><a class="headerlink" href="#positionx" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. The element's horizontal position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx"><code>tes3uiElement.ignoreLayoutX</code></a> is <code>true</code>.</p>
+<p>Integer number. The element's horizontal position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx"><code>ignoreLayoutX</code></a> is <code>true</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="positiony"><code>positionY</code><a class="headerlink" href="#positiony" title="Permanent link">⚓︎</a></h3>
-<p>Integer number. The element's vertical position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty"><code>tes3uiElement.ignoreLayoutY</code></a> is <code>true</code>.</p>
+<p>Integer number. The element's vertical position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless <a href="https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty"><code>ignoreLayoutY</code></a> is <code>true</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
