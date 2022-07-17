@@ -12716,21 +12716,41 @@
 </code></pre></div>
 <hr />
 <h3 id="tes3createobject"><code>tes3.createObject</code><a class="headerlink" href="#tes3createobject" title="Permanent link">⚓︎</a></h3>
-<p>Create an object and returns it. The created object will be part of the saved game. Currently supported object types are: <code>tes3.objectType.activator</code>, <code>.alchemy</code>, <code>.ammo</code>, <code>.book</code>, <code>.clothing</code>, <code>.container</code>, <code>.enchantment</code>, <code>.miscItem</code>, <code>.sound</code>, <code>.spell</code>, <code>.static</code>, and <code>.weapon</code>.</p>
+<p>Creates an object and returns it. The created object will be part of the saved game.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">createdObject</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">createObject</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">objectType</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">getIfExists</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li>
+<p><code>params</code> (table)</p>
+<ul>
 <li><code>id</code> (string): <em>Optional</em>. The id of the new object.</li>
-<li><code>objectType</code> (number): Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants. Used to filter object type to create.</li>
-<li><code>getIfExists</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, an existing object of the same type and ID will be returned instead of creating a new one.</li>
+<li>
+<p><code>objectType</code> (number): The type of object to create. Maps to values in the <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> table. Supported object types are:</p>
+<ul>
+<li><code>tes3.objectType.activator</code></li>
+<li><code>tes3.objectType.alchemy</code></li>
+<li><code>tes3.objectType.armor</code></li>
+<li><code>tes3.objectType.book</code></li>
+<li><code>tes3.objectType.clothing</code></li>
+<li><code>tes3.objectType.container</code></li>
+<li><code>tes3.objectType.enchantment</code></li>
+<li><code>tes3.objectType.misc</code></li>
+<li><code>tes3.objectType.sound</code></li>
+<li><code>tes3.objectType.spell</code></li>
+<li><code>tes3.objectType.static</code></li>
+<li><code>tes3.objectType.weapon</code></li>
+</ul>
+</li>
+<li>
+<p><code>getIfExists</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, an existing object of the same <code>objectType</code> and <code>id</code> will be returned instead of creating a new one.</p>
+</li>
 </ul>
 </li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>createdObject</code> (<a href="../../types/tes3activator">tes3activator</a>, <a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3container">tes3container</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3misc">tes3misc</a>, <a href="../../types/tes3sound">tes3sound</a>, <a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3static">tes3static</a>, <a href="../../types/tes3weapon">tes3weapon</a>)</li>
+<li><code>createdObject</code> (<a href="../../types/tes3activator">tes3activator</a>, <a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3armor">tes3armor</a>, <a href="../../types/tes3book">tes3book</a>, <a href="../../types/tes3clothing">tes3clothing</a>, <a href="../../types/tes3container">tes3container</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3misc">tes3misc</a>, <a href="../../types/tes3sound">tes3sound</a>, <a href="../../types/tes3spell">tes3spell</a>, <a href="../../types/tes3static">tes3static</a>, <a href="../../types/tes3weapon">tes3weapon</a>)</li>
 </ul>
 <details class="example">
 <summary>Example: Creates a tes3misc object</summary>
