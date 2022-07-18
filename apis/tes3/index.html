@@ -13366,7 +13366,7 @@
 </ul>
 <hr />
 <h3 id="tes3geteffectmagnitude"><code>tes3.getEffectMagnitude</code><a class="headerlink" href="#tes3geteffectmagnitude" title="Permanent link">⚓︎</a></h3>
-<p>This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied; it is always an integer, so it is used in some UI elements.</p>
+<p>This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">effectiveMagnitude</span><span class="p">,</span> <span class="n">magnitude</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getEffectMagnitude</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -13382,7 +13382,7 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>effectiveMagnitude</code> (number): The effective magnitude after all the actor's resistances are applied.</li>
-<li><code>magnitude</code> (number): The magnitude before any of the actor's resistances are applied.</li>
+<li><code>magnitude</code> (integer): The magnitude before any of the actor's resistances are applied.</li>
 </ul>
 <details class="example">
 <summary>Example: Get both magnitudes.</summary>
