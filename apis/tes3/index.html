@@ -13222,13 +13222,27 @@
 </ul>
 <hr />
 <h3 id="tes3getattachment"><code>tes3.getAttachment</code><a class="headerlink" href="#tes3getattachment" title="Permanent link">⚓︎</a></h3>
-<p>Fetches an attachment with a given type.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">getAttachment</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">attachment</span><span class="p">)</span>
+<p>Fetches an attachment with a given type from a reference. Will return <code>nil</code> if no attachment of that type has been found.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getAttachment</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">attachment</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
-<li><code>attachment</code> (string)</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The reference to get the attachment from.</li>
+<li><code>attachment</code> (string): The type of attachment to get. Possible values are:<ul>
+<li><code>"bodyPartManager"</code>: Returns <code>tes3bodyPartManager</code></li>
+<li><code>"light"</code>: Returns <code>tes3lightNode</code></li>
+<li><code>"lock"</code>: Returns <code>tes3lockNode</code></li>
+<li><code>"leveledBase"</code>: Returns <code>tes3reference</code></li>
+<li><code>"travelDestination"</code>: Returns <code>tes3travelDestinationNode</code></li>
+<li><code>"variables"</code>: Returns <code>tes3itemData</code></li>
+<li><code>"actor"</code>: Returns <code>tes3mobileActor</code></li>
+<li><code>"animation"</code>: Returns <code>tes3animationData</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (nil, <a href="../../types/tes3bodyPartManager">tes3bodyPartManager</a>, <a href="../../types/tes3itemData">tes3itemData</a>, <a href="../../types/tes3lightNode">tes3lightNode</a>, <a href="../../types/tes3lockNode">tes3lockNode</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3travelDestinationNode">tes3travelDestinationNode</a>, <a href="../../types/tes3animationData">tes3animationData</a>)</li>
 </ul>
 <hr />
 <h3 id="tes3getattributename"><code>tes3.getAttributeName</code><a class="headerlink" href="#tes3getattributename" title="Permanent link">⚓︎</a></h3>
