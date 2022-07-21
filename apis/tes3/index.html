@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
@@ -12113,7 +12113,7 @@
 <li><code>id</code> (number): Id of the new effect. Maps to newly claimed <code>tes3.effect</code> constants with <code>tes3.claimSpellEffectId()</code>. If the effect of this id already exists, an error will be thrown.</li>
 <li><code>name</code> (string): <em>Default</em>: <code>Unnamed Effect</code>. Name of the effect.</li>
 <li><code>baseCost</code> (number): <em>Default</em>: <code>1</code>. Base magicka cost for the effect.</li>
-<li><code>school</code> (number): <em>Default</em>: <code>tes3.magicSchool.alteration</code>. The magic school the new effect will be assigned to. Maps to <a href="https://mwse.github.io/MWSE/references/magic-schools/"><code>tes3.magicSchool</code></a> constants.</li>
+<li><code>school</code> (integer): <em>Default</em>: <code>tes3.magicSchool.alteration</code>. The magic school the new effect will be assigned to. Maps to <a href="https://mwse.github.io/MWSE/references/magic-schools/"><code>tes3.magicSchool</code></a> constants.</li>
 <li><code>size</code> (number): <em>Default</em>: <code>1</code>. The size scale for the spells containing this magic effect.</li>
 <li><code>sizeCap</code> (number): <em>Default</em>: <code>1</code>. The maximum possible size of the projectile.</li>
 <li><code>speed</code> (number): <em>Default</em>: <code>1</code>.</li>
@@ -12130,10 +12130,10 @@
 <li><code>boltSound</code> (string): The sound ID which will be played when a spell with this effect is in flight. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
 <li><code>hitSound</code> (string): The sound ID which will be played when a spell with this effect hits something. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
 <li><code>areaSound</code> (string): The sound ID which will be played on area of effect impact. Must be a string no longer than 31 characters long. If not specified, the default sound for the spell school will be used.</li>
-<li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect is cast.</li>
-<li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect is in flight.</li>
-<li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect hits something.</li>
-<li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Optional</em>. The visual played when a spell with this effect, with area of effect hits something.</li>
+<li><code>castVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The visual played when a spell with this effect is cast.</li>
+<li><code>boltVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The visual played when a spell with this effect is in flight.</li>
+<li><code>hitVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The visual played when a spell with this effect hits something.</li>
+<li><code>areaVFX</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>, string): <em>Optional</em>. The visual played when a spell with this effect, with area of effect hits something.</li>
 <li><code>allowEnchanting</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used in a custom enchantment.</li>
 <li><code>allowSpellmaking</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect can be used in a custom spell.</li>
 <li><code>appliesOnce</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether this effect applies once or is a ticking effect.</li>
@@ -12158,7 +12158,7 @@
     * <code>onTick</code> (function): <em>Optional</em>. A function which will be called on each tick of a spell containing this effect. A table <code>tickParams</code> will be passed to the callback function. Note: <code>dt</code>(frame time) scaling is handled automatically.
         - <code>tickParams</code> (table)
             - <code>effectId</code> (number)
-            - <code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>): Access to the magic source of the effect instance. 
+            - <code>sourceInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicSourceInstance/">tes3magicSourceInstance</a>): Access to the magic source of the effect instance.
             - <code>deltaTime</code> (number): The time passed since the last tick of the spell.
             - <code>effectInstance</code> (<a href="https://mwse.github.io/MWSE/types/tes3magicEffectInstance/">tes3magicEffectInstance</a>): Access to the magic effect instance.
             - <code>effectIndex</code> (number): The index of the effect in the spell.</p>
@@ -12175,11 +12175,11 @@
             - `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must returns boolean values.
                 **Parameters**
                 - `resistParams` (table)
-                    - `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance. 
+                    - `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
                     - `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
                     - `effectIndex` (number): The index of the effect in the spell.
 
-    - triggerBoundWeapon(`id`): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID. 
+    - triggerBoundWeapon(`id`): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID.
         **Parameters:**
         - `id` (string): The ID of the weapon object to summon.
 
@@ -12197,7 +12197,7 @@
 </code></pre>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>effect</code> (<a href="../../types/tes3effect">tes3effect</a>)</li>
+<li><code>effect</code> (<a href="../../types/tes3magicEffect">tes3magicEffect</a>)</li>
 </ul>
 <details class="example">
 <summary>Example: Fire Damage effect</summary>
@@ -15081,15 +15081,12 @@
 <hr />
 <h3 id="tes3setsourceless"><code>tes3.setSourceless</code><a class="headerlink" href="#tes3setsourceless" title="Permanent link">⚓︎</a></h3>
 <p>Sets an object (of any kind) to be sourceless, which are objects the game does not store in savegames. This can be useful for mod-created temporary objects which are not necessary to save.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setSourceless</span><span class="p">({</span> <span class="n">object</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sourceless</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setSourceless</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">sourceless</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
 <li><code>object</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>): The object whose sourceless flag to modify.</li>
 <li><code>sourceless</code> (boolean): <em>Default</em>: <code>true</code>. Allows flagging an object as sourceless or undoing that action.</li>
-</ul>
-</li>
 </ul>
 <hr />
 <h3 id="tes3setstatistic"><code>tes3.setStatistic</code><a class="headerlink" href="#tes3setstatistic" title="Permanent link">⚓︎</a></h3>
