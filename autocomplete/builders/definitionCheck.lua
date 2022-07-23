@@ -6,18 +6,42 @@ local lfs = require("lfs")
 local common = require("builders.common")
 
 common.log("Analizing autocomplete defintions...")
+
+--
+-- Settings
+--
+
+-- Setting this will also check definitions with `deprecated = true`.
+-- For example, this disables checks in mwscript API and tes3alchemy.create() etc.
+local checkDeprecated = false
+
+
 -- Base containers to hold our compiled data.
 local globals = {}
 local classes = {}
 local events = {}
 local warnings = {}
 
--- Missing optional flag on arguments that have default values set.
+
+-- Check missing optional flag on arguments that have default values set.
+local function checkArgument(package, argument)
+	if argument.default and	argument.optional == nil then
+		local warning = ("%s definition, argument: %s is missing `optional`, but provided `default`."):format(package.namespace, argument.name)
+		table.insert(warnings, warning)
+	end
+end
+
 local function checkFunction(package)
+	if package.deprecated and not checkDeprecated then
+		return
+	end
 	for _, argument in ipairs(package.arguments or {}) do
-		if argument.default and	argument.optional == nil then
-			local warning = ("%s definition, argument: %s is missing `optional`, but provided `default`."):format(package.namespace, argument.name)
-			table.insert(warnings, warning)
+		if (argument.tableParams) then
+			for _, tableArgument in ipairs(argument.tableParams) do
+				checkArgument(package, tableArgument)
+			end
+		else
+			checkArgument(package, argument)
 		end
 	end
 end
@@ -30,6 +54,10 @@ local function checkMissingDescription(package)
 end
 
 local function check(package)
+	if package.deprecated and not checkDeprecated then
+		return
+	end
+
 	if (package.type == "function") then
 		checkFunction(package)
 		checkMissingDescription(package)
