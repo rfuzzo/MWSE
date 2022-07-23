@@ -34,6 +34,16 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "Perform definitions checks",
+			"type": "shell",
+			"command": ".\\lua\\lua.exe",
+			"args": [
+				".\\builders\\definitionCheck.lua"
+			],
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
 			"label": "Build All",
 			"command": "echo",
 			"args": [
