@@ -12966,7 +12966,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): <em>Optional</em>. Defaults to the transition fader.</li>
 <li><code>duration</code> (number): <em>Default</em>: <code>1.0</code>. Time, in seconds, for the fade.</li>
 </ul>
@@ -12979,7 +12979,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): <em>Optional</em>. Defaults to the transition fader.</li>
 <li><code>duration</code> (number): <em>Default</em>: <code>1.0</code>. Time, in seconds, for the fade.</li>
 </ul>
@@ -12992,7 +12992,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>): <em>Optional</em>. Defaults to the transition fader.</li>
 <li><code>duration</code> (number): <em>Default</em>: <code>1.0</code>. Time, in seconds, for the fade.</li>
 <li><code>value</code> (number): <em>Default</em>: <code>1.0</code>.</li>
@@ -13594,7 +13594,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>actor</code> (<a href="../../types/tes3actor">tes3actor</a>, string): <em>Optional</em>. The actor (or their ID) for whom to retrieve player's kill count.</li>
 </ul>
 </li>
@@ -15095,7 +15095,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>enabled</code> (boolean): <em>Default</em>: <code>false</code>. Setting this to false will disable any kind of control.</li>
 <li><code>attack</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player from attacking.</li>
 <li><code>jumping</code> (boolean): <em>Default</em>: <code>false</code>. If this is false, it will block player from jumping.</li>
@@ -15163,7 +15163,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>enabled</code> (boolean): <em>Default</em>: <code>true</code>. This flag sets the vanity mode as enabled or disabled.</li>
 <li><code>checkVanityDisabled</code> (boolean): <em>Default</em>: <code>true</code>. This will prevent changing vanity mode according to vanityDisabled flag on tes3.mobilePlayer.</li>
 <li><code>toggle</code> (boolean): <em>Default</em>: <code>false</code>. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.</li>
@@ -15232,8 +15232,8 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
-<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Optional</em>. The actor to use for calculating the service price.</li>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
+<li><code>serviceActor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string): <em>Default</em>: <code>tes3mobilePlayer</code>. The actor to use for calculating the service price.</li>
 </ul>
 </li>
 </ul>
@@ -15245,7 +15245,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.</li>
 <li><code>checkForSolidGround</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is underwater. If underwater, false is returned.</li>
 <li><code>checkSleepingIllegal</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the sleeping in the current cell is illegal. If illegal, then the player will be prompted to wait instead of rest.</li>

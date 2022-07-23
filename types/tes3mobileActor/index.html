@@ -12283,7 +12283,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>direction</code> (<a href="../../types/tes3vector2">tes3vector2</a>): <em>Optional</em>. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.</li>
 </ul>
 </li>
@@ -12299,7 +12299,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>velocity</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.</li>
 <li><code>applyFatigueCost</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if <code>false</code>.</li>
 <li><code>allowMidairJumping</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.</li>
@@ -12570,7 +12570,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>unequipItem</code> (boolean): <em>Default</em>: <code>false</code>. Only valid if the currently equipped magic is from an equippable item enchantment. If <code>true</code>, the item containing the enchantment will be unequipped.</li>
 <li><code>updateGUI</code> (boolean): <em>Default</em>: <code>true</code>. Only valid if this actor is the player. If <code>false</code>, the player GUI will not be updated to reflect the change to equipped magic.</li>
 </ul>
