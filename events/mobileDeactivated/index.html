@@ -9053,7 +9053,7 @@
 -->
 
 <h1 id="mobiledeactivated">mobileDeactivated<a class="headerlink" href="#mobiledeactivated" title="Permanent link">⚓︎</a></h1>
-<p>This event is called when a mobile object is deactivated. This includes NPCs, creatures and projectiles of any kind. Typically this happens when an actor dies, a creature gets unsummoned, a projectile collides with something or expires or when the player transitions from one cell to another, causing actors in previously visited cells to get deactivated.</p>
+<p>This event is called when a mobile object is deactivated. This includes NPCs, creatures and projectiles, but not the player. Typically this happens when an actor dies, a creature gets unsummoned, a projectile collides with something or expires or when the player transitions from one cell to another, causing actors in previously visited cells to get deactivated.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e mobileDeactivatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">mobileDeactivatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
