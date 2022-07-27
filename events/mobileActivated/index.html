@@ -9053,7 +9053,7 @@
 -->
 
 <h1 id="mobileactivated">mobileActivated<a class="headerlink" href="#mobileactivated" title="Permanent link">⚓︎</a></h1>
-<p>This event is called when a Mobile Actor is activated. This may be the first time that a given Reference has an associated Mobile Actor attached to it. Typically this happens when transitioning through cells. When the player enters a cell, the <code>mobileActivated</code> event will fire for each new actor. When the player leaves the cell, the <code>mobileDeactivated</code> event is called.</p>
+<p>This event is called when a mobile object is activated. This includes NPCs, creatures and projectiles of any kind. This may be the first time that a given reference has an associated mobile object attached to it. Typically this happens when a projectile gets fired, a creature gets summoned or when the player transitions from one cell to another, causing actors in newly loaded cells to get activated.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e mobileActivatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">mobileActivatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -9065,8 +9065,8 @@
 </div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The activated mobile.</li>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference that the mobile has been activated for.</li>
+<li><code>mobile</code> (<a href="../../types/tes3mobileObject">tes3mobileObject</a>): <em>Read-only</em>. The activated mobile object.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference that the mobile object has been activated for.</li>
 </ul>
 
               

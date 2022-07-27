@@ -9053,7 +9053,7 @@
 -->
 
 <h1 id="mobiledeactivated">mobileDeactivated<a class="headerlink" href="#mobiledeactivated" title="Permanent link">⚓︎</a></h1>
-<p>This event is called when a Mobile Actor is deactivated. Typically this happens when transitioning through cells. When the player enters a cell, the <code>mobileActivated</code> event will fire for each new actor. When the player leaves the cell, the <code>mobileDeactivated</code> event is called.</p>
+<p>This event is called when a mobile object is deactivated. This includes NPCs, creatures and projectiles of any kind. Typically this happens when an actor dies, a creature gets unsummoned, a projectile collides with something or expires or when the player transitions from one cell to another, causing actors in previously visited cells to get deactivated.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e mobileDeactivatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">mobileDeactivatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -9065,7 +9065,8 @@
 </div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference that the mobile has been deactivated for.</li>
+<li><code>mobile</code> (<a href="../../types/tes3mobileObject">tes3mobileObject</a>): <em>Read-only</em>. The deactivated mobile object.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference that the mobile object has been deactivated for.</li>
 </ul>
 
               
