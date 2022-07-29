@@ -2056,6 +2056,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_77">
@@ -2069,6 +2071,20 @@
           Other
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/other/game-units/" class="md-nav__link">
+        Game Units
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -3801,8 +3817,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fromaxisangle" class="md-nav__link">
-    fromAxisAngle
+  <a href="#fromangleaxis" class="md-nav__link">
+    fromAngleAxis
   </a>
   
 </li>
@@ -3815,6 +3831,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#invert" class="md-nav__link">
+    invert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#slerp" class="md-nav__link">
     slerp
   </a>
@@ -3822,8 +3845,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#toaxisangle" class="md-nav__link">
-    toAxisAngle
+  <a href="#toangleaxis" class="md-nav__link">
+    toAngleAxis
   </a>
   
 </li>
@@ -9172,8 +9195,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fromaxisangle" class="md-nav__link">
-    fromAxisAngle
+  <a href="#fromangleaxis" class="md-nav__link">
+    fromAngleAxis
   </a>
   
 </li>
@@ -9186,6 +9209,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#invert" class="md-nav__link">
+    invert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#slerp" class="md-nav__link">
     slerp
   </a>
@@ -9193,8 +9223,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#toaxisangle" class="md-nav__link">
-    toAxisAngle
+  <a href="#toangleaxis" class="md-nav__link">
+    toAngleAxis
   </a>
   
 </li>
@@ -9271,9 +9301,9 @@
 <li><code>result</code> (<a href="../../types/niQuaternion">niQuaternion</a>)</li>
 </ul>
 <hr />
-<h3 id="fromaxisangle"><code>fromAxisAngle</code><a class="headerlink" href="#fromaxisangle" title="Permanent link">⚓︎</a></h3>
+<h3 id="fromangleaxis"><code>fromAngleAxis</code><a class="headerlink" href="#fromangleaxis" title="Permanent link">⚓︎</a></h3>
 <p>Fill the quaternion by converting an angle-axis rotation. The angle must be within the interval [0, PI] and the axis must be unit length.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fromAxisAngle</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fromAngleAxis</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -9290,6 +9320,15 @@
 <li><code>matrix</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>)</li>
 </ul>
 <hr />
+<h3 id="invert"><code>invert</code><a class="headerlink" href="#invert" title="Permanent link">⚓︎</a></h3>
+<p>Inverting or conjugating a rotation quaternion has the effect of reversing the axis of rotation, which modifies it to rotate in the opposite direction from the original. That is, if an object is rotated to a new position using a quaternion, then rotating it again by quaternion's inverse will return it to its original location.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">invert</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/niQuaternion">niQuaternion</a>)</li>
+</ul>
+<hr />
 <h3 id="slerp"><code>slerp</code><a class="headerlink" href="#slerp" title="Permanent link">⚓︎</a></h3>
 <p>Calculates the spherical linear interpolate between this quaternion and another.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">slerp</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
@@ -9304,9 +9343,9 @@
 <li><code>result</code> (<a href="../../types/niQuaternion">niQuaternion</a>): The calculated result.</li>
 </ul>
 <hr />
-<h3 id="toaxisangle"><code>toAxisAngle</code><a class="headerlink" href="#toaxisangle" title="Permanent link">⚓︎</a></h3>
+<h3 id="toangleaxis"><code>toAngleAxis</code><a class="headerlink" href="#toangleaxis" title="Permanent link">⚓︎</a></h3>
 <p>Convert this quaternion into an angle-axis rotation.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">toAxisAngle</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">toAngleAxis</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>

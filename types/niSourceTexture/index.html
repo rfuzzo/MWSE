@@ -2056,6 +2056,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_77">
@@ -2069,6 +2071,20 @@
           Other
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/other/game-units/" class="md-nav__link">
+        Game Units
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -3957,6 +3973,34 @@
           <li class="md-nav__item">
   <a href="#getgamereference" class="md-nav__link">
     getGameReference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getstringdatastartingwith" class="md-nav__link">
+    getStringDataStartingWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getstringdatawith" class="md-nav__link">
+    getStringDataWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasstringdatastartingwith" class="md-nav__link">
+    hasStringDataStartingWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasstringdatawith" class="md-nav__link">
+    hasStringDataWith
   </a>
   
 </li>
@@ -9409,6 +9453,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getstringdatastartingwith" class="md-nav__link">
+    getStringDataStartingWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getstringdatawith" class="md-nav__link">
+    getStringDataWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasstringdatastartingwith" class="md-nav__link">
+    hasStringDataStartingWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hasstringdatawith" class="md-nav__link">
+    hasStringDataWith
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#isinstanceoftype" class="md-nav__link">
     isInstanceOfType
   </a>
@@ -9661,13 +9733,65 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
 </ul>
 <hr />
+<h3 id="getstringdatastartingwith"><code>getStringDataStartingWith</code><a class="headerlink" href="#getstringdatastartingwith" title="Permanent link">⚓︎</a></h3>
+<p>Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided <code>value</code> argument.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">extra</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getStringDataStartingWith</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>value</code> (string): The first niStringExtraData starting with this value will be returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>extra</code> (<a href="../../types/niStringExtraData">niStringExtraData</a>)</li>
+</ul>
+<hr />
+<h3 id="getstringdatawith"><code>getStringDataWith</code><a class="headerlink" href="#getstringdatawith" title="Permanent link">⚓︎</a></h3>
+<p>Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided <code>value</code> argument in its string field.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">extra</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getStringDataWith</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>value</code> (string): The first niStringExtraData with this word will be returned.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>extra</code> (<a href="../../types/niStringExtraData">niStringExtraData</a>)</li>
+</ul>
+<hr />
+<h3 id="hasstringdatastartingwith"><code>hasStringDataStartingWith</code><a class="headerlink" href="#hasstringdatastartingwith" title="Permanent link">⚓︎</a></h3>
+<p>Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided <code>value</code> argument. Returns true if the value was found.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">hasStringDataStartingWith</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>value</code> (string): The value to search for.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="hasstringdatawith"><code>hasStringDataWith</code><a class="headerlink" href="#hasstringdatawith" title="Permanent link">⚓︎</a></h3>
+<p>Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided <code>value</code> argument in its string field. Returns true if the value was found.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">hasStringDataWith</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>value</code> (string): The value to search for.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
-<p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.</p>
+<p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (number)</li>
+<li><code>type</code> (number): Use values in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9675,12 +9799,12 @@
 </ul>
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
-<p>Determines if the object is of a given type. Types can be found in the tes3.niType table.</p>
+<p>Determines if the object is of a given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (number)</li>
+<li><code>type</code> (number): Use values in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9694,11 +9818,11 @@
 <hr />
 <h3 id="prependcontroller"><code>prependController</code><a class="headerlink" href="#prependcontroller" title="Permanent link">⚓︎</a></h3>
 <p>Add a controller to the object as the first controller.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">prependController</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">prependController</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (<a href="../../types/niTimeController">niTimeController</a>)</li>
+<li><code>controller</code> (<a href="../../types/niTimeController">niTimeController</a>)</li>
 </ul>
 <hr />
 <h3 id="removeallcontrollers"><code>removeAllControllers</code><a class="headerlink" href="#removeallcontrollers" title="Permanent link">⚓︎</a></h3>
