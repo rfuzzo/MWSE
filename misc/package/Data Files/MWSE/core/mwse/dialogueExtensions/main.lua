@@ -15,13 +15,17 @@ local barterMenuUIID = tes3ui.registerID("MenuBarter")
 local classMenuUIID = tes3ui.registerID("MenuClassChoice")
 local companionShareMenuUIID = tes3ui.registerID("MenuContents")
 local enchantingMenuUIID = tes3ui.registerID("MenuEnchantment")
-local persuastionMenuUIID = tes3ui.registerID("MenuPersuasion")
+local persuasionMenuUIID = tes3ui.registerID("MenuPersuasion")
 local raceMenuUIID = tes3ui.registerID("MenuRaceSex")
 local repairMenuUIID = tes3ui.registerID("MenuServiceRepair")
 local spellmakingMenuUIID = tes3ui.registerID("MenuSpellmaking")
 local spellsServiceMenuUIID = tes3ui.registerID("MenuServiceSpells")
 local trainingMenuUIID = tes3ui.registerID("MenuServiceTraining")
 local travelMenuUIID = tes3ui.registerID("MenuServiceTravel")
+
+-- This is the vertical offset in pixels of Persuasion menu
+-- from the top of the Dialogue menu.
+local constOffsetY = -65
 
 --- The function opens a menu within dialogue window. Returns true if the menu is open or was opened.
 ---@param menuID number The id of the menu to open.
@@ -48,6 +52,7 @@ local function onDialogueEnvironmentCreated(e)
 	-- Dialogue scripters shouldn't have to constantly pass these to the functions anyway.
 	local env = e.environment
 	local reference = env.reference --- @type tes3reference
+	---@diagnostic disable-next-line:assign-type-mismatch
 	local mobile = reference.mobile --- @type tes3mobileActor
 	local dialogue = env.dialogue --- @type tes3dialogue
 	local info = env.info --- @type tes3dialogueInfo
@@ -95,7 +100,15 @@ local function onDialogueEnvironmentCreated(e)
 
 	function env.OpenPersuasionMenu()
 		-- This menu is opened under the mouse cursor
-		return openMenu(persuastionMenuUIID, persuasionButtonUIID)
+		openMenu(persuasionMenuUIID, persuasionButtonUIID)
+
+		-- Move it under the persuasion button
+		local dialogueMenu = tes3ui.findMenu(dialogueMenuUIID)
+		local mainBlock = dialogueMenu:findChild("MenuDialog_scroll_pane")
+		local persuasionMenu = tes3ui.findMenu(persuasionMenuUIID)
+		persuasionMenu.positionX = dialogueMenu.positionX + mainBlock.width
+		persuasionMenu.positionY = dialogueMenu.positionY + constOffsetY
+		persuasionMenu:updateLayout()
 	end
 
 	function env.OpenRaceMenu()
