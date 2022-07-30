@@ -3029,6 +3029,12 @@
         
           
         
+          
+        
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -3651,6 +3657,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../niParticleModifier/" class="md-nav__link">
+        niParticleModifier
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niParticles/" class="md-nav__link">
+        niParticles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../niParticlesData/" class="md-nav__link">
         niParticlesData
       </a>
@@ -3793,6 +3827,20 @@
     <li class="md-nav__item">
       <a href="../niRotKey/" class="md-nav__link">
         niRotKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRotatingParticles/" class="md-nav__link">
+        niRotatingParticles
       </a>
     </li>
   
@@ -4171,13 +4219,6 @@
           <li class="md-nav__item">
   <a href="#refcount" class="md-nav__link">
     refCount
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    references
   </a>
   
 </li>
@@ -9617,13 +9658,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    references
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rotation" class="md-nav__link">
     rotation
   </a>
@@ -10022,10 +10056,10 @@
 </ul>
 <hr />
 <h3 id="normals"><code>normals</code><a class="headerlink" href="#normals" title="Permanent link">⚓︎</a></h3>
-<p>The normals of the object.</p>
+<p><em>Read-only</em>. The list of unitized, model-space vertex normals for the object. The length of the array is equal to the vertex count.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>[])</li>
 </ul>
 <hr />
 <h3 id="parent"><code>parent</code><a class="headerlink" href="#parent" title="Permanent link">⚓︎</a></h3>
@@ -10047,13 +10081,6 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
-</ul>
-<hr />
-<h3 id="references"><code>references</code><a class="headerlink" href="#references" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.</p>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (string)</li>
 </ul>
 <hr />
 <h3 id="rotation"><code>rotation</code><a class="headerlink" href="#rotation" title="Permanent link">⚓︎</a></h3>
@@ -10127,10 +10154,10 @@
 </ul>
 <hr />
 <h3 id="vertices"><code>vertices</code><a class="headerlink" href="#vertices" title="Permanent link">⚓︎</a></h3>
-<p>The vertices of the object.</p>
+<p><em>Read-only</em>. The array of vertex position data. The length of the array is equal to vertex count.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>[])</li>
 </ul>
 <hr />
 <h3 id="worldboundorigin"><code>worldBoundOrigin</code><a class="headerlink" href="#worldboundorigin" title="Permanent link">⚓︎</a></h3>
@@ -10172,7 +10199,7 @@
 </ul>
 <hr />
 <h3 id="attachproperty"><code>attachProperty</code><a class="headerlink" href="#attachproperty" title="Permanent link">⚓︎</a></h3>
-<p>Attaches a property to this object.</p>
+<p>Attaches a property to this object, without checking to see if the property or another of its type is already on the list. Property lists must not have more than one property of a given class (i.e. no two niTexturingProperty objects) attached at once, or else undefined behavior will result.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">attachProperty</span><span class="p">(</span><span class="n">property</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -10356,15 +10383,20 @@
 </ul>
 <hr />
 <h3 id="propagatepositionchange"><code>propagatePositionChange</code><a class="headerlink" href="#propagatepositionchange" title="Permanent link">⚓︎</a></h3>
-<p>Alias for <code>update()</code> method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, or bounds.</p>
+<p>Alias for <code>update()</code> method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Update Efficiency
+It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.</p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">propagatePositionChange</span><span class="p">({</span> <span class="n">time</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">controllers</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">bounds</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>args</code> (table): <em>Optional</em>.<ul>
-<li><code>time</code> (number): <em>Default</em>: <code>0</code>. </li>
-<li><code>controllers</code> (boolean): <em>Default</em>: <code>false</code>. Update object's controllers.</li>
-<li><code>bounds</code> (boolean): <em>Default</em>: <code>true</code>. Update object's bounds.</li>
+<li><code>time</code> (number): <em>Default</em>: <code>0</code>. This parameter is the time-slice for transformation and bounds updates</li>
+<li><code>controllers</code> (boolean): <em>Default</em>: <code>false</code>. Update object's controllers?</li>
+<li><code>bounds</code> (boolean): <em>Default</em>: <code>true</code>. Update object's bounds?</li>
 </ul>
 </li>
 </ul>
@@ -10421,21 +10453,26 @@
 </ul>
 <hr />
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
-<p>Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, or bounds.</p>
+<p>Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Update Efficiency
+It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.</p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">update</span><span class="p">({</span> <span class="n">time</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">controllers</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">bounds</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>args</code> (table): <em>Optional</em>.<ul>
-<li><code>time</code> (number): <em>Default</em>: <code>0</code>. </li>
-<li><code>controllers</code> (boolean): <em>Default</em>: <code>false</code>. Update object's controllers.</li>
-<li><code>bounds</code> (boolean): <em>Default</em>: <code>true</code>. Update object's bounds.</li>
+<li><code>time</code> (number): <em>Default</em>: <code>0</code>. This parameter is the time-slice for transformation and bounds updates</li>
+<li><code>controllers</code> (boolean): <em>Default</em>: <code>false</code>. Update object's controllers?</li>
+<li><code>bounds</code> (boolean): <em>Default</em>: <code>true</code>. Update object's bounds?</li>
 </ul>
 </li>
 </ul>
 <hr />
 <h3 id="updateeffects"><code>updateEffects</code><a class="headerlink" href="#updateeffects" title="Permanent link">⚓︎</a></h3>
-<p>Update all attached effects.</p>
+<p>Update all attached effects. This method must be called at or above any object when dynamic effects are attached or detached from it</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">updateEffects</span><span class="p">()</span>
 </code></pre></div>
 <hr />
