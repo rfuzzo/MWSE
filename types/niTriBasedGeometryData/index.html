@@ -745,6 +745,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1451,6 +1453,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../references/niProperty-types/" class="md-nav__link">
+        NIProperty Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../references/niTypes/" class="md-nav__link">
         NI Types
       </a>
@@ -1820,7 +1836,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_76" type="checkbox" id="__nav_3_76" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
       
       
       
@@ -1851,13 +1867,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_76">
+        <label class="md-nav__link" for="__nav_3_77">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_76">
+        <label class="md-nav__title" for="__nav_3_77">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -2049,7 +2065,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_78" type="checkbox" id="__nav_3_78" >
       
       
       
@@ -2060,13 +2076,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_77">
+        <label class="md-nav__link" for="__nav_3_78">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_77">
+        <label class="md-nav__title" for="__nav_3_78">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -2518,6 +2534,12 @@
       
       
       
+        
+          
+        
+          
+        
+          
         
           
         
@@ -3629,6 +3651,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../niParticlesData/" class="md-nav__link">
+        niParticlesData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../niPick/" class="md-nav__link">
         niPick
       </a>
@@ -3757,6 +3793,20 @@
     <li class="md-nav__item">
       <a href="../niRotKey/" class="md-nav__link">
         niRotKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRotatingParticlesData/" class="md-nav__link">
+        niRotatingParticlesData
       </a>
     </li>
   
@@ -4021,6 +4071,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#activetrianglecount" class="md-nav__link">
+    activeTriangleCount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bounds" class="md-nav__link">
     bounds
   </a>
@@ -4209,6 +4266,20 @@
     <li class="md-nav__item">
       <a href="../niTriShapeData/" class="md-nav__link">
         niTriShapeData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niTriangle/" class="md-nav__link">
+        niTriangle
       </a>
     </li>
   
@@ -9210,6 +9281,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#activetrianglecount" class="md-nav__link">
+    activeTriangleCount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bounds" class="md-nav__link">
     bounds
   </a>
@@ -9390,25 +9468,32 @@
 <p>Contains the actual geometry data for a <code>NiTriBasedGeometry</code> object.</p>
 <p>This type inherits the following: <a href="../../types/niGeometryData">niGeometryData</a>, <a href="../../types/niObject">niObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
+<h3 id="activetrianglecount"><code>activeTriangleCount</code><a class="headerlink" href="#activetrianglecount" title="Permanent link">⚓︎</a></h3>
+<p>The active triangle count of the object.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (number)</li>
+</ul>
+<hr />
 <h3 id="bounds"><code>bounds</code><a class="headerlink" href="#bounds" title="Permanent link">⚓︎</a></h3>
-<p>The bounds of the object.</p>
+<p>The model-space bounding sphere of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niBound">niBound</a>)</li>
 </ul>
 <hr />
 <h3 id="colors"><code>colors</code><a class="headerlink" href="#colors" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The color for the object.</p>
+<p><em>Read-only</em>. The vertex colors for the object. The length of the array is equal to <code>vertexCount</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/niColorA">niColorA</a>)</li>
+<li><code>result</code> (<a href="../../types/niPackedColor">niPackedColor</a>[])</li>
 </ul>
 <hr />
 <h3 id="normals"><code>normals</code><a class="headerlink" href="#normals" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The normals list for the object.</p>
+<p><em>Read-only</em>. The list of unitized, model-space vertex normals for the object. The length of the array is equal to <code>vertexCount</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>[])</li>
 </ul>
 <hr />
 <h3 id="refcount"><code>refCount</code><a class="headerlink" href="#refcount" title="Permanent link">⚓︎</a></h3>
@@ -9440,17 +9525,17 @@
 </ul>
 <hr />
 <h3 id="texcoords"><code>texCoords</code><a class="headerlink" href="#texcoords" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The array of texture coordinates.</p>
+<p><em>Read-only</em>. The array of texture coordinates. The length of the array is equal to <code>vertexCount</code> times <code>textureSets</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3vector2">tes3vector2</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3vector2">tes3vector2</a>[])</li>
 </ul>
 <hr />
 <h3 id="textures"><code>textures</code><a class="headerlink" href="#textures" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The array of texture coordinates.</p>
+<p><em>Read-only</em>. The array of texture coordinates. The length of the array is equal to <code>vertexCount</code> times <code>textureSets</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3vector2">tes3vector2</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3vector2">tes3vector2</a>[])</li>
 </ul>
 <hr />
 <h3 id="texturesets"><code>textureSets</code><a class="headerlink" href="#texturesets" title="Permanent link">⚓︎</a></h3>
@@ -9461,14 +9546,14 @@
 </ul>
 <hr />
 <h3 id="trianglecount"><code>triangleCount</code><a class="headerlink" href="#trianglecount" title="Permanent link">⚓︎</a></h3>
-<p>The triangle count of the object.</p>
+<p><em>Read-only</em>. The triangle count of the object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="uniqueid"><code>uniqueID</code><a class="headerlink" href="#uniqueid" title="Permanent link">⚓︎</a></h3>
-<p>A unique ID for this model, assigned at model creation.</p>
+<p><em>Read-only</em>. A unique ID for this model, assigned at model creation.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -9482,10 +9567,10 @@
 </ul>
 <hr />
 <h3 id="vertices"><code>vertices</code><a class="headerlink" href="#vertices" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The array of vertex position data.</p>
+<p><em>Read-only</em>. The array of vertex position data. The length of the array is equal to <code>vertexCount</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3vector3">tes3vector3</a>[])</li>
 </ul>
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>

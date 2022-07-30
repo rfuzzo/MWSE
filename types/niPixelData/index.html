@@ -745,6 +745,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1451,6 +1453,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../references/niProperty-types/" class="md-nav__link">
+        NIProperty Types
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../references/niTypes/" class="md-nav__link">
         NI Types
       </a>
@@ -1820,7 +1836,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_76" type="checkbox" id="__nav_3_76" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
       
       
       
@@ -1851,13 +1867,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_76">
+        <label class="md-nav__link" for="__nav_3_77">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_76">
+        <label class="md-nav__title" for="__nav_3_77">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -2049,7 +2065,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_78" type="checkbox" id="__nav_3_78" >
       
       
       
@@ -2060,13 +2076,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_77">
+        <label class="md-nav__link" for="__nav_3_78">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_77">
+        <label class="md-nav__title" for="__nav_3_78">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -2518,6 +2534,12 @@
       
       
       
+        
+          
+        
+          
+        
+          
         
           
         
@@ -3629,6 +3651,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../niParticlesData/" class="md-nav__link">
+        niParticlesData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../niPick/" class="md-nav__link">
         niPick
       </a>
@@ -3763,6 +3799,13 @@
           <li class="md-nav__item">
   <a href="#createsourcetexture" class="md-nav__link">
     createSourceTexture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill" class="md-nav__link">
+    fill
   </a>
   
 </li>
@@ -3942,6 +3985,20 @@
     <li class="md-nav__item">
       <a href="../niRotKey/" class="md-nav__link">
         niRotKey
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRotatingParticlesData/" class="md-nav__link">
+        niRotatingParticlesData
       </a>
     </li>
   
@@ -4194,6 +4251,20 @@
     <li class="md-nav__item">
       <a href="../niTriShapeData/" class="md-nav__link">
         niTriShapeData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niTriangle/" class="md-nav__link">
+        niTriangle
       </a>
     </li>
   
@@ -9264,6 +9335,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#fill" class="md-nav__link">
+    fill
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getheight" class="md-nav__link">
     getHeight
   </a>
@@ -9421,13 +9499,23 @@
 <li><code>result</code> (<a href="../../types/niSourceTexture">niSourceTexture</a>)</li>
 </ul>
 <hr />
+<h3 id="fill"><code>fill</code><a class="headerlink" href="#fill" title="Permanent link">⚓︎</a></h3>
+<p>Fills this pixel data with the provided color.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fill</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mipMapLevel</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>data</code> (number[]): The color data to be set (1-indexed). The values should be in range [0.0, 1.0]. The first three values are RGB color channels, while the last one is alpha channel. The array length must be equal to the <code>bytesPerPixel</code> property of this niPixelData object, because alpha can be assigned only to the niPixelData object that has an alpha channel.</li>
+<li><code>mipMapLevel</code> (number): <em>Default</em>: <code>0</code>. The mipmap level to fill with the provided color. The finest (largest) mipmap level is level 0.</li>
+</ul>
+<hr />
 <h3 id="getheight"><code>getHeight</code><a class="headerlink" href="#getheight" title="Permanent link">⚓︎</a></h3>
-<p>Returns the height of the mipmap level at the given index, where level 1 is the largest.</p>
+<p>Returns the height of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level <code>mipMapLevels - 1</code> is the coarsest (smallest) mipmap level.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getHeight</span><span class="p">(</span><span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>mipMapLevel</code> (number): <em>Optional</em>. Default value: 1</li>
+<li><code>mipMapLevel</code> (number): <em>Default</em>: <code>0</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9435,12 +9523,12 @@
 </ul>
 <hr />
 <h3 id="getwidth"><code>getWidth</code><a class="headerlink" href="#getwidth" title="Permanent link">⚓︎</a></h3>
-<p>Returns the width of the mipmap level at the given index, where level 1 is the largest.</p>
+<p>Returns the width of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level <code>mipMapLevels - 1</code> is the coarsest (smallest) mipmap level.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getWidth</span><span class="p">(</span><span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>mipMapLevel</code> (number): <em>Optional</em>. Default value: 1</li>
+<li><code>mipMapLevel</code> (number): <em>Default</em>: <code>0</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -9492,8 +9580,8 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>data</code> (table): The byte data to be set to.</li>
-<li><code>mipMapLevel</code> (number): <em>Optional</em>. Default value: 1</li>
+<li><code>data</code> (number[]): The byte data to be set to (1-indexed).</li>
+<li><code>mipMapLevel</code> (number): <em>Default</em>: <code>0</code>. The mipmap level whose data to modify. The finest (largest) mipmap level is level 0.</li>
 </ul>
 <hr />
 <h3 id="setpixelsfloat"><code>setPixelsFloat</code><a class="headerlink" href="#setpixelsfloat" title="Permanent link">⚓︎</a></h3>
@@ -9502,19 +9590,24 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>data</code> (table): The float data to be set to.</li>
-<li><code>mipMapLevel</code> (number): <em>Optional</em>. Default value: 1</li>
+<li><code>data</code> (number[]): The float data to be set to (1-indexed). The values should be in range [0.0, 1.0].</li>
+<li><code>mipMapLevel</code> (number): <em>Default</em>: <code>0</code>. The mipmap level whose data to modify. The finest (largest) mipmap level is level 0.</li>
 </ul>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
 <p>Creates a new NiPixelData object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">niPixelData</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">pixelData</span> <span class="o">=</span> <span class="n">niPixelData</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">mipMapLevels</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>width</code> (number)</li>
 <li><code>height</code> (number)</li>
+<li><code>mipMapLevels</code> (number): <em>Default</em>: <code>1</code>.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>pixelData</code> (<a href="../../types/niPixelData">niPixelData</a>)</li>
 </ul>
 <hr />
 
