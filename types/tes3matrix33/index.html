@@ -9643,7 +9643,7 @@
 </ul>
 <hr />
 <h3 id="torotation"><code>toRotation</code><a class="headerlink" href="#torotation" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Makes this matrix a rotation matrix with provided axis-angle rotation parameters.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">toRotation</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9655,7 +9655,7 @@
 </ul>
 <hr />
 <h3 id="torotationx"><code>toRotationX</code><a class="headerlink" href="#torotationx" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the X axis by <code>x</code> degrees. For the rotation matrix A and vector v, the rotated vector is given by A * v.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">toRotationX</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9664,7 +9664,7 @@
 </ul>
 <hr />
 <h3 id="torotationy"><code>toRotationY</code><a class="headerlink" href="#torotationy" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the Y axis by <code>y</code> degrees. For the rotation matrix A and vector v, the rotated vector is given by A * v.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">toRotationY</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9673,7 +9673,7 @@
 </ul>
 <hr />
 <h3 id="torotationz"><code>toRotationZ</code><a class="headerlink" href="#torotationz" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
+<p>Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the Z axis by <code>x</code> degrees. For the rotation matrix A and vector v, the rotated vector is given by A * v.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">toRotationZ</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -9697,20 +9697,20 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
-<p>Creates a new 3 by 3 matrix from 3 provided vectors, 9 numbers or creates an empty matrix if nothing is provided.</p>
+<p>Creates a new 3 by 3 matrix from 3 provided vectors or 9 numbers. Creates an empty matrix if nothing is provided.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">tes3matrix33</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>x0</code> (number): <em>Optional</em>.</li>
-<li><code>y0</code> (number): <em>Optional</em>.</li>
-<li><code>z0</code> (number): <em>Optional</em>.</li>
-<li><code>x1</code> (number): <em>Optional</em>.</li>
-<li><code>y1</code> (number): <em>Optional</em>.</li>
-<li><code>z1</code> (number): <em>Optional</em>.</li>
-<li><code>x2</code> (number): <em>Optional</em>.</li>
-<li><code>y2</code> (number): <em>Optional</em>.</li>
-<li><code>z2</code> (number): <em>Optional</em>.</li>
+<li><code>x0</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>y0</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>z0</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>x1</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>y1</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>z1</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>x2</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>y2</code> (number): <em>Default</em>: <code>0</code>.</li>
+<li><code>z2</code> (number): <em>Default</em>: <code>0</code>.</li>
 <li><code>x</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>.</li>
 <li><code>y</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>.</li>
 <li><code>z</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>.</li>

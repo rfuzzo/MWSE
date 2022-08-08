@@ -9499,11 +9499,16 @@
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
 <p>Creates a new fader, and adds it to the fader system.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3fader</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">fader</span> <span class="o">=</span> <span class="n">tes3fader</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">unknownBool</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>distance</code> (number): <em>Optional</em>. If no distance is provided, a distance will be calculated based on current amount of faders, <code>tes3.worldController.projectionDistance</code> and crosshair node's <code>translation.y</code>.</li>
+<li><code>unknownBool</code> (boolean): <em>Default</em>: <code>true</code>.</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3fader">tes3fader</a>)</li>
+<li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>)</li>
 </ul>
 <hr />
 
