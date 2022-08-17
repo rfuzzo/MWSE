@@ -909,7 +909,7 @@ namespace TES3 {
 	void MobileActor::setIsWerewolf(bool set) {
 		setMobileActorFlag(TES3::MobileActorFlag::Werewolf, set);
 	}
-	
+
 	void MobileActor::changeWerewolfState(bool isWerewolf) {
 		vTable.mobileActor->changeWerewolf(this, isWerewolf);
 	}
@@ -1561,6 +1561,14 @@ namespace TES3 {
 
 	void MobileActor::setMovementFlagRunning(bool value) {
 		setMobileActorMovementFlag(TES3::ActorMovement::Running, value);
+	}
+
+	bool MobileActor::getMovementFlagSliding() const {
+		return getMobileActorMovementFlag(ActorMovement::Sliding);
+	}
+
+	void MobileActor::setMovementFlagSliding(bool value) {
+		setMobileActorMovementFlag(TES3::ActorMovement::Sliding, value)
 	}
 
 	bool MobileActor::getMovementFlagSneaking() const {
