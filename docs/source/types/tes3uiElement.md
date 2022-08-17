@@ -602,8 +602,8 @@ local copy = myObject:copy({ to = ..., copyChildren = ..., copyProperties = ... 
 
 * `params` (table)
 	* `to` ([tes3uiElement](../../types/tes3uiElement)): The element to create the copy in. Will be the parent of the newly created element.
-	* `copyChildren` (boolean): *Default*: `true`. If `true`, all children will also be copied to the newly created element.
-	* `copyProperties` (boolean): *Default*: `true`. If `true`, all properties will be copied to the newly created element.
+	* `copyChildren` (boolean): *Optional*. *Default*: `true`. If `true`, all children will also be copied to the newly created element.
+	* `copyProperties` (boolean): *Optional*. *Default*: `true`. If `true`, all properties will be copied to the newly created element.
 
 **Returns**:
 
@@ -921,8 +921,8 @@ local result = myObject:createSlider({ id = ..., current = ..., max = ..., step 
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
 	* `current` (number): The current value of the slider.
 	* `max` (number): The maximum value of the slider.
-	* `step` (number): *Default*: `1`. The change in value when clicking the left and right arrow buttons.
-	* `jump` (number): *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
+	* `step` (number): *Optional*. *Default*: `1`. The change in value when clicking the left and right arrow buttons.
+	* `jump` (number): *Optional*. *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 
 **Returns**:
 
@@ -946,8 +946,8 @@ local result = myObject:createSliderVertical({ id = ..., current = ..., max = ..
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
 	* `current` (number): The current value of the slider.
 	* `max` (number): The maximum value of the slider.
-	* `step` (number): *Default*: `1`. The change in value when clicking the left and right arrow buttons.
-	* `jump` (number): *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
+	* `step` (number): *Optional*. *Default*: `1`. The change in value when clicking the left and right arrow buttons.
+	* `jump` (number): *Optional*. *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 
 **Returns**:
 
@@ -995,7 +995,7 @@ local result = myObject:createTextSelect({ id = ..., text = ..., state = ... })
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
 	* `text` (string): *Optional*. The text to display.
-	* `state` (number): *Default*: `tes3.uiState.normal`. The initial interaction state.
+	* `state` (number): *Optional*. *Default*: `tes3.uiState.normal`. The initial interaction state.
 
 **Returns**:
 

@@ -187,9 +187,9 @@ local copiedData = myObject:copy({ normals = ..., colors = ..., texCoords = ... 
 **Parameters**:
 
 * `filters` (table): *Optional*.
-	* `normals` (boolean): *Default*: `true`. If false, the geometry data's normals will be absent from the copy.
-	* `colors` (boolean): *Default*: `true`. If false, the geometry data's colors will be absent from the copy.
-	* `texCoords` (boolean): *Default*: `true`. If false, the geometry data's texture coordinates will be absent from the copy.
+	* `normals` (boolean): *Optional*. *Default*: `true`. If false, the geometry data's normals will be absent from the copy.
+	* `colors` (boolean): *Optional*. *Default*: `true`. If false, the geometry data's colors will be absent from the copy.
+	* `texCoords` (boolean): *Optional*. *Default*: `true`. If false, the geometry data's texture coordinates will be absent from the copy.
 
 **Returns**:
 

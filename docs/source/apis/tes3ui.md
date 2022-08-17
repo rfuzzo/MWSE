@@ -599,9 +599,9 @@ tes3ui.showDialogueMessage({ text = ..., style = ..., answerIndex = ... })
 **Parameters**:
 
 * `params` (table)
-	* `text` (string): *Default*: ``. The text of the shown message.
-	* `style` (number): *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
-	* `answerIndex` (number): *Default*: `0`. This number can be used later to identify which response was selected.
+	* `text` (string): *Optional*. *Default*: ``. The text of the shown message.
+	* `style` (number): *Optional*. *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
+	* `answerIndex` (number): *Optional*. *Default*: `0`. This number can be used later to identify which response was selected.
 
 ***
 
@@ -616,7 +616,7 @@ tes3ui.showInventorySelectMenu({ reference = ..., title = ..., leaveMenuMode = .
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference)): *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
+	* `reference` ([tes3reference](../../types/tes3reference)): *Optional*. *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
 	* `title` (string): The text used for the title of the inventory select menu.
 	* `leaveMenuMode` (boolean): *Optional*. Determines if menu mode should be exited after closing the inventory select menu. By default, it will be in the state it was in before this function was called.
 	* `noResultsText` (string): *Optional*. The text used for the message that gets shown to the player if no items have been found in the inventory. The default text is equivalent to the `sInventorySelectNoItems` GMST value, unless `"ingredients"` or `"soulgemFilled"` has been assigned to `filter`, in which case the default text is equivalent to either the `sInventorySelectNoIngredients` or `sInventorySelectNoSoul` GMST value respectively.

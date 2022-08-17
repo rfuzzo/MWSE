@@ -120,7 +120,7 @@ function table.size(t) end
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/table/#tabletraverse).
 --- @param t table A table to transverse.
---- @param k unknown? *Default*: `children`. The key of a table inside t object.
+--- @param k unknown? *Optional*. *Default*: `children`. The key of a table inside t object.
 --- @return iterator result No description yet available.
 function table.traverse(t, k) end
 

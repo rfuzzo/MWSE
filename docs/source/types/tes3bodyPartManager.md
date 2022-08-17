@@ -129,8 +129,8 @@ myObject:setActivePartData(layer, index, overwriteData, node)
 
 * `layer` (number): A value from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
-* `overwriteData` (boolean): *Default*: `true`. A flag which controls whether the current data should be overwritten.
-* `node` ([niNode](../../types/niNode)): *Default*: `nil`. 
+* `overwriteData` (boolean): *Optional*. *Default*: `true`. A flag which controls whether the current data should be overwritten.
+* `node` ([niNode](../../types/niNode)): *Optional*. *Default*: `nil`. 
 
 ***
 
@@ -147,7 +147,7 @@ myObject:setBodyPartByIdForObject(object, index, bodyPartId, isFirstPerson)
 * `object` ([tes3physicalObject](../../types/tes3physicalObject)): An object whose body part to set.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 * `bodyPartId` (string): The unique ID of the `tes3bodyPart` object to set as a new body part for given object.
-* `isFirstPerson` (boolean): *Default*: `false`. A flag which controls whether the body part is used in first person.
+* `isFirstPerson` (boolean): *Optional*. *Default*: `false`. A flag which controls whether the body part is used in first person.
 
 ***
 
@@ -164,7 +164,7 @@ myObject:setBodyPartForObject(object, index, bodyPart, isFirstPerson)
 * `object` ([tes3physicalObject](../../types/tes3physicalObject)): An object whose body part to set.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 * `bodyPart` ([tes3bodyPart](../../types/tes3bodyPart)): The `tes3bodyPart` object to set as a new body part for given object.
-* `isFirstPerson` (boolean): *Default*: `false`. A flag which controls whether the body part is used in first person.
+* `isFirstPerson` (boolean): *Optional*. *Default*: `false`. A flag which controls whether the body part is used in first person.
 
 ***
 

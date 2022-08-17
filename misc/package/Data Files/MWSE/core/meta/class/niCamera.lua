@@ -19,7 +19,7 @@
 niCamera = {}
 
 --- This method renders the currently-attached scene graph to the active renderer.
---- @param something boolean? *Default*: `false`. No description yet available.
+--- @param something boolean? *Optional*. *Default*: `false`. No description yet available.
 function niCamera:click(something) end
 
 --- Given a screen space position, calculates the world position and outlook direction. This can be useful when trying to find a reference under a UI element, such as the cusor.

@@ -205,17 +205,17 @@ function tes3mobileActor:calculateJumpVelocity(params) end
 --- 
 --- `velocity`: tes3vector3? — *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
 --- 
---- `applyFatigueCost`: boolean? — *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
+--- `applyFatigueCost`: boolean? — *Optional*. *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
 --- 
---- `allowMidairJumping`: boolean? — *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
+--- `allowMidairJumping`: boolean? — *Optional*. *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
 --- @return boolean result No description yet available.
 function tes3mobileActor:doJump(params) end
 
 ---Table parameter definitions for `tes3mobileActor.doJump`.
 --- @class tes3mobileActor.doJump.params
 --- @field velocity tes3vector3? *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
---- @field applyFatigueCost boolean? *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
---- @field allowMidairJumping boolean? *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
+--- @field applyFatigueCost boolean? *Optional*. *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
+--- @field allowMidairJumping boolean? *Optional*. *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
 
 --- Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return `true`.
 --- @param params tes3mobileActor.equip.params This table accepts the following values:
@@ -252,9 +252,9 @@ function tes3mobileActor:equip(params) end
 --- 
 --- `itemData`: tes3itemData? — *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
 --- 
---- `equipItem`: boolean? — *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
+--- `equipItem`: boolean? — *Optional*. *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
 --- 
---- `updateGUI`: boolean? — *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+--- `updateGUI`: boolean? — *Optional*. *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 --- @return boolean result No description yet available.
 function tes3mobileActor:equipMagic(params) end
 
@@ -267,8 +267,8 @@ function tes3mobileActor:equipMagic(params) end
 --- 		Items must have a castable enchantment. Castable enchantments have a `castType` of `tes3.enchantmentType.onUse` or `tes3.enchantmentType.castOnce`. The actor is not required to have this item in their inventory, unless `equipItem` is `true`.
 --- 
 --- @field itemData tes3itemData? *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
---- @field equipItem boolean? *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
---- @field updateGUI boolean? *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+--- @field equipItem boolean? *Optional*. *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
+--- @field updateGUI boolean? *Optional*. *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 
 --- Fetches a filtered list of the active magic effects on the actor. Returns a table with [`tes3activeMagicEffect`](https://mwse.github.io/MWSE/types/tes3activeMagicEffect/) items.
 --- @param params tes3mobileActor.getActiveMagicEffects.params? This table accepts the following values:
@@ -380,15 +380,15 @@ function tes3mobileActor:unequip(params) end
 --- Unequips the currently equipped magic, optionally unequipping the enchanted item if needed.
 --- @param params tes3mobileActor.unequipMagic.params? This table accepts the following values:
 --- 
---- `unequipItem`: boolean? — *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
+--- `unequipItem`: boolean? — *Optional*. *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
 --- 
---- `updateGUI`: boolean? — *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+--- `updateGUI`: boolean? — *Optional*. *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 function tes3mobileActor:unequipMagic(params) end
 
 ---Table parameter definitions for `tes3mobileActor.unequipMagic`.
 --- @class tes3mobileActor.unequipMagic.params
---- @field unequipItem boolean? *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
---- @field updateGUI boolean? *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+--- @field unequipItem boolean? *Optional*. *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
+--- @field updateGUI boolean? *Optional*. *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 
 --- Updates statistics derived from attributes, which are magicka, fatigue, and encumbrance. Will also update the UI if used on the player. Normally handled automatically when you use `tes3.modStatistic()`.
 --- @param attribute tes3statistic|tes3statisticSkill|nil *Optional*. Limits the update to statistics derived from this attribute.  e.g. `mobile:updateDerivedStatistics(mobile.strength)`. If not present, all derived statistics will be updated.

@@ -161,7 +161,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Parameters**:
 
-* `searchParents` (boolean): *Default*: `false`. If true, all parent objects (if applicable) are also searched.
+* `searchParents` (boolean): *Optional*. *Default*: `false`. If true, all parent objects (if applicable) are also searched.
 
 **Returns**:
 

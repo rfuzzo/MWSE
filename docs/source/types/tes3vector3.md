@@ -301,9 +301,9 @@ local vector = tes3vector3.new(x, y, z)
 
 **Parameters**:
 
-* `x` (number): *Default*: `0`.
-* `y` (number): *Default*: `0`.
-* `z` (number): *Default*: `0`.
+* `x` (number): *Optional*. *Default*: `0`.
+* `y` (number): *Optional*. *Default*: `0`.
+* `z` (number): *Optional*. *Default*: `0`.
 
 **Returns**:
 

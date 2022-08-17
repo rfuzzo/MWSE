@@ -337,7 +337,7 @@ myObject:playVisualEffect({ effectIndex = ..., position = ..., visual = ..., sca
 	* `effectIndex` (number): The index in the effect whose visual will be played, a number in range [0, 7].
 	* `position` ([tes3vector3](../../types/tes3vector3), table): A table or a `tes3vector3` holding `x`, `y` and `z` coordinates at which the visual effect will be played.
 	* `visual` ([tes3physicalObject](../../types/tes3physicalObject), string): The visual effect to be played.
-	* `scale` (number): *Default*: `1`. The scale of the effect. Only applies to effects that are designed to be scaled.
+	* `scale` (number): *Optional*. *Default*: `1`. The scale of the effect. Only applies to effects that are designed to be scaled.
 	* `reference` ([tes3reference](../../types/tes3reference), string): A reference on which the visual effect will be played.
 
 ??? example "Example: Plays the soul trap effect if the player kills a target that is affected by vampirism."

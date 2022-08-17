@@ -101,7 +101,7 @@ myObject:fill(data, mipMapLevel)
 **Parameters**:
 
 * `data` (number[]): The color data to be set (1-indexed). The values should be in range [0.0, 1.0]. The first three values are RGB color channels, while the last one is alpha channel. The array length must be equal to the `bytesPerPixel` property of this niPixelData object, because alpha can be assigned only to the niPixelData object that has an alpha channel.
-* `mipMapLevel` (number): *Default*: `0`. The mipmap level to fill with the provided color. The finest (largest) mipmap level is level 0.
+* `mipMapLevel` (number): *Optional*. *Default*: `0`. The mipmap level to fill with the provided color. The finest (largest) mipmap level is level 0.
 
 ***
 
@@ -115,7 +115,7 @@ local result = myObject:getHeight(mipMapLevel)
 
 **Parameters**:
 
-* `mipMapLevel` (number): *Default*: `0`.
+* `mipMapLevel` (number): *Optional*. *Default*: `0`.
 
 **Returns**:
 
@@ -133,7 +133,7 @@ local result = myObject:getWidth(mipMapLevel)
 
 **Parameters**:
 
-* `mipMapLevel` (number): *Default*: `0`.
+* `mipMapLevel` (number): *Optional*. *Default*: `0`.
 
 **Returns**:
 
@@ -206,7 +206,7 @@ myObject:setPixelsByte(data, mipMapLevel)
 **Parameters**:
 
 * `data` (number[]): The byte data to be set to (1-indexed).
-* `mipMapLevel` (number): *Default*: `0`. The mipmap level whose data to modify. The finest (largest) mipmap level is level 0.
+* `mipMapLevel` (number): *Optional*. *Default*: `0`. The mipmap level whose data to modify. The finest (largest) mipmap level is level 0.
 
 ***
 
@@ -221,7 +221,7 @@ myObject:setPixelsFloat(data, mipMapLevel)
 **Parameters**:
 
 * `data` (number[]): The float data to be set to (1-indexed). The values should be in range [0.0, 1.0].
-* `mipMapLevel` (number): *Default*: `0`. The mipmap level whose data to modify. The finest (largest) mipmap level is level 0.
+* `mipMapLevel` (number): *Optional*. *Default*: `0`. The mipmap level whose data to modify. The finest (largest) mipmap level is level 0.
 
 ***
 
@@ -239,7 +239,7 @@ local pixelData = niPixelData.new(width, height, mipMapLevels)
 
 * `width` (number)
 * `height` (number)
-* `mipMapLevels` (number): *Default*: `1`.
+* `mipMapLevels` (number): *Optional*. *Default*: `1`.
 
 **Returns**:
 

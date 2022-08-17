@@ -360,7 +360,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Parameters**:
 
-* `searchParents` (boolean): *Default*: `false`. If true, all parent objects (if applicable) are also searched.
+* `searchParents` (boolean): *Optional*. *Default*: `false`. If true, all parent objects (if applicable) are also searched.
 
 **Returns**:
 
@@ -542,9 +542,9 @@ myObject:propagatePositionChange({ time = ..., controllers = ..., bounds = ... }
 **Parameters**:
 
 * `args` (table): *Optional*.
-	* `time` (number): *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
-	* `controllers` (boolean): *Default*: `false`. Update object's controllers?
-	* `bounds` (boolean): *Default*: `true`. Update object's bounds?
+	* `time` (number): *Optional*. *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+	* `controllers` (boolean): *Optional*. *Default*: `false`. Update object's controllers?
+	* `bounds` (boolean): *Optional*. *Default*: `true`. Update object's bounds?
 
 ***
 
@@ -645,9 +645,9 @@ myObject:update({ time = ..., controllers = ..., bounds = ... })
 **Parameters**:
 
 * `args` (table): *Optional*.
-	* `time` (number): *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
-	* `controllers` (boolean): *Default*: `false`. Update object's controllers?
-	* `bounds` (boolean): *Default*: `true`. Update object's bounds?
+	* `time` (number): *Optional*. *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+	* `controllers` (boolean): *Optional*. *Default*: `false`. Update object's controllers?
+	* `bounds` (boolean): *Optional*. *Default*: `true`. Update object's bounds?
 
 ***
 

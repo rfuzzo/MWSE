@@ -101,10 +101,10 @@ local color = niPackedColor.new(r, g, b, a)
 
 **Parameters**:
 
-* `r` (number): *Default*: `0`. The red value for the color.
-* `g` (number): *Default*: `0`. The green value for the color.
-* `b` (number): *Default*: `0`. The blue value for the color.
-* `a` (number): *Default*: `0`. The alpha value for the color.
+* `r` (number): *Optional*. *Default*: `0`. The red value for the color.
+* `g` (number): *Optional*. *Default*: `0`. The green value for the color.
+* `b` (number): *Optional*. *Default*: `0`. The blue value for the color.
+* `a` (number): *Optional*. *Default*: `0`. The alpha value for the color.
 
 **Returns**:
 

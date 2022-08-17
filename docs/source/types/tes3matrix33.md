@@ -279,15 +279,15 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2, x, y, z)
 
 **Parameters**:
 
-* `x0` (number): *Default*: `0`.
-* `y0` (number): *Default*: `0`.
-* `z0` (number): *Default*: `0`.
-* `x1` (number): *Default*: `0`.
-* `y1` (number): *Default*: `0`.
-* `z1` (number): *Default*: `0`.
-* `x2` (number): *Default*: `0`.
-* `y2` (number): *Default*: `0`.
-* `z2` (number): *Default*: `0`.
+* `x0` (number): *Optional*. *Default*: `0`.
+* `y0` (number): *Optional*. *Default*: `0`.
+* `z0` (number): *Optional*. *Default*: `0`.
+* `x1` (number): *Optional*. *Default*: `0`.
+* `y1` (number): *Optional*. *Default*: `0`.
+* `z1` (number): *Optional*. *Default*: `0`.
+* `x2` (number): *Optional*. *Default*: `0`.
+* `y2` (number): *Optional*. *Default*: `0`.
+* `z2` (number): *Optional*. *Default*: `0`.
 * `x` ([tes3vector3](../../types/tes3vector3)): *Optional*.
 * `y` ([tes3vector3](../../types/tes3vector3)): *Optional*.
 * `z` ([tes3vector3](../../types/tes3vector3)): *Optional*.

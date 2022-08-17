@@ -1538,8 +1538,8 @@ local result = myObject:doJump({ velocity = ..., applyFatigueCost = ..., allowMi
 
 * `params` (table): *Optional*.
 	* `velocity` ([tes3vector3](../../types/tes3vector3)): *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
-	* `applyFatigueCost` (boolean): *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
-	* `allowMidairJumping` (boolean): *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
+	* `applyFatigueCost` (boolean): *Optional*. *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
+	* `allowMidairJumping` (boolean): *Optional*. *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
 
 **Returns**:
 
@@ -1588,8 +1588,8 @@ local result = myObject:equipMagic({ source = ..., itemData = ..., equipItem = .
 		Items must have a castable enchantment. Castable enchantments have a `castType` of `tes3.enchantmentType.onUse` or `tes3.enchantmentType.castOnce`. The actor is not required to have this item in their inventory, unless `equipItem` is `true`.
 
 	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
-	* `equipItem` (boolean): *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
-	* `updateGUI` (boolean): *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+	* `equipItem` (boolean): *Optional*. *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
+	* `updateGUI` (boolean): *Optional*. *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 
 **Returns**:
 
@@ -1905,8 +1905,8 @@ myObject:unequipMagic({ unequipItem = ..., updateGUI = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `unequipItem` (boolean): *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
-	* `updateGUI` (boolean): *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+	* `unequipItem` (boolean): *Optional*. *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
+	* `updateGUI` (boolean): *Optional*. *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 
 ***
 

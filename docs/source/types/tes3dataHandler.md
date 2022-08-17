@@ -232,9 +232,9 @@ myObject:updateCollisionGroupsForActiveCells({ force = ..., isResettingData = ..
 **Parameters**:
 
 * `params` (table)
-	* `force` (boolean): *Default*: `true`.
-	* `isResettingData` (boolean): *Default*: `false`.
-	* `resetCollisionGroups` (boolean): *Default*: `true`.
+	* `force` (boolean): *Optional*. *Default*: `true`.
+	* `isResettingData` (boolean): *Optional*. *Default*: `false`.
+	* `resetCollisionGroups` (boolean): *Optional*. *Default*: `true`.
 
 ***
 

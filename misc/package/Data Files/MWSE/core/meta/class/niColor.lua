@@ -15,9 +15,9 @@
 niColor = {}
 
 --- Creates a new niColor.
---- @param r number? *Default*: `0`. The red value for the color.
---- @param g number? *Default*: `0`. The green value for the color.
---- @param b number? *Default*: `0`. The blue value for the color.
+--- @param r number? *Optional*. *Default*: `0`. The red value for the color.
+--- @param g number? *Optional*. *Default*: `0`. The green value for the color.
+--- @param b number? *Optional*. *Default*: `0`. The blue value for the color.
 --- @return niColor color No description yet available.
 function niColor.new(r, g, b) end
 

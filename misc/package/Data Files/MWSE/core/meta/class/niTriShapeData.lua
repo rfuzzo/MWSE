@@ -12,17 +12,17 @@ niTriShapeData = {}
 --- Creates a copy of the data. An optional table of filters can be passed to remove information from the copy.
 --- @param filters niTriShapeData.copy.params? This table accepts the following values:
 --- 
---- `normals`: boolean? — *Default*: `true`. If false, the geometry data's normals will be absent from the copy.
+--- `normals`: boolean? — *Optional*. *Default*: `true`. If false, the geometry data's normals will be absent from the copy.
 --- 
---- `colors`: boolean? — *Default*: `true`. If false, the geometry data's colors will be absent from the copy.
+--- `colors`: boolean? — *Optional*. *Default*: `true`. If false, the geometry data's colors will be absent from the copy.
 --- 
---- `texCoords`: boolean? — *Default*: `true`. If false, the geometry data's texture coordinates will be absent from the copy.
+--- `texCoords`: boolean? — *Optional*. *Default*: `true`. If false, the geometry data's texture coordinates will be absent from the copy.
 --- @return niTriShapeData copiedData The duplicated data.
 function niTriShapeData:copy(filters) end
 
 ---Table parameter definitions for `niTriShapeData.copy`.
 --- @class niTriShapeData.copy.params
---- @field normals boolean? *Default*: `true`. If false, the geometry data's normals will be absent from the copy.
---- @field colors boolean? *Default*: `true`. If false, the geometry data's colors will be absent from the copy.
---- @field texCoords boolean? *Default*: `true`. If false, the geometry data's texture coordinates will be absent from the copy.
+--- @field normals boolean? *Optional*. *Default*: `true`. If false, the geometry data's normals will be absent from the copy.
+--- @field colors boolean? *Optional*. *Default*: `true`. If false, the geometry data's colors will be absent from the copy.
+--- @field texCoords boolean? *Optional*. *Default*: `true`. If false, the geometry data's texture coordinates will be absent from the copy.
 

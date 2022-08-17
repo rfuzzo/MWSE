@@ -97,17 +97,17 @@ tes3uiElement = {}
 --- 
 --- `to`: tes3uiElement — The element to create the copy in. Will be the parent of the newly created element.
 --- 
---- `copyChildren`: boolean? — *Default*: `true`. If `true`, all children will also be copied to the newly created element.
+--- `copyChildren`: boolean? — *Optional*. *Default*: `true`. If `true`, all children will also be copied to the newly created element.
 --- 
---- `copyProperties`: boolean? — *Default*: `true`. If `true`, all properties will be copied to the newly created element.
+--- `copyProperties`: boolean? — *Optional*. *Default*: `true`. If `true`, all properties will be copied to the newly created element.
 --- @return tes3uiElement copy The created copy.
 function tes3uiElement:copy(params) end
 
 ---Table parameter definitions for `tes3uiElement.copy`.
 --- @class tes3uiElement.copy.params
 --- @field to tes3uiElement The element to create the copy in. Will be the parent of the newly created element.
---- @field copyChildren boolean? *Default*: `true`. If `true`, all children will also be copied to the newly created element.
---- @field copyProperties boolean? *Default*: `true`. If `true`, all properties will be copied to the newly created element.
+--- @field copyChildren boolean? *Optional*. *Default*: `true`. If `true`, all children will also be copied to the newly created element.
+--- @field copyProperties boolean? *Optional*. *Default*: `true`. If `true`, all properties will be copied to the newly created element.
 
 --- Creates an empty block container inside the element. Used to group and layout elements.
 --- @param params tes3uiElement.createBlock.params? This table accepts the following values:
@@ -334,9 +334,9 @@ function tes3uiElement:createRect(params) end
 --- 
 --- `max`: number — The maximum value of the slider.
 --- 
---- `step`: number? — *Default*: `1`. The change in value when clicking the left and right arrow buttons.
+--- `step`: number? — *Optional*. *Default*: `1`. The change in value when clicking the left and right arrow buttons.
 --- 
---- `jump`: number? — *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
+--- `jump`: number? — *Optional*. *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 --- @return tes3uiElement result No description yet available.
 function tes3uiElement:createSlider(params) end
 
@@ -345,8 +345,8 @@ function tes3uiElement:createSlider(params) end
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
 --- @field current number The current value of the slider.
 --- @field max number The maximum value of the slider.
---- @field step number? *Default*: `1`. The change in value when clicking the left and right arrow buttons.
---- @field jump number? *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
+--- @field step number? *Optional*. *Default*: `1`. The change in value when clicking the left and right arrow buttons.
+--- @field jump number? *Optional*. *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 
 --- Creates a vertical slider.
 --- 
@@ -359,9 +359,9 @@ function tes3uiElement:createSlider(params) end
 --- 
 --- `max`: number — The maximum value of the slider.
 --- 
---- `step`: number? — *Default*: `1`. The change in value when clicking the left and right arrow buttons.
+--- `step`: number? — *Optional*. *Default*: `1`. The change in value when clicking the left and right arrow buttons.
 --- 
---- `jump`: number? — *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
+--- `jump`: number? — *Optional*. *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 --- @return tes3uiElement result No description yet available.
 function tes3uiElement:createSliderVertical(params) end
 
@@ -370,8 +370,8 @@ function tes3uiElement:createSliderVertical(params) end
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
 --- @field current number The current value of the slider.
 --- @field max number The maximum value of the slider.
---- @field step number? *Default*: `1`. The change in value when clicking the left and right arrow buttons.
---- @field jump number? *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
+--- @field step number? *Optional*. *Default*: `1`. The change in value when clicking the left and right arrow buttons.
+--- @field jump number? *Optional*. *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 
 --- Creates a single line text input element. To receive input the keyboard must be captured with `tes3ui.acquireTextInput(element)`. Read the input with the `text` property. Write an initial value to display by setting the `text` property; that value will be cleared on the first keypress.
 --- 
@@ -407,7 +407,7 @@ function tes3uiElement:createTextInput(params) end
 --- 
 --- `text`: string? — *Optional*. The text to display.
 --- 
---- `state`: number? — *Default*: `tes3.uiState.normal`. The initial interaction state.
+--- `state`: number? — *Optional*. *Default*: `tes3.uiState.normal`. The initial interaction state.
 --- @return tes3uiElement result No description yet available.
 function tes3uiElement:createTextSelect(params) end
 
@@ -415,7 +415,7 @@ function tes3uiElement:createTextSelect(params) end
 --- @class tes3uiElement.createTextSelect.params
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
 --- @field text string? *Optional*. The text to display.
---- @field state number? *Default*: `tes3.uiState.normal`. The initial interaction state.
+--- @field state number? *Optional*. *Default*: `tes3.uiState.normal`. The initial interaction state.
 
 --- Creates a styled thin border element. Any content should be created as children of this border.
 --- @param params tes3uiElement.createThinBorder.params? This table accepts the following values:

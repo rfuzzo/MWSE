@@ -330,7 +330,7 @@ local result = table.traverse(t, k)
 **Parameters**:
 
 * `t` (table): A table to transverse.
-* `k` (unknown): *Default*: `children`. The key of a table inside t object.
+* `k` (unknown): *Optional*. *Default*: `children`. The key of a table inside t object.
 
 **Returns**:
 

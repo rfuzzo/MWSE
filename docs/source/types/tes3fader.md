@@ -99,7 +99,7 @@ local result = myObject:setColor({ color = ..., flag = ... })
 
 * `params` (table)
 	* `color` ([tes3vector3](../../types/tes3vector3), table): The RGB values to set in [0.0, 1.0] range.
-	* `flag` (boolean): *Default*: `false`.
+	* `flag` (boolean): *Optional*. *Default*: `false`.
 
 **Returns**:
 
@@ -158,7 +158,7 @@ local fader = tes3fader.new(distance, unknownBool)
 **Parameters**:
 
 * `distance` (number): *Optional*. If no distance is provided, a distance will be calculated based on current amount of faders, `tes3.worldController.projectionDistance` and crosshair node's `translation.y`.
-* `unknownBool` (boolean): *Default*: `true`.
+* `unknownBool` (boolean): *Optional*. *Default*: `true`.
 
 **Returns**:
 

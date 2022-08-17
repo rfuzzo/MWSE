@@ -61,18 +61,18 @@ function niAVObject:getProperty(type) end
 --- 
 --- @param args niAVObject.propagatePositionChange.params? This table accepts the following values:
 --- 
---- `time`: number? — *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+--- `time`: number? — *Optional*. *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
 --- 
---- `controllers`: boolean? — *Default*: `false`. Update object's controllers?
+--- `controllers`: boolean? — *Optional*. *Default*: `false`. Update object's controllers?
 --- 
---- `bounds`: boolean? — *Default*: `true`. Update object's bounds?
+--- `bounds`: boolean? — *Optional*. *Default*: `true`. Update object's bounds?
 function niAVObject:propagatePositionChange(args) end
 
 ---Table parameter definitions for `niAVObject.propagatePositionChange`.
 --- @class niAVObject.propagatePositionChange.params
---- @field time number? *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
---- @field controllers boolean? *Default*: `false`. Update object's controllers?
---- @field bounds boolean? *Default*: `true`. Update object's bounds?
+--- @field time number? *Optional*. *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+--- @field controllers boolean? *Optional*. *Default*: `false`. Update object's controllers?
+--- @field bounds boolean? *Optional*. *Default*: `true`. Update object's bounds?
 
 --- Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 --- 
@@ -82,18 +82,18 @@ function niAVObject:propagatePositionChange(args) end
 --- 
 --- @param args niAVObject.update.params? This table accepts the following values:
 --- 
---- `time`: number? — *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+--- `time`: number? — *Optional*. *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
 --- 
---- `controllers`: boolean? — *Default*: `false`. Update object's controllers?
+--- `controllers`: boolean? — *Optional*. *Default*: `false`. Update object's controllers?
 --- 
---- `bounds`: boolean? — *Default*: `true`. Update object's bounds?
+--- `bounds`: boolean? — *Optional*. *Default*: `true`. Update object's bounds?
 function niAVObject:update(args) end
 
 ---Table parameter definitions for `niAVObject.update`.
 --- @class niAVObject.update.params
---- @field time number? *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
---- @field controllers boolean? *Default*: `false`. Update object's controllers?
---- @field bounds boolean? *Default*: `true`. Update object's bounds?
+--- @field time number? *Optional*. *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+--- @field controllers boolean? *Optional*. *Default*: `false`. Update object's controllers?
+--- @field bounds boolean? *Optional*. *Default*: `true`. Update object's bounds?
 
 --- Update all attached effects. This method must be called at or above any object when dynamic effects are attached or detached from it
 function niAVObject:updateEffects() end

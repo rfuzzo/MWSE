@@ -58,7 +58,7 @@ local timer = timer.delayOneFrame(callback, type)
 **Parameters**:
 
 * `callback` (function): The callback function that will execute when the timer expires.
-* `type` (number): *Default*: ``timer.simulate``. Type of the timer. This value can be `timer.simulate`, `timer.game` or `timer.real`.
+* `type` (number): *Optional*. *Default*: ``timer.simulate``. Type of the timer. This value can be `timer.simulate`, `timer.game` or `timer.real`.
 
 **Returns**:
 
@@ -114,11 +114,11 @@ local timer = timer.start({ type = ..., duration = ..., callback = ..., iteratio
 **Parameters**:
 
 * `params` (table)
-	* `type` (number): *Default*: ``timer.simulate``. Type of the timer. This value can be `timer.simulate`, `timer.game` or `timer.real`.
+	* `type` (number): *Optional*. *Default*: ``timer.simulate``. Type of the timer. This value can be `timer.simulate`, `timer.game` or `timer.real`.
 	* `duration` (number): Duration of the timer. The method of time passing depends on the timer type.
 	* `callback` (function): The callback function that will execute when the timer expires.
-	* `iterations` (number): *Default*: `1`. The number of iterations to run. Use `-1` for infinite looping.
-	* `persist` (boolean): *Default*: `true`. Registering a timer with persist flag set to `true` will serialize the callback string in the save to persist between sessions. Only a registered timer will persist between sessions. See `timer.register()`.
+	* `iterations` (number): *Optional*. *Default*: `1`. The number of iterations to run. Use `-1` for infinite looping.
+	* `persist` (boolean): *Optional*. *Default*: `true`. Registering a timer with persist flag set to `true` will serialize the callback string in the save to persist between sessions. Only a registered timer will persist between sessions. See `timer.register()`.
 	* `data` (table): *Optional*. Data to be attached to the timer. If this is a persistent timer, the data must be json-serializable, matching the same limitations as data stored on references.
 
 **Returns**:

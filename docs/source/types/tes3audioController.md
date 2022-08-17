@@ -183,8 +183,8 @@ myObject:changeMusicTrack({ filename = ..., crossfade = ..., volume = ... })
 
 * `params` (table)
 	* `filename` (string): File name of the new music track.
-	* `crossfade` (number): *Default*: `1000`. Duration of the crossfading between music tracks. Measured in miliseconds.
-	* `volume` (number): *Default*: `1`. Allows changing the volume of the music track.
+	* `crossfade` (number): *Optional*. *Default*: `1000`. Duration of the crossfading between music tracks. Measured in miliseconds.
+	* `volume` (number): *Optional*. *Default*: `1`. Allows changing the volume of the music track.
 
 ***
 

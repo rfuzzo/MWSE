@@ -217,25 +217,25 @@ function tes3ui.showBookMenu(text) end
 --- This function creates a dialogue message. The message can have three styles. The style `2` makes a selectable text. That way by calling this function multiple time you can create a selection of responses.
 --- @param params tes3ui.showDialogueMessage.params This table accepts the following values:
 --- 
---- `text`: string? — *Default*: ``. The text of the shown message.
+--- `text`: string? — *Optional*. *Default*: ``. The text of the shown message.
 --- 
---- `style`: number? — *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
+--- `style`: number? — *Optional*. *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
 --- 
---- `answerIndex`: number? — *Default*: `0`. This number can be used later to identify which response was selected.
+--- `answerIndex`: number? — *Optional*. *Default*: `0`. This number can be used later to identify which response was selected.
 function tes3ui.showDialogueMessage(params) end
 
 ---Table parameter definitions for `tes3ui.showDialogueMessage`.
 --- @class tes3ui.showDialogueMessage.params
---- @field text string? *Default*: ``. The text of the shown message.
---- @field style number? *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
---- @field answerIndex number? *Default*: `0`. This number can be used later to identify which response was selected.
+--- @field text string? *Optional*. *Default*: ``. The text of the shown message.
+--- @field style number? *Optional*. *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
+--- @field answerIndex number? *Optional*. *Default*: `0`. This number can be used later to identify which response was selected.
 
 --- This function opens the inventory select menu which lets the player select items from an inventory. These items can be selected from any actor's inventory and can be filtered with the `filter` callback. The selected item can be retrieved in the function assigned to `callback`.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uishowinventoryselectmenu).
 --- @param params tes3ui.showInventorySelectMenu.params This table accepts the following values:
 --- 
---- `reference`: tes3reference? — *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
+--- `reference`: tes3reference? — *Optional*. *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
 --- 
 --- `title`: string — The text used for the title of the inventory select menu.
 --- 
@@ -277,7 +277,7 @@ function tes3ui.showInventorySelectMenu(params) end
 
 ---Table parameter definitions for `tes3ui.showInventorySelectMenu`.
 --- @class tes3ui.showInventorySelectMenu.params
---- @field reference tes3reference? *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
+--- @field reference tes3reference? *Optional*. *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
 --- @field title string The text used for the title of the inventory select menu.
 --- @field leaveMenuMode boolean? *Optional*. Determines if menu mode should be exited after closing the inventory select menu. By default, it will be in the state it was in before this function was called.
 --- @field noResultsText string? *Optional*. The text used for the message that gets shown to the player if no items have been found in the inventory. The default text is equivalent to the `sInventorySelectNoItems` GMST value, unless `"ingredients"` or `"soulgemFilled"` has been assigned to `filter`, in which case the default text is equivalent to either the `sInventorySelectNoIngredients` or `sInventorySelectNoSoul` GMST value respectively.

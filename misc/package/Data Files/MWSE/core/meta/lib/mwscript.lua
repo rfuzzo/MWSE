@@ -478,14 +478,14 @@ function mwscript.scriptRunning(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
 --- 
---- `delete`: boolean? — *Default*: `true`. Setting this to true deletes the reference and triggers `referenceDeactivated` event. Setting this to false effectively undeletes/activates the reference and triggers `referenceActivated` event.
+--- `delete`: boolean? — *Optional*. *Default*: `true`. Setting this to true deletes the reference and triggers `referenceDeactivated` event. Setting this to false effectively undeletes/activates the reference and triggers `referenceActivated` event.
 --- @return boolean executed No description yet available.
 function mwscript.setDelete(params) end
 
 ---Table parameter definitions for `mwscript.setDelete`.
 --- @class mwscript.setDelete.params
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
---- @field delete boolean? *Default*: `true`. Setting this to true deletes the reference and triggers `referenceDeactivated` event. Setting this to false effectively undeletes/activates the reference and triggers `referenceActivated` event.
+--- @field delete boolean? *Optional*. *Default*: `true`. Setting this to true deletes the reference and triggers `referenceDeactivated` event. Setting this to false effectively undeletes/activates the reference and triggers `referenceActivated` event.
 
 --- Use [`tes3npc.level`](https://mwse.github.io/MWSE/types/tes3npc/#level) instead. Wrapper for the `SetLevel` mwscript function.
 --- @deprecated

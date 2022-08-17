@@ -217,7 +217,7 @@ tes3.addJournalEntry({ text = ..., showMessage = ... })
 
 * `params` (table)
 	* `text` (string): The text of the new Journal entry.
-	* `showMessage` (boolean): *Default*: `true`. If this parameter is true, a "Your journal has been updated" message will be displayed.
+	* `showMessage` (boolean): *Optional*. *Default*: `true`. If this parameter is true, a "Your journal has been updated" message will be displayed.
 
 ***
 
@@ -233,13 +233,13 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 
 * `params` (table)
 	* `id` (number): Id of the new effect. Maps to newly claimed `tes3.effect` constants with `tes3.claimSpellEffectId()`. If the effect of this id already exists, an error will be thrown.
-	* `name` (string): *Default*: `Unnamed Effect`. Name of the effect.
-	* `baseCost` (number): *Default*: `1`. Base magicka cost for the effect.
-	* `school` (integer): *Default*: `tes3.magicSchool.alteration`. The magic school the new effect will be assigned to. Maps to [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) constants.
-	* `size` (number): *Default*: `1`. Controls how much the visual effect scales with its magnitude.
-	* `sizeCap` (number): *Default*: `1`. The maximum possible size of the projectile.
-	* `speed` (number): *Default*: `1`.
-	* `description` (string): *Default*: `No description available.`. Description for the effect.
+	* `name` (string): *Optional*. *Default*: `Unnamed Effect`. Name of the effect.
+	* `baseCost` (number): *Optional*. *Default*: `1`. Base magicka cost for the effect.
+	* `school` (integer): *Optional*. *Default*: `tes3.magicSchool.alteration`. The magic school the new effect will be assigned to. Maps to [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) constants.
+	* `size` (number): *Optional*. *Default*: `1`. Controls how much the visual effect scales with its magnitude.
+	* `sizeCap` (number): *Optional*. *Default*: `1`. The maximum possible size of the projectile.
+	* `speed` (number): *Optional*. *Default*: `1`.
+	* `description` (string): *Optional*. *Default*: `No description available.`. Description for the effect.
 	* `lighting` (table): *Optional*.
 		* `x` (number): *Default*: `1`. Value of red color channel. In range of 0 - 1.
 		* `y` (number): *Default*: `1`. Value of green color channel. In range of 0 - 1.
@@ -254,25 +254,25 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	* `boltVFX` ([tes3physicalObject](../../types/tes3physicalObject), string): *Optional*. The visual played when a spell with this effect is in flight.
 	* `hitVFX` ([tes3physicalObject](../../types/tes3physicalObject), string): *Optional*. The visual played when a spell with this effect hits something.
 	* `areaVFX` ([tes3physicalObject](../../types/tes3physicalObject), string): *Optional*. The visual played when a spell with this effect, with area of effect hits something.
-	* `allowEnchanting` (boolean): *Default*: `true`. A flag which controls whether this effect can be used in a custom enchantment.
-	* `allowSpellmaking` (boolean): *Default*: `true`. A flag which controls whether this effect can be used in a custom spell.
-	* `appliesOnce` (boolean): *Default*: `true`. A flag which controls whether this effect applies once or is a ticking effect.
-	* `canCastSelf` (boolean): *Default*: `true`. A flag which controls whether this effect can be used with cast on self range.
-	* `canCastTarget` (boolean): *Default*: `true`. A flag which controls whether this effect can be used with cast on target range.
-	* `canCastTouch` (boolean): *Default*: `true`. A flag which controls whether this effect can be used with cast on touch range.
-	* `casterLinked` (boolean): *Default*: `true`. Access to the base flag that determines if this effect must end if caster is dead, or not an NPC/creature. Not allowed in container or door trap spells.
+	* `allowEnchanting` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be used in a custom enchantment.
+	* `allowSpellmaking` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be used in a custom spell.
+	* `appliesOnce` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect applies once or is a ticking effect.
+	* `canCastSelf` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be used with cast on self range.
+	* `canCastTarget` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be used with cast on target range.
+	* `canCastTouch` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be used with cast on touch range.
+	* `casterLinked` (boolean): *Optional*. *Default*: `true`. Access to the base flag that determines if this effect must end if caster is dead, or not an NPC/creature. Not allowed in container or door trap spells.
 
 Note that this property is hidden in the Construction Set.
-	* `hasContinuousVFX` (boolean): *Default*: `true`. A flag which controls whether the effect's visual is continuously played during the whole duration of the effect.
-	* `hasNoDuration` (boolean): *Default*: `true`. A flag which controls whether this effect doesn't have duration.
-	* `hasNoMagnitude` (boolean): *Default*: `true`. A flag which controls whether this effect doesn't have magnitude.
-	* `illegalDaedra` (boolean): *Default*: `true`. A flag which controls whether this effect is illegal to use in public, because it summons Daedra. Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.
-	* `isHarmful` (boolean): *Default*: `true`. A flag which controls whether this effect is considered harmful and casting it can be considered as an attack.
-	* `nonRecastable` (boolean): *Default*: `true`. A flag which controls whether this effect can be recast while it already is in duration.
-	* `targetsAttributes` (boolean): *Default*: `true`. A flag which controls whether this effect targets a certain attribute or attributes.
-	* `targetsSkills` (boolean): *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
-	* `unreflectable` (boolean): *Default*: `true`. A flag which controls whether this effect can be reflected.
-	* `usesNegativeLighting` (boolean): *Default*: `true`. A flag which controls whether this effect uses negative lighting.
+	* `hasContinuousVFX` (boolean): *Optional*. *Default*: `true`. A flag which controls whether the effect's visual is continuously played during the whole duration of the effect.
+	* `hasNoDuration` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect doesn't have duration.
+	* `hasNoMagnitude` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect doesn't have magnitude.
+	* `illegalDaedra` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect is illegal to use in public, because it summons Daedra. Note: this mechanic is not implemented in the game. Some mods might rely on this parameter.
+	* `isHarmful` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect is considered harmful and casting it can be considered as an attack.
+	* `nonRecastable` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be recast while it already is in duration.
+	* `targetsAttributes` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect targets a certain attribute or attributes.
+	* `targetsSkills` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
+	* `unreflectable` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect can be reflected.
+	* `usesNegativeLighting` (boolean): *Optional*. *Default*: `true`. A flag which controls whether this effect uses negative lighting.
 	* `onTick` (function): *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
 		- `tickParams` (table)
 			- `effectId` (number)
@@ -559,8 +559,8 @@ local hoursPassed = tes3.advanceTime({ hours = ..., resting = ..., updateEnviron
 
 * `params` (table)
 	* `hours` (number): How many hours to progress.
-	* `resting` (boolean): *Default*: `false`. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.
-	* `updateEnvironment` (boolean): *Default*: `true`. Controls if the weather system is updated for each hour passed.
+	* `resting` (boolean): *Optional*. *Default*: `false`. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.
+	* `updateEnvironment` (boolean): *Optional*. *Default*: `true`. Controls if the weather system is updated for each hour passed.
 
 **Returns**:
 
@@ -583,19 +583,19 @@ local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = .
 	* `source` ([tes3object](../../types/tes3object)): *Optional*. A magic source to apply.
 	* `name` (string): *Optional*. While optional for other uses, if applying alchemy as a source, you must specify a name for the magic source.
 	* `effects` (table): *Optional*. A table of custom effects to apply as a potion. Maximal number of effects is 8.
-		* `id` (boolean): *Default*: `-1`. ID of the effect.
-		* `skill` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants.
-		* `attribute` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants.
-		* `rangeType` (number): *Default*: `tes3.effectRange.self`. The range of the effect. This maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants.
-		* `radius` (number): *Default*: `0`. The radius of the effect.
-		* `duration` (number): *Default*: `0`. Number of seconds the effect is going to be active.
-		* `min` (number): *Default*: `0`. The minimal magintude of the effect per tick.
-		* `max` (number): *Default*: `0`. The maximal magnitude of the effect per tick.
-	* `createCopy` (boolean): *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
+		* `id` (boolean): *Optional*. *Default*: `-1`. ID of the effect.
+		* `skill` (number): *Optional*. *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants.
+		* `attribute` (number): *Optional*. *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants.
+		* `rangeType` (number): *Optional*. *Default*: `tes3.effectRange.self`. The range of the effect. This maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants.
+		* `radius` (number): *Optional*. *Default*: `0`. The radius of the effect.
+		* `duration` (number): *Optional*. *Default*: `0`. Number of seconds the effect is going to be active.
+		* `min` (number): *Optional*. *Default*: `0`. The minimal magintude of the effect per tick.
+		* `max` (number): *Optional*. *Default*: `0`. The maximal magnitude of the effect per tick.
+	* `createCopy` (boolean): *Optional*. *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
 	* `fromStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 	* `castChance` (number): *Optional*. This parameter allows overriding the casting chance of the magic source.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The target of the magic.
-	* `bypassResistances` (boolean): *Default*: `false`. Is this effect going to bypass magic resistance?
+	* `bypassResistances` (boolean): *Optional*. *Default*: `false`. Is this effect going to bypass magic resistance?
 
 **Returns**:
 
@@ -1753,8 +1753,8 @@ local effectiveMagnitude, magnitude = tes3.getEffectMagnitude({ reference = ...,
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): An associated mobile should exist for this function to be able to work.
 	* `effect` (number): Effect ID. Can be any of the predefined spell effects, or one added by `tes3.claimSpellEffectId()`. Maps to values of [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) constants
-	* `skill` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants.
-	* `attribute` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants.
+	* `skill` (number): *Optional*. *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants.
+	* `attribute` (number): *Optional*. *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants.
 
 **Returns**:
 
@@ -2336,7 +2336,7 @@ local region = tes3.getRegion(useDoors)
 
 **Parameters**:
 
-* `useDoors` (boolean): *Default*: `false`.
+* `useDoors` (boolean): *Optional*. *Default*: `false`.
 
 **Returns**:
 
@@ -2499,10 +2499,10 @@ local result = tes3.getSpells({ target = ..., spellType = ..., getActorSpells = 
 
 * `params` (table)
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), [tes3actor](../../types/tes3actor)): The actor to get the spells of. Must be able to cast spells.
-	* `spellType` (number): *Default*: `-1`. The spell type to filter for. Only spells with this spell type will be returned. A value of `-1` will return spells of all types. Maps to values in the [`tes3.spellType`](https://mwse.github.io/MWSE/references/spell-types/) table.
-	* `getActorSpells` (boolean): *Default*: `true`. If `true`, the spells of the actor itself will be included in the result. This includes every spell except racial and birthsign spells.
-	* `getRaceSpells` (boolean): *Default*: `true`. If `true`, the spells of the actor's race will be included in the result.
-	* `getBirthsignSpells` (boolean): *Default*: `true`. If `true`, the spells of the actor's birthsign will be included in the result.
+	* `spellType` (number): *Optional*. *Default*: `-1`. The spell type to filter for. Only spells with this spell type will be returned. A value of `-1` will return spells of all types. Maps to values in the [`tes3.spellType`](https://mwse.github.io/MWSE/references/spell-types/) table.
+	* `getActorSpells` (boolean): *Optional*. *Default*: `true`. If `true`, the spells of the actor itself will be included in the result. This includes every spell except racial and birthsign spells.
+	* `getRaceSpells` (boolean): *Optional*. *Default*: `true`. If `true`, the spells of the actor's race will be included in the result.
+	* `getBirthsignSpells` (boolean): *Optional*. *Default*: `true`. If `true`, the spells of the actor's birthsign will be included in the result.
 
 **Returns**:
 
@@ -2885,7 +2885,7 @@ local model = tes3.loadMesh(path, useCache)
 **Parameters**:
 
 * `path` (string): Path, relative to Data Files/Meshes.
-* `useCache` (boolean): *Default*: `true`. If false, a new object will be created even if it had been previously loaded.
+* `useCache` (boolean): *Optional*. *Default*: `true`. If false, a new object will be created even if it had been previously loaded.
 
 **Returns**:
 
@@ -2996,7 +2996,7 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 	* `message` (string)
 	* `buttons` (string[]): *Optional*. An array of strings to use for buttons.
 	* `callback` (function)
-	* `showInDialog` (boolean): *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
+	* `showInDialog` (boolean): *Optional*. *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 	* `duration` (number): *Optional*. Overrides how long the toast-style message remains visible.
 * `formatAdditions` (variadic): *Optional*. Only used if messageOrParams is a string.
 
@@ -3210,9 +3210,9 @@ local executed = tes3.positionCell({ reference = ..., cell = ..., position = ...
 	* `cell` ([tes3cell](../../types/tes3cell)): *Optional*. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 	* `position` ([tes3vector3](../../types/tes3vector3), table): The position to move the reference to.
 	* `orientation` ([tes3vector3](../../types/tes3vector3), table): *Optional*. The new orientation of the reference.
-	* `forceCellChange` (boolean): *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
-	* `suppressFader` (boolean): *Default*: `false`. When moving the player, can be used to prevent the fade in and out visual effect.
-	* `teleportCompanions` (boolean): *Default*: `true`. If used on the player, determines if companions should also be teleported.
+	* `forceCellChange` (boolean): *Optional*. *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
+	* `suppressFader` (boolean): *Optional*. *Default*: `false`. When moving the player, can be used to prevent the fade in and out visual effect.
+	* `teleportCompanions` (boolean): *Optional*. *Default*: `true`. If used on the player, determines if companions should also be teleported.
 
 **Returns**:
 
@@ -3648,7 +3648,7 @@ tes3.setAIEscort({ reference = ..., target = ..., destination = ..., duration = 
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference)): The escorting actor.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor)): The actor being escorted.
 	* `destination` ([tes3vector3](../../types/tes3vector3), table)
-	* `duration` (number): *Default*: `0`. How long the escorter will do the escorting, in hours.
+	* `duration` (number): *Optional*. *Default*: `0`. How long the escorter will do the escorting, in hours.
 	* `cell` ([tes3cell](../../types/tes3cell), string): *Optional*.
 	* `reset` (boolean): *Default*: `true`.
 
@@ -3668,7 +3668,7 @@ tes3.setAIFollow({ reference = ..., target = ..., destination = ..., duration = 
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference)): This is the actor that will follow another one.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor)): The actor to follow.
 	* `destination` ([tes3vector3](../../types/tes3vector3), table): *Optional*.
-	* `duration` (number): *Default*: `0`. How long the follower will follow, in hours.
+	* `duration` (number): *Optional*. *Default*: `0`. How long the follower will follow, in hours.
 	* `cell` ([tes3cell](../../types/tes3cell), string): *Optional*.
 	* `reset` (boolean): *Default*: `true`.
 
@@ -3704,9 +3704,9 @@ tes3.setAIWander({ reference = ..., idles = ..., range = ..., duration = ..., ti
 * `params` (table)
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference)): This actor will wander around.
 	* `idles` (number[]): An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
-	* `range` (number): *Default*: `0`.
-	* `duration` (number): *Default*: `0`. How long the actor will be wandering around, in hours.
-	* `time` (number): *Default*: `0`.
+	* `range` (number): *Optional*. *Default*: `0`.
+	* `duration` (number): *Optional*. *Default*: `0`. How long the actor will be wandering around, in hours.
+	* `time` (number): *Optional*. *Default*: `0`.
 	* `reset` (boolean): *Default*: `true`.
 
 ***
@@ -3872,7 +3872,7 @@ tes3.setMarkLocation({ position = ..., rotation = ..., cell = ... })
 
 * `params` (table)
 	* `position` ([tes3vector3](../../types/tes3vector3)): Coordinates of the mark's position.
-	* `rotation` (number): *Default*: `Player's current rotation.`. This argument controls which direction the player's mark location will be facing.
+	* `rotation` (number): *Optional*. *Default*: `Player's current rotation.`. This argument controls which direction the player's mark location will be facing.
 	* `cell` ([tes3cell](../../types/tes3cell)): *Optional*. A cell in which the mark should be placed.
 
 ***
@@ -3889,10 +3889,10 @@ tes3.setOwner({ reference = ..., remove = ..., owner = ..., requiredGlobal = ...
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): A reference whose owner to set.
-	* `remove` (boolean): *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
+	* `remove` (boolean): *Optional*. *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
 	* `owner` ([tes3npc](../../types/tes3npc), [tes3faction](../../types/tes3faction), string): Assigns this NPC or a faction as the owner of the reference.
 	* `requiredGlobal` ([tes3globalVariable](../../types/tes3globalVariable)): *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
-	* `requiredRank` (number): *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
+	* `requiredRank` (number): *Optional*. *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 
 ***
 
@@ -3907,12 +3907,12 @@ local changedControlState = tes3.setPlayerControlState({ enabled = ..., attack =
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `enabled` (boolean): *Default*: `false`. Setting this to false will disable any kind of control.
-	* `attack` (boolean): *Default*: `false`. If this is false, it will block player from attacking.
-	* `jumping` (boolean): *Default*: `false`. If this is false, it will block player from jumping.
-	* `magic` (boolean): *Default*: `false`. If this is false, it will block player from using magic.
-	* `vanity` (boolean): *Default*: `false`. If this is false, it will block player from going to vanity mode.
-	* `viewSwitch` (boolean): *Default*: `false`. If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.
+	* `enabled` (boolean): *Optional*. *Default*: `false`. Setting this to false will disable any kind of control.
+	* `attack` (boolean): *Optional*. *Default*: `false`. If this is false, it will block player from attacking.
+	* `jumping` (boolean): *Optional*. *Default*: `false`. If this is false, it will block player from jumping.
+	* `magic` (boolean): *Optional*. *Default*: `false`. If this is false, it will block player from using magic.
+	* `vanity` (boolean): *Optional*. *Default*: `false`. If this is false, it will block player from going to vanity mode.
+	* `viewSwitch` (boolean): *Optional*. *Default*: `false`. If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.
 
 **Returns**:
 
@@ -3931,7 +3931,7 @@ tes3.setSourceless(object, sourceless)
 **Parameters**:
 
 * `object` ([tes3baseObject](../../types/tes3baseObject)): The object whose sourceless flag to modify.
-* `sourceless` (boolean): *Default*: `true`. Allows flagging an object as sourceless or undoing that action.
+* `sourceless` (boolean): *Optional*. *Default*: `true`. Allows flagging an object as sourceless or undoing that action.
 
 ***
 
@@ -3990,9 +3990,9 @@ local changedVanityMode = tes3.setVanityMode({ enabled = ..., checkVanityDisable
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `enabled` (boolean): *Default*: `true`. This flag sets the vanity mode as enabled or disabled.
-	* `checkVanityDisabled` (boolean): *Default*: `true`. This will prevent changing vanity mode according to vanityDisabled flag on tes3.mobilePlayer.
-	* `toggle` (boolean): *Default*: `false`. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.
+	* `enabled` (boolean): *Optional*. *Default*: `true`. This flag sets the vanity mode as enabled or disabled.
+	* `checkVanityDisabled` (boolean): *Optional*. *Default*: `true`. This will prevent changing vanity mode according to vanityDisabled flag on tes3.mobilePlayer.
+	* `toggle` (boolean): *Optional*. *Default*: `false`. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.
 
 **Returns**:
 
@@ -4076,7 +4076,7 @@ tes3.showRepairServiceMenu({ serviceActor = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `serviceActor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Default*: `tes3mobilePlayer`. The actor to use for calculating the service price.
+	* `serviceActor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Optional*. *Default*: `tes3mobilePlayer`. The actor to use for calculating the service price.
 
 ***
 
@@ -4093,13 +4093,13 @@ local success = tes3.showRestMenu({ checkForEnemies = ..., checkForSolidGround =
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `checkForEnemies` (boolean): *Default*: `true`. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.
-	* `checkForSolidGround` (boolean): *Default*: `true`. Perform a check if the player is underwater. If underwater, false is returned.
-	* `checkSleepingIllegal` (boolean): *Default*: `true`. Perform a check if the sleeping in the current cell is illegal. If illegal, then the player will be prompted to wait instead of rest.
-	* `checkIsWerewolf` (boolean): *Default*: `true`. Perform a check if the player is Werewolf. If they are, then the player will be prompted to wait instead of rest.
-	* `showMessage` (boolean): *Default*: `true`. Should a messagebox be shown if the player can't open resting menu because some condition isn't met.
-	* `resting` (boolean): *Default*: `true`. Should this be a rest?
-	* `waiting` (boolean): *Default*: `false`. Or, is this a wait?
+	* `checkForEnemies` (boolean): *Optional*. *Default*: `true`. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.
+	* `checkForSolidGround` (boolean): *Optional*. *Default*: `true`. Perform a check if the player is underwater. If underwater, false is returned.
+	* `checkSleepingIllegal` (boolean): *Optional*. *Default*: `true`. Perform a check if the sleeping in the current cell is illegal. If illegal, then the player will be prompted to wait instead of rest.
+	* `checkIsWerewolf` (boolean): *Optional*. *Default*: `true`. Perform a check if the player is Werewolf. If they are, then the player will be prompted to wait instead of rest.
+	* `showMessage` (boolean): *Optional*. *Default*: `true`. Should a messagebox be shown if the player can't open resting menu because some condition isn't met.
+	* `resting` (boolean): *Optional*. *Default*: `true`. Should this be a rest?
+	* `waiting` (boolean): *Optional*. *Default*: `false`. Or, is this a wait?
 
 **Returns**:
 
@@ -4259,10 +4259,10 @@ local result = tes3.triggerCrime({ type = ..., victim = ..., value = ..., forceD
 **Parameters**:
 
 * `params` (table)
-	* `type` (number): *Default*: `tes3.crimeType.theft`. The type of crime to be committed. Maps to values in the [`tes3.crimeType`](https://mwse.github.io/MWSE/references/crime-types/) table.
-	* `victim` ([tes3mobileNPC](../../types/tes3mobileNPC), [tes3actor](../../types/tes3actor), [tes3faction](../../types/tes3faction)): *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
-	* `value` (number): *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
-	* `forceDetection` (boolean): *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
+	* `type` (number): *Optional*. *Default*: `tes3.crimeType.theft`. The type of crime to be committed. Maps to values in the [`tes3.crimeType`](https://mwse.github.io/MWSE/references/crime-types/) table.
+	* `victim` ([tes3mobileNPC](../../types/tes3mobileNPC), [tes3actor](../../types/tes3actor), [tes3faction](../../types/tes3faction)): *Optional*. *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
+	* `value` (number): *Optional*. *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
+	* `forceDetection` (boolean): *Optional*. *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
 
 **Returns**:
 

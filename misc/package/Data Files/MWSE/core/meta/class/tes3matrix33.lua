@@ -12,15 +12,15 @@
 tes3matrix33 = {}
 
 --- Creates a new 3 by 3 matrix from 3 provided vectors or 9 numbers. Creates an empty matrix if nothing is provided.
---- @param x0 number? *Default*: `0`. No description yet available.
---- @param y0 number? *Default*: `0`. No description yet available.
---- @param z0 number? *Default*: `0`. No description yet available.
---- @param x1 number? *Default*: `0`. No description yet available.
---- @param y1 number? *Default*: `0`. No description yet available.
---- @param z1 number? *Default*: `0`. No description yet available.
---- @param x2 number? *Default*: `0`. No description yet available.
---- @param y2 number? *Default*: `0`. No description yet available.
---- @param z2 number? *Default*: `0`. No description yet available.
+--- @param x0 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param y0 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param z0 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param x1 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param y1 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param z1 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param x2 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param y2 number? *Optional*. *Default*: `0`. No description yet available.
+--- @param z2 number? *Optional*. *Default*: `0`. No description yet available.
 --- @param x tes3vector3? *Optional*. No description yet available.
 --- @param y tes3vector3? *Optional*. No description yet available.
 --- @param z tes3vector3? *Optional*. No description yet available.

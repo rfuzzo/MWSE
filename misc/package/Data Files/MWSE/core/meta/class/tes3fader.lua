@@ -11,7 +11,7 @@ tes3fader = {}
 
 --- Creates a new fader, and adds it to the fader system.
 --- @param distance number? *Optional*. If no distance is provided, a distance will be calculated based on current amount of faders, `tes3.worldController.projectionDistance` and crosshair node's `translation.y`.
---- @param unknownBool boolean? *Default*: `true`. No description yet available.
+--- @param unknownBool boolean? *Optional*. *Default*: `true`. No description yet available.
 --- @return tes3fader fader No description yet available.
 function tes3fader.new(distance, unknownBool) end
 
@@ -59,14 +59,14 @@ function tes3fader:fadeTo(params) end
 --- 
 --- `color`: tes3vector3|table — The RGB values to set in [0.0, 1.0] range.
 --- 
---- `flag`: boolean? — *Default*: `false`. No description yet available.
+--- `flag`: boolean? — *Optional*. *Default*: `false`. No description yet available.
 --- @return boolean result No description yet available.
 function tes3fader:setColor(params) end
 
 ---Table parameter definitions for `tes3fader.setColor`.
 --- @class tes3fader.setColor.params
 --- @field color tes3vector3|table The RGB values to set in [0.0, 1.0] range.
---- @field flag boolean? *Default*: `false`. No description yet available.
+--- @field flag boolean? *Optional*. *Default*: `false`. No description yet available.
 
 --- This method allows changing the texture of the fader.
 --- @param path string A path for the texture that will be displayed on screen.
