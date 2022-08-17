@@ -688,7 +688,7 @@ namespace TES3 {
 			!getMovementFlagSwimming() &&
 			!getMovementFlagFlying() &&
 			(allowMidairJumping || (!getMovementFlagJumping() && !getMovementFlagFalling())) &&
-			(!getMobileActorMovementFlag(ActorMovement::Unknown) || thisFrameDeltaPosition.length() <= 0.0099999998);
+			(!getMovementFlagSliding() || thisFrameDeltaPosition.length() <= 0.0099999998);
 	}
 
 	bool MobileActor::canJump_lua() const {
@@ -1568,7 +1568,7 @@ namespace TES3 {
 	}
 
 	void MobileActor::setMovementFlagSliding(bool value) {
-		setMobileActorMovementFlag(TES3::ActorMovement::Sliding, value)
+		setMobileActorMovementFlag(TES3::ActorMovement::Sliding, value);
 	}
 
 	bool MobileActor::getMovementFlagSneaking() const {
