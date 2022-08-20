@@ -229,6 +229,8 @@
 #include "LuaMagicCastedEvent.h"
 #include "LuaMagicEffectRemovedEvent.h"
 #include "LuaMenuStateEvent.h"
+#include "LuaMobileObjectActivatedEvent.h"
+#include "LuaMobileObjectDeactivatedEvent.h"
 #include "LuaMouseAxisEvent.h"
 #include "LuaMouseButtonDownEvent.h"
 #include "LuaMouseButtonUpEvent.h"
@@ -1838,21 +1840,36 @@ namespace mwse::lua {
 	// Event: Activation Target Changed
 	//
 
-	static const uintptr_t MACP__getPlayerAnimData_fieldEC = 0x567990;
+	static const uintptr_t MACP__getVanityState = 0x567990;
+	static TES3::Reference* ActivationTargetChanged_preActivationTarget = nullptr;
+	static bool ActivationTargetChanged_invalidated = false;
 
 	static __declspec(naked) void HookPreFindActivationTarget() {
 		_asm {
-			mov eax, ds: [0x7C6CDC]  // global_TES3_Game
-			mov eax, [eax + 0xE8]	// game->playerTarget
-			mov TES3::Game::previousPlayerTarget, eax
-			jmp MACP__getPlayerAnimData_fieldEC
+			mov		eax, ds: [0x7C6CDC]  // global_TES3_Game
+			mov		eax, [eax + 0xE8]	// game->playerTarget
+			mov		ActivationTargetChanged_preActivationTarget, eax
+			mov		ActivationTargetChanged_invalidated, 0
+			jmp		MACP__getVanityState
+		}
+	}
+
+	static __declspec(naked) void HookPostActivate() {
+		// On ref activation, clear remembered reference to avoid using a stale pointer to a possibly destroyed reference.
+		// The invalidation flag is required to identify change when the current target also becomes nullptr.
+		_asm {
+			xor		edx, edx
+			mov		ActivationTargetChanged_preActivationTarget, edx
+			mov		ActivationTargetChanged_invalidated, 1
+			retn	8
 		}
 	}
 
 	static void HookPostFindActivationTarget() {
 		TES3::Reference* currentTarget = TES3::Game::get()->playerTarget;
-		if (TES3::Game::previousPlayerTarget != currentTarget && event::ActivationTargetChangedEvent::getEventEnabled()) {
-			LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::ActivationTargetChangedEvent(TES3::Game::previousPlayerTarget, currentTarget));
+		bool changed = ActivationTargetChanged_invalidated || ActivationTargetChanged_preActivationTarget != currentTarget;
+		if (changed && event::ActivationTargetChangedEvent::getEventEnabled()) {
+			LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::ActivationTargetChangedEvent(ActivationTargetChanged_preActivationTarget, currentTarget));
 		}
 	}
 
@@ -3192,12 +3209,20 @@ namespace mwse::lua {
 		TriggerItemTileUpdatedEventForElement(element, 0x7D3A70);
 	}
 
-	void __fastcall OnInventoryTileChildPropertySet(TES3::UI::Element* element, DWORD _UNUSED_, TES3::UI::Property property, TES3::UI::PropertyValue value, TES3::UI::PropertyType type) {
+	void __fastcall OnMenuContentsInventoryTileChildPropertySet(TES3::UI::Element* element, DWORD _UNUSED_, TES3::UI::Property property, TES3::UI::PropertyValue value, TES3::UI::PropertyType type) {
 		// Overwritten code.
 		element->setProperty(property, value, type);
 
 		// Get the associated tile and fire off the update event.
 		TriggerItemTileUpdatedEventForElement(element, 0x7D308C);
+	}
+	
+	void __fastcall OnMenuBarterInventoryTileChildPropertySet(TES3::UI::Element* element, DWORD _UNUSED_, TES3::UI::Property property, TES3::UI::PropertyValue value, TES3::UI::PropertyType type) {
+		// Overwritten code.
+		element->setProperty(property, value, type);
+
+		// Get the associated tile and fire off the update event.
+		TriggerItemTileUpdatedEventForElement(element, 0x7D284C);
 	}
 
 	const auto TES3_AttachTileToCursor = reinterpret_cast<TES3::UI::Element * (__cdecl*)(TES3::UI::InventoryTile*, int)>(0x5D14F0);
@@ -3630,6 +3655,41 @@ namespace mwse::lua {
 	}
 
 	//
+	// Event: Mobile activated/deactivated
+	//
+
+	const auto TES3_MobileObject_EnterLeaveSimulation = reinterpret_cast<void(__thiscall*)(TES3::MobileObject*, bool)>(0x561CB0);
+	void __fastcall onMobileObjectEnterLeaveSimulation(TES3::MobileObject* mobileObject, DWORD _EDX_, bool active) {
+		// Store previous ActiveInSimulation state.
+		bool wasActive = mobileObject->actorFlags & TES3::MobileActorFlag::ActiveInSimulation;
+
+		// Call original function.
+		TES3_MobileObject_EnterLeaveSimulation(mobileObject, active);
+
+		bool isPlayer = false;
+		if (mobileObject->isActor()) {
+			// Check if the current mobile is the player.
+			TES3::MobileActor* mobileActor = static_cast<TES3::MobileActor*>(mobileObject);
+			isPlayer = mobileActor->actorType == TES3::MobileActorType::Player;
+
+			// Remove projectiles fired by this actor from simulation since they will contain invalid data shortly after.
+			if (wasActive && !active) {
+				mobileActor->removeFiredProjectiles(false);
+			}
+		}
+
+		// Fire off mobile activation events for anything but the player if ActiveInSimulation state changed.
+		if (!isPlayer) {
+			if (mwse::lua::event::MobileObjectActivatedEvent::getEventEnabled() && !wasActive && active) {
+				mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileObjectActivatedEvent(mobileObject));
+			}
+			else if (mwse::lua::event::MobileObjectDeactivatedEvent::getEventEnabled() && wasActive && !active) {
+				mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileObjectDeactivatedEvent(mobileObject));
+			}
+		}
+	}
+
+	//
 	// Event: Power recharged
 	//
 
@@ -3637,7 +3697,11 @@ namespace mwse::lua {
 	void __fastcall OnDeletePowerHashMapKVP(PowersHashMap* self, DWORD edx, PowersHashMap::Node* node) {
 		if (event::PowerRechargedEvent::getEventEnabled()) {
 			auto mobile = reinterpret_cast<TES3::MobileActor*>(DWORD(self) - offsetof(TES3::MobileActor, powers));
-			LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new lua::event::PowerRechargedEvent(node->key, mobile));
+
+			// Ignore calls from cleanup in the mobile dtor.
+			if (mobile->getFlagActiveAI()) {
+				LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new lua::event::PowerRechargedEvent(node->key, mobile));
+			}
 		}
 	}
 
@@ -4444,6 +4508,7 @@ namespace mwse::lua {
 
 		// Event: Activation Target Changed
 		genCallEnforced(0x41CA64, 0x567990, reinterpret_cast<DWORD>(HookPreFindActivationTarget));
+		genJumpUnprotected(0x4EB0BE, reinterpret_cast<DWORD>(HookPostActivate));
 		genJumpUnprotected(0x41CCF5, reinterpret_cast<DWORD>(HookPostFindActivationTarget));
 
 		// Event: Active magic effect icons updated
@@ -4519,50 +4584,13 @@ namespace mwse::lua {
 		genCallEnforced(0x570C0B, 0x570600, *reinterpret_cast<DWORD*>(&processManagerDetectSneak));
 		genCallEnforced(0x570E48, 0x570600, *reinterpret_cast<DWORD*>(&processManagerDetectSneak));
 
-		// Event: Mobile added to controller.
-		auto mobManagerAddMob = &TES3::MobManager::addMob;
-		genCallEnforced(0x4665D5, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x484F3D, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x4C6954, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x4DC965, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x4EBCBF, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x5090BF, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x50990C, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x509A6E, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x50EFE3, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x529C3B, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x54DE92, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x57356C, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x5752C6, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x57595B, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-		genCallEnforced(0x635390, 0x5636A0, *reinterpret_cast<DWORD*>(&mobManagerAddMob));
-
-		// Event: Mobile removed from controller.
-		auto mobManagerRemoveMob = &TES3::MobManager::removeMob;
-		genCallEnforced(0x4668D8, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x484E24, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x4E47C1, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x4E8911, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x4EBD8C, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x50919F, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x523A1F, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x523AE5, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x52E980, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x52EA6D, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x52EDE5, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x574FDB, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x57509A, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x57548A, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-		genCallEnforced(0x575647, 0x5637F0, *reinterpret_cast<DWORD*>(&mobManagerRemoveMob));
-
-		// Event Mobile added/removed from simulation by recalculated distance.
-		auto mobileEnterLeaveSimulationByDistance = &TES3::MobileObject::enterLeaveSimulationByDistance;
-		genCallEnforced(0x5090D1, 0x55FFC0, *reinterpret_cast<DWORD*>(&mobileEnterLeaveSimulationByDistance));
-		genCallEnforced(0x509EFF, 0x55FFC0, *reinterpret_cast<DWORD*>(&mobileEnterLeaveSimulationByDistance));
-		genCallEnforced(0x50EF90, 0x55FFC0, *reinterpret_cast<DWORD*>(&mobileEnterLeaveSimulationByDistance));
-		genCallEnforced(0x50F033, 0x55FFC0, *reinterpret_cast<DWORD*>(&mobileEnterLeaveSimulationByDistance));
-		genCallEnforced(0x5244F5, 0x55FFC0, *reinterpret_cast<DWORD*>(&mobileEnterLeaveSimulationByDistance));
-		genJumpEnforced(0x564F97, 0x55FFC0, *reinterpret_cast<DWORD*>(&mobileEnterLeaveSimulationByDistance));
+		// Event: Mobile activated/deactivated.
+		// MobileObject::enterLeaveSimulation call at 0x57249B is not required as it is already taken care of by the other hooks.
+		genCallEnforced(0x524C34, 0x561CB0, reinterpret_cast<DWORD>(onMobileObjectEnterLeaveSimulation)); // MobileActor::enterLeaveSimulation
+		genCallEnforced(0x524A63, 0x561CB0, reinterpret_cast<DWORD>(onMobileObjectEnterLeaveSimulation)); // MobileActor::enterLeaveSimulation
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::MobileObject, 0x70, 0x561CB0, reinterpret_cast<DWORD>(onMobileObjectEnterLeaveSimulation));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::MobileProjectile, 0x70, 0x561CB0, reinterpret_cast<DWORD>(onMobileObjectEnterLeaveSimulation));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::SpellProjectile, 0x70, 0x561CB0, reinterpret_cast<DWORD>(onMobileObjectEnterLeaveSimulation));
 
 		// Event: Calculate barter price.
 		if (genCallEnforced(0x5A447B, 0x5A46E0, reinterpret_cast<DWORD>(OnCalculateBarterPrice_CalcItemValue))) {
@@ -4842,7 +4870,8 @@ namespace mwse::lua {
 
 		// Recognize when an inventory tile is updated.
 		genCallEnforced(0x5A5DA4, 0x47E720, reinterpret_cast<DWORD>(GetNextInventoryTileToUpdate)); // General barter menu update.
-		genCallEnforced(0x5B6655, 0x581F30, reinterpret_cast<DWORD>(OnInventoryTileChildPropertySet)); // During click event into contents menu.
+		genCallEnforced(0x5B6655, 0x581F30, reinterpret_cast<DWORD>(OnMenuContentsInventoryTileChildPropertySet)); // During click event into contents menu.
+		genCallEnforced(0x5A5008, 0x581F30, reinterpret_cast<DWORD>(OnMenuBarterInventoryTileChildPropertySet)); // During click event into bartered menu.
 		genCallEnforced(0x5B6F13, 0x47E720, reinterpret_cast<DWORD>(GetNextInventoryTileToUpdate)); // General contents menu update.
 		genCallEnforced(0x5CC366, 0x58AE20, reinterpret_cast<DWORD>(OnSetItemTileIcon)); // On manual AddTile.
 		genCallEnforced(0x5CD147, 0x47E720, reinterpret_cast<DWORD>(GetNextInventoryTileToUpdate)); // General inventory menu update.

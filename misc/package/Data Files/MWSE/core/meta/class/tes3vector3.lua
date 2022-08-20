@@ -6,6 +6,12 @@
 
 --- A simple trio of floating-point numbers. You can perform following arithmetic with this type: `+`, `-`, and `*`.
 --- @class tes3vector3
+--- @operator add(tes3vector3): tes3vector3
+--- @operator div(number): tes3vector3
+--- @operator len: number
+--- @operator mul(tes3vector3): tes3vector3
+--- @operator mul(number): tes3vector3
+--- @operator sub(tes3vector3): tes3vector3
 --- @field angle number The angle between the vector and the water plane.
 --- @field b number The third value in the vector. An alias for `z`.
 --- @field g number The second value in the vector. An alias for `y`.
@@ -16,9 +22,9 @@
 tes3vector3 = {}
 
 --- Creates a new vector. If no parameters are provided, an empty set will be constructed.
---- @param x number? *Optional*. No description yet available.
---- @param y number? *Optional*. No description yet available.
---- @param z number? *Optional*. No description yet available.
+--- @param x number? *Default*: `0`. No description yet available.
+--- @param y number? *Default*: `0`. No description yet available.
+--- @param z number? *Default*: `0`. No description yet available.
 --- @return tes3vector3 vector No description yet available.
 function tes3vector3.new(x, y, z) end
 
@@ -38,7 +44,7 @@ function tes3vector3:distance(vec) end
 
 --- Calculates the dot product with another vector.
 --- @param vec tes3vector3 No description yet available.
---- @return tes3vector3 result No description yet available.
+--- @return number result No description yet available.
 function tes3vector3:dot(vec) end
 
 --- Calculates the vertical distance to another vector.

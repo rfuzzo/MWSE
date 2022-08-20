@@ -6,13 +6,13 @@
 
 --- An object that has a name, extra data, and controllers.
 --- @class niObjectNET : niObject
---- @field controller niKeyframeController|niLookAtController|niTimeController *Read-only*. The first controller available on the object.
---- @field extraData niExtraData|niStringExtraData *Read-only*. The first extra data available on the object.
+--- @field controller niKeyframeController|niLookAtController|niParticleSystemController|niTimeController *Read-only*. The first controller available on the object.
+--- @field extraData niStringExtraData|niTES3ExtraData|niTextKeyExtraData *Read-only*. The first extra data available on the object.
 --- @field name string The human-facing name of the given object.
 niObjectNET = {}
 
 --- Appends an extra data to the object.
---- @param extraData niExtraData|niStringExtraData No description yet available.
+--- @param extraData niStringExtraData|niTES3ExtraData|niTextKeyExtraData No description yet available.
 function niObjectNET:addExtraData(extraData) end
 
 --- Searches for an niExtraData on this object to see if it has one that holds a related reference.
@@ -20,9 +20,29 @@ function niObjectNET:addExtraData(extraData) end
 --- @return tes3reference? reference No description yet available.
 function niObjectNET:getGameReference(searchParents) end
 
+--- Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
+--- @param value string The first niStringExtraData starting with this value will be returned.
+--- @return niStringExtraData? extra No description yet available.
+function niObjectNET:getStringDataStartingWith(value) end
+
+--- Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
+--- @param value string The first niStringExtraData with this word will be returned.
+--- @return niStringExtraData? extra No description yet available.
+function niObjectNET:getStringDataWith(value) end
+
+--- Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
+--- @param value string The value to search for.
+--- @return boolean result No description yet available.
+function niObjectNET:hasStringDataStartingWith(value) end
+
+--- Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
+--- @param value string The value to search for.
+--- @return boolean result No description yet available.
+function niObjectNET:hasStringDataWith(value) end
+
 --- Add a controller to the object as the first controller.
---- @param type niKeyframeController|niLookAtController|niTimeController No description yet available.
-function niObjectNET:prependController(type) end
+--- @param controller niKeyframeController|niLookAtController|niParticleSystemController|niTimeController No description yet available.
+function niObjectNET:prependController(controller) end
 
 --- Removes all controllers.
 function niObjectNET:removeAllControllers() end
@@ -31,11 +51,11 @@ function niObjectNET:removeAllControllers() end
 function niObjectNET:removeAllExtraData() end
 
 --- Removes a controller from the object.
---- @param controller niKeyframeController|niLookAtController|niTimeController No description yet available.
+--- @param controller niKeyframeController|niLookAtController|niParticleSystemController|niTimeController No description yet available.
 function niObjectNET:removeController(controller) end
 
 --- Removes a specific extra data from the object.
---- @param extraData niExtraData|niStringExtraData No description yet available.
+--- @param extraData niStringExtraData|niTES3ExtraData|niTextKeyExtraData No description yet available.
 function niObjectNET:removeExtraData(extraData) end
 
 --- Sets a given flag in the niObjectNET flag data. The specifics use of the flag is dependent on the real underlying type.

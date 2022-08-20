@@ -5,7 +5,7 @@
 
 # niVertexColorProperty
 
-A rendering property that allows the application to control the method used to compute colors for each vertex in a geometry object.  This class enables effects such as static pre-lighting, dynamic lighting, etc.
+A rendering property that allows the application to control the method used to compute colors for each vertex in a geometry object. This class enables effects such as static pre-lighting, dynamic lighting, etc.
 
 This type inherits the following: [niProperty](../../types/niProperty), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
 ## Properties
@@ -32,11 +32,16 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 ### `lighting`
 
-The lighting mode.
+Describes how vertex colors influence lighting.
+
+Value | Mode                   | Description
+----- | ---------------------- | -----------------
+0     | LIGHT_MODE_EMISSIVE    | Only the emissive component of the lighting equation is used. No dynamic lights are considered in the lighting process.
+1	  | LIGHT_MODE_EMI_AMB_DIF | The emissive, ambient, and diffuse components of the lighting equation are all used.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -50,6 +55,16 @@ The human-facing name of the given object.
 
 ***
 
+### `propertyFlags`
+
+
+
+**Returns**:
+
+* `result` (integer)
+
+***
+
 ### `refCount`
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
@@ -57,16 +72,6 @@ The human-facing name of the given object.
 **Returns**:
 
 * `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -92,21 +97,27 @@ The human-facing name of the given object.
 
 ### `source`
 
-The source vertex mode.
+Determines how vertex and material colors are mixed on subclasses of niAVObject.
+
+Value | Mode                   | Description
+----- | ---------------------- | -----------------
+0     | VERT_MODE_SRC_IGNORE   | Emissive, ambient, and diffuse colors are all specified by the niMaterialProperty.
+1	  | VERT_MODE_SRC_EMISSIVE | Emissive colors are specified by the source vertex colors. Ambient and Diffuse are specified by the niMaterialProperty.
+2	  | VERT_MODE_SRC_AMB_DIF  | Ambient and Diffuse colors are specified by the source vertex colors. Emissive is specified by the niMaterialProperty (Default).
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `type`
 
-The unique class identifier number of the given rendering property.
+*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
 
 **Returns**:
 
-* `result` (niPropertyType)
+* `result` (integer)
 
 ***
 
@@ -158,9 +169,81 @@ local reference = myObject:getGameReference(searchParents)
 
 ***
 
+### `getStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
+
+```lua
+local extra = myObject:getStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData starting with this value will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `getStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
+
+```lua
+local extra = myObject:getStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData with this word will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `hasStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -168,7 +251,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 **Returns**:
 
@@ -178,7 +261,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -186,7 +269,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 **Returns**:
 
@@ -199,12 +282,12 @@ local result = myObject:isOfType(type)
 Add a controller to the object as the first controller.
 
 ```lua
-myObject:prependController(type)
+myObject:prependController(controller)
 ```
 
 **Parameters**:
 
-* `type` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../../types/niTimeController))
 
 ***
 
@@ -286,6 +369,22 @@ myObject:setFlag(state, index)
 
 * `state` (boolean)
 * `index` (number)
+
+***
+
+## Functions
+
+### `new`
+
+Creates a new niVertexColorProperty with `lighting` set to `LIGHT_MODE_EMI_AMB_DIF` and `source` set to `VERT_MODE_SRC_IGNORE`.
+
+```lua
+local property = niVertexColorProperty.new()
+```
+
+**Returns**:
+
+* `property` ([niVertexColorProperty](../../types/niVertexColorProperty))
 
 ***
 

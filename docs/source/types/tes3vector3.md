@@ -145,7 +145,7 @@ local result = myObject:dot(vec)
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` (number)
 
 ***
 
@@ -301,9 +301,9 @@ local vector = tes3vector3.new(x, y, z)
 
 **Parameters**:
 
-* `x` (number): *Optional*.
-* `y` (number): *Optional*.
-* `z` (number): *Optional*.
+* `x` (number): *Default*: `0`.
+* `y` (number): *Default*: `0`.
+* `z` (number): *Default*: `0`.
 
 **Returns**:
 

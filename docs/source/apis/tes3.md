@@ -95,6 +95,16 @@ A reference to the player.
 
 ***
 
+### `tes3.player1stPerson`
+
+A reference used for the player's first person hands.
+
+**Returns**:
+
+* `result` ([tes3reference](../../types/tes3reference))
+
+***
+
 ### `tes3.worldController`
 
 One of the core game objects.
@@ -150,7 +160,7 @@ tes3.addClothingSlot({ slot = ..., name = ... })
 Adds an item to a given reference's inventory or mobile's inventory.
 
 ```lua
-local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., soul = ..., count = ..., playSound = ..., limit = ..., reevaluateEquipment = ..., equipProjectiles = ..., updateGUI = ... })
+local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., soul = ..., count = ..., playSound = ..., showMessage = ..., limit = ..., reevaluateEquipment = ..., equipProjectiles = ..., updateGUI = ... })
 ```
 
 **Parameters**:
@@ -161,11 +171,12 @@ local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., s
 	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data for the item.
 	* `soul` ([tes3creature](../../types/tes3creature), [tes3npc](../../types/tes3npc)): *Optional*. For creating filled soul gems.
 	* `count` (number): *Default*: `1`. The maximum number of items to add.
-	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound for the item won't be played.
-	* `limit` (boolean): *Default*: `false`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
-	* `reevaluateEquipment` (boolean): *Default*: `true`. If true, and the item added is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if the new item is worth equipping. This does not affect the player.
-	* `equipProjectiles` (boolean): *Default*: `true`. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
-	* `updateGUI` (boolean): *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
+	* `playSound` (boolean): *Default*: `true`. If `false`, the up/down sound for the item won't be played. This only applies if `reference` is the player.
+	* `showMessage` (boolean): *Default*: `false`. If `true`, a message box notifying the player will be shown. This only applies if `reference` is the player.
+	* `limit` (boolean): *Default*: `false`. If `false`, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
+	* `reevaluateEquipment` (boolean): *Default*: `true`. If `true`, and the item added is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if the new item is worth equipping. This does not affect the player.
+	* `equipProjectiles` (boolean): *Default*: `true`. If `true`, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
+	* `updateGUI` (boolean): *Default*: `true`. If `false`, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
 
 **Returns**:
 
@@ -225,7 +236,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	* `name` (string): *Default*: `Unnamed Effect`. Name of the effect.
 	* `baseCost` (number): *Default*: `1`. Base magicka cost for the effect.
 	* `school` (integer): *Default*: `tes3.magicSchool.alteration`. The magic school the new effect will be assigned to. Maps to [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) constants.
-	* `size` (number): *Default*: `1`. The size scale for the spells containing this magic effect.
+	* `size` (number): *Default*: `1`. Controls how much the visual effect scales with its magnitude.
 	* `sizeCap` (number): *Default*: `1`. The maximum possible size of the projectile.
 	* `speed` (number): *Default*: `1`.
 	* `description` (string): *Default*: `No description available.`. Description for the effect.
@@ -531,7 +542,7 @@ tes3.adjustSoundVolume({ sound = ..., reference = ..., mixChannel = ..., volume 
 * `params` (table)
 	* `sound` ([tes3sound](../../types/tes3sound), string): The sound object, or id of the sound to look for.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): The reference to attach the sound to.
-	* `mixChannel` (number): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
+	* `mixChannel` (integer): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
 	* `volume` (number): *Default*: `1.0`. A value between 0.0 and 1.0 to scale the volume off of.
 
 ***
@@ -580,7 +591,7 @@ local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = .
 		* `duration` (number): *Default*: `0`. Number of seconds the effect is going to be active.
 		* `min` (number): *Default*: `0`. The minimal magintude of the effect per tick.
 		* `max` (number): *Default*: `0`. The maximal magnitude of the effect per tick.
-	* `createCopy` (boolean): *Default*: `false`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
+	* `createCopy` (boolean): *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
 	* `fromStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 	* `castChance` (number): *Optional*. This parameter allows overriding the casting chance of the magic source.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The target of the magic.
@@ -662,7 +673,7 @@ local price = tes3.calculatePrice({ object = ..., basePrice = ..., buying = ...,
 	* `training` (boolean): *Default*: `false`. If `true`, a [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event will be triggered, passing the given `skill` ID.
 	* `count` (number): *Default*: `1`. If `bartering`, the count passed to the [calcBarterPrice](https://mwse.github.io/MWSE/events/calcBarterPrice) event.
 	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. If `bartering` or `repairing`, the item data passed to the [calcBarterPrice](https://mwse.github.io/MWSE/events/calcBarterPrice) or [calcRepairPrice](https://mwse.github.io/MWSE/events/calcRepairPrice) event.
-	* `skill` (number): If `training`, the skill ID passed to the [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event.
+	* `skill` (number): If `training`, the skill ID passed to the [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event. Maps to value in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
@@ -1170,7 +1181,7 @@ tes3.fadeIn({ fader = ..., duration = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `fader` ([tes3fader](../../types/tes3fader)): *Optional*. Defaults to the transition fader.
 	* `duration` (number): *Default*: `1.0`. Time, in seconds, for the fade.
 
@@ -1186,7 +1197,7 @@ tes3.fadeOut({ fader = ..., duration = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `fader` ([tes3fader](../../types/tes3fader)): *Optional*. Defaults to the transition fader.
 	* `duration` (number): *Default*: `1.0`. Time, in seconds, for the fade.
 
@@ -1202,7 +1213,7 @@ tes3.fadeTo({ fader = ..., duration = ..., value = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `fader` ([tes3fader](../../types/tes3fader)): *Optional*. Defaults to the transition fader.
 	* `duration` (number): *Default*: `1.0`. Time, in seconds, for the fade.
 	* `value` (number): *Default*: `1.0`.
@@ -1981,7 +1992,7 @@ local count = tes3.getKillCount({ actor = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `actor` ([tes3actor](../../types/tes3actor), string): *Optional*. The actor (or their ID) for whom to retrieve player's kill count.
 
 **Returns**:
@@ -3251,7 +3262,7 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 	* `position` ([tes3vector3](../../types/tes3vector3), table): Position of the ray origin.
 	* `direction` ([tes3vector3](../../types/tes3vector3), table): Direction of the ray. Does not have to be unit length.
 	* `findAll` (boolean): *Default*: `false`. If true, the ray test won't stop after the first result.
-	* `maxDistance` (number): *Optional*. The maximum distance that the test will run.
+	* `maxDistance` (number): *Default*: `0`. The maximum distance that the test will run.
 	* `sort` (boolean): *Default*: `true`. If true, the results will be sorted by distance from the origin position.
 	* `useModelBounds` (boolean): *Default*: `false`. If true, model bounds will be tested for intersection. Otherwise triangles will be used.
 	* `useModelCoordinates` (boolean): *Default*: `false`. If true, model coordinates will be used instead of world coordinates.
@@ -3262,11 +3273,11 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 	* `returnNormal` (boolean): *Default*: `false`. Calculate and return the vertex normal at intersections.
 	* `returnSmoothNormal` (boolean): *Default*: `false`. Use normal interpolation for calculating vertex normals.
 	* `returnTexture` (boolean): *Default*: `false`. Calculate and return the texture coordinate at intersections.
-	* `ignore` ([tes3reference](../../types/tes3reference)[], [niNode](../../types/niNode)[]): *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
+	* `ignore` (table&lt;integer, [niNode](../../types/niNode)|[tes3reference](../../types/tes3reference)&gt;): *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
 
 **Returns**:
 
-* `result` ([niPickRecord](../../types/niPickRecord), [niPickRecord](../../types/niPickRecord)[])
+* `result` ([niPickRecord](../../types/niPickRecord), [niPickRecord](../../types/niPickRecord)[], nil)
 
 ??? example "Example: Get Activation Target"
 
@@ -3895,7 +3906,7 @@ local changedControlState = tes3.setPlayerControlState({ enabled = ..., attack =
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `enabled` (boolean): *Default*: `false`. Setting this to false will disable any kind of control.
 	* `attack` (boolean): *Default*: `false`. If this is false, it will block player from attacking.
 	* `jumping` (boolean): *Default*: `false`. If this is false, it will block player from jumping.
@@ -3978,7 +3989,7 @@ local changedVanityMode = tes3.setVanityMode({ enabled = ..., checkVanityDisable
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `enabled` (boolean): *Default*: `true`. This flag sets the vanity mode as enabled or disabled.
 	* `checkVanityDisabled` (boolean): *Default*: `true`. This will prevent changing vanity mode according to vanityDisabled flag on tes3.mobilePlayer.
 	* `toggle` (boolean): *Default*: `false`. When this flag is set to true. The vanity mode will be toggled. If the player was in vanity mode, this will make the player leave vanity mode. Conversly, if the player wasn't in the vanity mode, this will turn on the vanity mode.
@@ -4064,8 +4075,8 @@ tes3.showRepairServiceMenu({ serviceActor = ... })
 
 **Parameters**:
 
-* `params` (table)
-	* `serviceActor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Optional*. The actor to use for calculating the service price.
+* `params` (table): *Optional*.
+	* `serviceActor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Default*: `tes3mobilePlayer`. The actor to use for calculating the service price.
 
 ***
 
@@ -4081,7 +4092,7 @@ local success = tes3.showRestMenu({ checkForEnemies = ..., checkForSolidGround =
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `checkForEnemies` (boolean): *Default*: `true`. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.
 	* `checkForSolidGround` (boolean): *Default*: `true`. Perform a check if the player is underwater. If underwater, false is returned.
 	* `checkSleepingIllegal` (boolean): *Default*: `true`. Perform a check if the sleeping in the current cell is illegal. If illegal, then the player will be prompted to wait instead of rest.

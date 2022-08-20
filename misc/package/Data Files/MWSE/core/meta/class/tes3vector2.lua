@@ -6,13 +6,18 @@
 
 --- A simple pair of floating-point numbers. You can perform following arithmetic with this type: `+`, `-`, and `*`.
 --- @class tes3vector2
+--- @operator add(tes3vector2): tes3vector2
+--- @operator div(number): tes3vector2
+--- @operator mul(tes3vector2): tes3vector2
+--- @operator mul(number): tes3vector2
+--- @operator sub(tes3vector2): tes3vector2
 --- @field x number The first value in the vector.
 --- @field y number The second value in the vector.
 tes3vector2 = {}
 
 --- Creates a new vector. If no parameters are provided, an empty set will be constructed.
---- @param x number? *Optional*. No description yet available.
---- @param y number? *Optional*. No description yet available.
+--- @param x number? *Default*: `0`. No description yet available.
+--- @param y number? *Default*: `0`. No description yet available.
 --- @return tes3vector2 vector No description yet available.
 function tes3vector2.new(x, y) end
 

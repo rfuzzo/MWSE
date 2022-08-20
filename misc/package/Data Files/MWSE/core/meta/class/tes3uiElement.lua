@@ -489,7 +489,7 @@ function tes3uiElement:getPropertyInt(property) end
 
 --- Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as an object value, defaulting to `nil` if the property was not set. This function can be dangerous to use, and can lead to crashes if not properly understood.
 --- @param property number|string The property to get.
---- @param typeCast string|nil *Default*: `tes3baseObject`. The casting of the property to get.
+--- @param typeCast string|nil *Default*: `"tes3baseObject"`. The casting of the property to get.
 --- @return number value The value of the property, defaulting to `nil` if the property was not set.
 function tes3uiElement:getPropertyObject(property, typeCast) end
 
@@ -628,9 +628,9 @@ function tes3uiElement:registerAfter(eventID, callback) end
 --- @param callback function The callback function.
 function tes3uiElement:registerBefore(eventID, callback) end
 
---- 	Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+--- Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 --- 
---- 	Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
+--- Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 --- @param insertBefore tes3uiElement|number The insertion point (or its 0-based child index).
 --- @param moveFrom tes3uiElement|number The first child (or 0-based child index) to be moved.
 --- @param count number The number of child elements to move.

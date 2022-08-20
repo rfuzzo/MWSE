@@ -10,9 +10,19 @@ Contains the actual geometry data for a `NiTriBasedGeometry` object.
 This type inherits the following: [niGeometryData](../../types/niGeometryData), [niObject](../../types/niObject)
 ## Properties
 
+### `activeTriangleCount`
+
+The active triangle count of the object.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `bounds`
 
-The bounds of the object.
+The model-space bounding sphere of the object.
 
 **Returns**:
 
@@ -22,21 +32,21 @@ The bounds of the object.
 
 ### `colors`
 
-*Read-only*. The color for the object.
+*Read-only*. The vertex colors for the object. The length of the array is equal to `vertexCount`.
 
 **Returns**:
 
-* `result` ([niColorA](../../types/niColorA))
+* `result` ([niPackedColor](../../types/niPackedColor)[])
 
 ***
 
 ### `normals`
 
-*Read-only*. The normals list for the object.
+*Read-only*. The list of unitized, model-space vertex normals for the object. The length of the array is equal to `vertexCount`.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../../types/tes3vector3)[])
 
 ***
 
@@ -47,16 +57,6 @@ The bounds of the object.
 **Returns**:
 
 * `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -82,21 +82,21 @@ The bounds of the object.
 
 ### `texCoords`
 
-*Read-only*. The array of texture coordinates.
+*Read-only*. The array of texture coordinates. The length of the array is equal to `vertexCount` times `textureSets`.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../../types/tes3vector2)[])
 
 ***
 
 ### `textures`
 
-*Read-only*. The array of texture coordinates.
+*Read-only*. The array of texture coordinates. The length of the array is equal to `vertexCount` times `textureSets`.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../../types/tes3vector2)[])
 
 ***
 
@@ -112,7 +112,7 @@ The number of texture coordinate sets in the data.
 
 ### `triangleCount`
 
-The triangle count of the object.
+*Read-only*. The triangle count of the object.
 
 **Returns**:
 
@@ -122,7 +122,7 @@ The triangle count of the object.
 
 ### `uniqueID`
 
-A unique ID for this model, assigned at model creation.
+*Read-only*. A unique ID for this model, assigned at model creation.
 
 **Returns**:
 
@@ -142,11 +142,11 @@ A unique ID for this model, assigned at model creation.
 
 ### `vertices`
 
-*Read-only*. The array of vertex position data.
+*Read-only*. The array of vertex position data. The length of the array is equal to `vertexCount`.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../../types/tes3vector3)[])
 
 ***
 
@@ -168,7 +168,7 @@ local result = myObject:clone()
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -176,7 +176,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 **Returns**:
 
@@ -186,7 +186,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -194,7 +194,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
 
 **Returns**:
 

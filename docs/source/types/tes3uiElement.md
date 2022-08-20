@@ -1212,7 +1212,7 @@ local value = myObject:getPropertyObject(property, typeCast)
 **Parameters**:
 
 * `property` (number, string): The property to get.
-* `typeCast` (string, nil): *Default*: `tes3baseObject`. The casting of the property to get.
+* `typeCast` (string, nil): *Default*: `"tes3baseObject"`. The casting of the property to get.
 
 **Returns**:
 
@@ -1425,9 +1425,9 @@ myObject:registerBefore(eventID, callback)
 
 ### `reorderChildren`
 
-	Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 
-	Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
+Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 
 ```lua
 local result = myObject:reorderChildren(insertBefore, moveFrom, count)

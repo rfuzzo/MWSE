@@ -2699,6 +2699,11 @@ namespace mwse::lua {
 	}
 
 	TES3::BaseObject* createObject(sol::table params) {
+		const char* id = getOptionalParam<const char*>(params, "id", nullptr);
+		if (id && strlen(id) == 0) {
+			throw std::invalid_argument("Invalid 'id' parameter provided.");
+		}
+
 		auto objectType = getOptionalParam(params, "objectType", TES3::ObjectType::Invalid);
 		if (objectType == TES3::ObjectType::Invalid) {
 			throw std::invalid_argument("Invalid 'objectType' parameter provided.");
@@ -3048,6 +3053,10 @@ namespace mwse::lua {
 	}
 
 	int addItem(sol::table params) {
+		auto& luaManager = mwse::lua::LuaManager::getInstance();
+		auto stateHandle = luaManager.getThreadSafeStateHandle();
+		auto& state = stateHandle.state;
+
 		// Get the reference we are manipulating.
 		TES3::Reference* reference = getOptionalParamReference(params, "reference");
 		if (reference == nullptr) {
@@ -3163,9 +3172,22 @@ namespace mwse::lua {
 		// Play the relevant sound.
 		auto worldController = TES3::WorldController::get();
 		auto playerMobile = worldController->getMobilePlayer();
-		if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
-			if (mobile == playerMobile) {
+		if (mobile == playerMobile) {
+			if (getOptionalParam<bool>(params, "playSound", true)) {
 				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
+			}
+
+			if (getOptionalParam<bool>(params, "showMessage", false)) {
+				std::string message;
+				auto luaFormat = state["string"]["format"];
+				auto GMSTs = TES3::DataHandler::get()->nonDynamicData->GMSTs;
+				if (fulfilledCount > 1) {
+					message = luaFormat(GMSTs[TES3::GMST::sNotifyMessage61]->value.asString, fulfilledCount, item->getName());
+				}
+				else {
+					message = luaFormat(GMSTs[TES3::GMST::sNotifyMessage60]->value.asString, item->getName());
+				}
+				TES3::UI::showMessageBox(message.c_str());
 			}
 		}
 
@@ -4229,19 +4251,22 @@ namespace mwse::lua {
 
 		// Change the animation temporarily. Passing nullptr resets the animation to base.
 		const char* modelFile = getOptionalParam<const char*>(params, "file", nullptr);
-		reference->setModelPath(modelFile, true);
 
-		if (modelFile == nullptr) {
-			// Reset animation control.
-			auto mact = reference->getAttachedMobileActor();
-			if (mact) {
-				mact->setMobileActorFlag(TES3::MobileActorFlag::IdleAnim, false);
-			}
-		}
-		else {
+		if (modelFile) {
+			reference->setModelPath(modelFile, true);
+
 			animData = reference->getAttachedAnimationData();
 			if (!animData->hasOverrideAnimations()) {
 				throw std::logic_error("Animation file failed to load.");
+			}
+		}
+		else {
+			reference->reloadAnimation(reference->baseObject->getModelPath());
+
+			// Reset animation control that may be set by playAnimation.
+			auto mact = reference->getAttachedMobileActor();
+			if (mact) {
+				mact->setMobileActorFlag(TES3::MobileActorFlag::IdleAnim, false);
 			}
 		}
 	}
@@ -4424,7 +4449,7 @@ namespace mwse::lua {
 		}
 
 		auto mact = reference->getAttachedMobileActor();
-		if (mact == nullptr) {
+		if (mact == nullptr || !mact->isActor()) {
 			throw std::invalid_argument("Invalid 'reference' parameter provided. No mobile actor found.");
 		}
 
@@ -4486,7 +4511,7 @@ namespace mwse::lua {
 		}
 
 		auto mact = reference->getAttachedMobileActor();
-		if (mact == nullptr) {
+		if (mact == nullptr || !mact->isActor()) {
 			throw std::invalid_argument("Invalid 'reference' parameter provided. No mobile actor found.");
 		}
 
@@ -5301,7 +5326,7 @@ namespace mwse::lua {
 		float height1, height2;
 
 		// Try to get the first reference's data.
-		auto mobile1 = reference1->getAttachedMobileActor();
+		auto mobile1 = reference1->getAttachedMobileObject();
 		position1 = reference1->position;
 		if (mobile1) {
 			height1 = mobile1->height;
@@ -5315,7 +5340,7 @@ namespace mwse::lua {
 		}
 
 		// Try to get the second reference's data.
-		auto mobile2 = reference2->getAttachedMobileActor();
+		auto mobile2 = reference2->getAttachedMobileObject();
 		position2 = reference2->position;
 		if (mobile2) {
 			height2 = mobile2->height;
@@ -5340,7 +5365,7 @@ namespace mwse::lua {
 			position = reference->position;
 
 			// Use centre of body location to match how the findActorsInProximity treats mobiles.
-			auto mobile = reference->getAttachedMobileActor();
+			auto mobile = reference->getAttachedMobileObject();
 			if (mobile) {
 				position.value().z += 0.5f * mobile->height;
 			}
