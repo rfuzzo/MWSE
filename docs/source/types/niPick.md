@@ -123,11 +123,11 @@ If true, texture coordinates are returned for the point of intersection of trian
 
 ### `root`
 
-The root pick type for the object.
+The root of the scene graph on which the next picking operation will be performed.
 
 **Returns**:
 
-* `result` (niPickType)
+* `result` ([niNode](../../types/niNode))
 
 ***
 
