@@ -2,7 +2,17 @@
 -- Find missing MWSE-lua definitions.
 --
 
+-- Use instructions:
+-- Run the "Check for missing definitions" task. The missing definitions will
+-- be printed out at the terminal.
+--
+-- Settings
+--
+-- Check for definition files without a description
 local FIND_MISSING_DESCRIPTIONS = false
+-- Check for missing descriptions in arguments of functions or methods
+-- This is set to false by default since it doesn't always make sense
+-- to add a description for each argument.
 local CHECK_ARGUMENT_DESCRIPTION = false
 
 local function log(fmt, ...)

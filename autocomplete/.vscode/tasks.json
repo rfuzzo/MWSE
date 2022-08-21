@@ -34,11 +34,11 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "Perform definitions checks",
+			"label": "Check for missing definitions",
 			"type": "shell",
 			"command": ".\\lua\\lua.exe",
 			"args": [
-				".\\builders\\definitionCheck.lua"
+				".\\builders\\youforgotsomething.lua"
 			],
 			"group": "build",
 			"problemMatcher": []
