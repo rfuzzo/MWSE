@@ -275,6 +275,54 @@ end
 
 
 --
+-- Definition checking functions
+--
+
+--- Check for missing `optional = true` flag on arguments that have default values set.
+---@param package package
+---@param argument table
+local function checkArgument(package, argument)
+	if (argument.default ~= nil) and (argument.optional == nil) then
+		error(string.format("%s definition, argument: `%s` is missing `optional = true`, but provided a `default` value.", package.namespace, argument.name))
+	end
+end
+
+--- Check for flaws in a function definition file.
+---@param package package
+local function checkFunction(package)
+	if package.deprecated then
+		return
+	end
+	for _, argument in ipairs(package.arguments or {}) do
+		if (argument.tableParams) then
+			for _, tableArgument in ipairs(argument.tableParams) do
+				checkArgument(package, tableArgument)
+			end
+		else
+			checkArgument(package, argument)
+		end
+	end
+end
+
+---@param package package
+local function check(package)
+	if package.deprecated then
+		return
+	end
+
+	if (package.type == "function") or (package.type == "method") then
+		checkFunction(package)
+	end
+	for _, package in ipairs(package.methods or {}) do
+		checkFunction(package)
+	end
+	for _, package in ipairs(package.functions or {}) do
+		checkFunction(package)
+	end
+end
+
+
+--
 -- Add some common paths and urls.
 --
 
@@ -392,11 +440,15 @@ end
 --
 
 --- @class package
---- @field key package The name of the file that generated this package.
+--- @field key string The name of the file that generated this package.
 --- @field type string The type definition for the package.
 --- @field folder string The folder that the package was created from.
 --- @field parent package The package this package is a child of.
 --- @field namespace string The full namespace of the package.
+--- @field methods package[]|nil The packages for the methods available on a package. Set by this builder.
+--- @field functions package[]|nil The packages for the functions inside this package. Set by this builder.
+--- @field deprecated boolean|nil This flag comes from the package definition file.
+--- @field arguments table This table with the arguments a function or a method package accepts. This field is set in the definition file.
 
 --- @class packageLib : package
 --- @field children table<string, package>|nil
@@ -512,6 +564,8 @@ function common.compile(folder, key, owningCollection, acceptedType)
 			end
 		end
 	end
+
+	check(package)
 
 	-- Store it for later.
 	owningCollection[key] = package

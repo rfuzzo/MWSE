@@ -2,6 +2,9 @@
 -- Find missing MWSE-lua definitions.
 --
 
+local FIND_MISSING_DESCRIPTIONS = false
+local CHECK_ARGUMENT_DESCRIPTION = false
+
 local function log(fmt, ...)
 	print (fmt:format(...))
 end
@@ -153,15 +156,15 @@ local function breakoutMultipleTypes(str)
 end
 
 
--- 
+--
 -- Events
--- 
+--
 
 -- TODO: Find missing events.
 
--- 
+--
 -- API
--- 
+--
 
 local function checkSourceFileAPI(namespace, sourcePath)
 	--log("Checking file: " .. sourcePath .. " ...")
@@ -206,7 +209,7 @@ local function reportNamedType(properties, typeName)
 		print("Missing type directory: " .. typeName)
 		return
 	end
-	
+
 	for p in pairs(properties) do
 		local f = lfs.attributes(path .. "\\" .. p .. ".lua")
 		if (not f) then
@@ -261,4 +264,103 @@ for entry in lfs.dir(sourceFolder) do
 			checkSourceFileTypes(sourceFolder .. "\\" .. entry)
 		end
 	end
+end
+
+--
+-- Missing descriptions in existing definitions
+--
+
+-- Don't report missing description for operator overload definitions.
+local ignoredOperatorDefinitions = {
+	["add"] = true,
+	["sub"] = true,
+	["mul"] = true,
+	["div"] = true,
+	["idiv"] = true,
+	["mod"] = true,
+	["pow"] = true,
+	["concat"] = true,
+	["len"] = true,
+	["unm"] = true
+}
+
+local function noDescription(package)
+	if (package.description == nil) or
+	(package.description == "") or
+	-- Don't count two characters as proper description.
+	(package.description:len() < 3) then
+	 	return true
+ 	end
+
+	return false
+end
+
+local function checkDesc(package, path)
+	local messages = {}
+
+	if CHECK_ARGUMENT_DESCRIPTION then
+		for _, argumentTable in ipairs(package.arguments or {}) do
+			if (argumentTable.tableParams) then
+				for _, argument in ipairs(argumentTable.tableParams) do
+					if noDescription(argument) then
+						assert(argument.name ~= nil, ("checkDesc: Argument without name, %s"):format(path))
+						table.insert(messages, ("\t%s"):format(argument.name))
+					end
+				end
+			else
+				if noDescription(argumentTable) then
+					assert(argumentTable.name ~= nil, ("checkDesc: Argument without name %s"):format(path))
+					table.insert(messages, ("\t%s"):format(argumentTable.name))
+				end
+			end
+		end
+	end
+
+	local file = path:gsub(definitionsFolder .. "\\", "")
+	local name, extension = file:match("(%a+)%.(%a+)$")
+	if #messages > 0 then
+		table.insert(messages, 1, ("Function \"%s\" has arguments without description:"):format(file))
+	end
+
+	if noDescription(package) and (not ignoredOperatorDefinitions[name]) then
+		table.insert(messages, 1, ("Definition without description: \"%s\""):format(file))
+	end
+
+	return table.concat(messages, "\n")
+end
+
+local function scan(folder)
+	for entry in lfs.dir(folder) do
+		-- Filter out this folder and parent folder (".", and "..")
+		if not entry:find("%.$") then
+			local path = folder .. "\\" .. entry
+			local mode = lfs.attributes(path, "mode")
+
+			if mode == "file" then
+				local extension = entry:match("[^.]+$")
+				if extension == "lua" then
+					-- Filter out the example files. Those will always error out, so
+					-- use that as a criterion to filter only the definition files.
+					local definitionFile, file = pcall(dofile, path)
+
+					if definitionFile and file then
+						local msg = checkDesc(file, path)
+						-- table.concat returns empty string "" when concatenating an
+						-- empty table, so don't log the "" strings that result from
+						-- definition files that are ok. Each logged "" string will
+						-- add a newline to the log which makes it less readable.
+						if msg ~= "" then
+							log(msg)
+						end
+					end
+				end
+			elseif mode == "directory" then
+				scan(path)
+			end
+		end
+	end
+end
+
+if FIND_MISSING_DESCRIPTIONS then
+	scan(definitionsFolder)
 end
