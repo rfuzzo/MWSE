@@ -4,7 +4,8 @@
 			keyCode = tes3.scanCode,
 			isAltPressed = true/false,
 			isShiftPressed = true/false,
-			isCtrlPressed = true/false
+			isCtrlPressed = true/false,
+			isSuperDown = true/false
 		}
 ]]--
 
@@ -34,7 +35,7 @@ function KeyBinder:getLetter(keyCode)
 end
 
 function KeyBinder:getComboString(keyCombo)
-	-- Returns "SHIFT-X" if shift is held down but the active key is not Shift, 
+	-- Returns "SHIFT-X" if shift is held down but the active key is not Shift,
 	-- otherwise just "X" (X being the key being pressed)
 	-- And so on for Alt and Ctrl
 
@@ -52,7 +53,8 @@ function KeyBinder:getComboString(keyCombo)
 	                 tes3.scanCode.rShift)
 	local hasCtrl = (keyCombo.isControlDown and keyCombo.keyCode ~= tes3.scanCode.lCtrl and keyCombo.keyCode ~=
 	                tes3.scanCode.rCtrl)
-	local prefix = (hasAlt and "Alt-" or hasShift and "Shift-" or hasCtrl and "Ctrl-" or "")
+	local hasSuper = (keyCombo.isSuperDown and keyCombo.keyCode ~= tes3.scanCode.lSuper)
+	local prefix = (hasAlt and "Alt-" or hasShift and "Shift-" or hasCtrl and "Ctrl-" or hasSuper and "Win-" or "")
 	return (prefix .. letter)
 end
 
@@ -66,6 +68,7 @@ function KeyBinder:keySelected(e)
 		isAltDown = e.isAltDown,
 		isShiftDown = e.isShiftDown,
 		isControlDown = e.isControlDown,
+		isSuperDown = e.isSuperDown
 	}
 
 	-- This messagebox forces the next messagebox to have the same layout as the previous one

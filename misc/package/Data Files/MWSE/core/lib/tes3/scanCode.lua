@@ -175,5 +175,9 @@ return {
 	["home"] = 199,
 	["end"] = 207,
 	["pageUp"] = 201,
-	["pageDown"] = 209
+	["pageDown"] = 209,
+	["lWindows"] = 219,
+	["leftWindows"] = 219,
+	["lSuper"] = 219,
+	["leftSuper"] = 219,
 }
