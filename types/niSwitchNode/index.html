@@ -745,10 +745,6 @@
         
           
         
-          
-        
-          
-        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1455,34 +1451,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references/niProperty-types/" class="md-nav__link">
-        NIProperty Types
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../references/niTypes/" class="md-nav__link">
-        NI Types
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../references/object-types/" class="md-nav__link">
         Object Types
       </a>
@@ -1838,7 +1806,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_75" type="checkbox" id="__nav_3_75" >
       
       
       
@@ -1869,13 +1837,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_77">
+        <label class="md-nav__link" for="__nav_3_75">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_77">
+        <label class="md-nav__title" for="__nav_3_75">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -2067,7 +2035,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_78" type="checkbox" id="__nav_3_78" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_76" type="checkbox" id="__nav_3_76" >
       
       
       
@@ -2130,13 +2098,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_78">
+        <label class="md-nav__link" for="__nav_3_76">
           Ni
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Ni" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_78">
+        <label class="md-nav__title" for="__nav_3_76">
           <span class="md-nav__icon md-icon"></span>
           Ni
         </label>
@@ -2552,7 +2520,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_79" type="checkbox" id="__nav_3_79" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
       
       
       
@@ -2565,13 +2533,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_79">
+        <label class="md-nav__link" for="__nav_3_77">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_79">
+        <label class="md-nav__title" for="__nav_3_77">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -11271,12 +11239,8 @@
 <hr />
 <h3 id="detachallproperties"><code>detachAllProperties</code><a class="headerlink" href="#detachallproperties" title="Permanent link">⚓︎</a></h3>
 <p>Detaches all the properties on the object and returns them in the table.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachAllProperties</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachAllProperties</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>ts</code> (table)</li>
-</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/niProperty">niProperty</a>[])</li>
@@ -11323,7 +11287,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (number): The types are available in <a href="https://mwse.github.io/MWSE/references/niProperty-types/"><code>tes3.niPropertyType</code></a> table.</li>
+<li><code>type</code> (integer): The types are available in <a href="https://mwse.github.io/MWSE/references/ni/property-types/"><code>ni.propertyType</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11345,7 +11309,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (integer): Use the values from <a href="https://mwse.github.io/MWSE/references/dynamic-effect-types/"><code>tes3.dynamicEffectType</code></a> table.</li>
+<li><code>type</code> (integer): Use the values from <a href="https://mwse.github.io/MWSE/references/ni/dynamic-effect-types/"><code>ni.dynamicEffectType</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11384,7 +11348,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (number): The types are available in <a href="https://mwse.github.io/MWSE/references/niProperty-types/"><code>tes3.niPropertyType</code></a> table.</li>
+<li><code>type</code> (integer): The types are available in <a href="https://mwse.github.io/MWSE/references/ni/property-types/"><code>ni.propertyType</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11444,12 +11408,12 @@
 </ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
-<p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</p>
+<p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (number): Use values in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</li>
+<li><code>type</code> (number): Use values in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11457,12 +11421,12 @@
 </ul>
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
-<p>Determines if the object is of a given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</p>
+<p>Determines if the object is of a given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>type</code> (number): Use values in the <a href="https://mwse.github.io/MWSE/references/niTypes/"><code>tes3.niType</code></a> table.</li>
+<li><code>type</code> (number): Use values in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

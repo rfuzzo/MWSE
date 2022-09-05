@@ -745,10 +745,6 @@
         
           
         
-          
-        
-          
-        
       
       
         <label class="md-nav__link" for="__nav_3">
@@ -1455,34 +1451,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references/niProperty-types/" class="md-nav__link">
-        NIProperty Types
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../references/niTypes/" class="md-nav__link">
-        NI Types
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../references/object-types/" class="md-nav__link">
         Object Types
       </a>
@@ -1838,7 +1806,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_75" type="checkbox" id="__nav_3_75" >
       
       
       
@@ -1869,13 +1837,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_77">
+        <label class="md-nav__link" for="__nav_3_75">
           MWSE-mwscript
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="MWSE-mwscript" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_77">
+        <label class="md-nav__title" for="__nav_3_75">
           <span class="md-nav__icon md-icon"></span>
           MWSE-mwscript
         </label>
@@ -2067,7 +2035,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_78" type="checkbox" id="__nav_3_78" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_76" type="checkbox" id="__nav_3_76" >
       
       
       
@@ -2130,13 +2098,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_78">
+        <label class="md-nav__link" for="__nav_3_76">
           Ni
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Ni" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_78">
+        <label class="md-nav__title" for="__nav_3_76">
           <span class="md-nav__icon md-icon"></span>
           Ni
         </label>
@@ -2552,7 +2520,7 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_79" type="checkbox" id="__nav_3_79" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_77" type="checkbox" id="__nav_3_77" >
       
       
       
@@ -2565,13 +2533,13 @@
         
       
       
-        <label class="md-nav__link" for="__nav_3_79">
+        <label class="md-nav__link" for="__nav_3_77">
           Other
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Other" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_79">
+        <label class="md-nav__title" for="__nav_3_77">
           <span class="md-nav__icon md-icon"></span>
           Other
         </label>
@@ -10335,10 +10303,10 @@
 <p>Class used in the picking intersection system within the game engine. Using a ray, the engine performs picking operations on a scene graph or any subtree. Given a ray and a subtree, the subtree is traversed and matching nodes are added to an array.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="coordinatetype"><code>coordinateType</code><a class="headerlink" href="#coordinatetype" title="Permanent link">⚓︎</a></h3>
-<p>The coordinate type for the object.</p>
+<p>The coordinate type for the object. Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/pick-coordinate-types/"><code>ni.pickCoordinateType</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (niPickCoordinateType)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="frontonly"><code>frontOnly</code><a class="headerlink" href="#frontonly" title="Permanent link">⚓︎</a></h3>
@@ -10349,10 +10317,10 @@
 </ul>
 <hr />
 <h3 id="intersecttype"><code>intersectType</code><a class="headerlink" href="#intersecttype" title="Permanent link">⚓︎</a></h3>
-<p>The intersect type for the object.</p>
+<p>The intersect type for the object. Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/pick-intersection-types/"><code>ni.pickIntersectType</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (niPickIntersectType)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="lastaddedrecord"><code>lastAddedRecord</code><a class="headerlink" href="#lastaddedrecord" title="Permanent link">⚓︎</a></h3>
@@ -10370,10 +10338,10 @@
 </ul>
 <hr />
 <h3 id="picktype"><code>pickType</code><a class="headerlink" href="#picktype" title="Permanent link">⚓︎</a></h3>
-<p>The pick type for the object.</p>
+<p>The pick type for the object. Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/pick-types/"><code>ni.pickType</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (niPickType)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="results"><code>results</code><a class="headerlink" href="#results" title="Permanent link">⚓︎</a></h3>
@@ -10419,10 +10387,10 @@
 </ul>
 <hr />
 <h3 id="sorttype"><code>sortType</code><a class="headerlink" href="#sorttype" title="Permanent link">⚓︎</a></h3>
-<p>The sort type for the object.</p>
+<p>The sort type for the object. Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/pick-sort-types/"><code>ni.pickSortType</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (niPickSortType)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
