@@ -9746,13 +9746,13 @@
 <div class="admonition warning">
 <p class="admonition-title">Dots in Translation Keys</p>
 <p>When using dots to break apart translation keys, be careful of not to use a category as a value. For example, the following will create an error:
-<div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;mcm.component.console&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Enable console component?&quot;</span><span class="p">,</span>
     <span class="p">[</span><span class="s2">&quot;mcm.component.console.description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;It&#39;s really cool, so you should.&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
 Instead, use something like:
-<div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="p">[</span><span class="s2">&quot;mcm.component.console.label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Enable console component?&quot;</span><span class="p">,</span>
     <span class="p">[</span><span class="s2">&quot;mcm.component.console.description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;It&#39;s really cool, so you should.&quot;</span><span class="p">,</span>
 <span class="p">}</span>
@@ -9769,7 +9769,7 @@ Instead, use something like:
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
@@ -9806,7 +9806,7 @@ Instead, use something like:
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %{item}s.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %{item}.&quot;</span><span class="p">,</span>
@@ -9827,7 +9827,7 @@ Instead, use something like:
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %ss.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %s.&quot;</span><span class="p">,</span>
@@ -9856,7 +9856,7 @@ Instead, use something like:
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">return</span> <span class="p">{</span>
     <span class="n">itemCountNotification</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">zero</span> <span class="o">=</span> <span class="s2">&quot;You have no %&lt;item&gt;ss.&quot;</span><span class="p">,</span>
         <span class="n">one</span> <span class="o">=</span> <span class="s2">&quot;You have 1 %&lt;item&gt;d.&quot;</span><span class="p">,</span>
