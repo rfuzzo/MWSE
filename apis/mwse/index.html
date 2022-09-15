@@ -2919,6 +2919,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwsegetcurrentmorrowindscriptstate" class="md-nav__link">
+    mwse.getCurrentMorrowindScriptState
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwsegetversion" class="md-nav__link">
     mwse.getVersion
   </a>
@@ -10199,6 +10206,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwsegetcurrentmorrowindscriptstate" class="md-nav__link">
+    mwse.getCurrentMorrowindScriptState
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwsegetversion" class="md-nav__link">
     mwse.getVersion
   </a>
@@ -10348,6 +10362,16 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="mwsegetcurrentmorrowindscriptstate"><code>mwse.getCurrentMorrowindScriptState</code><a class="headerlink" href="#mwsegetcurrentmorrowindscriptstate" title="Permanent link">⚓︎</a></h3>
+<p>This function returns information on the current mwscript execution state.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">script</span><span class="p">,</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getCurrentMorrowindScriptState</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>script</code> (<a href="../../types/tes3script">tes3script</a>, nil): The currently executing mwscript script, or nil if none is presently being executed.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.</li>
 </ul>
 <hr />
 <h3 id="mwsegetversion"><code>mwse.getVersion</code><a class="headerlink" href="#mwsegetversion" title="Permanent link">⚓︎</a></h3>
