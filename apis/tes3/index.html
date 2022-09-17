@@ -14446,7 +14446,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>actor</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3actor">tes3actor</a>)</li>
-<li><code>enchanted</code> (boolean): <em>Optional</em>. If true, filters to enchanted items.</li>
+<li><code>enchanted</code> (boolean): <em>Optional</em>. If true, filters only enchanted items.</li>
 <li><code>objectType</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants. Used to filter equipment by type.</li>
 <li><code>slot</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/armor-slots/"><code>tes3.armorSlot</code></a> or <a href="https://mwse.github.io/MWSE/references/clothing-slots/"><code>tes3.clothingSlot</code></a>. Used to filter equipment by slot.</li>
 <li><code>type</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/weapon-types/"><code>tes3.weaponType</code></a>. Used to filter equipment by type.</li>
@@ -15657,15 +15657,18 @@
 <hr />
 <h3 id="tes3removeeffects"><code>tes3.removeEffects</code><a class="headerlink" href="#tes3removeeffects" title="Permanent link">⚓︎</a></h3>
 <p>Removes magic effects from a given reference. Requires that either the <code>effect</code> or <code>castType</code> parameter be provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">removeEffects</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">castType</span><span class="p">,</span> <span class="n">chance</span><span class="p">,</span> <span class="n">removeSpell</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">removeEffects</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">castType</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">chance</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">removeSpell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): Target reference to remove effects from.</li>
-<li><code>effect</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/magic-effects/"><code>tes3.effect</code></a> constants.</li>
-<li><code>castType</code> (number): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/spell-types/"><code>tes3.spellType</code></a> constants.</li>
+<li><code>effect</code> (integer): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/magic-effects/"><code>tes3.effect</code></a> constants.</li>
+<li><code>castType</code> (integer): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/spell-types/"><code>tes3.spellType</code></a> constants.</li>
 <li><code>chance</code> (number): <em>Default</em>: <code>100</code>. The chance for the effect to be removed.</li>
 <li><code>removeSpell</code> (boolean): <em>Optional</em>. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if <code>castType</code> is not <code>tes3.spellType.spell.</code> This causes diseases and curses to be removed when dispelled.</li>
+</ul>
+</li>
 </ul>
 <details class="example">
 <summary>Example: Simulating a Dispel</summary>

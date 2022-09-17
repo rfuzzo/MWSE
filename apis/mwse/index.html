@@ -10457,6 +10457,50 @@
 <ul>
 <li><code>result</code> (boolean)</li>
 </ul>
+<details class="example">
+<summary>Example: Here is an example of the most common use case for this function.</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- In this example, the vanilla &quot;RaceCheck&quot; script is overridden</span>
+<span class="c1">-- with our own raceCeheck() function that does the same thing.</span>
+
+<span class="kd">local</span> <span class="n">raceCheckScriptID</span> <span class="o">=</span> <span class="s2">&quot;RaceCheck&quot;</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">raceCheck</span><span class="p">()</span>
+    <span class="c1">-- This is almost always the desired behavior,</span>
+    <span class="c1">-- since we are overriding the script.</span>
+    <span class="n">mwscript</span><span class="p">.</span><span class="n">stopScript</span><span class="p">({</span> <span class="n">script</span> <span class="o">=</span> <span class="n">raceCheckScriptID</span> <span class="p">})</span>
+
+    <span class="kd">local</span> <span class="n">pcRaceID</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">race</span><span class="p">.</span><span class="n">id</span><span class="p">:</span><span class="n">lower</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">PCRace</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">findGlobal</span><span class="p">(</span><span class="s2">&quot;PCRace&quot;</span><span class="p">)</span>
+
+    <span class="kr">if</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;argonian&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;breton&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;dark elf&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;high elf&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;imperial&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;khajiit&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;nord&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;orc&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;redguard&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">9</span>
+    <span class="kr">elseif</span> <span class="n">pcRaceID</span> <span class="o">==</span> <span class="s2">&quot;wood elf&quot;</span> <span class="kr">then</span>
+        <span class="n">PCRace</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Script overrides can be queued when initialited event triggers.</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">initialized</span><span class="p">,</span> <span class="kr">function</span><span class="p">()</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">overrideScript</span><span class="p">(</span><span class="n">raceCheckScriptID</span><span class="p">,</span> <span class="n">raceCheck</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="mwsesaveconfig"><code>mwse.saveConfig</code><a class="headerlink" href="#mwsesaveconfig" title="Permanent link">⚓︎</a></h3>
 <p>Saves a config table to Data Files\MWSE\config\{fileName}.json.</p>

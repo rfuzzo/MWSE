@@ -10519,59 +10519,7 @@
 </ul>
 <hr />
 <h3 id="testfunction"><code>testFunction</code><a class="headerlink" href="#testfunction" title="Permanent link">⚓︎</a></h3>
-<p>The Z-buffer test function.</p>
-<p>Note that "less than" means closer to the camera and "greater than" means further from the camera, regardless of the low-level hardware representation of Z values.</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Mode</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>ZCOMP_ALWAYS</td>
-<td>Test will allways succeed. The Z Buffer value is ignored.</td>
-</tr>
-<tr>
-<td>1</td>
-<td>ZCOMP_LESS</td>
-<td>The test will only succeed if the pixel is nearer than the previous pixel.</td>
-</tr>
-<tr>
-<td>2</td>
-<td>ZCOMP_EQUAL</td>
-<td>Test will only succeed if the Z value of the pixel to be drawn is equal to the value of the previous drawn pixel.</td>
-</tr>
-<tr>
-<td>3</td>
-<td>ZCOMP_LESS_EQUAL</td>
-<td>Test will succeed if the Z value of the pixel to be drawn is smaller than or equal to the value in the Z Buffer.</td>
-</tr>
-<tr>
-<td>4</td>
-<td>ZCOMP_GREATER</td>
-<td>Opposite of TEST_LESS</td>
-</tr>
-<tr>
-<td>5</td>
-<td>ZCOMP_NOT_EQUAL</td>
-<td>Test will succeed if the Z value of the pixel to be drawn is NOT equal to the value of the previously drawn pixel.</td>
-</tr>
-<tr>
-<td>6</td>
-<td>ZCOMP_GREATER_EQUAL</td>
-<td>Opposite of TEST_LESS_EQUAL.</td>
-</tr>
-<tr>
-<td>7</td>
-<td>ZCOMP_NEVER</td>
-<td>Test will allways return false. Nothing is drawn at all.</td>
-</tr>
-</tbody>
-</table>
+<p>The Z-buffer test function used. Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/z-buffer-property-test-functions/"><code>ni.zBufferPropertyTestFunction</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (integer)</li>
@@ -10756,7 +10704,7 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
-<p>Creates a new niVertexColorProperty with <code>lighting</code> set to <code>LIGHT_MODE_EMI_AMB_DIF</code> and <code>source</code> set to <code>VERT_MODE_SRC_IGNORE</code>.</p>
+<p>Creates a new niZBufferProperty with <code>testFunction</code> set to <code>ni.zBufferPropertyTestFunction.lessEqual</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">property</span> <span class="o">=</span> <span class="n">niZBufferProperty</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
