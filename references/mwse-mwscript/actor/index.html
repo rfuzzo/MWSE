@@ -10490,14 +10490,17 @@
 <h2 id="xactivate"><code>xActivate</code><a class="headerlink" href="#xactivate" title="Permanent link">⚓︎</a></h2>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>reference</code> <strong>target</strong>: What the reference will try to activate. </li>
+<li><code>reference</code> <strong>target</strong>: What the reference will try to activate.</li>
 </ul>
 <p><strong>Returned:</strong></p>
 <ul>
 <li><em>None</em></li>
 </ul>
 <p>This function allows the forced activation of one reference onto another. Unlike the vanilla <code>Activate</code> function, this allows variable input and will work even when <code>OnActivate</code> hasn't been triggered in the script.</p>
-<p>.. note:: Unlike the vanilla activate function, the reference is the actor that will activate something, rather than the object to activate.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike the vanilla activate function, the reference is the actor that will activate something, rather than the object to activate.</p>
+</div>
 <details class="example">
 <summary>Force the PC to Activate</summary>
 <div class="highlight"><pre><span></span><code>begin test
@@ -10634,8 +10637,8 @@ end
 <h2 id="xgetclass"><code>xGetClass</code><a class="headerlink" href="#xgetclass" title="Permanent link">⚓︎</a></h2>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>long</code> <strong>attributesMask</strong>: A bit mask to apply to the <strong>attributes</strong> value. </li>
-<li><code>long</code> <strong>majorMask</strong>: A bit mask to apply to the <strong>majorSkills</strong> value. </li>
+<li><code>long</code> <strong>attributesMask</strong>: A bit mask to apply to the <strong>attributes</strong> value.</li>
+<li><code>long</code> <strong>majorMask</strong>: A bit mask to apply to the <strong>majorSkills</strong> value.</li>
 <li><code>long</code> <strong>minorMask</strong>: A bit mask to apply to the <strong>minorSkills</strong> value.</li>
 </ul>
 <p><strong>Returned:</strong></p>
@@ -10645,8 +10648,8 @@ end
 <li><code>long</code> <strong>playable</strong>: 1 if the class can be chosen by the PC, 0 otherwise.</li>
 <li><code>long</code> <strong>specialization</strong>: <code>0</code> = Combat, <code>1</code> = Magic, <code>2</code> = Stealth</li>
 <li><code>long</code> <strong>attributes</strong>: A bitmap of the two primary attributes. The result is obtained by adding the values found in the attributes table below.</li>
-<li><code>long</code> <strong>majorSkills</strong>: A bitmap of the 5 major skills. The result is obtained by adding the values found in the skills table below. </li>
-<li><code>long</code> <strong>minorSkills</strong>: A bitmap of the 5 minor skills. The result is obtained by adding the values found in the skills table below. </li>
+<li><code>long</code> <strong>majorSkills</strong>: A bitmap of the 5 major skills. The result is obtained by adding the values found in the skills table below.</li>
+<li><code>long</code> <strong>minorSkills</strong>: A bitmap of the 5 minor skills. The result is obtained by adding the values found in the skills table below.</li>
 </ul>
 <p>Returns info about the class of the target NPC/PC, or 0 if the target is not an NPC or the PC.</p>
 <p>For a custom class created at PC creation, the <strong>classID</strong> is "NEWCLASSID_CHARGEN" and <strong>playable</strong> is <code>0</code>.</p>
@@ -10859,7 +10862,7 @@ end
 <ul>
 <li><code>float</code> <strong>maxFatigue</strong>: The reference's maximum fatigue.</li>
 </ul>
-<p>!!! noteReturns maximum fatigue. 
+<p>!!! noteReturns maximum fatigue.
     This function only supports the player and NPCs.</p>
 <hr />
 <h2 id="xgetmaxhealth"><code>xGetMaxHealth</code><a class="headerlink" href="#xgetmaxhealth" title="Permanent link">⚓︎</a></h2>
@@ -10871,7 +10874,7 @@ end
 <ul>
 <li><code>float</code> <strong>maxHealth</strong>: The reference's maximum health.</li>
 </ul>
-<p>!!! noteReturns maximum health. 
+<p>!!! noteReturns maximum health.
     This function only supports the player and NPCs.</p>
 <hr />
 <h2 id="xgetmaxmagicka"><code>xGetMaxMagicka</code><a class="headerlink" href="#xgetmaxmagicka" title="Permanent link">⚓︎</a></h2>
@@ -10883,7 +10886,7 @@ end
 <ul>
 <li><code>float</code> <strong>maxMagicka</strong>: The reference's maximum magicka.</li>
 </ul>
-<p>!!! noteReturns maximum magicka. 
+<p>!!! noteReturns maximum magicka.
     This function only supports the player and NPCs.</p>
 <hr />
 <h2 id="xgetrace"><code>xGetRace</code><a class="headerlink" href="#xgetrace" title="Permanent link">⚓︎</a></h2>

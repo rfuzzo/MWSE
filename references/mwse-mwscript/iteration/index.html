@@ -10579,7 +10579,10 @@ end
 <li><code>long</code> <strong>reference</strong>: The first reference in the current cell's "Static" list.</li>
 </ul>
 <p><code>xFirstStatic</code> returns the first reference in the current cell's "Static" list. Despite the name of this function, the associated list can contain references of any <a href="../../object-types">Object Type</a> other than those exclusive to <code>xFirstNPC</code>. Once acquired, the reference can be used with various other MWSE functions, such as <code>xRefID</code> and <code>xRefType</code>. Passing the reference as the argument to the <code>xNextRef</code> function will return the next reference in its associated list.</p>
-<p>.. note:: Scripts that intend to process <em>all</em> references in the loaded cells will need to independently handle the separate lists provided by <code>xFirstItem</code>, <code>xFirstStatic</code>, and <code>xFirstNPC</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Scripts that intend to process <em>all</em> references in the loaded cells will need to independently handle the separate lists provided by <code>xFirstItem</code>, <code>xFirstStatic</code>, and <code>xFirstNPC</code>.</p>
+</div>
 <hr />
 <h2 id="xinventory"><code>xInventory</code><a class="headerlink" href="#xinventory" title="Permanent link">⚓︎</a></h2>
 <p><strong>Parameters:</strong></p>
@@ -10623,7 +10626,7 @@ end
 <p>Returns the <strong>objectID</strong> and <strong>count</strong> of an item in the target's inventory. The <strong>nextStack</strong> can be fed into xNextStack to continue iteration.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This function is limited. Consider using <code>xContentList</code>, <code>xContentListFiltered</code> or <code>xEquipmentList</code> instead. </p>
+<p>This function is limited. Consider using <code>xContentList</code>, <code>xContentListFiltered</code> or <code>xEquipmentList</code> instead.</p>
 </div>
 <hr />
 <h2 id="xspelllist"><code>xSpellList</code><a class="headerlink" href="#xspelllist" title="Permanent link">⚓︎</a></h2>
