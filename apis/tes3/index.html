@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
     
     
       
@@ -14202,8 +14202,11 @@
 </ul>
 <hr />
 <h3 id="tes3get3rdpersoncameraoffset"><code>tes3.get3rdPersonCameraOffset</code><a class="headerlink" href="#tes3get3rdpersoncameraoffset" title="Permanent link">⚓︎</a></h3>
-<p>Returns the camera's offset from the player's head while in 3rd person view.</p>
-<p>Note this function can be used once WorldController and MobilePlayer have finished initializing.</p>
+<p>Returns the camera offset from the player's head while in 3rd person view.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If used before initialized event, this function returns empty table.</p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">cameraOffset</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">get3rdPersonCameraOffset</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
@@ -15859,13 +15862,19 @@
 </ul>
 <hr />
 <h3 id="tes3set3rdpersoncameraoffset"><code>tes3.set3rdPersonCameraOffset</code><a class="headerlink" href="#tes3set3rdpersoncameraoffset" title="Permanent link">⚓︎</a></h3>
-<p>Changes the 3rd person camera's offset from the player's head.</p>
-<p>Note this function can be used once WorldController and MobilePlayer have finished initializing.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">set3rdPersonCameraOffset</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+<p>Changes the 3rd person camera offset from the player's head.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This function can be used once tes3worldController and tes3mobilePlayer have finished initializing.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">set3rdPersonCameraOffset</span><span class="p">({</span> <span class="n">offset</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>offset</code> (<a href="../../types/tes3vector3">tes3vector3</a>): The offset vector.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="tes3setaiactivate"><code>tes3.setAIActivate</code><a class="headerlink" href="#tes3setaiactivate" title="Permanent link">⚓︎</a></h3>
