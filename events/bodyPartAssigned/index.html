@@ -7958,6 +7958,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -10050,6 +10057,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -10094,6 +10108,21 @@
 <li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): <em>Read-only</em>. Access to the physical object for the assigned body part.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference for the actor whose body part was assigned.</li>
 </ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Example: Bald is beautiful</p>
+<p>This example shows how to disable hair body parts from appearing on NPCs or the Player.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">---@param e bodyPartAssignedEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">baldIsBeautiful</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPart</span><span class="p">.</span><span class="n">hair</span><span class="p">)</span> <span class="kr">then</span>
+        <span class="c1">-- Returning false from this event will</span>
+        <span class="c1">-- block the assignment of the body part.</span>
+        <span class="kr">return</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">bodyPartAssigned</span><span class="p">,</span> <span class="n">baldIsBeautiful</span><span class="p">)</span>
+</code></pre></div>
+</div>
 
 
 

@@ -10171,6 +10171,23 @@
 </tbody>
 </table>
 <hr />
+<details class="example">
+<summary>Example: Checking reference's script variables.</summary>
+<p>Companions usually have a mwscript script with variable named <code>companion</code> set to 1. This can be used if a certain reference is player's companion or not.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- This function returns `true` if the reference</span>
+<span class="c1">--- has a variable companion set to 1 in its script.</span>
+<span class="c1">---@param reference tes3reference</span>
+<span class="c1">---@return boolean</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">hasCompanionShare</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+
+    <span class="c1">-- This shows that we can read any variable inside</span>
+    <span class="c1">-- `tes3scriptContext` objects as if it was normal Lua table</span>
+    <span class="c1">-- (`reference.context` is of `tes3scriptContext` type)</span>
+    <span class="kd">local</span> <span class="n">companion</span> <span class="o">=</span> <span class="n">reference</span><span class="p">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;companion&quot;</span><span class="p">]</span>
+    <span class="kr">return</span> <span class="n">companion</span> <span class="ow">and</span> <span class="n">companion</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 
 
 

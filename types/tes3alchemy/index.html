@@ -5478,13 +5478,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -10557,13 +10550,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#functions" class="md-nav__link">
-    Functions
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -10629,6 +10615,23 @@
 <ul>
 <li><code>result</code> (<a href="../../types/tes3effect">tes3effect</a>[])</li>
 </ul>
+<details class="example">
+<summary>Example: Determining if a potion is hostile</summary>
+<p>The following function returns <code>true</code> if the spell contains at least one hostile effect. This criterion can be considered subjective, but that rule is also used by the game to determine if a use of the spell on an NPC is considered an offense.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- @param magicSource tes3spell|tes3enchantment|tes3alchemy</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">isSpellHostile</span><span class="p">(</span><span class="n">magicSource</span><span class="p">)</span>
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">effect</span> <span class="kr">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">magicSource</span><span class="p">.</span><span class="n">effects</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="kr">if</span> <span class="p">(</span><span class="n">effect</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">isHarmful</span><span class="p">)</span> <span class="kr">then</span>
+            <span class="c1">-- If one of the spell&#39;s effects is harmful, then</span>
+            <span class="c1">-- `true` is returned and function ends here.</span>
+            <span class="kr">return</span> <span class="kc">true</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+    <span class="c1">-- If no harmful effect was found then return `false`.</span>
+    <span class="kr">return</span> <span class="kc">false</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="flags"><code>flags</code><a class="headerlink" href="#flags" title="Permanent link">⚓︎</a></h3>
 <p>The alchemy item's flags.</p>
@@ -10841,7 +10844,6 @@
 <li><code>index</code> (number)</li>
 </ul>
 <hr />
-<h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 
 
 

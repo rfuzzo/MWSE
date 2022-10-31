@@ -15386,7 +15386,7 @@
 <li><code>messageOrParams</code> (string, table)<ul>
 <li><code>message</code> (string)</li>
 <li><code>buttons</code> (string[]): <em>Optional</em>. An array of strings to use for buttons.</li>
-<li><code>callback</code> (function)</li>
+<li><code>callback</code> (function): The callback function will be executed after a button was pressed. The callback function will be passed a table with <code>button</code> field corresponding to 0-based index of the button from passed <code>buttons</code> array.</li>
 <li><code>showInDialog</code> (boolean): <em>Default</em>: <code>true</code>. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.</li>
 <li><code>duration</code> (number): <em>Optional</em>. Overrides how long the toast-style message remains visible.</li>
 </ul>
@@ -15397,6 +15397,41 @@
 <ul>
 <li><code>element</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>, nil): The UI menu created for the notification, if any.</li>
 </ul>
+<details class="example">
+<summary>Example: A message box with a callback function</summary>
+<p>This demonstrates how to determine which button was pressed inside callback function.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- This variable is used to store a function that will be</span>
+<span class="c1">-- registered as a callback when a button is pressed inside</span>
+<span class="c1">-- our messageBox. The function&#39;s body is declared later.</span>
+<span class="kd">local</span> <span class="n">onButtonPressed</span>
+
+
+<span class="c1">-- This function is registered to execute when U key is pressed.</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">onKeyPressed</span><span class="p">()</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">({</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Do you want a muffin?&quot;</span><span class="p">,</span>
+        <span class="n">buttons</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Yes&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span> <span class="p">},</span>
+        <span class="n">showInDialog</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="n">callback</span> <span class="o">=</span> <span class="n">onButtonPressed</span><span class="p">,</span>
+    <span class="p">})</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">onKeyPressed</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
+
+<span class="c1">-- Here we define the body of our function.</span>
+<span class="n">onButtonPressed</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c1">-- This corresponds to the first button</span>
+    <span class="c1">--  of our message, which is &quot;Yes&quot;</span>
+    <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">button</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">addItem</span><span class="p">({</span>
+            <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="s2">&quot;ingred_bread_01_UNI3&quot;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="kr">else</span>
+        <span class="c1">-- Do nothing</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3modstatistic"><code>tes3.modStatistic</code><a class="headerlink" href="#tes3modstatistic" title="Permanent link">⚓︎</a></h3>
 <p>Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.</p>
