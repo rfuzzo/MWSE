@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.8">
     
     
       
@@ -20,7 +20,7 @@
       <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.815d1a91.min.css">
         
       
       
@@ -10909,6 +10909,21 @@
 <ul>
 <li><code>result</code> (<a href="../../types/tes3aiConfig">tes3aiConfig</a>)</li>
 </ul>
+<details class="example">
+<summary>Example: Checking if a creature offers traveling service</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">--- This function returns `true` if given NPC</span>
+<span class="c1">--- or creature offers traveling service.</span>
+<span class="c1">---@param actor tes3npc|tes3npcInstance|tes3creature|tes3creatureInstance</span>
+<span class="c1">---@return boolean</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">offersTraveling</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">travelDestinations</span> <span class="o">=</span> <span class="n">actor</span><span class="p">.</span><span class="n">aiConfig</span><span class="p">.</span><span class="n">travelDestinations</span>
+
+    <span class="c1">-- Actors that can&#39;t transport the player</span>
+    <span class="c1">-- have travelDestinations equal to `nil`</span>
+    <span class="kr">return</span> <span class="n">travelDestinations</span> <span class="o">~=</span> <span class="kc">nil</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="attacks"><code>attacks</code><a class="headerlink" href="#attacks" title="Permanent link">⚓︎</a></h3>
 <p>A table of three attacks, represented by a trio of <a href="https://mwse.github.io/MWSE/types/tes3rangeInt/"><code>tes3rangeInt</code></a>.</p>
@@ -11395,7 +11410,7 @@
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d6c3db9e.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       
