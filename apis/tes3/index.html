@@ -14545,7 +14545,7 @@
 <hr />
 <h3 id="tes3getfilesource"><code>tes3.getFileSource</code><a class="headerlink" href="#tes3getfilesource" title="Permanent link">⚓︎</a></h3>
 <p>Determines if a file exists on the filesystem or inside of a bsa. The returned string will be "file" or "bsa".</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">exists</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getFileSource</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">exists</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getFileSource</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -14553,7 +14553,8 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>exists</code> (string)</li>
+<li><code>exists</code> (string?): A string representing the file source. This can be either <code>file</code> or <code>bsa</code>.</li>
+<li><code>path</code> (string?): If the file exists, this is a path to the file. If the file is from a BSA, it is a path inside the BSA.</li>
 </ul>
 <hr />
 <h3 id="tes3getglobal"><code>tes3.getGlobal</code><a class="headerlink" href="#tes3getglobal" title="Permanent link">⚓︎</a></h3>
