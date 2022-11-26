@@ -10326,10 +10326,10 @@
 </ul>
 <hr />
 <h3 id="hittarget"><code>hitTarget</code><a class="headerlink" href="#hittarget" title="Permanent link">⚓︎</a></h3>
-<p>The actor's attack target. The target will be saved in <code>hitTarget</code> field until a new attack is made.</p>
+<p>The actor's attack target. The target will be saved in <code>hitTarget</code> field until a new attack is made. Missing an attack will clear <code>hitTarget</code> field.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="lastbarterhourspassed"><code>lastBarterHoursPassed</code><a class="headerlink" href="#lastbarterhourspassed" title="Permanent link">⚓︎</a></h3>
@@ -10368,10 +10368,10 @@
 </ul>
 <hr />
 <h3 id="target"><code>target</code><a class="headerlink" href="#target" title="Permanent link">⚓︎</a></h3>
-<p>The actor's attack target.</p>
+<p>The actor's attack target, stored until the actor attacks successfully again. In contrast to <code>hitTarget</code>, <code>target</code> property isn't cleared on missed attack.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="walkdestination"><code>walkDestination</code><a class="headerlink" href="#walkdestination" title="Permanent link">⚓︎</a></h3>

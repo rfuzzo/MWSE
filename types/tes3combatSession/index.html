@@ -10352,10 +10352,64 @@
 </ul>
 <hr />
 <h3 id="selectedaction"><code>selectedAction</code><a class="headerlink" href="#selectedaction" title="Permanent link">⚓︎</a></h3>
-<p>The next action.</p>
+<p>The next action. From observed behavior, this roughly maps to:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Undecided</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Use melee weapon</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Use marksman weapon</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Use hand to hand attacks</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Use on-touch offensive spell</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Use on-target offensive spell</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Use summon spell</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Flee</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Cast on-self empowering spell (For example, Ancestor Guardian)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>MaybeEquipUseItem?</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Use enchanted item</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="selecteditem"><code>selectedItem</code><a class="headerlink" href="#selecteditem" title="Permanent link">⚓︎</a></h3>

@@ -10402,6 +10402,90 @@
 <ul>
 <li><code>fader</code> (<a href="../../types/tes3fader">tes3fader</a>)</li>
 </ul>
+<details class="example">
+<summary>Example: Creating a new fader</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">-- This is a working example. You are encouraged to create a new file</span>
+<span class="c1">-- main.lua, paste this code and see the results in-game!</span>
+<span class="c1">-- Use `u` key to activate the fader.</span>
+<span class="c1">-- Use `l` and `k` keys to increase or decrease the fader&#39;s opacity.</span>
+
+<span class="c1">-- This variable is used to store our fader.</span>
+<span class="kd">local</span> <span class="n">fader</span> <span class="o">=</span> <span class="kc">nil</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">createFader</span><span class="p">()</span>
+    <span class="n">fader</span> <span class="o">=</span> <span class="n">tes3fader</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+    <span class="n">fader</span><span class="p">:</span><span class="n">setColor</span><span class="p">({</span>
+        <span class="c1">-- This changes the color of our fader to green.</span>
+        <span class="c1">-- The RGB values are in range [0.0, 1.0].</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="p">{</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">},</span>
+    <span class="p">})</span>
+
+    <span class="c1">-- The fader needs to be updated every frame to be rendered correctly.</span>
+    <span class="c1">-- You may notice that for this event we have registered a function with</span>
+    <span class="c1">-- no name. That is an anonymous function. It works exactly the same as</span>
+    <span class="c1">-- any other function. We have a need to register this function inside</span>
+    <span class="c1">-- our createFader() function, since our `fader` variable is `nil` at start</span>
+    <span class="c1">-- (look up). We can&#39;t call fader:update() if fader is `nil`.</span>
+    <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">enterFrame</span><span class="p">,</span>
+        <span class="kr">function</span><span class="p">()</span>
+            <span class="n">fader</span><span class="p">:</span><span class="n">update</span><span class="p">()</span>
+        <span class="kr">end</span>
+    <span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- The fader needs to be created during `fadersCreated` event,</span>
+<span class="c1">-- so our createFader() function is registered for that event.</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">fadersCreated</span><span class="p">,</span> <span class="n">createFader</span><span class="p">)</span>
+
+
+<span class="kd">local</span> <span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">activateFader</span><span class="p">()</span>
+    <span class="c1">-- The fader needs to be activated first to be visible.</span>
+    <span class="n">fader</span><span class="p">:</span><span class="n">activate</span><span class="p">()</span>
+    <span class="c1">-- Now we change its visibility.</span>
+    <span class="n">fader</span><span class="p">:</span><span class="n">fadeTo</span><span class="p">({</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">opacity</span><span class="p">,</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">})</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Welcome to the Fallout mode!&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- We registered our activateFader() function on keyDown event, filtered for `u` key.</span>
+<span class="c1">-- That makes our activateFader() function called only when `u` is pressed.</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">activateFader</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">u</span> <span class="p">})</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">increaseOpacity</span><span class="p">()</span>
+    <span class="c1">-- The fader&#39;s opacity is in [0.0, 1.0] range.</span>
+    <span class="c1">-- Make sure we don&#39;t exceed it.</span>
+    <span class="kr">if</span> <span class="n">opacity</span> <span class="o">&lt;=</span> <span class="mf">0.9</span> <span class="kr">then</span>
+        <span class="n">opacity</span> <span class="o">=</span> <span class="n">opacity</span> <span class="o">+</span> <span class="mf">0.1</span>
+    <span class="kr">else</span>
+        <span class="kr">return</span>
+    <span class="kr">end</span>
+    <span class="c1">-- This method sets the current opacity of our fader</span>
+    <span class="c1">-- to the value of `opacity` variable</span>
+    <span class="n">fader</span><span class="p">:</span><span class="n">updateMaterialProperty</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+
+    <span class="c1">-- The &quot;\n&quot; sign means insert a new line here.</span>
+    <span class="c1">-- The &quot;%.1f&quot; code means insert the opacity&#39;s value in this text.</span>
+    <span class="c1">-- The &quot;.1&quot; part means show 1 decimal after the decimal point.</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Fader opacity increased.</span><span class="se">\n</span><span class="s2">Current opacity: %.1f&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">increaseOpacity</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">l</span> <span class="p">})</span>
+
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">decreaseOpacity</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="n">opacity</span> <span class="o">&gt;=</span> <span class="mf">0.1</span> <span class="kr">then</span>
+        <span class="n">opacity</span> <span class="o">=</span> <span class="n">opacity</span> <span class="o">-</span> <span class="mf">0.1</span>
+    <span class="kr">else</span>
+        <span class="kr">return</span>
+    <span class="kr">end</span>
+    <span class="n">fader</span><span class="p">:</span><span class="n">updateMaterialProperty</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Fader opacity decreased.</span><span class="se">\n</span><span class="s2">Current opacity: %.1f&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">decreaseOpacity</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">k</span> <span class="p">})</span>
+</code></pre></div>
+</details>
 <hr />
 
 
