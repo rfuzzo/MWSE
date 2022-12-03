@@ -12499,10 +12499,10 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="collidingreference"><code>collidingReference</code><a class="headerlink" href="#collidingreference" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The reference that the mobile has collided with this frame.</p>
+<p><em>Read-only</em>. The reference that the mobile has collided with this frame. Doesn't include actors and terrain.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="combatsession"><code>combatSession</code><a class="headerlink" href="#combatsession" title="Permanent link">⚓︎</a></h3>
@@ -12523,7 +12523,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <p><em>Read-only</em>. The currently equipped enchanted item that the actor will use.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3equipmentStack">tes3equipmentStack</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="currentspell"><code>currentSpell</code><a class="headerlink" href="#currentspell" title="Permanent link">⚓︎</a></h3>
@@ -12555,7 +12555,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="facing"><code>facing</code><a class="headerlink" href="#facing" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. The facing of the actor, in radians.</p>
+<p><em>Read-only</em>. The facing of the actor, in radians. It corresponds to the <code>mobile.reference.orientation.z</code>. Facing of 0 corresponds to the in game North, facing of PI corresponds to the game South. It's in clockwise direction.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -13369,14 +13369,14 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getactivemagiceffects"><code>getActiveMagicEffects</code><a class="headerlink" href="#getactivemagiceffects" title="Permanent link">⚓︎</a></h3>
-<p>Fetches a filtered list of the active magic effects on the actor. Returns a table with <a href="https://mwse.github.io/MWSE/types/tes3activeMagicEffect/"><code>tes3activeMagicEffect</code></a> items.</p>
+<p>Fetches a filtered list of the active magic effects on the actor.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveMagicEffects</span><span class="p">({</span> <span class="n">effect</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">serial</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table): <em>Optional</em>.<ul>
-<li><code>effect</code> (number): <em>Optional</em>. The magic effect ID to search for.</li>
-<li><code>serial</code> (number): <em>Optional</em>. The magic instance serial to search for.</li>
+<li><code>effect</code> (integer): <em>Optional</em>. The magic effect ID to search for, from <a href="https://mwse.github.io/MWSE/references/magic-effects/"><code>tes3.effect</code></a> table.</li>
+<li><code>serial</code> (integer): <em>Optional</em>. The magic instance serial to search for.</li>
 </ul>
 </li>
 </ul>
@@ -13443,30 +13443,43 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getviewtoactor"><code>getViewToActor</code><a class="headerlink" href="#getviewtoactor" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getViewToActor</span><span class="p">()</span>
+<p>Returns the angle between provided actor and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getViewToActor</span><span class="p">(</span><span class="n">mobile</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): The target actor to calculate the facing angle.</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>angle</code> (number): In range of [-180, 180] in degrees.</li>
 </ul>
 <hr />
 <h3 id="getviewtopoint"><code>getViewToPoint</code><a class="headerlink" href="#getviewtopoint" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getViewToPoint</span><span class="p">()</span>
+<p>Returns the angle between provided point in space and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getViewToPoint</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>point</code> (<a href="../../types/tes3vector3">tes3vector3</a>): The target point to calculate the facing angle.</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>angle</code> (number): In range of [-180, 180] in degrees.</li>
 </ul>
 <hr />
 <h3 id="getviewtopointwithfacing"><code>getViewToPointWithFacing</code><a class="headerlink" href="#getviewtopointwithfacing" title="Permanent link">⚓︎</a></h3>
-<p>No description yet available.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getViewToPointWithFacing</span><span class="p">()</span>
+<p>Returns the angle between provided point in space and the actor's current position with provided facing (which effectively overrides the actor's facing used in other getViewTo methods). The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the provided facing angle with the origin in actor's position.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getViewToPointWithFacing</span><span class="p">(</span><span class="n">facing</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>facing</code> (number): The facing angle in radians. The values should be in [0, PI] interval.</li>
+<li><code>point</code> (<a href="../../types/tes3vector3">tes3vector3</a>): The target point to calculate the facing angle.</li>
+</ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>angle</code> (number): In range of [-180, 180] in degrees.</li>
 </ul>
 <hr />
 <h3 id="getweaponspeed"><code>getWeaponSpeed</code><a class="headerlink" href="#getweaponspeed" title="Permanent link">⚓︎</a></h3>
