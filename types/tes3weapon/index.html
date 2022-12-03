@@ -11018,7 +11018,7 @@
 </ul>
 <hr />
 <h3 id="issilver"><code>isSilver</code><a class="headerlink" href="#issilver" title="Permanent link">⚓︎</a></h3>
-<p>If true, the weapon has a silver material flag.</p>
+<p>If true, the weapon has a silver material flag. Silver weapons deal double damage to the Undead and Werewolf creatures.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -11109,7 +11109,7 @@
 </ul>
 <hr />
 <h3 id="scale"><code>scale</code><a class="headerlink" href="#scale" title="Permanent link">⚓︎</a></h3>
-<p>The object's scale.</p>
+<p>The object's scale. The value range is (0, 10).</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -11289,11 +11289,11 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>flagBit</code> (number)</li>
+<li><code>flagBit</code> (integer): <code>0</code> corresponds to the <code>ignoresNormalWeaponResistance</code> field, <code>1</code> corresponds to the <code>isSilver</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="setmaterialflag"><code>setMaterialFlag</code><a class="headerlink" href="#setmaterialflag" title="Permanent link">⚓︎</a></h3>
@@ -11302,7 +11302,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>flagBit</code> (number)</li>
+<li><code>flagBit</code> (integer): <code>0</code> corresponds to the <code>ignoresNormalWeaponResistance</code> field, <code>1</code> corresponds to the <code>isSilver</code>.</li>
 <li><code>value</code> (boolean)</li>
 </ul>
 <hr />

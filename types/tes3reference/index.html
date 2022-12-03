@@ -11469,7 +11469,7 @@
 </ul>
 <hr />
 <h3 id="scale"><code>scale</code><a class="headerlink" href="#scale" title="Permanent link">⚓︎</a></h3>
-<p>The object's scale.</p>
+<p>The object's scale. The value range is (0, 10).</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -11598,7 +11598,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>flagIndex</code> (number): The action flag to clear. Maps to values in <a href="https://mwse.github.io/MWSE/references/action-flags/"><code>tes3.actionFlag</code></a> namespace.</li>
+<li><code>flagIndex</code> (integer): The action flag to clear. Maps to values in <a href="https://mwse.github.io/MWSE/references/action-flags/"><code>tes3.actionFlag</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
@@ -11695,12 +11695,12 @@
 </ul>
 <hr />
 <h3 id="setactionflag"><code>setActionFlag</code><a class="headerlink" href="#setactionflag" title="Permanent link">⚓︎</a></h3>
-<p>Sets a bit in the reference's action data attachment</p>
+<p>Sets a bit in the reference's action data attachment.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setActionFlag</span><span class="p">(</span><span class="n">flagIndex</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>flagIndex</code> (number): The action flag to clear.</li>
+<li><code>flagIndex</code> (integer): The action flag to clear. Maps to values in <a href="https://mwse.github.io/MWSE/references/action-flags/"><code>tes3.actionFlag</code></a> namespace.</li>
 </ul>
 <hr />
 <h3 id="setdynamiclighting"><code>setDynamicLighting</code><a class="headerlink" href="#setdynamiclighting" title="Permanent link">⚓︎</a></h3>
@@ -11715,7 +11715,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>hasNoCollision</code> (boolean): If <code>true</code>, the reference no longer has collision.</li>
-<li><code>updateCollisions</code> (boolean): If <code>true</code>, collision groups for the active cells are recalculated.</li>
+<li><code>updateCollisions</code> (boolean): <em>Default</em>: <code>true</code>. If <code>true</code>, collision groups for the active cells are recalculated.</li>
 </ul>
 <hr />
 <h3 id="testactionflag"><code>testActionFlag</code><a class="headerlink" href="#testactionflag" title="Permanent link">⚓︎</a></h3>
@@ -11724,7 +11724,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>flagIndex</code> (number): The action flag to test. Maps to values in <a href="https://mwse.github.io/MWSE/references/action-flags/"><code>tes3.actionFlag</code></a> namespace.</li>
+<li><code>flagIndex</code> (integer): The action flag to test. Maps to values in <a href="https://mwse.github.io/MWSE/references/action-flags/"><code>tes3.actionFlag</code></a> namespace.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>

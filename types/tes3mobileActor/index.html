@@ -7149,13 +7149,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#applyhealthdamage" class="md-nav__link">
-    applyHealthDamage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#applyjumpfatiguecost" class="md-nav__link">
     applyJumpFatigueCost
   </a>
@@ -12109,13 +12102,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#applyhealthdamage" class="md-nav__link">
-    applyHealthDamage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#applyjumpfatiguecost" class="md-nav__link">
     applyJumpFatigueCost
   </a>
@@ -13250,11 +13236,11 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
-<li><code>applyArmor</code> (boolean): <em>Optional</em>. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.</li>
+<li><code>applyArmor</code> (boolean): <em>Default</em>: <code>false</code>. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.</li>
 <li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
-<li><code>applyDifficulty</code> (boolean): <em>Optional</em>. If the game difficulty modifier should be applied. Must be used with the <code>playerAttack</code> argument to apply the correct modifier.</li>
+<li><code>applyDifficulty</code> (boolean): <em>Default</em>: <code>false</code>. If the game difficulty modifier should be applied. Must be used with the <code>playerAttack</code> argument to apply the correct modifier.</li>
 <li><code>playerAttack</code> (boolean): <em>Optional</em>. If the attack came from the player. Used for difficulty calculation.</li>
-<li><code>doNotChangeHealth</code> (boolean): <em>Optional</em>. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.</li>
+<li><code>doNotChangeHealth</code> (boolean): <em>Default</em>: <code>false</code>. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.</li>
 </ul>
 </li>
 </ul>
@@ -13278,23 +13264,6 @@ if damage &lt; 1 then damage = 1 end</p>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
-<h3 id="applyhealthdamage"><code>applyHealthDamage</code><a class="headerlink" href="#applyhealthdamage" title="Permanent link">⚓︎</a></h3>
-<p><strong>Deprecated, please use <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#applydamage"><code>applyDamage()</code></a> instead.</strong></p>
-<p>Damages the actor.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">applyHealthDamage</span><span class="p">(</span><span class="n">damage</span><span class="p">,</span> <span class="n">isPlayerAttack</span><span class="p">,</span> <span class="n">scaleWithDifficulty</span><span class="p">,</span> <span class="n">doNotChangeHealth</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>damage</code> (number): The amount of damage to apply.</li>
-<li><code>isPlayerAttack</code> (boolean): Used to calculate difficulty scaling.</li>
-<li><code>scaleWithDifficulty</code> (boolean): Apply difficulty scaling to the damage.</li>
-<li><code>doNotChangeHealth</code> (boolean): Do all the audiovisual effects of damage without the health change.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (boolean)</li>
-</ul>
-<hr />
 <h3 id="applyjumpfatiguecost"><code>applyJumpFatigueCost</code><a class="headerlink" href="#applyjumpfatiguecost" title="Permanent link">⚓︎</a></h3>
 <p>Reduces the actor's current fatigue by the amount a regular jump would currently cost.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">applyJumpFatigueCost</span><span class="p">()</span>
@@ -13308,7 +13277,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>damage</code> (number): The amount of damage to apply.</li>
-<li><code>applyArmor</code> (boolean): <em>Optional</em>. If armor should mitigate the incoming damage.</li>
+<li><code>applyArmor</code> (boolean): <em>Default</em>: <code>false</code>. If armor should mitigate the incoming damage.</li>
 <li><code>resistAttribute</code> (number): <em>Optional</em>. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from <a href="https://mwse.github.io/MWSE/references/effect-attributes/"><code>tes3.effectAttribute</code></a> namespace.</li>
 </ul>
 </li>

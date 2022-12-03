@@ -10246,16 +10246,16 @@
 <p>Constant to represent a timer that has completed.</p>
 <hr />
 <h3 id="timergame"><code>timer.game</code><a class="headerlink" href="#timergame" title="Permanent link">⚓︎</a></h3>
-<p>Constant to represent timers that run based on in-world time. Duration measured in game-scale hours.</p>
+<p>Constant to represent timers that run based on in-world time. Their clock is measured in game-scale hours.</p>
 <hr />
 <h3 id="timerpaused"><code>timer.paused</code><a class="headerlink" href="#timerpaused" title="Permanent link">⚓︎</a></h3>
 <p>Constant to represent a timer that is paused.</p>
 <hr />
 <h3 id="timerreal"><code>timer.real</code><a class="headerlink" href="#timerreal" title="Permanent link">⚓︎</a></h3>
-<p>Constant to represent timers that run in real-time.</p>
+<p>Constant to represent timers that run in real-time. Their time is measured in seconds.</p>
 <hr />
 <h3 id="timersimulate"><code>timer.simulate</code><a class="headerlink" href="#timersimulate" title="Permanent link">⚓︎</a></h3>
-<p>Constant to represent timers that run when the game isn't paused. It matches the <code>simulate</code> event's timing. If the game is simulating, simulate events and simulate timers progress. Duration is measured in seconds.</p>
+<p>Constant to represent timers that run when the game isn't paused - the game's menus are closed. It matches the <code>simulate</code> event's timing. If the game is simulating, simulate events and simulate timers progress. Duration is measured in seconds.</p>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="timerdelayoneframe"><code>timer.delayOneFrame</code><a class="headerlink" href="#timerdelayoneframe" title="Permanent link">⚓︎</a></h3>
@@ -10265,7 +10265,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>callback</code> (function): The callback function that will execute when the timer expires.</li>
-<li><code>type</code> (number): <em>Default</em>: <code>timer.simulate</code>. Type of the timer. This value can be <code>timer.simulate</code>, <code>timer.game</code> or <code>timer.real</code>.</li>
+<li><code>type</code> (integer): <em>Default</em>: <code>timer.simulate</code>. Type of the timer. This value can be <code>timer.simulate</code>, <code>timer.game</code> or <code>timer.real</code>.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10282,10 +10282,30 @@
 <li><code>fn</code> (function): A callback function for the timer.</li>
 </ul>
 <details class="example">
-<summary>Example: Show a Message After 1 Day</summary>
+<summary>Example: Persistent timers tutorial with <code>.data</code> usage</summary>
 <p>The timer registered in the example is registered and persistent. That renders starting the timer on every loaded event unnecessary. Its state is saved, and it continues where it stopped after loading a save.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessage</span><span class="p">()</span>
-    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;One day later...&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">---@class timerCallbackData</span>
+<span class="c1">---@field timer mwseTimer Access to our timer</span>
+
+<span class="c1">---@param e timerCallbackData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">showMessage</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">timer</span>
+    <span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">data</span>
+    <span class="kd">local</span> <span class="n">currentTimestamp</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSimulationTimestamp</span><span class="p">()</span>
+
+    <span class="c1">-- We are sure that the timer.data ~= nil since we</span>
+    <span class="c1">-- created that table in timer.start function.</span>
+    <span class="c1">-- So, lets disable the warnings for a bit.</span>
+    <span class="c1">---@diagnostic disable:need-check-nil</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">message</span><span class="p">:</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">data</span><span class="p">.</span><span class="n">startTimestamp</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">.</span><span class="n">lastIterationTimestamp</span><span class="p">,</span>
+        <span class="n">currentTimestamp</span>
+    <span class="p">))</span>
+    <span class="c1">---@diagnostic enable:need-check-nil</span>
+
+    <span class="c1">-- Save this to the data table on the timer</span>
+    <span class="n">data</span><span class="p">.</span><span class="n">lastIterationTimestamp</span> <span class="o">=</span> <span class="n">currentTimestamp</span>
 <span class="kr">end</span>
 
 <span class="n">timer</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;testExample:OneDayTimer&quot;</span><span class="p">,</span> <span class="n">showMessage</span><span class="p">)</span>
@@ -10293,9 +10313,20 @@
 <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span>
     <span class="nb">type</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">game</span><span class="p">,</span>
     <span class="n">persist</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">iterations</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">duration</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
-    <span class="n">callback</span> <span class="o">=</span> <span class="s2">&quot;testExample:OneDayTimer&quot;</span> <span class="c1">-- Notice that the callback isn&#39;t a function, but a custom timer.</span>
+    <span class="c1">-- Notice that the callback isn&#39;t a function, but</span>
+    <span class="c1">-- a string passed to the timer.register function</span>
+    <span class="n">callback</span> <span class="o">=</span> <span class="s2">&quot;testExample:OneDayTimer&quot;</span><span class="p">,</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">startTimestamp</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSimulationTimestamp</span><span class="p">(),</span>
+        <span class="n">lastIterationTimestamp</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getSimulationTimestamp</span><span class="p">(),</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s">[[One day later...</span>
+<span class="s">timer&#39;s starting timestamp %s</span>
+<span class="s">the timestamp of last iteration %s</span>
+<span class="s">current timestamp %s</span>
+<span class="s">]]</span>
+    <span class="p">}</span>
 <span class="p">})</span>
 </code></pre></div>
 </details>
@@ -10307,12 +10338,12 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>type</code> (number): <em>Default</em>: <code>timer.simulate</code>. Type of the timer. This value can be <code>timer.simulate</code>, <code>timer.game</code> or <code>timer.real</code>.</li>
+<li><code>type</code> (integer): <em>Default</em>: <code>timer.simulate</code>. Type of the timer. This value can be <code>timer.simulate</code>, <code>timer.game</code> or <code>timer.real</code>.</li>
 <li><code>duration</code> (number): Duration of the timer. The method of time passing depends on the timer type.</li>
-<li><code>callback</code> (function): The callback function that will execute when the timer expires.</li>
-<li><code>iterations</code> (number): <em>Default</em>: <code>1</code>. The number of iterations to run. Use <code>-1</code> for infinite looping.</li>
+<li><code>callback</code> (function, string): The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the <code>name</code> string passed to <code>timer.register</code>.</li>
+<li><code>iterations</code> (integer): <em>Default</em>: <code>1</code>. The number of iterations to run. Use <code>-1</code> for infinite looping.</li>
 <li><code>persist</code> (boolean): <em>Default</em>: <code>true</code>. Registering a timer with persist flag set to <code>true</code> will serialize the callback string in the save to persist between sessions. Only a registered timer will persist between sessions. See <code>timer.register()</code>.</li>
-<li><code>data</code> (table): <em>Optional</em>. Data to be attached to the timer. If this is a persistent timer, the data must be json-serializable, matching the same limitations as data stored on references.</li>
+<li><code>data</code> (table, nil): <em>Default</em>: <code>nil</code>. Data to be attached to the timer. If this is a persistent timer, the data must be json-serializable, matching the same limitations as data stored on references.</li>
 </ul>
 </li>
 </ul>
