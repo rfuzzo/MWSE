@@ -2595,8 +2595,42 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mwse-updater" class="md-nav__link">
+    MWSE-Updater
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manually" class="md-nav__link">
+    Manually
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility" class="md-nav__link">
+    Compatibility
   </a>
   
 </li>
@@ -10119,8 +10153,42 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" class="md-nav__link">
     Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mwse-updater" class="md-nav__link">
+    MWSE-Updater
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manually" class="md-nav__link">
+    Manually
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compatibility" class="md-nav__link">
+    Compatibility
   </a>
   
 </li>
@@ -10196,10 +10264,21 @@
 
 
 <h1 id="construction-set-extender">Construction Set Extender<a class="headerlink" href="#construction-set-extender" title="Permanent link">⚓︎</a></h1>
+<p>The Construction Set Extender, also known as CSSE, is a project that aims to improve the functionality of the TES Construction Set. This page serves to document the project.</p>
+<p>To request a feature, visit the <a href="https://github.com/MWSE/MWSE/issues/397">Construction Set Extender Development issue</a> on GitHub. Support for the project can be found in the #mwse channel in the <a href="https://discord.me/page/mwmods">Morrowind Modding Community</a>.</p>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">⚓︎</a></h2>
+<p>CSSE requires <a href="https://www.nexusmods.com/morrowind/mods/41102?">MGE XE</a> v0.14.3 (released July 29, 2022) or later in order to be automatically loaded into the Construction Set.</p>
+<p>If using OpenMW, you will still need to install MGE XE into your Morrowind installation directory (the same directory that you launch the Construction Set).</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">⚓︎</a></h2>
-<p>Currently, the Construction Set Extender is only available from the #mwse channel in the <a href="https://discord.me/page/mwmods">Morrowind Modding Community</a> discord. Check the latest pinned CSSE post there.</p>
-<p>Once you have downloaded the .7z file, extract it to the Morrowind installation directory (to be in the same folder as TES Construction Set.exe).</p>
-<p>CSSE requires <a href="https://www.nexusmods.com/morrowind/mods/41102?">MGE XE</a> v0.14.3 (released July 29, 2022) or later to be automatically loaded into the Construction Set.</p>
+<p>You can obtain the CSSE using one of the following methods:</p>
+<h3 id="mwse-updater">MWSE-Updater<a class="headerlink" href="#mwse-updater" title="Permanent link">⚓︎</a></h3>
+<p>MGE XE includes the MWSE-Update program. This program will download the latest CSSE file (as well as the latest MWSE) into your Morrowind installation directory.</p>
+<p>To get CSSE with this method, simply run the program and follow any prompts that may be displayed (such as closing the Construction Set). It may only open briefly, in which case you are likely already up-to-date. The updater won't download the file if you already have the latest version.</p>
+<h3 id="manually">Manually<a class="headerlink" href="#manually" title="Permanent link">⚓︎</a></h3>
+<p>The same download can be found on the <a href="https://github.com/MWSE/MWSE/releases/tag/build-automatic">Automated Build release on GitHub</a>. You can download the mwse.zip file, which contains both MWSE and CSSE.</p>
+<p>Once you have the zip file downloaded, extract its contents to the Morrowind installation directory. Both CSSE.dll and TES Construction Set.exe must reside in the same directory.</p>
+<p>If you are strictly an OpenMW user but also a TES Construction Set user, you need only extract the CSSE.dll file into your Morrowind directory. However, for testing in the vanilla engine you should still have the <a href="https://www.nexusmods.com/morrowind/mods/19510">Morrowind Code Patch</a> and MWSE installed. MWSE offers various <a href="https://mwse.github.io/MWSE/references/other/patches/">patches and other features</a> to help make the original engine faster and more stable, in the same way that CSSE does for the Construction Set.</p>
+<h2 id="compatibility">Compatibility<a class="headerlink" href="#compatibility" title="Permanent link">⚓︎</a></h2>
 <p>If you are using <a href="https://www.nexusmods.com/morrowind/mods/50311">Construction Set Better UI</a>, CSSE will not automatically load. To get CSSE to work with Better UI, you will need to rename the Better UI executable to "TES Construction Set" and replace the existing vanilla CS file. Be sure to back the original up first!</p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">⚓︎</a></h2>
 <h3 id="general">General<a class="headerlink" href="#general" title="Permanent link">⚓︎</a></h3>
