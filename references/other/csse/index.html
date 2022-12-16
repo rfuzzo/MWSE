@@ -10299,7 +10299,7 @@
 <ul>
 <li>General optimizations to UI rendering. Status updates are throttled to only update once every 20ms, which drastically improves load times.</li>
 <li>The following warnings will no longer or only conditionally create popup windows, but will still be written to Warnings.txt:<ul>
-<li>"Following string is different for topic" and "Previous string is different for topic" are suppressed to Warnings.txt entirely.</li>
+<li>"Following string is different for topic" and "Previous string is different for topic" are suppressed entirely.</li>
 <li>The "1 duplicate references were removed" from loading Tribunal and Bloodmoon will no longer make a popup. If this is not the vanilla duplicate reference, or if there is more than one duplicate reference, a popup will still be shown.</li>
 </ul>
 </li>
@@ -10311,17 +10311,18 @@
 </ul>
 <h3 id="dialogue-window">Dialogue Window<a class="headerlink" href="#dialogue-window" title="Permanent link">⚓︎</a></h3>
 <ul>
-<li>Optimized UI initialization. With TR, average dialogue load time decreased by about 60%. Displaying INFO details is a minimum twice as fast (which is still really slow for any INFO that has certain conditions).</li>
+<li>Optimized UI. Changing between INFOs should be nearly instantaneous. Initial dialogue load time reduced by 60%.</li>
 </ul>
 <h3 id="render-window">Render Window<a class="headerlink" href="#render-window" title="Permanent link">⚓︎</a></h3>
 <ul>
 <li>Reference rotation is now performed on the world axis, rather than the local axis. To rotate on the local axis as it worked in vanilla, hold the alt key.</li>
 <li>References can be group-scaled. By holding the alt key when scaling, all selected references will scale together and reposition accordingly.</li>
-<li>References can be moved onto surfaces. By holding the alt key when drag-moving a reference, it will rotate and snap onto the surface under the cursor.</li>
+<li>References can be moved onto surfaces. By holding the alt key when drag-moving a reference, it will rotate and snap onto the surface under the cursor. The context menu (Q) can be used to set the axis to snap to.</li>
 <li>Extended editor marker support. Toggling markers (M) will now also toggle markers supported by the game executable. This allows custom markers to be toggled by tagging them with a MRK string and adding a EditorMarker node, or by defining objects whose name begins with or matches "Tri EditorMarker".</li>
 <li>A new context menu is available, using the Q key. From it you can access some new features:<ul>
 <li>Hide selected references, culling them from the scene so you can work behind them.</li>
 <li>Restore hidden references, restoring to view any references hidden with the hide selection option.</li>
+<li>Set the snap axis when alt-drag-moving references.</li>
 </ul>
 </li>
 </ul>
