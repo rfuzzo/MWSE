@@ -14324,10 +14324,10 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="levelupprogress"><code>levelUpProgress</code><a class="headerlink" href="#levelupprogress" title="Permanent link">⚓︎</a></h3>
-<p>The progress the player has made towards leveling up.</p>
+<p>The progress the player has made towards leveling up. Equal to the total amount of Minor and Major skill increases during the current level. This value can be larger than 10.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="levelupsperattribute"><code>levelupsPerAttribute</code><a class="headerlink" href="#levelupsperattribute" title="Permanent link">⚓︎</a></h3>
@@ -14622,7 +14622,7 @@ if damage &lt; 1 then damage = 1 end</p>
 <p>How many hours are left while resting.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="restoration"><code>restoration</code><a class="headerlink" href="#restoration" title="Permanent link">⚓︎</a></h3>
@@ -14690,6 +14690,10 @@ if damage &lt; 1 then damage = 1 end</p>
 <hr />
 <h3 id="skillprogress"><code>skillProgress</code><a class="headerlink" href="#skillprogress" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. Array-style table access to skill progress for each of the 27 skills.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The first index in the array is 1, but skill indices in tes3.skill table start from 0.</p>
+</div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number[])</li>
@@ -15054,12 +15058,12 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="exerciseskill"><code>exerciseSkill</code><a class="headerlink" href="#exerciseskill" title="Permanent link">⚓︎</a></h3>
-<p>Exercises a skill, providing experience in it.</p>
+<p>Exercises a skill, providing experience in it. Invokes <code>exerciseSkill</code> event.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">exerciseSkill</span><span class="p">(</span><span class="n">skill</span><span class="p">,</span> <span class="n">progress</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>skill</code> (number): The skill index to give experience to.</li>
+<li><code>skill</code> (integer): The skill index to give experience to. Maps to values from <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> table.</li>
 <li><code>progress</code> (number): The amount of experience to grant.</li>
 </ul>
 <hr />
@@ -15112,12 +15116,12 @@ if damage &lt; 1 then damage = 1 end</p>
 </ul>
 <hr />
 <h3 id="getskillprogressrequirement"><code>getSkillProgressRequirement</code><a class="headerlink" href="#getskillprogressrequirement" title="Permanent link">⚓︎</a></h3>
-<p>Returns the total progress needed to progress the skill to the next level.</p>
+<p>Returns the total progress needed to progress the skill to the next level. The actual amount of progress needed is the floor of the value returned by this function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">progressNeeded</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getSkillProgressRequirement</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>skill</code> (number): The skill index to check.</li>
+<li><code>skill</code> (integer): The skill index to check. Maps to values from <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -15236,7 +15240,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>skill</code> (number): The skill index to check for leveling.</li>
+<li><code>skill</code> (integer): The skill index to check for leveling. Maps to values from <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> table.</li>
 </ul>
 <hr />
 <h3 id="progressskilltonextlevel"><code>progressSkillToNextLevel</code><a class="headerlink" href="#progressskilltonextlevel" title="Permanent link">⚓︎</a></h3>
@@ -15245,11 +15249,11 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>skill</code> (number): The skill index to increase.</li>
+<li><code>skill</code> (integer): The skill index to increase. Maps to values from <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> table.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>newLevel</code> (number)</li>
+<li><code>newLevel</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="rechargepower"><code>rechargePower</code><a class="headerlink" href="#rechargepower" title="Permanent link">⚓︎</a></h3>

@@ -16214,9 +16214,9 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>): Coordinates of the mark's position.</li>
-<li><code>rotation</code> (number): <em>Default</em>: <code>Player's current rotation.</code>. This argument controls which direction the player's mark location will be facing.</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): <em>Optional</em>. A cell in which the mark should be placed.</li>
+<li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, number[]): Coordinates of the mark's position.</li>
+<li><code>rotation</code> (number): <em>Default</em>: <code>tes3.player.orientation.z</code>. This argument controls which direction the player's mark location will be facing.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): <em>Optional</em>. A cell in which the mark should be placed. This argument is unnecessary when setting the Mark's location to an exterior cell.</li>
 </ul>
 </li>
 </ul>
