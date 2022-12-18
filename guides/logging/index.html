@@ -10172,6 +10172,7 @@
 <li>Change log level via MCM</li>
 <li>Log messages can be color coded according to log level (via MWSE MCM)</li>
 <li>Optional setting to print messages to a separate log file</li>
+<li>Optional setting to print messages to the in-game console</li>
 </ul>
 <h2 id="log-levels">Log Levels<a class="headerlink" href="#log-levels" title="Permanent link">⚓︎</a></h2>
 <p>Log levels are ordered as follows: <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, and <code>ERROR</code>. Only logs at or below the current log level will be printed to the log file. For example, if log level is set to <code>INFO</code>, then <code>INFO</code>, <code>WARN</code> and <code>ERROR</code> messages will be logged, but <code>TRACE</code> and <code>DEBUG</code> messages will not.</p>
@@ -10190,6 +10191,7 @@
 <span class="kd">local</span> <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">new</span><span class="p">{</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Test Mod&quot;</span><span class="p">,</span>
     <span class="n">logLevel</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">,</span>
+    <span class="n">logToConsole</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">log</span><span class="p">:</span><span class="n">trace</span><span class="p">(</span><span class="s2">&quot;This is a trace message&quot;</span><span class="p">)</span>
 <span class="n">log</span><span class="p">:</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is a debug message&quot;</span><span class="p">)</span>
@@ -10198,31 +10200,37 @@
 <span class="n">log</span><span class="p">:</span><span class="nb">error</span><span class="p">(</span><span class="s2">&quot;This is an error message&quot;</span><span class="p">)</span>
 
 <span class="n">log</span><span class="p">:</span><span class="n">setLogLevel</span><span class="p">(</span><span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
+
+<span class="c1">-- To disable logging to the in-game console, set the logToConsole field to false</span>
+<span class="n">log</span><span class="p">.</span><span class="n">logToConsole</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="c1">-- After this point no logging messages will be logged to the in-game console</span>
 </code></pre></div>
 <h2 id="using-your-logger-in-different-source-files">Using your logger in different source files<a class="headerlink" href="#using-your-logger-in-different-source-files" title="Permanent link">⚓︎</a></h2>
 <p>In your main.lua, place the logger creation before other source files are included or required. This is to ensure the logger is created and accessible to these other source files.</p>
 <p>In the other source files:
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;Test Mod&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">logger</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;logging.logger&quot;</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;Test Mod&quot;</span><span class="p">)</span>
 
 <span class="n">log</span><span class="p">:</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This is an info message&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 <h2 id="creating-an-mcm-to-control-log-level">Creating an MCM to control Log Level<a class="headerlink" href="#creating-an-mcm-to-control-log-level" title="Permanent link">⚓︎</a></h2>
 <p>In your MCM config, create a dropdown with the following options:
 <div class="highlight"><pre><span></span><code><span class="n">settings</span><span class="p">:</span><span class="n">createDropdown</span><span class="p">{</span>
-  <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Logging Level&quot;</span><span class="p">,</span>
-  <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Set the log level.&quot;</span><span class="p">,</span>
-  <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">},</span>
-    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">},</span>
-    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span><span class="p">},</span>
-    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;WARN&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;WARN&quot;</span><span class="p">},</span>
-    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">},</span>
-    <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span><span class="p">},</span>
-  <span class="p">},</span>
-  <span class="n">variable</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">mcm</span><span class="p">.</span><span class="n">createTableVariable</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;logLevel&quot;</span><span class="p">,</span> <span class="n">table</span> <span class="o">=</span> <span class="n">mcmConfig</span> <span class="p">},</span>
-  <span class="n">callback</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
-    <span class="n">log</span><span class="p">:</span><span class="n">setLogLevel</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">variable</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
-  <span class="kr">end</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Logging Level&quot;</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Set the log level.&quot;</span><span class="p">,</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;TRACE&quot;</span><span class="p">},</span>
+        <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">},</span>
+        <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span><span class="p">},</span>
+        <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;WARN&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;WARN&quot;</span><span class="p">},</span>
+        <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">},</span>
+        <span class="p">{</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">variable</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">mcm</span><span class="p">.</span><span class="n">createTableVariable</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;logLevel&quot;</span><span class="p">,</span> <span class="n">table</span> <span class="o">=</span> <span class="n">mcmConfig</span> <span class="p">},</span>
+    <span class="n">callback</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+        <span class="n">log</span><span class="p">:</span><span class="n">setLogLevel</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">variable</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="kr">end</span>
 <span class="p">}</span>
 </code></pre></div></p>
 
