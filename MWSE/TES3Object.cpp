@@ -407,6 +407,10 @@ namespace TES3 {
 		if (ref != sol::nil) {
 			baseObjectCache[this] = ref;
 		}
+		else {
+			mwse::log::getLog() << "[MWSE] WARNING: An unknown object type was identified with a virtual table address of 0x" << std::hex << (unsigned int)vTable.base << ". Report this to MWSE developers." << std::endl;
+			mwse::lua::logStackTrace();
+		}
 
 		return ref;
 	}
@@ -635,8 +639,12 @@ namespace TES3 {
 			return false;
 		}
 
-		// Prevent markers from supporting lua data.
-		if (getIsLocationMarker()) {
+		// Prevent markers from supporting lua data, due to the loading code crashing on bad assumptions.
+		// getIsLocationMarker returns true for lights without a mesh, but they generate scene nodes and work normally when modified.
+		if (objectType == ObjectType::Light) {
+			return true;
+		}
+		else if (getIsLocationMarker()) {
 			return false;
 		}
 

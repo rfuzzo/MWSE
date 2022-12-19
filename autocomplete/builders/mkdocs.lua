@@ -39,6 +39,17 @@ common.compilePath(lfs.join(common.pathDefinitions, "events", "standard"), event
 -- Building
 --
 
+---@param packages package[]
+local function getDeprecatedCount(packages)
+	local count = 0
+	for _, pack in ipairs(packages) do
+		if pack.deprecated then
+			count = count + 1
+		end
+	end
+	return count
+end
+
 local function buildParentChain(className)
 	local package = assert(classes[className])
 	local ret = ""
@@ -71,13 +82,16 @@ local function getTypeLink(type)
 	return typeLinks[type]
 end
 
+---@param type string
+---@param nested boolean?
+---@return string
 local function breakoutTypeLinks(type, nested)
 	local types = {}
 
 	-- Support "table<x, y>" as type, in HTML < and > signs have a special meaning.
 	-- Use "&lt;" and "&gt;" instead.
 	if type:startswith("table<") then
-		local keyType, valueType = type:match("table<(.+), (.+)>")
+		local keyType, valueType = type:match("table<(%w+), (.+)>")
 		keyType = breakoutTypeLinks(keyType, true)
 		valueType = breakoutTypeLinks(valueType, true)
 
@@ -154,6 +168,40 @@ end
 
 local writeSubPackage = nil
 
+local operatorToTitle = {
+	add = "Addition (`+`)",
+	sub = "Subtraction (`-`)",
+	mul = "Multiplication (`*`)",
+	div = "Division (`/`)",
+	idiv = "Floor division (`//`)",
+	mod = "Modulo (`%`)",
+	pow = "Exponentation (`^`)",
+	concat = "Concatenation (`..`)",
+	len = "Length (`#`)",
+}
+
+local function writeOperatorPackage(file, operator, package)
+	file:write(string.format("### %s\n\n", operatorToTitle[operator.key]))
+
+	local notUnary = operator.overloads[1].rightType and true
+
+	if (notUnary) then
+		file:write("| Left operand type | Right operand type | Result type | Description |\n")
+		file:write("| ----------------- | ------------------ | ----------- | ----------- |\n")
+		for _, overload in ipairs(operator.overloads) do
+			file:write(string.format("| %s | %s | %s | %s |\n", getTypeLink(package.namespace), getTypeLink(overload.rightType), getTypeLink(overload.resultType), overload.description or ""))
+		end
+	else
+		file:write("| Result type | Description |\n")
+		file:write("| ----------- | ----------- |\n")
+		for _, overload in ipairs(operator.overloads) do
+			file:write(string.format("| %s | %s |\n", getTypeLink(overload.resultType), overload.description or ""))
+		end
+	end
+
+	file:write("\n")
+end
+
 local function writePackageDetails(file, package)
 	-- Write description.
 	file:write(string.format("%s\n\n", common.getDescriptionString(package)))
@@ -196,13 +244,24 @@ local function writePackageDetails(file, package)
 
 	-- Write out functions.
 	local functions = table.values(getPackageComponentsArray(package, "functions"), sortPackagesByKey)
-	if (#functions > 0) then
+	local deprecatedCount = getDeprecatedCount(functions)
+	if (#functions > 0 and #functions > deprecatedCount) then
 		file:write("## Functions\n\n")
 		for _, fn in ipairs(functions) do
 			if (not fn.deprecated) then
 				writeSubPackage(file, fn, package)
 				file:write("***\n\n")
 			end
+		end
+	end
+
+	-- Write out operators.
+	local operators = table.values(getPackageComponentsArray(package, "operators"), sortPackagesByKey)
+	if (#operators > 0) then
+		file:write("## Math Operations\n\n")
+		for _, operator in ipairs(operators) do
+			writeOperatorPackage(file, operator, package)
+			file:write("***\n\n")
 		end
 	end
 

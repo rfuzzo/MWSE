@@ -68,6 +68,27 @@ The cost of using the enchantment.
 
 * `result` ([tes3effect](../../types/tes3effect)[])
 
+??? example "Example: Determining if an enchantment is hostile"
+
+	The following function returns `true` if the enchantment contains at least one hostile effect. This criterion can be considered subjective, but that rule is also used by the game to determine if use of enchantment on an NPC is considered an offense.
+
+	```lua
+	
+	--- @param magicSource tes3spell|tes3enchantment|tes3alchemy
+	local function isSpellHostile(magicSource)
+	    for _, effect in ipairs(magicSource.effects) do
+	        if (effect.object.isHarmful) then
+				-- If one of the spell's effects is harmful, then
+				-- `true` is returned and function ends here.
+	            return true
+	        end
+	    end
+		-- If no harmful effect was found then return `false`.
+	    return false
+	end
+
+	```
+
 ***
 
 ### `flags`
@@ -182,7 +203,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -203,16 +224,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -318,6 +329,4 @@ local index = myObject:getFirstIndexOfEffect(effectId)
 * `index` (number)
 
 ***
-
-## Functions
 

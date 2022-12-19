@@ -13,9 +13,11 @@ Elements can have custom data attached using their `Property`_ key-value store, 
 
 ### `absolutePosAlignX`
 
-Sets element position to a point relative to the parent element. 0.0 = left/top content edge, 1.0 = right/bottom content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.
+The horizontal alignment of the element relative to it's parent element. Can be `nil`. If `nil`, deactivates behaviour associated with this property. Valid values range from `0.0` to `1.0`. Sets the element's `positionX` to a point relative to the parent element. A value of `0.0` is equal to the parent element's left content edge, whereas a value of `1.0` is equal to the parent element's right content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.
 	
-	Bug note: Elements may not respond to widthProportional/heightProportional sizing after either of these properties are set. If you need to use both you should consider testing if it works first.
+Incompatible with and will change the value of [`ignoreLayoutX`](https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx).
+
+Elements may not respond to `widthProportional` sizing after this property is set. If you need to use both you should consider testing if it works first.
 
 **Returns**:
 
@@ -25,7 +27,11 @@ Sets element position to a point relative to the parent element. 0.0 = left/top 
 
 ### `absolutePosAlignY`
 
-See absolutePosAlignX.
+The vertical alignment of the element relative to it's parent element. Can be `nil`. If `nil`, deactivates behaviour associated with this property. Valid values range from `0.0` to `1.0`. Sets the element's `positionY` to a point relative to the parent element. A value of `0.0` is equal to the parent element's top content edge, whereas a value of `1.0` is equal to the parent element's bottom content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.
+	
+Incompatible with and will change the value of [`ignoreLayoutY`](https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty).
+
+Elements may not respond to `heightProportional` sizing after this property is set. If you need to use both you should consider testing if it works first.
 
 **Returns**:
 
@@ -35,7 +41,7 @@ See absolutePosAlignX.
 
 ### `alpha`
 
-Element alpha colour, using range [0.0, 1.0]. Used to composite elements. If you wish to hide an element completely, use `disable` instead.
+The element's alpha color. Valid values range from `0.0` to `1.0`. Used to composite elements. If you wish to hide an element completely, use `disable` instead.
 
 **Returns**:
 
@@ -45,7 +51,7 @@ Element alpha colour, using range [0.0, 1.0]. Used to composite elements. If you
 
 ### `autoHeight`
 
-When `true`, automatically expands element dimensions to fit child elements. Dimensions are restricted by `minWidth`, `minHeight`, `maxWidth` and `maxHeight` properties.
+If `true`, automatically expands element dimensions to fit child elements. Ignores child elements that have `ignoreLayoutY` set to `true`. Dimensions are restricted by `minWidth`, `minHeight`, `maxWidth` and `maxHeight` properties.
 
 **Returns**:
 
@@ -55,7 +61,7 @@ When `true`, automatically expands element dimensions to fit child elements. Dim
 
 ### `autoWidth`
 
-When `true`, automatically expands element dimensions to fit child elements. Dimensions are restricted by `minWidth`, `minHeight`, `maxWidth` and `maxHeight` properties.
+If `true`, automatically expands element dimensions to fit child elements. Ignores child elements that have `ignoreLayoutX` set to `true`. Dimensions are restricted by `minWidth`, `minHeight`, `maxWidth` and `maxHeight` properties.
 
 **Returns**:
 
@@ -65,58 +71,59 @@ When `true`, automatically expands element dimensions to fit child elements. Dim
 
 ### `borderAllSides`
 
-Integer number. Border size in pixels. Border is the extra empty space around an element. Individual border sizes default to using the borderAllSides setting.
+The border size in pixels. Border is the extra empty space around an element. Individual border sizes default to using the borderAllSides setting.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `borderBottom`
 
-Integer number. Bottom border size in pixels. When this is set to `-1`, the borderAllSides setting is used for this side instead.
+The bottom border size in pixels. When this is set to `-1`, the `borderAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `borderLeft`
 
-Integer number. Left border size in pixels. When this is set to `-1`, the borderAllSides setting is used for this side instead.
+The left border size in pixels. When this is set to `-1`, the `borderAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `borderRight`
 
-Integer number. Left border size in pixels. When this is set to `-1`, the borderAllSides setting is used for this side instead.
+The left border size in pixels. When this is set to `-1`, the `borderAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `borderTop`
 
-Integer number. Top border size in pixels. When this is set to `-1`, the borderAllSides setting is used for this side instead.
+The top border size in pixels. When this is set to `-1`, the `borderAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `childAlignX`
 
 Sets alignment of child elements inside its parent, though it only works in specific conditions. 0.0 = left/top edge touches left/top edge of parent, 0.5 = centred, 1.0 = right/bottom edge touches right/bottom edge of parent. For negative values, there is a special case behaviour: all children but the last will be left-aligned/top-aligned, the last child will be right-aligned/bottom-aligned.
-	
+
+!!! important
 	Child alignment only works if the element has proportional sizing (using widthProportional/heightProportional) and all children use non-proportional sizing (widthProportional and heightProportional are nil).
 
 **Returns**:
@@ -137,11 +144,11 @@ See childAlignX.
 
 ### `childOffsetX`
 
-Integer number. View offset in pixels, applied to the position of child nodes. Used in scroll panes.
+The view offset in pixels, applied to the position of child nodes. Used in scroll panes.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -167,7 +174,7 @@ See childOffsetX.
 
 ### `color`
 
-The RGB color of the element. An array of 3 numbers with values ranging from `0.0` to `1.0`. For menus and rects, it sets the background colour. For text, it sets the text colour. For images, it multiplies the image by the colour.
+The RGB color of the element. An array of 3 numbers with values ranging from `0.0` to `1.0`. For menus and rects, it sets the background color. For text, it sets the text color. For images, it multiplies the image by the color.
 
 **Returns**:
 
@@ -185,9 +192,19 @@ When `true`, mouse events over this element are sent to event handlers, or disca
 
 ***
 
+### `contentPath`
+
+The file path to the image or model content of this element. Only used if `contentType` is set to `tes3.contentType.image` or `tes3.contentType.model`.
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `contentType`
 
-*Read-only*. The type of content this `tes3uiElement` represents. Maps to values in [`tes3.contentType`](https://mwse.github.io/MWSE/references/content-types/).
+*Read-only*. The type of content this `tes3uiElement` represents. Maps to values in the [`tes3.contentType`](https://mwse.github.io/MWSE/references/content-types/) table.
 
 **Returns**:
 
@@ -230,11 +247,11 @@ Index of font to use for text.
 
 ### `height`
 
-Element dimensions in pixels. Integer number.
+The element's height in pixels.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -242,9 +259,10 @@ Element dimensions in pixels. Integer number.
 
 Sets element dimensions using a proportional sizer. The sizer starts with the parent dimension in the flow direction, subtracts any fixed dimension children leaving the proportional sizer space. Each proportionally sized element then gets an equal division of the space, multiplied by this member. Values above 1.0 are permissible.
 
-	Bug note: If widthProportional is used without heightProportional, an element may not respond to changes in parent size. It is recommended to set heightProportional, or have a fixed size sibling element if dynamic reflow is required.
+!!! bug
+	If widthProportional is used without heightProportional, an element may not respond to changes in parent size. It is recommended to set heightProportional, or have a fixed size sibling element if dynamic reflow is required.
 
-	Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
+Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 
 **Returns**:
 
@@ -259,6 +277,30 @@ Sets element dimensions using a proportional sizer. The sizer starts with the pa
 **Returns**:
 
 * `result` (number)
+
+***
+
+### `ignoreLayoutX`
+
+If `true`, the element's [`positionX`](https://mwse.github.io/MWSE/types/tes3uiElement/#positionx) can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of [`absolutePosAlignX`](https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposalignx).
+	
+Elements that bypass parent layout will be ignored when automatically determing the parent's width. See [`autoWidth`](https://mwse.github.io/MWSE/types/tes3uiElement/#autowidth) for more information.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `ignoreLayoutY`
+
+If `true`, the element's [`positionY`](https://mwse.github.io/MWSE/types/tes3uiElement/#positiony) can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of [`absolutePosAlignY`](https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposaligny).
+	
+Elements that bypass parent layout will be ignored when automatically determing the parent's height. See [`autoHeight`](https://mwse.github.io/MWSE/types/tes3uiElement/#autoheight) for more information.
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 
@@ -294,41 +336,41 @@ Can have values `"left"`, `"center"`, or `"right"`. Controls text justification.
 
 ### `maxHeight`
 
-Maximum dimensions for auto-size layout and resizable frames. Integer number.
+The maximum height for auto-size layout and resizable frames.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `maxWidth`
 
-Maximum dimensions for auto-size layout and resizable frames. Integer number.
+The maximum width for auto-size layout and resizable frames.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `minHeight`
 
-Minimum dimensions for auto-size layout and resizable frames. Integer number.
+The minimum height for auto-size layout and resizable frames.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `minWidth`
 
-Minimum dimensions for auto-size layout and resizable frames. Integer number.
+The minimum width for auto-size layout and resizable frames.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -344,31 +386,31 @@ Minimum dimensions for auto-size layout and resizable frames. Integer number.
 
 ### `paddingAllSides`
 
-Integer number. Padding size in pixels. Padding is the blank space between the edge of an element and its contents. Individual padding sizes default to `-1`, making it use the paddingAllSides setting.
+The padding size in pixels. Padding is the blank space between the edge of an element and its contents. Individual padding sizes default to `-1`, making it use the `paddingAllSides` setting.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `paddingBottom`
 
-Integer number. Bottom padding size in pixels. When this is set to `-1`, the paddingAllSides setting is used for this side instead.
+The bottom padding size in pixels. When this is set to `-1`, the `paddingAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `paddingLeft`
 
-Integer number. Left padding size in pixels. When this is set to `-1`, the paddingAllSides setting is used for this side instead.
+The left padding size in pixels. When this is set to `-1`, the `paddingAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -384,11 +426,11 @@ Integer number. Right padding size in pixels. When this is set to `-1`, the padd
 
 ### `paddingTop`
 
-Integer number. Top padding size in pixels. When this is set to `-1`, the paddingAllSides setting is used for this side instead.
+The top padding size in pixels. When this is set to `-1`, the `paddingAllSides` setting is used for this side instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -404,21 +446,21 @@ Integer number. Top padding size in pixels. When this is set to `-1`, the paddin
 
 ### `positionX`
 
-Integer number. Element X position relative to its parent's top-left content area. For top-level menus there is a difference: (0, 0) is the centre of the screen.
+The element's horizontal position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless [`ignoreLayoutX`](https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayoutx) is `true`.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `positionY`
 
-Integer number. Element Y position relative to its parent's top-left content area. For top-level menus there is a difference: (0, 0) is the centre of the screen.
+The element's vertical position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless [`ignoreLayoutY`](https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty) is `true`.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -466,7 +508,8 @@ When set to `true` on image and NIF elements, they are scaled to fit `width` and
 
 The element's text. Text input can be read by accessing this property.
 
-	tip: If your element's text is a number, you need to manually convert it to string using `tostring()`.
+!!! tip
+	If your element's text is a number, you need to manually convert it to string using `tostring()`.
 
 **Returns**:
 
@@ -516,11 +559,11 @@ Access to element specific properties. This will be `nil` if there are no elemen
 
 ### `width`
 
-Element dimensions in pixels. Integer number.
+The element's width in pixels.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -528,9 +571,10 @@ Element dimensions in pixels. Integer number.
 
 Sets element dimensions using a proportional sizer. The sizer starts with the parent dimension in the flow direction, subtracts any fixed dimension children leaving the proportional sizer space. Each proportionally sized element then gets an equal division of the space, multiplied by this member. Values above 1.0 are permissible.
 
-	Bug note: If widthProportional is used without heightProportional, an element may not respond to changes in parent size. It is recommended to set heightProportional, or have a fixed size sibling element if dynamic reflow is required.
+!!! bug
+	If widthProportional is used without heightProportional, an element may not respond to changes in parent size. It is recommended to set heightProportional, or have a fixed size sibling element if dynamic reflow is required.
 
-	Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
+Overrides fixed, minimum and maximum sizes unless this value is `nil` (default).
 
 **Returns**:
 
@@ -540,7 +584,7 @@ Sets element dimensions using a proportional sizer. The sizer starts with the pa
 
 ### `wrapText`
 
-Controls text wrapping. Setting this to `true` will also set `layoutHeightFraction` to `1.0`, which is required for wrapping text to adjust to its container size.
+Controls text wrapping. Setting this to `true` will also set `heightProportional` to `1.0`, which is required for wrapping text to adjust to its container size.
 
 **Returns**:
 
@@ -555,14 +599,15 @@ Controls text wrapping. Setting this to `true` will also set `layoutHeightFracti
 Copies this element to a new parent. This function can have unintended consequences. The specifics of what exact elements are being copied is important.
 
 ```lua
-local copy = myObject:copy(to, copyChildren, copyProperties)
+local copy = myObject:copy({ to = ..., copyChildren = ..., copyProperties = ... })
 ```
 
 **Parameters**:
 
-* `to` ([tes3uiElement](../../types/tes3uiElement)): Where to create the copy.
-* `copyChildren` (boolean): *Default*: `true`. If true, all children will also be copied to the newly created element.
-* `copyProperties` (boolean): *Default*: `true`. If true, all properties will be copied to the newly created element.
+* `params` (table)
+	* `to` ([tes3uiElement](../../types/tes3uiElement)): The element to create the copy in. Will be the parent of the newly created element.
+	* `copyChildren` (boolean): *Default*: `true`. If `true`, all children will also be copied to the newly created element.
+	* `copyProperties` (boolean): *Default*: `true`. If `true`, all properties will be copied to the newly created element.
 
 **Returns**:
 
@@ -752,7 +797,7 @@ local result = myObject:createImage({ id = ..., path = ... })
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `path` (string): An image path. This path is relative to `Data Files`.
+	* `path` (string): *Optional*. An image path. This path is relative to `Data Files`.
 
 **Returns**:
 
@@ -784,7 +829,7 @@ local result = myObject:createImageButton({ id = ..., idle = ..., over = ..., pr
 
 ### `createLabel`
 
-Creates a text label. It defaults to displaying all text on a single line. To get a multi-line label, set `wrap_text` to `true`. The element is created with `autoWidth` and `autoHeight` turned on.
+Creates a text label. It defaults to displaying all text on a single line. To get a multi-line label, set `wrapText` to `true`. The element is created with `autoWidth` and `autoHeight` turned on.
 
 ```lua
 local result = myObject:createLabel({ id = ..., text = ... })
@@ -845,7 +890,7 @@ local result = myObject:createParagraphInput({ id = ... })
 
 ### `createRect`
 
-Creates a filled rectangle. The rectangle is displayed as filled with the element's colour. It supports alpha compositing.
+Creates a filled rectangle. The rectangle is displayed as filled with the element's color. It supports alpha compositing.
 
 ```lua
 local result = myObject:createRect({ id = ..., color = ..., randomizeColor = ... })
@@ -941,7 +986,7 @@ local result = myObject:createTextInput({ id = ..., text = ..., placeholderText 
 
 ### `createTextSelect`
 
-Creates a selectable line of text, with configurable hover, click, and disabled colours. Can be used to create a list box by placing them in a ScrollPane.
+Creates a selectable line of text, with configurable hover, click, and disabled colors. Can be used to create a list box by placing them in a ScrollPane.
 
 Text select specific properties can be accessed through the `widget` property. The widget type for text selects is [`tes3uiTextSelect`](https://mwse.github.io/MWSE/types/tes3uiTextSelect/).
 
@@ -1058,7 +1103,7 @@ myObject:forwardEvent(id)
 
 Returns the descendant element that creation functions used on this element will place children into, or the calling element if there is no specific descendant for children.
 
-	Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element, but other functions do not access this content element directly. This function finds this content container for any element, so that changing layout and accessing children is possible. For simple elements, the calling element will be returned so that there is always a valid container element.
+Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element, but other functions do not access this content element directly. This function finds this content container for any element, so that changing layout and accessing children is possible. For simple elements, the calling element will be returned so that there is always a valid container element.
 
 ```lua
 local result = myObject:getContentElement()
@@ -1156,7 +1201,7 @@ local value = myObject:getPropertyInt(property)
 
 **Returns**:
 
-* `value` (number): The value of the property, defaulting to `0` if the property was not set.
+* `value` (integer): The value of the property, defaulting to `0` if the property was not set.
 
 ***
 
@@ -1171,7 +1216,7 @@ local value = myObject:getPropertyObject(property, typeCast)
 **Parameters**:
 
 * `property` (number, string): The property to get.
-* `typeCast` (string, nil): *Default*: `tes3baseObject`. The casting of the property to get.
+* `typeCast` (string, nil): *Default*: `"tes3baseObject"`. The casting of the property to get.
 
 **Returns**:
 
@@ -1242,7 +1287,7 @@ local copy = myObject:move(to)
 ### `register`
 
 Sets an `event` handler, which can add or override an existing event handler. The use of `registerBefore` or `registerAfter` is recommended if you do not want to replace the existing event handler. The eventID can be a standard `event` name, or an event specific to an element class. These can be accessed through [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/) for convenience. The callback receives an argument with the event data. See below for details.
-	
+
 The original Morrowind callback is captured and can be invoked with the `forwardEvent` method on the event argument. If there is an existing Lua callback, it is replaced.
 
 	Standard events:
@@ -1296,19 +1341,19 @@ The original Morrowind callback is captured and can be invoked with the `forward
 Event forwarding
 -------------------------------------------------------------------------------
 
-The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the `forwardEvent` method.  Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback. 
+The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the `forwardEvent` method.  Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback.
 
 **Example**
+```Lua
+local function onClick(e)
+	-- pre-event code
+	e.source:forwardEvent(e)
+	-- post-event code
+end
 
-	local function onClick(e)
-		-- pre-event code
-		e.source:forwardEvent(e)
-		-- post-event code
-	end
-	
-	local button = menu:findChild("MenuExample_Ok")
-	button:register("mouseClick", onClick)
-
+local button = menu:findChild("MenuExample_Ok")
+button:register("mouseClick", onClick)
+```
 
 Event handler
 -------------------------------------------------------------------------------
@@ -1318,26 +1363,26 @@ The standard type signature for events.
 	`boolean`_ eventHandler(**EventData** e)
 		Returns: `optional`
 			Returning `false` may cancel an interaction for certain events. e.g. unfocus
-	
+
 		EventData:
 			**source** (`Element`_)
 				The source element of the event.
-			
+
 			**id** (`number`_)
 				The numeric id of the event type.
-		
+
 			**widget** (`Element`_)
 				The widget element that the source belongs to, if the element is a sub-part of a widget. May not be accurate if the element is not a sub-part.
-			
+
 			**data0** (`number`_)
 				..
-				
+
 			**data1** (`number`_)
 				Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer. For keyboard events, data0 is the `scan code`_.
-			
+
 			**relativeX** (`number`_)
 				..
-				
+
 			**relativeY** (`number`_)
 				For mouse events only. X and Y coordinates of the pointer relative to the top-left of the element.
 
@@ -1384,9 +1429,9 @@ myObject:registerBefore(eventID, callback)
 
 ### `reorderChildren`
 
-	Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 
-	Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
+Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 
 ```lua
 local result = myObject:reorderChildren(insertBefore, moveFrom, count)

@@ -1,5 +1,5 @@
 return {
 	type = "value",
-	description = [[The source vertex mode.]],
-	valuetype = "number",
+	description = [[Determines how vertex and material colors are mixed on subclasses of niAVObject. Maps to values in [`ni.sourceVertexModes`](https://mwse.github.io/MWSE/references/ni/source-vertex-modes/) table.]],
+	valuetype = "integer",
 }

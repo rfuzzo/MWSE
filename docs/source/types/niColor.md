@@ -5,7 +5,7 @@
 
 # niColor
 
-An object that represents a RGB color.
+An object that represents a RGB color. The values are in [0.0, 1.0] range.
 
 ## Properties
 
@@ -73,7 +73,7 @@ Alias for the red value of the color.
 
 ### `clamp`
 
-Clamps the color object.
+Clamps the color object to [0.0, 1.0] range.
 
 ```lua
 myObject:clamp()
@@ -140,13 +140,40 @@ local color = niColor.new(r, g, b)
 
 **Parameters**:
 
-* `r` (number): The red value for the color.
-* `g` (number): The green value for the color.
-* `b` (number): The blue value for the color.
+* `r` (number): *Default*: `0`. The red value for the color.
+* `g` (number): *Default*: `0`. The green value for the color.
+* `b` (number): *Default*: `0`. The blue value for the color.
 
 **Returns**:
 
 * `color` ([niColor](../../types/niColor))
+
+***
+
+## Math Operations
+
+### Addition (`+`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Adds the color channel values of two `niColor` objects. |
+
+***
+
+### Multiplication (`*`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Multiplies color channel values. |
+| [niColor](../../types/niColor) | number | [niColor](../../types/niColor) | Multiplies each color value with a scalar. |
+
+***
+
+### Subtraction (`-`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Subtracts the color channel values. |
 
 ***
 

@@ -88,6 +88,27 @@ The spell's cast type. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/re
 
 * `result` ([tes3effect](../../types/tes3effect)[])
 
+??? example "Example: Determining if a spell is hostile"
+
+	The following function returns `true` if the spell contains at least one hostile effect. This criterion can be considered subjective, but that rule is also used by the game to determine if a use of the spell on an NPC is considered an offense.
+
+	```lua
+	
+	--- @param magicSource tes3spell|tes3enchantment|tes3alchemy
+	local function isSpellHostile(magicSource)
+	    for _, effect in ipairs(magicSource.effects) do
+	        if (effect.object.isHarmful) then
+				-- If one of the spell's effects is harmful, then
+				-- `true` is returned and function ends here.
+	            return true
+	        end
+	    end
+		-- If no harmful effect was found then return `false`.
+	    return false
+	end
+
+	```
+
 ***
 
 ### `flags`
@@ -232,7 +253,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -253,16 +274,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -337,7 +348,7 @@ local result = myObject:calculateCastChance({ checkMagicka = ..., caster = ... }
 **Parameters**:
 
 * `params` (table)
-	* `checkMagicka` (boolean): *Optional*. Determines if the caster's magicka should be taken into account during the calculation.
+	* `checkMagicka` (boolean): *Default*: `true`. Determines if the caster's magicka should be taken into account during the calculation.
 	* `caster` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor)): The caster to perform the calculation against.
 
 **Returns**:
@@ -377,13 +388,13 @@ local result = myObject:getActiveEffectCount()
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `getFirstIndexOfEffect`
 
-Gets the first index of an effect ID in the spell effect table.
+Gets the first index of an effect ID in the spell effect table. Returns `-1` if provided effect doesn't exist in the spell
 
 ```lua
 local result = myObject:getFirstIndexOfEffect(effectId)
@@ -391,11 +402,11 @@ local result = myObject:getFirstIndexOfEffect(effectId)
 
 **Parameters**:
 
-* `effectId` (number): The ID of a `tes3effect` object to look for.
+* `effectId` (number): A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -431,9 +442,7 @@ local schoolID = myObject:getLeastProficientSchool(actor)
 
 **Returns**:
 
-* `schoolID` (number, nil): The least proficient school ID, or `nil` if the spell has no valid effects.
+* `schoolID` (number, nil): The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
 
 ***
-
-## Functions
 

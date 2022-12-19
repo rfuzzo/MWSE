@@ -202,7 +202,7 @@ True if this object is an editor marker for a gameplay location. These include t
 
 ### `isSilver`
 
-If true, the weapon has a silver material flag.
+If true, the weapon has a silver material flag. Silver weapons deal double damage to the Undead and Werewolf creatures.
 
 **Returns**:
 
@@ -332,7 +332,7 @@ The weapon's relative reach. A value of `1.0` is the standard reach. It is multi
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -353,16 +353,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -473,7 +463,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3baseObject](../../types/tes3baseObject)[])
 
 ***
 
@@ -594,11 +584,11 @@ local result = myObject:getMaterialFlag(flagBit)
 
 **Parameters**:
 
-* `flagBit` (number)
+* `flagBit` (integer): `0` corresponds to the `ignoresNormalWeaponResistance` field, `1` corresponds to the `isSilver`.
 
 **Returns**:
 
-* `result` (number)
+* `result` (boolean)
 
 ***
 
@@ -612,7 +602,7 @@ myObject:setMaterialFlag(flagBit, value)
 
 **Parameters**:
 
-* `flagBit` (number)
+* `flagBit` (integer): `0` corresponds to the `ignoresNormalWeaponResistance` field, `1` corresponds to the `isSilver`.
 * `value` (boolean)
 
 ***

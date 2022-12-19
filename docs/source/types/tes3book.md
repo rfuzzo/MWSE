@@ -192,7 +192,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -220,16 +220,6 @@ The scene graph node for this object.
 
 ***
 
-### `sceneReference`
-
-The scene graph reference node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
 ### `script`
 
 The script that runs on the object.
@@ -242,11 +232,11 @@ The script that runs on the object.
 
 ### `skill`
 
-The skill learned from the book, or `-1` if the book doesn't have one, or has already been read.
+The skill learned from the book (from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table), or `-1` if the book doesn't have one, or has already been read.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -276,7 +266,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3baseObject](../../types/tes3baseObject)[])
 
 ***
 

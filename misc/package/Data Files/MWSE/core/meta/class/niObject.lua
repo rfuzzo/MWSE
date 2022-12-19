@@ -7,22 +7,21 @@
 --- The base-most object from which almost all NetImmerse structures are derived from.
 --- @class niObject
 --- @field refCount number *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
---- @field references string *Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
 --- @field RTTI niRTTI *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 --- @field runTimeTypeInformation niRTTI *Read-only*. The runtime type information for this object.
 niObject = {}
 
 --- Creates a copy of this object.
---- @return niAlphaProperty|niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niDynamicEffect|niExtraData|niFogProperty|niGeometry|niGeometryData|niKeyframeController|niKeyframeData|niLight|niLookAtController|niMaterialProperty|niNode|niPixelData|niPointLight|niSourceTexture|niSpotLight|niStencilProperty|niStringExtraData|niSwitchNode|niTexture|niTexturingProperty|niTimeController|niTriBasedGeometry|niTriBasedGeometryData|niTriShape|niTriShapeData|niVertexColorProperty result No description yet available.
+--- @return niAlphaProperty|niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niColorData|niDirectionalLight|niFogProperty|niGeometryData|niGravity|niKeyframeController|niKeyframeData|niLookAtController|niMaterialProperty|niNode|niParticleBomb|niParticleCollider|niParticleColorModifier|niParticleGrowFade|niParticleRotation|niParticleSystemController|niParticles|niParticlesData|niPixelData|niPlanarCollider|niPointLight|niRotatingParticles|niRotatingParticlesData|niSkinData|niSkinInstance|niSkinPartition|niSourceTexture|niSphericalCollider|niSpotLight|niStencilProperty|niStringExtraData|niSwitchNode|niTES3ExtraData|niTextKeyExtraData|niTexture|niTextureEffect|niTexturingProperty|niTriBasedGeometryData|niTriShape|niTriShapeData|niVertexColorProperty|niZBufferProperty result No description yet available.
 function niObject:clone() end
 
---- Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
---- @param type number No description yet available.
+--- Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+--- @param type number Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 --- @return boolean result No description yet available.
 function niObject:isInstanceOfType(type) end
 
---- Determines if the object is of a given type. Types can be found in the tes3.niType table.
---- @param type number No description yet available.
+--- Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+--- @param type number Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 --- @return boolean result No description yet available.
 function niObject:isOfType(type) end
 

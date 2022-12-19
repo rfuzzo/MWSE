@@ -20,6 +20,7 @@
 #include "LuaCalcArmorRatingEvent.h"
 #include "LuaCalcBarterPriceEvent.h"
 #include "LuaCalcBlockChanceEvent.h"
+#include "LuaCalcEnchantmentPriceEvent.h"
 #include "LuaCalcHitArmorPieceEvent.h"
 #include "LuaCalcHitChanceEvent.h"
 #include "LuaCalcMovementSpeedEvent.h"
@@ -93,8 +94,8 @@
 #include "LuaMenuStateEvent.h"
 #include "LuaMeshLoadedEvent.h"
 #include "LuaMeshLoadEvent.h"
-#include "LuaMobileActorActivatedEvent.h"
-#include "LuaMobileActorDeactivatedEvent.h"
+#include "LuaMobileObjectActivatedEvent.h"
+#include "LuaMobileObjectDeactivatedEvent.h"
 #include "LuaMobileObjectCollisionEvent.h"
 #include "LuaMobileObjectWaterImpactEvent.h"
 #include "LuaMobileProjectileActorCollisionEvent.h"
@@ -176,6 +177,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["calcArmorRating"] = sol::property(&CalculateArmorRatingEvent::getEventEnabled, &CalculateArmorRatingEvent::setEventEnabled);
 		usertypeDefinition["calcBarterPrice"] = sol::property(&CalculateBarterPriceEvent::getEventEnabled, &CalculateBarterPriceEvent::setEventEnabled);
 		usertypeDefinition["calcBlockChance"] = sol::property(&CalcBlockChanceEvent::getEventEnabled, &CalcBlockChanceEvent::setEventEnabled);
+		usertypeDefinition["calcEnchantmentPrice"] = sol::property(&CalculateEnchantmentPriceEvent::getEventEnabled, &CalculateEnchantmentPriceEvent::setEventEnabled);
 		usertypeDefinition["calcFlySpeed"] = sol::property(&CalculateMovementSpeed::getEventEnabled, &CalculateMovementSpeed::setEventEnabled);
 		usertypeDefinition["calcHitChance"] = sol::property(&CalcHitChanceEvent::getEventEnabled, &CalcHitChanceEvent::setEventEnabled);
 		usertypeDefinition["calcMoveSpeed"] = sol::property(&CalculateMovementSpeed::getEventEnabled, &CalculateMovementSpeed::setEventEnabled);
@@ -253,8 +255,8 @@ namespace mwse::lua::event {
 		usertypeDefinition["menuExit"] = sol::property(&MenuStateEvent::getEventEnabled, &MenuStateEvent::setEventEnabled);
 		usertypeDefinition["meshLoad"] = sol::property(&MeshLoadEvent::getEventEnabled, &MeshLoadEvent::setEventEnabled);
 		usertypeDefinition["meshLoaded"] = sol::property(&MeshLoadedEvent::getEventEnabled, &MeshLoadedEvent::setEventEnabled);
-		usertypeDefinition["mobileActivated"] = sol::property(&MobileActorActivatedEvent::getEventEnabled, &MobileActorActivatedEvent::setEventEnabled);
-		usertypeDefinition["mobileDeactivated"] = sol::property(&MobileActorDeactivatedEvent::getEventEnabled, &MobileActorDeactivatedEvent::setEventEnabled);
+		usertypeDefinition["mobileActivated"] = sol::property(&MobileObjectActivatedEvent::getEventEnabled, &MobileObjectActivatedEvent::setEventEnabled);
+		usertypeDefinition["mobileDeactivated"] = sol::property(&MobileObjectDeactivatedEvent::getEventEnabled, &MobileObjectDeactivatedEvent::setEventEnabled);
 		usertypeDefinition["mouseAxis"] = sol::property(&MouseAxisEvent::getEventEnabled, &MouseAxisEvent::setEventEnabled);
 		usertypeDefinition["mouseButtonDown"] = sol::property(&MouseButtonDownEvent::getEventEnabled, &MouseButtonDownEvent::setEventEnabled);
 		usertypeDefinition["mouseButtonUp"] = sol::property(&MouseButtonUpEvent::getEventEnabled, &MouseButtonUpEvent::setEventEnabled);

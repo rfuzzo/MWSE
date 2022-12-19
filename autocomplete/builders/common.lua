@@ -148,6 +148,18 @@ function table.deepcopy(t)
 	return copy
 end
 
+---@param t table
+---@param value any
+---@return boolean
+function table.removevalue(t, value)
+	local i = table.find(t, value)
+	if (i ~= nil) then
+		table.remove(t, i)
+		return true
+	end
+	return false
+end
+
 
 --
 -- json library extensions
@@ -288,12 +300,15 @@ common.urlBase = "https://mwse.github.io/MWSE"
 -- Reused language strings
 --
 
---- @type string
 common.defaultNoDescriptionText = "No description yet available."
+common.defaultExperimentalAPIWarning = [[
+!!! warning
+	This part of the API isn't fully understood yet and thus is considered experimental. That means that there can be breaking changes requiring the code using this part of the API to be rewritten. The MWSE team will not make any effort to keep backward compatibility with the mods using experimental APIs.
+]]
 
 --- @param package table
 --- @param useDefault boolean|nil
---- @return string
+--- @return string|nil
 function common.getDescriptionString(package, useDefault)
 	if (useDefault == nil) then
 		useDefault = true
@@ -309,6 +324,10 @@ function common.getDescriptionString(package, useDefault)
 		table.insert(descriptionBits, string.format("*Default*: `%s`.", tostring(package.default)))
 	elseif (package.optional) then
 		table.insert(descriptionBits, "*Optional*.")
+	end
+
+	if (package.experimental) then
+		table.insert(descriptionBits, common.defaultExperimentalAPIWarning)
 	end
 
 	if (package.description) then
@@ -378,6 +397,7 @@ end
 --- @field folder string The folder that the package was created from.
 --- @field parent package The package this package is a child of.
 --- @field namespace string The full namespace of the package.
+--- @field deprecated boolean Allows marking definitions as deprecated. Those definitions aren't written to the web documentation.
 
 --- @class packageLib : package
 --- @field children table<string, package>|nil

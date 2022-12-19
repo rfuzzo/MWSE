@@ -11,11 +11,11 @@ An active magic effect.
 
 ### `attributeId`
 
-*Read-only*. The attribute ID (note that this may be the skill ID if the effect affects skills).
+*Read-only*. The attribute ID (note that this may be the skill ID if the effect affects skills, since `attributeId` and `skillId` properties are set to the same value by the engine). Maps to values from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -31,11 +31,11 @@ An active magic effect.
 
 ### `effectId`
 
-*Read-only*. The magic effect ID.
+*Read-only*. The magic effect ID. Maps to values from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -45,7 +45,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -79,9 +79,29 @@ An active magic effect.
 
 ***
 
+### `isBoundItem`
+
+*Read-only*. If this effect has summoned a bound item.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isIllegalSummon`
+
+*Read-only*. If this effect has summoned a creature that has been declared illegal to summon. This is an otherwise unused flag in the game that is set for daedra and undead summon magic effects, but not for any other summon creature magic effects.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isSummon`
 
-*Read-only*. No description yet available.
+*Read-only*. If this effect has summoned a creature.
 
 **Returns**:
 
@@ -91,11 +111,11 @@ An active magic effect.
 
 ### `magnitude`
 
-*Read-only*. The unresisted magnitude of the magic effect, that is the magnitude before resistance attributes are applied. This is always an integer number. To find the actual effective magnitude after resistances are applied, you must check the magic effect instance.
+*Read-only*. The unresisted magnitude of the magic effect, that is the magnitude before resistance attributes are applied. To find the actual effective magnitude after resistances are applied, you must check the magic effect instance.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -145,17 +165,17 @@ An active magic effect.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `skillId`
 
-*Read-only*. The skill ID (note that this may be the attribute ID if the effect affects attributes).
+*Read-only*. The skill ID (note that this may be the attribute ID if the effect affects attributes, since `attributeId` and `skillId` properties are set to the same value by the engine). Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 

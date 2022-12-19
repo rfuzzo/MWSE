@@ -80,16 +80,16 @@ function tes3ui.createMenu(params) end
 --- 
 --- `text`: string — The text to display.
 --- 
---- `type`: number? — *Optional*. The type for the response. Defaults to `choice` responses.
+--- `type`: integer? — *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
 --- 
---- `index`: number? — *Optional*. The answer index for the response. Only used for `choice` responses.
+--- `index`: integer? — *Optional*. The answer index for the response. Only used for `choice` responses.
 function tes3ui.createResponseText(params) end
 
 ---Table parameter definitions for `tes3ui.createResponseText`.
 --- @class tes3ui.createResponseText.params
 --- @field text string The text to display.
---- @field type number? *Optional*. The type for the response. Defaults to `choice` responses.
---- @field index number? *Optional*. The answer index for the response. Only used for `choice` responses.
+--- @field type integer? *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
+--- @field index integer? *Optional*. The answer index for the response. Only used for `choice` responses.
 
 --- Creates a tooltip menu, which can be an empty menu, an item tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.
 ---
@@ -122,7 +122,7 @@ function tes3ui.findHelpLayerMenu(id) end
 
 --- Locates a top-level menu through its id.
 --- @param id string|number The ID of the menu to locate.
---- @return tes3uiElement result No description yet available.
+--- @return tes3uiElement? result No description yet available.
 function tes3ui.findMenu(id) end
 
 --- Forces the game to update the inventory tile GUI elements. Unlike tes3ui.updateInventoryTiles, this will force-resync the player's inventory to the GUI, rather than updating what is already in the GUI system.
@@ -141,11 +141,15 @@ function tes3ui.getInventorySelectType() end
 function tes3ui.getMenuOnTop() end
 
 --- Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
+--- 
+--- ![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png){ loading = lazy }
+--- *Above: All the palette colors in-game with default settings. Note that some entries are entirely black. In order of appearance, those are backgroundColor, blackColor, and journalTopicColor.*
+--- 
 --- @param name string The name of the palette color. Maps to values in [`tes3.palette`](https://mwse.github.io/MWSE/references/palettes/) enumeration.
 --- @return number[] palette An array containing the RGB color values, in the range [0.0, 1.0].
 function tes3ui.getPalette(name) end
 
---- Returns the mobile actor currently providing services to the player.
+--- Returns the mobile actor currently providing services, or the actor the player is talking to.
 --- @return tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer result No description yet available.
 function tes3ui.getServiceActor() end
 
@@ -166,7 +170,7 @@ function tes3ui.leaveMenuMode() end
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uilog).
 --- @param message string No description yet available.
---- @vararg any *Optional*. No description yet available.
+--- @param ... any? *Optional*. No description yet available.
 function tes3ui.log(message, ...) end
 
 --- Logs a message to the console. Consider using `tes3ui.log` instead of this function if you do not need to make use of the `isCommand` parameter.
@@ -177,9 +181,9 @@ function tes3ui.log(message, ...) end
 function tes3ui.logToConsole(text, isCommand) end
 
 --- 
---- @param unknown nil No description yet available.
+--- @param id tes3uiProperty|integer No description yet available.
 --- @return string executed No description yet available.
-function tes3ui.lookupID(unknown) end
+function tes3ui.lookupID(id) end
 
 --- Checks if the game is in menu mode.
 --- @return boolean result No description yet available.
@@ -210,27 +214,29 @@ function tes3ui.registerProperty(s) end
 --- @param reference tes3reference|nil No description yet available.
 function tes3ui.setConsoleReference(reference) end
 
---- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
+--- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
 --- @param text string No description yet available.
 function tes3ui.showBookMenu(text) end
 
---- 
+--- This function creates a dialogue message. The message can have three styles. The style `2` makes a selectable text. That way by calling this function multiple time you can create a selection of responses.
 --- @param params tes3ui.showDialogueMessage.params This table accepts the following values:
 --- 
 --- `text`: string? — *Default*: ``. The text of the shown message.
 --- 
---- `style`: number? — *Default*: `0`. 
+--- `style`: number? — *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
 --- 
---- `answerIndex`: number? — *Default*: `0`. 
+--- `answerIndex`: number? — *Default*: `0`. This number can be used later to identify which response was selected.
 function tes3ui.showDialogueMessage(params) end
 
 ---Table parameter definitions for `tes3ui.showDialogueMessage`.
 --- @class tes3ui.showDialogueMessage.params
 --- @field text string? *Default*: ``. The text of the shown message.
---- @field style number? *Default*: `0`. 
---- @field answerIndex number? *Default*: `0`. 
+--- @field style number? *Default*: `0`. This argument controls the text color of the message. Value `0` makes the message text the same color as the text in the dialogue window. Value `1` makes the text white, and also print a newline after the message. Value `2` turns the message into a selectable text inside the dialogue window. Value `3` looks the same as `1` but there isn't a newline after each message. Value `4` is the same as value `1`. All the other values work as `0`.
+--- @field answerIndex number? *Default*: `0`. This number can be used later to identify which response was selected.
 
 --- This function opens the inventory select menu which lets the player select items from an inventory. These items can be selected from any actor's inventory and can be filtered with the `filter` callback. The selected item can be retrieved in the function assigned to `callback`.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uishowinventoryselectmenu).
 --- @param params tes3ui.showInventorySelectMenu.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference? — *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
@@ -249,10 +255,10 @@ function tes3ui.showDialogueMessage(params) end
 --- --- 
 --- --- 		- `alembic`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.alembic` will be shown.
 --- --- 		- `calcinator`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.calcinator` will be shown.
---- --- 		- `enchanted`: Only enchanted items will be shown.
+--- --- 		- `enchanted`: Only non-enchanted items will be shown. That's because that filter is usually used in the enchanting menu to select items viable for enchanting.
 --- --- 		- `ingredients`: Only [tes3ingredient](https://mwse.github.io/MWSE/types/tes3ingredient/) items will be shown.
 --- --- 		- `mortar`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.mortarAndPestle` will be shown.
---- --- 		- `quickUse`: Only items available for quick use will be shown.
+--- --- 		- `quickUse`: Only items that can be assigned as quick keys will be shown.
 --- --- 		- `retort`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.retort` will be shown.
 --- --- 		- `soulgemFilled`: Only filled soulgems will be shown.
 --- --- 
@@ -286,10 +292,10 @@ function tes3ui.showInventorySelectMenu(params) end
 --- 
 --- 		- `alembic`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.alembic` will be shown.
 --- 		- `calcinator`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.calcinator` will be shown.
---- 		- `enchanted`: Only enchanted items will be shown.
+--- 		- `enchanted`: Only non-enchanted items will be shown. That's because that filter is usually used in the enchanting menu to select items viable for enchanting.
 --- 		- `ingredients`: Only [tes3ingredient](https://mwse.github.io/MWSE/types/tes3ingredient/) items will be shown.
 --- 		- `mortar`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.mortarAndPestle` will be shown.
---- 		- `quickUse`: Only items available for quick use will be shown.
+--- 		- `quickUse`: Only items that can be assigned as quick keys will be shown.
 --- 		- `retort`: Only [tes3apparatus](https://mwse.github.io/MWSE/types/tes3apparatus/) items of type `tes3.apparatusType.retort` will be shown.
 --- 		- `soulgemFilled`: Only filled soulgems will be shown.
 --- 
@@ -314,11 +320,11 @@ function tes3ui.showJournal() end
 
 --- Creates a new notify menu with a formatted string. A notify menu is a toast-style display that shows at the bottom of the screen. It will expire after an amount of time, determined by the length of the message and the `fMessageTimePerChar` GMST.
 --- @param string string The message to display. If it supports formatting, additional arguments are used.
---- @vararg any Optional values to feed to formatting found in the first parameter.
+--- @param ... any? Optional values to feed to formatting found in the first parameter.
 --- @return tes3uiElement menu The notify menu created.
 function tes3ui.showNotifyMenu(string, ...) end
 
---- Displays the scroll menu with arbitrary text. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
+--- Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
 --- @param text string No description yet available.
 function tes3ui.showScrollMenu(text) end
 

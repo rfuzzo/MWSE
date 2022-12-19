@@ -93,7 +93,7 @@ namespace TES3 {
 		unsigned char padding_0x5;
 		short magicEffectID; // 0x6
 		bool isHarmful; // 0x8
-		bool isSummon; // 0x9
+		bool isIllegalSummon; // 0x9
 		unsigned short duration; // 0xA
 		unsigned short unresistedMagnitude; // 0xC
 		signed char skillOrAttributeID; // 0xE
@@ -125,6 +125,8 @@ namespace TES3 {
 		//
 
 		MagicEffectInstance * getEffectInstance() const;
+		bool isBoundItem() const;
+		bool isSummon() const;
 
 		ActiveMagicEffect* getFirst_legacy() const;
 		ActiveMagicEffect* getNext_legacy();
@@ -145,7 +147,7 @@ namespace TES3 {
 		AIPlanner * aiPlanner; // 0xC8
 		ActionData actionData; // 0xCC
 		ActionData actionBeforeCombat; // 0x13C
-		CrimeController crimesA; // 0x1AC
+		CrimeController committedCrimes; // 0x1AC
 		int unknown_0x1B8;
 		int unknown_0x1BC;
 		CombatSession * combatSession; // 0x1C0
@@ -170,7 +172,7 @@ namespace TES3 {
 			ActorAnimationController * asActor;
 			PlayerAnimationController * asPlayer;
 		} animationController; // 0x244
-		CrimeController crimesB; // 0x248
+		CrimeController witnessedCrimes; // 0x248
 		Statistic attributes[8]; // 0x254
 		Statistic health; // 0x2B4
 		Statistic magicka; // 0x2C0
@@ -224,11 +226,6 @@ namespace TES3 {
 		float applyArmorRating(float damage, float swing, bool damageEquipment);
 		float calculateArmorRating(int * armorItemCount = nullptr) const;
 		float getArmorRating_lua() const;
-		void applyPhysicalHit(MobileActor* attacker, MobileActor* defender, float damage, float swing, MobileProjectile* projectile = nullptr, bool alwaysPlayHitVoice = false);
-
-		void setCurrentMagicFromSpell(Spell* spell);
-		void setCurrentMagicFromSourceCombo(MagicSourceCombo sourceCombo);
-		void setCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack);
 
 		//
 		// Other related this-call functions.
@@ -247,11 +244,13 @@ namespace TES3 {
 		float getWeaponSpeed() const;
 
 		void startCombat(MobileActor*);
+		void startCombat_lua(sol::object target);
 		void stopCombat(bool);
 		void stopCombat_lua(sol::optional<bool>);
 		bool isDead() const;
 		void onDeath();
 		void kill();
+		void retireMagic();
 		bool applyHealthDamage(float damage, bool isPlayerAttack, bool scaleWithDifficulty, bool doNotChangeHealth);
 		float applyFatigueDamage(float damage, float swing, bool alwaysPlayHitVoice = false);
 		void applyJumpFatigueCost() const;
@@ -275,6 +274,10 @@ namespace TES3 {
 		float calculateFlySpeed();
 		Vector3 calculateJumpVelocity(Vector2 direction);
 		Vector3 calculateJumpVelocity_lua(sol::optional<sol::table> params);
+		void applyPhysicalHit(MobileActor* attacker, MobileActor* defender, float damage, float swing, MobileProjectile* projectile = nullptr, bool alwaysPlayHitVoice = false);
+		void setCurrentMagicFromSpell(Spell* spell);
+		void setCurrentMagicFromSourceCombo(MagicSourceCombo sourceCombo);
+		void setCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack);
 
 		void updateDerivedStatistics(Statistic * baseStatistic);
 		void updateDerivedStatistics_lua(sol::optional<Statistic*> baseStatistic);
@@ -329,6 +332,8 @@ namespace TES3 {
 		void setWeaponReady(bool value);
 
 		void updateOpacity();
+		void notifyActorDeadOrDestroyed(MobileActor* mobileActor);
+		void removeFiredProjectiles(bool includeSpellProjectiles);
 
 		ActorAnimationController* getAnimationController() const;
 		BaseObject* getCurrentSpell() const;

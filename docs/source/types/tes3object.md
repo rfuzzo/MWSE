@@ -132,7 +132,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -153,16 +153,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 

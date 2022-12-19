@@ -16,7 +16,7 @@ The list of nodes that a given dynamic effect will affect.
 
 **Returns**:
 
-* `result` (niNodeLinkedList)
+* `result` ([niNodeLinkedList](../../types/niNodeLinkedList))
 
 ***
 
@@ -112,7 +112,7 @@ The human-facing name of the given object.
 
 ### `parent`
 
-The object's parent. It may not have one if it is not attached to the scene.
+*Read-only*. The object's parent. It may not have one if it is not attached to the scene.
 
 **Returns**:
 
@@ -122,7 +122,7 @@ The object's parent. It may not have one if it is not attached to the scene.
 
 ### `properties`
 
-The list of properties attached to this `niAVObject`.
+*Read-only*. The list of properties attached to this `niAVObject`.
 
 **Returns**:
 
@@ -137,16 +137,6 @@ The list of properties attached to this `niAVObject`.
 **Returns**:
 
 * `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -222,11 +212,21 @@ The object's local translation vector.
 
 ### `type`
 
-The enumerated type of a given dynamic effect. Types: `0 - niAmbientLight`, `1 - niDirectionalLight`, `2 - niPointLight`, `3 - niSpotLight`, `4 - niTextureEffect`.
+*Read-only*. The enumerated type of a given dynamic effect. Maps to values in [`ni.dynamicEffectType`](https://mwse.github.io/MWSE/references/ni/dynamic-effect-types/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
+
+***
+
+### `velocity`
+
+The object's local velocity.
+
+**Returns**:
+
+* `result` ([tes3vector3](../../types/tes3vector3))
 
 ***
 
@@ -240,13 +240,43 @@ Convenient access to this object's vertex coloring property. Setting this value 
 
 ***
 
+### `worldBoundOrigin`
+
+The world coordinates of the object's bounds origin.
+
+**Returns**:
+
+* `result` ([tes3vector3](../../types/tes3vector3))
+
+***
+
+### `worldBoundRadius`
+
+The radius of the object's bounds.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `worldTransform`
+
+The object's transformations in the world space.
+
+**Returns**:
+
+* `result` ([tes3transform](../../types/tes3transform))
+
+***
+
 ### `zBufferProperty`
 
 Convenient access to this object's z-buffer property. Setting this value to be nil will erase the property, while setting it to a valid z-buffer property will set (or replace) it.
 
 **Returns**:
 
-* `result` (niZBufferProperty, nil)
+* `result` ([niZBufferProperty](../../types/niZBufferProperty), nil)
 
 ***
 
@@ -266,9 +296,23 @@ myObject:addExtraData(extraData)
 
 ***
 
+### `attachAffectedNode`
+
+Adds a node to the dynamic effect's affected nodes list. The node's `:updateEffects()` function should be called afterwards to recognize the change.
+
+```lua
+myObject:attachAffectedNode(node)
+```
+
+**Parameters**:
+
+* `node` ([niNode](../../types/niNode)): The node to add to the affected nodes list.
+
+***
+
 ### `attachProperty`
 
-Attach a property to this object.
+Attaches a property to this object, without checking to see if the property or another of its type is already on the list. Property lists must not have more than one property of a given class (i.e. no two niTexturingProperty objects) attached at once, or else undefined behavior will result.
 
 ```lua
 myObject:attachProperty(property)
@@ -304,17 +348,31 @@ local result = myObject:clone()
 
 ***
 
-### `createBoundingBox`
+### `detachAffectedNode`
 
-Calculates and creates a bounding box for the object. The existing bounding box, if any, will not be used, a fresh one will always be calculated.
+Removes a node from the dynamic effect's affected nodes list. The node's `:updateEffects()` function should be called afterwards to recognize the change.
 
 ```lua
-local boundingBox = myObject:createBoundingBox()
+myObject:detachAffectedNode(node)
+```
+
+**Parameters**:
+
+* `node` ([niNode](../../types/niNode)): The node to remove from the affected nodes list.
+
+***
+
+### `detachAllProperties`
+
+Detaches all the properties on the object and returns them in the table.
+
+```lua
+local result = myObject:detachAllProperties()
 ```
 
 **Returns**:
 
-* `boundingBox` ([tes3boundingBox](../../types/tes3boundingBox)): The newly created bounding box.
+* `result` ([niProperty](../../types/niProperty)[])
 
 ***
 
@@ -328,7 +386,7 @@ local result = myObject:detachProperty(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (integer): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
@@ -382,7 +440,7 @@ local result = myObject:getProperty(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (integer): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
@@ -390,9 +448,81 @@ local result = myObject:getProperty(type)
 
 ***
 
+### `getStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
+
+```lua
+local extra = myObject:getStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData starting with this value will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `getStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
+
+```lua
+local extra = myObject:getStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData with this word will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `hasStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -400,7 +530,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -410,7 +540,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -418,7 +548,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -431,12 +561,33 @@ local result = myObject:isOfType(type)
 Add a controller to the object as the first controller.
 
 ```lua
-myObject:prependController(type)
+myObject:prependController(controller)
 ```
 
 **Parameters**:
 
-* `type` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../../types/niTimeController))
+
+***
+
+### `propagatePositionChange`
+
+Alias for `update()` method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
+
+!!! tip
+	It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.
+
+
+```lua
+myObject:propagatePositionChange({ time = ..., controllers = ..., bounds = ... })
+```
+
+**Parameters**:
+
+* `args` (table): *Optional*.
+	* `time` (number): *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+	* `controllers` (boolean): *Default*: `false`. Update object's controllers?
+	* `bounds` (boolean): *Default*: `true`. Update object's bounds?
 
 ***
 
@@ -523,17 +674,28 @@ myObject:setFlag(state, index)
 
 ### `update`
 
-Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, or bounds.
+Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
+
+!!! tip	"Update Efficiency"
+	It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.
+
 
 ```lua
-myObject:update()
+myObject:update({ time = ..., controllers = ..., bounds = ... })
 ```
+
+**Parameters**:
+
+* `args` (table): *Optional*.
+	* `time` (number): *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
+	* `controllers` (boolean): *Default*: `false`. Update object's controllers?
+	* `bounds` (boolean): *Default*: `true`. Update object's bounds?
 
 ***
 
 ### `updateEffects`
 
-Update all attached effects.
+Update all attached effects. This method must be called at or above any object when dynamic effects are attached or detached from it
 
 ```lua
 myObject:updateEffects()
@@ -548,36 +710,6 @@ Update all attached properties.
 ```lua
 myObject:updateProperties()
 ```
-
-***
-
-## Functions
-
-### `attachAffectedNode`
-
-Adds a node to the dynamic effect's affected nodes list. The node's `:updateEffects()` function should be called afterwards to recognize the change.
-
-```lua
-niDynamicEffect.attachAffectedNode(node)
-```
-
-**Parameters**:
-
-* `node` ([niNode](../../types/niNode)): The node to add to the affected nodes list.
-
-***
-
-### `detachAffectedNode`
-
-Removes a node from the dynamic effect's affected nodes list. The node's `:updateEffects()` function should be called afterwards to recognize the change.
-
-```lua
-niDynamicEffect.detachAffectedNode(node)
-```
-
-**Parameters**:
-
-* `node` ([niNode](../../types/niNode)): The node to remove from the affected nodes list.
 
 ***
 

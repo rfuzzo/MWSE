@@ -68,6 +68,27 @@ The bounding box for the object.
 
 * `result` ([tes3effect](../../types/tes3effect)[])
 
+??? example "Example: Determining if a potion is hostile"
+
+	The following function returns `true` if the spell contains at least one hostile effect. This criterion can be considered subjective, but that rule is also used by the game to determine if a use of the spell on an NPC is considered an offense.
+
+	```lua
+	
+	--- @param magicSource tes3spell|tes3enchantment|tes3alchemy
+	local function isSpellHostile(magicSource)
+	    for _, effect in ipairs(magicSource.effects) do
+	        if (effect.object.isHarmful) then
+				-- If one of the spell's effects is harmful, then
+				-- `true` is returned and function ends here.
+	            return true
+	        end
+	    end
+		-- If no harmful effect was found then return `false`.
+	    return false
+	end
+
+	```
+
 ***
 
 ### `flags`
@@ -202,7 +223,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -223,16 +244,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -276,7 +287,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3baseObject](../../types/tes3baseObject)[])
 
 ***
 
@@ -296,7 +307,7 @@ The value of the object. For this object type, its maximum value is 65535. Large
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -376,32 +387,6 @@ local index = myObject:getFirstIndexOfEffect(effectId)
 **Returns**:
 
 * `index` (number)
-
-***
-
-## Functions
-
-### `create`
-
-Creates a new alchemy item, which will be stored as part of the current saved game. If there is already an alchemy item with matching effects, name, weight, value, and script, that will be returned instead of creating a new item.
-
-```lua
-tes3alchemy.create({ id = ..., name = ..., script = ..., mesh = ..., icon = ..., objectFlags = ..., weight = ..., value = ..., flags = ..., effects = ... })
-```
-
-**Parameters**:
-
-* `params` (table)
-	* `id` (string): The new object's ID. Must be unique.
-	* `name` (string): *Default*: `"Potion"`. The new item's name.
-	* `script` ([tes3script](../../types/tes3script)): *Optional*. A script to attach to the object.
-	* `mesh` (string): *Default*: `"m\Misc_Potion_Bargain_01.nif"`. The mesh to use for the object.
-	* `icon` (string): *Default*: `"m\Tx_potion_bargain_01.nif"`. The icon to use for the object.
-	* `objectFlags` (number): *Default*: `8`. The object flags initially set. Force set as modified.
-	* `weight` (number): *Default*: `0`. The new item's weight.
-	* `value` (number): *Default*: `0`. The new item's value.
-	* `flags` (number): *Default*: `0`. The new alchemy item's flags.
-	* `effects` (table): A table of effects described, providing values for id, skill, attribute, range, radius, duration, min, and/or max.
 
 ***
 

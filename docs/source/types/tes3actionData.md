@@ -62,11 +62,11 @@ Actor's current animation group. Maps to values in [`tes3.animationGroup`](https
 
 ### `hitTarget`
 
-The actor's attack target. The target will be saved in `hitTarget` field until a new attack is made.
+The actor's attack target. The target will be saved in `hitTarget` field until a new attack is made. Missing an attack will clear `hitTarget` field.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../../types/tes3mobileActor), nil)
 
 ***
 
@@ -102,7 +102,7 @@ A number from the [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/refere
 
 ### `physicalDamage`
 
-When attacking, this is the value of the weapon damage that was rolled. This value takes into account the actor's strength, attack swing and weapon condition, but it doesn't include difficulty nor target's armor. This value is updated on a attack. After the attack this value will still contain the damage rolled. It will be refreshed on new attack.
+When attacking, this is the value of the weapon damage that was rolled. This value takes into account the actor's strength, attack swing and weapon condition, but it doesn't include difficulty nor target's armor. This value is updated on an attack. After the attack this value will still contain the damage rolled. It will be refreshed on a new attack.
 
 **Returns**:
 
@@ -122,11 +122,11 @@ No description yet available.
 
 ### `target`
 
-The actor's attack target.
+The actor's attack target, stored until the actor attacks successfully again. In contrast to `hitTarget`, `target` property isn't cleared on missed attack.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../../types/tes3mobileActor), nil)
 
 ***
 

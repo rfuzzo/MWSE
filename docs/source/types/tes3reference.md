@@ -28,7 +28,7 @@ The current reference, if any, that this reference will activate.
 
 **Returns**:
 
-* `result` (table&lt;string, [tes3bodyPartManager](../../types/tes3bodyPartManager)|[tes3itemData](../../types/tes3itemData)|[tes3lightNode](../../types/tes3lightNode)|[tes3lockNode](../../types/tes3lockNode)|[tes3mobileActor](../../types/tes3mobileActor)|[tes3reference](../../types/tes3reference)|[tes3travelDestinationNode](../../types/tes3travelDestinationNode)&gt;)
+* `result` (table&lt;string, [tes3bodyPartManager](../../types/tes3bodyPartManager)|[tes3itemData](../../types/tes3itemData)|[tes3lightNode](../../types/tes3lightNode)|[tes3lockNode](../../types/tes3lockNode)|[tes3mobileActor](../../types/tes3mobileActor)|[tes3reference](../../types/tes3reference)|[tes3travelDestinationNode](../../types/tes3travelDestinationNode)|[tes3animationData](../../types/tes3animationData)&gt;)
 
 ***
 
@@ -79,6 +79,27 @@ The blocked state of the object.
 **Returns**:
 
 * `result` ([tes3scriptContext](../../types/tes3scriptContext))
+
+??? example "Example: Checking reference's script variables"
+
+	Companions usually have a mwscript script with variable named `companion` set to 1. This can be used to determine if a reference is player's companion or not.
+
+	```lua
+	
+	--- This function returns `true` if the reference
+	--- has a variable companion set to 1 in its script.
+	---@param reference tes3reference
+	---@return boolean
+	local function hasCompanionShare(reference)
+	
+		-- This shows that we can read any variable inside
+		-- `tes3scriptContext` objects as if it was normal Lua table
+		-- (`reference.context` is of `tes3scriptContext` type)
+	    local companion = reference.context["companion"]
+	    return companion and companion == 1
+	end
+
+	```
 
 ***
 
@@ -344,7 +365,7 @@ The next object in parent collection's list.
 
 ### `orientation`
 
-Access to the reference's orientation. Setting the orientation sets the reference as modified.
+Access to the reference's orientation, in XYZ Euler angles in Radians. Changing the orientation marks the reference as modified.
 
 **Returns**:
 
@@ -375,6 +396,13 @@ The persistent flag of the object.
 ### `position`
 
 Access to the reference's position. Setting the position sets the reference as modified.
+
+For actors, the axes are:
+
+ - X right - left(+)
+ - Y front - back(+)
+ - Z down  - up(+)
+
 
 **Returns**:
 
@@ -414,7 +442,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -435,16 +463,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 *Read-only*. The scene graph node that the reference uses for rendering.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -612,7 +630,7 @@ myObject:clearActionFlag(flagIndex)
 
 **Parameters**:
 
-* `flagIndex` (number): The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+* `flagIndex` (integer): The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 
 ***
 
@@ -763,7 +781,7 @@ local result = myObject:onCloseInventory()
 
 ### `setActionFlag`
 
-Sets a bit in the reference's action data attachment
+Sets a bit in the reference's action data attachment.
 
 ```lua
 myObject:setActionFlag(flagIndex)
@@ -771,7 +789,7 @@ myObject:setActionFlag(flagIndex)
 
 **Parameters**:
 
-* `flagIndex` (number): The action flag to clear.
+* `flagIndex` (integer): The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 
 ***
 
@@ -796,7 +814,7 @@ myObject:setNoCollisionFlag(hasNoCollision, updateCollisions)
 **Parameters**:
 
 * `hasNoCollision` (boolean): If `true`, the reference no longer has collision.
-* `updateCollisions` (boolean): If `true`, collision groups for the active cells are recalculated.
+* `updateCollisions` (boolean): *Default*: `true`. If `true`, collision groups for the active cells are recalculated.
 
 ***
 
@@ -810,7 +828,7 @@ local result = myObject:testActionFlag(flagIndex)
 
 **Parameters**:
 
-* `flagIndex` (number): The action flag to test. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+* `flagIndex` (integer): The action flag to test. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 
 **Returns**:
 

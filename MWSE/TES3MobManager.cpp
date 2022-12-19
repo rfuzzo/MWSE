@@ -1,9 +1,8 @@
 #include "TES3MobManager.h"
 
 #include "LuaManager.h"
+#include "LuaUtil.h"
 
-#include "LuaMobileActorActivatedEvent.h"
-#include "LuaMobileActorDeactivatedEvent.h"
 #include "LuaDetectSneakEvent.h"
 
 #include "TES3MobileActor.h"
@@ -12,7 +11,14 @@
 #include "TES3MobileSpellProjectile.h"
 #include "TES3WorldController.h"
 
+#include "MathUtil.h"
+
 namespace TES3 {
+	const auto TES3_ProcessManager_detectAttack = reinterpret_cast<bool(__thiscall*)(ProcessManager*, MobileActor*)>(0x570C60);
+	bool ProcessManager::detectAttack(MobileActor* actor) {
+		return TES3_ProcessManager_detectAttack(this, actor);
+	}
+
 	const auto TES3_ProcessManager_detectPresence = reinterpret_cast<bool(__thiscall*)(ProcessManager*, MobileActor*, bool)>(0x570A60);
 	bool ProcessManager::detectPresence(MobileActor * actor, bool unknown) {
 		return TES3_ProcessManager_detectPresence(this, actor, unknown);
@@ -78,27 +84,25 @@ namespace TES3 {
 		TES3_ProjectileManager_resolveCollisions(this, deltaTime);
 	}
 
+	void ProjectileManager::removeProjectilesFiredByActor(MobileActor* mobileActor, bool includeSpellProjectiles) {
+		criticalSection.enter("MWSE:ProjectileManager::removeProjectilesFiredByActor");
+		for (auto projectile : activeProjectiles) {
+			if (projectile->firingActor == mobileActor && (includeSpellProjectiles || projectile->objectType == ObjectType::MobileProjectile)) {
+				projectile->enterLeaveSimulation(false);
+				projectile->flagExpire = true;
+			}
+		}
+		criticalSection.leave();
+	}
+
 	const auto TES3_MobManager_addMob = reinterpret_cast<void(__thiscall*)(MobManager*, Reference*)>(0x5636A0);
 	void MobManager::addMob(Reference * reference) {
 		TES3_MobManager_addMob(this, reference);
-
-		auto mobile = reference->getAttachedMobileObject();
-		if (mwse::lua::event::MobileActorActivatedEvent::getEventEnabled() && mobile) {
-			// Update simulation distance with an initial value before the event fires.
-			auto macp = WorldController::get()->getMobilePlayer();
-			mobile->simulationDistance = reference->position.distance(&macp->reference->position);
-
-			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileActorActivatedEvent(mobile));
-		}
 	}
 
 	const auto TES3_MobManager_removeMob = reinterpret_cast<void(__thiscall*)(MobManager*, Reference*)>(0x5637F0);
 	void MobManager::removeMob(Reference * reference) {
 		TES3_MobManager_removeMob(this, reference);
-
-		if (mwse::lua::event::MobileActorDeactivatedEvent::getEventEnabled()) {
-			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MobileActorDeactivatedEvent(reference));
-		}
 	}
 
 	void MobManager::checkPlayerDistance() {
@@ -139,5 +143,30 @@ namespace TES3 {
 			mobCollisionGroup->removeCollider(node);
 			criticalSection_Mobs.leave();
 		}
+	}
+
+	Vector3* MobManager::getGravity() {
+		return &gravity;
+	}
+
+	void MobManager::setGravity(sol::stack_object value) {
+		mwse::lua::setVectorFromLua(gravity, value);
+	}
+
+	Vector3* MobManager::getTerminalVelocity() {
+		return &terminalVelocity;
+	}
+
+	void MobManager::setTerminalVelocity(sol::stack_object value) {
+		mwse::lua::setVectorFromLua(terminalVelocity, value);
+	}
+
+	float MobManager::getMaxClimbableSlope() {
+		return maxClimbableSlopeDegrees;
+	}
+
+	void MobManager::setMaxClimbableSlope(float value) {
+		maxClimbableSlopeDegrees = value;
+		dotProductOfMaxClimbableSlope = cos(maxClimbableSlopeDegrees * mwse::math::M_PI / 180.0);
 	}
 }

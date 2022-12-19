@@ -10,7 +10,7 @@ mwscript = {}
 
 --- Use [`tes3reference:activate()`](https://mwse.github.io/MWSE/types/tes3reference/#activate) or [`tes3.setAIActivate()`](https://mwse.github.io/MWSE/apis/tes3/#tes3setaiactivate) instead. Wrapper for the `Activate` mwscript function.
 --- @deprecated
---- @param params mwscript.activate.params This table accepts the following values:
+--- @param params mwscript.activate.params? This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
 function mwscript.activate(params) end
@@ -239,7 +239,7 @@ function mwscript.getDetected(params) end
 
 --- Use [`object.disabled`](https://mwse.github.io/MWSE/types/tes3baseObject/#disabled) on any object inheriting from `tes3baseObject`. Wrapper for the `GetDisabled` mwscript function.
 --- @deprecated
---- @param params mwscript.getDisabled.params This table accepts the following values:
+--- @param params mwscript.getDisabled.params? This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
 --- @return boolean result No description yet available.
@@ -472,6 +472,21 @@ function mwscript.scriptRunning(params) end
 --- @class mwscript.scriptRunning.params
 --- @field script tes3script|string No description yet available.
 
+--- Marks the `reference` as deleted, and modified. Deleted reference isn't rendered nor is its local mwscript run.
+--- @deprecated
+--- @param params mwscript.setDelete.params? This table accepts the following values:
+--- 
+--- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
+--- 
+--- `delete`: boolean? — *Default*: `true`. Setting this to true deletes the reference and triggers `referenceDeactivated` event. Setting this to false effectively undeletes/activates the reference and triggers `referenceActivated` event.
+--- @return boolean executed No description yet available.
+function mwscript.setDelete(params) end
+
+---Table parameter definitions for `mwscript.setDelete`.
+--- @class mwscript.setDelete.params
+--- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
+--- @field delete boolean? *Default*: `true`. Setting this to true deletes the reference and triggers `referenceDeactivated` event. Setting this to false effectively undeletes/activates the reference and triggers `referenceActivated` event.
+
 --- Use [`tes3npc.level`](https://mwse.github.io/MWSE/types/tes3npc/#level) instead. Wrapper for the `SetLevel` mwscript function.
 --- @deprecated
 --- @param params mwscript.setLevel.params This table accepts the following values:
@@ -532,7 +547,7 @@ function mwscript.stopCombat(params) end
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The target reference for this command to be executed on. Defaults to the normal script execution reference.
 --- @field target tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Actor to stop combat with.
 
---- Wrapper for the `StopCombat` mwscript function.
+--- Wrapper for the `StopScript` mwscript function.
 --- @deprecated
 --- @param params mwscript.stopScript.params This table accepts the following values:
 --- 

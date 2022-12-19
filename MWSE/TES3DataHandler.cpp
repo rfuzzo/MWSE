@@ -363,6 +363,12 @@ namespace TES3 {
 		return TES3_NonDynamicData_getCellByGrid(this, x, y);
 	}
 
+	Cell* NonDynamicData::getCellByPosition(float x, float y) {
+		int cellX = Cell::toGridCoord(x);
+		int cellY = Cell::toGridCoord(y);
+		return getCellByGrid(cellX, cellY);
+	}
+
 	const auto TES3_NonDynamicData_getCellByName = reinterpret_cast<Cell * (__thiscall*)(NonDynamicData*, const char*)>(0x4BA9B0);
 	Cell* NonDynamicData::getCellByName(const char* name) {
 		return TES3_NonDynamicData_getCellByName(this, name);
@@ -435,7 +441,7 @@ namespace TES3 {
 	}
 
 	Vector3 DataHandler::getLastExteriorPosition() {
-		if (currentInteriorCell && lastExteriorCellPositionX != INT_MAX && lastExteriorCellPositionX != INT_MAX) {
+		if (currentInteriorCell && lastExteriorCellPositionX != INT_MAX && lastExteriorCellPositionY != INT_MAX) {
 			auto x = float(lastExteriorCellPositionX * TES3::Cell::exteriorGridWidth);
 			auto y = float(lastExteriorCellPositionY * TES3::Cell::exteriorGridWidth);
 			return Vector3(x, y, 0.0f);

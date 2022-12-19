@@ -126,18 +126,25 @@ local function writeFunction(package, file, namespaceOverride)
 		file:write("--- @deprecated\n")
 	end
 
+	local functionHasTableArguments = false
+
 	for _, argument in ipairs(package.arguments or {}) do
 		local type = argument.type
 		local description = common.getDescriptionString(argument)
 		if (argument.tableParams) then
-			type = package.namespace .. ".params"
+			functionHasTableArguments = true
+			local types = type:split("|")
+			table.removevalue(types, "table")
+			table.insert(types, package.namespace .. "." .. argument.name)
+
+			type = table.concat(types, "|")
 			description = "This table accepts the following values:"
 			for _, tableArgument in ipairs(argument.tableParams) do
 				description = description .. string.format("\n\n`%s`: %s — %s", tableArgument.name or "unknown", getAllPossibleVariationsOfType(tableArgument.type, tableArgument) or "any", formatLineBreaks(common.getDescriptionString(tableArgument)))
 			end
 		end
 		if (argument.type == "variadic") then
-			file:write(string.format("--- @vararg %s %s\n", getAllPossibleVariationsOfType(argument.variadicType, argument) or "any", formatLineBreaks(description)))
+			file:write(string.format("--- @param ... %s %s\n", getAllPossibleVariationsOfType(argument.variadicType, argument) or "any?", formatLineBreaks(description)))
 		else
 			file:write(string.format("--- @param %s %s %s\n", argument.name or "unknown", getAllPossibleVariationsOfType(type, argument), formatLineBreaks(description)))
 		end
@@ -149,13 +156,18 @@ local function writeFunction(package, file, namespaceOverride)
 
 	file:write(string.format("function %s(%s) end\n\n", namespaceOverride or package.namespace, table.concat(getParamNames(package), ", ")))
 
-	if (package.arguments and #package.arguments > 0 and package.arguments[1].tableParams) then
+	if (functionHasTableArguments) then
 		file:write(string.format("---Table parameter definitions for `%s`.\n", package.namespace))
-		file:write(string.format("--- @class %s.params\n", package.namespace))
-		for _, param in ipairs(package.arguments[1].tableParams) do
-			file:write(string.format("--- @field %s %s %s\n", param.name, getAllPossibleVariationsOfType(param.type, param), formatLineBreaks(common.getDescriptionString(param))))
+		for _, argument in ipairs(package.arguments or {}) do
+			if (argument.tableParams) then
+				file:write(string.format("--- @class %s.%s\n", package.namespace, argument.name))
+
+				for _, param in ipairs(argument.tableParams) do
+					file:write(string.format("--- @field %s %s %s\n", param.name, getAllPossibleVariationsOfType(param.type, param), formatLineBreaks(common.getDescriptionString(param))))
+				end
+				file:write("\n")
+			end
 		end
-		file:write("\n")
 	end
 end
 
@@ -237,6 +249,19 @@ local function build(package)
 		writeFunction(package, file)
 	end
 
+	-- Write out operator overloads
+	for _, operator in ipairs(package.operators or {}) do
+		for _, overload in ipairs(operator.overloads) do
+			-- Handle unary operators
+			local rightSideType = ""
+			if overload.rightType then
+				rightSideType = string.format("(%s)", overload.rightType)
+			end
+
+			file:write(string.format("--- @operator %s%s: %s\n", operator.key, rightSideType, overload.resultType))
+		end
+	end
+
 	-- Write out fields.
 	for _, value in ipairs(package.values or {}) do
 		if (not value.deprecated) then
@@ -246,9 +271,9 @@ local function build(package)
 
 	-- Custom case: Write out event overrides.
 	if (package.type == "lib" and package.key == "event") then
-		file:write(string.format("--- @field register fun(eventId: string, callback: fun(e: table), options: table?)\n"))
+		file:write(string.format("--- @field register fun(eventId: string, callback: fun(e: table): boolean?, options: table?)\n"))
 		for _, key in ipairs(table.keys(events, true)) do
-			file:write(string.format("--- @field register fun(eventId: '\"%s\"', callback: fun(e: %sEventData), options: table?)\n", key, key))
+			file:write(string.format("--- @field register fun(eventId: '\"%s\"', callback: fun(e: %sEventData): boolean?, options: table?)\n", key, key))
 		end
 	end
 

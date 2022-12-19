@@ -5,7 +5,18 @@
 
 # niStencilProperty
 
-A rendering property that controls the use of a stencil buffer when rendering. It also includes a draw-mode setting to allows the game engine to control the culling mode of a set of geometry.
+A rendering property that controls the use of a stencil buffer when rendering. Stencil buffering allows effects such as cutouts in a screen, decal polygons without Z-buffer "aliasing", and advanced effects such as volumetric shadows. It also includes a draw-mode setting to allow the game engine to control the culling mode of a set of geometry.
+
+This table describes the actions that can be set to occur as a result of tests for niStencilProperty:
+
+Value | Mode             | Description
+----- | ---------------- | -------------
+0     | ACTION_KEEP      | Keep the current value in the stencil buffer.
+1	  | ACTION_ZERO      | Write zero to the stencil buffer.
+2	  | ACTION_REPLACE   | Write the reference value to the stencil buffer.
+3	  | ACTION_INCREMENT | Increment the value in the stencil buffer.
+4     | ACTION_DECREMENT | Decrement the value in the stencil buffer.
+5     | ACTION_INVERT    | Bitwise invert the value in the stencil buffer.
 
 This type inherits the following: [niProperty](../../types/niProperty), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
 ## Properties
@@ -22,11 +33,18 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 ### `drawMode`
 
-The drawing mode used to draw the object.
+The face drawing (culling) mode used to draw the object.
+
+Value | Mode             | Behavior
+----- | ---------------- | ---------
+0     | DRAW_CCW_OR_BOTH | The default mode, chooses between DRAW_CCW or DRAW_BOTH.
+1	  | DRAW_CCW         | Draw only the triangles whose vertices are ordered counter-clockwise with respect to the viewer (Standard behavior).
+2	  | DRAW_CW          | Draw only the triangles whose vertices are ordered clockwise with respect to the viewer (Effectively flips the faces).
+3	  | DRAW_BOTH        | Do not cull back faces of any kind. Draw all triangles, regardless of orientation (Effectively force double-sided).
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -52,21 +70,21 @@ The value of the stencil buffer enable flag.
 
 ### `failAction`
 
-The action that is taken in the stencil buffer when the stencil test fails.
+The action that is taken in the stencil buffer when the stencil test fails. See the table at the top for available actions.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `mask`
 
-The mask value of the stencil buffer.
+The mask value of the stencil buffer. This value is AND-ed with the `reference` and the buffer value prior to comparing and writing the buffer. The default is `0xffffffff`.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -82,11 +100,21 @@ The human-facing name of the given object.
 
 ### `passAction`
 
-The action that is taken in the stencil buffer when the stencil test passes and the pixel passes the Z-buffer test.
+The action that is taken in the stencil buffer when the stencil test passes and the pixel passes the Z-buffer test. See the table at the top for available actions.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
+
+***
+
+### `propertyFlags`
+
+
+
+**Returns**:
+
+* `result` (integer)
 
 ***
 
@@ -102,21 +130,11 @@ The action that is taken in the stencil buffer when the stencil test passes and 
 
 ### `reference`
 
-The stencil reference.
+The stencil reference value. It's compared against the stencil value at an individual pixel to determine the success of the stencil test.
 
 **Returns**:
 
-* `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
+* `result` (integer)
 
 ***
 
@@ -144,29 +162,41 @@ The stencil reference.
 
 The stencil buffer test function used to test the reference value against the buffer value.
 
+Value | Mode               | Description
+----- | ------------------ | -------------
+0     | TEST_NEVER         | Test will allways return false. Nothing is drawn at all.
+1	  | TEST_LESS          | The test will only succeed if the pixel is nearer than the previous pixel.
+2	  | TEST_EQUAL         | Test will only succeed if the z value of the pixel to be drawn is equal to the value of the previous drawn pixel.
+3	  | TEST_LESS_EQUAL    | Test will succeed if the z value of the pixel to be drawn is smaller than or equal to the value in the Stencil Buffer.
+4     | TEST_GREATER       | Opposite of TEST_LESS
+5     | TEST_NOT_EQUAL     | Test will succeed if the z value of the pixel to be drawn is NOT equal to the value of the previously drawn pixel.
+6     | TEST_GREATER_EQUAL | Opposite of TEST_LESS_EQUAL.
+7	  | TEST_ALWAYS        | Test will allways succeed. The Stencil Buffer value is ignored.
+
+
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `type`
 
-The unique class identifier number of the given rendering property.
+*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
-* `result` (niPropertyType)
+* `result` (integer)
 
 ***
 
 ### `zFailAction`
 
-The action that is taken in the stencil buffer when the stencil test passes but the pixel fails the Z-buffer test.
+The action that is taken in the stencil buffer when the stencil test passes but the pixel fails the Z-buffer test. See the table at the top for available actions.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -218,9 +248,81 @@ local reference = myObject:getGameReference(searchParents)
 
 ***
 
+### `getStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
+
+```lua
+local extra = myObject:getStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData starting with this value will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `getStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
+
+```lua
+local extra = myObject:getStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData with this word will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `hasStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -228,7 +330,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -238,7 +340,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -246,7 +348,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -259,12 +361,12 @@ local result = myObject:isOfType(type)
 Add a controller to the object as the first controller.
 
 ```lua
-myObject:prependController(type)
+myObject:prependController(controller)
 ```
 
 **Parameters**:
 
-* `type` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../../types/niTimeController))
 
 ***
 

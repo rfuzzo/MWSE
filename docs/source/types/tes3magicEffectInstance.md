@@ -39,13 +39,33 @@ The effective magnitude of the effect, after all resistances are applied.
 
 ***
 
+### `isBoundItem`
+
+*Read-only*. If this effect has summoned a bound item.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isSummon`
+
+*Read-only*. If this effect has summoned a creature.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `lastUsedArmor`
 
 *Read-only*. No description yet available.
 
 **Returns**:
 
-* `result` ([tes3armor](../../types/tes3armor))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
 
 ***
 
@@ -55,7 +75,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
 
 ***
 
@@ -65,7 +85,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3light](../../types/tes3light))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
 
 ***
 
@@ -75,7 +95,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3armor](../../types/tes3armor))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
 
 ***
 
@@ -85,7 +105,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3weapon](../../types/tes3weapon))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
 
 ***
 
@@ -131,7 +151,7 @@ No description yet available.
 
 ### `timeActive`
 
-No description yet available.
+The time since the effect started affecting its target in seconds.
 
 **Returns**:
 
@@ -141,11 +161,11 @@ No description yet available.
 
 ### `visual`
 
-No description yet available.
+The associated visual effect.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3vfx](../../types/tes3vfx))
 
 ***
 

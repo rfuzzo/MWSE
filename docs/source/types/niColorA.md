@@ -5,7 +5,7 @@
 
 # niColorA
 
-An object that represents a RGB color with alpha channel support.
+An object that represents a RGB color with alpha channel support. The values are in [0.0, 1.0] range.
 
 ## Properties
 
@@ -136,10 +136,10 @@ local color = niColorA.new(r, g, b, a)
 
 **Parameters**:
 
-* `r` (number): The red value for the color.
-* `g` (number): The green value for the color.
-* `b` (number): The blue value for the color.
-* `a` (number): The alpha value for the color.
+* `r` (number): *Default*: `0`. The red value for the color.
+* `g` (number): *Default*: `0`. The green value for the color.
+* `b` (number): *Default*: `0`. The blue value for the color.
+* `a` (number): *Default*: `0`. The alpha value for the color.
 
 **Returns**:
 

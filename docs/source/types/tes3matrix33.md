@@ -5,7 +5,7 @@
 
 # tes3matrix33
 
-A 3 by 3 matrix. You can perform following arithmetic with this type: `+`, `-`, `*`, and `==`.
+A 3 by 3 matrix. You can perform following arithmetic with this type: `==`.
 
 ## Properties
 
@@ -132,31 +132,31 @@ local result = myObject:reorthogonalize()
 
 ### `toEulerXYZ`
 
-Converts the matrix to a vector with 3 Euler angles.
+Converts the matrix to series of rotations along each axis.
 
 ```lua
-local isUnique, vector3 = myObject:toEulerXYZ()
+local vector3, isUnique = myObject:toEulerXYZ()
 ```
 
 **Returns**:
 
-* `isUnique` (boolean)
 * `vector3` ([tes3vector3](../../types/tes3vector3))
+* `isUnique` (boolean)
 
 ***
 
 ### `toEulerZYX`
 
-Converts the matrix to a vector with 3 Euler angles.
+Converts the matrix to series of rotations along each axis.
 
 ```lua
-local isUnique, vector3 = myObject:toEulerZYX()
+local vector3, isUnique = myObject:toEulerZYX()
 ```
 
 **Returns**:
 
-* `isUnique` (boolean)
 * `vector3` ([tes3vector3](../../types/tes3vector3))
+* `isUnique` (boolean)
 
 ***
 
@@ -186,7 +186,7 @@ local result = myObject:toQuaternion()
 
 ### `toRotation`
 
-No description yet available.
+Makes this matrix a rotation matrix with provided axis-angle rotation parameters.
 
 ```lua
 myObject:toRotation(angle, x, y, z)
@@ -203,7 +203,7 @@ myObject:toRotation(angle, x, y, z)
 
 ### `toRotationX`
 
-No description yet available.
+Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the X axis by `x` radians. For the rotation matrix A and vector v, the rotated vector is given by A * v.
 
 ```lua
 myObject:toRotationX(x)
@@ -211,13 +211,13 @@ myObject:toRotationX(x)
 
 **Parameters**:
 
-* `x` (number)
+* `x` (number): In radians.
 
 ***
 
 ### `toRotationY`
 
-No description yet available.
+Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the Y axis by `y` radians. For the rotation matrix A and vector v, the rotated vector is given by A * v.
 
 ```lua
 myObject:toRotationY(y)
@@ -225,13 +225,13 @@ myObject:toRotationY(y)
 
 **Parameters**:
 
-* `y` (number)
+* `y` (number): In radians.
 
 ***
 
 ### `toRotationZ`
 
-No description yet available.
+Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the Z axis by `z` radians. For the rotation matrix A and vector v, the rotated vector is given by A * v.
 
 ```lua
 myObject:toRotationZ(z)
@@ -239,7 +239,7 @@ myObject:toRotationZ(z)
 
 **Parameters**:
 
-* `z` (number)
+* `z` (number): In radians.
 
 ***
 
@@ -271,7 +271,7 @@ local result = myObject:transpose()
 
 ### `new`
 
-Creates a new 3 by 3 matrix from 3 provided vectors, 9 numbers or creates an empty matrix if nothing is provided.
+Creates a new 3 by 3 matrix from 3 provided vectors or 9 numbers. Creates an empty matrix if nothing is provided.
 
 ```lua
 local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2, x, y, z)
@@ -279,15 +279,15 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2, x, y, z)
 
 **Parameters**:
 
-* `x0` (number): *Optional*.
-* `y0` (number): *Optional*.
-* `z0` (number): *Optional*.
-* `x1` (number): *Optional*.
-* `y1` (number): *Optional*.
-* `z1` (number): *Optional*.
-* `x2` (number): *Optional*.
-* `y2` (number): *Optional*.
-* `z2` (number): *Optional*.
+* `x0` (number): *Default*: `0`.
+* `y0` (number): *Default*: `0`.
+* `z0` (number): *Default*: `0`.
+* `x1` (number): *Default*: `0`.
+* `y1` (number): *Default*: `0`.
+* `z1` (number): *Default*: `0`.
+* `x2` (number): *Default*: `0`.
+* `y2` (number): *Default*: `0`.
+* `z2` (number): *Default*: `0`.
 * `x` ([tes3vector3](../../types/tes3vector3)): *Optional*.
 * `y` ([tes3vector3](../../types/tes3vector3)): *Optional*.
 * `z` ([tes3vector3](../../types/tes3vector3)): *Optional*.
@@ -295,6 +295,34 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2, x, y, z)
 **Returns**:
 
 * `matrix` ([tes3matrix33](../../types/tes3matrix33))
+
+***
+
+## Math Operations
+
+### Addition (`+`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | The matrix addition. |
+
+***
+
+### Multiplication (`*`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | The matrix multiplication. Geometrically, this will concatenate the transformations of both matrices in the resulting matrix. |
+| [tes3matrix33](../../types/tes3matrix33) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | Multiplies the matrix by a vector. The resulting vector is staring vector with the matrix' transformations applied. |
+| [tes3matrix33](../../types/tes3matrix33) | number | [tes3matrix33](../../types/tes3matrix33) | Multiplies the matrix by a scalar. |
+
+***
+
+### Subtraction (`-`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | The matrix subtraction. |
 
 ***
 

@@ -42,11 +42,11 @@ The blocked state of the object.
 
 ### `blood`
 
-Friendly access to actor's blood type.
+Friendly access to actor's blood type, in [0, 7] range. The available blood types are defined in the Morrowind.ini file, and assigned to the actor via the Construction Set.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -106,7 +106,7 @@ The amount of weight that the container can hold.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack)[])
 
 ***
 
@@ -262,7 +262,7 @@ Determines if the container's respawn flag is enabled.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -283,16 +283,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -336,7 +326,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3baseObject](../../types/tes3baseObject)[])
 
 ***
 

@@ -5,14 +5,16 @@
 
 # niGeometryData
 
-NiGeometryData objects contain the geometry data necessary to render an NiGeometry object. When an NiGeometry-based object is created, the actual geometry data is stored in an attached NiGeometryData object.
+niGeometryData objects contain the geometry data necessary to render a niGeometry object. When a niGeometry-based object is created, the actual geometry data is stored in an attached niGeometryData object.
+
+The distinction between niGeometry and niGeometryData (and other pairs of NetImmerse classes with similarly distinguished names, such as niTriShape and niTriShapeData) is that niGeometry stores data that cannot be shared when an object is instanced, and niGeometryData stores data that can be shared when an object is instanced. So, for example, when a scene graph is cloned, duplicate copies of the niGeometry objects in the original scene graph are created for the new scene graph, but new niGeometryData objects are not created. Instead, the newly-created niGeometry objects refer to the same niGeometryData objects referred to by the original scene graph.
 
 This type inherits the following: [niObject](../../types/niObject)
 ## Properties
 
 ### `bounds`
 
-The bounds of the object.
+The model-space bounding sphere of the object.
 
 **Returns**:
 
@@ -22,21 +24,21 @@ The bounds of the object.
 
 ### `colors`
 
-*Read-only*. The color for the object.
+*Read-only*. The vertex colors for the object. The length of the array is equal to `vertexCount`.
 
 **Returns**:
 
-* `result` ([niColorA](../../types/niColorA))
+* `result` ([niPackedColor](../../types/niPackedColor)[])
 
 ***
 
 ### `normals`
 
-*Read-only*. The normals list for the object.
+*Read-only*. The list of unitized, model-space vertex normals for the object. The length of the array is equal to `vertexCount`.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../../types/tes3vector3)[])
 
 ***
 
@@ -47,16 +49,6 @@ The bounds of the object.
 **Returns**:
 
 * `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -82,21 +74,21 @@ The bounds of the object.
 
 ### `texCoords`
 
-*Read-only*. The array of texture coordinates.
+*Read-only*. The array of texture coordinates. The length of the array is equal to `vertexCount` times `textureSets`.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../../types/tes3vector2)[])
 
 ***
 
 ### `textures`
 
-*Read-only*. The array of texture coordinates.
+*Read-only*. The array of texture coordinates. The length of the array is equal to `vertexCount` times `textureSets`.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../../types/tes3vector2)[])
 
 ***
 
@@ -112,7 +104,7 @@ The number of texture coordinate sets in the data.
 
 ### `uniqueID`
 
-A unique ID for this model, assigned at model creation.
+*Read-only*. A unique ID for this model, assigned at model creation.
 
 **Returns**:
 
@@ -132,11 +124,11 @@ A unique ID for this model, assigned at model creation.
 
 ### `vertices`
 
-*Read-only*. The array of vertex position data.
+*Read-only*. The array of vertex position data. The length of the array is equal to `vertexCount`.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../../types/tes3vector3)[])
 
 ***
 
@@ -158,7 +150,7 @@ local result = myObject:clone()
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -166,7 +158,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -176,7 +168,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -184,7 +176,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 

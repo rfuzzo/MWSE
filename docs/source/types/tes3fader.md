@@ -5,7 +5,7 @@
 
 # tes3fader
 
-An object that applies a graphical effect on the screen, such as screen glare or damage coloring.
+An object that applies a graphical effect on the screen, such as screen glare or damage coloring. For an example of how to set up a custom fader, see [fadersCreated](https://mwse.github.io/MWSE/events/fadersCreated/) event.
 
 ## Properties
 
@@ -89,7 +89,7 @@ myObject:fadeTo({ value = ..., duration = ... })
 
 ### `setColor`
 
-Applies a coloring effect to the fader.
+Applies a coloring effect to the fader. A fader without a texture will apply a colouring effect over the screen. The colour set here can completely change the color of the fader's texture.
 
 ```lua
 local result = myObject:setColor({ color = ..., flag = ... })
@@ -98,8 +98,8 @@ local result = myObject:setColor({ color = ..., flag = ... })
 **Parameters**:
 
 * `params` (table)
-	* `color` ([tes3vector3](../../types/tes3vector3), table): The RGB values to set.
-	* `flag` (boolean)
+	* `color` ([tes3vector3](../../types/tes3vector3), table): The RGB values to set in [0.0, 1.0] range.
+	* `flag` (boolean): *Default*: `false`.
 
 **Returns**:
 
@@ -123,7 +123,7 @@ myObject:setTexture(path)
 
 ### `update`
 
-Updates the fader for the current frame.
+Updates the fader for the current frame. This method needs to be called each frame for fader to be present.
 
 ```lua
 myObject:update()
@@ -133,7 +133,7 @@ myObject:update()
 
 ### `updateMaterialProperty`
 
-Updates the fader for the current frame.
+Updates the fader's alpha. The fader needs to be active.
 
 ```lua
 myObject:updateMaterialProperty(value)
@@ -141,7 +141,7 @@ myObject:updateMaterialProperty(value)
 
 **Parameters**:
 
-* `value` (number)
+* `value` (number): The opacity of the fader in range [0.0, 1.0]
 
 ***
 
@@ -152,12 +152,103 @@ myObject:updateMaterialProperty(value)
 Creates a new fader, and adds it to the fader system.
 
 ```lua
-local result = tes3fader.new()
+local fader = tes3fader.new(distance, unknownBool)
 ```
+
+**Parameters**:
+
+* `distance` (number): *Optional*. If no distance is provided, a distance will be calculated based on current amount of faders, `tes3.worldController.projectionDistance` and crosshair node's `translation.y`.
+* `unknownBool` (boolean): *Default*: `true`.
 
 **Returns**:
 
-* `result` ([tes3fader](../../types/tes3fader))
+* `fader` ([tes3fader](../../types/tes3fader))
+
+??? example "Example: Creating a new fader"
+
+	```lua
+	-- This is a working example. You are encouraged to create a new file
+	-- main.lua, paste this code and see the results in-game!
+	-- Use `u` key to activate the fader.
+	-- Use `l` and `k` keys to increase or decrease the fader's opacity.
+	
+	-- This variable is used to store our fader.
+	local fader = nil
+	
+	local function createFader()
+		fader = tes3fader.new()
+		fader:setColor({
+			-- This changes the color of our fader to green.
+			-- The RGB values are in range [0.0, 1.0].
+			color = { 0.0, 1.0, 0.0 },
+		})
+	
+		-- The fader needs to be updated every frame to be rendered correctly.
+		-- You may notice that for this event we have registered a function with
+		-- no name. That is an anonymous function. It works exactly the same as
+		-- any other function. We have a need to register this function inside
+		-- our createFader() function, since our `fader` variable is `nil` at start
+		-- (look up). We can't call fader:update() if fader is `nil`.
+		event.register(tes3.event.enterFrame,
+			function()
+				fader:update()
+			end
+		)
+	end
+	
+	-- The fader needs to be created during `fadersCreated` event,
+	-- so our createFader() function is registered for that event.
+	event.register(tes3.event.fadersCreated, createFader)
+	
+	
+	local opacity = 0.1
+	
+	local function activateFader()
+		-- The fader needs to be activated first to be visible.
+		fader:activate()
+		-- Now we change its visibility.
+		fader:fadeTo({
+			value = opacity,
+			duration = 3,
+		})
+		tes3.messageBox("Welcome to the Fallout mode!")
+	end
+	
+	-- We registered our activateFader() function on keyDown event, filtered for `u` key.
+	-- That makes our activateFader() function called only when `u` is pressed.
+	event.register(tes3.event.keyDown, activateFader, { filter = tes3.scanCode.u })
+	
+	local function increaseOpacity()
+		-- The fader's opacity is in [0.0, 1.0] range.
+		-- Make sure we don't exceed it.
+		if opacity <= 0.9 then
+			opacity = opacity + 0.1
+		else
+			return
+		end
+		-- This method sets the current opacity of our fader
+		-- to the value of `opacity` variable
+		fader:updateMaterialProperty(opacity)
+	
+		-- The "\n" sign means insert a new line here.
+		-- The "%.1f" code means insert the opacity's value in this text.
+		-- The ".1" part means show 1 decimal after the decimal point.
+		tes3.messageBox("Fader opacity increased.\nCurrent opacity: %.1f", opacity)
+	end
+	event.register(tes3.event.keyDown, increaseOpacity, { filter = tes3.scanCode.l })
+	
+	local function decreaseOpacity()
+		if opacity >= 0.1 then
+			opacity = opacity - 0.1
+		else
+			return
+		end
+		fader:updateMaterialProperty(opacity)
+		tes3.messageBox("Fader opacity decreased.\nCurrent opacity: %.1f", opacity)
+	end
+	event.register(tes3.event.keyDown, decreaseOpacity, { filter = tes3.scanCode.k })
+
+	```
 
 ***
 

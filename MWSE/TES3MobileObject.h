@@ -22,6 +22,7 @@ namespace TES3 {
 
 		enum Flag : value_type {
 			ActiveInSimulation = 0x4,
+			AffectedByGravity = 0x10,
 			CollisionActive = 0x20,
 			UsesUnionBV = 0x100,
 			Werewolf = 0x400,
@@ -271,6 +272,9 @@ namespace TES3 {
 		bool onActivatorCollision(int collisionIndex);
 
 		bool isActor() const;
+
+		// Enters/leaves the simulation state and executes related cleanup/initialization logic.
+		// If executed on a MobileActor the reference must not be disabled before calling this function, as it blocks execution.
 		void enterLeaveSimulation(bool entering);
 
 		//
@@ -280,7 +284,7 @@ namespace TES3 {
 		void setFootPoint(const Vector3* point);
 		void setInstantVelocity(const Vector3* velocity);
 		void updateConstantVelocity(const Vector3* velocity);
-
+		void resetCollisionGroup();
 		void enterLeaveSimulationByDistance();
 		IteratedList<ItemStack*>* getInventory() const;
 		bool getBasePositionIsUnderwater() const;
@@ -298,8 +302,12 @@ namespace TES3 {
 		Vector3* getVelocity();
 		void setVelocityFromLua(sol::stack_object);
 
+		bool getMobileObjectFlag(MobileActorFlag::Flag flag) const;
+		void setMobileObjectFlag(MobileActorFlag::Flag flag, bool set);
+		bool getAffectedByGravityFlag() const;
+		void setAffectedByGravityFlag(bool value);
 		bool getMovementCollisionFlag() const;
-		void setMovementCollisionFlag(bool collide);
+		void setMovementCollisionFlag(bool value);
 		sol::table getCollisions_lua(sol::this_state ts) const;
 
 		// Storage for cached userdata.

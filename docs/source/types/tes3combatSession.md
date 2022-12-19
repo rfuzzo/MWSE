@@ -21,13 +21,17 @@ No description yet available.
 
 ### `data`
 
-No description yet available.
+A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json.
+
+**Returns**:
+
+* `result` (table)
 
 ***
 
 ### `distance`
 
-No description yet available.
+The combat distance.
 
 **Returns**:
 
@@ -47,7 +51,7 @@ No description yet available.
 
 ### `mobile`
 
-*Read-only*. No description yet available.
+*Read-only*. Convenience access back to the associated actor.
 
 **Returns**:
 
@@ -67,21 +71,26 @@ No description yet available.
 
 ### `selectedAction`
 
-No description yet available.
+The next action. From observed behavior, this roughly maps to:
+
+Value | Behavior
+----- | ---------
+0     | Undecided
+1	  | Use melee weapon
+2	  | Use marksman weapon
+3	  | Use hand to hand attacks
+4	  | Use on-touch offensive spell
+5	  | Use on-target offensive spell
+6	  | Use summon spell
+7	  | Flee
+8	  | Cast on-self empowering spell (For example, Ancestor Guardian)
+9	  | MaybeEquipUseItem?
+10	  | Use enchanted item
+
 
 **Returns**:
 
-* `result` (number)
-
-***
-
-### `selectedAlchemy`
-
-No description yet available.
-
-**Returns**:
-
-* `result` ([tes3alchemy](../../types/tes3alchemy))
+* `result` (integer)
 
 ***
 
@@ -107,7 +116,7 @@ No description yet available.
 
 ### `selectedSpell`
 
-No description yet available.
+This field containg the spell the actor is currently casting. If not in casting state this field has `nil` value.
 
 **Returns**:
 
@@ -117,7 +126,7 @@ No description yet available.
 
 ### `selectedWeapon`
 
-*Read-only*. No description yet available.
+*Read-only*. The weapon the actor is using in this combat session.
 
 **Returns**:
 
@@ -153,7 +162,7 @@ myObject:changeEquipment(equipmentStack)
 
 ### `selectAlchemyWithEffect`
 
-Selects the alchemy item with the greatest value, for a given effect ID and loads it into the `selectedAlchemy` property.
+Selects the alchemy item with the greatest value, for a given effect ID and loads it into the `selectedItem` property.
 
 ```lua
 local result = myObject:selectAlchemyWithEffect(id)
@@ -161,7 +170,7 @@ local result = myObject:selectAlchemyWithEffect(id)
 
 **Parameters**:
 
-* `id` (number)
+* `id` (integer)
 
 **Returns**:
 

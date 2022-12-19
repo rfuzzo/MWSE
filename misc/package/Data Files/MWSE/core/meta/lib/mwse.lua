@@ -24,6 +24,11 @@ mwse = {}
 --- @return boolean result No description yet available.
 function mwse.clearScriptOverride(scriptId) end
 
+--- This function returns information on the current mwscript execution state.
+--- @return tes3script|nil script The currently executing mwscript script, or nil if none is presently being executed.
+--- @return tes3reference|nil reference The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
+function mwse.getCurrentMorrowindScriptState() end
+
 --- Equivalent to mwse.version.
 --- @return number result No description yet available.
 function mwse.getVersion() end
@@ -49,7 +54,7 @@ function mwse.loadTranslations(mod) end
 --- 
 --- The message accepts formatting and additional parameters matching string.format's usage.
 --- @param message string No description yet available.
---- @vararg any *Optional*. No description yet available.
+--- @param ... any? *Optional*. No description yet available.
 function mwse.log(message, ...) end
 
 --- Converts a TES3 object type (e.g. from tes3.objectType) into an uppercase, 4-character string.
@@ -58,6 +63,8 @@ function mwse.log(message, ...) end
 function mwse.longToString(type) end
 
 --- Configures MWSE to execute a given function instead when a script would run.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse/#mwseoverridescript).
 --- @param scriptId string No description yet available.
 --- @param callback function No description yet available.
 --- @return boolean result No description yet available.

@@ -28,6 +28,24 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 
 * `result` ([tes3aiConfig](../../types/tes3aiConfig))
 
+??? example "Example: Checking if an NPC offers traveling service"
+
+	```lua
+	
+	--- This function returns `true` if given NPC
+	--- or creature offers traveling service.
+	---@param actor tes3npc|tes3npcInstance|tes3creature|tes3creatureInstance
+	---@return boolean
+	local function offersTraveling(actor)
+		local travelDestinations = actor.aiConfig.travelDestinations
+	
+		-- Actors that can't transport the player
+		-- have travelDestinations equal to `nil`
+		return travelDestinations ~= nil
+	end
+
+	```
+
 ***
 
 ### `attributes`
@@ -92,11 +110,11 @@ The blocked state of the object.
 
 ### `blood`
 
-Friendly access to actor's blood type.
+Friendly access to actor's blood type, in [0, 7] range. The available blood types are defined in the Morrowind.ini file, and assigned to the actor via the Construction Set.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -166,7 +184,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack)[])
 
 ***
 
@@ -462,7 +480,7 @@ The actor's reputation.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -483,16 +501,6 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 
 The scene graph node for this object.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
-
-***
-
-### `sceneReference`
-
-The scene graph reference node for this object.
 
 **Returns**:
 
@@ -566,7 +574,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3baseObject](../../types/tes3baseObject)[])
 
 ***
 

@@ -4,7 +4,7 @@
 --- @meta
 --- @diagnostic disable:undefined-doc-name
 
---- An object that represents a RGB color with alpha channel support.
+--- An object that represents a RGB color with alpha channel support. The values are in [0.0, 1.0] range.
 --- @class niColorA
 --- @field a number The alpha value of the color.
 --- @field alpha number The alpha value of the color.
@@ -17,10 +17,10 @@
 niColorA = {}
 
 --- Creates a new niColorA.
---- @param r number The red value for the color.
---- @param g number The green value for the color.
---- @param b number The blue value for the color.
---- @param a number The alpha value for the color.
+--- @param r number? *Default*: `0`. The red value for the color.
+--- @param g number? *Default*: `0`. The green value for the color.
+--- @param b number? *Default*: `0`. The blue value for the color.
+--- @param a number? *Default*: `0`. The alpha value for the color.
 --- @return niColorA color No description yet available.
 function niColorA.new(r, g, b, a) end
 

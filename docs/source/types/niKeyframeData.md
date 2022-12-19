@@ -32,11 +32,11 @@ This type inherits the following: [niObject](../../types/niObject)
 
 ### `positionType`
 
-*Read-only*. The type of animation key used for position keys.
+*Read-only*. The type of animation key used for position keys. Maps to values in [`ni.animationKeyType`](https://mwse.github.io/MWSE/references/ni/animation-key-types/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -47,16 +47,6 @@ This type inherits the following: [niObject](../../types/niObject)
 **Returns**:
 
 * `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -82,11 +72,11 @@ This type inherits the following: [niObject](../../types/niObject)
 
 ### `rotationType`
 
-*Read-only*. The type of animation key used for rotation keys.
+*Read-only*. The type of animation key used for rotation keys. Maps to values in [`ni.animationKeyType`](https://mwse.github.io/MWSE/references/ni/animation-key-types/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -132,11 +122,11 @@ This type inherits the following: [niObject](../../types/niObject)
 
 ### `scaleType`
 
-*Read-only*. The type of animation key used for scale keys.
+*Read-only*. The type of animation key used for scale keys. Maps to values in [`ni.animationKeyType`](https://mwse.github.io/MWSE/references/ni/animation-key-types/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -158,7 +148,7 @@ local result = myObject:clone()
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -166,7 +156,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -176,7 +166,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -184,7 +174,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 

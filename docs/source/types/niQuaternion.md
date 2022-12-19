@@ -65,12 +65,12 @@ local result = myObject:copy()
 
 ***
 
-### `fromAxisAngle`
+### `fromAngleAxis`
 
 Fill the quaternion by converting an angle-axis rotation. The angle must be within the interval [0, PI] and the axis must be unit length.
 
 ```lua
-myObject:fromAxisAngle(angle, axis)
+myObject:fromAngleAxis(angle, axis)
 ```
 
 **Parameters**:
@@ -94,6 +94,20 @@ myObject:fromRotation(matrix)
 
 ***
 
+### `invert`
+
+Inverting or conjugating a rotation quaternion has the effect of reversing the axis of rotation, which modifies it to rotate in the opposite direction from the original. That is, if an object is rotated to a new position using a quaternion, then rotating it again by quaternion's inverse will return it to its original location.
+
+```lua
+local result = myObject:invert()
+```
+
+**Returns**:
+
+* `result` ([niQuaternion](../../types/niQuaternion))
+
+***
+
 ### `slerp`
 
 Calculates the spherical linear interpolate between this quaternion and another.
@@ -113,12 +127,12 @@ local result = myObject:slerp(target, transition)
 
 ***
 
-### `toAxisAngle`
+### `toAngleAxis`
 
 Convert this quaternion into an angle-axis rotation.
 
 ```lua
-local angle, axis = myObject:toAxisAngle()
+local angle, axis = myObject:toAngleAxis()
 ```
 
 **Returns**:
@@ -139,6 +153,39 @@ local result = myObject:toRotation()
 **Returns**:
 
 * `result` ([tes3matrix33](../../types/tes3matrix33))
+
+***
+
+## Functions
+
+### `new`
+
+Creates a new niQuaternion object.
+
+```lua
+local quaternion = niQuaternion.new(w, x, y, z)
+```
+
+**Parameters**:
+
+* `w` (number): *Default*: `0`.
+* `x` (number): *Default*: `0`.
+* `y` (number): *Default*: `0`.
+* `z` (number): *Default*: `0`.
+
+**Returns**:
+
+* `quaternion` ([niQuaternion](../../types/niQuaternion))
+
+***
+
+## Math Operations
+
+### Multiplication (`*`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niQuaternion](../../types/niQuaternion) | [niQuaternion](../../types/niQuaternion) | [niQuaternion](../../types/niQuaternion) | Multiplies two quaternions. The end effect is that the resulting rotation quaternion is equal to the rotation of both quaternions. |
 
 ***
 

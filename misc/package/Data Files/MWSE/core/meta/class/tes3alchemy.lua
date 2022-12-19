@@ -13,18 +13,19 @@
 --- @field mesh string The path to the object's mesh.
 --- @field name string The player-facing name for the object.
 --- @field script tes3script The script that runs on the object.
---- @field value number The value of the object. For this object type, its maximum value is 65535. Larger numbers will overflow.
+--- @field value integer The value of the object. For this object type, its maximum value is 65535. Larger numbers will overflow.
 --- @field weight number The weight of the object.
 tes3alchemy = {}
 
---- Creates a new alchemy item, which will be stored as part of the current saved game. If there is already an alchemy item with matching effects, name, weight, value, and script, that will be returned instead of creating a new item.
+--- Use [`tes3.createObject`](https://mwse.github.io/MWSE/apis/tes3/#tes3createobject) instead. Creates a new alchemy item, which will be stored as part of the current saved game. If there is already an alchemy item with matching effects, name, weight, value, and script, that will be returned instead of creating a new item.
+--- @deprecated
 --- @param params tes3alchemy.create.params This table accepts the following values:
 --- 
 --- `id`: string — The new object's ID. Must be unique.
 --- 
 --- `name`: string? — *Default*: `"Potion"`. The new item's name.
 --- 
---- `script`: tes3script? — *Optional*. A script to attach to the object.
+--- `script`: tes3script|string|nil — *Optional*. A script to attach to the object.
 --- 
 --- `mesh`: string? — *Default*: `"m\Misc_Potion_Bargain_01.nif"`. The mesh to use for the object.
 --- 
@@ -39,13 +40,14 @@ tes3alchemy = {}
 --- `flags`: number? — *Default*: `0`. The new alchemy item's flags.
 --- 
 --- `effects`: table — A table of effects described, providing values for id, skill, attribute, range, radius, duration, min, and/or max.
+--- @return tes3alchemy newObject No description yet available.
 function tes3alchemy.create(params) end
 
 ---Table parameter definitions for `tes3alchemy.create`.
 --- @class tes3alchemy.create.params
 --- @field id string The new object's ID. Must be unique.
 --- @field name string? *Default*: `"Potion"`. The new item's name.
---- @field script tes3script? *Optional*. A script to attach to the object.
+--- @field script tes3script|string|nil *Optional*. A script to attach to the object.
 --- @field mesh string? *Default*: `"m\Misc_Potion_Bargain_01.nif"`. The mesh to use for the object.
 --- @field icon string? *Default*: `"m\Tx_potion_bargain_01.nif"`. The icon to use for the object.
 --- @field objectFlags number? *Default*: `8`. The object flags initially set. Force set as modified.

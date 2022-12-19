@@ -858,7 +858,7 @@ namespace mwse::lua {
 
 		// Determine what returned values we care about.
 		rayTestCache->returnColor = getOptionalParam<bool>(params, "returnColor", false);
-		rayTestCache->returnNormal = getOptionalParam<bool>(params, "returnNormal", true);
+		rayTestCache->returnNormal = getOptionalParam<bool>(params, "returnNormal", false);
 		rayTestCache->returnSmoothNormal = getOptionalParam<bool>(params, "returnSmoothNormal", false);
 		rayTestCache->returnTexture = getOptionalParam<bool>(params, "returnTexture", false);
 
@@ -952,55 +952,20 @@ namespace mwse::lua {
 			}
 		}
 
-		// Parameter: Ignore Skinned results.
-		// Removes results of skinned objects
-		if (getOptionalParam<bool>(params, "ignoreSkinned", false)) {
-			// We're now in multi-result mode. We'll store these in a table.
-			sol::table results = state.create_table();
-
-			// Go through and clone the results in a way that will play nice.
-			// Skip any results that have a skinInstance
-			for (auto& r : rayTestCache->results) {
-				if (r->object->isInstanceOfType(NI::RTTIStaticPtr::NiTriShape)) {
-					auto node = static_cast<const NI::TriShape*>(r->object);
-					if (!node->skinInstance) {
-						results.add(r);
-					}
-				}
-				else {
-					results.add(r);
-				}
-			}
-
-			// Return nothing if all results were skinned.
-			if (results.empty()) {
-				return sol::nil;
-			}
-
-			// Are we looking for a single result?
-			if (rayTestCache->pickType == NI::PickType::FIND_FIRST) {
-				return results[1];
-			}
-
-			return results;
+		// Are we looking for a single result?
+		if (rayTestCache->pickType == NI::PickType::FIND_FIRST) {
+			return sol::make_object(state, rayTestCache->results[0]);
 		}
-		else {
-			// Treat results as normal
-			// Are we looking for a single result?
-			if (rayTestCache->pickType == NI::PickType::FIND_FIRST) {
-				return sol::make_object(state, rayTestCache->results[0]);
-			}
 
-			// We're now in multi-result mode. We'll store these in a table.
-			sol::table results = state.create_table();
+		// We're now in multi-result mode. We'll store these in a table.
+		sol::table results = state.create_table();
 
-			// Go through and clone the results in a way that will play nice.
-			for (auto& r : rayTestCache->results) {
-				results.add(r);
-			}
-
-			return results;
+		// Go through and clone the results in a way that will play nice.
+		for (auto& r : rayTestCache->results) {
+			results.add(r);
 		}
+
+		return results;
 	}
 
 	bool isThirdPerson() {
@@ -1288,94 +1253,95 @@ namespace mwse::lua {
 	}
 
 	bool triggerCrime(sol::table params) {
-		auto& luaManager = mwse::lua::LuaManager::getInstance();
-		auto stateHandle = luaManager.getThreadSafeStateHandle();
-		auto& state = stateHandle.state;
-
 		TES3::CrimeEvent crimeEvent;
 
-		// Look at the given type.
-		int crimeType = getOptionalParam<int>(params, "type", 3);
-		if (crimeType < 1 || crimeType > 7) {
-			throw std::exception("Invalid type given. Value must be between 1 and 7.");
+		// Verify the provided type.
+		int crimeType = getOptionalParam<int>(params, "type", TES3::CrimeType::Theft);
+		if (crimeType < TES3::CrimeType::Attack || crimeType > TES3::CrimeType::Werewolf) {
+			throw std::invalid_argument("Invalid 'type' parameter provided. Must be one of the values in the 'tes3.crimeType' table.");
 		}
 		crimeEvent.type = crimeType;
 
-		// Also set the type string based on the crime committed.
-		switch (crimeType) {
-		case 1:
-			crimeEvent.typeString = "attack";
-			break;
-		case 2:
-			crimeEvent.typeString = "killing";
-			break;
-		case 3:
-			crimeEvent.typeString = "stealing";
-			break;
-		case 4:
-			crimeEvent.typeString = "pickpocket";
-			crimeEvent.penalty = 25;
-			break;
-		case 5:
-			crimeEvent.typeString = "theft";
-			break;
-		case 6:
-			crimeEvent.typeString = "trespass";
-			break;
-		case 7:
-			crimeEvent.typeString = "werewolf";
-			break;
-		}
-
-		// Criminal is assumed to be the player if no value is supplied.
-		TES3::MobileActor* criminal = getOptionalParamMobileActor(params, "criminal");
-		if (criminal == nullptr) {
-			criminal = TES3::WorldController::get()->getMobilePlayer();
-		}
-		crimeEvent.criminal = criminal;
+		// The player is always the criminal. Other values will have no effect and do not get reacted to by AI actors.
+		crimeEvent.criminal = TES3::WorldController::get()->getMobilePlayer();
 
 		// Set some basic crime event data.
 		crimeEvent.timestamp = float(timeGetTime());
-		crimeEvent.position = criminal->reference->position;
-		crimeEvent.penalty = getOptionalParam<int>(params, "value", crimeEvent.penalty);
+		crimeEvent.position = crimeEvent.criminal->reference->position;
+		int stolenValue = getOptionalParam<int>(params, "value", crimeEvent.stolenValue);
 
-		// Victim can be more complicated.
+		// Try to set as many victim-related crime event fields as possible.
 		sol::object victim = params["victim"];
-		crimeEvent.victim = TES3::WorldController::get()->getMobilePlayer();
+		crimeEvent.victim = crimeEvent.criminal;
 		if (victim.is<TES3::Faction>()) {
 			crimeEvent.victimFaction = victim.as<TES3::Faction*>();
 		}
 		else if (victim.is<TES3::Actor>()) {
-			crimeEvent.victim = TES3::WorldController::get()->getMobilePlayer();
+			crimeEvent.victim = static_cast<TES3::MobileActor*>(victim.as<TES3::Actor*>()->getMobile());
 			crimeEvent.victimFaction = victim.as<TES3::Actor*>()->getFaction();
 			if (victim.is<TES3::NPC>()) {
-				crimeEvent.victimBaseActor = victim.as<TES3::NPC*>();
+				crimeEvent.stolenFrom = victim.as<TES3::NPC*>();
 			}
 			else if (victim.is<TES3::NPCInstance>()) {
-				crimeEvent.victimBaseActor = victim.as<TES3::NPCInstance*>()->baseNPC;
+				crimeEvent.stolenFrom = victim.as<TES3::NPCInstance*>()->baseNPC;
 			}
 		}
 		else if (victim.is<TES3::MobileNPC>()) {
-			TES3::MobileNPC* mach = victim.as<TES3::MobileNPC*>();
-			crimeEvent.victim = mach;
-			crimeEvent.victimFaction = mach->npcInstance->getFaction();
-			crimeEvent.victimBaseActor = mach->npcInstance;
+			TES3::MobileNPC* mobileNPC = victim.as<TES3::MobileNPC*>();
+			crimeEvent.victim = mobileNPC;
+			crimeEvent.victimFaction = mobileNPC->npcInstance->getFaction();
+			crimeEvent.stolenFrom = mobileNPC->npcInstance;
 		}
 
-		// Do detection and the like.
+		// Set crime event data based on the crime committed.
+		bool isAttack = false;
+		switch (crimeType) {
+		case TES3::CrimeType::Attack:
+			isAttack = true;
+			crimeEvent.bountyKey = "attack";
+			crimeEvent.stolenFrom = nullptr;
+			break;
+		case TES3::CrimeType::Killing:
+			isAttack = true;
+			crimeEvent.bountyKey = "killing";
+			crimeEvent.stolenFrom = nullptr;
+			break;
+		case TES3::CrimeType::Pickpocket:
+			crimeEvent.bountyKey = "pickpocket";
+			crimeEvent.stolenValue = 25;
+			break;
+		case TES3::CrimeType::WitnessReaction: // Not really a valid type for this function, but redirected to TES3::CrimeType::Theft for backwards compatibility.
+		case TES3::CrimeType::Theft:
+			crimeEvent.type = TES3::CrimeType::Theft;
+			crimeEvent.bountyKey = "theft";
+			crimeEvent.stolenValue = stolenValue;
+			break;
+		case TES3::CrimeType::Trespass:
+			crimeEvent.bountyKey = "trespass";
+			crimeEvent.victim = crimeEvent.criminal; // The player mobile will always be the victim for this crime type.
+			crimeEvent.stolenFrom = nullptr;
+			break;
+		case TES3::CrimeType::Werewolf:
+			crimeEvent.bountyKey = "werewolf";
+			crimeEvent.victim = crimeEvent.criminal; // The player mobile will always be the victim for this crime type.
+			crimeEvent.stolenFrom = nullptr;
+			break;
+		}
+
+		// Try to detect the crime.
 		bool forceDetection = getOptionalParam<bool>(params, "forceDetection", false);
 		auto processManager = TES3::WorldController::get()->mobManager->processManager;
-		if (!forceDetection && processManager->detectPresence(crimeEvent.criminal)) {
-			processManager->checkAlarmRadius(crimeEvent.victim, crimeEvent.witnesses);
+		if (forceDetection || (isAttack && processManager->detectAttack(crimeEvent.criminal)) || (!isAttack && processManager->detectPresence(crimeEvent.criminal))) {
+			processManager->checkAlarmRadius(crimeEvent.criminal, crimeEvent.witnesses);
 		}
 
-		// If we were detected, add it to the list.
-		if (forceDetection || crimeEvent.witnesses->size() > 0) {
-			auto crimeController = &crimeEvent.victim->crimesA;
-			crimeController->insertCrime(&crimeEvent);
+		// Add the crime to the criminal's committed crimes list if there are witnesses.
+		if (crimeEvent.witnesses->count) {
+			crimeEvent.criminal->committedCrimes.insertCrime(&crimeEvent);
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	NI::Pointer<NI::Node> loadMesh(const char* relativePath, sol::optional<bool> useCached) {
@@ -2280,6 +2246,9 @@ namespace mwse::lua {
 				reference->relocateNoRotation(cell, &position.value());
 			}
 			TES3::DataHandler::suppressThreadLoad = false;
+
+			// Script item data needs to be instanced if the reference is now active but has not been seen before.
+			reference->ensureScriptDataIsInstanced();
 		}
 
 		// Ensure the reference and cell is flagged as modified.
@@ -2733,6 +2702,11 @@ namespace mwse::lua {
 	}
 
 	TES3::BaseObject* createObject(sol::table params) {
+		const char* id = getOptionalParam<const char*>(params, "id", nullptr);
+		if (id && strlen(id) == 0) {
+			throw std::invalid_argument("Invalid 'id' parameter provided.");
+		}
+
 		auto objectType = getOptionalParam(params, "objectType", TES3::ObjectType::Invalid);
 		if (objectType == TES3::ObjectType::Invalid) {
 			throw std::invalid_argument("Invalid 'objectType' parameter provided.");
@@ -2765,6 +2739,12 @@ namespace mwse::lua {
 
 		// Get the cell.
 		TES3::Cell* cell = getOptionalParamCell(params, "cell");
+		if (cell == nullptr) {
+			cell = TES3::DataHandler::get()->nonDynamicData->getCellByPosition(position->x, position->y);
+			if (cell == nullptr) {
+				throw std::invalid_argument("Invalid position parameter provided. It does not resolve to a valid exterior cell.");
+			}
+		}
 
 		reference->setTravelDestination(&position.value(), &orientation.value(), cell);
 		reference->setObjectModified(true);
@@ -3082,6 +3062,10 @@ namespace mwse::lua {
 	}
 
 	int addItem(sol::table params) {
+		auto& luaManager = mwse::lua::LuaManager::getInstance();
+		auto stateHandle = luaManager.getThreadSafeStateHandle();
+		auto& state = stateHandle.state;
+
 		// Get the reference we are manipulating.
 		TES3::Reference* reference = getOptionalParamReference(params, "reference");
 		if (reference == nullptr) {
@@ -3197,9 +3181,22 @@ namespace mwse::lua {
 		// Play the relevant sound.
 		auto worldController = TES3::WorldController::get();
 		auto playerMobile = worldController->getMobilePlayer();
-		if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
-			if (mobile == playerMobile) {
+		if (mobile == playerMobile) {
+			if (getOptionalParam<bool>(params, "playSound", true)) {
 				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
+			}
+
+			if (getOptionalParam<bool>(params, "showMessage", false)) {
+				std::string message;
+				auto luaFormat = state["string"]["format"];
+				auto GMSTs = TES3::DataHandler::get()->nonDynamicData->GMSTs;
+				if (fulfilledCount > 1) {
+					message = luaFormat(GMSTs[TES3::GMST::sNotifyMessage61]->value.asString, fulfilledCount, item->getName());
+				}
+				else {
+					message = luaFormat(GMSTs[TES3::GMST::sNotifyMessage60]->value.asString, item->getName());
+				}
+				TES3::UI::showMessageBox(message.c_str());
 			}
 		}
 
@@ -4263,19 +4260,22 @@ namespace mwse::lua {
 
 		// Change the animation temporarily. Passing nullptr resets the animation to base.
 		const char* modelFile = getOptionalParam<const char*>(params, "file", nullptr);
-		reference->setModelPath(modelFile, true);
 
-		if (modelFile == nullptr) {
-			// Reset animation control.
-			auto mact = reference->getAttachedMobileActor();
-			if (mact) {
-				mact->setMobileActorFlag(TES3::MobileActorFlag::IdleAnim, false);
-			}
-		}
-		else {
+		if (modelFile) {
+			reference->setModelPath(modelFile, true);
+
 			animData = reference->getAttachedAnimationData();
 			if (!animData->hasOverrideAnimations()) {
 				throw std::logic_error("Animation file failed to load.");
+			}
+		}
+		else {
+			reference->reloadAnimation(reference->baseObject->getModelPath());
+
+			// Reset animation control that may be set by playAnimation.
+			auto mact = reference->getAttachedMobileActor();
+			if (mact) {
+				mact->setMobileActorFlag(TES3::MobileActorFlag::IdleAnim, false);
 			}
 		}
 	}
@@ -4458,7 +4458,7 @@ namespace mwse::lua {
 		}
 
 		auto mact = reference->getAttachedMobileActor();
-		if (mact == nullptr) {
+		if (mact == nullptr || !mact->isActor()) {
 			throw std::invalid_argument("Invalid 'reference' parameter provided. No mobile actor found.");
 		}
 
@@ -4520,7 +4520,7 @@ namespace mwse::lua {
 		}
 
 		auto mact = reference->getAttachedMobileActor();
-		if (mact == nullptr) {
+		if (mact == nullptr || !mact->isActor()) {
 			throw std::invalid_argument("Invalid 'reference' parameter provided. No mobile actor found.");
 		}
 
@@ -5335,7 +5335,7 @@ namespace mwse::lua {
 		float height1, height2;
 
 		// Try to get the first reference's data.
-		auto mobile1 = reference1->getAttachedMobileActor();
+		auto mobile1 = reference1->getAttachedMobileObject();
 		position1 = reference1->position;
 		if (mobile1) {
 			height1 = mobile1->height;
@@ -5349,7 +5349,7 @@ namespace mwse::lua {
 		}
 
 		// Try to get the second reference's data.
-		auto mobile2 = reference2->getAttachedMobileActor();
+		auto mobile2 = reference2->getAttachedMobileObject();
 		position2 = reference2->position;
 		if (mobile2) {
 			height2 = mobile2->height;
@@ -5374,7 +5374,7 @@ namespace mwse::lua {
 			position = reference->position;
 
 			// Use centre of body location to match how the findActorsInProximity treats mobiles.
-			auto mobile = reference->getAttachedMobileActor();
+			auto mobile = reference->getAttachedMobileObject();
 			if (mobile) {
 				position.value().z += 0.5f * mobile->height;
 			}

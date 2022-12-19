@@ -116,7 +116,7 @@ Access to the root mobile object flags, represented as an integer. Should not be
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -150,6 +150,26 @@ A vector that represents the 3D acceleration of the object.
 
 ***
 
+### `inventory`
+
+*Read-only*. Access to the items the mobile object has in its inventory.
+
+**Returns**:
+
+* `result` ([tes3itemStack](../../types/tes3itemStack)[])
+
+***
+
+### `isAffectedByGravity`
+
+If `true`, the mobile is affected by gravity. Does not have any effect on spell projectiles.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `movementCollision`
 
 Controls if the mobile has movement collision active. When false, the mobile can move through any object, but can still block other mobiles, and can still be hit in combat. Actors will still follow pathgrids, ramps and stairs when navigating.
@@ -166,7 +186,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -206,7 +226,7 @@ Access to the root mobile object movement flags from the previous frame, represe
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 

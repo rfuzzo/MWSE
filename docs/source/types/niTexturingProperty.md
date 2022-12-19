@@ -12,11 +12,11 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 ### `applyMode`
 
-The texture apply mode. The texture apply mode controls how the vertex colors are blended with the texture color.
+The texture apply mode. The texture apply mode controls how the vertex colors are blended with the texture color. Maps to values in [`ni.texturingPropertyApplyMode`](https://mwse.github.io/MWSE/references/ni/texturing-property-apply-modes/) table.
 
 **Returns**:
 
-* `result` (niTexturingPropertyApplyMode)
+* `result` (integer)
 
 ***
 
@@ -76,7 +76,7 @@ Gets or set the dark map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -122,11 +122,11 @@ Gets or set the glow map. Can be set to nil to delete it. Note that doing so wil
 
 ### `maps`
 
-The maps of texture property. Accessible as an array.
+*Read-only*. The maps of texture property. Accessible as an array.
 
 **Returns**:
 
-* `result` (niTexturingPropertyMapTArray)
+* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap)[])
 
 ***
 
@@ -140,6 +140,16 @@ The human-facing name of the given object.
 
 ***
 
+### `propertyFlags`
+
+
+
+**Returns**:
+
+* `result` (integer)
+
+***
+
 ### `refCount`
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
@@ -147,16 +157,6 @@ The human-facing name of the given object.
 **Returns**:
 
 * `result` (number)
-
-***
-
-### `references`
-
-*Read-only*. The number of references that exist for the given object. When this value hits zero, the object's memory is freed.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -182,11 +182,11 @@ The human-facing name of the given object.
 
 ### `type`
 
-The unique class identifier number of the given rendering property.
+*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
-* `result` (niPropertyType)
+* `result` (integer)
 
 ***
 
@@ -207,7 +207,7 @@ local map, index = myObject:addDecalMap(texture)
 **Returns**:
 
 * `map` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil): A newly created decal map.
-* `index` (number, nil): The index of the newly added decal map.
+* `index` (integer, nil): The index of the newly added decal map.
 
 ***
 
@@ -257,9 +257,81 @@ local reference = myObject:getGameReference(searchParents)
 
 ***
 
+### `getStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
+
+```lua
+local extra = myObject:getStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData starting with this value will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `getStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
+
+```lua
+local extra = myObject:getStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The first niStringExtraData with this word will be returned.
+
+**Returns**:
+
+* `extra` ([niStringExtraData](../../types/niStringExtraData))
+
+***
+
+### `hasStringDataStartingWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataStartingWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasStringDataWith`
+
+Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
+
+```lua
+local result = myObject:hasStringDataWith(value)
+```
+
+**Parameters**:
+
+* `value` (string): The value to search for.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -267,7 +339,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -277,7 +349,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the tes3.niType table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -285,7 +357,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -298,12 +370,12 @@ local result = myObject:isOfType(type)
 Add a controller to the object as the first controller.
 
 ```lua
-myObject:prependController(type)
+myObject:prependController(controller)
 ```
 
 **Parameters**:
 
-* `type` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../../types/niTimeController))
 
 ***
 
@@ -351,7 +423,7 @@ local removed = myObject:removeDecalMap(index)
 
 **Parameters**:
 
-* `index` (number): The index of the decal to remove.
+* `index` (integer): The index of the decal to remove. The available indices are between `ni.texturingPropertyMapType.decalFirst` and `ni.texturingPropertyMapType.decalLast`.
 
 **Returns**:
 

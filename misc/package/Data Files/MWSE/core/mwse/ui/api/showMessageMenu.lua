@@ -84,7 +84,7 @@ local function callbackButtonHelp(e)
 	end
 
 	-- Ensure we got something valid.
-	tooltipCreator = common.resolveDynamicValue(tooltipCreator)
+	tooltipCreator = common.resolveDynamicValue(tooltipCreator, menuData.callbackParams)
 	if (not tooltipCreator) then
 		return
 	end
@@ -105,7 +105,7 @@ local function callbackButtonHelp(e)
 	-- Make our header.
 	if tooltipCreator.header then
 		local headerLabel = outerBlock:createLabel({
-			text = common.resolveDynamicText(tooltipCreator.header),
+			text = common.resolveDynamicText(tooltipCreator.header, menuData.callbackParams),
 		})
 		headerLabel.autoHeight = true
 		headerLabel.width = 285
@@ -116,7 +116,7 @@ local function callbackButtonHelp(e)
 	-- Make our normal text.
 	if tooltipCreator.text then
 		local descriptionLabel = outerBlock:createLabel({
-			text = common.resolveDynamicText(tooltipCreator.text),
+			text = common.resolveDynamicText(tooltipCreator.text, menuData.callbackParams),
 		})
 		descriptionLabel.autoHeight = true
 		descriptionLabel.width = 285
@@ -325,22 +325,30 @@ function tes3ui.showMessageMenu(params)
 		validateButtonParam(button)
 	end
 
+	-- Prevent callback params from being copied.
+	local callbackParams = params.callbackParams
+	params.callbackParams = nil
+
 	-- Clone the params so modders can reuse params between calls.
-	params = table.deepcopy(params)
+	local copiedParams = table.deepcopy(params)
+	copiedParams.callbackParams = callbackParams
+
+	-- Restore original callback param for table reuse.
+	params.callbackParams = callbackParams
 
 	-- Create menu.
-	local menu = tes3ui.createMenu({ id = params.id or uiids.menu, fixedFrame = true })
+	local menu = tes3ui.createMenu({ id = copiedParams.id or uiids.menu, fixedFrame = true })
 	local contentElement = menu:getContentElement()
 	contentElement.maxWidth = 400
 	contentElement.childAlignX = 0.5
 	tes3ui.enterMenuMode(menu.id)
 
 	-- Store our params as lua data.
-	menu:setLuaData("messageData", params)
+	menu:setLuaData("messageData", copiedParams)
 
 	-- Initialize some default values.
-	params.page = params.page or 1
-	params.pageSize = params.pageSize or 30
+	copiedParams.page = copiedParams.page or 1
+	copiedParams.pageSize = copiedParams.pageSize or 30
 
 	-- Create our menu.
 	recreateMenu(menu)

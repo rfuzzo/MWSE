@@ -27,6 +27,7 @@ namespace TES3 {
 		// Related this-call functions.
 		//
 
+		bool detectAttack(MobileActor* actor);
 		bool detectPresence(MobileActor * actor, bool unknown = true);
 		bool detectSneak(MobileActor * detector, MobileActor * target, bool unknown = true);
 		void findActorsInProximity(Vector3 * position, float range, IteratedList<MobileActor*>* outputList);
@@ -54,15 +55,16 @@ namespace TES3 {
 		//
 
 		void resolveCollisions(float deltaTime);
+		void removeProjectilesFiredByActor(MobileActor* mobileActor, bool includeSpellProjectiles);
 	};
 	static_assert(sizeof(ProjectileManager) == 0x3C, "TES3::ProjectileManager failed size validation");
 
 	struct MobManager {
 		NI::CollisionGroup * mobCollisionGroup;
-		Vector3 gravity; // 0x4
+		Vector3 gravity; // 0x4, Initialized to {0, 0, -627.2}.
 		Vector3 terminalVelocity; // Initialized to {0, 0, -4005.5}.
-		float dotProductOfMaxClimableSlope; // Initialized to cos(46 degrees).
-		float maxClimableSlopeDegrees; // Initialized to 46 degrees.
+		float dotProductOfMaxClimbableSlope; // Initialized to cos(46 degrees).
+		float maxClimbableSlopeDegrees; // Initialized to 46 degrees.
 		ProcessManager* processManager; // 0x24
 		ProjectileManager* projectileManager; // 0x28
 		bool mobCollisionActive;
@@ -77,7 +79,12 @@ namespace TES3 {
 		// Related this-call functions.
 		//
 
+		// Adds an actor to simulation, while also setting up their collider and AI planner.
+		// The reference must not be disabled before calling this function, as it blocks execution.
 		void addMob(Reference * reference);
+
+		// Removes an actor from simulation, while also cleaning up their collider and AI planner.
+		// Simulation will not be exited if the reference is disabled before calling this function.
 		void removeMob(Reference * reference);
 
 		void checkPlayerDistance();
@@ -91,6 +98,13 @@ namespace TES3 {
 		bool hasMobileCollision(const MobileActor* mobile);
 		void enableMobileCollision(MobileActor* mobile);
 		void disableMobileCollision(MobileActor* mobile);
+
+		Vector3* getGravity();
+		void setGravity(sol::stack_object);
+		Vector3* getTerminalVelocity();
+		void setTerminalVelocity(sol::stack_object);
+		float getMaxClimbableSlope();
+		void setMaxClimbableSlope(float value);
 	};
 	static_assert(sizeof(MobManager) == 0x8C, "TES3::MobManager failed size validation");
 }

@@ -346,7 +346,7 @@ namespace TES3::UI {
 		Element *help = TES3_ui_findHelpLayerMenu(static_cast<UI_ID>(Property::HelpMenu));
 		if (help) {
 			// Remove menu from help layer child vector.
-			Element **p = help->parent->vectorChildren.begin, **end = help->parent->vectorChildren.end;
+			Element **p = help->parent->vectorChildren.first, **end = help->parent->vectorChildren.nextEmpty;
 			while (*p != help) {
 				++p;
 			}
@@ -354,7 +354,7 @@ namespace TES3::UI {
 				*p = *(p + 1);
 			}
 			*p = 0;
-			help->parent->vectorChildren.end--;
+			help->parent->vectorChildren.nextEmpty--;
 
 			// Place menu in main layer.
 			help->reattachToParent(*TES3_uiMainRoot);
@@ -1149,6 +1149,9 @@ namespace TES3::UI {
 		pushNewUIID(0x5F333F, "MenuMulti_bottom_row_left");
 		pushNewUIID(0x5F339A, "MenuMulti_npc");
 		pushNewUIID(0x5F34DC, "MenuMulti_fillbars");
+		pushNewUIID(0x5F3552, "MenuMulti_health");
+		pushNewUIID(0x5F3680, "MenuMulti_magic");
+		pushNewUIID(0x5F37B9, "MenuMulti_fatigue");
 		pushNewUIID(0x5F38EA, "MenuMulti_icons");
 		pushNewUIID(0x5F391D, "MenuMulti_icons_spacer");
 		pushNewUIID(0x5F393E, "MenuMulti_icons_layout");

@@ -82,11 +82,11 @@ Friendly access to the actor's flag that controls if AI is active.
 
 ### `aiPlanner`
 
-*Read-only*. Access to the mobile's AI planner and AI package information.
+*Read-only*. Access to the mobile's AI planner and AI package information. Doesn't exist on the player mobile.
 
 **Returns**:
 
-* `result` ([tes3aiPlanner](../../types/tes3aiPlanner))
+* `result` ([tes3aiPlanner](../../types/tes3aiPlanner), nil)
 
 ***
 
@@ -132,11 +132,11 @@ Toggle flag for if the player should always run.
 
 ### `animationController`
 
-*Read-only*. No description yet available.
+*Read-only*. Access to the player's animation controller.
 
 **Returns**:
 
-* `result` ([tes3actorAnimationController](../../types/tes3actorAnimationController))
+* `result` ([tes3playerAnimationController](../../types/tes3playerAnimationController))
 
 ***
 
@@ -436,21 +436,21 @@ Direct access to the actor's chameleon effect attribute.
 
 ### `collidingReference`
 
-*Read-only*. The reference that the mobile has collided with this frame.
+*Read-only*. The reference that the mobile has collided with this frame. Doesn't include actors and terrain.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../../types/tes3reference), nil)
 
 ***
 
 ### `combatSession`
 
-*Read-only*. Combat session data. This exists while the actor is in combat to provide memory for AI combat decisions.
+*Read-only*. Combat session data. This exists while the actor is in combat to provide memory for AI combat decisions. Doesn't exist on the player's mobile.
 
 **Returns**:
 
-* `result` ([tes3combatSession](../../types/tes3combatSession))
+* `result` ([tes3combatSession](../../types/tes3combatSession), nil)
 
 ***
 
@@ -490,7 +490,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
 
 ***
 
@@ -520,7 +520,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3dialogue](../../types/tes3dialogue)[])
 
 ***
 
@@ -566,7 +566,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 ### `facing`
 
-*Read-only*. The facing of the actor, in radians.
+*Read-only*. The facing of the actor, in radians. It corresponds to the `mobile.reference.orientation.z`. Facing of 0 corresponds to the in game North, facing of PI corresponds to the game South. It's in clockwise direction.
 
 **Returns**:
 
@@ -620,7 +620,7 @@ Access to the root mobile object flags, represented as an integer. Should not be
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -690,7 +690,7 @@ Toggle flag for if the NPC sneaks.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
 
 ***
 
@@ -790,7 +790,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
 
 ***
 
@@ -864,6 +864,16 @@ Toggle flag for if the player is currently in jail.
 
 ***
 
+### `inventory`
+
+*Read-only*. Access to the items the mobile object has in its inventory.
+
+**Returns**:
+
+* `result` ([tes3itemStack](../../types/tes3itemStack)[])
+
+***
+
 ### `invisibility`
 
 Direct access to the actor's invisibility effect attribute.
@@ -877,6 +887,16 @@ Direct access to the actor's invisibility effect attribute.
 ### `is3rdPerson`
 
 *Read-only*. Shows if the player's camera is currently in 3rd person view.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isAffectedByGravity`
+
+If `true`, the mobile is affected by gravity. Does not have any effect on spell projectiles.
 
 **Returns**:
 
@@ -1216,11 +1236,11 @@ The amount of ammo for the ranged weapon that that was last equipped.
 
 ### `levelUpProgress`
 
-The progress the player has made towards leveling up.
+The progress the player has made towards leveling up. Equal to the total amount of Minor and Major skill increases during the current level. This value can be larger than 10.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -1382,7 +1402,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -1482,17 +1502,17 @@ Access to the root mobile object movement flags from the previous frame, represe
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `readiedAmmo`
 
-The currently equipped ammo.
+The currently equipped ammo, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
 
 ***
 
@@ -1502,27 +1522,27 @@ The number of ammo equipped for the readied ammo.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `readiedShield`
 
-The currently equipped shield.
+The currently equipped shield, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
 
 ***
 
 ### `readiedWeapon`
 
-The currently equipped weapon.
+The currently equipped weapon, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
 
 ***
 
@@ -1642,7 +1662,7 @@ How many hours are left while resting.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -1739,6 +1759,9 @@ Direct access to the actor's silence effect attribute.
 ### `skillProgress`
 
 *Read-only*. Array-style table access to skill progress for each of the 27 skills.
+
+!!! attention
+	The first index in the array is 1, but skill indices in tes3.skill table start from 0.
 
 **Returns**:
 
@@ -2070,11 +2093,11 @@ local result = myObject:applyDamage({ damage = ..., applyArmor = ..., resistAttr
 
 * `params` (table)
 	* `damage` (number): The amount of damage to apply.
-	* `applyArmor` (boolean): *Optional*. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.
+	* `applyArmor` (boolean): *Default*: `false`. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.
 	* `resistAttribute` (number): *Optional*. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
-	* `applyDifficulty` (boolean): *Optional*. If the game difficulty modifier should be applied. Must be used with the `playerAttack` argument to apply the correct modifier.
+	* `applyDifficulty` (boolean): *Default*: `false`. If the game difficulty modifier should be applied. Must be used with the `playerAttack` argument to apply the correct modifier.
 	* `playerAttack` (boolean): *Optional*. If the attack came from the player. Used for difficulty calculation.
-	* `doNotChangeHealth` (boolean): *Optional*. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.
+	* `doNotChangeHealth` (boolean): *Default*: `false`. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.
 
 **Returns**:
 
@@ -2102,29 +2125,6 @@ local result = myObject:applyFatigueDamage(fatigueDamage, swing, alwaysPlayHitVo
 
 ***
 
-### `applyHealthDamage`
-
-**Deprecated, please use [`applyDamage()`](https://mwse.github.io/MWSE/types/tes3mobileActor/#applydamage) instead.**
-
-Damages the actor.
-
-```lua
-local result = myObject:applyHealthDamage(damage, isPlayerAttack, scaleWithDifficulty, doNotChangeHealth)
-```
-
-**Parameters**:
-
-* `damage` (number): The amount of damage to apply.
-* `isPlayerAttack` (boolean): Used to calculate difficulty scaling.
-* `scaleWithDifficulty` (boolean): Apply difficulty scaling to the damage.
-* `doNotChangeHealth` (boolean): Do all the audiovisual effects of damage without the health change.
-
-**Returns**:
-
-* `result` (boolean)
-
-***
-
 ### `applyJumpFatigueCost`
 
 Reduces the actor's current fatigue by the amount a regular jump would currently cost.
@@ -2147,7 +2147,7 @@ local result = myObject:calcEffectiveDamage({ damage = ..., applyArmor = ..., re
 
 * `params` (table)
 	* `damage` (number): The amount of damage to apply.
-	* `applyArmor` (boolean): *Optional*. If armor should mitigate the incoming damage.
+	* `applyArmor` (boolean): *Default*: `false`. If armor should mitigate the incoming damage.
 	* `resistAttribute` (number): *Optional*. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
 
 **Returns**:
@@ -2166,7 +2166,7 @@ local result = myObject:calculateJumpVelocity({ direction = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `direction` ([tes3vector2](../../types/tes3vector2)): *Optional*. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.
 
 **Returns**:
@@ -2185,7 +2185,7 @@ local result = myObject:doJump({ velocity = ..., applyFatigueCost = ..., allowMi
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `velocity` ([tes3vector3](../../types/tes3vector3)): *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
 	* `applyFatigueCost` (boolean): *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
 	* `allowMidairJumping` (boolean): *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
@@ -2248,7 +2248,7 @@ local result = myObject:equipMagic({ source = ..., itemData = ..., equipItem = .
 
 ### `exerciseSkill`
 
-Exercises a skill, providing experience in it.
+Exercises a skill, providing experience in it. Invokes `exerciseSkill` event.
 
 ```lua
 myObject:exerciseSkill(skill, progress)
@@ -2256,14 +2256,14 @@ myObject:exerciseSkill(skill, progress)
 
 **Parameters**:
 
-* `skill` (number): The skill index to give experience to.
+* `skill` (integer): The skill index to give experience to. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 * `progress` (number): The amount of experience to grant.
 
 ***
 
 ### `getActiveMagicEffects`
 
-Fetches a filtered list of the active magic effects on the actor. Returns a table with [`tes3activeMagicEffect`](https://mwse.github.io/MWSE/types/tes3activeMagicEffect/) items.
+Fetches a filtered list of the active magic effects on the actor.
 
 ```lua
 local result = myObject:getActiveMagicEffects({ effect = ..., serial = ... })
@@ -2272,8 +2272,8 @@ local result = myObject:getActiveMagicEffects({ effect = ..., serial = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `effect` (number): *Optional*. The magic effect ID to search for.
-	* `serial` (number): *Optional*. The magic instance serial to search for.
+	* `effect` (integer): *Optional*. The magic effect ID to search for, from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+	* `serial` (integer): *Optional*. The magic instance serial to search for.
 
 **Returns**:
 
@@ -2329,7 +2329,7 @@ local timestamp = myObject:getPowerUseTimestamp(power)
 
 ### `getSkillProgressRequirement`
 
-Returns the total progress needed to progress the skill to the next level.
+Returns the total progress needed to progress the skill to the next level. The actual amount of progress needed is the floor of the value returned by this function.
 
 ```lua
 local progressNeeded = myObject:getSkillProgressRequirement(skill)
@@ -2337,7 +2337,7 @@ local progressNeeded = myObject:getSkillProgressRequirement(skill)
 
 **Parameters**:
 
-* `skill` (number): The skill index to check.
+* `skill` (integer): The skill index to check. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
@@ -2383,43 +2383,56 @@ local result = myObject:getSkillValue(skillId)
 
 ### `getViewToActor`
 
-No description yet available.
+Returns the angle between provided actor and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.
 
 ```lua
-local result = myObject:getViewToActor()
+local angle = myObject:getViewToActor(mobile)
 ```
+
+**Parameters**:
+
+* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): The target actor to calculate the facing angle.
 
 **Returns**:
 
-* `result` (number)
+* `angle` (number): In range of [-180, 180] in degrees.
 
 ***
 
 ### `getViewToPoint`
 
-No description yet available.
+Returns the angle between provided point in space and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.
 
 ```lua
-local result = myObject:getViewToPoint()
+local angle = myObject:getViewToPoint(point)
 ```
+
+**Parameters**:
+
+* `point` ([tes3vector3](../../types/tes3vector3)): The target point to calculate the facing angle.
 
 **Returns**:
 
-* `result` (number)
+* `angle` (number): In range of [-180, 180] in degrees.
 
 ***
 
 ### `getViewToPointWithFacing`
 
-No description yet available.
+Returns the angle between provided point in space and the actor's current position with provided facing (which effectively overrides the actor's facing used in other getViewTo methods). The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the provided facing angle with the origin in actor's position.
 
 ```lua
-local result = myObject:getViewToPointWithFacing()
+local angle = myObject:getViewToPointWithFacing(facing, point)
 ```
+
+**Parameters**:
+
+* `facing` (number): The facing angle in radians. The values should be in [0, PI] interval.
+* `point` ([tes3vector3](../../types/tes3vector3)): The target point to calculate the facing angle.
 
 **Returns**:
 
-* `result` (number)
+* `angle` (number): In range of [-180, 180] in degrees.
 
 ***
 
@@ -2493,7 +2506,7 @@ myObject:progressSkillLevelIfRequirementsMet(skill)
 
 **Parameters**:
 
-* `skill` (number): The skill index to check for leveling.
+* `skill` (integer): The skill index to check for leveling. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 ***
 
@@ -2507,11 +2520,11 @@ local newLevel = myObject:progressSkillToNextLevel(skill)
 
 **Parameters**:
 
-* `skill` (number): The skill index to increase.
+* `skill` (integer): The skill index to increase. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
-* `newLevel` (number)
+* `newLevel` (integer)
 
 ***
 
@@ -2529,7 +2542,7 @@ local result = myObject:rechargePower(power)
 
 **Returns**:
 
-* `result` (number)
+* `result` (boolean)
 
 ***
 
@@ -2618,7 +2631,7 @@ myObject:unequipMagic({ unequipItem = ..., updateGUI = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `unequipItem` (boolean): *Default*: `false`. Only valid if the currently equipped magic is from an equippable item enchantment. If `true`, the item containing the enchantment will be unequipped.
 	* `updateGUI` (boolean): *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 
