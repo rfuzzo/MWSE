@@ -10524,6 +10524,26 @@
 <ul>
 <li><code>result</code> (iterator)</li>
 </ul>
+<details class="example">
+<summary>Example: Logging all the files present in Data files\meshes folder</summary>
+<div class="highlight"><pre><span></span><code><span class="kr">for</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">fileName</span> <span class="kr">in</span> <span class="n">lfs</span><span class="p">.</span><span class="n">walkdir</span><span class="p">(</span><span class="s2">&quot;data files</span><span class="se">\\</span><span class="s2">meshes</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kr">do</span>
+    <span class="c1">-- Here filePath would look like:</span>
+    <span class="c1">-- data files\meshes\o\Contain_Trama_Shrub_01.nif&quot;</span>
+
+    <span class="c1">-- dir:</span>
+    <span class="c1">-- data files\meshes\o\</span>
+
+    <span class="c1">-- fileName:</span>
+    <span class="c1">-- Contain_Trama_Shrub_01.nif</span>
+    <span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span>
+        <span class="s2">&quot;%s, %s, %s&quot;</span><span class="p">,</span>
+        <span class="n">filePath</span><span class="p">,</span>
+        <span class="n">dir</span><span class="p">,</span>
+        <span class="n">fileName</span>
+    <span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 
 

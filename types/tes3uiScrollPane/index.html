@@ -10241,6 +10241,18 @@
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
+<details class="example">
+<summary>Example: An example of updating the position of a scroll pane widget.</summary>
+<div class="highlight"><pre><span></span><code><span class="c1">--Updating position of scroll panes:</span>
+<span class="c1">---@type tes3uiElement</span>
+<span class="kd">local</span> <span class="n">scrollpane</span> <span class="c1">-- Created somewhere before</span>
+
+<span class="n">scrollpane</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">positionY</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1">-- This will update the position of the scrollpane</span>
+<span class="n">scrollpane</span><span class="p">:</span><span class="n">getTopLevelMenu</span><span class="p">():</span><span class="n">updateLayout</span><span class="p">()</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="scrollbarvisible"><code>scrollbarVisible</code><a class="headerlink" href="#scrollbarvisible" title="Permanent link">⚓︎</a></h3>
 <p>If <code>true</code>, the scrollbar will be visible.</p>

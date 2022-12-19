@@ -15681,10 +15681,18 @@
 <p>Performs a ray test and returns various information related to the result(s). If <code>findAll</code> is set, the result will be a table of results, otherwise only the first result is returned.</p>
 <div class="admonition tip improving performance of raytest">
 <p class="admonition-title">Tip<ol>
-<li>Keep maximum size of objects reasonable, as well as triangle counts</li>
-<li>Whenever possible set a maxDistance in your rayTest calls</li>
-<li>Keep a cached table of ignored objects that you pass to rayTest</li>
-<li>Whenever possible call ray test on only a subset of the game's scene graph. It can be <code>worldPickRoot</code> for interactable objects, <code>worldLandscapeRoot</code>, or <code>worldObjectRoot</code> for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different <code>NiNode</code> you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.</li>
+<li>
+<p>Keep maximum size of objects reasonable, as well as triangle counts</p>
+</li>
+<li>
+<p>Whenever possible set a maxDistance in your rayTest calls</p>
+</li>
+<li>
+<p>Keep a cached table of ignored objects that you pass to rayTest</p>
+</li>
+<li>
+<p>Whenever possible call ray test on only a subset of the game's scene graph. It can be <code>worldPickRoot</code> for interactable objects, <code>worldLandscapeRoot</code>, or <code>worldObjectRoot</code> for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different <code>NiNode</code> you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.</p>
+</li>
 </ol>
 </p>
 </div>

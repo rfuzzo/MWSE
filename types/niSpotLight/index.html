@@ -11657,9 +11657,8 @@
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
 <p>Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Update Efficiency
-It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.</p>
+<p class="admonition-title">Update Efficiency</p>
+<p>It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.</p>
 </div>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">update</span><span class="p">({</span> <span class="n">time</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">controllers</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">bounds</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>

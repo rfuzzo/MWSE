@@ -7990,6 +7990,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -10068,6 +10075,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -10104,6 +10118,39 @@
 <li><code>mobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile actor whose body parts were updated.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference for the actor whose body parts were updated.</li>
 </ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Example: In this example all the scene graph nodes that make up left arm are culled. That will effectively make all the left arms in the game dissapear.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">leftArmParts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPart</span><span class="p">.</span><span class="n">leftForearm</span><span class="p">,</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPart</span><span class="p">.</span><span class="n">leftHand</span><span class="p">,</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPart</span><span class="p">.</span><span class="n">leftUpperArm</span><span class="p">,</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPart</span><span class="p">.</span><span class="n">leftWrist</span><span class="p">,</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPart</span><span class="p">.</span><span class="n">shield</span>
+<span class="p">}</span>
+
+<span class="c1">---@param e bodyPartsUpdatedEventData</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">ripLefties</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">bpm</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">reference</span><span class="p">.</span><span class="n">bodyPartManager</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">bpm</span><span class="p">)</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
+
+    <span class="c1">-- Hide all left arm nodes.</span>
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">part</span> <span class="kr">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">leftArmParts</span><span class="p">)</span> <span class="kr">do</span>
+
+        <span class="c1">-- We want to hide the body parts in all the three</span>
+        <span class="c1">-- layers that make up the character&#39;s body.</span>
+        <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">layer</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">activeBodyPartLayer</span><span class="p">)</span> <span class="kr">do</span>
+            <span class="kd">local</span> <span class="n">activePart</span> <span class="o">=</span> <span class="n">bpm</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span>
+            <span class="kr">if</span> <span class="p">(</span><span class="n">activePart</span> <span class="ow">and</span> <span class="n">activePart</span><span class="p">.</span><span class="n">node</span><span class="p">)</span> <span class="kr">then</span>
+                <span class="n">activePart</span><span class="p">.</span><span class="n">node</span><span class="p">.</span><span class="n">appCulled</span> <span class="o">=</span> <span class="kc">true</span>
+            <span class="kr">end</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">bodyPartsUpdated</span><span class="p">,</span> <span class="n">ripLefties</span><span class="p">)</span>
+</code></pre></div>
+</div>
 
 
 

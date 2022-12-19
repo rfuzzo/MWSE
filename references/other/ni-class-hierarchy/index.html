@@ -922,11 +922,6 @@
     Diagrammatic representation
   </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#the-actual">
-    The actual
-  </a>
-</li>
 </ul>
 </nav>
 </li>
@@ -3295,11 +3290,6 @@
     Diagrammatic representation
   </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#the-actual">
-    The actual
-  </a>
-</li>
 </ul>
 </nav>
 </div>
@@ -3664,144 +3654,19 @@
 <li>niTextKey</li>
 </ul>
 <h2 id="diagrammatic-representation">Diagrammatic representation<a class="headerlink" href="#diagrammatic-representation" title="Permanent link">⚓︎</a></h2>
-<div class="mermaid">graph LR
-    A(niObject) --&gt; B(niAccumulator);
-        B --&gt; BA(niClusterAccumulator);
-            BA --&gt; BAA(niAlphaAccumulator);
-
-    A --&gt; C(niExtraData);
-        C --&gt; CA(BrickNiExtraData);
-        C --&gt; CB(TES3ObjectExtraData);
-        C --&gt; CC(niStringExtraData);
-        C --&gt; CD(niTextKeyExtraData);
-        C --&gt; CE(niVertWeightsExtraData);
-
-    A --&gt; D(niGeometryData);
-        D --&gt; DA(niLinesData);
-        D --&gt; DB(niParticlesData);
-            DB --&gt; DBA(niAutoNormalParticlesData);
-            DB --&gt; DBB(niRotatingParticlesData);
-        D --&gt; DC(niTriBasedGeomData);
-            DC --&gt; DCA(niTriShapeData);
-                DCA --&gt; DCAA(niTriShapeDynamicData);
-            DC --&gt; DCB(niTriStripsData);
-
-    A --&gt; E(niObjectNET);
-        E --&gt; EA(niAVObject);
-            EA --&gt; EAA(niCamera);
-
-            EA --&gt; EAB(niDynamicEffect);
-                EAB --&gt; EABA(niTextureEffect);
-                EAB --&gt; EABB(niLight);
-                    EABB --&gt; EABBA(niAmbientLight);
-                    EABB --&gt; EABBB(niDirectionalLight);
-                    EABB --&gt; EABBC(niPointLight);
-                        EABBC --&gt; EABBCA(niSpotLight);
-
-            EA --&gt; EAC(niGeometry);
-                EAC --&gt; EACA(niLines);
-                EAC --&gt; EACB(niParticles);
-                    EACB --&gt; EACBA(niAutoNormalParticles);
-                    EACB --&gt; EACBB(niRotatingParticles);
-                EAC --&gt; EACC(niTriBasedGeometry);
-                    EACC --&gt; EACCA(niTriShape);
-                    EACC --&gt; EACCB(niTriStrips);
-
-            EA --&gt; EAD(niNode);
-                EAD --&gt; EADA(AvoidNode);
-                EAD --&gt; EADB(RootCollisionNode);
-                EAD --&gt; EADC(niBillboardNode);
-                EAD --&gt; EADD(niBSAnimationManager);
-                EAD --&gt; EADE(niBSPNode);
-                EAD --&gt; EADF(niCollisionSwitch);
-                EAD --&gt; EADG(niSortAdjustNode);
-                EAD --&gt; EADH(niBSAnimationNode);
-                    EADH --&gt; EADHA(niBSParticleNode);
-                EAD --&gt; EADI(niSwitchNode);
-                    EADI --&gt; EADIA(niFltAnimationNode);
-                    EADI --&gt; EADIB(niLODNode);
-
-        E --&gt; EB(niProperty);
-            EB --&gt; EBA(niAlphaProperty);
-            EB --&gt; EBB(niDitherProperty);
-            EB --&gt; EBC(niFogProperty);
-            EB --&gt; EBD(niMaterialProperty);
-            EB --&gt; EBE(niRendererSpecificProperty);
-            EB --&gt; EBF(niShadeProperty);
-            EB --&gt; EBG(niSpecularProperty);
-            EB --&gt; EBH(niStencilProperty);
-            EB --&gt; EBI(niTexturingProperty);
-            EB --&gt; EBJ(niVertexColorProperty);
-            EB --&gt; EBK(niWireframeProperty);
-            EB --&gt; EBL(niZBufferProperty);
-
-        E --&gt; EC(niSequenceStreamHelper);
-
-        E --&gt; ED(niTexture);
-            ED --&gt; EDA(niRenderedTexture);
-                EDA --&gt; EDAA(niRenderedCubeMap);
-            ED --&gt; EDB(niSourceTexture);
-
-    A --&gt; F(niParticleModifier);
-        F --&gt; FA(niGravity);
-        F --&gt; FB(niParticleBomb);
-        F --&gt; FC(niParticleCollider);
-            FC --&gt; FCA(niPlanarCollider);
-            FC --&gt; FCB(niSphericalCollider);
-        F --&gt; FD(niParticleColorModifier);
-        F --&gt; FE(niParticleGrowFade);
-        F --&gt; FF(niParticleRotation);
-
-    A --&gt; G(niRenderer);
-        G --&gt; GA(niDX8Renderer);
-
-    A --&gt; H(niTimeController);
-        H --&gt; HA(niFlipController);
-        H --&gt; HB(niFloatController);
-            HB --&gt; HBA(niAlphaController);
-            HB --&gt; HBB(niRollController);
-        H --&gt; HC(niKeyframeController);
-        H --&gt; HD(niKeyframeManager);
-        H --&gt; HE(niLightColorController);
-        H --&gt; HF(niLookAtController);
-        H --&gt; HG(niMaterialColorController);
-        H --&gt; HH(niMorpherController);
-            HH --&gt; HHA(niGeomMorpherController);
-        H --&gt; HI(niParticleSystemController);
-            HI --&gt; HIA(niBSPArrayController);
-        H --&gt; HJ(niPathController);
-        H --&gt; HK(niUVController);
-        H --&gt; HL(niVisController);
-
-    A --&gt; I(niBltSource);
-    A --&gt; J(niColorData);
-    A --&gt; K(niEmitterModifier);
-    A --&gt; L(niFloatData);
-    A --&gt; M(niKeyframeData);
-    A --&gt; N(niMorphData);
-    A --&gt; O(niPalette);
-    A --&gt; P(niPixelData);
-    A --&gt; Q(niPosData);
-    A --&gt; R(niScreenPolygon);
-    A --&gt; S(niSequence);
-    A --&gt; T(niSkinData);
-    A --&gt; U(niSkinInstance);
-    A --&gt; V(niSkinPartition);
-    A --&gt; W(niUVData);
-    A --&gt; X(niVisData);
-
-    %% Default style
-    classDef default color: #fafafa, fill:#434659, stroke:#e6e6e6, stroke-width:2px;
-
-    %% Turquoise
-    classDef notExposed color:#000, fill: #40E0D0, stroke: #333, stroke-width: 2px;
-    class DA,EAC,EACA,EACC,EDA,G,HA,HD,HK,Q,R,W notExposed;
-
-    %% YellowGreen
-    classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;
-    class B,BA,BAA,CA,CE,DBA,DCAA,DCB,EACCB,EADA,EADB,EADD,EADE,EADG,EADH,EADHA,EADIA,EADIB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
-</div>
-<div class="mermaid">graph LR
+<div class="mermaid">%%{
+    init: {
+        'er': {
+            'diagramPadding': 5,
+            'entityPadding': 5
+        },
+        'flowchart': {
+            'diagramPadding': 2,
+            'curve': 'monotoneX'
+        }
+    }
+}%%
+graph LR
     A(niObject) --&gt; B(niAccumulator);
         B --&gt; BA(niClusterAccumulator);
             BA --&gt; BAA(niAlphaAccumulator);
@@ -3903,14 +3768,25 @@
 
     %% Turquoise
     classDef notExposed color:#000, fill: #40E0D0, stroke: #333, stroke-width: 2px;
-    class DA,EAC,EACA,EACC,EDA,G,HA,HD,HK,Q,R,W notExposed;
+    class DA,EDA,G,HA,HD,HK,Q,R,W notExposed;
 
     %% YellowGreen
     classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;
-    class B,BA,BAA,CA,CE,DBA,DCAA,DCB,EACCB,EADA,EADB,EADD,EADE,EADG,EADH,EADHA,EADIA,EADIB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
+    class B,BA,BAA,CA,CE,DBA,DCAA,DCB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
 </div>
-<h2 id="the-actual">The actual<a class="headerlink" href="#the-actual" title="Permanent link">⚓︎</a></h2>
-<div class="mermaid">graph LR
+<div class="mermaid">%%{
+    init: {
+        'er': {
+            'diagramPadding': 5,
+            'entityPadding': 5
+        },
+        'flowchart': {
+            'diagramPadding': 2,
+            'curve': 'monotoneX'
+        }
+    }
+}%%
+graph LR
     EA(niAVObject);
     EA --&gt; EAA(niCamera);
 
@@ -3950,11 +3826,11 @@
 
     %% Turquoise
     classDef notExposed color:#000, fill: #40E0D0, stroke: #333, stroke-width: 2px;
-    class DA,EAC,EACA,EACC,EDA,G,HA,HD,HK,Q,R,W notExposed;
+    class EAC,EACA,EACC notExposed;
 
     %% YellowGreen
     classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;
-    class B,BA,BAA,CA,CE,DBA,DCAA,DCB,EACCB,EADA,EADB,EADD,EADE,EADG,EADH,EADHA,EADIA,EADIB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
+    class EACCB,EADA,EADB,EADD,EADE,EADG,EADH,EADHA,EADIA,EADIB notResearched;
 </div>
 </article>
 </div>

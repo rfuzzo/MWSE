@@ -10661,6 +10661,77 @@
 <ul>
 <li><code>result</code> (<a href="../../types/tes3referenceList">tes3referenceList</a>)</li>
 </ul>
+<details class="example">
+<summary>Example: Converting reference list to array style table</summary>
+<p>An example is given of a general function that can be used to convert a tes3referenceList to simple array which can be looped over with standard ipairs().</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- This function loops over the references inside the</span>
+<span class="c1">-- tes3referenceList and adds them to an array-style table</span>
+<span class="c1">---@param list tes3referenceList</span>
+<span class="c1">---@return tes3reference[]</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">referenceListToTable</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="kr">if</span> <span class="n">list</span><span class="p">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="p">{}</span>
+    <span class="kr">end</span>
+    <span class="kd">local</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="n">head</span>
+
+    <span class="kr">while</span> <span class="n">ref</span><span class="p">.</span><span class="n">nextNode</span> <span class="kr">do</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ref</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="p">.</span><span class="n">nextNode</span>
+    <span class="kr">end</span>
+
+    <span class="c1">-- Add the last reference</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ref</span>
+
+    <span class="kr">return</span> <span class="n">result</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Usage:</span>
+<span class="kd">local</span> <span class="n">list</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">cell</span><span class="p">.</span><span class="n">actors</span>
+
+<span class="c1">-- The references is now a simple array style table</span>
+<span class="c1">-- that can be looped over with regular ipairs()</span>
+<span class="kd">local</span> <span class="n">references</span> <span class="o">=</span> <span class="n">referenceListToTable</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+
+<span class="kr">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ref</span> <span class="kr">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">references</span><span class="p">)</span> <span class="kr">do</span>
+    <span class="c1">-- Do something with the reference</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">ref</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Example: Generic iterator function</summary>
+<p>In this more involved example, we used the corouting API from the Lua standard library to construct a generic iterator function. The iterReferenceList() function can then be used directly inside a for loop.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- This is a generic iterator function used</span>
+<span class="c1">--- to loop over a tes3referenceList</span>
+<span class="c1">---@param list tes3referenceList</span>
+<span class="c1">---@return fun(): tes3reference</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">iterReferenceList</span><span class="p">(</span><span class="n">list</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="kr">function</span> <span class="nf">iterator</span><span class="p">()</span>
+        <span class="kd">local</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">list</span><span class="p">.</span><span class="n">head</span>
+
+        <span class="kr">if</span> <span class="n">list</span><span class="p">.</span><span class="n">size</span> <span class="o">~=</span> <span class="mi">0</span> <span class="kr">then</span>
+            <span class="nb">coroutine.yield</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+        <span class="kr">end</span>
+
+        <span class="kr">while</span> <span class="n">ref</span><span class="p">.</span><span class="n">nextNode</span> <span class="kr">do</span>
+            <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="p">.</span><span class="n">nextNode</span>
+            <span class="nb">coroutine.yield</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+    <span class="kr">return</span> <span class="nb">coroutine.wrap</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Usage:</span>
+<span class="kd">local</span> <span class="n">list</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">cell</span><span class="p">.</span><span class="n">actors</span>
+<span class="kr">for</span> <span class="n">ref</span> <span class="kr">in</span> <span class="n">iterReferenceList</span><span class="p">(</span><span class="n">list</span><span class="p">)</span> <span class="kr">do</span>
+    <span class="c1">-- Do something with the reference</span>
+    <span class="n">tes3ui</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">ref</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="ambientcolor"><code>ambientColor</code><a class="headerlink" href="#ambientcolor" title="Permanent link">⚓︎</a></h3>
 <p>The cell's ambient color. Only available on interior cells.</p>

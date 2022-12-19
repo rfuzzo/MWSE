@@ -10097,13 +10097,18 @@
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
+<p>This event can be filtered based on the <strong><code>source.id</code></strong> event data.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>An event can be claimed by setting <code>e.claim</code> to <code>true</code>, or by returning <code>false</code> from the callback. Claiming the event prevents any lower priority callbacks from being called.</p>
 </div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>block</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): <em>Read-only</em>. The UI element that is firing this event.</li>
+<li><code>block</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): <em>Read-only</em>. <em>Deprecated, please use <code>source</code> instead</em>. The UI element that is firing this event.</li>
 <li><code>parent</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): <em>Read-only</em>. The calling element's parent.</li>
 <li><code>property</code> (number): <em>Read-only</em>. The property identifier that is being triggered.</li>
+<li><code>source</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>): <em>Read-only</em>. The UI element that is firing this event.</li>
 <li><code>var1</code> (number): <em>Read-only</em>. One of two undefined variables related to the event.</li>
 <li><code>var2</code> (number): <em>Read-only</em>. One of two undefined variables related to the event.</li>
 </ul>
