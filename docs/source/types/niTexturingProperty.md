@@ -12,11 +12,11 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 ### `applyMode`
 
-The texture apply mode. The texture apply mode controls how the vertex colors are blended with the texture color.
+The texture apply mode. The texture apply mode controls how the vertex colors are blended with the texture color. Maps to values in [`ni.texturingPropertyApplyMode`](https://mwse.github.io/MWSE/references/ni/texturing-property-apply-modes/) table.
 
 **Returns**:
 
-* `result` (niTexturingPropertyApplyMode)
+* `result` (integer)
 
 ***
 
@@ -122,11 +122,11 @@ Gets or set the glow map. Can be set to nil to delete it. Note that doing so wil
 
 ### `maps`
 
-The maps of texture property. Accessible as an array.
+*Read-only*. The maps of texture property. Accessible as an array.
 
 **Returns**:
 
-* `result` (niTexturingPropertyMapTArray)
+* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap)[])
 
 ***
 
@@ -182,7 +182,7 @@ The human-facing name of the given object.
 
 ### `type`
 
-*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
+*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
@@ -331,7 +331,7 @@ local result = myObject:hasStringDataWith(value)
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -339,7 +339,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -349,7 +349,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -357,7 +357,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -423,7 +423,7 @@ local removed = myObject:removeDecalMap(index)
 
 **Parameters**:
 
-* `index` (integer): The index of the decal to remove.
+* `index` (integer): The index of the decal to remove. The available indices are between `ni.texturingPropertyMapType.decalFirst` and `ni.texturingPropertyMapType.decalLast`.
 
 **Returns**:
 

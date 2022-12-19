@@ -15,7 +15,7 @@ A game object which holds information about body parts.
 
 **Returns**:
 
-* `result` ([tes3bodyPartManagerActiveBodyPart](../../types/tes3bodyPartManagerActiveBodyPart)[])
+* `result` (table&lt;integer, table&lt;integer, [tes3bodyPartManagerActiveBodyPart](../../types/tes3bodyPartManagerActiveBodyPart)&gt;&gt;)
 
 ***
 
@@ -153,7 +153,7 @@ myObject:setBodyPartByIdForObject(object, index, bodyPartId, isFirstPerson)
 
 ### `setBodyPartForObject`
 
-The method sets a new body part for a given object.
+The method sets a new body part for a given object. Triggers `bodyPart` event.
 
 ```lua
 myObject:setBodyPartForObject(object, index, bodyPart, isFirstPerson)

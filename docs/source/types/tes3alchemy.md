@@ -68,6 +68,27 @@ The bounding box for the object.
 
 * `result` ([tes3effect](../../types/tes3effect)[])
 
+??? example "Example: Determining if a potion is hostile"
+
+	The following function returns `true` if the spell contains at least one hostile effect. This criterion can be considered subjective, but that rule is also used by the game to determine if a use of the spell on an NPC is considered an offense.
+
+	```lua
+	
+	--- @param magicSource tes3spell|tes3enchantment|tes3alchemy
+	local function isSpellHostile(magicSource)
+	    for _, effect in ipairs(magicSource.effects) do
+	        if (effect.object.isHarmful) then
+				-- If one of the spell's effects is harmful, then
+				-- `true` is returned and function ends here.
+	            return true
+	        end
+	    end
+		-- If no harmful effect was found then return `false`.
+	    return false
+	end
+
+	```
+
 ***
 
 ### `flags`
@@ -202,7 +223,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -266,7 +287,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3baseObject](../../types/tes3baseObject)[])
 
 ***
 
@@ -286,7 +307,7 @@ The value of the object. For this object type, its maximum value is 65535. Large
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -368,6 +389,4 @@ local index = myObject:getFirstIndexOfEffect(effectId)
 * `index` (number)
 
 ***
-
-## Functions
 

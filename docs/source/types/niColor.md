@@ -5,7 +5,7 @@
 
 # niColor
 
-An object that represents a RGB color.
+An object that represents a RGB color. The values are in [0.0, 1.0] range.
 
 ## Properties
 
@@ -147,6 +147,33 @@ local color = niColor.new(r, g, b)
 **Returns**:
 
 * `color` ([niColor](../../types/niColor))
+
+***
+
+## Math Operations
+
+### Addition (`+`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Adds the color channel values of two `niColor` objects. |
+
+***
+
+### Multiplication (`*`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Multiplies color channel values. |
+| [niColor](../../types/niColor) | number | [niColor](../../types/niColor) | Multiplies each color value with a scalar. |
+
+***
+
+### Subtraction (`-`)
+
+| Left operand type | Right operand type | Result type | Description |
+| ----------------- | ------------------ | ----------- | ----------- |
+| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Subtracts the color channel values. |
 
 ***
 

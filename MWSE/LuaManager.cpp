@@ -187,14 +187,15 @@
 #include "LuaBarterOfferEvent.h"
 #include "LuaCalcBarterPriceEvent.h"
 #include "LuaCalcBlockChanceEvent.h"
+#include "LuaCalcEnchantmentPriceEvent.h"
 #include "LuaCalcHitArmorPieceEvent.h"
 #include "LuaCalcHitChanceEvent.h"
 #include "LuaCalcRepairPriceEvent.h"
 #include "LuaCalcRestInterruptEvent.h"
 #include "LuaCalcSoulValueEvent.h"
-#include "LuaCalcSpellPriceEvent.h"
 #include "LuaCalcSpellmakingPriceEvent.h"
 #include "LuaCalcSpellmakingSpellPointCostEvent.h"
+#include "LuaCalcSpellPriceEvent.h"
 #include "LuaCalcTrainingPriceEvent.h"
 #include "LuaCalcTravelPriceEvent.h"
 #include "LuaCellChangedEvent.h"
@@ -2148,6 +2149,7 @@ namespace mwse::lua {
 	//
 	// Event: Calculate spellmaking price.
 	//
+
 	void __fastcall OnCalculateSpellmakingPrice(TES3::UI::Element* self, DWORD _UNUSED_, TES3::UI::Property id, TES3::UI::PropertyValue value, TES3::UI::PropertyType type) {
 		if (event::CalculateSpellmakingPriceEvent::getEventEnabled()) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
@@ -2164,8 +2166,29 @@ namespace mwse::lua {
 	}
 
 	//
+	// Event: Calculate enchantment price.
+	//
+
+	int __fastcall OnCalculateEnchantmentPrice(TES3::MobileActor* mobile, DWORD _UNUSED_, int basePrice, bool buying) {
+		int price = mobile->determineModifiedPrice(basePrice, buying);
+
+		if (event::CalculateEnchantmentPriceEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+
+			sol::table result = stateHandle.triggerEvent(new event::CalculateEnchantmentPriceEvent(mobile, basePrice, price));
+			if (result.valid()) {
+				price = result["price"];
+			}
+		}
+
+		return price;
+	}
+
+	//
 	// Event: Calculate spellmaking spell point cost.
 	//
+
 	void __fastcall OnCalculateSpellmakingSpellPointCost(TES3::UI::Element* self, DWORD _UNUSED_, TES3::UI::Property id, TES3::UI::PropertyValue value, TES3::UI::PropertyType type) {
 		if (event::CalculateSpellmakingSpellPointCostEvent::getEventEnabled()) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
@@ -2842,7 +2865,7 @@ namespace mwse::lua {
 		}
 
 		// Overwritten code for this hook.
-		if (TES3::WorldController::get()->menuController->unknown_0x24 % 1) {
+		if (TES3::WorldController::get()->menuController->gameplayFlags & TES3::UI::MenuControllerGameplayFlags::ShowCombatStats) {
 			char* buffer = mwse::tes3::getThreadSafeStringBuffer();
 			const auto attacker = event::CalcHitChanceEvent::m_Attacker;
 			const auto attackerId = attacker->reference->baseObject->getObjectID();
@@ -2883,7 +2906,7 @@ namespace mwse::lua {
 		}
 
 		// Overwritten code for this hook.
-		if (TES3::WorldController::get()->menuController->unknown_0x24 % 1) {
+		if (TES3::WorldController::get()->menuController->gameplayFlags & TES3::UI::MenuControllerGameplayFlags::ShowCombatStats) {
 			char* buffer = mwse::tes3::getThreadSafeStringBuffer();
 			sprintf(buffer, "Block Chance %d%%, for %s to hit %s", blockChance, attacker->reference->baseObject->getObjectID(), attacker->actionData.hitTarget->reference->baseObject->getObjectID());
 			const auto TES3_ConsoleLogResult = reinterpret_cast<void(__cdecl*)(const char*, bool)>(0x5B2C20);
@@ -4634,7 +4657,10 @@ namespace mwse::lua {
 		// Event: Calculate spell making price.
 		genCallEnforced(0x622332, 0x581F30, reinterpret_cast<DWORD>(OnCalculateSpellmakingPrice));
 
-		// Event: Calculate spell making price.
+		// Event: Calculate enchantment making price.
+		genCallEnforced(0x5C3C47, 0x52AA50, reinterpret_cast<DWORD>(OnCalculateEnchantmentPrice));
+
+		// Event: Calculate spell making point cost.
 		genCallEnforced(0x6223BD, 0x581F30, reinterpret_cast<DWORD>(OnCalculateSpellmakingSpellPointCost));
 
 		// Event: Calculate training price. We have to make sure it works with and without MCP patch #33.

@@ -32,12 +32,7 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 ### `lighting`
 
-Describes how vertex colors influence lighting.
-
-Value | Mode                   | Description
------ | ---------------------- | -----------------
-0     | LIGHT_MODE_EMISSIVE    | Only the emissive component of the lighting equation is used. No dynamic lights are considered in the lighting process.
-1	  | LIGHT_MODE_EMI_AMB_DIF | The emissive, ambient, and diffuse components of the lighting equation are all used.
+Describes how vertex colors influence lighting. Maps to values in [`ni.lightingMode`](https://mwse.github.io/MWSE/references/ni/lighting-modes/) table.
 
 **Returns**:
 
@@ -97,13 +92,7 @@ The human-facing name of the given object.
 
 ### `source`
 
-Determines how vertex and material colors are mixed on subclasses of niAVObject.
-
-Value | Mode                   | Description
------ | ---------------------- | -----------------
-0     | VERT_MODE_SRC_IGNORE   | Emissive, ambient, and diffuse colors are all specified by the niMaterialProperty.
-1	  | VERT_MODE_SRC_EMISSIVE | Emissive colors are specified by the source vertex colors. Ambient and Diffuse are specified by the niMaterialProperty.
-2	  | VERT_MODE_SRC_AMB_DIF  | Ambient and Diffuse colors are specified by the source vertex colors. Emissive is specified by the niMaterialProperty (Default).
+Determines how vertex and material colors are mixed on subclasses of niAVObject. Maps to values in [`ni.sourceVertexModes`](https://mwse.github.io/MWSE/references/ni/source-vertex-modes/) table.
 
 **Returns**:
 
@@ -113,7 +102,7 @@ Value | Mode                   | Description
 
 ### `type`
 
-*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
+*Read-only*. The unique class identifier number of the given rendering property. The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
@@ -243,7 +232,7 @@ local result = myObject:hasStringDataWith(value)
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -251,7 +240,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -261,7 +250,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -269,7 +258,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -376,7 +365,7 @@ myObject:setFlag(state, index)
 
 ### `new`
 
-Creates a new niVertexColorProperty with `lighting` set to `LIGHT_MODE_EMI_AMB_DIF` and `source` set to `VERT_MODE_SRC_IGNORE`.
+Creates a new niVertexColorProperty with `lighting` set to `ni.lightingMode.emiAmbDif` and `source` set to `ni.sourceVertexMode.ignore`.
 
 ```lua
 local property = niVertexColorProperty.new()

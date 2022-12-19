@@ -26,9 +26,11 @@ If the controller is active. When inactive, the target does not get updated and 
 
 How the time parameter passed to the update function is treated. Type 0 is the default, which treats the update time as a delta time. Type 1 treats the update time an offset from the start of the animation.
 
+Maps to values in [`ni.animType`](https://mwse.github.io/MWSE/references/ni/animation-types/) table.
+
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -39,9 +41,11 @@ A number representing the axis that points at the lookAt object. `flip` determin
 `1` Y axis
 `2` Z axis
 
+Maps to values in [`ni.lookAtControllerAxis`](https://mwse.github.io/MWSE/references/ni/look-at-controller-axes/) table.
+
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -49,9 +53,11 @@ A number representing the axis that points at the lookAt object. `flip` determin
 
 The animation cycle type. Type 0 is looping, type 2 is reverse, type 4 is clamped.
 
+Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni/animation-cycle-types/) table.
+
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -67,7 +73,7 @@ Determines which end of the chosen axis points towards the lookAt target.
 
 ### `frequency`
 
-The animation controller's frequency value.
+The animation controller's frequency value. It is a scaling value used to convert from update time units to keyframe time units, if necessary.
 
 **Returns**:
 
@@ -77,7 +83,7 @@ The animation controller's frequency value.
 
 ### `highKeyFrame`
 
-No description.
+This is the end animation key time of the animation controller.
 
 **Returns**:
 
@@ -87,7 +93,7 @@ No description.
 
 ### `lastScaledTime`
 
-No description.
+This function returns the last scaled time computed by this controller. The scaled time takes the `frequency` and `phase` into account, along with the `cycleType` and `animTimingType`. This is the last value used to interpolate animation keys.
 
 **Returns**:
 
@@ -117,7 +123,7 @@ The object that this controller will point towards. This is not a reference coun
 
 ### `lowKeyFrame`
 
-No description.
+This is the beginning animation key time of the animation controller.
 
 **Returns**:
 
@@ -127,7 +133,7 @@ No description.
 
 ### `nextController`
 
-The next NiTimeController in the list of controllers containing the calling controller.
+The next animation controller in the list of controllers containing the calling controller.
 
 **Returns**:
 
@@ -137,7 +143,7 @@ The next NiTimeController in the list of controllers containing the calling cont
 
 ### `phase`
 
-The phase value.
+The phase value. It is an offset applied to the animation's update time, in seconds.
 
 **Returns**:
 
@@ -177,7 +183,7 @@ The phase value.
 
 ### `startTime`
 
-No description.
+The time at which the animation controller starts playing its animation.
 
 **Returns**:
 
@@ -187,7 +193,7 @@ No description.
 
 ### `target`
 
-The scene graph object that this animation controller is to animate.
+*Read-only*. The scene graph object that this animation controller is to animate.
 
 **Returns**:
 
@@ -213,7 +219,7 @@ local result = myObject:clone()
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -221,7 +227,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -231,7 +237,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -239,7 +245,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -265,9 +271,23 @@ local success = myObject:saveBinary(path)
 
 ***
 
+### `setTarget`
+
+This method assigns a new target to the animation controller.
+
+```lua
+myObject:setTarget(target)
+```
+
+**Parameters**:
+
+* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+
+***
+
 ### `start`
 
-Starts the controller at the specified time.
+Starts the controller at the specified time. Intended for controllers with `animTimingType` of 1.
 
 ```lua
 myObject:start(time)

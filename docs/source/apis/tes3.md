@@ -260,9 +260,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	* `canCastSelf` (boolean): *Default*: `true`. A flag which controls whether this effect can be used with cast on self range.
 	* `canCastTarget` (boolean): *Default*: `true`. A flag which controls whether this effect can be used with cast on target range.
 	* `canCastTouch` (boolean): *Default*: `true`. A flag which controls whether this effect can be used with cast on touch range.
-	* `casterLinked` (boolean): *Default*: `true`. Access to the base flag that determines if this effect must end if caster is dead, or not an NPC/creature. Not allowed in container or door trap spells.
-
-Note that this property is hidden in the Construction Set.
+	* `casterLinked` (boolean): *Default*: `true`. Access to the base flag that determines if this effect must end if caster is dead, or not an NPC/creature. Not allowed in container or door trap spells. Note that this property is hidden in the Construction Set.
 	* `hasContinuousVFX` (boolean): *Default*: `true`. A flag which controls whether the effect's visual is continuously played during the whole duration of the effect.
 	* `hasNoDuration` (boolean): *Default*: `true`. A flag which controls whether this effect doesn't have duration.
 	* `hasNoMagnitude` (boolean): *Default*: `true`. A flag which controls whether this effect doesn't have magnitude.
@@ -542,7 +540,7 @@ tes3.adjustSoundVolume({ sound = ..., reference = ..., mixChannel = ..., volume 
 * `params` (table)
 	* `sound` ([tes3sound](../../types/tes3sound), string): The sound object, or id of the sound to look for.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): The reference to attach the sound to.
-	* `mixChannel` (number): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
+	* `mixChannel` (integer): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
 	* `volume` (number): *Default*: `1.0`. A value between 0.0 and 1.0 to scale the volume off of.
 
 ***
@@ -673,7 +671,7 @@ local price = tes3.calculatePrice({ object = ..., basePrice = ..., buying = ...,
 	* `training` (boolean): *Default*: `false`. If `true`, a [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event will be triggered, passing the given `skill` ID.
 	* `count` (number): *Default*: `1`. If `bartering`, the count passed to the [calcBarterPrice](https://mwse.github.io/MWSE/events/calcBarterPrice) event.
 	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. If `bartering` or `repairing`, the item data passed to the [calcBarterPrice](https://mwse.github.io/MWSE/events/calcBarterPrice) or [calcRepairPrice](https://mwse.github.io/MWSE/events/calcRepairPrice) event.
-	* `skill` (number): If `training`, the skill ID passed to the [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event.
+	* `skill` (number): If `training`, the skill ID passed to the [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event. Maps to value in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
@@ -1464,9 +1462,10 @@ local changedPOV = tes3.force3rdPerson()
 
 ### `tes3.get3rdPersonCameraOffset`
 
-Returns the camera's offset from the player's head while in 3rd person view.
+Returns the camera offset from the player's head while in 3rd person view.
 
-Note this function can be used once WorldController and MobilePlayer have finished initializing.
+!!! tip
+	If used before initialized event, this function returns empty table.
 
 ```lua
 local cameraOffset = tes3.get3rdPersonCameraOffset()
@@ -1793,7 +1792,7 @@ local stack = tes3.getEquippedItem({ actor = ..., enchanted = ..., objectType = 
 
 * `params` (table)
 	* `actor` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), [tes3actor](../../types/tes3actor))
-	* `enchanted` (boolean): *Optional*. If true, filters to enchanted items.
+	* `enchanted` (boolean): *Optional*. If true, filters only enchanted items.
 	* `objectType` (number): *Optional*. Maps to [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) constants. Used to filter equipment by type.
 	* `slot` (number): *Optional*. Maps to [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) or [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/). Used to filter equipment by slot.
 	* `type` (number): *Optional*. Maps to [`tes3.weaponType`](https://mwse.github.io/MWSE/references/weapon-types/). Used to filter equipment by type.
@@ -1873,7 +1872,7 @@ local exists = tes3.getFileExists(path)
 Determines if a file exists on the filesystem or inside of a bsa. The returned string will be "file" or "bsa".
 
 ```lua
-local exists = tes3.getFileSource(path)
+local exists, path = tes3.getFileSource(path)
 ```
 
 **Parameters**:
@@ -1882,7 +1881,8 @@ local exists = tes3.getFileSource(path)
 
 **Returns**:
 
-* `exists` (string)
+* `exists` (string?): A string representing the file source. This can be either `file` or `bsa`.
+* `path` (string?): If the file exists, this is a path to the file. If the file is from a BSA, it is a path inside the BSA.
 
 ***
 
@@ -1900,7 +1900,7 @@ local value = tes3.getGlobal(id)
 
 **Returns**:
 
-* `value` (number)
+* `value` (integer)
 
 ***
 
@@ -2097,7 +2097,7 @@ local level = tes3.getLockLevel({ reference = ... })
 
 ### `tes3.getMagicEffect`
 
-Fetches the core game Magic Effect object for a given ID.
+Fetches the core game Magic Effect object for a given ID. Can return custom magic effects added with `tes3.addMagicEffect`.
 
 ```lua
 local magicEffect = tes3.getMagicEffect(id)
@@ -2105,11 +2105,11 @@ local magicEffect = tes3.getMagicEffect(id)
 
 **Parameters**:
 
-* `id` (number)
+* `id` (integer): Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 
-* `magicEffect` ([tes3magicEffect](../../types/tes3magicEffect))
+* `magicEffect` ([tes3magicEffect](../../types/tes3magicEffect), nil)
 
 ***
 
@@ -2124,9 +2124,9 @@ local complexName = tes3.getMagicEffectName({ effect = ..., attribute = ..., ski
 **Parameters**:
 
 * `params` (table)
-	* `effect` (number): The effect ID to get the name of.
-	* `attribute` (number): *Optional*. The attribute ID to use, if applicable.
-	* `skill` (number): *Optional*. The skill ID to use, if applicable.
+	* `effect` (integer): The effect ID to get the name of. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+	* `attribute` (integer): *Optional*. The attribute ID to use, if applicable. Maps to values in [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) table.
+	* `skill` (integer): *Optional*. The skill ID to use, if applicable. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
@@ -2364,11 +2364,15 @@ local script = tes3.getScript(id)
 
 ### `tes3.getSimulationTimestamp`
 
-Returns a UNIX-style timestamp based on in-world simulation time since the start of the era.
+Returns a UNIX-style timestamp based on in-world simulation time since the start of the era, in hours.
 
 ```lua
-local timestamp = tes3.getSimulationTimestamp()
+local timestamp = tes3.getSimulationTimestamp(highPrecision)
 ```
+
+**Parameters**:
+
+* `highPrecision` (boolean): *Default*: `true`. If `false` is passed returns the value of the simulation time variable used by the game engine. Calculates the timestamp from the current year, month and game hour global variables otherwise.
 
 **Returns**:
 
@@ -2995,7 +2999,7 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 * `messageOrParams` (string, table)
 	* `message` (string)
 	* `buttons` (string[]): *Optional*. An array of strings to use for buttons.
-	* `callback` (function)
+	* `callback` (function): The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 	* `showInDialog` (boolean): *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 	* `duration` (number): *Optional*. Overrides how long the toast-style message remains visible.
 * `formatAdditions` (variadic): *Optional*. Only used if messageOrParams is a string.
@@ -3003,6 +3007,44 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 **Returns**:
 
 * `element` ([tes3uiElement](../../types/tes3uiElement), nil): The UI menu created for the notification, if any.
+
+??? example "Example: A message box with a callback function"
+
+	This demonstrates how to determine which button was pressed inside callback function.
+
+	```lua
+	-- This variable is used to store a function that will be
+	-- registered as a callback when a button is pressed inside
+	-- our messageBox. The function's body is declared later.
+	local onButtonPressed
+	
+	
+	-- This function is registered to execute when U key is pressed.
+	local function onKeyPressed()
+		tes3.messageBox({
+			message = "Do you want a muffin?",
+			buttons = { "Yes", "No" },
+			showInDialog = false,
+			callback = onButtonPressed,
+		})
+	end
+	event.register(tes3.event.keyDown, onKeyPressed, { filter = tes3.scanCode.u })
+	
+	-- Here we define the body of our function.
+	onButtonPressed = function(e)
+		-- This corresponds to the first button
+		--  of our message, which is "Yes"
+		if e.button == 0 then
+			tes3.addItem({
+				reference = tes3.player,
+				item = "ingred_bread_01_UNI3",
+			})
+		else
+			-- Do nothing
+		end
+	end
+
+	```
 
 ***
 
@@ -3252,6 +3294,17 @@ tes3.random(seed)
 
 Performs a ray test and returns various information related to the result(s). If `findAll` is set, the result will be a table of results, otherwise only the first result is returned.
 
+!!! tip Improving performance of rayTest
+
+		1. Keep maximum size of objects reasonable, as well as triangle counts
+
+		2. Whenever possible set a maxDistance in your rayTest calls
+
+		3. Keep a cached table of ignored objects that you pass to rayTest
+
+		4. Whenever possible call ray test on only a subset of the game's scene graph. It can be `worldPickRoot` for interactable objects, `worldLandscapeRoot`, or `worldObjectRoot` for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different `NiNode` you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.
+
+
 ```lua
 local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., maxDistance = ..., sort = ..., useModelBounds = ..., useModelCoordinates = ..., useBackTriangles = ..., observeAppCullFlag = ..., root = ..., returnColor = ..., returnNormal = ..., returnSmoothNormal = ..., returnTexture = ..., ignore = ... })
 ```
@@ -3262,22 +3315,22 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 	* `position` ([tes3vector3](../../types/tes3vector3), table): Position of the ray origin.
 	* `direction` ([tes3vector3](../../types/tes3vector3), table): Direction of the ray. Does not have to be unit length.
 	* `findAll` (boolean): *Default*: `false`. If true, the ray test won't stop after the first result.
-	* `maxDistance` (number): *Optional*. The maximum distance that the test will run.
+	* `maxDistance` (number): *Default*: `0`. The maximum distance that the test will run.
 	* `sort` (boolean): *Default*: `true`. If true, the results will be sorted by distance from the origin position.
 	* `useModelBounds` (boolean): *Default*: `false`. If true, model bounds will be tested for intersection. Otherwise triangles will be used.
 	* `useModelCoordinates` (boolean): *Default*: `false`. If true, model coordinates will be used instead of world coordinates.
 	* `useBackTriangles` (boolean): *Default*: `false`. Include intersections with back-facing triangles.
 	* `observeAppCullFlag` (boolean): *Default*: `true`. Ignore intersections with culled (hidden) models.
-	* `root` ([niNode](../../types/niNode)): *Default*: `tes3.game.worldRoot`. Node pointer to node scene.
+	* `root` ([niNode](../../types/niNode)): *Default*: `tes3.game.worldRoot`. Node pointer to node scene. To reduce the computational work, consider passing only a smaller subset of the `worldRoot` to improve performance. The typical nodes you can pass here are: [`tes3.game.worldLandscapeRoot`](https://mwse.github.io/MWSE/types/tes3game/#worldLandscapeRoot), [`worldObjectRoot`](https://mwse.github.io/MWSE/types/tes3game/#worldObjectRoot), and [`worldPickRoot`](https://mwse.github.io/MWSE/types/tes3game/#worldPickRoot).
 	* `returnColor` (boolean): *Default*: `false`. Calculate and return the vertex color at intersections.
 	* `returnNormal` (boolean): *Default*: `false`. Calculate and return the vertex normal at intersections.
 	* `returnSmoothNormal` (boolean): *Default*: `false`. Use normal interpolation for calculating vertex normals.
 	* `returnTexture` (boolean): *Default*: `false`. Calculate and return the texture coordinate at intersections.
-	* `ignore` ([tes3reference](../../types/tes3reference)[], [niNode](../../types/niNode)[]): *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
+	* `ignore` (table&lt;integer, [niNode](../../types/niNode)|[tes3reference](../../types/tes3reference)&gt;): *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
 
 **Returns**:
 
-* `result` ([niPickRecord](../../types/niPickRecord), [niPickRecord](../../types/niPickRecord)[])
+* `result` ([niPickRecord](../../types/niPickRecord), [niPickRecord](../../types/niPickRecord)[], nil)
 
 ??? example "Example: Get Activation Target"
 
@@ -3373,16 +3426,17 @@ tes3.releaseKey(keyCode)
 Removes magic effects from a given reference. Requires that either the `effect` or `castType` parameter be provided.
 
 ```lua
-tes3.removeEffects(reference, effect, castType, chance, removeSpell)
+tes3.removeEffects({ reference = ..., effect = ..., castType = ..., chance = ..., removeSpell = ... })
 ```
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference)): Target reference to remove effects from.
-* `effect` (number): *Optional*. Maps to [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) constants.
-* `castType` (number): *Optional*. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/references/spell-types/) constants.
-* `chance` (number): *Default*: `100`. The chance for the effect to be removed.
-* `removeSpell` (boolean): *Optional*. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if `castType` is not `tes3.spellType.spell.` This causes diseases and curses to be removed when dispelled.
+* `params` (table)
+	* `reference` ([tes3reference](../../types/tes3reference)): Target reference to remove effects from.
+	* `effect` (integer): *Optional*. Maps to [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) constants.
+	* `castType` (integer): *Optional*. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/references/spell-types/) constants.
+	* `chance` (number): *Default*: `100`. The chance for the effect to be removed.
+	* `removeSpell` (boolean): *Optional*. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if `castType` is not `tes3.spellType.spell.` This causes diseases and curses to be removed when dispelled.
 
 ??? example "Example: Simulating a Dispel"
 
@@ -3603,17 +3657,19 @@ tes3.say({ reference = ..., soundPath = ..., pitch = ..., volume = ..., forceSub
 
 ### `tes3.set3rdPersonCameraOffset`
 
-Changes the 3rd person camera's offset from the player's head.
+Changes the 3rd person camera offset from the player's head.
 
-Note this function can be used once WorldController and MobilePlayer have finished initializing.
+!!! important
+	This function can be used once tes3worldController and tes3mobilePlayer have finished initializing.
 
 ```lua
-tes3.set3rdPersonCameraOffset(offset)
+tes3.set3rdPersonCameraOffset({ offset = ... })
 ```
 
 **Parameters**:
 
-* `offset` ([tes3vector3](../../types/tes3vector3)): The offset vector.
+* `params` (table)
+	* `offset` ([tes3vector3](../../types/tes3vector3)): The offset vector.
 
 ***
 
@@ -3871,9 +3927,9 @@ tes3.setMarkLocation({ position = ..., rotation = ..., cell = ... })
 **Parameters**:
 
 * `params` (table)
-	* `position` ([tes3vector3](../../types/tes3vector3)): Coordinates of the mark's position.
-	* `rotation` (number): *Default*: `Player's current rotation.`. This argument controls which direction the player's mark location will be facing.
-	* `cell` ([tes3cell](../../types/tes3cell)): *Optional*. A cell in which the mark should be placed.
+	* `position` ([tes3vector3](../../types/tes3vector3), number[]): Coordinates of the mark's position.
+	* `rotation` (number): *Default*: `tes3.player.orientation.z`. This argument controls which direction the player's mark location will be facing.
+	* `cell` ([tes3cell](../../types/tes3cell)): *Optional*. A cell in which the mark should be placed. This argument is unnecessary when setting the Mark's location to an exterior cell.
 
 ***
 

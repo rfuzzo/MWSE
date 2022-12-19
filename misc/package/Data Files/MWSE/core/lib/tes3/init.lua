@@ -27,7 +27,6 @@ tes3.crimeType = require("tes3.crimeType")
 tes3.damageSource = require("tes3.damageSource")
 tes3.dialoguePage = require("tes3.dialoguePage")
 tes3.dialogueType = require("tes3.dialogueType")
-tes3.dynamicEffectType = require("tes3.dynamicEffectType")
 tes3.effect = require("tes3.effect")
 tes3.effectAttribute = require("tes3.effectAttribute")
 tes3.effectEventType = require("tes3.effectEventType")
@@ -48,7 +47,6 @@ tes3.magicSchool = require("tes3.magicSchool")
 tes3.magicSourceType = require("tes3.magicSourceType")
 tes3.merchantService = require("tes3.merchantService")
 tes3.musicSituation = require("tes3.musicSituation")
-tes3.niPropertyType = require("tes3.niPropertyType")
 tes3.niType = require("tes3.niType")
 tes3.objectType = require("tes3.objectType")
 tes3.palette  = require("tes3.palette")
@@ -68,7 +66,6 @@ tes3.specializationName = require("tes3.specializationName")
 tes3.spellSource = require("tes3.spellSource")
 tes3.spellState = require("tes3.spellState")
 tes3.spellType = require("tes3.spellType")
-tes3.texturingPropertyMap = require("tes3.texturingPropertyMap")
 tes3.uiElementType = require("tes3.uiElementType")
 tes3.uiEvent = require("tes3.uiEvent")
 tes3.uiProperty = require("tes3.uiProperty")
@@ -200,6 +197,7 @@ end
 
 -- Checks to see if a lua mod is active.
 function tes3.isLuaModActive(key)
+	---@diagnostic disable-next-line: undefined-field
 	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()] == true
 end
 

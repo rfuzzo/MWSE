@@ -19,12 +19,45 @@ local results = myObject:getVariableData()
 
 **Returns**:
 
-* `results` (table): The table with all of script's variable names as keys. 
-		
-		Each entry has following fields:
-			1.) type - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
-			2.) index - the order of occurance of the variable in the script, starting from `0`
-			3.) value - this can have `nil` value
+* `results` (table&lt;string, table&gt;): The table with all of script's variable names as keys.
+
+Each entry has following fields:
+
+ 1. type  - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
+ 2. index - the order of occurance of the variable in the script, starting from `0`
+ 3. value - this can have `nil` value
+
 
 ***
+
+## Math Operations
+
+### Length (`#`)
+
+| Result type | Description |
+| ----------- | ----------- |
+| number | Returns the total amount of variables in this tes3scriptContext. |
+
+***
+
+??? example "Example: An example of indexing local script variables inside `tes3scriptContext` objects"
+
+	Companions usually have a mwscript script with variable named `companion` set to 1. This can be used to determine if a reference is player's companion or not.
+
+	```lua
+	
+	--- This function returns `true` if the reference
+	--- has a variable companion set to 1 in its script.
+	---@param reference tes3reference
+	---@return boolean
+	local function hasCompanionShare(reference)
+	
+		-- This shows that we can read any variable inside
+		-- `tes3scriptContext` objects as if it was normal Lua table
+		-- (`reference.context` is of `tes3scriptContext` type)
+	    local companion = reference.context["companion"]
+	    return companion and companion == 1
+	end
+
+	```
 

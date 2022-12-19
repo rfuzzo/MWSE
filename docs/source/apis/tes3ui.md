@@ -165,8 +165,8 @@ tes3ui.createResponseText({ text = ..., type = ..., index = ... })
 
 * `params` (table)
 	* `text` (string): The text to display.
-	* `type` (number): *Optional*. The type for the response. Defaults to `choice` responses.
-	* `index` (number): *Optional*. The answer index for the response. Only used for `choice` responses.
+	* `type` (integer): *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
+	* `index` (integer): *Optional*. The answer index for the response. Only used for `choice` responses.
 
 ***
 
@@ -315,6 +315,10 @@ local result = tes3ui.getMenuOnTop()
 ### `tes3ui.getPalette`
 
 Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
+
+![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png){ loading = lazy }
+*Above: All the palette colors in-game with default settings. Note that some entries are entirely black. In order of appearance, those are backgroundColor, blackColor, and journalTopicColor.*
+
 
 ```lua
 local palette = tes3ui.getPalette(name)
@@ -469,12 +473,12 @@ tes3ui.logToConsole(text, isCommand)
 
 
 ```lua
-local executed = tes3ui.lookupID(unknown)
+local executed = tes3ui.lookupID(id)
 ```
 
 **Parameters**:
 
-* `unnamed`
+* `id` ([tes3uiProperty](../../types/tes3uiProperty), integer)
 
 **Returns**:
 
@@ -576,7 +580,7 @@ tes3ui.setConsoleReference(reference)
 
 ### `tes3ui.showBookMenu`
 
-Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
+Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
 
 ```lua
 tes3ui.showBookMenu(text)
@@ -794,7 +798,7 @@ local menu = tes3ui.showNotifyMenu(string, formatValues)
 
 ### `tes3ui.showScrollMenu`
 
-Displays the scroll menu with arbitrary text. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
+Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
 
 ```lua
 tes3ui.showScrollMenu(text)

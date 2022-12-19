@@ -252,7 +252,7 @@ The object's local uniform scaling factor.
 
 ### `specular`
 
-This property was inteded to be specular light color in Gamebryo, but in Morrowind it represents the dynamic culling radius. All the color channels are equal to the radius.
+This property was inteded to be specular light color in NetImmerse, but in Morrowind it represents the dynamic culling radius. All the color channels are equal to the radius.
 
 In practice, this radius represents the light's influence radius.
 
@@ -314,11 +314,11 @@ The object's local translation vector.
 
 ### `type`
 
-*Read-only*. The enumerated type of a given dynamic effect. Types: `0 - niAmbientLight`, `1 - niDirectionalLight`, `2 - niPointLight`, `3 - niSpotLight`, `4 - niTextureEffect`.
+*Read-only*. The enumerated type of a given dynamic effect. Maps to values in [`ni.dynamicEffectType`](https://mwse.github.io/MWSE/references/ni/dynamic-effect-types/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -469,12 +469,8 @@ myObject:detachAffectedNode(node)
 Detaches all the properties on the object and returns them in the table.
 
 ```lua
-local result = myObject:detachAllProperties(ts)
+local result = myObject:detachAllProperties()
 ```
-
-**Parameters**:
-
-* `ts` (table)
 
 **Returns**:
 
@@ -492,7 +488,7 @@ local result = myObject:detachProperty(type)
 
 **Parameters**:
 
-* `type` (number): The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
+* `type` (integer): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
@@ -546,7 +542,7 @@ local result = myObject:getProperty(type)
 
 **Parameters**:
 
-* `type` (number): The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
+* `type` (integer): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
@@ -628,7 +624,7 @@ local result = myObject:hasStringDataWith(value)
 
 ### `isInstanceOfType`
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -636,7 +632,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -646,7 +642,7 @@ local result = myObject:isInstanceOfType(type)
 
 ### `isOfType`
 
-Determines if the object is of a given type. Types can be found in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -654,7 +650,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`tes3.niType`](https://mwse.github.io/MWSE/references/niTypes/) table.
+* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -681,7 +677,6 @@ myObject:prependController(controller)
 Alias for `update()` method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 
 !!! tip
-	Update Efficiency
 	It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.
 
 
@@ -811,8 +806,7 @@ myObject:setRadius(radius)
 
 Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 
-!!! tip
-	Update Efficiency
+!!! tip	"Update Efficiency"
 	It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.
 
 

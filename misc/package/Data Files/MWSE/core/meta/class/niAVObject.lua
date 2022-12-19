@@ -34,12 +34,11 @@ function niAVObject:attachProperty(property) end
 function niAVObject:clearTransforms() end
 
 --- Detaches all the properties on the object and returns them in the table.
---- @param ts table No description yet available.
 --- @return niAlphaProperty[]|niFogProperty[]|niMaterialProperty[]|niStencilProperty[]|niTexturingProperty[]|niVertexColorProperty[]|niZBufferProperty[] result No description yet available.
-function niAVObject:detachAllProperties(ts) end
+function niAVObject:detachAllProperties() end
 
 --- Detaches and returns a property from the object which matches the given property type.
---- @param type number The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
+--- @param type integer The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 --- @return niAlphaProperty|niFogProperty|niMaterialProperty|niStencilProperty|niTexturingProperty|niVertexColorProperty|niZBufferProperty result No description yet available.
 function niAVObject:detachProperty(type) end
 
@@ -49,17 +48,16 @@ function niAVObject:detachProperty(type) end
 function niAVObject:getObjectByName(name) end
 
 --- Gets an attached property by property type.
---- @param type number The types are available in [`tes3.niPropertyType`](https://mwse.github.io/MWSE/references/niProperty-types/) table.
+--- @param type integer The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 --- @return niAlphaProperty|niFogProperty|niMaterialProperty|niStencilProperty|niTexturingProperty|niVertexColorProperty|niZBufferProperty result No description yet available.
 function niAVObject:getProperty(type) end
 
 --- Alias for `update()` method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 --- 
 --- !!! tip
---- 	Update Efficiency
 --- 	It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.
 --- 
---- @param args niAVObject.propagatePositionChange.params? This table accepts the following values:
+--- @param args niAVObject.propagatePositionChange.args? This table accepts the following values:
 --- 
 --- `time`: number? — *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
 --- 
@@ -69,18 +67,17 @@ function niAVObject:getProperty(type) end
 function niAVObject:propagatePositionChange(args) end
 
 ---Table parameter definitions for `niAVObject.propagatePositionChange`.
---- @class niAVObject.propagatePositionChange.params
+--- @class niAVObject.propagatePositionChange.args
 --- @field time number? *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
 --- @field controllers boolean? *Default*: `false`. Update object's controllers?
 --- @field bounds boolean? *Default*: `true`. Update object's bounds?
 
 --- Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 --- 
---- !!! tip
---- 	Update Efficiency
+--- !!! tip	"Update Efficiency"
 --- 	It's best to "batch up" calls to this method. For example, when transform of an object its parent and grandparent are all changed during the same frame, it is much more efficient to call this method only on the grandparent object after all transforms have been changed. Also, consider calling this function as low as possible on a scene graph.
 --- 
---- @param args niAVObject.update.params? This table accepts the following values:
+--- @param args niAVObject.update.args? This table accepts the following values:
 --- 
 --- `time`: number? — *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
 --- 
@@ -90,7 +87,7 @@ function niAVObject:propagatePositionChange(args) end
 function niAVObject:update(args) end
 
 ---Table parameter definitions for `niAVObject.update`.
---- @class niAVObject.update.params
+--- @class niAVObject.update.args
 --- @field time number? *Default*: `0`. This parameter is the time-slice for transformation and bounds updates
 --- @field controllers boolean? *Default*: `false`. Update object's controllers?
 --- @field bounds boolean? *Default*: `true`. Update object's bounds?

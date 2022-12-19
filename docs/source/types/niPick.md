@@ -5,17 +5,17 @@
 
 # niPick
 
-Class used in the picking intersection system within the game engine.  Using a ray, the engine performs picking operations on a scene graph or any subtree. Given a ray and a subtree, the subtree is traversed and matching nodes are added to an array.
+Class used in the picking intersection system within the game engine. Using a ray, the engine performs picking operations on a scene graph or any subtree. Given a ray and a subtree, the subtree is traversed and matching nodes are added to an array.
 
 ## Properties
 
 ### `coordinateType`
 
-The coordinate type for the object.
+The coordinate type for the object. Maps to values in [`ni.pickCoordinateType`](https://mwse.github.io/MWSE/references/ni/pick-coordinate-types/) table.
 
 **Returns**:
 
-* `result` (niPickCoordinateType)
+* `result` (integer)
 
 ***
 
@@ -32,11 +32,11 @@ If true, back face triangles (those with clockwise winding order) are culled pri
 
 ### `intersectType`
 
-The intersect type for the object.
+The intersect type for the object. Maps to values in [`ni.pickIntersectType`](https://mwse.github.io/MWSE/references/ni/pick-intersection-types/) table.
 
 **Returns**:
 
-* `result` (niPickIntersectType)
+* `result` (integer)
 
 ***
 
@@ -63,21 +63,21 @@ If true, the pick stops if it encounters an object with the 'app culled' flag se
 
 ### `pickType`
 
-The pick type for the object.
+The pick type for the object. Maps to values in [`ni.pickType`](https://mwse.github.io/MWSE/references/ni/pick-types/) table.
 
 **Returns**:
 
-* `result` (niPickType)
+* `result` (integer)
 
 ***
 
 ### `results`
 
-The array of pick records obtained by the last call to PickObjects.
+*Read-only*. The array of pick records obtained by the last call to `pickObjects`.
 
 **Returns**:
 
-* `result` (niPickRecordTArray)
+* `result` ([niPickRecord](../../types/niPickRecord)[])
 
 ***
 
@@ -133,11 +133,11 @@ The root of the scene graph on which the next picking operation will be performe
 
 ### `sortType`
 
-The sort type for the object.
+The sort type for the object. Maps to values in [`ni.pickSortType`](https://mwse.github.io/MWSE/references/ni/pick-sort-types/) table.
 
 **Returns**:
 
-* `result` (niPickSortType)
+* `result` (integer)
 
 ***
 
@@ -155,17 +155,17 @@ myObject:clearResults()
 
 ### `pickObjects`
 
-Performs the picking operation.
+Performs the picking operation by casting a ray.
 
 ```lua
-myObject:pickObjects(origin, distance, append, maxDistance)
+myObject:pickObjects(origin, direction, append, maxDistance)
 ```
 
 **Parameters**:
 
-* `origin` ([tes3vector3](../../types/tes3vector3))
-* `distance` ([tes3vector3](../../types/tes3vector3))
-* `append` (boolean): *Optional*. Default value: false
+* `origin` ([tes3vector3](../../types/tes3vector3)): The origin of the ray in world coordinates.
+* `direction` ([tes3vector3](../../types/tes3vector3))
+* `append` (boolean): *Default*: `false`. This parameter indicates whether the new results are appended to the results array, or if a new array is formed clearing the results array.
 * `maxDistance` (number): *Optional*. Default value: 0.0F
 
 ***

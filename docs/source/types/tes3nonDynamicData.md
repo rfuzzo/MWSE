@@ -25,7 +25,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3birthsign](../../types/tes3birthsign)[])
 
 ***
 
@@ -35,7 +35,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` (tes3stlList)
+* `result` ([tes3cell](../../types/tes3cell)[])
 
 ***
 
@@ -45,7 +45,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3class](../../types/tes3class)[])
 
 ***
 
@@ -55,7 +55,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3dialogue](../../types/tes3dialogue)[])
 
 ***
 
@@ -65,7 +65,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3faction](../../types/tes3faction)[])
 
 ***
 
@@ -89,13 +89,33 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 ***
 
+### `lastLoadedFile`
+
+*Read-only*. The last loaded savegame file.
+
+**Returns**:
+
+* `result` ([tes3gameFile](../../types/tes3gameFile))
+
+***
+
 ### `magicEffects`
 
 *Read-only*. A table of references to all magic effects. This is a dictionary, as the effect list may have gaps.
 
 **Returns**:
 
-* `result` (table&lt;number, [tes3magicEffect](../../types/tes3magicEffect)&gt;)
+* `result` (table&lt;integer, [tes3magicEffect](../../types/tes3magicEffect)&gt;)
+
+***
+
+### `mapTexture`
+
+Access to the World map texture.
+
+**Returns**:
+
+* `result` ([niSourceTexture](../../types/niSourceTexture))
 
 ***
 
@@ -105,7 +125,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` (tes3linkedList)
+* `result` ([tes3object](../../types/tes3object)[])
 
 ***
 
@@ -115,7 +135,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3race](../../types/tes3race)[])
 
 ***
 
@@ -125,7 +145,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3region](../../types/tes3region)[])
 
 ***
 
@@ -135,7 +155,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3script](../../types/tes3script)[])
 
 ***
 
@@ -155,7 +175,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3soundGenerator](../../types/tes3soundGenerator)[])
 
 ***
 
@@ -165,7 +185,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3sound](../../types/tes3sound)[])
 
 ***
 
@@ -175,17 +195,17 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` (tes3linkedList)
+* `result` ([tes3spell](../../types/tes3spell)[])
 
 ***
 
 ### `startScripts`
 
-*Read-only*. A collection of all [`tes3startScript`](https://mwse.github.io/MWSE/types/tes3startScript/) objects.
+*Read-only*. A collection of all start script objects.
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3startScript](../../types/tes3startScript)[])
 
 ***
 

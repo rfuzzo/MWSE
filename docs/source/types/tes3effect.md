@@ -11,11 +11,11 @@ A structure that defines information for an effect and its associated variables,
 
 ### `attribute`
 
-The attribute associated with this effect, or `-1` if no attribute is used.
+The attribute associated with this effect, or `nil` if no attribute is used. Maps to values from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer, nil)
 
 ***
 
@@ -35,17 +35,17 @@ How long the effect should last.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `id`
 
-The base `tes3magicEffect` ID that the effect uses.
+The base `tes3magicEffect` ID that the effect uses. Maps to values from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -55,7 +55,7 @@ The maximum magnitude of the effect.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -65,7 +65,7 @@ The minimum magnitude of the effect.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -85,7 +85,7 @@ The radius of the effect.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -95,17 +95,17 @@ Determines if the effect is self, touch, or target ranged. Maps to [`tes3.effect
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ### `skill`
 
-The skill associated with this effect, or `-1` if no skill is used.
+The skill associated with this effect, or `nil` if no skill is used. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer, nil)
 
 ***
 

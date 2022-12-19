@@ -80,6 +80,27 @@ The blocked state of the object.
 
 * `result` ([tes3scriptContext](../../types/tes3scriptContext))
 
+??? example "Example: Checking reference's script variables"
+
+	Companions usually have a mwscript script with variable named `companion` set to 1. This can be used to determine if a reference is player's companion or not.
+
+	```lua
+	
+	--- This function returns `true` if the reference
+	--- has a variable companion set to 1 in its script.
+	---@param reference tes3reference
+	---@return boolean
+	local function hasCompanionShare(reference)
+	
+		-- This shows that we can read any variable inside
+		-- `tes3scriptContext` objects as if it was normal Lua table
+		-- (`reference.context` is of `tes3scriptContext` type)
+	    local companion = reference.context["companion"]
+	    return companion and companion == 1
+	end
+
+	```
+
 ***
 
 ### `data`
@@ -344,7 +365,7 @@ The next object in parent collection's list.
 
 ### `orientation`
 
-Access to the reference's orientation, which corresponds to rotation along each axis in degrees (Euler angles). Setting the orientation sets the reference as modified.
+Access to the reference's orientation, in XYZ Euler angles in Radians. Changing the orientation marks the reference as modified.
 
 **Returns**:
 
@@ -375,6 +396,13 @@ The persistent flag of the object.
 ### `position`
 
 Access to the reference's position. Setting the position sets the reference as modified.
+
+For actors, the axes are:
+
+ - X right - left(+)
+ - Y front - back(+)
+ - Z down  - up(+)
+
 
 **Returns**:
 
@@ -414,7 +442,7 @@ The previous object in parent collection's list.
 
 ### `scale`
 
-The object's scale.
+The object's scale. The value range is (0, 10).
 
 **Returns**:
 
@@ -602,7 +630,7 @@ myObject:clearActionFlag(flagIndex)
 
 **Parameters**:
 
-* `flagIndex` (number): The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+* `flagIndex` (integer): The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 
 ***
 
@@ -753,7 +781,7 @@ local result = myObject:onCloseInventory()
 
 ### `setActionFlag`
 
-Sets a bit in the reference's action data attachment
+Sets a bit in the reference's action data attachment.
 
 ```lua
 myObject:setActionFlag(flagIndex)
@@ -761,7 +789,7 @@ myObject:setActionFlag(flagIndex)
 
 **Parameters**:
 
-* `flagIndex` (number): The action flag to clear.
+* `flagIndex` (integer): The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 
 ***
 
@@ -786,7 +814,7 @@ myObject:setNoCollisionFlag(hasNoCollision, updateCollisions)
 **Parameters**:
 
 * `hasNoCollision` (boolean): If `true`, the reference no longer has collision.
-* `updateCollisions` (boolean): If `true`, collision groups for the active cells are recalculated.
+* `updateCollisions` (boolean): *Default*: `true`. If `true`, collision groups for the active cells are recalculated.
 
 ***
 
@@ -800,7 +828,7 @@ local result = myObject:testActionFlag(flagIndex)
 
 **Parameters**:
 
-* `flagIndex` (number): The action flag to test. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+* `flagIndex` (integer): The action flag to test. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 
 **Returns**:
 

@@ -80,16 +80,16 @@ function tes3ui.createMenu(params) end
 --- 
 --- `text`: string — The text to display.
 --- 
---- `type`: number? — *Optional*. The type for the response. Defaults to `choice` responses.
+--- `type`: integer? — *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
 --- 
---- `index`: number? — *Optional*. The answer index for the response. Only used for `choice` responses.
+--- `index`: integer? — *Optional*. The answer index for the response. Only used for `choice` responses.
 function tes3ui.createResponseText(params) end
 
 ---Table parameter definitions for `tes3ui.createResponseText`.
 --- @class tes3ui.createResponseText.params
 --- @field text string The text to display.
---- @field type number? *Optional*. The type for the response. Defaults to `choice` responses.
---- @field index number? *Optional*. The answer index for the response. Only used for `choice` responses.
+--- @field type integer? *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
+--- @field index integer? *Optional*. The answer index for the response. Only used for `choice` responses.
 
 --- Creates a tooltip menu, which can be an empty menu, an item tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.
 ---
@@ -122,7 +122,7 @@ function tes3ui.findHelpLayerMenu(id) end
 
 --- Locates a top-level menu through its id.
 --- @param id string|number The ID of the menu to locate.
---- @return tes3uiElement result No description yet available.
+--- @return tes3uiElement? result No description yet available.
 function tes3ui.findMenu(id) end
 
 --- Forces the game to update the inventory tile GUI elements. Unlike tes3ui.updateInventoryTiles, this will force-resync the player's inventory to the GUI, rather than updating what is already in the GUI system.
@@ -141,6 +141,10 @@ function tes3ui.getInventorySelectType() end
 function tes3ui.getMenuOnTop() end
 
 --- Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
+--- 
+--- ![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png){ loading = lazy }
+--- *Above: All the palette colors in-game with default settings. Note that some entries are entirely black. In order of appearance, those are backgroundColor, blackColor, and journalTopicColor.*
+--- 
 --- @param name string The name of the palette color. Maps to values in [`tes3.palette`](https://mwse.github.io/MWSE/references/palettes/) enumeration.
 --- @return number[] palette An array containing the RGB color values, in the range [0.0, 1.0].
 function tes3ui.getPalette(name) end
@@ -177,9 +181,9 @@ function tes3ui.log(message, ...) end
 function tes3ui.logToConsole(text, isCommand) end
 
 --- 
---- @param unknown nil No description yet available.
+--- @param id tes3uiProperty|integer No description yet available.
 --- @return string executed No description yet available.
-function tes3ui.lookupID(unknown) end
+function tes3ui.lookupID(id) end
 
 --- Checks if the game is in menu mode.
 --- @return boolean result No description yet available.
@@ -210,7 +214,7 @@ function tes3ui.registerProperty(s) end
 --- @param reference tes3reference|nil No description yet available.
 function tes3ui.setConsoleReference(reference) end
 
---- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
+--- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
 --- @param text string No description yet available.
 function tes3ui.showBookMenu(text) end
 
@@ -320,7 +324,7 @@ function tes3ui.showJournal() end
 --- @return tes3uiElement menu The notify menu created.
 function tes3ui.showNotifyMenu(string, ...) end
 
---- Displays the scroll menu with arbitrary text. It needs to follow book text conventions as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
+--- Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
 --- @param text string No description yet available.
 function tes3ui.showScrollMenu(text) end
 
