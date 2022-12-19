@@ -3576,6 +3576,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -4998,6 +5002,20 @@
     <li class="md-nav__item">
       <a href="../niZBufferProperty/" class="md-nav__link">
         niZBufferProperty
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pattern/" class="md-nav__link">
+        Pattern
       </a>
     </li>
   
@@ -6846,6 +6864,20 @@
     <li class="md-nav__item">
       <a href="../tes3statisticSkill/" class="md-nav__link">
         tes3statisticSkill
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tes3tarray/" class="md-nav__link">
+        Tes3tarray
       </a>
     </li>
   
@@ -12517,7 +12549,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>id</code> (tes3uiEvent): The original UI event.</li>
+<li><code>id</code> (<a href="../../types/tes3uiEventData">tes3uiEventData</a>): The original UI event.</li>
 </ul>
 <hr />
 <h3 id="getcontentelement"><code>getContentElement</code><a class="headerlink" href="#getcontentelement" title="Permanent link">⚓︎</a></h3>
@@ -12597,7 +12629,7 @@
 <hr />
 <h3 id="getpropertyobject"><code>getPropertyObject</code><a class="headerlink" href="#getpropertyobject" title="Permanent link">⚓︎</a></h3>
 <p>Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as an object value, defaulting to <code>nil</code> if the property was not set. This function can be dangerous to use, and can lead to crashes if not properly understood.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyObject</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">typeCast</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">object</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getPropertyObject</span><span class="p">(</span><span class="n">property</span><span class="p">,</span> <span class="n">typeCast</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -12606,7 +12638,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>value</code> (number): The value of the property, defaulting to <code>nil</code> if the property was not set.</li>
+<li><code>object</code> (any): The value of the property, defaulting to <code>nil</code> if the property was not set.</li>
 </ul>
 <hr />
 <h3 id="getpropertyproperty"><code>getPropertyProperty</code><a class="headerlink" href="#getpropertyproperty" title="Permanent link">⚓︎</a></h3>
@@ -12845,7 +12877,7 @@ Widget-specific events:
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>property</code> (number, string): The property to get.</li>
-<li><code>value</code> (object): The value to set.</li>
+<li><code>value</code> (any): The value to set.</li>
 </ul>
 <hr />
 <h3 id="setpropertyproperty"><code>setPropertyProperty</code><a class="headerlink" href="#setpropertyproperty" title="Permanent link">⚓︎</a></h3>
@@ -12873,7 +12905,7 @@ Widget-specific events:
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>eventID</code> (tes3uiEvent, string): The event, or event ID.</li>
+<li><code>eventID</code> (<a href="../../types/tes3uiEventData">tes3uiEventData</a>, string): The event, or event ID.</li>
 </ul>
 <hr />
 <h3 id="unregister"><code>unregister</code><a class="headerlink" href="#unregister" title="Permanent link">⚓︎</a></h3>

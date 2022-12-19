@@ -3756,6 +3756,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -5178,6 +5182,20 @@
     <li class="md-nav__item">
       <a href="../../types/niZBufferProperty/" class="md-nav__link">
         niZBufferProperty
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/pattern/" class="md-nav__link">
+        Pattern
       </a>
     </li>
   
@@ -7026,6 +7044,20 @@
     <li class="md-nav__item">
       <a href="../../types/tes3statisticSkill/" class="md-nav__link">
         tes3statisticSkill
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3tarray/" class="md-nav__link">
+        Tes3tarray
       </a>
     </li>
   
@@ -10594,7 +10626,7 @@
 <h3 id="tabletraverse"><code>table.traverse</code><a class="headerlink" href="#tabletraverse" title="Permanent link">⚓︎</a></h3>
 <p>This function is used to iterate over a graph-like table. You can specify the key of the subtable that contains the child nodes.</p>
 <p>Each "node" is an object with a children table of other "nodes", each of which might have their own children. For example, a sceneNode is made up of niNodes, and each niNodes can have a list of niNode children. This is best used for recursive data structures like UI elements and sceneNodes etc.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10603,7 +10635,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (iterator)</li>
+<li><code>iterator</code> (fun(): any)</li>
 </ul>
 <details class="example">
 <summary>Example: Iterate over all scene nodes attached to player.</summary>

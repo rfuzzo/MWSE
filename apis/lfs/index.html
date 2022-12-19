@@ -3728,6 +3728,10 @@
         
           
         
+          
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5">
@@ -5150,6 +5154,20 @@
     <li class="md-nav__item">
       <a href="../../types/niZBufferProperty/" class="md-nav__link">
         niZBufferProperty
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/pattern/" class="md-nav__link">
+        Pattern
       </a>
     </li>
   
@@ -6998,6 +7016,20 @@
     <li class="md-nav__item">
       <a href="../../types/tes3statisticSkill/" class="md-nav__link">
         tes3statisticSkill
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/tes3tarray/" class="md-nav__link">
+        Tes3tarray
       </a>
     </li>
   
@@ -10514,7 +10546,7 @@
 <hr />
 <h3 id="lfswalkdir"><code>lfs.walkdir</code><a class="headerlink" href="#lfswalkdir" title="Permanent link">⚓︎</a></h3>
 <p>An iterator that visits all files in a directory tree.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">walkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">walkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10522,7 +10554,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (iterator)</li>
+<li><code>iterator</code> (fun(): string, string, string)</li>
 </ul>
 <details class="example">
 <summary>Example: Logging all the files present in Data files\meshes folder</summary>
