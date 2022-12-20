@@ -10172,7 +10172,7 @@
 
 
 <h1 id="storing-data">Storing Data<a class="headerlink" href="#storing-data" title="Permanent link">⚓︎</a></h1>
-<p>MWSE offers various ways to store data persistently. Be at across save sessions for the same character or even persistently across different player characters. To store data that is meant to persist between different characters, you can used provided <a href="https://mwse.github.io/MWSE/apis/json/">json API</a>. It provides a set of functions needed to save Lua's values to json files and load the data to Lua's tables. This process is called serialization. One requirement is that the value can be serialized. Even functions used to work with configuration files <code>mwse.saveConfig</code> and <code>mwse.loadConfig</code> are implemented with json API.</p>
+<p>MWSE offers various ways to store data persistently. Be at across save sessions for the same character or even persistently across different player characters. To store data that is meant to persist between different characters, you can use provided <a href="https://mwse.github.io/MWSE/apis/json/">json API</a>. It provides a set of functions needed to save Lua's values to json files and load the data to Lua's tables. This process is called serialization. One requirement is that the value can be serialized. Even functions used to work with configuration files <code>mwse.saveConfig</code> and <code>mwse.loadConfig</code> are implemented with json API.</p>
 <h2 id="serialization">Serialization<a class="headerlink" href="#serialization" title="Permanent link">⚓︎</a></h2>
 <p>Serializible values are Lua's primitive types:</p>
 <ul>
@@ -10195,7 +10195,7 @@
 <p class="admonition-title">Note</p>
 <p>Both <code>data</code> and <code>tempData</code> tables can only be used to store <em>serializible</em> data.</p>
 </div>
-<p>Data stored in <code>data</code> table on a certain object will persist between savegame sessions, while data stored in <code>tempData</code> table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one.</p>
+<p>Data stored in the <code>data</code> table on a certain object will persist between savegame sessions, while data stored in <code>tempData</code> table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one.</p>
 <div class="admonition example">
 <p class="admonition-title">Example: creating a table inside <code>data</code> table on the player's reference</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Correct way</span>
@@ -10223,7 +10223,7 @@
 <span class="n">myData</span><span class="p">.</span><span class="n">var2</span> <span class="o">=</span> <span class="mi">32</span>
 </code></pre></div>
 </div>
-<p>The field <code>data</code> on the player's reference could be perfect way to store some mod-related player's statistics. For example, a mod implementing karma system could save the player's current karma level inside that table, so that it can persist between save sessions. On the other hand, the data that mod's user would want to persist between whichever character the player or savegame is played would should be saved to a configuration file insted. For instance, keybindings for new abilities are a good candidate for that.</p>
+<p>The field <code>data</code> on the player's reference could be the perfect way to store some mod-related player statistics. For example, a mod implementing a karma system could save the player's current karma level inside that table, so that it can persist between save sessions. On the other hand, the data that the mod's user would want to persist between whichever character the player or savegame is played would be saved to a configuration file instead. For instance, keybindings for new abilities are a good candidate for that.</p>
 <h3 id="usage-of-data-table">Usage of data table<a class="headerlink" href="#usage-of-data-table" title="Permanent link">⚓︎</a></h3>
 <p>Here an example of a simple mod is given which stores some variables to <code>tes3.player.data</code> and <code>tes3.player.tempData</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">shrineIds</span> <span class="o">=</span> <span class="p">{</span>
@@ -10290,7 +10290,7 @@
     <span class="kr">return</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">myMod</span>
 <span class="kr">end</span>
 
-<span class="c1">--- This function will handle update the player&#39;s Current</span>
+<span class="c1">--- This function will handle updating the player&#39;s Current</span>
 <span class="c1">--- karma level, and handle if it passes over -100 or 100</span>
 <span class="c1">---@param delta integer</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">modKarma</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
@@ -10346,7 +10346,7 @@
             <span class="c1">-- award some karma points</span>
             <span class="n">modKarma</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 
-            <span class="c1">-- Lets save that to the list of visited shrine in</span>
+            <span class="c1">-- Let&#39;s save that to the list of visited shrines in</span>
             <span class="c1">-- a table on tes3.player.data, so it can persist</span>
             <span class="c1">-- between savegames.</span>
             <span class="n">data</span><span class="p">.</span><span class="n">shrinesVisited</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span>
