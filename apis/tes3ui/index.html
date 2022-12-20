@@ -391,6 +391,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2">
@@ -525,6 +527,20 @@
     <li class="md-nav__item">
       <a href="../../guides/mod-translations/" class="md-nav__link">
         Mod Translations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/storing-data/" class="md-nav__link">
+        Storing Data
       </a>
     </li>
   
@@ -11023,6 +11039,70 @@
 <ul>
 <li><code>palette</code> (number[]): An array containing the RGB color values, in the range [0.0, 1.0].</li>
 </ul>
+<details class="example">
+<summary>Example: Here is the code used to construct the menu from the image above. This can be used to preview in-game all the available color palettes.</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="nf">onKey</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">menu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">findHelpLayerMenu</span><span class="p">(</span><span class="s2">&quot;testing:Menu&quot;</span><span class="p">)</span>
+
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">menu</span> <span class="kr">then</span>
+        <span class="n">menu</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createHelpLayerMenu</span><span class="p">({</span> <span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;testing:Menu&quot;</span> <span class="p">})</span>
+        <span class="n">menu</span><span class="p">:</span><span class="n">destroyChildren</span><span class="p">()</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">absolutePosAlignX</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">absolutePosAlignY</span> <span class="o">=</span> <span class="mf">0.05</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">autoWidth</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">autoHeight</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">paddingLeft</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">paddingRight</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">paddingTop</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">paddingBottom</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">flowDirection</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">flowDirection</span><span class="p">.</span><span class="n">leftToRight</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">autoWidth</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">autoHeight</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="n">menu</span><span class="p">.</span><span class="n">childAlignX</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="kr">end</span>
+
+    <span class="kd">local</span> <span class="n">left</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createBlock</span><span class="p">()</span>
+    <span class="n">left</span><span class="p">.</span><span class="n">flowDirection</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">flowDirection</span><span class="p">.</span><span class="n">topToBottom</span>
+    <span class="n">left</span><span class="p">.</span><span class="n">autoHeight</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">left</span><span class="p">.</span><span class="n">autoWidth</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">left</span><span class="p">.</span><span class="n">childAlignX</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+    <span class="kd">local</span> <span class="n">right</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createBlock</span><span class="p">()</span>
+    <span class="n">right</span><span class="p">.</span><span class="n">flowDirection</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">flowDirection</span><span class="p">.</span><span class="n">topToBottom</span>
+    <span class="n">right</span><span class="p">.</span><span class="n">autoWidth</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">right</span><span class="p">.</span><span class="n">autoHeight</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="n">right</span><span class="p">.</span><span class="n">childAlignX</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+    <span class="kd">local</span> <span class="n">palettes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="kr">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">palette</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">palette</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="n">palettes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span>
+            <span class="n">palette</span> <span class="o">=</span> <span class="n">palette</span>
+        <span class="p">}</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="kr">end</span>
+    <span class="nb">table.sort</span><span class="p">(</span><span class="n">palettes</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="kr">return</span> <span class="n">a</span><span class="p">.</span><span class="n">name</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">name</span>
+    <span class="kr">end</span><span class="p">)</span>
+
+    <span class="kr">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">entry</span> <span class="kr">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">palettes</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="kd">local</span> <span class="n">label</span>
+        <span class="kr">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">27</span> <span class="kr">then</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">left</span><span class="p">:</span><span class="n">createLabel</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="n">entry</span><span class="p">.</span><span class="n">name</span> <span class="p">})</span>
+        <span class="kr">else</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">right</span><span class="p">:</span><span class="n">createLabel</span><span class="p">({</span> <span class="n">text</span> <span class="o">=</span> <span class="n">entry</span><span class="p">.</span><span class="n">name</span> <span class="p">})</span>
+        <span class="kr">end</span>
+        <span class="n">label</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">getPalette</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">palette</span><span class="p">)</span>
+    <span class="kr">end</span>
+    <span class="n">menu</span><span class="p">:</span><span class="n">updateLayout</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="n">onKey</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">scanCode</span><span class="p">.</span><span class="n">o</span> <span class="p">})</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3uigetserviceactor"><code>tes3ui.getServiceActor</code><a class="headerlink" href="#tes3uigetserviceactor" title="Permanent link">⚓︎</a></h3>
 <p>Returns the mobile actor currently providing services, or the actor the player is talking to.</p>

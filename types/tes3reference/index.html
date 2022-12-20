@@ -391,6 +391,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2">
@@ -525,6 +527,20 @@
     <li class="md-nav__item">
       <a href="../../guides/mod-translations/" class="md-nav__link">
         Mod Translations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/storing-data/" class="md-nav__link">
+        Storing Data
       </a>
     </li>
   
@@ -11281,6 +11297,7 @@
 <hr />
 <h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
 <p>A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the <code>tes3itemData</code> structure. To store data that doesn't get serialized to/from the save, use <code>tempData</code>.</p>
+<p>There is a guide available <a href="https://mwse.github.io/MWSE/guides/storing-data/">here</a> on using this table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>
@@ -11609,6 +11626,7 @@
 <hr />
 <h3 id="tempdata"><code>tempData</code><a class="headerlink" href="#tempdata" title="Permanent link">⚓︎</a></h3>
 <p>As with the <code>data</code> field, a generic lua table that data can be written to. No information in this table will persist into saves. For item references, this is the same table as on the <code>tes3itemData</code> structure.</p>
+<p>There is a guide available <a href="https://mwse.github.io/MWSE/guides/storing-data/">here</a> on using this table.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table)</li>

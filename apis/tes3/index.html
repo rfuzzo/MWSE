@@ -391,6 +391,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_2">
@@ -525,6 +527,20 @@
     <li class="md-nav__item">
       <a href="../../guides/mod-translations/" class="md-nav__link">
         Mod Translations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/storing-data/" class="md-nav__link">
+        Storing Data
       </a>
     </li>
   
@@ -15333,7 +15349,7 @@
 <h3 id="tes3iterate"><code>tes3.iterate</code><a class="headerlink" href="#tes3iterate" title="Permanent link">⚓︎</a></h3>
 <p>This function returns a function that iterates over a tes3iterator object. This is useful for for loops.</p>
 <p>Note that tes3iterator objects support iteration with <code>pairs()</code> function.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="kr">function</span> <span class="err">=</span> <span class="nc">tes3</span><span class="p">.</span><span class="nf">iterate</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -15341,20 +15357,20 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>function</code> (function)</li>
+<li><code>iterator</code> (fun(): tes3object)</li>
 </ul>
 <hr />
 <h3 id="tes3iterateobjects"><code>tes3.iterateObjects</code><a class="headerlink" href="#tes3iterateobjects" title="Permanent link">⚓︎</a></h3>
 <p>Iteration function used for looping over game options.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">object</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">iterateObjects</span><span class="p">(</span><span class="n">filter</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">objectIterator</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">iterateObjects</span><span class="p">(</span><span class="n">filter</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>filter</code> (number, number[], nil): Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants.</li>
+<li><code>filter</code> (integer, integer[]): <em>Optional</em>. Maps to <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> constants.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>object</code> (<a href="../../types/tes3object">tes3object</a>)</li>
+<li><code>objectIterator</code> (fun(): tes3object)</li>
 </ul>
 <hr />
 <h3 id="tes3loadanimation"><code>tes3.loadAnimation</code><a class="headerlink" href="#tes3loadanimation" title="Permanent link">⚓︎</a></h3>
@@ -15436,7 +15452,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>iterationFunction</code> (function)</li>
+<li><code>iterationFunction</code> (fun(): tes3object)</li>
 </ul>
 <hr />
 <h3 id="tes3makesafeobjecthandle"><code>tes3.makeSafeObjectHandle</code><a class="headerlink" href="#tes3makesafeobjecthandle" title="Permanent link">⚓︎</a></h3>
