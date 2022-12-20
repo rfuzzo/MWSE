@@ -10174,19 +10174,23 @@
 <h1 id="storing-data">Storing Data<a class="headerlink" href="#storing-data" title="Permanent link">⚓︎</a></h1>
 <p>MWSE offers various ways to store data persistently. Be at across save sessions for the same character or even persistently across different player characters. To store data that is meant to persist between different characters, you can used provided <a href="https://mwse.github.io/MWSE/apis/json/">json API</a>. It provides a set of functions needed to save Lua's values to json files and load the data to Lua's tables. This process is called serialization. One requirement is that the value can be serialized. Even functions used to work with configuration files <code>mwse.saveConfig</code> and <code>mwse.loadConfig</code> are implemented with json API.</p>
 <h2 id="serialization">Serialization<a class="headerlink" href="#serialization" title="Permanent link">⚓︎</a></h2>
-<p>Serializible values are Lua's primitive types:
- - <code>boolean</code>
- - <code>number</code>
- - <code>string</code>
- - <code>table</code>'s made of above values</p>
+<p>Serializible values are Lua's primitive types:</p>
+<ul>
+<li><code>boolean</code></li>
+<li><code>number</code></li>
+<li><code>string</code></li>
+<li><code>table</code>'s made of above values</li>
+</ul>
 <p>You can't serialize MWSE classes such as <code>tes3reference</code>, <code>tes3mobilePlayer</code>, etc.</p>
 <h2 id="persistent-storage-for-the-same-player-character">Persistent Storage for the Same Player Character<a class="headerlink" href="#persistent-storage-for-the-same-player-character" title="Permanent link">⚓︎</a></h2>
-<p>Besides saving your data to files, you can save your data to some of the MWSE's classes that have a <code>data</code> or <code>tempData</code> property. Those are:
-- <code>tes3combatSession.data</code>
-- <code>tes3itemData.data</code>
-- <code>tes3reference.data</code>
-- <code>tes3itemData.tempData</code>
-- <code>tes3reference.tempData</code></p>
+<p>Besides saving your data to files, you can save your data to some of the MWSE's classes that have a <code>data</code> or <code>tempData</code> property. Those are:</p>
+<ul>
+<li><code>tes3combatSession.data</code></li>
+<li><code>tes3itemData.data</code></li>
+<li><code>tes3reference.data</code></li>
+<li><code>tes3itemData.tempData</code></li>
+<li><code>tes3reference.tempData</code></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Both <code>data</code> and <code>tempData</code> tables can only be used to store <em>serializible</em> data.</p>
