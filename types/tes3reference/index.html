@@ -11279,7 +11279,7 @@
 </ul>
 <details class="example">
 <summary>Example: Checking reference's script variables</summary>
-<p>Companions usually have a mwscript script with variable named <code>companion</code> set to 1. This can be used to determine if a reference is player's companion or not.</p>
+<p>Companions usually have a mwscript script with variable named <code>companion</code> set to 1. This can be used to determine if a reference is player's companion or not. Note that companion share functionality was added to Morrowind in Tribunal expansion. In vanilla game it is used by Tribunal companions. Also, companion mods usually use this feature. But note that all the followers (during certain parts of their quests) from base Morrowind don't have companion share.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- This function returns `true` if the reference</span>
 <span class="c1">--- has a variable companion set to 1 in its script.</span>
 <span class="c1">---@param reference tes3reference</span>
@@ -11290,7 +11290,56 @@
     <span class="c1">-- `tes3scriptContext` objects as if it was normal Lua table</span>
     <span class="c1">-- (`reference.context` is of `tes3scriptContext` type)</span>
     <span class="kd">local</span> <span class="n">companion</span> <span class="o">=</span> <span class="n">reference</span><span class="p">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;companion&quot;</span><span class="p">]</span>
-    <span class="kr">return</span> <span class="n">companion</span> <span class="ow">and</span> <span class="n">companion</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="kr">return</span> <span class="p">(</span><span class="n">companion</span> <span class="ow">and</span>
+            <span class="n">companion</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span>
+            <span class="kc">false</span>
+    <span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary>Example: Checking if an actor is a follower</summary>
+<p>In this example we provide a way to check if a certain actor is currently player's follower. This function can also be useful besides the one from previous example, since not all of the followers have companion share enabled.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- This function returns `true` if a given mobile has</span>
+<span class="c1">--- follow ai package with player as its target</span>
+<span class="c1">---@param mobile tes3mobileNPC|tes3mobileCreature</span>
+<span class="c1">---@return boolean isFollower</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">isFollower</span><span class="p">(</span><span class="n">mobile</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">planner</span> <span class="o">=</span> <span class="n">mobile</span><span class="p">.</span><span class="n">aiPlanner</span>
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">planner</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+
+    <span class="kd">local</span> <span class="n">package</span> <span class="o">=</span> <span class="n">planner</span><span class="p">:</span><span class="n">getActivePackage</span><span class="p">()</span>
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">package</span> <span class="kr">then</span>
+        <span class="kr">return</span> <span class="kc">false</span>
+    <span class="kr">end</span>
+    <span class="kr">if</span> <span class="n">package</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">aiPackage</span><span class="p">.</span><span class="n">follow</span> <span class="kr">then</span>
+        <span class="kd">local</span> <span class="n">target</span> <span class="o">=</span> <span class="n">package</span><span class="p">.</span><span class="n">targetActor</span>
+
+        <span class="kr">if</span> <span class="n">target</span><span class="p">.</span><span class="n">objectType</span> <span class="o">==</span> <span class="n">tes3</span><span class="p">.</span><span class="n">objectType</span><span class="p">.</span><span class="n">mobilePlayer</span> <span class="kr">then</span>
+            <span class="kr">return</span> <span class="kc">true</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+    <span class="kr">return</span> <span class="kc">false</span>
+<span class="kr">end</span>
+
+<span class="c1">--- With the above function we can build a function that</span>
+<span class="c1">--- creates a table with all of the player&#39;s followers</span>
+<span class="c1">---@return tes3reference[] followerList</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">getFollowers</span><span class="p">()</span>
+    <span class="kd">local</span> <span class="n">followers</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="kr">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">mobile</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">mobilePlayer</span><span class="p">.</span><span class="n">friendlyActors</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="c1">---@cast mobile tes3mobileNPC|tes3mobileCreature</span>
+        <span class="kr">if</span> <span class="n">isFollower</span><span class="p">(</span><span class="n">mobile</span><span class="p">)</span> <span class="kr">then</span>
+            <span class="n">followers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mobile</span><span class="p">.</span><span class="n">reference</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="kr">end</span>
+    <span class="kr">end</span>
+
+    <span class="kr">return</span> <span class="n">followers</span>
 <span class="kr">end</span>
 </code></pre></div>
 </details>
@@ -11409,10 +11458,10 @@
 </ul>
 <hr />
 <h3 id="locknode"><code>lockNode</code><a class="headerlink" href="#locknode" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. Quick access to the reference's lock node, if any.</p>
+<p><em>Read-only</em>. Quick access to the reference's lock node, if any. Doors or containers that aren't locked nor trapped have this property set to <code>nil</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3lockNode">tes3lockNode</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3lockNode">tes3lockNode</a>, nil)</li>
 </ul>
 <hr />
 <h3 id="mesh"><code>mesh</code><a class="headerlink" href="#mesh" title="Permanent link">⚓︎</a></h3>

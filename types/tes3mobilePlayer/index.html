@@ -13610,10 +13610,14 @@
 <hr />
 <h3 id="armorrating"><code>armorRating</code><a class="headerlink" href="#armorrating" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the <code>applyDamage</code> function.</p>
-<p>Armour mitigation calculation:
-x = damage / (damage + target.armorRating)
+<div class="admonition note">
+<p class="admonition-title">Armour mitigation calculation:</p>
+<p>x = damage / (damage + target.armorRating)
 damage *= max(fCombatArmorMinMult, x)
-if damage &lt; 1 then damage = 1 end</p>
+if damage &lt; 1 then
+    damage = 1
+end</p>
+</div>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
@@ -15347,7 +15351,7 @@ if damage &lt; 1 then damage = 1 end</p>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>force</code> (boolean): If <code>false</code>, the function won't stop combat if the actor has other valid hostile targets.</li>
+<li><code>force</code> (boolean): <em>Default</em>: <code>false</code>. If <code>false</code>, the function won't stop combat if the actor has other valid hostile targets.</li>
 </ul>
 <hr />
 <h3 id="unequip"><code>unequip</code><a class="headerlink" href="#unequip" title="Permanent link">⚓︎</a></h3>

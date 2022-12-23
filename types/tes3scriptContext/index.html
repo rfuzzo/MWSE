@@ -10250,7 +10250,10 @@
     <span class="c1">-- `tes3scriptContext` objects as if it was normal Lua table</span>
     <span class="c1">-- (`reference.context` is of `tes3scriptContext` type)</span>
     <span class="kd">local</span> <span class="n">companion</span> <span class="o">=</span> <span class="n">reference</span><span class="p">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;companion&quot;</span><span class="p">]</span>
-    <span class="kr">return</span> <span class="n">companion</span> <span class="ow">and</span> <span class="n">companion</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="kr">return</span> <span class="p">(</span><span class="n">companion</span> <span class="ow">and</span>
+            <span class="n">companion</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span>
+            <span class="kc">false</span>
+    <span class="p">)</span>
 <span class="kr">end</span>
 </code></pre></div>
 </details>
