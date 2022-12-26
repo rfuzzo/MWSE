@@ -10314,6 +10314,7 @@
 <h1 id="construction-set-extender">Construction Set Extender<a class="headerlink" href="#construction-set-extender" title="Permanent link">⚓︎</a></h1>
 <p>The Construction Set Extender, also known as CSSE, is a project that aims to improve the functionality of the TES Construction Set. This page serves to document the project.</p>
 <p>To request a feature, visit the <a href="https://github.com/MWSE/MWSE/issues/397">Construction Set Extender Development issue</a> on GitHub. Support for the project can be found in the #mwse channel in the <a href="https://discord.me/page/mwmods">Morrowind Modding Community</a>.</p>
+<p>For a list of recent changes, <a href="https://github.com/MWSE/MWSE/commits/master/CSSE">visit the CSSE project folder commit history</a>.</p>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">⚓︎</a></h2>
 <p>CSSE requires <a href="https://www.nexusmods.com/morrowind/mods/41102?">MGE XE</a> v0.14.3 (released July 29, 2022) or later in order to be automatically loaded into the Construction Set.</p>
 <p>If using OpenMW, you will still need to install MGE XE into your Morrowind installation directory (the same directory that you launch the Construction Set).</p>
@@ -10343,8 +10344,11 @@
 <h3 id="object-window">Object Window<a class="headerlink" href="#object-window" title="Permanent link">⚓︎</a></h3>
 <ul>
 <li>Significantly improved UI responsiveness.</li>
-<li>Added a footer to the window, with a new filter input. This input can be focused by using CTRL+F while the Object Window is active. This can be used to filter objects by a matching object ID fragment.</li>
+<li>Added a footer to the window, with a new filter input. This input can be focused by using CTRL+F while the Object Window is active. This can be used to filter objects by a matching id, name, icon, model, enchantment, script, or book text fragments.</li>
 <li>Fixed issue where box selection in the object window would cause the mouse to snap to the edge of the screen.</li>
+<li>Modified objects are highlighted with a light green background.</li>
+<li>Deleted objects are highlighted with a light red background.</li>
+<li>A new column is available to sort on for the object modified state.</li>
 </ul>
 <h3 id="dialogue-window">Dialogue Window<a class="headerlink" href="#dialogue-window" title="Permanent link">⚓︎</a></h3>
 <ul>
@@ -10358,9 +10362,10 @@
 <li>References can be moved onto surfaces. By holding the alt key when drag-moving a reference, it will rotate and snap onto the surface under the cursor. The context menu (Q) can be used to set the axis to snap to.</li>
 <li>Extended editor marker support. Toggling markers (M) will now also toggle markers supported by the game executable. This allows custom markers to be toggled by tagging them with a MRK string and adding a EditorMarker node, or by defining objects whose name begins with or matches "Tri EditorMarker".</li>
 <li>A new context menu is available, using the Q key. From it you can access some new features:<ul>
+<li>Set the snap axis when alt-drag-moving references.</li>
+<li>Toggle between world axis or local axis rotations by default.</li>
 <li>Hide selected references, culling them from the scene so you can work behind them.</li>
 <li>Restore hidden references, restoring to view any references hidden with the hide selection option.</li>
-<li>Set the snap axis when alt-drag-moving references.</li>
 <li>Set or clear the QuickStart data from the current render window perspective.</li>
 </ul>
 </li>
