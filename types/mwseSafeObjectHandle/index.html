@@ -10185,7 +10185,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (<a href="../../types/tes3object">tes3object</a>)</li>
+<li><code>result</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
 </ul>
 <hr />
 <h3 id="valid"><code>valid</code><a class="headerlink" href="#valid" title="Permanent link">⚓︎</a></h3>
@@ -10210,7 +10210,7 @@
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">myFunction</span><span class="p">()</span>
     <span class="c1">-- Before using the reference, we need to check that it&#39;s still valid.</span>
     <span class="c1">-- References get unloaded on cell changes etc.</span>
-    <span class="kr">if</span> <span class="n">refHandle</span><span class="p">:</span><span class="n">valid</span><span class="p">()</span> <span class="kr">then</span>
+    <span class="kr">if</span> <span class="n">refHandle</span> <span class="ow">and</span> <span class="n">refHandle</span><span class="p">:</span><span class="n">valid</span><span class="p">()</span> <span class="kr">then</span>
         <span class="c1">-- Now we can safely do something with our stored reference.</span>
         <span class="kd">local</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">refHandle</span><span class="p">:</span><span class="n">getObject</span><span class="p">()</span>
 

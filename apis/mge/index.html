@@ -2983,6 +2983,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mgesavescreenshot" class="md-nav__link">
+    mge.saveScreenshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mgesetlightingmode" class="md-nav__link">
     mge.setLightingMode
   </a>
@@ -10332,6 +10339,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mgesavescreenshot" class="md-nav__link">
+    mge.saveScreenshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mgesetlightingmode" class="md-nav__link">
     mge.setLightingMode
   </a>
@@ -10459,6 +10473,19 @@
 <p>Saves the MGE config file. This is primarily an internal function and shouldn't be called casually.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">saveConfig</span><span class="p">()</span>
 </code></pre></div>
+<hr />
+<h3 id="mgesavescreenshot"><code>mge.saveScreenshot</code><a class="headerlink" href="#mgesavescreenshot" title="Permanent link">⚓︎</a></h3>
+<p>Saves a screenshot.</p>
+<div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">saveScreenshot</span><span class="p">({</span> <span class="n">path</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">captureWithUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
+<li><code>path</code> (string)</li>
+<li><code>captureWithUI</code> (boolean): <em>Default</em>: <code>false</code>. If set to <code>true</code>, the screenshot will include the user interface.</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h3 id="mgesetlightingmode"><code>mge.setLightingMode</code><a class="headerlink" href="#mgesetlightingmode" title="Permanent link">⚓︎</a></h3>
 <p>Sets the lighting mode used by MGE XE. The values passed can be used from the <code>mge.lightingMode.*</code> constants.</p>
