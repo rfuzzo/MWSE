@@ -4257,6 +4257,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#copytransforms" class="md-nav__link">
+    copyTransforms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detachallproperties" class="md-nav__link">
     detachAllProperties
   </a>
@@ -4329,6 +4336,13 @@
           <li class="md-nav__item">
   <a href="#isoftype" class="md-nav__link">
     isOfType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookatworldpoint" class="md-nav__link">
+    lookAtWorldPoint
   </a>
   
 </li>
@@ -10935,6 +10949,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#copytransforms" class="md-nav__link">
+    copyTransforms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#detachallproperties" class="md-nav__link">
     detachAllProperties
   </a>
@@ -11007,6 +11028,13 @@
           <li class="md-nav__item">
   <a href="#isoftype" class="md-nav__link">
     isOfType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lookatworldpoint" class="md-nav__link">
+    lookAtWorldPoint
   </a>
   
 </li>
@@ -11421,6 +11449,15 @@
 <li><code>result</code> (<a href="../../types/niObject">niObject</a>)</li>
 </ul>
 <hr />
+<h3 id="copytransforms"><code>copyTransforms</code><a class="headerlink" href="#copytransforms" title="Permanent link">⚓︎</a></h3>
+<p>Update object's local transform by copying from another source.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">copyTransforms</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>source</code> (<a href="../../types/niAVObject">niAVObject</a>, <a href="../../types/tes3transform">tes3transform</a>)</li>
+</ul>
+<hr />
 <h3 id="detachallproperties"><code>detachAllProperties</code><a class="headerlink" href="#detachallproperties" title="Permanent link">⚓︎</a></h3>
 <p>Detaches all the properties on the object and returns them in the table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">detachAllProperties</span><span class="p">()</span>
@@ -11558,6 +11595,16 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="lookatworldpoint"><code>lookAtWorldPoint</code><a class="headerlink" href="#lookatworldpoint" title="Permanent link">⚓︎</a></h3>
+<p>Update the camera's local rotation so that it is looking at the given point, with an up vector as close as possible to the given up vector. Both parameters are assumed to be in world space.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">lookAtWorldPoint</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">up</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>point</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+<li><code>up</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
 </ul>
 <hr />
 <h3 id="prependcontroller"><code>prependController</code><a class="headerlink" href="#prependcontroller" title="Permanent link">⚓︎</a></h3>
