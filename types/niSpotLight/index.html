@@ -11676,13 +11676,9 @@
 </ul>
 <hr />
 <h3 id="isappculled"><code>isAppCulled</code><a class="headerlink" href="#isappculled" title="Permanent link">⚓︎</a></h3>
-<p>Convenience method for checking the object's appCulled flag.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">isAppCulled</span><span class="p">(</span><span class="n">searchParents</span><span class="p">)</span>
+<p>Recursively checks if either the object or any of its parents are appCulled.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">isAppCulled</span><span class="p">()</span>
 </code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>searchParents</code> (boolean): <em>Default</em>: <code>false</code>. Check if the object is indirectly appCulled by a parent object.</li>
-</ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
 <p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
