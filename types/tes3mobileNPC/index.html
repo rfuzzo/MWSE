@@ -6540,6 +6540,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#canmove" class="md-nav__link">
+    canMove
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell" class="md-nav__link">
     cell
   </a>
@@ -6885,6 +6892,13 @@
           <li class="md-nav__item">
   <a href="#isflying" class="md-nav__link">
     isFlying
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ishitstunned" class="md-nav__link">
+    isHitStunned
   </a>
   
 </li>
@@ -11769,6 +11783,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#canmove" class="md-nav__link">
+    canMove
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell" class="md-nav__link">
     cell
   </a>
@@ -12114,6 +12135,13 @@
           <li class="md-nav__item">
   <a href="#isflying" class="md-nav__link">
     isFlying
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ishitstunned" class="md-nav__link">
+    isHitStunned
   </a>
   
 </li>
@@ -13179,7 +13207,7 @@
 </ul>
 <hr />
 <h3 id="canact"><code>canAct</code><a class="headerlink" href="#canact" title="Permanent link">⚓︎</a></h3>
-<p><em>Read-only</em>. If <code>true</code>, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
+<p><em>Read-only</em>. If <code>true</code>, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, knocked out, hit stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -13194,6 +13222,13 @@
 <hr />
 <h3 id="canjumpmidair"><code>canJumpMidair</code><a class="headerlink" href="#canjumpmidair" title="Permanent link">⚓︎</a></h3>
 <p><em>Read-only</em>. If <code>true</code>, the actor is currently able to jump midair. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, swimming or flying. For more information on midair jumping see <a href="https://mwse.github.io/MWSE/types/tes3mobileActor/#dojump"><code>tes3mobileActor:doJump()</code></a>.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="canmove"><code>canMove</code><a class="headerlink" href="#canmove" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If <code>true</code>, the actor is able to freely move along the ground or in the air. This does not include jumping (see <code>canJump</code>). This is equal to checking if the actor is not dead, knocked down, knocked out, hit stunned, or paralyzed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
@@ -13544,6 +13579,13 @@
 <hr />
 <h3 id="isflying"><code>isFlying</code><a class="headerlink" href="#isflying" title="Permanent link">⚓︎</a></h3>
 <p>Direct access to the actor's current movement flags, showing if the actor is flying.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
+<hr />
+<h3 id="ishitstunned"><code>isHitStunned</code><a class="headerlink" href="#ishitstunned" title="Permanent link">⚓︎</a></h3>
+<p><em>Read-only</em>. If <code>true</code>, the actor is affected by hit stun. This prevents the actor from initiating an attack, but not continuing and finishing an attack. It also prevents movement except for jumping.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (boolean)</li>
