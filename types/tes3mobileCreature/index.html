@@ -13793,7 +13793,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): The item to equip.</li>
-<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to equip.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to equip, if a specific item is required.</li>
 <li><code>addItem</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the item will be added to the actor's inventory if needed.</li>
 <li><code>selectBestCondition</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the item in the inventory with the best condition and best charge will be selected.</li>
 <li><code>selectWorstCondition</code> (boolean): <em>Default</em>: <code>false</code>. If <code>true</code>, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.</li>
@@ -14034,12 +14034,13 @@
 <hr />
 <h3 id="unequip"><code>unequip</code><a class="headerlink" href="#unequip" title="Permanent link">⚓︎</a></h3>
 <p>Unequips one or more items from the actor.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemUnequipped</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">unequip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">armorSlot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">clothingSlot</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">itemUnequipped</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">unequip</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">armorSlot</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">clothingSlot</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to unequip.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data of the specific item to unequip, if a specific item is required.</li>
 <li><code>type</code> (number): <em>Optional</em>. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from <a href="https://mwse.github.io/MWSE/references/object-types/"><code>tes3.objectType</code></a> can be passed here.</li>
 <li><code>armorSlot</code> (number): <em>Optional</em>. The armor slot to unequip. Maps to values in <a href="https://mwse.github.io/MWSE/references/armor-slots/"><code>tes3.armorSlot</code></a> namespace.</li>
 <li><code>clothingSlot</code> (number): <em>Optional</em>. The clothing slot to unequip. Maps to values in <a href="https://mwse.github.io/MWSE/references/clothing-slots/"><code>tes3.clothingSlot</code></a> namespace</li>
