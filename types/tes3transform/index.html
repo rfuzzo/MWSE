@@ -7092,6 +7092,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#invert" class="md-nav__link">
+    invert
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#math-operations" class="md-nav__link">
+    Math Operations
+  </a>
+  
+    <nav class="md-nav" aria-label="Math Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiplication" class="md-nav__link">
+    Multiplication (*)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10326,6 +10353,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#invert" class="md-nav__link">
+    invert
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#math-operations" class="md-nav__link">
+    Math Operations
+  </a>
+  
+    <nav class="md-nav" aria-label="Math Operations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiplication" class="md-nav__link">
+    Multiplication (*)
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10385,6 +10439,43 @@
 <ul>
 <li><code>result</code> (<a href="../../types/tes3transform">tes3transform</a>)</li>
 </ul>
+<hr />
+<h3 id="invert"><code>invert</code><a class="headerlink" href="#invert" title="Permanent link">⚓︎</a></h3>
+<p>Returns a new transform that is the inverse of this transform. The second return value indicates whether the calculating the inverse was possible.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">transform</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">invert</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>transform</code> (<a href="../../types/tes3transform">tes3transform</a>)</li>
+<li><code>valid</code> (boolean)</li>
+</ul>
+<hr />
+<h2 id="math-operations">Math Operations<a class="headerlink" href="#math-operations" title="Permanent link">⚓︎</a></h2>
+<h3 id="multiplication">Multiplication (<code>*</code>)<a class="headerlink" href="#multiplication" title="Permanent link">⚓︎</a></h3>
+<table>
+<thead>
+<tr>
+<th>Left operand type</th>
+<th>Right operand type</th>
+<th>Result type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../types/tes3transform">tes3transform</a></td>
+<td><a href="../../types/tes3transform">tes3transform</a></td>
+<td><a href="../../types/tes3transform">tes3transform</a></td>
+<td>Calculate the combination of two transforms.</td>
+</tr>
+<tr>
+<td><a href="../../types/tes3transform">tes3transform</a></td>
+<td><a href="../../types/tes3vector3">tes3vector3</a></td>
+<td><a href="../../types/tes3vector3">tes3vector3</a></td>
+<td>Calculate the result of applying this transform to a vector.</td>
+</tr>
+</tbody>
+</table>
 <hr />
 
 
