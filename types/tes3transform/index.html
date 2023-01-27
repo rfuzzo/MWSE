@@ -3646,6 +3646,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="true">
@@ -4620,6 +4622,20 @@
     <li class="md-nav__item">
       <a href="../niRenderedTexture/" class="md-nav__link">
         niRenderedTexture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRenderer/" class="md-nav__link">
+        niRenderer
       </a>
     </li>
   
@@ -7111,6 +7127,20 @@
           <li class="md-nav__item">
   <a href="#invert" class="md-nav__link">
     invert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    new
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toidentity" class="md-nav__link">
+    toIdentity
   </a>
   
 </li>
@@ -10376,6 +10406,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    new
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toidentity" class="md-nav__link">
+    toIdentity
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10465,6 +10509,26 @@
 <li><code>transform</code> (<a href="../../types/tes3transform">tes3transform</a>)</li>
 <li><code>valid</code> (boolean)</li>
 </ul>
+<hr />
+<h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
+<p>Creates a new instance of this type.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">new</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">translation</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>rotation</code> (<a href="../../types/tes3matrix33">tes3matrix33</a>): <em>Optional</em>.</li>
+<li><code>translation</code> (<a href="../../types/tes3vector3">tes3vector3</a>): <em>Optional</em>.</li>
+<li><code>scale</code> (number): <em>Optional</em>.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/tes3transform">tes3transform</a>)</li>
+</ul>
+<hr />
+<h3 id="toidentity"><code>toIdentity</code><a class="headerlink" href="#toidentity" title="Permanent link">⚓︎</a></h3>
+<p>Sets transform's rotation matrix to the identity matrix, translation to null vector, and scale to 1.0.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">toIdentity</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h2 id="math-operations">Math Operations<a class="headerlink" href="#math-operations" title="Permanent link">⚓︎</a></h2>
 <h3 id="multiplication">Multiplication (<code>*</code>)<a class="headerlink" href="#multiplication" title="Permanent link">⚓︎</a></h3>

@@ -3646,6 +3646,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="true">
@@ -4620,6 +4622,20 @@
     <li class="md-nav__item">
       <a href="../niRenderedTexture/" class="md-nav__link">
         niRenderedTexture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRenderer/" class="md-nav__link">
+        niRenderer
       </a>
     </li>
   
@@ -12673,6 +12689,20 @@
 <ul>
 <li><code>result</code> (<a href="../../types/tes3uiElement">tes3uiElement</a>)</li>
 </ul>
+<details class="example">
+<summary>Example: Sorting the child elements in a scroll pane</summary>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">myMenu</span> <span class="c1">-- Created before</span>
+<span class="c1">---@cast myMenu tes3uiElement</span>
+
+<span class="kd">local</span> <span class="n">pane</span> <span class="o">=</span> <span class="n">myMenu</span><span class="p">:</span><span class="n">createVerticalScrollPane</span><span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;sortedPane&quot;</span> <span class="p">}</span>
+<span class="n">pane</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;V&quot;</span> <span class="p">}</span>
+<span class="n">pane</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;S&quot;</span> <span class="p">}</span>
+<span class="n">pane</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span> <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span> <span class="p">}</span>
+<span class="n">pane</span><span class="p">:</span><span class="n">getContentElement</span><span class="p">():</span><span class="n">sortChildren</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">a</span><span class="p">.</span><span class="n">text</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">text</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="destroy"><code>destroy</code><a class="headerlink" href="#destroy" title="Permanent link">⚓︎</a></h3>
 <p>Deletes an element and all its child elements. If any element is bound to text input by <code>tes3ui.acquireTextInput</code>_, the input is automatically released.</p>

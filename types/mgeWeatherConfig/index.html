@@ -3646,6 +3646,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="true">
@@ -3827,6 +3829,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getskylightscattering" class="md-nav__link">
+    getSkylightScattering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getwind" class="md-nav__link">
     getWind
   </a>
@@ -3850,6 +3859,13 @@
           <li class="md-nav__item">
   <a href="#setscattering" class="md-nav__link">
     setScattering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setskylightscattering" class="md-nav__link">
+    setSkylightScattering
   </a>
   
 </li>
@@ -4723,6 +4739,20 @@
     <li class="md-nav__item">
       <a href="../niRenderedTexture/" class="md-nav__link">
         niRenderedTexture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRenderer/" class="md-nav__link">
+        niRenderer
       </a>
     </li>
   
@@ -10338,6 +10368,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getskylightscattering" class="md-nav__link">
+    getSkylightScattering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getwind" class="md-nav__link">
     getWind
   </a>
@@ -10361,6 +10398,13 @@
           <li class="md-nav__item">
   <a href="#setscattering" class="md-nav__link">
     setScattering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setskylightscattering" class="md-nav__link">
+    setSkylightScattering
   </a>
   
 </li>
@@ -10432,6 +10476,15 @@
 <li><code>scatters</code> (table&lt;string, <a href="../../types/tes3vector3">tes3vector3</a>&gt;)</li>
 </ul>
 <hr />
+<h3 id="getskylightscattering"><code>getSkylightScattering</code><a class="headerlink" href="#getskylightscattering" title="Permanent link">⚓︎</a></h3>
+<p>Gets the skylight scatter values from MGE. These are returned in a table with the <code>skylight</code> and <code>mix</code> keys. The result table can be modified, then sent back to <code>setSkylightScattering</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scatters</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getSkylightScattering</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>scatters</code> (table&lt;string, number[]|number&gt;)</li>
+</ul>
+<hr />
 <h3 id="getwind"><code>getWind</code><a class="headerlink" href="#getwind" title="Permanent link">⚓︎</a></h3>
 <p>Gets the wind speed for a weather from MGE. This is returned in a table with the <code>speed</code> key, as well as the <code>weather</code> redefined. The result table can be modified, then sent back to <code>setWind</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getWind</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
@@ -10475,7 +10528,7 @@
 <hr />
 <h3 id="setscattering"><code>setScattering</code><a class="headerlink" href="#setscattering" title="Permanent link">⚓︎</a></h3>
 <p>Sets the in- and out-scatter values for MGE. The result table of <code>getScattering</code> can be modified then passed to this function.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setScattering</span><span class="p">({</span> <span class="n">inscatter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">outscatter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setScattering</span><span class="p">({</span> <span class="n">inscatter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">outscatter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10485,9 +10538,18 @@
 </ul>
 </li>
 </ul>
-<p><strong>Returns</strong>:</p>
+<hr />
+<h3 id="setskylightscattering"><code>setSkylightScattering</code><a class="headerlink" href="#setskylightscattering" title="Permanent link">⚓︎</a></h3>
+<p>Sets the sky scatter values for MGE. The result table of <code>getSkylightScattering</code> can be modified then passed to this function.</p>
+<div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setSkylightScattering</span><span class="p">({</span> <span class="n">skylight</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">mix</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>success</code> (table&lt;string, number&gt;)</li>
+<li><code>params</code> (table)<ul>
+<li><code>skylight</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table)</li>
+<li><code>mix</code> (number): <em>Default</em>: <code>0.44</code>.</li>
+</ul>
+</li>
 </ul>
 <hr />
 <h3 id="setwind"><code>setWind</code><a class="headerlink" href="#setwind" title="Permanent link">⚓︎</a></h3>

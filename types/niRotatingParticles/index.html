@@ -3646,6 +3646,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="true">
@@ -4620,6 +4622,20 @@
     <li class="md-nav__item">
       <a href="../niRenderedTexture/" class="md-nav__link">
         niRenderedTexture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../niRenderer/" class="md-nav__link">
+        niRenderer
       </a>
     </li>
   
@@ -11404,16 +11420,24 @@
 <hr />
 <h3 id="isappculled"><code>isAppCulled</code><a class="headerlink" href="#isappculled" title="Permanent link">⚓︎</a></h3>
 <p>Recursively checks if either the object or any of its parents are appCulled.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">isAppCulled</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isAppCulled</span><span class="p">()</span>
 </code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
 <hr />
 <h3 id="isfrustumculled"><code>isFrustumCulled</code><a class="headerlink" href="#isfrustumculled" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the object is frustum culled for the given camera.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">isFrustumCulled</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isFrustumCulled</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>camera</code> (<a href="../../types/niCamera">niCamera</a>)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
