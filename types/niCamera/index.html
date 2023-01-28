@@ -3648,6 +3648,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="true">
@@ -3768,6 +3770,20 @@
     <li class="md-nav__item">
       <a href="../mgeWeatherConfig/" class="md-nav__link">
         mgeWeatherConfig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mwseLogger/" class="md-nav__link">
+        mwseLogger
       </a>
     </li>
   
@@ -4439,6 +4455,13 @@
           <li class="md-nav__item">
   <a href="#setflag" class="md-nav__link">
     setFlag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swapbuffers" class="md-nav__link">
+    swapBuffers
   </a>
   
 </li>
@@ -11220,6 +11243,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#swapbuffers" class="md-nav__link">
+    swapBuffers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update" class="md-nav__link">
     update
   </a>
@@ -11386,7 +11416,7 @@
 <p><em>Read-only</em>. The renderer of the camera.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (niRenderer)</li>
+<li><code>result</code> (<a href="../../types/niRenderer">niRenderer</a>)</li>
 </ul>
 <hr />
 <h3 id="rotation"><code>rotation</code><a class="headerlink" href="#rotation" title="Permanent link">⚓︎</a></h3>
@@ -11697,16 +11727,24 @@
 <hr />
 <h3 id="isappculled"><code>isAppCulled</code><a class="headerlink" href="#isappculled" title="Permanent link">⚓︎</a></h3>
 <p>Recursively checks if either the object or any of its parents are appCulled.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">isAppCulled</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isAppCulled</span><span class="p">()</span>
 </code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
 <hr />
 <h3 id="isfrustumculled"><code>isFrustumCulled</code><a class="headerlink" href="#isfrustumculled" title="Permanent link">⚓︎</a></h3>
 <p>Checks if the object is frustum culled for the given camera.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">isFrustumCulled</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isFrustumCulled</span><span class="p">(</span><span class="n">camera</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>camera</code> (<a href="../../types/niCamera">niCamera</a>)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
 </ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
@@ -11737,12 +11775,16 @@
 <hr />
 <h3 id="lookatworldpoint"><code>lookAtWorldPoint</code><a class="headerlink" href="#lookatworldpoint" title="Permanent link">⚓︎</a></h3>
 <p>Update the camera's local rotation so that it is looking at the given point, with an up vector as close as possible to the given up vector. Both parameters are assumed to be in world space.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">lookAtWorldPoint</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">up</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">lookAtWorldPoint</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">up</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>point</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
 <li><code>up</code> (<a href="../../types/tes3vector3">tes3vector3</a>)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>success</code> (boolean): It's false when the provided location is equal to the location of the camera. It's true on success.</li>
 </ul>
 <hr />
 <h3 id="prependcontroller"><code>prependController</code><a class="headerlink" href="#prependcontroller" title="Permanent link">⚓︎</a></h3>
@@ -11822,6 +11864,11 @@
 <li><code>state</code> (boolean)</li>
 <li><code>index</code> (number)</li>
 </ul>
+<hr />
+<h3 id="swapbuffers"><code>swapBuffers</code><a class="headerlink" href="#swapbuffers" title="Permanent link">⚓︎</a></h3>
+<p>Causes the current backbuffer of the attached display to be drawn to the frontbuffer, by swapping the two.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">swapBuffers</span><span class="p">()</span>
+</code></pre></div>
 <hr />
 <h3 id="update"><code>update</code><a class="headerlink" href="#update" title="Permanent link">⚓︎</a></h3>
 <p>Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.</p>
