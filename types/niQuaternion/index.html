@@ -15,7 +15,7 @@
         <link rel="next" href="../niRTTI/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.7">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.8">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
@@ -4769,6 +4769,13 @@
           <li class="md-nav__item">
   <a href="#slerp" class="md-nav__link">
     slerp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slerpkeyframe" class="md-nav__link">
+    slerpKeyframe
   </a>
   
 </li>
@@ -10638,6 +10645,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#slerpkeyframe" class="md-nav__link">
+    slerpKeyframe
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#toangleaxis" class="md-nav__link">
     toAngleAxis
   </a>
@@ -10843,7 +10857,7 @@
 </ul>
 <hr />
 <h3 id="rotatetowards"><code>rotateTowards</code><a class="headerlink" href="#rotatetowards" title="Permanent link">⚓︎</a></h3>
-<p>Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle.</p>
+<p>Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">rotateTowards</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">rotationLimit</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -10857,8 +10871,22 @@
 </ul>
 <hr />
 <h3 id="slerp"><code>slerp</code><a class="headerlink" href="#slerp" title="Permanent link">⚓︎</a></h3>
-<p>Calculates a spherical linear interpolation between this quaternion and another.</p>
+<p>Calculates a spherical linear interpolation between this quaternion and another. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">slerp</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>target</code> (<a href="../../types/niQuaternion">niQuaternion</a>): The quaternion to interpolate towards.</li>
+<li><code>transition</code> (number): The interpolation parameter. Must be between <code>0.0</code> (closer to this quaternion) and <code>1.0</code> (closer to the other quaternion).</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (<a href="../../types/niQuaternion">niQuaternion</a>): The calculated result.</li>
+</ul>
+<hr />
+<h3 id="slerpkeyframe"><code>slerpKeyframe</code><a class="headerlink" href="#slerpkeyframe" title="Permanent link">⚓︎</a></h3>
+<p>Calculates a spherical linear interpolation between this quaternion and another. Does not choose a direction of interpolation. This means the interpolation arc can be up to 2pi radians or 360 degrees, depending on the signs of the quaternions.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">slerpKeyframe</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
