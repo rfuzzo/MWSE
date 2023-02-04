@@ -10639,6 +10639,8 @@
 <p>This library provides generic functions for table manipulation. It provides all its functions inside the table table.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="tablebininsert"><code>table.bininsert</code><a class="headerlink" href="#tablebininsert" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">bininsert</div>
+
 <p>Inserts a given value through BinaryInsert into the table sorted by [, comp].</p>
 <p>If 'comp' is given, then it must be a function that receives two table elements, and returns true when the first is less than the second, e.g. comp = function(a, b) return a &gt; b end, will give a sorted table, with the biggest value on position 1. [, comp] behaves as in table.sort(table, value [, comp]) returns the index where 'value' was inserted</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">bininsert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
@@ -10655,6 +10657,8 @@
 </ul>
 <hr />
 <h3 id="tablebinsearch"><code>table.binsearch</code><a class="headerlink" href="#tablebinsearch" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">binsearch</div>
+
 <p>Performs a binary search for a given value.</p>
 <p>If the value is found: It returns a table holding all the mathing indices (e.g. { startindice,endindice } ) endindice may be the same as startindice if only one matching indice was found</p>
 <p>If compval is given: then it must be a function that takes one value and returns a second value2, to be compared with the input value, e.g.: compvalue = function( value ) return value[1] end</p>
@@ -10675,6 +10679,8 @@
 </ul>
 <hr />
 <h3 id="tablechoice"><code>table.choice</code><a class="headerlink" href="#tablechoice" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">choice</div>
+
 <p>Returns a random element from the given table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </code></pre></div>
@@ -10688,6 +10694,8 @@
 </ul>
 <hr />
 <h3 id="tableclear"><code>table.clear</code><a class="headerlink" href="#tableclear" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clear</div>
+
 <p>This clears all keys and values from a table, but preserves the allocated array/hash sizes. This is useful when a table, which is linked from multiple places, needs to be cleared and/or when recycling a table for use by the same context. This avoids managing backlinks, saves an allocation and the overhead of incremental array/hash part growth.</p>
 <p>Please note this function is meant for very specific situations. In most cases it's better to replace the (usually single) link with a new table and let the garbage collection do its work.</p>
 <div class="highlight"><pre><span></span><code><span class="n">table</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -10698,6 +10706,8 @@
 </ul>
 <hr />
 <h3 id="tablecopy"><code>table.copy</code><a class="headerlink" href="#tablecopy" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">copy</div>
+
 <p>Shallowly copies a table's contents to a destination table. If no destination table is provided, a new table will be created. Note that sub tables will not be copied, and will still refer to the same data.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
 </code></pre></div>
@@ -10712,6 +10722,8 @@
 </ul>
 <hr />
 <h3 id="tablecopymissing"><code>table.copymissing</code><a class="headerlink" href="#tablecopymissing" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">copymissing</div>
+
 <p>Copies a table's contents from one table to another, including subtitles. If a non-table key is already defined, it will not be overwritten. Metatables are not copied.</p>
 <div class="highlight"><pre><span></span><code><span class="n">table</span><span class="p">.</span><span class="n">copymissing</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">from</span><span class="p">)</span>
 </code></pre></div>
@@ -10722,6 +10734,8 @@
 </ul>
 <hr />
 <h3 id="tabledeepcopy"><code>table.deepcopy</code><a class="headerlink" href="#tabledeepcopy" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">deepcopy</div>
+
 <p>Copies a table's contents. All subtables will also be copied, as will any metatable.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </code></pre></div>
@@ -10735,6 +10749,8 @@
 </ul>
 <hr />
 <h3 id="tableempty"><code>table.empty</code><a class="headerlink" href="#tableempty" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">empty</div>
+
 <p>Returns true if the table is empty, otherwise, it returns false.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">empty</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">deepCheck</span><span class="p">)</span>
 </code></pre></div>
@@ -10749,6 +10765,8 @@
 </ul>
 <hr />
 <h3 id="tablefind"><code>table.find</code><a class="headerlink" href="#tablefind" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">find</div>
+
 <p>Returns the key for a given value, or nil if the table does not contain the value.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
@@ -10763,6 +10781,8 @@
 </ul>
 <hr />
 <h3 id="tableget"><code>table.get</code><a class="headerlink" href="#tableget" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">get</div>
+
 <p>Gets a value in a table. If the key doesn't exist in the table, a specified default value will be returned instead.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">)</span>
 </code></pre></div>
@@ -10778,6 +10798,8 @@
 </ul>
 <hr />
 <h3 id="tablegetset"><code>table.getset</code><a class="headerlink" href="#tablegetset" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getset, set</div>
+
 <p>Gets a value in a table. If the key doesn't exist in the table, a specified default value will be set in the table and returned instead.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">getset</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">)</span>
 </code></pre></div>
@@ -10793,6 +10815,8 @@
 </ul>
 <hr />
 <h3 id="tableinvert"><code>table.invert</code><a class="headerlink" href="#tableinvert" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">invert</div>
+
 <p>Returns a copy of <code>t</code> with the keys and values flipped.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">invert</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </code></pre></div>
@@ -10806,6 +10830,8 @@
 </ul>
 <hr />
 <h3 id="tablekeys"><code>table.keys</code><a class="headerlink" href="#tablekeys" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">keys</div>
+
 <p>Returns an array-style table of all keys in the given table, t. Optionally, it will sort the returned table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">keys</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">keys</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
 </code></pre></div>
@@ -10820,6 +10846,8 @@
 </ul>
 <hr />
 <h3 id="tablenew"><code>table.new</code><a class="headerlink" href="#tablenew" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">new</div>
+
 <p>This creates a pre-sized table. This is useful for big tables if the final table size is known and automatic table resizing is too expensive.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">newTable</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">narray</span><span class="p">,</span> <span class="n">nhash</span><span class="p">)</span>
 </code></pre></div>
@@ -10834,6 +10862,8 @@
 </ul>
 <hr />
 <h3 id="tableremovevalue"><code>table.removevalue</code><a class="headerlink" href="#tableremovevalue" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">removevalue, value</div>
+
 <p>Removes a value from a given table. Returns true if the value was successfully removed.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">removevalue</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
@@ -10848,6 +10878,8 @@
 </ul>
 <hr />
 <h3 id="tablesize"><code>table.size</code><a class="headerlink" href="#tablesize" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">size</div>
+
 <p>Returns the number of elements inside the table. Unlike the length operator (#) this will work with any table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">size</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </code></pre></div>
@@ -10861,6 +10893,8 @@
 </ul>
 <hr />
 <h3 id="tabletraverse"><code>table.traverse</code><a class="headerlink" href="#tabletraverse" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">traverse</div>
+
 <p>This function is used to iterate over a graph-like table. You can specify the key of the subtable that contains the child nodes.</p>
 <p>Each "node" is an object with a children table of other "nodes", each of which might have their own children. For example, a sceneNode is made up of niNodes, and each niNodes can have a list of niNode children. This is best used for recursive data structures like UI elements and sceneNodes etc.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">traverse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
@@ -10890,6 +10924,8 @@
 </details>
 <hr />
 <h3 id="tablevalues"><code>table.values</code><a class="headerlink" href="#tablevalues" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">values</div>
+
 <p>Returns an array-style table of all values in the given table, t. Optionally, it will sort the returned table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">values</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">values</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sort</span><span class="p">)</span>
 </code></pre></div>
@@ -10904,6 +10940,8 @@
 </ul>
 <hr />
 <h3 id="tablewrapindex"><code>table.wrapindex</code><a class="headerlink" href="#tablewrapindex" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">wrapindex</div>
+
 <p>This function is used for calculating relative access into an array, such that accessing an element one past the array's size will instead return the position of the first element. Providing an index one before the start (note that this is <code>0</code>, not <code>-1</code>) will instead give the index to the last element in the array.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">index</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">wrapindex</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>

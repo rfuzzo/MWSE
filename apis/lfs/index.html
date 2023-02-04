@@ -10583,6 +10583,8 @@
 <p>LuaFileSystem is a Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution. This library has been further extended by MWSE.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="lfsattributes"><code>lfs.attributes</code><a class="headerlink" href="#lfsattributes" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">attributes</div>
+
 <p>Returns a table with the file attributes corresponding to filepath (or nil followed by an error message and a system-dependent error code in case of error). If the second optional argument is given and is a string, then only the value of the named attribute is returned (this use is equivalent to lfs.attributes(filepath)[request_name], but the table is not created and only one attribute is retrieved from the O.S.). if a table is passed as the second argument, it (result_table) is filled with attributes and returned instead of a new table. The attributes are described as follows; attribute mode is a string, all the others are numbers, and the time related attributes use the same time reference of os.time: dev, mode, nlink, access, modification, change, size, permissions.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">attributes</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">attributes</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">resultTable</span><span class="p">)</span>
 </code></pre></div>
@@ -10599,6 +10601,8 @@
 </ul>
 <hr />
 <h3 id="lfschdir"><code>lfs.chdir</code><a class="headerlink" href="#lfschdir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">chdir</div>
+
 <p>Changes the current working directory to the given path. Note that this is global. Do not use this function without restoring the previous directory at the end of your logic. Failure to do so can cause unrecoverable errors.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10613,6 +10617,8 @@
 </ul>
 <hr />
 <h3 id="lfscurrentdir"><code>lfs.currentdir</code><a class="headerlink" href="#lfscurrentdir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">currentdir</div>
+
 <p>Changes the current working directory to the given path.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">path</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">currentdir</span><span class="p">()</span>
 </code></pre></div>
@@ -10623,6 +10629,8 @@
 </ul>
 <hr />
 <h3 id="lfsdir"><code>lfs.dir</code><a class="headerlink" href="#lfsdir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">dir</div>
+
 <p>Creates a Lua iterator over the entries of a given directory. This can be used to create a for loop of directories. Be wary that current and parent directory markers may be available in the results.</p>
 <div class="highlight"><pre><span></span><code><span class="n">lfs</span><span class="p">.</span><span class="n">dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10632,6 +10640,8 @@
 </ul>
 <hr />
 <h3 id="lfsdirectoryexists"><code>lfs.directoryexists</code><a class="headerlink" href="#lfsdirectoryexists" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">directoryexists</div>
+
 <p>Simple check to determine if a directory exists.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">directoryexists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10645,6 +10655,8 @@
 </ul>
 <hr />
 <h3 id="lfsfileexists"><code>lfs.fileexists</code><a class="headerlink" href="#lfsfileexists" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">fileexists</div>
+
 <p>Simple check to determine if a file exists.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">fileexists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10658,6 +10670,8 @@
 </ul>
 <hr />
 <h3 id="lfslink"><code>lfs.link</code><a class="headerlink" href="#lfslink" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">link</div>
+
 <p>Creates a link. This is a hard link by default.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">link</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">symlink</span><span class="p">)</span>
 </code></pre></div>
@@ -10674,6 +10688,8 @@
 </ul>
 <hr />
 <h3 id="lfslock"><code>lfs.lock</code><a class="headerlink" href="#lfslock" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lock</div>
+
 <p>Locks a file or a part of it. This function works on open files; the file handle should be specified as the first argument.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">lock</span><span class="p">(</span><span class="n">filehandle</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
 </code></pre></div>
@@ -10691,6 +10707,8 @@
 </ul>
 <hr />
 <h3 id="lfslock_dir"><code>lfs.lock_dir</code><a class="headerlink" href="#lfslock_dir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lock_dir</div>
+
 <p>Creates a lockfile (called lockfile.lfs) in path if it does not exist and returns the lock. If the lock already exists checks if it's stale, using the second parameter (default for the second parameter is INT_MAX, which in practice means the lock will never be stale. The lock object has a method to free it.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">lock_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10705,6 +10723,8 @@
 </ul>
 <hr />
 <h3 id="lfsmkdir"><code>lfs.mkdir</code><a class="headerlink" href="#lfsmkdir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">mkdir</div>
+
 <p>Creates a new directory.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
 </code></pre></div>
@@ -10719,6 +10739,8 @@
 </ul>
 <hr />
 <h3 id="lfsrmdir"><code>lfs.rmdir</code><a class="headerlink" href="#lfsrmdir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">rmdir</div>
+
 <p>Removes an existing directory. Unless using the recursive parameter, only empty directories can be removed.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">rmdir</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="n">recursive</span><span class="p">)</span>
 </code></pre></div>
@@ -10734,6 +10756,8 @@
 </ul>
 <hr />
 <h3 id="lfssetmode"><code>lfs.setmode</code><a class="headerlink" href="#lfssetmode" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setmode, mode</div>
+
 <p>Sets the writing mode for a file.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="n">errorOrOldMode</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">setmode</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
 </code></pre></div>
@@ -10749,6 +10773,8 @@
 </ul>
 <hr />
 <h3 id="lfstouch"><code>lfs.touch</code><a class="headerlink" href="#lfstouch" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">touch</div>
+
 <p>Set access and modification times of a file. Both access and modified times are measured in seconds, matching the OS time function.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">touch</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">accessTime</span><span class="p">,</span> <span class="n">modifiedTime</span><span class="p">)</span>
 </code></pre></div>
@@ -10765,6 +10791,8 @@
 </ul>
 <hr />
 <h3 id="lfsunlock"><code>lfs.unlock</code><a class="headerlink" href="#lfsunlock" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">unlock</div>
+
 <p>Unlocks a file or a part of it. This function works on open files; the file handle should be specified as the first argument.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">unlock</span><span class="p">(</span><span class="n">filehandle</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
 </code></pre></div>
@@ -10782,6 +10810,8 @@
 </ul>
 <hr />
 <h3 id="lfswalkdir"><code>lfs.walkdir</code><a class="headerlink" href="#lfswalkdir" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">walkdir</div>
+
 <p>An iterator that visits all files in a directory tree.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">lfs</span><span class="p">.</span><span class="n">walkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>

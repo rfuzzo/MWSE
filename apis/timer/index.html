@@ -10525,25 +10525,39 @@
 <p>The timer library provides helper functions for creating delayed executors.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="timeractive"><code>timer.active</code><a class="headerlink" href="#timeractive" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">active</div>
+
 <p>Constant to represent a timer that is actively running.</p>
 <hr />
 <h3 id="timerexpired"><code>timer.expired</code><a class="headerlink" href="#timerexpired" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">expired</div>
+
 <p>Constant to represent a timer that has completed.</p>
 <hr />
 <h3 id="timergame"><code>timer.game</code><a class="headerlink" href="#timergame" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">game</div>
+
 <p>Constant to represent timers that run based on in-world time. Their clock is measured in game-scale hours.</p>
 <hr />
 <h3 id="timerpaused"><code>timer.paused</code><a class="headerlink" href="#timerpaused" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">paused</div>
+
 <p>Constant to represent a timer that is paused.</p>
 <hr />
 <h3 id="timerreal"><code>timer.real</code><a class="headerlink" href="#timerreal" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">real</div>
+
 <p>Constant to represent timers that run in real-time. Their time is measured in seconds.</p>
 <hr />
 <h3 id="timersimulate"><code>timer.simulate</code><a class="headerlink" href="#timersimulate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">simulate</div>
+
 <p>Constant to represent timers that run when the game isn't paused - the game's menus are closed. It matches the <code>simulate</code> event's timing. If the game is simulating, simulate events and simulate timers progress. Duration is measured in seconds.</p>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="timerdelayoneframe"><code>timer.delayOneFrame</code><a class="headerlink" href="#timerdelayoneframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">delayoneframe</div>
+
 <p>Creates a timer that will finish the next frame. It defaults to the next simulation frame.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">delayOneFrame</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -10558,6 +10572,8 @@
 </ul>
 <hr />
 <h3 id="timerregister"><code>timer.register</code><a class="headerlink" href="#timerregister" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">register</div>
+
 <p>Registers a named timer with a callback to persist between game sessions. Bear in mind that nothing in MWSE is sandboxed, so all the registered timers are in the global namespace. Consider prefixing your timer with mod name or something else to avoid name collisions. For instance, <code>iceCreamMod:myTimer</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">timer</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
 </code></pre></div>
@@ -10617,6 +10633,8 @@
 </details>
 <hr />
 <h3 id="timerstart"><code>timer.start</code><a class="headerlink" href="#timerstart" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">start</div>
+
 <p>Creates a timer.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">persist</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>

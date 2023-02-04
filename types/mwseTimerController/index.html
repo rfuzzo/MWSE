@@ -10467,6 +10467,8 @@
 <p>A Timer Controller is a class used to sort and trigger callbacks based on an arbitrary timekeeping mechanic. By default there are three Timer Controllers for each type of timers: <code>timer.simulate</code>, <code>timer.game</code> or <code>timer.real</code>.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="clock"><code>clock</code><a class="headerlink" href="#clock" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clock</div>
+
 <p>The current clock time for this timer controller. Timer Controller, responsible for <code>timer.game</code> type of timers, has clock equal to the game's simuation timestamp. Timer Controllers, responsible for <code>timer.real</code>, and <code>timer.simulate</code>, types of timers have their initial clock set to <code>0</code> on a new game, and their clock's progressions is equal to <code>deltaTime</code>. Timer Controller's, responsible for <code>timer.simulate</code> timers, clock only advances when the menu mode is off.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10475,6 +10477,8 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="create"><code>create</code><a class="headerlink" href="#create" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">create</div>
+
 <p>Creates a timer for the given Timer Controller.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">timer</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">create</span><span class="p">({</span> <span class="n">duration</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">callback</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">persists</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">data</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10496,6 +10500,8 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">new</div>
+
 <p>Creates a new Timer Controller. Its initial clock is zero, unless a start time is provided.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwseTimerController</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">startTime</span><span class="p">)</span>
 </code></pre></div>

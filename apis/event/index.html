@@ -10443,6 +10443,8 @@
 <p>The event library helps to instruct mwse to call a given function when a specific action is taken in the game.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="eventclear"><code>event.clear</code><a class="headerlink" href="#eventclear" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clear</div>
+
 <p>Removes all callbacks registered for a given event.</p>
 <div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">filter</span><span class="p">)</span>
 </code></pre></div>
@@ -10453,6 +10455,8 @@
 </ul>
 <hr />
 <h3 id="eventisregistered"><code>event.isRegistered</code><a class="headerlink" href="#eventisregistered" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isregistered, registered</div>
+
 <p>Returns true for a function previously registered to an event with <code>event.register()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="n">isRegistered</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10471,6 +10475,8 @@
 </ul>
 <hr />
 <h3 id="eventregister"><code>event.register</code><a class="headerlink" href="#eventregister" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">register</div>
+
 <p>Registers a function to be called when an event is raised.</p>
 <div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="p">{</span> <span class="n">doOnce</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">priority</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10487,6 +10493,8 @@
 </ul>
 <hr />
 <h3 id="eventtrigger"><code>event.trigger</code><a class="headerlink" href="#eventtrigger" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">trigger</div>
+
 <p>Triggers an event. This can be used to trigger custom events with specific data.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">resultPayload</span> <span class="o">=</span> <span class="n">event</span><span class="p">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10505,6 +10513,8 @@
 </ul>
 <hr />
 <h3 id="eventunregister"><code>event.unregister</code><a class="headerlink" href="#eventunregister" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">unregister</div>
+
 <p>Unregisters a function previously registered for an event with <code>event.register()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">event</span><span class="p">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">eventId</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="p">{</span> <span class="n">filter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>

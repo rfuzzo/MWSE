@@ -10657,6 +10657,8 @@ http://www.inf.puc-rio.br/~roberto/lpeg/</p>
 <p>There is also a copy in the MWSE repo at: deps/lpeg/lpeg.html</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="lpegb"><code>lpeg.B</code><a class="headerlink" href="#lpegb" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">b</div>
+
 <p>Returns a pattern that matches only if the input string at the current position is preceded by pattern p.</p>
 <p>Pattern p must match only strings with some fixed length, and it cannot contain captures.</p>
 <p>Like the and predicate, this pattern never consumes any input, independently of success or failure.</p>
@@ -10672,6 +10674,8 @@ http://www.inf.puc-rio.br/~roberto/lpeg/</p>
 </ul>
 <hr />
 <h3 id="lpegc"><code>lpeg.C</code><a class="headerlink" href="#lpegc" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">c</div>
+
 <p>Create a simple capture pattern, which captures the substring of the subject that matches pattern p.</p>
 <p>The captured value is a string. If p has other captures, their values are returned after this one.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">C</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -10686,6 +10690,8 @@ http://www.inf.puc-rio.br/~roberto/lpeg/</p>
 </ul>
 <hr />
 <h3 id="lpegcarg"><code>lpeg.Carg</code><a class="headerlink" href="#lpegcarg" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">carg</div>
+
 <p>Create an argument capture.</p>
 <p>This pattern matches the empty string and produces the value given as the nth extra argument given 
 in the call to lpeg.match.</p>
@@ -10701,6 +10707,8 @@ in the call to lpeg.match.</p>
 </ul>
 <hr />
 <h3 id="lpegcb"><code>lpeg.Cb</code><a class="headerlink" href="#lpegcb" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cb</div>
+
 <p>Create a back capture.</p>
 <p>This pattern matches the empty string and produces the values produced by the most recent group
 capture named name (where name can be any Lua value).</p>
@@ -10721,6 +10729,8 @@ it reuses values previously produced by the group or re-evaluates them.</p>
 </ul>
 <hr />
 <h3 id="lpegcc"><code>lpeg.Cc</code><a class="headerlink" href="#lpegcc" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cc</div>
+
 <p>Create a constant capture.</p>
 <p>This pattern matches the empty string and produces all given values as its captured values.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">Cc</span><span class="p">(...)</span>
@@ -10735,6 +10745,8 @@ it reuses values previously produced by the group or re-evaluates them.</p>
 </ul>
 <hr />
 <h3 id="lpegcf"><code>lpeg.Cf</code><a class="headerlink" href="#lpegcf" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cf</div>
+
 <p>Create a fold capture.</p>
 <p>If pattern p produces a list of captures C1 C2 ... Cn, this capture will produce the value 
 function f(...f(f(C1, C2), C3)..., Cn), that is, it will fold (or accumulate, or reduce) the 
@@ -10758,6 +10770,8 @@ accumulator becomes the captured value.</p>
 </ul>
 <hr />
 <h3 id="lpegcg"><code>lpeg.Cg</code><a class="headerlink" href="#lpegcg" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cg</div>
+
 <p>Create a group capture.</p>
 <p>It groups all values returned by pattern p into a single capture. The group may be anonymous (if no
 name is given) or named with the given name (which can be any non-nil Lua value).</p>
@@ -10777,6 +10791,8 @@ values are only relevant for a following back capture or when used inside a tabl
 </ul>
 <hr />
 <h3 id="lpegcmt"><code>lpeg.Cmt</code><a class="headerlink" href="#lpegcmt" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cmt</div>
+
 <p>Create a match-time capture.</p>
 <p>Unlike all other captures, this one is evaluated immediately when a match occurs (even if it is 
 part of a larger pattern that fails later). It forces the immediate evaluation of all its nested
@@ -10802,6 +10818,8 @@ return i.) If the call returns false, nil, or no value, the match fails.</p>
 </ul>
 <hr />
 <h3 id="lpegcp"><code>lpeg.Cp</code><a class="headerlink" href="#lpegcp" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cp</div>
+
 <p>Create a position capture.</p>
 <p>It matches the empty string and captures the position in the subject where the match occurs. The 
 captured value is a number.</p>
@@ -10813,6 +10831,8 @@ captured value is a number.</p>
 </ul>
 <hr />
 <h3 id="lpegcs"><code>lpeg.Cs</code><a class="headerlink" href="#lpegcs" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cs</div>
+
 <p>Create a substitution capture, which captures the substring of the subject that matches pattern p, with substitutions.</p>
 <p>For any capture inside p with a value, the substring that matched the capture is replaced by the 
 capture value (which should be a string). The final captured value is the string resulting from all
@@ -10829,6 +10849,8 @@ replacements.</p>
 </ul>
 <hr />
 <h3 id="lpegct"><code>lpeg.Ct</code><a class="headerlink" href="#lpegct" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">ct</div>
+
 <p>Create a table capture.</p>
 <p>This capture returns a table with all values from all anonymous captures made by pattern p inside 
 this table in successive integer keys, starting at 1. Moreover, for each named capture group 
@@ -10846,6 +10868,8 @@ The captured value is only the table.</p>
 </ul>
 <hr />
 <h3 id="lpeglocale"><code>lpeg.locale</code><a class="headerlink" href="#lpeglocale" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">locale</div>
+
 <p>Return a table with patterns for matching some character classes according to the current locale.</p>
 <p>The table has fields named alnum, alpha, cntrl, digit, graph, lower, print, punct, space, upper,
 and xdigit, each one containing a correspondent pattern. Each pattern matches any single character 
@@ -10864,6 +10888,8 @@ that table. </p>
 </ul>
 <hr />
 <h3 id="lpegmatch"><code>lpeg.match</code><a class="headerlink" href="#lpegmatch" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">match</div>
+
 <p>Attempt to match the given pattern against the subject string.</p>
 <p>If the match succeeds, return the index in the subject of the first character after the match, or
 the captured values (if the pattern captured any value).</p>
@@ -10907,6 +10933,8 @@ and quite efficient; see examples in the full documentation for details.</p>
 </details>
 <hr />
 <h3 id="lpegp"><code>lpeg.P</code><a class="headerlink" href="#lpegp" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">p</div>
+
 <p>Converts the given value into a proper lpeg pattern.</p>
 <p>If the argument is a pattern, it is returned unmodified.</p>
 <p>If the argument is a string, it is translated to a pattern that matches the string literally.</p>
@@ -10933,6 +10961,8 @@ string.</p>
 </ul>
 <hr />
 <h3 id="lpegr"><code>lpeg.R</code><a class="headerlink" href="#lpegr" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">r</div>
+
 <p>Returns a pattern that matches any single character belonging to one of the given ranges.</p>
 <p>Each range is a string xy of length 2, representing all characters with code between the codes of x and y (both inclusive).</p>
 <p>As an example, the pattern lpeg.R("09") matches any digit, and lpeg.R("az", "AZ") matches any ASCII letter.</p>
@@ -10967,6 +10997,8 @@ string.</p>
 </details>
 <hr />
 <h3 id="lpegs"><code>lpeg.S</code><a class="headerlink" href="#lpegs" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">s</div>
+
 <p>Returns a pattern that matches any single character that appears in the given string.</p>
 <p>As an example, the pattern lpeg.S("+-*/") matches any arithmetic operator.</p>
 <p>Note that, if s is a character (that is, a string of length 1), then lpeg.P(s) is equivalent to 
@@ -10984,6 +11016,8 @@ patterns that always fail.</p>
 </ul>
 <hr />
 <h3 id="lpegsetmaxstack"><code>lpeg.setmaxstack</code><a class="headerlink" href="#lpegsetmaxstack" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setmaxstack, maxstack</div>
+
 <p>Set a limit for the size of the backtrack stack used by LPeg to track calls and choices.</p>
 <p>The default limit is 400. Most well-written patterns need little backtrack levels and therefore you seldom
 need to change this limit; before changing it you should try to rewrite your pattern to avoid the need for 
@@ -10997,6 +11031,8 @@ deep recursion may also need larger limits.</p>
 </ul>
 <hr />
 <h3 id="lpegtype"><code>lpeg.type</code><a class="headerlink" href="#lpegtype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">type</div>
+
 <p>If the given value is a pattern, return the string "pattern". Otherwise return nil.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
@@ -11010,6 +11046,8 @@ deep recursion may also need larger limits.</p>
 </ul>
 <hr />
 <h3 id="lpegv"><code>lpeg.V</code><a class="headerlink" href="#lpegv" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">v</div>
+
 <p>Create a non-terminal (a variable) for a grammar.</p>
 <p>The created non-terminal refers to the rule indexed by v in the enclosing grammar. See Grammars
 in the full documentation for details.</p>
@@ -11025,6 +11063,8 @@ in the full documentation for details.</p>
 </ul>
 <hr />
 <h3 id="lpegversion"><code>lpeg.version</code><a class="headerlink" href="#lpegversion" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">version</div>
+
 <p>Return a string with the running version of lpeg.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">lpeg</span><span class="p">.</span><span class="n">version</span><span class="p">()</span>
 </code></pre></div>

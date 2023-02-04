@@ -10553,6 +10553,8 @@
 <p>A Timer is a class used to keep track of callback that should be invoked at a later time.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="callback"><code>callback</code><a class="headerlink" href="#callback" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">callback</div>
+
 <p><em>Read-only</em>. The callback that will be invoked at the end of each iteration.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10560,6 +10562,8 @@
 </ul>
 <hr />
 <h3 id="data"><code>data</code><a class="headerlink" href="#data" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">data</div>
+
 <p>Arbitrary json-serializable data stored in the timer. This defaults to <code>nil</code>, but can be set at the time of timer creation, or changed later.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10567,6 +10571,8 @@
 </ul>
 <hr />
 <h3 id="duration"><code>duration</code><a class="headerlink" href="#duration" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">duration</div>
+
 <p><em>Read-only</em>. The duration of single iteration of the timer in seconds for timers of <code>timer.real</code> and <code>timer.simulate</code> types. It's in hours for <code>timer.game</code> timers.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10574,6 +10580,8 @@
 </ul>
 <hr />
 <h3 id="iterations"><code>iterations</code><a class="headerlink" href="#iterations" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iterations</div>
+
 <p><em>Read-only</em>. The amount of iterations left for the timer.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10581,6 +10589,8 @@
 </ul>
 <hr />
 <h3 id="state"><code>state</code><a class="headerlink" href="#state" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">state</div>
+
 <p><em>Read-only</em>. The state of the timer, matching <code>timer.active</code>, <code>timer.paused</code>, or <code>timer.expired</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10588,6 +10598,8 @@
 </ul>
 <hr />
 <h3 id="timeleft"><code>timeLeft</code><a class="headerlink" href="#timeleft" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">timeleft</div>
+
 <p><em>Read-only</em>. The amount of time left before the current iteration of the timer will complete. Reset to <code>duration</code> value at the end of each iteration.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10595,6 +10607,8 @@
 </ul>
 <hr />
 <h3 id="timing"><code>timing</code><a class="headerlink" href="#timing" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">timing</div>
+
 <p><em>Read-only</em>. This is the time in the owning <code>mwseTimerController</code>'s clock when the current iteration of the timer ends. It's updated for each iteration. For paused timers its equal to the number of seconds/hours left for the current iteration.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10603,6 +10617,8 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="cancel"><code>cancel</code><a class="headerlink" href="#cancel" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cancel, cel</div>
+
 <p>Cancels the timer.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">canceled</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">cancel</span><span class="p">()</span>
 </code></pre></div>
@@ -10612,6 +10628,8 @@
 </ul>
 <hr />
 <h3 id="pause"><code>pause</code><a class="headerlink" href="#pause" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">pause</div>
+
 <p>Pauses the timer.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">paused</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">pause</span><span class="p">()</span>
 </code></pre></div>
@@ -10621,11 +10639,15 @@
 </ul>
 <hr />
 <h3 id="reset"><code>reset</code><a class="headerlink" href="#reset" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">reset</div>
+
 <p>Resets the timer completion time and iterations count.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">reset</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="resume"><code>resume</code><a class="headerlink" href="#resume" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">resume</div>
+
 <p>Resumes a paused timer.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">resumed</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">resume</span><span class="p">()</span>
 </code></pre></div>

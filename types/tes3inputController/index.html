@@ -10651,6 +10651,8 @@
 <p>A data structure, off of the world controller, that handles input.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="creationflags"><code>creationFlags</code><a class="headerlink" href="#creationflags" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">creationflags</div>
+
 <p><em>Read-only</em>. A bit field representing device capabilities and settings.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10658,6 +10660,8 @@
 </ul>
 <hr />
 <h3 id="inputmaps"><code>inputMaps</code><a class="headerlink" href="#inputmaps" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">inputmaps</div>
+
 <p><em>Read-only</em>. The array-style access to input bindings (<a href="https://mwse.github.io/MWSE/types/tes3inputConfig/">tes3inputConfig</a> objects).</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10665,6 +10669,8 @@
 </ul>
 <hr />
 <h3 id="keyboardstate"><code>keyboardState</code><a class="headerlink" href="#keyboardstate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">keyboardstate</div>
+
 <p><em>Read-only</em>. The array-style access to raw key states.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10672,6 +10678,8 @@
 </ul>
 <hr />
 <h3 id="mousestate"><code>mouseState</code><a class="headerlink" href="#mousestate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">mousestate</div>
+
 <p><em>Read-only</em>. The raw DirectInput mouse state.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10679,6 +10687,8 @@
 </ul>
 <hr />
 <h3 id="previouskeyboardstate"><code>previousKeyboardState</code><a class="headerlink" href="#previouskeyboardstate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">previouskeyboardstate</div>
+
 <p><em>Read-only</em>. The array-style access to the previous frame's raw key states.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10686,6 +10696,8 @@
 </ul>
 <hr />
 <h3 id="previousmousestate"><code>previousMouseState</code><a class="headerlink" href="#previousmousestate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">previousmousestate</div>
+
 <p><em>Read-only</em>. The raw DirectInput mouse state for the previous state.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10694,6 +10706,8 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="isaltdown"><code>isAltDown</code><a class="headerlink" href="#isaltdown" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isaltdown, altdown</div>
+
 <p>Returns true if either alt modifier key is pressed.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isAltDown</span><span class="p">()</span>
 </code></pre></div>
@@ -10703,6 +10717,8 @@
 </ul>
 <hr />
 <h3 id="iscapslockactive"><code>isCapsLockActive</code><a class="headerlink" href="#iscapslockactive" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iscapslockactive, capslockactive</div>
+
 <p>Returns true if the caps lock mode is active.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isCapsLockActive</span><span class="p">()</span>
 </code></pre></div>
@@ -10712,6 +10728,8 @@
 </ul>
 <hr />
 <h3 id="iscontroldown"><code>isControlDown</code><a class="headerlink" href="#iscontroldown" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iscontroldown, controldown</div>
+
 <p>Returns true if either control modifier key is pressed.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isControlDown</span><span class="p">()</span>
 </code></pre></div>
@@ -10721,6 +10739,8 @@
 </ul>
 <hr />
 <h3 id="iskeydown"><code>isKeyDown</code><a class="headerlink" href="#iskeydown" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iskeydown, keydown</div>
+
 <p>Performs a key down test for a given scan key code.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isKeyDown</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 </code></pre></div>
@@ -10734,6 +10754,8 @@
 </ul>
 <hr />
 <h3 id="iskeypressedthisframe"><code>isKeyPressedThisFrame</code><a class="headerlink" href="#iskeypressedthisframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iskeypressedthisframe, keypressedthisframe</div>
+
 <p>Checks to see if a given scan code is pressed, and wasn't pressed last frame.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isKeyPressedThisFrame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 </code></pre></div>
@@ -10747,6 +10769,8 @@
 </ul>
 <hr />
 <h3 id="iskeyreleasedthisframe"><code>isKeyReleasedThisFrame</code><a class="headerlink" href="#iskeyreleasedthisframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iskeyreleasedthisframe, keyreleasedthisframe</div>
+
 <p>Checks to see if a given scan code is released, and was pressed last frame.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isKeyReleasedThisFrame</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 </code></pre></div>
@@ -10760,6 +10784,8 @@
 </ul>
 <hr />
 <h3 id="ismousebuttondown"><code>isMouseButtonDown</code><a class="headerlink" href="#ismousebuttondown" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">ismousebuttondown, mousebuttondown</div>
+
 <p>Returns the mouse down state for a given mouse button.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isMouseButtonDown</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
 </code></pre></div>
@@ -10773,6 +10799,8 @@
 </ul>
 <hr />
 <h3 id="ismousebuttonpressedthisframe"><code>isMouseButtonPressedThisFrame</code><a class="headerlink" href="#ismousebuttonpressedthisframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">ismousebuttonpressedthisframe, mousebuttonpressedthisframe</div>
+
 <p>Returns true if a mouse button was up last frame, and down this frame.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isMouseButtonPressedThisFrame</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
 </code></pre></div>
@@ -10786,6 +10814,8 @@
 </ul>
 <hr />
 <h3 id="ismousebuttonreleasedthisframe"><code>isMouseButtonReleasedThisFrame</code><a class="headerlink" href="#ismousebuttonreleasedthisframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">ismousebuttonreleasedthisframe, mousebuttonreleasedthisframe</div>
+
 <p>Returns true if a mouse button was down last frame, and up this frame.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isMouseButtonReleasedThisFrame</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
 </code></pre></div>
@@ -10799,6 +10829,8 @@
 </ul>
 <hr />
 <h3 id="isshiftdown"><code>isShiftDown</code><a class="headerlink" href="#isshiftdown" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isshiftdown, shiftdown</div>
+
 <p>Returns true if either shift modifier key is pressed. It does not take into account caps lock.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isShiftDown</span><span class="p">()</span>
 </code></pre></div>
@@ -10808,6 +10840,8 @@
 </ul>
 <hr />
 <h3 id="issuperdown"><code>isSuperDown</code><a class="headerlink" href="#issuperdown" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">issuperdown, superdown</div>
+
 <p>Returns true if either super/windows modifier key is pressed.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">isPressed</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isSuperDown</span><span class="p">()</span>
 </code></pre></div>
@@ -10817,6 +10851,8 @@
 </ul>
 <hr />
 <h3 id="keybindtest"><code>keybindTest</code><a class="headerlink" href="#keybindtest" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">keybindtest</div>
+
 <p>Performs a test for a given keybind, and optionally a transition state.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">keybindTest</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">transition</span><span class="p">)</span>
 </code></pre></div>

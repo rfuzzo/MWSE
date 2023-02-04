@@ -11213,6 +11213,8 @@
 <p>This type inherits the following: <a href="../../types/niTimeController">niTimeController</a>, <a href="../../types/niObject">niObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="active"><code>active</code><a class="headerlink" href="#active" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">active</div>
+
 <p>If the controller is active. When inactive, the target does not get updated and animation timing does not advance.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11220,6 +11222,8 @@
 </ul>
 <hr />
 <h3 id="activeparticlecount"><code>activeParticleCount</code><a class="headerlink" href="#activeparticlecount" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">activeparticlecount</div>
+
 <p><em>Read-only</em>. The number of active particles in the initial particles array.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11227,6 +11231,8 @@
 </ul>
 <hr />
 <h3 id="animtimingtype"><code>animTimingType</code><a class="headerlink" href="#animtimingtype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">animtimingtype</div>
+
 <p>How the time parameter passed to the update function is treated. Type 0 is the default, which treats the update time as a delta time. Type 1 treats the update time an offset from the start of the animation.</p>
 <p>Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/animation-types/"><code>ni.animType</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
@@ -11235,6 +11241,8 @@
 </ul>
 <hr />
 <h3 id="birthrate"><code>birthRate</code><a class="headerlink" href="#birthrate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">birthrate</div>
+
 <p>The rate at which new particles are generated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11242,6 +11250,8 @@
 </ul>
 <hr />
 <h3 id="currentparticleindex"><code>currentParticleIndex</code><a class="headerlink" href="#currentparticleindex" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">currentparticleindex</div>
+
 <p><em>Read-only</em>. </p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11249,6 +11259,8 @@
 </ul>
 <hr />
 <h3 id="cycletype"><code>cycleType</code><a class="headerlink" href="#cycletype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">cycletype</div>
+
 <p>The animation cycle type. Type 0 is looping, type 2 is reverse, type 4 is clamped.</p>
 <p>Maps to values in <a href="https://mwse.github.io/MWSE/references/ni/animation-cycle-types/"><code>ni.animCycleType</code></a> table.</p>
 <p><strong>Returns</strong>:</p>
@@ -11257,6 +11269,8 @@
 </ul>
 <hr />
 <h3 id="declinationangle"><code>declinationAngle</code><a class="headerlink" href="#declinationangle" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">declinationangle</div>
+
 <p>The declination angle of the velocity vector of newly spawned particles from the positive Z axis in radians. The range is [0, PI], where declination angle of <code>0</code> will set the initial velocity vector to [0, 0, 1]. Declination angle of PI will set the initial velocity vector to [0, 0, -1].</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11264,6 +11278,8 @@
 </ul>
 <hr />
 <h3 id="declinationanglevariation"><code>declinationAngleVariation</code><a class="headerlink" href="#declinationanglevariation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">declinationanglevariation</div>
+
 <p>The variation of the initial declination angle. The initial velocity declination will be evenly distributed over the [<code>.declinationAngle - .declinationAngleVariation / 2</code>, <code>.declinationAngle + .declinationAngleVariation / 2</code>] range.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11271,6 +11287,8 @@
 </ul>
 <hr />
 <h3 id="emitstarttime"><code>emitStartTime</code><a class="headerlink" href="#emitstarttime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emitstarttime</div>
+
 <p>The time value at which the niParticleSystemController will start emitting particles. If this value is less than the <code>.startTime</code> variable (inherited from niTimeController), the controller will perform a run-up for the amount of time indicated by the difference.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11278,6 +11296,8 @@
 </ul>
 <hr />
 <h3 id="emitstoptime"><code>emitStopTime</code><a class="headerlink" href="#emitstoptime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emitstoptime</div>
+
 <p>The time value at which the controller stops emitting the particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11285,6 +11305,8 @@
 </ul>
 <hr />
 <h3 id="emitter"><code>emitter</code><a class="headerlink" href="#emitter" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emitter</div>
+
 <p>The object that emits the particles. The emitter volume is transformed into the world coordinates of the emitter before new particles are generated. This allows the transforms of the emitter to change without affecting the transforms of all the particles in the system.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11292,6 +11314,8 @@
 </ul>
 <hr />
 <h3 id="emitterdepth"><code>emitterDepth</code><a class="headerlink" href="#emitterdepth" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emitterdepth</div>
+
 <p>Determines the dimensions of the volume from which new particles are generated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11299,6 +11323,8 @@
 </ul>
 <hr />
 <h3 id="emitterheight"><code>emitterHeight</code><a class="headerlink" href="#emitterheight" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emitterheight</div>
+
 <p>Determines the dimensions of the volume from which new particles are generated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11306,6 +11332,8 @@
 </ul>
 <hr />
 <h3 id="emittermodifiers"><code>emitterModifiers</code><a class="headerlink" href="#emittermodifiers" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emittermodifiers</div>
+
 <p>Modifiers that will influence the particle system by modifying the emmiting object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11313,6 +11341,8 @@
 </ul>
 <hr />
 <h3 id="emitterwidth"><code>emitterWidth</code><a class="headerlink" href="#emitterwidth" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">emitterwidth</div>
+
 <p>Determines the dimensions of the volume from which new particles are generated.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11320,12 +11350,16 @@
 </ul>
 <hr />
 <h3 id="firsttime"><code>firstTime</code><a class="headerlink" href="#firsttime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">firsttime</div>
+
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="frequency"><code>frequency</code><a class="headerlink" href="#frequency" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">frequency</div>
+
 <p>The animation controller's frequency value. It is a scaling value used to convert from update time units to keyframe time units, if necessary.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11333,6 +11367,8 @@
 </ul>
 <hr />
 <h3 id="highkeyframe"><code>highKeyFrame</code><a class="headerlink" href="#highkeyframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">highkeyframe</div>
+
 <p>This is the end animation key time of the animation controller.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11340,6 +11376,8 @@
 </ul>
 <hr />
 <h3 id="initialcolor"><code>initialColor</code><a class="headerlink" href="#initialcolor" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">initialcolor</div>
+
 <p>The initial color given to the newly created particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11347,6 +11385,8 @@
 </ul>
 <hr />
 <h3 id="initialnormal"><code>initialNormal</code><a class="headerlink" href="#initialnormal" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">initialnormal</div>
+
 <p><em>Default</em>: <code>{1.0, 0.0, 0.0}</code>. The normal vector given to the newly created particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11354,6 +11394,8 @@
 </ul>
 <hr />
 <h3 id="initialsize"><code>initialSize</code><a class="headerlink" href="#initialsize" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">initialsize</div>
+
 <p>The initial size of the new particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11361,6 +11403,8 @@
 </ul>
 <hr />
 <h3 id="lastemit"><code>lastEmit</code><a class="headerlink" href="#lastemit" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lastemit</div>
+
 <p>The timestamp at which the last emitted particles were created.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11368,6 +11412,8 @@
 </ul>
 <hr />
 <h3 id="lastscaledtime"><code>lastScaledTime</code><a class="headerlink" href="#lastscaledtime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lastscaledtime</div>
+
 <p>This function returns the last scaled time computed by this controller. The scaled time takes the <code>frequency</code> and <code>phase</code> into account, along with the <code>cycleType</code> and <code>animTimingType</code>. This is the last value used to interpolate animation keys.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11375,6 +11421,8 @@
 </ul>
 <hr />
 <h3 id="lasttime"><code>lastTime</code><a class="headerlink" href="#lasttime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lasttime</div>
+
 <p>No description.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11382,6 +11430,8 @@
 </ul>
 <hr />
 <h3 id="lifespan"><code>lifespan</code><a class="headerlink" href="#lifespan" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lifespan</div>
+
 <p>The life spane for each particle.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11389,6 +11439,8 @@
 </ul>
 <hr />
 <h3 id="lifespanvariance"><code>lifespanVariance</code><a class="headerlink" href="#lifespanvariance" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lifespanvariance</div>
+
 <p>The variation of the particle life span. It will be evenly distributed over the [<code>.lifespan - .lifespanVariance / 2</code>, <code>.lifespan + .lifespanVariance / 2</code>] range.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11396,6 +11448,8 @@
 </ul>
 <hr />
 <h3 id="lowkeyframe"><code>lowKeyFrame</code><a class="headerlink" href="#lowkeyframe" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lowkeyframe</div>
+
 <p>This is the beginning animation key time of the animation controller.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11403,6 +11457,8 @@
 </ul>
 <hr />
 <h3 id="nextcontroller"><code>nextController</code><a class="headerlink" href="#nextcontroller" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">nextcontroller</div>
+
 <p>The next animation controller in the list of controllers containing the calling controller.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11410,6 +11466,8 @@
 </ul>
 <hr />
 <h3 id="particlecolliders"><code>particleColliders</code><a class="headerlink" href="#particlecolliders" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">particlecolliders</div>
+
 <p>Collider modifiers that will influence the individual particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11417,6 +11475,8 @@
 </ul>
 <hr />
 <h3 id="particledatacount"><code>particleDataCount</code><a class="headerlink" href="#particledatacount" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">particledatacount</div>
+
 <p><em>Read-only</em>. The number of initial particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11424,6 +11484,8 @@
 </ul>
 <hr />
 <h3 id="particlemodifiers"><code>particleModifiers</code><a class="headerlink" href="#particlemodifiers" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">particlemodifiers</div>
+
 <p>Modifiers that will influence the individual particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11431,6 +11493,8 @@
 </ul>
 <hr />
 <h3 id="phase"><code>phase</code><a class="headerlink" href="#phase" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">phase</div>
+
 <p>The phase value. It is an offset applied to the animation's update time, in seconds.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11438,6 +11502,8 @@
 </ul>
 <hr />
 <h3 id="planarangle"><code>planarAngle</code><a class="headerlink" href="#planarangle" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">planarangle</div>
+
 <p>The planar angle (around the Z axis from the positive X axis) that will serve as the plane in which the declination will occur. The expected range of the planar angle is [0, 2PI).</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11445,6 +11511,8 @@
 </ul>
 <hr />
 <h3 id="planaranglevariation"><code>planarAngleVariation</code><a class="headerlink" href="#planaranglevariation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">planaranglevariation</div>
+
 <p>The variation of the initial planar angle. The planar angle will be evenly distributed over the [<code>.planarAngle - .planarAngleVariation / 2</code>, <code>.planarAngle + .planarAngleVariation / 2</code>] range.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11452,6 +11520,8 @@
 </ul>
 <hr />
 <h3 id="refcount"><code>refCount</code><a class="headerlink" href="#refcount" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">refcount</div>
+
 <p><em>Read-only</em>. The number of references that exist for this object. When this value reaches zero, the object will be deleted.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11459,6 +11529,8 @@
 </ul>
 <hr />
 <h3 id="resetparticlesystem"><code>resetParticleSystem</code><a class="headerlink" href="#resetparticlesystem" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">resetparticlesystem</div>
+
 <p>Controls whether the system will be reset when the niParticleSystemController loops. If this flag is set to <code>true</code>, existing particles will be eliminated when the controller loops, and any run-up indicated by <code>.emitStartTime</code> variable will occur. Otherwise, the controller will simply continue running from the beginning of the loop, and the existing particles will continue to run until they die out naturally.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11466,6 +11538,8 @@
 </ul>
 <hr />
 <h3 id="rtti"><code>RTTI</code><a class="headerlink" href="#rtti" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">rtti</div>
+
 <p><em>Read-only</em>. The runtime type information for this object. This is an alias for the <code>.runTimeTypeInformation</code> property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11473,6 +11547,8 @@
 </ul>
 <hr />
 <h3 id="runtimetypeinformation"><code>runTimeTypeInformation</code><a class="headerlink" href="#runtimetypeinformation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
+
 <p><em>Read-only</em>. The runtime type information for this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11480,12 +11556,16 @@
 </ul>
 <hr />
 <h3 id="scaledlasttime"><code>scaledLastTime</code><a class="headerlink" href="#scaledlasttime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">scaledlasttime</div>
+
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
 <hr />
 <h3 id="spawndirectionchaos"><code>spawnDirectionChaos</code><a class="headerlink" href="#spawndirectionchaos" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spawndirectionchaos</div>
+
 <p>Controls the change in direction that new particles generated by a spawn event will have. A value of <code>0.0</code> indicates no change in direction, and a value of <code>1.0</code> indicates a 0 % to 100 % change in direction.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11493,6 +11573,8 @@
 </ul>
 <hr />
 <h3 id="spawngenerationscount"><code>spawnGenerationsCount</code><a class="headerlink" href="#spawngenerationscount" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spawngenerationscount</div>
+
 <p>The number of spawn generations a particle can go through.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11500,6 +11582,8 @@
 </ul>
 <hr />
 <h3 id="spawnmultiplier"><code>spawnMultiplier</code><a class="headerlink" href="#spawnmultiplier" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spawnmultiplier</div>
+
 <p>The number of new particles generated on a spawn event.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11507,6 +11591,8 @@
 </ul>
 <hr />
 <h3 id="spawnondeath"><code>spawnOnDeath</code><a class="headerlink" href="#spawnondeath" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spawnondeath</div>
+
 <p>This flag indicates whether a particle spawn event will occur upon particle death.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11514,6 +11600,8 @@
 </ul>
 <hr />
 <h3 id="spawnpercentage"><code>spawnPercentage</code><a class="headerlink" href="#spawnpercentage" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spawnpercentage</div>
+
 <p>The percentage of the particles that will actually spawn when a spawn event occurs Expected values are in range [0.0, 1.0].</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11521,6 +11609,8 @@
 </ul>
 <hr />
 <h3 id="spawnspeedchaos"><code>spawnSpeedChaos</code><a class="headerlink" href="#spawnspeedchaos" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spawnspeedchaos</div>
+
 <p>Controls the change in speed that new particles generated by a spawn event will have. A value of <code>0.0</code> indicates no change in speed, a value of <code>1.0</code> indicates a 0 % to 100 % increase in speed, and a value of <code>-1.0</code> indicates 0 % to 100 % decrease in speed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11528,6 +11618,8 @@
 </ul>
 <hr />
 <h3 id="speed"><code>speed</code><a class="headerlink" href="#speed" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">speed</div>
+
 <p>This is the initial speed of the newly spawned particles.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11535,6 +11627,8 @@
 </ul>
 <hr />
 <h3 id="speedvariation"><code>speedVariation</code><a class="headerlink" href="#speedvariation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">speedvariation</div>
+
 <p>The variation of the initial velocity. The initial velocity will be evenly distributed over the [<code>.speed - .speedVariation / 2</code>, <code>.speed + .speedVariation / 2</code>] range.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11542,6 +11636,8 @@
 </ul>
 <hr />
 <h3 id="starttime"><code>startTime</code><a class="headerlink" href="#starttime" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">starttime</div>
+
 <p>The time at which the animation controller starts playing its animation.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11549,6 +11645,8 @@
 </ul>
 <hr />
 <h3 id="staticbounds"><code>staticBounds</code><a class="headerlink" href="#staticbounds" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">staticbounds</div>
+
 <p>This flag controls whether or not the controller uses precomputed static bounding volumes for each frame of the animation.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11556,6 +11654,8 @@
 </ul>
 <hr />
 <h3 id="target"><code>target</code><a class="headerlink" href="#target" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">target</div>
+
 <p><em>Read-only</em>. The scene graph object that this animation controller is to animate.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11563,6 +11663,8 @@
 </ul>
 <hr />
 <h3 id="usebirthrate"><code>useBirthRate</code><a class="headerlink" href="#usebirthrate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">usebirthrate</div>
+
 <p>If this flag is set to <code>false</code>, the maximal sustainable birth rate based on the life span of the particles will be used. Otherwise, the value of <code>.birthRate</code> property will be used.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -11571,6 +11673,8 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clone</div>
+
 <p>Creates a copy of this object.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
 </code></pre></div>
@@ -11580,6 +11684,8 @@
 </ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
+
 <p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -11593,6 +11699,8 @@
 </ul>
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isoftype, oftype</div>
+
 <p>Determines if the object is of a given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -11606,6 +11714,8 @@
 </ul>
 <hr />
 <h3 id="savebinary"><code>saveBinary</code><a class="headerlink" href="#savebinary" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">savebinary</div>
+
 <p>Serializes the object, and writes it to the given file.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">saveBinary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -11619,6 +11729,8 @@
 </ul>
 <hr />
 <h3 id="settarget"><code>setTarget</code><a class="headerlink" href="#settarget" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">settarget, target</div>
+
 <p>This method assigns a new target to the animation controller.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setTarget</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 </code></pre></div>
@@ -11628,6 +11740,8 @@
 </ul>
 <hr />
 <h3 id="start"><code>start</code><a class="headerlink" href="#start" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">start</div>
+
 <p>Starts the controller at the specified time. Intended for controllers with <code>animTimingType</code> of 1.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">start</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 </code></pre></div>
@@ -11637,6 +11751,8 @@
 </ul>
 <hr />
 <h3 id="stop"><code>stop</code><a class="headerlink" href="#stop" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">stop</div>
+
 <p>Stops the controller. If you only want to pause the controller, use the <code>update</code> property.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">stop</span><span class="p">()</span>
 </code></pre></div>

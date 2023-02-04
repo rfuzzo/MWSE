@@ -10568,6 +10568,8 @@
 <p>This type inherits the following: <a href="../../types/niObject">niObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="bonedata"><code>boneData</code><a class="headerlink" href="#bonedata" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">bonedata</div>
+
 <p><em>Read-only</em>. An array of objects containing one entry for each bone that influences vertices in the skinned mesh. The order of the entries in the <code>boneData</code> array corresponds to the order of the bones in the bone array in the <code>niSkinInstance</code> objects that point to this <code>niSkinData</code>. Each object in this array contains all the data needed to deform vertices by a single bone.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10575,6 +10577,8 @@
 </ul>
 <hr />
 <h3 id="partition"><code>partition</code><a class="headerlink" href="#partition" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">partition</div>
+
 <p>Access to the container with the skinning data optimized for hardware skinning. If the <code>niSkinData</code> object has not been partitioned, this property is <code>nil</code>.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10582,6 +10586,8 @@
 </ul>
 <hr />
 <h3 id="refcount"><code>refCount</code><a class="headerlink" href="#refcount" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">refcount</div>
+
 <p><em>Read-only</em>. The number of references that exist for this object. When this value reaches zero, the object will be deleted.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10589,6 +10595,8 @@
 </ul>
 <hr />
 <h3 id="rotation"><code>rotation</code><a class="headerlink" href="#rotation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">rotation</div>
+
 <p>Defines the rotation of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10596,6 +10604,8 @@
 </ul>
 <hr />
 <h3 id="rtti"><code>RTTI</code><a class="headerlink" href="#rtti" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">rtti</div>
+
 <p><em>Read-only</em>. The runtime type information for this object. This is an alias for the <code>.runTimeTypeInformation</code> property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10603,6 +10613,8 @@
 </ul>
 <hr />
 <h3 id="runtimetypeinformation"><code>runTimeTypeInformation</code><a class="headerlink" href="#runtimetypeinformation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
+
 <p><em>Read-only</em>. The runtime type information for this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10610,6 +10622,8 @@
 </ul>
 <hr />
 <h3 id="scale"><code>scale</code><a class="headerlink" href="#scale" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">scale</div>
+
 <p>Defines the scale of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10617,6 +10631,8 @@
 </ul>
 <hr />
 <h3 id="translation"><code>translation</code><a class="headerlink" href="#translation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">translation</div>
+
 <p>Defines the translation of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10625,6 +10641,8 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clone</div>
+
 <p>Creates a copy of this object.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
 </code></pre></div>
@@ -10634,6 +10652,8 @@
 </ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
+
 <p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -10647,6 +10667,8 @@
 </ul>
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isoftype, oftype</div>
+
 <p>Determines if the object is of a given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -10660,6 +10682,8 @@
 </ul>
 <hr />
 <h3 id="savebinary"><code>saveBinary</code><a class="headerlink" href="#savebinary" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">savebinary</div>
+
 <p>Serializes the object, and writes it to the given file.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">saveBinary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>

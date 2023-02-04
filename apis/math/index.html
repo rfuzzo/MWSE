@@ -10525,6 +10525,8 @@
 <p>This library is an interface to the standard C math library. This library has been further extended by MWSE. The functions implemented by MWSE are listed here. It provides all its functions inside the table math.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="mathepsilon"><code>math.epsilon</code><a class="headerlink" href="#mathepsilon" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">epsilon</div>
+
 <p>The <em>machine</em> epsilon available for double-precision numbers. This is the difference between 1.0 and the next representable value using lua numbers.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10532,6 +10534,8 @@
 </ul>
 <hr />
 <h3 id="mathfepsilon"><code>math.fepsilon</code><a class="headerlink" href="#mathfepsilon" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">fepsilon</div>
+
 <p>The <em>machine</em> epsilon available for single-precision numbers. This is the difference between 1.0 and the next representable value for many Morrowind structures.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10539,6 +10543,8 @@
 </ul>
 <hr />
 <h3 id="mathfhuge"><code>math.fhuge</code><a class="headerlink" href="#mathfhuge" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">fhuge</div>
+
 <p>The <em>machine</em> maximum available value for single-precision numbers. This is the maximum representable value for any floating-point Morrowind structures.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10546,6 +10552,8 @@
 </ul>
 <hr />
 <h3 id="mathnfhuge"><code>math.nfhuge</code><a class="headerlink" href="#mathnfhuge" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">nfhuge</div>
+
 <p>The <em>machine</em> minimum available value for single-precision numbers. This is the minimum representable value for any floating-point Morrowind structures.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10554,6 +10562,8 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mathclamp"><code>math.clamp</code><a class="headerlink" href="#mathclamp" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clamp</div>
+
 <p>Returns a value, limited by upper and lower bounds.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">min</span><span class="p">,</span> <span class="n">max</span><span class="p">)</span>
 </code></pre></div>
@@ -10569,6 +10579,8 @@
 </ul>
 <hr />
 <h3 id="mathisclose"><code>math.isclose</code><a class="headerlink" href="#mathisclose" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isclose, close</div>
+
 <p>This function compares <code>a</code> and <code>b</code> and returns true if they are close together. This can be useful when comparing floating-point numbers with some degree of tolerance.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">absoluteTolerance</span><span class="p">,</span> <span class="n">relativeTolerance</span><span class="p">)</span>
 </code></pre></div>
@@ -10585,6 +10597,8 @@
 </ul>
 <hr />
 <h3 id="mathlerp"><code>math.lerp</code><a class="headerlink" href="#mathlerp" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">lerp</div>
+
 <p>Performs linear interpolation between values v0 and v1. Returns a value that is t percent between them.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">lerp</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 </code></pre></div>
@@ -10600,6 +10614,8 @@
 </ul>
 <hr />
 <h3 id="mathremap"><code>math.remap</code><a class="headerlink" href="#mathremap" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">remap</div>
+
 <p>Returns a value, scaled from expected values [lowIn, highIn] to [lowOut, highOut].</p>
 <p>For example, a value of 7 remapped from [0,10] to [0,100] would be 70.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">remap</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">lowIn</span><span class="p">,</span> <span class="n">highIn</span><span class="p">,</span> <span class="n">lowOut</span><span class="p">,</span> <span class="n">highOut</span><span class="p">)</span>
@@ -10618,6 +10634,8 @@
 </ul>
 <hr />
 <h3 id="mathround"><code>math.round</code><a class="headerlink" href="#mathround" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">round</div>
+
 <p>Rounds a number to a given count of digits.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
 </code></pre></div>

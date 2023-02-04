@@ -10497,6 +10497,8 @@
 <p>Provides support for interacting with json data through an extended dkjson module.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="jsonnull"><code>json.null</code><a class="headerlink" href="#jsonnull" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">null</div>
+
 <p>You can use this value for setting explicit null values.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10504,6 +10506,8 @@
 </ul>
 <hr />
 <h3 id="jsonversion"><code>json.version</code><a class="headerlink" href="#jsonversion" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">version</div>
+
 <p>Current version of dkjson.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10512,6 +10516,8 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="jsondecode"><code>json.decode</code><a class="headerlink" href="#jsondecode" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">decode</div>
+
 <p>Decode string into a table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">nullValue</span><span class="p">)</span>
 </code></pre></div>
@@ -10527,6 +10533,8 @@
 </ul>
 <hr />
 <h3 id="jsonencode"><code>json.encode</code><a class="headerlink" href="#jsonencode" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">encode</div>
+
 <p>Create a string representing the object. Object can be a table, a string, a number, a boolean, nil, json.null or any object with a function __tojson in its metatable. A table can only use strings and numbers as keys and its values have to be valid objects as well. It raises an error for any invalid data types or reference cycles.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 </code></pre></div>
@@ -10541,6 +10549,8 @@
 </ul>
 <hr />
 <h3 id="jsonloadfile"><code>json.loadfile</code><a class="headerlink" href="#jsonloadfile" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">loadfile</div>
+
 <p>Loads the contents of a file through json.decode. Files loaded from Data Files\MWSE\{fileName}.json.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loadfile</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
 </code></pre></div>
@@ -10554,6 +10564,8 @@
 </ul>
 <hr />
 <h3 id="jsonquotestring"><code>json.quotestring</code><a class="headerlink" href="#jsonquotestring" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">quotestring</div>
+
 <p>Quote a UTF-8 string and escape critical characters using JSON escape sequences. This function is only necessary when you build your own __tojson functions.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">quotestring</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </code></pre></div>
@@ -10567,6 +10579,8 @@
 </ul>
 <hr />
 <h3 id="jsonsavefile"><code>json.savefile</code><a class="headerlink" href="#jsonsavefile" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">savefile</div>
+
 <p>Saves a serializable table to Data Files\MWSE\{fileName}.json, using json.encode.</p>
 <div class="highlight"><pre><span></span><code><span class="n">json</span><span class="p">.</span><span class="n">savefile</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">object</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 </code></pre></div>

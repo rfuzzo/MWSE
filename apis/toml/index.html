@@ -10429,6 +10429,8 @@
 <p>Provides support for interacting with toml data through an extended toml.lua module.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="tomldecode"><code>toml.decode</code><a class="headerlink" href="#tomldecode" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">decode</div>
+
 <p>Decode string representing toml into a table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">toml</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
 </code></pre></div>
@@ -10442,6 +10444,8 @@
 </ul>
 <hr />
 <h3 id="tomlencode"><code>toml.encode</code><a class="headerlink" href="#tomlencode" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">encode</div>
+
 <p>Encodes a table into a toml string.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">toml</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">input</span><span class="p">)</span>
 </code></pre></div>
@@ -10455,6 +10459,8 @@
 </ul>
 <hr />
 <h3 id="tomlloadfile"><code>toml.loadFile</code><a class="headerlink" href="#tomlloadfile" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">loadfile</div>
+
 <p>Loads a toml file from <code>path</code>, using <code>toml.decode</code>. Unlike the related <code>json.loadfile</code> function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the <code>path</code> string.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">toml</span><span class="p">.</span><span class="n">loadFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10468,6 +10474,8 @@
 </ul>
 <hr />
 <h3 id="tomlsavefile"><code>toml.saveFile</code><a class="headerlink" href="#tomlsavefile" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">savefile</div>
+
 <p>Saves a serializable table to <code>path</code>, using <code>toml.encode</code>. Unlike the related <code>json.savefile</code> function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the <code>path</code> string.</p>
 <div class="highlight"><pre><span></span><code><span class="n">toml</span><span class="p">.</span><span class="n">saveFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>

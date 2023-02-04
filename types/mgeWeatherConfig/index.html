@@ -10513,6 +10513,8 @@
 <p>Allows control of MGE weather features.</p>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="getdistantfog"><code>getDistantFog</code><a class="headerlink" href="#getdistantfog" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getdistantfog, distantfog</div>
+
 <p>No description yet available.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getDistantFog</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
 </code></pre></div>
@@ -10522,6 +10524,8 @@
 </ul>
 <hr />
 <h3 id="getperpixellighting"><code>getPerPixelLighting</code><a class="headerlink" href="#getperpixellighting" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getperpixellighting, perpixellighting</div>
+
 <p>Gets the PPL data for a weather from MGE. These are returned in a table with the <code>sun</code> and <code>ambient</code> keys, as well as the <code>weather</code> redefined. The result table can be modified, then sent back to <code>setPerPixelLighting</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getPerPixelLighting</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
 </code></pre></div>
@@ -10535,6 +10539,8 @@
 </ul>
 <hr />
 <h3 id="getscattering"><code>getScattering</code><a class="headerlink" href="#getscattering" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getscattering, scattering</div>
+
 <p>Gets the in- and out-scatter values from MGE. These are returned in a table with the <code>inscatter</code> and <code>outscatter</code> keys. The result table can be modified, then sent back to <code>setScattering</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scatters</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getScattering</span><span class="p">()</span>
 </code></pre></div>
@@ -10544,6 +10550,8 @@
 </ul>
 <hr />
 <h3 id="getskylightscattering"><code>getSkylightScattering</code><a class="headerlink" href="#getskylightscattering" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getskylightscattering, skylightscattering</div>
+
 <p>Gets the skylight scatter values from MGE. These are returned in a table with the <code>skylight</code> and <code>mix</code> keys. The result table can be modified, then sent back to <code>setSkylightScattering</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">scatters</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getSkylightScattering</span><span class="p">()</span>
 </code></pre></div>
@@ -10553,6 +10561,8 @@
 </ul>
 <hr />
 <h3 id="getwind"><code>getWind</code><a class="headerlink" href="#getwind" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getwind, wind</div>
+
 <p>Gets the wind speed for a weather from MGE. This is returned in a table with the <code>speed</code> key, as well as the <code>weather</code> redefined. The result table can be modified, then sent back to <code>setWind</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">getWind</span><span class="p">(</span><span class="n">weather</span><span class="p">)</span>
 </code></pre></div>
@@ -10566,6 +10576,8 @@
 </ul>
 <hr />
 <h3 id="setdistantfog"><code>setDistantFog</code><a class="headerlink" href="#setdistantfog" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setdistantfog, distantfog</div>
+
 <p>No description yet available.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setDistantFog</span><span class="p">({</span> <span class="n">weather</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">distance</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">offset</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10580,6 +10592,8 @@
 </ul>
 <hr />
 <h3 id="setperpixellighting"><code>setPerPixelLighting</code><a class="headerlink" href="#setperpixellighting" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setperpixellighting, perpixellighting</div>
+
 <p>Sets the PPL values for a weather in MGE. The result table of <code>getPerPixelLighting</code> can be modified then passed to this function.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setPerPixelLighting</span><span class="p">({</span> <span class="n">weather</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">sun</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">ambient</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10594,6 +10608,8 @@
 </ul>
 <hr />
 <h3 id="setscattering"><code>setScattering</code><a class="headerlink" href="#setscattering" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setscattering, scattering</div>
+
 <p>Sets the in- and out-scatter values for MGE. The result table of <code>getScattering</code> can be modified then passed to this function.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setScattering</span><span class="p">({</span> <span class="n">inscatter</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">outscatter</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10607,6 +10623,8 @@
 </ul>
 <hr />
 <h3 id="setskylightscattering"><code>setSkylightScattering</code><a class="headerlink" href="#setskylightscattering" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setskylightscattering, skylightscattering</div>
+
 <p>Sets the sky scatter values for MGE. The result table of <code>getSkylightScattering</code> can be modified then passed to this function.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setSkylightScattering</span><span class="p">({</span> <span class="n">skylight</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">mix</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10620,6 +10638,8 @@
 </ul>
 <hr />
 <h3 id="setwind"><code>setWind</code><a class="headerlink" href="#setwind" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setwind, wind</div>
+
 <p>Sets the wind speed for a weather in MGE. The result table of <code>getWind</code> can be modified then passed to this function.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mgeWeatherConfig</span><span class="p">.</span><span class="n">setWind</span><span class="p">({</span> <span class="n">weather</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">speed</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>

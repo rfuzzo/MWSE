@@ -10623,6 +10623,8 @@
 <p>The mwse library provides methods for interacting with MWSE itself, rather than direct TES3 objects.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="mwsebuilddate"><code>mwse.buildDate</code><a class="headerlink" href="#mwsebuilddate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">builddate</div>
+
 <p>A numerical representation of the date that version of MWSE currently being used was built on.</p>
 <p>Formatted as YYYYMMDD.</p>
 <p><strong>Returns</strong>:</p>
@@ -10640,6 +10642,8 @@
 </details>
 <hr />
 <h3 id="mwsegametimers"><code>mwse.gameTimers</code><a class="headerlink" href="#mwsegametimers" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">gametimers</div>
+
 <p>The mwseTimerController responsible for game-type timers.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10647,6 +10651,8 @@
 </ul>
 <hr />
 <h3 id="mwserealtimers"><code>mwse.realTimers</code><a class="headerlink" href="#mwserealtimers" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">realtimers</div>
+
 <p>The mwseTimerController responsible for real-type timers.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10654,6 +10660,8 @@
 </ul>
 <hr />
 <h3 id="mwsesimulatetimers"><code>mwse.simulateTimers</code><a class="headerlink" href="#mwsesimulatetimers" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">simulatetimers</div>
+
 <p>The mwseTimerController responsible for simulate-type timers.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10661,6 +10669,8 @@
 </ul>
 <hr />
 <h3 id="mwseversion"><code>mwse.version</code><a class="headerlink" href="#mwseversion" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">version</div>
+
 <p>A numerical representation of the release version of MWSE currently being used.</p>
 <p>Formatted as AAABBBCCC, where A is the major version, BBB is the minor version, and CCC is the patch version. BBB and CCC are forward-padded.</p>
 <p>It is usually better to use <code>mwse.buildDate</code> instead.</p>
@@ -10671,6 +10681,8 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="mwseclearscriptoverride"><code>mwse.clearScriptOverride</code><a class="headerlink" href="#mwseclearscriptoverride" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clearscriptoverride</div>
+
 <p>Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of <code>mwse.overrideScript</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">clearScriptOverride</span><span class="p">(</span><span class="n">scriptId</span><span class="p">)</span>
 </code></pre></div>
@@ -10684,6 +10696,8 @@
 </ul>
 <hr />
 <h3 id="mwsegetcurrentmorrowindscriptstate"><code>mwse.getCurrentMorrowindScriptState</code><a class="headerlink" href="#mwsegetcurrentmorrowindscriptstate" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getcurrentmorrowindscriptstate, currentmorrowindscriptstate</div>
+
 <p>This function returns information on the current mwscript execution state.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">script</span><span class="p">,</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getCurrentMorrowindScriptState</span><span class="p">()</span>
 </code></pre></div>
@@ -10694,6 +10708,8 @@
 </ul>
 <hr />
 <h3 id="mwsegetversion"><code>mwse.getVersion</code><a class="headerlink" href="#mwsegetversion" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getversion, version</div>
+
 <p>Equivalent to mwse.version.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getVersion</span><span class="p">()</span>
 </code></pre></div>
@@ -10703,6 +10719,8 @@
 </ul>
 <hr />
 <h3 id="mwsegetvirtualmemoryusage"><code>mwse.getVirtualMemoryUsage</code><a class="headerlink" href="#mwsegetvirtualmemoryusage" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getvirtualmemoryusage, virtualmemoryusage</div>
+
 <p>Returns the amount of memory used, in bytes.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">getVirtualMemoryUsage</span><span class="p">()</span>
 </code></pre></div>
@@ -10712,6 +10730,8 @@
 </ul>
 <hr />
 <h3 id="mwseloadconfig"><code>mwse.loadConfig</code><a class="headerlink" href="#mwseloadconfig" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">loadconfig</div>
+
 <p>Loads a config table from Data Files\MWSE\config\{fileName}.json.</p>
 <p>If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadConfig</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>
@@ -10727,6 +10747,8 @@
 </ul>
 <hr />
 <h3 id="mwseloadtranslations"><code>mwse.loadTranslations</code><a class="headerlink" href="#mwseloadtranslations" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">loadtranslations</div>
+
 <p>Loads translations from the i18n folder for a given mod. This is locale-aware, using the result from <code>tes3.getLanguage()</code>. See the <a href="https://mwse.github.io/MWSE/guides/mod-translations/">mod translations guide</a> for more information.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">i18n</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadTranslations</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
 </code></pre></div>
@@ -10740,6 +10762,8 @@
 </ul>
 <hr />
 <h3 id="mwselog"><code>mwse.log</code><a class="headerlink" href="#mwselog" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">log</div>
+
 <p>This function writes information to the mwse.log file in the user's installation directory.</p>
 <p>The message accepts formatting and additional parameters matching string.format's usage.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mwse</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">formatValues</span><span class="p">)</span>
@@ -10751,6 +10775,8 @@
 </ul>
 <hr />
 <h3 id="mwselongtostring"><code>mwse.longToString</code><a class="headerlink" href="#mwselongtostring" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">longtostring</div>
+
 <p>Converts a TES3 object type (e.g. from tes3.objectType) into an uppercase, 4-character string.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">longToString</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -10764,6 +10790,8 @@
 </ul>
 <hr />
 <h3 id="mwseoverridescript"><code>mwse.overrideScript</code><a class="headerlink" href="#mwseoverridescript" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">overridescript</div>
+
 <p>Configures MWSE to execute a given function instead when a script would run.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">overrideScript</span><span class="p">(</span><span class="n">scriptId</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 </code></pre></div>
@@ -10822,6 +10850,8 @@
 </details>
 <hr />
 <h3 id="mwsesaveconfig"><code>mwse.saveConfig</code><a class="headerlink" href="#mwsesaveconfig" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">saveconfig</div>
+
 <p>Saves a config table to Data Files\MWSE\config\{fileName}.json.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">saveConfig</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">object</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 </code></pre></div>
@@ -10837,6 +10867,8 @@
 </ul>
 <hr />
 <h3 id="mwsestringtolong"><code>mwse.stringToLong</code><a class="headerlink" href="#mwsestringtolong" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">stringtolong</div>
+
 <p>Converts an uppercase, 4-character string into a TES3 object type.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">stringToLong</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
 </code></pre></div>

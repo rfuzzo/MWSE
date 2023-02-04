@@ -10525,6 +10525,8 @@
 <p>A configuration detailing a quick key.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="item"><code>item</code><a class="headerlink" href="#item" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">item</div>
+
 <p><em>Read-only</em>. The raw item bound to the quick key. To change its value, use either the <code>setItem</code> or <code>setMagic</code> methods.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10532,6 +10534,8 @@
 </ul>
 <hr />
 <h3 id="itemdata"><code>itemData</code><a class="headerlink" href="#itemdata" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">itemdata</div>
+
 <p><em>Read-only</em>. The raw item data bound to the quick key. To change its value, use either the <code>setItem</code> or <code>setMagic</code> methods.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10539,6 +10543,8 @@
 </ul>
 <hr />
 <h3 id="spell"><code>spell</code><a class="headerlink" href="#spell" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">spell</div>
+
 <p><em>Read-only</em>. The raw spell bound to the quick key. To change its value, use the <code>setMagic</code> method.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10546,6 +10552,8 @@
 </ul>
 <hr />
 <h3 id="type"><code>type</code><a class="headerlink" href="#type" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">type</div>
+
 <p><em>Read-only</em>. The type of the quick key, with the numeric value matching <a href="https://mwse.github.io/MWSE/references/quick-key-types/"><code>tes3.quickKeyType</code></a> constants.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10554,11 +10562,15 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="clear"><code>clear</code><a class="headerlink" href="#clear" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clear</div>
+
 <p>Unbinds the quick key, removing any data in it.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">clear</span><span class="p">()</span>
 </code></pre></div>
 <hr />
 <h3 id="getitem"><code>getItem</code><a class="headerlink" href="#getitem" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getitem, item</div>
+
 <p>Gets the item associated with the given quick key. If the quick key is not marked as an item, this will return <code>nil</code>. This is equivalent to fetching the <code>item</code> and <code>itemData</code> properties, after checking to make sure the <code>type</code> is set to item.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getItem</span><span class="p">()</span>
 </code></pre></div>
@@ -10569,6 +10581,8 @@
 </ul>
 <hr />
 <h3 id="getmagic"><code>getMagic</code><a class="headerlink" href="#getmagic" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getmagic, magic</div>
+
 <p>Gets the magic associated with the given quick key. If the quick key is not marked as magic, this will return <code>nil</code>. This is equivalent to fetching either the <code>spell</code> or <code>item</code> properties and the <code>itemData</code> property, after checking to make sure the <code>type</code> is set to magic.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">source</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getMagic</span><span class="p">()</span>
 </code></pre></div>
@@ -10579,6 +10593,8 @@
 </ul>
 <hr />
 <h3 id="setitem"><code>setItem</code><a class="headerlink" href="#setitem" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setitem, item</div>
+
 <p>Sets the binding of the quick key to a given item source.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setItem</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>
@@ -10589,6 +10605,8 @@
 </ul>
 <hr />
 <h3 id="setmagic"><code>setMagic</code><a class="headerlink" href="#setmagic" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setmagic, magic</div>
+
 <p>Sets the binding of the quick key to a given magic source. This must be a spell, or an item with an on-use enchantment.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setMagic</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 </code></pre></div>

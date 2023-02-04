@@ -10650,6 +10650,8 @@
 <p>This type inherits the following: <a href="../../types/niObject">niObject</a></p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="bytesperpixel"><code>bytesPerPixel</code><a class="headerlink" href="#bytesperpixel" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">bytesperpixel</div>
+
 <p><em>Read-only</em>. The number of bytes per pixel.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10657,6 +10659,8 @@
 </ul>
 <hr />
 <h3 id="mipmaplevels"><code>mipMapLevels</code><a class="headerlink" href="#mipmaplevels" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">mipmaplevels</div>
+
 <p><em>Read-only</em>. The number of MipMap levels.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10664,6 +10668,8 @@
 </ul>
 <hr />
 <h3 id="refcount"><code>refCount</code><a class="headerlink" href="#refcount" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">refcount</div>
+
 <p><em>Read-only</em>. The number of references that exist for this object. When this value reaches zero, the object will be deleted.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10671,6 +10677,8 @@
 </ul>
 <hr />
 <h3 id="rtti"><code>RTTI</code><a class="headerlink" href="#rtti" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">rtti</div>
+
 <p><em>Read-only</em>. The runtime type information for this object. This is an alias for the <code>.runTimeTypeInformation</code> property.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10678,6 +10686,8 @@
 </ul>
 <hr />
 <h3 id="runtimetypeinformation"><code>runTimeTypeInformation</code><a class="headerlink" href="#runtimetypeinformation" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
+
 <p><em>Read-only</em>. The runtime type information for this object.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10686,6 +10696,8 @@
 <hr />
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">⚓︎</a></h2>
 <h3 id="clone"><code>clone</code><a class="headerlink" href="#clone" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">clone</div>
+
 <p>Creates a copy of this object.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">clone</span><span class="p">()</span>
 </code></pre></div>
@@ -10695,6 +10707,8 @@
 </ul>
 <hr />
 <h3 id="createsourcetexture"><code>createSourceTexture</code><a class="headerlink" href="#createsourcetexture" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">createsourcetexture, sourcetexture</div>
+
 <p>Creates a source texture from the current NiPixelData object.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">createSourceTexture</span><span class="p">()</span>
 </code></pre></div>
@@ -10704,6 +10718,8 @@
 </ul>
 <hr />
 <h3 id="fill"><code>fill</code><a class="headerlink" href="#fill" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">fill</div>
+
 <p>Fills this pixel data with the provided color.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">fill</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
@@ -10714,6 +10730,8 @@
 </ul>
 <hr />
 <h3 id="getheight"><code>getHeight</code><a class="headerlink" href="#getheight" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getheight, height</div>
+
 <p>Returns the height of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level <code>mipMapLevels - 1</code> is the coarsest (smallest) mipmap level.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getHeight</span><span class="p">(</span><span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
@@ -10727,6 +10745,8 @@
 </ul>
 <hr />
 <h3 id="getwidth"><code>getWidth</code><a class="headerlink" href="#getwidth" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getwidth, width</div>
+
 <p>Returns the width of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level <code>mipMapLevels - 1</code> is the coarsest (smallest) mipmap level.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getWidth</span><span class="p">(</span><span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
@@ -10740,6 +10760,8 @@
 </ul>
 <hr />
 <h3 id="isinstanceoftype"><code>isInstanceOfType</code><a class="headerlink" href="#isinstanceoftype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
+
 <p>Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isInstanceOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -10753,6 +10775,8 @@
 </ul>
 <hr />
 <h3 id="isoftype"><code>isOfType</code><a class="headerlink" href="#isoftype" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">isoftype, oftype</div>
+
 <p>Determines if the object is of a given type. Types can be found in the <a href="https://mwse.github.io/MWSE/references/ni/types/"><code>ni.type</code></a> table.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">isOfType</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>
 </code></pre></div>
@@ -10766,6 +10790,8 @@
 </ul>
 <hr />
 <h3 id="savebinary"><code>saveBinary</code><a class="headerlink" href="#savebinary" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">savebinary</div>
+
 <p>Serializes the object, and writes it to the given file.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">success</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">saveBinary</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
@@ -10779,6 +10805,8 @@
 </ul>
 <hr />
 <h3 id="setpixelsbyte"><code>setPixelsByte</code><a class="headerlink" href="#setpixelsbyte" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setpixelsbyte, pixelsbyte</div>
+
 <p>Sets the pixel data from byte data.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPixelsByte</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
@@ -10789,6 +10817,8 @@
 </ul>
 <hr />
 <h3 id="setpixelsfloat"><code>setPixelsFloat</code><a class="headerlink" href="#setpixelsfloat" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">setpixelsfloat, pixelsfloat</div>
+
 <p>Sets the pixel data from float data.</p>
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setPixelsFloat</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mipMapLevel</span><span class="p">)</span>
 </code></pre></div>
@@ -10800,6 +10830,8 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="new"><code>new</code><a class="headerlink" href="#new" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">new</div>
+
 <p>Creates a new NiPixelData object.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">pixelData</span> <span class="o">=</span> <span class="n">niPixelData</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">mipMapLevels</span><span class="p">)</span>
 </code></pre></div>

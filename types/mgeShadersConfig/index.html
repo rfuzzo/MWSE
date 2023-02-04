@@ -10469,6 +10469,8 @@
 <p>Allows control of MGE shader features.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">⚓︎</a></h2>
 <h3 id="debug"><code>debug</code><a class="headerlink" href="#debug" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">debug</div>
+
 <p><em>Read-only</em>. Gathers a string listing all shaders.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10476,6 +10478,8 @@
 </ul>
 <hr />
 <h3 id="hdrreactionspeed"><code>hdrReactionSpeed</code><a class="headerlink" href="#hdrreactionspeed" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">hdrreactionspeed</div>
+
 <p>The HDR exposure reaction speed, in seconds.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10483,6 +10487,8 @@
 </ul>
 <hr />
 <h3 id="list"><code>list</code><a class="headerlink" href="#list" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">list</div>
+
 <p><em>Read-only</em>. Loads a list of all shaders. This is not a constant-held collection, and each shader handle is initialized anew each time this function is called. Cache this value when you are sure that shaders are not added or removed.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -10491,6 +10497,8 @@
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
 <h3 id="find"><code>find</code><a class="headerlink" href="#find" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">find</div>
+
 <p>Finds a loaded shader and returns a handle to it.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">shader</span> <span class="o">=</span> <span class="n">mgeShadersConfig</span><span class="p">.</span><span class="n">find</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -10507,6 +10515,8 @@
 </ul>
 <hr />
 <h3 id="load"><code>load</code><a class="headerlink" href="#load" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">load</div>
+
 <p>Loads a shader by name, from the <code>Data Files/shaders/XEshaders</code> directory. Adds the shader to the existing shader list, or returns the existing shader if it is already loaded.</p>
 <p>If the shader has a category annotation, it is inserted into a position that preserves the category ordering. Shaders without a category will be added to the end of the list.</p>
 <p>Summary of category sort order:
