@@ -10379,6 +10379,8 @@
 <li><code>caster</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The caster of the enchantment.</li>
 <li><code>charge</code> (number): The charge required to cast the enchantment. May be modified.</li>
 <li><code>isCast</code> (boolean): True if the calculation is for a on-strike or on-use action, false if for UI enchant charge display. The type of action is found at <code>e.source.castType</code>.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): <em>Read-only</em>. Only available when isCast is true. The item used to cast the enchantment.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Read-only</em>. Only available when isCast is true. The item data of the item used to cast the enchantment.</li>
 <li><code>source</code> (<a href="../../types/tes3enchantment">tes3enchantment</a>): <em>Read-only</em>. The enchantment being used or examined by the UI.</li>
 </ul>
 
