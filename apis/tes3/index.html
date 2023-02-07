@@ -14836,12 +14836,15 @@
 <h3 id="tes3getcurrentaipackageid"><code>tes3.getCurrentAIPackageId</code><a class="headerlink" href="#tes3getcurrentaipackageid" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getcurrentaipackageid, currentaipackageid</div>
 
-<p>Returns an actor's current AI package ID, just as the mwscript function <code>GetCurrentAIPackage</code> would.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">packageID</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCurrentAIPackageId</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+<p>Returns an actor's current AI package ID, just as the mwscript function <code>GetCurrentAIPackage</code> would. The return value maps to values in <code>tes3.aiPackage</code> namespace.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">packageID</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getCurrentAIPackageId</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
