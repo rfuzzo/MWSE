@@ -10522,7 +10522,7 @@
 <p class="admonition-title">Note</p>
 <p>Both <code>data</code> and <code>tempData</code> tables can only be used to store <em>serializible</em> data.</p>
 </div>
-<p>Data stored in the <code>data</code> table on a certain object will persist between savegame sessions, while data stored in <code>tempData</code> table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one.</p>
+<p>Data stored in the <code>data</code> table on a certain object will persist between savegame sessions, while data stored in <code>tempData</code> table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one. In addition, not every object can have Lua data. You can check that with <code>myRef.supportsLuaData</code> property.</p>
 <div class="admonition example">
 <p class="admonition-title">Example: creating a table inside <code>data</code> table on the player's reference</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Correct way</span>
@@ -10740,11 +10740,11 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 16:22:11</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 17:50:54</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 16:22:11</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">December 20, 2022 08:43:18</span>
       
     
   </small>
