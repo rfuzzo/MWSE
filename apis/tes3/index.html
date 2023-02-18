@@ -5255,6 +5255,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -5361,6 +5363,20 @@
     <li class="md-nav__item">
       <a href="../../types/mgeShadersConfig/" class="md-nav__link">
         mgeShadersConfig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/mgeVersionTable/" class="md-nav__link">
+        mgeVersionTable
       </a>
     </li>
   
@@ -14833,12 +14849,12 @@
 <h3 id="tes3getarchivelist"><code>tes3.getArchiveList</code><a class="headerlink" href="#tes3getarchivelist" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getarchivelist, archivelist</div>
 
-<p>Returns a 1-indexed table of active archives.</p>
+<p>Returns a 1-indexed table of active archives. The paths are relative to Morrowind folder. For example: "Data Files\Tribunal.bsa".</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">archives</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getArchiveList</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>archives</code> (<a href="../../types/tes3archive">tes3archive</a>[])</li>
+<li><code>archives</code> (string[])</li>
 </ul>
 <hr />
 <h3 id="tes3getattachment"><code>tes3.getAttachment</code><a class="headerlink" href="#tes3getattachment" title="Permanent link">⚓︎</a></h3>
@@ -17462,7 +17478,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 18, 2023 11:00:31</span>
       
         <br>
         Created:

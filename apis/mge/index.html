@@ -3911,6 +3911,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -4017,6 +4019,20 @@
     <li class="md-nav__item">
       <a href="../../types/mgeShadersConfig/" class="md-nav__link">
         mgeShadersConfig
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types/mgeVersionTable/" class="md-nav__link">
+        mgeVersionTable
       </a>
     </li>
   
@@ -10798,12 +10814,12 @@
 <h3 id="mgegetversion"><code>mge.getVersion</code><a class="headerlink" href="#mgegetversion" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getversion, version</div>
 
-<p>Gets the MGE version. Returns a table with keys <code>major</code>, <code>minor</code>, and <code>patch</code>.</p>
+<p>Gets the MGE version. Returns a table with keys <code>major</code>, <code>minor</code>, and <code>patch</code>. In some older MGE XE versions, the versions are concatenated to a string.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getVersion</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (<a href="../../types/mgeVersionTable">mgeVersionTable</a>, string)</li>
 </ul>
 <hr />
 <h3 id="mgeloadconfig"><code>mge.loadConfig</code><a class="headerlink" href="#mgeloadconfig" title="Permanent link">⚓︎</a></h3>
@@ -10869,7 +10885,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 18, 2023 11:00:31</span>
       
         <br>
         Created:
