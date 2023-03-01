@@ -685,6 +685,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
@@ -1904,73 +1906,125 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
-          Ni
+          Mge
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mge
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/mge/lighting-modes/" class="md-nav__link">
+        Lighting Modes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+          Ni
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_3">
           <span class="md-nav__icon md-icon"></span>
           Ni
         </label>
@@ -10497,8 +10551,253 @@
     More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-<p>This event is invoked after a UI menu has been built or made visible, at the point that all menu elements contain updated data.</p>
-<p><strong>Supported Menus</strong>: <code>MenuAlchemy</code>, <code>MenuAttributes</code>, <code>MenuAttributesList</code> (Enchanting/spellmaking effect attribute), <code>MenuAudio</code> (Options, audio), <code>MenuBarter</code>, <code>MenuBirthSign</code>, <code>MenuBook</code>, <code>MenuChooseClass</code>, <code>MenuClassChoice</code>, <code>MenuClassMessage</code>, <code>MenuConsole</code>, <code>MenuContents</code> (Container/NPC inventory), <code>MenuCreateClass</code>, <code>MenuCtrls</code> (Options, controls), <code>MenuDialog</code>, <code>MenuEnchantment</code>, <code>MenuInput</code>, <code>MenuInputSave</code>, <code>MenuInventory</code> (Player inventory), <code>MenuInventorySelect</code> (Item selector), <code>MenuJournal</code>, <code>MenuLevelUp</code>, <code>MenuLoad</code>, <code>MenuLoading</code>, <code>MenuMagic</code> (Spell/enchanted item selector), <code>MenuMagicSelect</code>, <code>MenuMap</code>, <code>MenuMapNoteEdit</code>, <code>MenuMessage</code>, <code>MenuMulti</code> (Status bars, current weapon/magic, active effects and minimap), <code>MenuName</code>, <code>MenuNotify1</code>, <code>MenuNotify2</code>, <code>MenuNotify3</code>, <code>MenuOptions</code> (Main menu), <code>MenuPersuasion</code>, <code>MenuPrefs</code> (Options, prefs), <code>MenuQuantity</code>, <code>MenuQuick</code> (Quick keys), <code>MenuRaceSex</code>, <code>MenuRepair</code>, <code>MenuRestWait</code>, <code>MenuSave</code>, <code>MenuScroll</code>, <code>MenuServiceRepair</code>, <code>MenuServiceSpells</code>, <code>MenuServiceTraining</code>, <code>MenuServiceTravel</code>, <code>MenuSetValues</code> (Enchanting/spellmaking effect values), <code>MenuSkills</code>, <code>MenuSkillsList</code> (Enchanting/spellmaking effect skill), <code>MenuSpecialization</code>, <code>MenuSpellmaking</code>, <code>MenuStat</code> (Player attributes, skills, factions etc.), <code>MenuStatReview</code>, <code>MenuSwimFillBar</code>, <code>MenuTimePass</code>, <code>MenuTopic</code>, <code>MenuVideo</code> (Options, video)</p>
+<p>This event is invoked after a UI menu has been built or made visible, at the point that all menu elements contain updated data. Below is a table with all the menus this event triggers for.</p>
+<table>
+<thead>
+<tr>
+<th>Menu id</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"MenuAlchemy"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuAttributes"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuAttributesList"</code></td>
+<td>Enchanting/spellmaking effect attribute</td>
+</tr>
+<tr>
+<td><code>"MenuAudio"</code></td>
+<td>Options, audio</td>
+</tr>
+<tr>
+<td><code>"MenuBarter"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuBirthSign"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuBook"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuChooseClass"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuClassChoice"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuClassMessage"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuConsole"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuContents"</code></td>
+<td>Container/NPC inventory</td>
+</tr>
+<tr>
+<td><code>"MenuCreateClass"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuCtrls"</code></td>
+<td>Options, controls</td>
+</tr>
+<tr>
+<td><code>"MenuDialog"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuEnchantment"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuInput"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuInputSave"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuInventory"</code></td>
+<td>Player inventory</td>
+</tr>
+<tr>
+<td><code>"MenuInventorySelect"</code></td>
+<td>Item selector</td>
+</tr>
+<tr>
+<td><code>"MenuJournal"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuLevelUp"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuLoad"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuLoading"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuMagic"</code></td>
+<td>Spell/enchanted item selector</td>
+</tr>
+<tr>
+<td><code>"MenuMagicSelect"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuMap"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuMapNoteEdit"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuMessage"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuMulti"</code></td>
+<td>Status bars, current weapon/magic, active effects and minimap</td>
+</tr>
+<tr>
+<td><code>"MenuName"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuNotify1"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuNotify2"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuNotify3"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuOptions"</code></td>
+<td>Main menu</td>
+</tr>
+<tr>
+<td><code>"MenuPersuasion"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuPrefs"</code></td>
+<td>Options, preferences</td>
+</tr>
+<tr>
+<td><code>"MenuQuantity"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuQuick"</code></td>
+<td>Quick keys</td>
+</tr>
+<tr>
+<td><code>"MenuRaceSex"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuRepair"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuRestWait"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuSave"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuScroll"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuServiceRepair"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuServiceSpells"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuServiceTraining"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuServiceTravel"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuSetValues"</code></td>
+<td>Enchanting/spellmaking effect values</td>
+</tr>
+<tr>
+<td><code>"MenuSkills"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuSkillsList"</code></td>
+<td>Enchanting/spellmaking effect skill</td>
+</tr>
+<tr>
+<td><code>"MenuSpecialization"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuSpellmaking"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuStat"</code></td>
+<td>Player attributes, skills, factions etc.</td>
+</tr>
+<tr>
+<td><code>"MenuStatReview"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuSwimFillBar"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuTimePass"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuTopic"</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>"MenuVideo"</code></td>
+<td>Options, video</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e uiActivatedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">uiActivatedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -10523,7 +10822,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 5, 2023 01:00:33</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 1, 2023 20:08:07</span>
       
         <br>
         Created:

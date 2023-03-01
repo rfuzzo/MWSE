@@ -685,6 +685,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
@@ -1904,73 +1906,125 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
-          Ni
+          Mge
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mge
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/mge/lighting-modes/" class="md-nav__link">
+        Lighting Modes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+          Ni
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_3">
           <span class="md-nav__icon md-icon"></span>
           Ni
         </label>
@@ -10807,12 +10861,12 @@
 <h3 id="mgegetlightingmode"><code>mge.getLightingMode</code><a class="headerlink" href="#mgegetlightingmode" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getlightingmode, lightingmode</div>
 
-<p>Returns the lighting mode used by MGE XE. These values map to <code>mge.lightingMode.*</code> constants.</p>
+<p>Returns the lighting mode used by MGE XE. These values map to <a href="https://mwse.github.io/MWSE/references/mge/lighting-modes/"><code>mge.lightingMode</code></a> constants.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">mge</span><span class="p">.</span><span class="n">getLightingMode</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>mode</code> (number): Maps to the <code>mge.lightingMode.*</code> constants.</li>
+<li><code>mode</code> (integer): Maps to the <code>mge.lightingMode</code> constants.</li>
 </ul>
 <hr />
 <h3 id="mgegetuiscale"><code>mge.getUIScale</code><a class="headerlink" href="#mgegetuiscale" title="Permanent link">⚓︎</a></h3>
@@ -10876,12 +10930,12 @@
 <h3 id="mgesetlightingmode"><code>mge.setLightingMode</code><a class="headerlink" href="#mgesetlightingmode" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">setlightingmode, lightingmode</div>
 
-<p>Sets the lighting mode used by MGE XE. The values passed can be used from the <code>mge.lightingMode.*</code> constants.</p>
+<p>Sets the lighting mode used by MGE XE. The values passed can be used from the <a href="https://mwse.github.io/MWSE/references/mge/lighting-modes/"><code>mge.lightingMode</code></a> constants.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mge</span><span class="p">.</span><span class="n">setLightingMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>mode</code> (number): Maps from the <code>mge.lightingMode.*</code> constants.</li>
+<li><code>mode</code> (integer): Maps to the <code>mge.lightingMode</code> constants.</li>
 </ul>
 <hr />
 <h3 id="mgesetuiscale"><code>mge.setUIScale</code><a class="headerlink" href="#mgesetuiscale" title="Permanent link">⚓︎</a></h3>
@@ -10900,7 +10954,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 18, 2023 11:00:31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 1, 2023 20:06:11</span>
       
         <br>
         Created:

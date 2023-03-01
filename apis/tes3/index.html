@@ -685,6 +685,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
@@ -1904,73 +1906,125 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
-          Ni
+          Mge
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mge
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/mge/lighting-modes/" class="md-nav__link">
+        Lighting Modes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+          Ni
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_3">
           <span class="md-nav__icon md-icon"></span>
           Ni
         </label>
@@ -14828,8 +14882,8 @@
 <h3 id="tes3getanimationgroups"><code>tes3.getAnimationGroups</code><a class="headerlink" href="#tes3getanimationgroups" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getanimationgroups, animationgroups</div>
 
-<p>This function fetches a reference's attached animation groups.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">animData</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getAnimationGroups</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>This function fetches a reference's attached animation groups. The animation groups match the values from <a href="https://mwse.github.io/MWSE/references/animation-groups/"><code>tes3.animationGroup</code></a> table.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">lowerBodyGroup</span><span class="p">,</span> <span class="n">upperBodyGroup</span><span class="p">,</span> <span class="n">leftArmGroup</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getAnimationGroups</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -14840,7 +14894,9 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>animData</code> (number[])</li>
+<li><code>lowerBodyGroup</code> (integer)</li>
+<li><code>upperBodyGroup</code> (integer)</li>
+<li><code>leftArmGroup</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="tes3getanimationtiming"><code>tes3.getAnimationTiming</code><a class="headerlink" href="#tes3getanimationtiming" title="Permanent link">⚓︎</a></h3>
@@ -14860,6 +14916,14 @@
 <ul>
 <li><code>result</code> (number[])</li>
 </ul>
+<details class="example">
+<summary>Example: An elegent usage example</summary>
+<p>The function returns animation timings for three body segments. This array can be nicely broken down into three variables using Lua's <code>unpack()</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">lowerTiming</span><span class="p">,</span> <span class="n">upperTiming</span><span class="p">,</span> <span class="n">leftArmTiming</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span>
+    <span class="n">tes3</span><span class="p">.</span><span class="n">getAnimationTiming</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span> <span class="p">})</span>
+<span class="p">)</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="tes3getarchivelist"><code>tes3.getArchiveList</code><a class="headerlink" href="#tes3getarchivelist" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getarchivelist, archivelist</div>
@@ -17493,7 +17557,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 18, 2023 11:00:31</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 1, 2023 20:11:09</span>
       
         <br>
         Created:

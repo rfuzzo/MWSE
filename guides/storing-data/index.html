@@ -748,6 +748,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
@@ -1967,73 +1969,125 @@
         
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
       
       
         <label class="md-nav__link" for="__nav_3_1_2" id="__nav_3_1_2_label" tabindex="0">
-          Ni
+          Mge
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mge
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/mge/lighting-modes/" class="md-nav__link">
+        Lighting Modes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_3" id="__nav_3_1_3_label" tabindex="0">
+          Ni
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_3">
           <span class="md-nav__icon md-icon"></span>
           Ni
         </label>
@@ -10553,7 +10607,12 @@
 <p class="admonition-title">Note</p>
 <p>Both <code>data</code> and <code>tempData</code> tables can only be used to store <em>serializible</em> data.</p>
 </div>
-<p>Data stored in the <code>data</code> table on a certain object will persist between savegame sessions, while data stored in <code>tempData</code> table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one. In addition, not every object can have Lua data. You can check that with <code>myRef.supportsLuaData</code> property.</p>
+<p>Data stored in the <code>data</code> table on a certain object will persist between savegame sessions, while data stored in <code>tempData</code> table will be cleared on game reload. There are some peculiarities when working with these tables:</p>
+<ul>
+<li>Each of the table fields needs to be declared one by one.</li>
+<li>Not every object can have Lua data. You can check that with <code>myRef.supportsLuaData</code> property.</li>
+<li>The <code>data</code> field on a <code>tes3reference</code> won't persist between savegames if the reference isn't marked as modified (NPCs and creatures are usually marked as modified by other parts of the engine). Make sure to mark your reference as modified explicitly: <code>myRef.modified = true</code></li>
+</ul>
 <div class="admonition example">
 <p class="admonition-title">Example: creating a table inside <code>data</code> table on the player's reference</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Correct way</span>
@@ -10600,8 +10659,11 @@
 
 <span class="c1">-- This is the default layout for the table</span>
 <span class="c1">-- stored on tes3.player.data</span>
+<span class="c1">---@class myData</span>
 <span class="kd">local</span> <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">reginalBounties</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">regionalBounties</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1">-- This table is unused in this example, but</span>
+        <span class="c1">-- it shows how to  initialize a sub-table.</span>
         <span class="p">[</span><span class="s2">&quot;balmora&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="p">[</span><span class="s2">&quot;seyda neen&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="p">[</span><span class="s2">&quot;ald-ruhn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -10616,15 +10678,15 @@
 <span class="c1">---@param t table</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">initTableValues</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
     <span class="kr">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="kr">do</span>
-        <span class="c1">-- If a field already exists - we did work with</span>
-        <span class="c1">-- this character before. Don&#39;t do anything.</span>
+        <span class="c1">-- If a field already exists - we initialized the data</span>
+        <span class="c1">-- table for this character before. Don&#39;t do anything.</span>
         <span class="kr">if</span> <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span> <span class="kr">then</span>
             <span class="kr">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">~=</span> <span class="s2">&quot;table&quot;</span> <span class="kr">then</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
             <span class="kr">elseif</span> <span class="n">v</span> <span class="o">==</span> <span class="p">{}</span> <span class="kr">then</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="kr">else</span>
-                <span class="c1">-- Fill out the sub-table</span>
+                <span class="c1">-- Fill out the sub-tables</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="n">initTableValues</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">v</span><span class="p">)</span>
             <span class="kr">end</span>
@@ -10643,7 +10705,7 @@
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">loaded</span><span class="p">,</span> <span class="n">initializeData</span><span class="p">)</span>
 
 <span class="c1">--- This is a convinience function to get our storage</span>
-<span class="c1">---@return table myData</span>
+<span class="c1">---@return myData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">getData</span><span class="p">()</span>
     <span class="kr">return</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">myMod</span>
 <span class="kr">end</span>
@@ -10656,13 +10718,16 @@
     <span class="kd">local</span> <span class="n">oldKarma</span> <span class="o">=</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span>
     <span class="n">myData</span><span class="p">.</span><span class="n">karma</span> <span class="o">=</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span> <span class="o">+</span> <span class="n">delta</span>
 
-    <span class="kd">local</span> <span class="n">barrierCrossed</span> <span class="o">=</span> <span class="p">(</span><span class="nb">math.abs</span><span class="p">(</span><span class="n">oldKarma</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="ow">and</span> <span class="nb">math.abs</span><span class="p">(</span><span class="n">myData</span><span class="p">.</span><span class="n">karma</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="ow">or</span>
-                                    <span class="p">(</span><span class="nb">math.abs</span><span class="p">(</span><span class="n">myData</span><span class="p">.</span><span class="n">karma</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="ow">and</span> <span class="nb">math.abs</span><span class="p">(</span><span class="n">oldKarma</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">karma</span> <span class="o">=</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span>
+    <span class="kd">local</span> <span class="n">absOldKarma</span> <span class="o">=</span> <span class="nb">math.abs</span><span class="p">(</span><span class="n">oldKarma</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">absKarma</span> <span class="o">=</span> <span class="nb">math.abs</span><span class="p">(</span><span class="n">karma</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">barrierCrossed</span> <span class="o">=</span> <span class="p">((</span><span class="n">absOldKarma</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">absKarma</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span> <span class="ow">or</span>
+                           <span class="p">((</span><span class="n">absKarma</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">absOldKarma</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">))</span>
 
     <span class="kr">if</span> <span class="n">barrierCrossed</span> <span class="kr">then</span>
         <span class="c1">-- Let&#39;s log to see what&#39;s happening</span>
-        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Current karma: %s&quot;</span><span class="p">,</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span><span class="p">)</span>
-        <span class="kr">if</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">100</span> <span class="kr">then</span>
+        <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Current karma: %s&quot;</span><span class="p">,</span> <span class="n">karma</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">karma</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">100</span> <span class="kr">then</span>
             <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Because of your deeds your karma now reached evil level.&quot;</span><span class="p">)</span>
 
             <span class="c1">-- Now let&#39;s store that to tes3.player.tempData for later use</span>
@@ -10673,13 +10738,13 @@
             <span class="c1">-- Now actually store player&#39;s karma range</span>
             <span class="n">temp</span><span class="p">.</span><span class="n">encounter</span> <span class="o">=</span> <span class="s2">&quot;bad&quot;</span>
 
-        <span class="kr">elseif</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="kr">then</span>
-            <span class="c1">-- -100 &lt; karmy &lt; 100</span>
+        <span class="kr">elseif</span> <span class="n">karma</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="kr">then</span>
+            <span class="c1">-- -100 &lt; karma &lt; 100</span>
             <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Because of your deeds your karma now reached neutral level.&quot;</span><span class="p">)</span>
             <span class="kd">local</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">getset</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">tempData</span><span class="p">,</span> <span class="s2">&quot;myMod&quot;</span><span class="p">,</span> <span class="p">{})</span>
             <span class="n">temp</span><span class="p">.</span><span class="n">encounter</span> <span class="o">=</span> <span class="s2">&quot;neutral&quot;</span>
 
-        <span class="kr">elseif</span> <span class="n">myData</span><span class="p">.</span><span class="n">karma</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="kr">then</span>
+        <span class="kr">elseif</span> <span class="n">karma</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="kr">then</span>
             <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Through your deeds your karma now reached good level.&quot;</span><span class="p">)</span>
             <span class="kd">local</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">getset</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">tempData</span><span class="p">,</span> <span class="s2">&quot;myMod&quot;</span><span class="p">,</span> <span class="p">{})</span>
             <span class="n">temp</span><span class="p">.</span><span class="n">encounter</span> <span class="o">=</span> <span class="s2">&quot;good&quot;</span>
@@ -10701,7 +10766,7 @@
         <span class="c1">-- not to award the karma boost twice.</span>
         <span class="kr">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">.</span><span class="n">shrinesVisited</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="kr">then</span>
             <span class="c1">-- Player visited this shrine for the first time,</span>
-            <span class="c1">-- award some karma points</span>
+            <span class="c1">-- award some karma points.</span>
             <span class="n">modKarma</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 
             <span class="c1">-- Let&#39;s save that to the list of visited shrines in</span>
@@ -10725,7 +10790,7 @@
         <span class="kd">local</span> <span class="n">cellId</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">cell</span><span class="p">.</span><span class="n">id</span><span class="p">:</span><span class="n">lower</span><span class="p">()</span>
         <span class="kr">if</span> <span class="n">regions</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="kr">then</span>
             <span class="kd">local</span> <span class="n">myData</span> <span class="o">=</span> <span class="n">getData</span><span class="p">()</span>
-            <span class="n">myData</span><span class="p">.</span><span class="n">reginalBounties</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="o">=</span> <span class="n">myData</span><span class="p">.</span><span class="n">reginalBounties</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="o">+</span> <span class="mi">25</span>
+            <span class="n">myData</span><span class="p">.</span><span class="n">regionalBounties</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="o">=</span> <span class="n">myData</span><span class="p">.</span><span class="n">regionalBounties</span><span class="p">[</span><span class="n">cellId</span><span class="p">]</span> <span class="o">+</span> <span class="mi">25</span>
         <span class="kr">end</span>
 
     <span class="kr">end</span>
@@ -10735,12 +10800,13 @@
 
 <span class="c1">---@param e calcRestInterruptEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onCalcRestInterrupt</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-    <span class="kr">if</span> <span class="ow">not</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">tempData</span><span class="p">.</span><span class="n">myMod</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
+    <span class="kd">local</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">tempData</span><span class="p">.</span><span class="n">myMod</span>
+    <span class="kr">if</span> <span class="ow">not</span> <span class="n">temp</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
 
     <span class="kd">local</span> <span class="n">roll</span> <span class="o">=</span> <span class="nb">math.random</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
     <span class="kr">if</span> <span class="n">roll</span> <span class="o">&gt;</span> <span class="mi">60</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
 
-    <span class="kd">local</span> <span class="n">encounterType</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">tempData</span><span class="p">.</span><span class="n">myMod</span><span class="p">.</span><span class="n">encounter</span>
+    <span class="kd">local</span> <span class="n">encounterType</span> <span class="o">=</span> <span class="n">temp</span><span class="p">.</span><span class="n">encounter</span>
     <span class="kr">if</span> <span class="n">encounterType</span> <span class="o">==</span> <span class="s2">&quot;good&quot;</span> <span class="kr">then</span>
         <span class="c1">-- The player has good karma, let&#39;s block</span>
         <span class="c1">-- the rest interruption</span>
@@ -10756,8 +10822,8 @@
             <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Blocking encounter!&quot;</span><span class="p">)</span>
         <span class="kr">end</span>
     <span class="kr">else</span>
-        <span class="c1">-- Player is bad, let&#39;s increase the amount</span>
-        <span class="c1">-- of spawned creatures by a random number</span>
+        <span class="c1">-- Player is a bad guy, let&#39;s increase the amount</span>
+        <span class="c1">-- of spawned creatures by a random number.</span>
         <span class="kd">local</span> <span class="n">mod</span> <span class="o">=</span> <span class="nb">math.random</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
         <span class="n">e</span><span class="p">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">count</span> <span class="o">+</span> <span class="n">mod</span>
         <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;Increased the spawned enemy count!&quot;</span><span class="p">)</span>
@@ -10771,7 +10837,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 17:50:54</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 1, 2023 20:54:46</span>
       
         <br>
         Created:
