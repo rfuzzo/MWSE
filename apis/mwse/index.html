@@ -3122,6 +3122,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwsebuildnumber" class="md-nav__link">
+    mwse.buildNumber
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwsegametimers" class="md-nav__link">
     mwse.gameTimers
   </a>
@@ -3191,6 +3198,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwseiconv" class="md-nav__link">
+    mwse.iconv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwseloadconfig" class="md-nav__link">
     mwse.loadConfig
   </a>
@@ -3235,6 +3249,13 @@
           <li class="md-nav__item">
   <a href="#mwsestringtolong" class="md-nav__link">
     mwse.stringToLong
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mwsevirtualkeypressed" class="md-nav__link">
+    mwse.virtualKeyPressed
   </a>
   
 </li>
@@ -10681,6 +10702,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwsebuildnumber" class="md-nav__link">
+    mwse.buildNumber
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwsegametimers" class="md-nav__link">
     mwse.gameTimers
   </a>
@@ -10750,6 +10778,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mwseiconv" class="md-nav__link">
+    mwse.iconv
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mwseloadconfig" class="md-nav__link">
     mwse.loadConfig
   </a>
@@ -10794,6 +10829,13 @@
           <li class="md-nav__item">
   <a href="#mwsestringtolong" class="md-nav__link">
     mwse.stringToLong
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mwsevirtualkeypressed" class="md-nav__link">
+    mwse.virtualKeyPressed
   </a>
   
 </li>
@@ -10850,6 +10892,15 @@
 </code></pre></div>
 </details>
 <hr />
+<h3 id="mwsebuildnumber"><code>mwse.buildNumber</code><a class="headerlink" href="#mwsebuildnumber" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">buildnumber</div>
+
+<p>Equal to the <code>APPVEYOR_BUILD_NUMBER</code> in builds by AppVeyor (these builds are installed using the MWSE-Update). Equal to <code>UINT_MAX</code> in regular builds. This number is used for <a href="https://mwse.github.io/MWSE/guides/metadata/#dependencies-section">mod metadata</a> files, when a mod depends on MWSE being installed.</p>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (integer)</li>
+</ul>
+<hr />
 <h3 id="mwsegametimers"><code>mwse.gameTimers</code><a class="headerlink" href="#mwsegametimers" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">gametimers</div>
 
@@ -10885,7 +10936,7 @@
 <p>It is usually better to use <code>mwse.buildDate</code> instead.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permanent link">⚓︎</a></h2>
@@ -10924,7 +10975,7 @@
 </code></pre></div>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (number)</li>
+<li><code>result</code> (integer)</li>
 </ul>
 <hr />
 <h3 id="mwsegetvirtualmemoryusage"><code>mwse.getVirtualMemoryUsage</code><a class="headerlink" href="#mwsegetvirtualmemoryusage" title="Permanent link">⚓︎</a></h3>
@@ -10936,6 +10987,22 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
+</ul>
+<hr />
+<h3 id="mwseiconv"><code>mwse.iconv</code><a class="headerlink" href="#mwseiconv" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">iconv</div>
+
+<p>Converts the provided string in UTF8 encoding to Morrowind's codepage base encoding.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">converted</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">iconv</span><span class="p">(</span><span class="n">languageCode</span><span class="p">,</span> <span class="n">utf8string</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>languageCode</code> (integer): Determines the language (and appropriate encoding) to use. Maps to values in <a href="https://mwse.github.io/MWSE/references/language-codes/"><code>tes3.languageCode</code></a> table.</li>
+<li><code>utf8string</code> (string): The string to convert</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>converted</code> (string)</li>
 </ul>
 <hr />
 <h3 id="mwseloadconfig"><code>mwse.loadConfig</code><a class="headerlink" href="#mwseloadconfig" title="Permanent link">⚓︎</a></h3>
@@ -11002,6 +11069,7 @@
 <div class="search_terms" style="display: none">overridescript</div>
 
 <p>Configures MWSE to execute a given function instead when a script would run.</p>
+<p>In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling <code>mwscript.stopScript()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">overrideScript</span><span class="p">(</span><span class="n">scriptId</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11089,13 +11157,28 @@
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
+<hr />
+<h3 id="mwsevirtualkeypressed"><code>mwse.virtualKeyPressed</code><a class="headerlink" href="#mwsevirtualkeypressed" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">virtualkeypressed</div>
+
+<p>Determines whether a key is pressed. A wrapper for <code>GetAsyncKeyState</code> function in Win32 API.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">virtualKeyPressed</span><span class="p">(</span><span class="n">VK_key</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>VK_key</code> (integer)</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>result</code> (boolean)</li>
+</ul>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 4, 2023 13:52:35</span>
       
         <br>
         Created:
