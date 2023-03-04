@@ -10686,24 +10686,25 @@
 </code></pre></div>
 <h2 id="tools-section">Tools Section<a class="headerlink" href="#tools-section" title="Permanent link">⚓︎</a></h2>
 <p>The <code>[tools]</code> section is for tool-specific configuration.</p>
-<p>The following fields are available:
-* <code>mwse</code></p>
-<pre><code>Here you can specify MWSE-specific information about your mod.
-
-The following fields are available:
-
-* `lua-mod` - The path to the main.lua associated with this mod. For example, if your main.lua file is located in `"Data Files\MWSE\mods\g7\myMod\main.lua"`, then this field should be set to `"g7.myMod"`.
-* `load-order` - The priority for when this mod is loaded. Lower numbers are loaded first.
-* `wait-until-initialize` - Whether to wait until the game has initialized before loading this mod.
-
-Example:
-```toml
-    [tools.mwse]
-    lua-mod = "mer.myMod"
-    load-order = 100
-    wait-until-initialize = true
-```
-</code></pre>
+<p>The following fields are available:</p>
+<ul>
+<li>
+<p><code>mwse</code></p>
+<p>Here you can specify MWSE-specific information about your mod.</p>
+<p>The following fields are available:</p>
+<ul>
+<li><code>lua-mod</code> - The path to the main.lua associated with this mod. For example, if your main.lua file is located in <code>"Data Files\MWSE\mods\g7\myMod\main.lua"</code>, then this field should be set to <code>"g7.myMod"</code>.</li>
+<li><code>load-order</code> - The priority for when this mod is loaded. Lower numbers are loaded first.</li>
+<li><code>wait-until-initialize</code> - Whether to wait until the game has initialized before loading this mod.</li>
+</ul>
+<p>Example:
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">[tools.mwse]</span>
+<span class="w">    </span><span class="n">lua-mod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mer.myMod&quot;</span>
+<span class="w">    </span><span class="n">load-order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="n">wait-until-initialize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div></p>
+</li>
+</ul>
 <h2 id="dependencies-section">Dependencies Section<a class="headerlink" href="#dependencies-section" title="Permanent link">⚓︎</a></h2>
 <p>The <code>[dependencies]</code> section of the metadata file is where you should list any dependencies your mod has. Dependencies are checked before your <code>main.lua</code> file is executed and will warn the player if any are missing.</p>
 <p>The following dependencies are available:</p>
@@ -10866,7 +10867,7 @@ Example:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 24, 2023 08:34:17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 4, 2023 19:23:04</span>
       
         <br>
         Created:
