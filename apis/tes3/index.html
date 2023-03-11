@@ -15,7 +15,7 @@
         <link rel="next" href="../tes3ui/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.402914a4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -14912,20 +14912,20 @@
 <h3 id="tes3getanimationactiontiming"><code>tes3.getAnimationActionTiming</code><a class="headerlink" href="#tes3getanimationactiontiming" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getanimationactiontiming, animationactiontiming</div>
 
-<p>This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is the a table with action names as keys, and timings as values.</p>
+<p>This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getAnimationActionTiming</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">group</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference to the which actor whose animations will be checked.</li>
-<li><code>group</code> (number): <em>Optional</em>. The animation group id get the action timings for. Maps to <a href="https://mwse.github.io/MWSE/references/animation-groups/"><code>tes3.animationGroup</code></a> constants.</li>
+<li><code>group</code> (number): <em>Optional</em>. The animation group id to get the action timings for. Maps to <a href="https://mwse.github.io/MWSE/references/animation-groups/"><code>tes3.animationGroup</code></a> constants.</li>
 </ul>
 </li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>result</code> (table)</li>
+<li><code>result</code> (table&lt;string, number&gt;)</li>
 </ul>
 <hr />
 <h3 id="tes3getanimationgroups"><code>tes3.getAnimationGroups</code><a class="headerlink" href="#tes3getanimationgroups" title="Permanent link">⚓︎</a></h3>
@@ -17606,7 +17606,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 7, 2023 20:35:44</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 11, 2023 17:29:29</span>
       
         <br>
         Created:
@@ -17662,7 +17662,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "content.tabs.link", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.b78d2936.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
       
         <script src="../../assets/js/reloadMermaidPagesOnPaletteSwitch.js"></script>
       
