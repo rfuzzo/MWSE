@@ -12095,13 +12095,14 @@
 <div class="search_terms" style="display: none">new</div>
 
 <p>Creates a new niTriShape.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">niTriShape</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">vertexCount</span><span class="p">,</span> <span class="n">hasNormals</span><span class="p">,</span> <span class="n">hasTextureCoords</span><span class="p">,</span> <span class="n">triangleCount</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">niTriShape</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">vertexCount</span><span class="p">,</span> <span class="n">hasNormals</span><span class="p">,</span> <span class="n">hasColors</span><span class="p">,</span> <span class="n">textureCoordSets</span><span class="p">,</span> <span class="n">triangleCount</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>vertexCount</code> (number): The number of vertices the shape will allocate.</li>
 <li><code>hasNormals</code> (boolean): If <code>true</code>, normals will be allocated.</li>
-<li><code>hasTextureCoords</code> (boolean): If <code>true</code>, texture coordinates will be allocated.</li>
+<li><code>hasColors</code> (boolean): If <code>true</code>, colors will be allocated.</li>
+<li><code>textureCoordSets</code> (number): The number of texture coordinate sets (UV sets) to allocate.</li>
 <li><code>triangleCount</code> (number): The number of triangles to allocate.</li>
 </ul>
 <p><strong>Returns</strong>:</p>
@@ -12114,7 +12115,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 14, 2023 23:49:08</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 15, 2023 19:55:44</span>
       
         <br>
         Created:
