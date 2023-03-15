@@ -16341,16 +16341,16 @@
 <h3 id="tes3modstatistic"><code>tes3.modStatistic</code><a class="headerlink" href="#tes3modstatistic" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">modstatistic, statistic</div>
 
-<p>Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">base</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limitToBase</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">modStatistic</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">base</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limitToBase</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
-<li><code>name</code> (string): <em>Optional</em>. A generic name of an attribute to set.</li>
-<li><code>attribute</code> (number): <em>Optional</em>. The attribute to set.</li>
-<li><code>skill</code> (number): <em>Optional</em>. The skill to set.</li>
+<li><code>attribute</code> (number): <em>Optional</em>. The attribute to set. Uses a value from <a href="https://mwse.github.io/MWSE/references/attributes/"><code>tes3.attribute</code></a></li>
+<li><code>skill</code> (number): <em>Optional</em>. The skill to set. Uses a value from <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a></li>
+<li><code>name</code> (string): <em>Optional</em>. The property name of the statistic to set. The names can be taken from the properties of <code>tes3mobileNPC</code> or <code>tes3mobileCreature</code>. Useful for specifying health, magicka or fatigue.</li>
 <li><code>base</code> (number): <em>Optional</em>. If set, the base value will be modified.</li>
 <li><code>current</code> (number): <em>Optional</em>. If set, the current value will be modified.</li>
 <li><code>value</code> (number): <em>Optional</em>. If set, both the base and current value will be modified.</li>
@@ -17212,20 +17212,20 @@
 <h3 id="tes3setstatistic"><code>tes3.setStatistic</code><a class="headerlink" href="#tes3setstatistic" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">setstatistic, statistic</div>
 
-<p>Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setStatistic</span><span class="p">({</span> <span class="n">attribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">base</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.</p>
+<div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">setStatistic</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">attribute</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">name</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">base</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">current</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">value</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">limit</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>attribute</code> (number): <em>Optional</em>. The attribute to set.</li>
+<li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
+<li><code>attribute</code> (number): <em>Optional</em>. The attribute to set. Uses a value from <a href="https://mwse.github.io/MWSE/references/attributes/"><code>tes3.attribute</code></a></li>
+<li><code>skill</code> (number): <em>Optional</em>. The skill to set. Uses a value from <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a></li>
+<li><code>name</code> (string): <em>Optional</em>. The property name of the statistic to set. The names can be taken from the properties of <code>tes3mobileNPC</code> or <code>tes3mobileCreature</code>. Useful for specifying health, magicka or fatigue.</li>
 <li><code>base</code> (number): <em>Optional</em>. If set, the base value will be set.</li>
 <li><code>current</code> (number): <em>Optional</em>. If set, the current value will be set.</li>
-<li><code>limit</code> (boolean): <em>Default</em>: <code>false</code>. If set, the attribute won't rise above 100 or fall below 0.</li>
-<li><code>name</code> (string): <em>Optional</em>. A generic name of an attribute to set.</li>
-<li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
-<li><code>skill</code> (number): <em>Optional</em>. The skill to set.</li>
 <li><code>value</code> (number): <em>Optional</em>. If set, both the base and current value will be set.</li>
+<li><code>limit</code> (boolean): <em>Default</em>: <code>false</code>. If set, the attribute won't rise above 100 or fall below 0.</li>
 </ul>
 </li>
 </ul>
@@ -17631,7 +17631,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 12, 2023 15:33:10</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 15, 2023 18:53:39</span>
       
         <br>
         Created:
