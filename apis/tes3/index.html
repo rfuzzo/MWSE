@@ -13695,7 +13695,7 @@
 <h3 id="tes3additemdata"><code>tes3.addItemData</code><a class="headerlink" href="#tes3additemdata" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">additemdata, itemdata</div>
 
-<p>Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data.</p>
+<p>Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data. Calling this function will mark the <code>to</code> reference as modified.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">createdData</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">addItemData</span><span class="p">({</span> <span class="n">to</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">updateGUI</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -14241,7 +14241,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>params</code> (table)<ul>
+<li><code>params</code> (table): <em>Optional</em>.<ul>
 <li><code>checkForEnemies</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.</li>
 <li><code>checkForSolidGround</code> (boolean): <em>Default</em>: <code>true</code>. Perform a check if the player is underwater. If underwater, false is returned.</li>
 <li><code>showMessage</code> (boolean): <em>Default</em>: <code>false</code>. If true, a messagebox will be shown if the player can't rest because some condition isn't met.</li>
@@ -15106,7 +15106,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>)</li>
+<li><code>reference</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
 </ul>
 </li>
 </ul>
@@ -15156,12 +15156,15 @@
 <div class="search_terms" style="display: none">getdialogueinfo, dialogueinfo</div>
 
 <p>Locates and returns a Dialogue Info by a given id. This involves file IO and is an expensive call. Results should be cached.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">dialogueInfo</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getDialogueInfo</span><span class="p">(</span><span class="n">dialogue</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">dialogueInfo</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getDialogueInfo</span><span class="p">({</span> <span class="n">dialogue</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">id</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>dialogue</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string): The dialogue that the info belongs to.</li>
 <li><code>id</code> (string): The numerical, unique id for the info object.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -15554,7 +15557,7 @@
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
-<li><code>object</code> (<a href="../../types/tes3object">tes3object</a>)</li>
+<li><code>object</code> (<a href="../../types/tes3baseObject">tes3baseObject</a>)</li>
 </ul>
 <hr />
 <h3 id="tes3getowner"><code>tes3.getOwner</code><a class="headerlink" href="#tes3getowner" title="Permanent link">⚓︎</a></h3>
@@ -15566,7 +15569,7 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>)</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
 </ul>
 </li>
 </ul>
@@ -16516,7 +16519,7 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Default</em>: <code>tes3.mobilePlayer</code>. The reference to reposition.</li>
-<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>): <em>Optional</em>. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.</li>
+<li><code>cell</code> (<a href="../../types/tes3cell">tes3cell</a>, string, table, nil): <em>Optional</em>. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.</li>
 <li><code>position</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): The position to move the reference to.</li>
 <li><code>orientation</code> (<a href="../../types/tes3vector3">tes3vector3</a>, table): <em>Optional</em>. The new orientation of the reference.</li>
 <li><code>forceCellChange</code> (boolean): <em>Default</em>: <code>false</code>. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.</li>
@@ -16840,10 +16843,10 @@
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>script</code> (<a href="../../types/tes3script">tes3script</a>): <em>Default</em>: <code>tes3.worldController.scriptGlobals</code>. The base script to base the execution from.</li>
+<li><code>script</code> (<a href="../../types/tes3script">tes3script</a>, string): <em>Default</em>: <code>tes3.worldController.scriptGlobals</code>. The base script to base the execution from.</li>
 <li><code>source</code> (number): The compilation source to use. Defaults to tes3.scriptSource.default</li>
 <li><code>command</code> (string): The script text to compile and run.</li>
-<li><code>variables</code> (tes3scriptVariables): <em>Optional</em>. If a reference is provided, the reference's variables will be used.</li>
+<li><code>variables</code> (<a href="../../types/tes3scriptVariables">tes3scriptVariables</a>): <em>Optional</em>. If a reference is provided, the reference's variables will be used.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to target for execution.</li>
 <li><code>dialogue</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string): <em>Optional</em>. If compiling for dialogue context, the dialogue associated with the script.</li>
 <li><code>info</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>): <em>Optional</em>. The info associated with the dialogue.</li>
@@ -17167,7 +17170,7 @@
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): A reference whose owner to set.</li>
 <li><code>remove</code> (boolean): <em>Default</em>: <code>false</code>. If this parameter is set to true, reference's owner field will be removed.</li>
-<li><code>owner</code> (<a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3faction">tes3faction</a>, string): Assigns this NPC or a faction as the owner of the reference.</li>
+<li><code>owner</code> (<a href="../../types/tes3npc">tes3npc</a>, <a href="../../types/tes3npcInstance">tes3npcInstance</a>, <a href="../../types/tes3mobileNPC">tes3mobileNPC</a>, <a href="../../types/tes3mobileCreature">tes3mobileCreature</a>, <a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3faction">tes3faction</a>, string): Assigns this NPC or a faction as the owner of the reference.</li>
 <li><code>requiredGlobal</code> (<a href="../../types/tes3globalVariable">tes3globalVariable</a>): <em>Optional</em>. If <code>owner</code> is set to NPC, <code>requiredGlobal</code> variable can be set.</li>
 <li><code>requiredRank</code> (number): <em>Default</em>: <code>0</code>. If <code>owner</code> is set to faction, <code>requitedRank</code> variable controls minimal rank in faction the player has to have to be able to freely take the reference.</li>
 </ul>
@@ -17631,7 +17634,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 15, 2023 18:53:39</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 18, 2023 18:46:18</span>
       
         <br>
         Created:
