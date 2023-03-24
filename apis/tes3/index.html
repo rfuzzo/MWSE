@@ -4059,6 +4059,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getvalue" class="md-nav__link">
+    tes3.getValue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getvanitymode" class="md-nav__link">
     tes3.getVanityMode
   </a>
@@ -12871,6 +12878,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getvalue" class="md-nav__link">
+    tes3.getValue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getvanitymode" class="md-nav__link">
     tes3.getVanityMode
   </a>
@@ -15869,6 +15883,28 @@
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>)</li>
 </ul>
 <hr />
+<h3 id="tes3getvalue"><code>tes3.getValue</code><a class="headerlink" href="#tes3getvalue" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getvalue, value</div>
+
+<p>Gets the value of an item and, optionally, an associated itemData. This can be useful if you wish to take durability and soul value into account. It will also take into account any installed Morrowind Code Patch rebalances. It can also be used to get the value of a reference.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getValue</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">useDurability</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">useSoulValue</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to get the value of. Not needed if a reference is given.</li>
+<li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data to use to modify the value. Not needed if a reference is given.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference to get the value of. Not used if an item is given.</li>
+<li><code>useDurability</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, durability will be ignored.</li>
+<li><code>useSoulValue</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>value</code> (number): The calculated value of the item.</li>
+</ul>
+<hr />
 <h3 id="tes3getvanitymode"><code>tes3.getVanityMode</code><a class="headerlink" href="#tes3getvanitymode" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getvanitymode, vanitymode</div>
 
@@ -16846,7 +16882,7 @@
 <li><code>script</code> (<a href="../../types/tes3script">tes3script</a>, string): <em>Default</em>: <code>tes3.worldController.scriptGlobals</code>. The base script to base the execution from.</li>
 <li><code>source</code> (number): The compilation source to use. Defaults to tes3.scriptSource.default</li>
 <li><code>command</code> (string): The script text to compile and run.</li>
-<li><code>variables</code> (<a href="../../types/tes3scriptVariables">tes3scriptVariables</a>): <em>Optional</em>. If a reference is provided, the reference's variables will be used.</li>
+<li><code>variables</code> (tes3scriptVariables): <em>Optional</em>. If a reference is provided, the reference's variables will be used.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to target for execution.</li>
 <li><code>dialogue</code> (<a href="../../types/tes3dialogue">tes3dialogue</a>, string): <em>Optional</em>. If compiling for dialogue context, the dialogue associated with the script.</li>
 <li><code>info</code> (<a href="../../types/tes3dialogueInfo">tes3dialogueInfo</a>): <em>Optional</em>. The info associated with the dialogue.</li>
@@ -17634,7 +17670,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 18, 2023 19:35:26</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 24, 2023 08:13:20</span>
       
         <br>
         Created:
