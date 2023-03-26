@@ -8604,6 +8604,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -10724,6 +10726,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../events/uiSkillTooltip/" class="md-nav__link">
+        uiSkillTooltip
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../events/uiSpellTooltip/" class="md-nav__link">
         uiSpellTooltip
       </a>
@@ -11389,8 +11405,8 @@
 <h3 id="tes3uicreatetooltipmenu"><code>tes3ui.createTooltipMenu</code><a class="headerlink" href="#tes3uicreatetooltipmenu" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">createtooltipmenu, tooltipmenu</div>
 
-<p>Creates a tooltip menu, which can be an empty menu, an item tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<p>Creates a tooltip menu, which can be an empty menu, an item tooltip, a skill tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">({</span> <span class="n">item</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">itemData</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">spell</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">skill</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -11398,6 +11414,7 @@
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to create a tooltip for. If not specified, the tooltip will be empty.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data for the item.</li>
 <li><code>spell</code> (<a href="../../types/tes3spell">tes3spell</a>): <em>Optional</em>. The spell to create a tooltip for.</li>
+<li><code>skill</code> (<a href="../../types/tes3skill">tes3skill</a>): <em>Optional</em>. The skill to create a tooltip for.</li>
 </ul>
 </li>
 </ul>
@@ -12104,7 +12121,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 26, 2023 20:14:42</span>
       
         <br>
         Created:
