@@ -3877,6 +3877,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getluamodmetadata" class="md-nav__link">
+    tes3.getLuaModMetadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getmagiceffect" class="md-nav__link">
     tes3.getMagicEffect
   </a>
@@ -12712,6 +12719,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tes3getluamodmetadata" class="md-nav__link">
+    tes3.getLuaModMetadata
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tes3getmagiceffect" class="md-nav__link">
     tes3.getMagicEffect
   </a>
@@ -15511,6 +15525,21 @@
 <li><code>level</code> (number)</li>
 </ul>
 <hr />
+<h3 id="tes3getluamodmetadata"><code>tes3.getLuaModMetadata</code><a class="headerlink" href="#tes3getluamodmetadata" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getluamodmetadata, luamodmetadata</div>
+
+<p>Fetches the contents of the <a href="https://mwse.github.io/MWSE/guides/metadata/">metadata file</a> associated with a given lua mod key.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">metadata</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getLuaModMetadata</span><span class="p">(</span><span class="n">modKey</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>modKey</code> (string): The key for the lua mod, which must match the file location and the metadata file's <code>[tools.mwse]</code> contents.</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>metadata</code> (table, nil)</li>
+</ul>
+<hr />
 <h3 id="tes3getmagiceffect"><code>tes3.getMagicEffect</code><a class="headerlink" href="#tes3getmagiceffect" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getmagiceffect, magiceffect</div>
 
@@ -15911,7 +15940,7 @@
 <li><code>item</code> (<a href="../../types/tes3item">tes3item</a>, string): <em>Optional</em>. The item to get the value of. Not needed if a reference is given.</li>
 <li><code>itemData</code> (<a href="../../types/tes3itemData">tes3itemData</a>): <em>Optional</em>. The item data to use to modify the value. Not needed if a reference is given.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference to get the value of. Not used if an item is given.</li>
-<li><code>useDurability</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, durability will be ignored.</li>
+<li><code>useDurability</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, condition and uses will be ignored.</li>
 <li><code>useSoulValue</code> (boolean): <em>Default</em>: <code>true</code>. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.</li>
 </ul>
 </li>
@@ -17686,7 +17715,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 24, 2023 08:13:20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 10:02:14</span>
       
         <br>
         Created:
