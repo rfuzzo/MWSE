@@ -16549,7 +16549,7 @@
 <h3 id="tes3playsound"><code>tes3.playSound</code><a class="headerlink" href="#tes3playsound" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">playsound</div>
 
-<p>Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control.</p>
+<p>Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers <code>addTempSound</code> event if <code>soundPath</code> argument is passed, triggers <code>playSound</code> otherwise.</p>
 <p><strong>Note</strong>: MP3 sound files can only be played if they are inside \Vo\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">executed</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">playSound</span><span class="p">({</span> <span class="n">sound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">loop</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">mixChannel</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">volume</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">pitch</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">soundPath</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -16961,7 +16961,7 @@
 <h3 id="tes3say"><code>tes3.say</code><a class="headerlink" href="#tes3say" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">say</div>
 
-<p>Plays a sound file, with an optional alteration and subtitle.</p>
+<p>Plays a sound file, with an optional alteration and subtitle. Triggers <code>addTempSound</code> event.</p>
 <p><strong>Note</strong>: MP3 voice files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">say</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">soundPath</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">pitch</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">volume</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">forceSubtitle</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">subtitle</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
@@ -16969,9 +16969,9 @@
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): The reference to make say something.</li>
-<li><code>soundPath</code> (string): A path to a valid sound file.</li>
-<li><code>pitch</code> (number): <em>Default</em>: <code>1</code>. A pitch shift to adjust the sound with.</li>
-<li><code>volume</code> (number): <em>Default</em>: <code>1</code>. The volume to play the sound at, relative to the voice mix channel.</li>
+<li><code>soundPath</code> (string): A path to a valid sound file. Starts in Data Files\Sound.</li>
+<li><code>pitch</code> (number): <em>Default</em>: <code>1.0</code>. A pitch shift to adjust the sound with.</li>
+<li><code>volume</code> (number): <em>Default</em>: <code>1.0</code>. The volume to play the sound at, relative to the voice mix channel.</li>
 <li><code>forceSubtitle</code> (boolean): <em>Default</em>: <code>false</code>. If true a subtitle will be shown, even if subtitles are disabled.</li>
 <li><code>subtitle</code> (string): <em>Optional</em>. The subtitle to show if subtitles are enabled, or if forceSubtitle is set.</li>
 </ul>
@@ -17715,7 +17715,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 10:02:14</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 11:50:35</span>
       
         <br>
         Created:
