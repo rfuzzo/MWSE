@@ -11025,7 +11025,12 @@
 <div class="search_terms" style="display: none">loadconfig</div>
 
 <p>Loads a config table from Data Files\MWSE\config\{fileName}.json.</p>
-<p>If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.</p>
+<p>If the default values table is passed:</p>
+<ul>
+<li>Empty keys in the config will be filled in using its values.</li>
+<li>If no file exists, the function will return the default table.</li>
+<li>In json, tables can be either arrays with integer keys or dictionaries with string keys. If your configuration table is mixed (has both string and integer indices), saving and loading from json will effectively convert all your integer indices to strings. This function will convert your configuration table's integer indices back if defaults table is given.</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">loadConfig</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -11194,7 +11199,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 4, 2023 13:52:35</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 07:20:26</span>
       
         <br>
         Created:
