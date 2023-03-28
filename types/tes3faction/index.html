@@ -6254,6 +6254,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#gethighestjoinedreaction" class="md-nav__link">
+    getHighestJoinedReaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getlowestjoinedreaction" class="md-nav__link">
     getLowestJoinedReaction
   </a>
@@ -10913,6 +10920,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#gethighestjoinedreaction" class="md-nav__link">
+    getHighestJoinedReaction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#getlowestjoinedreaction" class="md-nav__link">
     getLowestJoinedReaction
   </a>
@@ -11166,6 +11180,18 @@
 <li><code>string</code> (string)</li>
 </ul>
 <hr />
+<h3 id="gethighestjoinedreaction"><code>getHighestJoinedReaction</code><a class="headerlink" href="#gethighestjoinedreaction" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">gethighestjoinedreaction, highestjoinedreaction</div>
+
+<p>For this faction, this function finds the best reaction for another faction that the player has joined. It returns that reaction and its associated faction, or <code>nil</code> for both values if the no relationship is applicable.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">reaction</span><span class="p">,</span> <span class="n">faction</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getHighestJoinedReaction</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>reaction</code> (number, nil): The reaction, if any, that is best for the faction.</li>
+<li><code>faction</code> (<a href="../../types/tes3faction">tes3faction</a>, nil): The faction association, if any, that is best for the faction.</li>
+</ul>
+<hr />
 <h3 id="getlowestjoinedreaction"><code>getLowestJoinedReaction</code><a class="headerlink" href="#getlowestjoinedreaction" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getlowestjoinedreaction, lowestjoinedreaction</div>
 
@@ -11225,7 +11251,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 28, 2023 11:24:06</span>
       
         <br>
         Created:

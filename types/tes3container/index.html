@@ -6142,6 +6142,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getequipmentvalue" class="md-nav__link">
+    getEquipmentValue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hasitemequipped" class="md-nav__link">
     hasItemEquipped
   </a>
@@ -11109,6 +11116,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getequipmentvalue" class="md-nav__link">
+    getEquipmentValue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hasitemequipped" class="md-nav__link">
     hasItemEquipped
   </a>
@@ -11499,6 +11513,24 @@
 <li><code>newObject</code> (<a href="../../types/tes3container">tes3container</a>)</li>
 </ul>
 <hr />
+<h3 id="getequipmentvalue"><code>getEquipmentValue</code><a class="headerlink" href="#getequipmentvalue" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getequipmentvalue, equipmentvalue</div>
+
+<p>Returns the combined value of all the items worn by the actor.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getEquipmentValue</span><span class="p">({</span> <span class="n">useDurability</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>useDurability</code> (boolean): <em>Default</em>: <code>false</code>. If true, damaged items will have a proportionally lower durability.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>value</code> (number): The value of each equipped item added together.</li>
+</ul>
+<hr />
 <h3 id="hasitemequipped"><code>hasItemEquipped</code><a class="headerlink" href="#hasitemequipped" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">hasitemequipped, itemequipped</div>
 
@@ -11561,7 +11593,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 07:47:55</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 28, 2023 11:24:06</span>
       
         <br>
         Created:
