@@ -8333,6 +8333,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#resurrect" class="md-nav__link">
+    resurrect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#setpowerusetimestamp" class="md-nav__link">
     setPowerUseTimestamp
   </a>
@@ -13951,6 +13958,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#resurrect" class="md-nav__link">
+    resurrect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#setpowerusetimestamp" class="md-nav__link">
     setPowerUseTimestamp
   </a>
@@ -16366,6 +16380,21 @@
 <li><code>result</code> (boolean)</li>
 </ul>
 <hr />
+<h3 id="resurrect"><code>resurrect</code><a class="headerlink" href="#resurrect" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">resurrect</div>
+
+<p>Resurrects the actor, with more control over the resurrect logic compared to mwscript.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">resurrect</span><span class="p">({</span> <span class="n">resetState</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">moveToStartingLocation</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+</code></pre></div>
+<p><strong>Parameters</strong>:</p>
+<ul>
+<li><code>params</code> (table)<ul>
+<li><code>resetState</code> (boolean): <em>Default</em>: <code>true</code>. Controls if the stats are reset, the inventory contents are respawned, and the reference recreated. This is the logic that mwscript resurrect uses. It can be useful to reset armor, ammunition, and consumables, if the player has already looted the body. When false, the base stats and inventory are unchanged.</li>
+<li><code>moveToStartingLocation</code> (boolean): <em>Default</em>: <code>false</code>. Controls if the actor should be moved to its spawn point on resurrection. Requires <code>resetState</code> to be true.</li>
+</ul>
+</li>
+</ul>
+<hr />
 <h3 id="setpowerusetimestamp"><code>setPowerUseTimestamp</code><a class="headerlink" href="#setpowerusetimestamp" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">setpowerusetimestamp, powerusetimestamp</div>
 
@@ -16467,7 +16496,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 28, 2023 11:24:06</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 28, 2023 14:30:51</span>
       
         <br>
         Created:
