@@ -5831,8 +5831,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#getactivebodypartnode" class="md-nav__link">
-    getActiveBodyPartNode
+  <a href="#removeactivebodypart" class="md-nav__link">
+    removeActiveBodyPart
   </a>
   
 </li>
@@ -5840,13 +5840,6 @@
           <li class="md-nav__item">
   <a href="#removeequippedlayers" class="md-nav__link">
     removeEquippedLayers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#setactivepartdata" class="md-nav__link">
-    setActivePartData
   </a>
   
 </li>
@@ -10749,8 +10742,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#getactivebodypartnode" class="md-nav__link">
-    getActiveBodyPartNode
+  <a href="#removeactivebodypart" class="md-nav__link">
+    removeActiveBodyPart
   </a>
   
 </li>
@@ -10758,13 +10751,6 @@
           <li class="md-nav__item">
   <a href="#removeequippedlayers" class="md-nav__link">
     removeEquippedLayers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#setactivepartdata" class="md-nav__link">
-    setActivePartData
   </a>
   
 </li>
@@ -10826,7 +10812,7 @@
 <h3 id="activebodyparts"><code>activeBodyParts</code><a class="headerlink" href="#activebodyparts" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">activebodyparts</div>
 
-<p><em>Read-only</em>. The access to the reference's <a href="https://mwse.github.io/MWSE/types/tes3bodyPartManagerActiveBodyPart/"><code>tes3bodyPartManagerActiveBodyPart</code></a> objects. It's a 2-dimensional table, with first dimension index values from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace, while its second dimension indexes are values from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</p>
+<p><em>Read-only</em>. Access to the reference's <a href="https://mwse.github.io/MWSE/types/tes3bodyPartManagerActiveBodyPart/"><code>tes3bodyPartManagerActiveBodyPart</code></a> objects. It's a 2-dimensional table, with first dimension index values from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace, while its second dimension indexes are values from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (table&lt;integer, table&lt;integer, <a href="../../types/tes3bodyPartManagerActiveBodyPart">tes3bodyPartManagerActiveBodyPart</a>&gt;&gt;)</li>
@@ -10863,7 +10849,7 @@
 <h3 id="getactivebodypart"><code>getActiveBodyPart</code><a class="headerlink" href="#getactivebodypart" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getactivebodypart, activebodypart</div>
 
-<p>The method fetches active body part of a actor at a given layer and position.</p>
+<p>The method fetches the active body part at a given layer and position. This gives access to the associated scene node, equipped item, and base body part.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -10891,20 +10877,18 @@
 <li><code>result</code> (<a href="../../types/tes3bodyPartManagerActiveBodyPart">tes3bodyPartManagerActiveBodyPart</a>)</li>
 </ul>
 <hr />
-<h3 id="getactivebodypartnode"><code>getActiveBodyPartNode</code><a class="headerlink" href="#getactivebodypartnode" title="Permanent link">⚓︎</a></h3>
-<div class="search_terms" style="display: none">getactivebodypartnode, activebodypartnode</div>
+<h3 id="removeactivebodypart"><code>removeActiveBodyPart</code><a class="headerlink" href="#removeactivebodypart" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">removeactivebodypart, activebodypart</div>
 
-<p>The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getActiveBodyPartNode</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+<p>Removes an active body part and optionally sets override data that can be used prevent other items using the same location.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">removeActiveBodyPart</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">setOverride</span><span class="p">,</span> <span class="n">overrideData</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><code>result</code> (<a href="../../types/niNode">niNode</a>)</li>
+<li><code>setOverride</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the override data should be written.</li>
+<li><code>overrideData</code> (number): <em>Default</em>: <code>0</code>. Use -1 to prevent other items from appearing in the same location.</li>
 </ul>
 <hr />
 <h3 id="removeequippedlayers"><code>removeEquippedLayers</code><a class="headerlink" href="#removeequippedlayers" title="Permanent link">⚓︎</a></h3>
@@ -10914,46 +10898,32 @@
 <div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">removeEquippedLayers</span><span class="p">()</span>
 </code></pre></div>
 <hr />
-<h3 id="setactivepartdata"><code>setActivePartData</code><a class="headerlink" href="#setactivepartdata" title="Permanent link">⚓︎</a></h3>
-<div class="search_terms" style="display: none">setactivepartdata, activepartdata</div>
-
-<p>The method sets a niNode derived object as active body part at a given layer and position.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setActivePartData</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">overwriteData</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Parameters</strong>:</p>
-<ul>
-<li><code>layer</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-part-layers/"><code>tes3.activeBodyPartLayer</code></a> namespace.</li>
-<li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
-<li><code>overwriteData</code> (boolean): <em>Default</em>: <code>true</code>. A flag which controls whether the current data should be overwritten.</li>
-<li><code>node</code> (<a href="../../types/niNode">niNode</a>): <em>Default</em>: <code>nil</code>. </li>
-</ul>
-<hr />
 <h3 id="setbodypartbyidforobject"><code>setBodyPartByIdForObject</code><a class="headerlink" href="#setbodypartbyidforobject" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">setbodypartbyidforobject, bodypartbyidforobject</div>
 
 <p>The method sets a new body part for a given object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPartId</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setBodyPartByIdForObject</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPartId</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item that the body part is from.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 <li><code>bodyPartId</code> (string): The unique ID of the <code>tes3bodyPart</code> object to set as a new body part for given object.</li>
-<li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which controls whether the body part is used in first person.</li>
+<li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which must be set if the target reference is the first person player.</li>
 </ul>
 <hr />
 <h3 id="setbodypartforobject"><code>setBodyPartForObject</code><a class="headerlink" href="#setbodypartforobject" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">setbodypartforobject, bodypartforobject</div>
 
-<p>The method sets a new body part for a given object. Triggers <code>bodyPart</code> event.</p>
-<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPart</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
+<p>The method sets an active body part slot with an item and bodyPart. Triggers <code>bodyPart</code> event.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myObject</span><span class="p">:</span><span class="n">setBodyPartForObject</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">bodyPart</span><span class="p">,</span> <span class="n">isFirstPerson</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>object</code> (<a href="../../types/tes3physicalObject">tes3physicalObject</a>): An object whose body part to set.</li>
+<li><code>item</code> (<a href="../../types/tes3item">tes3item</a>): The item that the body part is from.</li>
 <li><code>index</code> (number): A value from <a href="https://mwse.github.io/MWSE/references/active-body-parts/"><code>tes3.activeBodyPart</code></a> namespace.</li>
 <li><code>bodyPart</code> (<a href="../../types/tes3bodyPart">tes3bodyPart</a>): The <code>tes3bodyPart</code> object to set as a new body part for given object.</li>
-<li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which controls whether the body part is used in first person.</li>
+<li><code>isFirstPerson</code> (boolean): <em>Default</em>: <code>false</code>. A flag which must be set if the target reference is the first person player.</li>
 </ul>
 <hr />
 <h3 id="updateforreference"><code>updateForReference</code><a class="headerlink" href="#updateforreference" title="Permanent link">⚓︎</a></h3>
@@ -10964,7 +10934,7 @@
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
-<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The reference whose body parts to update.</li>
+<li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): The reference whose body parts will be updated.</li>
 </ul>
 
   <hr>
@@ -10972,7 +10942,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 30, 2023 19:00:54</span>
       
         <br>
         Created:
