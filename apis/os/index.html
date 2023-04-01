@@ -3201,6 +3201,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#osgetcommandline" class="md-nav__link">
+    os.getCommandLine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#osopenurl" class="md-nav__link">
     os.openURL
   </a>
@@ -10667,6 +10674,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#osgetcommandline" class="md-nav__link">
+    os.getCommandLine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#osopenurl" class="md-nav__link">
     os.openURL
   </a>
@@ -10769,6 +10783,17 @@
 <li><code>result</code> (string, nil)</li>
 </ul>
 <hr />
+<h3 id="osgetcommandline"><code>os.getCommandLine</code><a class="headerlink" href="#osgetcommandline" title="Permanent link">⚓︎</a></h3>
+<div class="search_terms" style="display: none">getcommandline, commandline</div>
+
+<p>Returns the command line array for the currently execution. This almost always has one value, which is the (potentially relative) path to Morrowind.exe</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">commandLine</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getCommandLine</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Returns</strong>:</p>
+<ul>
+<li><code>commandLine</code> (string[]): An array of strings that reprents the command line.</li>
+</ul>
+<hr />
 <h3 id="osopenurl"><code>os.openURL</code><a class="headerlink" href="#osopenurl" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">openurl, url</div>
 
@@ -10800,7 +10825,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 1, 2023 11:48:28</span>
       
         <br>
         Created:
