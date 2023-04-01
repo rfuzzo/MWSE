@@ -11262,10 +11262,41 @@
 <h3 id="lipsynclevel"><code>lipsyncLevel</code><a class="headerlink" href="#lipsynclevel" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">lipsynclevel</div>
 
+<p>This value indicates whether the NPC is speaking or not. The table below describes the relationship.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>The NPC isn't speaking.</td>
+</tr>
+<tr>
+<td>0.0 - 1.0</td>
+<td>The NPC is speaking. The <code>lipsyncLevel</code> can be <code>0.0</code> when there is a silent part in the sound file the NPC is currently speaking.</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (number)</li>
 </ul>
+<details class="example">
+<summary>Example: isSpeaking</summary>
+<p>Check if the NPC is speaking</p>
+<div class="highlight"><pre><span></span><code><span class="c1">--- Returns true if the actor is currently speaking a voiceover line.</span>
+<span class="c1">---@param mobile tes3mobileActor</span>
+<span class="c1">---@return boolean isSpeaking</span>
+<span class="kd">local</span> <span class="kr">function</span> <span class="nf">isSpeaking</span><span class="p">(</span><span class="n">mobile</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">ad</span> <span class="o">=</span> <span class="n">mobile</span><span class="p">.</span><span class="n">animationController</span><span class="p">.</span><span class="n">animationData</span>
+    <span class="kr">return</span> <span class="p">(</span><span class="n">ad</span><span class="p">.</span><span class="n">lipsyncLevel</span> <span class="o">~=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+</details>
 <hr />
 <h3 id="loopcounts"><code>loopCounts</code><a class="headerlink" href="#loopcounts" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">loopcounts</div>
@@ -11427,7 +11458,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 17, 2023 02:59:16</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 1, 2023 07:31:49</span>
       
         <br>
         Created:

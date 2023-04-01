@@ -16606,7 +16606,7 @@
 <h3 id="tes3playvoiceover"><code>tes3.playVoiceover</code><a class="headerlink" href="#tes3playvoiceover" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">playvoiceover</div>
 
-<p>Causes a target actor to play a voiceover.</p>
+<p>Causes a target actor to play a voiceover. To stop a currently playing voiceover see <code>tes3.removeSound()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">played</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">playVoiceover</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">voiceover</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -16893,13 +16893,13 @@
 <h3 id="tes3removesound"><code>tes3.removeSound</code><a class="headerlink" href="#tes3removesound" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">removesound, sound</div>
 
-<p>Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference.</p>
+<p>Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference. To stop a voiceover, pass the wanted actor as the <code>reference</code> parameter and <code>sound = nil</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">tes3</span><span class="p">.</span><span class="n">removeSound</span><span class="p">({</span> <span class="n">sound</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
-<li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string): The sound object, or id of the sound to look for.</li>
+<li><code>sound</code> (<a href="../../types/tes3sound">tes3sound</a>, string, nil): The sound object, or id of the sound to look for. If no sound is passed, removes every sound on the reference.</li>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string): <em>Optional</em>. The reference the sound is attached to.</li>
 </ul>
 </li>
@@ -17747,7 +17747,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 11:50:35</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 1, 2023 07:31:49</span>
       
         <br>
         Created:

@@ -10633,6 +10633,7 @@
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">onModConfigReady</span><span class="p">()</span>
     <span class="kd">local</span> <span class="n">template</span> <span class="o">=</span> <span class="n">mwse</span><span class="p">.</span><span class="n">mcm</span><span class="p">.</span><span class="n">createTemplate</span><span class="p">({</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;My Mod&quot;</span> <span class="p">})</span>
     <span class="n">template</span><span class="p">:</span><span class="n">saveOnClose</span><span class="p">(</span><span class="s2">&quot;My Mod&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+    <span class="n">template</span><span class="p">:</span><span class="n">register</span><span class="p">()</span>
 
     <span class="kd">local</span> <span class="n">settings</span> <span class="o">=</span> <span class="n">template</span><span class="p">:</span><span class="n">createSideBarPage</span><span class="p">({</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Settings&quot;</span> <span class="p">})</span>
     <span class="n">settings</span><span class="p">.</span><span class="n">sidebar</span><span class="p">:</span><span class="n">createInfo</span><span class="p">({</span>
@@ -10663,7 +10664,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 5, 2023 01:00:33</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 1, 2023 07:47:31</span>
       
         <br>
         Created:

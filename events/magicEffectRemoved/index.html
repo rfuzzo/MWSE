@@ -10629,7 +10629,12 @@
     More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-<p>This event triggers when a magic effect has been removed from an actor. This includes magic effects that have been resisted or are part of abilities like racial passives and diseases.</p>
+<p>This event triggers when a magic effect has been removed from an actor. This includes:</p>
+<ul>
+<li>magic effects that have been resisted or are part of abilities like racial passives and diseases</li>
+<li>magic effects that are removed when an actor is unloaded</li>
+</ul>
+<p>This event doesn't trigger when an effect expires naturally.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e magicEffectRemovedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">magicEffectRemovedCallback</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="kr">end</span>
@@ -10653,7 +10658,7 @@
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference of the mobile actor the magic effect is removed from.</li>
 <li><code>source</code> (<a href="../../types/tes3alchemy">tes3alchemy</a>, <a href="../../types/tes3enchantment">tes3enchantment</a>, <a href="../../types/tes3spell">tes3spell</a>): <em>Read-only</em>. The magic source that contains the effect.</li>
 <li><code>sourceInstance</code> (<a href="../../types/tes3magicSourceInstance">tes3magicSourceInstance</a>): <em>Read-only</em>. The unique instance of the magic source that contains the effect.</li>
-<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The target of the magic source that contained the magic effect. Can be <code>nil</code>.</li>
+<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The target of the magic source that contained the magic effect. Can be <code>nil</code> if the target was unloaded.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
@@ -10681,7 +10686,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 5, 2023 01:00:33</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 1, 2023 07:31:49</span>
       
         <br>
         Created:
