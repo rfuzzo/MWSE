@@ -10835,6 +10835,38 @@
 <li>Opening the Construction Set through Mod Organizer 2 is no longer slowed by the number of active MO2 mod folders.</li>
 <li>The NetImmerse NiLinesData structure loads correctly.</li>
 </ul>
+<h4 id="testing-from-the-construction-set">Testing from the Construction Set<a class="headerlink" href="#testing-from-the-construction-set" title="Permanent link">⚓︎</a></h4>
+<p>Both Morrowind and OpenMW can be launched from the CS with a specified environment. Two new buttons have been added to the toolbar, the first with Morrowind's icon, and the second with OpenMW's icon.</p>
+<p>When one of these buttons is clicked, the appropriate game launches with only the active plugins loaded in the Construction Set loading. Instead of seeing the main menu, you will be loaded to a specified position with a mostly fresh character.</p>
+<p>To change the starting location, use the Render Window's quick menu. You can click on a reference and test at its position (e.g. where a door marker is, or on a carpet) or at the camera position.</p>
+<h5 id="openmw-support">OpenMW Support<a class="headerlink" href="#openmw-support" title="Permanent link">⚓︎</a></h5>
+<p>The OpenMW icon will only display if a valid OpenMW installation directory has been provided. This must be entered into the csse.toml file:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[openmw]</span>
+<span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;D:\\Games\\OpenMW&quot;</span>
+</code></pre></div>
+<p>Because of the implementation of the OpenMW support, a custom config directory is used. This means user settings such as resolution must be reconfigured the first time the game is run from this environment.</p>
+<h5 id="test-environment">Test Environment<a class="headerlink" href="#test-environment" title="Permanent link">⚓︎</a></h5>
+<p>Developers can customize the starting environment of the test character to test changes in quests. This can be done by editing the csse.toml file to specify items, spells, topics, quest states, and global variable values they want to use. Below is an example environment that gives the player a relatively fresh start with some experience in the Mages' Guild:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[test_environment]</span>
+<span class="n">spells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;fireball&quot;</span><span class="p">,</span><span class="s">&quot;mark&quot;</span><span class="p">,</span><span class="s">&quot;recall&quot;</span><span class="p">,</span><span class="s">&quot;levitate&quot;</span><span class="p">]</span>
+<span class="n">topics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;duties&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;advancement&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;latest rumors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;little secret&quot;</span><span class="p">]</span>
+
+<span class="k">[test_environment.inventory]</span>
+<span class="s">&quot;iron dagger&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">ingred_gold_kanet_01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">ingred_stoneflower_petals_01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">ingred_willow_anther_01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">ingred_heather_01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">gold_001</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5000</span>
+
+<span class="k">[test_environment.journal]</span>
+<span class="n">MG_Flowers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="n">MG_Sabotage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">MG_BCShrooms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+
+<span class="k">[test_environment.globals]</span>
+<span class="n">chargenstate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="mf">.0</span>
+</code></pre></div>
 <h3 id="object-window">Object Window<a class="headerlink" href="#object-window" title="Permanent link">⚓︎</a></h3>
 <ul>
 <li>Significantly improved UI responsiveness.</li>
@@ -10911,7 +10943,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 29, 2023 12:03:04</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 3, 2023 00:53:10</span>
       
         <br>
         Created:
