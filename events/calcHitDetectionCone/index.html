@@ -10647,11 +10647,13 @@
 </div>
 <h2 id="event-data">Event Data<a class="headerlink" href="#event-data" title="Permanent link">⚓︎</a></h2>
 <ul>
-<li><code>angleXY</code> (number): The cosine of the maximum allowable angle offset in the horizontal direction that will hit. This is the same units as game setting fCombatAngleXY. May be adjusted.</li>
-<li><code>angleZ</code> (number): The cosine of the maximum allowable angle offset in the vertical direction that will hit. This is the same units as game setting fCombatAngleXY. May be adjusted.</li>
+<li><code>angleXY</code> (number): The maximum allowable angle offset (in radians) in the horizontal direction that will hit. This is related to game setting fCombatAngleXY but using different units. May be adjusted.</li>
+<li><code>angleZ</code> (number): The maximum allowable angle offset (in radians) in the vertical direction that will hit. This is related to game setting fCombatAngleZ but using different units. May be adjusted.</li>
 <li><code>attacker</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference of the attacker.</li>
 <li><code>attackerMobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile which is making the attack.</li>
 <li><code>reach</code> (number): The weapon's reach multiplier, typically in the range 0.5 - 2.0. May be adjusted.</li>
+<li><code>target</code> (<a href="../../types/tes3reference">tes3reference</a>): <em>Read-only</em>. The reference of the target. Only available at the second stage (weapon strike).</li>
+<li><code>targetMobile</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>): <em>Read-only</em>. The mobile which is targetted. Only available at the second stage (weapon strike).</li>
 </ul>
 
   <hr>
@@ -10659,7 +10661,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 3, 2023 17:41:35</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 4, 2023 00:30:54</span>
       
         <br>
         Created:
