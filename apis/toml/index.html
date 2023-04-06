@@ -10735,7 +10735,7 @@
 <div class="search_terms" style="display: none">loadfile</div>
 
 <p>Loads a toml file from <code>path</code>, using <code>toml.decode</code>. Unlike the related <code>json.loadfile</code> function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the <code>path</code> string.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">toml</span><span class="p">.</span><span class="n">loadFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">data</span><span class="p">,</span> <span class="nb">error</span> <span class="o">=</span> <span class="n">toml</span><span class="p">.</span><span class="n">loadFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
@@ -10744,6 +10744,7 @@
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>data</code> (table?): The decoded data, or <code>nil</code> if the file could not be found.</li>
+<li><code>error</code> (table?): Information about why the toml file could not be decoded. This result will only be given if the operation fails.</li>
 </ul>
 <hr />
 <h3 id="tomlsavefile"><code>toml.saveFile</code><a class="headerlink" href="#tomlsavefile" title="Permanent link">⚓︎</a></h3>
@@ -10763,7 +10764,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 6, 2023 06:08:56</span>
       
         <br>
         Created:
