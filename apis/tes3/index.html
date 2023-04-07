@@ -15018,7 +15018,7 @@
 <h3 id="tes3getanimationactiontiming"><code>tes3.getAnimationActionTiming</code><a class="headerlink" href="#tes3getanimationactiontiming" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">getanimationactiontiming, animationactiontiming</div>
 
-<p>This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.</p>
+<p>This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values. The function will return nil if the actor does not have that animation group, or if the actor's animations are not active.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getAnimationActionTiming</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">group</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
@@ -17763,7 +17763,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 1, 2023 07:31:49</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 7, 2023 02:26:56</span>
       
         <br>
         Created:
