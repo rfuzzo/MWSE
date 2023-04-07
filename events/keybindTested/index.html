@@ -10667,7 +10667,7 @@
 <ul>
 <li><code>keybind</code> (number): <em>Read-only</em>. The keybind that was tested. This maps to the <code>tes3.keybind.*</code> constants.</li>
 <li><code>result</code> (boolean): The read state of the keybind. If true, the key was pressed/released/toggled as determined by the <code>transition</code> event data.</li>
-<li><code>transition</code> (number): <em>Read-only</em>. The transition for the keybind that was tested. This is typically <code>tes3.keyTransition.down</code> but not guaranteed to be. Always be sure to check what transition is being used.</li>
+<li><code>transition</code> (number): <em>Read-only</em>. The transition for the keybind that was tested. This is typically <code>tes3.keyTransition.isDown</code> but not guaranteed to be. Always be sure to check what transition is being used.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">⚓︎</a></h2>
 <div class="admonition example">
@@ -10676,7 +10676,7 @@
 <div class="highlight"><pre><span></span><code><span class="c1">--- @param e keybindTestedEventData</span>
 <span class="kd">local</span> <span class="kr">function</span> <span class="nf">noJournalMenu</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- We only care about checks to see if the key was pressed.</span>
-    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">transition</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">keyTransition</span><span class="p">.</span><span class="n">down</span><span class="p">)</span> <span class="kr">then</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">transition</span> <span class="o">~=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">keyTransition</span><span class="p">.</span><span class="n">isDown</span><span class="p">)</span> <span class="kr">then</span>
         <span class="kr">return</span>
     <span class="kr">end</span>
 
@@ -10699,7 +10699,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 5, 2023 01:00:33</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 7, 2023 15:30:51</span>
       
         <br>
         Created:

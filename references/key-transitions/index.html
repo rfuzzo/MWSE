@@ -10588,31 +10588,36 @@
 <h1 id="key-transitions">Key Transitions<a class="headerlink" href="#key-transitions" title="Permanent link">⚓︎</a></h1>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>These values are available in Lua by their index in the <code>tes3.keyTransition</code> table. For example, <code>tes3.keyTransition.up</code> has a value of <code>1</code>.</p>
+<p>These values are available in Lua by their index in the <code>tes3.keyTransition</code> table. For example, <code>tes3.keyTransition.isDown</code> has a value of <code>1</code>.</p>
 </div>
 <table>
 <thead>
 <tr>
 <th>Index</th>
 <th>Value</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>test</td>
-<td><code>0</code></td>
-</tr>
-<tr>
-<td>up</td>
+<td>isDown</td>
 <td><code>1</code></td>
+<td>Tests if the key is currently pressed down.</td>
 </tr>
 <tr>
-<td>down</td>
+<td>downThisFrame</td>
 <td><code>2</code></td>
+<td>Tests if the key was pressed this frame.</td>
 </tr>
 <tr>
-<td>toggled</td>
+<td>upThisFrame</td>
 <td><code>3</code></td>
+<td>Tests if the key was released this frame.</td>
+</tr>
+<tr>
+<td>changedThisFrame</td>
+<td><code>4</code></td>
+<td>Tests if the key changed state this frame.</td>
 </tr>
 </tbody>
 </table>
@@ -10622,7 +10627,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 9, 2022 17:42:34</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 7, 2023 15:30:51</span>
       
         <br>
         Created:
