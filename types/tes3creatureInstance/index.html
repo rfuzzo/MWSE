@@ -11997,7 +11997,7 @@
 <h3 id="spells"><code>spells</code><a class="headerlink" href="#spells" title="Permanent link">⚓︎</a></h3>
 <div class="search_terms" style="display: none">spells</div>
 
-<p><em>Read-only</em>. Quick access to the base creature's spell list. It is a <code>tes3spellList</code>, which is a list wrapper with helper functions. The actual list is accessed with <code>.iterator</code>. e.g. <code>for _, spell in pairs(creature.spells.iterator) do print(spell.name) end</code></p>
+<p><em>Read-only</em>. Quick access to the creature's spell list. It is a <code>tes3spellList</code>, which is a list wrapper with helper functions. The actual list is iterated over using <code>pairs</code>. E.g. <code>for _, spell in pairs(creature.spells) do print(spell.name) end</code></p>
 <p><strong>Returns</strong>:</p>
 <ul>
 <li><code>result</code> (<a href="../../types/tes3spellList">tes3spellList</a>, <a href="../../types/tes3spell">tes3spell</a>[])</li>
@@ -12165,7 +12165,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 10, 2023 16:40:17</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 12, 2023 08:53:46</span>
       
         <br>
         Created:

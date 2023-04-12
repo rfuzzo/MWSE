@@ -10696,6 +10696,7 @@
         <span class="n">p</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">effects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="kr">end</span>
 
+    <span class="c1">---@diagnostic disable-next-line: deprecated</span>
     <span class="kd">local</span> <span class="n">newPotion</span> <span class="o">=</span> <span class="n">tes3alchemy</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">removeItem</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">object</span><span class="p">,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">}</span>
     <span class="n">tes3</span><span class="p">.</span><span class="n">addItem</span><span class="p">{</span><span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">player</span><span class="p">,</span> <span class="n">item</span> <span class="o">=</span> <span class="n">newPotion</span><span class="p">,</span> <span class="n">playSound</span> <span class="o">=</span> <span class="kc">false</span><span class="p">}</span>
@@ -10708,7 +10709,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 5, 2023 01:00:33</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 12, 2023 08:52:54</span>
       
         <br>
         Created:

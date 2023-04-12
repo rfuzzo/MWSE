@@ -11359,7 +11359,10 @@
 <details class="example">
 <summary>Example: Basic Usage</summary>
 <p>Using the UI event system, cause a given element to capture the mouse drag.</p>
-<div class="highlight"><pre><span></span><code><span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">---@type tes3uiElement</span>
+<span class="kd">local</span> <span class="n">element</span> <span class="c1">-- Created somewhere before</span>
+
+<span class="n">element</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mouseDown&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="c1">-- Capture must be inside a mouse event.</span>
     <span class="n">tes3ui</span><span class="p">.</span><span class="n">captureMouseDrag</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
 <span class="kr">end</span><span class="p">)</span>
@@ -11489,8 +11492,11 @@
 <details class="example">
 <summary>Example: Add an item tooltip to a new element</summary>
 <p>This demonstrates adding an item tooltip to a button using the help event.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;- Item -&quot;</span><span class="p">}</span>
-<span class="kd">local</span> <span class="n">item</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron_shield&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">---@type tes3uiElement</span>
+<span class="kd">local</span> <span class="n">menu</span> <span class="c1">-- Created somewhere before</span>
+
+<span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">menu</span><span class="p">:</span><span class="n">createButton</span><span class="p">{</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;- Item -&quot;</span><span class="p">}</span>
+<span class="kd">local</span> <span class="n">item</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">getObject</span><span class="p">(</span><span class="s2">&quot;iron_shield&quot;</span><span class="p">)</span> <span class="cm">--[[@as tes3armor]]</span>
 
 <span class="n">button</span><span class="p">:</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kd">local</span> <span class="n">tooltip</span> <span class="o">=</span> <span class="n">tes3ui</span><span class="p">.</span><span class="n">createTooltipMenu</span><span class="p">{</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="p">}</span>
@@ -12185,7 +12191,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">March 26, 2023 10:11:49</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 12, 2023 08:52:54</span>
       
         <br>
         Created:

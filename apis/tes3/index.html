@@ -14213,7 +14213,7 @@
 <li><code>source</code> (<a href="../../types/tes3object">tes3object</a>): <em>Optional</em>. A magic source to apply.</li>
 <li><code>name</code> (string): <em>Optional</em>. While optional for other uses, if applying alchemy as a source, you must specify a name for the magic source.</li>
 <li><code>effects</code> (table): <em>Optional</em>. A table of custom effects to apply as a potion. Maximal number of effects is 8.<ul>
-<li><code>id</code> (boolean): <em>Default</em>: <code>-1</code>. ID of the effect.</li>
+<li><code>id</code> (boolean): <em>Default</em>: <code>-1</code>. ID of the effect. Maps to values in <a href="https://mwse.github.io/MWSE/references/magic-effects/"><code>tes3.effect</code></a> table.</li>
 <li><code>skill</code> (number): <em>Default</em>: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to <a href="https://mwse.github.io/MWSE/references/skills/"><code>tes3.skill</code></a> constants.</li>
 <li><code>attribute</code> (number): <em>Default</em>: <code>-1</code>. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to <a href="https://mwse.github.io/MWSE/references/attributes/"><code>tes3.attribute</code></a> constants.</li>
 <li><code>rangeType</code> (number): <em>Default</em>: <code>tes3.effectRange.self</code>. The range of the effect. This maps to <a href="https://mwse.github.io/MWSE/references/effect-ranges/"><code>tes3.effectRange</code></a> constants.</li>
@@ -14391,6 +14391,7 @@
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isAltDown</span> <span class="kr">then</span>
         <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;mwscript.explodeSpell&quot;</span><span class="p">)</span>
+        <span class="c1">---@diagnostic disable-next-line: deprecated</span>
         <span class="n">mwscript</span><span class="p">.</span><span class="n">explodeSpell</span><span class="p">({</span>
             <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">game</span><span class="p">.</span><span class="n">playerTarget</span><span class="p">,</span>
             <span class="n">spell</span> <span class="o">=</span> <span class="s2">&quot;proj_trap_spell&quot;</span>
@@ -14401,7 +14402,7 @@
 <span class="n">event</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">tes3</span><span class="p">.</span><span class="n">event</span><span class="p">.</span><span class="n">keyDown</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="kr">if</span> <span class="n">e</span><span class="p">.</span><span class="n">isAltDown</span> <span class="kr">then</span>
         <span class="n">tes3</span><span class="p">.</span><span class="n">messageBox</span><span class="p">(</span><span class="s2">&quot;tes3.cast&quot;</span><span class="p">)</span>
-        <span class="c1">-- This will behave the same as will mwscript.explodeSpell()</span>
+        <span class="c1">-- This will behave the same as mwscript.explodeSpell()</span>
         <span class="n">tes3</span><span class="p">.</span><span class="n">cast</span><span class="p">({</span>
             <span class="n">target</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">game</span><span class="p">.</span><span class="n">playerTarget</span><span class="p">,</span>
             <span class="n">reference</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">game</span><span class="p">.</span><span class="n">playerTarget</span><span class="p">,</span>
@@ -17779,7 +17780,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 7, 2023 02:26:56</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 12, 2023 08:52:54</span>
       
         <br>
         Created:
