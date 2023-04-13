@@ -876,6 +876,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
@@ -1220,6 +1222,20 @@
     <li class="md-nav__item">
       <a href="../../references/damage-sources/" class="md-nav__link">
         Damage Sources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/dialogue-filter-context/" class="md-nav__link">
+        Dialogue Filter Contexts
       </a>
     </li>
   
@@ -9810,6 +9826,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -10658,6 +10676,20 @@
     <li class="md-nav__item">
       <a href="../../events/dialogueEnvironmentCreated/" class="md-nav__link">
         dialogueEnvironmentCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/dialogueFiltered/" class="md-nav__link">
+        dialogueFiltered
       </a>
     </li>
   
@@ -14417,12 +14449,16 @@
 <div class="search_terms" style="display: none">checkmerchantoffersservice</div>
 
 <p>Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">offersService</span><span class="p">,</span> <span class="n">refusalReply</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">checkMerchantOffersService</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">service</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">offersService</span><span class="p">,</span> <span class="n">refusalReply</span> <span class="o">=</span> <span class="n">tes3</span><span class="p">.</span><span class="n">checkMerchantOffersService</span><span class="p">({</span> <span class="n">reference</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">service</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">context</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
+<li><code>params</code> (table)<ul>
 <li><code>reference</code> (<a href="../../types/tes3reference">tes3reference</a>, <a href="../../types/tes3mobileActor">tes3mobileActor</a>, string)</li>
 <li><code>service</code> (number): <em>Optional</em>. The specific service to check for availability. Maps to values in the <a href="https://mwse.github.io/MWSE/references/merchant-services/"><code>tes3.merchantService</code></a> table.</li>
+<li><code>context</code> (number): <em>Default</em>: <code>tes3.dialogueFilterContext.script</code>. An override for how this info request should be treated. Maps to values in the <a href="https://mwse.github.io/MWSE/references/dialogue-filter-context/"><code>tes3.dialogueFilterContext</code></a> table.</li>
+</ul>
+</li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -17780,7 +17816,7 @@ Statics, activators, containers, doors, and lights with non-zero weight.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 12, 2023 08:52:54</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 13, 2023 02:35:39</span>
       
         <br>
         Created:

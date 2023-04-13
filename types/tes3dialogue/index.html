@@ -876,6 +876,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
@@ -1220,6 +1222,20 @@
     <li class="md-nav__item">
       <a href="../../references/damage-sources/" class="md-nav__link">
         Damage Sources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/dialogue-filter-context/" class="md-nav__link">
+        Dialogue Filter Contexts
       </a>
     </li>
   
@@ -8466,6 +8482,8 @@
         
           
         
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -9314,6 +9332,20 @@
     <li class="md-nav__item">
       <a href="../../events/dialogueEnvironmentCreated/" class="md-nav__link">
         dialogueEnvironmentCreated
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../events/dialogueFiltered/" class="md-nav__link">
+        dialogueFiltered
       </a>
     </li>
   
@@ -11115,12 +11147,13 @@
 <div class="search_terms" style="display: none">getinfo, info</div>
 
 <p>Fetches the info that a given actor would produce for the dialogue.</p>
-<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getInfo</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myObject</span><span class="p">:</span><span class="n">getInfo</span><span class="p">({</span> <span class="n">actor</span> <span class="o">=</span> <span class="p">...,</span> <span class="n">context</span> <span class="o">=</span> <span class="p">...</span> <span class="p">})</span>
 </code></pre></div>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code>params</code> (table)<ul>
 <li><code>actor</code> (<a href="../../types/tes3mobileActor">tes3mobileActor</a>, <a href="../../types/tes3reference">tes3reference</a>, string)</li>
+<li><code>context</code> (number): <em>Default</em>: <code>tes3.dialogueFilterContext.script</code>. An override for how this info request should be treated. Maps to values in the <a href="https://mwse.github.io/MWSE/references/dialogue-filter-context/"><code>tes3.dialogueFilterContext</code></a> table.</li>
 </ul>
 </li>
 </ul>
@@ -11160,7 +11193,7 @@
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">February 11, 2023 19:45:50</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-datetime">April 13, 2023 02:35:39</span>
       
         <br>
         Created:
