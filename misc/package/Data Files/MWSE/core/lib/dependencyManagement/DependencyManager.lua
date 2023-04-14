@@ -2,6 +2,7 @@ local DependencyType = require("dependencyManagement.DependencyType")
 ---@class MWSE.Metadata.Package
 ---@field name string
 ---@field version string
+---@field plugin string
 ---@field description string
 ---@field authors string[]
 
@@ -72,11 +73,18 @@ function DependencyManager.new(e)
     return self
 end
 
-
 ---Check if all dependencies are met
 ---@return boolean #returns true if all dependencies passed, false if any failed.
 function DependencyManager:checkDependencies()
     self.logger:debug("Checking dependencies for: %s", self.metadata.package.name)
+
+    -- Don't check dependencies if mod is not active.
+    local plugin = self.metadata.package.plugin
+    if plugin and not tes3.isModActive(plugin) then
+        self.logger:debug("Plugin %s is not active, skipping dependency check", plugin)
+        return true
+    end
+
     local failedDependencies = {} ---@type table<string, MWSE.DependencyType.Failure>
     if self.metadata.dependencies then
         for typeId, dependency in pairs(self.metadata.dependencies) do
