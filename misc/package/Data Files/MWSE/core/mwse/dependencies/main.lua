@@ -1,13 +1,26 @@
 local DependencyType = require("dependencyManagement.DependencyType")
 local DependencyNotifier = require("dependencyManagement.DependencyNotifier")
 local DependencyManager = require("dependencyManagement.DependencyManager")
-local LOG_LEVEL = "INFO"
-local logger = require("logging.logger").new{
+local LOG_LEVEL = "TRACE"
+local logger = require("logging.logger").new {
     name = "Dependencies",
     logLevel = LOG_LEVEL
 }
-local function isLuaFile(file) return file:sub(-4, -1) == ".lua" end
-local function isInitFile(file) return file == "init.lua" end
+
+---@param file string
+local function isLuaFile(file)
+    return file:lower():endswith(".lua")
+end
+
+---@param file string
+local function isInitFile(file)
+    return file:lower() == "init.lua"
+end
+
+---@param file string
+local function isMetadataFile(file)
+    return file:lower():endswith("-metadata.toml")
+end
 
 --[[
     Register all dependency types in the dependencyManagement.types folder.
@@ -31,12 +44,7 @@ end
 local function checkDependencies()
     if not mwse.getConfig("EnableDependencyChecks") then return end
     logger:debug("Checking dependencies")
-    ---@param file string
-    local function isMetadataFile(file)
-        file = file:lower()
-        --ends in `-metadata.toml`
-        return file:endswith("-metadata.toml")
-    end
+
     --[[
         For each `-metadata.toml` file in Data Files,
         that do not have a `tools.mwse.lua-mod` field,
