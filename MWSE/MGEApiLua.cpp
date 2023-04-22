@@ -36,7 +36,8 @@ namespace mge::lua {
 	}
 	
 	bool CoreInterface::reloadDistantLand() {
-		return api->reloadDistantLand();
+		//return api->reloadDistantLand();
+		return false;
 	}
 
 	float CoreInterface::getGUIScale() {
@@ -63,7 +64,7 @@ namespace mge::lua {
 			throw std::invalid_argument("path argument missing.");
 		}
 
-		static_cast<MGEAPIv2*>(api)->saveScreenshot(path, captureWithUI);
+		//static_cast<MGEAPIv2*>(api)->saveScreenshot(path, captureWithUI);
 	}
 
 	//
@@ -162,7 +163,7 @@ namespace mge::lua {
 		sol::state_view state(ts);
 		sol::table shaders = state.create_table();
 
-		for (size_t i = 0; true; ++i) {
+		/*for (size_t i = 0; true; ++i) {
 			auto s = api->shaderListShaders(i);
 			if (s) {
 				shaders[i + 1] = ShaderHandleLua(s);
@@ -170,7 +171,7 @@ namespace mge::lua {
 			else {
 				break;
 			}
-		}
+		}*/
 
 		return shaders;
 	}
@@ -178,7 +179,7 @@ namespace mge::lua {
 	std::string ShadersConfig::debugShaders() {
 		std::stringstream out;
 
-		for (size_t i = 0; true; i++) {
+		/*for (size_t i = 0; true; i++) {
 			auto s = api->shaderListShaders(i);
 			if (s) {
 				char line[256];
@@ -188,7 +189,7 @@ namespace mge::lua {
 			else {
 				break;
 			}
-		}
+		}*/
 
 		return std::move(out.str());
 	}
@@ -199,10 +200,10 @@ namespace mge::lua {
 			throw std::invalid_argument("name argument missing.");
 		}
 
-		auto handle = api->shaderGetShader(id);
+		/*auto handle = api->shaderGetShader(id);
 		if (handle) {
 			return { handle };
-		}
+		}*/
 
 		return {};
 	}
@@ -213,20 +214,21 @@ namespace mge::lua {
 			throw std::invalid_argument("name argument missing.");
 		}
 
-		auto handle = api->shaderLoad(id);
+		/*auto handle = api->shaderLoad(id);
 		if (handle) {
 			return { handle };
-		}
+		}*/
 
 		return {};
 	}
 
 	float ShadersConfig::getHDRReactionSpeed() {
-		return api->shaderGetHDRReactionSpeed();
+		//return api->shaderGetHDRReactionSpeed();
+		return 0;
 	}
 
 	void ShadersConfig::setHDRReactionSpeed(float speed) {
-		api->shaderSetHDRReactionSpeed(speed);
+		//api->shaderSetHDRReactionSpeed(speed);
 	}
 
 	//
@@ -234,7 +236,7 @@ namespace mge::lua {
 	//
 	sol::table WeatherConfig::getScattering(sol::this_state ts) {
 		float inscatter[3], outscatter[3];
-		api->weatherScatteringGet(inscatter, outscatter);
+		//api->weatherScatteringGet(inscatter, outscatter);
 
 		sol::state_view state = ts;
 		sol::table in = state.create_table_with(1, inscatter[0], 2, inscatter[1], 3, inscatter[2]);
@@ -248,7 +250,7 @@ namespace mge::lua {
 		auto outscatter = mwse::lua::getOptionalParamVector3(params, "outscatter");
 
 		if (inscatter && outscatter) {
-			api->weatherScatteringSet(&inscatter.value().x, &outscatter.value().x);
+			//api->weatherScatteringSet(&inscatter.value().x, &outscatter.value().x);
 		}
 		else {
 			throw std::invalid_argument("inscatter and outscatter must be 3-vectors.");
@@ -257,7 +259,7 @@ namespace mge::lua {
 
 	sol::table WeatherConfig::getSkylightScattering(sol::this_state ts) {
 		float skylight_scatter[4];
-		static_cast<MGEAPIv2*>(api)->weatherScatteringSkylightGet(skylight_scatter);
+		//static_cast<MGEAPIv2*>(api)->weatherScatteringSkylightGet(skylight_scatter);
 
 		sol::state_view state = ts;
 		sol::table far = state.create_table_with(1, skylight_scatter[0], 2, skylight_scatter[1], 3, skylight_scatter[2]);
@@ -269,13 +271,13 @@ namespace mge::lua {
 		auto skylight_scatter = mwse::lua::getOptionalParamVector3(params, "skylight");
 		auto skylight_mix = mwse::lua::getOptionalParam<float>(params, "mix", 0.44f);
 
-		if (skylight_scatter) {
+		/*if (skylight_scatter) {
 			TES3::Vector4 v(skylight_scatter.value().x, skylight_scatter.value().y, skylight_scatter.value().z, skylight_mix);
 			static_cast<MGEAPIv2*>(api)->weatherScatteringSkylightSet(&v.x);
 		}
-		else {
+		else {*/
 			throw std::invalid_argument("skylight must be a 3-vector.");
-		}
+		//}
 	}
 
 	sol::table WeatherConfig::getDLFog(int weatherID, sol::this_state ts) {
@@ -331,13 +333,13 @@ namespace mge::lua {
 	}
 
 	sol::table WeatherConfig::getWind(int weatherID, sol::this_state ts) {
-		if (!(weatherID >= 0 && weatherID < 10)) {
+		//if (!(weatherID >= 0 && weatherID < 10)) {
 			throw std::invalid_argument("valid weather parameter required.");
-		}
+		//}
 
-		float speed = api->getDistantLandRenderConfig()->Wind[weatherID];
-		sol::state_view state = ts;
-		return state.create_table_with("weather", weatherID, "speed", speed);
+		//float speed = api->getDistantLandRenderConfig()->Wind[weatherID];
+		//sol::state_view state = ts;
+		//return state.create_table_with("weather", weatherID, "speed", speed);
 	}
 
 	void WeatherConfig::setWind(sol::optional<sol::table> params) {
@@ -351,7 +353,7 @@ namespace mge::lua {
 			throw std::invalid_argument("speed parameter required.");
 		}
 
-		api->getDistantLandRenderConfig()->Wind[weatherID] = speed;
+		//api->getDistantLandRenderConfig()->Wind[weatherID] = speed;
 	}
 
 	//
@@ -401,24 +403,24 @@ namespace mge::lua {
 
 	ShaderHandle LegacyInterface::findShader(sol::optional<sol::table> params) {
 		auto shaderName = mwse::lua::getOptionalParam<const char*>(params, "shader", nullptr);
-		if (shaderName == nullptr) {
+		//if (shaderName == nullptr) {
 			return nullptr;
-		}
+		//}
 
-		return api->shaderGetShader(shaderName);
+		//return api->shaderGetShader(shaderName);
 	}
 
 	void LegacyInterface::enableShader(sol::optional<sol::table> params) {
 		auto shader = findShader(params);
 		if (shader) {
-			api->shaderSetEnabled(shader, true);
+			//api->shaderSetEnabled(shader, true);
 		}
 	}
 
 	void LegacyInterface::disableShader(sol::optional<sol::table> params) {
 		auto shader = findShader(params);
 		if (shader) {
-			api->shaderSetEnabled(shader, false);
+			//api->shaderSetEnabled(shader, false);
 		}
 	}
 
@@ -427,9 +429,9 @@ namespace mge::lua {
 		auto variable = mwse::lua::getOptionalParam<const char*>(params, "variable", nullptr);
 		auto value = mwse::lua::getOptionalParam<float>(params, "value", 0.0f);
 
-		if (shader && variable) {
+		/*if (shader && variable) {
 			api->shaderSetFloat(shader, variable, value);
-		}
+		}*/
 	}
 
 	void LegacyInterface::setShaderLong(sol::optional<sol::table> params) {
@@ -437,9 +439,9 @@ namespace mge::lua {
 		auto variable = mwse::lua::getOptionalParam<const char*>(params, "variable", nullptr);
 		auto value = mwse::lua::getOptionalParam<int>(params, "value", 0);
 
-		if (shader && variable) {
+		/*if (shader && variable) {
 			api->shaderSetInt(shader, variable, value);
-		}
+		}*/
 	}
 
 	std::tuple<float, float> LegacyInterface::getWeatherDLFog(int weatherID) {

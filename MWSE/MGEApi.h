@@ -28,11 +28,6 @@ namespace mge {
 		float Wind[10];
 		float FogDist[10];
 		float FogOffset[10];
-
-		// Custom wrapper functions.
-		std::reference_wrapper<float[10]> getWind() { return std::ref(Wind); }
-		std::reference_wrapper<float[10]> getFogDist() { return std::ref(FogDist); }
-		std::reference_wrapper<float[10]> getFogOffset() { return std::ref(FogOffset); }
 	};
 
 	enum struct LightingMode {
@@ -131,10 +126,13 @@ namespace mge {
 
 		virtual float guiGetScale();
 		virtual void guiSetScale(float scale);
-
+#ifdef FULL_MGE
 		virtual const MacroFunctions* macroFunctions();
+#endif // FULL_MGE
+#ifdef DISTANT_LAND
 		virtual bool reloadDistantLand();
 		virtual DistantLandRenderConfig* getDistantLandRenderConfig();
+#endif // DISTANT_LAND
 		virtual LightingMode lightingModeGet();
 		virtual void lightingModeSet(LightingMode mode);
 
@@ -172,7 +170,7 @@ namespace mge {
 		virtual void hudSetInt(const char* name, const char* variableName, int value);
 		virtual void hudSetVector4(const char* name, const char* variableName, float value[4]);
 		virtual void hudSetTexture(const char* name, const char* texturePath);
-
+#ifdef MGE_SHADERS
 		virtual float shaderGetHDRReactionSpeed();
 		virtual void shaderSetHDRReactionSpeed(float speed);
 		virtual ShaderHandle shaderLoad(const char* id);
@@ -199,20 +197,25 @@ namespace mge {
 		virtual bool shaderSetFloatArray(ShaderHandle handle, const char* variableName, const float* values, size_t* count);
 		virtual bool shaderSetVector(ShaderHandle handle, const char* variableName, const float* values, size_t count);
 		virtual bool shaderSetMatrix(ShaderHandle handle, const char* variableName, const float* values);
-
+#endif // MGE_SHADERS
+#ifdef DISTANT_LAND
 		virtual void weatherScatteringGet(float* inscatter, float* outscatter);
 		virtual void weatherScatteringSet(float inscatter[3], float outscatter[3]);
+#endif // DISTANT_LAND
 		virtual void weatherDistantFogGet(int weatherID, float* fogDistMult, float* fogOffset);
 		virtual void weatherDistantFogSet(int weatherID, float fogDistMult, float fogOffset);
 		virtual void weatherPerPixelLightGet(int weatherID, float* sunMult, float* ambMult);
 		virtual void weatherPerPixelLightSet(int weatherID, float sunMult, float ambMult);
+
 	};
 
 	struct MGEAPIv2 : public MGEAPIv1 {
+#ifdef DISTANT_LAND
 		virtual void saveScreenshot(const char* path, bool captureWithUI);
 
 		virtual void weatherScatteringSkylightGet(float* skylight);
-		virtual void weatherScatteringSkylightSet(float skylight[3]);
+		virtual void weatherScatteringSkylightSet(float skylight[4]);
+#endif // DISTANT_LAND
 	};
 
 	inline MGEAPIv1* api = nullptr;

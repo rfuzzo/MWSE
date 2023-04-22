@@ -24,9 +24,9 @@ namespace mwse::lua {
 			usertypeDefinition[sol::meta_function::new_index] = &mge::ShaderHandleLua::setVariable;
 
 			// Properties.
-			usertypeDefinition["enabled"] = sol::property(&mge::ShaderHandleLua::getEnabled, &mge::ShaderHandleLua::setEnabled);
+			//usertypeDefinition["enabled"] = sol::property(&mge::ShaderHandleLua::getEnabled, &mge::ShaderHandleLua::setEnabled);
 			usertypeDefinition["name"] = sol::readonly_property(&mge::ShaderHandleLua::getName);
-			usertypeDefinition["orderPriority"] = sol::property(&mge::ShaderHandleLua::getPriority, &mge::ShaderHandleLua::setPriority);
+			//usertypeDefinition["orderPriority"] = sol::property(&mge::ShaderHandleLua::getPriority, &mge::ShaderHandleLua::setPriority);
 			usertypeDefinition["variables"] = sol::readonly_property(&mge::ShaderHandleLua::listVariables);
 
 			// Functions.

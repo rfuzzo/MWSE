@@ -52,16 +52,16 @@ namespace mwse::lua {
 			usertypeDefinition["interiorFogEnd"] = &DistantLandRenderConfig::InteriorFogEnd;
 			usertypeDefinition["interiorFogStart"] = &DistantLandRenderConfig::InteriorFogStart;
 			usertypeDefinition["nearStaticEnd"] = &DistantLandRenderConfig::NearStaticEnd;
-			usertypeDefinition["fogOffsetPercent"] = sol::readonly_property(&DistantLandRenderConfig::getFogOffset);
-			usertypeDefinition["fogDistance"] = sol::readonly_property(&DistantLandRenderConfig::getFogDist);
+			//usertypeDefinition["fogOffsetPercent"] = sol::readonly_property(&DistantLandRenderConfig::getFogOffset);
+			//usertypeDefinition["fogDistance"] = sol::readonly_property(&DistantLandRenderConfig::getFogDist);
 			usertypeDefinition["veryFarStaticEnd"] = &DistantLandRenderConfig::VeryFarStaticEnd;
 			usertypeDefinition["veryFarStaticMinSize"] = &DistantLandRenderConfig::VeryFarStaticMinSize;
 			usertypeDefinition["waterCaustics"] = &DistantLandRenderConfig::WaterCaustics;
 			usertypeDefinition["waterWaveHeight"] = &DistantLandRenderConfig::WaterWaveHeight;
-			usertypeDefinition["wind"] = sol::readonly_property(&DistantLandRenderConfig::getWind);
+			//usertypeDefinition["wind"] = sol::readonly_property(&DistantLandRenderConfig::getWind);
 			// Note that DistantLandRenderConfig::ShadowResolution does not appear, as it is not configurable.
 		}
-		lua_mge["distantLandRenderConfig"] = mge::api->getDistantLandRenderConfig();
+		//lua_mge["distantLandRenderConfig"] = mge::api->getDistantLandRenderConfig();
 		lua_mge["reloadDistantLand"] = &mge::lua::CoreInterface::reloadDistantLand;
 
 		lua_mge["getUIScale"] = &mge::lua::CoreInterface::getGUIScale;
@@ -173,7 +173,7 @@ namespace mwse::lua {
 			}
 		}
 		lua_mge["weather"] = mge::lua::WeatherConfig();
-
+#ifdef FULL_MGE
 		// Macro functions with on-screen notifications.
 		auto lua_macros = lua_mge.create_named("macros");
 		lua_macros["decreaseFOV"] = mge::macros->DecreaseFOV;
@@ -214,7 +214,7 @@ namespace mwse::lua {
 		lua_macros["toggleStatusText"] = mge::macros->ToggleStatusText;
 		lua_macros["toggleTransparencyAA"] = mge::macros->ToggleTransparencyAA;
 		lua_macros["toggleZoom"] = mge::macros->ToggleZoom;
-
+#endif // FULL_MGE
 		// Legacy functions.
 		lua_mge["disableShader"] = &mge::lua::LegacyInterface::disableShader;
 		lua_mge["disableZoom"] = &mge::lua::LegacyInterface::disableZoom;
