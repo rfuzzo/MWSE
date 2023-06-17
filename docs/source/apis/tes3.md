@@ -1741,7 +1741,7 @@ local cell = tes3.getCell({ id = ..., position = ..., x = ..., y = ... })
 
 * `params` (table)
 	* `id` (string): *Optional*. The cell's ID. If not provided, position or x and y must be.
-	* `position` ([tes3vector3](../../types/tes3vector3)): *Optional*. A point in an exterior cell.
+	* `position` ([tes3vector3](../../types/tes3vector3), table): *Optional*. A point in an exterior cell.
 	* `x` (number): *Optional*. The X grid-position.
 	* `y` (number): *Optional*. The Y grid-position.
 

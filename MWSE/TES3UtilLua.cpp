@@ -1808,22 +1808,34 @@ namespace mwse::lua {
 	}
 
 	TES3::Cell* getCell(sol::table params) {
+		const auto dataHandler = TES3::DataHandler::get();
+		if (dataHandler == nullptr) {
+			throw std::runtime_error("Cell data has not yet been initialized.");
+		}
+
 		// If we were given a name, try that.
-		sol::optional<const char*> cellId = params["id"];
-		if (cellId) {
-			return TES3::DataHandler::get()->nonDynamicData->getCellByName(cellId.value());
+		const auto id = getOptionalParam<const char*>(params, "id");
+		if (id) {
+			return dataHandler->nonDynamicData->getCellByName(id.value());
+		}
+
+		// If we were given x/y coordinates use that.
+		const auto gridX = getOptionalParam<int>(params, "x");
+		const auto gridY = getOptionalParam<int>(params, "y");
+		if (gridX && gridY) {
+			return dataHandler->nonDynamicData->getCellByGrid(gridX.value(), gridY.value());
 		}
 
 		// If we were given a position, try that.
-		sol::optional<TES3::Vector3*> position = params["position"];
+		const auto position = getOptionalParamVector3(params, "position");
 		if (position) {
-			int gridX = TES3::Cell::toGridCoord(position.value()->x);
-			int gridY = TES3::Cell::toGridCoord(position.value()->y);
-			return TES3::DataHandler::get()->nonDynamicData->getCellByGrid(gridX, gridY);
+			const auto gridX = TES3::Cell::toGridCoord(position.value().x);
+			const auto gridY = TES3::Cell::toGridCoord(position.value().y);
+			return dataHandler->nonDynamicData->getCellByGrid(gridX, gridY);
 		}
 
-		// Otherwise try to use grid X/Y.
-		return TES3::DataHandler::get()->nonDynamicData->getCellByGrid(params["x"], params["y"]);
+		// Incorrect call made. Throw an error.
+		throw std::invalid_argument("Invalid call. Must provide an id, position, or grid X and Y coordinates.");
 	}
 
 	void fadeIn(sol::optional<sol::table> params) {

@@ -1013,7 +1013,7 @@ function tes3.getCameraVector() end
 --- 
 --- `id`: string? — *Optional*. The cell's ID. If not provided, position or x and y must be.
 --- 
---- `position`: tes3vector3? — *Optional*. A point in an exterior cell.
+--- `position`: tes3vector3|table|nil — *Optional*. A point in an exterior cell.
 --- 
 --- `x`: number? — *Optional*. The X grid-position.
 --- 
@@ -1024,7 +1024,7 @@ function tes3.getCell(params) end
 ---Table parameter definitions for `tes3.getCell`.
 --- @class tes3.getCell.params
 --- @field id string? *Optional*. The cell's ID. If not provided, position or x and y must be.
---- @field position tes3vector3? *Optional*. A point in an exterior cell.
+--- @field position tes3vector3|table|nil *Optional*. A point in an exterior cell.
 --- @field x number? *Optional*. The X grid-position.
 --- @field y number? *Optional*. The Y grid-position.
 
