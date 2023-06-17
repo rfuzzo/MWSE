@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-Contains information from a standard UI callback. This is the parameter passed to callbacks when using `:register`, `:registerBefore`, or `:registerAfter` on tes3uiElements.
+Contains information from a standard UI callback. This is the parameter passed to callbacks when using `:register`, `:registerBefore`, or `:registerAfter`.
 
 ## Properties
 

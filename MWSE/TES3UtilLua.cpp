@@ -1814,7 +1814,15 @@ namespace mwse::lua {
 			return TES3::DataHandler::get()->nonDynamicData->getCellByName(cellId.value());
 		}
 
-		// Otherwise try to use X/Y.
+		// If we were given a position, try that.
+		sol::optional<TES3::Vector3*> position = params["position"];
+		if (position) {
+			int gridX = TES3::Cell::toGridCoord(position.value()->x);
+			int gridY = TES3::Cell::toGridCoord(position.value()->y);
+			return TES3::DataHandler::get()->nonDynamicData->getCellByGrid(gridX, gridY);
+		}
+
+		// Otherwise try to use grid X/Y.
 		return TES3::DataHandler::get()->nonDynamicData->getCellByGrid(params["x"], params["y"]);
 	}
 

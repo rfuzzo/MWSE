@@ -1008,22 +1008,25 @@ function tes3.getCameraPosition() end
 --- @return tes3vector3 vector3 No description yet available.
 function tes3.getCameraVector() end
 
---- Finds a cell, either by an id or an X/Y grid position.
+--- Finds a cell, either by an id, by an object position (finds an exterior cell), or by an X/Y grid position. Returns `nil` if the cell id cannot be found or the cell does not exist at a position.
 --- @param params tes3.getCell.params This table accepts the following values:
 --- 
---- `id`: string — The cell's ID. If not provided, x and y must be.
+--- `id`: string? — *Optional*. The cell's ID. If not provided, position or x and y must be.
 --- 
---- `x`: number — No description yet available.
+--- `position`: tes3vector3? — *Optional*. A point in an exterior cell.
 --- 
---- `y`: number — No description yet available.
+--- `x`: number? — *Optional*. The X grid-position.
+--- 
+--- `y`: number? — *Optional*. The Y grid-position.
 --- @return tes3cell cell No description yet available.
 function tes3.getCell(params) end
 
 ---Table parameter definitions for `tes3.getCell`.
 --- @class tes3.getCell.params
---- @field id string The cell's ID. If not provided, x and y must be.
---- @field x number No description yet available.
---- @field y number No description yet available.
+--- @field id string? *Optional*. The cell's ID. If not provided, position or x and y must be.
+--- @field position tes3vector3? *Optional*. A point in an exterior cell.
+--- @field x number? *Optional*. The X grid-position.
+--- @field y number? *Optional*. The Y grid-position.
 
 --- Gets the number of days that have passed leading up to the start of a given month.
 --- @param month number The 0-based month index.

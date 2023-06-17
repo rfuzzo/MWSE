@@ -1731,18 +1731,19 @@ local vector3 = tes3.getCameraVector()
 ### `tes3.getCell`
 <div class="search_terms" style="display: none">getcell, cell</div>
 
-Finds a cell, either by an id or an X/Y grid position.
+Finds a cell, either by an id, by an object position (finds an exterior cell), or by an X/Y grid position. Returns `nil` if the cell id cannot be found or the cell does not exist at a position.
 
 ```lua
-local cell = tes3.getCell({ id = ..., x = ..., y = ... })
+local cell = tes3.getCell({ id = ..., position = ..., x = ..., y = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `id` (string): The cell's ID. If not provided, x and y must be.
-	* `x` (number)
-	* `y` (number)
+	* `id` (string): *Optional*. The cell's ID. If not provided, position or x and y must be.
+	* `position` ([tes3vector3](../../types/tes3vector3)): *Optional*. A point in an exterior cell.
+	* `x` (number): *Optional*. The X grid-position.
+	* `y` (number): *Optional*. The Y grid-position.
 
 **Returns**:
 
