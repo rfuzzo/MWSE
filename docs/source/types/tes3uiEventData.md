@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-Contains information from a standard UI callback. This is the parameter passed to callbacks when using `:register`, `:registerBefore`, or `:registerAfter`.
+Contains information from a standard UI callback. This is the parameter passed to callbacks when using `:register`, `:registerBefore`, or `:registerAfter` on tes3uiElements.
 
 ## Properties
 
@@ -24,7 +24,7 @@ Contains information from a standard UI callback. This is the parameter passed t
 ### `data1`
 <div class="search_terms" style="display: none">data1</div>
 
-*Read-only*. Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer. For keyboard events, data0 is the scan code.
+*Read-only*. Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer.
 
 **Returns**:
 
@@ -90,7 +90,7 @@ Contains information from a standard UI callback. This is the parameter passed t
 ### `widget`
 <div class="search_terms" style="display: none">widget</div>
 
-*Read-only*. No description yet available.
+*Read-only*. The widget element that the source belongs to, if the element is a sub-part of a widget. May not be accurate if the element is not a sub-part.
 
 **Returns**:
 

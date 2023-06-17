@@ -5,4 +5,10 @@ return {
 		{ name = "property", type = "number|string", description = "The property to set." },
 		{ name = "value", type = "boolean", description = "The value to set." },
 	},
+	examples = {
+		["menuAlpha"] = {
+			title = "Make a UI element update its transparency based on the Menu Transparency setting.",
+			description = "This will automatically update the menu's transparency recursively. A requirement is that the menu background is of \"rect\" contentType."
+		}
+	}
 }
