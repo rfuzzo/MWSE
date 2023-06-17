@@ -10,14 +10,8 @@
 --- @field shortVariableCount number *Read-only*. The number of variables of short type in the script.
 tes3script = {}
 
---- This method fetches all of the script's variables as a table.
---- @return table results The table with all of script's variable names as keys.
---- 
---- Each entry has the following fields:
---- 
----  1. type - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
----  2. index - the order of occurrence of the variable in the script, starting from `0`
----  3. value - this can have `nil` value
---- 
-function tes3script:getVariableData() end
+--- This method fetches all of the script's variables as a table. Returns nil if the script has no variables.
+--- @param useLocals boolean? *Optional*. 
+--- @return table<string, tes3scriptVariableData> results A table with all of the script's variable names as keys.
+function tes3script:getVariableData(useLocals) end
 

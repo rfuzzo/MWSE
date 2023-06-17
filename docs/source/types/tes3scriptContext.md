@@ -21,14 +21,7 @@ local results = myObject:getVariableData()
 
 **Returns**:
 
-* `results` (table&lt;string, table&gt;): The table with all of script's variable names as keys.
-
-Each entry has following fields:
-
- 1. type  - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
- 2. index - the order of occurance of the variable in the script, starting from `0`
- 3. value - this can have `nil` value
-
+* `results` (table&lt;string, [tes3scriptVariableData](../../types/tes3scriptVariableData)&gt;): A table with all of the script's variable names as keys.
 
 ***
 

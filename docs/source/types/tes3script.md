@@ -196,20 +196,17 @@ local string = myObject:__tojson()
 ### `getVariableData`
 <div class="search_terms" style="display: none">getvariabledata, variabledata</div>
 
-This method fetches all of the script's variables as a table.
+This method fetches all of the script's variables as a table. Returns nil if the script has no variables.
 
 ```lua
-local results = myObject:getVariableData()
+local results = myObject:getVariableData(useLocals)
 ```
+
+**Parameters**:
+
+* `useLocals` (boolean): *Optional*. 
 
 **Returns**:
 
-* `results` (table): The table with all of script's variable names as keys.
-
-Each entry has the following fields:
-
- 1. type - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
- 2. index - the order of occurrence of the variable in the script, starting from `0`
- 3. value - this can have `nil` value
-
+* `results` (table&lt;string, [tes3scriptVariableData](../../types/tes3scriptVariableData)&gt;, nil): A table with all of the script's variable names as keys.
 
