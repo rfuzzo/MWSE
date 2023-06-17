@@ -8,7 +8,7 @@ return {
 			description = "The path to the sound to play, relative to Data Files\\Sounds",
 		},
 		["reference"] = {
-			type = "tes3reference",
+			type = "tes3reference|nil",
 			description = "The reference which is emiting the sound.",
 		},
 		["flags"] = {

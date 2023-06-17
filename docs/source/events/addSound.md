@@ -29,7 +29,7 @@ event.register(tes3.event.addSound, addSoundCallback)
 * `flags` (number): *Read-only*. A flag whether the sound is looping or not. 0 means the sound doesn't loop, 1 means the sound loops.
 * `isVoiceover` (boolean): A flag whether the sound is a voiced line, which are usually found in the Sound\Vo data folder.
 * `pitch` (number): The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
-* `reference` ([tes3reference](../../types/tes3reference)): The reference which is emiting the sound.
+* `reference` ([tes3reference](../../types/tes3reference), nil): The reference which is emiting the sound. Not all sounds are played on a reference, such as (un)reading weapon, book-up, and wind sounds.
 * `sound` ([tes3sound](../../types/tes3sound)): The sound going to be played.
 * `volume` (number): The volume of the sound. In range [1, 250].
 

@@ -8,8 +8,8 @@ return {
 			description = "The sound going to be played.",
 		},
 		["reference"] = {
-			type = "tes3reference",
-			description = "The reference which is emiting the sound.",
+			type = "tes3reference|nil",
+			description = "The reference which is emiting the sound. Not all sounds are played on a reference, such as (un)reading weapon, book-up, and wind sounds.",
 		},
 		["flags"] = {
 			type = "number",

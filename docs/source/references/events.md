@@ -142,6 +142,7 @@ restInterrupt                 | `"restInterrupt"`                 | [`restInterr
 save                          | `"save"`                          | [`save`](https://mwse.github.io/MWSE/events/save)
 saved                         | `"saved"`                         | [`saved`](https://mwse.github.io/MWSE/events/saved)
 simulate                      | `"simulate"`                      | [`simulate`](https://mwse.github.io/MWSE/events/simulate)
+simulated                     | `"simulated"`                     | [`simulated`](https://mwse.github.io/MWSE/events/simulated)
 skillRaised                   | `"skillRaised"`                   | [`skillRaised`](https://mwse.github.io/MWSE/events/skillRaised)
 soundObjectPlay               | `"soundObjectPlay"`               | [`soundObjectPlay`](https://mwse.github.io/MWSE/events/soundObjectPlay)
 spellCast                     | `"spellCast"`                     | [`spellCast`](https://mwse.github.io/MWSE/events/spellCast)

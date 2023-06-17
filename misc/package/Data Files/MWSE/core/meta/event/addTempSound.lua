@@ -10,6 +10,6 @@
 --- @field isVoiceover boolean A flag whether the sound is a voiced line, which are usually found in the Sound\Vo data folder.
 --- @field path string The path to the sound to play, relative to Data Files\Sounds
 --- @field pitch number The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
---- @field reference tes3reference The reference which is emiting the sound.
+--- @field reference tes3reference|nil The reference which is emiting the sound.
 --- @field sound tes3sound The sound object about to be played.
 --- @field volume number The volume of the sound. In range [1, 250].
