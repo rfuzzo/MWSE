@@ -2,15 +2,25 @@
 -- creating an effect with that ID
 tes3.claimSpellEffectId("customFireDmg", 220)
 
+---@param tickParams tes3magicEffectTickEventData
 local function onFireDmgTick(tickParams)
-	-- This will print current health for any actor our spell hit
-	tes3.messageBox("%s, health: %s", tickParams.effectInstance.target.object.id, tickParams.effectInstance.target.mobile.health.current)
+	local target = tickParams.effectInstance.target
+	local targetHealth = target.mobile.health
+	-- This will print current health for any actor our spell hit,
+	-- so we can see if it works as expected
+	tes3.messageBox(
+		"%s, health: %s",
+		target.object.id,
+		targetHealth.current
+	)
 
 	tickParams:trigger({
 		type = tes3.effectEventType.modStatistic,
 		-- The resistance attribute against Fire Damage should be Resist Fire
 		attribute = tes3.effectAttribute.resistFire,
-		value = tickParams.effectInstance.target.mobile.health,
+
+		-- The variable this effect affects
+		value = targetHealth,
 		negateOnExpiry = false,
 		isUncapped = true,
 	})
@@ -21,7 +31,7 @@ event.register(tes3.event.magicEffectsResolved, function()
 		-- The ID we claimed before is now available in tes3.effect namespace
 		id = tes3.effect.customFireDmg,
 
-		-- This information if just copied from the Construction Set --
+		-- This information is copied from the Construction Set
 		name = "Fire Damage",
 		description = ("This spell effect produces a manifestation of elemental fire. Upon " ..
 		"contact with an object, this manifestation explodes, causing damage."),
@@ -43,7 +53,6 @@ event.register(tes3.event.magicEffectsResolved, function()
 		hitVFX = "VFX_DestructHit",
 		areaSound = "destruction area",
 		areaVFX = "VFX_DestructArea",
-		-- --
 
 		appliesOnce = false,
 		hasNoDuration = false,
@@ -60,7 +69,10 @@ event.register(tes3.event.magicEffectsResolved, function()
 end)
 
 event.register(tes3.event.loaded, function()
-	local spell1 = tes3.createObject({ objectType = tes3.objectType.spell })
+
+	-- Now let's create some custom spells to test the new effect.
+
+	local spell1 = tes3.createObject({ objectType = tes3.objectType.spell }) --[[@as tes3spell]]
 	tes3.setSourceless(spell1)
 	spell1.name = "TEST SPELL - self"
 	spell1.magickaCost = 1
@@ -75,7 +87,7 @@ event.register(tes3.event.loaded, function()
 	effect.skill = -1
 	effect.attribute = -1
 
-	local spell2 = tes3.createObject({ objectType = tes3.objectType.spell })
+	local spell2 = tes3.createObject({ objectType = tes3.objectType.spell }) --[[@as tes3spell]]
 	tes3.setSourceless(spell2)
 	spell2.name = "TEST SPELL - target"
 	spell2.magickaCost = 1
@@ -90,7 +102,7 @@ event.register(tes3.event.loaded, function()
 	effect.skill = -1
 	effect.attribute = -1
 
-	local spell3 = tes3.createObject({ objectType = tes3.objectType.spell })
+	local spell3 = tes3.createObject({ objectType = tes3.objectType.spell }) --[[@as tes3spell]]
 	tes3.setSourceless(spell3)
 	spell3.name = "TEST SPELL - touch"
 	spell3.magickaCost = 1

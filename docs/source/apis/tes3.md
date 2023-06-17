@@ -287,7 +287,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	* `targetsSkills` (boolean): *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
 	* `unreflectable` (boolean): *Default*: `true`. A flag which controls whether this effect can be reflected.
 	* `usesNegativeLighting` (boolean): *Default*: `true`. A flag which controls whether this effect uses negative lighting.
-	* `onTick` (function): *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
+	* `onTick` (fun(e: [tes3magicEffectTickEventData](../../types/tes3magicEffectTickEventData))): *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
 		- `tickParams` (table)
 			- `effectId` (number)
 			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
@@ -305,7 +305,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 				- `attribute` (number): *Optional. Default:* `tes3.effectAttribute.nonResistable` The attribute used in resistance calculations agains this effect. Maps to values in [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
 				- `type` (number): *Optional. Default:* `tes3.effectEventType.boolean`. This flag controls how the effect behaves. For example, `tes3.effectEventType.modStatistic` will make the effect work as calling `tes3.modStatistic`. Maps to values in [`tes3.effectEventType`](https://mwse.github.io/MWSE/references/effect-event-types/) namespace.
 				- `value` (number): *Optional. Default:* `0`. The variable this effect changes.
-				- `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must returns boolean values.
+				- `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must return boolean values.
 					**Parameters**
 					- `resistParams` (table)
 						- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
@@ -316,17 +316,16 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 			**Parameters:**
 			- `id` (string): The ID of the weapon object to summon.
 
-		- triggerBoundArmor(`params`): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
+		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
 			**Parameters:**
-			- `params` (table)
-				- `id` (string): The ID of the armor object to summon.
-				- `id2` (string): *Optional.* The ID of the additional armor object to summon.
+			- `id` (string): The ID of the armor object to summon.
+			- `id2` (string): *Optional.* The ID of the additional armor object to summon.
 
 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
 			**Parameters:**
 			- `id` (string): The ID of the creature object to summon.
 
-	* `onCollision` (function): *Optional*. A function which will be called when a spell containing this spell effect collides with something.
+	* `onCollision` (fun(e: [tes3magicEffectCollisionEventData](../../types/tes3magicEffectCollisionEventData))): *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 
 **Returns**:
 
@@ -341,15 +340,25 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	-- creating an effect with that ID
 	tes3.claimSpellEffectId("customFireDmg", 220)
 	
+	---@param tickParams tes3magicEffectTickEventData
 	local function onFireDmgTick(tickParams)
-		-- This will print current health for any actor our spell hit
-		tes3.messageBox("%s, health: %s", tickParams.effectInstance.target.object.id, tickParams.effectInstance.target.mobile.health.current)
+		local target = tickParams.effectInstance.target
+		local targetHealth = target.mobile.health
+		-- This will print current health for any actor our spell hit,
+		-- so we can see if it works as expected
+		tes3.messageBox(
+			"%s, health: %s",
+			target.object.id,
+			targetHealth.current
+		)
 	
 		tickParams:trigger({
 			type = tes3.effectEventType.modStatistic,
 			-- The resistance attribute against Fire Damage should be Resist Fire
 			attribute = tes3.effectAttribute.resistFire,
-			value = tickParams.effectInstance.target.mobile.health,
+	
+			-- The variable this effect affects
+			value = targetHealth,
 			negateOnExpiry = false,
 			isUncapped = true,
 		})
@@ -360,7 +369,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 			-- The ID we claimed before is now available in tes3.effect namespace
 			id = tes3.effect.customFireDmg,
 	
-			-- This information if just copied from the Construction Set --
+			-- This information is copied from the Construction Set
 			name = "Fire Damage",
 			description = ("This spell effect produces a manifestation of elemental fire. Upon " ..
 			"contact with an object, this manifestation explodes, causing damage."),
@@ -382,7 +391,6 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 			hitVFX = "VFX_DestructHit",
 			areaSound = "destruction area",
 			areaVFX = "VFX_DestructArea",
-			-- --
 	
 			appliesOnce = false,
 			hasNoDuration = false,
@@ -399,7 +407,10 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	end)
 	
 	event.register(tes3.event.loaded, function()
-		local spell1 = tes3.createObject({ objectType = tes3.objectType.spell })
+	
+		-- Now let's create some custom spells to test the new effect.
+	
+		local spell1 = tes3.createObject({ objectType = tes3.objectType.spell }) --[[@as tes3spell]]
 		tes3.setSourceless(spell1)
 		spell1.name = "TEST SPELL - self"
 		spell1.magickaCost = 1
@@ -414,7 +425,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 		effect.skill = -1
 		effect.attribute = -1
 	
-		local spell2 = tes3.createObject({ objectType = tes3.objectType.spell })
+		local spell2 = tes3.createObject({ objectType = tes3.objectType.spell }) --[[@as tes3spell]]
 		tes3.setSourceless(spell2)
 		spell2.name = "TEST SPELL - target"
 		spell2.magickaCost = 1
@@ -429,7 +440,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 		effect.skill = -1
 		effect.attribute = -1
 	
-		local spell3 = tes3.createObject({ objectType = tes3.objectType.spell })
+		local spell3 = tes3.createObject({ objectType = tes3.objectType.spell }) --[[@as tes3spell]]
 		tes3.setSourceless(spell3)
 		spell3.name = "TEST SPELL - touch"
 		spell3.magickaCost = 1
