@@ -120,6 +120,7 @@ mouseAxis                     | `"mouseAxis"`                     | [`mouseAxis`
 mouseButtonDown               | `"mouseButtonDown"`               | [`mouseButtonDown`](https://mwse.github.io/MWSE/events/mouseButtonDown)
 mouseButtonUp                 | `"mouseButtonUp"`                 | [`mouseButtonUp`](https://mwse.github.io/MWSE/events/mouseButtonUp)
 mouseWheel                    | `"mouseWheel"`                    | [`mouseWheel`](https://mwse.github.io/MWSE/events/mouseWheel)
+musicChangeTrack              | `"musicChangeTrack"`              | [`musicChangeTrack`](https://mwse.github.io/MWSE/events/musicChangeTrack)
 musicSelectTrack              | `"musicSelectTrack"`              | [`musicSelectTrack`](https://mwse.github.io/MWSE/events/musicSelectTrack)
 objectInvalidated             | `"objectInvalidated"`             | [`objectInvalidated`](https://mwse.github.io/MWSE/events/objectInvalidated)
 playGroup                     | `"playGroup"`                     | [`playGroup`](https://mwse.github.io/MWSE/events/playGroup)
