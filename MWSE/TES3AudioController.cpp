@@ -1,10 +1,31 @@
 
 #include "TES3AudioController.h"
 
+#include "TES3WorldController.h"
+
+#include "LuaManager.h"
+#include "LuaMusicChangeTrackEvent.h"
+
 namespace TES3 {
 	const auto TES3_AudioController_changeMusicTrack = reinterpret_cast<void(__thiscall*)(AudioController*, const char*, int, float)>(0x403AC0);
-	void AudioController::changeMusicTrack(const char* filename, int crossfadeMillis, float volume) {
-		TES3_AudioController_changeMusicTrack(this, filename, crossfadeMillis, volume);
+	void AudioController::changeMusicTrack(const char* _filename, int crossfadeMillis, float volume) {
+		std::string filename = _filename;
+
+		if (mwse::lua::event::MusicChangeTrackEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::MusicChangeTrackEvent(_filename, volume, crossfadeMillis, (int)WorldController::get()->musicSituation));
+			if (eventData.valid()) {
+				sol::optional<std::string> musicPath = eventData["music"];
+				if (musicPath) {
+					filename = std::move(musicPath.value());
+				}
+				crossfadeMillis = eventData.get_or("crossfade", crossfadeMillis);
+				volume = eventData.get_or("volume", volume);
+			}
+			mwse::lua::event::MusicChangeTrackEvent::ms_Context = "invalid";
+		}
+
+		TES3_AudioController_changeMusicTrack(this, filename.c_str(), crossfadeMillis, volume);
 	}
 
 	const auto TES3_AudioController_setMusicVolume = reinterpret_cast<void(__thiscall*)(AudioController*, float)>(0x403A10);
@@ -160,6 +181,8 @@ namespace TES3 {
 	}
 
 	void AudioController::changeMusicTrack_lua(const char* filename, sol::optional<int> crossfade, sol::optional<float> volume) {
+		mwse::lua::event::MusicChangeTrackEvent::ms_Context = "lua";
+		WorldController::get()->musicSituation = MusicSituation::Uninterruptible;
 		changeMusicTrack(filename, crossfade.value_or(1000), volume.value_or(1.0f));
 	}
 

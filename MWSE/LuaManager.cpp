@@ -24,8 +24,9 @@
 #include "TES3Alchemy.h"
 #include "TES3Apparatus.h"
 #include "TES3Archive.h"
-#include "TES3Book.h"
+#include "TES3AudioController.h"
 #include "TES3BodyPartManager.h"
+#include "TES3Book.h"
 #include "TES3CombatSession.h"
 #include "TES3Container.h"
 #include "TES3Creature.h"
@@ -244,6 +245,7 @@
 #include "LuaMouseButtonDownEvent.h"
 #include "LuaMouseButtonUpEvent.h"
 #include "LuaMouseWheelEvent.h"
+#include "LuaMusicChangeTrackEvent.h"
 #include "LuaMusicSelectTrackEvent.h"
 #include "LuaObjectInvalidatedEvent.h"
 #include "LuaPostInfoResponseEvent.h"
@@ -2006,6 +2008,56 @@ namespace mwse::lua {
 
 		// Call original function.
 		return reinterpret_cast<bool(__thiscall*)(TES3::WorldController*, int)>(0x410EA0)(controller, situation);
+	}
+
+	//
+	// Event: Music, change track
+	//
+
+	void __fastcall OnChangeMusic_Explore(TES3::AudioController* audioController, DWORD _EDX_, const char* path, int crossfadeMS, float volume) {
+		event::MusicChangeTrackEvent::ms_Context = "explore";
+		TES3::WorldController::get()->musicSituation = TES3::MusicSituation::Explore;
+		audioController->changeMusicTrack(path, crossfadeMS, volume);
+	}
+
+	void __fastcall OnChangeMusic_Combat(TES3::AudioController* audioController, DWORD _EDX_, const char* path, int crossfadeMS, float volume) {
+		event::MusicChangeTrackEvent::ms_Context = "combat";
+		TES3::WorldController::get()->musicSituation = TES3::MusicSituation::Combat;
+		audioController->changeMusicTrack(path, crossfadeMS, volume);
+	}
+
+	void __fastcall OnChangeMusic_TitleLoop(TES3::AudioController* audioController, DWORD _EDX_, const char* path, int crossfadeMS, float volume) {
+		event::MusicChangeTrackEvent::ms_Context = "title";
+		TES3::WorldController::get()->musicSituation = TES3::MusicSituation::Uninterruptible;
+		audioController->changeMusicTrack(path, crossfadeMS, volume);
+	}
+
+	void __fastcall OnChangeMusic_Event(TES3::AudioController* audioController, DWORD _EDX_, const char* path, int crossfadeMS, float volume) {
+		TES3::WorldController::get()->musicSituation = TES3::MusicSituation::Uninterruptible;
+		audioController->changeMusicTrack(path, crossfadeMS, volume);
+	}
+
+	const auto TES3_WorldController_PlayEventMusic = reinterpret_cast<void(__thiscall*)(TES3::WorldController*, const char*, bool)>(0x410FA0);
+
+	void __fastcall OnChangeMusic_Event_Death(TES3::WorldController* worldController, DWORD _EDX_, const char* path, bool isMusic) {
+		event::MusicChangeTrackEvent::ms_Context = "death";
+		TES3_WorldController_PlayEventMusic(worldController, path, isMusic);
+	}
+
+	void __fastcall OnChangeMusic_Event_MainMenu(TES3::WorldController* worldController, DWORD _EDX_, const char* path, bool isMusic) {
+		event::MusicChangeTrackEvent::ms_Context = "title";
+		TES3_WorldController_PlayEventMusic(worldController, path, isMusic);
+	}
+
+	void __fastcall OnChangeMusic_Event_LevelUp(TES3::WorldController* worldController, DWORD _EDX_, const char* path, bool isMusic) {
+		event::MusicChangeTrackEvent::ms_Context = "levelup";
+		TES3_WorldController_PlayEventMusic(worldController, path, isMusic);
+	}
+
+	void __fastcall OnChangeMusic_MwscriptStreamMusic(TES3::AudioController* audioController, DWORD _EDX_, const char* path, int crossfadeMS, float volume) {
+		event::MusicChangeTrackEvent::ms_Context = "mwscript";
+		TES3::WorldController::get()->musicSituation = TES3::MusicSituation::Uninterruptible;
+		audioController->changeMusicTrack(path, 1000, volume);
 	}
 
 	//
@@ -5060,6 +5112,17 @@ namespace mwse::lua {
 		// Event: Select music track
 		genCallEnforced(0x40F8CA, 0x410EA0, reinterpret_cast<DWORD>(OnSelectMusicTrack));
 		genCallEnforced(0x40F901, 0x410EA0, reinterpret_cast<DWORD>(OnSelectMusicTrack));
+
+		// Setup existing calls to change music for the change music event so we can know the situation slightly earlier.
+		genCallEnforced(0x40F895, 0x403AC0, reinterpret_cast<DWORD>(OnChangeMusic_TitleLoop));
+		genCallEnforced(0x40F8E1, 0x403AC0, reinterpret_cast<DWORD>(OnChangeMusic_Combat));
+		genCallEnforced(0x40F918, 0x403AC0, reinterpret_cast<DWORD>(OnChangeMusic_Explore));
+		genCallEnforced(0x410FC8, 0x403AC0, reinterpret_cast<DWORD>(OnChangeMusic_Event));
+		genCallEnforced(0x5FC8A1, 0x410FA0, reinterpret_cast<DWORD>(OnChangeMusic_Event_MainMenu));
+		genCallEnforced(0x634E92, 0x410FA0, reinterpret_cast<DWORD>(OnChangeMusic_Event_LevelUp));
+		genCallEnforced(0x56A139, 0x410FA0, reinterpret_cast<DWORD>(OnChangeMusic_Event_Death));
+		genCallEnforced(0x45C969, 0x403AC0, reinterpret_cast<DWORD>(OnChangeMusic_MwscriptStreamMusic)); // Non-MCP
+		genCallEnforced(0x45C969, 0x403B14, reinterpret_cast<DWORD>(OnChangeMusic_MwscriptStreamMusic)); // MCP
 
 		// Event: Weapon ready.
 		genCallEnforced(0x527FEA, 0x52D5B0, reinterpret_cast<DWORD>(OnReadyNoWeapon));

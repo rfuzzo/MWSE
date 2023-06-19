@@ -84,6 +84,7 @@
 #include "LuaCalcTrainingPriceEvent.h"
 #include "LuaCalcTravelPriceEvent.h"
 #include "LuaEnchantChargeUseEvent.h"
+#include "LuaMusicChangeTrackEvent.h"
 
 #include "BitUtil.h"
 #include "MathUtil.h"
@@ -421,8 +422,9 @@ namespace mwse::lua {
 			char path[260];
 
 			std::snprintf(path, sizeof(path), "Data Files/music/%s", relativePath);
-			worldController->audioController->changeMusicTrack(path, int(1000.0f * crossfade), volume);
+			event::MusicChangeTrackEvent::ms_Context = "lua";
 			worldController->musicSituation = TES3::MusicSituation(situation);
+			worldController->audioController->changeMusicTrack(path, int(1000.0f * crossfade), volume);
 		}
 	}
 
