@@ -2,8 +2,9 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. However, it does not control transitions to combat music, which in the future will be available in another event.
+--- The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. The event can be blocked, which prevents a new explore or battle track from being chosen randomly. Blocking only works if `eventData.music` is not set.
 --- @class musicSelectTrackEventData
+--- @field block boolean If set to `true`, vanilla logic will be suppressed. Returning `false` will set this to `true`.
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
 --- @field music string? *Optional*. If set to the path of a given track (relative to Data Files/music), it will play the given path instead of a random one.
 --- @field situation number *Read-only*. Maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/), indicating combat or non-combat music.

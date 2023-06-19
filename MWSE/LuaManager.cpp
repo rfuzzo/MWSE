@@ -2003,6 +2003,11 @@ namespace mwse::lua {
 					snprintf(buffer, 512, "Data Files/music/%s", musicPath.value().c_str());
 					return true;
 				}
+
+				// Only allow blocking if a music path was not provided.
+				if (eventData.get_or("block", false)) {
+					return false;
+				}
 			}
 		}
 
