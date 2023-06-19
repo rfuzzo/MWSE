@@ -112,6 +112,7 @@ return {
 	["mouseButtonDown"] = "mouseButtonDown",
 	["mouseButtonUp"] = "mouseButtonUp",
 	["mouseWheel"] = "mouseWheel",
+	["musicChangeTrack"] = "musicChangeTrack",
 	["musicSelectTrack"] = "musicSelectTrack",
 	["objectInvalidated"] = "objectInvalidated",
 	["playGroup"] = "playGroup",
