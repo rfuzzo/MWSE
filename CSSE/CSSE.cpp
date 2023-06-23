@@ -203,6 +203,48 @@ namespace se::cs {
 		}
 
 		//
+		// Patch: Remember last chosen model directory.
+		//
+
+		std::optional<std::string> lastModelDirectory = {};
+
+		BOOL __stdcall GetOpenFileNameForModel(LPOPENFILENAMEA openData) {
+			// Use the last saved dir.
+			if (lastModelDirectory) {
+				openData->lpstrInitialDir = lastModelDirectory.value().c_str();
+			}
+
+			if (!GetOpenFileNameA(openData)) {
+				return FALSE;
+			}
+
+			lastModelDirectory = std::filesystem::canonical(openData->lpstrFile).parent_path().string();
+
+			return TRUE;
+		}
+
+		//
+		// Patch: Remember last chosen icon directory.
+		//
+
+		std::optional<std::string> lastIconDirectory = {};
+
+		BOOL __stdcall GetOpenFileNameForIcon(LPOPENFILENAMEA openData) {
+			// Use the last saved dir.
+			if (lastIconDirectory) {
+				openData->lpstrInitialDir = lastIconDirectory.value().c_str();
+			}
+
+			if (!GetOpenFileNameA(openData)) {
+				return FALSE;
+			}
+
+			lastIconDirectory = std::filesystem::canonical(openData->lpstrFile).parent_path().string();
+
+			return TRUE;
+		}
+
+		//
 		// Create minidumps.
 		//
 
@@ -472,6 +514,10 @@ namespace se::cs {
 		genCallUnprotected(0x485359, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
 		genCallUnprotected(0x485494, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
 		genCallUnprotected(0x4857A6, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // ProgramFlow.txt
+
+		// Patch: Remember last used model/icon directories.
+		genCallEnforced(0x414EB4, 0x573290, reinterpret_cast<DWORD>(patch::GetOpenFileNameForIcon));
+		genCallEnforced(0x414C5E, 0x573290, reinterpret_cast<DWORD>(patch::GetOpenFileNameForModel));
 
 		// Install all our sectioned patches.
 		window::main::installPatches();
