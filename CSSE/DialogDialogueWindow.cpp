@@ -1074,9 +1074,9 @@ namespace se::cs::dialog::dialogue_window {
 		case DialogueInfo::Condition::TypeNotFaction:
 		case DialogueInfo::Condition::TypeNotClass:
 		case DialogueInfo::Condition::TypeNotRace:
+		case DialogueInfo::Condition::TypeNotCell:
 			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, true);
 			break;
-		case DialogueInfo::Condition::TypeNotCell:
 		case DialogueInfo::Condition::TypeNotLocal:
 			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(lParam, info, condition, true);
 			break;
