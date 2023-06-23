@@ -54,6 +54,8 @@ namespace se::cs {
 	void Settings_t::DialogueWindowSettings::from_toml(const toml::value& v) {
 		highlight_modified_items = toml::find_or(v, "highlight_modified_items", highlight_modified_items);
 
+		size = toml::find_or(v, "size", size);
+
 		column_text = toml::find_or(v, "column_text", column_text);
 		column_info_id = toml::find_or(v, "column_info_id", column_info_id);
 		column_disp_index = toml::find_or(v, "column_disp_index", column_disp_index);
@@ -72,6 +74,8 @@ namespace se::cs {
 		return toml::value(
 			{
 				{ "highlight_modified_items", highlight_modified_items },
+
+				{ "size", size },
 
 				{ "column_text", column_text },
 				{ "column_info_id", column_info_id },
