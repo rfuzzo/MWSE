@@ -919,6 +919,145 @@ namespace se::cs::dialog::dialogue_window {
 		}
 	}
 
+	const auto functionNames = reinterpret_cast<const char**>(0x6A5A38);
+	const auto compareText = reinterpret_cast<const char**>(0x6A5A20);
+
+	int GetInverseCompareOperator(int compareOp) {
+		using CompareOp = DialogueInfo::Condition::CompareOp;
+		switch (compareOp) {
+		case CompareOp::Equal:
+			return CompareOp::NotEqual;
+		case CompareOp::NotEqual:
+			return CompareOp::Equal;
+		case CompareOp::GreaterThan:
+			return CompareOp::LessThanOrEqual;
+		case CompareOp::GreaterThanOrEqual:
+			return CompareOp::LessThan;
+		case CompareOp::LessThan:
+			return CompareOp::GreaterThanOrEqual;
+		case CompareOp::LessThanOrEqual:
+			return CompareOp::GreaterThan;
+		}
+		return compareOp;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition, bool invert, const char* wrapper = nullptr) {
+		if (condition->compareValue.object == nullptr) {
+			forcedReturnType = FALSE;
+			return;
+		}
+
+		const auto id = condition->compareValue.object->getObjectID();
+		const auto compare = invert ? compareText[GetInverseCompareOperator(condition->compareOp)] : compareText[condition->compareOp];
+
+		if (wrapper) {
+			sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s(%s) %s %d", wrapper, id, compare, (int)condition->value);
+		}
+		else {
+			sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", id, compare, (int)condition->value);
+		}
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_ObjectDialogue(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition, bool invert) {
+		if (condition->compareValue.dialogue == nullptr || condition->compareValue.dialogue->id == nullptr) {
+			forcedReturnType = FALSE;
+			return;
+		}
+
+		const auto id = condition->compareValue.dialogue->id;
+		const auto compare = invert ? compareText[GetInverseCompareOperator(condition->compareOp)] : compareText[condition->compareOp];
+
+		sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", id, compare, (int)condition->value);
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition, bool invert) {
+		const auto compare = invert ? compareText[GetInverseCompareOperator(condition->compareOp)] : compareText[condition->compareOp];
+
+		sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", condition->compareValue.string, compare, (int)condition->value);
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Function(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition) {
+		const auto function = functionNames[condition->compareValue.integer];
+		const auto compare = compareText[condition->compareOp];
+
+		sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", function, compare, (int)condition->value);
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar(HWND hWnd, UINT msg, WPARAM wParam, NMLVDISPINFOA* lParam) {
+		const auto info = reinterpret_cast<DialogueInfo*>(lParam->item.lParam);
+		const auto conditionIndex = lParam->item.iSubItem - 6;
+		const auto condition = &info->conditions[conditionIndex];
+
+		switch (condition->type) {
+		case DialogueInfo::Condition::TypeFunction:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Function(lParam, info, condition);
+			break;
+		case DialogueInfo::Condition::TypeGlobal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeLocal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeJournal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_ObjectDialogue(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeItem:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeDead:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, false, "dead");
+			break;
+		case DialogueInfo::Condition::TypeNotID:
+		case DialogueInfo::Condition::TypeNotFaction:
+		case DialogueInfo::Condition::TypeNotClass:
+		case DialogueInfo::Condition::TypeNotRace:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, true);
+			break;
+		case DialogueInfo::Condition::TypeNotCell:
+		case DialogueInfo::Condition::TypeNotLocal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(lParam, info, condition, true);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo(HWND hWnd, UINT msg, WPARAM wParam, NMLVDISPINFOA* lParam) {
+		switch (lParam->item.iSubItem) {
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList(HWND hWnd, UINT msg, WPARAM wParam, NMHDR* lParam) {
+		switch (lParam->code) {
+		case LVN_GETDISPINFO:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo(hWnd, msg, wParam, (NMLVDISPINFOA*)lParam);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto message = reinterpret_cast<NMHDR*>(lParam);
+		switch (message->idFrom) {
+		case CONTROL_ID_INFO_LIST:
+			PatchDialogProc_BeforeNotify_InfoList(hWnd, msg, wParam, message);
+			break;
+		}
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		forcedReturnType = {};
 
@@ -931,6 +1070,9 @@ namespace se::cs::dialog::dialogue_window {
 			break;
 		case WM_COMMAND:
 			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
+			break;
+		case WM_NOTIFY:
+			PatchDialogProc_BeforeNotify(hWnd, msg, wParam, lParam);
 			break;
 		}
 
