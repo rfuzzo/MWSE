@@ -137,6 +137,42 @@ namespace se::cs::dialog::dialogue_window {
 		RedrawWindow(child, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
 	}
 
+
+	void restoreInfoColumnWidths(HWND hWnd) {
+		const auto infoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
+
+		ListView_SetColumnWidth(infoList, 0, settings.dialogue_window.column_text.width);
+		ListView_SetColumnWidth(infoList, 1, settings.dialogue_window.column_info_id.width);
+		ListView_SetColumnWidth(infoList, 2, settings.dialogue_window.column_disp_index.width);
+		ListView_SetColumnWidth(infoList, 3, settings.dialogue_window.column_id.width);
+		ListView_SetColumnWidth(infoList, 4, settings.dialogue_window.column_faction.width);
+		ListView_SetColumnWidth(infoList, 5, settings.dialogue_window.column_cell.width);
+		ListView_SetColumnWidth(infoList, 6, settings.dialogue_window.column_condition1.width);
+		ListView_SetColumnWidth(infoList, 7, settings.dialogue_window.column_condition2.width);
+		ListView_SetColumnWidth(infoList, 8, settings.dialogue_window.column_condition3.width);
+		ListView_SetColumnWidth(infoList, 9, settings.dialogue_window.column_condition4.width);
+		ListView_SetColumnWidth(infoList, 10, settings.dialogue_window.column_condition5.width);
+		ListView_SetColumnWidth(infoList, 11, settings.dialogue_window.column_condition6.width);
+	}
+
+
+	void saveInfoColumnWidths(HWND hWnd) {
+		const auto infoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
+
+		settings.dialogue_window.column_text.width = ListView_GetColumnWidth(infoList, 0);
+		settings.dialogue_window.column_info_id.width = ListView_GetColumnWidth(infoList, 1);
+		settings.dialogue_window.column_disp_index.width = ListView_GetColumnWidth(infoList, 2);
+		settings.dialogue_window.column_id.width = ListView_GetColumnWidth(infoList, 3);
+		settings.dialogue_window.column_faction.width = ListView_GetColumnWidth(infoList, 4);
+		settings.dialogue_window.column_cell.width = ListView_GetColumnWidth(infoList, 5);
+		settings.dialogue_window.column_condition1.width = ListView_GetColumnWidth(infoList, 6);
+		settings.dialogue_window.column_condition2.width = ListView_GetColumnWidth(infoList, 7);
+		settings.dialogue_window.column_condition3.width = ListView_GetColumnWidth(infoList, 8);
+		settings.dialogue_window.column_condition4.width = ListView_GetColumnWidth(infoList, 9);
+		settings.dialogue_window.column_condition5.width = ListView_GetColumnWidth(infoList, 10);
+		settings.dialogue_window.column_condition6.width = ListView_GetColumnWidth(infoList, 11);
+	}
+
 	//
 	// Patch: Optimize cell string find/insertion.
 	//
@@ -421,6 +457,7 @@ namespace se::cs::dialog::dialogue_window {
 	void PatchDialogProc_BeforeInitialize(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		using winui::GetStyle;
 		using winui::SetStyle;
+		using winui::ResizeAndCenterWindow;
 
 		// Begin measure of initialization time.
 		if constexpr (LOG_PERFORMANCE_RESULTS) {
@@ -444,6 +481,15 @@ namespace se::cs::dialog::dialogue_window {
 			// Gather what data we need to populate lists.
 			populateCollections();
 		}
+
+		// Restore size.
+		const auto& size = settings.dialogue_window.size;
+		ResizeAndCenterWindow(hWnd, size.width, size.height);
+	}
+
+	void PatchDialogProc_BeforeDestroy(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Save column info.
+		saveInfoColumnWidths(hWnd);
 	}
 
 	void PatchDialogProc_GetMinMaxInfo(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -461,6 +507,9 @@ namespace se::cs::dialog::dialogue_window {
 		using se::cs::winui::RemoveStyles;
 		using se::cs::winui::ResizeAndCenterWindow;
 		using se::cs::winui::SetWindowIdByValue;
+
+		// Restore column widths.
+		restoreInfoColumnWidths(hWnd);
 
 		// Reenable redraw.
 		if constexpr (ENABLE_ALL_OPTIMIZATIONS) {
@@ -900,6 +949,12 @@ namespace se::cs::dialog::dialogue_window {
 		// Force redraw. Embrace the flicker.
 		RedrawWindow(hWnd, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
 
+		// Store window size for later restoration.
+		SIZE winSize = {};
+		if (winui::GetWindowSize(hWnd, winSize)) {
+			settings.dialogue_window.size = winSize;
+		}
+
 		forcedReturnType = TRUE;
 	}
 
@@ -1064,6 +1119,9 @@ namespace se::cs::dialog::dialogue_window {
 		switch (msg) {
 		case WM_INITDIALOG:
 			PatchDialogProc_BeforeInitialize(hWnd, msg, wParam, lParam);
+			break;
+		case WM_DESTROY:
+			PatchDialogProc_BeforeDestroy(hWnd, msg, wParam, lParam);
 			break;
 		case WM_SIZE:
 			PatchDialogProc_BeforeSize(hWnd, msg, wParam, lParam);

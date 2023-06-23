@@ -8,17 +8,83 @@ namespace se::cs {
 	const Settings_t default_settings;
 
 	//
+	// Common help structures
+	//
+
+	void Settings_t::ColumnSettings::from_toml(const toml::value& v) {
+		width = toml::find_or(v, "width", width);
+	}
+
+	toml::value Settings_t::ColumnSettings::into_toml() const {
+		return toml::value(
+			{
+				{ "width", width },
+			}
+		);
+	}
+
+	Settings_t::WindowSize::WindowSize(size_t cx, size_t cy) {
+		width = cx;
+		height = cy;
+	}
+
+	Settings_t::WindowSize::WindowSize(const SIZE& fromSize) {
+		width = fromSize.cx;
+		height = fromSize.cy;
+	}
+
+	void Settings_t::WindowSize::from_toml(const toml::value& v) {
+		width = toml::find_or(v, "width", width);
+		height = toml::find_or(v, "height", height);
+	}
+
+	toml::value Settings_t::WindowSize::into_toml() const {
+		return toml::value(
+			{
+				{ "width", width },
+				{ "height", height },
+			}
+		);
+	}
+
+	//
 	// Dialogue Window
 	//
 
 	void Settings_t::DialogueWindowSettings::from_toml(const toml::value& v) {
 		highlight_modified_items = toml::find_or(v, "highlight_modified_items", highlight_modified_items);
+
+		column_text = toml::find_or(v, "column_text", column_text);
+		column_info_id = toml::find_or(v, "column_info_id", column_info_id);
+		column_disp_index = toml::find_or(v, "column_disp_index", column_disp_index);
+		column_id = toml::find_or(v, "column_id", column_id);
+		column_faction = toml::find_or(v, "column_faction", column_faction);
+		column_cell = toml::find_or(v, "column_cell", column_cell);
+		column_condition1 = toml::find_or(v, "column_condition1", column_condition1);
+		column_condition2 = toml::find_or(v, "column_condition2", column_condition2);
+		column_condition3 = toml::find_or(v, "column_condition3", column_condition3);
+		column_condition4 = toml::find_or(v, "column_condition4", column_condition4);
+		column_condition5 = toml::find_or(v, "column_condition5", column_condition5);
+		column_condition6 = toml::find_or(v, "column_condition6", column_condition6);
 	}
 
 	toml::value Settings_t::DialogueWindowSettings::into_toml() const {
 		return toml::value(
 			{
 				{ "highlight_modified_items", highlight_modified_items },
+
+				{ "column_text", column_text },
+				{ "column_info_id", column_info_id },
+				{ "column_disp_index", column_disp_index },
+				{ "column_id", column_id },
+				{ "column_faction", column_faction },
+				{ "column_cell", column_cell },
+				{ "column_condition1", column_condition1 },
+				{ "column_condition2", column_condition2 },
+				{ "column_condition3", column_condition3 },
+				{ "column_condition4", column_condition4 },
+				{ "column_condition5", column_condition5 },
+				{ "column_condition6", column_condition6 },
 			}
 		);
 	}
@@ -62,18 +128,6 @@ namespace se::cs {
 	//
 	// Object Window
 	//
-
-	void Settings_t::ObjectWindowSettings::ColumnSettings::from_toml(const toml::value& v) {
-		width = toml::find_or(v, "width", width);
-	}
-
-	toml::value Settings_t::ObjectWindowSettings::ColumnSettings::into_toml() const {
-		return toml::value(
-			{
-				{ "width", width },
-			}
-		);
-	}
 
 	void Settings_t::ObjectWindowSettings::from_toml(const toml::value& v) {
 		// Backwards compatibility.

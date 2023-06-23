@@ -2,6 +2,40 @@
 
 namespace se::cs {
 	struct Settings_t {
+		//
+		// Helper structures
+		//
+
+		struct ColumnSettings {
+			static constexpr auto DEFAULT_SIZE_ID = 100u;
+			static constexpr auto DEFAULT_SIZE_BOOL = 45u;
+			static constexpr auto DEFAULT_SIZE_SHORT = 45u;
+			static constexpr auto DEFAULT_SIZE_FLOAT = 45u;
+			static constexpr auto DEFAULT_SIZE_DIALOGUE_CONDITION = DEFAULT_SIZE_ID + DEFAULT_SIZE_SHORT;
+
+			size_t width = DEFAULT_SIZE_SHORT;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		};
+
+		struct WindowSize {
+			static constexpr auto SIZE_INVALID = 0;
+
+			size_t width = SIZE_INVALID;
+			size_t height = SIZE_INVALID;
+
+			WindowSize(size_t cx = SIZE_INVALID, size_t cy = SIZE_INVALID);
+			WindowSize(const SIZE& fromSize);
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		};
+
+		//
+		// The actual settings
+		//
+
 		struct RenderWindowSettings {
 			bool use_group_scaling = false;
 			bool use_legacy_camera = false;
@@ -19,23 +53,26 @@ namespace se::cs {
 		struct DialogueWindowSettings {
 			bool highlight_modified_items = true;
 
+			WindowSize size = { 633, 406 };
+
+			ColumnSettings column_text = { 125 };
+			ColumnSettings column_info_id = { 5 };
+			ColumnSettings column_disp_index = { ColumnSettings::DEFAULT_SIZE_SHORT };
+			ColumnSettings column_id = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_faction = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_cell = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_condition1 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition2 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition3 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition4 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition5 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition6 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+
 			void from_toml(const toml::value& v);
 			toml::value into_toml() const;
 		} dialogue_window;
 
 		struct ObjectWindowSettings {
-			struct ColumnSettings {
-				static constexpr auto DEFAULT_SIZE_ID = 100u;
-				static constexpr auto DEFAULT_SIZE_BOOL = 45u;
-				static constexpr auto DEFAULT_SIZE_SHORT = 45u;
-				static constexpr auto DEFAULT_SIZE_FLOAT = 45u;
-
-				size_t width = DEFAULT_SIZE_SHORT;
-
-				void from_toml(const toml::value& v);
-				toml::value into_toml() const;
-			};
-
 			bool clear_filter_on_tab_switch = true;
 			bool filter_by_id = true;
 			bool filter_by_name = true;

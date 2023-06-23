@@ -49,7 +49,7 @@ namespace se::cs::dialog::object_window {
 		virtual void getDisplayInfo(LPNMLVDISPINFOA displayInfo) const = 0;
 		virtual int sortObject(const Object* lParam1, const Object* lParam2, bool sortOrderAsc) const = 0;
 
-		using ColumnSettings = Settings_t::ObjectWindowSettings::ColumnSettings;
+		using ColumnSettings = Settings_t::ColumnSettings;
 		virtual ColumnSettings& getSettings() const = 0;
 
 		void insert(HWND hWnd, size_t index) const;
