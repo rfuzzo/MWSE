@@ -120,6 +120,8 @@ chargenstate = -1.0
 	* The journal conditions (name/finished/restart) are shown but disabled for other dialogue types.
 	* The general UI has minor other position layout changes.
 * Select all control (Ctrl+A) now functions in the edit boxes.
+* The window will remember the user preferences for column widths, as well as the overall window size.
+* Conditional columns display the value being compared against to make it easier at a glance what the INFO requires.
 
 ### Render Window
 
