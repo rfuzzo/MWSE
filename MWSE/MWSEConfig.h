@@ -12,6 +12,7 @@ namespace mwse {
 		static bool EnableLogColors;
 		static bool EnableDependencyChecks;
 		static bool ReplaceDialogueFiltering;
+		static UINT BuildNumber;
 
 		static sol::table getDefaults();
 
