@@ -849,7 +849,7 @@ namespace TES3 {
 
 	bool Reference::hasValidBaseObject() const {
 		return this != nullptr
-			&& uint32_t(vTable.object) != TES3::VirtualTableAddress::BaseObject
+			&& uint32_t(vTable.object) == TES3::VirtualTableAddress::Reference
 			&& baseObject != nullptr
 			&& uint32_t(baseObject->vTable.object) != TES3::VirtualTableAddress::BaseObject;
 	}
@@ -876,10 +876,16 @@ namespace TES3 {
 
 	const auto TES3_Reference_getSceneGraphNode = reinterpret_cast<NI::Node*(__thiscall*)(Reference*)>(0x4E81A0);
 	NI::Node * Reference::getSceneGraphNode() {
+		// Ignore for deleted objects.
+		if (getDeleted()) {
+			return nullptr;
+		}
+
 		auto previousNode = sceneNode;
 		auto newNode = TES3_Reference_getSceneGraphNode(this);
+		const auto wasCreated = (previousNode == nullptr && newNode != nullptr);
 
-		if (mwse::lua::event::ReferenceSceneNodeCreatedEvent::getEventEnabled() && hasValidBaseObject() && previousNode != newNode) {
+		if (wasCreated && mwse::lua::event::ReferenceSceneNodeCreatedEvent::getEventEnabled() && hasValidBaseObject()) {
 			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::ReferenceSceneNodeCreatedEvent(this));
 		}
 
