@@ -13,6 +13,11 @@ namespace TES3 {
 	};
 
 	struct CutscenePlayer {
+		enum State {
+			Finished = 1,
+			Playing = 2,
+			Paused = 3,
+		};
 		struct VirtualTable {
 			int dtor; // 0x0
 			int decodeFrame; // 0x4

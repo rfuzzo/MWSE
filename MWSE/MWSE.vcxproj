@@ -777,6 +777,7 @@
     <ClCompile Include="TES3Land.cpp" />
     <ClCompile Include="TES3LandLua.cpp" />
     <ClCompile Include="TES3LandTextureLua.cpp" />
+    <ClCompile Include="TES3LoadScreenManager.cpp" />
     <ClCompile Include="TES3Lockpick.cpp" />
     <ClCompile Include="TES3MagicEffectController.cpp" />
     <ClCompile Include="MemoryUtil.cpp" />

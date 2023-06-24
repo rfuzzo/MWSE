@@ -445,7 +445,7 @@ namespace TES3 {
 	sol::table NonDynamicData::getMagicEffects_lua(sol::this_state ts) {
 		sol::state_view state = ts;
 		sol::table results = state.create_table();
-		for (auto itt : magicEffects->effectObjects) {
+		for (const auto& itt : magicEffects->effectObjects) {
 			results[itt.second->id + 1] = itt.second;
 		}
 		return results;
