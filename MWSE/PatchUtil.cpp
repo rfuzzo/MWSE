@@ -780,6 +780,41 @@ namespace mwse::patch {
 		return TES3_VFXManager_createFromSaveData(vfxManager, effect, reference, serializedVFX, verticalOffset);
 	}
 
+	// Patch: Land textures loading/unloading flag array overflow bug. Increase array from 500 to 4096 elements and fix bounds checks.
+
+	const unsigned short Land_LTEX_isLoaded_size = 4096;
+	bool Land_LTEX_isLoaded[Land_LTEX_isLoaded_size];
+
+	__declspec(naked) void PatchLandUnloadTexturesBoundsCheck() {
+		__asm {
+			// Replace index >= 500 and index != -1 with a single unsigned comparison against the new size.
+			cmp ax, 4096 // immediate arg = Land_LTEX_isLoaded_size
+			jnb $ + 0xAB
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+		}
+	}
+	const size_t PatchLandUnloadTexturesBoundsCheck_size = 0x10;
+	
+	__declspec(naked) void PatchLandLoadTexturesBoundsCheck() {
+		__asm {
+			// Replace index >= 500 and index != -1 with a single unsigned comparison against the new size.
+			cmp cx, 4096 // immediate arg = Land_LTEX_isLoaded_size
+			jnb $ + 0xF5
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+		}
+	}
+	const size_t PatchLandLoadTexturesBoundsCheck_size = 0x11;
+
 	//
 	// Install all the patches.
 	//
@@ -1175,6 +1210,19 @@ namespace mwse::patch {
 
 		// Patch: Do not load VFX with maxAge <= 0.001f from save games.
 		genCallEnforced(0x46A04B, 0x468620, reinterpret_cast<DWORD>(PatchVFXManagerCreateFromSaveData));
+
+		// Patch: LTEX loading/unloading array overflow bug. Increase array from 500 to 4096 elements and fix bounds checks.
+		writeValueEnforced(0x4CDF09, 500 / 4, Land_LTEX_isLoaded_size / 4);
+		writeValueEnforced(0x4CDF0E, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writePatchCodeUnprotected(0x4CDF58, (BYTE*)&PatchLandUnloadTexturesBoundsCheck, PatchLandUnloadTexturesBoundsCheck_size);
+		writeValueEnforced(0x4CDF6D, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writeValueEnforced(0x4CDF7E, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+
+		writeValueEnforced(0x4CECAE, 500 / 4, Land_LTEX_isLoaded_size / 4);
+		writeValueEnforced(0x4CECB3, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writePatchCodeUnprotected(0x4CECD3, (BYTE*)&PatchLandLoadTexturesBoundsCheck, PatchLandLoadTexturesBoundsCheck_size);
+		writeValueEnforced(0x4CECE9, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writeValueEnforced(0x4CEDB1, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
 	}
 
 	void installPostLuaPatches() {
