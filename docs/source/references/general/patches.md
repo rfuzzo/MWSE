@@ -12,6 +12,7 @@ The following patches are included by MWSE.
 - Allows NiUVController to specify its texture correctly.
 - Creates crash dump files and logging information to help diagnose mod issues.
 - `Disable` mwscript function updates collision information so the player won't collide with invisible references.
+- Improved support for NiSortAdjustNode, with additional alpha subtree rendering.
 - Improves load times when using Mod Organizer 2.
 - Optimizes access to global variables.
 - Optimizes access to player kill count, via `GetDeadCount` or dialogue filtering.
@@ -20,6 +21,7 @@ The following patches are included by MWSE.
 - Optimizes journal updating.
 - Optimizes `ShowMap` and `FillMap` to not be absurdly slow.
 - Raises mod limit from 256 to 1024.
+- Replaces Morrowind's dialogue filtering system with one that is much more performant.
 
 
 ## Bug Fixes
@@ -29,6 +31,8 @@ The following patches are included by MWSE.
 - Correctly initialize MobileProjectile tag/objectType. Useful to modders.
 - `Enable` and `Disable` mwscript functions no longer can cause crashes with script variables unset.
 - Fixes book and weapon enchantment copying. Useful to modders.
+- Fixes cloning of NiObjects with multiple NiStringExtraData attachments.
+- Fixes crash when cloning certain NiSortAdjustNode structures.
 - Fixes crash when releasing a clone of a light with no reference.
 - Fixes crash when saving active VFXs when none are serializable.
 - Fixes crash when saving menu position if the derived key name is too long.
@@ -36,6 +40,9 @@ The following patches are included by MWSE.
 - Fixes crash where NPC flee logic tries to select a random node from pathgrids with 0 nodes.
 - Fixes crash with paper doll equipping/unequipping.
 - Fixes crash with uncloned actors removing items.
+- Fixes issue where VFX objects would load incorrectly, or cause save bloat.
+- Fixes sound volume calculations. Additional fixes provided when sound loops.
+- Fixes terrain render issues when using more than 500 land textures.
 - Fixes time being nudged forward by small extra increments when resting.
 - Fixes time being truncated when advancing time past midnight.
 - Fixes transparency effects from invisibility/chameleon from being desynced when changing equipment.
