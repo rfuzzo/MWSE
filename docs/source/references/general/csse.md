@@ -6,6 +6,10 @@ To request a feature, visit the [Construction Set Extender Development issue](ht
 
 For a list of recent changes, [visit the CSSE project folder commit history](https://github.com/MWSE/MWSE/commits/master/CSSE).
 
+!!! tip The Morrowind Script Extender
+
+	This project also improves Morrowind's execution. Read more about fixes and features for the core game on the [patches](https://mwse.github.io/MWSE/references/general/patches/) page.
+
 ## Requirements
 
 CSSE requires [MGE XE](https://www.nexusmods.com/morrowind/mods/41102?) v0.14.3 (released July 29, 2022) or later in order to be automatically loaded into the Construction Set.

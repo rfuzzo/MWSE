@@ -2,6 +2,10 @@
 
 The following patches are included by MWSE.
 
+!!! tip The Construction Set Extender
+
+	This project also improves the Construction Set. Read more about changes to that program on the [CSSE](https://mwse.github.io/MWSE/references/general/csse/) page.
+
 ## Features
 
 * Allows custom classes to have custom images on the class selection menu. The texture used is a bmp file found in the textures\\levelup directory, whose name is the id of the class.
