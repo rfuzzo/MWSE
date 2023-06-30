@@ -593,31 +593,34 @@ namespace TES3 {
 	}
 
 	void loadNotID(DialogueFilterContext::ConditionalContext* context) {
-		context->resultOverride = context->conditional->actor == context->parentContext->speakerBaseActor;
+		context->compareValue = context->conditional->actor == context->parentContext->speakerBaseActor;
 	}
 
 	void loadNotFaction(DialogueFilterContext::ConditionalContext* context) {
 		if (context->conditional->faction == nullptr) {
 			context->resultOverride = true;
+			return;
 		}
 
-		context->resultOverride = context->conditional->faction == context->parentContext->speakerBaseActor->getFaction();
+		context->compareValue = context->conditional->faction == context->parentContext->speakerBaseActor->getFaction();
 	}
 
 	void loadNotClass(DialogueFilterContext::ConditionalContext* context) {
 		if (context->conditional->class_ == nullptr) {
 			context->resultOverride = true;
+			return;
 		}
 
-		context->resultOverride = context->conditional->class_ == context->parentContext->speakerBaseActor->getClass();
+		context->compareValue = context->conditional->class_ == context->parentContext->speakerBaseActor->getClass();
 	}
 
 	void loadNotRace(DialogueFilterContext::ConditionalContext* context) {
 		if (context->conditional->race == nullptr) {
 			context->resultOverride = true;
+			return;
 		}
 
-		context->resultOverride = context->conditional->race == context->parentContext->speakerBaseActor->getRace();
+		context->compareValue = context->conditional->race == context->parentContext->speakerBaseActor->getRace();
 	}
 
 	void loadNotCell(DialogueFilterContext::ConditionalContext* context) {
@@ -632,7 +635,7 @@ namespace TES3 {
 		}
 
 		std::string_view cellId = filterCell->getObjectID();
-		context->resultOverride = _strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0;
+		context->compareValue = _strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0;
 	}
 
 	void loadNotLocal(DialogueFilterContext::ConditionalContext* context) {
