@@ -481,10 +481,6 @@ namespace se::cs::dialog::dialogue_window {
 			// Gather what data we need to populate lists.
 			populateCollections();
 		}
-
-		// Restore size.
-		const auto& size = settings.dialogue_window.size;
-		ResizeAndCenterWindow(hWnd, size.width, size.height);
 	}
 
 	void PatchDialogProc_BeforeDestroy(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -492,10 +488,13 @@ namespace se::cs::dialog::dialogue_window {
 		saveInfoColumnWidths(hWnd);
 	}
 
+	constexpr auto MIN_WIDTH = 1113u;
+	constexpr auto MIN_HEIGHT = 700u;
+
 	void PatchDialogProc_GetMinMaxInfo(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		auto info = (LPMINMAXINFO)lParam;
-		info->ptMinTrackSize.x = 1113;
-		info->ptMinTrackSize.y = 700;
+		const auto info = (LPMINMAXINFO)lParam;
+		info->ptMinTrackSize.x = MIN_WIDTH;
+		info->ptMinTrackSize.y = MIN_HEIGHT;
 
 		forcedReturnType = 0;
 	}
@@ -574,27 +573,11 @@ namespace se::cs::dialog::dialogue_window {
 		RemoveStyles(hWnd, DS_MODALFRAME);
 		AddStyles(hWnd, WS_SIZEBOX | WS_MAXIMIZEBOX);
 
-		// Enforce minimum size.
-		constexpr auto MIN_WIDTH = 1113;
-		constexpr auto MIN_HEIGHT = 720;
-		RECT clientRect = {};
-		GetClientRect(hWnd, &clientRect);
-		int clientWidth = GetRectWidth(&clientRect);
-		int clientHeight = GetRectHeight(&clientRect);
-
-		if (clientWidth < MIN_WIDTH || clientHeight < MIN_HEIGHT) {
-			// Resize window. Calculate required client size increase and convert to window size.
-			RECT windowRect = {};
-			GetWindowRect(hWnd, &windowRect);
-			int windowWidth = GetRectWidth(&windowRect) + std::max(0, MIN_WIDTH - clientWidth);
-			int windowHeight = GetRectHeight(&windowRect) + std::max(0, MIN_HEIGHT - clientHeight);
-
-			ResizeAndCenterWindow(hWnd, windowWidth, windowHeight);
-		}
-		else {
-			// Force a resize anyway to put elements in the right position.
-			SendMessageA(hWnd, WM_SIZE, SIZE_RESTORED, MAKELPARAM(clientWidth, clientHeight));
-		}
+		// Restore size, with enforced minimum.
+		const auto& settingsSize = settings.dialogue_window.size;
+		const auto width = std::max(settingsSize.width, MIN_WIDTH);
+		const auto height = std::max(settingsSize.height, MIN_HEIGHT);
+		ResizeAndCenterWindow(hWnd, width, height);
 
 		// Finish measure of initialization time.
 		if constexpr (LOG_PERFORMANCE_RESULTS) {
