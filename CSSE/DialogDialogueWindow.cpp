@@ -577,16 +577,23 @@ namespace se::cs::dialog::dialogue_window {
 		// Enforce minimum size.
 		constexpr auto MIN_WIDTH = 1113;
 		constexpr auto MIN_HEIGHT = 720;
-		RECT windowRect = {};
-		GetClientRect(hWnd, &windowRect);
-		auto windowWidth = GetRectWidth(&windowRect);
-		auto windowHeight = GetRectHeight(&windowRect);
-		if (windowWidth < MIN_WIDTH || windowHeight < MIN_HEIGHT) {
-			ResizeAndCenterWindow(hWnd, MIN_WIDTH, MIN_HEIGHT);
+		RECT clientRect = {};
+		GetClientRect(hWnd, &clientRect);
+		int clientWidth = GetRectWidth(&clientRect);
+		int clientHeight = GetRectHeight(&clientRect);
+
+		if (clientWidth < MIN_WIDTH || clientHeight < MIN_HEIGHT) {
+			// Resize window. Calculate required client size increase and convert to window size.
+			RECT windowRect = {};
+			GetWindowRect(hWnd, &windowRect);
+			int windowWidth = GetRectWidth(&windowRect) + std::max(0, MIN_WIDTH - clientWidth);
+			int windowHeight = GetRectHeight(&windowRect) + std::max(0, MIN_HEIGHT - clientHeight);
+
+			ResizeAndCenterWindow(hWnd, windowWidth, windowHeight);
 		}
 		else {
 			// Force a resize anyway to put elements in the right position.
-			SendMessageA(hWnd, WM_SIZE, SIZE_RESTORED, MAKELPARAM(windowWidth, windowHeight));
+			SendMessageA(hWnd, WM_SIZE, SIZE_RESTORED, MAKELPARAM(clientWidth, clientHeight));
 		}
 
 		// Finish measure of initialization time.
@@ -739,8 +746,8 @@ namespace se::cs::dialog::dialogue_window {
 		using winui::GetRectWidth;
 		using winui::TabCtrl_GetInteriorRect;
 
-		const auto windowWidth = LOWORD(lParam);
-		const auto windowHeight = HIWORD(lParam);
+		const auto clientWidth = LOWORD(lParam);
+		const auto clientHeight = HIWORD(lParam);
 		
 		RECT tempRect = {};
 
@@ -752,7 +759,7 @@ namespace se::cs::dialog::dialogue_window {
 			constexpr auto FILTER_FOR_AREA_SIZE = STATIC_HEIGHT + COMBO_HEIGHT * 2 + BASIC_PADDING * 2;
 
 			// Dialogue type tabs
-			const auto topicsAreaSize = windowHeight - FILTER_FOR_AREA_SIZE - BASIC_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
+			const auto topicsAreaSize = clientHeight - FILTER_FOR_AREA_SIZE - BASIC_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
 			auto hDlgTopicTabs = GetDlgItem(hWnd, CONTROL_ID_TOPIC_TABS);
 			MoveWindow(hDlgTopicTabs, currentX, currentY, LEFT_SECTION_WIDTH, topicsAreaSize, FALSE);
 
@@ -783,24 +790,24 @@ namespace se::cs::dialog::dialogue_window {
 			int currentX = WINDOW_EDGE_PADDING + LEFT_SECTION_WIDTH + BIG_PADDING;
 			int currentY = WINDOW_EDGE_PADDING;
 
-			const auto infoListWidth = windowWidth - LEFT_SECTION_WIDTH - BIG_PADDING - WINDOW_EDGE_PADDING * 2;
+			const auto infoListWidth = clientWidth - LEFT_SECTION_WIDTH - BIG_PADDING - WINDOW_EDGE_PADDING * 2;
 
 			auto hDlgInfoStatic = GetDlgItem(hWnd, CONTROL_ID_INFO_STATIC);
 			MoveWindow(hDlgInfoStatic, currentX, currentY, infoListWidth, STATIC_HEIGHT, FALSE);
 			currentY += STATIC_HEIGHT + BASIC_PADDING;
 
 			auto hDlgInfoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
-			MoveWindow(hDlgInfoList, currentX, currentY, infoListWidth, windowHeight - currentY - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING - BASIC_PADDING, FALSE);
+			MoveWindow(hDlgInfoList, currentX, currentY, infoListWidth, clientHeight - currentY - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING - BASIC_PADDING, FALSE);
 		}
 
 		// INFO details section
 		{
 			// Calculate fixed sizes.
-			const auto BOTTOM_MIDDLE_WIDTH = windowWidth - LEFT_SECTION_WIDTH - BOTTOM_RIGHT_SECTION_WIDTH - BIG_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
+			const auto BOTTOM_MIDDLE_WIDTH = clientWidth - LEFT_SECTION_WIDTH - BOTTOM_RIGHT_SECTION_WIDTH - BIG_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
 
 			// Temp values.
 			auto currentX = WINDOW_EDGE_PADDING + LEFT_SECTION_WIDTH + BIG_PADDING;
-			auto currentY = windowHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
+			auto currentY = clientHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
 
 			// Info text edit
 			auto hDlgCurrentTextEdit = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_EDIT);
@@ -895,8 +902,8 @@ namespace se::cs::dialog::dialogue_window {
 		// Bottom right section.
 		{
 			constexpr auto EXTRA_PADDING_ABOVE_OK_BUTTON = 16;
-			const auto currentX = windowWidth - BOTTOM_RIGHT_SECTION_WIDTH - WINDOW_EDGE_PADDING;
-			auto currentY = windowHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
+			const auto currentX = clientWidth - BOTTOM_RIGHT_SECTION_WIDTH - WINDOW_EDGE_PADDING;
+			auto currentY = clientHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
 
 			// Shared By static
 			auto hDlgSharedByStatic = GetDlgItem(hWnd, CONTROL_ID_SHARED_BY_STATIC);
@@ -943,7 +950,7 @@ namespace se::cs::dialog::dialogue_window {
 
 			// OK button
 			auto hDlgOkButton = GetDlgItem(hWnd, CONTROL_ID_OK_BUTTON);
-			MoveWindow(hDlgOkButton, currentX, windowHeight - BIG_BUTTON_HEIGHT - WINDOW_EDGE_PADDING, BOTTOM_RIGHT_SECTION_WIDTH, BIG_BUTTON_HEIGHT, FALSE);
+			MoveWindow(hDlgOkButton, currentX, clientHeight - BIG_BUTTON_HEIGHT - WINDOW_EDGE_PADDING, BOTTOM_RIGHT_SECTION_WIDTH, BIG_BUTTON_HEIGHT, FALSE);
 		}
 
 		// Force redraw. Embrace the flicker.
