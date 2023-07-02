@@ -173,6 +173,17 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 		return true;
 	}
 
+	bool getLandscapeEditingEnabled() {
+		return gLandscapeEditingEnabled::get();
+	}
+
+	void setLandscapeEditingEnabled(bool enabled, bool ifWindowOpen) {
+		if (ifWindowOpen) {
+			enabled = gWindowHandle::get() != NULL;
+		}
+		gLandscapeEditingEnabled::set(enabled);
+	}
+
 	//
 	// Patch: Extend Render Window message handling.
 	//

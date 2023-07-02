@@ -1068,6 +1068,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	bool PickLandscapeTexture(HWND hWnd) {
+		using landscape_edit_settings_window::getLandscapeEditingEnabled;
 		using landscape_edit_settings_window::getEditLandscapeColor;
 		using landscape_edit_settings_window::setSelectTexture;
 		using gLandscapeEditWindowHandle = landscape_edit_settings_window::gWindowHandle;
@@ -1077,7 +1078,12 @@ namespace se::cs::dialog::render_window {
 			return false;
 		}
 
-		// Make sure we are in texture edit mode.
+		// Make sure we're in landscape editing mode.
+		if (!getLandscapeEditingEnabled()) {
+			return false;
+		}
+
+		// Make sure we aren't in landscape color edit mode.
 		if (getEditLandscapeColor()) {
 			return false;
 		}
@@ -1316,13 +1322,32 @@ namespace se::cs::dialog::render_window {
 		settings.save();
 	}
 
+	void toggleLandscapeShown() {
+		using namespace landscape_edit_settings_window;
+
+		auto dataHandler = DataHandler::get();
+		auto landscapeRoot = dataHandler->editorLandscapeRoot;
+
+		const auto wasShown = !landscapeRoot->getAppCulled();
+
+		if (wasShown) {
+			setLandscapeEditingEnabled(false);
+			landscapeRoot->setAppCulled(true);
+		}
+		else {
+			setLandscapeEditingEnabled(true, true);
+			landscapeRoot->setAppCulled(false);
+		}
+	}
+
 	void showContextAwareActionMenu(HWND hWndRenderWindow) {
 		auto menu = CreatePopupMenu();
 		if (menu == NULL) {
 			return;
 		}
 
-		auto recordHandler = DataHandler::get()->recordHandler;
+		auto dataHandler = DataHandler::get();
+		auto recordHandler = dataHandler->recordHandler;
 		auto selectionData = SelectionData::get();
 		const bool hasReferencesSelected = selectionData->numberOfTargets > 0;
 
@@ -1351,15 +1376,17 @@ namespace se::cs::dialog::render_window {
 			CLEAR_STATE_FROM_QUICKSTART,
 			TEST_FROM_REFERENCE_POSITION,
 			TEST_FROM_CAMERA_POSITION,
+			HIDE_LANDSCAPE,
 		};
 
 		/*
 		* Reserved hotkeys:
+		*   D: Hide/show landscape.
+		*   M: Toggle legacy object movement
 		*	H: Hide Selection
 		*	R: Restore Hidden References
 		*	S: Set Snapping Axis
 		*	W: Toggle world axis rotation
-		*   M: Toggle legacy object movement
 		*/
 
 		MENUITEMINFO menuItem = {};
@@ -1555,6 +1582,19 @@ namespace se::cs::dialog::render_window {
 		menuItem.fType = MFT_SEPARATOR;
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
 
+		menuItem.wID = HIDE_LANDSCAPE;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = MFS_ENABLED;
+		menuItem.dwTypeData = (LPSTR)"Hide lan&dscape";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, HIDE_LANDSCAPE, dataHandler->editorLandscapeRoot->getAppCulled() ? MFS_CHECKED : MFS_UNCHECKED);
+
+		menuItem.wID = RESERVED_NO_CALLBACK;
+		menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+		menuItem.fType = MFT_SEPARATOR;
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
 		menuItem.wID = SAVE_STATE_TO_QUICKSTART;
 		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
 		menuItem.fType = MFT_STRING;
@@ -1668,6 +1708,9 @@ namespace se::cs::dialog::render_window {
 		case TEST_FROM_CAMERA_POSITION:
 			setTestingPositionToCamera();
 			break;
+		case HIDE_LANDSCAPE:
+			toggleLandscapeShown();
+			break;
 		default:
 			log::stream << "Unknown render window context menu ID " << result << " used!" << std::endl;
 		}
@@ -1679,6 +1722,12 @@ namespace se::cs::dialog::render_window {
 		// We also stole paint stuff, so repaint.
 		SendMessage(hWndRenderWindow, WM_PAINT, 0, 0);
 		PatchDialogProc_OverrideResult = TRUE;
+	}
+
+	void PatchDialogProc_BeforeMouseMove(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Cache cursor position.
+		lastCursorPosX = LOWORD(lParam);
+		lastCursorPosY = HIWORD(lParam);
 	}
 
 	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -1825,8 +1874,7 @@ namespace se::cs::dialog::render_window {
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
-			lastCursorPosX = LOWORD(lParam);
-			lastCursorPosY = HIWORD(lParam);
+			PatchDialogProc_BeforeMouseMove(hWnd, msg, wParam, lParam);
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);

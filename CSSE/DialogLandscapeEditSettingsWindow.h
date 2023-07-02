@@ -33,5 +33,11 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 	bool incrementEditRadius();
 	bool decrementEditRadius();
 
+	using gLandscapeEditingEnabled = memory::ExternalGlobal<bool, 0x6CF792>;
+	using gLandscapeModifyingVertices = memory::ExternalGlobal<bool, 0x6CF794>;
+
+	bool getLandscapeEditingEnabled();
+	void setLandscapeEditingEnabled(bool enabled, bool ifWindowOpen = false);
+
 	void installPatches();
 }
