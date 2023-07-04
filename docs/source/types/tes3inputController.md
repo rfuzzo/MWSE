@@ -24,7 +24,7 @@ A data structure, off of the world controller, that handles input.
 ### `inputMaps`
 <div class="search_terms" style="display: none">inputmaps</div>
 
-*Read-only*. The array-style access to input bindings ([tes3inputConfig](https://mwse.github.io/MWSE/types/tes3inputConfig/) objects).
+*Read-only*. The array-style access to input bindings.
 
 **Returns**:
 

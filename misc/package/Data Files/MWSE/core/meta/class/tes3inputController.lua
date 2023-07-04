@@ -5,7 +5,7 @@
 --- A data structure, off of the world controller, that handles input.
 --- @class tes3inputController
 --- @field creationFlags number *Read-only*. A bit field representing device capabilities and settings.
---- @field inputMaps tes3inputConfig[] *Read-only*. The array-style access to input bindings ([tes3inputConfig](https://mwse.github.io/MWSE/types/tes3inputConfig/) objects).
+--- @field inputMaps tes3inputConfig[] *Read-only*. The array-style access to input bindings.
 --- @field keyboardState number[] *Read-only*. The array-style access to raw key states.
 --- @field mouseState tes3directInputMouseState *Read-only*. The raw DirectInput mouse state.
 --- @field previousKeyboardState number[] *Read-only*. The array-style access to the previous frame's raw key states.

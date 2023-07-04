@@ -343,6 +343,8 @@ function tes3mobileActor:getSkillValue(skillId) end
 function tes3mobileActor:getViewToActor(mobile) end
 
 --- Returns the angle between provided point in space and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3mobileActor/#getViewToPoint).
 --- @param point tes3vector3 The target point to calculate the facing angle.
 --- @return number angle In range of [-180, 180] in degrees.
 function tes3mobileActor:getViewToPoint(point) end

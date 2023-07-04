@@ -28,7 +28,7 @@
 --- @field staticObjectsRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode The scenegraph node containing static non-player-interactable objects from this cell.
 --- @field statics tes3referenceList *Read-only*. One of the three reference collections for a cell.
 --- @field sunColor niPackedColor The cell's sun color. Only available on interior cells.
---- @field waterLevel number The water level in the cell. Only available on interior cells.
+--- @field waterLevel number|nil The water level in the cell. In extirior cells, water level is 0, while the interior cells can have custom water, usually set in the Construction Set, or don't have water at all. In that case, this property will be `nil`.
 tes3cell = {}
 
 --- Determines if a given X/Y coordinate falls in the given cell. This will always be true for interior cells.

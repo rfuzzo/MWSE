@@ -23,11 +23,11 @@ event.register(tes3.event.keyDown, keyDownCallback)
 
 ## Event Data
 
-* `isAltDown` (number): *Read-only*. True if either alt key is held.
-* `isControlDown` (number): *Read-only*. True if either control key is held.
-* `isShiftDown` (number): *Read-only*. True if either shift key is held.
-* `isSuperDown` (number): *Read-only*. True if super (Windows key) is held.
-* `keyCode` (number): *Read-only*. The scan code of the key that raised the event.
+* `isAltDown` (boolean): *Read-only*. True if either alt key is held.
+* `isControlDown` (boolean): *Read-only*. True if either control key is held.
+* `isShiftDown` (boolean): *Read-only*. True if either shift key is held.
+* `isSuperDown` (boolean): *Read-only*. True if super (Windows key) is held.
+* `keyCode` (integer): *Read-only*. The scan code of the key that raised the event. Maps to values in [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/) table.
 
 ## Examples
 
