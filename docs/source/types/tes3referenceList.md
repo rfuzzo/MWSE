@@ -8,50 +8,6 @@
 
 A collection for references, holding a cell and a linked list of references contained in the cell.
 
-## Properties
-
-### `cell`
-<div class="search_terms" style="display: none">cell</div>
-
-*Read-only*. The cell for the collection.
-
-**Returns**:
-
-* `result` ([tes3cell](../../types/tes3cell))
-
-***
-
-### `head`
-<div class="search_terms" style="display: none">head</div>
-
-*Read-only*. The first reference in the collection.
-
-**Returns**:
-
-* `result` ([tes3reference](../../types/tes3reference))
-
-***
-
-### `size`
-<div class="search_terms" style="display: none">size</div>
-
-*Read-only*. The number of references in the collection.
-
-**Returns**:
-
-* `result` ([tes3reference](../../types/tes3reference))
-
-***
-
-### `tail`
-<div class="search_terms" style="display: none">tail</div>
-
-*Read-only*. The last reference in the collection.
-
-**Returns**:
-
-* `result` ([tes3reference](../../types/tes3reference))
-
 ??? example "Example: Converting reference list to array style table"
 
 	An example is given of a general function that can be used to convert a tes3referenceList to simple array which can be looped over with standard ipairs().
@@ -130,4 +86,48 @@ A collection for references, holding a cell and a linked list of references cont
 	end
 
 	```
+
+## Properties
+
+### `cell`
+<div class="search_terms" style="display: none">cell</div>
+
+*Read-only*. The cell for the collection.
+
+**Returns**:
+
+* `result` ([tes3cell](../../types/tes3cell))
+
+***
+
+### `head`
+<div class="search_terms" style="display: none">head</div>
+
+*Read-only*. The first reference in the collection.
+
+**Returns**:
+
+* `result` ([tes3reference](../../types/tes3reference))
+
+***
+
+### `size`
+<div class="search_terms" style="display: none">size</div>
+
+*Read-only*. The number of references in the collection.
+
+**Returns**:
+
+* `result` ([tes3reference](../../types/tes3reference))
+
+***
+
+### `tail`
+<div class="search_terms" style="display: none">tail</div>
+
+*Read-only*. The last reference in the collection.
+
+**Returns**:
+
+* `result` ([tes3reference](../../types/tes3reference))
 

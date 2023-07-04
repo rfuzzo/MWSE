@@ -393,6 +393,10 @@ end
 -- Package compilation
 --
 
+---@class exampleTable
+---@field title string|nil The example title.
+---@field description string|nil The description of the example.
+
 --- @class package
 --- @field key package The name of the file that generated this package.
 --- @field type string The type definition for the package.
@@ -400,6 +404,7 @@ end
 --- @field parent package The package this package is a child of.
 --- @field namespace string The full namespace of the package.
 --- @field deprecated boolean Allows marking definitions as deprecated. Those definitions aren't written to the web documentation.
+--- @field examples table<string, exampleTable>|nil A table containing the examples. Keys are the example's name/path to the example file.
 
 --- @class packageLib : package
 --- @field children table<string, package>|nil

@@ -293,6 +293,38 @@ local function writeOperatorPackage(file, operator, package)
 	file:write("\n")
 end
 
+--- This function is used to write out examples of a package.
+---@param file file* The file to write to.
+---@param package package The package whose examples will be written out.
+local function writeExamples(file, package)
+	local exampleType = "???"
+	if (package.type == "event") then
+		file:write("## Examples\n\n")
+		exampleType = "!!!"
+	end
+
+	local exampleKeys = table.keys(package.examples, true)
+	for _, name in ipairs(exampleKeys) do
+		local example = package.examples[name]
+		file:write(string.format("%s example \"Example: %s\"\n\n", exampleType, example.title or name))
+		if (example.description) then
+			file:write(string.format("\t%s\n\n", string.gsub(example.description, "\n\n", "\n\n\t")))
+		end
+		file:write(string.format("\t```lua\n"))
+
+		local path = nil
+		if (package.type == "class") then
+			path = lfs.join(package.folder, package.key, package.key, name .. ".lua")
+		else
+			path = lfs.join(package.folder, package.key, name .. ".lua")
+		end
+		for line in io.lines(path) do
+			file:write(string.format("\t%s\n", line))
+		end
+		file:write(string.format("\n\t```\n\n"))
+	end
+end
+
 --- This function is used to write out properties, methods, functions, and operators of a package.
 ---@param file file* The file to write to.
 ---@param package package The package whose fields that will be written out.
@@ -329,8 +361,15 @@ end
 local function writePackageDetails(file, package)
 	-- Write description.
 	file:write(string.format("%s\n\n", common.getDescriptionString(package)))
-	if (package.type == "class" and package.inherits) then
-		file:write(string.format("This type inherits the following: %s\n", buildParentChain(package.inherits)))
+	if (package.type == "class") then
+		if (package.inherits) then
+			file:write(string.format("This type inherits the following: %s\n", buildParentChain(package.inherits)))
+		end
+
+		-- Write class examples before the methods and properties
+		if (package.examples) then
+			writeExamples(file, package)
+		end
 	elseif (package.type == "event") then
 		file:write(string.format("```lua\n--- @param e %sEventData\nlocal function %sCallback(e)\nend\nevent.register(tes3.event.%s, %sCallback)\n```\n\n", package.key, package.key, package.key, package.key))
 		if (package.filter) then
@@ -428,33 +467,9 @@ local function writePackageDetails(file, package)
 		end
 	end
 
-	if (package.examples) then
-		local exampleType = "???"
-		if (package.type == "event") then
-			file:write("## Examples\n\n")
-			exampleType = "!!!"
-		end
-
-		local exampleKeys = table.keys(package.examples, true)
-		for _, name in ipairs(exampleKeys) do
-			local example = package.examples[name]
-			file:write(string.format("%s example \"Example: %s\"\n\n", exampleType, example.title or name))
-			if (example.description) then
-				file:write(string.format("\t%s\n\n", string.gsub(example.description, "\n\n", "\n\n\t")))
-			end
-			file:write(string.format("\t```lua\n"))
-
-			local path = nil
-			if (package.type == "class") then
-				path = lfs.join(package.folder, package.key, package.key, name .. ".lua")
-			else
-				path = lfs.join(package.folder, package.key, name .. ".lua")
-			end
-			for line in io.lines(path) do
-				file:write(string.format("\t%s\n", line))
-			end
-			file:write(string.format("\n\t```\n\n"))
-		end
+	-- Class examples were writte before
+	if (package.examples and not (package.type == "class")) then
+		writeExamples(file, package)
 	end
 
 	if (package.type == "event" and package.related) then

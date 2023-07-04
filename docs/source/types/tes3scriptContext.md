@@ -8,6 +8,29 @@
 
 A script context object, which allows variables to be get/set using the variable name.
 
+??? example "Example: An example of indexing local script variables inside `tes3scriptContext` objects"
+
+	Companions usually have a mwscript script with variable named `companion` set to 1. This can be used to determine if a reference is player's companion or not.
+
+	```lua
+	--- This function returns `true` if the reference
+	--- has a variable companion set to 1 in its script.
+	---@param reference tes3reference
+	---@return boolean
+	local function hasCompanionShare(reference)
+	
+		-- This shows that we can read any variable inside
+		-- `tes3scriptContext` objects as if it was normal Lua table
+		-- (`reference.context` is of `tes3scriptContext` type)
+		local companion = reference.context["companion"]
+		return (companion and
+				companion == 1 or
+				false
+		)
+	end
+
+	```
+
 ## Methods
 
 ### `getVariableData`
@@ -32,27 +55,4 @@ local results = myObject:getVariableData()
 | Result type | Description |
 | ----------- | ----------- |
 | number | Returns the total amount of variables in this tes3scriptContext. |
-
-??? example "Example: An example of indexing local script variables inside `tes3scriptContext` objects"
-
-	Companions usually have a mwscript script with variable named `companion` set to 1. This can be used to determine if a reference is player's companion or not.
-
-	```lua
-	--- This function returns `true` if the reference
-	--- has a variable companion set to 1 in its script.
-	---@param reference tes3reference
-	---@return boolean
-	local function hasCompanionShare(reference)
-	
-		-- This shows that we can read any variable inside
-		-- `tes3scriptContext` objects as if it was normal Lua table
-		-- (`reference.context` is of `tes3scriptContext` type)
-		local companion = reference.context["companion"]
-		return (companion and
-				companion == 1 or
-				false
-		)
-	end
-
-	```
 

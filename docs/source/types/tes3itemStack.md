@@ -11,39 +11,6 @@ A complex container that holds a relationship between an item, and zero or more 
 Item stack represents all copies of an item with the same id. Some of those may have itemData and some may not. E.g. you might have two lockpicks and one of them has fewer uses remaining.
 So `itemStack.variables` is a list of different itemData for each thing in the stack, not a single itemData.
 
-## Properties
-
-### `count`
-<div class="search_terms" style="display: none">count</div>
-
-The total number of items in the stack.
-
-**Returns**:
-
-* `result` (integer)
-
-***
-
-### `object`
-<div class="search_terms" style="display: none">object</div>
-
-*Read-only*. The core game object that the stack represents.
-
-**Returns**:
-
-* `result` ([tes3item](../../types/tes3item))
-
-***
-
-### `variables`
-<div class="search_terms" style="display: none">variables</div>
-
-A collection of variables that are associated with the stack's object, or nil if there aren't any.
-
-**Returns**:
-
-* `result` ([tes3itemData](../../types/tes3itemData)[], nil)
-
 ??? example "Example: In the iterItems() function we can see that the an item stack can consist of items with itemData and items without it"
 
 	```lua
@@ -87,4 +54,37 @@ A collection of variables that are associated with the stack's object, or nil if
 	end
 
 	```
+
+## Properties
+
+### `count`
+<div class="search_terms" style="display: none">count</div>
+
+The total number of items in the stack.
+
+**Returns**:
+
+* `result` (integer)
+
+***
+
+### `object`
+<div class="search_terms" style="display: none">object</div>
+
+*Read-only*. The core game object that the stack represents.
+
+**Returns**:
+
+* `result` ([tes3item](../../types/tes3item))
+
+***
+
+### `variables`
+<div class="search_terms" style="display: none">variables</div>
+
+A collection of variables that are associated with the stack's object, or nil if there aren't any.
+
+**Returns**:
+
+* `result` ([tes3itemData](../../types/tes3itemData)[], nil)
 
