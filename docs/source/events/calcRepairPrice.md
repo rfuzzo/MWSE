@@ -27,3 +27,8 @@ event.register(tes3.event.calcRepairPrice, calcRepairPriceCallback)
 * `price` (number): The adjusted price of repairing item.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. mobile’s related reference.
 
+
+## Related events
+
+[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+

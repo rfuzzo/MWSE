@@ -31,3 +31,8 @@ event.register(tes3.event.absorbedMagic, absorbedMagicCallback)
 * `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source.
 * `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The actor that absorbed the spell.
 
+
+## Related events
+
+[spellResist](../spellResist/){ .md-button }[spellResisted](../spellResisted/){ .md-button }
+

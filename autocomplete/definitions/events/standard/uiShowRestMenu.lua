@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "The uiShowRestMenu event is raised when the rest menu is about to be displayed. It allows the callback to change if sleeping is allowed, or to prevent the UI from showing at all.",
+	related = { "preventRest" },
 	eventData = {
 		["allowRest"] = {
 			type = "boolean",

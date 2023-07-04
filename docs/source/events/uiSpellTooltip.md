@@ -23,3 +23,8 @@ event.register(tes3.event.uiSpellTooltip, uiSpellTooltipCallback)
 * `spell` ([tes3spell](../../types/tes3spell)): *Read-only*. The spell being examined.
 * `tooltip` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The newly created tooltip element. Due to timeouts and target changes, it may be destroyed at any time.
 
+
+## Related events
+
+[uiObjectTooltip](../uiObjectTooltip/){ .md-button }[uiSkillTooltip](../uiSkillTooltip/){ .md-button }
+

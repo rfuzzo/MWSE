@@ -31,3 +31,8 @@ event.register(tes3.event.trapDisarm, trapDisarmCallback)
 * `toolItemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data for the tool.
 * `trapPresent` (boolean): *Read-only*. Indicates if a trap is present on the reference.
 
+
+## Related events
+
+[lockPick](../lockPick/){ .md-button }
+

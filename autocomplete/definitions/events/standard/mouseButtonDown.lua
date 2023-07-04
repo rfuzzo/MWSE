@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event fires when a button on the mouse is pressed.",
+	related = { "mouseButtonUp" },
 	eventData = {
 		["button"] = {
 			type = "number",

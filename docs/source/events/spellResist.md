@@ -34,3 +34,8 @@ event.register(tes3.event.spellResist, spellResistCallback)
 * `spellCastChance` (number): *Read-only*. The cast chance of the magic source. This is only available if the `source` is a spell or an enchantment.
 * `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the spell. For self-targeted spells, this matches caster.
 
+
+## Related events
+
+[absorbedMagic](../absorbedMagic/){ .md-button }[spellResisted](../spellResisted/){ .md-button }
+

@@ -30,3 +30,8 @@ event.register(tes3.event.playItemSound, playItemSoundCallback)
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The actor reference that picked or dropped the item that's now about to play the sound.
 * `state` (number): *Read-only*. Maps to values in [tes3.itemSoundState](https://mwse.github.io/MWSE/references/item-sound-states/) namespace.
 
+
+## Related events
+
+[soundObjectPlay](../soundObjectPlay/){ .md-button }
+

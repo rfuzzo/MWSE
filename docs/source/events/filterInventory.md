@@ -24,3 +24,8 @@ event.register(tes3.event.filterInventory, filterInventoryCallback)
 * `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data for the item being filtered.
 * `tile` ([tes3inventoryTile](../../types/tes3inventoryTile)): *Read-only*. The inventory tile being filtered.
 
+
+## Related events
+
+[filterBarterMenu](../filterBarterMenu/){ .md-button }[filterContentsMenu](../filterContentsMenu/){ .md-button }[filterInventory](../filterInventory/){ .md-button }
+

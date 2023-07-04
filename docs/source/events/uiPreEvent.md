@@ -32,3 +32,8 @@ event.register(tes3.event.uiPreEvent, uiPreEventCallback)
 * `var1` (number): *Read-only*. One of two undefined variables related to the event.
 * `var2` (number): *Read-only*. One of two undefined variables related to the event.
 
+
+## Related events
+
+[uiEvent](../uiEvent/){ .md-button }
+

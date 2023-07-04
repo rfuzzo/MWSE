@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is fired when an enchanted item could not be created.",
+	related = { "enchantedItemCreated" },
 	eventData = {
 		["baseObject"] = {
 			type = "tes3item",

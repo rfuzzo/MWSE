@@ -27,3 +27,8 @@ event.register(tes3.event.calcTrainingPrice, calcTrainingPriceCallback)
 * `skill` ([tes3statisticSkill](../../types/tes3statisticSkill)): *Read-only*. The ID of the skill to be trained.
 * `skillId` (number): *Read-only*. The ID of the skill to be trained.
 
+
+## Related events
+
+[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+

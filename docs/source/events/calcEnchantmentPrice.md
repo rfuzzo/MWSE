@@ -32,3 +32,8 @@ event.register(tes3.event.calcEnchantmentPrice, calcEnchantmentPriceCallback)
 * `soulGem` ([tes3misc](../../types/tes3misc)): *Read-only*. The soul gem being used to make the enchantment.
 * `soulGemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The soul gem's associated item data.
 
+
+## Related events
+
+[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+

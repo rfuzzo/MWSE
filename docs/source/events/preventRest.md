@@ -29,3 +29,8 @@ event.register(tes3.event.preventRest, preventRestCallback)
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that is preventing the player from resting.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. Mobile's associated reference.
 
+
+## Related events
+
+[uiShowRestMenu](../uiShowRestMenu/){ .md-button }
+

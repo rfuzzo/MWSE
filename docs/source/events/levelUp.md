@@ -25,3 +25,8 @@ event.register(tes3.event.levelUp, levelUpCallback)
 
 * `level` (number): *Read-only*. The new level obtained.
 
+
+## Related events
+
+[preLevelUp](../preLevelUp/){ .md-button }
+

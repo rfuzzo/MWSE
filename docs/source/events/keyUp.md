@@ -29,3 +29,8 @@ event.register(tes3.event.keyUp, keyUpCallback)
 * `isSuperDown` (boolean): *Read-only*. True if super (Windows key) is held.
 * `keyCode` (integer): *Read-only*. The scan code of the key that raised the event. Maps to values in [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/) table.
 
+
+## Related events
+
+[keyDown](../keyDown/){ .md-button }
+

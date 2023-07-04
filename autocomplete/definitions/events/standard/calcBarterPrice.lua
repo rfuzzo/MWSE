@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is raised when an item price is being determined when bartering.",
+	related = { "calcBarterPrice", "calcEnchantmentPrice", "calcRepairPrice", "calcSpellmakingPrice", "calcSpellPrice", "calcTrainingPrice", "calcTravelPrice" },
 	eventData = {
 		["item"] = {
 			type = "tes3item",

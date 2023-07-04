@@ -26,3 +26,8 @@ event.register(tes3.event.potionBrewFailed, potionBrewFailedCallback)
 * `mortar` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The mortar apparatus used to create the potion.
 * `retort` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The retort apparatus used to create the potion.
 
+
+## Related events
+
+[potionBrewed](../potionBrewed/){ .md-button }[potionBrewSkillCheck](../potionBrewSkillCheck/){ .md-button }
+

@@ -26,3 +26,8 @@ event.register(tes3.event.uiShowRestMenu, uiShowRestMenuCallback)
 * `allowRest` (boolean): true if the player is allowed to sleep (determined primarily from the cell flags), or false if they must wait instead. This value can be modified.
 * `scripted` (boolean): *Read-only*. This value is true when the menu is shown from using the ShowRestMenu or equivalent function.
 
+
+## Related events
+
+[preventRest](../preventRest/){ .md-button }
+

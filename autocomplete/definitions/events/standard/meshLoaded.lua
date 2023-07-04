@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is triggered when a mesh is loaded.",
+	related = { "keyframesLoad", "meshLoad" },
 	eventData = {
 		["path"] = {
 			type = "string",

@@ -58,3 +58,8 @@ event.register(tes3.event.spellResisted, spellResistedCallback)
 
 	```
 
+
+## Related events
+
+[absorbedMagic](../absorbedMagic/){ .md-button }[spellResist](../spellResist/){ .md-button }
+

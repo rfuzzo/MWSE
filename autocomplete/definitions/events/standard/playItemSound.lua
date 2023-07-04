@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is triggered when the game is about to play a sound from an item. Can be blocked to play custom sound instead.",
+	related = { "soundObjectPlay" },
 	eventData = {
 		["item"] = {
 			type = "tes3baseObject",

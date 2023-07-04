@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is raised when an enchantment price is being determined.",
+	related = { "calcBarterPrice", "calcEnchantmentPrice", "calcRepairPrice", "calcSpellmakingPrice", "calcSpellPrice", "calcTrainingPrice", "calcTravelPrice" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",

@@ -31,3 +31,8 @@ event.register(tes3.event.lockPick, lockPickCallback)
 * `tool` ([tes3item](../../types/tes3item)): *Read-only*. The item the picker is using to pick the lock.
 * `toolItemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data for the tool.
 
+
+## Related events
+
+[trapDisarm](../trapDisarm/){ .md-button }
+

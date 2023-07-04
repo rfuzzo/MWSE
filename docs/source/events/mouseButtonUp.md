@@ -29,3 +29,8 @@ event.register(tes3.event.mouseButtonUp, mouseButtonUpCallback)
 * `isShiftDown` (number): *Read-only*. True if either shift key is held.
 * `isSuperDown` (number): *Read-only*. True if super (Windows key) is held.
 
+
+## Related events
+
+[mouseButtonDown](../mouseButtonDown/){ .md-button }
+

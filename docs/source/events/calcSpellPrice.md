@@ -26,3 +26,8 @@ event.register(tes3.event.calcSpellPrice, calcSpellPriceCallback)
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. mobile’s related reference.
 * `spell` ([tes3spell](../../types/tes3spell)): *Read-only*. The spell currently being purchased.
 
+
+## Related events
+
+[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+

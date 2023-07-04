@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "The key event fires when a key is released.",
+	related = { "keyDown" },
 	eventData = {
 		["keyCode"] = {
 			type = "integer",

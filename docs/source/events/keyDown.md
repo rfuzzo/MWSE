@@ -47,3 +47,8 @@ event.register(tes3.event.keyDown, keyDownCallback)
 
 	```
 
+
+## Related events
+
+[keyUp](../keyUp/){ .md-button }
+

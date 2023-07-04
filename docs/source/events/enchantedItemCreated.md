@@ -27,3 +27,8 @@ event.register(tes3.event.enchantedItemCreated, enchantedItemCreatedCallback)
 * `soul` ([tes3actor](../../types/tes3actor)): The actor used to enchant the item.
 * `soulGem` ([tes3misc](../../types/tes3misc)): The soul gem used for the creation of the item.
 
+
+## Related events
+
+[enchantedItemCreateFailed](../enchantedItemCreateFailed/){ .md-button }
+

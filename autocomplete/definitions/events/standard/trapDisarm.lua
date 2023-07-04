@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event fires when a trap is being disarmed.",
+	related = { "lockPick" },
 	eventData = {
 		["reference"] = {
 			type = "tes3reference",

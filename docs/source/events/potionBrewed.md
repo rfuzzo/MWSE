@@ -53,3 +53,8 @@ event.register(tes3.event.potionBrewed, potionBrewedCallback)
 
 	```
 
+
+## Related events
+
+[potionBrewFailed](../potionBrewFailed/){ .md-button }[potionBrewSkillCheck](../potionBrewSkillCheck/){ .md-button }
+

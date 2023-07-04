@@ -29,3 +29,8 @@ event.register(tes3.event.calcBarterPrice, calcBarterPriceCallback)
 * `price` (number): The price of the item. This can be modified, but ensure that the buy/sell price is matched or there will be odd behavior.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the mobile's reference. May not always be available.
 
+
+## Related events
+
+[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+

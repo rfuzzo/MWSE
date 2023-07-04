@@ -26,3 +26,8 @@ event.register(tes3.event.uiObjectTooltip, uiObjectTooltipCallback)
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference being examined. Only valid for in-world objects. For inventory tiles it will always be nil.
 * `tooltip` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The newly created tooltip element. Due to timeouts and target changes, it may be destroyed at any time.
 
+
+## Related events
+
+[uiSkillTooltip](../uiSkillTooltip/){ .md-button }[uiSpellTooltip](../uiSpellTooltip/){ .md-button }
+

@@ -24,3 +24,8 @@ event.register(tes3.event.simulate, simulateCallback)
 * `menuMode` (boolean): *Read-only*. Always false, maintained only for consistency with the enterFrame event.
 * `timestamp` (number): *Read-only*. The number of hours since the beginning of the 3rd Era (similar to the Unix Epoch).
 
+
+## Related events
+
+[simulated](../simulated/){ .md-button }
+
