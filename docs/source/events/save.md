@@ -29,3 +29,8 @@ event.register(tes3.event.save, saveCallback)
 * `filename` (string): The filename of the save, not including file extension.
 * `name` (string): The user facing name of the save, shown in the load/save game menu.
 
+
+## Related events
+
+[save](../save/){ .md-button }[saved](../saved/){ .md-button }
+

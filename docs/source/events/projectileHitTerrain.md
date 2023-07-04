@@ -27,3 +27,8 @@ event.register(tes3.event.projectileHitTerrain, projectileHitTerrainCallback)
 * `position` ([tes3vector3](../../types/tes3vector3)): *Read-only*. The position of the mobile projectile at collision.
 * `velocity` ([tes3vector3](../../types/tes3vector3)): *Read-only*. The velocity of the mobile projectile at collision.
 
+
+## Related events
+
+[projectileHitActor](../projectileHitActor/){ .md-button }[projectileHitObject](../projectileHitObject/){ .md-button }[projectileHitTerrain](../projectileHitTerrain/){ .md-button }[projectileExpire](../projectileExpire/){ .md-button }
+

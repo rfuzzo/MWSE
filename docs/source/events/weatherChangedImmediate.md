@@ -22,3 +22,8 @@ event.register(tes3.event.weatherChangedImmediate, weatherChangedImmediateCallba
 
 * `to` ([tes3weather](../../types/tes3weather)): The weather object that is the new current weather. Can be modified to change behavior.
 
+
+## Related events
+
+[weatherCycled](../weatherCycled/){ .md-button }[weatherTransitionFinished](../weatherTransitionFinished/){ .md-button }[weatherChangedImmediate](../weatherChangedImmediate/){ .md-button }[weatherTransitionStarted](../weatherTransitionStarted/){ .md-button }
+

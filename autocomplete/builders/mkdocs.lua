@@ -182,6 +182,18 @@ local function breakoutTypeLinks(type, nested)
 	return table.concat(types, nested and "|" or ", ")
 end
 
+--- Converts the `related` table in event definitions to a set of markdown buttons:
+--- https://squidfunk.github.io/mkdocs-material/reference/buttons/#adding-buttons
+---@param related string[]
+---@return string
+local function relatedButtons(related)
+	local ret = { "\n## Related events\n\n" }
+	for _, eventName in ipairs(related) do
+		ret[#ret + 1] = string.format("[%s](../%s/){ .md-button }", eventName, eventName)
+	end
+	return table.concat(ret)
+end
+
 --- comment
 --- @param package table
 --- @param field any
@@ -443,6 +455,10 @@ local function writePackageDetails(file, package)
 			end
 			file:write(string.format("\n\t```\n\n"))
 		end
+	end
+
+	if (package.type == "event" and package.related) then
+		file:write(relatedButtons(package.related), "\n\n")
 	end
 end
 

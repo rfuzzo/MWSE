@@ -22,3 +22,8 @@ event.register(tes3.event.menuExit, menuExitCallback)
 
 * `menuMode` (boolean): *Read-only*. Always true for this event. This parameter is only useful when registering the same callback for menuEnter and menuExit events.
 
+
+## Related events
+
+[menuEnter](../menuEnter/){ .md-button }[menuExit](../menuExit/){ .md-button }
+

@@ -29,3 +29,8 @@ event.register(tes3.event.spellCastedFailure, spellCastedFailureCallback)
 * `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source.
 * `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the spell. For self-targeted spells, this matches caster.
 
+
+## Related events
+
+[spellCast](../spellCast/){ .md-button }[spellCasted](../spellCasted/){ .md-button }[spellCastedFailure](../spellCastedFailure/){ .md-button }
+

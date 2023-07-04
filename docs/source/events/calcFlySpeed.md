@@ -29,3 +29,8 @@ event.register(tes3.event.calcFlySpeed, calcFlySpeedCallback)
 * `speed` (number): The previous speed calculated, starting with the base engine values.
 * `type` (number): *Read-only*. The type of movement that was calculated. This is always 5 for this event.
 
+
+## Related events
+
+[calcMoveSpeed](../calcMoveSpeed/){ .md-button }[calcWalkSpeed](../calcWalkSpeed/){ .md-button }[calcRunSpeed](../calcRunSpeed/){ .md-button }[calcFlySpeed](../calcFlySpeed/){ .md-button }[calcSwimSpeed](../calcSwimSpeed/){ .md-button }[calcSwimRunSpeed](../calcSwimRunSpeed/){ .md-button }
+

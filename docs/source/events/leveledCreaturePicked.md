@@ -32,3 +32,8 @@ event.register(tes3.event.leveledCreaturePicked, leveledCreaturePickedCallback)
 * `source` (string): The context that the creature is being spawned in. Valid values include: `"reference"` for when spawned from a placed leveled spawn; `"emptyCell"` for when the player is exploring empty, undefined exterior cells; `"sleepInterrupt"` for when a random creature is chosen to attack the player when resting; and `"script"` for otherwise scripted picking.
 * `spawner` ([tes3reference](../../types/tes3reference), nil): If spawned from a placed leveled creature reference, this is a handle to the creating reference.
 
+
+## Related events
+
+[leveledCreaturePicked](../leveledCreaturePicked/){ .md-button }[leveledItemPicked](../leveledItemPicked/){ .md-button }
+

@@ -32,3 +32,8 @@ event.register(tes3.event.equip, equipCallback)
 * `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data of item.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference to the mobile actor that is equipping the item.
 
+
+## Related events
+
+[equip](../equip/){ .md-button }[equipped](../equipped/){ .md-button }[unequipped](../unequipped/){ .md-button }
+

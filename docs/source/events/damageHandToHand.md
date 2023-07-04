@@ -29,3 +29,8 @@ event.register(tes3.event.damageHandToHand, damageHandToHandCallback)
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that is taking fatigue damage.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The mobile’s associated reference.
 
+
+## Related events
+
+[damage](../damage/){ .md-button }[damaged](../damaged/){ .md-button }[damageHandToHand](../damageHandToHand/){ .md-button }[damagedHandToHand](../damagedHandToHand/){ .md-button }
+

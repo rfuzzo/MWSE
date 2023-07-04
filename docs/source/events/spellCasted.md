@@ -29,3 +29,8 @@ event.register(tes3.event.spellCasted, spellCastedCallback)
 * `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source.
 * `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the spell. For self-targeted spells, this matches the caster. Touch spells can also have `target` parameter. On target spells don't have `target` parameter during this event, since it can't have a target until it hits it. Which isn't known when the spell is casted.
 
+
+## Related events
+
+[spellCast](../spellCast/){ .md-button }[spellCasted](../spellCasted/){ .md-button }[spellCastedFailure](../spellCastedFailure/){ .md-button }
+

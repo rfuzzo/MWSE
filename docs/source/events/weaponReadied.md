@@ -23,3 +23,8 @@ event.register(tes3.event.weaponReadied, weaponReadiedCallback)
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference associated with the change in readied weapon.
 * `weaponStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): *Read-only*. The stack that contains the newly readied weapon and its associated data.
 
+
+## Related events
+
+[weaponReadied](../weaponReadied/){ .md-button }[weaponUnreadied](../weaponUnreadied/){ .md-button }
+

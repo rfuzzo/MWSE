@@ -26,3 +26,8 @@ event.register(tes3.event.menuEnter, menuEnterCallback)
 * `menu` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The new top-level menu.
 * `menuMode` (boolean): *Read-only*. Always true for this event. This parameter is only useful when registering the same callback for menuEnter and menuExit events.
 
+
+## Related events
+
+[menuEnter](../menuEnter/){ .md-button }[menuExit](../menuExit/){ .md-button }
+

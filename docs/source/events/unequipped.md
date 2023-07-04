@@ -26,3 +26,8 @@ event.register(tes3.event.unequipped, unequippedCallback)
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that has unequipped the item.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. actor’s associated reference.
 
+
+## Related events
+
+[equip](../equip/){ .md-button }[equipped](../equipped/){ .md-button }[unequipped](../unequipped/){ .md-button }
+

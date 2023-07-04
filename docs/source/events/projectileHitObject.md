@@ -28,3 +28,8 @@ event.register(tes3.event.projectileHitObject, projectileHitObjectCallback)
 * `target` ([tes3reference](../../types/tes3reference)): *Read-only*. Reference to the object that was hit.
 * `velocity` ([tes3vector3](../../types/tes3vector3)): *Read-only*. The velocity of the mobile projectile at collision.
 
+
+## Related events
+
+[projectileHitActor](../projectileHitActor/){ .md-button }[projectileHitObject](../projectileHitObject/){ .md-button }[projectileHitTerrain](../projectileHitTerrain/){ .md-button }[projectileExpire](../projectileExpire/){ .md-button }
+

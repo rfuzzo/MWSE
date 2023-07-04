@@ -44,3 +44,8 @@ event.register(tes3.event.attackHit, attackHitCallback)
 
 	```
 
+
+## Related events
+
+[attack](../attack/){ .md-button }[attackStart](../attackStart/){ .md-button }
+

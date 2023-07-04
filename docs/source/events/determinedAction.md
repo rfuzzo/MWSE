@@ -22,3 +22,8 @@ event.register(tes3.event.determinedAction, determinedActionCallback)
 
 * `session` ([tes3combatSession](../../types/tes3combatSession)): *Read-only*. The combat session the action has been determined for.
 
+
+## Related events
+
+[determineAction](../determineAction/){ .md-button }
+

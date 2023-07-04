@@ -25,3 +25,8 @@ event.register(tes3.event.weatherTransitionStarted, weatherTransitionStartedCall
 * `from` ([tes3weather](../../types/tes3weather)): *Read-only*. The weather object that is the current weather.
 * `to` ([tes3weather](../../types/tes3weather)): The weather object that will be transitioned to.
 
+
+## Related events
+
+[weatherCycled](../weatherCycled/){ .md-button }[weatherTransitionFinished](../weatherTransitionFinished/){ .md-button }[weatherChangedImmediate](../weatherChangedImmediate/){ .md-button }[weatherTransitionStarted](../weatherTransitionStarted/){ .md-button }[weatherChangedImmediate](../weatherChangedImmediate/){ .md-button }
+

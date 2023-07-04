@@ -65,3 +65,8 @@ event.register(tes3.event.damage, damageCallback)
 
 	```
 
+
+## Related events
+
+[damage](../damage/){ .md-button }[damaged](../damaged/){ .md-button }[damageHandToHand](../damageHandToHand/){ .md-button }[damagedHandToHand](../damagedHandToHand/){ .md-button }
+

@@ -29,3 +29,8 @@ event.register(tes3.event.equipped, equippedCallback)
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that has equipped the item.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference to the mobile actor that has equipped the item.
 
+
+## Related events
+
+[equip](../equip/){ .md-button }[equipped](../equipped/){ .md-button }[unequipped](../unequipped/){ .md-button }
+

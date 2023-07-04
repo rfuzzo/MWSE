@@ -25,3 +25,8 @@ event.register(tes3.event.referenceActivated, referenceActivatedCallback)
 
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference which was activated.
 
+
+## Related events
+
+[referenceActivated](../referenceActivated/){ .md-button }[referenceDeactivated](../referenceDeactivated/){ .md-button }
+

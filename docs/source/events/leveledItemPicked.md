@@ -30,3 +30,8 @@ event.register(tes3.event.leveledItemPicked, leveledItemPickedCallback)
 * `pick` ([tes3item](../../types/tes3item)): The result of the pick by vanilla mechanism.
 * `spawner` ([tes3reference](../../types/tes3reference), nil): The reference for the inventory that the item is being picked in. In a few cases this may be `nil`. Note that during actor cloning, the inventory is resolved before cloning is fully complete.
 
+
+## Related events
+
+[leveledCreaturePicked](../leveledCreaturePicked/){ .md-button }[leveledItemPicked](../leveledItemPicked/){ .md-button }
+

@@ -47,3 +47,8 @@ event.register(tes3.event.calcMoveSpeed, calcMoveSpeedCallback)
 
 	```
 
+
+## Related events
+
+[calcMoveSpeed](../calcMoveSpeed/){ .md-button }[calcWalkSpeed](../calcWalkSpeed/){ .md-button }[calcRunSpeed](../calcRunSpeed/){ .md-button }[calcFlySpeed](../calcFlySpeed/){ .md-button }[calcSwimSpeed](../calcSwimSpeed/){ .md-button }[calcSwimRunSpeed](../calcSwimRunSpeed/){ .md-button }
+

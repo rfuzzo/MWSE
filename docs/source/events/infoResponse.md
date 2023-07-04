@@ -29,3 +29,8 @@ event.register(tes3.event.infoResponse, infoResponseCallback)
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference.
 * `variables` (tes3scriptVariables): *Read-only*. The script variables.
 
+
+## Related events
+
+[infoGetText](../infoGetText/){ .md-button }[infoLinkResolve](../infoLinkResolve/){ .md-button }[infoResponse](../infoResponse/){ .md-button }[infoFilter](../infoFilter/){ .md-button }[postInfoResponse](../postInfoResponse/){ .md-button }
+

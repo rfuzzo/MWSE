@@ -23,3 +23,8 @@ event.register(tes3.event.mobileDeactivated, mobileDeactivatedCallback)
 * `mobile` ([tes3mobileObject](../../types/tes3mobileObject)): *Read-only*. The deactivated mobile object.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference that the mobile object has been deactivated for.
 
+
+## Related events
+
+[mobileActivated](../mobileActivated/){ .md-button }[mobileDeactivated](../mobileDeactivated/){ .md-button }
+

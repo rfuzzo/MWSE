@@ -30,3 +30,8 @@ event.register(tes3.event.attackStart, attackStartCallback)
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor making the attack.
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the reference that is attacking.
 
+
+## Related events
+
+[attack](../attack/){ .md-button }[attackHit](../attackHit/){ .md-button }
+

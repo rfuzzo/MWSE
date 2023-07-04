@@ -59,3 +59,8 @@ event.register(tes3.event.bodyPartsUpdated, bodyPartsUpdatedCallback)
 
 	```
 
+
+## Related events
+
+[bodyPartAssigned](../bodyPartAssigned/){ .md-button }[bodyPartsUpdated](../bodyPartsUpdated/){ .md-button }
+

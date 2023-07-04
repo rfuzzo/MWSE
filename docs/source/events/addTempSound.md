@@ -34,3 +34,8 @@ event.register(tes3.event.addTempSound, addTempSoundCallback)
 * `sound` ([tes3sound](../../types/tes3sound)): The sound object about to be played.
 * `volume` (number): The volume of the sound. In range [1, 250].
 
+
+## Related events
+
+[addSound](../addSound/){ .md-button }
+

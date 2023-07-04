@@ -26,3 +26,8 @@ event.register(tes3.event.cellChanged, cellChangedCallback)
 * `cell` ([tes3cell](../../types/tes3cell)): *Read-only*. The new cell that the player has entered.
 * `previousCell` ([tes3cell](../../types/tes3cell)): *Read-only*. The previous cell that the player came from. This will be nil when loading a game.
 
+
+## Related events
+
+[cellActivated](../cellActivated/){ .md-button }[cellDeactivated](../cellDeactivated/){ .md-button }[cellChanged](../cellChanged/){ .md-button }
+

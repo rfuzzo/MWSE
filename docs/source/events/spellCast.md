@@ -28,3 +28,8 @@ event.register(tes3.event.spellCast, spellCastCallback)
 * `source` ([tes3spell](../../types/tes3spell)): *Read-only*. The magic source.
 * `weakestSchool` (number): *Read-only*. Of all the magic effects in the spell, there is a magic school which the caster has the lowest skill at casting. This school determines which skill will gain experience on a successful cast.
 
+
+## Related events
+
+[spellCast](../spellCast/){ .md-button }[spellCasted](../spellCasted/){ .md-button }[spellCastedFailure](../spellCastedFailure/){ .md-button }
+

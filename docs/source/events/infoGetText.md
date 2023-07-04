@@ -54,3 +54,8 @@ event.register(tes3.event.infoGetText, infoGetTextCallback)
 
 	```
 
+
+## Related events
+
+[infoGetText](../infoGetText/){ .md-button }[infoLinkResolve](../infoLinkResolve/){ .md-button }[infoResponse](../infoResponse/){ .md-button }[infoFilter](../infoFilter/){ .md-button }[postInfoResponse](../postInfoResponse/){ .md-button }
+
