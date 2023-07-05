@@ -166,6 +166,10 @@ namespace TES3 {
 		return calculateArmorRating(nullptr);
 	}
 
+	AnimationData* MobileActor::getAnimationData() const {
+		return vTable.mobileActor->getAnimationAttachment(this);
+	}
+
 	const auto TES3_MobileActor_applyPhysicalHit = reinterpret_cast<void(__thiscall*)(MobileActor*, MobileActor*, MobileActor*, float, float, MobileProjectile*, bool)>(0x5568F0);
 	void MobileActor::applyPhysicalHit(MobileActor* attacker, MobileActor* defender, float damage, float swing, MobileProjectile* projectile, bool alwaysPlayHitVoice) {
 		// Setup damage event data.

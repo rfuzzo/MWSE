@@ -227,6 +227,8 @@ namespace TES3 {
 		float calculateArmorRating(int * armorItemCount = nullptr) const;
 		float getArmorRating_lua() const;
 
+		AnimationData* getAnimationData() const;
+
 		//
 		// Other related this-call functions.
 		//

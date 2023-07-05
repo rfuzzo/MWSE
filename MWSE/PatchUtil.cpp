@@ -5,6 +5,7 @@
 #include "Log.h"
 
 #include "TES3Actor.h"
+#include "TES3ActorAnimationController.h"
 #include "TES3AudioController.h"
 #include "TES3BodyPartManager.h"
 #include "TES3Cell.h"
@@ -55,6 +56,39 @@ namespace mwse::patch {
 	// Debug builds.
 	constexpr auto INSTALL_MINIDUMP_HOOK = false;
 #endif
+
+	const char* SafeGetObjectId(const TES3::BaseObject* object) {
+		__try {
+			return object->getObjectID();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
+			return nullptr;
+		}
+	}
+
+	const char* SafeGetSourceFile(const TES3::BaseObject* object) {
+		__try {
+			return object->getSourceFilename();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
+			return nullptr;
+		}
+	}
+
+	template <typename T>
+	void safePrintObjectToLog(const char* title, const T* object) {
+		if (object) {
+			auto id = SafeGetObjectId(object);
+			auto source = SafeGetSourceFile(object);
+			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
+			if (id) {
+				log::prettyDump(object);
+			}
+		}
+		else {
+			log::getLog() << "  " << title << ": nullptr" << std::endl;
+		}
+	}
 
 	//
 	// Patch: Enable
@@ -816,6 +850,29 @@ namespace mwse::patch {
 	const size_t PatchLandLoadTexturesBoundsCheck_size = 0x11;
 
 	//
+	// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
+	// 
+	// Leaving here since the reporter couldn't reproduce the crash on a new save, but we'll want information next time this happens.
+	//
+
+	void __fastcall PatchSetAnimControllerMobile(TES3::ActorAnimationController* animController, DWORD _EDX_, TES3::MobileActor* mobile) {
+		if (mobile == nullptr) {
+			return;
+		}
+
+		// Try to get more information about this crash.
+		if (mobile->reference->getSceneGraphNode() == nullptr) {
+			log::getLog() << "No scene graph found when attempting to add animation controller to reference. Doing what we can with the reference. Please report this to the #mwse channel in the Morrowind Modding Community discord." << std::endl;
+			safePrintObjectToLog("Reference", mobile->reference);
+		}
+
+		// Perform overwritten code, but use getRotationMatrix to fall back to reference rotation values.
+		animController->mobileActor = mobile;
+		animController->animationData = mobile->getAnimationData();
+		animController->groundPlaneRotation = mobile->reference->getRotationMatrix();
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1223,6 +1280,9 @@ namespace mwse::patch {
 		writePatchCodeUnprotected(0x4CECD3, (BYTE*)&PatchLandLoadTexturesBoundsCheck, PatchLandLoadTexturesBoundsCheck_size);
 		writeValueEnforced(0x4CECE9, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
 		writeValueEnforced(0x4CEDB1, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+
+		// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
+		genCallEnforced(0x521773, 0x53DE70, reinterpret_cast<DWORD>(PatchSetAnimControllerMobile));
 	}
 
 	void installPostLuaPatches() {
@@ -1325,24 +1385,6 @@ namespace mwse::patch {
 		return bRet;
 	}
 
-	const char* SafeGetObjectId(const TES3::BaseObject* object) {
-		__try {
-			return object->getObjectID();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
-			return nullptr;
-		}
-	}
-
-	const char* SafeGetSourceFile(const TES3::BaseObject* object) {
-		__try {
-			return object->getSourceFilename();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
-			return nullptr;
-		}
-	}
-
 	const char* GetThreadName(DWORD threadId) {
 		const auto dataHandler = TES3::DataHandler::get();
 		if (dataHandler) {
@@ -1359,21 +1401,6 @@ namespace mwse::patch {
 
 	const char* GetThreadName() {
 		return GetThreadName(GetCurrentThreadId());
-	}
-
-	template <typename T>
-	void safePrintObjectToLog(const char* title, const T* object) {
-		if (object) {
-			auto id = SafeGetObjectId(object);
-			auto source = SafeGetSourceFile(object);
-			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
-			if (id) {
-				log::prettyDump(object);
-			}
-		}
-		else {
-			log::getLog() << "  " << title << ": nullptr" << std::endl;
-		}
 	}
 
 	void CreateMiniDump(EXCEPTION_POINTERS* pep) {

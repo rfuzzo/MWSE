@@ -157,7 +157,7 @@ namespace TES3 {
 		int (__thiscall* getWeaponAttackMax)(MobileActor*); // 0xC0
 		void (__thiscall* calculateWeaponDamage)(MobileActor*); // 0xC4
 		float (__thiscall* getWeaponSwingWeightProduct)(MobileActor*); // 0xC8
-		AnimationData* (__thiscall* getAnimationAttachment)(MobileActor*); // 0xCC
+		AnimationData* (__thiscall* getAnimationAttachment)(const MobileActor*); // 0xCC
 		SkillStatistic * (__thiscall* getSkillStatistic)(MobileActor*, int); // 0xD0
 		float (__thiscall* getSkillValue)(const MobileActor*, int); // 0xD4
 		void (__thiscall* getVampire)(MobileActor*);
