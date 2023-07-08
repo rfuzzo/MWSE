@@ -1687,6 +1687,63 @@ namespace se::cs::dialog::object_window {
 	}
 
 	//
+	// Column: Spell Range
+	//
+
+	const char* GetSpellRange(const Spell* spell) {
+		auto range = spell->effects[0].rangeType;
+		for (auto i = 1u; i < 8; ++i) {
+			const auto& effect = spell->effects[i];
+			if (effect.effectID == -1) {
+				break;
+			}
+
+			if (effect.rangeType != range) {
+				range = Effect::Range::Invalid;
+				break;
+			}
+		}
+
+		switch (range) {
+		case Effect::Range::Self:
+			return "Self";
+		case Effect::Range::Touch:
+			return "Touch";
+		case Effect::Range::Target:
+			return "Target";
+		default:
+			return "Mixed";
+		}
+	}
+
+	TabColumnSpellRange::TabColumnSpellRange() : TabColumn("Range", LVCFMT_CENTER) {
+
+	}
+
+	bool TabColumnSpellRange::supportsObjectType(ObjectType::ObjectType objectType) const {
+		switch (objectType) {
+		case ObjectType::Spell:
+			return true;
+		}
+		return false;
+	}
+
+	void TabColumnSpellRange::getDisplayInfo(LPNMLVDISPINFOA displayInfo) const {
+		const auto object = getObjectFromDisplayInfo(displayInfo);
+		display(displayInfo, GetSpellRange(static_cast<const Spell*>(object)));
+	}
+
+	int TabColumnSpellRange::sortObject(const Object* lParam1, const Object* lParam2, bool sortOrderAsc) const {
+		const auto a = static_cast<const Spell*>(lParam1);
+		const auto b = static_cast<const Spell*>(lParam2);
+		return sort(GetSpellRange(a), GetSpellRange(b), sortOrderAsc);
+	}
+
+	TabColumn::ColumnSettings& TabColumnSpellRange::getSettings() const {
+		return settings.object_window.column_spell_range;
+	}
+
+	//
 	// Column: Type
 	//
 
@@ -2201,6 +2258,7 @@ namespace se::cs::dialog::object_window {
 	TabColumnRace TabController::tabColumnRace;
 	TabColumnScript TabController::tabColumnScript;
 	TabColumnSound TabController::tabColumnSound;
+	TabColumnSpellRange TabController::tabColumnSpellRange;
 	TabColumnType TabController::tabColumnType;
 	TabColumnUses TabController::tabColumnUses;
 	TabColumnValue TabController::tabColumnValue;
@@ -2439,6 +2497,7 @@ namespace se::cs::dialog::object_window {
 			tabColumnName.addToController(this, hWnd);
 			tabColumnType.addToController(this, hWnd);
 			tabColumnCost.addToController(this, hWnd);
+			tabColumnSpellRange.addToController(this, hWnd);
 			tabColumnAutoCalc.addToController(this, hWnd);
 			tabColumnPCStart.addToController(this, hWnd);
 			break;

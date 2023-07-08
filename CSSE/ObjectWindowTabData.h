@@ -130,6 +130,7 @@ namespace se::cs::dialog::object_window {
 	DEFINE_COLUMN(Rank);
 	DEFINE_COLUMN(Script);
 	DEFINE_COLUMN(Sound);
+	DEFINE_COLUMN(SpellRange);
 	DEFINE_COLUMN(Type);
 	DEFINE_COLUMN(Uses);
 	DEFINE_COLUMN(Value);
@@ -221,6 +222,7 @@ namespace se::cs::dialog::object_window {
 		static TabColumnRace tabColumnRace;
 		static TabColumnScript tabColumnScript;
 		static TabColumnSound tabColumnSound;
+		static TabColumnSpellRange tabColumnSpellRange;
 		static TabColumnType tabColumnType;
 		static TabColumnUses tabColumnUses;
 		static TabColumnValue tabColumnValue;

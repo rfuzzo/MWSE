@@ -197,6 +197,7 @@ namespace se::cs {
 		column_script = toml::find_or(v, "column_script", column_script);
 		column_sound = toml::find_or(v, "column_sound", column_sound);
 		column_spell_pc_start = toml::find_or(v, "column_spell_pc_start", column_spell_pc_start);
+		column_spell_range = toml::find_or(v, "column_spell_range", column_spell_range);
 		column_type = toml::find_or(v, "column_type", column_type);
 		column_uses = toml::find_or(v, "column_uses", column_uses);
 		column_value = toml::find_or(v, "column_value", column_value);
@@ -277,6 +278,7 @@ namespace se::cs {
 				{ "column_script", column_script },
 				{ "column_sound", column_sound },
 				{ "column_spell_pc_start", column_spell_pc_start },
+				{ "column_spell_range", column_spell_range },
 				{ "column_type", column_type },
 				{ "column_uses", column_uses },
 				{ "column_value", column_value },

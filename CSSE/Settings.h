@@ -131,6 +131,7 @@ namespace se::cs {
 			ColumnSettings column_script = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_sound = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_spell_pc_start = { ColumnSettings::DEFAULT_SIZE_BOOL };
+			ColumnSettings column_spell_range = { ColumnSettings::DEFAULT_SIZE_SHORT };
 			ColumnSettings column_type = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_uses = { ColumnSettings::DEFAULT_SIZE_SHORT };
 			ColumnSettings column_value = { ColumnSettings::DEFAULT_SIZE_SHORT };
