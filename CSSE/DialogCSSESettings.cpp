@@ -31,6 +31,7 @@ BOOL DialogCSSESettings::OnInitDialog() {
 	m_PropertyGrid.AddProperty(new CDataBoundPropertyGridProperty("Enabled", &se::cs::settings.enabled, "This can be used to prevent CSSE from loading at startup. You will need to manually re-enable it in the config file."));
 
 	auto groupObjectsWindow = new CMFCPropertyGridProperty("Objects Window");
+	groupObjectsWindow->AddSubItem(new CDataBoundPropertyGridProperty("Change Tab Style", &se::cs::settings.object_window.use_button_style_tabs, "If true, the tab control will use a more button-like style. This will prevent tab rows from jumping to the bottom of the stack when selected."));
 	groupObjectsWindow->AddSubItem(new CDataBoundPropertyGridProperty("Highlight Modified", &se::cs::settings.object_window.highlight_modified_items, "If true, modified objects will have a background color."));
 	groupObjectsWindow->AddSubItem(new CDataBoundPropertyGridProperty("Case Sensitive", &se::cs::settings.object_window.case_sensitive, "If true, searching will be case sensitive."));
 	groupObjectsWindow->AddSubItem(new CDataBoundPropertyGridProperty("Use Regex", &se::cs::settings.object_window.use_regex, "If true, searching will be performed with regex. The case sensitive option is still used."));

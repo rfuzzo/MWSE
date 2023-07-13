@@ -323,6 +323,12 @@ namespace se::cs::dialog::object_window {
 	void CALLBACK PatchDialogProc_AfterCreate(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		auto hInstance = (HINSTANCE)GetWindowLongA(hWnd, GWLP_HINSTANCE);
 
+		// Change the tabs to be button-based so that they don't have the selected tab stack always on the bottom.
+		const auto hDlgTabControl = GetDlgItem(hWnd, CONTROL_ID_TABS);
+		if (settings.object_window.use_button_style_tabs) {
+			winui::AddStyles(hDlgTabControl, TCS_BUTTONS);
+		}
+
 		// Ensure our custom filter box is added.
 		auto hDlgFilterEdit = GetDlgItem(hWnd, CONTROL_ID_FILTER_EDIT);
 		if (objectWindowSearchControl == NULL) {

@@ -73,6 +73,7 @@ namespace se::cs {
 		} dialogue_window;
 
 		struct ObjectWindowSettings {
+			bool use_button_style_tabs = true;
 			bool clear_filter_on_tab_switch = true;
 			bool filter_by_id = true;
 			bool filter_by_name = true;

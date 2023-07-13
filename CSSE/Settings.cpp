@@ -137,6 +137,9 @@ namespace se::cs {
 		// Backwards compatibility.
 		clear_filter_on_tab_switch = toml::find_or(v, "clear_on_tab_switch", clear_filter_on_tab_switch);
 
+		// Tab settings.
+		use_button_style_tabs = toml::find_or(v, "use_button_style_tabs", use_button_style_tabs);
+
 		// Search settings
 		clear_filter_on_tab_switch = toml::find_or(v, "clear_filter_on_tab_switch", clear_filter_on_tab_switch);
 		filter_by_id = toml::find_or(v, "filter_by_id", filter_by_id);
@@ -218,6 +221,9 @@ namespace se::cs {
 	toml::value Settings_t::ObjectWindowSettings::into_toml() const {
 		return toml::value(
 			{
+				// Tab settings
+				{ "use_button_style_tabs", use_button_style_tabs },
+
 				// Search settings
 				{ "clear_filter_on_tab_switch", clear_filter_on_tab_switch },
 				{ "filter_by_id", filter_by_id },
