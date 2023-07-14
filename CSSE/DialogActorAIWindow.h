@@ -58,8 +58,8 @@ namespace se::cs::dialog::actor_ai_window {
 		DWORD initialMerchantFlags; // 0x14
 		NI::IteratedList<void*>* travelDestinations; // 0x18
 		BYTE unknown_0x1C;
-		Cell* currentCell; // 0x20
-		NI::Vector3 unknown_0x24;
+		Cell* returnCell; // 0x20
+		NI::Vector3 returnPosition; // 0x24
 		BYTE unknown_0x30;
 		int unknown_0x34;
 	};

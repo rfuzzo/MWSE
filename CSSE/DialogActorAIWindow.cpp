@@ -52,6 +52,27 @@ namespace se::cs::dialog::actor_ai_window {
 		}
 	}
 
+	void CALLBACK PatchDialogProc_BeforeCommand_FromTravelReturnButton(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		const auto userData = (UserData*)GetWindowLongA(hWnd, GWL_USERDATA);
+
+		// Prevent any command from doing anything if we have no cell.
+		if (userData->returnCell == nullptr) {
+			forcedReturnType = TRUE;
+			return;
+		}
+	}
+
+	void CALLBACK PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		const auto command = HIWORD(wParam);
+		const auto id = LOWORD(wParam);
+
+		switch (id) {
+		case CONTROL_ID_TRAVEL_SERVICE_RETURN_BUTTON:
+			PatchDialogProc_BeforeCommand_FromTravelReturnButton(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		forcedReturnType = {};
 
@@ -59,6 +80,9 @@ namespace se::cs::dialog::actor_ai_window {
 		switch (msg) {
 		case WM_INITDIALOG:
 			PatchDialogProc_BeforeInit(hWnd, msg, wParam, lParam);
+			break;
+		case WM_COMMAND:
+			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
 			break;
 		}
 
