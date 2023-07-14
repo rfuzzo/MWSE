@@ -55,6 +55,8 @@ namespace se::cs {
 		}; // 0x5C
 
 		bool getIsInterior() const;
+		int getGridX() const;
+		int getGridY() const;
 	};
 	static_assert(sizeof(Cell) == 0x60, "Cell failed size validation");
 }
