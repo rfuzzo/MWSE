@@ -16,6 +16,7 @@
 
 #include "WindowMain.h"
 
+#include "DialogActorAIWindow.h"
 #include "DialogCellWindow.h"
 #include "DialogDialogueWindow.h"
 #include "DialogEditObjectWindow.h"
@@ -521,6 +522,7 @@ namespace se::cs {
 
 		// Install all our sectioned patches.
 		window::main::installPatches();
+		dialog::actor_ai_window::installPatches();
 		dialog::cell_window::installPatches();
 		dialog::dialogue_window::installPatches();
 		dialog::edit_object_window::installPatches();

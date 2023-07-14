@@ -84,6 +84,9 @@
     <ClCompile Include="PathUtil.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="DialogActorAIWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CSSE.def">
@@ -351,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="PathUtil.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogActorAIWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
