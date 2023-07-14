@@ -5,7 +5,7 @@
 #include "NIIteratedList.h"
 #include "NIProperty.h"
 
-#include "BasicLinkedList.h"
+#include "StlList.h"
 #include "LinkedObjectsList.h"
 
 namespace se::cs {
@@ -51,7 +51,7 @@ namespace se::cs {
 		NI::IteratedList<BaseObject*>* startScripts; // 0x44
 		Skill_dummy skills[27]; // 0x48
 		MagicEffect_dummy magicEffects[143]; // 0x558
-		BasicLinkedList<BaseObject*>* lights; // 0x9B0C
+		StlList<BaseObject*>* lights; // 0x9B0C
 		Substructure_9B10 unknown_0x9B10;
 		int unknown_0xA470;
 		int unknown_0xA474;
@@ -69,9 +69,9 @@ namespace se::cs {
 		int unknown_0xABA8;
 		int unknown_0xABAC;
 		NI::Pointer<NI::Property> handlerCollisionWireframeProperty; // 0xABB0
-		BasicLinkedList<GameFile*>* availableDataFiles; // 0x1BB4
+		StlList<GameFile*>* availableDataFiles; // 0x1BB4
 		GameFile* activeGameFiles[256]; // 0xABB8
-		BasicLinkedList<BaseObject*>* cells; // 0xAFB8
+		StlList<Cell*>* cells; // 0xAFB8
 		int unknown_0xAFBC;
 		int unknown_0xAFC0;
 		char unknown_0xAFC4[260];

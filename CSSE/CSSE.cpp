@@ -154,7 +154,7 @@ namespace se::cs {
 			for (auto i = 0; i < recordHandler->activeModCount; ++i) {
 				auto file = recordHandler->activeGameFiles[i];
 				if (file->masters == nullptr) {
-					const auto cs_GameFile_CreateMasterArray = reinterpret_cast<bool(__thiscall*)(GameFile*, BasicLinkedList<GameFile*>*, bool)>(0x401D7F);
+					const auto cs_GameFile_CreateMasterArray = reinterpret_cast<bool(__thiscall*)(GameFile*, StlList<GameFile*>*, bool)>(0x401D7F);
 					cs_GameFile_CreateMasterArray(file, recordHandler->availableDataFiles, true);
 				}
 			}
