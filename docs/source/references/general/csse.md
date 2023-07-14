@@ -103,6 +103,7 @@ chargenstate = -1.0
 ### Object Window
 
 * Significantly improved UI responsiveness.
+* The tab style has been changed to be more button-like. This prevents tabs from moving around.
 * Added a footer to the window, with a new filter input. This input can be focused by using CTRL+F while the Object Window is active. This can be used to filter objects by a matching id, name, icon, model, enchantment, script, or book text fragments.
 	* Regex search options and case-sensitive search options can be enabled in the config file.
 * The footer also supports a toggle button to only show modified objects.
@@ -111,6 +112,12 @@ chargenstate = -1.0
 * Fixed issue where box selection in the object window would cause the mouse to snap to the edge of the screen.
 * Modified objects are highlighted with a light green background.
 * Deleted objects are highlighted with a light red background.
+* The spell list lists the range of the spell.
+
+### Actor Editing Windows
+
+* The AI window opens more quickly.
+* Clicking on the return button in the AI window when no cell has been loaded no longer crashes the CS.
 
 ### Dialogue Window
 
