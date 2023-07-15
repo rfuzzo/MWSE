@@ -237,7 +237,19 @@ namespace TES3 {
 			eventFileName += ".ess";
 		}
 
+		// Bugfix: Preserve lowestZInCurrentCell when reloading a save in an interior cell.
+		// The engine resets it to -FLT_MAX instead of recalculating it if the player is in the same cell before and after loading.
+		float* pLowestZInCurrentCell = reinterpret_cast<float*>(0x7B217C);
+		float previousLowestZInCurrentCell = *pLowestZInCurrentCell;
+
 		bool loaded = TES3_NonDynamicData_loadGameInGame(this, eventFileName.c_str());
+
+		// Bugfix: In interior, restore previous lowestZInCurrentCell if has been reset.
+		if (loaded && TES3::DataHandler::get()->currentInteriorCell != nullptr) {
+			if (*pLowestZInCurrentCell == -FLT_MAX) {
+				*pLowestZInCurrentCell = previousLowestZInCurrentCell;
+			}
+		}
 
 		// Pass a follow-up event if we successfully loaded and clear timers.
 		if (loaded) {
