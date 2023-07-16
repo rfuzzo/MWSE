@@ -106,6 +106,16 @@ local config = {
 						table = mwseConfig,
 					},
 				},
+				{
+					class = "OnOffButton",
+					label = i18n("enableLuaErrorNotifications.label"),
+					description = i18n("enableLuaErrorNotifications.description"),
+					variable = {
+						id = "EnableLuaErrorNotifications",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
+				},
 			},
 			sidebarComponents = {
 				{

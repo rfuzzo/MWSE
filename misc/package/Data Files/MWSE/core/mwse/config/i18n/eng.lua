@@ -20,4 +20,6 @@ return {
 	["enableDependencyChecks.description"] = "If enabled, MWSE will check for dependencies of mods and warn the user if they are missing.",
 	["replaceDialogueFiltering.label"] = "Replace Dialogue Filtering",
 	["replaceDialogueFiltering.description"] = "If enabled, MWSE will replace the logic for dialogue filtering. This feature is currently in public testing.",
+	["enableLuaErrorNotifications.label"] = "Enable lua error notifications",
+	["enableLuaErrorNotifications.description"] = "If enabled, notification pop-ups will appear when a lua error is logged. They contain the mod name and a short error description only. Many released mods cause frequent non-critical errors, so this mode is primarily intended for use in development and bugfixing.",
 }

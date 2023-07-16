@@ -15,6 +15,7 @@ namespace mwse {
 	bool Configuration::EnableLogColors = false;
 	bool Configuration::EnableDependencyChecks = true;
 	bool Configuration::ReplaceDialogueFiltering = true;
+	bool Configuration::EnableLuaErrorNotifications = false;
 #ifdef APPVEYOR_BUILD_NUMBER
 	UINT Configuration::BuildNumber = APPVEYOR_BUILD_NUMBER;
 #else
@@ -57,6 +58,7 @@ namespace mwse {
 		DECLARE_CONFIG(EnableLogColors)
 		DECLARE_CONFIG(EnableDependencyChecks)
 		DECLARE_CONFIG(ReplaceDialogueFiltering)
+		DECLARE_CONFIG(EnableLuaErrorNotifications)
 		DECLARE_CONFIG(BuildNumber)
 	}
 }
