@@ -131,7 +131,7 @@ namespace mwse::lua {
 			usertypeDefinition["enchantedItemEffect"] = sol::readonly_property(&TES3::WorldController::enchantedItemEffect);
 			usertypeDefinition["enchantedItemEffectCreated"] = sol::readonly_property(&TES3::WorldController::enchantedItemEffectCreated);
 			usertypeDefinition["enchantedItemEffectTextures"] = sol::readonly_property(&TES3::WorldController::enchantedItemEffectTextures);
-			usertypeDefinition["flagLevitationDisabled"] = &TES3::WorldController::flagLevitationDisabled;
+			usertypeDefinition["flagLevitationDisabled"] = sol::property(&TES3::WorldController::getLevitationDisabled, &TES3::WorldController::setLevitationDisabled);
 			usertypeDefinition["flagTeleportingDisabled"] = &TES3::WorldController::flagTeleportingDisabled;
 			usertypeDefinition["globalScripts"] = sol::readonly_property(&TES3::WorldController::globalScripts);
 			usertypeDefinition["handToHandHit2Sound"] = &TES3::WorldController::soundHandToHandHit2;

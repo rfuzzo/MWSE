@@ -429,6 +429,8 @@ namespace TES3 {
 		void setAIDistanceScale(float scale);
 
 		void rechargerAddItem(Object* item, ItemData* itemData, Enchantment* enchantment);
+		bool getLevitationDisabled() const;
+		void setLevitationDisabled(bool disable);
 
 		//
 		// Custom functions.

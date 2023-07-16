@@ -5,6 +5,7 @@
 #include "TES3GameFile.h"
 #include "TES3GameSetting.h"
 #include "TES3GlobalVariable.h"
+#include "TES3MagicInstanceController.h"
 #include "TES3MobManager.h"
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
@@ -564,6 +565,28 @@ namespace TES3 {
 	const auto TES3_WorldController_rechargerAddItem = reinterpret_cast<void(__thiscall*)(WorldController*, Object*, Enchantment*, ItemData*)>(0x410790);
 	void WorldController::rechargerAddItem(Object* item, ItemData* itemData, Enchantment* enchantment) {
 		TES3_WorldController_rechargerAddItem(this, item, enchantment, itemData);
+	}
+
+	bool WorldController::getLevitationDisabled() const {
+		return flagLevitationDisabled;
+	}
+
+	void WorldController::setLevitationDisabled(bool disable) {
+		if (disable) {
+			// Ensure active leviation is cancelled. Logic copied from mwscript DisableLevitation.
+			auto macp = getMobilePlayer();
+			magicInstanceController->removeSpellsByEffect(macp->reference, EffectID::Levitate, 100);
+
+			if (macp->getEffectAttributeLevitate()) {
+				macp->setEffectAttributeLevitate(0);
+				macp->vTable.mobileNPC->setLevitating(macp, false);
+				if (!macp->getMovementFlagFlying() && !macp->getMovementFlagSwimming()) {
+					macp->vTable.mobileNPC->jumpingFalling(macp, true);
+				}
+			}
+		}
+
+		flagLevitationDisabled = disable;
 	}
 
 	int WorldController::getShadowLevel() const {
