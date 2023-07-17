@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This event is triggered when a reference is deactivated.
+This event is triggered when a reference is deactivated because it has been removed from the world, or is no longer in an active cell.
 
 ```lua
 --- @param e referenceDeactivatedEventData

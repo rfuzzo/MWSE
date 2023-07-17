@@ -2,7 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- An active magic effect.
+--- Data about a magic effect currently active on a particular mobile actor. It is accessed from `tes3mobileActor.activeMagicEffectList`. The data is a subset of the full data from a `tes3magicEffectInstance`, but does not require extra lookups to access, making it faster to scan through an actor's magic effects.
 --- @class tes3activeMagicEffect
 --- @field attributeId integer *Read-only*. The attribute ID (note that this may be the skill ID if the effect affects skills, since `attributeId` and `skillId` properties are set to the same value by the engine). Maps to values from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) table.
 --- @field duration number *Read-only*. The total duration of this specific effect.

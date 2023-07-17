@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This event is triggered when a reference is activated.
+This event is triggered when a reference becomes active because its cell has been loaded, or it has been placed or moved to an active cell. Current notable exception: when loading a save game that's in the same cell as the player, the cell stays active and unmodified references will not trigger referenceActivated. This exception may be resolved with future patches.
 
 ```lua
 --- @param e referenceActivatedEventData
