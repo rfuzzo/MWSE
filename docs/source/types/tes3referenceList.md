@@ -54,7 +54,7 @@ A collection for references, holding a cell and a linked list of references cont
 
 ??? example "Example: Generic iterator function"
 
-	In this more involved example, we used the corouting API from the Lua standard library to construct a generic iterator function. The iterReferenceList() function can then be used directly inside a for loop.
+	In this more involved example, we used the coroutine API from the Lua standard library to construct a generic iterator function. The iterReferenceList() function can then be used directly inside a for loop.
 
 	```lua
 	

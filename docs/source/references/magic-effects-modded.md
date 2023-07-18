@@ -202,6 +202,8 @@ These effects build off of the [standard magic effects](../magic-effects). If yo
 | pocket                       | **_701_** | [Extradimensional Pockets](https://www.nexusmods.com/morrowind/mods/50499)                         |
 | multiRecall                  | 702       | [4NM - Total Gameplay Overhaul](https://www.nexusmods.com/morrowind/mods/47015)                    |
 | boundarrow                   | 704       | [Bound Ammo](https://www.nexusmods.com/morrowind/mods/50766)                                       |
+| boundbolt                    | 705       | [Bound Ammo (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)                   |
+| boundcrossbow                | 706       | [Bound Ammo (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)                   |
 | animatedWeapon               | 711       | [Animate Weapon Spell](https://www.nexusmods.com/morrowind/mods/50165)                             |
 | enchantDrain                 | 786       | [Enchant Drain](https://www.nexusmods.com/morrowind/mods/51124)                                    |
 | soulRelease                  | 787       | [Obedient Summons](https://www.nexusmods.com/morrowind/mods/51472)                                 |
@@ -227,4 +229,5 @@ These effects build off of the [standard magic effects](../magic-effects). If yo
 | ss20SoulManipulation         | 8113      | [Pimp My Shrine - The Daedric Legend of Vernaccus](https://www.nexusmods.com/morrowind/mods/49173) |
 | ss20ManipulateSouls          | 8114      | [Pimp My Shrine - The Daedric Legend of Vernaccus](https://www.nexusmods.com/morrowind/mods/49173) |
 | selfRepair                   | 8500      | [DRIP - Dynamic Randomised Item Properties](https://www.nexusmods.com/morrowind/mods/51242)        |
+| identify                     | 9599      | [Unidentified Items (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)           |
 | npcSoulTrap                  | 10000     | [Seph's NPC Soul Trapping](https://www.nexusmods.com/morrowind/mods/50744)                         |
