@@ -165,78 +165,78 @@ end
 -- Custom error notifications
 
 local errorNotifier = {
-	visible_error_limit = 4,
-	timer_duration = 8.0,
+	visible_error_limit = 8,
+	timeout_duration = 8.0,
 	eventType = nil,
 	displayed = {},
 	mod_totals = {}
 }
 
-function errorNotifier.create_menu()
+-- Expose to MWSE
+this.errorNotifier = errorNotifier
+
+function errorNotifier.createMenu()
 	local menu = tes3ui.createMenu{ id = "MWSE:ErrorNotify", fixedFrame = true, modal = false, loadable = false }
 	menu.autoWidth = false
 	menu.autoHeight = true
-	menu.absolutePosAlignX = 0.02
-	menu.absolutePosAlignY = 0.80
-	menu.width = 720
-	menu.minWidth = 720
-	menu.minHeight = 120
+	menu.absolutePosAlignX = nil
+	menu.absolutePosAlignY = nil
+	menu.positionX = 8 - menu.maxWidth / 2
+	menu.positionY = menu.maxHeight / 2 - 8
+	menu.width = 900
+	menu.minWidth = 900
+	menu.minHeight = 0
 
 	local f = menu:getContentElement()
+	f.contentPath = nil
 	f.borderAllSides = 0
-	f.paddingAllSides = 12
-	f.flowDirection = tes3.flowDirection.leftToRight
+	f.paddingAllSides = 6
+	f.flowDirection = tes3.flowDirection.topToBottom
 
-	local r = f:createRect{ color = { 0.9, 0.1, 0.1 } }
-	r.width = 18
-	r.height = 24
-	r.borderTop = 6
-	r.borderRight = 8
+	local t = f:createLabel{ text = "Lua errors" }
+	t.color = { 0.9, 0.9, 0.9 }
+	t.borderBottom = 4
 
 	local m = f:createBlock{ id = "MWSE:ErrorNotify_Listing" }
 	m.widthProportional = 1
 	m.autoHeight = true
-	m.paddingRight = 6
 	m.flowDirection = tes3.flowDirection.topToBottom
 
 	for i = 1, errorNotifier.visible_error_limit do
 		local t = m:createLabel{ text = "" }
-		t.color = { 0.9, 0.9, 0.75 }
+		t.color = { 0.8, 0.8, 0.65 }
 		t.widthProportional = 1
-		t.borderBottom = 5
+		t.height = 0
+		t.borderBottom = 2
 		t.wrapText = true
 		t.visible = false
 	end
-
-	local h = m:createLabel{ text = "See file MWSE.log for details on all errors." }
-	h.color = { 0.65, 0.65, 0.55 }
-	h.widthProportional = 1
-	h.autoHeight = true
-	h.borderTop = 8
 
 	menu:updateLayout()
 	return menu
 end
 
-function errorNotifier.clear_msg()
+function errorNotifier.clearMsg()
+	errorNotifier.displayed = {}
+	errorNotifier.timer = nil
+
 	local menu = tes3ui.findMenu("MWSE:ErrorNotify")
 	if menu then
 		local list = menu:findChild("MWSE:ErrorNotify_Listing")
 		for i = 1, errorNotifier.visible_error_limit do
 			list.children[i].text = ""
-			list.children[i].height = 0
+			list.children[i].visible = false
 		end
 
-		errorNotifier.displayed = {}
 		menu.visible = false
 		menu:updateLayout()
 	end
 end
 
-function errorNotifier.update_menu()
+function errorNotifier.updateMenu()
 	local menu = tes3ui.findMenu("MWSE:ErrorNotify")
 	if not menu then
-		menu = errorNotifier.create_menu()
+		menu = errorNotifier.createMenu()
 	end
 
 	local list = menu:findChild("MWSE:ErrorNotify_Listing")
@@ -249,31 +249,24 @@ function errorNotifier.update_menu()
 		end
 	end
 
+	-- Double re-layout to fix wrapping text heights.
 	menu.visible = true
+	menu:updateLayout()
 	menu:updateLayout()
 
 	if errorNotifier.timer then
 		errorNotifier.timer:reset()
 	else
-		errorNotifier.timer = timer.start{type = timer.real, duration = errorNotifier.timer_duration, callback = errorNotifier.clear_msg, persist = false}
+		errorNotifier.timer = timer.start{type = timer.real, duration = errorNotifier.timeout_duration, callback = errorNotifier.clearMsg, persist = false}
 	end
 end
 
-function errorNotifier.add_msg(modName, sourceFile, lineNum, errText)
+function errorNotifier.addMsg(modName, sourceFile, lineNum, errText)
 	local firstErrLine = string.match(errText, "([^\n]+)")
 	local errorCount = (errorNotifier.mod_totals[modName] or 0) + 1
 	errorNotifier.mod_totals[modName] = errorCount
 
-	local s = string.format("Lua error in mod: %s | Event: %s\n%s:%d > %s", modName, errorNotifier.eventType, sourceFile, lineNum, firstErrLine)
-
-	-- Replace message if mod is already there
-	for i, display in ipairs(errorNotifier.displayed) do
-		if display.mod == modName then
-			display.msg = s
-			errorNotifier.update_menu()
-			return
-		end
-	end
+	local s = string.format("Mod: %s            Event: %s\n%s:%d > %s", modName, errorNotifier.eventType, sourceFile, lineNum, firstErrLine)
 
 	-- Maintain list at fixed length
 	if #errorNotifier.displayed == errorNotifier.visible_error_limit then
@@ -281,16 +274,16 @@ function errorNotifier.add_msg(modName, sourceFile, lineNum, errText)
 	end
 	table.insert(errorNotifier.displayed, { mod = modName, msg = s })
 
-	errorNotifier.update_menu()
+	errorNotifier.updateMenu()
 end
 
-function errorNotifier.report_error(err)
-	local filePath, lineNum, errText = string.match(err, "[^:]+\\mods\\([^:]+):(%d+):(.+)")
+function errorNotifier.reportError(err)
+	local filePath, lineNum, errText = string.match(err, "[^:]+\\mods\\([^:]+):(%d+):%s*(.+)")
 
 	if filePath and errText then
 		local modName, sourceFile = string.match(filePath, "(.+)\\([^\\]+)")
 		if modName then
-			errorNotifier.add_msg(modName, sourceFile, lineNum, errText)
+			errorNotifier.addMsg(modName, sourceFile, lineNum, errText)
 		end
 	end
 end
@@ -299,7 +292,7 @@ local function onEventError(err)
 	mwse.log("Error in event callback: %s\n%s", err, debug.traceback())
 
 	if mwseConfig.EnableLuaErrorNotifications then
-		errorNotifier.report_error(err)
+		errorNotifier.reportError(err)
 	end
 end
 
