@@ -90,6 +90,7 @@
 #include "TES3UIManager.h"
 
 #include "MemoryUtil.h"
+#include "MWSEConfig.h"
 
 namespace mwse::lua {
 	template <>
@@ -501,5 +502,18 @@ namespace mwse::lua {
 				log::getLog() << asString.value() << std::endl;
 			}
 		}
+	}
+
+	void reportErrorInGame(const char* sourceName, const sol::error& error) {
+		if (!Configuration::EnableLuaErrorNotifications) {
+			return;
+		}
+
+		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
+		auto& state = stateHandle.state;
+		static sol::table errorNotifier = state["event"]["errorNotifier"];
+		static sol::protected_function reporter = errorNotifier["reportError"];
+
+		reporter(sourceName, error.what());
 	}
 }
