@@ -261,12 +261,12 @@ function errorNotifier.updateMenu()
 	end
 end
 
-function errorNotifier.addMsg(modName, sourceFile, lineNum, errText)
+function errorNotifier.addMsg(errSource, modName, sourceFile, lineNum, errText)
 	local firstErrLine = string.match(errText, "([^\n]+)")
 	local errorCount = (errorNotifier.mod_totals[modName] or 0) + 1
 	errorNotifier.mod_totals[modName] = errorCount
 
-	local s = string.format("Mod: %s            Event: %s\n%s:%d > %s", modName, errorNotifier.eventType, sourceFile, lineNum, firstErrLine)
+	local s = string.format("Mod: %s            Source: %s\n%s:%d > %s", modName, errSource, sourceFile, lineNum, firstErrLine)
 
 	-- Maintain list at fixed length
 	if #errorNotifier.displayed == errorNotifier.visible_error_limit then
@@ -277,23 +277,22 @@ function errorNotifier.addMsg(modName, sourceFile, lineNum, errText)
 	errorNotifier.updateMenu()
 end
 
-function errorNotifier.reportError(err)
+function errorNotifier.reportError(errSource, err)
+	if not mwseConfig.EnableLuaErrorNotifications then return end
+
 	local filePath, lineNum, errText = string.match(err, "[^:]+\\mods\\([^:]+):(%d+):%s*(.+)")
 
 	if filePath and errText then
 		local modName, sourceFile = string.match(filePath, "(.+)\\([^\\]+)")
 		if modName then
-			errorNotifier.addMsg(modName, sourceFile, lineNum, errText)
+			errorNotifier.addMsg(errSource, modName, sourceFile, lineNum, errText)
 		end
 	end
 end
 
 local function onEventError(err)
 	mwse.log("Error in event callback: %s\n%s", err, debug.traceback())
-
-	if mwseConfig.EnableLuaErrorNotifications then
-		errorNotifier.reportError(err)
-	end
+	errorNotifier.reportError("event " .. errorNotifier.eventType, err)
 end
 
 function this.trigger(eventType, payload, options)
