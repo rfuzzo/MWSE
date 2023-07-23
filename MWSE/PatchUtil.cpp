@@ -873,6 +873,15 @@ namespace mwse::patch {
 	}
 
 	//
+	// Patch: Log stack traces of problematic UI pointer issues.
+	//
+
+	void __cdecl PatchLogUIMemoryPointerErrors(const char* message) {
+		lua::logStackTrace("Lua traceback at time of invalid access:");
+		tes3::logErrorAndSavePoint(message);
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1283,6 +1292,10 @@ namespace mwse::patch {
 
 		// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
 		genCallEnforced(0x521773, 0x53DE70, reinterpret_cast<DWORD>(PatchSetAnimControllerMobile));
+
+		// Provide lua stack traces with invalid UI access.
+		genCallEnforced(0x581484, 0x476E20, reinterpret_cast<DWORD>(PatchLogUIMemoryPointerErrors));
+		genCallEnforced(0x582DFA, 0x476E20, reinterpret_cast<DWORD>(PatchLogUIMemoryPointerErrors));
 	}
 
 	void installPostLuaPatches() {
