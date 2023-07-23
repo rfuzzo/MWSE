@@ -3902,23 +3902,6 @@ namespace mwse::lua {
 		reference->relocate(cell, position, rotation);
 	}
 
-	// Trigger deactivation on cell reset.
-	const auto TES3_Cell_resetAlteredData = reinterpret_cast<bool(__thiscall*)(TES3::Cell*)>(0x4E0990);
-	bool __fastcall CellResetAlteredData(TES3::Cell* cell) {
-		const auto wasActive = cell->getCellActive();
-		if (wasActive) {
-			cell->setCellInactive();
-		}
-
-		const auto result = TES3_Cell_resetAlteredData(cell);
-
-		if (wasActive) {
-			cell->setCellActive();
-		}
-
-		return result;
-	}
-
 	//
 	// Event: Mobile activated/deactivated
 	//
@@ -5910,8 +5893,6 @@ namespace mwse::lua {
 		genCallEnforced(0x5063A6, 0x50EDD0, reinterpret_cast<DWORD>(ScriptRelocateReference));
 		genCallEnforced(0x5064D8, 0x50EDD0, reinterpret_cast<DWORD>(ScriptRelocateReference));
 		genCallEnforced(0x509D85, 0x50EDD0, reinterpret_cast<DWORD>(ScriptRelocateReference));
-		// When the player loads a save, flag the cells as inactive.
-		genCallEnforced(0x4C754D, 0x4E0990, reinterpret_cast<DWORD>(CellResetAlteredData));
 		// Disable destruction on process exit of a global temp reference. Avoids deactivation event triggering on this reference.
 		genNOPUnprotected(0x49A4E9, 0xD);
 
