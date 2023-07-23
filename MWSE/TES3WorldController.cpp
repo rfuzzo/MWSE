@@ -441,6 +441,7 @@ namespace TES3 {
 	// WorldController
 	//
 
+	float WorldController::realDeltaTime = 0.0f;
 	float WorldController::simulationTimeScalar = 1.0f;
 
 	WorldController * WorldController::get() {

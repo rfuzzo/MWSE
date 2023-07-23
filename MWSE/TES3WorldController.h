@@ -448,6 +448,7 @@ namespace TES3 {
 		// Helpful static variables.
 		//
 
+		static float realDeltaTime;
 		static float simulationTimeScalar;
 	};
 	static_assert(sizeof(WorldController) == 0x374, "TES3::WorldController failed size validation");

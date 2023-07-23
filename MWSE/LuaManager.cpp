@@ -4167,6 +4167,9 @@ namespace mwse::lua {
 		// Overwritten code.
 		TES3_WorldController_updateDeltaTime(worldController);
 
+		// Store the calculated deltaTime for if someone needs to know the real value.
+		TES3::WorldController::realDeltaTime = worldController->deltaTime;
+
 		// Multiply our delta time by our scalar.
 		worldController->deltaTime *= TES3::WorldController::simulationTimeScalar;
 	}
@@ -6197,7 +6200,7 @@ namespace mwse::lua {
 	}
 
 	void LuaManager::updateTimers(float deltaTime, double simulationTimestamp, bool simulating) {
-		realTimers->incrementClock(deltaTime);
+		realTimers->incrementClock(TES3::WorldController::realDeltaTime);
 		gameTimers->setClock(simulationTimestamp);
 
 		if (simulating) {
