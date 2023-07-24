@@ -593,49 +593,62 @@ namespace TES3 {
 	}
 
 	void loadNotID(DialogueFilterContext::ConditionalContext* context) {
-		context->compareValue = context->conditional->actor == context->parentContext->speakerBaseActor;
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->actor) {
+			context->resultOverride = context->conditional->actor != context->parentContext->speakerBaseActor;
+		}
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotFaction(DialogueFilterContext::ConditionalContext* context) {
-		if (context->conditional->faction == nullptr) {
-			context->resultOverride = true;
-			return;
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->faction) {
+			context->resultOverride = context->conditional->faction != context->parentContext->speakerBaseActor->getFaction();
 		}
-
-		context->compareValue = context->conditional->faction == context->parentContext->speakerBaseActor->getFaction();
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotClass(DialogueFilterContext::ConditionalContext* context) {
-		if (context->conditional->class_ == nullptr) {
-			context->resultOverride = true;
-			return;
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->class_) {
+			context->resultOverride = context->conditional->class_ != context->parentContext->speakerBaseActor->getClass();
 		}
-
-		context->compareValue = context->conditional->class_ == context->parentContext->speakerBaseActor->getClass();
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotRace(DialogueFilterContext::ConditionalContext* context) {
-		if (context->conditional->race == nullptr) {
-			context->resultOverride = true;
-			return;
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->race) {
+			context->resultOverride = context->conditional->race != context->parentContext->speakerBaseActor->getRace();
 		}
-
-		context->compareValue = context->conditional->race == context->parentContext->speakerBaseActor->getRace();
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotCell(DialogueFilterContext::ConditionalContext* context) {
-		const auto filterCell = context->conditional->cell;
-		if (context->conditional->cell == nullptr) {
-			return;
-		}
-
+		// This conditional bypasses compareValue comparisons.
 		auto playerCell = DataHandler::get()->currentCell;
 		if (playerCell == nullptr) {
+			context->resultOverride = false;
 			return;
 		}
 
-		std::string_view cellId = filterCell->getObjectID();
-		context->compareValue = _strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0;
+		// Prefix comparison of cell id.
+		const auto filterCell = context->conditional->cell;
+		if (filterCell) {
+			std::string_view cellId = filterCell->getObjectID();
+			context->resultOverride = _strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0;
+		}
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotLocal(DialogueFilterContext::ConditionalContext* context) {
