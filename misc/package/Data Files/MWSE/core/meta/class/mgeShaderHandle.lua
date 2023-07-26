@@ -26,3 +26,11 @@ mgeShaderHandle = {}
 --- @return boolean success No description yet available.
 function mgeShaderHandle:reload() end
 
+--- Serializes the object to json.
+--- @return string result No description yet available.
+function mgeShaderHandle:__tojson() end
+
+--- Serializes the object to string.
+--- @return string result No description yet available.
+function mgeShaderHandle:__tostring() end
+

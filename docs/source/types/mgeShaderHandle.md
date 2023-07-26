@@ -68,6 +68,36 @@ Variable types are:
 
 ## Methods
 
+### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
+
+Serializes the object to json.
+
+```lua
+local result = myObject:__tojson()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
+### `__tostring`
+<div class="search_terms" style="display: none">__tostring</div>
+
+Serializes the object to string.
+
+```lua
+local result = myObject:__tostring()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `reload`
 <div class="search_terms" style="display: none">reload</div>
 
