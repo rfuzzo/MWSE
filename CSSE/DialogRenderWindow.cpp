@@ -307,7 +307,7 @@ namespace se::cs::dialog::render_window {
 			rotationAxis = SelectionData::RotationAxis::Z;
 		}
 
-		auto widgets = SceneGraphController::get()->widgets;
+		auto widgets = SceneGraphController::get()->getWidgets();
 		if (isHoldingAxisKey()) {
 			widgets->setPosition(selectionData->bound.center);
 			widgets->show();
@@ -776,7 +776,7 @@ namespace se::cs::dialog::render_window {
 		planeOrigin = planeOrigin + context.cursorOffset;
 
 		// Align the plane to the locked axis if applicable.
-		auto widgets = SceneGraphController::get()->widgets;
+		auto widgets = SceneGraphController::get()->getWidgets();
 		bool isAxisLocked = lockX || lockY || lockZ;
 		if (isAxisLocked) {
 			planeNormal = camera->worldDirection;
@@ -1840,7 +1840,7 @@ namespace se::cs::dialog::render_window {
 
 	void PatchDialogProc_AfterKeyUp_XYZ(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Hide widgets if they are no longer needed.
-		auto widgets = SceneGraphController::get()->widgets;
+		auto widgets = SceneGraphController::get()->getWidgets();
 		if (!isHoldingAxisKey() && widgets->isShown()) {
 			widgets->hide();
 			movementContext.reset();
@@ -1856,13 +1856,6 @@ namespace se::cs::dialog::render_window {
 			PatchDialogProc_AfterKeyUp_XYZ(hWnd, msg, wParam, lParam);
 			break;
 		}
-	}
-
-	void PatchDialogProc_AfterInitDialog(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		// Initialize widget controller.
-		auto sgController = SceneGraphController::get();
-		sgController->widgets = new WidgetsController();
-		sgController->sceneRoot->attachChild(sgController->widgets->root);
 	}
 
 	namespace CustomWindowMessage {
@@ -1916,9 +1909,6 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_LBUTTONUP:
 			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
-			break;
-		case WM_INITDIALOG:
-			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
 			break;
 		}
 

@@ -857,8 +857,7 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeClose(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		auto sgController = dialog::render_window::SceneGraphController::get();
-		delete sgController->widgets;
-		sgController->widgets = nullptr;
+		sgController->clearWidgets();
 	}
 
 	void PatchDialogProc_AfterCreate_CreateNewCSSEMenu(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
