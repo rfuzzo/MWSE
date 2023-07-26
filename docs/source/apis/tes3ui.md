@@ -906,7 +906,7 @@ tes3ui.showMessageMenu({ id = ..., buttons = ..., callbackParams = ..., cancels 
 	* `cancelText` (string): *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
 	* `cancelCallback` (function): *Optional*. The function to call when the user clicks the cancel button.
 	* `header` (string, fun(): string): *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
-	* `message` (string, fun(): string): **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+	* `message` (string, fun(): string): *Optional*. The message at the top of the messagebox. Can also be a function that returns a string.
 	* `customBlock` (fun(parent: [tes3uiElement](../../types/tes3uiElement))): *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
 	* `page` (integer): *Default*: `1`.
 	* `pageSize` (integer): *Default*: `30`.

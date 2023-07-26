@@ -43,7 +43,7 @@
 --- @field combatSession tes3combatSession|nil *Read-only*. Combat session data. This exists while the actor is in combat to provide memory for AI combat decisions. Doesn't exist on the player's mobile.
 --- @field corpseHourstamp number This is the time measured in hours from the beginning of the game when the actor died. Returns a UNIX-style timestamp based on in-world simulation time since the start of the era. For living actors this field has value a of `0`.
 --- @field currentEnchantedItem tes3equipmentStack|nil *Read-only*. The currently equipped enchanted item that the actor will use.
---- @field currentSpell tes3spell *Read-only*. The currently equipped spell that the actor will use.
+--- @field currentSpell tes3spell|tes3enchantment *Read-only*. The currently equipped spell that the actor will use.
 --- @field effectAttributes number[] *Read-only*. Access to a table of 24 numbers for the actor's effect attributes. In order those are: `attackBonus`, `sanctuary`, `resistMagicka`, `resistFire`, `resistFrost`, `resistShock`, `resistCommonDisease`, `resistBlightDisease`, `resistCorprus`, `resistPoison`, `resistParalysis`, `chameleon`, `resistNormalWeapons`, `waterBreathing`, `waterWalking`, `swiftSwim`, `jump`, `levitate`, `shield`, `sound`, `silence`, `blind`, `paralyze`, and `invisibility`. Each of those can be accessed individually. For example, `tes3mobileActor.chameleon`.
 --- @field encumbrance tes3statistic|tes3statisticSkill *Read-only*. Access to the actor's encumbrance statistic.
 --- @field endurance tes3statistic|tes3statisticSkill *Read-only*. Direct access to the actor's endurance attribute statistic.

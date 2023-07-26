@@ -516,19 +516,21 @@ local wasAdded = tes3.addSoulGem({ item = ... })
 ### `tes3.addSpell`
 <div class="search_terms" style="display: none">addspell, spell</div>
 
-Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.
+Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied. At least one of the `actor`, `mobile` or `reference` arguments needs to be passed.
 
 ```lua
-local wasAdded = tes3.addSpell({ reference = ..., actor = ..., spell = ..., updateGUI = ... })
+local wasAdded = tes3.addSpell({ reference = ..., actor = ..., mobile = ..., spell = ..., updateGUI = ..., bypassResistances = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
-	* `actor` ([tes3actor](../../types/tes3actor), string): Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
+	* `actor` ([tes3actor](../../types/tes3actor), string): *Optional*. Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+	* `mobile` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
 	* `spell` ([tes3spell](../../types/tes3spell), string): The spell to add.
 	* `updateGUI` (boolean): *Default*: `true`. If true, the GUI will be updated respecting the adding of the spell. This can be useful to disable when batch-adding many spells. The batch should be ended with [`tes3.updateMagicGUI`](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) to reflect the changes.
+	* `bypassResistances` (boolean): *Default*: `true`. Should the resistances be bypassed when applying the spell?
 
 **Returns**:
 
@@ -2493,7 +2495,7 @@ local reference = tes3.getReference(id)
 
 **Parameters**:
 
-* `id` (string)
+* `id` (string): *Optional*.
 
 **Returns**:
 
@@ -2507,16 +2509,17 @@ local reference = tes3.getReference(id)
 Gets the current region the player is in. This checks the player's current cell first, but will fall back to the last exterior cell.
 
 ```lua
-local region = tes3.getRegion(useDoors)
+local region = tes3.getRegion({ useDoors = ... })
 ```
 
 **Parameters**:
 
-* `useDoors` (boolean): *Default*: `false`.
+* `params` (table): *Optional*.
+	* `useDoors` (boolean): *Default*: `false`.
 
 **Returns**:
 
-* `region` ([tes3region](../../types/tes3region))
+* `region` ([tes3region](../../types/tes3region), nil)
 
 ***
 
@@ -2877,17 +2880,18 @@ local hasAccess = tes3.hasOwnershipAccess({ reference = ..., target = ... })
 ### `tes3.hasSpell`
 <div class="search_terms" style="display: none">hasspell, spell</div>
 
-Determines if the player has access to a given spell.
+Determines if the player has access to a given spell. At least one of the `actor`, `mobile` or `reference` arguments needs to be passed.
 
 ```lua
-local hasSpell = tes3.hasSpell({ reference = ..., actor = ..., spell = ... })
+local hasSpell = tes3.hasSpell({ reference = ..., actor = ..., mobile = ..., spell = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
-	* `actor` ([tes3actor](../../types/tes3actor), string): Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
+	* `actor` ([tes3actor](../../types/tes3actor), string): *Optional*. Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+	* `mobile` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
 	* `spell` ([tes3spell](../../types/tes3spell), string): The spell to check.
 
 **Returns**:
@@ -3307,7 +3311,7 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 * `messageOrParams` (string, table)
 	* `message` (string)
 	* `buttons` (string[]): *Optional*. An array of strings to use for buttons.
-	* `callback` (function): The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+	* `callback` (function): *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 	* `showInDialog` (boolean): *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 	* `duration` (number): *Optional*. Overrides how long the toast-style message remains visible.
 * `formatAdditions` (variadic): *Optional*. Only used if messageOrParams is a string.
@@ -3518,7 +3522,7 @@ local executed = tes3.playSound({ sound = ..., reference = ..., loop = ..., mixC
 **Parameters**:
 
 * `params` (table)
-	* `sound` ([tes3sound](../../types/tes3sound), string): The sound object, or id of the sound to look for.
+	* `sound` ([tes3sound](../../types/tes3sound), string): *Optional*. The sound object, or id of the sound to look for.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.
 	* `loop` (boolean): *Default*: `false`. If true, the sound will loop.
 	* `mixChannel` (number): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
@@ -3872,17 +3876,18 @@ tes3.removeSound({ sound = ..., reference = ... })
 ### `tes3.removeSpell`
 <div class="search_terms" style="display: none">removespell, spell</div>
 
-Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired.
+Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired. At least one of the `actor`, `mobile` or `reference` arguments needs to be passed.
 
 ```lua
-local wasRemoved = tes3.removeSpell({ reference = ..., actor = ..., spell = ..., updateGUI = ... })
+local wasRemoved = tes3.removeSpell({ reference = ..., actor = ..., mobile = ..., spell = ..., updateGUI = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
-	* `actor` ([tes3actor](../../types/tes3actor), string): Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
+	* `actor` ([tes3actor](../../types/tes3actor), string): *Optional*. Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+	* `mobile` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
 	* `spell` ([tes3spell](../../types/tes3spell), string): The spell to remove.
 	* `updateGUI` (boolean): *Default*: `true`. If true, the GUI will be updated respecting the removal of the spell. This can be useful to disable when batch-removing many spells. The batch should be ended with [`tes3.updateMagicGUI`](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) to reflect the changes.
 
@@ -4205,15 +4210,14 @@ tes3.setItemIsStolen({ item = ..., from = ..., stolen = ... })
 Sets the index of a given journal in a way similar to the mwscript function SetJournalIndex.
 
 ```lua
-local wasSet = tes3.setJournalIndex({ id = ..., index = ..., speaker = ..., showMessage = ... })
+local wasSet = tes3.setJournalIndex({ id = ..., index = ..., showMessage = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `id` ([tes3dialogue](../../types/tes3dialogue), string)
-	* `index` (number)
-	* `speaker` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
+	* `index` (integer)
 	* `showMessage` (boolean): *Default*: `false`. If set, a message may be shown to the player.
 
 **Returns**:
@@ -4611,12 +4615,12 @@ local hasLineOfSight = tes3.testLineOfSight({ reference1 = ..., reference2 = ...
 **Parameters**:
 
 * `params` (table)
-	* `reference1` ([tes3reference](../../types/tes3reference)): Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
-	* `reference2` ([tes3reference](../../types/tes3reference)): Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
-	* `position1` ([tes3vector3](../../types/tes3vector3), table): Position of the starting point of the LoS check. Modified by height1.
-	* `height1` ([tes3vector3](../../types/tes3vector3), table): *Optional*. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.
-	* `position2` ([tes3vector3](../../types/tes3vector3), table): Position of the ending point of the LoS check. Modified by height2.
-	* `height2` ([tes3vector3](../../types/tes3vector3), table): *Optional*. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.
+	* `reference1` ([tes3reference](../../types/tes3reference)): *Optional*. Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
+	* `reference2` ([tes3reference](../../types/tes3reference)): *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
+	* `position1` ([tes3vector3](../../types/tes3vector3), table): *Optional*. Position of the starting point of the LoS check. Modified by height1.
+	* `height1` (number): *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
+	* `position2` ([tes3vector3](../../types/tes3vector3), table): *Optional*. Position of the ending point of the LoS check. Modified by height2.
+	* `height2` (number): *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 
 **Returns**:
 
@@ -4768,19 +4772,20 @@ tes3.updateInventoryGUI({ reference = ... })
 Updates the journal index in a way similar to the mwscript function Journal.
 
 ```lua
-local wasSet = tes3.updateJournal({ id = ..., index = ..., showMessage = ... })
+local wasUpdated = tes3.updateJournal({ id = ..., index = ..., speaker = ..., showMessage = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `id` ([tes3dialogue](../../types/tes3dialogue), string)
-	* `index` (number)
-	* `showMessage` (boolean): *Default*: `false`. If set, a message may be shown to the player.
+	* `index` (integer)
+	* `speaker` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
+	* `showMessage` (boolean): *Default*: `true`. If set, a message may be shown to the player.
 
 **Returns**:
 
-* `wasSet` (boolean)
+* `wasUpdated` (boolean)
 
 ***
 

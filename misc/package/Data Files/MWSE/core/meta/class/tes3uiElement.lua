@@ -288,14 +288,14 @@ function tes3uiElement:createLabel(params) end
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.
 --- 
---- `text`: string — A model path. This path is relative to `Data Files`.
+--- `path`: string — A model path. This path is relative to `Data Files`.
 --- @return tes3uiElement result No description yet available.
 function tes3uiElement:createNif(params) end
 
 ---Table parameter definitions for `tes3uiElement.createNif`.
 --- @class tes3uiElement.createNif.params
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
---- @field text string A model path. This path is relative to `Data Files`.
+--- @field path string A model path. This path is relative to `Data Files`.
 
 --- Creates a multi-line text input element, with line wrapping on. To receive input the keyboard must be captured with `tes3ui.acquireTextInput(element)`. Read the input with the `text` property. Write an initial value to edit by setting the `text` property.
 --- 

@@ -79,6 +79,27 @@ local function formatDescription(description)
 	return "--- " .. formatLineBreaks(description)
 end
 
+---@param types string[]
+local function insertNil(types)
+	local hasNil = false
+	for _, type in ipairs(types) do
+		if type == "nil" then
+			hasNil = true
+		elseif type:startswith("fun(") then
+			-- If the type ends with "|fun(): someReturnType", don't append nil
+			-- at the end. That won't make the argument optional, but will
+			-- change the type of the function's return value
+			print("Types length: ", #types)
+			table.insert(types, #types, "nil")
+			hasNil = true
+			break
+		end
+	end
+	if (not hasNil) then
+		table.insert(types, "nil")
+	end
+end
+
 local function getAllPossibleVariationsOfType(type, package)
 	if (not type) then
 		return nil
@@ -108,15 +129,13 @@ local function getAllPossibleVariationsOfType(type, package)
 
 	if (package.optional or package.default ~= nil) then
 		-- If we only have one type, just add ? to it.
-		if (#types == 1) then
+		if (#types == 1 and (not types[1]:startswith("fun("))) then
 			if (not types[1]:endswith("?")) then
 				types[1] = types[1] .. "?"
 			end
 		else
 			-- Otherwise add `nil` to the list if it isn't already there.
-			if (not table.find(types, "nil")) then
-				table.insert(types, "nil")
-			end
+			insertNil(types)
 		end
 	end
 

@@ -923,14 +923,14 @@ local result = myObject:createLabel({ id = ..., text = ... })
 Creates a NIF model from a file. Still under research.
 
 ```lua
-local result = myObject:createNif({ id = ..., text = ... })
+local result = myObject:createNif({ id = ..., path = ... })
 ```
 
 **Parameters**:
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `text` (string): A model path. This path is relative to `Data Files`.
+	* `path` (string): A model path. This path is relative to `Data Files`.
 
 **Returns**:
 

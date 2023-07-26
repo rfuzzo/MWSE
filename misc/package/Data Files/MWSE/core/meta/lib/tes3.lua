@@ -196,7 +196,7 @@ function tes3.addJournalEntry(params) end
 --- 
 --- `usesNegativeLighting`: boolean? — *Default*: `true`. A flag which controls whether this effect uses negative lighting.
 --- 
---- `onTick`: fun(e: tes3magicEffectTickEventData)? — *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
+--- `onTick`: nil|fun(e: tes3magicEffectTickEventData) — *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
 --- --- 		- `tickParams` (table)
 --- --- 			- `effectId` (number)
 --- --- 			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
@@ -235,7 +235,7 @@ function tes3.addJournalEntry(params) end
 --- --- 			- `id` (string): The ID of the creature object to summon.
 --- --- 
 --- 
---- `onCollision`: fun(e: tes3magicEffectCollisionEventData)? — *Optional*. A function which will be called when a spell containing this spell effect collides with something.
+--- `onCollision`: nil|fun(e: tes3magicEffectCollisionEventData) — *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 --- @return tes3magicEffect effect No description yet available.
 function tes3.addMagicEffect(params) end
 
@@ -277,7 +277,7 @@ function tes3.addMagicEffect(params) end
 --- @field targetsSkills boolean? *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
 --- @field unreflectable boolean? *Default*: `true`. A flag which controls whether this effect can be reflected.
 --- @field usesNegativeLighting boolean? *Default*: `true`. A flag which controls whether this effect uses negative lighting.
---- @field onTick fun(e: tes3magicEffectTickEventData)? *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
+--- @field onTick nil|fun(e: tes3magicEffectTickEventData) *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
 --- 		- `tickParams` (table)
 --- 			- `effectId` (number)
 --- 			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
@@ -315,7 +315,7 @@ function tes3.addMagicEffect(params) end
 --- 			**Parameters:**
 --- 			- `id` (string): The ID of the creature object to summon.
 --- 
---- @field onCollision fun(e: tes3magicEffectCollisionEventData)? *Optional*. A function which will be called when a spell containing this spell effect collides with something.
+--- @field onCollision nil|fun(e: tes3magicEffectCollisionEventData) *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 
 --- Causes a misc item to be recognized as a soul gem, so that it can be used for soul trapping.
 ---
@@ -330,25 +330,31 @@ function tes3.addSoulGem(params) end
 --- @class tes3.addSoulGem.params
 --- @field item tes3misc|string The item to recognize as a soul gem.
 
---- Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.
+--- Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied. At least one of the `actor`, `mobile` or `reference` arguments needs to be passed.
 --- @param params tes3.addSpell.params This table accepts the following values:
 --- 
---- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
+--- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
 --- 
---- `actor`: tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string — Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- `actor`: tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string|nil — *Optional*. Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- 
+--- `mobile`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
 --- 
 --- `spell`: tes3spell|string — The spell to add.
 --- 
 --- `updateGUI`: boolean? — *Default*: `true`. If true, the GUI will be updated respecting the adding of the spell. This can be useful to disable when batch-adding many spells. The batch should be ended with [`tes3.updateMagicGUI`](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) to reflect the changes.
+--- 
+--- `bypassResistances`: boolean? — *Default*: `true`. Should the resistances be bypassed when applying the spell?
 --- @return boolean wasAdded True if the spell was successfully added. This can be false if the actor's race or birthsign already contains the spell.
 function tes3.addSpell(params) end
 
 ---Table parameter definitions for `tes3.addSpell`.
 --- @class tes3.addSpell.params
---- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
---- @field actor tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
+--- @field actor tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string|nil *Optional*. Who to give the spell to. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- @field mobile tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. Who to give the spell to. To manipulate an actor without specifying any particular reference, use `actor` instead.
 --- @field spell tes3spell|string The spell to add.
 --- @field updateGUI boolean? *Default*: `true`. If true, the GUI will be updated respecting the adding of the spell. This can be useful to disable when batch-adding many spells. The batch should be ended with [`tes3.updateMagicGUI`](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) to reflect the changes.
+--- @field bypassResistances boolean? *Default*: `true`. Should the resistances be bypassed when applying the spell?
 
 --- Adds a topic to the valid topic list for the player. This doesn't create a dynamic new topic.
 --- @param params tes3.addTopic.params This table accepts the following values:
@@ -1344,14 +1350,20 @@ function tes3.getQuickKey(params) end
 --- @field slot number The key to retrieve data for. This is a value between 1 and 9.
 
 --- Fetches the first reference for a given base object ID.
---- @param id string No description yet available.
+--- @param id string? *Optional*. No description yet available.
 --- @return tes3reference reference No description yet available.
 function tes3.getReference(id) end
 
 --- Gets the current region the player is in. This checks the player's current cell first, but will fall back to the last exterior cell.
---- @param useDoors boolean? *Default*: `false`. No description yet available.
---- @return tes3region region No description yet available.
-function tes3.getRegion(useDoors) end
+--- @param params tes3.getRegion.params? This table accepts the following values:
+--- 
+--- `useDoors`: boolean? — *Default*: `false`. No description yet available.
+--- @return tes3region|nil region No description yet available.
+function tes3.getRegion(params) end
+
+---Table parameter definitions for `tes3.getRegion`.
+--- @class tes3.getRegion.params
+--- @field useDoors boolean? *Default*: `false`. No description yet available.
 
 --- Locates and returns a script by a given id.
 --- @param id string No description yet available.
@@ -1504,12 +1516,14 @@ function tes3.hasOwnershipAccess(params) end
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Default*: `tes3.player`. The actor to check permissions for.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string The reference to check access of.
 
---- Determines if the player has access to a given spell.
+--- Determines if the player has access to a given spell. At least one of the `actor`, `mobile` or `reference` arguments needs to be passed.
 --- @param params tes3.hasSpell.params This table accepts the following values:
 --- 
---- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
+--- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
 --- 
---- `actor`: tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string — Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- `actor`: tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string|nil — *Optional*. Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- 
+--- `mobile`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
 --- 
 --- `spell`: tes3spell|string — The spell to check.
 --- @return boolean hasSpell True if the spell exists in the actor's spell list, race spell list, or birthsign spell list.
@@ -1517,8 +1531,9 @@ function tes3.hasSpell(params) end
 
 ---Table parameter definitions for `tes3.hasSpell`.
 --- @class tes3.hasSpell.params
---- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
---- @field actor tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
+--- @field actor tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string|nil *Optional*. Who to check the spell list of. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- @field mobile tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. Who to check the spell list of. To check an actor without specifying any particular reference, use `actor` instead.
 --- @field spell tes3spell|string The spell to check.
 
 --- Increases player's kill count of a certain type of actor by one.
@@ -1676,7 +1691,7 @@ function tes3.menuMode() end
 --- 
 --- `buttons`: string[]? — *Optional*. An array of strings to use for buttons.
 --- 
---- `callback`: function — The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- `callback`: function? — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- 
 --- `showInDialog`: boolean? — *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- 
@@ -1689,7 +1704,7 @@ function tes3.messageBox(messageOrParams, ...) end
 --- @class tes3.messageBox.messageOrParams
 --- @field message string No description yet available.
 --- @field buttons string[]? *Optional*. An array of strings to use for buttons.
---- @field callback function The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- @field callback function? *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- @field showInDialog boolean? *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- @field duration number? *Optional*. Overrides how long the toast-style message remains visible.
 
@@ -1810,7 +1825,7 @@ function tes3.playItemPickupSound(params) end
 --- **Note**: MP3 sound files can only be played if they are inside \\Vo\\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 --- @param params tes3.playSound.params This table accepts the following values:
 --- 
---- `sound`: tes3sound|string — The sound object, or id of the sound to look for.
+--- `sound`: tes3sound|string|nil — *Optional*. The sound object, or id of the sound to look for.
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.
 --- 
@@ -1828,7 +1843,7 @@ function tes3.playSound(params) end
 
 ---Table parameter definitions for `tes3.playSound`.
 --- @class tes3.playSound.params
---- @field sound tes3sound|string The sound object, or id of the sound to look for.
+--- @field sound tes3sound|string|nil *Optional*. The sound object, or id of the sound to look for.
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.
 --- @field loop boolean? *Default*: `false`. If true, the sound will loop.
 --- @field mixChannel number? *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
@@ -2052,12 +2067,14 @@ function tes3.removeSound(params) end
 --- @field sound tes3sound|string|nil The sound object, or id of the sound to look for. If no sound is passed, removes every sound on the reference.
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference the sound is attached to.
 
---- Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired.
+--- Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired. At least one of the `actor`, `mobile` or `reference` arguments needs to be passed.
 --- @param params tes3.removeSpell.params This table accepts the following values:
 --- 
---- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
+--- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
 --- 
---- `actor`: tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string — Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- `actor`: tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string|nil — *Optional*. Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- 
+--- `mobile`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
 --- 
 --- `spell`: tes3spell|string — The spell to remove.
 --- 
@@ -2067,8 +2084,9 @@ function tes3.removeSpell(params) end
 
 ---Table parameter definitions for `tes3.removeSpell`.
 --- @class tes3.removeSpell.params
---- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
---- @field actor tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
+--- @field actor tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|string|nil *Optional*. Who to remove the spell from. Providing a base actor can be done before a save has been loaded, but may not correctly update effects for instanced versions of that actor in an active save.
+--- @field mobile tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. Who to remove the spell from. To manipulate an actor without specifying any particular reference, use `actor` instead.
 --- @field spell tes3spell|string The spell to remove.
 --- @field updateGUI boolean? *Default*: `true`. If true, the GUI will be updated respecting the removal of the spell. This can be useful to disable when batch-removing many spells. The batch should be ended with [`tes3.updateMagicGUI`](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) to reflect the changes.
 
@@ -2358,9 +2376,7 @@ function tes3.setItemIsStolen(params) end
 --- 
 --- `id`: tes3dialogue|string — No description yet available.
 --- 
---- `index`: number — No description yet available.
---- 
---- `speaker`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
+--- `index`: integer — No description yet available.
 --- 
 --- `showMessage`: boolean? — *Default*: `false`. If set, a message may be shown to the player.
 --- @return boolean wasSet No description yet available.
@@ -2369,8 +2385,7 @@ function tes3.setJournalIndex(params) end
 ---Table parameter definitions for `tes3.setJournalIndex`.
 --- @class tes3.setJournalIndex.params
 --- @field id tes3dialogue|string No description yet available.
---- @field index number No description yet available.
---- @field speaker tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
+--- @field index integer No description yet available.
 --- @field showMessage boolean? *Default*: `false`. If set, a message may be shown to the player.
 
 --- Sets player's kill count of a certain type of actor.
@@ -2668,28 +2683,28 @@ function tes3.tapKey(keyCode) end
 --- The collision root node is used for testing, if present in the model.
 --- @param params tes3.testLineOfSight.params This table accepts the following values:
 --- 
---- `reference1`: tes3reference — Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
+--- `reference1`: tes3reference? — *Optional*. Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
 --- 
---- `reference2`: tes3reference — Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
+--- `reference2`: tes3reference? — *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
 --- 
---- `position1`: tes3vector3|table — Position of the starting point of the LoS check. Modified by height1.
+--- `position1`: tes3vector3|table|nil — *Optional*. Position of the starting point of the LoS check. Modified by height1.
 --- 
---- `height1`: tes3vector3|table|nil — *Optional*. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.
+--- `height1`: number? — *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 --- 
---- `position2`: tes3vector3|table — Position of the ending point of the LoS check. Modified by height2.
+--- `position2`: tes3vector3|table|nil — *Optional*. Position of the ending point of the LoS check. Modified by height2.
 --- 
---- `height2`: tes3vector3|table|nil — *Optional*. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.
+--- `height2`: number? — *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 --- @return boolean hasLineOfSight No description yet available.
 function tes3.testLineOfSight(params) end
 
 ---Table parameter definitions for `tes3.testLineOfSight`.
 --- @class tes3.testLineOfSight.params
---- @field reference1 tes3reference Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
---- @field reference2 tes3reference Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
---- @field position1 tes3vector3|table Position of the starting point of the LoS check. Modified by height1.
---- @field height1 tes3vector3|table|nil *Optional*. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.
---- @field position2 tes3vector3|table Position of the ending point of the LoS check. Modified by height2.
---- @field height2 tes3vector3|table|nil *Optional*. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground. Defaults to 0.
+--- @field reference1 tes3reference? *Optional*. Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
+--- @field reference2 tes3reference? *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
+--- @field position1 tes3vector3|table|nil *Optional*. Position of the starting point of the LoS check. Modified by height1.
+--- @field height1 number? *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
+--- @field position2 tes3vector3|table|nil *Optional*. Position of the ending point of the LoS check. Modified by height2.
+--- @field height2 number? *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 
 --- Forces a toggle of the player's POV the next simulation frame, and returns if the player was previously in 3rd person. Multiple calls in the same frame will not stack.
 --- @return boolean was3rdPerson No description yet available.
@@ -2794,17 +2809,20 @@ function tes3.updateInventoryGUI(params) end
 --- 
 --- `id`: tes3dialogue|string — No description yet available.
 --- 
---- `index`: number — No description yet available.
+--- `index`: integer — No description yet available.
 --- 
---- `showMessage`: boolean? — *Default*: `false`. If set, a message may be shown to the player.
---- @return boolean wasSet No description yet available.
+--- `speaker`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
+--- 
+--- `showMessage`: boolean? — *Default*: `true`. If set, a message may be shown to the player.
+--- @return boolean wasUpdated No description yet available.
 function tes3.updateJournal(params) end
 
 ---Table parameter definitions for `tes3.updateJournal`.
 --- @class tes3.updateJournal.params
 --- @field id tes3dialogue|string No description yet available.
---- @field index number No description yet available.
---- @field showMessage boolean? *Default*: `false`. If set, a message may be shown to the player.
+--- @field index integer No description yet available.
+--- @field speaker tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
+--- @field showMessage boolean? *Default*: `true`. If set, a message may be shown to the player.
 
 --- Forces the GUI to update magic-relevant elements for a given reference. This can be used after many calls to magic- or magic item-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.
 --- @param params tes3.updateMagicGUI.params This table accepts the following values:

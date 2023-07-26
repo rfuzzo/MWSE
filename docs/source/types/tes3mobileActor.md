@@ -351,7 +351,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../../types/tes3spell), [tes3enchantment](../../types/tes3enchantment))
 
 ***
 
