@@ -106,8 +106,15 @@ local function getAllPossibleVariationsOfType(type, package)
 	end
 
 	if (type:startswith("table<")) then
-		local keyType, valueType = type:match("table<(.+), (.+)>")
-		return string.format("table<%s, %s>", getAllPossibleVariationsOfType(keyType, package), getAllPossibleVariationsOfType(valueType, package))
+		local keyType, valueType, other = type:match("table<(.+), (.+)>(.*)")
+		other = getAllPossibleVariationsOfType(other:sub(2), package)
+		return string.format("table<%s, %s>%s%s",
+			getAllPossibleVariationsOfType(keyType, package),
+			getAllPossibleVariationsOfType(valueType, package),
+			other ~= "" and "|" or "",
+			other
+		)
+
 	end
 
 	local types = {}
