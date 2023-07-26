@@ -13,15 +13,19 @@ Allows control of MGE weather features.
 ### `getDistantFog`
 <div class="search_terms" style="display: none">getdistantfog, distantfog</div>
 
-No description yet available.
+This function returns the distant fog settings for given weather type. These can be found in the Distant Land Weather Settings in MGE XE.
 
 ```lua
-mgeWeatherConfig.getDistantFog(weather)
+local result = mgeWeatherConfig.getDistantFog(weather)
 ```
 
 **Parameters**:
 
-* `weather` (number)
+* `weather` (integer): Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+
+**Returns**:
+
+* `result` ([mgeDistantFogTable](../../types/mgeDistantFogTable))
 
 ***
 
@@ -36,11 +40,11 @@ local result = mgeWeatherConfig.getPerPixelLighting(weather)
 
 **Parameters**:
 
-* `weather` (number)
+* `weather` (integer): Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
 **Returns**:
 
-* `result` (table&lt;string, number&gt;)
+* `result` ([mgePerPixelLightingTable](../../types/mgePerPixelLightingTable))
 
 ***
 
@@ -55,7 +59,7 @@ local scatters = mgeWeatherConfig.getScattering()
 
 **Returns**:
 
-* `scatters` (table&lt;string, [tes3vector3](../../types/tes3vector3)&gt;)
+* `scatters` ([mgeScatteringTable](../../types/mgeScatteringTable))
 
 ***
 
@@ -70,7 +74,7 @@ local scatters = mgeWeatherConfig.getSkylightScattering()
 
 **Returns**:
 
-* `scatters` (table&lt;string, number[]|number&gt;)
+* `scatters` ([mgeSkylightScatteringTable](../../types/mgeSkylightScatteringTable))
 
 ***
 
@@ -85,18 +89,18 @@ local result = mgeWeatherConfig.getWind(weather)
 
 **Parameters**:
 
-* `weather` (number)
+* `weather` (integer): Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
 **Returns**:
 
-* `result` (table&lt;string, number&gt;): A package containing the speed property.
+* `result` ([mgeWindTable](../../types/mgeWindTable)): A package containing the speed property.
 
 ***
 
 ### `setDistantFog`
 <div class="search_terms" style="display: none">setdistantfog, distantfog</div>
 
-No description yet available.
+This is used to change the distant fog settings for given weather type.
 
 ```lua
 mgeWeatherConfig.setDistantFog({ weather = ..., distance = ..., offset = ... })
@@ -104,10 +108,10 @@ mgeWeatherConfig.setDistantFog({ weather = ..., distance = ..., offset = ... })
 
 **Parameters**:
 
-* `params` (table)
-	* `weather` (number)
-	* `distance` (number)
-	* `offset` (number)
+* `params` (table, [mgeDistantFogTable](../../types/mgeDistantFogTable))
+	* `weather` (integer): Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+	* `distance` (number): Corresponds to the value of "Fog range factor" setting for given weather in the Distant Land Weather Settings of MGE XE.
+	* `offset` (number): Corresponds to the value of "Fog offset" setting for given weather in the Distant Land Weather Settings of MGE XE.
 
 ***
 
@@ -122,10 +126,10 @@ mgeWeatherConfig.setPerPixelLighting({ weather = ..., sun = ..., ambient = ... }
 
 **Parameters**:
 
-* `params` (table)
-	* `weather` (number)
-	* `sun` (number)
-	* `ambient` (number)
+* `params` (table, [mgePerPixelLightingTable](../../types/mgePerPixelLightingTable))
+	* `weather` (integer): Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+	* `sun` (number): Corresponds to the value of "Sun brightness multiplier" setting for given weather in the Per-pixel Lighting Settings menu of MGE XE.
+	* `ambient` (number): Corresponds to the value of "Ambient brightness multiplier" setting for given weather in the Per-pixel Lighting Settings menu of MGE XE.
 
 ***
 
@@ -140,7 +144,7 @@ mgeWeatherConfig.setScattering({ inscatter = ..., outscatter = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table, [mgeScatteringTable](../../types/mgeScatteringTable))
 	* `inscatter` ([tes3vector3](../../types/tes3vector3), table)
 	* `outscatter` ([tes3vector3](../../types/tes3vector3), table)
 
@@ -157,7 +161,7 @@ mgeWeatherConfig.setSkylightScattering({ skylight = ..., mix = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table, [mgeSkylightScatteringTable](../../types/mgeSkylightScatteringTable))
 	* `skylight` ([tes3vector3](../../types/tes3vector3), table)
 	* `mix` (number): *Default*: `0.44`.
 
@@ -174,7 +178,7 @@ mgeWeatherConfig.setWind({ weather = ..., speed = ... })
 
 **Parameters**:
 
-* `params` (table)
-	* `weather` (number)
+* `params` (table, [mgeWindTable](../../types/mgeWindTable))
+	* `weather` (integer): Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 	* `speed` (number)
 
