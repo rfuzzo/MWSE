@@ -66,8 +66,8 @@ function tes3reference:activate(reference) end
 --- @param flagIndex integer The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 function tes3reference:clearActionFlag(flagIndex) end
 
---- Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory.
---- @return boolean result No description yet available.
+--- Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory. Also, marks the new cloned reference as modified.
+--- @return boolean cloned Returns `true` if the reference was successfully cloned. Returns `false` if the reference was already cloned or can't be cloned.
 function tes3reference:clone() end
 
 --- Disables the reference, removes all its attachments, resets its scale, and sets the reference to be deleted.
