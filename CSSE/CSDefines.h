@@ -1,8 +1,8 @@
 #pragma once
 
 namespace se::cs {
-	struct AIConfig;
 	struct Actor;
+	struct AIConfig;
 	struct AnimatedObject;
 	struct Apparatus;
 	struct Armor;
@@ -32,6 +32,7 @@ namespace se::cs {
 	struct Race;
 	struct RecordHandler;
 	struct Reference;
+	struct Region;
 	struct RepairTool;
 	struct Script;
 	struct Skill;

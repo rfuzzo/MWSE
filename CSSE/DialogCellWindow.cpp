@@ -65,7 +65,7 @@ namespace se::cs::dialog::cell_window {
 			return true;
 		}
 
-		return matchDispatcher(cell->getObjectID());
+		return matchDispatcher(cell->getEditorId());
 	}
 
 	bool FilterRefsList_RefMatchesSearch(const Reference* reference) {

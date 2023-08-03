@@ -358,6 +358,9 @@
     <ClInclude Include="DialogActorAIWindow.h">
       <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="CSRegion.h">
+      <Filter>Header Files\CS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
