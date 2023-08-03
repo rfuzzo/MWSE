@@ -684,6 +684,19 @@ namespace mwse::lua {
 		return player;
 	}
 
+	void __fastcall OnPlayerMobileDestruction(TES3::MobilePlayer* macp) {
+		// Call overwritten code.
+		const auto TES3_MobilePlayer_Dtor = reinterpret_cast<void(__thiscall*)(TES3::MobilePlayer*)>(0x5662F0);
+		TES3_MobilePlayer_Dtor(macp);
+
+		// Clear the player shortcuts.
+		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
+		auto& state = stateHandle.state;
+		state["tes3"]["mobilePlayer"] = sol::nil;
+		state["tes3"]["player"] = sol::nil;
+		state["tes3"]["player1stPerson"] = sol::nil;
+	}
+
 	//
 	// Hook: Finished initializing game code.
 	//
@@ -4563,6 +4576,7 @@ namespace mwse::lua {
 		// Hook the MACP creation functions to update lua variables that point to the player.
 		genCallEnforced(0x5661A0, 0x4E5770, reinterpret_cast<DWORD>(OnPlayerReferenceAssigned));
 		genCallEnforced(0x4C0180, 0x4E4510, reinterpret_cast<DWORD>(OnPlayerReferenceCreated));
+		genCallEnforced(0x565F53, 0x5662F0, reinterpret_cast<DWORD>(OnPlayerMobileDestruction));
 
 		// Event: initialized. Hook initial plugin loading and merging function.
 		genCallEnforced(0x419EE7, 0x40E790, reinterpret_cast<DWORD>(InitDataHandler));
