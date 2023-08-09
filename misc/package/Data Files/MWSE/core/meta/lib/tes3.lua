@@ -406,7 +406,13 @@ function tes3.advanceTime(params) end
 --- @field resting boolean? *Default*: `false`. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.
 --- @field updateEnvironment boolean? *Default*: `true`. Controls if the weather system is updated for each hour passed.
 
+--- Applies magic effects from a spell, potion, or enchantment on the given actor instantly. You can also apply any custom set of effects, by passing an effects table.
 --- 
+--- Usage:
+--- 
+--- - To apply a potion pass a `reference`.
+--- - When applying a spell, the `reference` will be the spell's caster, and the `target` will be the spell's target.
+--- - When using enchantment, you need to pass the `reference`, `target`, and `fromStack`. The charge of the item in the `fromStack` will be used. If that item is out of charge no enchantment will be applied.
 --- @param params tes3.applyMagicSource.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — A reference on which the magic source will be applied.
@@ -419,9 +425,7 @@ function tes3.advanceTime(params) end
 --- 
 --- `createCopy`: boolean? — *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
 --- 
---- `fromStack`: tes3equipmentStack? — *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
---- 
---- `castChance`: number? — *Optional*. This parameter allows overriding the casting chance of the magic source.
+--- `fromStack`: tes3equipmentStack? — *Optional*. The piece of equipment this magic source is coming from. This item's charge will be used. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 --- 
 --- `target`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The target of the magic.
 --- 
@@ -436,8 +440,7 @@ function tes3.applyMagicSource(params) end
 --- @field name string? *Optional*. While optional for other uses, if applying alchemy as a source, you must specify a name for the magic source.
 --- @field effects table? *Optional*. A table of custom effects to apply as a potion. Maximal number of effects is 8.
 --- @field createCopy boolean? *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
---- @field fromStack tes3equipmentStack? *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
---- @field castChance number? *Optional*. This parameter allows overriding the casting chance of the magic source.
+--- @field fromStack tes3equipmentStack? *Optional*. The piece of equipment this magic source is coming from. This item's charge will be used. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The target of the magic.
 --- @field bypassResistances boolean? *Default*: `false`. Is this effect going to bypass magic resistance?
 
@@ -1335,7 +1338,7 @@ function tes3.getPlayerRef() end
 --- This function is used to see what the player is looking at. Unlike a real raycast, this does not work in all circumstances. For instance, combat targets aren't returned by this function. You can access the last hit combat target using [`mobileActor.actionData.hitTarget`](https://mwse.github.io/MWSE/types/tes3actionData/#hittarget). Other option is to use `tes3.rayTest`.
 --- 
 --- As a general rule, it will return the reference if the information box is shown when it is looked at.
---- @return tes3reference result No description yet available.
+--- @return tes3reference|nil result No description yet available.
 function tes3.getPlayerTarget() end
 
 --- This function retrieves data for a quick key.
@@ -2218,7 +2221,7 @@ function tes3.setAIActivate(params) end
 --- 
 --- `destination`: tes3vector3|table — No description yet available.
 --- 
---- `duration`: number? — *Default*: `0`. How long the escorter will do the escorting, in hours.
+--- `duration`: integer? — *Default*: `0`. How long the escorter will do the escorting, in hours.
 --- 
 --- `cell`: tes3cell|string|nil — *Optional*. No description yet available.
 --- 
@@ -2230,7 +2233,7 @@ function tes3.setAIEscort(params) end
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference The escorting actor.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor being escorted.
 --- @field destination tes3vector3|table No description yet available.
---- @field duration number? *Default*: `0`. How long the escorter will do the escorting, in hours.
+--- @field duration integer? *Default*: `0`. How long the escorter will do the escorting, in hours.
 --- @field cell tes3cell|string|nil *Optional*. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
@@ -2243,7 +2246,7 @@ function tes3.setAIEscort(params) end
 --- 
 --- `destination`: tes3vector3|table|nil — *Optional*. No description yet available.
 --- 
---- `duration`: number? — *Default*: `0`. How long the follower will follow, in hours.
+--- `duration`: integer? — *Default*: `0`. How long the follower will follow, in hours.
 --- 
 --- `cell`: tes3cell|string|nil — *Optional*. No description yet available.
 --- 
@@ -2255,7 +2258,7 @@ function tes3.setAIFollow(params) end
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference This is the actor that will follow another one.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to follow.
 --- @field destination tes3vector3|table|nil *Optional*. No description yet available.
---- @field duration number? *Default*: `0`. How long the follower will follow, in hours.
+--- @field duration integer? *Default*: `0`. How long the follower will follow, in hours.
 --- @field cell tes3cell|string|nil *Optional*. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
@@ -2280,13 +2283,13 @@ function tes3.setAITravel(params) end
 --- 
 --- `reference`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — This actor will wander around.
 --- 
---- `idles`: number[] — An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
+--- `idles`: integer[] — An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
 --- 
---- `range`: number? — *Default*: `0`. No description yet available.
+--- `range`: integer? — *Default*: `0`. No description yet available.
 --- 
---- `duration`: number? — *Default*: `0`. How long the actor will be wandering around, in hours.
+--- `duration`: integer? — *Default*: `0`. How long the actor will be wandering around, in hours.
 --- 
---- `time`: number? — *Default*: `0`. No description yet available.
+--- `time`: integer? — *Default*: `0`. No description yet available.
 --- 
 --- `reset`: boolean? — *Default*: `true`. No description yet available.
 function tes3.setAIWander(params) end
@@ -2294,10 +2297,10 @@ function tes3.setAIWander(params) end
 ---Table parameter definitions for `tes3.setAIWander`.
 --- @class tes3.setAIWander.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference This actor will wander around.
---- @field idles number[] An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
---- @field range number? *Default*: `0`. No description yet available.
---- @field duration number? *Default*: `0`. How long the actor will be wandering around, in hours.
---- @field time number? *Default*: `0`. No description yet available.
+--- @field idles integer[] An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
+--- @field range integer? *Default*: `0`. No description yet available.
+--- @field duration integer? *Default*: `0`. How long the actor will be wandering around, in hours.
+--- @field time integer? *Default*: `0`. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
 --- This function sets a reference's animation groups' timings to a specified value.
@@ -2438,7 +2441,7 @@ function tes3.setMarkLocation(params) end
 --- 
 --- `remove`: boolean? — *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
 --- 
---- `owner`: tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string — Assigns this NPC or a faction as the owner of the reference.
+--- `owner`: tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string|nil — *Optional*. Assigns this NPC or a faction as the owner of the reference.
 --- 
 --- `requiredGlobal`: tes3globalVariable? — *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 --- 
@@ -2449,7 +2452,7 @@ function tes3.setOwner(params) end
 --- @class tes3.setOwner.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string A reference whose owner to set.
 --- @field remove boolean? *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
---- @field owner tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string Assigns this NPC or a faction as the owner of the reference.
+--- @field owner tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string|nil *Optional*. Assigns this NPC or a faction as the owner of the reference.
 --- @field requiredGlobal tes3globalVariable? *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 --- @field requiredRank number? *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 
@@ -2811,7 +2814,7 @@ function tes3.updateInventoryGUI(params) end
 --- 
 --- `index`: integer — No description yet available.
 --- 
---- `speaker`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
+--- `speaker`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string|nil — *Default*: `tes3.mobilePlayer`. No description yet available.
 --- 
 --- `showMessage`: boolean? — *Default*: `true`. If set, a message may be shown to the player.
 --- @return boolean wasUpdated No description yet available.
@@ -2821,7 +2824,7 @@ function tes3.updateJournal(params) end
 --- @class tes3.updateJournal.params
 --- @field id tes3dialogue|string No description yet available.
 --- @field index integer No description yet available.
---- @field speaker tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
+--- @field speaker tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string|nil *Default*: `tes3.mobilePlayer`. No description yet available.
 --- @field showMessage boolean? *Default*: `true`. If set, a message may be shown to the player.
 
 --- Forces the GUI to update magic-relevant elements for a given reference. This can be used after many calls to magic- or magic item-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.

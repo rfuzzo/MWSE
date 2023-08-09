@@ -603,10 +603,16 @@ local hoursPassed = tes3.advanceTime({ hours = ..., resting = ..., updateEnviron
 ### `tes3.applyMagicSource`
 <div class="search_terms" style="display: none">applymagicsource, magicsource</div>
 
+Applies magic effects from a spell, potion, or enchantment on the given actor instantly. You can also apply any custom set of effects, by passing an effects table.
 
+Usage:
+
+- To apply a potion pass a `reference`.
+- When applying a spell, the `reference` will be the spell's caster, and the `target` will be the spell's target.
+- When using enchantment, you need to pass the `reference`, `target`, and `fromStack`. The charge of the item in the `fromStack` will be used. If that item is out of charge no enchantment will be applied.
 
 ```lua
-local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = ..., effects = ..., createCopy = ..., fromStack = ..., castChance = ..., target = ..., bypassResistances = ... })
+local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = ..., effects = ..., createCopy = ..., fromStack = ..., target = ..., bypassResistances = ... })
 ```
 
 **Parameters**:
@@ -625,8 +631,7 @@ local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = .
 		* `min` (number): *Default*: `0`. The minimal magintude of the effect per tick.
 		* `max` (number): *Default*: `0`. The maximal magnitude of the effect per tick.
 	* `createCopy` (boolean): *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
-	* `fromStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
-	* `castChance` (number): *Optional*. This parameter allows overriding the casting chance of the magic source.
+	* `fromStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): *Optional*. The piece of equipment this magic source is coming from. This item's charge will be used. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The target of the magic.
 	* `bypassResistances` (boolean): *Default*: `false`. Is this effect going to bypass magic resistance?
 
@@ -2460,7 +2465,7 @@ local result = tes3.getPlayerTarget()
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../../types/tes3reference), nil)
 
 ***
 
@@ -3691,7 +3696,7 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 	This example performs a ray test and displays all results in the entire ray test, rather than ending at the first object hit.
 
 	```lua
-	local results = tes3.rayTest{ tes3.getCameraPosition(), direction = tes3.getCameraVector(), findAll = true }
+	local results = tes3.rayTest{ position = tes3.getCameraPosition(), direction = tes3.getCameraVector(), findAll = true }
 	if results then
 		for i, hit in pairs(results) do
 			mwse.log("Ray hit #%d: %s", i, hit.reference or "<non-reference>");
@@ -4042,7 +4047,7 @@ tes3.setAIEscort({ reference = ..., target = ..., destination = ..., duration = 
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference)): The escorting actor.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor)): The actor being escorted.
 	* `destination` ([tes3vector3](../../types/tes3vector3), table)
-	* `duration` (number): *Default*: `0`. How long the escorter will do the escorting, in hours.
+	* `duration` (integer): *Default*: `0`. How long the escorter will do the escorting, in hours.
 	* `cell` ([tes3cell](../../types/tes3cell), string): *Optional*.
 	* `reset` (boolean): *Default*: `true`.
 
@@ -4063,7 +4068,7 @@ tes3.setAIFollow({ reference = ..., target = ..., destination = ..., duration = 
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference)): This is the actor that will follow another one.
 	* `target` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor)): The actor to follow.
 	* `destination` ([tes3vector3](../../types/tes3vector3), table): *Optional*.
-	* `duration` (number): *Default*: `0`. How long the follower will follow, in hours.
+	* `duration` (integer): *Default*: `0`. How long the follower will follow, in hours.
 	* `cell` ([tes3cell](../../types/tes3cell), string): *Optional*.
 	* `reset` (boolean): *Default*: `true`.
 
@@ -4100,10 +4105,10 @@ tes3.setAIWander({ reference = ..., idles = ..., range = ..., duration = ..., ti
 
 * `params` (table)
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference)): This actor will wander around.
-	* `idles` (number[]): An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
-	* `range` (number): *Default*: `0`.
-	* `duration` (number): *Default*: `0`. How long the actor will be wandering around, in hours.
-	* `time` (number): *Default*: `0`.
+	* `idles` (integer[]): An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
+	* `range` (integer): *Default*: `0`.
+	* `duration` (integer): *Default*: `0`. How long the actor will be wandering around, in hours.
+	* `time` (integer): *Default*: `0`.
 	* `reset` (boolean): *Default*: `true`.
 
 ***
@@ -4296,7 +4301,7 @@ tes3.setOwner({ reference = ..., remove = ..., owner = ..., requiredGlobal = ...
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): A reference whose owner to set.
 	* `remove` (boolean): *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
-	* `owner` ([tes3npc](../../types/tes3npc), [tes3npcInstance](../../types/tes3npcInstance), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobileCreature](../../types/tes3mobileCreature), [tes3reference](../../types/tes3reference), [tes3faction](../../types/tes3faction), string): Assigns this NPC or a faction as the owner of the reference.
+	* `owner` ([tes3npc](../../types/tes3npc), [tes3npcInstance](../../types/tes3npcInstance), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobileCreature](../../types/tes3mobileCreature), [tes3reference](../../types/tes3reference), [tes3faction](../../types/tes3faction), string): *Optional*. Assigns this NPC or a faction as the owner of the reference.
 	* `requiredGlobal` ([tes3globalVariable](../../types/tes3globalVariable)): *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 	* `requiredRank` (number): *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 
@@ -4780,7 +4785,7 @@ local wasUpdated = tes3.updateJournal({ id = ..., index = ..., speaker = ..., sh
 * `params` (table)
 	* `id` ([tes3dialogue](../../types/tes3dialogue), string)
 	* `index` (integer)
-	* `speaker` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
+	* `speaker` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Default*: `tes3.mobilePlayer`.
 	* `showMessage` (boolean): *Default*: `true`. If set, a message may be shown to the player.
 
 **Returns**:
