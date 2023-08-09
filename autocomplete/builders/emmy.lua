@@ -52,8 +52,8 @@ end
 --- have one or more methods or functions. This the avoids creation of tables
 --- in the global namespace for virtual types - types that only existent
 --- in the annotations.
----@param package packageClass
----@return boolean
+--- @param package packageClass
+--- @return boolean
 local function shouldCreateTable(package)
 	return (
 		package.type == "lib" or
@@ -79,7 +79,7 @@ local function formatDescription(description)
 	return "--- " .. formatLineBreaks(description)
 end
 
----@param types string[]
+--- @param types string[]
 local function insertNil(types)
 	local hasNil = false
 	for _, type in ipairs(types) do
@@ -89,7 +89,6 @@ local function insertNil(types)
 			-- If the type ends with "|fun(): someReturnType", don't append nil
 			-- at the end. That won't make the argument optional, but will
 			-- change the type of the function's return value
-			print("Types length: ", #types)
 			table.insert(types, #types, "nil")
 			hasNil = true
 			break
@@ -114,7 +113,6 @@ local function getAllPossibleVariationsOfType(type, package)
 			other ~= "" and "|" or "",
 			other
 		)
-
 	end
 
 	local types = {}

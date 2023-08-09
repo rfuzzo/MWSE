@@ -148,9 +148,9 @@ function table.deepcopy(t)
 	return copy
 end
 
----@param t table
----@param value any
----@return boolean
+--- @param t table
+--- @param value any
+--- @return boolean
 function table.removevalue(t, value)
 	local i = table.find(t, value)
 	if (i ~= nil) then
@@ -244,9 +244,9 @@ end
 -- Cache the original lfs.rmdir and replace it with a version that supports recursion.
 lfs.rmdir_old = lfs.rmdir
 
----@param dir string
----@param recursive boolean
----@return boolean
+--- @param dir string
+--- @param recursive boolean
+--- @return boolean
 function lfs.rmdir(dir, recursive)
 	-- Default to not being recursive.
 	local recursive = recursive or false
@@ -267,7 +267,7 @@ function lfs.rmdir(dir, recursive)
 	return lfs.rmdir_old(dir)
 end
 
----@param path string
+--- @param path string
 function lfs.remakedir(path)
 	assert(lfs.rmdir(path, true))
 	assert(lfs.mkdir(path))
@@ -393,12 +393,12 @@ end
 -- Package compilation
 --
 
----@class exampleTable
----@field title string|nil The example title.
----@field description string|nil The description of the example.
+--- @class exampleTable
+--- @field title string|nil The example title.
+--- @field description string|nil The description of the example.
 
 --- @class package
---- @field key package The name of the file that generated this package.
+--- @field key string The name of the file that generated this package.
 --- @field type string The type definition for the package.
 --- @field folder string The folder that the package was created from.
 --- @field parent package The package this package is a child of.
@@ -415,7 +415,7 @@ end
 --- @field inherits string The class that this class descends from.
 --- @field isAbstract boolean
 --- @field methods package[]|nil
---- @field allDescendents string
+--- @field allDescendents table<string, packageClass>
 --- @field directDescendents table<string, packageClass>
 
 --- @class packageFunction : package
