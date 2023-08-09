@@ -103,9 +103,36 @@ The currently nocked projectile the associated actor is using. It is available w
 
 A number from the [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/references/physical-attack-types/) enumeration identifying the physical attack type. Can be `tes3.physicalAttackType.slash`, `.chop`, `.thrust`, `.projectile`, `.creature1`, `.creature2`, or `.creature3.`
 
+Proper time to change the attack direction is the [attackStart](https://mwse.github.io/MWSE/events/attackStart/) event. See the example below to see how.
+
 **Returns**:
 
 * `result` (number)
+
+??? example "Example: Changing axe attack direction"
+
+	```lua
+	
+	-- In this example, we force the attack
+	-- direction for axes to always be chop
+	
+	---@param e attackStartEventData
+	local function onAttackStart(e)
+		local mobile = e.reference.mobile
+		if not mobile then return end
+	
+		local weapon = mobile.readiedWeapon.object --[[@as tes3weapon]]
+	
+		if weapon.type == tes3.weaponType.axeOneHand
+		or weapon.type == tes3.weaponType.axeTwoHand then
+			-- Now actually change the attack direction
+			e.attackType = tes3.physicalAttackType.chop
+		end
+	end
+	
+	event.register(tes3.event.attackStart, onAttackStart)
+
+	```
 
 ***
 
