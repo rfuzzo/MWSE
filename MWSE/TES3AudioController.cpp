@@ -23,6 +23,10 @@ namespace TES3 {
 				volume = eventData.get_or("volume", volume);
 			}
 			mwse::lua::event::MusicChangeTrackEvent::ms_Context = "invalid";
+
+			if (eventData.get_or("block", false)) {
+				return;
+			}
 		}
 
 		TES3_AudioController_changeMusicTrack(this, filename.c_str(), crossfadeMillis, volume);
