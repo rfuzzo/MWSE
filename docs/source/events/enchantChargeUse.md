@@ -29,4 +29,7 @@ event.register(tes3.event.enchantChargeUse, enchantChargeUseCallback)
 * `item` ([tes3item](../../types/tes3item)): *Read-only*. Only available when isCast is true. The item used to cast the enchantment.
 * `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. Only available when isCast is true. The item data of the item used to cast the enchantment.
 * `source` ([tes3enchantment](../../types/tes3enchantment)): *Read-only*. The enchantment being used or examined by the UI.
+* `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance), nil): *Read-only*. Only available when isCast is true. The instance object of the magic being cast.
+
+Warning: The sourceInstance may be destroyed immediately if the cast fails due to insufficient charge. Do not keep a long-lived reference to this sourceInstance. If you need to reference it in the future, save the source's `serialNumber` and look it up with `tes3.getMagicSourceInstanceBySerial`.
 
