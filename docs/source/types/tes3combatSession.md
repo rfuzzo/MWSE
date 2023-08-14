@@ -48,7 +48,7 @@ The combat distance.
 ### `lastUseTimestamp`
 <div class="search_terms" style="display: none">lastusetimestamp</div>
 
-No description yet available.
+Used by the MCP to implement enchanted item cooldown.
 
 **Returns**:
 
@@ -86,16 +86,16 @@ The next action. From observed behavior, this roughly maps to:
 Value | Behavior
 ----- | ---------
 0     | Undecided
-1	  | Use melee weapon
-2	  | Use marksman weapon
-3	  | Use hand to hand attacks
-4	  | Use on-touch offensive spell
-5	  | Use on-target offensive spell
-6	  | Use summon spell
-7	  | Flee
-8	  | Cast on-self empowering spell (For example, Ancestor Guardian)
-9	  | MaybeEquipUseItem?
-10	  | Use enchanted item
+1     | Use melee weapon
+2     | Use marksman weapon
+3     | Use hand to hand attacks
+4     | Use on-touch offensive spell
+5     | Use on-target offensive spell
+6     | Use summon spell
+7     | Flee
+8     | Cast on-self empowering spell (For example, Ancestor Guardian)
+9     | MaybeEquipUseItem?
+10    | Use enchanted item
 
 
 **Returns**:
@@ -187,7 +187,7 @@ local result = myObject:selectAlchemyWithEffect(id)
 
 **Parameters**:
 
-* `id` (integer)
+* `id` (integer): Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 
