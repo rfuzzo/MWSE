@@ -1353,7 +1353,7 @@ function tes3.getQuickKey(params) end
 --- @field slot number The key to retrieve data for. This is a value between 1 and 9.
 
 --- Fetches the first reference for a given base object ID.
---- @param id string? *Optional*. No description yet available.
+--- @param id string? *Optional*. Passing "player" or "playersavegame" will return the player reference.
 --- @return tes3reference reference No description yet available.
 function tes3.getReference(id) end
 

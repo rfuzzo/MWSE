@@ -2500,7 +2500,7 @@ local reference = tes3.getReference(id)
 
 **Parameters**:
 
-* `id` (string): *Optional*.
+* `id` (string): *Optional*. Passing "player" or "playersavegame" will return the player reference.
 
 **Returns**:
 
