@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-A set of variables that differentiates one item from another.
+A set of variables that differentiates one item from another. The game adds itemData to items on equipping.
 
 ## Properties
 
