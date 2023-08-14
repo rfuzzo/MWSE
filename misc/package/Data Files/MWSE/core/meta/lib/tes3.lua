@@ -225,10 +225,10 @@ function tes3.addJournalEntry(params) end
 --- --- 			**Parameters:**
 --- --- 			- `id` (string): The ID of the weapon object to summon.
 --- --- 
---- --- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
+--- --- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
 --- --- 			**Parameters:**
 --- --- 			- `id` (string): The ID of the armor object to summon.
---- --- 			- `id2` (string): *Optional.* The ID of the additional armor object to summon.
+--- --- 			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
 --- --- 
 --- --- 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
 --- --- 			**Parameters:**
@@ -306,10 +306,10 @@ function tes3.addMagicEffect(params) end
 --- 			**Parameters:**
 --- 			- `id` (string): The ID of the weapon object to summon.
 --- 
---- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
+--- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
 --- 			**Parameters:**
 --- 			- `id` (string): The ID of the armor object to summon.
---- 			- `id2` (string): *Optional.* The ID of the additional armor object to summon.
+--- 			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
 --- 
 --- 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
 --- 			**Parameters:**
