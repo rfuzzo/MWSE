@@ -22,7 +22,7 @@
 --- @field currentSoundgenIndices number[] *Read-only*. The index of the currently used sound generator for each of the [body sections](https://mwse.github.io/MWSE/references/animation-body-sections/).
 --- @field deltaTime number The time in seconds since the last update.
 --- @field flags number 
---- @field hasOverrideAnimations boolean *Read-only*. 
+--- @field hasOverrideAnimations boolean *Read-only*. True if the actor has some custom animations in the override layer. For example, drumming or sitting. These are assigned in the Construction Set or using [tes3.loadAnimation](https://mwse.github.io/MWSE/apis/tes3/#tes3loadanimation).
 --- @field headGeometry niParticles|niRotatingParticles|niTriShape 
 --- @field headMorphTiming number The timing offset of the head morph controller. Used to select either blinking or lipsync animations. Actively updated by the animation system during blinking or voiceovers. Timing is specific to the current head model.
 --- @field headNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
@@ -31,8 +31,8 @@
 --- 
 --- Value      | Behavior
 --- ---------- | ---------
----       -1   | The NPC isn't speaking.
----  0.0 - 1.0 | The NPC is speaking. The `lipsyncLevel` can be `0.0` when there is a silent part in the sound file the NPC is currently speaking.
+---       -1.0 | The NPC isn't speaking.
+---  0.0 - 1.0 | The NPC is speaking. The value roughly corresponds to the current loudness of the voiceover line. The `lipsyncLevel` is `0.0` when there is a silent part in the sound file the NPC is currently speaking. Also, the speaking actor's mouth is opened more when the value is higher.
 --- 
 --- @field loopCounts number[] *Read-only*. 
 --- @field manager niKeyframeManager 

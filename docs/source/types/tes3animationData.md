@@ -171,7 +171,7 @@ The time in seconds since the last update.
 ### `hasOverrideAnimations`
 <div class="search_terms" style="display: none">hasoverrideanimations, overrideanimations</div>
 
-*Read-only*. 
+*Read-only*. True if the actor has some custom animations in the override layer. For example, drumming or sitting. These are assigned in the Construction Set or using [tes3.loadAnimation](https://mwse.github.io/MWSE/apis/tes3/#tes3loadanimation).
 
 **Returns**:
 
@@ -230,8 +230,8 @@ This value indicates whether the NPC is speaking or not. The table below describ
 
 Value      | Behavior
 ---------- | ---------
-      -1   | The NPC isn't speaking.
- 0.0 - 1.0 | The NPC is speaking. The `lipsyncLevel` can be `0.0` when there is a silent part in the sound file the NPC is currently speaking.
+      -1.0 | The NPC isn't speaking.
+ 0.0 - 1.0 | The NPC is speaking. The value roughly corresponds to the current loudness of the voiceover line. The `lipsyncLevel` is `0.0` when there is a silent part in the sound file the NPC is currently speaking. Also, the speaking actor's mouth is opened more when the value is higher.
 
 
 **Returns**:
