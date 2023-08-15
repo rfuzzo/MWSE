@@ -2713,6 +2713,35 @@ function tes3.testLineOfSight(params) end
 --- @return boolean was3rdPerson No description yet available.
 function tes3.togglePOV() end
 
+--- Moves all the items in one reference's inventory to another.
+--- @param params tes3.transferInventory.params This table accepts the following values:
+--- 
+--- `from`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to take items from.
+--- 
+--- `to`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to give items to.
+--- 
+--- `playSound`: boolean? — *Default*: `true`. If false, the up/down sound won't be played.
+--- 
+--- `limitCapacity`: boolean? — *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
+--- 
+--- `reevaluateEquipment`: boolean? — *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player.
+--- 
+--- `equipProjectiles`: boolean? — *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
+--- 
+--- `checkCrime`: boolean? — *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
+--- @return boolean transferred No description yet available.
+function tes3.transferInventory(params) end
+
+---Table parameter definitions for `tes3.transferInventory`.
+--- @class tes3.transferInventory.params
+--- @field from tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to take items from.
+--- @field to tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give items to.
+--- @field playSound boolean? *Default*: `true`. If false, the up/down sound won't be played.
+--- @field limitCapacity boolean? *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
+--- @field reevaluateEquipment boolean? *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player.
+--- @field equipProjectiles boolean? *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
+--- @field checkCrime boolean? *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
+
 --- Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.
 --- @param params tes3.transferItem.params This table accepts the following values:
 --- 

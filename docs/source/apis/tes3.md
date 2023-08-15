@@ -4648,6 +4648,32 @@ local was3rdPerson = tes3.togglePOV()
 
 ***
 
+### `tes3.transferInventory`
+<div class="search_terms" style="display: none">transferinventory</div>
+
+Moves all the items in one reference's inventory to another.
+
+```lua
+local transferred = tes3.transferInventory({ from = ..., to = ..., playSound = ..., limitCapacity = ..., reevaluateEquipment = ..., equipProjectiles = ..., checkCrime = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `from` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to take items from.
+	* `to` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to give items to.
+	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound won't be played.
+	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
+	* `reevaluateEquipment` (boolean): *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player.
+	* `equipProjectiles` (boolean): *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
+	* `checkCrime` (boolean): *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
+
+**Returns**:
+
+* `transferred` (boolean)
+
+***
+
 ### `tes3.transferItem`
 <div class="search_terms" style="display: none">transferitem</div>
 
