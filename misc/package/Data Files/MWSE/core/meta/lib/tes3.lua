@@ -1811,7 +1811,7 @@ function tes3.playAnimation(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to attach the sound to.
 --- 
---- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon — No description yet available.
+--- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string — The appropriate item up/down sound will be played for item of this type.
 --- 
 --- `pickup`: boolean? — *Default*: `true`. If false, the place down item will be used.
 --- @return boolean executed No description yet available.
@@ -1820,7 +1820,7 @@ function tes3.playItemPickupSound(params) end
 ---Table parameter definitions for `tes3.playItemPickupSound`.
 --- @class tes3.playItemPickupSound.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to attach the sound to.
---- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon No description yet available.
+--- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The appropriate item up/down sound will be played for item of this type.
 --- @field pickup boolean? *Default*: `true`. If false, the place down item will be used.
 
 --- Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` or `soundObjectPlay` otherwise.
@@ -2523,14 +2523,14 @@ function tes3.setStatistic(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — No description yet available.
 --- 
---- `spell`: tes3spell|string — No description yet available.
+--- `spell`: tes3spell|string|nil — Passing `nil` will untrap the object.
 --- @return boolean trapped No description yet available.
 function tes3.setTrap(params) end
 
 ---Table parameter definitions for `tes3.setTrap`.
 --- @class tes3.setTrap.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
---- @field spell tes3spell|string No description yet available.
+--- @field spell tes3spell|string|nil Passing `nil` will untrap the object.
 
 --- Toggles the camera into vanity mode. In vanity mode the camera is in third person and it is orbiting slowly around the player character. Returns true if changed to vanity mode.
 --- 
@@ -2732,9 +2732,9 @@ function tes3.togglePOV() end
 --- 
 --- `reevaluateEquipment`: boolean? — *Default*: `true`. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.
 --- 
---- `equipProjectiles`: boolean? — *Default*: `true`. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
+--- `equipProjectiles`: boolean? — *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
 --- 
---- `updateGUI`: boolean? — *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
+--- `updateGUI`: boolean? — *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [tes3ui.forcePlayerInventoryUpdate](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) or [tes3.updateInventoryGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updateinventorygui) and [tes3.updateMagicGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) must manually be called after all inventory updates are finished.
 --- @return number transferredCount No description yet available.
 function tes3.transferItem(params) end
 
@@ -2748,8 +2748,8 @@ function tes3.transferItem(params) end
 --- @field playSound boolean? *Default*: `true`. If false, the up/down sound for the item won't be played.
 --- @field limitCapacity boolean? *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
 --- @field reevaluateEquipment boolean? *Default*: `true`. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.
---- @field equipProjectiles boolean? *Default*: `true`. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
---- @field updateGUI boolean? *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
+--- @field equipProjectiles boolean? *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
+--- @field updateGUI boolean? *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [tes3ui.forcePlayerInventoryUpdate](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) or [tes3.updateInventoryGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updateinventorygui) and [tes3.updateMagicGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) must manually be called after all inventory updates are finished.
 
 --- Emulates the player committing a crime. Returns `true` if the crime was witnessed by an actor.
 --- @param params tes3.triggerCrime.params This table accepts the following values:

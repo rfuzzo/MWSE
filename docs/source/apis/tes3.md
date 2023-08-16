@@ -3504,7 +3504,7 @@ local executed = tes3.playItemPickupSound({ reference = ..., item = ..., pickup 
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to attach the sound to.
-	* `item` ([tes3item](../../types/tes3item))
+	* `item` ([tes3item](../../types/tes3item), string): The appropriate item up/down sound will be played for item of this type.
 	* `pickup` (boolean): *Default*: `true`. If false, the place down item will be used.
 
 **Returns**:
@@ -4384,7 +4384,7 @@ local trapped = tes3.setTrap({ reference = ..., spell = ... })
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
-	* `spell` ([tes3spell](../../types/tes3spell), string)
+	* `spell` ([tes3spell](../../types/tes3spell), string, nil): Passing `nil` will untrap the object.
 
 **Returns**:
 
@@ -4668,8 +4668,8 @@ local transferredCount = tes3.transferItem({ from = ..., to = ..., item = ..., i
 	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound for the item won't be played.
 	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
 	* `reevaluateEquipment` (boolean): *Default*: `true`. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.
-	* `equipProjectiles` (boolean): *Default*: `true`. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
-	* `updateGUI` (boolean): *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
+	* `equipProjectiles` (boolean): *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
+	* `updateGUI` (boolean): *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [tes3ui.forcePlayerInventoryUpdate](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) or [tes3.updateInventoryGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updateinventorygui) and [tes3.updateMagicGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) must manually be called after all inventory updates are finished.
 
 **Returns**:
 
