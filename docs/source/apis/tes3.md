@@ -4171,6 +4171,23 @@ local success = tes3.setEnabled({ reference = ..., toggle = ..., enabled = ... }
 
 ***
 
+### `tes3.setExpelled`
+<div class="search_terms" style="display: none">setexpelled, expelled</div>
+
+This function can expel and undo expelled state for the player in the given faction.
+
+```lua
+tes3.setExpelled({ faction = ..., expelled = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `faction` ([tes3faction](../../types/tes3faction)): The faction the player will be expelled from.
+	* `expelled` (boolean): *Default*: `true`. Passing `false` will make the player regain membership.
+
+***
+
 ### `tes3.setGlobal`
 <div class="search_terms" style="display: none">setglobal, global</div>
 

@@ -2352,6 +2352,19 @@ function tes3.setEnabled(params) end
 --- @field toggle boolean? *Default*: `false`. If true, the enabled state will be toggled.
 --- @field enabled boolean? *Default*: `true`. If not toggling, setting `enabled` to true will enable the reference or to false will disable the reference.
 
+--- This function can expel and undo expelled state for the player in the given faction.
+--- @param params tes3.setExpelled.params This table accepts the following values:
+--- 
+--- `faction`: tes3faction — The faction the player will be expelled from.
+--- 
+--- `expelled`: boolean? — *Default*: `true`. Passing `false` will make the player regain membership.
+function tes3.setExpelled(params) end
+
+---Table parameter definitions for `tes3.setExpelled`.
+--- @class tes3.setExpelled.params
+--- @field faction tes3faction The faction the player will be expelled from.
+--- @field expelled boolean? *Default*: `true`. Passing `false` will make the player regain membership.
+
 --- Sets the value of a global value. If the global could not be found, the function returns false.
 --- @param id string No description yet available.
 --- @param value number No description yet available.
