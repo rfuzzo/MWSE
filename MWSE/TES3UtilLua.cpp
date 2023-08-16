@@ -60,7 +60,7 @@
 #include "TES3MobileCreature.h"
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
-#include "TES3PlayerAnimationController.h" 
+#include "TES3PlayerAnimationController.h"
 #include "TES3Race.h"
 #include "TES3Reference.h"
 #include "TES3Region.h"
@@ -481,7 +481,7 @@ namespace mwse::lua {
 			// Set up our event callback.
 			LuaManager::getInstance().setButtonPressedCallback(params["callback"]);
 
-			// Temporary hook into the function that creates message boxes. 
+			// Temporary hook into the function that creates message boxes.
 			reinterpret_cast<void(__cdecl*)(const char*, ...)>(0x5F1AA0)(message.c_str(), buttonTextStruct, NULL);
 			return TES3::UI::findMenu("MenuMessage");
 		}
@@ -4331,6 +4331,21 @@ namespace mwse::lua {
 		}
 	}
 
+	void setExpelled(sol::table params) {
+		TES3::Faction* faction = getOptionalParamObject<TES3::Faction>(params, "faction");
+		if (faction == nullptr) {
+			throw std::invalid_argument("Invalid 'faction' parameter provided");
+		}
+
+		if (getOptionalParam<bool>(params, "expelled", true)) {
+			faction->setPlayerExpelled(true);
+			TES3::UI::showMessageBox(dataHandler->nonDynamicData->GMSTs[TES3::GMST::sExpelledMessage]->value.asString, nullptr, true);
+		}
+		else {
+			faction->setPlayerExpelled(false);
+		}
+	}
+
 	sol::optional<std::tuple<unsigned char, unsigned char, unsigned char>> getCurrentAnimationGroups(sol::table params) {
 		TES3::Reference* reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -5461,7 +5476,7 @@ namespace mwse::lua {
 			throw std::invalid_argument("Invalid positional params provided. Must provided two references or two positions/heights.");
 		}
 
-		// 
+		//
 		sol::optional<TES3::Vector3> position2;
 		float height1, height2;
 
@@ -6051,6 +6066,7 @@ namespace mwse::lua {
 		tes3["setAnimationTiming"] = setAnimationTiming;
 		tes3["setDestination"] = setDestination;
 		tes3["setEnabled"] = setEnabled;
+		tes3["setExpelled"] = setExpelled;
 		tes3["setGlobal"] = setGlobal;
 		tes3["setItemIsStolen"] = setItemIsStolen;
 		tes3["setJournalIndex"] = setJournalIndex;
