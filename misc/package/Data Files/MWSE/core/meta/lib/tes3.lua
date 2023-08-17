@@ -2519,6 +2519,8 @@ function tes3.setStatistic(params) end
 --- @field limit boolean? *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
 
 --- Sets the trap on a given reference.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3settrap).
 --- @param params tes3.setTrap.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — No description yet available.

@@ -22,5 +22,8 @@ If the caster is the player, the target parameter is optional; without a target,
 		["imitateExplodeSpell"] = {
 			title = "This is an example of how to use tes3.cast instead of mwscript.explodeSpell",
 		},
+		["triggerTrap"] = {
+			title = "Applying the spell of a trapped door or container on an actor"
+		},
 	},
 }

@@ -5,7 +5,7 @@ return {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "color", type = "tes3vector3|table", description = "The RGB values to set in [0.0, 1.0] range." },
+			{ name = "color", type = "tes3vector3|number[]", description = "The RGB values to set in [0.0, 1.0] range. If passing an array, pass 3 numbers." },
 			{ name = "flag", type = "boolean", optional = true, default = false },
 		}
 	}},

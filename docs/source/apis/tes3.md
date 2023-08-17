@@ -835,6 +835,68 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 
 	```
 
+??? example "Example: Applying the spell of a trapped door or container on an actor"
+
+	```lua
+	
+	--- Filter only the objects that can have a trap.
+	---@param object tes3object
+	---@return boolean canHaveTrap
+	local function canHaveTrap(object)
+		local type = object.objectType
+		return (type == tes3.objectType.container or
+				type == tes3.objectType.door)
+	end
+	
+	---@param trappedReference tes3reference
+	---@param targetReference tes3reference? *Default:* tes3.player
+	---@return boolean trapApplied
+	local function triggerTrapSpell(trappedReference, targetReference)
+	
+		-- Set the player as default targetReference.
+		targetReference = targetReference or tes3.player
+	
+		local object = trappedReference.object
+		if not canHaveTrap(object) then
+			return false
+		end
+	
+		local lockNode = trappedReference.lockNode
+		if not lockNode then
+			return false
+		end
+	
+		local trap = lockNode.trap
+		if not trap then
+			return false
+		end
+	
+		tes3.cast({
+			reference = trappedReference,
+			target = targetReference,
+			spell = trap,
+		})
+		lockNode.trap = nil
+		trappedReference.modified = true
+	
+		-- Let the game update the activation tooltip otherwise,
+		-- the tooltip would still say "Trapped" if the activation
+		-- tooltip was active when the triggerTrapSpell() was called.
+		tes3.game:clearTarget()
+		return true
+	end
+	
+	-- To test aim at a trapped door or container and press "u" key.
+	local function onKeyDown()
+		local result = tes3.getPlayerTarget()
+		if not result then return end
+	
+		triggerTrapSpell(result)
+	end
+	event.register(tes3.event.keyDown, onKeyDown, { filter = tes3.scanCode.u })
+
+	```
+
 ***
 
 ### `tes3.checkMerchantOffersService`
@@ -4389,6 +4451,46 @@ local trapped = tes3.setTrap({ reference = ..., spell = ... })
 **Returns**:
 
 * `trapped` (boolean)
+
+??? example "Example: Untrapping a door or container the player is looking at"
+
+	```lua
+	
+	---@param reference tes3reference
+	---@return boolean untrapped
+	local function untrap(reference)
+		local object = reference.object
+	
+		-- Skip objects that can't be trapped.
+		if object.objectType ~= tes3.objectType.door
+		or object.objectType ~= tes3.objectType.container then
+			return false
+		end
+	
+		tes3.setTrap({
+			reference = reference,
+			spell = nil
+		})
+		-- Let the game update the activation tooltip otherwise,
+		-- the tooltip would still say "Trapped".
+		tes3.game:clearTarget()
+	
+		return true
+	end
+	
+	-- To test aim at a trapped door or container and press "u" key.
+	local function onKeyDown()
+		-- Get the player's target and apply it's spell
+		-- on the player if it's trapped.
+	
+		local target = tes3.getPlayerTarget()
+		if not target then return end
+	
+		untrap(target)
+	end
+	event.register(tes3.event.keyDown, onKeyDown, { filter = tes3.scanCode.u })
+
+	```
 
 ***
 

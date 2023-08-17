@@ -5,7 +5,7 @@ return {
 		["type"] = {
 			type = "string",
 			readOnly = true,
-			description = "The type of crime that was committed. The type can be \"attack\", \"killing\", \"stealing\", \"pickpocket\", \"theft\", \"trespass\", and \"werewolf\". Crime \"theft\" is raised when picking up owned items. Crime \"trespass\" is raised when lockpicking, probing or sleeping in owned beds."
+			description = "The type of crime that was committed. The type can be \"attack\", \"killing\", \"stealing\", \"pickpocket\", \"theft\", \"trespass\", and \"werewolf\". Crime \"theft\" is raised when picking up owned items. Crime \"trespass\" is raised when lockpicking, probing, using Open magic on owned doors or chests and sleeping in owned beds."
 		},
 		["position"] = {
 			type = "tes3vector3",
@@ -20,7 +20,7 @@ return {
 		["value"] = {
 			type = "number",
 			readOnly = true,
-			description = "The bounty value of the crime.",
+			description = "The total stolen items value of the crime. Only valid for thefts. See the example below to calculate the bounty incurred on each crime type.",
 		},
 		["victim"] = {
 			type = "tes3actor|tes3faction",
@@ -49,4 +49,9 @@ return {
 		},
 	},
 	filter = "type",
+	examples = {
+		["bountyValue"] = {
+			title = "Getting bounty value after certain crime type",
+		}
+	}
 }
