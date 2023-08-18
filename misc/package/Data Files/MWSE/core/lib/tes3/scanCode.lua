@@ -173,6 +173,7 @@ return {
 	["insert"] = 210,
 	["delete"] = 211,
 	["numpadEnter"] = 156,
+	["printScreen"] = 183,
 	["pause"] = 197,
 	["home"] = 199,
 	["end"] = 207,

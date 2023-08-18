@@ -175,6 +175,7 @@ numpadEnter        | `156` |
 rightCtrl          | `157` |
 rCtrl              | `157` |
 divide             | `181` | Numpad
+printScreen        | `183` |
 rAlt               | `184` |
 rightAlt           | `184` |
 pause              | `197` |
