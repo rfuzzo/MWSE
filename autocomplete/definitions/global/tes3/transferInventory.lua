@@ -7,6 +7,7 @@ return {
 		tableParams = {
 			{ name = "from", type = "tes3reference|tes3mobileActor|string", description = "Who to take items from." },
 			{ name = "to", type = "tes3reference|tes3mobileActor|string", description = "Who to give items to." },
+			{ name = "filter", type = "fun(item: tes3item, itemData?: tes3itemData): boolean", optional = true, description = "You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData." },
 			{ name = "playSound", type = "boolean", optional = true, default = true, description = "If false, the up/down sound won't be played." },
 			{ name = "limitCapacity", type = "boolean", optional = true, default = true, description = "If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, the whole inventory won't be transferred." },
 			{ name = "reevaluateEquipment", type = "boolean", optional = true, default = true, description = "If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player." },-- TODO make it not affect player

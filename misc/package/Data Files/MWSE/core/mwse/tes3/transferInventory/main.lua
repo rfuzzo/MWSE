@@ -37,6 +37,11 @@ function tes3.transferInventory(params)
 	-- Set default parameter values.
 	local playSound = table.get(params, "playSound", true)
 	local reevaluateEquipment = table.get(params, "reevaluateEquipment", true)
+	local filter = table.get(params, "filter", nil)
+	if filter then
+		assert(type(filter) == "function", "Provided 'filter' needs to be a function.")
+	end
+	---@cast filter nil|fun(item: tes3item, itemData?: tes3itemData): boolean
 
 	-- The fromActor needs to be cloned before transfering the items since we
 	-- need to get item counts including the items that come from leveled lists.
@@ -59,10 +64,33 @@ function tes3.transferInventory(params)
 		-- can't remove. Some creatures like atronaches have uncarryable lights
 		-- in their inventory to make them glow that are not supposed to be looted.
 		if item.canCarry ~= false then
-			toTransfer[#toTransfer + 1] = {
-				item = item,
-				count = stack.count
-			}
+			if filter then
+				-- Decompose the stack into individual items
+				local countWithoutVariables = stack.count - (stack.variables and #stack.variables or 0)
+				if countWithoutVariables > 0 then
+					if filter(item) then
+						toTransfer[#toTransfer + 1] = {
+							item = item,
+							count = countWithoutVariables
+						}
+					end
+				end
+
+				for _, itemData in ipairs(stack.variables or {}) do
+					if filter(item, itemData) then
+						toTransfer[#toTransfer + 1] = {
+							item = item,
+							count = 1,
+							itemData = itemData
+						}
+					end
+				end
+			else
+				toTransfer[#toTransfer + 1] = {
+					item = item,
+					count = stack.count
+				}
+			end
 		end
 	end
 
@@ -75,6 +103,7 @@ function tes3.transferInventory(params)
 			to = to,
 			item = item,
 			count = stack.count,
+			itemData = stack.itemData,
 			limitCapacity = params.limitCapacity,
 			equipProjectiles = params.equipProjectiles,
 			reevaluateEquipment = false,

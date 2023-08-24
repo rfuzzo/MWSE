@@ -4654,7 +4654,7 @@ local was3rdPerson = tes3.togglePOV()
 Moves all the items in one reference's inventory to another. Both `to` and `from` objects will be cloned. The function will update the GUI for the `to` and `from` references. This function preserves the `tes3itemData` of the transferred items and handles leveled lists.
 
 ```lua
-local transferred = tes3.transferInventory({ from = ..., to = ..., playSound = ..., limitCapacity = ..., reevaluateEquipment = ..., equipProjectiles = ..., checkCrime = ... })
+local transferred = tes3.transferInventory({ from = ..., to = ..., filter = ..., playSound = ..., limitCapacity = ..., reevaluateEquipment = ..., equipProjectiles = ..., checkCrime = ... })
 ```
 
 **Parameters**:
@@ -4662,6 +4662,7 @@ local transferred = tes3.transferInventory({ from = ..., to = ..., playSound = .
 * `params` (table)
 	* `from` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to take items from.
 	* `to` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to give items to.
+	* `filter` (fun(item: [tes3item](../../types/tes3item), itemData: [tes3itemData](../../types/tes3itemData)): boolean): *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
 	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound won't be played.
 	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, the whole inventory won't be transferred.
 	* `reevaluateEquipment` (boolean): *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player.

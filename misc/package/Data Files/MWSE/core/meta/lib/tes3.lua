@@ -2720,6 +2720,8 @@ function tes3.togglePOV() end
 --- 
 --- `to`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to give items to.
 --- 
+--- `filter`: nil|fun(item: tes3item, itemData?: tes3itemData): boolean — *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
+--- 
 --- `playSound`: boolean? — *Default*: `true`. If false, the up/down sound won't be played.
 --- 
 --- `limitCapacity`: boolean? — *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, the whole inventory won't be transferred.
@@ -2736,6 +2738,7 @@ function tes3.transferInventory(params) end
 --- @class tes3.transferInventory.params
 --- @field from tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to take items from.
 --- @field to tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give items to.
+--- @field filter nil|fun(item: tes3item, itemData?: tes3itemData): boolean *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
 --- @field playSound boolean? *Default*: `true`. If false, the up/down sound won't be played.
 --- @field limitCapacity boolean? *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, the whole inventory won't be transferred.
 --- @field reevaluateEquipment boolean? *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player.
