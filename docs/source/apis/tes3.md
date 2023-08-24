@@ -4651,7 +4651,7 @@ local was3rdPerson = tes3.togglePOV()
 ### `tes3.transferInventory`
 <div class="search_terms" style="display: none">transferinventory</div>
 
-Moves all the items in one reference's inventory to another.
+Moves all the items in one reference's inventory to another. Both `to` and `from` objects will be cloned. The function will update the GUI for the `to` and `from` references. This function preserves the `tes3itemData` of the transferred items and handles leveled lists.
 
 ```lua
 local transferred = tes3.transferInventory({ from = ..., to = ..., playSound = ..., limitCapacity = ..., reevaluateEquipment = ..., equipProjectiles = ..., checkCrime = ... })
@@ -4663,14 +4663,14 @@ local transferred = tes3.transferInventory({ from = ..., to = ..., playSound = .
 	* `from` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to take items from.
 	* `to` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to give items to.
 	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound won't be played.
-	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
+	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, the whole inventory won't be transferred.
 	* `reevaluateEquipment` (boolean): *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does affect the player.
 	* `equipProjectiles` (boolean): *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
 	* `checkCrime` (boolean): *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
 
 **Returns**:
 
-* `transferred` (boolean)
+* `transferred` (boolean): Returns `true` if at least one item was transferred.
 
 ***
 
