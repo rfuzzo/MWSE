@@ -4339,10 +4339,9 @@ namespace mwse::lua {
 
 		if (getOptionalParam<bool>(params, "expelled", true)) {
 			faction->setPlayerExpelled(true);
-			auto expelledMessage = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sExpelledMessage]->value.asString;
-			char message[250];
-			std::snprintf(message, sizeof(message), "%s%s", expelledMessage, faction->getName());
-			TES3::UI::showMessageBox(message, nullptr, true);
+			std::string message = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sExpelledMessage]->value.asString;
+			message.append(faction->getName());
+			TES3::UI::showMessageBox(message.c_str(), nullptr, true);
 		}
 		else {
 			faction->setPlayerExpelled(false);
