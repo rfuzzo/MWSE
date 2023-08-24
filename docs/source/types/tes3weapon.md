@@ -157,7 +157,7 @@ Access to the flag that controls if this weapon bypasses the "Resist normal weap
 ### `isAmmo`
 <div class="search_terms" style="display: none">isammo, ammo</div>
 
-*Read-only*. If true, the weapon is a type of ammunition.
+*Read-only*. If true, the weapon is a type of ammunition. Arrows and bolts are ammunition, while thrown weapons aren't.
 
 **Returns**:
 

@@ -17,7 +17,7 @@ The function to call when this button is clicked. This function will be passed t
 
 **Returns**:
 
-* `result` (fun(callbackParams: table))
+* `result` (nil, fun(callbackParams: table))
 
 ***
 

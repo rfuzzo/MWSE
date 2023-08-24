@@ -1,6 +1,6 @@
 # Operator Definitions Guide
 
-Operator overloads are documented similarly to the methods of their parent class. The operator oveload definition file is just a regular Lua table. The name of the needs to be the same as the Lua [operator metamethod](http://lua-users.org/wiki/MetatableEvents) name without the two leading underscores. The supported operators are:
+Operator overloads are documented similarly to the methods of their parent class. The operator oveload definition file is just a regular Lua table. The name of the oparator needs to be the same as the Lua [operator metamethod](http://lua-users.org/wiki/MetatableEvents) name without the two leading underscores. The supported operators are:
 - unm - unary minus
 - add - addition
 - sub - subtraction
