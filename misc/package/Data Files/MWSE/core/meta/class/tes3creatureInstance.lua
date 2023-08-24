@@ -36,6 +36,6 @@
 --- @field weapon tes3weapon *Read-only*. The creature's currently equipped weapon.
 tes3creatureInstance = {}
 
---- Causes the creature to reevaluate its equipment choices and equip the best available.
+--- Causes the creature to reevaluate its equipment choices and equip the best available. Then, the visible body parts will be updated.
 function tes3creatureInstance:reevaluateEquipment() end
 

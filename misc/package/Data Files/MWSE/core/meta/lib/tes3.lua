@@ -48,7 +48,7 @@ function tes3.addClothingSlot(params) end
 --- @field slot number Clothing slot number. A number greater than 9 to configure a slot for.
 --- @field name string No description yet available.
 
---- Adds an item to a given reference's inventory or mobile's inventory.
+--- Adds an item to a given reference's inventory or mobile's inventory. The `reference` will be cloned if needed.
 --- @param params tes3.addItem.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to give items to.
@@ -1999,7 +1999,7 @@ function tes3.removeEffects(params) end
 --- @field chance number? *Default*: `100`. The chance for the effect to be removed.
 --- @field removeSpell boolean? *Optional*. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if `castType` is not `tes3.spellType.spell.` This causes diseases and curses to be removed when dispelled.
 
---- Removes an item from a given reference's inventory.
+--- Removes an item from a given reference's inventory. Items without itemData will be removed first. The `reference` will be cloned if needed.
 --- @param params tes3.removeItem.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to remove items from.
@@ -2715,7 +2715,7 @@ function tes3.testLineOfSight(params) end
 --- @return boolean was3rdPerson No description yet available.
 function tes3.togglePOV() end
 
---- Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.
+--- Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred. If transfering more than one item, the items without itemData will be transferred first. Both the `from` and `to` references will be cloned if needed.
 --- @param params tes3.transferItem.params This table accepts the following values:
 --- 
 --- `from`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to take items from.
@@ -2724,7 +2724,7 @@ function tes3.togglePOV() end
 --- 
 --- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string — The item to transfer.
 --- 
---- `itemData`: tes3itemData? — *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item.
+--- `itemData`: tes3itemData? — *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item. If `itemData` argument is provided, only one item will be transferred.
 --- 
 --- `count`: number? — *Default*: `1`. The maximum number of items to transfer.
 --- 
@@ -2745,7 +2745,7 @@ function tes3.transferItem(params) end
 --- @field from tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to take items from.
 --- @field to tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give items to.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to transfer.
---- @field itemData tes3itemData? *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item.
+--- @field itemData tes3itemData? *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item. If `itemData` argument is provided, only one item will be transferred.
 --- @field count number? *Default*: `1`. The maximum number of items to transfer.
 --- @field playSound boolean? *Default*: `true`. If false, the up/down sound for the item won't be played.
 --- @field limitCapacity boolean? *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
@@ -2760,7 +2760,7 @@ function tes3.transferItem(params) end
 --- 
 --- `victim`: tes3mobileNPC|tes3mobilePlayer|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|tes3faction|nil — *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
 --- 
---- `value`: number? — *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
+--- `value`: number? — *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that.
 --- 
 --- `forceDetection`: boolean? — *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
 --- @return boolean result No description yet available.
@@ -2770,7 +2770,7 @@ function tes3.triggerCrime(params) end
 --- @class tes3.triggerCrime.params
 --- @field type number? *Default*: `tes3.crimeType.theft`. The type of crime to be committed. Maps to values in the [`tes3.crimeType`](https://mwse.github.io/MWSE/references/crime-types/) table.
 --- @field victim tes3mobileNPC|tes3mobilePlayer|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|tes3faction|nil *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
---- @field value number? *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
+--- @field value number? *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that.
 --- @field forceDetection boolean? *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
 
 --- Changes a reference back from werewolf form to human. This function works only on a reference infected with Lycanthropy, be it the player or any other reference. Returns true if successful.

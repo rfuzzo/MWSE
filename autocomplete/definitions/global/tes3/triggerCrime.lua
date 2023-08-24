@@ -25,7 +25,7 @@ return {
 					type = "number",
 					optional = true,
 					default = "0",
-					description = "Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects."
+					description = "Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that."
 				},
 				{
 					name = "forceDetection",

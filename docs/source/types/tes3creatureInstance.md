@@ -728,7 +728,7 @@ myObject:onInventoryClose(reference)
 ### `reevaluateEquipment`
 <div class="search_terms" style="display: none">reevaluateequipment</div>
 
-Causes the creature to reevaluate its equipment choices and equip the best available.
+Causes the creature to reevaluate its equipment choices and equip the best available. Then, the visible body parts will be updated.
 
 ```lua
 myObject:reevaluateEquipment()

@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.]],
+	description = [[Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred. If transfering more than one item, the items without itemData will be transferred first. Both the `from` and `to` references will be cloned if needed.]],
 	arguments = {{
 		name = "params",
 		type = "table",
@@ -8,7 +8,7 @@ return {
 			{ name = "from", type = "tes3reference|tes3mobileActor|string", description = "Who to take items from." },
 			{ name = "to", type = "tes3reference|tes3mobileActor|string", description = "Who to give items to." },
 			{ name = "item", type = "tes3item|string", description = "The item to transfer." },
-			{ name = "itemData", type = "tes3itemData", optional = true, description = "The specific item data to transfer if, for example, you want to transfer a specific player item." },
+			{ name = "itemData", type = "tes3itemData", optional = true, description = "The specific item data to transfer if, for example, you want to transfer a specific player item. If `itemData` argument is provided, only one item will be transferred." },
 			{ name = "count", type = "number", optional = true, default = "1", description = "The maximum number of items to transfer." },
 			{ name = "playSound", type = "boolean", optional = true, default = true, description = "If false, the up/down sound for the item won't be played." },
 			{ name = "limitCapacity", type = "boolean", optional = true, default = true, description = "If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full." },

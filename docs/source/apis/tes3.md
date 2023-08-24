@@ -170,7 +170,7 @@ tes3.addClothingSlot({ slot = ..., name = ... })
 ### `tes3.addItem`
 <div class="search_terms" style="display: none">additem, item</div>
 
-Adds an item to a given reference's inventory or mobile's inventory.
+Adds an item to a given reference's inventory or mobile's inventory. The `reference` will be cloned if needed.
 
 ```lua
 local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., soul = ..., count = ..., playSound = ..., showMessage = ..., limit = ..., reevaluateEquipment = ..., equipProjectiles = ..., updateGUI = ... })
@@ -3874,7 +3874,7 @@ tes3.removeEffects({ reference = ..., effect = ..., castType = ..., chance = ...
 ### `tes3.removeItem`
 <div class="search_terms" style="display: none">removeitem, item</div>
 
-Removes an item from a given reference's inventory.
+Removes an item from a given reference's inventory. Items without itemData will be removed first. The `reference` will be cloned if needed.
 
 ```lua
 local removedCount = tes3.removeItem({ reference = ..., item = ..., itemData = ..., deleteItemData = ..., count = ..., playSound = ..., reevaluateEquipment = ..., updateGUI = ... })
@@ -4753,7 +4753,7 @@ local was3rdPerson = tes3.togglePOV()
 ### `tes3.transferItem`
 <div class="search_terms" style="display: none">transferitem</div>
 
-Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.
+Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred. If transfering more than one item, the items without itemData will be transferred first. Both the `from` and `to` references will be cloned if needed.
 
 ```lua
 local transferredCount = tes3.transferItem({ from = ..., to = ..., item = ..., itemData = ..., count = ..., playSound = ..., limitCapacity = ..., reevaluateEquipment = ..., equipProjectiles = ..., updateGUI = ... })
@@ -4765,7 +4765,7 @@ local transferredCount = tes3.transferItem({ from = ..., to = ..., item = ..., i
 	* `from` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to take items from.
 	* `to` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to give items to.
 	* `item` ([tes3item](../../types/tes3item), string): The item to transfer.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item.
+	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item. If `itemData` argument is provided, only one item will be transferred.
 	* `count` (number): *Default*: `1`. The maximum number of items to transfer.
 	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound for the item won't be played.
 	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
@@ -4793,7 +4793,7 @@ local result = tes3.triggerCrime({ type = ..., victim = ..., value = ..., forceD
 * `params` (table)
 	* `type` (number): *Default*: `tes3.crimeType.theft`. The type of crime to be committed. Maps to values in the [`tes3.crimeType`](https://mwse.github.io/MWSE/references/crime-types/) table.
 	* `victim` ([tes3mobileNPC](../../types/tes3mobileNPC), [tes3actor](../../types/tes3actor), [tes3faction](../../types/tes3faction)): *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
-	* `value` (number): *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
+	* `value` (number): *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that.
 	* `forceDetection` (boolean): *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
 
 **Returns**:
