@@ -37,6 +37,8 @@ function tes3.transferInventory(params)
 	-- Set default parameter values.
 	local playSound = table.get(params, "playSound", true)
 	local reevaluateEquipment = table.get(params, "reevaluateEquipment", true)
+	local limitCapacity = table.get(params, "limitCapacity", true)
+	local completeTransfer = table.get(params, "completeTransfer", false)
 	local filter = table.get(params, "filter", nil)
 	if filter then
 		assert(type(filter) == "function", "Provided 'filter' needs to be a function.")
@@ -56,7 +58,7 @@ function tes3.transferInventory(params)
 	end
 
 	local toTransfer = {}
-
+	local totalWeight = 0
 	for _, stack in pairs(fromActor.inventory) do
 		local item = stack.object
 		-- Skip uncarryable lights. They are hidden from the interface. A MWSE mod
@@ -73,6 +75,7 @@ function tes3.transferInventory(params)
 							item = item,
 							count = countWithoutVariables
 						}
+						totalWeight = totalWeight + item.weight * countWithoutVariables
 					end
 				end
 
@@ -83,6 +86,7 @@ function tes3.transferInventory(params)
 							count = 1,
 							itemData = itemData
 						}
+						totalWeight = totalWeight + item.weight
 					end
 				end
 			else
@@ -90,7 +94,21 @@ function tes3.transferInventory(params)
 					item = item,
 					count = stack.count
 				}
+				totalWeight = totalWeight + item.weight * stack.count
 			end
+		end
+	end
+
+	if toActor.objectType == tes3.objectType.container and limitCapacity then
+		if toActor.organic then
+			return false
+		end
+
+		local maxCapacity = toActor.capacity
+		local currentWeight = toActor.inventory:calculateWeight()
+		local transferFits = (maxCapacity - currentWeight) >= totalWeight
+		if completeTransfer and not transferFits then
+			return false
 		end
 	end
 
@@ -104,7 +122,7 @@ function tes3.transferInventory(params)
 			item = item,
 			count = stack.count,
 			itemData = stack.itemData,
-			limitCapacity = params.limitCapacity,
+			limitCapacity = limitCapacity,
 			equipProjectiles = params.equipProjectiles,
 			reevaluateEquipment = false,
 			playSound = false,
