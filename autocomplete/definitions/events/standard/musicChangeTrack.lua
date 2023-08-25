@@ -2,6 +2,7 @@ return {
 	type = "event",
 	description = "The `musicChangeTrack` event when the game is changing to play a new piece of music.",
 	blockable = true,
+	related = { "musicSelectTrack" },
 	eventData = {
 		["situation"] = {
 			type = "number",

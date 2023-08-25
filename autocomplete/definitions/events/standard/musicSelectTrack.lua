@@ -2,6 +2,7 @@ return {
 	type = "event",
 	description = "The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. The event can be blocked, which prevents a new explore or battle track from being chosen randomly. Blocking only works if `eventData.music` is not set.",
 	blockable = true,
+	related = { "musicChangeTrack" },
 	eventData = {
 		["situation"] = {
 			type = "number",

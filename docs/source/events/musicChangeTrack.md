@@ -29,3 +29,8 @@ event.register(tes3.event.musicChangeTrack, musicChangeTrackCallback)
 * `situation` (number): *Read-only*. Maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/), indicating combat, non-combat, or scripted music.
 * `volume` (number): The volume of the track to be played, ranging from `0.0` to `1.0`. This can be modified.
 
+
+## Related events
+
+[musicSelectTrack](./musicSelectTrack.md){ .md-button }
+
