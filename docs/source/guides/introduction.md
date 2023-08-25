@@ -72,7 +72,7 @@ The details of which events are available and what event data is exposed to them
 
 ## Support Libraries
 
-On top of all this are support libraries to help make modding easier. An example library is [timer](../apis/timer/), which helps to manage time-based operations.
+On top of all this are support libraries to help make modding easier. An example library is [timer](../apis/timer.md), which helps to manage time-based operations.
 
 ```lua
 -- Define the function we want to call when our timer completes.

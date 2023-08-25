@@ -88,7 +88,7 @@ event.register(tes3.event.initialized, initialized)
 
 At this point, the mod can be tested to confirm the events are set up correctly. To do this, follow the workflow described at the beginning of this guide. When you draw your weapon in-game, you should see a messagebox popup!
 
-The details of which events are available and what event data is exposed to them can be found on the [events](../events/) page.
+The details of which events are available and what event data is exposed to them can be found on the [events](../events/initialized.md) page.
 
 ## Validating the Event & Showing a Messagebox
 Now that the required events have been set up, the `showMessageboxOnWeaponReadied` function should be updated to restrict the types of actions that our code applies to. For the purposes of this guide, the function will only apply to two-handed weapons, and only to the player. The updated function is as follows:
