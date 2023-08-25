@@ -104,7 +104,7 @@ local result = myObject:angle(vec)
 
 **Parameters**:
 
-* `vec` ([tes3vector3](../../types/tes3vector3))
+* `vec` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
@@ -123,7 +123,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -138,11 +138,11 @@ local result = myObject:cross(vec)
 
 **Parameters**:
 
-* `vec` ([tes3vector3](../../types/tes3vector3))
+* `vec` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -157,7 +157,7 @@ local result = myObject:distance(vec)
 
 **Parameters**:
 
-* `vec` ([tes3vector3](../../types/tes3vector3))
+* `vec` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
@@ -176,7 +176,7 @@ local result = myObject:dot(vec)
 
 **Parameters**:
 
-* `vec` ([tes3vector3](../../types/tes3vector3))
+* `vec` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
@@ -195,7 +195,7 @@ local result = myObject:heightDifference(vec)
 
 **Parameters**:
 
-* `vec` ([tes3vector3](../../types/tes3vector3))
+* `vec` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
@@ -214,12 +214,12 @@ local result = myObject:interpolate(targetPoint, distance)
 
 **Parameters**:
 
-* `targetPoint` ([tes3vector3](../../types/tes3vector3))
+* `targetPoint` ([tes3vector3](../types/tes3vector3.md))
 * `distance` (number)
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -249,12 +249,12 @@ local lerpedVector = myObject:lerp(toVector, transition)
 
 **Parameters**:
 
-* `toVector` ([tes3vector3](../../types/tes3vector3)): The vector to interpolate towards.
+* `toVector` ([tes3vector3](../types/tes3vector3.md)): The vector to interpolate towards.
 * `transition` (number): The interpolation value. Must be between `0.0` (closer to this vector) and `1.0` (closer to the other vector).
 
 **Returns**:
 
-* `lerpedVector` ([tes3vector3](../../types/tes3vector3)): The calculated value.
+* `lerpedVector` ([tes3vector3](../types/tes3vector3.md)): The calculated value.
 
 ***
 
@@ -295,7 +295,7 @@ local result = myObject:normalized()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -310,11 +310,11 @@ local result = myObject:outerProduct(vec)
 
 **Parameters**:
 
-* `vec` ([tes3vector3](../../types/tes3vector3))
+* `vec` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -329,7 +329,7 @@ local result = myObject:toColor()
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -352,7 +352,7 @@ local vector = tes3vector3.new(x, y, z)
 
 **Returns**:
 
-* `vector` ([tes3vector3](../../types/tes3vector3))
+* `vector` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -362,7 +362,7 @@ local vector = tes3vector3.new(x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | Standard vector addition. |
+| [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | Standard vector addition. |
 
 ***
 
@@ -370,7 +370,7 @@ local vector = tes3vector3.new(x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3vector3](../../types/tes3vector3) | number | [tes3vector3](../../types/tes3vector3) | Divides the vector by a scalar. |
+| [tes3vector3](../types/tes3vector3.md) | number | [tes3vector3](../types/tes3vector3.md) | Divides the vector by a scalar. |
 
 ***
 
@@ -386,8 +386,8 @@ local vector = tes3vector3.new(x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | The per-element multiplication of two vectors. |
-| [tes3vector3](../../types/tes3vector3) | number | [tes3vector3](../../types/tes3vector3) | Multiplies the vector by a scalar. |
+| [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | The per-element multiplication of two vectors. |
+| [tes3vector3](../types/tes3vector3.md) | number | [tes3vector3](../types/tes3vector3.md) | Multiplies the vector by a scalar. |
 
 ***
 
@@ -395,7 +395,7 @@ local vector = tes3vector3.new(x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | Standard vector subtraction. |
+| [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | Standard vector subtraction. |
 
 ***
 
@@ -403,5 +403,5 @@ local vector = tes3vector3.new(x, y, z)
 
 | Result type | Description |
 | ----------- | ----------- |
-| [tes3vector3](../../types/tes3vector3) | Swaps the sign of the vector's components. |
+| [tes3vector3](../types/tes3vector3.md) | Swaps the sign of the vector's components. |
 

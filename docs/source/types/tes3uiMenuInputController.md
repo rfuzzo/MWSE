@@ -28,7 +28,7 @@ A handle back to the main menu controller.
 
 **Returns**:
 
-* `result` ([tes3uiMenuController](../../types/tes3uiMenuController))
+* `result` ([tes3uiMenuController](../types/tes3uiMenuController.md))
 
 ***
 
@@ -39,7 +39,7 @@ The element that is currently focused for text input.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement), nil)
+* `result` ([tes3uiElement](../types/tes3uiElement.md), nil)
 
 ??? example "Example: Checking if text input is active"
 

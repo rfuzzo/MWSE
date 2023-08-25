@@ -52,7 +52,7 @@ The mwseTimerController responsible for game-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -63,7 +63,7 @@ The mwseTimerController responsible for real-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -74,7 +74,7 @@ The mwseTimerController responsible for simulate-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -125,8 +125,8 @@ local script, reference = mwse.getCurrentMorrowindScriptState()
 
 **Returns**:
 
-* `script` ([tes3script](../../types/tes3script), nil): The currently executing mwscript script, or nil if none is presently being executed.
-* `reference` ([tes3reference](../../types/tes3reference), nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
+* `script` ([tes3script](../types/tes3script.md), nil): The currently executing mwscript script, or nil if none is presently being executed.
+* `reference` ([tes3reference](../types/tes3reference.md), nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
 
 ***
 
@@ -277,7 +277,7 @@ local success = mwse.overrideScript(scriptId, callback)
 **Parameters**:
 
 * `scriptId` (string)
-* `callback` (fun(e: [mwseOverrideScriptCallbackData](../../types/mwseOverrideScriptCallbackData)))
+* `callback` (fun(e: [mwseOverrideScriptCallbackData](../types/mwseOverrideScriptCallbackData.md)))
 
 **Returns**:
 

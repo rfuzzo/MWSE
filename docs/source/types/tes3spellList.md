@@ -19,7 +19,7 @@ Direct access to the spells in this list.
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell)[])
+* `result` ([tes3spell](../types/tes3spell.md)[])
 
 ***
 
@@ -36,7 +36,7 @@ local result = myObject:add(spell)
 
 **Parameters**:
 
-* `spell` (string, [tes3spell](../../types/tes3spell)): The spell.
+* `spell` (string, [tes3spell](../types/tes3spell.md)): The spell.
 
 **Returns**:
 
@@ -55,7 +55,7 @@ local result = myObject:contains(spell)
 
 **Parameters**:
 
-* `spell` (string, [tes3spell](../../types/tes3spell)): The spell.
+* `spell` (string, [tes3spell](../types/tes3spell.md)): The spell.
 
 **Returns**:
 
@@ -78,7 +78,7 @@ local result = myObject:containsType(spellType)
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -93,7 +93,7 @@ local result = myObject:getCheapest()
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -108,7 +108,7 @@ local result = myObject:remove(spell)
 
 **Parameters**:
 
-* `spell` (string, [tes3spell](../../types/tes3spell)): The spell.
+* `spell` (string, [tes3spell](../types/tes3spell.md)): The spell.
 
 **Returns**:
 

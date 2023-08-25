@@ -28,8 +28,8 @@ event.register(tes3.event.calcMoveSpeed, calcMoveSpeedCallback)
 
 ## Event Data
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor whose speed is being calculated.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. mobile’s related reference.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor whose speed is being calculated.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. mobile’s related reference.
 * `speed` (number): The previous speed calculated, starting with the base engine values.
 * `type` (number): *Read-only*. The type of movement that was calculated. This is always 0 for this event.
 
@@ -50,5 +50,5 @@ event.register(tes3.event.calcMoveSpeed, calcMoveSpeedCallback)
 
 ## Related events
 
-[calcMoveSpeed](../calcMoveSpeed/){ .md-button }[calcWalkSpeed](../calcWalkSpeed/){ .md-button }[calcRunSpeed](../calcRunSpeed/){ .md-button }[calcFlySpeed](../calcFlySpeed/){ .md-button }[calcSwimSpeed](../calcSwimSpeed/){ .md-button }[calcSwimRunSpeed](../calcSwimRunSpeed/){ .md-button }
+[calcMoveSpeed](./calcMoveSpeed.md){ .md-button }[calcWalkSpeed](./calcWalkSpeed.md){ .md-button }[calcRunSpeed](./calcRunSpeed.md){ .md-button }[calcFlySpeed](./calcFlySpeed.md){ .md-button }[calcSwimSpeed](./calcSwimSpeed.md){ .md-button }[calcSwimRunSpeed](./calcSwimRunSpeed.md){ .md-button }
 

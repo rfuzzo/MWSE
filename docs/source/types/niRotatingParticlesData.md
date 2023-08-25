@@ -8,7 +8,7 @@
 
 niRotatingParticlesData objects contain the geometry data necessary to render a niRotatingParticles object. When a niRotatingParticles-based object is created, the actual geometry data is stored in an attached niRotatingParticlesData object.
 
-This type inherits the following: [niParticlesData](../../types/niParticlesData), [niTriBasedGeometryData](../../types/niTriBasedGeometryData), [niGeometryData](../../types/niGeometryData), [niObject](../../types/niObject)
+This type inherits the following: [niParticlesData](../types/niParticlesData.md), [niTriBasedGeometryData](../types/niTriBasedGeometryData.md), [niGeometryData](../types/niGeometryData.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `activeCount`
@@ -51,7 +51,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor)[])
+* `result` ([niPackedColor](../types/niPackedColor.md)[])
 
 ***
 
@@ -62,7 +62,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 
 ***
 
@@ -95,7 +95,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion)[])
+* `result` ([niQuaternion](../types/niQuaternion.md)[])
 
 ***
 
@@ -106,7 +106,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -117,7 +117,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -139,7 +139,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2)[])
+* `result` ([tes3vector2](../types/tes3vector2.md)[])
 
 ***
 
@@ -150,7 +150,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2)[])
+* `result` ([tes3vector2](../types/tes3vector2.md)[])
 
 ***
 
@@ -205,7 +205,7 @@ The number of texture coordinate sets in the data.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 
 ***
 
@@ -222,7 +222,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

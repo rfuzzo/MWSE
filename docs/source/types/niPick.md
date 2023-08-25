@@ -51,7 +51,7 @@ The pick record that was last added to the object.
 
 **Returns**:
 
-* `result` ([niPickRecord](../../types/niPickRecord))
+* `result` ([niPickRecord](../types/niPickRecord.md))
 
 ***
 
@@ -85,7 +85,7 @@ The pick type for the object. Maps to values in [`ni.pickType`](https://mwse.git
 
 **Returns**:
 
-* `result` ([niPickRecord](../../types/niPickRecord)[])
+* `result` ([niPickRecord](../types/niPickRecord.md)[])
 
 ***
 
@@ -179,8 +179,8 @@ myObject:pickObjects(origin, direction, append, maxDistance)
 
 **Parameters**:
 
-* `origin` ([tes3vector3](../../types/tes3vector3)): The origin of the ray in world coordinates.
-* `direction` ([tes3vector3](../../types/tes3vector3))
+* `origin` ([tes3vector3](../types/tes3vector3.md)): The origin of the ray in world coordinates.
+* `direction` ([tes3vector3](../types/tes3vector3.md))
 * `append` (boolean): *Default*: `false`. This parameter indicates whether the new results are appended to the results array, or if a new array is formed clearing the results array.
 * `maxDistance` (number): *Optional*. Default value: 0.0F
 

@@ -8,7 +8,7 @@
 
 A structure containing properties specific to paragraph inputs.
 
-This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
+This type inherits the following: [tes3uiWidget](../types/tes3uiWidget.md)
 ## Properties
 
 ### `element`
@@ -18,7 +18,7 @@ Access back to the element this widget interface is for.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 

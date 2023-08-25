@@ -23,7 +23,7 @@ event.register(tes3.event.infoGetText, infoGetTextCallback)
 
 ## Event Data
 
-* `info` ([tes3dialogueInfo](../../types/tes3dialogueInfo)): *Read-only*. The dialogue info object.
+* `info` ([tes3dialogueInfo](../types/tes3dialogueInfo.md)): *Read-only*. The dialogue info object.
 * `loadOriginalText` (fun(self: infoGetTextEventData): string): Loads the original text for the info from the game files, bypassing this event.
 * `text` (string): The text to return. This can be modified. Does not contain the original text. If not set, the original text will be used instead.
 
@@ -57,5 +57,5 @@ event.register(tes3.event.infoGetText, infoGetTextCallback)
 
 ## Related events
 
-[dialogueFiltered](../dialogueFiltered/){ .md-button }[infoGetText](../infoGetText/){ .md-button }[infoLinkResolve](../infoLinkResolve/){ .md-button }[infoResponse](../infoResponse/){ .md-button }[infoFilter](../infoFilter/){ .md-button }[postInfoResponse](../postInfoResponse/){ .md-button }
+[dialogueFiltered](./dialogueFiltered.md){ .md-button }[infoGetText](./infoGetText.md){ .md-button }[infoLinkResolve](./infoLinkResolve.md){ .md-button }[infoResponse](./infoResponse.md){ .md-button }[infoFilter](./infoFilter.md){ .md-button }[postInfoResponse](./postInfoResponse.md){ .md-button }
 

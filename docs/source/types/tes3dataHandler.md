@@ -83,7 +83,7 @@ Access to the current ambient water sound.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -94,7 +94,7 @@ Access to the current ambient water sound.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -105,7 +105,7 @@ Access to the current ambient water sound.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -127,7 +127,7 @@ Access to dontThreadLoad setting.
 
 **Returns**:
 
-* `result` ([tes3dataHandlerExteriorCellData](../../types/tes3dataHandlerExteriorCellData)[])
+* `result` ([tes3dataHandlerExteriorCellData](../types/tes3dataHandlerExteriorCellData.md)[])
 
 ***
 
@@ -138,7 +138,7 @@ Access to dontThreadLoad setting.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -184,7 +184,7 @@ This is used by the engine to check for the player falling out of bounds.
 
 **Returns**:
 
-* `result` ([tes3nonDynamicData](../../types/tes3nonDynamicData))
+* `result` ([tes3nonDynamicData](../types/tes3nonDynamicData.md))
 
 ***
 
@@ -228,7 +228,7 @@ An engine flag that controls if there is a fade in/out between cells.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -239,7 +239,7 @@ An engine flag that controls if there is a fade in/out between cells.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -250,7 +250,7 @@ An engine flag that controls if there is a fade in/out between cells.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 

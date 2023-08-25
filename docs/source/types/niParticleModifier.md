@@ -8,7 +8,7 @@
 
 Abstract base class for particle system modifiers. It affects every particle in a particle system.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ Access to the generic time controller for particle systems.
 
 **Returns**:
 
-* `result` ([niParticleSystemController](../../types/niParticleSystemController))
+* `result` ([niParticleSystemController](../types/niParticleSystemController.md))
 
 ***
 
@@ -29,7 +29,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier))
+* `result` ([niParticleModifier](../types/niParticleModifier.md))
 
 ***
 
@@ -51,7 +51,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -62,7 +62,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -79,7 +79,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

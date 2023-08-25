@@ -158,7 +158,7 @@ local success, error = lfs.lock(filehandle, mode, start, length)
 
 **Parameters**:
 
-* `filehandle` ([ioFile](../../types/ioFile)): The file handle to lock.
+* `filehandle` ([ioFile](../types/ioFile.md)): The file handle to lock.
 * `mode` (string): "r" for a read/shared lock, or "w" for a write/exclusive lock.
 * `start` (number): *Optional*. The starting point of the file to lock.
 * `length` (number): *Optional*. The length of the file, relative to start, to lock.
@@ -185,7 +185,7 @@ local success, error = lfs.lock_dir(path)
 
 **Returns**:
 
-* `success` ([lfsLock](../../types/lfsLock), nil): The lock object to manage, or nil in the case of an error.
+* `success` ([lfsLock](../types/lfsLock.md), nil): The lock object to manage, or nil in the case of an error.
 * `error` (string, nil): In the case of an error, a string describing the issue. In particular, if the lock exists and is not stale it returns the "File exists" message.
 
 ***
@@ -242,7 +242,7 @@ local success, errorOrOldMode = lfs.setmode(file, mode)
 
 **Parameters**:
 
-* `file` ([ioFile](../../types/ioFile)): The file to set mode for.
+* `file` ([ioFile](../types/ioFile.md)): The file to set mode for.
 * `mode` (string): The file's new mode. Can be either "binary" or "text".
 
 **Returns**:
@@ -285,7 +285,7 @@ local success, error = lfs.unlock(filehandle, mode, start, length)
 
 **Parameters**:
 
-* `filehandle` ([ioFile](../../types/ioFile)): The file handle to unlock.
+* `filehandle` ([ioFile](../types/ioFile.md)): The file handle to unlock.
 * `mode` (string): "r" for a read/shared lock, or "w" for a write/exclusive unlock.
 * `start` (number): *Optional*. The starting point of the file to unlock.
 * `length` (number): *Optional*. The length of the file, relative to start, to unlock.

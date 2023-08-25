@@ -39,7 +39,7 @@ Contains information from a standard UI callback. This is the parameter passed t
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -83,7 +83,7 @@ Contains information from a standard UI callback. This is the parameter passed t
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -94,5 +94,5 @@ Contains information from a standard UI callback. This is the parameter passed t
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 

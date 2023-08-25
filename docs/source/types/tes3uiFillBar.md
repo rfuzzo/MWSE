@@ -8,7 +8,7 @@
 
 A structure containing properties specific to fillbars.
 
-This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
+This type inherits the following: [tes3uiWidget](../types/tes3uiWidget.md)
 ## Properties
 
 ### `current`
@@ -29,7 +29,7 @@ Access back to the element this widget interface is for.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -51,7 +51,7 @@ The RGB color of the filled portion. An array of 3 floats with value range [0.0,
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 

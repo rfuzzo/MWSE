@@ -8,7 +8,7 @@
 
 A container object that has been cloned. Typically represents a container that has been instanced by being opened by the player.
 
-This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3actor](../types/tes3actor.md), [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `actorFlags`
@@ -40,7 +40,7 @@ Friendly access to actor's barter gold amount.
 
 **Returns**:
 
-* `result` ([tes3container](../../types/tes3container))
+* `result` ([tes3container](../types/tes3container.md))
 
 ***
 
@@ -73,7 +73,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -117,7 +117,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack)[])
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md)[])
 
 ***
 
@@ -139,7 +139,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3inventory](../../types/tes3inventory), [tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3inventory](../types/tes3inventory.md), [tes3itemStack](../types/tes3itemStack.md)[])
 
 ***
 
@@ -205,7 +205,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -249,7 +249,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -271,7 +271,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -282,7 +282,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -315,7 +315,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -326,7 +326,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -337,7 +337,7 @@ The script that runs on the object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -370,7 +370,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 
@@ -433,8 +433,8 @@ local result = myObject:hasItemEquipped(item, itemData)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item), string): The item to perform a check for.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*.
+* `item` ([tes3item](../types/tes3item.md), string): The item to perform a check for.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*.
 
 **Returns**:
 
@@ -472,7 +472,7 @@ myObject:onInventoryClose(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 

@@ -85,7 +85,7 @@ The total number of items in the stack.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 
 ***
 
@@ -96,5 +96,5 @@ A collection of variables that are associated with the stack's object, or nil if
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData)[], nil)
+* `result` ([tes3itemData](../types/tes3itemData.md)[], nil)
 

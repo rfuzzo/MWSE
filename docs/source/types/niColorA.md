@@ -111,7 +111,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([niColorA](../../types/niColorA))
+* `result` ([niColorA](../types/niColorA.md))
 
 ***
 
@@ -126,12 +126,12 @@ local lerpedcolor = myObject:lerp(tocolor, transition)
 
 **Parameters**:
 
-* `tocolor` ([niColorA](../../types/niColorA)): The color to interpolate towards.
+* `tocolor` ([niColorA](../types/niColorA.md)): The color to interpolate towards.
 * `transition` (number): The interpolation value. Must be between 0.0 (closer to this color) and 1.0 (closer to the other color).
 
 **Returns**:
 
-* `lerpedcolor` ([niColorA](../../types/niColorA)): The calculated value.
+* `lerpedcolor` ([niColorA](../types/niColorA.md)): The calculated value.
 
 ***
 
@@ -155,5 +155,5 @@ local color = niColorA.new(r, g, b, a)
 
 **Returns**:
 
-* `color` ([niColorA](../../types/niColorA))
+* `color` ([niColorA](../types/niColorA.md))
 

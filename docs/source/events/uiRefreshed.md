@@ -25,5 +25,5 @@ event.register(tes3.event.uiRefreshed, uiRefreshedCallback)
 
 ## Event Data
 
-* `element` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The menu element that was recreated or refreshed. The event is filtered on element.name
+* `element` ([tes3uiElement](../types/tes3uiElement.md)): *Read-only*. The menu element that was recreated or refreshed. The event is filtered on element.name
 

@@ -17,7 +17,7 @@ The key that will open this door.
 
 **Returns**:
 
-* `result` ([tes3misc](../../types/tes3misc))
+* `result` ([tes3misc](../types/tes3misc.md))
 
 ***
 
@@ -50,7 +50,7 @@ The trap associated with the object.
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md))
 
 ??? example "Example: Applying the spell of a trapped door or container on an actor"
 

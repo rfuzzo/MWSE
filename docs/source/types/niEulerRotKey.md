@@ -8,7 +8,7 @@
 
 An animation key for euler rotations.
 
-This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimationKey](../../types/niAnimationKey)
+This type inherits the following: [niRotKey](../types/niRotKey.md), [niAnimationKey](../types/niAnimationKey.md)
 ## Properties
 
 ### `keyOrder`
@@ -29,7 +29,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 
 **Returns**:
 
-* `result` (table&lt;number, [niFloatKey](../../types/niFloatKey)[]&gt;)
+* `result` (table&lt;number, [niFloatKey](../types/niFloatKey.md)[]&gt;)
 
 ***
 
@@ -84,5 +84,5 @@ The rotation value of the animation key.
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion))
+* `result` ([niQuaternion](../types/niQuaternion.md))
 

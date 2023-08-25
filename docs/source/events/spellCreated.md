@@ -24,5 +24,5 @@ event.register(tes3.event.spellCreated, spellCreatedCallback)
 ## Event Data
 
 * `source` (string): Was the origin of the spell spellmaker or a script?  Maps to values in [`tes3.spellSource`](https://mwse.github.io/MWSE/references/spell-sources/) namespace.
-* `spell` ([tes3spell](../../types/tes3spell)): A spell which was created.
+* `spell` ([tes3spell](../types/tes3spell.md)): A spell which was created.
 

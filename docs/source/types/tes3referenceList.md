@@ -96,7 +96,7 @@ A collection for references, holding a cell and a linked list of references cont
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -107,7 +107,7 @@ A collection for references, holding a cell and a linked list of references cont
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -118,7 +118,7 @@ A collection for references, holding a cell and a linked list of references cont
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -129,5 +129,5 @@ A collection for references, holding a cell and a linked list of references cont
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 

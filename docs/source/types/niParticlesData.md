@@ -10,7 +10,7 @@ niParticlesData objects contain the geometry data necessary to render a niPartic
 
 There are two ways to adjust particle size within an niParticles object. The `radius` affects all the particles in this niParticlesData object. There is also a `size` for each particle (available as `sizes` array), which is a ratio between 0.0 and 1.0 that is multiplied by the radius to obtain the final rendered size of the particle.
 
-This type inherits the following: [niTriBasedGeometryData](../../types/niTriBasedGeometryData), [niGeometryData](../../types/niGeometryData), [niObject](../../types/niObject)
+This type inherits the following: [niTriBasedGeometryData](../types/niTriBasedGeometryData.md), [niGeometryData](../types/niGeometryData.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `activeCount`
@@ -53,7 +53,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor)[])
+* `result` ([niPackedColor](../types/niPackedColor.md)[])
 
 ***
 
@@ -64,7 +64,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 
 ***
 
@@ -97,7 +97,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -108,7 +108,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -130,7 +130,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2)[])
+* `result` ([tes3vector2](../types/tes3vector2.md)[])
 
 ***
 
@@ -141,7 +141,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2)[])
+* `result` ([tes3vector2](../types/tes3vector2.md)[])
 
 ***
 
@@ -196,7 +196,7 @@ The number of texture coordinate sets in the data.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 
 ***
 
@@ -213,7 +213,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

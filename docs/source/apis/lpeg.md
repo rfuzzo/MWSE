@@ -31,11 +31,11 @@ local result = lpeg.B(p)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The input pattern.
+* `p` ([pattern](../types/pattern.md)): The input pattern.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -52,11 +52,11 @@ local result = lpeg.C(p)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to capture against.
+* `p` ([pattern](../types/pattern.md)): The pattern to capture against.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -78,7 +78,7 @@ local result = lpeg.Carg(n)
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -107,7 +107,7 @@ local result = lpeg.Cb(name)
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -128,7 +128,7 @@ local result = lpeg.Cc(...)
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -154,12 +154,12 @@ local result = lpeg.Cf(p, f)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to fold with f.
+* `p` ([pattern](../types/pattern.md)): The pattern to fold with f.
 * `f` (function): The function to use to fold p.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -181,12 +181,12 @@ local result = lpeg.Cg(p, name)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to capture with.
+* `p` ([pattern](../types/pattern.md)): The pattern to capture with.
 * `name` (any): *Optional*. The name of the group.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -216,12 +216,12 @@ local result = lpeg.Cmt(p, f)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to capture with.
+* `p` ([pattern](../types/pattern.md)): The pattern to capture with.
 * `f` (function): The function to call to evaluate matches.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -239,7 +239,7 @@ local result = lpeg.Cp()
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -258,11 +258,11 @@ local result = lpeg.Cs(p)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to capture with.
+* `p` ([pattern](../types/pattern.md)): The pattern to capture with.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -282,11 +282,11 @@ local result = lpeg.Ct(p)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to capture with.
+* `p` ([pattern](../types/pattern.md)): The pattern to capture with.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -339,7 +339,7 @@ local result = lpeg.match(p, subject, init)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The pattern to match.
+* `p` ([pattern](../types/pattern.md)): The pattern to match.
 * `subject` (string): The string to match against.
 * `init` (number): *Optional*. Start the match at this position in subject.
 
@@ -402,11 +402,11 @@ local result = lpeg.P(value)
 
 **Parameters**:
 
-* `value` ([pattern](../../types/pattern), string, number, boolean, table, function): The value to convert to a pattern.
+* `value` ([pattern](../types/pattern.md), string, number, boolean, table, function): The value to convert to a pattern.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -425,11 +425,11 @@ local result = lpeg.R(p)
 
 **Parameters**:
 
-* `p` ([pattern](../../types/pattern)): The input pattern.
+* `p` ([pattern](../types/pattern.md)): The input pattern.
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ??? example "Example: Simple Match"
 
@@ -476,7 +476,7 @@ local result = lpeg.S(s)
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 
@@ -515,7 +515,7 @@ local result = lpeg.type(value)
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern), nil)
+* `result` ([pattern](../types/pattern.md), nil)
 
 ***
 
@@ -537,7 +537,7 @@ local result = lpeg.V(v)
 
 **Returns**:
 
-* `result` ([pattern](../../types/pattern))
+* `result` ([pattern](../types/pattern.md))
 
 ***
 

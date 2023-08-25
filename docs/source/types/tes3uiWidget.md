@@ -26,5 +26,5 @@ Access back to the element this widget interface is for.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 

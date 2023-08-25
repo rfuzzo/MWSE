@@ -23,8 +23,8 @@ event.register(tes3.event.spellMagickaUse, spellMagickaUseCallback)
 
 ## Event Data
 
-* `caster` ([tes3reference](../../types/tes3reference)): *Read-only*. The caster of the spell.
+* `caster` ([tes3reference](../types/tes3reference.md)): *Read-only*. The caster of the spell.
 * `cost` (integer): The magicka cost required to cast the spell. May be modified.
-* `instance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): The magic source instance.
-* `spell` ([tes3spell](../../types/tes3spell)): *Read-only*. The spell being cast.
+* `instance` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md)): The magic source instance.
+* `spell` ([tes3spell](../types/tes3spell.md)): *Read-only*. The spell being cast.
 

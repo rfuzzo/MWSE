@@ -8,7 +8,7 @@
 
 An AI Activate package game object. Sets an actor to activate a reference.
 
-This type inherits the following: [tes3aiPackage](../../types/tes3aiPackage)
+This type inherits the following: [tes3aiPackage](../types/tes3aiPackage.md)
 ## Properties
 
 ### `activateTarget`
@@ -18,7 +18,7 @@ The reference this actor with this activate AI package is set to activate.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -29,7 +29,7 @@ The destination cell for escort and follow AI packages. For wander package, this
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -128,7 +128,7 @@ Access to the actor to whom this AI package belongs.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -150,7 +150,7 @@ The target actor for activate, follow and escort AI packages.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -161,7 +161,7 @@ The final position to be reached by the escort, follow, and travel AI packages.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 

@@ -8,7 +8,7 @@
 
 An animation key that holds a position value.
 
-This type inherits the following: [niAnimationKey](../../types/niAnimationKey)
+This type inherits the following: [niAnimationKey](../types/niAnimationKey.md)
 ## Properties
 
 ### `timing`
@@ -29,5 +29,5 @@ The position value of the animation key.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

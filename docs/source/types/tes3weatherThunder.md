@@ -8,7 +8,7 @@
 
 A structure that contains weather information for the thunder weather type.
 
-This type inherits the following: [tes3weather](../../types/tes3weather)
+This type inherits the following: [tes3weather](../types/tes3weather.md)
 ## Properties
 
 ### `ambientDayColor`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -51,7 +51,7 @@ The weather's ambient looping sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -73,7 +73,7 @@ The weather's ambient looping sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -84,7 +84,7 @@ The weather's ambient looping sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -128,7 +128,7 @@ The weather's cloud texture path.
 
 **Returns**:
 
-* `result` ([tes3weatherController](../../types/tes3weatherController))
+* `result` ([tes3weatherController](../types/tes3weatherController.md))
 
 ***
 
@@ -150,7 +150,7 @@ The weather's flash decrement value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -161,7 +161,7 @@ The weather's flash decrement value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -172,7 +172,7 @@ The weather's flash decrement value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -183,7 +183,7 @@ The weather's flash decrement value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -315,7 +315,7 @@ The weather's particle radius.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -337,7 +337,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -348,7 +348,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -359,7 +359,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -370,7 +370,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -381,7 +381,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -392,7 +392,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -403,7 +403,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -414,7 +414,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -425,7 +425,7 @@ The weather's rain loop sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -458,7 +458,7 @@ The weather's thunder frequency.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -480,7 +480,7 @@ The weather's thunder sound 1 ID.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -502,7 +502,7 @@ The weather's thunder sound 2 ID.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -524,7 +524,7 @@ The weather's thunder sound 3 ID.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 

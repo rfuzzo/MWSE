@@ -17,7 +17,7 @@ The first row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -28,7 +28,7 @@ The second row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -39,7 +39,7 @@ The third row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -71,7 +71,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -120,7 +120,7 @@ myObject:fromQuaternion(quaternion)
 
 **Parameters**:
 
-* `quaternion` ([niQuaternion](../../types/niQuaternion))
+* `quaternion` ([niQuaternion](../types/niQuaternion.md))
 
 ***
 
@@ -135,7 +135,7 @@ local result = myObject:getForwardVector()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -150,7 +150,7 @@ local result = myObject:getRightVector()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -165,7 +165,7 @@ local result = myObject:getUpVector()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -180,7 +180,7 @@ local matrix, valid = myObject:invert()
 
 **Returns**:
 
-* `matrix` ([tes3matrix33](../../types/tes3matrix33))
+* `matrix` ([tes3matrix33](../types/tes3matrix33.md))
 * `valid` (boolean)
 
 ***
@@ -196,8 +196,8 @@ myObject:lookAt(forward, up)
 
 **Parameters**:
 
-* `forward` ([tes3vector3](../../types/tes3vector3))
-* `up` ([tes3vector3](../../types/tes3vector3))
+* `forward` ([tes3vector3](../types/tes3vector3.md))
+* `up` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -227,7 +227,7 @@ local vector3, isUnique = myObject:toEulerXYZ()
 
 **Returns**:
 
-* `vector3` ([tes3vector3](../../types/tes3vector3))
+* `vector3` ([tes3vector3](../types/tes3vector3.md))
 * `isUnique` (boolean)
 
 ***
@@ -243,7 +243,7 @@ local vector3, isUnique = myObject:toEulerZYX()
 
 **Returns**:
 
-* `vector3` ([tes3vector3](../../types/tes3vector3))
+* `vector3` ([tes3vector3](../types/tes3vector3.md))
 * `isUnique` (boolean)
 
 ***
@@ -270,7 +270,7 @@ local result = myObject:toQuaternion()
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion))
+* `result` ([niQuaternion](../types/niQuaternion.md))
 
 ***
 
@@ -359,7 +359,7 @@ local result = myObject:transpose()
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -376,9 +376,9 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 
 **Parameters**:
 
-* `x0` (number, [tes3vector3](../../types/tes3vector3)): *Default*: `0`.
-* `y0` (number, [tes3vector3](../../types/tes3vector3)): *Default*: `0`.
-* `z0` (number, [tes3vector3](../../types/tes3vector3)): *Default*: `0`.
+* `x0` (number, [tes3vector3](../types/tes3vector3.md)): *Default*: `0`.
+* `y0` (number, [tes3vector3](../types/tes3vector3.md)): *Default*: `0`.
+* `z0` (number, [tes3vector3](../types/tes3vector3.md)): *Default*: `0`.
 * `x1` (number): *Default*: `0`.
 * `y1` (number): *Default*: `0`.
 * `z1` (number): *Default*: `0`.
@@ -388,7 +388,7 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 
 **Returns**:
 
-* `matrix` ([tes3matrix33](../../types/tes3matrix33))
+* `matrix` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -398,7 +398,7 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | The matrix addition. |
+| [tes3matrix33](../types/tes3matrix33.md) | [tes3matrix33](../types/tes3matrix33.md) | [tes3matrix33](../types/tes3matrix33.md) | The matrix addition. |
 
 ***
 
@@ -406,9 +406,9 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | The matrix multiplication. Geometrically, this will concatenate the transformations of both matrices in the resulting matrix. |
-| [tes3matrix33](../../types/tes3matrix33) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | Multiplies the matrix by a vector. The resulting vector is starting vector with the matrix' transformations applied. |
-| [tes3matrix33](../../types/tes3matrix33) | number | [tes3matrix33](../../types/tes3matrix33) | Multiplies the matrix by a scalar. |
+| [tes3matrix33](../types/tes3matrix33.md) | [tes3matrix33](../types/tes3matrix33.md) | [tes3matrix33](../types/tes3matrix33.md) | The matrix multiplication. Geometrically, this will concatenate the transformations of both matrices in the resulting matrix. |
+| [tes3matrix33](../types/tes3matrix33.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | Multiplies the matrix by a vector. The resulting vector is starting vector with the matrix' transformations applied. |
+| [tes3matrix33](../types/tes3matrix33.md) | number | [tes3matrix33](../types/tes3matrix33.md) | Multiplies the matrix by a scalar. |
 
 ***
 
@@ -416,5 +416,5 @@ local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | [tes3matrix33](../../types/tes3matrix33) | The matrix subtraction. |
+| [tes3matrix33](../types/tes3matrix33.md) | [tes3matrix33](../types/tes3matrix33.md) | [tes3matrix33](../types/tes3matrix33.md) | The matrix subtraction. |
 

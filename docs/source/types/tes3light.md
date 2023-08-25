@@ -8,7 +8,7 @@
 
 A core light object. This isn't actually a light in the rendering engine, but something like a lamp or torch.
 
-This type inherits the following: [tes3item](../../types/tes3item), [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3item](../types/tes3item.md), [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -29,7 +29,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -216,7 +216,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -249,7 +249,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -271,7 +271,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -326,7 +326,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -337,7 +337,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -348,7 +348,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -359,7 +359,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -392,7 +392,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 
@@ -475,7 +475,7 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 **Returns**:
 
-* `newObject` ([tes3light](../../types/tes3light))
+* `newObject` ([tes3light](../types/tes3light.md))
 
 ***
 
@@ -490,7 +490,7 @@ local result = myObject:getTimeLeft(data)
 
 **Parameters**:
 
-* `data` ([tes3reference](../../types/tes3reference), [tes3itemData](../../types/tes3itemData), [tes3equipmentStack](../../types/tes3equipmentStack))
+* `data` ([tes3reference](../types/tes3reference.md), [tes3itemData](../types/tes3itemData.md), [tes3equipmentStack](../types/tes3equipmentStack.md))
 
 **Returns**:
 

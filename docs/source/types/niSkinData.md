@@ -8,7 +8,7 @@
 
 Contains skinning data that may be shared by multiple `NiSkinInstance` objects.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `boneData`
@@ -18,7 +18,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niSkinDataBoneData](../../types/niSkinDataBoneData)[])
+* `result` ([niSkinDataBoneData](../types/niSkinDataBoneData.md)[])
 
 ***
 
@@ -29,7 +29,7 @@ Access to the container with the skinning data optimized for hardware skinning. 
 
 **Returns**:
 
-* `result` ([niSkinPartition](../../types/niSkinPartition), nil)
+* `result` ([niSkinPartition](../types/niSkinPartition.md), nil)
 
 ***
 
@@ -51,7 +51,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -62,7 +62,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -73,7 +73,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -95,7 +95,7 @@ Defines the translation of the root bone in the bind pose from the parent node o
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -112,7 +112,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

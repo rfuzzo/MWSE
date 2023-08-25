@@ -72,7 +72,7 @@ The actor's attack target. The target will be saved in `hitTarget` field until a
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor), nil)
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md), nil)
 
 ***
 
@@ -94,7 +94,7 @@ The currently nocked projectile the associated actor is using. It is available w
 
 **Returns**:
 
-* `result` ([tes3mobileProjectile](../../types/tes3mobileProjectile))
+* `result` ([tes3mobileProjectile](../types/tes3mobileProjectile.md))
 
 ***
 
@@ -154,7 +154,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -165,7 +165,7 @@ The actor's attack target, stored until the actor attacks successfully again. In
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor), nil)
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md), nil)
 
 ***
 
@@ -176,5 +176,5 @@ If moving to a location, this is the position to be walked to.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

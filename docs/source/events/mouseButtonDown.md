@@ -32,5 +32,5 @@ event.register(tes3.event.mouseButtonDown, mouseButtonDownCallback)
 
 ## Related events
 
-[mouseButtonUp](../mouseButtonUp/){ .md-button }
+[mouseButtonUp](./mouseButtonUp.md){ .md-button }
 

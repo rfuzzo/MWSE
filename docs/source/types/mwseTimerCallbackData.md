@@ -17,7 +17,7 @@ The data passed to callback function registered to a mwseTimer.
 
 **Returns**:
 
-* `result` ([mwseTimer](../../types/mwseTimer))
+* `result` ([mwseTimer](../types/mwseTimer.md))
 
 ??? example "Example: Persistent timer"
 

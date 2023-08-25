@@ -20,5 +20,5 @@ event.register(tes3.event.referenceSceneNodeCreated, referenceSceneNodeCreatedCa
 
 ## Event Data
 
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. Reference that the SceneNode was created for.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. Reference that the SceneNode was created for.
 

@@ -28,7 +28,7 @@ A value in the range [0, 1]. The (relative) maximum distance setting for AI simu
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md)[])
 
 ***
 
@@ -39,7 +39,7 @@ A value in the range [0, 1]. The (relative) maximum distance setting for AI simu
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCamera](../../types/tes3worldControllerRenderCamera))
+* `result` ([tes3worldControllerRenderCamera](../types/tes3worldControllerRenderCamera.md))
 
 ***
 
@@ -50,7 +50,7 @@ A value in the range [0, 1]. The (relative) maximum distance setting for AI simu
 
 **Returns**:
 
-* `result` ([tes3audioController](../../types/tes3audioController))
+* `result` ([tes3audioController](../types/tes3audioController.md))
 
 ***
 
@@ -61,7 +61,7 @@ A value in the range [0, 1]. The (relative) maximum distance setting for AI simu
 
 **Returns**:
 
-* `result` ([tes3fader](../../types/tes3fader))
+* `result` ([tes3fader](../types/tes3fader.md))
 
 ***
 
@@ -83,7 +83,7 @@ A value in the range [0, 1]. The (relative) maximum distance setting for AI simu
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -116,7 +116,7 @@ The sound played when an actor takes damage from a critical hit. It plays instea
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -138,7 +138,7 @@ If the target crosshair is disabled. Corresponds to the "Crosshair" option in th
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -149,7 +149,7 @@ If the target crosshair is disabled. Corresponds to the "Crosshair" option in th
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -171,7 +171,7 @@ This it the default sound played when the player lands, after a jump or a fall.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -182,7 +182,7 @@ This it the default sound played when the player lands in the water, after a jum
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -215,7 +215,7 @@ The sound played when an actor takes health damage while drowning. It plays inst
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -226,7 +226,7 @@ The sound played when an actor is losing health by drowning.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -237,7 +237,7 @@ The sound played when an actor is losing health by drowning.
 
 **Returns**:
 
-* `result` ([niTextureEffect](../../types/niTextureEffect))
+* `result` ([niTextureEffect](../types/niTextureEffect.md))
 
 ***
 
@@ -259,7 +259,7 @@ The sound played when an actor is losing health by drowning.
 
 **Returns**:
 
-* `result` ([niSourceTexture](../../types/niSourceTexture)[])
+* `result` ([niSourceTexture](../types/niSourceTexture.md)[])
 
 ***
 
@@ -292,7 +292,7 @@ If teleporting is disabled.
 
 **Returns**:
 
-* `result` ([tes3globalScript](../../types/tes3globalScript)[])
+* `result` ([tes3globalScript](../types/tes3globalScript.md)[])
 
 ***
 
@@ -303,7 +303,7 @@ A sound played when a hand to hand attack hits. For each attack, `handToHandHitS
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -314,7 +314,7 @@ A sound played when a hand to hand attack hits. For each attack, `handToHandHitS
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -325,7 +325,7 @@ The sound played when health damage is taken.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -336,7 +336,7 @@ The sound played when a heavy armor piece is hit.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -358,7 +358,7 @@ A number in the range [0, 2]. The delay in seconds before a tooltip appears. Cor
 
 **Returns**:
 
-* `result` ([tes3fader](../../types/tes3fader))
+* `result` ([tes3fader](../types/tes3fader.md))
 
 ***
 
@@ -369,7 +369,7 @@ A number in the range [0, 2]. The delay in seconds before a tooltip appears. Cor
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -391,7 +391,7 @@ No known effect.
 
 **Returns**:
 
-* `result` ([tes3inputController](../../types/tes3inputController))
+* `result` ([tes3inputController](../types/tes3inputController.md))
 
 ***
 
@@ -413,7 +413,7 @@ The sound played when an item is repaired.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -435,7 +435,7 @@ The sound played when a light armor piece is hit.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -468,7 +468,7 @@ The sound played when a medium armor piece is hit.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -490,7 +490,7 @@ A value in the range [0, 1]. The alpha value of the black background of menus. C
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCamera](../../types/tes3worldControllerRenderCamera))
+* `result` ([tes3worldControllerRenderCamera](../types/tes3worldControllerRenderCamera.md))
 
 ***
 
@@ -501,7 +501,7 @@ The sound played when a UI button or other control is clicked.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -512,7 +512,7 @@ The sound played when a UI button or other control is clicked.
 
 **Returns**:
 
-* `result` ([tes3uiMenuController](../../types/tes3uiMenuController))
+* `result` ([tes3uiMenuController](../types/tes3uiMenuController.md))
 
 ***
 
@@ -523,7 +523,7 @@ Unused sound. Not used when a menu is resized.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -534,7 +534,7 @@ The sound played when a weapon fails its to-hit check.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -545,7 +545,7 @@ The sound played when a weapon fails its to-hit check.
 
 **Returns**:
 
-* `result` ([tes3mobManager](../../types/tes3mobManager))
+* `result` ([tes3mobManager](../types/tes3mobManager.md))
 
 ***
 
@@ -556,7 +556,7 @@ The sound played when a weapon fails its to-hit check.
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -567,7 +567,7 @@ The sound played when a weapon fails its to-hit check.
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -616,7 +616,7 @@ Note: These values are available as [`tes3.musicSituation`](https://mwse.github.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -649,7 +649,7 @@ Note: These values are available as [`tes3.musicSituation`](https://mwse.github.
 
 **Returns**:
 
-* `result` ([tes3quest](../../types/tes3quest)[])
+* `result` ([tes3quest](../types/tes3quest.md)[])
 
 ***
 
@@ -671,7 +671,7 @@ Controls if auto-save on resting or waiting is enabled. Corresponds to the "Auto
 
 **Returns**:
 
-* `result` ([tes3rechargingItem](../../types/tes3rechargingItem)[])
+* `result` ([tes3rechargingItem](../types/tes3rechargingItem.md)[])
 
 ***
 
@@ -704,7 +704,7 @@ Period between reflection updates for pixel shader water. Not functional with MG
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCamera](../../types/tes3worldControllerRenderCamera))
+* `result` ([tes3worldControllerRenderCamera](../types/tes3worldControllerRenderCamera.md))
 
 ***
 
@@ -748,7 +748,7 @@ A scalar used for simulation time. At the start of every frame, the `deltaTime` 
 
 **Returns**:
 
-* `result` ([tes3splashController](../../types/tes3splashController))
+* `result` ([tes3splashController](../types/tes3splashController.md))
 
 ***
 
@@ -759,7 +759,7 @@ A scalar used for simulation time. At the start of every frame, the `deltaTime` 
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCamera](../../types/tes3worldControllerRenderCamera))
+* `result` ([tes3worldControllerRenderCamera](../types/tes3worldControllerRenderCamera.md))
 
 ***
 
@@ -781,7 +781,7 @@ When true, the game simulation loop will stop. Not normally used, and may have o
 
 **Returns**:
 
-* `result` ([tes3fader](../../types/tes3fader))
+* `result` ([tes3fader](../types/tes3fader.md))
 
 ***
 
@@ -803,7 +803,7 @@ When true, the game simulation loop will stop. Not normally used, and may have o
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -814,7 +814,7 @@ When true, the game simulation loop will stop. Not normally used, and may have o
 
 **Returns**:
 
-* `result` ([tes3fader](../../types/tes3fader))
+* `result` ([tes3fader](../types/tes3fader.md))
 
 ***
 
@@ -836,7 +836,7 @@ Automatically choose the best attack direction for attacks. Corresponds to the "
 
 **Returns**:
 
-* `result` ([tes3vfxManager](../../types/tes3vfxManager))
+* `result` ([tes3vfxManager](../types/tes3vfxManager.md))
 
 ***
 
@@ -869,7 +869,7 @@ The sound played when an attack with a melee weapon is performed. It always play
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -880,7 +880,7 @@ The sound played when an attack with a melee weapon is performed. It always play
 
 **Returns**:
 
-* `result` ([tes3weatherController](../../types/tes3weatherController))
+* `result` ([tes3weatherController](../types/tes3weatherController.md))
 
 ***
 
@@ -891,7 +891,7 @@ The sound played when an attack with a melee weapon is performed. It always play
 
 **Returns**:
 
-* `result` ([tes3fader](../../types/tes3fader))
+* `result` ([tes3fader](../types/tes3fader.md))
 
 ***
 
@@ -913,7 +913,7 @@ The camera FOV when the player is a werewolf.
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCamera](../../types/tes3worldControllerRenderCamera))
+* `result` ([tes3worldControllerRenderCamera](../types/tes3worldControllerRenderCamera.md))
 
 ***
 
@@ -924,7 +924,7 @@ The camera FOV when the player is a werewolf.
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -941,8 +941,8 @@ local result = myObject:applyEnchantEffect(node, enchantment)
 
 **Parameters**:
 
-* `node` ([niNode](../../types/niNode)): A scene node to which to apply the enchantment's effects.
-* `enchantment` ([tes3enchantment](../../types/tes3enchantment)): The enchantment's effects to apply.
+* `node` ([niNode](../types/niNode.md)): A scene node to which to apply the enchantment's effects.
+* `enchantment` ([tes3enchantment](../types/tes3enchantment.md)): The enchantment's effects to apply.
 
 **Returns**:
 

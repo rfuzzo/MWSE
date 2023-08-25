@@ -31,5 +31,5 @@ event.register(tes3.event.calcRestInterrupt, calcRestInterruptCallback)
 
 ## Related events
 
-[restInterrupt](../restInterrupt/){ .md-button }
+[restInterrupt](./restInterrupt.md){ .md-button }
 

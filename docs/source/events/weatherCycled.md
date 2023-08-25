@@ -21,5 +21,5 @@ event.register(tes3.event.weatherCycled, weatherCycledCallback)
 
 ## Related events
 
-[weatherCycled](../weatherCycled/){ .md-button }[weatherTransitionFinished](../weatherTransitionFinished/){ .md-button }[weatherChangedImmediate](../weatherChangedImmediate/){ .md-button }[weatherTransitionStarted](../weatherTransitionStarted/){ .md-button }[weatherChangedImmediate](../weatherChangedImmediate/){ .md-button }
+[weatherCycled](./weatherCycled.md){ .md-button }[weatherTransitionFinished](./weatherTransitionFinished.md){ .md-button }[weatherChangedImmediate](./weatherChangedImmediate.md){ .md-button }[weatherTransitionStarted](./weatherTransitionStarted.md){ .md-button }[weatherChangedImmediate](./weatherChangedImmediate.md){ .md-button }
 

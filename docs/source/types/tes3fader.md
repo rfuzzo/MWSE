@@ -106,7 +106,7 @@ local result = myObject:setColor({ color = ..., flag = ... })
 **Parameters**:
 
 * `params` (table)
-	* `color` ([tes3vector3](../../types/tes3vector3), number[]): The RGB values to set in [0.0, 1.0] range. If passing an array, pass 3 numbers.
+	* `color` ([tes3vector3](../types/tes3vector3.md), number[]): The RGB values to set in [0.0, 1.0] range. If passing an array, pass 3 numbers.
 	* `flag` (boolean): *Default*: `false`.
 
 **Returns**:
@@ -174,7 +174,7 @@ local fader = tes3fader.new(distance, unknownBool)
 
 **Returns**:
 
-* `fader` ([tes3fader](../../types/tes3fader))
+* `fader` ([tes3fader](../types/tes3fader.md))
 
 ??? example "Example: Creating a new fader"
 

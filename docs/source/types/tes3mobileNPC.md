@@ -8,7 +8,7 @@
 
 A mobile object for an NPC.
 
-This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor), [tes3mobileObject](../../types/tes3mobileObject)
+This type inherits the following: [tes3mobileActor](../types/tes3mobileActor.md), [tes3mobileObject](../types/tes3mobileObject.md)
 ## Properties
 
 ### `acrobatics`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 
 **Returns**:
 
-* `result` ([tes3actionData](../../types/tes3actionData))
+* `result` ([tes3actionData](../types/tes3actionData.md))
 
 ***
 
@@ -40,7 +40,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 
 **Returns**:
 
-* `result` ([tes3actionData](../../types/tes3actionData))
+* `result` ([tes3actionData](../types/tes3actionData.md))
 
 ***
 
@@ -62,7 +62,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect)[])
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md)[])
 
 ***
 
@@ -84,7 +84,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -95,7 +95,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` ([tes3aiPlanner](../../types/tes3aiPlanner), nil)
+* `result` ([tes3aiPlanner](../types/tes3aiPlanner.md), nil)
 
 ***
 
@@ -117,7 +117,7 @@ The actor's alarm AI value.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -128,7 +128,7 @@ The actor's alarm AI value.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -139,7 +139,7 @@ The actor's alarm AI value.
 
 **Returns**:
 
-* `result` ([tes3actorAnimationController](../../types/tes3actorAnimationController))
+* `result` ([tes3actorAnimationController](../types/tes3actorAnimationController.md))
 
 ***
 
@@ -150,7 +150,7 @@ The actor's alarm AI value.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -186,7 +186,7 @@ The actor's alarm AI value.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -219,7 +219,7 @@ Direct access to the actor's attack bonus effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic)[])
+* `result` ([tes3statistic](../types/tes3statistic.md)[])
 
 ***
 
@@ -230,7 +230,7 @@ Direct access to the actor's attack bonus effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -263,7 +263,7 @@ Direct access to the actor's blind effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -274,7 +274,7 @@ Direct access to the actor's blind effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -285,7 +285,7 @@ A vector that shows the size of the bounding box in each direction. Note that th
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -296,7 +296,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../types/tes3vector2.md))
 
 ***
 
@@ -351,7 +351,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -395,7 +395,7 @@ Direct access to the actor's chameleon effect attribute.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference), nil)
+* `result` ([tes3reference](../types/tes3reference.md), nil)
 
 ***
 
@@ -406,7 +406,7 @@ Direct access to the actor's chameleon effect attribute.
 
 **Returns**:
 
-* `result` ([tes3combatSession](../../types/tes3combatSession), nil)
+* `result` ([tes3combatSession](../types/tes3combatSession.md), nil)
 
 ***
 
@@ -417,7 +417,7 @@ Direct access to the actor's chameleon effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -439,7 +439,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -450,7 +450,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell), [tes3enchantment](../../types/tes3enchantment))
+* `result` ([tes3spell](../types/tes3spell.md), [tes3enchantment](../types/tes3enchantment.md))
 
 ***
 
@@ -461,7 +461,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -483,7 +483,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -494,7 +494,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -505,7 +505,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -527,7 +527,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -626,7 +626,7 @@ Toggle flag for if the NPC sneaks.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md)[])
 
 ***
 
@@ -659,7 +659,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -725,7 +725,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -736,7 +736,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -780,7 +780,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md)[])
 
 ***
 
@@ -802,7 +802,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -813,7 +813,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -835,7 +835,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -846,7 +846,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3itemStack](../types/tes3itemStack.md)[])
 
 ***
 
@@ -1176,7 +1176,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1187,7 +1187,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1198,7 +1198,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1209,7 +1209,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1220,7 +1220,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1231,7 +1231,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1242,7 +1242,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1253,7 +1253,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1310,7 +1310,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1332,7 +1332,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 
 **Returns**:
 
-* `result` ([tes3npcInstance](../../types/tes3npcInstance))
+* `result` ([tes3npcInstance](../types/tes3npcInstance.md))
 
 ***
 
@@ -1365,7 +1365,7 @@ Direct access to the actor's paralyze effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1387,7 +1387,7 @@ A vector that represents the 3D position of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -1409,7 +1409,7 @@ The currently equipped ammo, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -1431,7 +1431,7 @@ The currently equipped shield, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -1442,7 +1442,7 @@ The currently equipped weapon, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -1453,7 +1453,7 @@ The currently equipped weapon, if any.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -1574,7 +1574,7 @@ Direct access to the actor's shock resistance effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1629,7 +1629,7 @@ The time interval in seconds between specific actor AI checks. These checks incl
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1651,7 +1651,7 @@ Direct access to the actor's shield effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1673,7 +1673,7 @@ Direct access to the actor's silence effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill)[])
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md)[])
 
 ***
 
@@ -1684,7 +1684,7 @@ Direct access to the actor's silence effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1706,7 +1706,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1717,7 +1717,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1728,7 +1728,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1750,7 +1750,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1805,7 +1805,7 @@ The currently equipped light.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -1816,7 +1816,7 @@ The currently equipped light.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1838,7 +1838,7 @@ A vector that represents the 3D velocity of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -1926,7 +1926,7 @@ A flag for if the actor has a weapon ready or being readied (visible and held in
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -2023,11 +2023,11 @@ local result = myObject:calculateJumpVelocity({ direction = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `direction` ([tes3vector2](../../types/tes3vector2)): *Optional*. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.
+	* `direction` ([tes3vector2](../types/tes3vector2.md)): *Optional*. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -2043,7 +2043,7 @@ local result = myObject:doJump({ velocity = ..., applyFatigueCost = ..., allowMi
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `velocity` ([tes3vector3](../../types/tes3vector3)): *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
+	* `velocity` ([tes3vector3](../types/tes3vector3.md)): *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
 	* `applyFatigueCost` (boolean): *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
 	* `allowMidairJumping` (boolean): *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
 
@@ -2065,8 +2065,8 @@ local itemEquipped = myObject:equip({ item = ..., itemData = ..., addItem = ...,
 **Parameters**:
 
 * `params` (table)
-	* `item` ([tes3item](../../types/tes3item), string): The item to equip.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data of the specific item to equip, if a specific item is required.
+	* `item` ([tes3item](../types/tes3item.md), string): The item to equip.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. The item data of the specific item to equip, if a specific item is required.
 	* `addItem` (boolean): *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
 	* `selectBestCondition` (boolean): *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 	* `selectWorstCondition` (boolean): *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
@@ -2089,13 +2089,13 @@ local result = myObject:equipMagic({ source = ..., itemData = ..., equipItem = .
 **Parameters**:
 
 * `params` (table)
-	* `source` ([tes3spell](../../types/tes3spell), [tes3item](../../types/tes3item), string): The source of the magic to equip.
+	* `source` ([tes3spell](../types/tes3spell.md), [tes3item](../types/tes3item.md), string): The source of the magic to equip.
 
 		Spells must be castable. Castable spells have a `castType` of `tes3.spellType.spell` or `tes3.spellType.power`. The actor is not required to know this spell.
 
 		Items must have a castable enchantment. Castable enchantments have a `castType` of `tes3.enchantmentType.onUse` or `tes3.enchantmentType.castOnce`. The actor is not required to have this item in their inventory, unless `equipItem` is `true`.
 
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
 	* `equipItem` (boolean): *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
 	* `updateGUI` (boolean): *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
 
@@ -2145,7 +2145,7 @@ local result = myObject:getActiveMagicEffects({ effect = ..., serial = ... })
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect)[])
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md)[])
 
 ***
 
@@ -2190,7 +2190,7 @@ local timestamp = myObject:getPowerUseTimestamp(power)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 
 **Returns**:
 
@@ -2213,7 +2213,7 @@ local result = myObject:getSkillStatistic(skillId)
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -2247,7 +2247,7 @@ local angle = myObject:getViewToActor(mobile)
 
 **Parameters**:
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): The target actor to calculate the facing angle.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): The target actor to calculate the facing angle.
 
 **Returns**:
 
@@ -2266,7 +2266,7 @@ local angle = myObject:getViewToPoint(point)
 
 **Parameters**:
 
-* `point` ([tes3vector3](../../types/tes3vector3)): The target point to calculate the facing angle.
+* `point` ([tes3vector3](../types/tes3vector3.md)): The target point to calculate the facing angle.
 
 **Returns**:
 
@@ -2314,7 +2314,7 @@ local angle = myObject:getViewToPointWithFacing(facing, point)
 **Parameters**:
 
 * `facing` (number): The facing angle in radians. The values should be in [0, PI] interval.
-* `point` ([tes3vector3](../../types/tes3vector3)): The target point to calculate the facing angle.
+* `point` ([tes3vector3](../types/tes3vector3.md)): The target point to calculate the facing angle.
 
 **Returns**:
 
@@ -2348,7 +2348,7 @@ local result = myObject:hasUsedPower(power)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 
 **Returns**:
 
@@ -2367,7 +2367,7 @@ local result = myObject:isAffectedByObject(object)
 
 **Parameters**:
 
-* `object` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell)): The magic to check for.
+* `object` ([tes3alchemy](../types/tes3alchemy.md), [tes3enchantment](../types/tes3enchantment.md), [tes3spell](../types/tes3spell.md)): The magic to check for.
 
 **Returns**:
 
@@ -2397,7 +2397,7 @@ local result = myObject:rechargePower(power)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 
 **Returns**:
 
@@ -2433,7 +2433,7 @@ myObject:setPowerUseTimestamp(power, timestamp)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 * `timestamp` (number): The timestamp of the moment the power was casted, or 24 hours before the recharge point. The timestamp units are hours. The current time as a timestamp can be accessed at [`tes3.getSimulationTimestamp()`](https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp).
 
 ***
@@ -2449,7 +2449,7 @@ myObject:startCombat(target)
 
 **Parameters**:
 
-* `target` ([tes3mobileActor](../../types/tes3mobileActor))
+* `target` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -2491,8 +2491,8 @@ local itemUnequipped = myObject:unequip({ item = ..., itemData = ..., type = ...
 **Parameters**:
 
 * `params` (table)
-	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to unequip.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data of the specific item to unequip, if a specific item is required.
+	* `item` ([tes3item](../types/tes3item.md), string): *Optional*. The item to unequip.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. The item data of the specific item to unequip, if a specific item is required.
 	* `type` (number): *Optional*. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) can be passed here.
 	* `armorSlot` (number): *Optional*. The armor slot to unequip. Maps to values in [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) namespace.
 	* `clothingSlot` (number): *Optional*. The clothing slot to unequip. Maps to values in [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/) namespace
@@ -2531,7 +2531,7 @@ myObject:updateDerivedStatistics(attribute)
 
 **Parameters**:
 
-* `attribute` ([tes3statistic](../../types/tes3statistic)): *Optional*. Limits the update to statistics derived from this attribute.  e.g. `mobile:updateDerivedStatistics(mobile.strength)`. If not present, all derived statistics will be updated.
+* `attribute` ([tes3statistic](../types/tes3statistic.md)): *Optional*. Limits the update to statistics derived from this attribute.  e.g. `mobile:updateDerivedStatistics(mobile.strength)`. If not present, all derived statistics will be updated.
 
 ***
 

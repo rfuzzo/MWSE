@@ -17,7 +17,7 @@ Item data associated with the stack's object, if any. All equipped items except 
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData))
+* `result` ([tes3itemData](../types/tes3itemData.md))
 
 ***
 
@@ -28,5 +28,5 @@ Item data associated with the stack's object, if any. All equipped items except 
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 

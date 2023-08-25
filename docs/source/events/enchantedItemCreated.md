@@ -20,15 +20,15 @@ event.register(tes3.event.enchantedItemCreated, enchantedItemCreatedCallback)
 
 ## Event Data
 
-* `baseObject` ([tes3item](../../types/tes3item)): *Read-only*. The item originally enchanted.
-* `enchanter` ([tes3mobileActor](../../types/tes3mobileActor)): The mobile actor responsible for creating the enchantment.
-* `enchanterReference` ([tes3reference](../../types/tes3reference)): The reference responsible for creating the enchantment.
-* `object` ([tes3item](../../types/tes3item)): *Read-only*. The newly created and enchanted item.
-* `soul` ([tes3actor](../../types/tes3actor)): The actor used to enchant the item.
-* `soulGem` ([tes3misc](../../types/tes3misc)): The soul gem used for the creation of the item.
+* `baseObject` ([tes3item](../types/tes3item.md)): *Read-only*. The item originally enchanted.
+* `enchanter` ([tes3mobileActor](../types/tes3mobileActor.md)): The mobile actor responsible for creating the enchantment.
+* `enchanterReference` ([tes3reference](../types/tes3reference.md)): The reference responsible for creating the enchantment.
+* `object` ([tes3item](../types/tes3item.md)): *Read-only*. The newly created and enchanted item.
+* `soul` ([tes3actor](../types/tes3actor.md)): The actor used to enchant the item.
+* `soulGem` ([tes3misc](../types/tes3misc.md)): The soul gem used for the creation of the item.
 
 
 ## Related events
 
-[enchantedItemCreateFailed](../enchantedItemCreateFailed/){ .md-button }
+[enchantedItemCreateFailed](./enchantedItemCreateFailed.md){ .md-button }
 

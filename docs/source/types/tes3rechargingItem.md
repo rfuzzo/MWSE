@@ -17,7 +17,7 @@ Data for a recharging item. Not necessarily an item owned by the player.
 
 **Returns**:
 
-* `result` ([tes3enchantment](../../types/tes3enchantment))
+* `result` ([tes3enchantment](../types/tes3enchantment.md))
 
 ***
 
@@ -28,7 +28,7 @@ Data for a recharging item. Not necessarily an item owned by the player.
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData))
+* `result` ([tes3itemData](../types/tes3itemData.md))
 
 ***
 
@@ -39,5 +39,5 @@ Data for a recharging item. Not necessarily an item owned by the player.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 

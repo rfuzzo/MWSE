@@ -17,7 +17,7 @@ The next node in the collection.
 
 **Returns**:
 
-* `result` ([tes3equipmentStackIteratorNode](../../types/tes3equipmentStackIteratorNode))
+* `result` ([tes3equipmentStackIteratorNode](../types/tes3equipmentStackIteratorNode.md))
 
 ***
 
@@ -28,7 +28,7 @@ The equipment stack object stored in the node.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -39,5 +39,5 @@ The previous node in the collection.
 
 **Returns**:
 
-* `result` ([tes3equipmentStackIteratorNode](../../types/tes3equipmentStackIteratorNode))
+* `result` ([tes3equipmentStackIteratorNode](../types/tes3equipmentStackIteratorNode.md))
 

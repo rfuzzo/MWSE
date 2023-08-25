@@ -10,7 +10,7 @@ A reference is a sort of container structure for objects. It holds a base object
 
 For example, many doors may share the same base object. However, each door reference might have a different owner, different lock/trap statuses, etc. that make the object unique.
 
-This type inherits the following: [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `activationReference`
@@ -20,7 +20,7 @@ The current reference, if any, that this reference will activate.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -31,7 +31,7 @@ The current reference, if any, that this reference will activate.
 
 **Returns**:
 
-* `result` (table&lt;string, [tes3bodyPartManager](../../types/tes3bodyPartManager)|[tes3itemData](../../types/tes3itemData)|[tes3lightNode](../../types/tes3lightNode)|[tes3lockNode](../../types/tes3lockNode)|[tes3mobileActor](../../types/tes3mobileActor)|[tes3reference](../../types/tes3reference)|[tes3travelDestinationNode](../../types/tes3travelDestinationNode)|[tes3animationData](../../types/tes3animationData)&gt;)
+* `result` (table&lt;string, [tes3bodyPartManager](../types/tes3bodyPartManager.md)|[tes3itemData](../types/tes3itemData.md)|[tes3lightNode](../types/tes3lightNode.md)|[tes3lockNode](../types/tes3lockNode.md)|[tes3mobileActor](../types/tes3mobileActor.md)|[tes3reference](../types/tes3reference.md)|[tes3travelDestinationNode](../types/tes3travelDestinationNode.md)|[tes3animationData](../types/tes3animationData.md)&gt;)
 
 ***
 
@@ -42,7 +42,7 @@ The current reference, if any, that this reference will activate.
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -64,7 +64,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3bodyPartManager](../../types/tes3bodyPartManager), nil)
+* `result` ([tes3bodyPartManager](../types/tes3bodyPartManager.md), nil)
 
 ***
 
@@ -75,7 +75,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -86,7 +86,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3scriptContext](../../types/tes3scriptContext))
+* `result` ([tes3scriptContext](../types/tes3scriptContext.md))
 
 ??? example "Example: Checking reference's script variables"
 
@@ -193,7 +193,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 
 **Returns**:
 
-* `result` ([tes3travelDestinationNode](../../types/tes3travelDestinationNode), nil)
+* `result` ([tes3travelDestinationNode](../types/tes3travelDestinationNode.md), nil)
 
 ***
 
@@ -226,7 +226,7 @@ Convenient access to the z-component of the reference's orientation. Setting the
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -314,7 +314,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData))
+* `result` ([tes3itemData](../types/tes3itemData.md))
 
 ***
 
@@ -325,7 +325,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference), nil)
+* `result` ([tes3reference](../types/tes3reference.md), nil)
 
 ***
 
@@ -336,7 +336,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 
 **Returns**:
 
-* `result` ([niPointLight](../../types/niPointLight))
+* `result` ([niPointLight](../types/niPointLight.md))
 
 ***
 
@@ -347,7 +347,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 
 **Returns**:
 
-* `result` ([tes3lockNode](../../types/tes3lockNode), nil)
+* `result` ([tes3lockNode](../types/tes3lockNode.md), nil)
 
 ***
 
@@ -369,7 +369,7 @@ The path to the object's mesh.
 
 **Returns**:
 
-* `result` ([tes3mobileCreature](../../types/tes3mobileCreature), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobilePlayer](../../types/tes3mobilePlayer), [tes3mobileProjectile](../../types/tes3mobileProjectile), [tes3mobileSpellProjectile](../../types/tes3mobileSpellProjectile), nil)
+* `result` ([tes3mobileCreature](../types/tes3mobileCreature.md), [tes3mobileNPC](../types/tes3mobileNPC.md), [tes3mobilePlayer](../types/tes3mobilePlayer.md), [tes3mobileProjectile](../types/tes3mobileProjectile.md), [tes3mobileSpellProjectile](../types/tes3mobileSpellProjectile.md), nil)
 
 ***
 
@@ -391,7 +391,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -402,7 +402,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -413,7 +413,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -424,7 +424,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -457,7 +457,7 @@ Access to the reference's orientation, in XYZ Euler angles in Radians in [0, 2 P
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -468,7 +468,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -497,7 +497,7 @@ For actors, the axes are:
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -508,7 +508,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -519,7 +519,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -530,7 +530,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -552,7 +552,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -563,7 +563,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode), nil)
+* `result` ([niNode](../types/niNode.md), nil)
 
 ***
 
@@ -629,7 +629,7 @@ Access to the size of a stack, if the reference represents one or more items.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -640,7 +640,7 @@ Access to the size of a stack, if the reference represents one or more items.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -697,7 +697,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -729,7 +729,7 @@ myObject:activate(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference)): The other reference to activate.
+* `reference` ([tes3reference](../types/tes3reference.md)): The other reference to activate.
 
 ***
 
@@ -841,7 +841,7 @@ local angle = myObject:getAngleTo(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference)): The reference to calculate the angle to.
+* `reference` ([tes3reference](../types/tes3reference.md)): The reference to calculate the angle to.
 
 **Returns**:
 
@@ -860,7 +860,7 @@ local result = myObject:getAttachedDynamicLight()
 
 **Returns**:
 
-* `result` ([tes3lightNode](../../types/tes3lightNode))
+* `result` ([tes3lightNode](../types/tes3lightNode.md))
 
 ***
 
@@ -879,12 +879,12 @@ local result = myObject:getOrCreateAttachedDynamicLight(light, phase)
 
 **Parameters**:
 
-* `light` ([niPointLight](../../types/niPointLight)): *Optional*.
+* `light` ([niPointLight](../types/niPointLight.md)): *Optional*.
 * `phase` (number): *Optional*.
 
 **Returns**:
 
-* `result` ([tes3lightNode](../../types/tes3lightNode))
+* `result` ([tes3lightNode](../types/tes3lightNode.md))
 
 ***
 

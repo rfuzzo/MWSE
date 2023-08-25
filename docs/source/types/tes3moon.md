@@ -191,5 +191,5 @@ Controls the speed of the moons across the sky. This corresponds to the setting 
 
 **Returns**:
 
-* `result` ([tes3weatherController](../../types/tes3weatherController))
+* `result` ([tes3weatherController](../types/tes3weatherController.md))
 

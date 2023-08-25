@@ -8,7 +8,7 @@
 
 A texture that is also a render target. This object can be used with niRenderer:setRenderTarget and rendered into. It can be directly used in a texturing property, or read back into system memory (at a performance cost). After using it as a render target, make sure you reset the renderer with niRenderer:setRenderTarget(nil) so that it's not bound as a source texture and a target at the same time.
 
-This type inherits the following: [niTexture](../../types/niTexture), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niTexture](../types/niTexture.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -40,7 +40,7 @@ The `NiFormatPrefs` of the texture.
 
 **Returns**:
 
-* `result` ([niFormatPrefs](../../types/niFormatPrefs))
+* `result` ([niFormatPrefs](../types/niFormatPrefs.md))
 
 ***
 
@@ -75,7 +75,7 @@ This function requires the GPU to finish rendering and send data to the CPU. Thi
 
 **Parameters**:
 
-* `pixelData` ([niPixelData](../../types/niPixelData)): The pixel data to copy the texture into.
+* `pixelData` ([niPixelData](../types/niPixelData.md)): The pixel data to copy the texture into.
 
 **Returns**:
 
@@ -101,7 +101,7 @@ This function requires the GPU to finish rendering and send data to the CPU. Thi
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -112,7 +112,7 @@ This function requires the GPU to finish rendering and send data to the CPU. Thi
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -140,7 +140,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -155,7 +155,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -174,7 +174,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -193,7 +193,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -212,7 +212,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -303,7 +303,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -340,7 +340,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -355,7 +355,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -412,5 +412,5 @@ local texture = niRenderedTexture.create(width, height)
 
 **Returns**:
 
-* `texture` ([niRenderedTexture](../../types/niRenderedTexture))
+* `texture` ([niRenderedTexture](../types/niRenderedTexture.md))
 

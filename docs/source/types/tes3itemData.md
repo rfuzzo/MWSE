@@ -39,7 +39,7 @@ Returns an ease of use script context for variable access.
 
 **Returns**:
 
-* `result` ([tes3scriptContext](../../types/tes3scriptContext))
+* `result` ([tes3scriptContext](../types/tes3scriptContext.md))
 
 ***
 
@@ -74,7 +74,7 @@ The owner of the associated item. An item can have an owner or it can be faction
 
 **Returns**:
 
-* `result` ([tes3npc](../../types/tes3npc), [tes3faction](../../types/tes3faction), nil)
+* `result` ([tes3npc](../types/tes3npc.md), [tes3faction](../types/tes3faction.md), nil)
 
 ***
 
@@ -85,7 +85,7 @@ A requirement, typically associated with ownership and when the player may freel
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable), number, nil)
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md), number, nil)
 
 ***
 
@@ -96,7 +96,7 @@ A requirement, typically associated with ownership and when the player may freel
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -118,7 +118,7 @@ Only available on misc items. The actor that is stored inside the soul gem.
 
 **Returns**:
 
-* `result` ([tes3actor](../../types/tes3actor))
+* `result` ([tes3actor](../types/tes3actor.md))
 
 ***
 

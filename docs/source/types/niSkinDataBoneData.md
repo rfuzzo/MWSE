@@ -28,7 +28,7 @@ Defines the rotation of the bone in the bind pose from the skinned object's coor
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -50,7 +50,7 @@ Defines the translation of the bone in bind pose from the skinned object's coord
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -61,5 +61,5 @@ Defines the translation of the bone in bind pose from the skinned object's coord
 
 **Returns**:
 
-* `result` ([niSkinDataBoneDataVertexWeight](../../types/niSkinDataBoneDataVertexWeight)[])
+* `result` ([niSkinDataBoneDataVertexWeight](../types/niSkinDataBoneDataVertexWeight.md)[])
 
