@@ -55,7 +55,7 @@ local function buildParentChain(className)
 	local package = assert(classes[className])
 	local ret = ""
 	if (classes[className]) then
-		ret = string.format("[%s](../../types/%s)", className, className)
+		ret = string.format("[%s](../types/%s.md)", className, className)
 	else
 		ret = className
 	end
@@ -75,7 +75,7 @@ local function getTypeLink(type)
 	local valueType = type:match("[%w%.]+")
 
 	if classes[valueType] then
-		typeLinks[type] = string.format("[%s](../../types/%s)%s", valueType, valueType, isArray and "[]" or "")
+		typeLinks[type] = string.format("[%s](../types/%s.md)%s", valueType, valueType, isArray and "[]" or "")
 	else
 		typeLinks[type] = type
 	end
@@ -189,7 +189,7 @@ end
 local function relatedButtons(related)
 	local ret = { "\n## Related events\n\n" }
 	for _, eventName in ipairs(related) do
-		ret[#ret + 1] = string.format("[%s](../%s/){ .md-button }", eventName, eventName)
+		ret[#ret + 1] = string.format("[%s](./%s.md){ .md-button }", eventName, eventName)
 	end
 	return table.concat(ret)
 end
@@ -467,7 +467,7 @@ local function writePackageDetails(file, package)
 		end
 	end
 
-	-- Class examples were writte before
+	-- Class examples were written before
 	if (package.examples and not (package.type == "class")) then
 		writeExamples(file, package)
 	end
