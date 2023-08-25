@@ -234,7 +234,7 @@ The next object in parent collection's list.
 ### `organic`
 <div class="search_terms" style="display: none">organic</div>
 
-Determines if the container's organic flag is enabled.
+Determines if the container's organic flag is enabled. The name of this property comes from the Construction Set. If a container is flagged as organic, no items can be stored inside such containers. In vanilla, those are all plants, mushrooms, and ores. In addition, resupplying guild supply chests are implemented as organic and respawning containers.
 
 **Returns**:
 
@@ -278,7 +278,9 @@ The previous object in parent collection's list.
 ### `respawns`
 <div class="search_terms" style="display: none">respawns</div>
 
-Determines if the container's respawn flag is enabled.
+Determines if the container's respawn flag is enabled. Only the organic containers can have respawn flag set.
+
+The global script variable, "MonthsToRespawn" is decremented at the end of each month. If it reaches zero at the first day of next month, it is reset to `iMonthsToRespawn` (GMST) and all respawning containers are refilled.
 
 **Returns**:
 
