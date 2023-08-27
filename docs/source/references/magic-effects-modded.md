@@ -217,6 +217,15 @@ These effects build off of the [standard magic effects](./magic-effects.md). If 
 | forbidSleep                  | 1201      | [Vaermina's Quest - Dreams of the Escaped](https://www.nexusmods.com/morrowind/mods/49172)         |
 | summonCorruptedDouble        | 1202      | [Vaermina's Quest - Dreams of the Escaped](https://www.nexusmods.com/morrowind/mods/49172)         |
 | summonCorruptedDoublePotion  | 1203      | [Vaermina's Quest - Dreams of the Escaped](https://www.nexusmods.com/morrowind/mods/49172)         |
+| storeSoul                    | 3300      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul1                  | 3301      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul2                  | 3302      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul3                  | 3303      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul4                  | 3304      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul5                  | 3305      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul6                  | 3306      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul7                  | 3307      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul8                  | 3308      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
 | summonAshGolem               | 7700      | [Atronach Expansion](https://www.nexusmods.com/morrowind/mods/22189)                               |
 | summonBoneGolem              | 7701      | [Atronach Expansion](https://www.nexusmods.com/morrowind/mods/22189)                               |
 | summonCrystalGolem           | 7702      | [Atronach Expansion](https://www.nexusmods.com/morrowind/mods/22189)                               |
