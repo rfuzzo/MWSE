@@ -793,6 +793,21 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 
 * `result` (boolean)
 
+??? example "Example: Checking if a mobile actor is moving"
+
+	There are many movement flags for mobile actors. To check if a mobile actor is moving at all, we need to check if the mobile is moving in each possible direction.
+
+	```lua
+	
+	--- Returns true if the mobile is moving.
+	---@param mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer
+	---@return boolean
+	local function isMoving(mobile)
+		return mobile.isMovingForward or mobile.isMovingBack or mobile.isMovingLeft or mobile.isMovingRight
+	end
+
+	```
+
 ***
 
 ### `isMovingLeft`

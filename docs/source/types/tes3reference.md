@@ -130,7 +130,11 @@ The blocked state of the object.
 		if not package then
 			return false
 		end
-		if package.type == tes3.aiPackage.follow then
+		if package.type == tes3.aiPackage.follow
+		-- Depending on your needs, you can also include the actor's escorter.
+		-- In the base game, AiEscort package is quite rare. Only White Guar
+		-- has that package and targetActor is the player.
+		or package.type == tes3.aiPackage.escort then
 			local target = package.targetActor
 	
 			if target.objectType == tes3.objectType.mobilePlayer then
