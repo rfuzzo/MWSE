@@ -215,7 +215,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ### `facing`
 <div class="search_terms" style="display: none">facing</div>
 
-Convenient access to the z-component of the reference's orientation. Setting the facing sets the reference as modified.
+Convenient access to the z-component of the reference's orientation in range of [-PI, PI] for actors and [0, 2PI] radians for all the other references. The North is facing of 0. Setting the facing sets the reference as modified.
 
 **Returns**:
 
@@ -457,7 +457,7 @@ The next object in parent collection's list.
 ### `orientation`
 <div class="search_terms" style="display: none">orientation</div>
 
-Access to the reference's orientation, in XYZ Euler angles in Radians in [0, 2 PI]. Changing the orientation marks the reference as modified.
+Access to the reference's orientation, in XYZ Euler angles in radians in [0, 2 PI] except for actors. For actors, the Z angle is in range [-PI, PI] radians. Changing the orientation marks the reference as modified.
 
 **Returns**:
 

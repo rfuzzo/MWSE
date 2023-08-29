@@ -16,7 +16,7 @@
 --- 
 --- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field destination tes3travelDestinationNode|nil *Read-only*. Returns the travel destination node for this reference, or `nil`. This can be used to determine where a given door links to.
---- @field facing number Convenient access to the z-component of the reference's orientation. Setting the facing sets the reference as modified.
+--- @field facing number Convenient access to the z-component of the reference's orientation in range of [-PI, PI] for actors and [0, 2PI] radians for all the other references. The North is facing of 0. Setting the facing sets the reference as modified.
 --- @field forwardDirection tes3vector3 *Read-only*. The normalized forward or Y direction vector of the reference.
 --- @field hasNoCollision boolean Sets the no-collision flag on this reference, and recalculates collision groups. Use the [`setNoCollisionFlag()`](https://mwse.github.io/MWSE/types/tes3reference/?h=setnocollisionflag#setnocollisionflag) function to manage collision group recalculation instead.
 --- @field isDead boolean|nil *Read-only*. Returns `true` if the object is dead, `false` if they are alive, or `nil` if that couldn't be determined.
@@ -32,7 +32,7 @@
 --- @field nextNode tes3reference *Read-only*. The next reference in the parent reference list.
 --- @field nodeData tes3reference *Read-only*. Redundant access to this object, for iterating over a tes3referenceList.
 --- @field object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon *Read-only*. The object that the reference is for, such as a weapon, armor, or actor.
---- @field orientation tes3vector3 Access to the reference's orientation, in XYZ Euler angles in Radians in [0, 2 PI]. Changing the orientation marks the reference as modified.
+--- @field orientation tes3vector3 Access to the reference's orientation, in XYZ Euler angles in radians in [0, 2 PI] except for actors. For actors, the Z angle is in range [-PI, PI] radians. Changing the orientation marks the reference as modified.
 --- @field position tes3vector3 Access to the reference's position. Setting the position sets the reference as modified.
 --- 
 --- For actors, the axes are:
