@@ -8,7 +8,7 @@
 
 A UI element, the main building block of the UI system. All elements are created with methods on a parent Element.  Elements are very configurable, and have many HTML-like layout features. All layout properties can be set to `nil` to reset them to the default value, which will deactivate any related layout mode.
 
-Elements can have custom data attached using their `Property`_ key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
+Elements can have custom data attached using their `Property` key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
 
 ## Properties
 
@@ -1148,7 +1148,7 @@ local result = myObject:createVerticalScrollPane({ id = ... })
 ### `destroy`
 <div class="search_terms" style="display: none">destroy</div>
 
-Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 
 ```lua
 myObject:destroy()
@@ -1159,7 +1159,7 @@ myObject:destroy()
 ### `destroyChildren`
 <div class="search_terms" style="display: none">destroychildren</div>
 
-Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 
 Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 
@@ -1526,7 +1526,7 @@ myObject:registerBefore(eventID, callback)
 ### `reorderChildren`
 <div class="search_terms" style="display: none">reorderchildren</div>
 
-Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+Moves the layout order of the children of this element. `count` elements are taken from starting child `Element` or index (0-based) `moveFrom`, and moved before the child `Element` or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 
 Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 
