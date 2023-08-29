@@ -68,7 +68,7 @@ The timestamp at which currently playing music track started fading in. So, it's
 ### `musicNextTrackStartTimestamp`
 <div class="search_terms" style="display: none">musicnexttrackstarttimestamp</div>
 
-
+The timestamp at which next track will start playing.
 
 **Returns**:
 

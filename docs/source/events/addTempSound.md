@@ -28,7 +28,7 @@ event.register(tes3.event.addTempSound, addTempSoundCallback)
 
 * `flags` (number): *Read-only*. A flag whether the sound is looping or not. 0 means the sound doesn't loop, 1 means the sound loops.
 * `isVoiceover` (boolean): A flag whether the sound is a voiced line, which are usually found in the Sound\Vo data folder.
-* `path` (string): The path to the sound to play, relative to Data Files\Sounds
+* `path` (string): The path to the sound to play, relative to Data Files\Sounds. For some sounds, path can be an empty string.
 * `pitch` (number): The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
 * `reference` ([tes3reference](../types/tes3reference.md), nil): The reference which is emiting the sound.
 * `sound` ([tes3sound](../types/tes3sound.md)): The sound object about to be played.
