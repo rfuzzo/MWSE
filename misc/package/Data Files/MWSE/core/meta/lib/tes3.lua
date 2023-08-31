@@ -806,14 +806,14 @@ function tes3.enableKey(keyCode) end
 --- Similar to the vanilla FadeIn mwscript command.
 --- @param params tes3.fadeIn.params? This table accepts the following values:
 --- 
---- `fader`: tes3fader? — *Optional*. Defaults to the transition fader.
+--- `fader`: tes3fader? — *Default*: `tes3.worldController.transitionFader`. Defaults to the transition fader.
 --- 
 --- `duration`: number? — *Default*: `1.0`. Time, in seconds, for the fade.
 function tes3.fadeIn(params) end
 
 ---Table parameter definitions for `tes3.fadeIn`.
 --- @class tes3.fadeIn.params
---- @field fader tes3fader? *Optional*. Defaults to the transition fader.
+--- @field fader tes3fader? *Default*: `tes3.worldController.transitionFader`. Defaults to the transition fader.
 --- @field duration number? *Default*: `1.0`. Time, in seconds, for the fade.
 
 --- Similar to the vanilla FadeOut mwscript command.
@@ -962,6 +962,8 @@ function tes3.getAnimationActionTiming(params) end
 --- @field group number? *Optional*. The animation group id to get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
 
 --- This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3getanimationgroups).
 --- @param params tes3.getAnimationGroups.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference — A reference whose animation groups to fetch.
@@ -1688,13 +1690,13 @@ function tes3.menuMode() end
 --- Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3messagebox).
---- @param messageOrParams string|tes3.messageBox.messageOrParams This table accepts the following values:
+--- @param messageOrParams boolean|number|string|tes3.messageBox.messageOrParams This table accepts the following values:
 --- 
 --- `message`: string — No description yet available.
 --- 
---- `buttons`: string[]? — *Optional*. An array of strings to use for buttons.
+--- `buttons`: string[]? — *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
 --- 
---- `callback`: function? — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- `callback`: nil|fun(e: tes3messageboxCallbackData) — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- 
 --- `showInDialog`: boolean? — *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- 
@@ -1706,8 +1708,8 @@ function tes3.messageBox(messageOrParams, ...) end
 ---Table parameter definitions for `tes3.messageBox`.
 --- @class tes3.messageBox.messageOrParams
 --- @field message string No description yet available.
---- @field buttons string[]? *Optional*. An array of strings to use for buttons.
---- @field callback function? *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- @field buttons string[]? *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
+--- @field callback nil|fun(e: tes3messageboxCallbackData) *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- @field showInDialog boolean? *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- @field duration number? *Optional*. Overrides how long the toast-style message remains visible.
 

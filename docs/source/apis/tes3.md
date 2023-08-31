@@ -1306,7 +1306,7 @@ tes3.fadeIn({ fader = ..., duration = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `fader` ([tes3fader](../types/tes3fader.md)): *Optional*. Defaults to the transition fader.
+	* `fader` ([tes3fader](../types/tes3fader.md)): *Default*: `tes3.worldController.transitionFader`. Defaults to the transition fader.
 	* `duration` (number): *Default*: `1.0`. Time, in seconds, for the fade.
 
 ***
@@ -1672,6 +1672,25 @@ local lowerBodyGroup, upperBodyGroup, leftArmGroup = tes3.getAnimationGroups({ r
 * `upperBodyGroup` (integer)
 * `leftArmGroup` (integer)
 
+??? example "Example: Getting animation timings for bow animations"
+
+	```lua
+	
+	local function onSimulate()
+		local reference = tes3.is3rdPerson() and tes3.player or tes3.player1stPerson
+	
+		local _, upperGroup, _ = tes3.getAnimationGroups({ reference = reference })
+		if upperGroup ~= tes3.animationGroup.bowAndArrow then return end
+	
+		local _, upperTiming, _ = unpack(
+			tes3.getAnimationTiming({ reference = reference })
+		)
+		tes3.messageBox(upperTiming)
+	end
+	event.register(tes3.event.simulate, onSimulate)
+
+	```
+
 ***
 
 ### `tes3.getAnimationTiming`
@@ -1692,14 +1711,34 @@ local result = tes3.getAnimationTiming({ reference = ... })
 
 * `result` (number[])
 
+??? example "Example: Getting animation timings for bow animations"
+
+	```lua
+	
+	local function onSimulate()
+		local reference = tes3.is3rdPerson() and tes3.player or tes3.player1stPerson
+	
+		local _, upperGroup, _ = tes3.getAnimationGroups({ reference = reference })
+		if upperGroup ~= tes3.animationGroup.bowAndArrow then return end
+	
+		local _, upperTiming, _ = unpack(
+			tes3.getAnimationTiming({ reference = reference })
+		)
+		tes3.messageBox(upperTiming)
+	end
+	event.register(tes3.event.simulate, onSimulate)
+
+	```
+
 ??? example "Example: An elegent usage example"
 
 	The function returns animation timings for three body segments. This array can be nicely broken down into three variables using Lua's `unpack()` function.
 
 	```lua
 	
+	local reference = tes3.is3rdPerson() and tes3.player or tes3.player1stPerson
 	local lowerTiming, upperTiming, leftArmTiming = unpack(
-		tes3.getAnimationTiming({ reference = tes3.player })
+		tes3.getAnimationTiming({ reference = reference })
 	)
 
 	```
@@ -3375,10 +3414,10 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 
 **Parameters**:
 
-* `messageOrParams` (string, table)
+* `messageOrParams` (boolean, number, string, table)
 	* `message` (string)
-	* `buttons` (string[]): *Optional*. An array of strings to use for buttons.
-	* `callback` (function): *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+	* `buttons` (string[]): *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
+	* `callback` (fun(e: tes3messageboxCallbackData)): *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 	* `showInDialog` (boolean): *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 	* `duration` (number): *Optional*. Overrides how long the toast-style message remains visible.
 * `formatAdditions` (variadic): *Optional*. Only used if messageOrParams is a string.

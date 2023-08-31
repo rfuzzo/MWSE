@@ -12,5 +12,10 @@ return {
 		{ name = "lowerBodyGroup", type = "integer" },
 		{ name = "upperBodyGroup", type = "integer" },
 		{ name = "leftArmGroup", type = "integer" },
+	},
+	examples = {
+		["usage"] = {
+			title = "Getting animation timings for bow animations",
+		}
 	}
 }
