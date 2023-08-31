@@ -9,6 +9,143 @@
 Represents groups of multiple scene graph subtrees, only one of which is visible at any given time. They are useful for showing different states of a model depending on engine / lua logic. If you detach the active subtree, the switch node will set the active subtree to none, or to an index of -1.
 
 This type inherits the following: [niNode](../types/niNode.md), [niAVObject](../types/niAVObject.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
+??? example "Example: A line along the view direction"
+
+	```lua
+	
+	---@type niSwitchNode, niCamera
+	local line, camera
+	local verticalOffset = tes3vector3.new(0, 0, -5)
+	
+	local function onLoaded()
+		-- MWSE ships with a mesh which contains a few useful widgets.
+		-- These can be used during debugging.
+		local mesh = tes3.loadMesh("mwse\\widgets.nif") --[[@as niNode]]
+		local widgets = {
+			-- 3D coordinate axes
+			arrows = mesh:getObjectByName("unitArrows") --[[@as niTriShape]],
+			-- A common switch node that has three almost infinite lines
+			-- along each coordinate exis
+			axes = mesh:getObjectByName("axisLines") --[[@as niSwitchNode]],
+			plane = mesh:getObjectByName("unitPlane") --[[@as niTriShape]],
+			sphere = mesh:getObjectByName("unitSphere") --[[@as niTriShape]]
+		}
+	
+		local root = tes3.worldController.vfxManager.worldVFXRoot
+		---@cast root niNode
+	
+		line = widgets.axes:clone() --[[@as niSwitchNode]]
+		root:attachChild(line)
+		root:update()
+	
+		-- switchIndex = 0 - x axis (red)
+		-- switchIndex = 1 - y axis (green)
+		-- switchIndex = 2 - z axis (blue)
+		line.switchIndex = 1
+	
+		camera = tes3.worldController.worldCamera.cameraData.camera
+	end
+	event.register(tes3.event.loaded, onLoaded)
+	
+	local function simulateCallback()
+		-- Let's make the line's origin at the eye position.
+		-- The position is offset -5 along the Z axis, so that
+		-- that we can actually see the line (the line isn't
+		-- visible if looking directly along the line).
+		line.translation = tes3.getPlayerEyePosition() + verticalOffset
+	
+		local rotation = tes3matrix33.new()
+	
+		-- Make the line point in the look direction.
+		-- We'll get the direction vector from the world camera.
+		rotation:lookAt(camera.worldDirection, camera.worldUp)
+		line.rotation = rotation
+		line:update()
+	end
+	event.register(tes3.event.simulate, simulateCallback)
+
+	```
+
+??? example "Example: The visualization of vector reflection using two lines"
+
+	outDirection = inDirection - (normal * inDirection:dot(normal) * 2)
+
+	```lua
+	
+	---@type niSwitchNode, niSwitchNode, niCamera
+	local lineIn, lineOut, camera
+	local verticalOffset = tes3vector3.new(0, 0, -30)
+	
+	local function onLoaded()
+		-- MWSE ships with a mesh which contains a few useful widgets.
+		-- These can be used during debugging.
+		local mesh = tes3.loadMesh("mwse\\widgets.nif") --[[@as niNode]]
+		local widgets = {
+			-- 3D coordinate axes
+			arrows = mesh:getObjectByName("unitArrows") --[[@as niTriShape]],
+			-- A common switch node that has three almost infinite lines
+			-- along each coordinate exis
+			axes = mesh:getObjectByName("axisLines") --[[@as niSwitchNode]],
+			plane = mesh:getObjectByName("unitPlane") --[[@as niTriShape]],
+			sphere = mesh:getObjectByName("unitSphere") --[[@as niTriShape]]
+		}
+	
+		local root = tes3.worldController.vfxManager.worldVFXRoot
+		---@cast root niNode
+	
+		lineIn = widgets.axes:clone() --[[@as niSwitchNode]]
+		lineOut = lineIn:clone() --[[@as niSwitchNode]]
+	
+		root:attachChild(lineIn)
+		root:attachChild(lineOut)
+		root:update()
+	
+		-- switchIndex = 0 - x axis (red)
+		-- switchIndex = 1 - y axis (green)
+		-- switchIndex = 2 - z axis (blue)
+		lineIn.switchIndex = 1
+		lineOut.switchIndex = 1
+		camera = tes3.worldController.worldCamera.cameraData.camera
+	end
+	event.register(tes3.event.loaded, onLoaded)
+	
+	local function simulateCallback()
+		lineIn.translation = tes3.getPlayerEyePosition() + verticalOffset
+	
+		local inDirection = camera.worldDirection
+		local rotation = lineIn.rotation:copy()
+		rotation:lookAt(inDirection, camera.worldUp)
+	
+		lineIn.rotation = rotation
+		lineIn:update()
+	
+		-- Now get the coordinates for the outLine
+		--local inDirection = tes3.getPlayerEyeVector()
+		local hit = tes3.rayTest({
+			position = lineIn.translation,
+			direction = inDirection,
+			returnNormal = true,
+			returnSmoothNormal = true,
+			ignore = { tes3.player, tes3.player1stPerson }
+		})
+		if not hit then return end
+	
+		lineOut.translation = hit.intersection
+	
+		local normal = hit.normal
+		local outDirection = inDirection - (normal * inDirection:dot(normal) * 2)
+		outDirection:normalize()
+		local axis = outDirection:cross(inDirection)
+		local rotation = tes3matrix33.new()
+		rotation:lookAt(outDirection, axis:normalized())
+	
+		lineOut.rotation = rotation
+		lineOut:update()
+	end
+	event.register(tes3.event.simulate, simulateCallback)
+
+	```
+
 ## Properties
 
 ### `alphaProperty`

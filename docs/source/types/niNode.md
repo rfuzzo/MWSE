@@ -9,6 +9,200 @@
 Base class that represents the nodes of a scene graph. A node can have any number of child nodes.
 
 This type inherits the following: [niAVObject](../types/niAVObject.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
+??? example "Example: Attaching a mesh directly to the actor's scene graph"
+
+	```lua
+	
+	--- This function will attach an equipment mesh directly to the
+	--- reference's scene graph. The skeleton (bone names) in the
+	--- equipment mesh should match the destination skeleton.
+	---@param mesh niNode
+	---@param reference tes3reference
+	local function attachMesh(mesh, reference)
+		for shape in table.traverse(mesh.children) do
+			if shape:isInstanceOfType(ni.type.NiTriShape) then
+				---@cast shape niTriShape
+				local skin = shape.skinInstance
+				local referenceRoot = reference.sceneNode
+				---@cast referenceRoot niNode
+	
+				if skin then
+					skin.root = referenceRoot:getObjectByName(skin.root.name) --[[@as niNode]]
+					for i, bone in ipairs(skin.bones) do
+						skin.bones[i] = referenceRoot:getObjectByName(bone.name)
+					end
+				end
+				---@diagnostic disable-next-line
+				referenceRoot:getObjectByName("Bip01"):attachChild(shape)
+			end
+		end
+	end
+	
+	local function onLoaded()
+		local mesh = tes3.loadMesh("c\\c_m_helseth_robe.nif"):clone() --[[@as niNode]]
+		attachMesh(mesh, tes3.player)
+	end
+	event.register(tes3.event.loaded, onLoaded)
+
+	```
+
+??? example "Example: Adding new shapes to the scene graph"
+
+	The most basic of the scene graph operations is attaching. Attaching a node to the elements of the scene graph will make it visible.
+
+	```lua
+	
+	---@type niTriShape
+	local arrows
+	
+	local function onLoaded()
+		-- MWSE ships with a mesh which contains a few useful widgets.
+		-- These can be used during debugging.
+		local mesh = tes3.loadMesh("mwse\\widgets.nif") --[[@as niNode]]
+		local widgets = {
+			-- 3D coordinate axes
+			arrows = mesh:getObjectByName("unitArrows") --[[@as niTriShape]],
+			-- A common switch node that has three almost infinite lines
+			-- along each coordinate exis
+			axes = mesh:getObjectByName("axisLines") --[[@as niSwitchNode]],
+			plane = mesh:getObjectByName("unitPlane") --[[@as niTriShape]],
+			sphere = mesh:getObjectByName("unitSphere") --[[@as niTriShape]]
+		}
+	
+		local root = tes3.worldController.vfxManager.worldVFXRoot
+		---@cast root niNode
+	
+		-- Objects in the scene graph share as much same properties as possible, which
+		-- allows for some optimizations. Because of that, we need to clone our object
+		-- before attaching it to the scene graph.
+		arrows = widgets.arrows:clone() --[[@as niTriShape]]
+	
+		-- The base size of the arrows is 1 unit. Let's make them a bit bigger.
+		arrows.scale = 30
+	
+		-- Attaching our arrows shape to a node in the scene graph will
+		-- make it actually visible in-game.
+		root:attachChild(arrows)
+	
+		-- No changes are applied until the update() method was called on the parent node.
+		root:update()
+	end
+	event.register(tes3.event.loaded, onLoaded)
+	
+	local function simulateCallback()
+		-- Let's set the base position of the arrows in the in-game world to the player's
+		-- eye position. Then we offset it in the direction of eye vector by 200 units.
+		-- We get the arrows following the player's cursor at 200 units distance.
+		arrows.translation = tes3.getPlayerEyePosition() + tes3.getPlayerEyeVector() * 200
+		arrows:update()
+	end
+	event.register(tes3.event.simulate, simulateCallback)
+
+	```
+
+??? example "Example: Orienting an object so that it's perpendicular to the surface."
+
+	In this example the unit arrows are placed perpendicular to the surface in the direction the player is looking at.
+
+	```lua
+	
+	---@type niTriShape
+	local arrows
+	
+	local function onLoaded()
+		-- MWSE ships with a mesh which contains a few useful widgets.
+		-- These can be used during debugging.
+		local mesh = tes3.loadMesh("mwse\\widgets.nif") --[[@as niNode]]
+		local widgets = {
+			-- 3D coordinate axes
+			arrows = mesh:getObjectByName("unitArrows") --[[@as niTriShape]],
+			-- A common switch node that has three almost infinite lines
+			-- along each coordinate exis
+			axes = mesh:getObjectByName("axisLines") --[[@as niSwitchNode]],
+			plane = mesh:getObjectByName("unitPlane") --[[@as niTriShape]],
+			sphere = mesh:getObjectByName("unitSphere") --[[@as niTriShape]]
+		}
+	
+		local root = tes3.worldController.vfxManager.worldVFXRoot
+		---@cast root niNode
+	
+		-- Objects in the scene graph share as much same properties as possible, which
+		-- allows for some optimizations. Because of that, we need to clone our object
+		-- before attaching it to the scene graph.
+		arrows = widgets.arrows:clone() --[[@as niTriShape]]
+	
+		-- The base size of the arrows is 1 unit. Let's make them a bit bigger.
+		arrows.scale = 100
+	
+		-- Attaching our arrows shape to a node in the scene graph will
+		-- make it actually visible in-game.
+		root:attachChild(arrows)
+	
+		-- No changes are applied until the update() method was called on the parent node.
+		root:update()
+	end
+	event.register(tes3.event.loaded, onLoaded)
+	
+	
+	-- This is the up axis unit vector.
+	local UP = tes3vector3.new(0, 0, 1)
+	
+	--- This function returns the difference in direction
+	--- of two vectors in Euler angles in radians.
+	---@param vec1 tes3vector3
+	---@param vec2 tes3vector3
+	---@return tes3vector3, boolean?
+	local function rotationDifference(vec1, vec2)
+		vec1 = vec1:normalized()
+		vec2 = vec2:normalized()
+	
+		local axis = vec1:cross(vec2)
+		local norm = axis:length()
+		if norm < 1e-5 then
+			return tes3vector3.new(0, 0, 0)
+		end
+	
+		local angle = math.asin(norm)
+		if vec1:dot(vec2) < 0 then
+			angle = math.pi - angle
+		end
+	
+		axis:normalize()
+		local m = tes3matrix33.new()
+		m:toRotation(-angle, axis.x, axis.y, axis.z)
+		return m:toEulerXYZ()
+	end
+	
+	
+	local function simulateCallback()
+		local hit = tes3.rayTest({
+			position = tes3.getPlayerEyePosition(),
+			direction = tes3.getPlayerEyeVector(),
+			returnNormal = true,
+			returnSmoothNormal = true,
+			ignore = { tes3.player }
+		})
+		if not hit then return end
+	
+		-- First, set the the arrows position
+		arrows.translation = hit.intersection
+	
+		-- Now, let's get the rotation
+		local rotation = rotationDifference(UP, hit.normal)
+		local m = tes3matrix33.new()
+	
+		-- We need to convert our rotation to a rotation matrix
+		-- since nodes of scene graph store their rotations in
+		-- that form.
+		m:fromEulerXYZ(rotation.x, rotation.y, rotation.z)
+		arrows.rotation = m
+	
+		arrows:update()
+	end
+	event.register(tes3.event.simulate, simulateCallback)
+
+	```
+
 ## Properties
 
 ### `alphaProperty`

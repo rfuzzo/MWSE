@@ -46,6 +46,8 @@ function tes3vector3:cross(vec) end
 function tes3vector3:distance(vec) end
 
 --- Calculates the dot product with another vector.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3vector3/#dot).
 --- @param vec tes3vector3 No description yet available.
 --- @return number result No description yet available.
 function tes3vector3:dot(vec) end
