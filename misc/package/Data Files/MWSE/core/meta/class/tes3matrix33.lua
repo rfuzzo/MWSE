@@ -66,7 +66,7 @@ function tes3matrix33:invert() end
 
 --- Updates the matrix so that its forward and up vectors point toward the given directions.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3matrix33/#lookAt).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3matrix33/#lookat).
 --- @param forward tes3vector3 No description yet available.
 --- @param up tes3vector3 No description yet available.
 function tes3matrix33:lookAt(forward, up) end

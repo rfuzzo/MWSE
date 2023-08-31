@@ -438,7 +438,7 @@ function tes3uiElement:createThinBorder(params) end
 --- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createVerticalScrollPane).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createverticalscrollpane).
 --- @param params tes3uiElement.createVerticalScrollPane.params? This table accepts the following values:
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.
@@ -637,7 +637,7 @@ function tes3uiElement:setLuaData(key, value) end
 
 --- Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function sets a property to a boolean value.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#setPropertyBool).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#setpropertybool).
 --- @param property number|string The property to set.
 --- @param value boolean The value to set.
 function tes3uiElement:setPropertyBool(property, value) end

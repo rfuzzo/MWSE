@@ -29,19 +29,21 @@ common.log("Definitions folder: %s", common.pathDefinitions)
 local function getPackageLink(package)
 	local tokens = { common.urlBase, package.key }
 
-	if (package.type == "class") then
-		tokens = { common.urlBase, "types", package.key }
-	elseif (package.type == "class") then
-		tokens = { common.urlBase, "apis", package.namespace }
-	elseif (package.type == "event") then
-		tokens = { common.urlBase, "events", package.key }
-	elseif (package.parent) then
+	if (not package.parent) then
+		if (package.type == "class") then
+			tokens = { common.urlBase, "types", package.key }
+		elseif (package.type == "function") then
+			tokens = { common.urlBase, "apis", package.namespace }
+		elseif (package.type == "event") then
+			tokens = { common.urlBase, "events", package.key }
+		end
+	else
 		local parentType = package.parent.type
 		if (parentType == "lib") then
 			local token = string.gsub("#" .. package.namespace, "%.", "")
 			tokens = { common.urlBase, "apis", package.parent.namespace, token:lower() }
 		elseif (parentType == "class") then
-			tokens = { common.urlBase, "types", package.parent.key, "#" .. package.key }
+			tokens = { common.urlBase, "types", package.parent.key, "#" .. package.key:lower() }
 		end
 	end
 
@@ -67,6 +69,11 @@ end
 
 local function writeExamples(package, file)
 	if (package.examples) then
+		-- TODO: the page headline (after the #) needs to be all lowercase
+		-- See:
+		--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3matrix33/#lookAt).
+		-- Should be
+		-- (https://mwse.github.io/MWSE/types/tes3matrix33/#lookat)
 		file:write(string.format("---\n--- [Examples available in online documentation](%s).\n", getPackageLink(package)))
 	end
 end

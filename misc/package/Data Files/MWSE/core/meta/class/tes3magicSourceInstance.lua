@@ -34,7 +34,7 @@ function tes3magicSourceInstance:getMagnitudeForIndex(index) end
 
 --- This function plays an animation for an effect from the `tes3magicSourceInstance` object.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/#playVisualEffect).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/#playvisualeffect).
 --- @param params tes3magicSourceInstance.playVisualEffect.params This table accepts the following values:
 --- 
 --- `effectIndex`: number — The index in the effect whose visual will be played, a number in range [0, 7].
