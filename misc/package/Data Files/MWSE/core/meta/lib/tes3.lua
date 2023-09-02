@@ -1696,7 +1696,7 @@ function tes3.menuMode() end
 --- 
 --- `buttons`: string[]? — *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
 --- 
---- `callback`: nil|fun(e: tes3messageboxCallbackData) — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- `callback`: nil|fun(e: tes3messageBoxCallbackData) — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- 
 --- `showInDialog`: boolean? — *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- 
@@ -1709,7 +1709,7 @@ function tes3.messageBox(messageOrParams, ...) end
 --- @class tes3.messageBox.messageOrParams
 --- @field message string No description yet available.
 --- @field buttons string[]? *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
---- @field callback nil|fun(e: tes3messageboxCallbackData) *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- @field callback nil|fun(e: tes3messageBoxCallbackData) *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- @field showInDialog boolean? *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- @field duration number? *Optional*. Overrides how long the toast-style message remains visible.
 
