@@ -138,7 +138,6 @@ function DependencyManager:checkDependencies()
                 self.logger:debug("Checking dependency type: %s", typeId)
                 local passed, failures = dependencyType:checkDependency(dependency)
                 if failures and not passed then
-                    self.logger:error("Dependency failed: %s", typeId)
                     for _, failure in pairs(failures) do
                         table.insert(failedDependencies, failure)
                     end
@@ -150,7 +149,7 @@ function DependencyManager:checkDependencies()
     end
     if table.size(failedDependencies) > 0 then
         if self.showFailureMessage then
-            self.logger:error("Dependencies failed to load, adding to registered managers")
+            self.logger:debug("Dependencies failed to load, adding to registered managers")
             self.failedDependencies = failedDependencies
             table.insert(DependencyManager.registeredManagers, self)
         end

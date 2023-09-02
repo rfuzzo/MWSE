@@ -1,5 +1,6 @@
 ---@class DependencyNotifier
 local DependencyNotifier = {
+    ---@type mwseLogger
     logger = nil,
     failedDependencies = nil,
     packageName = nil
@@ -41,6 +42,7 @@ function DependencyNotifier:dependenciesFailMessage(callback)
             scrollPane.paddingAllSides = 2
             scrollPane.minHeight = 500
 
+			self.logger:error("A list of dependencies not met:")
             for _, failure in pairs(self.failedDependencies) do
                 local dependencyBlock = scrollPane:createThinBorder()
                 dependencyBlock.flowDirection = "top_to_bottom"
@@ -59,13 +61,16 @@ function DependencyNotifier:dependenciesFailMessage(callback)
                 titleLabel.widthProportional = 1.0
                 titleLabel.borderBottom = 4
                 titleLabel.color = tes3ui.getPalette(tes3.palette.headerColor)
+				self.logger:error(title:gsub("\n", ""))
 
                 for _, reason in pairs(failure.reasons) do
-                    local depLabel = dependencyBlock:createLabel { text = "- " .. reason }
+					local text = "- " .. reason
+                    local depLabel = dependencyBlock:createLabel { text = text }
                     --depLabel.color = tes3ui.getPalette(tes3.palette.negativeColor)
                     depLabel.wrapText = true
                     --depLabel.justifyText = "center"
                     depLabel.widthProportional = 1.0
+					self.logger:error(text)
                 end
                 if failure.resolveButton then
                     self.logger:assert(type(failure.resolveButton.text) == "string",
