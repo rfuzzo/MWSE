@@ -1,9 +1,12 @@
 local DependencyType = require("dependencyManagement.DependencyType")
 ---@class MWSE.Metadata.Package
 ---@field name string
----@field version string
+---@field version string Semver "MAJOR.MINOR.PATCH"
+---@field plugin string
 ---@field description string
 ---@field authors string[]
+---@field homepage string
+---@field repository string
 
 ---@class MWSE.Metadata.Tools.MWSE
 ---@field lua-mod string The path to the main.lua associated with this mod
@@ -37,7 +40,7 @@ local DependencyType = require("dependencyManagement.DependencyType")
 ---@field name string The name of the dependency manager
 ---@field metadata MWSE.Metadata The metadata of the mod using this dependency manager
 ---@field logger mwseLogger? The logger to use for this dependency manager
----@field showFailureMessage boolean?  Whether to show a message box if a dependency fails to load. Defaults to true.
+---@field showFailureMessage boolean? Whether to show a message box if a dependency fails to load. Defaults to true.
 ---@field failedDependencies MWSE.DependencyType.Failure[]? The list of failed dependencies
 local DependencyManager = {
     ---@type DependencyManager A list of all registered dependency managers
@@ -52,7 +55,7 @@ function DependencyManager.new(e)
     local self = setmetatable({}, { __index = DependencyManager })
     self.logger = e.logger
     self.metadata = e.metadata
-    self.showFailureMessage = e.showFailureMessage == nil and true or e.showFailureMessage
+    self.showFailureMessage = table.get(e, "showFailureMessage", true)
     self.name = e.metadata
         and e.metadata.package
         and e.metadata.package.name
@@ -74,8 +77,12 @@ end
 
 
 ---Check if all dependencies are met
----@return boolean #returns true if all dependencies passed, false if any failed.
+---@return boolean passed #returns true if all dependencies passed, false if any failed.
 function DependencyManager:checkDependencies()
+    if not mwse.getConfig("EnableDependencyChecks") then
+        return true
+    end
+
     self.logger:debug("Checking dependencies for: %s", self.metadata.package.name)
     local failedDependencies = {} ---@type table<string, MWSE.DependencyType.Failure>
     if self.metadata.dependencies then
