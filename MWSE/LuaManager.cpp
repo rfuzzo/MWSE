@@ -2581,7 +2581,7 @@ namespace mwse::lua {
 			}
 			const auto& lowerPath = maybeLowerPath.value();
 
-			// We only care *-metadata.toml files.
+			// We only care about *-metadata.toml files.
 			if (!string::ends_with(lowerPath, "-metadata.toml")) {
 				continue;
 			}
@@ -4345,7 +4345,7 @@ namespace mwse::lua {
 
 	//
 	// Patch: Modifiable physical hit detection cone and weapon reach;
-	// 
+	//
 
 	static float attackReach_saved, fCombatAngleXY_saved, fCombatAngleZ_saved;
 
@@ -4527,7 +4527,7 @@ namespace mwse::lua {
 			_putenv_s("Path", envPath.str().c_str());
 		}
 
-		// Execute mwse_init.lua
+		// Execute initialize.lua
 		try {
 			sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\initialize.lua");
 			if (!result.valid()) {
