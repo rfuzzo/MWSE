@@ -34,7 +34,7 @@ function KeyBinder:getLetter(keyCode)
 end
 
 function KeyBinder:getComboString(keyCombo)
-	-- Returns "SHIFT-X" if shift is held down but the active key is not Shift, 
+	-- Returns "SHIFT-X" if shift is held down but the active key is not Shift,
 	-- otherwise just "X" (X being the key being pressed)
 	-- And so on for Alt and Ctrl
 
@@ -84,6 +84,9 @@ function KeyBinder:bindKey(e)
 			tes3.messageBox(self.messageRebinded, self:getComboString(self.currentCombo))
 			self.variable.value = self.currentCombo
 			self:setText(self:getText())
+			if self.callback then
+				self:callback()
+			end
 		end
 	end
 	self.currentCombo = { keyCode = nil }
