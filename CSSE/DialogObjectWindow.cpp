@@ -377,11 +377,12 @@ namespace se::cs::dialog::object_window {
 				if (object) {
 					// Background color highlighting.
 					if (object->getDeleted()) {
-						lplvcd->clrTextBk = RGB(255, 235, 235);
+						lplvcd->clrTextBk = se::cs::window::main::bgColorDeleted;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 					else if (object->getModified()) {
-						lplvcd->clrTextBk = RGB(235, 255, 235);
+						// Modified color highlighting. Different colors for modified-master or mod-added object.
+						lplvcd->clrTextBk = object->isFromMaster() ? se::cs::window::main::bgColorModifiedMaster : se::cs::window::main::bgColorModifiedNew;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 				}

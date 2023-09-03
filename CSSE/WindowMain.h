@@ -34,6 +34,11 @@ namespace se::cs::window::main {
 	constexpr UINT MENU_ID_CSSE_TEST_ENVIRONMENT = 100002;
 	constexpr UINT MENU_ID_CSSE_ABOUT = 100001;
 
+	// Standard colors for modified entries.
+	constexpr COLORREF bgColorDeleted = RGB(255, 235, 235);
+	constexpr COLORREF bgColorModifiedMaster = RGB(235, 255, 235);
+	constexpr COLORREF bgColorModifiedNew = RGB(210, 240, 255);
+
 	// Global variables.
 	using hInstance = memory::ExternalGlobal<HINSTANCE, 0x6CE930>;
 	using ghWnd = memory::ExternalGlobal<HWND, 0x6CE934>;
