@@ -69,11 +69,6 @@ end
 
 local function writeExamples(package, file)
 	if (package.examples) then
-		-- TODO: the page headline (after the #) needs to be all lowercase
-		-- See:
-		--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3matrix33/#lookAt).
-		-- Should be
-		-- (https://mwse.github.io/MWSE/types/tes3matrix33/#lookat)
 		file:write(string.format("---\n--- [Examples available in online documentation](%s).\n", getPackageLink(package)))
 	end
 end
