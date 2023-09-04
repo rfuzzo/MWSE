@@ -11,8 +11,6 @@
 #include "StringUtil.h"
 #include "WinUIUtil.h"
 
-#include "WindowMain.h"
-
 #include "Settings.h"
 
 namespace se::cs::dialog::cell_window {
@@ -270,12 +268,12 @@ namespace se::cs::dialog::cell_window {
 				if (object) {
 					// Background color highlighting.
 					if (object->getDeleted()) {
-						lplvcd->clrTextBk = se::cs::window::main::bgColorDeleted;
+						lplvcd->clrTextBk = settings.color_theme.highlight_deleted_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 					else if (object->getModified()) {
 						// Modified color highlighting. Different colors for modified-master or mod-added object.
-						lplvcd->clrTextBk = object->isFromMaster() ? se::cs::window::main::bgColorModifiedMaster : se::cs::window::main::bgColorModifiedNew;
+						lplvcd->clrTextBk = object->isFromMaster() ? settings.color_theme.highlight_modified_from_master_packed_color : settings.color_theme.highlight_modified_new_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 				}
