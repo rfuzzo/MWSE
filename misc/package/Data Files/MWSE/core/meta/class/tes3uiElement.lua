@@ -315,7 +315,7 @@ function tes3uiElement:createParagraphInput(params) end
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.
 --- 
---- `color`: tes3vector3|table|nil — *Optional*. The fill color for the element.
+--- `color`: tes3vector3|number[]|nil — *Optional*. The fill color for the element.
 --- 
 --- `randomizeColor`: boolean? — *Default*: `false`. If true, the creation color will be randomized.
 --- @return tes3uiElement result No description yet available.
@@ -324,7 +324,7 @@ function tes3uiElement:createRect(params) end
 ---Table parameter definitions for `tes3uiElement.createRect`.
 --- @class tes3uiElement.createRect.params
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
---- @field color tes3vector3|table|nil *Optional*. The fill color for the element.
+--- @field color tes3vector3|number[]|nil *Optional*. The fill color for the element.
 --- @field randomizeColor boolean? *Default*: `false`. If true, the creation color will be randomized.
 
 --- Creates a horizontal slider.

@@ -702,9 +702,9 @@ function tes3.createObject(params) end
 --- 
 --- `object`: tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon|string — The object to create a reference of.
 --- 
---- `position`: tes3vector3|table — The location to create the reference at.
+--- `position`: tes3vector3|number[] — The location to create the reference at.
 --- 
---- `orientation`: tes3vector3|table — The new orientation for the created reference.
+--- `orientation`: tes3vector3|number[] — The new orientation for the created reference.
 --- 
 --- `cell`: tes3cell|string|table|nil — *Optional*. The cell to create the reference in. This is only needed for interior cells.
 --- 
@@ -715,8 +715,8 @@ function tes3.createReference(params) end
 ---Table parameter definitions for `tes3.createReference`.
 --- @class tes3.createReference.params
 --- @field object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon|string The object to create a reference of.
---- @field position tes3vector3|table The location to create the reference at.
---- @field orientation tes3vector3|table The new orientation for the created reference.
+--- @field position tes3vector3|number[] The location to create the reference at.
+--- @field orientation tes3vector3|number[] The new orientation for the created reference.
 --- @field cell tes3cell|string|table|nil *Optional*. The cell to create the reference in. This is only needed for interior cells.
 --- @field scale number? *Default*: `1`. A scale for the reference.
 
@@ -735,7 +735,7 @@ function tes3.createReference(params) end
 --- 
 --- `verticalOffset`: number? — *Default*: `0`. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.
 --- 
---- `position`: tes3vector3|table|nil — *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
+--- `position`: tes3vector3|number[]|nil — *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
 --- 
 --- `avObject`: niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSortAdjustNode|niSpotLight|niSwitchNode|niTextureEffect|niTriShape|nil — *Optional*. 
 --- 
@@ -751,7 +751,7 @@ function tes3.createVisualEffect(params) end
 --- @field lifespan number? *Optional*. The desired lifespan for the VFX. If not provided, the VFX will never die of old age.
 --- @field scale number? *Default*: `1`. The scale used to resize the given VFX. The default value will match the size used by most magical effect logic. This is not used when creating an enchantment-style VFX.
 --- @field verticalOffset number? *Default*: `0`. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.
---- @field position tes3vector3|table|nil *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
+--- @field position tes3vector3|number[]|nil *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
 --- @field avObject niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSortAdjustNode|niSpotLight|niSwitchNode|niTextureEffect|niTriShape|nil *Optional*. 
 --- @field magicEffectId number? *Optional*. The magic effect ID to use to create an enchantment-style VFX. This will use most of the same VFX logic, but cannot be applied to a position or specific niAVObject.
 
@@ -1026,7 +1026,7 @@ function tes3.getCameraVector() end
 --- 
 --- `id`: string? — *Optional*. The cell's ID. If not provided, position or x and y must be.
 --- 
---- `position`: tes3vector3|table|nil — *Optional*. A point in an exterior cell.
+--- `position`: tes3vector3|number[]|nil — *Optional*. A point in an exterior cell.
 --- 
 --- `x`: number? — *Optional*. The X grid-position.
 --- 
@@ -1037,7 +1037,7 @@ function tes3.getCell(params) end
 ---Table parameter definitions for `tes3.getCell`.
 --- @class tes3.getCell.params
 --- @field id string? *Optional*. The cell's ID. If not provided, position or x and y must be.
---- @field position tes3vector3|table|nil *Optional*. A point in an exterior cell.
+--- @field position tes3vector3|number[]|nil *Optional*. A point in an exterior cell.
 --- @field x number? *Optional*. The X grid-position.
 --- @field y number? *Optional*. The Y grid-position.
 
@@ -1877,9 +1877,9 @@ function tes3.playVoiceover(params) end
 --- 
 --- `cell`: tes3cell|string|table|nil — *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 --- 
---- `position`: tes3vector3|table — The position to move the reference to.
+--- `position`: tes3vector3|number[] — The position to move the reference to.
 --- 
---- `orientation`: tes3vector3|table|nil — *Optional*. The new orientation of the reference.
+--- `orientation`: tes3vector3|number[]|nil — *Optional*. The new orientation of the reference.
 --- 
 --- `forceCellChange`: boolean? — *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
 --- 
@@ -1893,8 +1893,8 @@ function tes3.positionCell(params) end
 --- @class tes3.positionCell.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Default*: `tes3.mobilePlayer`. The reference to reposition.
 --- @field cell tes3cell|string|table|nil *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
---- @field position tes3vector3|table The position to move the reference to.
---- @field orientation tes3vector3|table|nil *Optional*. The new orientation of the reference.
+--- @field position tes3vector3|number[] The position to move the reference to.
+--- @field orientation tes3vector3|number[]|nil *Optional*. The new orientation of the reference.
 --- @field forceCellChange boolean? *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
 --- @field suppressFader boolean? *Default*: `false`. When moving the player, can be used to prevent the fade in and out visual effect.
 --- @field teleportCompanions boolean? *Default*: `true`. If used on the player, determines if companions should also be teleported.
@@ -1923,9 +1923,9 @@ function tes3.random(seed) end
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3raytest).
 --- @param params tes3.rayTest.params This table accepts the following values:
 --- 
---- `position`: tes3vector3|table — Position of the ray origin.
+--- `position`: tes3vector3|number[] — Position of the ray origin.
 --- 
---- `direction`: tes3vector3|table — Direction of the ray. Does not have to be unit length.
+--- `direction`: tes3vector3|number[] — Direction of the ray. Does not have to be unit length.
 --- 
 --- `findAll`: boolean? — *Default*: `false`. If true, the ray test won't stop after the first result.
 --- 
@@ -1957,8 +1957,8 @@ function tes3.rayTest(params) end
 
 ---Table parameter definitions for `tes3.rayTest`.
 --- @class tes3.rayTest.params
---- @field position tes3vector3|table Position of the ray origin.
---- @field direction tes3vector3|table Direction of the ray. Does not have to be unit length.
+--- @field position tes3vector3|number[] Position of the ray origin.
+--- @field direction tes3vector3|number[] Direction of the ray. Does not have to be unit length.
 --- @field findAll boolean? *Default*: `false`. If true, the ray test won't stop after the first result.
 --- @field maxDistance number? *Default*: `0`. The maximum distance that the test will run.
 --- @field sort boolean? *Default*: `true`. If true, the results will be sorted by distance from the origin position.
@@ -2221,7 +2221,7 @@ function tes3.setAIActivate(params) end
 --- 
 --- `target`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor being escorted.
 --- 
---- `destination`: tes3vector3|table — No description yet available.
+--- `destination`: tes3vector3|number[] — No description yet available.
 --- 
 --- `duration`: integer? — *Default*: `0`. How long the escorter will do the escorting, in hours.
 --- 
@@ -2234,7 +2234,7 @@ function tes3.setAIEscort(params) end
 --- @class tes3.setAIEscort.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference The escorting actor.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor being escorted.
---- @field destination tes3vector3|table No description yet available.
+--- @field destination tes3vector3|number[] No description yet available.
 --- @field duration integer? *Default*: `0`. How long the escorter will do the escorting, in hours.
 --- @field cell tes3cell|string|nil *Optional*. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
@@ -2246,7 +2246,7 @@ function tes3.setAIEscort(params) end
 --- 
 --- `target`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor to follow.
 --- 
---- `destination`: tes3vector3|table|nil — *Optional*. No description yet available.
+--- `destination`: tes3vector3|number[]|nil — *Optional*. No description yet available.
 --- 
 --- `duration`: integer? — *Default*: `0`. How long the follower will follow, in hours.
 --- 
@@ -2259,7 +2259,7 @@ function tes3.setAIFollow(params) end
 --- @class tes3.setAIFollow.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference This is the actor that will follow another one.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to follow.
---- @field destination tes3vector3|table|nil *Optional*. No description yet available.
+--- @field destination tes3vector3|number[]|nil *Optional*. No description yet available.
 --- @field duration integer? *Default*: `0`. How long the follower will follow, in hours.
 --- @field cell tes3cell|string|nil *Optional*. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
@@ -2269,7 +2269,7 @@ function tes3.setAIFollow(params) end
 --- 
 --- `reference`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — No description yet available.
 --- 
---- `destination`: tes3vector3|table — No description yet available.
+--- `destination`: tes3vector3|number[] — No description yet available.
 --- 
 --- `reset`: boolean? — *Default*: `true`. No description yet available.
 function tes3.setAITravel(params) end
@@ -2277,7 +2277,7 @@ function tes3.setAITravel(params) end
 ---Table parameter definitions for `tes3.setAITravel`.
 --- @class tes3.setAITravel.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
---- @field destination tes3vector3|table No description yet available.
+--- @field destination tes3vector3|number[] No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
 --- Configures a mobile actor to wander around a cell.
@@ -2323,9 +2323,9 @@ function tes3.setAnimationTiming(params) end
 --- 
 --- `reference`: tes3reference — The door reference that will be updated.
 --- 
---- `position`: tes3vector3|table — The new coordinates of the transition.
+--- `position`: tes3vector3|number[] — The new coordinates of the transition.
 --- 
---- `orientation`: tes3vector3|table — The new rotation to use after transition.
+--- `orientation`: tes3vector3|number[] — The new rotation to use after transition.
 --- 
 --- `cell`: tes3cell|string|nil — *Optional*. The cell to transition to, if transitioning to an interior.
 function tes3.setDestination(params) end
@@ -2333,8 +2333,8 @@ function tes3.setDestination(params) end
 ---Table parameter definitions for `tes3.setDestination`.
 --- @class tes3.setDestination.params
 --- @field reference tes3reference The door reference that will be updated.
---- @field position tes3vector3|table The new coordinates of the transition.
---- @field orientation tes3vector3|table The new rotation to use after transition.
+--- @field position tes3vector3|number[] The new coordinates of the transition.
+--- @field orientation tes3vector3|number[] The new rotation to use after transition.
 --- @field cell tes3cell|string|nil *Optional*. The cell to transition to, if transitioning to an interior.
 
 --- Enables or disables a reference.
@@ -2694,11 +2694,11 @@ function tes3.tapKey(keyCode) end
 --- 
 --- `reference2`: tes3reference? — *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
 --- 
---- `position1`: tes3vector3|table|nil — *Optional*. Position of the starting point of the LoS check. Modified by height1.
+--- `position1`: tes3vector3|number[]|nil — *Optional*. Position of the starting point of the LoS check. Modified by height1.
 --- 
 --- `height1`: number? — *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 --- 
---- `position2`: tes3vector3|table|nil — *Optional*. Position of the ending point of the LoS check. Modified by height2.
+--- `position2`: tes3vector3|number[]|nil — *Optional*. Position of the ending point of the LoS check. Modified by height2.
 --- 
 --- `height2`: number? — *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 --- @return boolean hasLineOfSight No description yet available.
@@ -2708,9 +2708,9 @@ function tes3.testLineOfSight(params) end
 --- @class tes3.testLineOfSight.params
 --- @field reference1 tes3reference? *Optional*. Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
 --- @field reference2 tes3reference? *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
---- @field position1 tes3vector3|table|nil *Optional*. Position of the starting point of the LoS check. Modified by height1.
+--- @field position1 tes3vector3|number[]|nil *Optional*. Position of the starting point of the LoS check. Modified by height1.
 --- @field height1 number? *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
---- @field position2 tes3vector3|table|nil *Optional*. Position of the ending point of the LoS check. Modified by height2.
+--- @field position2 tes3vector3|number[]|nil *Optional*. Position of the ending point of the LoS check. Modified by height2.
 --- @field height2 number? *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 
 --- Forces a toggle of the player's POV the next simulation frame, and returns if the player was previously in 3rd person. Multiple calls in the same frame will not stack.

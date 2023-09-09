@@ -973,7 +973,7 @@ local result = myObject:createRect({ id = ..., color = ..., randomizeColor = ...
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `color` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. The fill color for the element.
+	* `color` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. The fill color for the element.
 	* `randomizeColor` (boolean): *Default*: `false`. If true, the creation color will be randomized.
 
 **Returns**:
