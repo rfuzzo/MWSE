@@ -126,7 +126,7 @@ myObject:setTexture(path)
 
 **Parameters**:
 
-* `path` (string): A path for the texture that will be displayed on screen.
+* `path` (string): A path for the texture that will be displayed on screen. Starting in `"Data Files\"`.
 
 ***
 
