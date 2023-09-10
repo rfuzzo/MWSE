@@ -189,15 +189,16 @@ namespace se::cs::dialog::render_window {
 			intersection = landscapePick->results[0]->intersection;
 			zDistLandscape = (intersection - origin).dotProduct(&camera->worldDirection);
 		}
-		else {
+		
+		if (zDistObject == 0.0f && zDistLandscape == 0.0f) {
 			return 0.0;
 		}
 
-		if (zDistObject != 0.0f) {
+		if (zDistObject != 0.0f && zDistLandscape != 0.0f) {
 			return std::fmin(zDistObject, zDistLandscape);
 		}
 		else {
-			return zDistLandscape;
+			return std::fmax(zDistObject, zDistLandscape);
 		}
 	}
 
