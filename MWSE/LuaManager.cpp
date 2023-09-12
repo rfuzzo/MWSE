@@ -238,7 +238,6 @@
 #include "LuaLoadedGameEvent.h"
 #include "LuaMagicCastedEvent.h"
 #include "LuaMagicEffectRemovedEvent.h"
-#include "LuaMagicSelectionChangedEvent.h"
 #include "LuaMenuStateEvent.h"
 #include "LuaMobileObjectActivatedEvent.h"
 #include "LuaMobileObjectDeactivatedEvent.h"
@@ -4454,42 +4453,6 @@ namespace mwse::lua {
 	}
 
 	//
-	// Patch: Notify when player's currently selected magic is changed or deselected.
-	// 
-
-	const auto TES3_UI_MenuMulti_updateCurrentSpell = reinterpret_cast<void(__cdecl*)(const char*, const char*, TES3::Spell*)>(0x5F4E70);
-	void __cdecl OnUpdatePlayerSelectedSpell(const char* iconPath, const char* spellName, TES3::Spell* spell) {
-		// Spells only, can be deselection if spell == nullptr.
-
-		// Call original code.
-		TES3_UI_MenuMulti_updateCurrentSpell(iconPath, spellName, spell);
-
-		// Fire event.
-		if (event::MagicSelectionChangedEvent::getEventEnabled()) {
-			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object response = stateHandle.triggerEvent(new event::MagicSelectionChangedEvent(spell));
-		}
-	}
-
-	const auto TES3_UI_MenuMulti_updateCurrentEnchantmentMagic = reinterpret_cast<void(__cdecl*)(const char*, const char*, TES3::EquipmentStack*)>(0x5F4DB0);
-	void __cdecl OnUpdatePlayerSelectedEnchant(const char* iconPath, const char* itemName, TES3::EquipmentStack* stack) {
-		// Enchantments only.
-
-		// Call original code.
-		TES3_UI_MenuMulti_updateCurrentEnchantmentMagic(iconPath, itemName, stack);
-
-		// Fire event.
-		if (stack) {
-			auto enchantment = stack->object->getEnchantment();
-
-			if (enchantment && event::MagicSelectionChangedEvent::getEventEnabled()) {
-				auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-				sol::object response = stateHandle.triggerEvent(new event::MagicSelectionChangedEvent(enchantment, stack->object));
-			}
-		}
-	}
-
-	//
 	//
 	//
 
@@ -6127,16 +6090,16 @@ namespace mwse::lua {
 		genCallEnforced(0x50B940, 0x62CE60, reinterpret_cast<DWORD>(ShowStatReviewMenu));
 
 		// Event: magicSelectionChanged
-		genCallEnforced(0x49B110, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x56DC7C, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5DFF81, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5E19D9, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5E23C4, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5E426E, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5E4569, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5E6264, 0x5F4E70, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedSpell));
-		genCallEnforced(0x5E234B, 0x5F4DB0, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedEnchant));
-		genCallEnforced(0x5E444C, 0x5F4DB0, reinterpret_cast<DWORD>(OnUpdatePlayerSelectedEnchant));
+		genCallEnforced(0x49B110, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x56DC7C, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5DFF81, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E19D9, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E23C4, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E426E, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E4569, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E6264, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E234B, 0x5F4DB0, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromEquipmentStack));
+		genCallEnforced(0x5E444C, 0x5F4DB0, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromEquipmentStack));
 
 		// UI framework hooks
 		TES3::UI::hook();
