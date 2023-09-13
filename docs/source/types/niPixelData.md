@@ -117,7 +117,7 @@ myObject:fill(data, mipMapLevel)
 ### `getHeight`
 <div class="search_terms" style="display: none">getheight, height</div>
 
-Returns the height of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
+Returns the height of the mipmap level at the given index, where level 1 is the finest (largest) mipmap level, and level `mipMapLevels` is the coarsest (smallest) mipmap level.
 
 ```lua
 local result = myObject:getHeight(mipMapLevel)
@@ -125,7 +125,7 @@ local result = myObject:getHeight(mipMapLevel)
 
 **Parameters**:
 
-* `mipMapLevel` (number): *Default*: `0`.
+* `mipMapLevel` (number): *Default*: `1`.
 
 **Returns**:
 
@@ -136,7 +136,7 @@ local result = myObject:getHeight(mipMapLevel)
 ### `getWidth`
 <div class="search_terms" style="display: none">getwidth, width</div>
 
-Returns the width of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
+Returns the width of the mipmap level at the given index, where level 1 is the finest (largest) mipmap level, and level `mipMapLevels` is the coarsest (smallest) mipmap level.
 
 ```lua
 local result = myObject:getWidth(mipMapLevel)
@@ -144,7 +144,7 @@ local result = myObject:getWidth(mipMapLevel)
 
 **Parameters**:
 
-* `mipMapLevel` (number): *Default*: `0`.
+* `mipMapLevel` (number): *Default*: `1`.
 
 **Returns**:
 
