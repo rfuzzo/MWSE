@@ -644,7 +644,7 @@ local result = tes3ui.registerID(s)
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 

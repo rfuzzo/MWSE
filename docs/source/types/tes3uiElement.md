@@ -1694,7 +1694,7 @@ myObject:sortChildren(sortFunction)
 
 **Parameters**:
 
-* `sortFunction` (function): The function to sort with. Like most sorting functions, this is given two arguments to compare.
+* `sortFunction` (fun(a: [tes3uiElement](../types/tes3uiElement.md), b: [tes3uiElement](../types/tes3uiElement.md)): boolean): The function to sort with. Like most sorting functions, this is given two arguments to compare.
 
 ***
 

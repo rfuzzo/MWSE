@@ -668,7 +668,7 @@ function tes3uiElement:setPropertyObject(property, value) end
 function tes3uiElement:setPropertyProperty(property, value) end
 
 --- Reorders the element's children given a sorting function.
---- @param sortFunction function The function to sort with. Like most sorting functions, this is given two arguments to compare.
+--- @param sortFunction fun(a: tes3uiElement, b: tes3uiElement): boolean The function to sort with. Like most sorting functions, this is given two arguments to compare.
 function tes3uiElement:sortChildren(sortFunction) end
 
 --- Triggers a UI event on an element, either using supplied event data, or by constructing new event data using `eventName`. `eventName` is the same as used in `register`.
