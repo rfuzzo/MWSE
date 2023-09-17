@@ -19,7 +19,7 @@ The same is done by this function if you pass both `parent` and `data` arguments
 			optional = true,
 			tableParams = {
 				{ name = "label", type = "string", optional = true, description = "Text shown above the slider. If left as a normal string, it will be shown in the form: [`label`]: [`self.variable.value`]. If the string contains a '%s' format operator, the value will be formatted into it." },
-				{ name = "variable", type = "mwseMCMVariable", description = "A variable for this setting." },
+				{ name = "variable", type = "mwseMCMVariable|mwseMCMSettingNewVariable", description = "A variable for this setting." },
 				{ name = "defaultSetting", type = "unknown", optional = true, description = "If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value." },
 				{ name = "min", type = "number", optional = true, default = 0.0, description = "Minimum value of slider." },
 				{ name = "max", type = "number", optional = true, default = 1.0, description = "Maximum value of slider." },

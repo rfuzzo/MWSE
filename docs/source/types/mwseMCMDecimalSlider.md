@@ -548,7 +548,7 @@ local slider = myObject:new({ label = ..., variable = ..., defaultSetting = ...,
 
 * `data` (table): *Optional*.
 	* `label` (string): *Optional*. Text shown above the slider. If left as a normal string, it will be shown in the form: [`label`]: [`self.variable.value`]. If the string contains a '%s' format operator, the value will be formatted into it.
-	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md)): *Optional*. A variable for this setting.
+	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): *Optional*. A variable for this setting.
 	* `defaultSetting` (unknown): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
 	* `min` (number): *Default*: `0`. Minimum value of slider.
 	* `max` (number): *Default*: `1`. Maximum value of slider.

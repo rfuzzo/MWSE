@@ -14,7 +14,6 @@ local Parent = require("mcm.components.settings.Setting")
 
 --- @class mwseMCMDecimalSlider
 local DecimalSlider = Parent:new()
-DecimalSlider.componentType = "DecimalSlider"
 DecimalSlider.min = 0.0
 DecimalSlider.max = 1.0
 DecimalSlider.step = 0.01
@@ -42,6 +41,13 @@ function DecimalSlider:new(data)
 	t.min  = t.min  * 10 ^ t.decimalPlaces
 	t.step = t.step * 10 ^ t.decimalPlaces
 	t.jump = t.jump * 10 ^ t.decimalPlaces
+
+	if data and data.variable then
+		-- create setting variable
+		t.variable.defaultSetting = t.variable.defaultSetting or t.defaultSetting
+		local typePath = ("mcm.variables." .. t.variable.class)
+		t.variable = require(typePath):new(t.variable)
+	end
 
 	if t.parentComponent then
 		t.indent = t.parentComponent.childIndent or t.indent
