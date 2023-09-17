@@ -135,14 +135,14 @@ end
 --- @param listName mwseMCMExclusionsPageListId
 function ExclusionsPage:updateSearch(listName)
 
-	local searchString = self.elements.searchBarInput[listName].text --[[@as string]]
+	local searchString = self.elements.searchBarInput[listName].text:lower() --[[@as string]]
 	local thisList = self.elements[listName] --[[@as tes3uiElement]]
 	local child = thisList:findChild(itemID)
 
 	if child then
 		local itemList = child.parent.children
 		for _, item in ipairs(itemList) do
-			if item.text:lower():find(searchString:lower(), 1, true) then
+			if item.text:lower():find(searchString, 1, true) then
 				item.visible = true
 			else
 				item.visible = false

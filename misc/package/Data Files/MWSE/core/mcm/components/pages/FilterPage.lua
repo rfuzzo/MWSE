@@ -9,9 +9,10 @@ local FilterPage = Parent:new()
 FilterPage.placeholderSearchText = mwse.mcm.i18n("Search...")
 
 function FilterPage:filterComponents()
+	local searchText = self.elements.searchBarInput.text:lower()
 	for _, component in ipairs(self.components) do
 		-- look for search text inside setting label
-		if component.label:lower():find(self.elements.searchBarInput.text:lower()) then
+		if component.label:lower():find(searchText) then
 			component.elements.outerContainer.visible = true
 		else
 			component.elements.outerContainer.visible = false
