@@ -116,7 +116,7 @@ function Template:clickTab(thisPage)
 	-- Enable tab for this page
 	tabsBlock:findChild(thisPage.tabUID).widget.state = 4
 	-- update view
-	pageBlock:getTopLevelParent():updateLayout()
+	pageBlock:getTopLevelMenu():updateLayout()
 
 	-- Enable Prev button if first tab is not active
 	local tab1 = tabsBlock:findChild(self.pages[1].tabUID)

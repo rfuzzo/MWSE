@@ -74,13 +74,13 @@ function Dropdown:createDropdown()
 			end
 		end
 		self.elements.dropdown = dropdown
-		dropdown:getTopLevelParent():updateLayout()
+		dropdown:getTopLevelMenu():updateLayout()
 
 		-- Destroy dropdown
 	else
 		self.elements.dropdownParent:destroyChildren()
 		self.dropdownActive = false
-		self.elements.dropdownParent:getTopLevelParent():updateLayout()
+		self.elements.dropdownParent:getTopLevelMenu():updateLayout()
 	end
 
 	--- @param element tes3uiElement

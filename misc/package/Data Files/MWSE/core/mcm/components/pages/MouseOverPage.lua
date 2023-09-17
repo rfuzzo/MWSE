@@ -46,7 +46,7 @@ function MouseOverPage:createContentsContainer(parentBlock)
 	self:createSubcomponentsContainer(self.elements.innerContainer)
 	self:createSubcomponents(self.elements.subcomponentsContainer, self.components)
 
-	parentBlock:getTopLevelParent():updateLayout()
+	parentBlock:getTopLevelMenu():updateLayout()
 end
 
 return MouseOverPage

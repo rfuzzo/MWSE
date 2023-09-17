@@ -118,7 +118,7 @@ function Category:createContentsContainer(parentBlock)
 	self:createInnerContainer(parentBlock)
 	self:createSubcomponentsContainer(self.elements.innerContainer)
 	self:createSubcomponents(self.elements.subcomponentsContainer, self.components)
-	parentBlock:getTopLevelParent():updateLayout()
+	parentBlock:getTopLevelMenu():updateLayout()
 end
 
 function Category.__index(tbl, key)

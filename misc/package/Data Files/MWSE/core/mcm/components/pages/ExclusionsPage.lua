@@ -130,7 +130,7 @@ function ExclusionsPage:toggle(e)
 		end
 	end
 	-- update display
-	self.elements.outerContainer:getTopLevelParent():updateLayout()
+	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
 
 --- @param listName mwseMCMExclusionsPageListId
@@ -152,7 +152,7 @@ function ExclusionsPage:updateSearch(listName)
 	end
 
 	self.elements[listName].widget:contentsChanged()
-	self.elements.outerContainer:getTopLevelParent():updateLayout()
+	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
 
 --- @param items string[]
