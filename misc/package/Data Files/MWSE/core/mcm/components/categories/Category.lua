@@ -17,19 +17,27 @@
 			}
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.Component")
+--- @class mwseMCMCategory
 local Category = Parent:new()
 Category.componentType = "Category"
 -- Category.childSpacing = 20
 -- Category.childIndent = 40
 -- CONTROL METHODS
 
+--- @param data mwseMCMCategory.new.data|nil
+--- @return mwseMCMCategory
 function Category:new(data)
 	local t = Parent:new(data)
 	t.components = t.components or {}
 
 	setmetatable(t, self)
 	t.__index = self.__index
+	--- @cast t mwseMCMCategory
 
 	return t
 end
@@ -80,6 +88,7 @@ end
 
 -- UI METHODS
 
+--- @param parentBlock tes3uiElement
 function Category:createSubcomponentsContainer(parentBlock)
 	local subcomponentsContainer = parentBlock:createBlock({ id = tes3ui.registerID("Category_ContentsContainer") })
 	subcomponentsContainer.flowDirection = "top_to_bottom"
@@ -90,6 +99,8 @@ function Category:createSubcomponentsContainer(parentBlock)
 	self.elements.subcomponentsContainer = subcomponentsContainer
 end
 
+--- @param parentBlock tes3uiElement
+--- @param components mwseMCMComponent.getComponent.componentData[]
 function Category:createSubcomponents(parentBlock, components)
 	if components then
 		for _, component in pairs(components) do
@@ -101,6 +112,7 @@ function Category:createSubcomponents(parentBlock, components)
 	end
 end
 
+--- @param parentBlock tes3uiElement
 function Category:createContentsContainer(parentBlock)
 	self:createLabel(parentBlock)
 	self:createInnerContainer(parentBlock)
@@ -130,6 +142,8 @@ function Category.__index(tbl, key)
 		end
 
 		if component then
+			--- @cast component mwseMCMComponent
+			--- @param self mwseMCMCategory
 			return function(self, data)
 				data = self:prepareData(data)
 				data.class = class

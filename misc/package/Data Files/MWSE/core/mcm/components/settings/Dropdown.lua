@@ -1,5 +1,10 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.settings.Setting")
 
+--- @class mwseMCMDropdown
 local Dropdown = Parent:new()
 Dropdown.idleColor = tes3ui.getPalette("normal_color")
 Dropdown.overColor = tes3ui.getPalette("normal_over_color")
@@ -31,6 +36,7 @@ function Dropdown:update()
 	Parent.update(self)
 end
 
+--- @param option mwseMCMDropdownOption
 function Dropdown:selectOption(option)
 	self.elements.dropdownParent:destroyChildren()
 	self.variable.value = option.value
@@ -77,7 +83,7 @@ function Dropdown:createDropdown()
 		self.elements.dropdownParent:getTopLevelParent():updateLayout()
 	end
 
-	---@param element tes3uiElement
+	--- @param element tes3uiElement
 	local function recursiveContentsChanged(element)
 		if element then
 			if element.widget and element.widget.contentsChanged then
@@ -91,6 +97,7 @@ function Dropdown:createDropdown()
 
 end
 
+--- @param parentBlock tes3uiElement
 function Dropdown:makeComponent(parentBlock)
 
 	local border = parentBlock:createThinBorder()
@@ -120,11 +127,13 @@ function Dropdown:makeComponent(parentBlock)
 
 end
 
+--- @param parentBlock tes3uiElement
 function Dropdown:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.paddingRight = self.indent -- * 2
 end
 
+--- @param parentBlock tes3uiElement
 function Dropdown:createContentsContainer(parentBlock)
 	self:createLabel(parentBlock)
 	self:createInnerContainer(parentBlock)

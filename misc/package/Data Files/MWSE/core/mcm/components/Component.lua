@@ -2,17 +2,24 @@
 	Base Object for all MCM components, such as categories and settings
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
+--- @class mwseMCMComponent
 local Component = {}
 Component.componentType = "Component"
 Component.paddingBottom = 4
 Component.indent = 12
-Component.sOK = tes3.findGMST(tes3.gmst.sOK).value
-Component.sCancel = tes3.findGMST(tes3.gmst.sCancel).value
-Component.sYes = tes3.findGMST(tes3.gmst.sYes).value
-Component.sNo = tes3.findGMST(tes3.gmst.sNo).value
+Component.sOK = tes3.findGMST(tes3.gmst.sOK).value --[[@as string]]
+Component.sCancel = tes3.findGMST(tes3.gmst.sCancel).value --[[@as string]]
+Component.sYes = tes3.findGMST(tes3.gmst.sYes).value --[[@as string]]
+Component.sNo = tes3.findGMST(tes3.gmst.sNo).value --[[@as string]]
 
 -- CONTROL METHODS
 
+--- @param data mwseMCMComponent.new.data?
+--- @return mwseMCMComponent component
 function Component:new(data)
 	local t = data or {}
 
@@ -23,6 +30,7 @@ function Component:new(data)
 
 	setmetatable(t, self)
 	self.__index = self
+	--- @cast t mwseMCMComponent
 	return t
 end
 
@@ -31,6 +39,7 @@ function Component:__index(key)
 end
 
 -- Prints the component table to the log
+--- @param component table?
 function Component:printComponent(component)
 	mwse.log("{")
 	for key, val in pairs(component or self) do
@@ -43,6 +52,8 @@ function Component:printComponent(component)
 	mwse.log("}")
 end
 
+--- @param data string|mwseMCMComponent.new.data|nil
+--- @return mwseMCMComponent.new.data data
 function Component:prepareData(data)
 	data = data or {}
 	if type(data) == "string" then
@@ -52,11 +63,40 @@ function Component:prepareData(data)
 	return data
 end
 
+--- @alias mwseMCMComponentClass
+---| "Category" # Categories
+---| "SideBySideBlock"
+---| "ActiveInfo" # Infos
+---| "Hyperlink"
+---| "Info"
+---| "MouseOverInfo"
+---| "ExclusionsPage" # Pages
+---| "FilterPage"
+---| "MouseOverPage"
+---| "Page"
+---| "SideBarPage"
+---| "Button" # Settings
+---| "DecimalSlider"
+---| "Dropdown"
+---| "KeyBinder"
+---| "OnOffButton"
+---| "ParagraphField"
+---| "Setting"
+---| "Slider"
+---| "TextField"
+---| "YesNoButton"
+---| "Template" # Templates
+
+--- @class mwseMCMComponent.getComponent.componentData
+--- @field class mwseMCMComponentClass
+
+--- @param componentData mwseMCMComponent|mwseMCMComponent.getComponent.componentData
+--- @return mwseMCMComponent|mwseMCMTemplate|nil component
 function Component:getComponent(componentData)
 
 	-- if componentType field is set then we've already built it
 	if componentData.componentType then
-		return componentData
+		return componentData --[[@as mwseMCMComponent]]
 	end
 
 	if not componentData.class then
@@ -76,6 +116,7 @@ function Component:getComponent(componentData)
 		end
 	end
 	if component then
+		--- @cast component mwseMCMComponent
 		self:prepareData(componentData)
 		return component:new(componentData)
 	else
@@ -83,6 +124,7 @@ function Component:getComponent(componentData)
 	end
 end
 
+--- @param mouseOverList tes3uiElement[]?
 function Component:registerMouseOverElements(mouseOverList)
 	if mouseOverList then
 		for _, element in ipairs(mouseOverList) do
@@ -110,6 +152,7 @@ function Component:enable()
 	end
 end
 
+--- @return boolean result
 function Component:checkDisabled()
 	local disabled = (self.inGameOnly == true and not tes3.player)
 	return disabled
@@ -117,6 +160,7 @@ end
 
 -- UI METHODS
 
+--- @param parentBlock tes3uiElement
 function Component:createLabelBlock(parentBlock)
 	local block = parentBlock:createBlock({ id = tes3ui.registerID("LabelBlock") })
 	block.flowDirection = "top_to_bottom"
@@ -131,6 +175,7 @@ function Component:createLabelBlock(parentBlock)
 	table.insert(self.mouseOvers, block)
 end
 
+--- @param parentBlock tes3uiElement
 function Component:createLabel(parentBlock)
 	if self.label then
 		self:createLabelBlock(parentBlock)
@@ -152,6 +197,7 @@ end
 --[[
 	Wraps up the entire component
 ]]
+--- @param parentBlock tes3uiElement
 function Component:createOuterContainer(parentBlock)
 	local outerContainer
 	outerContainer = parentBlock:createBlock({ id = tes3ui.registerID("OuterContainer") })
@@ -168,6 +214,7 @@ function Component:createOuterContainer(parentBlock)
 	table.insert(self.mouseOvers, outerContainer)
 end
 
+--- @param parentBlock tes3uiElement
 function Component:createInnerContainer(parentBlock)
 	local innerContainer = parentBlock:createBlock({ id = tes3ui.registerID("InnerContainer") })
 	innerContainer.widthProportional = parentBlock.widthProportional
@@ -181,6 +228,7 @@ function Component:createInnerContainer(parentBlock)
 	self.elements.innerContainer = innerContainer
 end
 
+--- @param parentBlock tes3uiElement
 function Component:create(parentBlock)
 
 	self.elements = {}

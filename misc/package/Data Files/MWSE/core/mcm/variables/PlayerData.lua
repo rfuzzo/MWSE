@@ -8,12 +8,18 @@
 	}
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.variables.Variable")
 
--- Class object
+--- Class object
+--- @class mwseMCMPlayerData
 local PlayerDataVar = Parent:new()
 PlayerDataVar.inGameOnly = true
 
+--- @return unknown value
 function PlayerDataVar:get()
 	if tes3.player then
 		local current = tes3.player.data
@@ -35,6 +41,7 @@ function PlayerDataVar:get()
 	return nil
 end
 
+--- @param newValue unknown
 function PlayerDataVar:set(newValue)
 	if tes3.player then
 		local converter = self.converter

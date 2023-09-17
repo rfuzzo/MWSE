@@ -6,7 +6,13 @@
 		while the label above the slider converts that to the decimal.
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.settings.Setting")
+
+--- @class mwseMCMDecimalSlider
 local DecimalSlider = Parent:new()
 DecimalSlider.componentType = "DecimalSlider"
 DecimalSlider.min = 0.0
@@ -15,11 +21,13 @@ DecimalSlider.step = 0.01
 DecimalSlider.jump = 0.05
 DecimalSlider.decimalPlaces = 2
 
----@param number number
+--- @param number number
 local function isPositiveInteger(number)
 	return (number % 1 == 0) and (number > 0)
 end
 
+--- @param data mwseMCMDecimalSlider.new.data?
+--- @return mwseMCMDecimalSlider slider
 function DecimalSlider:new(data)
 	local t = data or {}
 	t.max = t.max or self.max
@@ -42,6 +50,7 @@ function DecimalSlider:new(data)
 
 	setmetatable(t, self)
 	self.__index = self
+	--- @cast t mwseMCMDecimalSlider
 	return t
 end
 
@@ -68,6 +77,7 @@ function DecimalSlider:update()
 	Parent.update(self)
 end
 
+--- @param element tes3uiElement
 function DecimalSlider:registerSliderElement(element)
 	-- click
 	element:register(tes3.uiEvent.mouseClick, function(e)
@@ -107,6 +117,7 @@ end
 
 -- UI creation functions
 
+--- @param parentBlock tes3uiElement
 function DecimalSlider:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.widthProportional = 1.0
@@ -114,11 +125,13 @@ function DecimalSlider:createOuterContainer(parentBlock)
 	self.elements.outerContainer.flowDirection = tes3.flowDirection.topToBottom
 end
 
+--- @param parentBlock tes3uiElement
 function DecimalSlider:createLabel(parentBlock)
 	Parent.createLabel(self, parentBlock)
 	self:updateValueLabel()
 end
 
+--- @param parentBlock tes3uiElement
 function DecimalSlider:makeComponent(parentBlock)
 	local sliderBlock = parentBlock:createBlock()
 	sliderBlock.flowDirection = tes3.flowDirection.leftToRight
