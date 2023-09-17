@@ -1589,16 +1589,16 @@ function tes3.isCharGenStarted() end
 --- Compares two key objects and returns their equality. Returns true if the objects are equal, false otherwise.
 --- @param params tes3.isKeyEqual.params This table accepts the following values:
 --- 
---- `actual`: table — The key object that is being compared.
+--- `actual`: table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData — The key object that is being compared.
 --- 
---- `expected`: table — The key object that is being compared against.
---- @return boolean equal No description yet available.
+--- `expected`: table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData — The key object that is being compared against.
+--- @return any equal No description yet available.
 function tes3.isKeyEqual(params) end
 
 ---Table parameter definitions for `tes3.isKeyEqual`.
 --- @class tes3.isKeyEqual.params
---- @field actual table The key object that is being compared.
---- @field expected table The key object that is being compared against.
+--- @field actual table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData The key object that is being compared.
+--- @field expected table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData The key object that is being compared against.
 
 --- Determines if the player has a given lua mod active. The key passed to this function is the path to where its main.lua file is, relative to the MWSE\\mods folder. Slashes are automatically replaced with periods, and the key is case-insensitive.
 ---

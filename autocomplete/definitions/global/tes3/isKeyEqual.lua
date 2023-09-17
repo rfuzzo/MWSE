@@ -7,7 +7,7 @@ return {
 		tableParams = {
 			{
 				name = "actual",
-				type = "table",
+				type = "table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData",
 				description = "The key object that is being compared.",
 				tableParams = {
 					{
@@ -44,7 +44,7 @@ return {
 			},
 			{
 				name = "expected",
-				type = "table",
+				type = "table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData",
 				description = "The key object that is being compared against.",
 				tableParams = {
 					{
@@ -81,6 +81,7 @@ return {
 			},
 		},
 	}},
-	returns = "equal",
-	valuetype = "boolean",
+	returns = {
+		{ name = "equal", valuetype = "boolean" }
+	}
 }

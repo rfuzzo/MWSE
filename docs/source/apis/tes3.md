@@ -3118,13 +3118,13 @@ local equal = tes3.isKeyEqual({ actual = ..., expected = ... })
 **Parameters**:
 
 * `params` (table)
-	* `actual` (table): The key object that is being compared.
+	* `actual` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), keyDownEventData, keyUpEventData, keyEventData): The key object that is being compared.
 		* `keyCode` (number): *Default*: `false`. Value of the actual key scan code, such as the letter `p`. Maps to [`tes3.scanCode.*`](https://mwse.github.io/MWSE/references/scan-codes/).
 		* `isShiftDown` (boolean): *Default*: `false`. Value of whether the shift key is pressed.
 		* `isControlDown` (boolean): *Default*: `false`. Value of whether the control key is pressed.
 		* `isAltDown` (boolean): *Default*: `false`. Value of whether the alt key is pressed.
 		* `isSuperDown` (boolean): *Default*: `false`. Value of whether the super (Windows key) key is pressed.
-	* `expected` (table): The key object that is being compared against.
+	* `expected` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), keyDownEventData, keyUpEventData, keyEventData): The key object that is being compared against.
 		* `keyCode` (number): *Default*: `false`. Value of the expected key scan code, such as the letter `p`. Maps to [`tes3.scanCode.*`](https://mwse.github.io/MWSE/references/scan-codes/).
 		* `isShiftDown` (boolean): *Default*: `false`. Value of whether the shift key is expected to be pressed.
 		* `isControlDown` (boolean): *Default*: `false`. Value of whether the control key is expected to be pressed.
@@ -3133,7 +3133,7 @@ local equal = tes3.isKeyEqual({ actual = ..., expected = ... })
 
 **Returns**:
 
-* `equal` (boolean)
+* `equal`
 
 ***
 
