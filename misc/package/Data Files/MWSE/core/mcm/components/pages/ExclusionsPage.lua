@@ -122,12 +122,10 @@ function ExclusionsPage:toggle(e)
 
 	-- update sorting
 	local container = list:getContentElement()
-	for i, child in pairs(container.children) do
-		if child.text > text then
-			container:reorderChildren(i - 1, -1, 1)
-			break
-		end
-	end
+	container:sortChildren(function(a, b)
+			return a.text < b.text
+	end)
+
 	-- update display
 	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
