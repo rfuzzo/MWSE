@@ -12,10 +12,15 @@ function FilterPage:filterComponents()
 	local searchText = self.elements.searchBarInput.text:lower()
 	for _, component in ipairs(self.components) do
 		-- look for search text inside setting label
-		if component.label:lower():find(searchText) then
-			component.elements.outerContainer.visible = true
-		else
-			component.elements.outerContainer.visible = false
+		local label = component.label and component.label:lower()
+		if label then
+			if label:find(searchText) then
+				component.elements.outerContainer.visible = true
+			else
+				component.elements.outerContainer.visible = false
+			end
+
+			-- Do nothing for components without a label.
 		end
 	end
 end
