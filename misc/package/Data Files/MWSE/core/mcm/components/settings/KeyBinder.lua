@@ -8,8 +8,13 @@
 		}
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.settings.Button")
 
+--- @class mwseMCMKeyBinder
 local KeyBinder = Parent:new()
 KeyBinder.allowCombinations = true
 KeyBinder.currentCombo = {}
@@ -17,12 +22,15 @@ KeyBinder.messageDoRebind = mwse.mcm.i18n("Set new key binding to: %s")
 KeyBinder.messageRebinded = mwse.mcm.i18n("Key binding changed to '%s'")
 KeyBinder.sOkay = mwse.mcm.i18n("Rebind")
 KeyBinder.sNotChanged = mwse.mcm.i18n("Key binding not changed.")
-KeyBinder.sCancel = tes3.findGMST(tes3.gmst.sCancel).value
+KeyBinder.sCancel = tes3.findGMST(tes3.gmst.sCancel).value --[[@as string]]
 
+--- @return string result
 function KeyBinder:getText()
 	return self:getComboString(self.variable.value)
 end
 
+--- @param keyCode integer
+--- @return string|nil letter
 function KeyBinder:getLetter(keyCode)
 	for letter, code in pairs(tes3.scanCode) do
 		if code == keyCode then
@@ -33,6 +41,8 @@ function KeyBinder:getLetter(keyCode)
 	return nil
 end
 
+--- @param keyCombo mwseKeyCombo
+--- @return string result
 function KeyBinder:getComboString(keyCombo)
 	-- Returns "SHIFT-X" if shift is held down but the active key is not Shift,
 	-- otherwise just "X" (X being the key being pressed)
@@ -56,6 +66,7 @@ function KeyBinder:getComboString(keyCombo)
 	return (prefix .. letter)
 end
 
+--- @param e keyDownEventData
 function KeyBinder:keySelected(e)
 	-- If not set then we ignore this trigger as we've pressed okay or cancel
 	if not self.currentCombo.keyCode then
@@ -73,6 +84,7 @@ function KeyBinder:keySelected(e)
 	self:showKeyBindMessage(self.currentCombo)
 end
 
+--- @param e tes3messageBoxCallbackData
 function KeyBinder:bindKey(e)
 	-- Retrigger if Spacebar/Return was pressed
 	local inputController = tes3.worldController.inputController
@@ -92,8 +104,10 @@ function KeyBinder:bindKey(e)
 	self.currentCombo = { keyCode = nil }
 end
 
+--- @param keyCombo mwseKeyCombo
 function KeyBinder:showKeyBindMessage(keyCombo)
-	-- Register keyDown event
+	--- Register keyDown event
+	--- @param e keyDownEventData
 	event.register("keyDown", function(e)
 		self:keySelected(e)
 	end, { doOnce = true })
@@ -118,6 +132,8 @@ end
 
 -- UI methods
 
+
+--- @param parentBlock tes3uiElement
 function KeyBinder:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.autoWidth = false
@@ -125,6 +141,7 @@ function KeyBinder:createOuterContainer(parentBlock)
 	-- self.elements.outerContainer.borderRight = self.indent
 end
 
+--- @param parentBlock tes3uiElement
 function KeyBinder:makeComponent(parentBlock)
 	Parent.makeComponent(self, parentBlock)
 	-- self.elements.button.absolutePosAlignX = 1.0

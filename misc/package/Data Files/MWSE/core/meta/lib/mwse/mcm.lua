@@ -103,7 +103,7 @@ function mwse.mcm.createActiveInfo(parent, data) end
 --- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
 --- 
 --- `postCreate`: nil|fun(self: mwseMCMButton) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
---- @return mwseMCMButton|mwseMCMOnOffButton|mwseMCMYesNoButton button No description yet available.
+--- @return mwseMCMButton|mwseMCMKeyBinder|mwseMCMOnOffButton|mwseMCMYesNoButton button No description yet available.
 function mwse.mcm.createButton(parent, data) end
 
 ---Table parameter definitions for `mwse.mcm.createButton`.
@@ -459,6 +459,70 @@ function mwse.mcm.createInfo(parent, data) end
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 --- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
 --- @field postCreate nil|fun(self: mwseMCMInfo) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+
+--- Creates a new KeyBinder inside given `parent` menu.
+--- 
+--- The canonical way to use this function is to pass a `parent` and `data` arguments. If passing only `data` table, KeyBinder's UI element tree won't be created. To do so, use KeyBinder's `create` method:
+--- 
+--- ```lua
+--- local myKeyBinder = mwse.mcm.createKeyBinder({ ... })
+--- myKeyBinder:create(parent)
+--- ```
+--- 
+--- The same is done by this function if you pass both `parent` and `data` arguments.
+--- 
+--- @param parent tes3uiElement|mwse.mcm.createKeyBinder.data The UI element inside which the new KeyBinder will be created.
+--- @param data mwse.mcm.createKeyBinder.data? This table accepts the following values:
+--- 
+--- `label`: string? — *Optional*. Text shown next to the button.
+--- 
+--- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- 
+--- `allowCombinations `: boolean? — *Default*: `true`. If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
+--- 
+--- `leftSide `: boolean? — *Default*: `true`. If true, the button will be created on the left and label on the right.
+--- 
+--- `variable`: mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable — A variable for this KeyBinder.
+--- 
+--- `defaultSetting`: mwseKeyCombo? — *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- 
+--- `callback`: nil|fun(self: mwseMCMKeyBinder) — *Optional*. The custom function called when the player interacts with this KeyBinder.
+--- 
+--- `inGameOnly`: boolean? — *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+--- 
+--- `restartRequired`: boolean? — *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+--- 
+--- `restartRequiredMessage`: string? — *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+--- 
+--- `indent`: integer? — *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+--- 
+--- `childIndent`: integer? — *Optional*. The left padding size in pixels. Used on all the child components.
+--- 
+--- `paddingBottom`: integer? — *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+--- 
+--- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
+--- 
+--- `postCreate`: nil|fun(self: mwseMCMKeyBinder) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+--- @return mwseMCMKeyBinder button No description yet available.
+function mwse.mcm.createKeyBinder(parent, data) end
+
+---Table parameter definitions for `mwse.mcm.createKeyBinder`.
+--- @class mwse.mcm.createKeyBinder.data
+--- @field label string? *Optional*. Text shown next to the button.
+--- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- @field allowCombinations  boolean? *Default*: `true`. If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
+--- @field leftSide  boolean? *Default*: `true`. If true, the button will be created on the left and label on the right.
+--- @field variable mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable A variable for this KeyBinder.
+--- @field defaultSetting mwseKeyCombo? *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- @field callback nil|fun(self: mwseMCMKeyBinder) *Optional*. The custom function called when the player interacts with this KeyBinder.
+--- @field inGameOnly boolean? *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+--- @field restartRequired boolean? *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+--- @field restartRequiredMessage string? *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+--- @field indent integer? *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+--- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
+--- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+--- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
+--- @field postCreate nil|fun(self: mwseMCMKeyBinder) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 --- Creates a new MouseOverInfo inside given `parent` menu.
 --- 
@@ -977,7 +1041,7 @@ function mwse.mcm.register(template) end
 --- @param template table No description yet available.
 function mwse.mcm.registerMCM(template) end
 
---- This function check whether a certain key/key combination is currently pressed.
---- @param keybind mwseKeyboardKey No description yet available.
+--- This function check whether a certain key combination is currently pressed. It will only check ctrl, shift and alt modifier keys, matching the KeyBinder.
+--- @param keybind mwseKeyCombo No description yet available.
 function mwse.mcm.testKeyBind(keybind) end
 

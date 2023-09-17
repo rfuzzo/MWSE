@@ -22,7 +22,7 @@ function mcm.register(template)
 	mwse.registerModConfig(template.name, modConfig)
 end
 
---- @param keybind mwseMCMKeyBinderKeyCombo
+--- @param keybind mwseKeyCombo
 --- @return boolean pressed
 function mcm.testKeyBind(keybind)
 	local inputController = tes3.worldController.inputController
