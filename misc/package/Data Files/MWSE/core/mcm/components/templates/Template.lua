@@ -31,9 +31,11 @@ function Template:new(data)
 	return t --[[@as mwseMCMTemplate]]
 end
 
-function Template:saveOnClose(configPath, config)
+--- @param fileName string
+--- @param config unknown
+function Template:saveOnClose(fileName, config)
 	self.onClose = function()
-		mwse.saveConfig(configPath, config)
+		mwse.saveConfig(fileName, config)
 	end
 end
 
