@@ -133,7 +133,7 @@ function Category.__index(tbl, key)
 
 			local classPath = (path .. class)
 			local fullPath = lfs.currentdir() .. classPaths.basePath .. classPath .. ".lua"
-			local fileExists = lfs.attributes(fullPath, "mode") == "file"
+			local fileExists = lfs.fileexists(fullPath)
 
 			if fileExists then
 				component = require(classPath)

@@ -273,7 +273,7 @@ function Template.__index(tbl, key)
 		local classPaths = require("mcm.classPaths")
 		local classPath = classPaths.all.pages .. class
 		local fullPath = lfs.currentdir() .. classPaths.basePath .. classPath .. ".lua"
-		local fileExists = lfs.attributes(fullPath, "mode") == "file"
+		local fileExists = lfs.fileexists(fullPath)
 		if fileExists then
 			component = require(classPath)
 		end

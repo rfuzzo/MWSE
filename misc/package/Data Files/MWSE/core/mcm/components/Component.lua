@@ -108,7 +108,7 @@ function Component:getComponent(componentData)
 	for _, path in pairs(classPaths.components) do
 		local classPath = (path .. componentData.class)
 		local fullPath = lfs.currentdir() .. classPaths.basePath .. classPath .. ".lua"
-		local fileExists = lfs.attributes(fullPath, "mode") == "file"
+		local fileExists = lfs.fileexists(fullPath)
 
 		if fileExists then
 			component = require(classPath)
