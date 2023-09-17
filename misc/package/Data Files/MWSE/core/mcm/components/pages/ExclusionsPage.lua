@@ -67,13 +67,12 @@ local function getSortedObjectList(params)
 	for obj in tes3.iterateObjects(params.objectType) do
 		local doAdd = true
 		-- Check that all filters match
-		if params.objectFilters then
-			for field, value in pairs(params.objectFilters) do
-				if obj[field] ~= value then
-					doAdd = false
-				end
+		for field, value in pairs(params.objectFilters or {}) do
+			if obj[field] ~= value then
+				doAdd = false
 			end
 		end
+
 		if params.noScripted and obj.script ~= nil then
 			doAdd = false
 		end
@@ -434,16 +433,18 @@ end
 
 --- @param parentBlock tes3uiElement
 function ExclusionsPage:createDescription(parentBlock)
-	if self.description then
-		local description = parentBlock:createLabel{ text = self.description }
-		-- description.heightProportional = -1
-		description.autoHeight = true
-		description.widthProportional = 1.0
-		description.wrapText = true
-		description.borderLeft = self.indent
-		description.borderRight = self.indent
-		self.elements.description = description
+	if not self.description then
+		return
 	end
+
+	local description = parentBlock:createLabel{ text = self.description }
+	-- description.heightProportional = -1
+	description.autoHeight = true
+	description.widthProportional = 1.0
+	description.wrapText = true
+	description.borderLeft = self.indent
+	description.borderRight = self.indent
+	self.elements.description = description
 end
 
 --- @param parentBlock tes3uiElement

@@ -23,13 +23,15 @@ end
 
 --- @param parentBlock tes3uiElement
 function FilterPage:createDescription(parentBlock)
-	if self.description then
-		local description = parentBlock:createLabel{ text = self.description }
-		description.autoHeight = true
-		description.widthProportional = 1.0
-		description.wrapText = true
-		self.elements.description = description
+	if not self.description then
+		return
 	end
+
+	local description = parentBlock:createLabel{ text = self.description }
+	description.autoHeight = true
+	description.widthProportional = 1.0
+	description.wrapText = true
+	self.elements.description = description
 end
 
 --- @param parentBlock tes3uiElement
