@@ -39,7 +39,7 @@ If set to true, no objects with a script will be added to the list.
 
 **Returns**:
 
-* `result` (string, nil)
+* `result` (boolean, nil)
 
 ***
 
