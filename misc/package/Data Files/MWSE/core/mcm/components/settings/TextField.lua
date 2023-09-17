@@ -8,9 +8,9 @@ local Parent = require("mcm.components.settings.Setting")
 --- Class Object
 --- @class mwseMCMTextField
 local TextField = Parent:new()
-TextField.buttonText = mwse.mcm.i18n("Submit") --[[@as string]]
-TextField.sNumbersOnly = mwse.mcm.i18n("Value must be a number.") --[[@as string]]
-TextField.sNewValue = mwse.mcm.i18n("New value: '%s'") --[[@as string]]
+TextField.buttonText = mwse.mcm.i18n("Submit")
+TextField.sNumbersOnly = mwse.mcm.i18n("Value must be a number.")
+TextField.sNewValue = mwse.mcm.i18n("New value: '%s'")
 TextField.defaultSetting = ""
 
 function TextField:enable()

@@ -6,7 +6,7 @@ local Parent = require("mcm.components.pages.SideBarPage")
 
 --- @class mwseMCMFilterPage
 local FilterPage = Parent:new()
-FilterPage.placeholderSearchText = mwse.mcm.i18n("Search...") --[[@as string]]
+FilterPage.placeholderSearchText = mwse.mcm.i18n("Search...")
 
 function FilterPage:filterComponents()
 	for _, component in ipairs(self.components) do

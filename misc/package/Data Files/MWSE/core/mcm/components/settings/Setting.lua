@@ -13,7 +13,7 @@ local Parent = require("mcm.components.Component")
 local Setting = Parent:new()
 Setting.componentType = "Setting"
 Setting.restartRequired = false
-Setting.restartRequiredMessage = mwse.mcm.i18n("The game must be restarted before this change will come into effect.") --[[@as string]]
+Setting.restartRequiredMessage = mwse.mcm.i18n("The game must be restarted before this change will come into effect.")
 
 ---@param data mwseMCMSetting.new.data|nil
 ---@return mwseMCMSetting

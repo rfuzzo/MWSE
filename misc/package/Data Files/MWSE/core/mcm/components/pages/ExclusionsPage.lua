@@ -13,14 +13,14 @@ local Parent = require("mcm.components.pages.Page")
 --- @class mwseMCMExclusionsPage
 local ExclusionsPage = Parent:new()
 -- public fields
-ExclusionsPage.label = mwse.mcm.i18n("Exclusions") --[[@as string]]
-ExclusionsPage.rightListLabel = mwse.mcm.i18n("Allowed") --[[@as string]]
-ExclusionsPage.leftListLabel = mwse.mcm.i18n("Blocked") --[[@as string]]
-ExclusionsPage.toggleText = mwse.mcm.i18n("Toggle Filtered") --[[@as string]]
+ExclusionsPage.label = mwse.mcm.i18n("Exclusions")
+ExclusionsPage.rightListLabel = mwse.mcm.i18n("Allowed")
+ExclusionsPage.leftListLabel = mwse.mcm.i18n("Blocked")
+ExclusionsPage.toggleText = mwse.mcm.i18n("Toggle Filtered")
 
 -- private fields
 local itemID = tes3ui.registerID("ExclusionListItem")
-local placeholderText = mwse.mcm.i18n("Search...") --[[@as string]]
+local placeholderText = mwse.mcm.i18n("Search...")
 
 --- Constructor
 --- @param data mwseMCMExclusionsPage.new.data?
