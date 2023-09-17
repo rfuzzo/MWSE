@@ -109,6 +109,7 @@ lockPick                      | `"lockPick"`                      | [`lockPick`]
 magicCasted                   | `"magicCasted"`                   | [`magicCasted`](https://mwse.github.io/MWSE/events/magicCasted)
 magicEffectRemoved            | `"magicEffectRemoved"`            | [`magicEffectRemoved`](https://mwse.github.io/MWSE/events/magicEffectRemoved)
 magicEffectsResolved          | `"magicEffectsResolved"`          | [`magicEffectsResolved`](https://mwse.github.io/MWSE/events/magicEffectsResolved)
+magicSelectionChanged         | `"magicSelectionChanged"`         | [`magicSelectionChanged`](https://mwse.github.io/MWSE/events/magicSelectionChanged)
 menuEnter                     | `"menuEnter"`                     | [`menuEnter`](https://mwse.github.io/MWSE/events/menuEnter)
 menuExit                      | `"menuExit"`                      | [`menuExit`](https://mwse.github.io/MWSE/events/menuExit)
 meshLoad                      | `"meshLoad"`                      | [`meshLoad`](https://mwse.github.io/MWSE/events/meshLoad)
