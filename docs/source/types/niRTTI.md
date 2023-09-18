@@ -28,5 +28,5 @@ The runtime type information that this type derives from.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 

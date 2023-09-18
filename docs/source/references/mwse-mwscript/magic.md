@@ -7,10 +7,10 @@
 
 **Parameters:**
 
-- `long` **objectType**: [Object Type](../../object-types) value for the target's type.
+- `long` **objectType**: [Object Type](../object-types.md) value for the target's type.
 - `string` **objectID**: Object ID of target spell, enchantment, or potion.
-- `long` **effectID**: [Magic Effect](../../magic-effects) ID that will be added to the target.
-- `long` **skillAttributeID**: [Skill](../../skills) or [Attribute](../../attributes) ID to be used. (Only for absorb/damage/drain/fortify/restore effects - ignored otherwise.)
+- `long` **effectID**: [Magic Effect](../magic-effects.md) ID that will be added to the target.
+- `long` **skillAttributeID**: [Skill](../skills.md) or [Attribute](../attributes.md) ID to be used. (Only for absorb/damage/drain/fortify/restore effects - ignored otherwise.)
 - `long` **rangeType**: New range type. (0 = SELF, 1 = TOUCH, 2 = TARGET)
 - `long` **area**: Area of effect.
 - `long` **duration**: Duration in seconds.
@@ -68,7 +68,7 @@ Creates a new spell with all flags cleared, origin set to spellmaker (`2`) and a
 
 **Parameters:**
 
-- `long` **type**: The [Object Type](../../object-types) to delete an effect from. Must be an alchemy, spell, or enchantment object.
+- `long` **type**: The [Object Type](../object-types.md) to delete an effect from. Must be an alchemy, spell, or enchantment object.
 - `string` **id**: The object ID to remove an effect from.
 - `long` **index**: The index of the effect to remove. Must be between (inclusive) `1` and `8`.
 
@@ -87,7 +87,7 @@ Other effects are reordered, e.g. if effect `1` is removed, effect `2` becomes `
 
 **Parameters:**
 
-- `long` **type**: The [Object Type](../../object-types) to delete an effect from. Must be an alchemy, spell, or enchantment object.
+- `long` **type**: The [Object Type](../object-types.md) to delete an effect from. Must be an alchemy, spell, or enchantment object.
 - `string` **id**: The object ID to remove an effect from.
 - `long` **index**: The index of the effect to remove. Must be between (inclusive) `1` and `8`.
 
@@ -141,11 +141,11 @@ Provides information important to a given alchemy object. Unlike the other relat
 
 **Parameters:**
 
-- `long` **attributeID**: The [School](../../schools) ID to get the value of.
+- `long` **attributeID**: The [School](../magic-schools.md) ID to get the value of.
 
 **Returned:**
 
-- `long` **school**: The [School](../../schools) of the effect.
+- `long` **school**: The [School](../magic-schools.md) of the effect.
 - `float` **baseCost**: The base cost of the effect.
 - `long` **flags**: The flags of the effect.
 
@@ -160,14 +160,14 @@ This function only supports the player and NPCs.
 
 **Parameters:**
 
-- `long` **type**: The [Object Type](../../object-types) to get the effect of.
+- `long` **type**: The [Object Type](../object-types.md) to get the effect of.
 - `string` **objectID**: The Object ID of the object to get the effect of.
 - `long` **index**: The effect index to get the info from, from 1 to 8.
 
 **Returned:**
 
 - `long` **effectId**: The `Effect ID`_ of the effect.
-- `long` **skillAttribId**: The [Attribute](../../attributes) or [Skill](../../skills) ID associated with the effect, if applicable.
+- `long` **skillAttribId**: The [Attribute](../attributes.md) or [Skill](../skills.md) ID associated with the effect, if applicable.
 - `long` **rangeType**: `0` = self, `1` = touch, `2` = target
 - `long` **area**: Area of effect.
 - `long` **duration**: Duration in seconds.
@@ -209,8 +209,8 @@ Returns info about the given **enchantId**, or `0` if **enchantId** is invalid.
 
 **Returned:**
 
-- `long` **effectType**: The [Effect Type](../../effect-types) that the ingredient has at the given **effectIndex**.
-- `long` **skillAttributeType**: The [Attribute Type](../../attribute-types) or [Skill Type](../../skill-types), if the **effectType** supports one. Otherwise will always be -1.
+- `long` **effectType**: The [Effect Type](../magic-effects.md) that the ingredient has at the given **effectIndex**.
+- `long` **skillAttributeType**: The [Attribute Type](../attributes.md) or [Skill Type](../skill-types.md), if the **effectType** supports one. Otherwise will always be -1.
 
 This function allows scripts to determine the effects of a given ingredient programmatically. Scripts can alter these values as well using `xSetIngredientEffect`.
 
@@ -258,10 +258,10 @@ The **numEffects** value is useful when looping over spell effects using `xGetEf
 
 **Parameters:**
 
-- `long` **effectID**: The [Magic Effect](../../magic-effects) to modify.
-- `long` **school**: New spell [School](../../schools).
+- `long` **effectID**: The [Magic Effect](../magic-effects.md) to modify.
+- `long` **school**: New spell [School](../magic-schools.md).
 - `float` **cost**: New base cost in magicka.
-- `long` **flags**: New [Magic Effect Flags](../../magic-effect-flags). Only spellmaking, enchanting, and negative lighting are valid here. All others are ignored.
+- `long` **flags**: New [Magic Effect Flags](../magic-effect-flags.md). Only spellmaking, enchanting, and negative lighting are valid here. All others are ignored.
 
 **Returned:**
 
@@ -278,11 +278,11 @@ E.g. if you have a spell with a Fire Damage effect and you change the Fire Damag
 
 **Parameters:**
 
-- `long` **type**: The [Object Type](../../object-types) of the object to alter.
+- `long` **type**: The [Object Type](../object-types.md) of the object to alter.
 - `string` **id**: The object ID of the object to alter.
 - `long` **index**: The index of the effect to alter.
-- `long` **effectID**: The [Effect Type](../../effect-types) to change to.
-- `long` **skillOrAttributeID**: The [Attribute](../../attributes) or [Skill](../../skills) ID to use, if the **effectID** uses one.
+- `long` **effectID**: The [Effect Type](../magic-effects.md) to change to.
+- `long` **skillOrAttributeID**: The [Attribute](../attributes.md) or [Skill](../skills.md) ID to use, if the **effectID** uses one.
 - `long` **rangeType**: `0` = self, `1` = touch, `2` = target.
 - `long` **area**: Area of effect.
 - `long` **duration**: Effect duration (in seconds).
@@ -323,8 +323,8 @@ Sets the properties of the given **enchantId**.
 
 - `string` **id**: The id of the ingredient to fetch data for.
 - `long` **effectIndex**: A value between `1` and `4`, matching the effect index desired.
-- `long` **effectType**: The [Effect Type](../../effect-types) that the ingredient has at the given **effectIndex**.
-- `long` **skillAttributeType**: The [Attribute Type](../../attribute-types) or [Skill Type](../../skill-types), if the **effectType** supports one.
+- `long` **effectType**: The [Effect Type](../magic-effects.md) that the ingredient has at the given **effectIndex**.
+- `long` **skillAttributeType**: The [Attribute Type](../attributes.md) or [Skill Type](../skill-types.md), if the **effectType** supports one.
 
 **Returned:**
 

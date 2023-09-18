@@ -17,7 +17,7 @@ A structure the data handler uses to track loaded exterior cell data.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 

@@ -17,5 +17,5 @@ A game structure which holds all active projectiles.
 
 **Returns**:
 
-* `result` ([tes3mobileProjectile](../../types/tes3mobileProjectile)[])
+* `result` ([tes3mobileProjectile](../types/tes3mobileProjectile.md)[])
 

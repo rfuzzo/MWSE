@@ -8,7 +8,7 @@
 
 A structure that contains region information.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -117,7 +117,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3leveledCreature](../../types/tes3leveledCreature))
+* `result` ([tes3leveledCreature](../types/tes3leveledCreature.md))
 
 ***
 
@@ -128,7 +128,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3regionSound](../../types/tes3regionSound)[])
+* `result` ([tes3regionSound](../types/tes3regionSound.md)[])
 
 ***
 
@@ -172,7 +172,7 @@ The region's current weather.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather))
+* `result` ([tes3weather](../types/tes3weather.md))
 
 ***
 

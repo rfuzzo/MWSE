@@ -8,7 +8,7 @@
 
 The NiColorData class provides a shareable wrapper for color animation data. Usually found in niParticleColorModifiers.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `keyCount`
@@ -29,7 +29,7 @@ The number of keys in this niColorData.
 
 **Returns**:
 
-* `result` ([niColorKey](../../types/niColorKey)[])
+* `result` ([niColorKey](../types/niColorKey.md)[])
 
 ***
 
@@ -62,7 +62,7 @@ The type of the keys. Maps to values in [`ni.animationKeyType`](https://mwse.git
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -73,7 +73,7 @@ The type of the keys. Maps to values in [`ni.animationKeyType`](https://mwse.git
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -90,7 +90,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

@@ -44,7 +44,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 
 **Returns**:
 
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
 
 ***
 
@@ -55,7 +55,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 
 **Returns**:
 
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
 
 ***
 
@@ -66,7 +66,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 
 **Returns**:
 
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
 
 ***
 

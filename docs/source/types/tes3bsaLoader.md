@@ -17,7 +17,7 @@ A class responsible for handling the loading of BSA files.
 
 **Returns**:
 
-* `result` ([tes3archive](../../types/tes3archive)[])
+* `result` ([tes3archive](../types/tes3archive.md)[])
 
 ***
 
@@ -28,7 +28,7 @@ A class responsible for handling the loading of BSA files.
 
 **Returns**:
 
-* `result` ([tes3archive](../../types/tes3archive))
+* `result` ([tes3archive](../types/tes3archive.md))
 
 ***
 
@@ -49,6 +49,6 @@ local archive, index = myObject:findFile(path)
 
 **Returns**:
 
-* `archive` ([tes3archive](../../types/tes3archive), nil): The found archive, or `nil` if no result was found.
+* `archive` ([tes3archive](../types/tes3archive.md), nil): The found archive, or `nil` if no result was found.
 * `index` (number, nil): The index in the archive that the path was found at, or `nil` if no result was found.
 

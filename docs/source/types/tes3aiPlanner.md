@@ -28,7 +28,7 @@ The access to mobile actor this `tes3aiPlanner` object works on.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -50,7 +50,7 @@ The access to mobile actor this `tes3aiPlanner` object works on.
 
 **Returns**:
 
-* `result` ([tes3aiPackage](../../types/tes3aiPackage)[])
+* `result` ([tes3aiPackage](../types/tes3aiPackage.md)[])
 
 ***
 
@@ -67,5 +67,5 @@ local result = myObject:getActivePackage()
 
 **Returns**:
 
-* `result` ([tes3aiPackageActivate](../../types/tes3aiPackageActivate), [tes3aiPackageEscort](../../types/tes3aiPackageEscort), [tes3aiPackageFollow](../../types/tes3aiPackageFollow), [tes3aiPackageTravel](../../types/tes3aiPackageTravel), [tes3aiPackageWander](../../types/tes3aiPackageWander))
+* `result` ([tes3aiPackageActivate](../types/tes3aiPackageActivate.md), [tes3aiPackageEscort](../types/tes3aiPackageEscort.md), [tes3aiPackageFollow](../types/tes3aiPackageFollow.md), [tes3aiPackageTravel](../types/tes3aiPackageTravel.md), [tes3aiPackageWander](../types/tes3aiPackageWander.md))
 

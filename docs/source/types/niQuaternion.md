@@ -67,7 +67,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion))
+* `result` ([niQuaternion](../types/niQuaternion.md))
 
 ***
 
@@ -82,7 +82,7 @@ local result = myObject:dot(other)
 
 **Parameters**:
 
-* `other` ([niQuaternion](../../types/niQuaternion)): The other quaternion.
+* `other` ([niQuaternion](../types/niQuaternion.md)): The other quaternion.
 
 **Returns**:
 
@@ -117,7 +117,7 @@ myObject:fromAngleAxis(angle, axis)
 **Parameters**:
 
 * `angle` (number)
-* `axis` ([tes3vector3](../../types/tes3vector3))
+* `axis` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -132,7 +132,7 @@ myObject:fromRotation(matrix)
 
 **Parameters**:
 
-* `matrix` ([tes3matrix33](../../types/tes3matrix33))
+* `matrix` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -147,7 +147,7 @@ local result = myObject:invert()
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion))
+* `result` ([niQuaternion](../types/niQuaternion.md))
 
 ***
 
@@ -192,7 +192,7 @@ local result = myObject:normalized()
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion)): The normalized quaternion.
+* `result` ([niQuaternion](../types/niQuaternion.md)): The normalized quaternion.
 
 ***
 
@@ -207,12 +207,12 @@ local result = myObject:rotateTowards(target, rotationLimit)
 
 **Parameters**:
 
-* `target` ([niQuaternion](../../types/niQuaternion)): The quaternion to interpolate towards.
+* `target` ([niQuaternion](../types/niQuaternion.md)): The quaternion to interpolate towards.
 * `rotationLimit` (number): The interpolation result will be limited to this maximum angle from the initial quaternion. Angle in radians.
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion)): The calculated result.
+* `result` ([niQuaternion](../types/niQuaternion.md)): The calculated result.
 
 ***
 
@@ -227,12 +227,12 @@ local result = myObject:slerp(target, transition)
 
 **Parameters**:
 
-* `target` ([niQuaternion](../../types/niQuaternion)): The quaternion to interpolate towards.
+* `target` ([niQuaternion](../types/niQuaternion.md)): The quaternion to interpolate towards.
 * `transition` (number): The interpolation parameter. Must be between `0.0` (closer to this quaternion) and `1.0` (closer to the other quaternion).
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion)): The calculated result.
+* `result` ([niQuaternion](../types/niQuaternion.md)): The calculated result.
 
 ***
 
@@ -247,12 +247,12 @@ local result = myObject:slerpKeyframe(target, transition)
 
 **Parameters**:
 
-* `target` ([niQuaternion](../../types/niQuaternion)): The quaternion to interpolate towards.
+* `target` ([niQuaternion](../types/niQuaternion.md)): The quaternion to interpolate towards.
 * `transition` (number): The interpolation parameter. Must be between `0.0` (closer to this quaternion) and `1.0` (closer to the other quaternion).
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion)): The calculated result.
+* `result` ([niQuaternion](../types/niQuaternion.md)): The calculated result.
 
 ***
 
@@ -268,7 +268,7 @@ local angle, axis = myObject:toAngleAxis()
 **Returns**:
 
 * `angle` (number)
-* `axis` ([tes3vector3](../../types/tes3vector3))
+* `axis` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -283,7 +283,7 @@ local result = myObject:toRotation()
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -307,7 +307,7 @@ local quaternion = niQuaternion.new(w, x, y, z)
 
 **Returns**:
 
-* `quaternion` ([niQuaternion](../../types/niQuaternion))
+* `quaternion` ([niQuaternion](../types/niQuaternion.md))
 
 ***
 
@@ -317,7 +317,7 @@ local quaternion = niQuaternion.new(w, x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [niQuaternion](../../types/niQuaternion) | [niQuaternion](../../types/niQuaternion) | [niQuaternion](../../types/niQuaternion) | Multiplies two quaternions. The end effect is that the resulting rotation quaternion is equal to the rotation of both quaternions. |
+| [niQuaternion](../types/niQuaternion.md) | [niQuaternion](../types/niQuaternion.md) | [niQuaternion](../types/niQuaternion.md) | Multiplies two quaternions. The end effect is that the resulting rotation quaternion is equal to the rotation of both quaternions. |
 
 ***
 
@@ -325,5 +325,5 @@ local quaternion = niQuaternion.new(w, x, y, z)
 
 | Result type | Description |
 | ----------- | ----------- |
-| [niQuaternion](../../types/niQuaternion) | Unary negation. |
+| [niQuaternion](../types/niQuaternion.md) | Unary negation. |
 

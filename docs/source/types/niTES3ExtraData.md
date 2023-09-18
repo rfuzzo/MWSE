@@ -8,7 +8,7 @@
 
 A simple extra data that stores a `tes3reference` object.
 
-This type inherits the following: [niExtraData](../../types/niExtraData), [niObject](../../types/niObject)
+This type inherits the following: [niExtraData](../types/niExtraData.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `genericData`
@@ -29,7 +29,7 @@ The next extra data available on the object.
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -51,7 +51,7 @@ The reference stored on this extra data.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -62,7 +62,7 @@ The reference stored on this extra data.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -73,7 +73,7 @@ The reference stored on this extra data.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -90,7 +90,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

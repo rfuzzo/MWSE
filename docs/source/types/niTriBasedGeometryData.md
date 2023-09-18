@@ -8,7 +8,7 @@
 
 Contains the actual geometry data for a `NiTriBasedGeometry` object.
 
-This type inherits the following: [niGeometryData](../../types/niGeometryData), [niObject](../../types/niObject)
+This type inherits the following: [niGeometryData](../types/niGeometryData.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `activeTriangleCount`
@@ -40,7 +40,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor)[])
+* `result` ([niPackedColor](../types/niPackedColor.md)[])
 
 ***
 
@@ -51,7 +51,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 
 ***
 
@@ -73,7 +73,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -84,7 +84,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -95,7 +95,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2)[])
+* `result` ([tes3vector2](../types/tes3vector2.md)[])
 
 ***
 
@@ -106,7 +106,7 @@ The model-space bounding sphere of the object.
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2)[])
+* `result` ([tes3vector2](../types/tes3vector2.md)[])
 
 ***
 
@@ -161,7 +161,7 @@ The number of texture coordinate sets in the data.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 
 ***
 
@@ -178,7 +178,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -225,7 +225,7 @@ local result = myObject:isOfType(type)
 
 Tells the renderer that the object has changed. Should be called after you have finished changing any vertex data.
 
-If you have altered vertex positions, you may need to also call `updateModelBound`_. You should call it if vertices have been moved outside the bounds of the original model.
+If you have altered vertex positions, you may need to also call `updateModelBound`. You should call it if vertices have been moved outside the bounds of the original model.
 
 ```lua
 myObject:markAsChanged()

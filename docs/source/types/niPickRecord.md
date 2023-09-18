@@ -17,7 +17,7 @@ The vertex color at the point of intersection. The color is valid only when `ret
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor))
+* `result` ([niPackedColor](../types/niPackedColor.md))
 
 ***
 
@@ -39,7 +39,7 @@ The intersection point on the triangle. It's valid only if the `intersectType` w
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -50,7 +50,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -61,7 +61,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -72,7 +72,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -83,7 +83,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -94,7 +94,7 @@ The texture coordinates at the point of intersection. The coordinates are valid 
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../types/tes3vector2.md))
 
 ***
 

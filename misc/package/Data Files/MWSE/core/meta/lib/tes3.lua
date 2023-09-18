@@ -48,7 +48,7 @@ function tes3.addClothingSlot(params) end
 --- @field slot number Clothing slot number. A number greater than 9 to configure a slot for.
 --- @field name string No description yet available.
 
---- Adds an item to a given reference's inventory or mobile's inventory.
+--- Adds an item to a given reference's inventory or mobile's inventory. The `reference` will be cloned if needed.
 --- @param params tes3.addItem.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to give items to.
@@ -225,10 +225,10 @@ function tes3.addJournalEntry(params) end
 --- --- 			**Parameters:**
 --- --- 			- `id` (string): The ID of the weapon object to summon.
 --- --- 
---- --- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
+--- --- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
 --- --- 			**Parameters:**
 --- --- 			- `id` (string): The ID of the armor object to summon.
---- --- 			- `id2` (string): *Optional.* The ID of the additional armor object to summon.
+--- --- 			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
 --- --- 
 --- --- 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
 --- --- 			**Parameters:**
@@ -306,10 +306,10 @@ function tes3.addMagicEffect(params) end
 --- 			**Parameters:**
 --- 			- `id` (string): The ID of the weapon object to summon.
 --- 
---- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It can summon one or two armor objects with provided ID(s).
+--- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
 --- 			**Parameters:**
 --- 			- `id` (string): The ID of the armor object to summon.
---- 			- `id2` (string): *Optional.* The ID of the additional armor object to summon.
+--- 			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
 --- 
 --- 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
 --- 			**Parameters:**
@@ -406,7 +406,13 @@ function tes3.advanceTime(params) end
 --- @field resting boolean? *Default*: `false`. Should advancing time count as resting? If set to true invokes usual sleeping mechanics: health, fatigue and magicka restoration, and possible rest interruption. The length of the rest will be equal to hours parameter, rounded down to nearest natural number.
 --- @field updateEnvironment boolean? *Default*: `true`. Controls if the weather system is updated for each hour passed.
 
+--- Applies magic effects from a spell, potion, or enchantment on the given actor instantly. You can also apply any custom set of effects, by passing an effects table.
 --- 
+--- Usage:
+--- 
+--- - To apply a potion pass a `reference`.
+--- - When applying a spell, the `reference` will be the spell's caster, and the `target` will be the spell's target.
+--- - When using enchantment, you need to pass the `reference`, `target`, and `fromStack`. The charge of the item in the `fromStack` will be used. If that item is out of charge no enchantment will be applied.
 --- @param params tes3.applyMagicSource.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — A reference on which the magic source will be applied.
@@ -419,9 +425,7 @@ function tes3.advanceTime(params) end
 --- 
 --- `createCopy`: boolean? — *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
 --- 
---- `fromStack`: tes3equipmentStack? — *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
---- 
---- `castChance`: number? — *Optional*. This parameter allows overriding the casting chance of the magic source.
+--- `fromStack`: tes3equipmentStack? — *Optional*. The piece of equipment this magic source is coming from. This item's charge will be used. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 --- 
 --- `target`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The target of the magic.
 --- 
@@ -436,8 +440,7 @@ function tes3.applyMagicSource(params) end
 --- @field name string? *Optional*. While optional for other uses, if applying alchemy as a source, you must specify a name for the magic source.
 --- @field effects table? *Optional*. A table of custom effects to apply as a potion. Maximal number of effects is 8.
 --- @field createCopy boolean? *Default*: `true`. This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy.
---- @field fromStack tes3equipmentStack? *Optional*. The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
---- @field castChance number? *Optional*. This parameter allows overriding the casting chance of the magic source.
+--- @field fromStack tes3equipmentStack? *Optional*. The piece of equipment this magic source is coming from. This item's charge will be used. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The target of the magic.
 --- @field bypassResistances boolean? *Default*: `false`. Is this effect going to bypass magic resistance?
 
@@ -699,9 +702,9 @@ function tes3.createObject(params) end
 --- 
 --- `object`: tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon|string — The object to create a reference of.
 --- 
---- `position`: tes3vector3|table — The location to create the reference at.
+--- `position`: tes3vector3|number[] — The location to create the reference at.
 --- 
---- `orientation`: tes3vector3|table — The new orientation for the created reference.
+--- `orientation`: tes3vector3|number[] — The new orientation for the created reference.
 --- 
 --- `cell`: tes3cell|string|table|nil — *Optional*. The cell to create the reference in. This is only needed for interior cells.
 --- 
@@ -712,8 +715,8 @@ function tes3.createReference(params) end
 ---Table parameter definitions for `tes3.createReference`.
 --- @class tes3.createReference.params
 --- @field object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon|string The object to create a reference of.
---- @field position tes3vector3|table The location to create the reference at.
---- @field orientation tes3vector3|table The new orientation for the created reference.
+--- @field position tes3vector3|number[] The location to create the reference at.
+--- @field orientation tes3vector3|number[] The new orientation for the created reference.
 --- @field cell tes3cell|string|table|nil *Optional*. The cell to create the reference in. This is only needed for interior cells.
 --- @field scale number? *Default*: `1`. A scale for the reference.
 
@@ -732,7 +735,7 @@ function tes3.createReference(params) end
 --- 
 --- `verticalOffset`: number? — *Default*: `0`. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.
 --- 
---- `position`: tes3vector3|table|nil — *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
+--- `position`: tes3vector3|number[]|nil — *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
 --- 
 --- `avObject`: niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSortAdjustNode|niSpotLight|niSwitchNode|niTextureEffect|niTriShape|nil — *Optional*. 
 --- 
@@ -748,7 +751,7 @@ function tes3.createVisualEffect(params) end
 --- @field lifespan number? *Optional*. The desired lifespan for the VFX. If not provided, the VFX will never die of old age.
 --- @field scale number? *Default*: `1`. The scale used to resize the given VFX. The default value will match the size used by most magical effect logic. This is not used when creating an enchantment-style VFX.
 --- @field verticalOffset number? *Default*: `0`. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.
---- @field position tes3vector3|table|nil *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
+--- @field position tes3vector3|number[]|nil *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
 --- @field avObject niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSortAdjustNode|niSpotLight|niSwitchNode|niTextureEffect|niTriShape|nil *Optional*. 
 --- @field magicEffectId number? *Optional*. The magic effect ID to use to create an enchantment-style VFX. This will use most of the same VFX logic, but cannot be applied to a position or specific niAVObject.
 
@@ -803,14 +806,14 @@ function tes3.enableKey(keyCode) end
 --- Similar to the vanilla FadeIn mwscript command.
 --- @param params tes3.fadeIn.params? This table accepts the following values:
 --- 
---- `fader`: tes3fader? — *Optional*. Defaults to the transition fader.
+--- `fader`: tes3fader? — *Default*: `tes3.worldController.transitionFader`. Defaults to the transition fader.
 --- 
 --- `duration`: number? — *Default*: `1.0`. Time, in seconds, for the fade.
 function tes3.fadeIn(params) end
 
 ---Table parameter definitions for `tes3.fadeIn`.
 --- @class tes3.fadeIn.params
---- @field fader tes3fader? *Optional*. Defaults to the transition fader.
+--- @field fader tes3fader? *Default*: `tes3.worldController.transitionFader`. Defaults to the transition fader.
 --- @field duration number? *Default*: `1.0`. Time, in seconds, for the fade.
 
 --- Similar to the vanilla FadeOut mwscript command.
@@ -959,6 +962,8 @@ function tes3.getAnimationActionTiming(params) end
 --- @field group number? *Optional*. The animation group id to get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
 
 --- This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3getanimationgroups).
 --- @param params tes3.getAnimationGroups.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference — A reference whose animation groups to fetch.
@@ -1021,7 +1026,7 @@ function tes3.getCameraVector() end
 --- 
 --- `id`: string? — *Optional*. The cell's ID. If not provided, position or x and y must be.
 --- 
---- `position`: tes3vector3|table|nil — *Optional*. A point in an exterior cell.
+--- `position`: tes3vector3|number[]|nil — *Optional*. A point in an exterior cell.
 --- 
 --- `x`: number? — *Optional*. The X grid-position.
 --- 
@@ -1032,7 +1037,7 @@ function tes3.getCell(params) end
 ---Table parameter definitions for `tes3.getCell`.
 --- @class tes3.getCell.params
 --- @field id string? *Optional*. The cell's ID. If not provided, position or x and y must be.
---- @field position tes3vector3|table|nil *Optional*. A point in an exterior cell.
+--- @field position tes3vector3|number[]|nil *Optional*. A point in an exterior cell.
 --- @field x number? *Optional*. The X grid-position.
 --- @field y number? *Optional*. The Y grid-position.
 
@@ -1335,7 +1340,7 @@ function tes3.getPlayerRef() end
 --- This function is used to see what the player is looking at. Unlike a real raycast, this does not work in all circumstances. For instance, combat targets aren't returned by this function. You can access the last hit combat target using [`mobileActor.actionData.hitTarget`](https://mwse.github.io/MWSE/types/tes3actionData/#hittarget). Other option is to use `tes3.rayTest`.
 --- 
 --- As a general rule, it will return the reference if the information box is shown when it is looked at.
---- @return tes3reference result No description yet available.
+--- @return tes3reference|nil result No description yet available.
 function tes3.getPlayerTarget() end
 
 --- This function retrieves data for a quick key.
@@ -1350,7 +1355,7 @@ function tes3.getQuickKey(params) end
 --- @field slot number The key to retrieve data for. This is a value between 1 and 9.
 
 --- Fetches the first reference for a given base object ID.
---- @param id string? *Optional*. No description yet available.
+--- @param id string? *Optional*. Passing "player" or "playersavegame" will return the player reference.
 --- @return tes3reference reference No description yet available.
 function tes3.getReference(id) end
 
@@ -1584,16 +1589,16 @@ function tes3.isCharGenStarted() end
 --- Compares two key objects and returns their equality. Returns true if the objects are equal, false otherwise.
 --- @param params tes3.isKeyEqual.params This table accepts the following values:
 --- 
---- `actual`: table — The key object that is being compared.
+--- `actual`: table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData — The key object that is being compared.
 --- 
---- `expected`: table — The key object that is being compared against.
---- @return boolean equal No description yet available.
+--- `expected`: table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData — The key object that is being compared against.
+--- @return any equal No description yet available.
 function tes3.isKeyEqual(params) end
 
 ---Table parameter definitions for `tes3.isKeyEqual`.
 --- @class tes3.isKeyEqual.params
---- @field actual table The key object that is being compared.
---- @field expected table The key object that is being compared against.
+--- @field actual table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData The key object that is being compared.
+--- @field expected table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData The key object that is being compared against.
 
 --- Determines if the player has a given lua mod active. The key passed to this function is the path to where its main.lua file is, relative to the MWSE\\mods folder. Slashes are automatically replaced with periods, and the key is case-insensitive.
 ---
@@ -1685,13 +1690,13 @@ function tes3.menuMode() end
 --- Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3messagebox).
---- @param messageOrParams string|tes3.messageBox.messageOrParams This table accepts the following values:
+--- @param messageOrParams boolean|number|string|tes3.messageBox.messageOrParams This table accepts the following values:
 --- 
 --- `message`: string — No description yet available.
 --- 
---- `buttons`: string[]? — *Optional*. An array of strings to use for buttons.
+--- `buttons`: string[]? — *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
 --- 
---- `callback`: function? — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- `callback`: nil|fun(e: tes3messageBoxCallbackData) — *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- 
 --- `showInDialog`: boolean? — *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- 
@@ -1703,8 +1708,8 @@ function tes3.messageBox(messageOrParams, ...) end
 ---Table parameter definitions for `tes3.messageBox`.
 --- @class tes3.messageBox.messageOrParams
 --- @field message string No description yet available.
---- @field buttons string[]? *Optional*. An array of strings to use for buttons.
---- @field callback function? *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
+--- @field buttons string[]? *Optional*. An array of strings to use for buttons. Maximal text length on each button is 32 characters.
+--- @field callback nil|fun(e: tes3messageBoxCallbackData) *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 --- @field showInDialog boolean? *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- @field duration number? *Optional*. Overrides how long the toast-style message remains visible.
 
@@ -1808,7 +1813,7 @@ function tes3.playAnimation(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to attach the sound to.
 --- 
---- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon — No description yet available.
+--- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string — The appropriate item up/down sound will be played for item of this type.
 --- 
 --- `pickup`: boolean? — *Default*: `true`. If false, the place down item will be used.
 --- @return boolean executed No description yet available.
@@ -1817,7 +1822,7 @@ function tes3.playItemPickupSound(params) end
 ---Table parameter definitions for `tes3.playItemPickupSound`.
 --- @class tes3.playItemPickupSound.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to attach the sound to.
---- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon No description yet available.
+--- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The appropriate item up/down sound will be played for item of this type.
 --- @field pickup boolean? *Default*: `true`. If false, the place down item will be used.
 
 --- Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` or `soundObjectPlay` otherwise.
@@ -1872,9 +1877,9 @@ function tes3.playVoiceover(params) end
 --- 
 --- `cell`: tes3cell|string|table|nil — *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 --- 
---- `position`: tes3vector3|table — The position to move the reference to.
+--- `position`: tes3vector3|number[] — The position to move the reference to.
 --- 
---- `orientation`: tes3vector3|table|nil — *Optional*. The new orientation of the reference.
+--- `orientation`: tes3vector3|number[]|nil — *Optional*. The new orientation of the reference.
 --- 
 --- `forceCellChange`: boolean? — *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
 --- 
@@ -1888,8 +1893,8 @@ function tes3.positionCell(params) end
 --- @class tes3.positionCell.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Default*: `tes3.mobilePlayer`. The reference to reposition.
 --- @field cell tes3cell|string|table|nil *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
---- @field position tes3vector3|table The position to move the reference to.
---- @field orientation tes3vector3|table|nil *Optional*. The new orientation of the reference.
+--- @field position tes3vector3|number[] The position to move the reference to.
+--- @field orientation tes3vector3|number[]|nil *Optional*. The new orientation of the reference.
 --- @field forceCellChange boolean? *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
 --- @field suppressFader boolean? *Default*: `false`. When moving the player, can be used to prevent the fade in and out visual effect.
 --- @field teleportCompanions boolean? *Default*: `true`. If used on the player, determines if companions should also be teleported.
@@ -1918,9 +1923,9 @@ function tes3.random(seed) end
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3raytest).
 --- @param params tes3.rayTest.params This table accepts the following values:
 --- 
---- `position`: tes3vector3|table — Position of the ray origin.
+--- `position`: tes3vector3|number[] — Position of the ray origin.
 --- 
---- `direction`: tes3vector3|table — Direction of the ray. Does not have to be unit length.
+--- `direction`: tes3vector3|number[] — Direction of the ray. Does not have to be unit length.
 --- 
 --- `findAll`: boolean? — *Default*: `false`. If true, the ray test won't stop after the first result.
 --- 
@@ -1952,8 +1957,8 @@ function tes3.rayTest(params) end
 
 ---Table parameter definitions for `tes3.rayTest`.
 --- @class tes3.rayTest.params
---- @field position tes3vector3|table Position of the ray origin.
---- @field direction tes3vector3|table Direction of the ray. Does not have to be unit length.
+--- @field position tes3vector3|number[] Position of the ray origin.
+--- @field direction tes3vector3|number[] Direction of the ray. Does not have to be unit length.
 --- @field findAll boolean? *Default*: `false`. If true, the ray test won't stop after the first result.
 --- @field maxDistance number? *Default*: `0`. The maximum distance that the test will run.
 --- @field sort boolean? *Default*: `true`. If true, the results will be sorted by distance from the origin position.
@@ -1996,7 +2001,7 @@ function tes3.removeEffects(params) end
 --- @field chance number? *Default*: `100`. The chance for the effect to be removed.
 --- @field removeSpell boolean? *Optional*. If removing by cast type, determines if the spell should be removed from the target's spell list. Defaults to true if `castType` is not `tes3.spellType.spell.` This causes diseases and curses to be removed when dispelled.
 
---- Removes an item from a given reference's inventory.
+--- Removes an item from a given reference's inventory. Items without itemData will be removed first. The `reference` will be cloned if needed.
 --- @param params tes3.removeItem.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to remove items from.
@@ -2216,9 +2221,9 @@ function tes3.setAIActivate(params) end
 --- 
 --- `target`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor being escorted.
 --- 
---- `destination`: tes3vector3|table — No description yet available.
+--- `destination`: tes3vector3|number[] — No description yet available.
 --- 
---- `duration`: number? — *Default*: `0`. How long the escorter will do the escorting, in hours.
+--- `duration`: integer? — *Default*: `0`. How long the escorter will do the escorting, in hours.
 --- 
 --- `cell`: tes3cell|string|nil — *Optional*. No description yet available.
 --- 
@@ -2229,8 +2234,8 @@ function tes3.setAIEscort(params) end
 --- @class tes3.setAIEscort.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference The escorting actor.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor being escorted.
---- @field destination tes3vector3|table No description yet available.
---- @field duration number? *Default*: `0`. How long the escorter will do the escorting, in hours.
+--- @field destination tes3vector3|number[] No description yet available.
+--- @field duration integer? *Default*: `0`. How long the escorter will do the escorting, in hours.
 --- @field cell tes3cell|string|nil *Optional*. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
@@ -2241,9 +2246,9 @@ function tes3.setAIEscort(params) end
 --- 
 --- `target`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor to follow.
 --- 
---- `destination`: tes3vector3|table|nil — *Optional*. No description yet available.
+--- `destination`: tes3vector3|number[]|nil — *Optional*. No description yet available.
 --- 
---- `duration`: number? — *Default*: `0`. How long the follower will follow, in hours.
+--- `duration`: integer? — *Default*: `0`. How long the follower will follow, in hours.
 --- 
 --- `cell`: tes3cell|string|nil — *Optional*. No description yet available.
 --- 
@@ -2254,8 +2259,8 @@ function tes3.setAIFollow(params) end
 --- @class tes3.setAIFollow.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference This is the actor that will follow another one.
 --- @field target tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to follow.
---- @field destination tes3vector3|table|nil *Optional*. No description yet available.
---- @field duration number? *Default*: `0`. How long the follower will follow, in hours.
+--- @field destination tes3vector3|number[]|nil *Optional*. No description yet available.
+--- @field duration integer? *Default*: `0`. How long the follower will follow, in hours.
 --- @field cell tes3cell|string|nil *Optional*. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
@@ -2264,7 +2269,7 @@ function tes3.setAIFollow(params) end
 --- 
 --- `reference`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — No description yet available.
 --- 
---- `destination`: tes3vector3|table — No description yet available.
+--- `destination`: tes3vector3|number[] — No description yet available.
 --- 
 --- `reset`: boolean? — *Default*: `true`. No description yet available.
 function tes3.setAITravel(params) end
@@ -2272,7 +2277,7 @@ function tes3.setAITravel(params) end
 ---Table parameter definitions for `tes3.setAITravel`.
 --- @class tes3.setAITravel.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
---- @field destination tes3vector3|table No description yet available.
+--- @field destination tes3vector3|number[] No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
 --- Configures a mobile actor to wander around a cell.
@@ -2280,13 +2285,13 @@ function tes3.setAITravel(params) end
 --- 
 --- `reference`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — This actor will wander around.
 --- 
---- `idles`: number[] — An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
+--- `idles`: integer[] — An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
 --- 
---- `range`: number? — *Default*: `0`. No description yet available.
+--- `range`: integer? — *Default*: `0`. No description yet available.
 --- 
---- `duration`: number? — *Default*: `0`. How long the actor will be wandering around, in hours.
+--- `duration`: integer? — *Default*: `0`. How long the actor will be wandering around, in hours.
 --- 
---- `time`: number? — *Default*: `0`. No description yet available.
+--- `time`: integer? — *Default*: `0`. No description yet available.
 --- 
 --- `reset`: boolean? — *Default*: `true`. No description yet available.
 function tes3.setAIWander(params) end
@@ -2294,10 +2299,10 @@ function tes3.setAIWander(params) end
 ---Table parameter definitions for `tes3.setAIWander`.
 --- @class tes3.setAIWander.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference This actor will wander around.
---- @field idles number[] An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
---- @field range number? *Default*: `0`. No description yet available.
---- @field duration number? *Default*: `0`. How long the actor will be wandering around, in hours.
---- @field time number? *Default*: `0`. No description yet available.
+--- @field idles integer[] An array with 8 values that corresponds to the chance of playing each idle animation. For more info see [tes3aiPackageWander.idles](https://mwse.github.io/MWSE/types/tes3aiPackageWander/#idles).
+--- @field range integer? *Default*: `0`. No description yet available.
+--- @field duration integer? *Default*: `0`. How long the actor will be wandering around, in hours.
+--- @field time integer? *Default*: `0`. No description yet available.
 --- @field reset boolean? *Default*: `true`. No description yet available.
 
 --- This function sets a reference's animation groups' timings to a specified value.
@@ -2318,9 +2323,9 @@ function tes3.setAnimationTiming(params) end
 --- 
 --- `reference`: tes3reference — The door reference that will be updated.
 --- 
---- `position`: tes3vector3|table — The new coordinates of the transition.
+--- `position`: tes3vector3|number[] — The new coordinates of the transition.
 --- 
---- `orientation`: tes3vector3|table — The new rotation to use after transition.
+--- `orientation`: tes3vector3|number[] — The new rotation to use after transition.
 --- 
 --- `cell`: tes3cell|string|nil — *Optional*. The cell to transition to, if transitioning to an interior.
 function tes3.setDestination(params) end
@@ -2328,8 +2333,8 @@ function tes3.setDestination(params) end
 ---Table parameter definitions for `tes3.setDestination`.
 --- @class tes3.setDestination.params
 --- @field reference tes3reference The door reference that will be updated.
---- @field position tes3vector3|table The new coordinates of the transition.
---- @field orientation tes3vector3|table The new rotation to use after transition.
+--- @field position tes3vector3|number[] The new coordinates of the transition.
+--- @field orientation tes3vector3|number[] The new rotation to use after transition.
 --- @field cell tes3cell|string|nil *Optional*. The cell to transition to, if transitioning to an interior.
 
 --- Enables or disables a reference.
@@ -2438,7 +2443,7 @@ function tes3.setMarkLocation(params) end
 --- 
 --- `remove`: boolean? — *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
 --- 
---- `owner`: tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string — Assigns this NPC or a faction as the owner of the reference.
+--- `owner`: tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string|nil — *Optional*. Assigns this NPC or a faction as the owner of the reference.
 --- 
 --- `requiredGlobal`: tes3globalVariable? — *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 --- 
@@ -2449,7 +2454,7 @@ function tes3.setOwner(params) end
 --- @class tes3.setOwner.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string A reference whose owner to set.
 --- @field remove boolean? *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
---- @field owner tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string Assigns this NPC or a faction as the owner of the reference.
+--- @field owner tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string|nil *Optional*. Assigns this NPC or a faction as the owner of the reference.
 --- @field requiredGlobal tes3globalVariable? *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 --- @field requiredRank number? *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 
@@ -2516,18 +2521,20 @@ function tes3.setStatistic(params) end
 --- @field limit boolean? *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
 
 --- Sets the trap on a given reference.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3settrap).
 --- @param params tes3.setTrap.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — No description yet available.
 --- 
---- `spell`: tes3spell|string — No description yet available.
+--- `spell`: tes3spell|string|nil — Passing `nil` will untrap the object.
 --- @return boolean trapped No description yet available.
 function tes3.setTrap(params) end
 
 ---Table parameter definitions for `tes3.setTrap`.
 --- @class tes3.setTrap.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
---- @field spell tes3spell|string No description yet available.
+--- @field spell tes3spell|string|nil Passing `nil` will untrap the object.
 
 --- Toggles the camera into vanity mode. In vanity mode the camera is in third person and it is orbiting slowly around the player character. Returns true if changed to vanity mode.
 --- 
@@ -2687,11 +2694,11 @@ function tes3.tapKey(keyCode) end
 --- 
 --- `reference2`: tes3reference? — *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
 --- 
---- `position1`: tes3vector3|table|nil — *Optional*. Position of the starting point of the LoS check. Modified by height1.
+--- `position1`: tes3vector3|number[]|nil — *Optional*. Position of the starting point of the LoS check. Modified by height1.
 --- 
 --- `height1`: number? — *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 --- 
---- `position2`: tes3vector3|table|nil — *Optional*. Position of the ending point of the LoS check. Modified by height2.
+--- `position2`: tes3vector3|number[]|nil — *Optional*. Position of the ending point of the LoS check. Modified by height2.
 --- 
 --- `height2`: number? — *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 --- @return boolean hasLineOfSight No description yet available.
@@ -2701,16 +2708,16 @@ function tes3.testLineOfSight(params) end
 --- @class tes3.testLineOfSight.params
 --- @field reference1 tes3reference? *Optional*. Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
 --- @field reference2 tes3reference? *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
---- @field position1 tes3vector3|table|nil *Optional*. Position of the starting point of the LoS check. Modified by height1.
+--- @field position1 tes3vector3|number[]|nil *Optional*. Position of the starting point of the LoS check. Modified by height1.
 --- @field height1 number? *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
---- @field position2 tes3vector3|table|nil *Optional*. Position of the ending point of the LoS check. Modified by height2.
+--- @field position2 tes3vector3|number[]|nil *Optional*. Position of the ending point of the LoS check. Modified by height2.
 --- @field height2 number? *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 
 --- Forces a toggle of the player's POV the next simulation frame, and returns if the player was previously in 3rd person. Multiple calls in the same frame will not stack.
 --- @return boolean was3rdPerson No description yet available.
 function tes3.togglePOV() end
 
---- Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.
+--- Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred. If transfering more than one item, the items without itemData will be transferred first. Both the `from` and `to` references will be cloned if needed.
 --- @param params tes3.transferItem.params This table accepts the following values:
 --- 
 --- `from`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to take items from.
@@ -2719,7 +2726,7 @@ function tes3.togglePOV() end
 --- 
 --- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string — The item to transfer.
 --- 
---- `itemData`: tes3itemData? — *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item.
+--- `itemData`: tes3itemData? — *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item. If `itemData` argument is provided, only one item will be transferred.
 --- 
 --- `count`: number? — *Default*: `1`. The maximum number of items to transfer.
 --- 
@@ -2729,9 +2736,9 @@ function tes3.togglePOV() end
 --- 
 --- `reevaluateEquipment`: boolean? — *Default*: `true`. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.
 --- 
---- `equipProjectiles`: boolean? — *Default*: `true`. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
+--- `equipProjectiles`: boolean? — *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
 --- 
---- `updateGUI`: boolean? — *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
+--- `updateGUI`: boolean? — *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [tes3ui.forcePlayerInventoryUpdate](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) or [tes3.updateInventoryGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updateinventorygui) and [tes3.updateMagicGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) must manually be called after all inventory updates are finished.
 --- @return number transferredCount No description yet available.
 function tes3.transferItem(params) end
 
@@ -2740,13 +2747,13 @@ function tes3.transferItem(params) end
 --- @field from tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to take items from.
 --- @field to tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give items to.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to transfer.
---- @field itemData tes3itemData? *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item.
+--- @field itemData tes3itemData? *Optional*. The specific item data to transfer if, for example, you want to transfer a specific player item. If `itemData` argument is provided, only one item will be transferred.
 --- @field count number? *Default*: `1`. The maximum number of items to transfer.
 --- @field playSound boolean? *Default*: `true`. If false, the up/down sound for the item won't be played.
 --- @field limitCapacity boolean? *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers, and containers that are full.
 --- @field reevaluateEquipment boolean? *Default*: `true`. If true, and the item transferred is armor, clothing, or a weapon, the actors will reevaluate their equipment choices to see if the new item is worth equipping. This does not affect the player.
---- @field equipProjectiles boolean? *Default*: `true`. If true, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
---- @field updateGUI boolean? *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
+--- @field equipProjectiles boolean? *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
+--- @field updateGUI boolean? *Default*: `true`. If false, the function won't manually resync the player's GUI state. This can result in some optimizations, though [tes3ui.forcePlayerInventoryUpdate](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) or [tes3.updateInventoryGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updateinventorygui) and [tes3.updateMagicGUI](https://mwse.github.io/MWSE/apis/tes3/#tes3updatemagicgui) must manually be called after all inventory updates are finished.
 
 --- Emulates the player committing a crime. Returns `true` if the crime was witnessed by an actor.
 --- @param params tes3.triggerCrime.params This table accepts the following values:
@@ -2755,7 +2762,7 @@ function tes3.transferItem(params) end
 --- 
 --- `victim`: tes3mobileNPC|tes3mobilePlayer|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|tes3faction|nil — *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
 --- 
---- `value`: number? — *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
+--- `value`: number? — *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that.
 --- 
 --- `forceDetection`: boolean? — *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
 --- @return boolean result No description yet available.
@@ -2765,7 +2772,7 @@ function tes3.triggerCrime(params) end
 --- @class tes3.triggerCrime.params
 --- @field type number? *Default*: `tes3.crimeType.theft`. The type of crime to be committed. Maps to values in the [`tes3.crimeType`](https://mwse.github.io/MWSE/references/crime-types/) table.
 --- @field victim tes3mobileNPC|tes3mobilePlayer|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|tes3faction|nil *Default*: `tes3.mobilePlayer`. The victim of the crime. This can be an individual actor or a entire faction. Has no effect on crimes with a `type` of `tes3.crimeType.trespass` or `tes3.crimeType.werewolf`.
---- @field value number? *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects.
+--- @field value number? *Default*: `0`. Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that.
 --- @field forceDetection boolean? *Default*: `false`. If `true`, bypasses regular detection logic and forces all nearby actors to detect the crime.
 
 --- Changes a reference back from werewolf form to human. This function works only on a reference infected with Lycanthropy, be it the player or any other reference. Returns true if successful.
@@ -2811,7 +2818,7 @@ function tes3.updateInventoryGUI(params) end
 --- 
 --- `index`: integer — No description yet available.
 --- 
---- `speaker`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
+--- `speaker`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string|nil — *Default*: `tes3.mobilePlayer`. No description yet available.
 --- 
 --- `showMessage`: boolean? — *Default*: `true`. If set, a message may be shown to the player.
 --- @return boolean wasUpdated No description yet available.
@@ -2821,7 +2828,7 @@ function tes3.updateJournal(params) end
 --- @class tes3.updateJournal.params
 --- @field id tes3dialogue|string No description yet available.
 --- @field index integer No description yet available.
---- @field speaker tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
+--- @field speaker tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string|nil *Default*: `tes3.mobilePlayer`. No description yet available.
 --- @field showMessage boolean? *Default*: `true`. If set, a message may be shown to the player.
 
 --- Forces the GUI to update magic-relevant elements for a given reference. This can be used after many calls to magic- or magic item-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.

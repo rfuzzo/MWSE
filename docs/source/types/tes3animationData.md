@@ -19,7 +19,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -171,7 +171,7 @@ The time in seconds since the last update.
 ### `hasOverrideAnimations`
 <div class="search_terms" style="display: none">hasoverrideanimations, overrideanimations</div>
 
-*Read-only*. 
+*Read-only*. True if the actor has some custom animations in the override layer. For example, drumming or sitting. These are assigned in the Construction Set or using [tes3.loadAnimation](https://mwse.github.io/MWSE/apis/tes3/#tes3loadanimation).
 
 **Returns**:
 
@@ -186,7 +186,7 @@ The time in seconds since the last update.
 
 **Returns**:
 
-* `result` ([niGeometry](../../types/niGeometry))
+* `result` ([niGeometry](../types/niGeometry.md))
 
 ***
 
@@ -208,7 +208,7 @@ The timing offset of the head morph controller. Used to select either blinking o
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -219,7 +219,7 @@ The timing offset of the head morph controller. Used to select either blinking o
 
 **Returns**:
 
-* `result` ([tes3animationDataSequenceGroup](../../types/tes3animationDataSequenceGroup)[])
+* `result` ([tes3animationDataSequenceGroup](../types/tes3animationDataSequenceGroup.md)[])
 
 ***
 
@@ -230,8 +230,8 @@ This value indicates whether the NPC is speaking or not. The table below describ
 
 Value      | Behavior
 ---------- | ---------
-      -1   | The NPC isn't speaking.
- 0.0 - 1.0 | The NPC is speaking. The `lipsyncLevel` can be `0.0` when there is a silent part in the sound file the NPC is currently speaking.
+      -1.0 | The NPC isn't speaking.
+ 0.0 - 1.0 | The NPC is speaking. The value roughly corresponds to the current loudness of the voiceover line. The `lipsyncLevel` is `0.0` when there is a silent part in the sound file the NPC is currently speaking. Also, the speaking actor's mouth is opened more when the value is higher.
 
 
 **Returns**:
@@ -284,7 +284,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -317,7 +317,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -328,7 +328,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -339,7 +339,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -422,7 +422,7 @@ local result = myObject:getReference()
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -472,7 +472,7 @@ myObject:setHeadNode(head)
 
 **Parameters**:
 
-* `head` ([niNode](../../types/niNode)): 
+* `head` ([niNode](../types/niNode.md)): 
 
 ***
 

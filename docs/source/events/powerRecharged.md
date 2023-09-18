@@ -23,7 +23,7 @@ event.register(tes3.event.powerRecharged, powerRechargedCallback)
 
 ## Event Data
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The actor whose power recharged.
-* `power` ([tes3spell](../../types/tes3spell)): *Read-only*. A power which recharged.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. Mobile’s associated reference.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The actor whose power recharged.
+* `power` ([tes3spell](../types/tes3spell.md)): *Read-only*. A power which recharged.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. Mobile’s associated reference.
 

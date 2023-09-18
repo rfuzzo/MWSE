@@ -44,7 +44,7 @@ local results = myObject:getVariableData()
 
 **Returns**:
 
-* `results` (table&lt;string, [tes3scriptVariableData](../../types/tes3scriptVariableData)&gt;): A table with all of the script's variable names as keys.
+* `results` (table&lt;string, [tes3scriptVariableData](../types/tes3scriptVariableData.md)&gt;): A table with all of the script's variable names as keys.
 
 ***
 

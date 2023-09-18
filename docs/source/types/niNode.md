@@ -8,7 +8,201 @@
 
 Base class that represents the nodes of a scene graph. A node can have any number of child nodes.
 
-This type inherits the following: [niAVObject](../../types/niAVObject), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niAVObject](../types/niAVObject.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
+??? example "Example: Attaching a mesh directly to the actor's scene graph"
+
+	```lua
+	
+	--- This function will attach an equipment mesh directly to the
+	--- reference's scene graph. The skeleton (bone names) in the
+	--- equipment mesh should match the destination skeleton.
+	---@param mesh niNode
+	---@param reference tes3reference
+	local function attachMesh(mesh, reference)
+		for shape in table.traverse(mesh.children) do
+			if shape:isInstanceOfType(ni.type.NiTriShape) then
+				---@cast shape niTriShape
+				local skin = shape.skinInstance
+				local referenceRoot = reference.sceneNode
+				---@cast referenceRoot niNode
+	
+				if skin then
+					skin.root = referenceRoot:getObjectByName(skin.root.name) --[[@as niNode]]
+					for i, bone in ipairs(skin.bones) do
+						skin.bones[i] = referenceRoot:getObjectByName(bone.name)
+					end
+				end
+				---@diagnostic disable-next-line
+				referenceRoot:getObjectByName("Bip01"):attachChild(shape)
+			end
+		end
+	end
+	
+	local function onLoaded()
+		local mesh = tes3.loadMesh("c\\c_m_helseth_robe.nif"):clone() --[[@as niNode]]
+		attachMesh(mesh, tes3.player)
+	end
+	event.register(tes3.event.loaded, onLoaded)
+
+	```
+
+??? example "Example: Adding new shapes to the scene graph"
+
+	The most basic of the scene graph operations is attaching. Attaching a node to the elements of the scene graph will make it visible.
+
+	```lua
+	
+	---@type niTriShape
+	local arrows
+	
+	local function onLoaded()
+		-- MWSE ships with a mesh which contains a few useful widgets.
+		-- These can be used during debugging.
+		local mesh = tes3.loadMesh("mwse\\widgets.nif") --[[@as niNode]]
+		local widgets = {
+			-- 3D coordinate axes
+			arrows = mesh:getObjectByName("unitArrows") --[[@as niTriShape]],
+			-- A common switch node that has three almost infinite lines
+			-- along each coordinate exis
+			axes = mesh:getObjectByName("axisLines") --[[@as niSwitchNode]],
+			plane = mesh:getObjectByName("unitPlane") --[[@as niTriShape]],
+			sphere = mesh:getObjectByName("unitSphere") --[[@as niTriShape]]
+		}
+	
+		local root = tes3.worldController.vfxManager.worldVFXRoot
+		---@cast root niNode
+	
+		-- Objects in the scene graph share as much same properties as possible, which
+		-- allows for some optimizations. Because of that, we need to clone our object
+		-- before attaching it to the scene graph.
+		arrows = widgets.arrows:clone() --[[@as niTriShape]]
+	
+		-- The base size of the arrows is 1 unit. Let's make them a bit bigger.
+		arrows.scale = 30
+	
+		-- Attaching our arrows shape to a node in the scene graph will
+		-- make it actually visible in-game.
+		root:attachChild(arrows)
+	
+		-- No changes are applied until the update() method was called on the parent node.
+		root:update()
+	end
+	event.register(tes3.event.loaded, onLoaded)
+	
+	local function simulateCallback()
+		-- Let's set the base position of the arrows in the in-game world to the player's
+		-- eye position. Then we offset it in the direction of eye vector by 200 units.
+		-- We get the arrows following the player's cursor at 200 units distance.
+		arrows.translation = tes3.getPlayerEyePosition() + tes3.getPlayerEyeVector() * 200
+		arrows:update()
+	end
+	event.register(tes3.event.simulate, simulateCallback)
+
+	```
+
+??? example "Example: Orienting an object so that it's perpendicular to the surface."
+
+	In this example the unit arrows are placed perpendicular to the surface in the direction the player is looking at.
+
+	```lua
+	
+	---@type niTriShape
+	local arrows
+	
+	local function onLoaded()
+		-- MWSE ships with a mesh which contains a few useful widgets.
+		-- These can be used during debugging.
+		local mesh = tes3.loadMesh("mwse\\widgets.nif") --[[@as niNode]]
+		local widgets = {
+			-- 3D coordinate axes
+			arrows = mesh:getObjectByName("unitArrows") --[[@as niTriShape]],
+			-- A common switch node that has three almost infinite lines
+			-- along each coordinate exis
+			axes = mesh:getObjectByName("axisLines") --[[@as niSwitchNode]],
+			plane = mesh:getObjectByName("unitPlane") --[[@as niTriShape]],
+			sphere = mesh:getObjectByName("unitSphere") --[[@as niTriShape]]
+		}
+	
+		local root = tes3.worldController.vfxManager.worldVFXRoot
+		---@cast root niNode
+	
+		-- Objects in the scene graph share as much same properties as possible, which
+		-- allows for some optimizations. Because of that, we need to clone our object
+		-- before attaching it to the scene graph.
+		arrows = widgets.arrows:clone() --[[@as niTriShape]]
+	
+		-- The base size of the arrows is 1 unit. Let's make them a bit bigger.
+		arrows.scale = 100
+	
+		-- Attaching our arrows shape to a node in the scene graph will
+		-- make it actually visible in-game.
+		root:attachChild(arrows)
+	
+		-- No changes are applied until the update() method was called on the parent node.
+		root:update()
+	end
+	event.register(tes3.event.loaded, onLoaded)
+	
+	
+	-- This is the up axis unit vector.
+	local UP = tes3vector3.new(0, 0, 1)
+	
+	--- This function returns the difference in direction
+	--- of two vectors in Euler angles in radians.
+	---@param vec1 tes3vector3
+	---@param vec2 tes3vector3
+	---@return tes3vector3, boolean?
+	local function rotationDifference(vec1, vec2)
+		vec1 = vec1:normalized()
+		vec2 = vec2:normalized()
+	
+		local axis = vec1:cross(vec2)
+		local norm = axis:length()
+		if norm < 1e-5 then
+			return tes3vector3.new(0, 0, 0)
+		end
+	
+		local angle = math.asin(norm)
+		if vec1:dot(vec2) < 0 then
+			angle = math.pi - angle
+		end
+	
+		axis:normalize()
+		local m = tes3matrix33.new()
+		m:toRotation(-angle, axis.x, axis.y, axis.z)
+		return m:toEulerXYZ()
+	end
+	
+	
+	local function simulateCallback()
+		local hit = tes3.rayTest({
+			position = tes3.getPlayerEyePosition(),
+			direction = tes3.getPlayerEyeVector(),
+			returnNormal = true,
+			returnSmoothNormal = true,
+			ignore = { tes3.player }
+		})
+		if not hit then return end
+	
+		-- First, set the the arrows position
+		arrows.translation = hit.intersection
+	
+		-- Now, let's get the rotation
+		local rotation = rotationDifference(UP, hit.normal)
+		local m = tes3matrix33.new()
+	
+		-- We need to convert our rotation to a rotation matrix
+		-- since nodes of scene graph store their rotations in
+		-- that form.
+		m:fromEulerXYZ(rotation.x, rotation.y, rotation.z)
+		arrows.rotation = m
+	
+		arrows:update()
+	end
+	event.register(tes3.event.simulate, simulateCallback)
+
+	```
+
 ## Properties
 
 ### `alphaProperty`
@@ -18,7 +212,7 @@ Convenient access to this object's alpha property. Setting this value to be nil 
 
 **Returns**:
 
-* `result` ([niAlphaProperty](../../types/niAlphaProperty), nil)
+* `result` ([niAlphaProperty](../types/niAlphaProperty.md), nil)
 
 ***
 
@@ -40,7 +234,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject)[])
+* `result` ([niAVObject](../types/niAVObject.md)[])
 
 ***
 
@@ -51,7 +245,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -62,7 +256,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 
 **Returns**:
 
-* `result` ([niDynamicEffectLinkedList](../../types/niDynamicEffectLinkedList))
+* `result` ([niDynamicEffectLinkedList](../types/niDynamicEffectLinkedList.md))
 
 ***
 
@@ -73,7 +267,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -95,7 +289,7 @@ Convenient access to this object's fog property. Setting this value to be nil wi
 
 **Returns**:
 
-* `result` ([niFogProperty](../../types/niFogProperty), nil)
+* `result` ([niFogProperty](../types/niFogProperty.md), nil)
 
 ***
 
@@ -106,7 +300,7 @@ Convenient access to this object's material property. Setting this value to be n
 
 **Returns**:
 
-* `result` ([niMaterialProperty](../../types/niMaterialProperty), nil)
+* `result` ([niMaterialProperty](../types/niMaterialProperty.md), nil)
 
 ***
 
@@ -128,7 +322,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -139,7 +333,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niPropertyLinkedList](../../types/niPropertyLinkedList))
+* `result` ([niPropertyLinkedList](../types/niPropertyLinkedList.md))
 
 ***
 
@@ -161,7 +355,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -172,7 +366,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -183,7 +377,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -205,7 +399,7 @@ Convenient access to this object's stencil property. Setting this value to be ni
 
 **Returns**:
 
-* `result` ([niStencilProperty](../../types/niStencilProperty), nil)
+* `result` ([niStencilProperty](../types/niStencilProperty.md), nil)
 
 ***
 
@@ -216,7 +410,7 @@ Convenient access to this object's texturing property. Setting this value to be 
 
 **Returns**:
 
-* `result` ([niTexturingProperty](../../types/niTexturingProperty), nil)
+* `result` ([niTexturingProperty](../types/niTexturingProperty.md), nil)
 
 ***
 
@@ -227,7 +421,7 @@ The object's local translation vector.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -238,7 +432,7 @@ The object's local velocity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -249,7 +443,7 @@ Convenient access to this object's vertex coloring property. Setting this value 
 
 **Returns**:
 
-* `result` ([niVertexColorProperty](../../types/niVertexColorProperty), nil)
+* `result` ([niVertexColorProperty](../types/niVertexColorProperty.md), nil)
 
 ***
 
@@ -260,7 +454,7 @@ The world coordinates of the object's bounds origin.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -282,7 +476,7 @@ The object's transformations in the world space.
 
 **Returns**:
 
-* `result` ([tes3transform](../../types/tes3transform))
+* `result` ([tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -293,7 +487,7 @@ Convenient access to this object's z-buffer property. Setting this value to be n
 
 **Returns**:
 
-* `result` ([niZBufferProperty](../../types/niZBufferProperty), nil)
+* `result` ([niZBufferProperty](../types/niZBufferProperty.md), nil)
 
 ***
 
@@ -310,7 +504,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -325,7 +519,7 @@ myObject:attachChild(child, useFirstAvailable)
 
 **Parameters**:
 
-* `child` ([niAVObject](../../types/niAVObject))
+* `child` ([niAVObject](../types/niAVObject.md))
 * `useFirstAvailable` (boolean): *Default*: `false`. Use the first available space in the list. If `false` appends the child at the end of the list.
 
 ***
@@ -341,7 +535,7 @@ myObject:attachEffect(effect)
 
 **Parameters**:
 
-* `effect` ([niDynamicEffect](../../types/niDynamicEffect))
+* `effect` ([niDynamicEffect](../types/niDynamicEffect.md))
 
 ***
 
@@ -356,7 +550,7 @@ myObject:attachProperty(property)
 
 **Parameters**:
 
-* `property` ([niProperty](../../types/niProperty))
+* `property` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -382,7 +576,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -397,7 +591,7 @@ myObject:copyTransforms(source)
 
 **Parameters**:
 
-* `source` ([niAVObject](../../types/niAVObject), [tes3transform](../../types/tes3transform))
+* `source` ([niAVObject](../types/niAVObject.md), [tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -412,7 +606,7 @@ local boundingBox = myObject:createBoundingBox()
 
 **Returns**:
 
-* `boundingBox` ([tes3boundingBox](../../types/tes3boundingBox)): The newly created bounding box.
+* `boundingBox` ([tes3boundingBox](../types/tes3boundingBox.md)): The newly created bounding box.
 
 ***
 
@@ -449,7 +643,7 @@ local result = myObject:detachAllProperties()
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty)[])
+* `result` ([niProperty](../types/niProperty.md)[])
 
 ***
 
@@ -464,11 +658,11 @@ local detachedChild = myObject:detachChild(child)
 
 **Parameters**:
 
-* `child` ([niAVObject](../../types/niAVObject))
+* `child` ([niAVObject](../types/niAVObject.md))
 
 **Returns**:
 
-* `detachedChild` ([niAVObject](../../types/niAVObject))
+* `detachedChild` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -487,7 +681,7 @@ local detachedChild = myObject:detachChildAt(index)
 
 **Returns**:
 
-* `detachedChild` ([niAVObject](../../types/niAVObject))
+* `detachedChild` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -502,7 +696,7 @@ myObject:detachEffect(effect)
 
 **Parameters**:
 
-* `effect` ([niDynamicEffect](../../types/niDynamicEffect))
+* `effect` ([niDynamicEffect](../types/niDynamicEffect.md))
 
 ***
 
@@ -521,7 +715,7 @@ local result = myObject:detachProperty(type)
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -540,7 +734,7 @@ local effect = myObject:getEffect(type)
 
 **Returns**:
 
-* `effect` ([niDynamicEffect](../../types/niDynamicEffect), nil)
+* `effect` ([niDynamicEffect](../types/niDynamicEffect.md), nil)
 
 ***
 
@@ -559,7 +753,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -578,7 +772,7 @@ local result = myObject:getObjectByName(name)
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -597,7 +791,7 @@ local result = myObject:getProperty(type)
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -616,7 +810,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -635,7 +829,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -703,7 +897,7 @@ local result = myObject:isFrustumCulled(camera)
 
 **Parameters**:
 
-* `camera` ([niCamera](../../types/niCamera))
+* `camera` ([niCamera](../types/niCamera.md))
 
 **Returns**:
 
@@ -760,7 +954,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -819,7 +1013,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -834,7 +1028,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -930,5 +1124,5 @@ local node = niNode.new()
 
 **Returns**:
 
-* `node` ([niNode](../../types/niNode))
+* `node` ([niNode](../types/niNode.md))
 

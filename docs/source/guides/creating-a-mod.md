@@ -8,13 +8,13 @@ To facilitate this, this guide will explain how to create a mod that displays a 
 ## Development Workflow
 A Development Workflow is the environment and processes used to facilitate software development. This guide assumes that you have setup a development environment.
 
-If you have not set up a development environment, or do not know how to, please refer to the [Development Workflow](../development-workflows) guide to set one up.
+If you have not set up a development environment, or do not know how to, please refer to the [Development Workflow](./development-workflows.md) guide to set one up.
 
 ## Introduction to the Lua Scripting Language
-If you have basic knowledge of the Lua scripting language, you may skip this section. If you are not familiar with the Lua scripting language, please take a moment to read the [Introduction to Lua](../introduction-to-lua) guide.
+If you have basic knowledge of the Lua scripting language, you may skip this section. If you are not familiar with the Lua scripting language, please take a moment to read the [Introduction to Lua](./introduction-to-lua.md) guide.
 
 ## Introduction to Event Based Programming
-If you have basic knowledge of event based programming, you may skip this section. If you are not familiar with event based programming, please take a moment to read the [Introduction to Event Based Programming](../introduction-to-event-based-programming) guide.
+If you have basic knowledge of event based programming, you may skip this section. If you are not familiar with event based programming, please take a moment to read the [Introduction to Event Based Programming](./introduction-to-event-based-programming.md) guide.
 
 ## Creating the Mod File Structure
 Now that you have setup a development workflow, you are ready to create a mod.
@@ -88,7 +88,7 @@ event.register(tes3.event.initialized, initialized)
 
 At this point, the mod can be tested to confirm the events are set up correctly. To do this, follow the workflow described at the beginning of this guide. When you draw your weapon in-game, you should see a messagebox popup!
 
-The details of which events are available and what event data is exposed to them can be found on the [events](../events) page.
+The details of which events are available and what event data is exposed to them can be found on the [events](../events/initialized.md) page.
 
 ## Validating the Event & Showing a Messagebox
 Now that the required events have been set up, the `showMessageboxOnWeaponReadied` function should be updated to restrict the types of actions that our code applies to. For the purposes of this guide, the function will only apply to two-handed weapons, and only to the player. The updated function is as follows:

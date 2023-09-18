@@ -8,7 +8,7 @@
 
 A game structure that keeps track of a magic source and all the actors it affects. Each spell cast, alchemy or enchanted item use is a magic source. Area effect magic can hit multiple actors and have up to 8 effects. Individual magic effects are `tes3magicEffectInstance`s.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -40,7 +40,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -95,7 +95,7 @@ The number of hours passed since the player's corprus state last worsened.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 
 ***
 
@@ -106,7 +106,7 @@ The number of hours passed since the player's corprus state last worsened.
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData))
+* `result` ([tes3itemData](../types/tes3itemData.md))
 
 ***
 
@@ -183,7 +183,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3mobileProjectile](../../types/tes3mobileProjectile))
+* `result` ([tes3mobileProjectile](../types/tes3mobileProjectile.md))
 
 ***
 
@@ -205,7 +205,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell))
+* `result` ([tes3alchemy](../types/tes3alchemy.md), [tes3enchantment](../types/tes3enchantment.md), [tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -216,7 +216,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3effect](../../types/tes3effect)[])
+* `result` ([tes3effect](../types/tes3effect.md)[])
 
 ***
 
@@ -282,7 +282,7 @@ If true, references of this object can store temporary or persistent lua data.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -326,11 +326,11 @@ local result = myObject:getEffectInstance(index, target)
 **Parameters**:
 
 * `index` (number): The index in the effect list to fetch, between `0` and `7`.
-* `target` ([tes3reference](../../types/tes3reference)): The target actor for the effect.
+* `target` ([tes3reference](../types/tes3reference.md)): The target actor for the effect.
 
 **Returns**:
 
-* `result` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance))
+* `result` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md))
 
 ***
 
@@ -366,10 +366,10 @@ myObject:playVisualEffect({ effectIndex = ..., position = ..., visual = ..., sca
 
 * `params` (table)
 	* `effectIndex` (number): The index in the effect whose visual will be played, a number in range [0, 7].
-	* `position` ([tes3vector3](../../types/tes3vector3), table): A table or a `tes3vector3` holding `x`, `y` and `z` coordinates at which the visual effect will be played.
-	* `visual` ([tes3physicalObject](../../types/tes3physicalObject), string): The visual effect to be played.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): A table or a `tes3vector3` holding `x`, `y` and `z` coordinates at which the visual effect will be played.
+	* `visual` ([tes3physicalObject](../types/tes3physicalObject.md), string): The visual effect to be played.
 	* `scale` (number): *Default*: `1`. The scale of the effect. Only applies to effects that are designed to be scaled.
-	* `reference` ([tes3reference](../../types/tes3reference), string): A reference on which the visual effect will be played.
+	* `reference` ([tes3reference](../types/tes3reference.md), string): A reference on which the visual effect will be played.
 
 ??? example "Example: Plays the soul trap effect if the player kills a target that is affected by vampirism."
 

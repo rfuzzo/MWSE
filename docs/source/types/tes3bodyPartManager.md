@@ -17,7 +17,7 @@ A game object which holds information about body parts.
 
 **Returns**:
 
-* `result` (table&lt;integer, table&lt;integer, [tes3bodyPartManagerActiveBodyPart](../../types/tes3bodyPartManagerActiveBodyPart)&gt;&gt;)
+* `result` (table&lt;integer, table&lt;integer, [tes3bodyPartManagerActiveBodyPart](../types/tes3bodyPartManagerActiveBodyPart.md)&gt;&gt;)
 
 ***
 
@@ -39,7 +39,7 @@ A game object which holds information about body parts.
 
 **Returns**:
 
-* `result` ([tes3bodyPartManagerAttachNode](../../types/tes3bodyPartManagerAttachNode)[])
+* `result` ([tes3bodyPartManagerAttachNode](../types/tes3bodyPartManagerAttachNode.md)[])
 
 ***
 
@@ -50,7 +50,7 @@ A game object which holds information about body parts.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -72,7 +72,7 @@ local result = myObject:getActiveBodyPart(layer, index)
 
 **Returns**:
 
-* `result` ([tes3bodyPartManagerActiveBodyPart](../../types/tes3bodyPartManagerActiveBodyPart))
+* `result` ([tes3bodyPartManagerActiveBodyPart](../types/tes3bodyPartManagerActiveBodyPart.md))
 
 ***
 
@@ -87,11 +87,11 @@ local result = myObject:getActiveBodyPartForItem(item)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item)): The item to fetch the active body part for.
+* `item` ([tes3item](../types/tes3item.md)): The item to fetch the active body part for.
 
 **Returns**:
 
-* `result` ([tes3bodyPartManagerActiveBodyPart](../../types/tes3bodyPartManagerActiveBodyPart))
+* `result` ([tes3bodyPartManagerActiveBodyPart](../types/tes3bodyPartManagerActiveBodyPart.md))
 
 ***
 
@@ -135,7 +135,7 @@ myObject:setBodyPartByIdForObject(item, index, bodyPartId, isFirstPerson)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item)): The item that the body part is from.
+* `item` ([tes3item](../types/tes3item.md)): The item that the body part is from.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 * `bodyPartId` (string): The unique ID of the `tes3bodyPart` object to set as a new body part for given object.
 * `isFirstPerson` (boolean): *Default*: `false`. A flag which must be set if the target reference is the first person player.
@@ -153,9 +153,9 @@ myObject:setBodyPartForObject(item, index, bodyPart, isFirstPerson)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item)): The item that the body part is from.
+* `item` ([tes3item](../types/tes3item.md)): The item that the body part is from.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
-* `bodyPart` ([tes3bodyPart](../../types/tes3bodyPart)): The `tes3bodyPart` object to set as a new body part for given object.
+* `bodyPart` ([tes3bodyPart](../types/tes3bodyPart.md)): The `tes3bodyPart` object to set as a new body part for given object.
 * `isFirstPerson` (boolean): *Default*: `false`. A flag which must be set if the target reference is the first person player.
 
 ***
@@ -171,5 +171,5 @@ myObject:updateForReference(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference)): The reference whose body parts will be updated.
+* `reference` ([tes3reference](../types/tes3reference.md)): The reference whose body parts will be updated.
 

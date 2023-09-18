@@ -8,7 +8,7 @@
 
 An animation key that holds a rotation value.
 
-This type inherits the following: [niAnimationKey](../../types/niAnimationKey)
+This type inherits the following: [niAnimationKey](../types/niAnimationKey.md)
 ## Properties
 
 ### `timing`
@@ -29,5 +29,5 @@ The rotation value of the animation key.
 
 **Returns**:
 
-* `result` ([niQuaternion](../../types/niQuaternion))
+* `result` ([niQuaternion](../types/niQuaternion.md))
 

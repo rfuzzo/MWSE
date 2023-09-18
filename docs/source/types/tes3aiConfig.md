@@ -270,5 +270,5 @@ A table access to all [`tes3travelDestinationNode`](https://mwse.github.io/MWSE/
 
 **Returns**:
 
-* `result` ([tes3travelDestinationNode](../../types/tes3travelDestinationNode)[])
+* `result` ([tes3travelDestinationNode](../types/tes3travelDestinationNode.md)[])
 

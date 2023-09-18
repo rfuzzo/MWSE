@@ -39,8 +39,8 @@ common.compilePath(lfs.join(common.pathDefinitions, "events", "standard"), event
 -- Building
 --
 
----@param packages package[]
----@return package[] packages The provided packages without the deprecated fields.
+--- @param packages package[]
+--- @return package[] packages The provided packages without the deprecated fields.
 local function removeDeprecated(packages)
 	for i, package in ipairs(packages) do
 		if package.deprecated then
@@ -55,7 +55,7 @@ local function buildParentChain(className)
 	local package = assert(classes[className])
 	local ret = ""
 	if (classes[className]) then
-		ret = string.format("[%s](../../types/%s)", className, className)
+		ret = string.format("[%s](../types/%s.md)", className, className)
 	else
 		ret = className
 	end
@@ -65,7 +65,7 @@ local function buildParentChain(className)
 	return ret
 end
 
----@param type string Supports array annotation. For example: "tes3weather[]".
+--- @param type string Supports array annotation. For example: "tes3weather[]".
 local function getTypeLink(type)
 	if typeLinks[type] then
 		return typeLinks[type]
@@ -75,7 +75,7 @@ local function getTypeLink(type)
 	local valueType = type:match("[%w%.]+")
 
 	if classes[valueType] then
-		typeLinks[type] = string.format("[%s](../../types/%s)%s", valueType, valueType, isArray and "[]" or "")
+		typeLinks[type] = string.format("[%s](../types/%s.md)%s", valueType, valueType, isArray and "[]" or "")
 	else
 		typeLinks[type] = type
 	end
@@ -90,8 +90,8 @@ end
 ---    "fun(self: infoGetTextEventData|string): boolean, string",<br>
 ---    "integer",<br>
 --- }<br>
----@param union string
----@return string[]
+--- @param union string
+--- @return string[]
 local function breakoutUnion(union)
 	local types = {}
 
@@ -123,9 +123,9 @@ local function breakoutUnion(union)
 	return types
 end
 
----@param type string
----@param nested boolean?
----@return string
+--- @param type string
+--- @param nested boolean?
+--- @return string
 local function breakoutTypeLinks(type, nested)
 	local types = breakoutUnion(type)
 
@@ -184,12 +184,12 @@ end
 
 --- Converts the `related` table in event definitions to a set of markdown buttons:
 --- https://squidfunk.github.io/mkdocs-material/reference/buttons/#adding-buttons
----@param related string[]
----@return string
+--- @param related string[]
+--- @return string
 local function relatedButtons(related)
 	local ret = { "\n## Related events\n\n" }
 	for _, eventName in ipairs(related) do
-		ret[#ret + 1] = string.format("[%s](../%s/){ .md-button }", eventName, eventName)
+		ret[#ret + 1] = string.format("[%s](./%s.md){ .md-button }", eventName, eventName)
 	end
 	return table.concat(ret)
 end
@@ -294,8 +294,8 @@ local function writeOperatorPackage(file, operator, package)
 end
 
 --- This function is used to write out examples of a package.
----@param file file* The file to write to.
----@param package package The package whose examples will be written out.
+--- @param file file* The file to write to.
+--- @param package package The package whose examples will be written out.
 local function writeExamples(file, package)
 	local exampleType = "???"
 	if (package.type == "event") then
@@ -326,13 +326,13 @@ local function writeExamples(file, package)
 end
 
 --- This function is used to write out properties, methods, functions, and operators of a package.
----@param file file* The file to write to.
----@param package package The package whose fields that will be written out.
----@param field string The name of the fields to write. Can be "values", "methods", "functions", and "operators"
----@param fieldName string The name of the section for the fields.
----@param writeFunction fun(file: file*, package: package, from: package) The function that write a single package definition.
----@param writeRule boolean If true a horizontal rule will be written before the section.
----@return boolean written True if at least one field was written to file.
+--- @param file file* The file to write to.
+--- @param package package The package whose fields that will be written out.
+--- @param field string The name of the fields to write. Can be "values", "methods", "functions", and "operators"
+--- @param fieldName string The name of the section for the fields.
+--- @param writeFunction fun(file: file*, package: package, from: package) The function that write a single package definition.
+--- @param writeRule boolean If true a horizontal rule will be written before the section.
+--- @return boolean written True if at least one field was written to file.
 local function writeFields(file, package, field, fieldName, writeFunction, writeRule)
 	local fields = table.values(getPackageComponentsArray(package, field), sortPackagesByKey)
 	fields = removeDeprecated(fields)
@@ -356,8 +356,8 @@ local function writeFields(file, package, field, fieldName, writeFunction, write
 	return false
 end
 
----@param file file*
----@param package any
+--- @param file file*
+--- @param package any
 local function writePackageDetails(file, package)
 	-- Write description.
 	file:write(string.format("%s\n\n", common.getDescriptionString(package)))
@@ -467,7 +467,7 @@ local function writePackageDetails(file, package)
 		end
 	end
 
-	-- Class examples were writte before
+	-- Class examples were written before
 	if (package.examples and not (package.type == "class")) then
 		writeExamples(file, package)
 	end

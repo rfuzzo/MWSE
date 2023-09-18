@@ -20,7 +20,7 @@ event.register(tes3.event.calcSpellmakingSpellPointCost, calcSpellmakingSpellPoi
 
 ## Event Data
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the spellmaking service npc the player is interacting with.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. Mobile's related reference.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor of the spellmaking service npc the player is interacting with.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. Mobile's related reference.
 * `spellPointCost` (number): The spell point cost of the spell.
 

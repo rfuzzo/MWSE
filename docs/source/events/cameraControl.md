@@ -20,9 +20,9 @@ event.register(tes3.event.cameraControl, cameraControlCallback)
 
 ## Event Data
 
-* `animationController` ([tes3playerAnimationController](../../types/tes3playerAnimationController)): *Read-only*. Provides access to the player's animation controller.
-* `armCameraTransform` ([tes3transform](../../types/tes3transform)): The new arm camera transformation.
-* `cameraTransform` ([tes3transform](../../types/tes3transform)): The new camera transformation.
-* `previousArmCameraTransform` ([tes3transform](../../types/tes3transform)): *Read-only*. The arm camera transformation before any changes. Identical to `armCameraTransform` if the player teleported a significant distance.
-* `previousCameraTransform` ([tes3transform](../../types/tes3transform)): *Read-only*. The camera transformation before any changes. Identical to `cameraTransform` if the player teleported a significant distance.
+* `animationController` ([tes3playerAnimationController](../types/tes3playerAnimationController.md)): *Read-only*. Provides access to the player's animation controller.
+* `armCameraTransform` ([tes3transform](../types/tes3transform.md)): The new arm camera transformation.
+* `cameraTransform` ([tes3transform](../types/tes3transform.md)): The new camera transformation.
+* `previousArmCameraTransform` ([tes3transform](../types/tes3transform.md)): *Read-only*. The arm camera transformation before any changes. Identical to `armCameraTransform` if the player teleported a significant distance.
+* `previousCameraTransform` ([tes3transform](../types/tes3transform.md)): *Read-only*. The camera transformation before any changes. Identical to `cameraTransform` if the player teleported a significant distance.
 

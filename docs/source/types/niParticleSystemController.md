@@ -10,7 +10,7 @@ The niParticleSystemController animates an niParticles-based object. The control
 
 A particle spawn can be set to occur when the particle undergoes a specific condition, such as colliding with an object or dying. When such an event happens, naw particles are generated at the position of the old particle with the same attributes as the original particle. This behaviour will continue until the number of spawn generations equals the number of generations allowed. The number of new particles, precentage of particles that undergo spawning, speed and directional chaos values can be specified.
 
-This type inherits the following: [niTimeController](../../types/niTimeController), [niObject](../../types/niObject)
+This type inherits the following: [niTimeController](../types/niTimeController.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `active`
@@ -134,7 +134,7 @@ The object that emits the particles. The emitter volume is transformed into the 
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -167,7 +167,7 @@ Modifiers that will influence the particle system by modifying the emmiting obje
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject)[])
+* `result` ([niObject](../types/niObject.md)[])
 
 ***
 
@@ -222,7 +222,7 @@ The initial color given to the newly created particles.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor))
+* `result` ([niPackedColor](../types/niPackedColor.md))
 
 ***
 
@@ -233,7 +233,7 @@ The initial color given to the newly created particles.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -321,7 +321,7 @@ The next animation controller in the list of controllers containing the calling 
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -332,7 +332,7 @@ Collider modifiers that will influence the individual particles.
 
 **Returns**:
 
-* `result` ([niParticleCollider](../../types/niParticleCollider)[])
+* `result` ([niParticleCollider](../types/niParticleCollider.md)[])
 
 ***
 
@@ -354,7 +354,7 @@ Modifiers that will influence the individual particles.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier)[])
+* `result` ([niParticleModifier](../types/niParticleModifier.md)[])
 
 ***
 
@@ -420,7 +420,7 @@ Controls whether the system will be reset when the niParticleSystemController lo
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -431,7 +431,7 @@ Controls whether the system will be reset when the niParticleSystemController lo
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -563,7 +563,7 @@ This flag controls whether or not the controller uses precomputed static boundin
 
 **Returns**:
 
-* `result` ([niObjectNET](../../types/niObjectNET))
+* `result` ([niObjectNET](../types/niObjectNET.md))
 
 ***
 
@@ -591,7 +591,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -663,7 +663,7 @@ myObject:setTarget(target)
 
 **Parameters**:
 
-* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+* `target` ([niObjectNET](../types/niObjectNET.md)): The new target to assign.
 
 ***
 

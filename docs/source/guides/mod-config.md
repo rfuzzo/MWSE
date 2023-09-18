@@ -1,10 +1,10 @@
 
 # Mod Configuration Menu
 
-Mods can create new GUIs. One GUI that that MWSE ships with is the Mod Configuration Menu. By registering into this system, mods can create settings pages for their mods in a place where users can easily find and manipulate them.
+Mods can create new GUIs. One GUI that MWSE ships with is the Mod Configuration Menu. By registering into this system, mods can create settings pages for their mods in a place where users can easily find and manipulate them.
 
 !!! note
-    The complete MCM API documentation doesn't exist yet. You can browse its predecessor [EasyMCM's documentation](https://easymcm.readthedocs.io/en/latest/).
+	The MCM API is an integration of the EasyMCM project. Users don't need to have EasyMCM installed to use the MWSE's MCM API. You can browse its predecessor [EasyMCM's documentation here](https://easymcm.readthedocs.io/en/latest/).
 
 ## Simplest Example
 
@@ -18,26 +18,26 @@ local config = mwse.loadConfig(configPath, {
 	enabled = true
 })
 
--- When the mod config menu is ready to start accepting registrations, 
+-- When the mod config menu is ready to start accepting registrations,
 -- register this mod.
 local function registerModConfig()
-    -- Create the top level component Template
-    -- The name will be displayed in the mod list on the lefthand pane
-    local template = mwse.mcm.createTemplate({ name = "My Awesome Mod" })
+	-- Create the top level component Template
+	-- The name will be displayed in the mod list on the lefthand pane
+	local template = mwse.mcm.createTemplate({ name = "My Awesome Mod" })
 
-    -- Save config options when the mod config menu is closed
+	-- Save config options when the mod config menu is closed
 	template:saveOnClose(configPath, config)
 
-    -- Create a simple container Page under Template
+	-- Create a simple container Page under Template
 	local settings = template:createPage({ label = "Settings" })
 
-    -- Create a button under Page that toggles a variable between true and false
- 	settings:createYesNoButton({
+	-- Create a button under Page that toggles a variable between true and false
+	settings:createYesNoButton({
 		label = "Enable Mod",
 		variable = mwse.mcm:createTableVariable({ id = "enabled", table = config }),
 	})
 
-    -- Finish up.
+	-- Finish up.
 	template:register()
 end
 event.register(tes3.event.modConfigReady, registerModConfig)
@@ -49,10 +49,10 @@ After loading up the game, you should see "My Awesome Mod" in the mod config men
 
 ### Separate config.lua
 
-As your default config gets long, you might want to create a separate Lua file for it. 
+As your default config gets long, you might want to create a separate Lua file for it.
 
 !!! example "**MyMod\\config.lua**"
-	```lua linenums="1" 
+	```lua linenums="1"
 	local configPath = "My Awesome Mod" -- The name of the config json file of your mod
 	local defaultConfig = {
 		enabled = true,
@@ -63,7 +63,7 @@ As your default config gets long, you might want to create a separate Lua file f
 			isControlDown = true,
 		}, -- Ctrl + K
 		nonEdible = {
-			["ingred_diamond_01"] = true, 
+			["ingred_diamond_01"] = true,
 			["ingred_scrap_metal_01"] = true,
 		}
 	}
@@ -74,42 +74,42 @@ As your default config gets long, you might want to create a separate Lua file f
 And we import the config with `require` function in the `main.lua`.
 
 !!! example "**MyMod\\main.lua**"
-	```lua linenums="1" 
+	```lua linenums="1"
 	local config = require("MyMod.config")
 	```
 
 ### Side Bar Page
 
-MCM has a lot of features and one of the most commonly-used components is the Side Bar Page. When a component is moused over in a side bar page, the right panel will display the description of that component. It is recommended to use a side bar page instead of a page when a mod has lots of settings options.
+MCM has a lot of features, and one of the most commonly used components is the Sidebar Page. When a component is moused over in a sidebar page, the right panel will display the description of that component. It is recommended to use a sidebar page instead of a page when a mod has lots of settings.
 
 !!! example "**MyMod\\main.lua**"
 	```lua
-	local settings = template:createSideBarPage({ 
+	local settings = template:createSideBarPage({
 		label = "Settings",
 		-- This description will be displayed at the right panel if no component is moused over.
 		description =
-            "My Awesome Mod\n" ..
-            "Version 1.0.0\n" ..
-            "\n" ..
-            "The mod is very awesome. And this is its awesome description.\n",
-    })
+			"My Awesome Mod\n" ..
+			"Version 1.0.0\n" ..
+			"\n" ..
+			"The mod is very awesome. And this is its awesome description.\n",
+	})
 
-    settings:createYesNoButton({
-        label = "Enable Mod",
+	settings:createYesNoButton({
+		label = "Enable Mod",
 		-- This description will be displayed at the right panel if the button is moused over.
-        description =
-            "If this setting is enabled, the mod is enabled.\n" ..
-            "\n" ..
-            "If this setting is disabled, the mod is disabled.\n" ..
-            "\n" ..
-            "Default: yes",
-        variable = mwse.mcm:createTableVariable({ id = "enabled", table = config }),
-    })
+		description =
+			"If this setting is enabled, the mod is enabled.\n" ..
+			"\n" ..
+			"If this setting is disabled, the mod is disabled.\n" ..
+			"\n" ..
+			"Default: yes",
+		variable = mwse.mcm:createTableVariable({ id = "enabled", table = config }),
+	})
 	```
 
 ### Key Binder
 
-If your mod adds any hotkey function, a hotkey rebind in the mod config menu is a must. 
+If your mod adds any hotkey function, a way to rebind the hotkey in the mod config menu is a must.
 
 !!! example "**MyMod\\main.lua**"
 	```lua
@@ -138,7 +138,7 @@ Let's say your My Awesome Mod makes certain ingredients non-edible. Using an Exc
 		},
 		-- This filters the right list by ingredient object
 		filters = {
-			{ label = "Ingredients", type = "Object", objectType = tes3.objectType.ingredient }, 
+			{ label = "Ingredients", type = "Object", objectType = tes3.objectType.ingredient },
 		},
 	})
 	```
@@ -148,11 +148,11 @@ There is also a more customized way to filter the right list. The following code
 !!! example "**MyMod\\main.lua**"
 	```lua
 		filters = {
-			{	
-				label = "Ingredients", 
+			{
+				label = "Ingredients",
 				callback = function()
 					local ingreds = {}
-					---@param ingred tes3ingredient
+					--- @param ingred tes3ingredient
 					for ingred in tes3.iterateObjects(tes3.objectType.ingredients) do
 						if ingred.value >= 100 then
 							table.insert(ingreds, ingred)
@@ -160,7 +160,7 @@ There is also a more customized way to filter the right list. The following code
 					end
 					table.sort(ingreds)
 					return ingreds
-                end 
-			}, 
+				end
+			},
 		},
 	```

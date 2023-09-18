@@ -8,7 +8,7 @@
 --- 
 --- Intended use case for this function is for making interoperability between mods.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/include).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/include).
 --- @param modname string No description yet available.
 --- @return table|nil result No description yet available.
 function include(modname) end

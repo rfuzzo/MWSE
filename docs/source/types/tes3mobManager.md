@@ -17,7 +17,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -32,7 +32,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 
 **Returns**:
 
-* `result` ([niCollisionGroup](../../types/niCollisionGroup))
+* `result` ([niCollisionGroup](../types/niCollisionGroup.md))
 
 ***
 
@@ -47,7 +47,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference)[])
+* `result` ([tes3reference](../types/tes3reference.md)[])
 
 ***
 
@@ -58,7 +58,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 
 **Returns**:
 
-* `result` ([tes3processManager](../../types/tes3processManager))
+* `result` ([tes3processManager](../types/tes3processManager.md))
 
 ***
 
@@ -69,7 +69,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 
 **Returns**:
 
-* `result` ([tes3projectileManager](../../types/tes3projectileManager))
+* `result` ([tes3projectileManager](../types/tes3projectileManager.md))
 
 ***
 
@@ -80,5 +80,5 @@ The maximum velocity that actors can reach through the application of gravity. H
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

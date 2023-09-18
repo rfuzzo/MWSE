@@ -1,6 +1,12 @@
 return {
 	type = "function",
-	description = [[]],
+	description = [[Applies magic effects from a spell, potion, or enchantment on the given actor instantly. You can also apply any custom set of effects, by passing an effects table.
+
+Usage:
+
+- To apply a potion pass a `reference`.
+- When applying a spell, the `reference` will be the spell's caster, and the `target` will be the spell's target.
+- When using enchantment, you need to pass the `reference`, `target`, and `fromStack`. The charge of the item in the `fromStack` will be used. If that item is out of charge no enchantment will be applied.]],
 	arguments = {{
 		name = "params",
 		type = "table",
@@ -25,12 +31,12 @@ return {
 				}
 			},
 			{ name = "createCopy", type = "boolean", optional = true, default = true, description = "This parameter controls whether the function will return the original magic source or a copy of the magic source. This parameter is only used if source is alchemy." },
-			{ name = "fromStack", type = "tes3equipmentStack", optional = true, description = "The piece of equipment this magic source is coming from. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future." },
-			{ name = "castChance", type = "number", optional = true, description = "This parameter allows overriding the casting chance of the magic source." },
+			{ name = "fromStack", type = "tes3equipmentStack", optional = true, description = "The piece of equipment this magic source is coming from. This item's charge will be used. The fromStack has to be an already equipped item from tes3actor.equipment. This will probably change in the future." },
 			{ name = "target", type = "tes3reference|tes3mobileActor|string", optional = true, description = "The target of the magic." },
 			{ name = "bypassResistances", type = "boolean", optional = true, default = false, description = "Is this effect going to bypass magic resistance?" },
 		},
 	}},
-	returns = "instance",
-	valuetype = "tes3magicSourceInstance",
+	returns = {
+		{ name = "instance", type = "tes3magicSourceInstance" }
+	}
 }

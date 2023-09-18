@@ -83,7 +83,7 @@ The minimum magnitude of the effect.
 
 **Returns**:
 
-* `result` ([tes3magicEffect](../../types/tes3magicEffect))
+* `result` ([tes3magicEffect](../types/tes3magicEffect.md))
 
 ***
 

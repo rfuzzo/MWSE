@@ -16,8 +16,8 @@ return {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "position", type = "tes3vector3|table", description = "Position of the ray origin." },
-			{ name = "direction", type = "tes3vector3|table", description = "Direction of the ray. Does not have to be unit length." },
+			{ name = "position", type = "tes3vector3|number[]", description = "Position of the ray origin." },
+			{ name = "direction", type = "tes3vector3|number[]", description = "Direction of the ray. Does not have to be unit length." },
 			{ name = "findAll", type = "boolean", optional = true, default = false, description = "If true, the ray test won't stop after the first result." },
 			{ name = "maxDistance", type = "number", optional = true, default = 0, description = "The maximum distance that the test will run." },
 			{ name = "sort", type = "boolean", optional = true, default = true, description = "If true, the results will be sorted by distance from the origin position." },

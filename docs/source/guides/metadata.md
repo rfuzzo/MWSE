@@ -12,7 +12,8 @@ First, create a new file in the `Data Files` directory called `"<Mod Name>-metad
 
 Now open your new file and enter the following sections.
 
-***NOTE:** Metadata files are written in the TOML configuration file format. It is highly recommended you use an IDE or text editor with TOML syntax highlighting, such as [VS Code](https://code.visualstudio.com/) or [notepad++](https://notepad-plus-plus.org/) to ensure your file is valid. For more information on the TOML syntax, see the [TOML website](https://toml.io/en/).*
+!!! note
+	*Metadata files are written in the TOML configuration file format. It is highly recommended you use an IDE or text editor with TOML syntax highlighting, such as [VS Code](https://code.visualstudio.com/) or [notepad++](https://notepad-plus-plus.org/) to ensure your file is valid. For more information on the TOML syntax, see the [TOML website](https://toml.io/en/).*
 
 ## Package Section
 

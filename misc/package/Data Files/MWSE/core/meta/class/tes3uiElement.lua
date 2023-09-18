@@ -4,7 +4,7 @@
 --- @meta
 --- A UI element, the main building block of the UI system. All elements are created with methods on a parent Element.  Elements are very configurable, and have many HTML-like layout features. All layout properties can be set to `nil` to reset them to the default value, which will deactivate any related layout mode.
 --- 
---- Elements can have custom data attached using their `Property`_ key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
+--- Elements can have custom data attached using their `Property` key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
 --- @class tes3uiElement
 --- @field absolutePosAlignX number The horizontal alignment of the element relative to it's parent element. Can be `nil`. If `nil`, deactivates behaviour associated with this property. Valid values range from `0.0` to `1.0`. Sets the element's `positionX` to a point relative to the parent element. A value of `0.0` is equal to the parent element's left content edge, whereas a value of `1.0` is equal to the parent element's right content edge. The positioning is absolute, which frees the element from the standard flow layout and allows overlapping elements.
 --- 	
@@ -315,7 +315,7 @@ function tes3uiElement:createParagraphInput(params) end
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.
 --- 
---- `color`: tes3vector3|table|nil — *Optional*. The fill color for the element.
+--- `color`: tes3vector3|number[]|nil — *Optional*. The fill color for the element.
 --- 
 --- `randomizeColor`: boolean? — *Default*: `false`. If true, the creation color will be randomized.
 --- @return tes3uiElement result No description yet available.
@@ -324,7 +324,7 @@ function tes3uiElement:createRect(params) end
 ---Table parameter definitions for `tes3uiElement.createRect`.
 --- @class tes3uiElement.createRect.params
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
---- @field color tes3vector3|table|nil *Optional*. The fill color for the element.
+--- @field color tes3vector3|number[]|nil *Optional*. The fill color for the element.
 --- @field randomizeColor boolean? *Default*: `false`. If true, the creation color will be randomized.
 
 --- Creates a horizontal slider.
@@ -438,7 +438,7 @@ function tes3uiElement:createThinBorder(params) end
 --- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createVerticalScrollPane).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createverticalscrollpane).
 --- @param params tes3uiElement.createVerticalScrollPane.params? This table accepts the following values:
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.
@@ -449,10 +449,10 @@ function tes3uiElement:createVerticalScrollPane(params) end
 --- @class tes3uiElement.createVerticalScrollPane.params
 --- @field id string|number|nil *Optional*. An identifier to help find this element later.
 
---- Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+--- Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 function tes3uiElement:destroy() end
 
---- Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+--- Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 --- 
 --- Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 function tes3uiElement:destroyChildren() end
@@ -618,7 +618,7 @@ function tes3uiElement:registerAfter(eventID, callback) end
 --- @param callback fun(e: tes3uiEventData): boolean? The callback function.
 function tes3uiElement:registerBefore(eventID, callback) end
 
---- Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+--- Moves the layout order of the children of this element. `count` elements are taken from starting child `Element` or index (0-based) `moveFrom`, and moved before the child `Element` or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 --- 
 --- Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 --- @param insertBefore tes3uiElement|number The insertion point (or its 0-based child index).
@@ -637,7 +637,7 @@ function tes3uiElement:setLuaData(key, value) end
 
 --- Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function sets a property to a boolean value.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#setPropertyBool).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#setpropertybool).
 --- @param property number|string The property to set.
 --- @param value boolean The value to set.
 function tes3uiElement:setPropertyBool(property, value) end
@@ -668,7 +668,7 @@ function tes3uiElement:setPropertyObject(property, value) end
 function tes3uiElement:setPropertyProperty(property, value) end
 
 --- Reorders the element's children given a sorting function.
---- @param sortFunction function The function to sort with. Like most sorting functions, this is given two arguments to compare.
+--- @param sortFunction fun(a: tes3uiElement, b: tes3uiElement): boolean The function to sort with. Like most sorting functions, this is given two arguments to compare.
 function tes3uiElement:sortChildren(sortFunction) end
 
 --- Triggers a UI event on an element, either using supplied event data, or by constructing new event data using `eventName`. `eventName` is the same as used in `register`.

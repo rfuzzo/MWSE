@@ -37,6 +37,6 @@
 --- @field weight number *Read-only*. Convenience access to the NPCs (race) weight.
 tes3npcInstance = {}
 
---- Causes the NPC to reevaluate his/hers equipment choices and equip the best available.
+--- Causes the NPC to reevaluate his/hers equipment choices and equip the best available. Then, the visible body parts will be updated.
 function tes3npcInstance:reevaluateEquipment() end
 

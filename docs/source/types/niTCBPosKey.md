@@ -8,7 +8,7 @@
 
 An animation key for tension-, continuity-, and bias-derived positioning.
 
-This type inherits the following: [niPosKey](../../types/niPosKey), [niAnimationKey](../../types/niAnimationKey)
+This type inherits the following: [niPosKey](../types/niPosKey.md), [niAnimationKey](../types/niAnimationKey.md)
 ## Properties
 
 ### `bias`
@@ -62,5 +62,5 @@ The position value of the animation key.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

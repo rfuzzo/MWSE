@@ -16,6 +16,9 @@ event.register(tes3.event.musicChangeTrack, musicChangeTrackCallback)
 ```
 
 !!! tip
+	This event supports blocking by setting `e.block` to `true` or returning `false`. Blocking the event prevents vanilla behavior from happening. For example, blocking an `equip` event prevents the item from being equipped.
+
+!!! tip
 	An event can be claimed by setting `e.claim` to `true`, or by returning `false` from the callback. Claiming the event prevents any lower priority callbacks from being called.
 
 ## Event Data
@@ -25,4 +28,9 @@ event.register(tes3.event.musicChangeTrack, musicChangeTrackCallback)
 * `music` (string): The track that will be played. This can be changed to a new path, but it must be valid. Note that unlike the `musicSelectTrack` event, this value is not relative to `Data Files\music`.
 * `situation` (number): *Read-only*. Maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/), indicating combat, non-combat, or scripted music.
 * `volume` (number): The volume of the track to be played, ranging from `0.0` to `1.0`. This can be modified.
+
+
+## Related events
+
+[musicSelectTrack](./musicSelectTrack.md){ .md-button }
 

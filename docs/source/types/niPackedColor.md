@@ -118,5 +118,5 @@ local color = niPackedColor.new(r, g, b, a)
 
 **Returns**:
 
-* `color` ([niPackedColor](../../types/niPackedColor))
+* `color` ([niPackedColor](../types/niPackedColor.md))
 

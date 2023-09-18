@@ -50,7 +50,7 @@ The time passed since the last tick of the spell.
 
 **Returns**:
 
-* `result` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance))
+* `result` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md))
 
 ***
 
@@ -61,7 +61,7 @@ Access to the magic source of the effect instance.
 
 **Returns**:
 
-* `result` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance))
+* `result` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md))
 
 ***
 
@@ -83,15 +83,15 @@ local eventResult, modifiedValue = myObject:trigger({ negateOnExpiry = ..., isUn
 	* `isUncapped` (boolean): *Optional*.
 	* `attribute` (integer): *Default*: `tes3.effectAttribute.nonResistable`. The attribute used in resistance calculations agains this effect. Maps to values in [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) table.
 	* `type` (integer): *Default*: `tes3.effectEventType.boolean`. This flag controls how the effect behaves. For example, `tes3.effectEventType.modStatistic` will make the effect work as calling `tes3.modStatistic`. Maps to values in [`tes3.effectEventType`](https://mwse.github.io/MWSE/references/effect-event-types/) table.
-	* `value` (boolean, integer, number, [tes3statistic](../../types/tes3statistic)): *Default*: `0`. The variable this effect changes. This can be a local variable in a script or a tes3statistic property on a `tes3mobileActor`. The type of the passed variable must match the type of the `type` parameter.
-	* `resistanceCheck` (fun(e: [tes3magicEffectResistenceCheckEventData](../../types/tes3magicEffectResistenceCheckEventData)): boolean?): *Optional*. The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. Returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing.
+	* `value` (boolean, integer, number, [tes3statistic](../types/tes3statistic.md)): *Default*: `0`. The variable this effect changes. This can be a local variable in a script or a tes3statistic property on a `tes3mobileActor`. The type of the passed variable must match the type of the `type` parameter.
+	* `resistanceCheck` (fun(e: [tes3magicEffectResistenceCheckEventData](../types/tes3magicEffectResistenceCheckEventData.md)): boolean?): *Optional*. The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. Returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing.
 
 For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired.
 
 **Returns**:
 
 * `eventResult` (boolean)
-* `modifiedValue` (boolean, integer, number, [tes3statistic](../../types/tes3statistic)): The returned type depends on the passed `type` parameter.
+* `modifiedValue` (boolean, integer, number, [tes3statistic](../types/tes3statistic.md)): The returned type depends on the passed `type` parameter.
 
 ***
 

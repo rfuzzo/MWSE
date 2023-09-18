@@ -28,7 +28,7 @@ This table is passed to the `resistanceCheck` function in a custom magic effect.
 
 **Returns**:
 
-* `result` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance))
+* `result` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md))
 
 ***
 
@@ -39,5 +39,5 @@ This table is passed to the `resistanceCheck` function in a custom magic effect.
 
 **Returns**:
 
-* `result` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance))
+* `result` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md))
 

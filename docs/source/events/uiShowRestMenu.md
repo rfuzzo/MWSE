@@ -29,5 +29,5 @@ event.register(tes3.event.uiShowRestMenu, uiShowRestMenuCallback)
 
 ## Related events
 
-[preventRest](../preventRest/){ .md-button }
+[preventRest](./preventRest.md){ .md-button }
 

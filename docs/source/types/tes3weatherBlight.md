@@ -8,7 +8,7 @@
 
 A structure that contains weather information for the blightstorm weather type.
 
-This type inherits the following: [tes3weather](../../types/tes3weather)
+This type inherits the following: [tes3weather](../types/tes3weather.md)
 ## Properties
 
 ### `ambientDayColor`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -51,7 +51,7 @@ The weather's ambient looping sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -73,7 +73,7 @@ The weather's ambient looping sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -84,7 +84,7 @@ The weather's ambient looping sound ID.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -106,7 +106,7 @@ The weather's blight chance value.
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell)[])
+* `result` ([tes3spell](../types/tes3spell.md)[])
 
 ***
 
@@ -150,7 +150,7 @@ The weather's cloud texture path.
 
 **Returns**:
 
-* `result` ([tes3weatherController](../../types/tes3weatherController))
+* `result` ([tes3weatherController](../types/tes3weatherController.md))
 
 ***
 
@@ -161,7 +161,7 @@ The weather's cloud texture path.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -172,7 +172,7 @@ The weather's cloud texture path.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -183,7 +183,7 @@ The weather's cloud texture path.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -194,7 +194,7 @@ The weather's cloud texture path.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -260,7 +260,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -271,7 +271,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -282,7 +282,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -293,7 +293,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -304,7 +304,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -315,7 +315,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -326,7 +326,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -337,7 +337,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -348,7 +348,7 @@ The weather's land fog night depth value.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 

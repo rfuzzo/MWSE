@@ -684,6 +684,19 @@ namespace mwse::lua {
 		return player;
 	}
 
+	void __fastcall OnPlayerMobileDestruction(TES3::MobilePlayer* macp) {
+		// Call overwritten code.
+		const auto TES3_MobilePlayer_Dtor = reinterpret_cast<void(__thiscall*)(TES3::MobilePlayer*)>(0x5662F0);
+		TES3_MobilePlayer_Dtor(macp);
+
+		// Clear the player shortcuts.
+		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
+		auto& state = stateHandle.state;
+		state["tes3"]["mobilePlayer"] = sol::nil;
+		state["tes3"]["player"] = sol::nil;
+		state["tes3"]["player1stPerson"] = sol::nil;
+	}
+
 	//
 	// Hook: Finished initializing game code.
 	//
@@ -4563,6 +4576,7 @@ namespace mwse::lua {
 		// Hook the MACP creation functions to update lua variables that point to the player.
 		genCallEnforced(0x5661A0, 0x4E5770, reinterpret_cast<DWORD>(OnPlayerReferenceAssigned));
 		genCallEnforced(0x4C0180, 0x4E4510, reinterpret_cast<DWORD>(OnPlayerReferenceCreated));
+		genCallEnforced(0x565F53, 0x5662F0, reinterpret_cast<DWORD>(OnPlayerMobileDestruction));
 
 		// Event: initialized. Hook initial plugin loading and merging function.
 		genCallEnforced(0x419EE7, 0x40E790, reinterpret_cast<DWORD>(InitDataHandler));
@@ -6075,6 +6089,17 @@ namespace mwse::lua {
 		// Special call to raise an event when at the last stage of character creation (caused by script call to EnableStatReviewMenu)
 		genCallEnforced(0x50B940, 0x62CE60, reinterpret_cast<DWORD>(ShowStatReviewMenu));
 
+		// Event: magicSelectionChanged
+		genCallEnforced(0x49B110, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x56DC7C, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5DFF81, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E19D9, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E23C4, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E426E, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E4569, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E6264, 0x5F4E70, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromSpell));
+		genCallEnforced(0x5E234B, 0x5F4DB0, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromEquipmentStack));
+		genCallEnforced(0x5E444C, 0x5F4DB0, reinterpret_cast<DWORD>(TES3::UI::updateCurrentMagicFromEquipmentStack));
 
 		// UI framework hooks
 		TES3::UI::hook();

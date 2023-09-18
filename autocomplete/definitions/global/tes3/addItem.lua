@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Adds an item to a given reference's inventory or mobile's inventory.]],
+	description = [[Adds an item to a given reference's inventory or mobile's inventory. The `reference` will be cloned if needed.]],
 	arguments = {{
 		name = "params",
 		type = "table",

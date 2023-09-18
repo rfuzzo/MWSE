@@ -17,7 +17,7 @@ The transform's rotation matrix.
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -39,7 +39,7 @@ The transform's translation vector.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -56,7 +56,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([tes3transform](../../types/tes3transform))
+* `result` ([tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -71,7 +71,7 @@ local transform, valid = myObject:invert()
 
 **Returns**:
 
-* `transform` ([tes3transform](../../types/tes3transform))
+* `transform` ([tes3transform](../types/tes3transform.md))
 * `valid` (boolean)
 
 ***
@@ -87,13 +87,13 @@ local result = myObject:new(rotation, translation, scale)
 
 **Parameters**:
 
-* `rotation` ([tes3matrix33](../../types/tes3matrix33)): *Optional*.
-* `translation` ([tes3vector3](../../types/tes3vector3)): *Optional*.
+* `rotation` ([tes3matrix33](../types/tes3matrix33.md)): *Optional*.
+* `translation` ([tes3vector3](../types/tes3vector3.md)): *Optional*.
 * `scale` (number): *Optional*.
 
 **Returns**:
 
-* `result` ([tes3transform](../../types/tes3transform))
+* `result` ([tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -114,6 +114,6 @@ myObject:toIdentity()
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3transform](../../types/tes3transform) | [tes3transform](../../types/tes3transform) | [tes3transform](../../types/tes3transform) | Calculate the combination of two transforms. |
-| [tes3transform](../../types/tes3transform) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | Calculate the result of applying this transform to a vector. |
+| [tes3transform](../types/tes3transform.md) | [tes3transform](../types/tes3transform.md) | [tes3transform](../types/tes3transform.md) | Calculate the combination of two transforms. |
+| [tes3transform](../types/tes3transform.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | Calculate the result of applying this transform to a vector. |
 

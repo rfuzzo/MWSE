@@ -28,7 +28,7 @@ A reference for the currently iterated node. This is used by the core game engin
 
 **Returns**:
 
-* `result` ([tes3equipmentStackIteratorNode](../../types/tes3equipmentStackIteratorNode))
+* `result` ([tes3equipmentStackIteratorNode](../types/tes3equipmentStackIteratorNode.md))
 
 ***
 
@@ -39,7 +39,7 @@ The first node in the collection.
 
 **Returns**:
 
-* `result` ([tes3equipmentStackIteratorNode](../../types/tes3equipmentStackIteratorNode))
+* `result` ([tes3equipmentStackIteratorNode](../types/tes3equipmentStackIteratorNode.md))
 
 ***
 
@@ -50,5 +50,5 @@ The last node in the collection.
 
 **Returns**:
 
-* `result` ([tes3equipmentStackIteratorNode](../../types/tes3equipmentStackIteratorNode))
+* `result` ([tes3equipmentStackIteratorNode](../types/tes3equipmentStackIteratorNode.md))
 

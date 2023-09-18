@@ -50,7 +50,7 @@ The texture for the Map.
 
 **Returns**:
 
-* `result` ([niTexture](../../types/niTexture))
+* `result` ([niTexture](../types/niTexture.md))
 
 ***
 
@@ -68,7 +68,7 @@ local map = niTexturingPropertyMap.new({ texture = ..., clampMode = ..., filterM
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `texture` ([niTexture](../../types/niTexture)): *Optional*. If provided, sets the map texture to the given value.
+	* `texture` ([niTexture](../types/niTexture.md)): *Optional*. If provided, sets the map texture to the given value.
 	* `clampMode` (integer): *Default*: `ni.texturingPropertyClampMode.wrapSwrapT`. The clamp mode to set the map to use.
 	* `filterMode` (integer): *Default*: `ni.texturingPropertyFilterMode.trilerp`. The filter mode to set the map to use.
 	* `textCoords` (integer): *Default*: `0`. The texture coordinates to set the map to use.
@@ -76,5 +76,5 @@ local map = niTexturingPropertyMap.new({ texture = ..., clampMode = ..., filterM
 
 **Returns**:
 
-* `map` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap)): The created basic or bump map.
+* `map` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md)): The created basic or bump map.
 

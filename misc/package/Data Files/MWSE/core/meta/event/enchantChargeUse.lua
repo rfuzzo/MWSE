@@ -11,3 +11,6 @@
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon *Read-only*. Only available when isCast is true. The item used to cast the enchantment.
 --- @field itemData tes3itemData *Read-only*. Only available when isCast is true. The item data of the item used to cast the enchantment.
 --- @field source tes3enchantment *Read-only*. The enchantment being used or examined by the UI.
+--- @field sourceInstance tes3magicSourceInstance|nil *Read-only*. Only available when isCast is true. The instance object of the magic being cast.
+--- 
+--- Warning: The sourceInstance may be destroyed immediately if the cast fails due to insufficient charge. Do not keep a long-lived reference to this sourceInstance. If you need to reference it in the future, save the source's `serialNumber` and look it up with `tes3.getMagicSourceInstanceBySerial`.

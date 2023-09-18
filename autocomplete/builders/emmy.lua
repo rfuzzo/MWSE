@@ -29,19 +29,21 @@ common.log("Definitions folder: %s", common.pathDefinitions)
 local function getPackageLink(package)
 	local tokens = { common.urlBase, package.key }
 
-	if (package.type == "class") then
-		tokens = { common.urlBase, "types", package.key }
-	elseif (package.type == "class") then
-		tokens = { common.urlBase, "apis", package.namespace }
-	elseif (package.type == "event") then
-		tokens = { common.urlBase, "events", package.key }
-	elseif (package.parent) then
+	if (not package.parent) then
+		if (package.type == "class") then
+			tokens = { common.urlBase, "types", package.key }
+		elseif (package.type == "function") then
+			tokens = { common.urlBase, "apis", package.namespace }
+		elseif (package.type == "event") then
+			tokens = { common.urlBase, "events", package.key }
+		end
+	else
 		local parentType = package.parent.type
 		if (parentType == "lib") then
 			local token = string.gsub("#" .. package.namespace, "%.", "")
 			tokens = { common.urlBase, "apis", package.parent.namespace, token:lower() }
 		elseif (parentType == "class") then
-			tokens = { common.urlBase, "types", package.parent.key, "#" .. package.key }
+			tokens = { common.urlBase, "types", package.parent.key, "#" .. package.key:lower() }
 		end
 	end
 
@@ -52,8 +54,8 @@ end
 --- have one or more methods or functions. This the avoids creation of tables
 --- in the global namespace for virtual types - types that only exist
 --- in the annotations.
----@param package packageClass
----@return boolean
+--- @param package packageClass
+--- @return boolean
 local function shouldCreateTable(package)
 	return (
 		package.type == "lib" or
@@ -79,7 +81,7 @@ local function formatDescription(description)
 	return "--- " .. formatLineBreaks(description)
 end
 
----@param types string[]
+--- @param types string[]
 local function insertNil(types)
 	local hasNil = false
 	for _, type in ipairs(types) do
@@ -89,7 +91,6 @@ local function insertNil(types)
 			-- If the type ends with "|fun(): someReturnType", don't append nil
 			-- at the end. That won't make the argument optional, but will
 			-- change the type of the function's return value
-			print("Types length: ", #types)
 			table.insert(types, #types, "nil")
 			hasNil = true
 			break
@@ -114,7 +115,6 @@ local function getAllPossibleVariationsOfType(type, package)
 			other ~= "" and "|" or "",
 			other
 		)
-
 	end
 
 	local types = {}

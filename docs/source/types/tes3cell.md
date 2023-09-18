@@ -8,7 +8,7 @@
 
 An exterior or interior game area.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `activators`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ??? example "Example: Converting reference list to array style table"
 
@@ -119,7 +119,7 @@ The cell's ambient color. Only available on interior cells.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor))
+* `result` ([niPackedColor](../types/niPackedColor.md))
 
 ***
 
@@ -207,7 +207,7 @@ The cell's fog color. Only available on interior cells.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor))
+* `result` ([niPackedColor](../types/niPackedColor.md))
 
 ***
 
@@ -306,7 +306,7 @@ If true, the cell is an interior.
 
 **Returns**:
 
-* `result` ([tes3land](../../types/tes3land))
+* `result` ([tes3land](../types/tes3land.md))
 
 ***
 
@@ -361,7 +361,7 @@ The name and id of the cell. See also `displayName` and `editorName`.
 
 **Returns**:
 
-* `result` ([tes3pathGrid](../../types/tes3pathGrid), nil)
+* `result` ([tes3pathGrid](../types/tes3pathGrid.md), nil)
 
 ***
 
@@ -383,7 +383,7 @@ The scenegraph node containing player-interactable objects from this cell.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -394,7 +394,7 @@ The region associated with the cell. Only available on exterior cells, or interi
 
 **Returns**:
 
-* `result` ([tes3region](../../types/tes3region), nil)
+* `result` ([tes3region](../types/tes3region.md), nil)
 
 ***
 
@@ -438,7 +438,7 @@ The scenegraph node containing static non-player-interactable objects from this 
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -449,7 +449,7 @@ The scenegraph node containing static non-player-interactable objects from this 
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -460,7 +460,7 @@ The cell's sun color. Only available on interior cells.
 
 **Returns**:
 
-* `result` ([niPackedColor](../../types/niPackedColor))
+* `result` ([niPackedColor](../types/niPackedColor.md))
 
 ***
 
@@ -538,5 +538,5 @@ local iterator = myObject:iterateReferences(filter)
 
 **Returns**:
 
-* `iterator` (fun(): [tes3reference](../../types/tes3reference))
+* `iterator` (fun(): [tes3reference](../types/tes3reference.md))
 

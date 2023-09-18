@@ -8,7 +8,7 @@
 
 A script object.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -29,7 +29,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3scriptContext](../../types/tes3scriptContext))
+* `result` ([tes3scriptContext](../types/tes3scriptContext.md))
 
 ***
 
@@ -208,5 +208,5 @@ local results = myObject:getVariableData(useLocals)
 
 **Returns**:
 
-* `results` (table&lt;string, [tes3scriptVariableData](../../types/tes3scriptVariableData)&gt;, nil): A table with all of the script's variable names as keys.
+* `results` (table&lt;string, [tes3scriptVariableData](../types/tes3scriptVariableData.md)&gt;, nil): A table with all of the script's variable names as keys.
 

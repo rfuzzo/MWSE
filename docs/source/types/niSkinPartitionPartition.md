@@ -50,7 +50,7 @@ Skinning data for a submesh, optimized for hardware skinning.
 
 **Returns**:
 
-* `result` ([niTriangle](../../types/niTriangle)[])
+* `result` ([niTriangle](../types/niTriangle.md)[])
 
 ***
 

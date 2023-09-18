@@ -9,7 +9,7 @@
 --- @field listenerPosition tes3vector3 The sound listener position.
 --- @field musicDuration number *Read-only*. The duration of the currently playing music track.
 --- @field musicFadeBeginTimestamp number The timestamp at which currently playing music track started fading in. So, it's a timestamp at which currently playing music track started.
---- @field musicNextTrackStartTimestamp number 
+--- @field musicNextTrackStartTimestamp number The timestamp at which next track will start playing.
 --- @field musicNextTrackVolume number The volume of the next track.
 --- @field musicPosition number Current play time for currently playing music track.
 --- @field nextMusicFilePath string File path of the music track which is to be played next. The path can not be longer than 260 characters.

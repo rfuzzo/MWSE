@@ -64,27 +64,27 @@ function mgeWeatherConfig.setPerPixelLighting(params) end
 --- Sets the in- and out-scatter values for MGE. The result table of `getScattering` can be modified then passed to this function.
 --- @param params mgeScatteringTable|mgeWeatherConfig.setScattering.params This table accepts the following values:
 --- 
---- `inscatter`: tes3vector3|table — No description yet available.
+--- `inscatter`: tes3vector3|number[] — No description yet available.
 --- 
---- `outscatter`: tes3vector3|table — No description yet available.
+--- `outscatter`: tes3vector3|number[] — No description yet available.
 function mgeWeatherConfig.setScattering(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setScattering`.
 --- @class mgeWeatherConfig.setScattering.params
---- @field inscatter tes3vector3|table No description yet available.
---- @field outscatter tes3vector3|table No description yet available.
+--- @field inscatter tes3vector3|number[] No description yet available.
+--- @field outscatter tes3vector3|number[] No description yet available.
 
 --- Sets the sky scatter values for MGE. The result table of `getSkylightScattering` can be modified then passed to this function.
 --- @param params mgeSkylightScatteringTable|mgeWeatherConfig.setSkylightScattering.params This table accepts the following values:
 --- 
---- `skylight`: tes3vector3|table — No description yet available.
+--- `skylight`: tes3vector3|number[] — No description yet available.
 --- 
 --- `mix`: number? — *Default*: `0.44`. No description yet available.
 function mgeWeatherConfig.setSkylightScattering(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setSkylightScattering`.
 --- @class mgeWeatherConfig.setSkylightScattering.params
---- @field skylight tes3vector3|table No description yet available.
+--- @field skylight tes3vector3|number[] No description yet available.
 --- @field mix number? *Default*: `0.44`. No description yet available.
 
 --- Sets the wind speed for a weather in MGE. The result table of `getWind` can be modified then passed to this function.

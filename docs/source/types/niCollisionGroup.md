@@ -30,7 +30,7 @@ The `niCollisionGroup` class is used to group the object into two main groups, b
 
 **Returns**:
 
-* `result` ([niCollisionGroupRecord](../../types/niCollisionGroupRecord)[])
+* `result` ([niCollisionGroupRecord](../types/niCollisionGroupRecord.md)[])
 
 ***
 
@@ -41,5 +41,5 @@ The `niCollisionGroup` class is used to group the object into two main groups, b
 
 **Returns**:
 
-* `result` ([niCollisionGroupRecord](../../types/niCollisionGroupRecord)[])
+* `result` ([niCollisionGroupRecord](../types/niCollisionGroupRecord.md)[])
 

@@ -27,5 +27,5 @@ event.register(tes3.event.simulate, simulateCallback)
 
 ## Related events
 
-[simulated](../simulated/){ .md-button }
+[simulated](./simulated.md){ .md-button }
 

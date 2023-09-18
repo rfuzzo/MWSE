@@ -8,7 +8,7 @@
 
 A collection of position, rotation, and scale keys used on NiKeyframeControllers.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `positionKeyCount`
@@ -29,7 +29,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niPosKey](../../types/niPosKey)[])
+* `result` ([niPosKey](../types/niPosKey.md)[])
 
 ***
 
@@ -73,7 +73,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRotKey](../../types/niRotKey)[])
+* `result` ([niRotKey](../types/niRotKey.md)[])
 
 ***
 
@@ -95,7 +95,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -106,7 +106,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -128,7 +128,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niFloatKey](../../types/niFloatKey)[])
+* `result` ([niFloatKey](../types/niFloatKey.md)[])
 
 ***
 
@@ -156,7 +156,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

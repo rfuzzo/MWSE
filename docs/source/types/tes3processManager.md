@@ -46,8 +46,8 @@ myObject:checkAlarmRadius({ actor = ..., container = ... })
 **Parameters**:
 
 * `params` (table)
-	* `actor` ([tes3mobileActor](../../types/tes3mobileActor)): The actor to perform a check for.
-	* `container` ([tes3iterator](../../types/tes3iterator)): Container is a actor's AI planner e.g. `mobile.aiPlanner`.
+	* `actor` ([tes3mobileActor](../types/tes3mobileActor.md)): The actor to perform a check for.
+	* `container` ([tes3iterator](../types/tes3iterator.md)): Container is a actor's AI planner e.g. `mobile.aiPlanner`.
 
 ***
 
@@ -89,7 +89,7 @@ myObject:detectPresence({ actor = ..., unknown = ... })
 **Parameters**:
 
 * `params` (table)
-	* `actor` ([tes3mobileActor](../../types/tes3mobileActor)): The actor to perform a check for.
+	* `actor` ([tes3mobileActor](../types/tes3mobileActor.md)): The actor to perform a check for.
 	* `unknown` (boolean)
 
 ***
@@ -106,8 +106,8 @@ local isDetected = myObject:detectSneak({ detector = ..., target = ..., unknown 
 **Parameters**:
 
 * `params` (table)
-	* `detector` ([tes3mobileActor](../../types/tes3mobileActor)): The detector actor to perform a check for.
-	* `target` ([tes3mobileActor](../../types/tes3mobileActor)): The target actor to perform a check for.
+	* `detector` ([tes3mobileActor](../types/tes3mobileActor.md)): The detector actor to perform a check for.
+	* `target` ([tes3mobileActor](../types/tes3mobileActor.md)): The target actor to perform a check for.
 	* `unknown` (boolean)
 
 **Returns**:

@@ -101,6 +101,7 @@ return {
 	["magicCasted"] = "magicCasted",
 	["magicEffectRemoved"] = "magicEffectRemoved",
 	["magicEffectsResolved"] = "magicEffectsResolved",
+	["magicSelectionChanged"] = "magicSelectionChanged",
 	["menuEnter"] = "menuEnter",
 	["menuExit"] = "menuExit",
 	["meshLoad"] = "meshLoad",

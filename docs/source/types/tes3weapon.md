@@ -8,7 +8,7 @@
 
 A weapon game object.
 
-This type inherits the following: [tes3item](../../types/tes3item), [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3item](../types/tes3item.md), [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -29,7 +29,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -95,7 +95,7 @@ The enchantment used by the object.
 
 **Returns**:
 
-* `result` ([tes3enchantment](../../types/tes3enchantment))
+* `result` ([tes3enchantment](../types/tes3enchantment.md))
 
 ***
 
@@ -157,7 +157,7 @@ Access to the flag that controls if this weapon bypasses the "Resist normal weap
 ### `isAmmo`
 <div class="search_terms" style="display: none">isammo, ammo</div>
 
-*Read-only*. If true, the weapon is a type of ammunition.
+*Read-only*. If true, the weapon is a type of ammunition. Arrows and bolts are ammunition, while thrown weapons aren't.
 
 **Returns**:
 
@@ -293,7 +293,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -326,7 +326,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -348,7 +348,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -381,7 +381,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -392,7 +392,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -403,7 +403,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -414,7 +414,7 @@ Gets the skill data for the attack skill used by the weapon.
 
 **Returns**:
 
-* `result` ([tes3skill](../../types/tes3skill))
+* `result` ([tes3skill](../types/tes3skill.md))
 
 ***
 
@@ -508,7 +508,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 
@@ -624,7 +624,7 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 **Returns**:
 
-* `newObject` ([tes3weapon](../../types/tes3weapon))
+* `newObject` ([tes3weapon](../types/tes3weapon.md))
 
 ***
 

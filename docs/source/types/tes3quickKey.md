@@ -8,6 +8,9 @@
 
 A configuration detailing a quick key.
 
+!!! note
+    Storing an item in a quick key **won't** attach any itemData to the item, while equipping the item will.
+
 ## Properties
 
 ### `item`
@@ -17,7 +20,7 @@ A configuration detailing a quick key.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 
 ***
 
@@ -28,7 +31,7 @@ A configuration detailing a quick key.
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData))
+* `result` ([tes3itemData](../types/tes3itemData.md))
 
 ***
 
@@ -39,7 +42,7 @@ A configuration detailing a quick key.
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -78,8 +81,8 @@ local source, data = myObject:getItem()
 
 **Returns**:
 
-* `source` ([tes3item](../../types/tes3item), nil): The item bound to the quick key.
-* `data` ([tes3itemData](../../types/tes3itemData), nil): Any associated item data bound to the quick key
+* `source` ([tes3item](../types/tes3item.md), nil): The item bound to the quick key.
+* `data` ([tes3itemData](../types/tes3itemData.md), nil): Any associated item data bound to the quick key
 
 ***
 
@@ -94,8 +97,8 @@ local source, data = myObject:getMagic()
 
 **Returns**:
 
-* `source` ([tes3spell](../../types/tes3spell), [tes3item](../../types/tes3item), nil): The castable source bound to the quick key.
-* `data` ([tes3itemData](../../types/tes3itemData), nil): Any associated item data bound to the quick key
+* `source` ([tes3spell](../types/tes3spell.md), [tes3item](../types/tes3item.md), nil): The castable source bound to the quick key.
+* `data` ([tes3itemData](../types/tes3itemData.md), nil): Any associated item data bound to the quick key
 
 ***
 
@@ -110,8 +113,8 @@ myObject:setItem(source, data)
 
 **Parameters**:
 
-* `source` ([tes3item](../../types/tes3item)): The item to be bound to the quick key.
-* `data` ([tes3itemData](../../types/tes3itemData), nil): The optional item data to be paired with the binding.
+* `source` ([tes3item](../types/tes3item.md)): The item to be bound to the quick key.
+* `data` ([tes3itemData](../types/tes3itemData.md), nil): The optional item data to be paired with the binding.
 
 ***
 
@@ -126,6 +129,6 @@ myObject:setMagic(source, data)
 
 **Parameters**:
 
-* `source` ([tes3spell](../../types/tes3spell), [tes3item](../../types/tes3item)): The castable source to be bound to the quick key.
-* `data` ([tes3itemData](../../types/tes3itemData), nil): If given an item as the source, the optional item data to be paired with the binding.
+* `source` ([tes3spell](../types/tes3spell.md), [tes3item](../types/tes3item.md)): The castable source to be bound to the quick key.
+* `data` ([tes3itemData](../types/tes3itemData.md), nil): If given an item as the source, the optional item data to be paired with the binding.
 

@@ -25,5 +25,5 @@ event.register(tes3.event.infoLinkResolve, infoLinkResolveCallback)
 
 ## Related events
 
-[dialogueFiltered](../dialogueFiltered/){ .md-button }[infoGetText](../infoGetText/){ .md-button }[infoLinkResolve](../infoLinkResolve/){ .md-button }[infoResponse](../infoResponse/){ .md-button }[infoFilter](../infoFilter/){ .md-button }[postInfoResponse](../postInfoResponse/){ .md-button }
+[dialogueFiltered](./dialogueFiltered.md){ .md-button }[infoGetText](./infoGetText.md){ .md-button }[infoLinkResolve](./infoLinkResolve.md){ .md-button }[infoResponse](./infoResponse.md){ .md-button }[infoFilter](./infoFilter.md){ .md-button }[postInfoResponse](./postInfoResponse.md){ .md-button }
 

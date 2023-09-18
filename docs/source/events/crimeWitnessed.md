@@ -23,13 +23,59 @@ event.register(tes3.event.crimeWitnessed, crimeWitnessedCallback)
 
 ## Event Data
 
-* `position` ([tes3vector3](../../types/tes3vector3)): *Read-only*. The position that the crime ocurred at.
+* `position` ([tes3vector3](../types/tes3vector3.md)): *Read-only*. The position that the crime ocurred at.
 * `realTimestamp` (number): *Read-only*. The timestamp that the crime ocurred at.
-* `type` (string): *Read-only*. The type of crime that was committed. The type can be "attack", "killing", "stealing", "pickpocket", "theft", "trespass", and "werewolf". Crime "theft" is raised when picking up owned items. Crime "trespass" is raised when lockpicking, probing or sleeping in owned beds.
-* `value` (number): *Read-only*. The bounty value of the crime.
-* `victim` ([tes3actor](../../types/tes3actor), [tes3faction](../../types/tes3faction)): *Read-only*. The victim of the crime, as a general actor base object or faction.
-* `victimFaction` ([tes3faction](../../types/tes3faction)): *Read-only*. The faction that the crime was against, assuming the victim is, or is in, one.
-* `victimMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile of the victim, if applicable, giving access to the unique victim.
-* `witness` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference that witnessed the crime.
-* `witnessMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the reference that witnessed the crime.
+* `type` (string): *Read-only*. The type of crime that was committed. The type can be "attack", "killing", "stealing", "pickpocket", "theft", "trespass", and "werewolf". Crime "theft" is raised when picking up owned items. Crime "trespass" is raised when lockpicking, probing, using Open magic on owned doors or chests and sleeping in owned beds.
+* `value` (number): *Read-only*. The total stolen items value of the crime. Only valid for thefts. See the example below to calculate the bounty incurred on each crime type.
+* `victim` ([tes3actor](../types/tes3actor.md), [tes3faction](../types/tes3faction.md)): *Read-only*. The victim of the crime, as a general actor base object or faction.
+* `victimFaction` ([tes3faction](../types/tes3faction.md)): *Read-only*. The faction that the crime was against, assuming the victim is, or is in, one.
+* `victimMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile of the victim, if applicable, giving access to the unique victim.
+* `witness` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference that witnessed the crime.
+* `witnessMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor of the reference that witnessed the crime.
+
+## Examples
+
+!!! example "Example: Getting bounty value after certain crime type"
+
+	```lua
+	
+	--- This function will return the bounty aquired after a certain
+	--- crime has been commited. To be used with crimeWitnessed event.
+	---@param e crimeWitnessedEventData
+	---@return number bountyValue
+	local function getBountyValue(e)
+		if e.type == "theft"
+		or e.type == "stealing" then
+			-- Calculate the bounty value for thefts. The default value for fCrimeStealing
+			-- is 1, so with vanilla settings it doesn't make a difference, but players
+			-- might have mods that alter this GMST, so we need to take it into account.
+			return e.value * tes3.findGMST(tes3.gmst.fCrimeStealing).value --[[@as number]]
+	
+		elseif e.type == "attack" then
+			return tes3.findGMST(tes3.gmst.iCrimeAttack).value --[[@as number]]
+	
+		elseif e.type == "killing" then
+			return tes3.findGMST(tes3.gmst.iCrimeKilling).value --[[@as number]]
+	
+		elseif e.type == "pickpocket" then
+			return tes3.findGMST(tes3.gmst.iCrimePickPocket).value --[[@as number]]
+	
+		elseif e.type == "trespass" then
+			return tes3.findGMST(tes3.gmst.iCrimeTrespass).value --[[@as number]]
+	
+		elseif e.type == "werewolf" then
+			return tes3.findGMST(tes3.gmst.iWerewolfBounty).value --[[@as number]]
+		end
+	
+		return 0
+	end
+	
+	---@param e crimeWitnessedEventData
+	local function onCrimeWitnessed(e)
+		local bounty = getBountyValue(e)
+		-- ...
+	end
+	event.register(tes3.event.crimeWitnessed, onCrimeWitnessed)
+
+	```
 

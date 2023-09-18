@@ -5,6 +5,7 @@
 --- A UI widget is a special interface to an element that offers functionality in a more friendly way.
 --- 
 --- Some core widget interfaces offered by MWSE include:
+--- 
 --- * [tes3uiButton](https://mwse.github.io/MWSE/types/tes3uiButton)
 --- * [tes3uiFillBar](https://mwse.github.io/MWSE/types/tes3uiFillBar)
 --- * [tes3uiParagraphInput](https://mwse.github.io/MWSE/types/tes3uiParagraphInput)

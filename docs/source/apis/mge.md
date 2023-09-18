@@ -17,7 +17,7 @@ Allows control of MGE camera features.
 
 **Returns**:
 
-* `result` ([mgeCameraConfig](../../types/mgeCameraConfig))
+* `result` ([mgeCameraConfig](../types/mgeCameraConfig.md))
 
 ***
 
@@ -28,7 +28,7 @@ Allows control of the camera.
 
 **Returns**:
 
-* `result` ([mgeDistantLandRenderConfig](../../types/mgeDistantLandRenderConfig))
+* `result` ([mgeDistantLandRenderConfig](../types/mgeDistantLandRenderConfig.md))
 
 ***
 
@@ -39,7 +39,7 @@ Allows control of render features.
 
 **Returns**:
 
-* `result` ([mgeRenderFeatures](../../types/mgeRenderFeatures))
+* `result` ([mgeRenderFeatures](../types/mgeRenderFeatures.md))
 
 ***
 
@@ -50,7 +50,7 @@ Allows control of shaders.
 
 **Returns**:
 
-* `result` ([mgeShadersConfig](../../types/mgeShadersConfig))
+* `result` ([mgeShadersConfig](../types/mgeShadersConfig.md))
 
 ***
 
@@ -61,7 +61,7 @@ Allows control of MGE weather features.
 
 **Returns**:
 
-* `result` ([mgeWeatherConfig](../../types/mgeWeatherConfig))
+* `result` ([mgeWeatherConfig](../types/mgeWeatherConfig.md))
 
 ***
 
@@ -123,7 +123,7 @@ local result = mge.getVersion()
 
 **Returns**:
 
-* `result` ([mgeVersionTable](../../types/mgeVersionTable))
+* `result` ([mgeVersionTable](../types/mgeVersionTable.md))
 
 ***
 

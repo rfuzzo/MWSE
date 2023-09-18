@@ -23,5 +23,5 @@ event.register(tes3.event.consoleReferenceChanged, consoleReferenceChangedCallba
 
 ## Event Data
 
-* `reference` ([tes3reference](../../types/tes3reference), nil): *Read-only*. The newly selected reference, or nil if nothing is now selected.
+* `reference` ([tes3reference](../types/tes3reference.md), nil): *Read-only*. The newly selected reference, or nil if nothing is now selected.
 

@@ -8,7 +8,7 @@
 
 This modifer applies force, constant over time, to particles in the parent niParticleSystemController.
 
-This type inherits the following: [niParticleModifier](../../types/niParticleModifier), [niObject](../../types/niObject)
+This type inherits the following: [niParticleModifier](../types/niParticleModifier.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ Access to the generic time controller for particle systems.
 
 **Returns**:
 
-* `result` ([niParticleSystemController](../../types/niParticleSystemController))
+* `result` ([niParticleSystemController](../types/niParticleSystemController.md))
 
 ***
 
@@ -40,7 +40,7 @@ The direction of action for planar gravity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -75,7 +75,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier))
+* `result` ([niParticleModifier](../types/niParticleModifier.md))
 
 ***
 
@@ -86,7 +86,7 @@ The position of the center used when applying spherical gravity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -108,7 +108,7 @@ The position of the center used when applying spherical gravity.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -119,7 +119,7 @@ The position of the center used when applying spherical gravity.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -136,7 +136,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

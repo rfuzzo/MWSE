@@ -21,9 +21,9 @@ event.register(tes3.event.filterSoulGemTarget, filterSoulGemTargetCallback)
 ## Event Data
 
 * `filter` (boolean): Setting this to `false` or `nil` will prevent the `mobile`'s soul to end up in the `soulGem`. Setting this to `true` will make the opposite.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor whose soul is to be soultrapped.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference.
-* `soulGem` ([tes3misc](../../types/tes3misc)): *Read-only*. The soul gem object.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor whose soul is to be soultrapped.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference.
+* `soulGem` ([tes3misc](../types/tes3misc.md)): *Read-only*. The soul gem object.
 
 ## Examples
 

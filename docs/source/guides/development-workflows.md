@@ -10,7 +10,7 @@ A development workflow is the environment and processes used to facilitate softw
 
 ## Requirements
 
-All workflows require an installation of [Visual Studio Code](https://code.visualstudio.com). After it is installed, we will also need some Lua-focused extensions. You will also need to make sure that MWSE is up to date. [Install](../#installation) MWSE and run MWSE-Update.
+All workflows require an installation of [Visual Studio Code](https://code.visualstudio.com). After it is installed, we will also need some Lua-focused extensions. You will also need to make sure that MWSE is up to date. [Install](../index.md#installation) MWSE and run MWSE-Update.
 
 The simplest way to install these extensions is to open the `Data Files\MWSE` folder in Visual Studio Code using `File > Open Folder`. A prompt should show up to install a few extensions.
 

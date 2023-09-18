@@ -20,12 +20,12 @@ event.register(tes3.event.calcSpellmakingPrice, calcSpellmakingPriceCallback)
 
 ## Event Data
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the spellmaking service npc the player is interacting with.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor of the spellmaking service npc the player is interacting with.
 * `price` (number): The price of the spell.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. Mobile's related reference.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. Mobile's related reference.
 
 
 ## Related events
 
-[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+[calcBarterPrice](./calcBarterPrice.md){ .md-button }[calcEnchantmentPrice](./calcEnchantmentPrice.md){ .md-button }[calcRepairPrice](./calcRepairPrice.md){ .md-button }[calcSpellmakingPrice](./calcSpellmakingPrice.md){ .md-button }[calcSpellPrice](./calcSpellPrice.md){ .md-button }[calcTrainingPrice](./calcTrainingPrice.md){ .md-button }[calcTravelPrice](./calcTravelPrice.md){ .md-button }
 

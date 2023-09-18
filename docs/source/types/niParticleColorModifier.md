@@ -8,7 +8,7 @@
 
 This modifer alters the color of each particle as it ages.
 
-This type inherits the following: [niParticleModifier](../../types/niParticleModifier), [niObject](../../types/niObject)
+This type inherits the following: [niParticleModifier](../types/niParticleModifier.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `colorData`
@@ -18,7 +18,7 @@ The parameters for this modifier.
 
 **Returns**:
 
-* `result` ([niColorData](../../types/niColorData))
+* `result` ([niColorData](../types/niColorData.md))
 
 ***
 
@@ -29,7 +29,7 @@ Access to the generic time controller for particle systems.
 
 **Returns**:
 
-* `result` ([niParticleSystemController](../../types/niParticleSystemController))
+* `result` ([niParticleSystemController](../types/niParticleSystemController.md))
 
 ***
 
@@ -40,7 +40,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier))
+* `result` ([niParticleModifier](../types/niParticleModifier.md))
 
 ***
 
@@ -62,7 +62,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -73,7 +73,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -90,7 +90,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

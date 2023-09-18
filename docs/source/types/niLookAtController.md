@@ -10,7 +10,7 @@ Orients an axis of the controlled object towards a lookAt target. The axis is se
 
 Warning: The lookAt property is not reference counted, so this controller must be removed, or lookAt set to nil before the lookAt object is deleted.
 
-This type inherits the following: [niTimeController](../../types/niTimeController), [niObject](../../types/niObject)
+This type inherits the following: [niTimeController](../types/niTimeController.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `active`
@@ -128,7 +128,7 @@ The object that this controller will point towards. This is not a reference coun
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -150,7 +150,7 @@ The next animation controller in the list of controllers containing the calling 
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -183,7 +183,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -194,7 +194,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -216,7 +216,7 @@ The time at which the animation controller starts playing its animation.
 
 **Returns**:
 
-* `result` ([niObjectNET](../../types/niObjectNET))
+* `result` ([niObjectNET](../types/niObjectNET.md))
 
 ***
 
@@ -233,7 +233,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -305,7 +305,7 @@ myObject:setTarget(target)
 
 **Parameters**:
 
-* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+* `target` ([niObjectNET](../types/niObjectNET.md)): The new target to assign.
 
 ***
 

@@ -17,7 +17,7 @@ The 1st row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4))
+* `result` ([tes3vector4](../types/tes3vector4.md))
 
 ***
 
@@ -28,7 +28,7 @@ The 2nd row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4))
+* `result` ([tes3vector4](../types/tes3vector4.md))
 
 ***
 
@@ -39,7 +39,7 @@ The 3rd row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4))
+* `result` ([tes3vector4](../types/tes3vector4.md))
 
 ***
 
@@ -50,7 +50,7 @@ The 4th row of the matrix.
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4))
+* `result` ([tes3vector4](../types/tes3vector4.md))
 
 ***
 
@@ -82,7 +82,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([tes3matrix44](../../types/tes3matrix44))
+* `result` ([tes3matrix44](../types/tes3matrix44.md))
 
 ***
 
@@ -110,10 +110,10 @@ local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, 
 
 **Parameters**:
 
-* `w0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
-* `x0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
-* `y0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
-* `z0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
+* `w0` (number, [tes3vector4](../types/tes3vector4.md)): *Default*: `0`.
+* `x0` (number, [tes3vector4](../types/tes3vector4.md)): *Default*: `0`.
+* `y0` (number, [tes3vector4](../types/tes3vector4.md)): *Default*: `0`.
+* `z0` (number, [tes3vector4](../types/tes3vector4.md)): *Default*: `0`.
 * `w1` (number): *Default*: `0`.
 * `x1` (number): *Default*: `0`.
 * `y1` (number): *Default*: `0`.
@@ -129,7 +129,7 @@ local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, 
 
 **Returns**:
 
-* `matrix` ([tes3matrix44](../../types/tes3matrix44))
+* `matrix` ([tes3matrix44](../types/tes3matrix44.md))
 
 ***
 
@@ -139,7 +139,7 @@ local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, 
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3matrix44](../../types/tes3matrix44) | [tes3matrix44](../../types/tes3matrix44) | [tes3matrix44](../../types/tes3matrix44) | The matrix addition. |
+| [tes3matrix44](../types/tes3matrix44.md) | [tes3matrix44](../types/tes3matrix44.md) | [tes3matrix44](../types/tes3matrix44.md) | The matrix addition. |
 
 ***
 
@@ -147,8 +147,8 @@ local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, 
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3matrix44](../../types/tes3matrix44) | [tes3matrix44](../../types/tes3matrix44) | [tes3matrix44](../../types/tes3matrix44) | The matrix multiplication. Geometrically, this will concatenate the transformations of both matrices in the resulting matrix. |
-| [tes3matrix44](../../types/tes3matrix44) | number | [tes3matrix44](../../types/tes3matrix44) | Multiplies the matrix by a scalar. |
+| [tes3matrix44](../types/tes3matrix44.md) | [tes3matrix44](../types/tes3matrix44.md) | [tes3matrix44](../types/tes3matrix44.md) | The matrix multiplication. Geometrically, this will concatenate the transformations of both matrices in the resulting matrix. |
+| [tes3matrix44](../types/tes3matrix44.md) | number | [tes3matrix44](../types/tes3matrix44.md) | Multiplies the matrix by a scalar. |
 
 ***
 
@@ -156,5 +156,5 @@ local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, 
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [tes3matrix44](../../types/tes3matrix44) | [tes3matrix44](../../types/tes3matrix44) | [tes3matrix44](../../types/tes3matrix44) | The matrix subtraction. |
+| [tes3matrix44](../types/tes3matrix44.md) | [tes3matrix44](../types/tes3matrix44.md) | [tes3matrix44](../types/tes3matrix44.md) | The matrix subtraction. |
 

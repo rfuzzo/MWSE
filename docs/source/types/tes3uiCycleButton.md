@@ -8,7 +8,7 @@
 
 A structure containing properties specific to cycle buttons.
 
-This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
+This type inherits the following: [tes3uiWidget](../types/tes3uiWidget.md)
 ## Properties
 
 ### `element`
@@ -18,7 +18,7 @@ Access back to the element this widget interface is for.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -40,7 +40,7 @@ The options available to the cycle button. Setting this value will reset the act
 
 **Returns**:
 
-* `result` ([tes3uiCycleButtonOption](../../types/tes3uiCycleButtonOption)[])
+* `result` ([tes3uiCycleButtonOption](../types/tes3uiCycleButtonOption.md)[])
 
 ***
 
@@ -79,7 +79,7 @@ myObject:addOption(option)
 
 **Parameters**:
 
-* `option` ([tes3uiCycleButtonOption](../../types/tes3uiCycleButtonOption)): The option to add to the last position.
+* `option` ([tes3uiCycleButtonOption](../types/tes3uiCycleButtonOption.md)): The option to add to the last position.
 
 ***
 
@@ -113,7 +113,7 @@ local element = myObject:getTextElement()
 
 **Returns**:
 
-* `element` ([tes3uiElement](../../types/tes3uiElement)): The `tes3uiElement` containing the button's text.
+* `element` ([tes3uiElement](../types/tes3uiElement.md)): The `tes3uiElement` containing the button's text.
 
 ***
 

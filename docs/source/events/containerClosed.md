@@ -20,5 +20,5 @@ event.register(tes3.event.containerClosed, containerClosedCallback)
 
 ## Event Data
 
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference of the container that was closed.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference of the container that was closed.
 

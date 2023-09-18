@@ -9,7 +9,7 @@
 --- 
 --- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field distance number The combat distance.
---- @field lastUseTimestamp number No description yet available.
+--- @field lastUseTimestamp number Used by the MCP to implement enchanted item cooldown.
 --- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. Convenience access back to the associated actor.
 --- @field potionUseFlag number No description yet available.
 --- @field selectedAction integer The next action. From observed behavior, this roughly maps to:
@@ -17,16 +17,16 @@
 --- Value | Behavior
 --- ----- | ---------
 --- 0     | Undecided
---- 1	  | Use melee weapon
---- 2	  | Use marksman weapon
---- 3	  | Use hand to hand attacks
---- 4	  | Use on-touch offensive spell
---- 5	  | Use on-target offensive spell
---- 6	  | Use summon spell
---- 7	  | Flee
---- 8	  | Cast on-self empowering spell (For example, Ancestor Guardian)
---- 9	  | MaybeEquipUseItem?
---- 10	  | Use enchanted item
+--- 1     | Use melee weapon
+--- 2     | Use marksman weapon
+--- 3     | Use hand to hand attacks
+--- 4     | Use on-touch offensive spell
+--- 5     | Use on-target offensive spell
+--- 6     | Use summon spell
+--- 7     | Flee
+--- 8     | Cast on-self empowering spell (For example, Ancestor Guardian)
+--- 9     | MaybeEquipUseItem?
+--- 10    | Use enchanted item
 --- 
 --- @field selectedItem tes3itemStack A potion or an enchanted item whose spell will be used.
 --- @field selectedShield tes3equipmentStack *Read-only*. No description yet available.
@@ -40,7 +40,7 @@ tes3combatSession = {}
 function tes3combatSession:changeEquipment(equipmentStack) end
 
 --- Selects the alchemy item with the greatest value, for a given effect ID and loads it into the `selectedItem` property.
---- @param id integer No description yet available.
+--- @param id integer Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 --- @return number result No description yet available.
 function tes3combatSession:selectAlchemyWithEffect(id) end
 

@@ -31,6 +31,8 @@
 tes3game = {}
 
 --- Clears data related to activation, resetting what the player can activate.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3game/#cleartarget).
 function tes3game:clearTarget() end
 
 --- Saves all options menu settings, including those changed by editing controller variables. Writes to the Windows registry.
