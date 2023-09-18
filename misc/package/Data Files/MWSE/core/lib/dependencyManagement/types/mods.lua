@@ -32,8 +32,7 @@ local function getDownloadButton(modId, dependency, text)
             text = string.format("%s %s", text or "Download", modId),
             tooltip = string.format('Go to "%s"', dependency.url),
             callback = function()
-                local downloadExe = string.format('start %s', dependency.url)
-                os.execute(downloadExe)
+                os.openURL(dependency.url)
                 os.exit()
             end
         }
