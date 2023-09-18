@@ -1,4 +1,3 @@
----@enum tes3.animationState
 return {
 	["idle"] = 0,
 	["ready"] = 1,

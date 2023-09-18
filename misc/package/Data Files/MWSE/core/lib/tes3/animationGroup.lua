@@ -1,4 +1,3 @@
----@enum tes3.animationGroup
 return {
 	["idle"] = 0x0,
 	["idle2"] = 0x1,

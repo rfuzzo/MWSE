@@ -1,4 +1,3 @@
----@enum tes3.actionFlag
 return {
 	["useEnabled"] = 0x1,
 	["onActivate"] = 0x2,

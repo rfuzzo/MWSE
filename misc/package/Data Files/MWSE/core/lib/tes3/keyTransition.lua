@@ -1,5 +1,4 @@
 
----@enum tes3.keyTransition
 return {
 	["isDown"] = 1,
 	["downThisFrame"] = 2,

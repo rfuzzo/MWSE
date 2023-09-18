@@ -1,4 +1,3 @@
----@enum tes3.skill
 return {
 	["block"] = 0,
 	["armorer"] = 1,

@@ -1,4 +1,3 @@
----@enum tes3.objectType
 return {
 	["activator"] = 1230259009,
 	["alchemy"] = 1212369985,

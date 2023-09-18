@@ -1,4 +1,3 @@
----@enum tes3.creatureType
 return {
 	["normal"] = 0,
 	["daedra"] = 1,

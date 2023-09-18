@@ -52,7 +52,7 @@ end
 
 --- Only write table when necessary: for library packages or classes that
 --- have one or more methods or functions. This the avoids creation of tables
---- in the global namespace for virtual types - types that only existent
+--- in the global namespace for virtual types - types that only exist
 --- in the annotations.
 --- @param package packageClass
 --- @return boolean
@@ -236,6 +236,29 @@ local function buildParentChain(className)
 	return className
 end
 
+---@param namespace string Should look like: `"tes3.enumName.subEnumName"` or `"tes3.enumName"`. For example, `"tes3.activeBodyPart"` or `"tes3.dialoguePage.greeting"`.
+---@param keys string[] These are the keys of the table to build.
+---@param file file* The file to write to.
+local function buildAlias(namespace, keys, file)
+	file:write(string.format("--- @alias %s\n", namespace))
+	for _, key in ipairs(keys) do
+		if type(key) == "number" then
+			key = "[" .. key .. "]"
+		else
+			-- Capture "^[_%a]" matches all the letters + underscore -> valid first letter of lua identifier
+			-- Capture "[_%w]*$" matches all the letters + digits + underscore -> OK inside the key name
+			local enclose = not key:match("^[_%a][_%w]*$")
+			if enclose then
+				key = "[\"" .. key .. "\"]"
+			else
+				key = "." .. key
+			end
+		end
+		file:write(string.format("---| `%s%s`\n", namespace, key))
+	end
+	file:write("\n")
+end
+
 local function buildExternalRequires(package, file)
 	local fileBlacklist = {
 		["init"] = true,
@@ -246,7 +269,20 @@ local function buildExternalRequires(package, file)
 		if (extension == "lua") then
 			local filename = entry:match("[^/]+$"):sub(1, -1 * (#extension + 2))
 			if (not fileBlacklist[filename]) then
-				file:write(string.format('%s.%s = require("%s.%s")\n', package.key, filename, package.key, filename))
+				file:write(string.format('%s.%s = require("%s.%s")\n\n', package.key, filename, package.key, filename))
+
+				local enumerationTable = dofile(lfs.join(directory, entry))
+				local keys = table.keys(enumerationTable, true)
+				local namespace = package.key .. "." .. filename
+				if type(enumerationTable[keys[1]]) == "table" then
+					for subNamespace, subEnumeration in pairs(enumerationTable) do
+						local completeNamespace = namespace .. "." .. subNamespace
+						local keys = table.keys(subEnumeration, true)
+						buildAlias(completeNamespace, keys, file)
+					end
+				else
+					buildAlias(namespace, keys, file)
+				end
 			end
 		end
 	end

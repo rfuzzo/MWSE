@@ -1,4 +1,3 @@
----@enum tes3.skillName
 return {
 	[0] = "Block",
 	[1] = "Armorer",

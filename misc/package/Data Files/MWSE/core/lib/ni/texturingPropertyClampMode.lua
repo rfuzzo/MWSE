@@ -1,4 +1,3 @@
----@enum ni.texturingPropertyClampMode
 return {
 	["clampSclampT"] = 0,
 	["clampSwrapT"] = 1,

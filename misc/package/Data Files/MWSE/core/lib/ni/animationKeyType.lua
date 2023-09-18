@@ -1,4 +1,3 @@
----@enum ni.animationKeyType
 return {
 	["noInterp"] = 0,
 	["linear"] = 1,

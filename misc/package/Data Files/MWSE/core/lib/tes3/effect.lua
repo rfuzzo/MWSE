@@ -1,4 +1,3 @@
----@enum tes3.effect
 return {
 	["waterBreathing"] = 0,
 	["swiftSwim"] = 1,
