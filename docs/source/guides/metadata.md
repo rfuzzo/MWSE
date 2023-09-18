@@ -193,6 +193,21 @@ The following dependencies are available:
 
 		```
 
+-  `mcp`
+
+	A dependency on specific Morrowind Code Patch Features. Pass a list of features and the state the feature needs to be: enabled (true) or disabled (false). You can see the [list of MCP features here](https://mwse.github.io/MWSE/references/code-patch-features/). You only need to pass the feature name, for example `"creatureVoiceoverEnable"``.
+
+	Example:
+
+	```toml
+		[dependencies.mcp.features]
+		# The following MCP feature needs to be enabled
+		creatureVoiceoverEnable = true
+		# The mod is uncompatible with the following MCP feature,
+		# it needs to be disabled for the mod to work properly
+		arrowDenocker = false
+	```
+
 ## Versions
 
 The version strings in `[package]`, `[dependencies.mge-xe]` and `[dependencies.mods]` uses semver (Semantic Versioning) format. This consists of three numbers separated by periods, such as `1.2.3`. The first number is the `major` version, the second is the `minor` version, and the third is the `patch` version. You should increment the major version when you make a breaking change, the minor version when you add new features, and the patch version when you make bug fixes.
@@ -263,4 +278,12 @@ plugin = "OAAB_Data.esm"
 [dependencies.mods."My Other Mod"]
 version = ">=7.8.9"
 url = "https://www.nexusmods.com/morrowind/mods/52116"
+
+# Check if user has specific MCP feature enabled or disabled
+[dependencies.mcp.features]
+# The following MCP feature needs to be enabled
+creatureVoiceoverEnable = true
+# The mod is uncompatible with the following MCP feature,
+# it needs to be disabled for the mod to work properly
+arrowDenocker = false
 ```
