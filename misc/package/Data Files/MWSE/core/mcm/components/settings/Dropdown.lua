@@ -74,23 +74,25 @@ function Dropdown:createDropdown()
 			end
 		end
 		self.elements.dropdown = dropdown
-		dropdown:getTopLevelParent():updateLayout()
+		dropdown:getTopLevelMenu():updateLayout()
 
 		-- Destroy dropdown
 	else
 		self.elements.dropdownParent:destroyChildren()
 		self.dropdownActive = false
-		self.elements.dropdownParent:getTopLevelParent():updateLayout()
+		self.elements.dropdownParent:getTopLevelMenu():updateLayout()
 	end
 
 	--- @param element tes3uiElement
 	local function recursiveContentsChanged(element)
-		if element then
-			if element.widget and element.widget.contentsChanged then
-				element.widget:contentsChanged()
-			end
-			recursiveContentsChanged(element.parent)
+		if not element then
+			return
 		end
+
+		if element.widget and element.widget.contentsChanged then
+			element.widget:contentsChanged()
+		end
+		recursiveContentsChanged(element.parent)
 	end
 	-- Recursively go back to parent and call contentsChanged because scrolling is affected.
 	recursiveContentsChanged(self.elements.outerContainer.parent)

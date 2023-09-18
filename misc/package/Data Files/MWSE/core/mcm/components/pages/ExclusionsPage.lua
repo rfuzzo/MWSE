@@ -67,13 +67,12 @@ local function getSortedObjectList(params)
 	for obj in tes3.iterateObjects(params.objectType) do
 		local doAdd = true
 		-- Check that all filters match
-		if params.objectFilters then
-			for field, value in pairs(params.objectFilters) do
-				if obj[field] ~= value then
-					doAdd = false
-				end
+		for field, value in pairs(params.objectFilters or {}) do
+			if obj[field] ~= value then
+				doAdd = false
 			end
 		end
+
 		if params.noScripted and obj.script ~= nil then
 			doAdd = false
 		end
@@ -123,27 +122,25 @@ function ExclusionsPage:toggle(e)
 
 	-- update sorting
 	local container = list:getContentElement()
-	for i, child in pairs(container.children) do
-		if child.text > text then
-			container:reorderChildren(i - 1, -1, 1)
-			break
-		end
-	end
+	container:sortChildren(function(a, b)
+			return a.text < b.text
+	end)
+
 	-- update display
-	self.elements.outerContainer:getTopLevelParent():updateLayout()
+	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
 
 --- @param listName mwseMCMExclusionsPageListId
 function ExclusionsPage:updateSearch(listName)
 
-	local searchString = self.elements.searchBarInput[listName].text --[[@as string]]
+	local searchString = self.elements.searchBarInput[listName].text:lower() --[[@as string]]
 	local thisList = self.elements[listName] --[[@as tes3uiElement]]
 	local child = thisList:findChild(itemID)
 
 	if child then
 		local itemList = child.parent.children
 		for _, item in ipairs(itemList) do
-			if item.text:lower():find(searchString:lower(), 1, true) then
+			if item.text:lower():find(searchString, 1, true) then
 				item.visible = true
 			else
 				item.visible = false
@@ -152,7 +149,7 @@ function ExclusionsPage:updateSearch(listName)
 	end
 
 	self.elements[listName].widget:contentsChanged()
-	self.elements.outerContainer:getTopLevelParent():updateLayout()
+	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
 
 --- @param items string[]
@@ -434,16 +431,18 @@ end
 
 --- @param parentBlock tes3uiElement
 function ExclusionsPage:createDescription(parentBlock)
-	if self.description then
-		local description = parentBlock:createLabel{ text = self.description }
-		-- description.heightProportional = -1
-		description.autoHeight = true
-		description.widthProportional = 1.0
-		description.wrapText = true
-		description.borderLeft = self.indent
-		description.borderRight = self.indent
-		self.elements.description = description
+	if not self.description then
+		return
 	end
+
+	local description = parentBlock:createLabel{ text = self.description }
+	-- description.heightProportional = -1
+	description.autoHeight = true
+	description.widthProportional = 1.0
+	description.wrapText = true
+	description.borderLeft = self.indent
+	description.borderRight = self.indent
+	self.elements.description = description
 end
 
 --- @param parentBlock tes3uiElement

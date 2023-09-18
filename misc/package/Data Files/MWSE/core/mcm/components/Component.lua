@@ -108,7 +108,7 @@ function Component:getComponent(componentData)
 	for _, path in pairs(classPaths.components) do
 		local classPath = (path .. componentData.class)
 		local fullPath = lfs.currentdir() .. classPaths.basePath .. classPath .. ".lua"
-		local fileExists = lfs.attributes(fullPath, "mode") == "file"
+		local fileExists = lfs.fileexists(fullPath)
 
 		if fileExists then
 			component = require(classPath)
@@ -126,17 +126,15 @@ end
 
 --- @param mouseOverList tes3uiElement[]?
 function Component:registerMouseOverElements(mouseOverList)
-	if mouseOverList then
-		for _, element in ipairs(mouseOverList) do
-			element:register("mouseOver", function(e)
-				event.trigger("MCM:MouseOver", self)
-				e.source:forwardEvent(e)
-			end)
-			element:register("mouseLeave", function(e)
-				event.trigger("MCM:MouseLeave")
-				e.source:forwardEvent(e)
-			end)
-		end
+	for _, element in ipairs(mouseOverList or {}) do
+		element:register("mouseOver", function(e)
+			event.trigger("MCM:MouseOver", self)
+			e.source:forwardEvent(e)
+		end)
+		element:register("mouseLeave", function(e)
+			event.trigger("MCM:MouseLeave")
+			e.source:forwardEvent(e)
+		end)
 	end
 end
 
@@ -177,21 +175,23 @@ end
 
 --- @param parentBlock tes3uiElement
 function Component:createLabel(parentBlock)
-	if self.label then
-		self:createLabelBlock(parentBlock)
-
-		local id = ("Label: " .. self.label)
-		local label = self.elements.labelBlock:createLabel({ id = tes3ui.registerID(id), text = self.label })
-		label.borderBottom = self.paddingBottom
-		label.borderAllSides = 0
-		label.paddingAllSides = 0
-		label.wrapText = true
-		label.widthProportional = 1.0
-		label.alignY = 0.5
-
-		self.elements.label = label
-		table.insert(self.mouseOvers, label)
+	if not self.label then
+		return
 	end
+
+	self:createLabelBlock(parentBlock)
+
+	local id = ("Label: " .. self.label)
+	local label = self.elements.labelBlock:createLabel({ id = tes3ui.registerID(id), text = self.label })
+	label.borderBottom = self.paddingBottom
+	label.borderAllSides = 0
+	label.paddingAllSides = 0
+	label.wrapText = true
+	label.widthProportional = 1.0
+	label.childAlignY = 0.5
+
+	self.elements.label = label
+	table.insert(self.mouseOvers, label)
 end
 
 --[[

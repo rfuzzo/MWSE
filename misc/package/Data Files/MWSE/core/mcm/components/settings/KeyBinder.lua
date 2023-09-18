@@ -32,13 +32,11 @@ end
 --- @param keyCode integer
 --- @return string|nil letter
 function KeyBinder:getLetter(keyCode)
-	for letter, code in pairs(tes3.scanCode) do
-		if code == keyCode then
-			local returnString = tes3.scanCodeToNumber[code] or letter
-			return string.upper(returnString)
-		end
+	local letter = table.find(tes3.scanCode, keyCode)
+	local returnString = tes3.scanCodeToNumber[keyCode] or letter
+	if returnString then
+		return string.upper(returnString)
 	end
-	return nil
 end
 
 --- @param keyCombo mwseKeyCombo

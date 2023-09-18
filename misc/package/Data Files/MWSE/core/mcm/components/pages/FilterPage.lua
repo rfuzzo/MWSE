@@ -9,12 +9,18 @@ local FilterPage = Parent:new()
 FilterPage.placeholderSearchText = mwse.mcm.i18n("Search...")
 
 function FilterPage:filterComponents()
+	local searchText = self.elements.searchBarInput.text:lower()
 	for _, component in ipairs(self.components) do
 		-- look for search text inside setting label
-		if component.label:lower():find(self.elements.searchBarInput.text:lower()) then
-			component.elements.outerContainer.visible = true
-		else
-			component.elements.outerContainer.visible = false
+		local label = component.label and component.label:lower()
+		if label then
+			if label:find(searchText) then
+				component.elements.outerContainer.visible = true
+			else
+				component.elements.outerContainer.visible = false
+			end
+
+			-- Do nothing for components without a label.
 		end
 	end
 end
@@ -23,13 +29,15 @@ end
 
 --- @param parentBlock tes3uiElement
 function FilterPage:createDescription(parentBlock)
-	if self.description then
-		local description = parentBlock:createLabel{ text = self.description }
-		description.autoHeight = true
-		description.widthProportional = 1.0
-		description.wrapText = true
-		self.elements.description = description
+	if not self.description then
+		return
 	end
+
+	local description = parentBlock:createLabel{ text = self.description }
+	description.autoHeight = true
+	description.widthProportional = 1.0
+	description.wrapText = true
+	self.elements.description = description
 end
 
 --- @param parentBlock tes3uiElement

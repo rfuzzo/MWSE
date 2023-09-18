@@ -102,13 +102,11 @@ end
 --- @param parentBlock tes3uiElement
 --- @param components mwseMCMComponent.getComponent.componentData[]
 function Category:createSubcomponents(parentBlock, components)
-	if components then
-		for _, component in pairs(components) do
-			component.parentComponent = self
-			local newComponent = self:getComponent(component)
+	for _, component in pairs(components or {}) do
+		component.parentComponent = self
+		local newComponent = self:getComponent(component)
 
-			newComponent:create(parentBlock)
-		end
+		newComponent:create(parentBlock)
 	end
 end
 
@@ -118,7 +116,7 @@ function Category:createContentsContainer(parentBlock)
 	self:createInnerContainer(parentBlock)
 	self:createSubcomponentsContainer(self.elements.innerContainer)
 	self:createSubcomponents(self.elements.subcomponentsContainer, self.components)
-	parentBlock:getTopLevelParent():updateLayout()
+	parentBlock:getTopLevelMenu():updateLayout()
 end
 
 function Category.__index(tbl, key)
@@ -133,7 +131,7 @@ function Category.__index(tbl, key)
 
 			local classPath = (path .. class)
 			local fullPath = lfs.currentdir() .. classPaths.basePath .. classPath .. ".lua"
-			local fileExists = lfs.attributes(fullPath, "mode") == "file"
+			local fileExists = lfs.fileexists(fullPath)
 
 			if fileExists then
 				component = require(classPath)

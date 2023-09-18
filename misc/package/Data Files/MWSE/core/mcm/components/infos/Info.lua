@@ -46,7 +46,7 @@ function Info:makeComponent(parentBlock)
 	self.elements.info = info
 	table.insert(self.mouseOvers, info)
 	self:update()
-	info:getTopLevelParent():updateLayout()
+	info:getTopLevelMenu():updateLayout()
 end
 
 return Info

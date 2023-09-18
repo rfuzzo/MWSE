@@ -34,28 +34,28 @@ function PlayerDataVar:get()
 			current[self.id] = self.defaultSetting
 		end
 		return current[self.id]
-	else
-		return self.defaultSetting
 	end
 
-	return nil
+	return self.defaultSetting
 end
 
 --- @param newValue unknown
 function PlayerDataVar:set(newValue)
-	if tes3.player then
-		local converter = self.converter
-		if (converter) then
-			newValue = converter(newValue)
-		end
-
-		local table = tes3.player.data
-		for v in string.gmatch(self.path, "[^%.]+") do
-			table = table[v]
-		end
-
-		table[self.id] = newValue
+	if not tes3.player then
+		return
 	end
+
+	local converter = self.converter
+	if (converter) then
+		newValue = converter(newValue)
+	end
+
+	local table = tes3.player.data
+	for v in string.gmatch(self.path, "[^%.]+") do
+		table = table[v]
+	end
+
+	table[self.id] = newValue
 end
 
 return PlayerDataVar
