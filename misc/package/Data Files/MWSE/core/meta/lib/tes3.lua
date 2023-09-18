@@ -3852,6 +3852,7 @@ tes3.event = require("tes3.event")
 ---| `tes3.event.magicCasted`
 ---| `tes3.event.magicEffectRemoved`
 ---| `tes3.event.magicEffectsResolved`
+---| `tes3.event.magicSelectionChanged`
 ---| `tes3.event.menuEnter`
 ---| `tes3.event.menuExit`
 ---| `tes3.event.meshLoad`
