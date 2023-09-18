@@ -1,4 +1,3 @@
----@enum tes3.contentType
 return {
 	layout = "layout",
 	model = "model",

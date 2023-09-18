@@ -1,4 +1,3 @@
----@enum tes3.keybind
 return {
 	["forward"] = 0,
 	["back"] = 1,

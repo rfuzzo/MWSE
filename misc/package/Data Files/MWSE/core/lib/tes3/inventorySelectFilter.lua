@@ -1,4 +1,3 @@
----@enum tes3.inventorySelectFilter
 return {
 	alembic = "alembic",
 	calcinator = "calcinator",

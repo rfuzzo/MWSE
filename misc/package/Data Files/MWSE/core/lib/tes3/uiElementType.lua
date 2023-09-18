@@ -1,4 +1,3 @@
----@enum tes3.uiElementType
 return {
 	button = "button",
 	fillbar = "fillbar",

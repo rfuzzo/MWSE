@@ -1,4 +1,3 @@
----@enum ni.particleBombSymmetryType
 return {
 	["spherical"] = 0,
 	["cylindrical"] = 1,

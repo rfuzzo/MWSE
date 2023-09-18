@@ -1,4 +1,3 @@
----@enum tes3.merchantService
 return {
 	["spells"] = 0x800,
 	["training"] = 0x4000,

@@ -1,4 +1,3 @@
----@enum tes3.effectEventType
 return {
 	["bool"] = 0,
 	["boolean"] = 0,

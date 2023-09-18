@@ -1,4 +1,3 @@
----@enum tes3.dialoguePage
 return {
 	["voice"] = {
 		["hello"] = 0,

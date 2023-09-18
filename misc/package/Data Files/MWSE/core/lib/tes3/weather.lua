@@ -1,4 +1,3 @@
----@enum tes3.weather
 return {
 	["clear"] = 0,
 	["cloudy"] = 1,

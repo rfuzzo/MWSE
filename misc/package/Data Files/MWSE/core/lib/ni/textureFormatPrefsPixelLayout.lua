@@ -1,4 +1,3 @@
----@enum ni.textureFormatPrefsPixelLayout
 return {
 	["palettized8"] = 0,
 	["highColor16"] = 1,
