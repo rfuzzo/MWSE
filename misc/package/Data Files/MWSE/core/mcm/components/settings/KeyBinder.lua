@@ -2,9 +2,9 @@
 	Button Setting for binding a key combination. Variable returned in the form:
 		{
 			keyCode = tes3.scanCode,
-			isAltPressed = true/false,
-			isShiftPressed = true/false,
-			isCtrlPressed = true/false
+			isAltDown = true/false,
+			isShiftDown = true/false,
+			isControlDown = true/false
 		}
 ]]--
 
@@ -29,7 +29,7 @@ function KeyBinder:getText()
 	return self:getComboString(self.variable.value)
 end
 
---- @param keyCode integer
+--- @param keyCode integer|nil
 --- @return string|nil letter
 function KeyBinder:getLetter(keyCode)
 	local letter = table.find(tes3.scanCode, keyCode)
@@ -46,7 +46,8 @@ function KeyBinder:getComboString(keyCombo)
 	-- otherwise just "X" (X being the key being pressed)
 	-- And so on for Alt and Ctrl
 
-	local letter = self:getLetter(keyCombo.keyCode) or string.format("{%s}", mwse.mcm.i18n("unknown key"))
+	local keyCode = keyCombo.keyCode
+	local letter = self:getLetter(keyCode) or string.format("{%s}", mwse.mcm.i18n("unknown key"))
 
 	-- if you set allowCombinations to false, nothing functionally changes
 	-- but the player doesn't see the prefix
@@ -54,12 +55,12 @@ function KeyBinder:getComboString(keyCombo)
 		return letter
 	end
 
-	local hasAlt = (keyCombo.isAltDown and keyCombo.keyCode ~= tes3.scanCode.lAlt and keyCombo.keyCode ~=
-	               tes3.scanCode.rAlt)
-	local hasShift = (keyCombo.isShiftDown and keyCombo.keyCode ~= tes3.scanCode.lShift and keyCombo.keyCode ~=
-	                 tes3.scanCode.rShift)
-	local hasCtrl = (keyCombo.isControlDown and keyCombo.keyCode ~= tes3.scanCode.lCtrl and keyCombo.keyCode ~=
-	                tes3.scanCode.rCtrl)
+	local hasAlt = (keyCombo.isAltDown and keyCode ~= tes3.scanCode.lAlt
+	                                   and keyCode ~= tes3.scanCode.rAlt)
+	local hasShift = (keyCombo.isShiftDown and keyCode ~= tes3.scanCode.lShift
+	                                       and keyCode ~= tes3.scanCode.rShift)
+	local hasCtrl = (keyCombo.isControlDown and keyCode ~= tes3.scanCode.lCtrl
+	                                        and keyCode ~= tes3.scanCode.rCtrl)
 	local prefix = (hasAlt and "Alt-" or hasShift and "Shift-" or hasCtrl and "Ctrl-" or "")
 	return (prefix .. letter)
 end
@@ -115,9 +116,9 @@ function KeyBinder:showKeyBindMessage(keyCombo)
 	tes3.messageBox({
 		message = message,
 		buttons = { self.sOkay, self.sCancel },
-		callback = (function(e)
+		callback = function(e)
 			self:bindKey(e)
-		end),
+		end,
 	})
 end
 

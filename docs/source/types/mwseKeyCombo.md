@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-An table with the data about a key or key combination on the keyboard.
+A table with the data about a key or key combination on the keyboard.
 
 ## Properties
 

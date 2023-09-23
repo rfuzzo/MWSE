@@ -2,7 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- An table with the data about a key or key combination on the keyboard.
+--- A table with the data about a key or key combination on the keyboard.
 --- @class mwseKeyCombo
 --- @field isAltDown boolean|nil If true, alt key is pressed in the key combination.
 --- @field isControlDown boolean|nil If true, control key is pressed in the key combination.

@@ -623,7 +623,7 @@ local letter = myObject:getLetter(keyCode)
 
 **Parameters**:
 
-* `keyCode` (integer)
+* `keyCode` (integer, nil)
 
 **Returns**:
 
