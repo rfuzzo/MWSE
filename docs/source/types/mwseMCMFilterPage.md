@@ -641,6 +641,40 @@ local button = myObject:createKeyBinder({ label = ..., description = ..., allowC
 
 ***
 
+### `createKeyMouseBinder`
+<div class="search_terms" style="display: none">createkeymousebinder, keymousebinder</div>
+
+Creates a new KeyMouseBinder.
+
+```lua
+local button = myObject:createKeyMouseBinder({ label = ..., description = ..., keybindName = ..., leftSide  = ..., variable = ..., defaultSetting = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ... })
+```
+
+**Parameters**:
+
+* `data` (table)
+	* `label` (string): *Optional*. Text shown next to the button.
+	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+	* `keybindName` (string): The keybind name. Shown in the popup menu.
+	* `leftSide ` (boolean): *Default*: `true`. If true, the button will be created on the left and label on the right.
+	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): *Optional*. A variable for this KeyMouseBinder.
+	* `defaultSetting` ([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+	* `callback` (fun(self: [mwseMCMKeyMouseBinder](../types/mwseMCMKeyMouseBinder.md))): *Optional*. The custom function called when the player interacts with this KeyMouseBinder.
+	* `inGameOnly` (boolean): *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+	* `restartRequired` (boolean): *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+	* `restartRequiredMessage` (string): *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
+	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `postCreate` (fun(self: [mwseMCMKeyMouseBinder](../types/mwseMCMKeyMouseBinder.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+
+**Returns**:
+
+* `button` ([mwseMCMKeyMouseBinder](../types/mwseMCMKeyMouseBinder.md))
+
+***
+
 ### `createLabel`
 <div class="search_terms" style="display: none">createlabel, label</div>
 

@@ -103,7 +103,7 @@ function mwse.mcm.createActiveInfo(parent, data) end
 --- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
 --- 
 --- `postCreate`: nil|fun(self: mwseMCMButton) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
---- @return mwseMCMButton|mwseMCMKeyBinder|mwseMCMOnOffButton|mwseMCMYesNoButton button No description yet available.
+--- @return mwseMCMButton|mwseMCMKeyBinder|mwseMCMKeyMouseBinder|mwseMCMOnOffButton|mwseMCMYesNoButton button No description yet available.
 function mwse.mcm.createButton(parent, data) end
 
 ---Table parameter definitions for `mwse.mcm.createButton`.
@@ -484,7 +484,7 @@ function mwse.mcm.createInfo(parent, data) end
 --- 
 --- `variable`: mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable — A variable for this KeyBinder.
 --- 
---- `defaultSetting`: mwseKeyCombo? — *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- `defaultSetting`: mwseKeyCombo|mwseKeyMouseCombo|nil — *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
 --- 
 --- `callback`: nil|fun(self: mwseMCMKeyBinder) — *Optional*. The custom function called when the player interacts with this KeyBinder.
 --- 
@@ -513,7 +513,7 @@ function mwse.mcm.createKeyBinder(parent, data) end
 --- @field allowCombinations  boolean? *Default*: `true`. If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
 --- @field leftSide  boolean? *Default*: `true`. If true, the button will be created on the left and label on the right.
 --- @field variable mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable A variable for this KeyBinder.
---- @field defaultSetting mwseKeyCombo? *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- @field defaultSetting mwseKeyCombo|mwseKeyMouseCombo|nil *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
 --- @field callback nil|fun(self: mwseMCMKeyBinder) *Optional*. The custom function called when the player interacts with this KeyBinder.
 --- @field inGameOnly boolean? *Default*: `false`. If true, the setting is disabled while the game is on main menu.
 --- @field restartRequired boolean? *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
@@ -1042,6 +1042,6 @@ function mwse.mcm.register(template) end
 function mwse.mcm.registerMCM(template) end
 
 --- This function check whether a certain key combination is currently pressed. It will only check ctrl, shift and alt modifier keys, matching the KeyBinder.
---- @param keybind mwseKeyCombo No description yet available.
+--- @param keybind mwseKeyCombo|mwseKeyMouseCombo No description yet available.
 function mwse.mcm.testKeyBind(keybind) end
 

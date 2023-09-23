@@ -2,43 +2,43 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- A button is the most basic of settings. You click the button, and it calls the function defined in the `callback` field. A number of more advanced button classes extend this class.
---- @class mwseMCMButton : mwseMCMSetting, mwseMCMComponent
---- @field buttonText string The text shown on the button.
---- @field disabledText string This text is shown on the button if the `buttonText` isn't set.
---- @field elements mwseMCMButtonElements This dictionary-style table holds all the UI elements of the Button, for easy access.
---- @field label string The text shown next to the button.
---- @field leftSide boolean If true, the Button is created on the left, while the label text is created on the right. If false, label text is on the left.
-mwseMCMButton = {}
+--- This button allows the player to bind a key combination for use with hotkeys. This binder type supports keyboard key combinations and mouse button and scroll wheel.
+--- 
+--- The player presses the hotkey button, a prompt asks them to press a new key to bind (or key combination using Shift, Ctrl or Alt).
+--- 
+--- Key combos are stored in the following format ([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)):
+--- 
+--- ```lua
+--- {
+--- 	keyCode = tes3.scanCode.{key},
+--- 	isShiftDown = true,
+--- 	isAltDown = false,
+--- 	isControlDown = false,
+--- 	mouseWheel = -1 - down, 1 - up, nil
+--- 	mouseButton = number|nil
+--- },
+--- ```
+--- 	
+--- @class mwseMCMKeyMouseBinder : mwseMCMButton, mwseMCMSetting, mwseMCMComponent
+--- @field keybindName string The name for this keybind. This name is shown in the popup menu.
+mwseMCMKeyMouseBinder = {}
 
---- This method creates the Button's button and label UI elements.
---- @param parentBlock tes3uiElement No description yet available.
-function mwseMCMButton:createContentsContainer(parentBlock) end
-
---- Returns the current button text.
---- @return string buttonText No description yet available.
-function mwseMCMButton:getText() end
-
---- This method creates the Button's button UI element and stores it in `self.elements.button` and `self.mouseOvers`.
---- @param parentBlock tes3uiElement No description yet available.
-function mwseMCMButton:makeComponent(parentBlock) end
-
---- Creates a new Button.
---- @param data mwseMCMButton.new.data? This table accepts the following values:
+--- Creates a new KeyMouseBinder.
+--- @param data mwseMCMKeyMouseBinder.new.data? This table accepts the following values:
 --- 
 --- `label`: string? — *Optional*. Text shown next to the button.
 --- 
---- `buttonText `: string? — *Optional*. Text shown inside the button.
---- 
 --- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- 
+--- `keybindName`: string — The keybind name. Shown in the popup menu.
 --- 
 --- `leftSide `: boolean? — *Default*: `true`. If true, the button will be created on the left and label on the right.
 --- 
---- `variable`: mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable|nil — *Optional*. A variable for this Button.
+--- `variable`: mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable|nil — *Optional*. A variable for this KeyMouseBinder.
 --- 
---- `defaultSetting`: unknown? — *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- `defaultSetting`: mwseKeyMouseCombo? — *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
 --- 
---- `callback`: nil|fun(self: mwseMCMButton) — *Optional*. The custom function called when the player interacts with this Button.
+--- `callback`: nil|fun(self: mwseMCMKeyMouseBinder) — *Optional*. The custom function called when the player interacts with this KeyMouseBinder.
 --- 
 --- `inGameOnly`: boolean? — *Default*: `false`. If true, the setting is disabled while the game is on main menu.
 --- 
@@ -54,25 +54,25 @@ function mwseMCMButton:makeComponent(parentBlock) end
 --- 
 --- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
 --- 
---- `postCreate`: nil|fun(self: mwseMCMButton) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+--- `postCreate`: nil|fun(self: mwseMCMKeyMouseBinder) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- 
 --- `class`: string? — *Optional*. No description yet available.
 --- 
 --- `componentType`: string? — *Optional*. No description yet available.
 --- 
 --- `parentComponent`: mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMKeyMouseBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil — *Optional*. No description yet available.
---- @return mwseMCMButton|mwseMCMKeyBinder|mwseMCMKeyMouseBinder|mwseMCMOnOffButton|mwseMCMYesNoButton button No description yet available.
-function mwseMCMButton:new(data) end
+--- @return mwseMCMKeyMouseBinder button No description yet available.
+function mwseMCMKeyMouseBinder:new(data) end
 
----Table parameter definitions for `mwseMCMButton.new`.
---- @class mwseMCMButton.new.data
+---Table parameter definitions for `mwseMCMKeyMouseBinder.new`.
+--- @class mwseMCMKeyMouseBinder.new.data
 --- @field label string? *Optional*. Text shown next to the button.
---- @field buttonText  string? *Optional*. Text shown inside the button.
 --- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- @field keybindName string The keybind name. Shown in the popup menu.
 --- @field leftSide  boolean? *Default*: `true`. If true, the button will be created on the left and label on the right.
---- @field variable mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable|nil *Optional*. A variable for this Button.
---- @field defaultSetting unknown? *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
---- @field callback nil|fun(self: mwseMCMButton) *Optional*. The custom function called when the player interacts with this Button.
+--- @field variable mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable|nil *Optional*. A variable for this KeyMouseBinder.
+--- @field defaultSetting mwseKeyMouseCombo? *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- @field callback nil|fun(self: mwseMCMKeyMouseBinder) *Optional*. The custom function called when the player interacts with this KeyMouseBinder.
 --- @field inGameOnly boolean? *Default*: `false`. If true, the setting is disabled while the game is on main menu.
 --- @field restartRequired boolean? *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
 --- @field restartRequiredMessage string? *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
@@ -80,18 +80,8 @@ function mwseMCMButton:new(data) end
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 --- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
---- @field postCreate nil|fun(self: mwseMCMButton) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+--- @field postCreate nil|fun(self: mwseMCMKeyMouseBinder) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- @field class string? *Optional*. No description yet available.
 --- @field componentType string? *Optional*. No description yet available.
 --- @field parentComponent mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMKeyMouseBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil *Optional*. No description yet available.
-
---- Calls the `update` method.
-function mwseMCMButton:press() end
-
---- Sets the text on the mwseMCMButton's button UI Element.
---- @param newText string No description yet available.
-function mwseMCMButton:setText(newText) end
-
---- Sets the button UI element text to `self.buttonText`. Calls the Button's callback method and if `restartRequired` is set to true, notifies the player to restart the game.
-function mwseMCMButton:update() end
 
