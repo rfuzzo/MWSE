@@ -7,7 +7,7 @@ return {
 		tableParams = {
 			{
 				name = "actual",
-				type = "table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData",
+				type = "table|mwseKeyCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData",
 				description = "The key object that is being compared.",
 				tableParams = {
 					{
@@ -40,11 +40,25 @@ return {
 						default = false,
 						description = "Value of whether the super (Windows key) key is pressed."
 					},
+					{
+						name = "mouseButton",
+						type = "number",
+						optional = true,
+						default = false,
+						description = "The mouse button index."
+					},
+					{
+						name = "mouseWheel",
+						type = "integer",
+						optional = true,
+						default = false,
+						description = "The mouse wheel direction. `-1` is down, `1` is up."
+					},
 				},
 			},
 			{
 				name = "expected",
-				type = "table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData",
+				type = "table|mwseKeyCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData",
 				description = "The key object that is being compared against.",
 				tableParams = {
 					{
@@ -76,6 +90,20 @@ return {
 						type = "boolean",
 						default = false,
 						description = "Value of whether the super (Windows key) key is pressed."
+					},
+					{
+						name = "mouseButton",
+						type = "number",
+						optional = true,
+						default = false,
+						description = "The mouse button index."
+					},
+					{
+						name = "mouseWheel",
+						type = "integer",
+						optional = true,
+						default = false,
+						description = "The mouse wheel direction. `-1` is down, `1` is up."
 					},
 				},
 			},

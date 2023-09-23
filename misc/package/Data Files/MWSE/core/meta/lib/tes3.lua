@@ -1589,16 +1589,16 @@ function tes3.isCharGenStarted() end
 --- Compares two key objects and returns their equality. Returns true if the objects are equal, false otherwise.
 --- @param params tes3.isKeyEqual.params This table accepts the following values:
 --- 
---- `actual`: table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData — The key object that is being compared.
+--- `actual`: table|mwseKeyCombo|mwseKeyMouseCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData — The key object that is being compared.
 --- 
---- `expected`: table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData — The key object that is being compared against.
+--- `expected`: table|mwseKeyCombo|mwseKeyMouseCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData — The key object that is being compared against.
 --- @return any equal No description yet available.
 function tes3.isKeyEqual(params) end
 
 ---Table parameter definitions for `tes3.isKeyEqual`.
 --- @class tes3.isKeyEqual.params
---- @field actual table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData The key object that is being compared.
---- @field expected table|mwseKeyCombo|keyDownEventData|keyUpEventData|keyEventData The key object that is being compared against.
+--- @field actual table|mwseKeyCombo|mwseKeyMouseCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData The key object that is being compared.
+--- @field expected table|mwseKeyCombo|mwseKeyMouseCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData The key object that is being compared against.
 
 --- Determines if the player has a given lua mod active. The key passed to this function is the path to where its main.lua file is, relative to the MWSE\\mods folder. Slashes are automatically replaced with periods, and the key is case-insensitive.
 ---
@@ -5910,6 +5910,8 @@ tes3.scanCode = require("tes3.scanCode")
 ---| `tes3.scanCode.a`
 ---| `tes3.scanCode.add`
 ---| `tes3.scanCode.ampersand`
+---| `tes3.scanCode.appMenu`
+---| `tes3.scanCode.apps`
 ---| `tes3.scanCode.asterisk`
 ---| `tes3.scanCode.at`
 ---| `tes3.scanCode.b`
@@ -5966,11 +5968,16 @@ tes3.scanCode = require("tes3.scanCode")
 ---| `tes3.scanCode.lAlt`
 ---| `tes3.scanCode.lCtrl`
 ---| `tes3.scanCode.lShift`
+---| `tes3.scanCode.lSuper`
+---| `tes3.scanCode.lWindows`
 ---| `tes3.scanCode.leftAlt`
 ---| `tes3.scanCode.leftCtrl`
 ---| `tes3.scanCode.leftShift`
+---| `tes3.scanCode.leftSuper`
+---| `tes3.scanCode.leftWindows`
 ---| `tes3.scanCode.lessThan`
 ---| `tes3.scanCode.m`
+---| `tes3.scanCode.menu`
 ---| `tes3.scanCode.multiply`
 ---| `tes3.scanCode.n`
 ---| `tes3.scanCode.nine`
@@ -5995,10 +6002,12 @@ tes3.scanCode = require("tes3.scanCode")
 ---| `tes3.scanCode.p`
 ---| `tes3.scanCode.pageDown`
 ---| `tes3.scanCode.pageUp`
+---| `tes3.scanCode.pause`
 ---| `tes3.scanCode.percent`
 ---| `tes3.scanCode.period`
 ---| `tes3.scanCode.pipe`
 ---| `tes3.scanCode.plus`
+---| `tes3.scanCode.printScreen`
 ---| `tes3.scanCode.q`
 ---| `tes3.scanCode.questionMark`
 ---| `tes3.scanCode.quotationMark`
@@ -6008,10 +6017,14 @@ tes3.scanCode = require("tes3.scanCode")
 ---| `tes3.scanCode.rAlt`
 ---| `tes3.scanCode.rCtrl`
 ---| `tes3.scanCode.rShift`
+---| `tes3.scanCode.rSuper`
+---| `tes3.scanCode.rWindows`
 ---| `tes3.scanCode.return`
 ---| `tes3.scanCode.rightAlt`
 ---| `tes3.scanCode.rightCtrl`
 ---| `tes3.scanCode.rightShift`
+---| `tes3.scanCode.rightSuper`
+---| `tes3.scanCode.rightWindows`
 ---| `tes3.scanCode.s`
 ---| `tes3.scanCode.scrollLock`
 ---| `tes3.scanCode.semicolon`

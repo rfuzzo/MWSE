@@ -3118,18 +3118,22 @@ local equal = tes3.isKeyEqual({ actual = ..., expected = ... })
 **Parameters**:
 
 * `params` (table)
-	* `actual` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), keyDownEventData, keyUpEventData, keyEventData): The key object that is being compared.
+	* `actual` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md), keyDownEventData, keyUpEventData, keyEventData, mouseButtonDownEventData, mouseButtonUpEventData, mouseWheelEventData): The key object that is being compared.
 		* `keyCode` (number): *Default*: `false`. Value of the actual key scan code, such as the letter `p`. Maps to [`tes3.scanCode.*`](https://mwse.github.io/MWSE/references/scan-codes/).
 		* `isShiftDown` (boolean): *Default*: `false`. Value of whether the shift key is pressed.
 		* `isControlDown` (boolean): *Default*: `false`. Value of whether the control key is pressed.
 		* `isAltDown` (boolean): *Default*: `false`. Value of whether the alt key is pressed.
 		* `isSuperDown` (boolean): *Default*: `false`. Value of whether the super (Windows key) key is pressed.
-	* `expected` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), keyDownEventData, keyUpEventData, keyEventData): The key object that is being compared against.
+		* `mouseButton` (number): *Default*: `false`. The mouse button index.
+		* `mouseWheel` (integer): *Default*: `false`. The mouse wheel direction. `-1` is down, `1` is up.
+	* `expected` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md), keyDownEventData, keyUpEventData, keyEventData, mouseButtonDownEventData, mouseButtonUpEventData, mouseWheelEventData): The key object that is being compared against.
 		* `keyCode` (number): *Default*: `false`. Value of the expected key scan code, such as the letter `p`. Maps to [`tes3.scanCode.*`](https://mwse.github.io/MWSE/references/scan-codes/).
 		* `isShiftDown` (boolean): *Default*: `false`. Value of whether the shift key is expected to be pressed.
 		* `isControlDown` (boolean): *Default*: `false`. Value of whether the control key is expected to be pressed.
 		* `isAltDown` (boolean): *Default*: `false`. Value of whether the alt key is expected to be pressed.
 		* `isSuperDown` (boolean): *Default*: `false`. Value of whether the super (Windows key) key is pressed.
+		* `mouseButton` (number): *Default*: `false`. The mouse button index.
+		* `mouseWheel` (integer): *Default*: `false`. The mouse wheel direction. `-1` is down, `1` is up.
 
 **Returns**:
 
