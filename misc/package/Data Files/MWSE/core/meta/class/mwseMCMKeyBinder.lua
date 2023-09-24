@@ -36,7 +36,7 @@ function mwseMCMKeyBinder:bindKey(e) end
 function mwseMCMKeyBinder:getComboString(keyCombo) end
 
 --- Returns the letter the provided `keyCode` represents.
---- @param keyCode integer No description yet available.
+--- @param keyCode integer|nil No description yet available.
 --- @return string|nil letter No description yet available.
 function mwseMCMKeyBinder:getLetter(keyCode) end
 
