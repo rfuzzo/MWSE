@@ -25,5 +25,6 @@ return {
 	["Middle mouse button"] = "Middle mouse button",
 	["Mouse %s"] = "Mouse %%s",
 	["SET %s KEYBIND."] = "SET %%s KEYBIND.",
+	["SET NEW KEYBIND."] = "SET NEW KEYBIND.",
 	["Press any key to set the bind or ESC to cancel."] = "Press any key to set the bind or ESC to cancel.",
 }
