@@ -2,13 +2,13 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- This button allows the player to bind a key combination for use with hotkeys.
+--- This button allows the player to bind a key combination for use with hotkeys. The binder allows specifying if mouse buttons and scroll wheel bindings are allowed and wether modifier keys Shift, Alt and Ctrl are allowed.
 --- 
---- The player presses the hotkey button, a prompt asks them to press a key (or key combination using Shift, Ctrl or Alt), and the current key combo is displayed in the popup until they press “Okay” to confirm.
+--- When the player presses the button with current hotkey, a prompt asks them to press a new key (or key combination using Shift, Ctrl or Alt) to bind.
 --- 
---- Key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCombo.md)):
+--- If this KeyBinder is set to only accept keyboard keys, key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCombo.md)):
 --- 
---- ```lua
+--- ```lua linenums="1"
 --- {
 --- 	keyCode = tes3.scanCode.{key},
 --- 	isShiftDown = true,
@@ -16,22 +16,35 @@
 --- 	isControlDown = false,
 --- },
 --- ```
---- 	
+--- 
+--- On the other hand, if the KeyBinder allows binding mouse keys in addition to keyboard keys, key combos are stored in the following format([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)):
+--- 
+--- ```lua linenums="1"
+--- {
+--- 	keyCode = tes3.scanCode.{key},
+--- 	isShiftDown = true,
+--- 	isAltDown = false,
+--- 	isControlDown = false,
+--- 	mouseWheel = -1 - down, 1 - up, nil
+--- 	mouseButton = number|nil
+--- },
+--- ```
+--- 
 --- @class mwseMCMKeyBinder : mwseMCMButton, mwseMCMSetting, mwseMCMComponent
 --- @field allowCombinations boolean If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
---- @field currentCombo mwseKeyCombo|mwseKeyMouseCombo The current key combo, used while the rebind prompt messageBox is visible. The key combo is stored in `variable` field.
---- @field messageDoRebind string The text shown in a messageBox when a new key combo is bound. The default text is a localized version of: "Key binding changed to '%s'.", with the new combo string formatted in.
---- @field messageRebinded string The text shown in a messageBox when a new key combo is bound. The default text is a localized version of: "Key binding changed to '%s'.", with the new combo string formatted in.
---- @field sNotChanged string The text shown in a messageBox when the new key combo is the same as the current one. The default text is a localized version of: "Key binding not changed.".
---- @field sOkay string The text on the button in the rebind prompt messageBox. Clicking this button will change the stored key combo with the new one. The default text is a localized version of: "Rebind".
+--- @field allowMouse boolean If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder.
+--- @field keybindName string|nil The keybind name. Shown in the popup menu header. This string is formatted into a localized version of "SET %s KEYBIND.". If none is provided the popup has "SET NEW KEYBIND." as header text.
 mwseMCMKeyBinder = {}
 
---- Stores the value of the `currentCombo` to the variable if needed. Notifies the user of the result.
---- @param e tes3messageBoxCallbackData Only changes the variable's value if "Rebind" button was pressed.
-function mwseMCMKeyBinder:bindKey(e) end
+--- Closes the popup menu.
+function mwseMCMKeyBinder:closeMenu() end
 
---- Returns a string representing given `keyCombo`. For example, "Ctrl-C".
---- @param keyCombo mwseKeyCombo|mwseKeyMouseCombo No description yet available.
+--- Creates the popup menu.
+--- @return tes3uiElement menu No description yet available.
+function mwseMCMKeyBinder:createMenu() end
+
+--- Returns a string representing given `keyCombo`. For example, "Ctrl - C".
+--- @param keyCombo mwseKeyMouseCombo No description yet available.
 --- @return string result No description yet available.
 function mwseMCMKeyBinder:getComboString(keyCombo) end
 
@@ -40,12 +53,22 @@ function mwseMCMKeyBinder:getComboString(keyCombo) end
 --- @return string|nil letter No description yet available.
 function mwseMCMKeyBinder:getLetter(keyCode) end
 
---- Returns a string representing the key combo currently store in `variable`. For example, "Ctrl-C".
+--- Returns a localized name for the mouse button of given index.
+--- @param buttonIndex number|nil No description yet available.
+--- @return string|nil result No description yet available.
+function mwseMCMKeyBinder:getMouseButtonText(buttonIndex) end
+
+--- Returns a localized version of `"Mouse wheel up"` if `wheel` is 1 and `"Mouse wheel down"` if `wheel` is -1.
+--- @param wheel integer|nil No description yet available.
+--- @return string|nil result No description yet available.
+function mwseMCMKeyBinder:getMouseWheelText(wheel) end
+
+--- Returns a string representing the key combo currently store in `variable`. For example, "Ctrl - C".
 --- @return string result No description yet available.
 function mwseMCMKeyBinder:getText() end
 
---- Changes the `currentCombo` to the result of [keyDown](https://mwse.github.io/MWSE/events/keyDown) event.
---- @param e keyDownEventData No description yet available.
+--- Changes the `variable.value` to the key combination from given input event data.
+--- @param e keyUpEventData|mouseButtonDownEventData|mouseWheelEventData No description yet available.
 function mwseMCMKeyBinder:keySelected(e) end
 
 --- Creates a new KeyBinder.
@@ -56,6 +79,10 @@ function mwseMCMKeyBinder:keySelected(e) end
 --- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 --- 
 --- `allowCombinations `: boolean? — *Default*: `true`. If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
+--- 
+--- `allowMouse `: boolean? — *Default*: `false`. If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder. In that case the variable will have [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md) layout, [mwseKeyCombo](../types/mwseKeyCombo.md) otherwise.
+--- 
+--- `keybindName`: string? — *Optional*. The keybind name. Shown in the popup menu header. This string is formatted into a localized version of "SET %s KEYBIND.". If none is provided the popup has "SET NEW KEYBIND." as header text.
 --- 
 --- `leftSide `: boolean? — *Default*: `true`. If true, the button will be created on the left and label on the right.
 --- 
@@ -85,7 +112,7 @@ function mwseMCMKeyBinder:keySelected(e) end
 --- 
 --- `componentType`: string? — *Optional*. No description yet available.
 --- 
---- `parentComponent`: mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMKeyMouseBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil — *Optional*. No description yet available.
+--- `parentComponent`: mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil — *Optional*. No description yet available.
 --- @return mwseMCMKeyBinder button No description yet available.
 function mwseMCMKeyBinder:new(data) end
 
@@ -94,6 +121,8 @@ function mwseMCMKeyBinder:new(data) end
 --- @field label string? *Optional*. Text shown next to the button.
 --- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 --- @field allowCombinations  boolean? *Default*: `true`. If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
+--- @field allowMouse  boolean? *Default*: `false`. If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder. In that case the variable will have [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md) layout, [mwseKeyCombo](../types/mwseKeyCombo.md) otherwise.
+--- @field keybindName string? *Optional*. The keybind name. Shown in the popup menu header. This string is formatted into a localized version of "SET %s KEYBIND.". If none is provided the popup has "SET NEW KEYBIND." as header text.
 --- @field leftSide  boolean? *Default*: `true`. If true, the button will be created on the left and label on the right.
 --- @field variable mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable|nil *Optional*. A variable for this KeyBinder.
 --- @field defaultSetting mwseKeyCombo|mwseKeyMouseCombo|nil *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
@@ -108,12 +137,11 @@ function mwseMCMKeyBinder:new(data) end
 --- @field postCreate nil|fun(self: mwseMCMKeyBinder) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- @field class string? *Optional*. No description yet available.
 --- @field componentType string? *Optional*. No description yet available.
---- @field parentComponent mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMKeyMouseBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil *Optional*. No description yet available.
+--- @field parentComponent mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil *Optional*. No description yet available.
 
---- Shows the rebind prompt messageBox. This messageBox shows the current key combo and allows changing it.
---- @param keyCombo mwseKeyCombo|mwseKeyMouseCombo No description yet available.
-function mwseMCMKeyBinder:showKeyBindMessage(keyCombo) end
+--- Shows the rebind prompt popup. The popup is active until some valid input is given.
+function mwseMCMKeyBinder:showKeyBindMessage() end
 
---- Sets the `currentCombo` to the value stored in the `variable` and calls `showKeyBindMessage`.
+--- Calls `showKeyBindMessage` method.
 function mwseMCMKeyBinder:update() end
 

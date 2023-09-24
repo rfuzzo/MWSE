@@ -1,12 +1,12 @@
 return {
 	type = "class",
-	description = [[This button allows the player to bind a key combination for use with hotkeys.
+	description = [[This button allows the player to bind a key combination for use with hotkeys. The binder allows specifying if mouse buttons and scroll wheel bindings are allowed and wether modifier keys Shift, Alt and Ctrl are allowed.
 
-The player presses the hotkey button, a prompt asks them to press a key (or key combination using Shift, Ctrl or Alt), and the current key combo is displayed in the popup until they press “Okay” to confirm.
+When the player presses the button with current hotkey, a prompt asks them to press a new key (or key combination using Shift, Ctrl or Alt) to bind.
 
-Key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCombo.md)):
+If this KeyBinder is set to only accept keyboard keys, key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCombo.md)):
 
-```lua
+```lua linenums="1"
 {
 	keyCode = tes3.scanCode.{key},
 	isShiftDown = true,
@@ -14,6 +14,19 @@ Key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCo
 	isControlDown = false,
 },
 ```
-	]],
+
+On the other hand, if the KeyBinder allows binding mouse keys in addition to keyboard keys, key combos are stored in the following format([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)):
+
+```lua linenums="1"
+{
+	keyCode = tes3.scanCode.{key},
+	isShiftDown = true,
+	isAltDown = false,
+	isControlDown = false,
+	mouseWheel = -1 - down, 1 - up, nil
+	mouseButton = number|nil
+},
+```
+]],
 	inherits = "mwseMCMButton"
 }

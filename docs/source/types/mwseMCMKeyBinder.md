@@ -6,13 +6,13 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This button allows the player to bind a key combination for use with hotkeys.
+This button allows the player to bind a key combination for use with hotkeys. The binder allows specifying if mouse buttons and scroll wheel bindings are allowed and wether modifier keys Shift, Alt and Ctrl are allowed.
 
-The player presses the hotkey button, a prompt asks them to press a key (or key combination using Shift, Ctrl or Alt), and the current key combo is displayed in the popup until they press “Okay” to confirm.
+When the player presses the button with current hotkey, a prompt asks them to press a new key (or key combination using Shift, Ctrl or Alt) to bind.
 
-Key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCombo.md)):
+If this KeyBinder is set to only accept keyboard keys, key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCombo.md)):
 
-```lua
+```lua linenums="1"
 {
 	keyCode = tes3.scanCode.{key},
 	isShiftDown = true,
@@ -20,7 +20,20 @@ Key combos are stored in the following format ([mwseKeyCombo](../types/mwseKeyCo
 	isControlDown = false,
 },
 ```
-	
+
+On the other hand, if the KeyBinder allows binding mouse keys in addition to keyboard keys, key combos are stored in the following format([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)):
+
+```lua linenums="1"
+{
+	keyCode = tes3.scanCode.{key},
+	isShiftDown = true,
+	isAltDown = false,
+	isControlDown = false,
+	mouseWheel = -1 - down, 1 - up, nil
+	mouseButton = number|nil
+},
+```
+
 
 This type inherits the following: [mwseMCMButton](../types/mwseMCMButton.md), [mwseMCMSetting](../types/mwseMCMSetting.md), [mwseMCMComponent](../types/mwseMCMComponent.md)
 ## Properties
@@ -29,6 +42,17 @@ This type inherits the following: [mwseMCMButton](../types/mwseMCMButton.md), [m
 <div class="search_terms" style="display: none">allowcombinations</div>
 
 If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `allowMouse`
+<div class="search_terms" style="display: none">allowmouse</div>
+
+If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder.
 
 **Returns**:
 
@@ -113,17 +137,6 @@ This method creates the contents of a component. Not every component implements 
 
 ***
 
-### `currentCombo`
-<div class="search_terms" style="display: none">currentcombo</div>
-
-The current key combo, used while the rebind prompt messageBox is visible. The key combo is stored in `variable` field.
-
-**Returns**:
-
-* `result` ([mwseKeyCombo](../types/mwseKeyCombo.md))
-
-***
-
 ### `description`
 <div class="search_terms" style="display: none">description</div>
 
@@ -190,6 +203,17 @@ If true, the setting is disabled while the game is on main menu.
 
 ***
 
+### `keybindName`
+<div class="search_terms" style="display: none">keybindname</div>
+
+The keybind name. Shown in the popup menu header. This string is formatted into a localized version of "SET %s KEYBIND.". If none is provided the popup has "SET NEW KEYBIND." as header text.
+
+**Returns**:
+
+* `result` (string, nil)
+
+***
+
 ### `label`
 <div class="search_terms" style="display: none">label</div>
 
@@ -220,28 +244,6 @@ This method must be implemented by child classes of mwseMCMSetting.
 **Returns**:
 
 * `result` (nil, fun(self: [mwseMCMSetting](../types/mwseMCMSetting.md), innerContainer: [tes3uiElement](../types/tes3uiElement.md)))
-
-***
-
-### `messageDoRebind`
-<div class="search_terms" style="display: none">messagedorebind</div>
-
-The text shown in a messageBox when a new key combo is bound. The default text is a localized version of: "Key binding changed to '%s'.", with the new combo string formatted in.
-
-**Returns**:
-
-* `result` (string)
-
-***
-
-### `messageRebinded`
-<div class="search_terms" style="display: none">messagerebinded</div>
-
-The text shown in a messageBox when a new key combo is bound. The default text is a localized version of: "Key binding changed to '%s'.", with the new combo string formatted in.
-
-**Returns**:
-
-* `result` (string)
 
 ***
 
@@ -333,32 +335,10 @@ Set to the value of `sNo` GMST.
 
 ***
 
-### `sNotChanged`
-<div class="search_terms" style="display: none">snotchanged</div>
-
-The text shown in a messageBox when the new key combo is the same as the current one. The default text is a localized version of: "Key binding not changed.".
-
-**Returns**:
-
-* `result` (string)
-
-***
-
 ### `sOK`
 <div class="search_terms" style="display: none">sok</div>
 
 Set to the value of `sOK` GMST.
-
-**Returns**:
-
-* `result` (string)
-
-***
-
-### `sOkay`
-<div class="search_terms" style="display: none">sokay</div>
-
-The text on the button in the rebind prompt messageBox. Clicking this button will change the stored key combo with the new one. The default text is a localized version of: "Rebind".
 
 **Returns**:
 
@@ -390,21 +370,6 @@ The Variable this setting will update.
 
 ## Methods
 
-### `bindKey`
-<div class="search_terms" style="display: none">bindkey</div>
-
-Stores the value of the `currentCombo` to the variable if needed. Notifies the user of the result.
-
-```lua
-myObject:bindKey(e)
-```
-
-**Parameters**:
-
-* `e` ([tes3messageBoxCallbackData](../types/tes3messageBoxCallbackData.md)): Only changes the variable's value if "Rebind" button was pressed.
-
-***
-
 ### `checkDisabled`
 <div class="search_terms" style="display: none">checkdisabled</div>
 
@@ -426,6 +391,17 @@ local result = myObject:checkDisabled()
 **Returns**:
 
 * `result` (boolean)
+
+***
+
+### `closeMenu`
+<div class="search_terms" style="display: none">closemenu, menu</div>
+
+Closes the popup menu.
+
+```lua
+myObject:closeMenu()
+```
 
 ***
 
@@ -506,6 +482,21 @@ myObject:createLabelBlock(parentBlock)
 
 ***
 
+### `createMenu`
+<div class="search_terms" style="display: none">createmenu, menu</div>
+
+Creates the popup menu.
+
+```lua
+local menu = myObject:createMenu()
+```
+
+**Returns**:
+
+* `menu` ([tes3uiElement](../types/tes3uiElement.md))
+
+***
+
 ### `createOuterContainer`
 <div class="search_terms" style="display: none">createoutercontainer, outercontainer</div>
 
@@ -546,7 +537,7 @@ myObject:enable()
 ### `getComboString`
 <div class="search_terms" style="display: none">getcombostring, combostring</div>
 
-Returns a string representing given `keyCombo`. For example, "Ctrl-C".
+Returns a string representing given `keyCombo`. For example, "Ctrl - C".
 
 ```lua
 local result = myObject:getComboString(keyCombo)
@@ -554,7 +545,7 @@ local result = myObject:getComboString(keyCombo)
 
 **Parameters**:
 
-* `keyCombo` ([mwseKeyCombo](../types/mwseKeyCombo.md))
+* `keyCombo` ([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md))
 
 **Returns**:
 
@@ -631,10 +622,48 @@ local letter = myObject:getLetter(keyCode)
 
 ***
 
+### `getMouseButtonText`
+<div class="search_terms" style="display: none">getmousebuttontext, mousebuttontext</div>
+
+Returns a localized name for the mouse button of given index.
+
+```lua
+local result = myObject:getMouseButtonText(buttonIndex)
+```
+
+**Parameters**:
+
+* `buttonIndex` (number, nil)
+
+**Returns**:
+
+* `result` (string, nil)
+
+***
+
+### `getMouseWheelText`
+<div class="search_terms" style="display: none">getmousewheeltext, mousewheeltext</div>
+
+Returns a localized version of `"Mouse wheel up"` if `wheel` is 1 and `"Mouse wheel down"` if `wheel` is -1.
+
+```lua
+local result = myObject:getMouseWheelText(wheel)
+```
+
+**Parameters**:
+
+* `wheel` (integer, nil)
+
+**Returns**:
+
+* `result` (string, nil)
+
+***
+
 ### `getText`
 <div class="search_terms" style="display: none">gettext, text</div>
 
-Returns a string representing the key combo currently store in `variable`. For example, "Ctrl-C".
+Returns a string representing the key combo currently store in `variable`. For example, "Ctrl - C".
 
 ```lua
 local result = myObject:getText()
@@ -649,7 +678,7 @@ local result = myObject:getText()
 ### `keySelected`
 <div class="search_terms" style="display: none">keyselected</div>
 
-Changes the `currentCombo` to the result of [keyDown](https://mwse.github.io/MWSE/events/keyDown) event.
+Changes the `variable.value` to the key combination from given input event data.
 
 ```lua
 myObject:keySelected(e)
@@ -657,7 +686,7 @@ myObject:keySelected(e)
 
 **Parameters**:
 
-* `e` (keyDownEventData)
+* `e` (keyUpEventData, mouseButtonDownEventData, mouseWheelEventData)
 
 ***
 
@@ -682,7 +711,7 @@ myObject:makeComponent(parentBlock)
 Creates a new KeyBinder.
 
 ```lua
-local button = myObject:new({ label = ..., description = ..., allowCombinations  = ..., leftSide  = ..., variable = ..., defaultSetting = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ..., class = ..., componentType = ..., parentComponent = ... })
+local button = myObject:new({ label = ..., description = ..., allowCombinations  = ..., allowMouse  = ..., keybindName = ..., leftSide  = ..., variable = ..., defaultSetting = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ..., class = ..., componentType = ..., parentComponent = ... })
 ```
 
 **Parameters**:
@@ -691,6 +720,8 @@ local button = myObject:new({ label = ..., description = ..., allowCombinations 
 	* `label` (string): *Optional*. Text shown next to the button.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 	* `allowCombinations ` (boolean): *Default*: `true`. If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
+	* `allowMouse ` (boolean): *Default*: `false`. If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder. In that case the variable will have [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md) layout, [mwseKeyCombo](../types/mwseKeyCombo.md) otherwise.
+	* `keybindName` (string): *Optional*. The keybind name. Shown in the popup menu header. This string is formatted into a localized version of "SET %s KEYBIND.". If none is provided the popup has "SET NEW KEYBIND." as header text.
 	* `leftSide ` (boolean): *Default*: `true`. If true, the button will be created on the left and label on the right.
 	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): *Optional*. A variable for this KeyBinder.
 	* `defaultSetting` ([mwseKeyCombo](../types/mwseKeyCombo.md)): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
@@ -791,22 +822,18 @@ myObject:setText(newText)
 ### `showKeyBindMessage`
 <div class="search_terms" style="display: none">showkeybindmessage, keybindmessage</div>
 
-Shows the rebind prompt messageBox. This messageBox shows the current key combo and allows changing it.
+Shows the rebind prompt popup. The popup is active until some valid input is given.
 
 ```lua
-myObject:showKeyBindMessage(keyCombo)
+myObject:showKeyBindMessage()
 ```
-
-**Parameters**:
-
-* `keyCombo` ([mwseKeyCombo](../types/mwseKeyCombo.md))
 
 ***
 
 ### `update`
 <div class="search_terms" style="display: none">update</div>
 
-Sets the `currentCombo` to the value stored in the `variable` and calls `showKeyBindMessage`.
+Calls `showKeyBindMessage` method.
 
 ```lua
 myObject:update()

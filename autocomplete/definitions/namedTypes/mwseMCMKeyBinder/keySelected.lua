@@ -1,7 +1,7 @@
 return {
 	type = "method",
-	description = [[Changes the `currentCombo` to the result of [keyDown](https://mwse.github.io/MWSE/events/keyDown) event.]],
+	description = [[Changes the `variable.value` to the key combination from given input event data.]],
 	arguments = {
-		{ name = "e", type = "keyDownEventData" }
+		{ name = "e", type = "keyUpEventData|mouseButtonDownEventData|mouseWheelEventData" }
 	}
 }
