@@ -454,6 +454,17 @@ The actor's flee AI value.
 
 ***
 
+### `friendlyFireHitCount`
+<div class="search_terms" style="display: none">friendlyfirehitcount</div>
+
+The number of times the player has hit this actor with friendly fire. The actor will turn on the player on the fourth hit if it is not already in combat. The game will not increase this past 4, and will reset it to 0 at the end of combat.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `greetDuration`
 <div class="search_terms" style="display: none">greetduration</div>
 

@@ -30,6 +30,7 @@ namespace mwse::lua {
 		usertypeDefinition["fight"] = &TES3::MobileActor::fight;
 		usertypeDefinition["flee"] = &TES3::MobileActor::flee;
 		usertypeDefinition["friendlyActors"] = sol::readonly_property(&TES3::MobileActor::listFriendlyActors);
+		usertypeDefinition["friendlyFireHitCount"] = &TES3::MobileActor::friendlyFireHitCount;
 		usertypeDefinition["greetDuration"] = &TES3::MobileActor::greetDuration;
 		usertypeDefinition["greetTimer"] = sol::readonly_property(&TES3::MobileActor::greetTimer);
 		usertypeDefinition["health"] = sol::readonly_property(&TES3::MobileActor::health);
