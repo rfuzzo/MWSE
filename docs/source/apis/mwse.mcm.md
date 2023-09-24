@@ -152,6 +152,51 @@ local variable = mwse.mcm.createCustom({ id = ..., getter = ..., setter = ..., i
 
 ***
 
+### `mwse.mcm.createCycleButton`
+<div class="search_terms" style="display: none">createcyclebutton, cyclebutton</div>
+
+Creates a new mwseMCMCycleButton inside given `parent` menu.
+
+The canonical way to use this function is to pass a `parent` and `data` arguments. If passing only `data` table, cycle button's UI element tree won't be created. To do so, use cycle button's `create` method:
+
+```lua
+local myButton = mwse.mcm.createCycleButton({ ... })
+myButton:create(parent)
+```
+
+The same is done by this function if you pass both `parent` and `data` arguments.
+
+
+```lua
+local button = mwse.mcm.createCycleButton(parent, { label = ..., description = ..., options = ..., leftSide  = ..., variable = ..., defaultSetting = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ... })
+```
+
+**Parameters**:
+
+* `parent` ([tes3uiElement](../types/tes3uiElement.md), mwse.mcm.createCycleButton.data): The UI element inside which the new cycle button will be created.
+* `data` (table): *Optional*.
+	* `label` (string): *Optional*. Text shown next to the button.
+	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+	* `options` ([mwseMCMDropdownOption](../types/mwseMCMDropdownOption.md)[]): This table holds the text and variable value for each of the cycle button's options.
+	* `leftSide ` (boolean): *Default*: `true`. If true, the button will be created on the left and label on the right.
+	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): A variable for this cycle button.
+	* `defaultSetting` (unknown): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+	* `callback` (fun(self: [mwseMCMCycleButton](../types/mwseMCMCycleButton.md))): *Optional*. The custom function called when the player interacts with this cycle button.
+	* `inGameOnly` (boolean): *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+	* `restartRequired` (boolean): *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+	* `restartRequiredMessage` (string): *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
+	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `postCreate` (fun(self: [mwseMCMCycleButton](../types/mwseMCMCycleButton.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+
+**Returns**:
+
+* `button` ([mwseMCMCycleButton](../types/mwseMCMCycleButton.md))
+
+***
+
 ### `mwse.mcm.createDecimalSlider`
 <div class="search_terms" style="display: none">createdecimalslider, decimalslider</div>
 

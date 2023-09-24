@@ -401,6 +401,40 @@ myObject:createContentsContainer(parentBlock)
 
 ***
 
+### `createCycleButton`
+<div class="search_terms" style="display: none">createcyclebutton, cyclebutton</div>
+
+Creates a new nested mwseMCMCycleButton.
+
+```lua
+local button = myObject:createCycleButton({ label = ..., description = ..., options = ..., leftSide  = ..., variable = ..., defaultSetting = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ... })
+```
+
+**Parameters**:
+
+* `data` (table)
+	* `label` (string): *Optional*. Text shown next to the button.
+	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+	* `options` ([mwseMCMDropdownOption](../types/mwseMCMDropdownOption.md)[]): This table holds the text and variable value for each of the cycle button's options.
+	* `leftSide ` (boolean): *Default*: `true`. If true, the button will be created on the left and label on the right.
+	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): A variable for this cycle button.
+	* `defaultSetting` (unknown): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+	* `callback` (fun(self: [mwseMCMCycleButton](../types/mwseMCMCycleButton.md))): *Optional*. The custom function called when the player interacts with this cycle button.
+	* `inGameOnly` (boolean): *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+	* `restartRequired` (boolean): *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+	* `restartRequiredMessage` (string): *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
+	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `postCreate` (fun(self: [mwseMCMCycleButton](../types/mwseMCMCycleButton.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+
+**Returns**:
+
+* `button` ([mwseMCMCycleButton](../types/mwseMCMCycleButton.md))
+
+***
+
 ### `createDecimalSlider`
 <div class="search_terms" style="display: none">createdecimalslider, decimalslider</div>
 

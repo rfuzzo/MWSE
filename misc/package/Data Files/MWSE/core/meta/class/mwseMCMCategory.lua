@@ -4,7 +4,7 @@
 --- @meta
 --- A Category has a header and a list of components. Components within a category are indented. The Categories can be nested indefinitely. A Category is a good way to organize settings within a page.
 --- @class mwseMCMCategory : mwseMCMComponent
---- @field components mwseMCMCategory[]|mwseMCMExclusionsPage[]|mwseMCMFilterPage[]|mwseMCMMouseOverPage[]|mwseMCMPage[]|mwseMCMSideBarPage[]|mwseMCMSideBySideBlock[]|mwseMCMActiveInfo[]|mwseMCMButton[]|mwseMCMDecimalSlider[]|mwseMCMDropdown[]|mwseMCMHyperlink[]|mwseMCMInfo[]|mwseMCMKeyBinder[]|mwseMCMMouseOverInfo[]|mwseMCMOnOffButton[]|mwseMCMParagraphField[]|mwseMCMSetting[]|mwseMCMSlider[]|mwseMCMTextField[]|mwseMCMYesNoButton[]|mwseMCMActiveInfo[]|mwseMCMHyperlink[]|mwseMCMInfo[]|mwseMCMMouseOverInfo[] An array of all the components in this Category.
+--- @field components mwseMCMCategory[]|mwseMCMExclusionsPage[]|mwseMCMFilterPage[]|mwseMCMMouseOverPage[]|mwseMCMPage[]|mwseMCMSideBarPage[]|mwseMCMSideBySideBlock[]|mwseMCMActiveInfo[]|mwseMCMButton[]|mwseMCMCycleButton[]|mwseMCMDecimalSlider[]|mwseMCMDropdown[]|mwseMCMHyperlink[]|mwseMCMInfo[]|mwseMCMKeyBinder[]|mwseMCMMouseOverInfo[]|mwseMCMOnOffButton[]|mwseMCMParagraphField[]|mwseMCMSetting[]|mwseMCMSlider[]|mwseMCMTextField[]|mwseMCMYesNoButton[]|mwseMCMActiveInfo[]|mwseMCMHyperlink[]|mwseMCMInfo[]|mwseMCMMouseOverInfo[] An array of all the components in this Category.
 --- @field componentType "Category" The type of this component.
 --- @field elements mwseMCMCategoryElements|mwseMCMExclusionsPageElements|mwseMCMFilterPageElements|mwseMCMMouseOverPageElements|mwseMCMSideBarPageElements This dictionary-style table holds all the UI elements of the Category, for easy access.
 --- @field label string The category label.
@@ -142,6 +142,59 @@ function mwseMCMCategory:createCategory(data) end
 --- Creates UI element tree for this Category.
 --- @param parentBlock tes3uiElement No description yet available.
 function mwseMCMCategory:createContentsContainer(parentBlock) end
+
+--- Creates a new nested mwseMCMCycleButton.
+--- @param data mwseMCMCategory.createCycleButton.data This table accepts the following values:
+--- 
+--- `label`: string? — *Optional*. Text shown next to the button.
+--- 
+--- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- 
+--- `options`: mwseMCMDropdownOption[] — This table holds the text and variable value for each of the cycle button's options.
+--- 
+--- `leftSide `: boolean? — *Default*: `true`. If true, the button will be created on the left and label on the right.
+--- 
+--- `variable`: mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable — A variable for this cycle button.
+--- 
+--- `defaultSetting`: unknown? — *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- 
+--- `callback`: nil|fun(self: mwseMCMCycleButton) — *Optional*. The custom function called when the player interacts with this cycle button.
+--- 
+--- `inGameOnly`: boolean? — *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+--- 
+--- `restartRequired`: boolean? — *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+--- 
+--- `restartRequiredMessage`: string? — *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+--- 
+--- `indent`: integer? — *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+--- 
+--- `childIndent`: integer? — *Optional*. The left padding size in pixels. Used on all the child components.
+--- 
+--- `paddingBottom`: integer? — *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+--- 
+--- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
+--- 
+--- `postCreate`: nil|fun(self: mwseMCMCycleButton) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
+--- @return mwseMCMCycleButton button No description yet available.
+function mwseMCMCategory:createCycleButton(data) end
+
+---Table parameter definitions for `mwseMCMCategory.createCycleButton`.
+--- @class mwseMCMCategory.createCycleButton.data
+--- @field label string? *Optional*. Text shown next to the button.
+--- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- @field options mwseMCMDropdownOption[] This table holds the text and variable value for each of the cycle button's options.
+--- @field leftSide  boolean? *Default*: `true`. If true, the button will be created on the left and label on the right.
+--- @field variable mwseMCMConfigVariable|mwseMCMCustomVariable|mwseMCMGlobal|mwseMCMGlobalBoolean|mwseMCMPlayerData|mwseMCMTableVariable|mwseMCMVariable|mwseMCMSettingNewVariable A variable for this cycle button.
+--- @field defaultSetting unknown? *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
+--- @field callback nil|fun(self: mwseMCMCycleButton) *Optional*. The custom function called when the player interacts with this cycle button.
+--- @field inGameOnly boolean? *Default*: `false`. If true, the setting is disabled while the game is on main menu.
+--- @field restartRequired boolean? *Default*: `false`. If true, updating this Setting will notify the player to restart the game.
+--- @field restartRequiredMessage string? *Optional*. The message shown if restartRequired is triggered. The default text is a localized version of: "The game must be restarted before this change will come into effect."
+--- @field indent integer? *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
+--- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
+--- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
+--- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
+--- @field postCreate nil|fun(self: mwseMCMCycleButton) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 --- Creates a new nested DecimalSlider.
 --- @param data mwseMCMCategory.createDecimalSlider.data This table accepts the following values:
@@ -786,7 +839,7 @@ function mwseMCMCategory:createYesNoButton(data) end
 --- 
 --- `componentType`: string? — *Optional*. No description yet available.
 --- 
---- `parentComponent`: mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil — *Optional*. No description yet available.
+--- `parentComponent`: mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMCycleButton|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil — *Optional*. No description yet available.
 --- @return mwseMCMCategory|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMMouseOverPage|mwseMCMPage|mwseMCMSideBarPage|mwseMCMSideBySideBlock category No description yet available.
 function mwseMCMCategory:new(data) end
 
@@ -803,7 +856,7 @@ function mwseMCMCategory:new(data) end
 --- @field postCreate nil|fun(self: mwseMCMComponent) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- @field class string? *Optional*. No description yet available.
 --- @field componentType string? *Optional*. No description yet available.
---- @field parentComponent mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil *Optional*. No description yet available.
+--- @field parentComponent mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMCycleButton|mwseMCMDecimalSlider|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil *Optional*. No description yet available.
 
 --- This method calls `update` methods on all the components in this Category.
 function mwseMCMCategory:update() end
