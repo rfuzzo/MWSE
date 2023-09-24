@@ -30,6 +30,8 @@
 --- },
 --- ```
 --- 
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/mwseMCMKeyBinder).
 --- @class mwseMCMKeyBinder : mwseMCMButton, mwseMCMSetting, mwseMCMComponent
 --- @field allowCombinations boolean If true, the keybinder will let the user use modification keys: Shift, Ctrl, and Alt when rebinding.
 --- @field allowMouse boolean If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder.

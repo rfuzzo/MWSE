@@ -1587,6 +1587,8 @@ function tes3.isCharGenRunning() end
 function tes3.isCharGenStarted() end
 
 --- Compares two key objects and returns their equality. Returns true if the objects are equal, false otherwise.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3iskeyequal).
 --- @param params tes3.isKeyEqual.params This table accepts the following values:
 --- 
 --- `actual`: table|mwseKeyCombo|mwseKeyMouseCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData — The key object that is being compared.

@@ -111,5 +111,10 @@ return {
 	}},
 	returns = {
 		{ name = "equal", valuetype = "boolean" }
+	},
+	examples = {
+		["filtering"] = {
+			title = "Filtering out key presses that aren't equal to the bound key combination"
+		}
 	}
 }
