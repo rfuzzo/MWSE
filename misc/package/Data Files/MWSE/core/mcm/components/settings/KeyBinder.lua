@@ -42,7 +42,7 @@ local mouseWheel = {
 }
 
 --- @param wheel integer|nil
---- @return string|nil
+--- @return string|nil result
 function KeyBinder:getMouseWheelText(wheel)
 	if wheel == mouseWheel.up then
 		return mwse.mcm.i18n("Mouse wheel up")
@@ -58,7 +58,7 @@ local mouseButtonMap = {
 }
 
 --- @param buttonIndex number|nil
---- @return string|nil
+--- @return string|nil result
 function KeyBinder:getMouseButtonText(buttonIndex)
 	if not buttonIndex then
 		return
@@ -145,7 +145,7 @@ end
 
 local popupId = tes3ui.registerID("KeyBinderPopup")
 
---- @return tes3uiElement
+--- @return tes3uiElement menu
 function KeyBinder:createMenu()
 	local menu = tes3ui.findHelpLayerMenu(popupId)
 
