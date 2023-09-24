@@ -119,12 +119,12 @@ end
 --- @param e keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
 function KeyBinder:keySelected(e)
 	local variable = self.variable.value
-	variable.keyCode = e.keyCode
+	variable.keyCode = e.keyCode or false
 
 	if self.allowMouse then
 		local wheel = e.delta and math.clamp(e.delta, -1, 1)
-		variable.mouseWheel = wheel
-		variable.mouseButton = e.button
+		variable.mouseWheel = wheel or false
+		variable.mouseButton = e.button or false
 	end
 
 	-- TODO: here, check for modifer key state using tes3inputController
