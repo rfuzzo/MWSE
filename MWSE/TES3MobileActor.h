@@ -190,7 +190,7 @@ namespace TES3 {
 		short readiedAmmoCount; // 0x368
 		short corpseHourstamp; // 0x36A
 		short greetDuration; // 0x36C
-		signed char friendlyFireHits; // 0x36E
+		signed char friendlyFireHitCount; // 0x36E
 		char unknown_0x36F; // Undefined.
 		float holdBreathTime; // 0x370
 		int unknown_0x374;

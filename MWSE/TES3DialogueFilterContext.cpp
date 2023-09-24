@@ -405,7 +405,7 @@ namespace TES3 {
 	}
 
 	void loadFunctionFriendHit(DialogueFilterContext::ConditionalContext* context) {
-		context->compareValue = context->parentContext->speakerMobile->friendlyFireHits;
+		context->compareValue = context->parentContext->speakerMobile->friendlyFireHitCount;
 	}
 
 	void loadFunctionFight(DialogueFilterContext::ConditionalContext* context) {
