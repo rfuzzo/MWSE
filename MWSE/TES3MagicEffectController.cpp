@@ -442,6 +442,7 @@ namespace TES3 {
 			if (!result.valid()) {
 				sol::error error = result;
 				mwse::log::getLog() << "Lua error encountered in magic effect dispatch function:" << std::endl << error.what() << std::endl;
+				mwse::lua::reportErrorInGame("magicEffect tick", error);
 				return;
 			}
 		}
@@ -605,6 +606,7 @@ namespace TES3 {
 				if (!result.valid()) {
 					sol::error error = result;
 					mwse::log::getLog() << "Lua error encountered in magic effect collision function:" << std::endl << error.what() << std::endl;
+					mwse::lua::reportErrorInGame("magicEffect collision", error);
 					return;
 				}
 			}
