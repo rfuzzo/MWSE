@@ -1,4 +1,3 @@
----@enum tes3.spellType
 return {
 	["spell"] = 0,
 	["ability"] = 1,

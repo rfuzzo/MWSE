@@ -1,4 +1,3 @@
----@enum tes3.uiEvent
 return {
 	mouseLeave = "mouseLeave",
 	mouseOver = "mouseOver",

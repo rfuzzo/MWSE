@@ -1,7 +1,12 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 -- Parent Class
 local Parent = require("mcm.components.settings.Setting")
 
--- Class Object
+--- Class Object
+--- @class mwseMCMTextField
 local TextField = Parent:new()
 TextField.buttonText = mwse.mcm.i18n("Submit")
 TextField.sNumbersOnly = mwse.mcm.i18n("Value must be a number.")
@@ -14,6 +19,8 @@ function TextField:enable()
 	self.elements.border:register("mouseClick", function()
 		tes3ui.acquireTextInput(self.elements.inputField)
 	end)
+
+	--- @param e tes3uiElement
 	local function registerAcquireTextInput(e)
 		e:register("mouseClick", function()
 			tes3ui.acquireTextInput(self.elements.inputField)
@@ -40,7 +47,7 @@ end
 function TextField:update()
 	local isNumber = (tonumber(self.elements.inputField.text))
 	if self.variable.numbersOnly and not isNumber then
-		local sOk = tes3.findGMST(tes3.gmst.sOK).value
+		local sOk = tes3.findGMST(tes3.gmst.sOK).value --[[@as string]]
 		tes3.messageBox({ message = self.sNumbersOnly, buttons = { sOk } })
 		self.elements.inputField.text = self.variable.value
 		return
@@ -51,7 +58,7 @@ function TextField:update()
 end
 
 function TextField:press()
-	-- HINT: this could be overridden for a 
+	-- HINT: this could be overridden for a
 	-- confirmation message before calling update
 	self:update()
 end
@@ -61,11 +68,13 @@ function TextField:callback()
 	tes3.messageBox(self.sNewValue, self.variable.value)
 end
 
+--- @param parentBlock tes3uiElement
 function TextField:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.paddingRight = self.indent -- * 2
 end
 
+--- @param parentBlock tes3uiElement
 function TextField:createSubmitButton(parentBlock)
 	local button = parentBlock:createButton({ id = tes3ui.registerID("TextField_SubmitButton"), text = self.buttonText })
 	button.borderAllSides = 0
@@ -75,12 +84,14 @@ function TextField:createSubmitButton(parentBlock)
 	self.elements.submitButton = button
 end
 
+--- @param parentBlock tes3uiElement
 function TextField:createInnerContainer(parentBlock)
 	Parent.createInnerContainer(self, parentBlock)
 	self.elements.innerContainer.flowDirection = "left_to_right"
 
 end
 
+--- @param parentBlock tes3uiElement
 function TextField:makeComponent(parentBlock)
 	local border = parentBlock:createThinBorder()
 	border.widthProportional = 1.0

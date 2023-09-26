@@ -1,4 +1,3 @@
----@enum ni.particleBombDecayType
 return {
 	["none"] = 0,
 	["linear"] = 1,

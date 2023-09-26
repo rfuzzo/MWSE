@@ -1,4 +1,3 @@
----@enum tes3.uiProperty
 return {
 	["mouseLeave"] = 4294934578,
 	["mouseOver"] = 4294934579,

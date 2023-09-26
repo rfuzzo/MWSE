@@ -1,4 +1,3 @@
----@enum tes3.apparatusType
 return {
 	["mortarAndPestle"] = 0,
 	["alembic"] = 1,

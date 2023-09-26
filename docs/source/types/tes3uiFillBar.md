@@ -51,7 +51,7 @@ The RGB color of the filled portion. An array of 3 floats with value range [0.0,
 
 **Returns**:
 
-* `result` ([niColor](../types/niColor.md))
+* `result` (number[])
 
 ***
 

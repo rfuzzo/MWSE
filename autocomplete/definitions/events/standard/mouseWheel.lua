@@ -28,4 +28,9 @@ return {
 			description = "True if super (Windows key) is held.",
 		},
 	},
+	examples = {
+		["..\\..\\..\\global\\tes3\\isKeyEqual\\filtering"] = {
+			title = "Filtering out key presses that aren't equal to the bound key combination"
+		},
+	},
 }

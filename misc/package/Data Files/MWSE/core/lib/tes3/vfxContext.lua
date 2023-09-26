@@ -1,4 +1,3 @@
----@enum tes3.vfxContext
 return {
 	effect = "effect",
 	magicEffect = "magicEffect",

@@ -18,4 +18,13 @@ return {
 	["Toggle Filtered"] = "Toggle Filtered",
 	["unknown key"] = "unknown key",
 	["Value must be a number."] = "Value must be a number.",
+	["Mouse wheel up"] = "Mouse wheel up",
+	["Mouse wheel down"] = "Mouse wheel down",
+	["Left mouse button"] = "Left mouse button",
+	["Right mouse button"] = "Right mouse button",
+	["Middle mouse button"] = "Middle mouse button",
+	["Mouse %s"] = "Mouse %%s",
+	["SET %s KEYBIND."] = "SET %%s KEYBIND.",
+	["SET NEW KEYBIND."] = "SET NEW KEYBIND.",
+	["Press any key to set the bind or ESC to cancel."] = "Press any key to set the bind or ESC to cancel.",
 }

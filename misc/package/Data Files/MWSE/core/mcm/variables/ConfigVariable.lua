@@ -1,8 +1,14 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.variables.Variable")
 
+--- @class mwseMCMConfigVariable
 local ConfigVariable = Parent:new()
 ConfigVariable.inGameOnly = false
 
+--- @return unknown value
 function ConfigVariable:get()
 	local config = mwse.loadConfig(self.path)
 
@@ -20,6 +26,7 @@ function ConfigVariable:get()
 	return config[self.id]
 end
 
+--- @param newValue unknown
 function ConfigVariable:set(newValue)
 	if (self.converter) then
 		newValue = self.converter(newValue)

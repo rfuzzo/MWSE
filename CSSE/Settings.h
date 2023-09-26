@@ -153,6 +153,20 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} object_window;
 
+		struct ColorTheme {
+			std::array<unsigned char, 3> highlight_deleted_object_color = { 255, 235, 235 };
+			std::array<unsigned char, 3> highlight_modified_from_master_color = { 235, 255, 235 };
+			std::array<unsigned char, 3> highlight_modified_new_object_color = { 215, 240, 255 };
+
+			unsigned int highlight_deleted_object_packed_color = 0xFFFFFF;
+			unsigned int highlight_modified_from_master_packed_color = 0xFFFFFF;
+			unsigned int highlight_modified_new_object_packed_color = 0xFFFFFF;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+			void packColors();
+		} color_theme;
+
 		struct QuickstartSettings {
 			bool enabled = false;
 			bool load_cell = false;

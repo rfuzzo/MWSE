@@ -175,24 +175,31 @@ namespace se::cs::dialog::render_window {
 		}
 
 		NI::Vector3 intersection;
+		float zDistObject = 0.0f;
+		float zDistLandscape = 0.0f;
 
-		auto pick = SceneGraphController::get()->objectPick;
-		if (pick->pickObjectsWithSkinDeforms(&origin, &direction)) {
-			intersection = pick->results[0]->intersection;
+		auto objectPick = SceneGraphController::get()->objectPick;
+		if (objectPick->pickObjectsWithSkinDeforms(&origin, &direction)) {
+			intersection = objectPick->results[0]->intersection;
+			zDistObject = (intersection - origin).dotProduct(&camera->worldDirection);
+		}
+
+		auto landscapePick = SceneGraphController::get()->landscapePick;
+		if (landscapePick->pickObjects(&origin, &direction)) {
+			intersection = landscapePick->results[0]->intersection;
+			zDistLandscape = (intersection - origin).dotProduct(&camera->worldDirection);
+		}
+		
+		if (zDistObject == 0.0f && zDistLandscape == 0.0f) {
+			return 0.0;
+		}
+
+		if (zDistObject != 0.0f && zDistLandscape != 0.0f) {
+			return std::fmin(zDistObject, zDistLandscape);
 		}
 		else {
-			auto pick = SceneGraphController::get()->landscapePick;
-			if (pick->pickObjects(&origin, &direction)) {
-				intersection = pick->results[0]->intersection;
-			}
-			else {
-				return 0.0;
-			}
+			return std::fmax(zDistObject, zDistLandscape);
 		}
-
-		float zDist = (intersection - origin).dotProduct(&camera->worldDirection);
-
-		return zDist;
 	}
 
 	struct CameraPanContext {

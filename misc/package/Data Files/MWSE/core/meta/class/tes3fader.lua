@@ -69,7 +69,7 @@ function tes3fader:setColor(params) end
 --- @field flag boolean? *Default*: `false`. No description yet available.
 
 --- This method allows changing the texture of the fader.
---- @param path string A path for the texture that will be displayed on screen.
+--- @param path string A path for the texture that will be displayed on screen. Starting in `"Data Files\"`.
 function tes3fader:setTexture(path) end
 
 --- Updates the fader for the current frame. This method needs to be called each frame for fader to be present.

@@ -1,4 +1,3 @@
----@enum ni.billboardMode
 return {
 	["alwaysFaceCamera"] = 0,
 	["rotateAboutUp"] = 1,

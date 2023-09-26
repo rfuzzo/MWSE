@@ -1,4 +1,3 @@
----@enum tes3.clothingSlot
 return {
 	["pants"] = 0,
 	["shoes"] = 1,

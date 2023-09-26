@@ -145,8 +145,8 @@ mgeWeatherConfig.setScattering({ inscatter = ..., outscatter = ... })
 **Parameters**:
 
 * `params` (table, [mgeScatteringTable](../types/mgeScatteringTable.md))
-	* `inscatter` ([tes3vector3](../types/tes3vector3.md), table)
-	* `outscatter` ([tes3vector3](../types/tes3vector3.md), table)
+	* `inscatter` ([tes3vector3](../types/tes3vector3.md), number[])
+	* `outscatter` ([tes3vector3](../types/tes3vector3.md), number[])
 
 ***
 
@@ -162,7 +162,7 @@ mgeWeatherConfig.setSkylightScattering({ skylight = ..., mix = ... })
 **Parameters**:
 
 * `params` (table, [mgeSkylightScatteringTable](../types/mgeSkylightScatteringTable.md))
-	* `skylight` ([tes3vector3](../types/tes3vector3.md), table)
+	* `skylight` ([tes3vector3](../types/tes3vector3.md), number[])
 	* `mix` (number): *Default*: `0.44`.
 
 ***

@@ -1,4 +1,3 @@
----@enum tes3.magicSchool
 return {
 	["alteration"] = 0,
 	["conjuration"] = 1,

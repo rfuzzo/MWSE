@@ -1,4 +1,3 @@
----@enum tes3.effectAttribute
 return {
 	["attackBonus"] = 0,
 	["sanctuary"] = 1,

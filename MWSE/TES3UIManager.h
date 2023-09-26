@@ -75,7 +75,7 @@ namespace TES3::UI {
 	void updateFatigueFillBar(float current, float max);
 	void updateCurrentMagicFillBar(float current, float max);
 	void updateCurrentMagicFromSpell(const char* iconPath, const char* spellName, Spell* spell);
-	void updateCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack);
+	void updateCurrentMagicFromEquipmentStack(const char* iconPath, const char* itemName, EquipmentStack* equipmentStack);
 	void updateEncumbranceBar();
 	void updatePlayerAttribute(float current, int attributeId);
 	void updateStatsPane();

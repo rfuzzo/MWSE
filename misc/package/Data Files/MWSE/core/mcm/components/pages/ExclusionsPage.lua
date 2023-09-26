@@ -4,8 +4,13 @@
 	between allowed and blocked lists.
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.pages.Page")
 
+--- @class mwseMCMExclusionsPage
 local ExclusionsPage = Parent:new()
 -- public fields
 ExclusionsPage.label = mwse.mcm.i18n("Exclusions")
@@ -17,11 +22,13 @@ ExclusionsPage.toggleText = mwse.mcm.i18n("Toggle Filtered")
 local itemID = tes3ui.registerID("ExclusionListItem")
 local placeholderText = mwse.mcm.i18n("Search...")
 
--- Constructor
+--- Constructor
+--- @param data mwseMCMExclusionsPage.new.data?
+--- @return mwseMCMExclusionsPage page
 function ExclusionsPage:new(data)
 	local t = {}
 	if data then
-		t = data
+		t = data --[[@as mwseMCMExclusionsPage]]
 		local tabUID = ("Page_" .. t.label)
 		t.tabUID = tes3ui.registerID(tabUID)
 		-- create variable
@@ -47,19 +54,25 @@ local function getSortedModList()
 	return list
 end
 
+--- @class mwseMCMExclusionsPage.local.getSortedObjectList.params
+--- @field objectType integer|integer[] Maps to values tes3.objectType enumeration
+--- @field objectFilters table<string, unknown>
+--- @field noScripted boolean
+
+--- @param params mwseMCMExclusionsPage.local.getSortedObjectList.params
+--- @return string[]
 local function getSortedObjectList(params)
 	local list = {}
 
 	for obj in tes3.iterateObjects(params.objectType) do
 		local doAdd = true
 		-- Check that all filters match
-		if params.objectFilters then
-			for field, value in pairs(params.objectFilters) do
-				if obj[field] ~= value then
-					doAdd = false
-				end
+		for field, value in pairs(params.objectFilters or {}) do
+			if obj[field] ~= value then
+				doAdd = false
 			end
 		end
+
 		if params.noScripted and obj.script ~= nil then
 			doAdd = false
 		end
@@ -79,6 +92,7 @@ function ExclusionsPage:resetSearchBars()
 	self.elements.searchBarInput.leftList:triggerEvent("keyPress")
 end
 
+--- @param e tes3uiEventData
 function ExclusionsPage:toggle(e)
 	-- toggle an item between blocked / allowed
 
@@ -99,6 +113,7 @@ function ExclusionsPage:toggle(e)
 		var[text] = true
 		self.variable.value = var
 	end
+	--- @cast list tes3uiElement
 
 	-- create element
 	list:createTextSelect{ id = itemID, text = text }:register("mouseClick", function(e)
@@ -107,26 +122,25 @@ function ExclusionsPage:toggle(e)
 
 	-- update sorting
 	local container = list:getContentElement()
-	for i, child in pairs(container.children) do
-		if child.text > text then
-			container:reorderChildren(i - 1, -1, 1)
-			break
-		end
-	end
+	container:sortChildren(function(a, b)
+			return a.text < b.text
+	end)
+
 	-- update display
-	self.elements.outerContainer:getTopLevelParent():updateLayout()
+	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
 
+--- @param listName mwseMCMExclusionsPageListId
 function ExclusionsPage:updateSearch(listName)
 
-	local searchString = self.elements.searchBarInput[listName].text
-	local thisList = self.elements[listName]
+	local searchString = self.elements.searchBarInput[listName].text:lower() --[[@as string]]
+	local thisList = self.elements[listName] --[[@as tes3uiElement]]
 	local child = thisList:findChild(itemID)
 
 	if child then
 		local itemList = child.parent.children
 		for _, item in ipairs(itemList) do
-			if item.text:lower():find(searchString:lower(), 1, true) then
+			if item.text:lower():find(searchString, 1, true) then
 				item.visible = true
 			else
 				item.visible = false
@@ -135,9 +149,10 @@ function ExclusionsPage:updateSearch(listName)
 	end
 
 	self.elements[listName].widget:contentsChanged()
-	self.elements.outerContainer:getTopLevelParent():updateLayout()
+	self.elements.outerContainer:getTopLevelMenu():updateLayout()
 end
 
+--- @param items string[]
 function ExclusionsPage:distributeLeft(items)
 	-- distribute items between blocked / allowed
 
@@ -163,6 +178,7 @@ function ExclusionsPage:distributeLeft(items)
 	end
 end
 
+--- @param items string[]
 function ExclusionsPage:distributeRight(items)
 	-- distribute items between blocked / allowed
 
@@ -176,17 +192,19 @@ function ExclusionsPage:distributeRight(items)
 	end
 end
 
+--- @param listName mwseMCMExclusionsPageListId
 function ExclusionsPage:toggleFiltered(listName)
 	-- Move all items currently filtered to opposite list
 
-	local thisList = self.elements[listName]
-	local child = self.elements[listName]:findChild(itemID)
+	local thisList = self.elements[listName] --[[@as tes3uiElement]]
+	local child = thisList:findChild(itemID)
 
 	if child then
 		local itemList = child.parent.children
 		for _, item in ipairs(itemList) do
 
 			if item.visible then
+				--- @diagnostic disable-next-line: missing-fields
 				self:toggle({ source = item })
 			end
 
@@ -198,6 +216,7 @@ function ExclusionsPage:toggleFiltered(listName)
 
 end
 
+--- @param filter tes3uiElement
 function ExclusionsPage:clickFilter(filter)
 
 	-- Turn all filters off
@@ -211,6 +230,8 @@ end
 
 -- UI creation functions
 
+--- @param parentBlock tes3uiElement
+--- @param listName mwseMCMExclusionsPageListId
 function ExclusionsPage:createSearchBar(parentBlock, listName)
 
 	local searchBlock = parentBlock:createBlock()
@@ -239,7 +260,8 @@ function ExclusionsPage:createSearchBar(parentBlock, listName)
 		local inputController = tes3.worldController.inputController
 		local pressedTab = (inputController:isKeyDown(tes3.scanCode.tab))
 		local backspacedNothing = ((inputController:isKeyDown(tes3.scanCode.delete) or
-		                    inputController:isKeyDown(tes3.scanCode.backspace)) and input.text == placeholderText)
+		                            inputController:isKeyDown(tes3.scanCode.backspace))
+		                            and input.text == placeholderText)
 
 		if pressedTab then
 			-- Prevent alt-tabbing from creating spacing.
@@ -287,6 +309,7 @@ function ExclusionsPage:createSearchBar(parentBlock, listName)
 
 end
 
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:createFiltersSection(parentBlock)
 
 	local block = parentBlock:createBlock{}
@@ -347,13 +370,19 @@ function ExclusionsPage:createFiltersSection(parentBlock)
 	self.elements.filterList = filterList
 end
 
+--- @alias mwseMCMExclusionsPageListId
+---| "leftList"
+---| "rightList"
+
+--- @param parentBlock tes3uiElement
+--- @param listId mwseMCMExclusionsPageListId
 function ExclusionsPage:createList(parentBlock, listId)
 
 	if listId ~= "leftList" and listId ~= "rightList" then
 		mwse.log("ERROR: param 2 of createList must be 'leftList' or 'rightList'.")
 		return
 	end
-	local labelId = (listId .. "Label")
+	local labelId = (listId .. "Label") --[[@as "leftListLabel"|"rightListLabel"]]
 
 	local block = parentBlock:createBlock{}
 	block.flowDirection = "top_to_bottom"
@@ -376,6 +405,7 @@ function ExclusionsPage:createList(parentBlock, listId)
 
 end
 
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:createOuterContainer(parentBlock)
 	local outerContainer = parentBlock:createThinBorder({ id = tes3ui.registerID("Category_OuterContainer") })
 	outerContainer.flowDirection = "top_to_bottom"
@@ -391,6 +421,7 @@ function ExclusionsPage:createOuterContainer(parentBlock)
 	self.elements.outerContainer = outerContainer
 end
 
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:createLabel(parentBlock)
 	Parent.createLabel(self, parentBlock)
 	if self.elements.label then
@@ -398,19 +429,23 @@ function ExclusionsPage:createLabel(parentBlock)
 	end
 end
 
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:createDescription(parentBlock)
-	if self.description then
-		local description = parentBlock:createLabel{ text = self.description }
-		-- description.heightProportional = -1
-		description.autoHeight = true
-		description.widthProportional = 1.0
-		description.wrapText = true
-		description.borderLeft = self.indent
-		description.borderRight = self.indent
-		self.elements.description = description
+	if not self.description then
+		return
 	end
+
+	local description = parentBlock:createLabel{ text = self.description }
+	-- description.heightProportional = -1
+	description.autoHeight = true
+	description.widthProportional = 1.0
+	description.wrapText = true
+	description.borderLeft = self.indent
+	description.borderRight = self.indent
+	self.elements.description = description
 end
 
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:createSections(parentBlock)
 	local sections = parentBlock:createBlock{}
 	sections.flowDirection = "left_to_right"
@@ -420,6 +455,7 @@ function ExclusionsPage:createSections(parentBlock)
 	self.elements.sections = sections
 end
 
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:create(parentBlock)
 	self.elements = {}
 	self.mouseOvers = {}

@@ -1169,8 +1169,8 @@ local newReference = tes3.createReference({ object = ..., position = ..., orient
 
 * `params` (table)
 	* `object` ([tes3physicalObject](../types/tes3physicalObject.md), string): The object to create a reference of.
-	* `position` ([tes3vector3](../types/tes3vector3.md), table): The location to create the reference at.
-	* `orientation` ([tes3vector3](../types/tes3vector3.md), table): The new orientation for the created reference.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): The location to create the reference at.
+	* `orientation` ([tes3vector3](../types/tes3vector3.md), number[]): The new orientation for the created reference.
 	* `cell` ([tes3cell](../types/tes3cell.md), string, table): *Optional*. The cell to create the reference in. This is only needed for interior cells.
 	* `scale` (number): *Default*: `1`. A scale for the reference.
 
@@ -1198,7 +1198,7 @@ local vfx = tes3.createVisualEffect({ object = ..., serial = ..., repeatCount = 
 	* `lifespan` (number): *Optional*. The desired lifespan for the VFX. If not provided, the VFX will never die of old age.
 	* `scale` (number): *Default*: `1`. The scale used to resize the given VFX. The default value will match the size used by most magical effect logic. This is not used when creating an enchantment-style VFX.
 	* `verticalOffset` (number): *Default*: `0`. This offset will be used to position it above its anchor reference. This is not used when creating an enchantment-style VFX.
-	* `position` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. If provided the VFX will be attached relative to a position, and not follow a reference.
 	* `avObject` ([niAVObject](../types/niAVObject.md)): *Optional*. 
 	* `magicEffectId` (number): *Optional*. The magic effect ID to use to create an enchantment-style VFX. This will use most of the same VFX logic, but cannot be applied to a position or specific niAVObject.
 
@@ -1851,7 +1851,7 @@ local cell = tes3.getCell({ id = ..., position = ..., x = ..., y = ... })
 
 * `params` (table)
 	* `id` (string): *Optional*. The cell's ID. If not provided, position or x and y must be.
-	* `position` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. A point in an exterior cell.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. A point in an exterior cell.
 	* `x` (number): *Optional*. The X grid-position.
 	* `y` (number): *Optional*. The Y grid-position.
 
@@ -3118,22 +3118,92 @@ local equal = tes3.isKeyEqual({ actual = ..., expected = ... })
 **Parameters**:
 
 * `params` (table)
-	* `actual` (table): The key object that is being compared.
+	* `actual` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md), keyDownEventData, keyUpEventData, keyEventData, mouseButtonDownEventData, mouseButtonUpEventData, mouseWheelEventData): The key object that is being compared.
 		* `keyCode` (number): *Default*: `false`. Value of the actual key scan code, such as the letter `p`. Maps to [`tes3.scanCode.*`](https://mwse.github.io/MWSE/references/scan-codes/).
 		* `isShiftDown` (boolean): *Default*: `false`. Value of whether the shift key is pressed.
 		* `isControlDown` (boolean): *Default*: `false`. Value of whether the control key is pressed.
 		* `isAltDown` (boolean): *Default*: `false`. Value of whether the alt key is pressed.
 		* `isSuperDown` (boolean): *Default*: `false`. Value of whether the super (Windows key) key is pressed.
-	* `expected` (table): The key object that is being compared against.
+		* `mouseButton` (number): *Default*: `false`. The mouse button index.
+		* `mouseWheel` (integer): *Default*: `false`. The mouse wheel direction. `-1` is down, `1` is up.
+	* `expected` (table, [mwseKeyCombo](../types/mwseKeyCombo.md), [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md), keyDownEventData, keyUpEventData, keyEventData, mouseButtonDownEventData, mouseButtonUpEventData, mouseWheelEventData): The key object that is being compared against.
 		* `keyCode` (number): *Default*: `false`. Value of the expected key scan code, such as the letter `p`. Maps to [`tes3.scanCode.*`](https://mwse.github.io/MWSE/references/scan-codes/).
 		* `isShiftDown` (boolean): *Default*: `false`. Value of whether the shift key is expected to be pressed.
 		* `isControlDown` (boolean): *Default*: `false`. Value of whether the control key is expected to be pressed.
 		* `isAltDown` (boolean): *Default*: `false`. Value of whether the alt key is expected to be pressed.
 		* `isSuperDown` (boolean): *Default*: `false`. Value of whether the super (Windows key) key is pressed.
+		* `mouseButton` (number): *Default*: `false`. The mouse button index.
+		* `mouseWheel` (integer): *Default*: `false`. The mouse wheel direction. `-1` is down, `1` is up.
 
 **Returns**:
 
-* `equal` (boolean)
+* `equal`
+
+??? example "Example: Filtering out key presses that aren't equal to the bound key combination"
+
+	```lua
+	
+	-- An example of a simple configuration setup
+	local defaultConfig = {
+		---@type mwseKeyMouseCombo
+		combo = {
+			-- Alt + Left mouse button
+			mouseButton = 0,
+			isAltDown = true,
+			isControlDown = false,
+			isShiftDown = false,
+		},
+	}
+	local config = mwse.loadConfig("myModConfig", defaultConfig)
+	
+	local function registerModConfig()
+		local template = mwse.mcm.createTemplate({ name = "Test Mod" })
+		template:register()
+	
+		local page = template:createSideBarPage({ label = "Settings" })
+	
+		page:createKeyBinder({
+			label = "My combo",
+			description = "This combo does...",
+			allowMouse = true,
+			variable = mwse.mcm.createTableVariable({
+				id = "combo",
+				table = config
+			}),
+		})
+	end
+	event.register(tes3.event.modConfigReady, registerModConfig)
+	
+	
+	--- @param e keyDownEventData|mouseButtonDownEventData|mouseWheelEventData
+	local function sayHi(e)
+		local IC = tes3.worldController.inputController
+	
+		-- Let's construct the table with the currently pressed key combination.
+		-- This will handle event data from keyDown, mouseButtonDown and mouseWheel events.
+		--- @type mwseKeyMouseCombo
+		local actual = {
+			keyCode = e.keyCode,
+			isAltDown = IC:isAltDown(),
+			isControlDown = IC:isControlDown(),
+			isShiftDown = IC:isShiftDown(),
+			mouseButton = e.button,
+			delta = e.delta
+		}
+		if not tes3.isKeyEqual({ expected = config.combo, actual = actual }) then
+			-- Nothing to do if the pressed combination isn't equal to our expected combination.
+			return
+		end
+	
+		-- Now do our logic
+		tes3.messageBox("Hi!")
+	end
+	
+	event.register(tes3.event.keyDown, sayHi)
+	event.register(tes3.event.mouseButtonDown, sayHi)
+	event.register(tes3.event.mouseWheel, sayHi)
+
+	```
 
 ***
 
@@ -3677,8 +3747,8 @@ local executed = tes3.positionCell({ reference = ..., cell = ..., position = ...
 * `params` (table)
 	* `reference` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md), string): *Default*: `tes3.mobilePlayer`. The reference to reposition.
 	* `cell` ([tes3cell](../types/tes3cell.md), string, table, nil): *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
-	* `position` ([tes3vector3](../types/tes3vector3.md), table): The position to move the reference to.
-	* `orientation` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. The new orientation of the reference.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): The position to move the reference to.
+	* `orientation` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. The new orientation of the reference.
 	* `forceCellChange` (boolean): *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
 	* `suppressFader` (boolean): *Default*: `false`. When moving the player, can be used to prevent the fade in and out visual effect.
 	* `teleportCompanions` (boolean): *Default*: `true`. If used on the player, determines if companions should also be teleported.
@@ -3742,8 +3812,8 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 **Parameters**:
 
 * `params` (table)
-	* `position` ([tes3vector3](../types/tes3vector3.md), table): Position of the ray origin.
-	* `direction` ([tes3vector3](../types/tes3vector3.md), table): Direction of the ray. Does not have to be unit length.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): Position of the ray origin.
+	* `direction` ([tes3vector3](../types/tes3vector3.md), number[]): Direction of the ray. Does not have to be unit length.
 	* `findAll` (boolean): *Default*: `false`. If true, the ray test won't stop after the first result.
 	* `maxDistance` (number): *Default*: `0`. The maximum distance that the test will run.
 	* `sort` (boolean): *Default*: `true`. If true, the results will be sorted by distance from the origin position.
@@ -4147,7 +4217,7 @@ tes3.setAIEscort({ reference = ..., target = ..., destination = ..., duration = 
 * `params` (table)
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md)): The escorting actor.
 	* `target` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md)): The actor being escorted.
-	* `destination` ([tes3vector3](../types/tes3vector3.md), table)
+	* `destination` ([tes3vector3](../types/tes3vector3.md), number[])
 	* `duration` (integer): *Default*: `0`. How long the escorter will do the escorting, in hours.
 	* `cell` ([tes3cell](../types/tes3cell.md), string): *Optional*.
 	* `reset` (boolean): *Default*: `true`.
@@ -4168,7 +4238,7 @@ tes3.setAIFollow({ reference = ..., target = ..., destination = ..., duration = 
 * `params` (table)
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md)): This is the actor that will follow another one.
 	* `target` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md)): The actor to follow.
-	* `destination` ([tes3vector3](../types/tes3vector3.md), table): *Optional*.
+	* `destination` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*.
 	* `duration` (integer): *Default*: `0`. How long the follower will follow, in hours.
 	* `cell` ([tes3cell](../types/tes3cell.md), string): *Optional*.
 	* `reset` (boolean): *Default*: `true`.
@@ -4188,7 +4258,7 @@ tes3.setAITravel({ reference = ..., destination = ..., reset = ... })
 
 * `params` (table)
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md))
-	* `destination` ([tes3vector3](../types/tes3vector3.md), table)
+	* `destination` ([tes3vector3](../types/tes3vector3.md), number[])
 	* `reset` (boolean): *Default*: `true`.
 
 ***
@@ -4244,8 +4314,8 @@ tes3.setDestination({ reference = ..., position = ..., orientation = ..., cell =
 
 * `params` (table)
 	* `reference` ([tes3reference](../types/tes3reference.md)): The door reference that will be updated.
-	* `position` ([tes3vector3](../types/tes3vector3.md), table): The new coordinates of the transition.
-	* `orientation` ([tes3vector3](../types/tes3vector3.md), table): The new rotation to use after transition.
+	* `position` ([tes3vector3](../types/tes3vector3.md), number[]): The new coordinates of the transition.
+	* `orientation` ([tes3vector3](../types/tes3vector3.md), number[]): The new rotation to use after transition.
 	* `cell` ([tes3cell](../types/tes3cell.md), string): *Optional*. The cell to transition to, if transitioning to an interior.
 
 ***
@@ -4763,9 +4833,9 @@ local hasLineOfSight = tes3.testLineOfSight({ reference1 = ..., reference2 = ...
 * `params` (table)
 	* `reference1` ([tes3reference](../types/tes3reference.md)): *Optional*. Position of the starting point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the starting point is at the top of its bounding box.
 	* `reference2` ([tes3reference](../types/tes3reference.md)): *Optional*. Position of the ending point of the LoS check. For actors, this point is set to position of this reference's head. For other objects the ending point is at the top of its bounding box.
-	* `position1` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. Position of the starting point of the LoS check. Modified by height1.
+	* `position1` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. Position of the starting point of the LoS check. Modified by height1.
 	* `height1` (number): *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
-	* `position2` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. Position of the ending point of the LoS check. Modified by height2.
+	* `position2` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. Position of the ending point of the LoS check. Modified by height2.
 	* `height2` (number): *Default*: `0`. Moves the starting point upwards (+Z direction) by this amount. Normally used to simulate head height from a position that is on the ground.
 
 **Returns**:

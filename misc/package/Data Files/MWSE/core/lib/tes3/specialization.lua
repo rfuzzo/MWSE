@@ -1,4 +1,3 @@
----@enum tes3.specialization
 return {
 	["invalid"] = -1,
 	["combat"] = 0,

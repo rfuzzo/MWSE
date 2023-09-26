@@ -106,6 +106,7 @@
 --- @field register fun(eventId: '"magicCasted"', callback: fun(e: magicCastedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"magicEffectRemoved"', callback: fun(e: magicEffectRemovedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"magicEffectsResolved"', callback: fun(e: magicEffectsResolvedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"magicSelectionChanged"', callback: fun(e: magicSelectionChangedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"menuEnter"', callback: fun(e: menuEnterEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"menuExit"', callback: fun(e: menuExitEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"meshLoad"', callback: fun(e: meshLoadEventData): boolean?, options: table?)

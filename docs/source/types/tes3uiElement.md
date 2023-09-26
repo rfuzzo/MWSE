@@ -973,7 +973,7 @@ local result = myObject:createRect({ id = ..., color = ..., randomizeColor = ...
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `color` ([tes3vector3](../types/tes3vector3.md), table): *Optional*. The fill color for the element.
+	* `color` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. The fill color for the element.
 	* `randomizeColor` (boolean): *Default*: `false`. If true, the creation color will be randomized.
 
 **Returns**:
@@ -1694,7 +1694,7 @@ myObject:sortChildren(sortFunction)
 
 **Parameters**:
 
-* `sortFunction` (function): The function to sort with. Like most sorting functions, this is given two arguments to compare.
+* `sortFunction` (fun(a: [tes3uiElement](../types/tes3uiElement.md), b: [tes3uiElement](../types/tes3uiElement.md)): boolean): The function to sort with. Like most sorting functions, this is given two arguments to compare.
 
 ***
 

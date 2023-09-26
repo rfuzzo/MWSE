@@ -228,6 +228,8 @@ namespace se::cs::dialog::cell_window {
 		}
 	}
 
+	std::optional<LRESULT> forcedReturnResult = {};
+
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		const auto command = HIWORD(wParam);
 		const auto id = LOWORD(wParam);
@@ -252,12 +254,58 @@ namespace se::cs::dialog::cell_window {
 		}
 	}
 
+	inline void OnNotifyFromListView(HWND hWnd, UINT msg, WPARAM id, LPARAM lParam) {
+		const auto hdr = (NMHDR*)lParam;
+
+		if (hdr->code == NM_CUSTOMDRAW && settings.object_window.highlight_modified_items) {
+			LPNMLVCUSTOMDRAW lplvcd = (LPNMLVCUSTOMDRAW)lParam;
+
+			if (lplvcd->nmcd.dwDrawStage == CDDS_PREPAINT) {
+				SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NOTIFYITEMDRAW);
+			}
+			else if (lplvcd->nmcd.dwDrawStage == CDDS_ITEMPREPAINT) {
+				auto object = (BaseObject*)lplvcd->nmcd.lItemlParam;
+				if (object) {
+					// Background color highlighting.
+					if (object->getDeleted()) {
+						lplvcd->clrTextBk = settings.color_theme.highlight_deleted_object_packed_color;
+						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
+					}
+					else if (object->getModified()) {
+						// Modified color highlighting. Different colors for modified-master or mod-added object.
+						lplvcd->clrTextBk = object->isFromMaster() ? settings.color_theme.highlight_modified_from_master_packed_color : settings.color_theme.highlight_modified_new_object_packed_color;
+						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
+					}
+				}
+			}
+			forcedReturnResult = TRUE;
+		}
+	}
+
+	inline void PatchDialogProc_BeforeNotify(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		switch (wParam) {
+		case CONTROL_ID_CELL_LIST_VIEW:
+		case CONTROL_ID_REFS_LIST_VIEW:
+			OnNotifyFromListView(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Handle pre-patches.
+		forcedReturnResult = {};
+
 		switch (msg) {
 		case WM_COMMAND:
 			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
 			break;
+		case WM_NOTIFY:
+			PatchDialogProc_BeforeNotify(hWnd, msg, wParam, lParam);
+			break;
+		}
+
+		if (forcedReturnResult.has_value()) {
+			return forcedReturnResult.value();
 		}
 
 		// Call original function.

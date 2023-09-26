@@ -9,9 +9,11 @@ function mcm:new()
 	return t
 end
 
+--- @param template mwseMCMTemplate
 function mcm.register(template)
 	local modConfig = {}
 
+	--- @param container tes3uiElement
 	modConfig.onCreate = function(container)
 		template:create(container)
 		modConfig.onClose = template.onClose
@@ -20,6 +22,8 @@ function mcm.register(template)
 	mwse.registerModConfig(template.name, modConfig)
 end
 
+--- @param keybind mwseKeyCombo
+--- @return boolean pressed
 function mcm.testKeyBind(keybind)
 	local inputController = tes3.worldController.inputController
 	return inputController:isKeyDown(keybind.keyCode) and keybind.isShiftDown == inputController:isShiftDown() and
@@ -32,10 +36,11 @@ function mcm.registerModData(mcmData)
 	local modConfig = {}
 
 	---CREATE MCM---
+	--- @param container tes3uiElement
 	function modConfig.onCreate(container)
 		local templateClass = mcmData.template or "Template"
 		local templatePath = ("mcm.components.templates." .. templateClass)
-		local template = require(templatePath):new(mcmData)
+		local template = require(templatePath):new(mcmData) --[[@as mwseMCMTemplate]]
 		template:create(container)
 		modConfig.onClose = template.onClose
 	end
@@ -55,9 +60,9 @@ end
 	Check if key being accessed is in the form "create{class}" where
 	{class} is a component or variable class.
 
-	If only component data was sent as a parameter, create the new 
+	If only component data was sent as a parameter, create the new
 	component instance. If a parentBlock was also passed, then also
-	create the element on the parent. 
+	create the element on the parent.
 
 ]]--
 
@@ -76,12 +81,13 @@ function mcm.__index(tbl, key)
 
 			local classPath = path .. class
 			local fullPath = lfs.currentdir() .. classPaths.basePath .. classPath .. ".lua"
-			local fileExists = lfs.attributes(fullPath, "mode") == "file"
+			local fileExists = lfs.fileexists(fullPath)
 			if fileExists then
 				component = require(classPath)
 			end
 
 			if component then
+				--- @cast component mwseMCMComponent
 				return function(param1, param2)
 					local parent = nil
 					local data = nil
