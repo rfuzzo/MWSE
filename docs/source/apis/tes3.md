@@ -4871,9 +4871,9 @@ local transferred = tes3.transferInventory({ from = ..., to = ..., filter = ...,
 **Parameters**:
 
 * `params` (table)
-	* `from` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to take items from.
-	* `to` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): Who to give items to.
-	* `filter` (fun(item: [tes3item](../../types/tes3item), itemData: [tes3itemData](../../types/tes3itemData)): boolean): *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
+	* `from` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md), string): Who to take items from.
+	* `to` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md), string): Who to give items to.
+	* `filter` (fun(item: [tes3item](../types/tes3item.md), itemData: [tes3itemData](../types/tes3itemData.md)): boolean): *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
 	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound won't be played.
 	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, partial transfer is made.
 	* `completeTransfer` (boolean): *Default*: `false`. Use this to disable partial transfers. If `limitCapacity` is set to true, passing `completeTransfer = true` will only transfer the items from one inventory to the other if and only if all the items can fit inside the destination inventory. This argument only works if `limitCapacity` is `true`.
