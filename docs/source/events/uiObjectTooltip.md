@@ -21,13 +21,13 @@ event.register(tes3.event.uiObjectTooltip, uiObjectTooltipCallback)
 ## Event Data
 
 * `count` (number): *Read-only*. The number of items in the stack.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data of object, if any.
-* `object` ([tes3physicalObject](../../types/tes3physicalObject)): *Read-only*. The object being examined.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference being examined. Only valid for in-world objects. For inventory tiles it will always be nil.
-* `tooltip` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The newly created tooltip element. Due to timeouts and target changes, it may be destroyed at any time.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Read-only*. The item data of object, if any.
+* `object` ([tes3physicalObject](../types/tes3physicalObject.md)): *Read-only*. The object being examined.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference being examined. Only valid for in-world objects. For inventory tiles it will always be nil.
+* `tooltip` ([tes3uiElement](../types/tes3uiElement.md)): *Read-only*. The newly created tooltip element. Due to timeouts and target changes, it may be destroyed at any time.
 
 
 ## Related events
 
-[uiSkillTooltip](../uiSkillTooltip/){ .md-button }[uiSpellTooltip](../uiSpellTooltip/){ .md-button }
+[uiSkillTooltip](./uiSkillTooltip.md){ .md-button }[uiSpellTooltip](./uiSpellTooltip.md){ .md-button }
 

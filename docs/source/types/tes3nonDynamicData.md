@@ -17,7 +17,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3gameFile](../../types/tes3gameFile)[])
+* `result` ([tes3gameFile](../types/tes3gameFile.md)[])
 
 ***
 
@@ -28,7 +28,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3birthsign](../../types/tes3birthsign)[])
+* `result` ([tes3birthsign](../types/tes3birthsign.md)[])
 
 ***
 
@@ -39,7 +39,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell)[])
+* `result` ([tes3cell](../types/tes3cell.md)[])
 
 ***
 
@@ -50,7 +50,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3class](../../types/tes3class)[])
+* `result` ([tes3class](../types/tes3class.md)[])
 
 ***
 
@@ -61,7 +61,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3dialogue](../../types/tes3dialogue)[])
+* `result` ([tes3dialogue](../types/tes3dialogue.md)[])
 
 ***
 
@@ -72,7 +72,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3faction](../../types/tes3faction)[])
+* `result` ([tes3faction](../types/tes3faction.md)[])
 
 ***
 
@@ -83,7 +83,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3iterator](../../types/tes3iterator))
+* `result` ([tes3iterator](../types/tes3iterator.md))
 
 ***
 
@@ -105,7 +105,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3landTexture](../../types/tes3landTexture)[])
+* `result` ([tes3landTexture](../types/tes3landTexture.md)[])
 
 ***
 
@@ -116,7 +116,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` ([tes3gameFile](../../types/tes3gameFile))
+* `result` ([tes3gameFile](../types/tes3gameFile.md))
 
 ***
 
@@ -127,7 +127,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 **Returns**:
 
-* `result` (table&lt;integer, [tes3magicEffect](../../types/tes3magicEffect)&gt;)
+* `result` (table&lt;integer, [tes3magicEffect](../types/tes3magicEffect.md)&gt;)
 
 ***
 
@@ -138,7 +138,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([niSourceTexture](../../types/niSourceTexture))
+* `result` ([niSourceTexture](../types/niSourceTexture.md))
 
 ***
 
@@ -149,7 +149,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object)[])
+* `result` ([tes3object](../types/tes3object.md)[])
 
 ***
 
@@ -160,7 +160,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3race](../../types/tes3race)[])
+* `result` ([tes3race](../types/tes3race.md)[])
 
 ***
 
@@ -171,7 +171,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3region](../../types/tes3region)[])
+* `result` ([tes3region](../types/tes3region.md)[])
 
 ***
 
@@ -182,7 +182,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script)[])
+* `result` ([tes3script](../types/tes3script.md)[])
 
 ***
 
@@ -193,7 +193,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3skill](../../types/tes3skill)[])
+* `result` ([tes3skill](../types/tes3skill.md)[])
 
 ***
 
@@ -204,7 +204,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3soundGenerator](../../types/tes3soundGenerator)[])
+* `result` ([tes3soundGenerator](../types/tes3soundGenerator.md)[])
 
 ***
 
@@ -215,7 +215,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound)[])
+* `result` ([tes3sound](../types/tes3sound.md)[])
 
 ***
 
@@ -226,7 +226,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell)[])
+* `result` ([tes3spell](../types/tes3spell.md)[])
 
 ***
 
@@ -237,7 +237,7 @@ Access to the World map texture.
 
 **Returns**:
 
-* `result` ([tes3startScript](../../types/tes3startScript)[])
+* `result` ([tes3startScript](../types/tes3startScript.md)[])
 
 ***
 
@@ -254,7 +254,7 @@ local result = myObject:addNewObject(object)
 
 **Parameters**:
 
-* `object` ([tes3baseObject](../../types/tes3baseObject))
+* `object` ([tes3baseObject](../types/tes3baseObject.md))
 
 **Returns**:
 
@@ -273,7 +273,7 @@ myObject:deleteObject(object)
 
 **Parameters**:
 
-* `object` ([tes3baseObject](../../types/tes3baseObject))
+* `object` ([tes3baseObject](../types/tes3baseObject.md))
 
 ***
 
@@ -288,7 +288,7 @@ myObject:drawCellMapMarker(cell)
 
 **Parameters**:
 
-* `cell` ([tes3cell](../../types/tes3cell))
+* `cell` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -307,7 +307,7 @@ local result = myObject:findDialogue(id)
 
 **Returns**:
 
-* `result` ([tes3dialogue](../../types/tes3dialogue))
+* `result` ([tes3dialogue](../types/tes3dialogue.md))
 
 ***
 
@@ -326,7 +326,7 @@ local result = myObject:findFirstCloneOfActor(id)
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -345,7 +345,7 @@ local result = myObject:findGlobalVariable(id)
 
 **Returns**:
 
-* `result` ([tes3globalVariable](../../types/tes3globalVariable))
+* `result` ([tes3globalVariable](../types/tes3globalVariable.md))
 
 ***
 
@@ -364,7 +364,7 @@ local result = myObject:findScript(id)
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -383,7 +383,7 @@ local result = myObject:findSound(id)
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -402,7 +402,7 @@ local gameFile = myObject:getGameFile(fileName)
 
 **Returns**:
 
-* `gameFile` ([tes3gameFile](../../types/tes3gameFile), nil): The game file associated with the name.
+* `gameFile` ([tes3gameFile](../types/tes3gameFile.md), nil): The game file associated with the name.
 
 ***
 
@@ -421,7 +421,7 @@ local result = myObject:resolveObject(id)
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject))
+* `result` ([tes3baseObject](../types/tes3baseObject.md))
 
 ***
 

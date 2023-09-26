@@ -20,11 +20,11 @@ event.register(tes3.event.infoFilter, infoFilterCallback)
 
 ## Event Data
 
-* `actor` ([tes3object](../../types/tes3object)): *Read-only*. The actor.
-* `dialogue` ([tes3dialogue](../../types/tes3dialogue)): *Read-only*. The dialogue object.
-* `info` ([tes3dialogueInfo](../../types/tes3dialogueInfo)): *Read-only*. The dialogue info object.
+* `actor` ([tes3object](../types/tes3object.md)): *Read-only*. The actor.
+* `dialogue` ([tes3dialogue](../types/tes3dialogue.md)): *Read-only*. The dialogue object.
+* `info` ([tes3dialogueInfo](../types/tes3dialogueInfo.md)): *Read-only*. The dialogue info object.
 * `passes` (boolean): Indicates if the filter passes. Set to false to block a line.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference.
 * `source` (integer): *Read-only*. The source.
 
 ## Examples
@@ -63,5 +63,5 @@ event.register(tes3.event.infoFilter, infoFilterCallback)
 
 ## Related events
 
-[dialogueFiltered](../dialogueFiltered/){ .md-button }[infoGetText](../infoGetText/){ .md-button }[infoLinkResolve](../infoLinkResolve/){ .md-button }[infoResponse](../infoResponse/){ .md-button }[infoFilter](../infoFilter/){ .md-button }[postInfoResponse](../postInfoResponse/){ .md-button }
+[dialogueFiltered](./dialogueFiltered.md){ .md-button }[infoGetText](./infoGetText.md){ .md-button }[infoLinkResolve](./infoLinkResolve.md){ .md-button }[infoResponse](./infoResponse.md){ .md-button }[infoFilter](./infoFilter.md){ .md-button }[postInfoResponse](./postInfoResponse.md){ .md-button }
 

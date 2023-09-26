@@ -8,7 +8,7 @@
 
 The controller responsible for animating transforms, using position, rotation, and scale keys.
 
-This type inherits the following: [niTimeController](../../types/niTimeController), [niObject](../../types/niObject)
+This type inherits the following: [niTimeController](../types/niTimeController.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `active`
@@ -55,7 +55,7 @@ Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni
 
 **Returns**:
 
-* `result` ([niKeyframeData](../../types/niKeyframeData))
+* `result` ([niKeyframeData](../types/niKeyframeData.md))
 
 ***
 
@@ -154,7 +154,7 @@ The next animation controller in the list of controllers containing the calling 
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -187,7 +187,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -198,7 +198,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -220,7 +220,7 @@ The time at which the animation controller starts playing its animation.
 
 **Returns**:
 
-* `result` ([niObjectNET](../../types/niObjectNET))
+* `result` ([niObjectNET](../types/niObjectNET.md))
 
 ***
 
@@ -237,7 +237,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -309,7 +309,7 @@ myObject:setTarget(target)
 
 **Parameters**:
 
-* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+* `target` ([niObjectNET](../types/niObjectNET.md)): The new target to assign.
 
 ***
 

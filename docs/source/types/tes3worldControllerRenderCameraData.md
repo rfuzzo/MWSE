@@ -17,7 +17,7 @@ The camera scene node.
 
 **Returns**:
 
-* `result` ([niCamera](../../types/niCamera))
+* `result` ([niCamera](../types/niCamera.md))
 
 ***
 

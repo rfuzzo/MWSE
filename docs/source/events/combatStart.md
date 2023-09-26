@@ -23,8 +23,8 @@ event.register(tes3.event.combatStart, combatStartCallback)
 
 ## Event Data
 
-* `actor` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor who is entering combat.
-* `target` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor who combat is being triggered against.
+* `actor` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor who is entering combat.
+* `target` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor who combat is being triggered against.
 
 ## Examples
 
@@ -51,5 +51,5 @@ event.register(tes3.event.combatStart, combatStartCallback)
 
 ## Related events
 
-[combatStart](../combatStart/){ .md-button }[combatStarted](../combatStarted/){ .md-button }[combatStop](../combatStop/){ .md-button }[combatStopped](../combatStopped/){ .md-button }
+[combatStart](./combatStart.md){ .md-button }[combatStarted](./combatStarted.md){ .md-button }[combatStop](./combatStop.md){ .md-button }[combatStopped](./combatStopped.md){ .md-button }
 

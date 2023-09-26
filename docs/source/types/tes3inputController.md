@@ -28,7 +28,7 @@ A data structure, off of the world controller, that handles input.
 
 **Returns**:
 
-* `result` ([tes3inputConfig](../../types/tes3inputConfig)[])
+* `result` ([tes3inputConfig](../types/tes3inputConfig.md)[])
 
 ***
 
@@ -50,7 +50,7 @@ A data structure, off of the world controller, that handles input.
 
 **Returns**:
 
-* `result` ([tes3directInputMouseState](../../types/tes3directInputMouseState))
+* `result` ([tes3directInputMouseState](../types/tes3directInputMouseState.md))
 
 ***
 
@@ -72,7 +72,7 @@ A data structure, off of the world controller, that handles input.
 
 **Returns**:
 
-* `result` ([tes3directInputMouseState](../../types/tes3directInputMouseState))
+* `result` ([tes3directInputMouseState](../types/tes3directInputMouseState.md))
 
 ***
 

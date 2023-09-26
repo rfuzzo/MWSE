@@ -57,7 +57,7 @@ function tes3fader:fadeTo(params) end
 --- Applies a coloring effect to the fader. A fader without a texture will apply a colouring effect over the screen. The colour set here can completely change the color of the fader's texture.
 --- @param params tes3fader.setColor.params This table accepts the following values:
 --- 
---- `color`: tes3vector3|table — The RGB values to set in [0.0, 1.0] range.
+--- `color`: tes3vector3|number[] — The RGB values to set in [0.0, 1.0] range. If passing an array, pass 3 numbers.
 --- 
 --- `flag`: boolean? — *Default*: `false`. No description yet available.
 --- @return boolean result No description yet available.
@@ -65,11 +65,11 @@ function tes3fader:setColor(params) end
 
 ---Table parameter definitions for `tes3fader.setColor`.
 --- @class tes3fader.setColor.params
---- @field color tes3vector3|table The RGB values to set in [0.0, 1.0] range.
+--- @field color tes3vector3|number[] The RGB values to set in [0.0, 1.0] range. If passing an array, pass 3 numbers.
 --- @field flag boolean? *Default*: `false`. No description yet available.
 
 --- This method allows changing the texture of the fader.
---- @param path string A path for the texture that will be displayed on screen.
+--- @param path string A path for the texture that will be displayed on screen. Starting in `"Data Files\"`.
 function tes3fader:setTexture(path) end
 
 --- Updates the fader for the current frame. This method needs to be called each frame for fader to be present.

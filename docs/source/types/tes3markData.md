@@ -17,7 +17,7 @@ A simple structure to hold mark/recall data.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -28,14 +28,14 @@ The position to recall to.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
 ### `rotation`
 <div class="search_terms" style="display: none">rotation</div>
 
-The rotation to use when recalling. It's the Euler rotation around the Z axis in Radians.
+The rotation to use when recalling. It's the Euler rotation around the Z axis in radians.
 
 **Returns**:
 

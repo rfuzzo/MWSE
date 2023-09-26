@@ -1,4 +1,3 @@
----@enum ni.stencilTestFunction
 return {
 	["never"] = 0,
 	["less"] = 1,

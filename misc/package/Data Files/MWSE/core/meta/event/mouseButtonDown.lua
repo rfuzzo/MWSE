@@ -3,6 +3,8 @@
 
 --- @meta
 --- This event fires when a button on the mouse is pressed.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/events/mouseButtonDown).
 --- @class mouseButtonDownEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
 --- @field button number *Read-only*. The button index that was pressed.

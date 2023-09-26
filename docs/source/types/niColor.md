@@ -100,7 +100,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -115,12 +115,12 @@ local lerpedcolor = myObject:lerp(tocolor, transition)
 
 **Parameters**:
 
-* `tocolor` ([niColor](../../types/niColor)): The color to interpolate towards.
+* `tocolor` ([niColor](../types/niColor.md)): The color to interpolate towards.
 * `transition` (number): The interpolation value. Must be between 0.0 (closer to this color) and 1.0 (closer to the other color).
 
 **Returns**:
 
-* `lerpedcolor` ([niColor](../../types/niColor)): The calculated value.
+* `lerpedcolor` ([niColor](../types/niColor.md)): The calculated value.
 
 ***
 
@@ -135,7 +135,7 @@ local result = myObject:toVector3()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -158,7 +158,7 @@ local color = niColor.new(r, g, b)
 
 **Returns**:
 
-* `color` ([niColor](../../types/niColor))
+* `color` ([niColor](../types/niColor.md))
 
 ***
 
@@ -168,7 +168,7 @@ local color = niColor.new(r, g, b)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Adds the color channel values of two `niColor` objects. |
+| [niColor](../types/niColor.md) | [niColor](../types/niColor.md) | [niColor](../types/niColor.md) | Adds the color channel values of two `niColor` objects. |
 
 ***
 
@@ -176,8 +176,8 @@ local color = niColor.new(r, g, b)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Multiplies color channel values. |
-| [niColor](../../types/niColor) | number | [niColor](../../types/niColor) | Multiplies each color value with a scalar. |
+| [niColor](../types/niColor.md) | [niColor](../types/niColor.md) | [niColor](../types/niColor.md) | Multiplies color channel values. |
+| [niColor](../types/niColor.md) | number | [niColor](../types/niColor.md) | Multiplies each color value with a scalar. |
 
 ***
 
@@ -185,5 +185,5 @@ local color = niColor.new(r, g, b)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
-| [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Subtracts the color channel values. |
+| [niColor](../types/niColor.md) | [niColor](../types/niColor.md) | [niColor](../types/niColor.md) | Subtracts the color channel values. |
 

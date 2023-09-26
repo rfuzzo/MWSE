@@ -8,7 +8,7 @@
 
 A structure containing properties specific to buttons.
 
-This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
+This type inherits the following: [tes3uiWidget](../types/tes3uiWidget.md)
 ## Properties
 
 ### `element`
@@ -18,7 +18,7 @@ Access back to the element this widget interface is for.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -29,7 +29,7 @@ The RGB color of the button's text when `state` is set to `normal`.	An array of 
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -40,7 +40,7 @@ The RGB color of the button's text when `state` is set to `active`. An array of 
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -51,7 +51,7 @@ The RGB color of the button's text when `state` is set to `disabled`. An array o
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -62,7 +62,7 @@ The RGB color of the button's text when the button is selected and `state` is se
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -73,7 +73,7 @@ The RGB color of the button's text when the button is selected and `state` is se
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -84,7 +84,7 @@ The RGB color of the button's text when the button is selected and `state` is se
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -95,7 +95,7 @@ The RGB color of the button's text when the button is pressed and `state` is set
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -106,7 +106,7 @@ The RGB color of the button's text when the button is pressed and `state` is set
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -117,7 +117,7 @@ The RGB color of the button's text when the button is pressed and `state` is set
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 

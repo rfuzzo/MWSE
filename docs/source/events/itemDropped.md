@@ -20,5 +20,5 @@ event.register(tes3.event.itemDropped, itemDroppedCallback)
 
 ## Event Data
 
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference.
 

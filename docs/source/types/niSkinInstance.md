@@ -8,7 +8,7 @@
 
 Contains instance-dependent skinning data for a `NiTriShape` object.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `bones`
@@ -18,7 +18,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject)[])
+* `result` ([niAVObject](../types/niAVObject.md)[])
 
 ***
 
@@ -29,7 +29,7 @@ The skinning data. May be shared by multiple skin instances.
 
 **Returns**:
 
-* `result` ([niSkinData](../../types/niSkinData))
+* `result` ([niSkinData](../types/niSkinData.md))
 
 ***
 
@@ -51,7 +51,7 @@ The skeleton root (parent of the root bone).
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -62,7 +62,7 @@ The skeleton root (parent of the root bone).
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -73,7 +73,7 @@ The skeleton root (parent of the root bone).
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -90,7 +90,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 

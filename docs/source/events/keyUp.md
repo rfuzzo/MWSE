@@ -32,5 +32,5 @@ event.register(tes3.event.keyUp, keyUpCallback)
 
 ## Related events
 
-[keyDown](../keyDown/){ .md-button }
+[keyDown](./keyDown.md){ .md-button }
 

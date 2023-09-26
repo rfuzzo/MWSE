@@ -149,7 +149,7 @@ Represents a loaded ESM, ESP, or ESS file.
 
 **Returns**:
 
-* `result` ([tes3gameFile](../../types/tes3gameFile)[])
+* `result` ([tes3gameFile](../types/tes3gameFile.md)[])
 
 ***
 

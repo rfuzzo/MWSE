@@ -35,5 +35,8 @@ return {
 			title = "Show a Message when Ctrl-Z is Pressed",
 			description = "Displays a simple message when Z is pressed while control is held.",
 		},
+		["..\\..\\..\\global\\tes3\\isKeyEqual\\filtering"] = {
+			title = "Filtering out key presses that aren't equal to the bound key combination"
+		},
 	},
 }

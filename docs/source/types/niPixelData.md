@@ -8,7 +8,7 @@
 
 Represents 2D arrays of pixel values, as well as pyramids of multiple mipmap levels, each of 2D arrays of pixel values. Also contains information representing the format of the pixels and dimensions of the arrays.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `bytesPerPixel`
@@ -51,7 +51,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -62,7 +62,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -79,7 +79,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -94,7 +94,7 @@ local result = myObject:createSourceTexture()
 
 **Returns**:
 
-* `result` ([niSourceTexture](../../types/niSourceTexture))
+* `result` ([niSourceTexture](../types/niSourceTexture.md))
 
 ***
 
@@ -117,7 +117,7 @@ myObject:fill(data, mipMapLevel)
 ### `getHeight`
 <div class="search_terms" style="display: none">getheight, height</div>
 
-Returns the height of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
+Returns the height of the mipmap level at the given index, where level 1 is the finest (largest) mipmap level, and level `mipMapLevels` is the coarsest (smallest) mipmap level.
 
 ```lua
 local result = myObject:getHeight(mipMapLevel)
@@ -125,7 +125,7 @@ local result = myObject:getHeight(mipMapLevel)
 
 **Parameters**:
 
-* `mipMapLevel` (number): *Default*: `0`.
+* `mipMapLevel` (number): *Default*: `1`.
 
 **Returns**:
 
@@ -136,7 +136,7 @@ local result = myObject:getHeight(mipMapLevel)
 ### `getWidth`
 <div class="search_terms" style="display: none">getwidth, width</div>
 
-Returns the width of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
+Returns the width of the mipmap level at the given index, where level 1 is the finest (largest) mipmap level, and level `mipMapLevels` is the coarsest (smallest) mipmap level.
 
 ```lua
 local result = myObject:getWidth(mipMapLevel)
@@ -144,7 +144,7 @@ local result = myObject:getWidth(mipMapLevel)
 
 **Parameters**:
 
-* `mipMapLevel` (number): *Default*: `0`.
+* `mipMapLevel` (number): *Default*: `1`.
 
 **Returns**:
 
@@ -260,5 +260,5 @@ local pixelData = niPixelData.new(width, height, mipMapLevels)
 
 **Returns**:
 
-* `pixelData` ([niPixelData](../../types/niPixelData))
+* `pixelData` ([niPixelData](../types/niPixelData.md))
 

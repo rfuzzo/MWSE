@@ -338,7 +338,7 @@ namespace TES3 {
 
 			// Update the GUI if desired.
 			if (updateGUI) {
-				UI::updateCurrentMagicFromEquipmentStack(equipmentStackPointer);
+				UI::updateCurrentMagicFromEquipmentStack(nullptr, nullptr, equipmentStackPointer);
 				UI::updateMagicMenuSelection();
 			}
 		}

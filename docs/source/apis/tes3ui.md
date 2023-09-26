@@ -23,7 +23,7 @@ tes3ui.acquireTextInput(element)
 
 **Parameters**:
 
-* `element` ([tes3uiElement](../../types/tes3uiElement), nil): The element to focus, or `nil` to clear focus.
+* `element` ([tes3uiElement](../types/tes3uiElement.md), nil): The element to focus, or `nil` to clear focus.
 
 ***
 
@@ -137,7 +137,7 @@ local result = tes3ui.createHelpLayerMenu({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -161,7 +161,7 @@ local result = tes3ui.createMenu({ id = ..., dragFrame = ..., fixedFrame = ..., 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -195,14 +195,14 @@ local result = tes3ui.createTooltipMenu({ item = ..., itemData = ..., spell = ..
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to create a tooltip for. If not specified, the tooltip will be empty.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data for the item.
-	* `spell` ([tes3spell](../../types/tes3spell)): *Optional*. The spell to create a tooltip for.
-	* `skill` ([tes3skill](../../types/tes3skill)): *Optional*. The skill to create a tooltip for.
+	* `item` ([tes3item](../types/tes3item.md), string): *Optional*. The item to create a tooltip for. If not specified, the tooltip will be empty.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. The item data for the item.
+	* `spell` ([tes3spell](../types/tes3spell.md)): *Optional*. The spell to create a tooltip for.
+	* `skill` ([tes3skill](../types/tes3skill.md)): *Optional*. The skill to create a tooltip for.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ??? example "Example: Add an item tooltip to a new element"
 
@@ -258,7 +258,7 @@ local result = tes3ui.findHelpLayerMenu(id)
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -277,7 +277,7 @@ local result = tes3ui.findMenu(id)
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -303,7 +303,7 @@ local result = tes3ui.getConsoleReference()
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference), nil)
+* `result` ([tes3reference](../types/tes3reference.md), nil)
 
 ***
 
@@ -333,7 +333,7 @@ local result = tes3ui.getMenuOnTop()
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -438,7 +438,7 @@ local result = tes3ui.getServiceActor()
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -578,7 +578,7 @@ local executed = tes3ui.lookupID(id)
 
 **Parameters**:
 
-* `id` ([tes3uiProperty](../../types/tes3uiProperty), integer)
+* `id` ([tes3uiProperty](../types/tes3uiProperty.md), integer)
 
 **Returns**:
 
@@ -612,7 +612,7 @@ tes3ui.moveMenuToFront(menu)
 
 **Parameters**:
 
-* `menu` (string, number, [tes3uiElement](../../types/tes3uiElement)): The menu to bring to the front.
+* `menu` (string, number, [tes3uiElement](../types/tes3uiElement.md)): The menu to bring to the front.
 
 ***
 
@@ -644,7 +644,7 @@ local result = tes3ui.registerID(s)
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -680,7 +680,7 @@ tes3ui.setConsoleReference(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference), nil)
+* `reference` ([tes3reference](../types/tes3reference.md), nil)
 
 ***
 
@@ -729,7 +729,7 @@ tes3ui.showInventorySelectMenu({ reference = ..., title = ..., leaveMenuMode = .
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference)): *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
+	* `reference` ([tes3reference](../types/tes3reference.md)): *Default*: `tes3player`. The reference of a `tes3actor` whose inventory will be used.
 	* `title` (string): The text used for the title of the inventory select menu.
 	* `leaveMenuMode` (boolean): *Optional*. Determines if menu mode should be exited after closing the inventory select menu. By default, it will be in the state it was in before this function was called.
 	* `noResultsText` (string): *Optional*. The text used for the message that gets shown to the player if no items have been found in the inventory. The default text is equivalent to the `sInventorySelectNoItems` GMST value, unless `"ingredients"` or `"soulgemFilled"` has been assigned to `filter`, in which case the default text is equivalent to either the `sInventorySelectNoIngredients` or `sInventorySelectNoSoul` GMST value respectively.
@@ -900,14 +900,14 @@ tes3ui.showMessageMenu({ id = ..., buttons = ..., callbackParams = ..., cancels 
 
 * `params` (table)
 	* `id` (string): *Default*: `MenuMessage`. The menu ID of the message menu.
-	* `buttons` ([tes3ui.showMessageMenu.params.button](../../types/tes3ui.showMessageMenu.params.button)[]): **Required** The list of buttons.
+	* `buttons` ([tes3ui.showMessageMenu.params.button](../types/tes3ui.showMessageMenu.params.button.md)[]): **Required** The list of buttons.
 	* `callbackParams` (table): *Optional*. The table of parameters to pass to the callback functions.
 	* `cancels` (boolean): *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
 	* `cancelText` (string): *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
 	* `cancelCallback` (function): *Optional*. The function to call when the user clicks the cancel button.
 	* `header` (string, fun(): string): *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
 	* `message` (string, fun(): string): *Optional*. The message at the top of the messagebox. Can also be a function that returns a string.
-	* `customBlock` (fun(parent: [tes3uiElement](../../types/tes3uiElement))): *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
+	* `customBlock` (fun(parent: [tes3uiElement](../types/tes3uiElement.md))): *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
 	* `page` (integer): *Default*: `1`.
 	* `pageSize` (integer): *Default*: `30`.
 
@@ -929,7 +929,7 @@ local menu = tes3ui.showNotifyMenu(string, formatValues)
 
 **Returns**:
 
-* `menu` ([tes3uiElement](../../types/tes3uiElement)): The notify menu created.
+* `menu` ([tes3uiElement](../types/tes3uiElement.md)): The notify menu created.
 
 ***
 

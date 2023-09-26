@@ -61,7 +61,7 @@ Data about a magic effect currently active on a particular mobile actor. It is a
 
 **Returns**:
 
-* `result` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance))
+* `result` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md))
 
 ***
 
@@ -83,7 +83,7 @@ Data about a magic effect currently active on a particular mobile actor. It is a
 
 **Returns**:
 
-* `result` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance))
+* `result` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md))
 
 ***
 
@@ -149,7 +149,7 @@ Data about a magic effect currently active on a particular mobile actor. It is a
 
 **Returns**:
 
-* `result` ([tes3mobileCreature](../../types/tes3mobileCreature), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobilePlayer](../../types/tes3mobilePlayer))
+* `result` ([tes3mobileCreature](../types/tes3mobileCreature.md), [tes3mobileNPC](../types/tes3mobileNPC.md), [tes3mobilePlayer](../types/tes3mobilePlayer.md))
 
 ***
 
@@ -160,7 +160,7 @@ Data about a magic effect currently active on a particular mobile actor. It is a
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect))
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md))
 
 ***
 
@@ -171,7 +171,7 @@ Data about a magic effect currently active on a particular mobile actor. It is a
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect))
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md))
 
 ***
 

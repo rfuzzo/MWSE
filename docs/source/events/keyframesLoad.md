@@ -29,5 +29,5 @@ event.register(tes3.event.keyframesLoad, keyframesLoadCallback)
 
 ## Related events
 
-[meshLoad](../meshLoad/){ .md-button }[meshLoaded](../meshLoaded/){ .md-button }
+[meshLoad](./meshLoad.md){ .md-button }[meshLoaded](./meshLoaded.md){ .md-button }
 

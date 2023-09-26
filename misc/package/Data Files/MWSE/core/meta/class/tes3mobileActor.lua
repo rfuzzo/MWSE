@@ -52,6 +52,7 @@
 --- @field fight number The actor's fight AI value.
 --- @field flee number The actor's flee AI value.
 --- @field friendlyActors tes3mobileCreature[]|tes3mobileNPC[]|tes3mobilePlayer[] *Read-only*. A collection of other `tes3mobileActor`s that this actor considers friendly.
+--- @field friendlyFireHitCount number The number of times the player has hit this actor with friendly fire. The actor will turn on the player on the fourth hit if it is not already in combat. The game will not increase this past 4, and will reset it to 0 at the end of combat.
 --- @field greetDuration number No description yet available.
 --- @field greetTimer number *Read-only*. No description yet available.
 --- @field hasBlightDisease boolean *Read-only*. True if the actor is has a blight disease effect. This does not include common or corprus diseases, nor does it include vampirism.
@@ -344,7 +345,7 @@ function tes3mobileActor:getViewToActor(mobile) end
 
 --- Returns the angle between provided point in space and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.
 ---
---- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3mobileActor/#getViewToPoint).
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3mobileActor/#getviewtopoint).
 --- @param point tes3vector3 The target point to calculate the facing angle.
 --- @return number angle In range of [-180, 180] in degrees.
 function tes3mobileActor:getViewToPoint(point) end

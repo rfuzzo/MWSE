@@ -1,4 +1,3 @@
----@enum ni.texturingPropertyApplyMode
 return {
 	["replace"] = 0,
 	["decal"] = 1,

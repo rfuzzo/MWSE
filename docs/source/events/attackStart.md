@@ -27,8 +27,8 @@ event.register(tes3.event.attackStart, attackStartCallback)
 
 * `attackSpeed` (number): The speed multiplier of the attack animation, normally equal to the weapon speed (1.0 for no equipped weapon). May be changed to change the current attack's speed. See also [tes3actorAnimationController](https://mwse.github.io/MWSE/types/tes3actorAnimationController/) to change animation speed during the attack.
 * `attackType` (integer): A number from the [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/references/physical-attack-types/) enumeration identifying the physical attack type. Can be `tes3.physicalAttackType.slash`, `.chop`, `.thrust`, `.projectile`, `.creature1`, `.creature2`, or `.creature3`. May be changed to change the attack's type if the original attack was slash, chop, or thrust.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor making the attack.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the reference that is attacking.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor making the attack.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. A shortcut to the reference that is attacking.
 
 ## Examples
 
@@ -62,5 +62,5 @@ event.register(tes3.event.attackStart, attackStartCallback)
 
 ## Related events
 
-[attack](../attack/){ .md-button }[attackHit](../attackHit/){ .md-button }
+[attack](./attack.md){ .md-button }[attackHit](./attackHit.md){ .md-button }
 

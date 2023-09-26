@@ -6,7 +6,7 @@ hide:
 # Magic Effect Flags
 
 !!! tip
-	These values are available in Lua with their field access. Instead of manually setting the flags. For example use `.targetsSkills`. See the [Magic Effect type page](../types/tes3magicEffect) for more information.
+	These values are available in Lua with their field access. Instead of manually setting the flags. For example use `.targetsSkills`. See the [Magic Effect type page](../types/tes3magicEffect.md) for more information.
 
 Value  | Meaning
 ------ | ----------------

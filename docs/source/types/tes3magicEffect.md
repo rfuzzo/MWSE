@@ -50,7 +50,7 @@ The sound effect that plays on area of effect impacts. Can be set to ``nil`` to 
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -61,7 +61,7 @@ The visual played when a spell with this effect, with area of effect hits someth
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -105,7 +105,7 @@ The sound effect that plays for magic projectiles. Can be set to ``nil`` to use 
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -116,7 +116,7 @@ The visual played when a spell with this effect is in flight.
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -173,7 +173,7 @@ The sound effect that plays when casting. Can be set to ``nil`` to use the defau
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -184,7 +184,7 @@ The visual played when a spell with this effect is cast.
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -250,7 +250,7 @@ The sound effect that plays when the effect hits a target. Can be set to ``nil``
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -261,7 +261,7 @@ The visual played when a spell with this effect hits something.
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -437,7 +437,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 

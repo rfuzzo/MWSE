@@ -7,8 +7,10 @@ assignees: ''
 
 ---
 
-**What is the text identifier for the effect? This is the first param to `tes3.claimSpellEffectId`.**
+**What is the text identifier for the effect? This is the first param to `tes3.claimSpellEffectId`. When claiming multiple effects you can format them as a list:**
 
+- textIdentifier - numericIdentifier
+- ...
 
 **What is the numeric identifier for the effect? This is the second param to `tes3.claimSpellEffectId`.**
 

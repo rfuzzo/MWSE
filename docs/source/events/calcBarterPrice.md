@@ -23,14 +23,14 @@ event.register(tes3.event.calcBarterPrice, calcBarterPriceCallback)
 * `basePrice` (number): *Read-only*. The base price of the item, before any event modifications.
 * `buying` (boolean): *Read-only*. If true, the player is buying, otherwise the player is selling.
 * `count` (number): *Read-only*. The number of items being bartered.
-* `item` ([tes3item](../../types/tes3item)): *Read-only*. The item, if any, that is being bartered.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data for the bartered item.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor for who is selling or buying. May not always be available.
+* `item` ([tes3item](../types/tes3item.md)): *Read-only*. The item, if any, that is being bartered.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Read-only*. The item data for the bartered item.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor for who is selling or buying. May not always be available.
 * `price` (number): The price of the item. This can be modified, but ensure that the buy/sell price is matched or there will be odd behavior.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the mobile's reference. May not always be available.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. A shortcut to the mobile's reference. May not always be available.
 
 
 ## Related events
 
-[calcBarterPrice](../calcBarterPrice/){ .md-button }[calcEnchantmentPrice](../calcEnchantmentPrice/){ .md-button }[calcRepairPrice](../calcRepairPrice/){ .md-button }[calcSpellmakingPrice](../calcSpellmakingPrice/){ .md-button }[calcSpellPrice](../calcSpellPrice/){ .md-button }[calcTrainingPrice](../calcTrainingPrice/){ .md-button }[calcTravelPrice](../calcTravelPrice/){ .md-button }
+[calcBarterPrice](./calcBarterPrice.md){ .md-button }[calcEnchantmentPrice](./calcEnchantmentPrice.md){ .md-button }[calcRepairPrice](./calcRepairPrice.md){ .md-button }[calcSpellmakingPrice](./calcSpellmakingPrice.md){ .md-button }[calcSpellPrice](./calcSpellPrice.md){ .md-button }[calcTrainingPrice](./calcTrainingPrice.md){ .md-button }[calcTravelPrice](./calcTravelPrice.md){ .md-button }
 

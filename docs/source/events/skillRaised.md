@@ -30,5 +30,5 @@ event.register(tes3.event.skillRaised, skillRaisedCallback)
 
 ## Related events
 
-[exerciseSkill](../exerciseSkill/){ .md-button }
+[exerciseSkill](./exerciseSkill.md){ .md-button }
 

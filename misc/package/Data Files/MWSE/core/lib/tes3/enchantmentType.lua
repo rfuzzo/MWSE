@@ -1,4 +1,3 @@
----@enum tes3.enchantmentType
 return {
 	["castOnce"] = 0,
 	["onStrike"] = 1,

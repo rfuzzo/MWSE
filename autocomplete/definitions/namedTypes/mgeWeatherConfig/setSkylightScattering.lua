@@ -7,7 +7,7 @@ return {
 		-- the getSkylightScattering here without the type checker complaining
 		type = "table|mgeSkylightScatteringTable",
 		tableParams = {
-			{ name = "skylight", type = "tes3vector3|table" },
+			{ name = "skylight", type = "tes3vector3|number[]" },
 			{ name = "mix", type = "number", optional = true, default = 0.44 },
 		},
 	}},

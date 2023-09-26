@@ -8,7 +8,7 @@
 
 A simple extra data that contains a string.
 
-This type inherits the following: [niExtraData](../../types/niExtraData), [niObject](../../types/niObject)
+This type inherits the following: [niExtraData](../types/niExtraData.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `genericData`
@@ -29,7 +29,7 @@ The next extra data available on the object.
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -51,7 +51,7 @@ The next extra data available on the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -62,7 +62,7 @@ The next extra data available on the object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -90,7 +90,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -168,5 +168,5 @@ local extraData = niStringExtraData.new(string)
 
 **Returns**:
 
-* `extraData` ([niStringExtraData](../../types/niStringExtraData))
+* `extraData` ([niStringExtraData](../types/niStringExtraData.md))
 

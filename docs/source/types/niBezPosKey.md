@@ -8,7 +8,7 @@
 
 An animation key for bezier curved position.
 
-This type inherits the following: [niPosKey](../../types/niPosKey), [niAnimationKey](../../types/niAnimationKey)
+This type inherits the following: [niPosKey](../types/niPosKey.md), [niAnimationKey](../types/niAnimationKey.md)
 ## Properties
 
 ### `inTangent`
@@ -18,7 +18,7 @@ The inbound tangent for the bezier curve.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -29,7 +29,7 @@ The outbound tangent for the bezier curve.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -51,5 +51,5 @@ The position value of the animation key.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

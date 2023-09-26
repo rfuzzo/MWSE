@@ -1,4 +1,3 @@
----@enum tes3.codePatchFeature
 return {
 	["savegameCorruptionFix"] = 1,
 	["mercantileFix"] = 2,

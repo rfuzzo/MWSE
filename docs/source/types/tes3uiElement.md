@@ -8,7 +8,7 @@
 
 A UI element, the main building block of the UI system. All elements are created with methods on a parent Element.  Elements are very configurable, and have many HTML-like layout features. All layout properties can be set to `nil` to reset them to the default value, which will deactivate any related layout mode.
 
-Elements can have custom data attached using their `Property`_ key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
+Elements can have custom data attached using their `Property` key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
 
 ## Properties
 
@@ -184,7 +184,7 @@ See childOffsetX.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement)[])
+* `result` ([tes3uiElement](../types/tes3uiElement.md)[])
 
 ***
 
@@ -482,7 +482,7 @@ The top padding size in pixels. When this is set to `-1`, the `paddingAllSides` 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -548,7 +548,7 @@ When set to `true` on image and NIF elements, the image or NIF is scaled to fit 
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -573,7 +573,7 @@ The underlying texture for the element. This assumes that the element is of an e
 
 **Returns**:
 
-* `result` ([niSourceTexture](../../types/niSourceTexture))
+* `result` ([niSourceTexture](../types/niSourceTexture.md))
 
 ***
 
@@ -606,7 +606,7 @@ Access to element specific properties. This will be `nil` if there are no elemen
 
 **Returns**:
 
-* `result` ([tes3uiWidget](../../types/tes3uiWidget), nil)
+* `result` ([tes3uiWidget](../types/tes3uiWidget.md), nil)
 
 ***
 
@@ -662,13 +662,13 @@ local copy = myObject:copy({ to = ..., copyChildren = ..., copyProperties = ... 
 **Parameters**:
 
 * `params` (table)
-	* `to` ([tes3uiElement](../../types/tes3uiElement)): The element to create the copy in. Will be the parent of the newly created element.
+	* `to` ([tes3uiElement](../types/tes3uiElement.md)): The element to create the copy in. Will be the parent of the newly created element.
 	* `copyChildren` (boolean): *Default*: `true`. If `true`, all children will also be copied to the newly created element.
 	* `copyProperties` (boolean): *Default*: `true`. If `true`, all properties will be copied to the newly created element.
 
 **Returns**:
 
-* `copy` ([tes3uiElement](../../types/tes3uiElement)): The created copy.
+* `copy` ([tes3uiElement](../types/tes3uiElement.md)): The created copy.
 
 ***
 
@@ -688,7 +688,7 @@ local result = myObject:createBlock({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -711,7 +711,7 @@ local result = myObject:createButton({ id = ..., text = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -730,12 +730,12 @@ local result = myObject:createCycleButton({ id = ..., options = ..., index = ...
 
 * `params` (table)
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `options` ([tes3uiCycleButtonOption](../../types/tes3uiCycleButtonOption)[]): An array of options for the button to cycle through. At minimum the option must have a `text` property defined, to show on the button. If a `value` is provided, it can be accessed through the `.widget`'s `.value` property.
+	* `options` ([tes3uiCycleButtonOption](../types/tes3uiCycleButtonOption.md)[]): An array of options for the button to cycle through. At minimum the option must have a `text` property defined, to show on the button. If a `value` is provided, it can be accessed through the `.widget`'s `.value` property.
 	* `index` (number): *Optional*. The index selected by default.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -755,7 +755,7 @@ local result = myObject:createDivider({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -779,7 +779,7 @@ local result = myObject:createFillBar({ id = ..., current = ..., max = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -803,7 +803,7 @@ local result = myObject:createHorizontalScrollPane({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -828,7 +828,7 @@ local element = myObject:createHyperlink({ id = ..., text = ..., url = ..., conf
 
 **Returns**:
 
-* `element` ([tes3uiElement](../../types/tes3uiElement))
+* `element` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -848,7 +848,7 @@ local result = myObject:createHypertext({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -869,7 +869,7 @@ local result = myObject:createImage({ id = ..., path = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -892,7 +892,7 @@ local result = myObject:createImageButton({ id = ..., idle = ..., over = ..., pr
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -913,7 +913,7 @@ local result = myObject:createLabel({ id = ..., text = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -934,7 +934,7 @@ local result = myObject:createNif({ id = ..., path = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -956,7 +956,7 @@ local result = myObject:createParagraphInput({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -973,12 +973,12 @@ local result = myObject:createRect({ id = ..., color = ..., randomizeColor = ...
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `color` ([tes3vector3](../../types/tes3vector3), table): *Optional*. The fill color for the element.
+	* `color` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. The fill color for the element.
 	* `randomizeColor` (boolean): *Default*: `false`. If true, the creation color will be randomized.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1004,7 +1004,7 @@ local result = myObject:createSlider({ id = ..., current = ..., max = ..., step 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1030,7 +1030,7 @@ local result = myObject:createSliderVertical({ id = ..., current = ..., max = ..
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1056,7 +1056,7 @@ local result = myObject:createTextInput({ id = ..., text = ..., placeholderText 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1080,7 +1080,7 @@ local result = myObject:createTextSelect({ id = ..., text = ..., state = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1100,7 +1100,7 @@ local result = myObject:createThinBorder({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1124,7 +1124,7 @@ local result = myObject:createVerticalScrollPane({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ??? example "Example: Sorting the child elements in a scroll pane"
 
@@ -1148,7 +1148,7 @@ local result = myObject:createVerticalScrollPane({ id = ... })
 ### `destroy`
 <div class="search_terms" style="display: none">destroy</div>
 
-Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 
 ```lua
 myObject:destroy()
@@ -1159,7 +1159,7 @@ myObject:destroy()
 ### `destroyChildren`
 <div class="search_terms" style="display: none">destroychildren</div>
 
-Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 
 Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 
@@ -1184,7 +1184,7 @@ local result = myObject:findChild(id)
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1199,7 +1199,7 @@ myObject:forwardEvent(id)
 
 **Parameters**:
 
-* `id` ([tes3uiEventData](../../types/tes3uiEventData)): The original UI event.
+* `id` ([tes3uiEventData](../types/tes3uiEventData.md)): The original UI event.
 
 ***
 
@@ -1216,7 +1216,7 @@ local result = myObject:getContentElement()
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1365,7 +1365,7 @@ local result = myObject:getTopLevelMenu()
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1396,11 +1396,11 @@ local copy = myObject:move({ to = ... })
 **Parameters**:
 
 * `params` (table)
-	* `to` ([tes3uiElement](../../types/tes3uiElement)): Where to create the copy.
+	* `to` ([tes3uiElement](../types/tes3uiElement.md)): Where to create the copy.
 
 **Returns**:
 
-* `copy` ([tes3uiElement](../../types/tes3uiElement)): The created copy.
+* `copy` ([tes3uiElement](../types/tes3uiElement.md)): The created copy.
 
 ***
 
@@ -1487,7 +1487,7 @@ myObject:register(eventID, callback)
 **Parameters**:
 
 * `eventID` (string): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
-* `callback` (fun(e: [tes3uiEventData](../../types/tes3uiEventData)): boolean?): The callback function. Returning `false` from this function may cancel an interaction for certain events, such as unfocus.
+* `callback` (fun(e: [tes3uiEventData](../types/tes3uiEventData.md)): boolean?): The callback function. Returning `false` from this function may cancel an interaction for certain events, such as unfocus.
 
 ***
 
@@ -1503,7 +1503,7 @@ myObject:registerAfter(eventID, callback)
 **Parameters**:
 
 * `eventID` (string): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
-* `callback` (fun(e: [tes3uiEventData](../../types/tes3uiEventData)): boolean?): The callback function.
+* `callback` (fun(e: [tes3uiEventData](../types/tes3uiEventData.md)): boolean?): The callback function.
 
 ***
 
@@ -1519,14 +1519,14 @@ myObject:registerBefore(eventID, callback)
 **Parameters**:
 
 * `eventID` (string): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
-* `callback` (fun(e: [tes3uiEventData](../../types/tes3uiEventData)): boolean?): The callback function.
+* `callback` (fun(e: [tes3uiEventData](../types/tes3uiEventData.md)): boolean?): The callback function.
 
 ***
 
 ### `reorderChildren`
 <div class="search_terms" style="display: none">reorderchildren</div>
 
-Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+Moves the layout order of the children of this element. `count` elements are taken from starting child `Element` or index (0-based) `moveFrom`, and moved before the child `Element` or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 
 Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 
@@ -1536,8 +1536,8 @@ local result = myObject:reorderChildren(insertBefore, moveFrom, count)
 
 **Parameters**:
 
-* `insertBefore` ([tes3uiElement](../../types/tes3uiElement), number): The insertion point (or its 0-based child index).
-* `moveFrom` ([tes3uiElement](../../types/tes3uiElement), number): The first child (or 0-based child index) to be moved.
+* `insertBefore` ([tes3uiElement](../types/tes3uiElement.md), number): The insertion point (or its 0-based child index).
+* `moveFrom` ([tes3uiElement](../types/tes3uiElement.md), number): The first child (or 0-based child index) to be moved.
 * `count` (number): The number of child elements to move.
 
 **Returns**:
@@ -1694,7 +1694,7 @@ myObject:sortChildren(sortFunction)
 
 **Parameters**:
 
-* `sortFunction` (function): The function to sort with. Like most sorting functions, this is given two arguments to compare.
+* `sortFunction` (fun(a: [tes3uiElement](../types/tes3uiElement.md), b: [tes3uiElement](../types/tes3uiElement.md)): boolean): The function to sort with. Like most sorting functions, this is given two arguments to compare.
 
 ***
 
@@ -1709,7 +1709,7 @@ myObject:triggerEvent(eventID)
 
 **Parameters**:
 
-* `eventID` ([tes3uiEventData](../../types/tes3uiEventData), string): The event, or event ID.
+* `eventID` ([tes3uiEventData](../types/tes3uiEventData.md), string): The event, or event ID.
 
 ***
 

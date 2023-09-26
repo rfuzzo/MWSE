@@ -8,7 +8,7 @@
 
 A navigation graph used for pathfinding through cells. Composed of nodes (waypoints) connected by navigable edges. Pathgrid data is only available when the `isLoaded` property is true.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -106,7 +106,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` ([tes3pathGridNode](../../types/tes3pathGridNode)[])
+* `result` ([tes3pathGridNode](../types/tes3pathGridNode.md)[])
 
 ***
 
@@ -139,7 +139,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 

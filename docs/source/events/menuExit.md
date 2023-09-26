@@ -25,5 +25,5 @@ event.register(tes3.event.menuExit, menuExitCallback)
 
 ## Related events
 
-[menuEnter](../menuEnter/){ .md-button }[menuExit](../menuExit/){ .md-button }
+[menuEnter](./menuEnter.md){ .md-button }[menuExit](./menuExit.md){ .md-button }
 

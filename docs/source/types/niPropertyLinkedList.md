@@ -17,7 +17,7 @@ A linked list of properties.
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -28,5 +28,5 @@ A linked list of properties.
 
 **Returns**:
 
-* `result` ([niPropertyLinkedList](../../types/niPropertyLinkedList))
+* `result` ([niPropertyLinkedList](../types/niPropertyLinkedList.md))
 

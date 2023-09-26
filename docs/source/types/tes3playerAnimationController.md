@@ -8,7 +8,7 @@
 
 Works in conjuction with mobile AI to perform idle, movement, and attack animations. Holds data on the status of the current and next desired animation states for the different body sections that can be animated.
 
-This type inherits the following: [tes3actorAnimationController](../../types/tes3actorAnimationController)
+This type inherits the following: [tes3actorAnimationController](../types/tes3actorAnimationController.md)
 ## Properties
 
 ### `allowVerticalAirControl`
@@ -29,7 +29,7 @@ The alpha property applied to the actor. Controls the opacity/opaqueness of the 
 
 **Returns**:
 
-* `result` ([niAlphaProperty](../../types/niAlphaProperty))
+* `result` ([niAlphaProperty](../types/niAlphaProperty.md))
 
 ***
 
@@ -40,7 +40,7 @@ Access to the actor's animation data.
 
 **Returns**:
 
-* `result` ([tes3animationData](../../types/tes3animationData))
+* `result` ([tes3animationData](../types/tes3animationData.md))
 
 ***
 
@@ -106,7 +106,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -117,7 +117,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 
 **Returns**:
 
-* `result` ([niCamera](../../types/niCamera))
+* `result` ([niCamera](../types/niCamera.md))
 
 ***
 
@@ -128,7 +128,7 @@ The rotation of the actor around the up-down axis. When converted to euler angle
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -161,7 +161,7 @@ The material property applied to the actor.
 
 **Returns**:
 
-* `result` ([niMaterialProperty](../../types/niMaterialProperty))
+* `result` ([niMaterialProperty](../types/niMaterialProperty.md))
 
 ***
 
@@ -205,7 +205,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -227,7 +227,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 
 **Returns**:
 
-* `result` ([niPick](../../types/niPick))
+* `result` ([niPick](../types/niPick.md))
 
 ***
 
@@ -249,7 +249,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -326,7 +326,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 
 **Returns**:
 
-* `result` ([niCamera](../../types/niCamera))
+* `result` ([niCamera](../types/niCamera.md))
 
 ***
 
@@ -370,7 +370,7 @@ The vertex color property applied to the actor.
 
 **Returns**:
 
-* `result` ([niVertexColorProperty](../../types/niVertexColorProperty))
+* `result` ([niVertexColorProperty](../types/niVertexColorProperty.md))
 
 ***
 
@@ -381,7 +381,7 @@ Only used for the player. When converted to euler angles, the rotation about x a
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 

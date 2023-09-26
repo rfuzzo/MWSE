@@ -28,7 +28,7 @@ An inventory tile, connecting an item, its data, and various related UI elements
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -83,7 +83,7 @@ If `true`, the tile represents an item that is equipped.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 
 ***
 
@@ -94,7 +94,7 @@ If `true`, the tile represents an item that is equipped.
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData))
+* `result` ([tes3itemData](../types/tes3itemData.md))
 
 ***
 

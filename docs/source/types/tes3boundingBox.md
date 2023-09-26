@@ -17,7 +17,7 @@ The maximum bound of the box.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -28,7 +28,7 @@ The minimum bound of the box.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -60,7 +60,7 @@ local result = myObject:copy()
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -75,5 +75,5 @@ local result = myObject:vertices()
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3)[])
+* `result` ([tes3vector3](../types/tes3vector3.md)[])
 

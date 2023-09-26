@@ -18,7 +18,7 @@ Index                 | Value        | CS ID   | Description             | MWSE 
 --------------------- | ------------ | ------- | ----------------------- | ---------
 activator             | `1230259009` | ACTI    | Activator               | tes3activator
 alchemy               | `1212369985` | ALCH    | Alchemy                 | tes3alchemy
-ammunition            | `1330466113` | AMMO    | Ammunition              | tes3weapon
+ammunition            | `1330466113` | AMMO    | Ammunition              | tes3weapon. Arrows and bolts.
 apparatus             | `1095782465` | APPA    | Apparatus               | tes3apparatus
 armor                 | `1330467393` | ARMO    | Armor                   | tes3armor
 birthsign             | `1313297218` | BSGN    | Birthsign               | tes3birthsign
@@ -65,4 +65,4 @@ soundGenerator        | `1195658835` | SNDG    | Sound Generator         | tes3s
 spell                 | `1279610963` | SPEL    | Spell                   | tes3spell
 startScript           | `1380143955` | SSCR    | Start Script            | tes3startScript
 static                | `1413567571` | STAT    | Static                  | tes3static
-weapon                | `1346454871` | WEAP    | Weapon                  | tes3weapon
+weapon                | `1346454871` | WEAP    | Weapon                  | tes3weapon. Thrown weapons also go here.

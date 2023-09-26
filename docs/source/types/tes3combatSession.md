@@ -63,7 +63,7 @@ Used by the MCP to implement enchanted item cooldown.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -111,7 +111,7 @@ A potion or an enchanted item whose spell will be used.
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack))
+* `result` ([tes3itemStack](../types/tes3itemStack.md))
 
 ***
 
@@ -122,7 +122,7 @@ A potion or an enchanted item whose spell will be used.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -133,7 +133,7 @@ This field containg the spell the actor is currently casting. If not in casting 
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -144,7 +144,7 @@ This field containg the spell the actor is currently casting. If not in casting 
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -172,7 +172,7 @@ myObject:changeEquipment(equipmentStack)
 
 **Parameters**:
 
-* `equipmentStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): An item to equip.
+* `equipmentStack` ([tes3equipmentStack](../types/tes3equipmentStack.md)): An item to equip.
 
 ***
 

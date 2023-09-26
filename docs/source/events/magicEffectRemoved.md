@@ -28,15 +28,15 @@ event.register(tes3.event.magicEffectRemoved, magicEffectRemovedCallback)
 
 ## Event Data
 
-* `caster` ([tes3reference](../../types/tes3reference)): *Read-only*. The caster of the magic source that contained the magic effect. Can be `nil`.
-* `effect` ([tes3effect](../../types/tes3effect)): *Read-only*. The specific effect that triggered the event. This is equal to `e.source.effects[e.effectIndex]`. Can be `nil`.
+* `caster` ([tes3reference](../types/tes3reference.md)): *Read-only*. The caster of the magic source that contained the magic effect. Can be `nil`.
+* `effect` ([tes3effect](../types/tes3effect.md)): *Read-only*. The specific effect that triggered the event. This is equal to `e.source.effects[e.effectIndex]`. Can be `nil`.
 * `effectIndex` (number): *Read-only*. The index of the effect in the magic source's effects list.
-* `effectInstance` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance)): *Read-only*. The effect instance of the effect.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor the magic effect is removed from.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference of the mobile actor the magic effect is removed from.
-* `source` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell)): *Read-only*. The magic source that contains the effect.
-* `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source that contains the effect.
-* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the magic source that contained the magic effect. Can be `nil` if the target was unloaded.
+* `effectInstance` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md)): *Read-only*. The effect instance of the effect.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor the magic effect is removed from.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference of the mobile actor the magic effect is removed from.
+* `source` ([tes3alchemy](../types/tes3alchemy.md), [tes3enchantment](../types/tes3enchantment.md), [tes3spell](../types/tes3spell.md)): *Read-only*. The magic source that contains the effect.
+* `sourceInstance` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md)): *Read-only*. The unique instance of the magic source that contains the effect.
+* `target` ([tes3reference](../types/tes3reference.md)): *Read-only*. The target of the magic source that contained the magic effect. Can be `nil` if the target was unloaded.
 
 ## Examples
 

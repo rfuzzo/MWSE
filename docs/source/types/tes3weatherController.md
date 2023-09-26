@@ -61,7 +61,7 @@ The current fog color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -72,7 +72,7 @@ The current sky color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -83,7 +83,7 @@ The current sky color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather))
+* `result` ([tes3weather](../types/tes3weather.md))
 
 ***
 
@@ -182,7 +182,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3region](../../types/tes3region))
+* `result` ([tes3region](../types/tes3region.md))
 
 ***
 
@@ -193,7 +193,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3moon](../../types/tes3moon))
+* `result` ([tes3moon](../types/tes3moon.md))
 
 ***
 
@@ -204,7 +204,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather))
+* `result` ([tes3weather](../types/tes3weather.md))
 
 ***
 
@@ -215,7 +215,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3weatherControllerParticle](../../types/tes3weatherControllerParticle)[])
+* `result` ([tes3weatherControllerParticle](../types/tes3weatherControllerParticle.md)[])
 
 ***
 
@@ -226,7 +226,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3weatherControllerParticle](../../types/tes3weatherControllerParticle)[])
+* `result` ([tes3weatherControllerParticle](../types/tes3weatherControllerParticle.md)[])
 
 ***
 
@@ -237,7 +237,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -248,7 +248,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niDirectionalLight](../../types/niDirectionalLight))
+* `result` ([niDirectionalLight](../types/niDirectionalLight.md))
 
 ***
 
@@ -259,7 +259,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -270,7 +270,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -281,7 +281,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -292,7 +292,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -303,7 +303,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -314,7 +314,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -325,7 +325,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3moon](../../types/tes3moon))
+* `result` ([tes3moon](../types/tes3moon.md))
 
 ***
 
@@ -424,7 +424,7 @@ The sunglare fader color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -556,7 +556,7 @@ The underwater color, represented as a vector. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -633,7 +633,7 @@ The underwater sunset fog value.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather)[])
+* `result` ([tes3weather](../types/tes3weather.md)[])
 
 ***
 
@@ -644,7 +644,7 @@ The wind velocity for the current weather.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -655,7 +655,7 @@ The wind velocity for the next weather.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 

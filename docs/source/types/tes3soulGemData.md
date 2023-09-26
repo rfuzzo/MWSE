@@ -39,7 +39,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 
 **Returns**:
 
-* `result` ([tes3misc](../../types/tes3misc))
+* `result` ([tes3misc](../types/tes3misc.md))
 
 ***
 

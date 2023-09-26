@@ -20,14 +20,14 @@ event.register(tes3.event.dialogueFiltered, dialogueFilteredCallback)
 
 ## Event Data
 
-* `actor` ([tes3actor](../../types/tes3actor)): *Read-only*. Any associated actor for the query.
+* `actor` ([tes3actor](../types/tes3actor.md)): *Read-only*. Any associated actor for the query.
 * `context` (number): *Read-only*. What caused the dialogue filtering. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
-* `dialogue` ([tes3dialogue](../../types/tes3dialogue)): *Read-only*. The dialogue that was filtered.
-* `info` ([tes3dialogueInfo](../../types/tes3dialogueInfo)): *Read-only*. The result that the filter returned.
-* `reference` ([tes3actor](../../types/tes3actor)): *Read-only*. Any associated reference for the query.
+* `dialogue` ([tes3dialogue](../types/tes3dialogue.md)): *Read-only*. The dialogue that was filtered.
+* `info` ([tes3dialogueInfo](../types/tes3dialogueInfo.md)): *Read-only*. The result that the filter returned.
+* `reference` ([tes3actor](../types/tes3actor.md)): *Read-only*. Any associated reference for the query.
 
 
 ## Related events
 
-[dialogueFiltered](../dialogueFiltered/){ .md-button }[infoGetText](../infoGetText/){ .md-button }[infoLinkResolve](../infoLinkResolve/){ .md-button }[infoResponse](../infoResponse/){ .md-button }[infoFilter](../infoFilter/){ .md-button }[postInfoResponse](../postInfoResponse/){ .md-button }
+[dialogueFiltered](./dialogueFiltered.md){ .md-button }[infoGetText](./infoGetText.md){ .md-button }[infoLinkResolve](./infoLinkResolve.md){ .md-button }[infoResponse](./infoResponse.md){ .md-button }[infoFilter](./infoFilter.md){ .md-button }[postInfoResponse](./postInfoResponse.md){ .md-button }
 

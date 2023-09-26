@@ -1,4 +1,3 @@
----@enum tes3.damageSource
 return {
 	attack = "attack",
 	fall = "fall",

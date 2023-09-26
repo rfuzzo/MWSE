@@ -19,7 +19,7 @@ niGeometryData = {}
 
 --- Tells the renderer that the object has changed. Should be called after you have finished changing any vertex data.
 --- 
---- If you have altered vertex positions, you may need to also call `updateModelBound`_. You should call it if vertices have been moved outside the bounds of the original model.
+--- If you have altered vertex positions, you may need to also call `updateModelBound`. You should call it if vertices have been moved outside the bounds of the original model.
 function niGeometryData:markAsChanged() end
 
 --- Updates the geometry bounds to match the vertex data. You should call it if vertices have been moved outside the bounds of the original model, or if the effective bounds have become significantly smaller. 

@@ -17,7 +17,7 @@ The collision data.
 
 **Returns**:
 
-* `result` ([tes3mobileObjectCollision](../../types/tes3mobileObjectCollision))
+* `result` ([tes3mobileObjectCollision](../types/tes3mobileObjectCollision.md))
 
 ***
 
@@ -50,5 +50,5 @@ Access to the magic source of the effect instance.
 
 **Returns**:
 
-* `result` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance))
+* `result` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md))
 

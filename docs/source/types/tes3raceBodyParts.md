@@ -17,7 +17,7 @@ The ankle that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -28,7 +28,7 @@ The chest that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -39,7 +39,7 @@ The clavicle that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -50,7 +50,7 @@ The foot that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -61,7 +61,7 @@ The forearm that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -72,7 +72,7 @@ The groin that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -83,7 +83,7 @@ The base hair that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -94,7 +94,7 @@ The hands that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -105,7 +105,7 @@ The head that an actor of this race and sex will use. If the actor is a vampire,
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -116,7 +116,7 @@ The knee that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -127,7 +127,7 @@ The neck that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -138,7 +138,7 @@ The tail that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -149,7 +149,7 @@ The upper arm that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -160,7 +160,7 @@ The upper leg that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -171,7 +171,7 @@ The head that an actor of this race and sex will use when they are a vampire.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -182,5 +182,5 @@ The wrist that an actor of this race and sex will use.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 

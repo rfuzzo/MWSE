@@ -13,7 +13,7 @@
 
 - `string` **id**: The object ID string of the item.
 - `long` **count**: How many items are in the item stack.
-- `long` **type**: The [Object Type](../../object-types) of the item.
+- `long` **type**: The [Object Type](../object-types.md) of the item.
 - `long` **value**: The value of the item.
 - `float` **weight**: The weight of the item. (Always `0.000001` for LEVI objects.)
 - `string` **name**: The name of the item.
@@ -37,19 +37,19 @@ If you are only interested in items of specific types, consider using `xContentL
 
 - `string` **id**: The id string of the item.
 - `long` **count**: How many items are in the item stack.
-- `long` **type**: The [Object Type](../../object-types) of the item.
+- `long` **type**: The [Object Type](../object-types.md) of the item.
 - `long` **value**: The value of the item.
 - `float` **weight**: The weight of the item.
 - `string` **name**: The name of the item.
 - `long` **nextNode**: The next node to provide back into this function to continue looping. When this value is 0, there are no more items.
 
-This function behaves similar to `xContentList`, with the added convenience of filtering for one or more [Object Type](../../object-types).
+This function behaves similar to `xContentList`, with the added convenience of filtering for one or more [Object Type](../object-types.md).
 
 If you are trying to specifically get the equipped items of an actor, consider using `xEquipmentList`.
 
 ### Filter Mask
 
-The filter mask below is meant to be summed for each [Object Type](../../object-types) desired in the filter. The exception to this rule is the ENCH filter, which restricts the results to enchanted items.
+The filter mask below is meant to be summed for each [Object Type](../object-types.md) desired in the filter. The exception to this rule is the ENCH filter, which restricts the results to enchanted items.
 
 For example, if you wanted clothing (`128`) and armor (`16`) results, you would pass a value of `144` (`128+16`).
 
@@ -199,15 +199,15 @@ ENCH  | 4194304
 **Parameters:**
 
 - `long` **node**: For the first call, this should be 0 to get the first equipped item. In following iterations, this value will be what is returned as **nextNode** from the previous call.
-- `long` **typeFilter**: A type filter that matches the [Object Type](../../object-types) that is desired. Only equipped items matching that type will be returned. A value of 0 will perform no type filtering.
-- `long` **subTypeFilter**: An optional subtype filter, allowing the loop to search for a specific [Armor Type](../../armor-slots), [Clothing Type](../../clothing-slots) or [Weapon Type](../../weapon-types). The value passed must be one higher than the value on the linked table. A value of 0 will perform no subtype filtering.
+- `long` **typeFilter**: A type filter that matches the [Object Type](../object-types.md) that is desired. Only equipped items matching that type will be returned. A value of 0 will perform no type filtering.
+- `long` **subTypeFilter**: An optional subtype filter, allowing the loop to search for a specific [Armor Type](../armor-slots.md), [Clothing Type](../clothing-slots.md) or [Weapon Type](../weapon-types.md). The value passed must be one higher than the value on the linked table. A value of 0 will perform no subtype filtering.
 
 **Returned:**
 
 - `string` **id**: The id string of the equipped item.
 - `long` **count**: This value will always be 1. Future version of MWSE may expand this to return the actual item count for arrows, bolts, and thrown weapons.
-- `long` **type**: The [Object Type](../../object-types) of the equipped item.
-- `long` **subtype**: The [Armor Type](../../armor-slots), [Clothing Type](../../clothing-slots) or [Weapon Type](../../weapon-types) of the equipped item, or `0` if it is not an armor, clothing, or weapon object. Note that the value returned is one higher than the value on the given table.
+- `long` **type**: The [Object Type](../object-types.md) of the equipped item.
+- `long` **subtype**: The [Armor Type](../armor-slots.md), [Clothing Type](../clothing-slots.md) or [Weapon Type](../weapon-types.md) of the equipped item, or `0` if it is not an armor, clothing, or weapon object. Note that the value returned is one higher than the value on the given table.
 - `long` **value**: The value of the equipped item.
 - `float` **weight**: The weight of the equipped item.
 - `string` **name**: The name of the equipped item.
@@ -306,7 +306,7 @@ This function behaves similar to `xContentList`/`xContentListFiltered`, returnin
 
 - `long` **reference**: The first reference in the current cell's "Item" list.
 
-`xFirstItem` returns the first reference in the current cell's "Item" list. Despite the name of this function, the associated list can contain references of any [Object Type](../../object-types) other than those exclusive to `xFirstNPC`. Once acquired, the reference can be used with various other MWSE functions, such as `xRefID` and `xRefType`. Passing the reference as the argument to the `xNextRef` function will return the next reference in its associated list.
+`xFirstItem` returns the first reference in the current cell's "Item" list. Despite the name of this function, the associated list can contain references of any [Object Type](../object-types.md) other than those exclusive to `xFirstNPC`. Once acquired, the reference can be used with various other MWSE functions, such as `xRefID` and `xRefType`. Passing the reference as the argument to the `xNextRef` function will return the next reference in its associated list.
 
 !!! note
 	Scripts that intend to process *all* references in the loaded cells will need to independently handle the separate lists provided by `xFirstItem`, `xFirstStatic`, and `xFirstNPC`.
@@ -342,7 +342,7 @@ This function behaves similar to `xContentList`/`xContentListFiltered`, returnin
 
 - `long` **reference**: The first reference in the current cell's "Static" list.
 
-`xFirstStatic` returns the first reference in the current cell's "Static" list. Despite the name of this function, the associated list can contain references of any [Object Type](../../object-types) other than those exclusive to `xFirstNPC`. Once acquired, the reference can be used with various other MWSE functions, such as `xRefID` and `xRefType`. Passing the reference as the argument to the `xNextRef` function will return the next reference in its associated list.
+`xFirstStatic` returns the first reference in the current cell's "Static" list. Despite the name of this function, the associated list can contain references of any [Object Type](../object-types.md) other than those exclusive to `xFirstNPC`. Once acquired, the reference can be used with various other MWSE functions, such as `xRefID` and `xRefType`. Passing the reference as the argument to the `xNextRef` function will return the next reference in its associated list.
 
 !!! note
 	Scripts that intend to process *all* references in the loaded cells will need to independently handle the separate lists provided by `xFirstItem`, `xFirstStatic`, and `xFirstNPC`.

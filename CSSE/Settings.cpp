@@ -305,6 +305,34 @@ namespace se::cs {
 	}
 
 	//
+	// Color theme
+	// 
+
+	void Settings_t::ColorTheme::from_toml(const toml::value& v) {
+		// Modified object highlight
+		highlight_deleted_object_color = toml::find_or(v, "highlight_deleted_object_color", highlight_deleted_object_color);
+		highlight_modified_from_master_color = toml::find_or(v, "highlight_modified_from_master_color", highlight_modified_from_master_color);
+		highlight_modified_new_object_color = toml::find_or(v, "highlight_modified_new_object_color", highlight_modified_new_object_color);
+	}
+
+	toml::value Settings_t::ColorTheme::into_toml() const {
+		return toml::value(
+			{
+				// Modified object highlight
+				{ "highlight_deleted_object_color", highlight_deleted_object_color },
+				{ "highlight_modified_from_master_color", highlight_modified_from_master_color },
+				{ "highlight_modified_new_object_color", highlight_modified_new_object_color },
+			}
+		);
+	}
+
+	void Settings_t::ColorTheme::packColors() {
+		highlight_deleted_object_packed_color = RGB(highlight_deleted_object_color[0], highlight_deleted_object_color[1], highlight_deleted_object_color[2]);
+		highlight_modified_from_master_packed_color = RGB(highlight_modified_from_master_color[0], highlight_modified_from_master_color[1], highlight_modified_from_master_color[2]);
+		highlight_modified_new_object_packed_color = RGB(highlight_modified_new_object_color[0], highlight_modified_new_object_color[1], highlight_modified_new_object_color[2]);
+	}
+
+	//
 	// QuickStart
 	//
 
@@ -459,11 +487,14 @@ namespace se::cs {
 		enabled = toml::find_or(v, "enabled", enabled);
 		dialogue_window = toml::find_or(v, "dialogue_window", dialogue_window);
 		object_window = toml::find_or(v, "object_window", object_window);
-		quickstart = toml::find_or(v, "quickstart", quickstart);
 		render_window = toml::find_or(v, "render_window", render_window);
+		color_theme = toml::find_or(v, "color_theme", color_theme);
+		quickstart = toml::find_or(v, "quickstart", quickstart);
 		script_editor = toml::find_or(v, "script_editor", script_editor);
 		test_environment = toml::find_or(v, "test_environment", test_environment);
 		openmw = toml::find_or(v, "openmw", openmw);
+
+		color_theme.packColors();
 	}
 
 	toml::value Settings_t::into_toml() const {
@@ -474,6 +505,7 @@ namespace se::cs {
 				{ "dialogue_window", dialogue_window },
 				{ "object_window", object_window },
 				{ "render_window", render_window },
+				{ "color_theme", color_theme },
 				{ "quickstart", quickstart },
 				{ "script_editor", script_editor },
 				{ "test_environment", test_environment },

@@ -17,7 +17,7 @@ A linked list of scene graph nodes.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -28,5 +28,5 @@ A linked list of scene graph nodes.
 
 **Returns**:
 
-* `result` ([niNodeLinkedList](../../types/niNodeLinkedList))
+* `result` ([niNodeLinkedList](../types/niNodeLinkedList.md))
 

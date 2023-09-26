@@ -599,11 +599,12 @@ namespace se::cs::dialog::dialogue_window {
 				if (object) {
 					// Background color highlighting.
 					if (object->getDeleted()) {
-						lplvcd->clrTextBk = RGB(255, 235, 235);
+						lplvcd->clrTextBk = settings.color_theme.highlight_deleted_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 					else if (object->getModified()) {
-						lplvcd->clrTextBk = RGB(235, 255, 235);
+						// Modified color highlighting. Different colors for modified-master or mod-added object.
+						lplvcd->clrTextBk = object->isFromMaster() ? settings.color_theme.highlight_modified_from_master_packed_color : settings.color_theme.highlight_modified_new_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 				}

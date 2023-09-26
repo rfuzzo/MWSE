@@ -7,8 +7,8 @@ return {
 		-- the getScattering here without the type checker complaining
 		type = "table|mgeScatteringTable",
 		tableParams = {
-			{ name = "inscatter", type = "tes3vector3|table" },
-			{ name = "outscatter", type = "tes3vector3|table" },
+			{ name = "inscatter", type = "tes3vector3|number[]" },
+			{ name = "outscatter", type = "tes3vector3|number[]" },
 		},
 	}},
 }

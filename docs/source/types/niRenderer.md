@@ -8,7 +8,7 @@
 
 The Morrowind's renderer class.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `refCount`
@@ -29,7 +29,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -40,7 +40,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -57,7 +57,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -129,7 +129,7 @@ local result = myObject:setRenderTarget(texture)
 
 **Parameters**:
 
-* `texture` ([niRenderedTexture](../../types/niRenderedTexture)): *Default*: `nil`. Set to `nil` to reset to the default rendering target.
+* `texture` ([niRenderedTexture](../types/niRenderedTexture.md)): *Default*: `nil`. Set to `nil` to reset to the default rendering target.
 
 **Returns**:
 
@@ -152,5 +152,5 @@ local screenshot = myObject:takeScreenshot(bounds)
 
 **Returns**:
 
-* `screenshot` ([niPixelData](../../types/niPixelData))
+* `screenshot` ([niPixelData](../types/niPixelData.md))
 

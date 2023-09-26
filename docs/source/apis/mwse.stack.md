@@ -88,7 +88,7 @@ local unnamed1 = mwse.stack.popObject()
 
 **Returns**:
 
-* `unnamed` ([tes3baseObject](../../types/tes3baseObject)): *Optional*.
+* `unnamed` ([tes3baseObject](../types/tes3baseObject.md)): *Optional*.
 
 ***
 
@@ -171,7 +171,7 @@ local result = mwse.stack.pushObject(value)
 
 **Parameters**:
 
-* `value` ([tes3baseObject](../../types/tes3baseObject))
+* `value` ([tes3baseObject](../types/tes3baseObject.md))
 
 **Returns**:
 

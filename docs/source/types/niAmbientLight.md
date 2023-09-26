@@ -8,7 +8,7 @@
 
 An object that represents an ambient light. This object is fairly simple, and has no location, direction, or attenuation.
 
-This type inherits the following: [niLight](../../types/niLight), [niDynamicEffect](../../types/niDynamicEffect), [niAVObject](../../types/niAVObject), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niLight](../types/niLight.md), [niDynamicEffect](../types/niDynamicEffect.md), [niAVObject](../types/niAVObject.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `affectedNodes`
@@ -18,7 +18,7 @@ The list of nodes that a given dynamic effect will affect.
 
 **Returns**:
 
-* `result` ([niNodeLinkedList](../../types/niNodeLinkedList))
+* `result` ([niNodeLinkedList](../types/niNodeLinkedList.md))
 
 ***
 
@@ -29,7 +29,7 @@ Convenient access to this object's alpha property. Setting this value to be nil 
 
 **Returns**:
 
-* `result` ([niAlphaProperty](../../types/niAlphaProperty), nil)
+* `result` ([niAlphaProperty](../types/niAlphaProperty.md), nil)
 
 ***
 
@@ -40,7 +40,7 @@ The ambient light color.
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -62,7 +62,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -73,7 +73,7 @@ The diffuse light color.
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -106,7 +106,7 @@ The enabled state of a given dynamic effect.
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -128,7 +128,7 @@ Convenient access to this object's fog property. Setting this value to be nil wi
 
 **Returns**:
 
-* `result` ([niFogProperty](../../types/niFogProperty), nil)
+* `result` ([niFogProperty](../types/niFogProperty.md), nil)
 
 ***
 
@@ -139,7 +139,7 @@ Convenient access to this object's material property. Setting this value to be n
 
 **Returns**:
 
-* `result` ([niMaterialProperty](../../types/niMaterialProperty), nil)
+* `result` ([niMaterialProperty](../types/niMaterialProperty.md), nil)
 
 ***
 
@@ -161,7 +161,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -172,7 +172,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niPropertyLinkedList](../../types/niPropertyLinkedList))
+* `result` ([niPropertyLinkedList](../types/niPropertyLinkedList.md))
 
 ***
 
@@ -194,7 +194,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -205,7 +205,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -216,7 +216,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -240,7 +240,7 @@ In practice, this radius represents the light's influence radius.
 
 **Returns**:
 
-* `result` ([niColor](../../types/niColor))
+* `result` ([niColor](../types/niColor.md))
 
 ***
 
@@ -251,7 +251,7 @@ Convenient access to this object's stencil property. Setting this value to be ni
 
 **Returns**:
 
-* `result` ([niStencilProperty](../../types/niStencilProperty), nil)
+* `result` ([niStencilProperty](../types/niStencilProperty.md), nil)
 
 ***
 
@@ -262,7 +262,7 @@ Convenient access to this object's texturing property. Setting this value to be 
 
 **Returns**:
 
-* `result` ([niTexturingProperty](../../types/niTexturingProperty), nil)
+* `result` ([niTexturingProperty](../types/niTexturingProperty.md), nil)
 
 ***
 
@@ -273,7 +273,7 @@ The object's local translation vector.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -295,7 +295,7 @@ The object's local velocity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -306,7 +306,7 @@ Convenient access to this object's vertex coloring property. Setting this value 
 
 **Returns**:
 
-* `result` ([niVertexColorProperty](../../types/niVertexColorProperty), nil)
+* `result` ([niVertexColorProperty](../types/niVertexColorProperty.md), nil)
 
 ***
 
@@ -317,7 +317,7 @@ The world coordinates of the object's bounds origin.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -339,7 +339,7 @@ The object's transformations in the world space.
 
 **Returns**:
 
-* `result` ([tes3transform](../../types/tes3transform))
+* `result` ([tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -350,7 +350,7 @@ Convenient access to this object's z-buffer property. Setting this value to be n
 
 **Returns**:
 
-* `result` ([niZBufferProperty](../../types/niZBufferProperty), nil)
+* `result` ([niZBufferProperty](../types/niZBufferProperty.md), nil)
 
 ***
 
@@ -367,7 +367,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -382,7 +382,7 @@ myObject:attachAffectedNode(node)
 
 **Parameters**:
 
-* `node` ([niNode](../../types/niNode)): The node to add to the affected nodes list.
+* `node` ([niNode](../types/niNode.md)): The node to add to the affected nodes list.
 
 ***
 
@@ -397,7 +397,7 @@ myObject:attachProperty(property)
 
 **Parameters**:
 
-* `property` ([niProperty](../../types/niProperty))
+* `property` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -423,7 +423,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -438,7 +438,7 @@ myObject:copyTransforms(source)
 
 **Parameters**:
 
-* `source` ([niAVObject](../../types/niAVObject), [tes3transform](../../types/tes3transform))
+* `source` ([niAVObject](../types/niAVObject.md), [tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -453,7 +453,7 @@ myObject:detachAffectedNode(node)
 
 **Parameters**:
 
-* `node` ([niNode](../../types/niNode)): The node to remove from the affected nodes list.
+* `node` ([niNode](../types/niNode.md)): The node to remove from the affected nodes list.
 
 ***
 
@@ -468,7 +468,7 @@ local result = myObject:detachAllProperties()
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty)[])
+* `result` ([niProperty](../types/niProperty.md)[])
 
 ***
 
@@ -487,7 +487,7 @@ local result = myObject:detachProperty(type)
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -506,7 +506,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -525,7 +525,7 @@ local result = myObject:getObjectByName(name)
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -544,7 +544,7 @@ local result = myObject:getProperty(type)
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -563,7 +563,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -582,7 +582,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -650,7 +650,7 @@ local result = myObject:isFrustumCulled(camera)
 
 **Parameters**:
 
-* `camera` ([niCamera](../../types/niCamera))
+* `camera` ([niCamera](../types/niCamera.md))
 
 **Returns**:
 
@@ -707,7 +707,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -766,7 +766,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -781,7 +781,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 

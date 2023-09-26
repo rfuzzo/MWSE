@@ -23,10 +23,10 @@ event.register(tes3.event.cellActivated, cellActivatedCallback)
 
 ## Event Data
 
-* `cell` ([tes3cell](../../types/tes3cell)): *Read-only*. The cell which was activated.
+* `cell` ([tes3cell](../types/tes3cell.md)): *Read-only*. The cell which was activated.
 
 
 ## Related events
 
-[cellActivated](../cellActivated/){ .md-button }[cellDeactivated](../cellDeactivated/){ .md-button }[cellChanged](../cellChanged/){ .md-button }
+[cellActivated](./cellActivated.md){ .md-button }[cellDeactivated](./cellDeactivated.md){ .md-button }[cellChanged](./cellChanged.md){ .md-button }
 

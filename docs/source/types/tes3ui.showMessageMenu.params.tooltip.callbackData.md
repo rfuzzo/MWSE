@@ -17,7 +17,7 @@ The button table of the button this tooltip was created over.
 
 **Returns**:
 
-* `result` ([tes3ui.showMessageMenu.params.button](../../types/tes3ui.showMessageMenu.params.button))
+* `result` ([tes3ui.showMessageMenu.params.button](../types/tes3ui.showMessageMenu.params.button.md))
 
 ***
 
@@ -39,5 +39,5 @@ The actual ui element for the tooltip.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 

@@ -17,7 +17,7 @@ A core game controller responsible for controlling temporary graphics.
 
 **Returns**:
 
-* `result` ([tes3splashControllerActiveSplash](../../types/tes3splashControllerActiveSplash)[])
+* `result` ([tes3splashControllerActiveSplash](../types/tes3splashControllerActiveSplash.md)[])
 
 ***
 
@@ -39,7 +39,7 @@ A core game controller responsible for controlling temporary graphics.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode)[])
+* `result` ([niNode](../types/niNode.md)[])
 
 ***
 
@@ -72,7 +72,7 @@ A core game controller responsible for controlling temporary graphics.
 
 **Returns**:
 
-* `result` ([niTexturingProperty](../../types/niTexturingProperty)[])
+* `result` ([niTexturingProperty](../types/niTexturingProperty.md)[])
 
 ***
 
@@ -83,5 +83,5 @@ A core game controller responsible for controlling temporary graphics.
 
 **Returns**:
 
-* `result` ([niSourceTexture](../../types/niSourceTexture)[])
+* `result` ([niSourceTexture](../types/niSourceTexture.md)[])
 

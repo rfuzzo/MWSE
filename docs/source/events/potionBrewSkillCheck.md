@@ -20,12 +20,12 @@ event.register(tes3.event.potionBrewSkillCheck, potionBrewSkillCheckCallback)
 
 ## Event Data
 
-* `alembic` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The alembic apparatus used to create the potion.
-* `calcinator` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The calcinator apparatus used to create the potion.
-* `ingredients` ([tes3ingredient](../../types/tes3ingredient)[]): *Read-only*. Ingredients which were used to create the potion.
-* `mortar` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The mortar apparatus used to create the potion.
+* `alembic` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The alembic apparatus used to create the potion.
+* `calcinator` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The calcinator apparatus used to create the potion.
+* `ingredients` ([tes3ingredient](../types/tes3ingredient.md)[]): *Read-only*. Ingredients which were used to create the potion.
+* `mortar` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The mortar apparatus used to create the potion.
 * `potionStrength` (number): Can be modified. The strength multiplier used to scale the potion effects. For each different effect, it can modify magnitude, duration, or both. This is initially equal to -1 if the potion failed to brew.
-* `retort` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The retort apparatus used to create the potion.
+* `retort` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The retort apparatus used to create the potion.
 * `success` (boolean): Can be modified. Whether the brewing is successful.
 
 ## Examples
@@ -55,5 +55,5 @@ event.register(tes3.event.potionBrewSkillCheck, potionBrewSkillCheckCallback)
 
 ## Related events
 
-[potionBrewed](../potionBrewed/){ .md-button }[potionBrewFailed](../potionBrewFailed/){ .md-button }
+[potionBrewed](./potionBrewed.md){ .md-button }[potionBrewFailed](./potionBrewFailed.md){ .md-button }
 

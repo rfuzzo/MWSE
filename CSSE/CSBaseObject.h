@@ -27,6 +27,7 @@ namespace se::cs {
 
 		const char* getObjectID() const;
 
+		bool isFromMaster() const;
 		bool getModified() const;
 		void setModified(bool modified);
 		bool getDeleted() const;

@@ -1,7 +1,14 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.pages.Page")
 
+--- @class mwseMCMMouseOverPage
 local MouseOverPage = Parent:new()
 MouseOverPage.noScroll = true
+
+--- @param parentBlock tes3uiElement
 function MouseOverPage:createMouseOverBlock(parentBlock)
 	local mouseOverBlock = parentBlock:createBlock({ id = tes3ui.registerID("MouseOver_MouseoverBlock") })
 	mouseOverBlock.flowDirection = "top_to_bottom"
@@ -31,6 +38,7 @@ end
 
 end]]--
 
+--- @param parentBlock tes3uiElement
 function MouseOverPage:createContentsContainer(parentBlock)
 	self:createLabel(parentBlock)
 	self:createInnerContainer(parentBlock)
@@ -38,7 +46,7 @@ function MouseOverPage:createContentsContainer(parentBlock)
 	self:createSubcomponentsContainer(self.elements.innerContainer)
 	self:createSubcomponents(self.elements.subcomponentsContainer, self.components)
 
-	parentBlock:getTopLevelParent():updateLayout()
+	parentBlock:getTopLevelMenu():updateLayout()
 end
 
 return MouseOverPage

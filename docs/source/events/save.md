@@ -32,5 +32,5 @@ event.register(tes3.event.save, saveCallback)
 
 ## Related events
 
-[save](../save/){ .md-button }[saved](../saved/){ .md-button }
+[save](./save.md){ .md-button }[saved](./saved.md){ .md-button }
 

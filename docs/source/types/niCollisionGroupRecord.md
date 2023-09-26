@@ -21,7 +21,7 @@
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -32,5 +32,5 @@
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 

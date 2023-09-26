@@ -19,7 +19,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -186,7 +186,7 @@ The time in seconds since the last update.
 
 **Returns**:
 
-* `result` ([niGeometry](../../types/niGeometry))
+* `result` ([niGeometry](../types/niGeometry.md))
 
 ***
 
@@ -208,7 +208,7 @@ The timing offset of the head morph controller. Used to select either blinking o
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -219,7 +219,7 @@ The timing offset of the head morph controller. Used to select either blinking o
 
 **Returns**:
 
-* `result` ([tes3animationDataSequenceGroup](../../types/tes3animationDataSequenceGroup)[])
+* `result` ([tes3animationDataSequenceGroup](../types/tes3animationDataSequenceGroup.md)[])
 
 ***
 
@@ -284,7 +284,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -317,7 +317,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -328,7 +328,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -339,7 +339,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -422,7 +422,7 @@ local result = myObject:getReference()
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -472,7 +472,7 @@ myObject:setHeadNode(head)
 
 **Parameters**:
 
-* `head` ([niNode](../../types/niNode)): 
+* `head` ([niNode](../types/niNode.md)): 
 
 ***
 

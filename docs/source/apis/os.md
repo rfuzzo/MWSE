@@ -42,7 +42,7 @@ local executor = os.createProcess({ command = ..., async = ... })
 
 **Returns**:
 
-* `executor` ([mwseLuaExecutor](../../types/mwseLuaExecutor)): A handle to the executor. This can be used to check if the program has errored, finished, and to get the program's output.
+* `executor` ([mwseLuaExecutor](../types/mwseLuaExecutor.md)): A handle to the executor. This can be used to check if the program has errored, finished, and to get the program's output.
 
 ***
 

@@ -28,7 +28,7 @@ An inventory composes of an iterator, and flags caching the state of the invento
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3itemStack](../types/tes3itemStack.md)[])
 
 ??? example "Example: An example implementation of a generic iteration function for looping over all the items in an inventory using coroutine API from the Lua standard library."
 
@@ -52,6 +52,10 @@ An inventory composes of an iterator, and flags caching the state of the invento
 				if stack.variables then
 					for _, data in pairs(stack.variables) do
 						if data then
+							-- Note that data.count is always 1 for items in inventories.
+							-- That field is only relevant for items in the game world, which
+							-- are stored as references. In that case tes3itemData.count field
+							-- contains the amount of items in the in-game-world stack of items.
 							coroutine.yield(item, data.count, data)
 							count = count - data.count
 						end
@@ -90,9 +94,9 @@ myObject:addItem({ mobile = ..., item = ..., itemData = ..., count = ... })
 **Parameters**:
 
 * `params` (table)
-	* `mobile` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Optional*. The mobile actor whose stats will be updated.
-	* `item` ([tes3item](../../types/tes3item)): The item to add.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. Any associated item data to add.
+	* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string): *Optional*. The mobile actor whose stats will be updated.
+	* `item` ([tes3item](../types/tes3item.md)): The item to add.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. Any associated item data to add.
 	* `count` (number): *Default*: `1`. The number of items to add.
 
 ***
@@ -123,8 +127,8 @@ local result = myObject:contains(item, itemData)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item), string): The item to check for.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. If provided, it will check for the specific data as well.
+* `item` ([tes3item](../types/tes3item.md), string): The item to check for.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. If provided, it will check for the specific data as well.
 
 **Returns**:
 
@@ -143,12 +147,12 @@ myObject:dropItem(mobile, item, itemData, count, position, orientation, ignoreIt
 
 **Parameters**:
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): The mobile actor whose stats will be updated.
-* `item` ([tes3item](../../types/tes3item), string): The item to drop.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): If provided, it will check for the specific data to drop it.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string): The mobile actor whose stats will be updated.
+* `item` ([tes3item](../types/tes3item.md), string): The item to drop.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): If provided, it will check for the specific data to drop it.
 * `count` (number): The number of items to drop.
-* `position` ([tes3vector3](../../types/tes3vector3)): A vector determining placement location.
-* `orientation` ([tes3vector3](../../types/tes3vector3)): A vector determining placement rotation.
+* `position` ([tes3vector3](../types/tes3vector3.md)): A vector determining placement location.
+* `orientation` ([tes3vector3](../types/tes3vector3.md)): A vector determining placement rotation.
 * `ignoreItemData` (boolean)
 
 ***
@@ -164,12 +168,12 @@ local result = myObject:findItemStack(item, itemData)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item), string): The item to search for.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. If provided, it will check for the specific data as well.
+* `item` ([tes3item](../types/tes3item.md), string): The item to search for.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. If provided, it will check for the specific data as well.
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack))
+* `result` ([tes3itemStack](../types/tes3itemStack.md))
 
 ***
 
@@ -184,7 +188,7 @@ local count = myObject:getItemCount(item)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item), string): The item to check for.
+* `item` ([tes3item](../types/tes3item.md), string): The item to check for.
 
 **Returns**:
 
@@ -204,9 +208,9 @@ myObject:removeItem({ mobile = ..., item = ..., itemData = ..., count = ..., del
 **Parameters**:
 
 * `params` (table)
-	* `mobile` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Optional*. The mobile actor whose stats will be updated.
-	* `item` ([tes3item](../../types/tes3item)): The item to add.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. Any associated item data to add.
+	* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string): *Optional*. The mobile actor whose stats will be updated.
+	* `item` ([tes3item](../types/tes3item.md)): The item to add.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. Any associated item data to add.
 	* `count` (number): *Default*: `1`. The number of items to add.
 	* `deleteItemData` (boolean): *Default*: `false`. If set, the itemData will be deleted after being removed.
 
@@ -223,5 +227,5 @@ myObject:resolveLeveledItems(mobile)
 
 **Parameters**:
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Optional*. The mobile actor whose stats will be updated.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Optional*. The mobile actor whose stats will be updated.
 

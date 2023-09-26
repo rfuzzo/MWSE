@@ -17,7 +17,7 @@ A linked list of dynamic effects.
 
 **Returns**:
 
-* `result` ([niDynamicEffect](../../types/niDynamicEffect))
+* `result` ([niDynamicEffect](../types/niDynamicEffect.md))
 
 ***
 
@@ -28,5 +28,5 @@ A linked list of dynamic effects.
 
 **Returns**:
 
-* `result` ([niDynamicEffectLinkedList](../../types/niDynamicEffectLinkedList))
+* `result` ([niDynamicEffectLinkedList](../types/niDynamicEffectLinkedList.md))
 

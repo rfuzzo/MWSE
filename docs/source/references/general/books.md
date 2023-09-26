@@ -16,10 +16,11 @@ The tags are space sensitive.
 ```
 
 The available tags are:
-- &lt;div&gt; - text alignment
-- &lt;font&gt; - text style
-- &lt;br&gt; - a new line
-- &lt;img&gt; - inserts an image
+
+* &lt;div&gt; - text alignment
+* &lt;font&gt; - text style
+* &lt;br&gt; - adds a new line
+* &lt;img&gt; - inserts an image
 
 ### &lt;div align="options"&gt;
 
@@ -27,7 +28,17 @@ The `div` tag is used for aligning text. The `"options"` available are `"center"
 
 ### &lt;font color="textCol" size="num" face="fontName"&gt;
 
-The `font` tag changes the appearance of the book's text. The first option available in this tag is `"textCol"`. The color is a string of six hexadecimal digits where two correspond to one color channel: "RRGGBB". The default font color is black ("000000"). The size option will change the text's size. The most common font size for Morrowind's books is "3". The size needs to be a natural number. The face option (from typographical typeface) will change the font used to render the book's text. The available `"fontName"`s are "Magic Cards", "Century Gothic", and "Daedric". The default font is "Magic Cards" and doesn't need to be specified. Not all the options need to be specified, but if more than one is specified, they need to be in the above order.
+The `font` tag changes the appearance of the book's text. Not all the options need to be specified, but if more than one is specified, they need to be in the above order.
+
+The first option available in this tag is `"textCol"`. The color is a string of six hexadecimal digits (0-F) where two correspond to one color channel: `"RRGGBB"`. The default font color is black ("000000").
+
+The size option will change the text's size. The most common font size for Morrowind's books is "3". The size needs to be a natural number.
+
+The face option (from typographical typeface) will change the font used to render the book's text. The available `"fontName"`s are:
+
+* `"Magic Cards"` - The default font. It doesn't need to be specified.
+* `"Century Gothic"` - The console font.
+* `"Daedric"`
 
 #### Overriding Behavior
 

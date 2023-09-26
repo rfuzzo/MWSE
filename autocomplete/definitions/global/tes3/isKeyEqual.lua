@@ -7,7 +7,7 @@ return {
 		tableParams = {
 			{
 				name = "actual",
-				type = "table",
+				type = "table|mwseKeyCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData",
 				description = "The key object that is being compared.",
 				tableParams = {
 					{
@@ -40,11 +40,25 @@ return {
 						default = false,
 						description = "Value of whether the super (Windows key) key is pressed."
 					},
+					{
+						name = "mouseButton",
+						type = "number",
+						optional = true,
+						default = false,
+						description = "The mouse button index."
+					},
+					{
+						name = "mouseWheel",
+						type = "integer",
+						optional = true,
+						default = false,
+						description = "The mouse wheel direction. `-1` is down, `1` is up."
+					},
 				},
 			},
 			{
 				name = "expected",
-				type = "table",
+				type = "table|mwseKeyCombo|mwseKeyMouseCombo|keyDownEventData|keyUpEventData|keyEventData|mouseButtonDownEventData|mouseButtonUpEventData|mouseWheelEventData",
 				description = "The key object that is being compared against.",
 				tableParams = {
 					{
@@ -77,10 +91,30 @@ return {
 						default = false,
 						description = "Value of whether the super (Windows key) key is pressed."
 					},
+					{
+						name = "mouseButton",
+						type = "number",
+						optional = true,
+						default = false,
+						description = "The mouse button index."
+					},
+					{
+						name = "mouseWheel",
+						type = "integer",
+						optional = true,
+						default = false,
+						description = "The mouse wheel direction. `-1` is down, `1` is up."
+					},
 				},
 			},
 		},
 	}},
-	returns = "equal",
-	valuetype = "boolean",
+	returns = {
+		{ name = "equal", valuetype = "boolean" }
+	},
+	examples = {
+		["filtering"] = {
+			title = "Filtering out key presses that aren't equal to the bound key combination"
+		}
+	}
 }

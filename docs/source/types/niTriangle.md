@@ -40,5 +40,5 @@ local triangle = niTriangle.new(first, second, third)
 
 **Returns**:
 
-* `triangle` ([niTriangle](../../types/niTriangle))
+* `triangle` ([niTriangle](../types/niTriangle.md))
 

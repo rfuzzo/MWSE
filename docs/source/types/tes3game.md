@@ -17,7 +17,7 @@ A core game object used for storing game settings.
 
 **Returns**:
 
-* `result` ([niAmbientLight](../../types/niAmbientLight))
+* `result` ([niAmbientLight](../types/niAmbientLight.md))
 
 ***
 
@@ -28,7 +28,7 @@ A core game object used for storing game settings.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -39,7 +39,7 @@ A core game object used for storing game settings.
 
 **Returns**:
 
-* `result` ([niFogProperty](../../types/niFogProperty))
+* `result` ([niFogProperty](../types/niFogProperty.md))
 
 ***
 
@@ -61,7 +61,7 @@ A core game object used for storing game settings.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -83,7 +83,7 @@ The game's rendering distance.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -94,7 +94,7 @@ The game's rendering distance.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -105,7 +105,7 @@ The game's rendering distance.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -226,7 +226,7 @@ Mix volumes for voices.
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -237,7 +237,7 @@ Mix volumes for voices.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -248,7 +248,7 @@ Mix volumes for voices.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -259,7 +259,7 @@ Mix volumes for voices.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -270,7 +270,7 @@ Mix volumes for voices.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -284,6 +284,46 @@ Clears data related to activation, resetting what the player can activate.
 ```lua
 myObject:clearTarget()
 ```
+
+??? example "Example: Resetting the activation tooltip text after untrapping a door"
+
+	```lua
+	
+	---@param reference tes3reference
+	---@return boolean untrapped
+	local function untrap(reference)
+		local object = reference.object
+	
+		-- Skip objects that can't be trapped.
+		if object.objectType ~= tes3.objectType.door
+		or object.objectType ~= tes3.objectType.container then
+			return false
+		end
+	
+		tes3.setTrap({
+			reference = reference,
+			spell = nil
+		})
+		-- Let the game update the activation tooltip otherwise,
+		-- the tooltip would still say "Trapped".
+		tes3.game:clearTarget()
+	
+		return true
+	end
+	
+	-- To test aim at a trapped door or container and press "u" key.
+	local function onKeyDown()
+		-- Get the player's target and apply it's spell
+		-- on the player if it's trapped.
+	
+		local target = tes3.getPlayerTarget()
+		if not target then return end
+	
+		untrap(target)
+	end
+	event.register(tes3.event.keyDown, onKeyDown, { filter = tes3.scanCode.u })
+
+	```
 
 ***
 

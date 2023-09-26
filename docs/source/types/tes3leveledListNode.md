@@ -28,5 +28,5 @@ The item or creature that can be resolved.
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 

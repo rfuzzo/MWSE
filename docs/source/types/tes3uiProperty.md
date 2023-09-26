@@ -50,5 +50,5 @@ UI property's unique ID.
 
 **Returns**:
 
-* `result` (integer, number, boolean, [tes3uiProperty](../../types/tes3uiProperty), nil)
+* `result` (integer, number, boolean, [tes3uiProperty](../types/tes3uiProperty.md), nil)
 

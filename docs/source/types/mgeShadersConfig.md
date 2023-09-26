@@ -39,7 +39,7 @@ The HDR exposure reaction speed, in seconds.
 
 **Returns**:
 
-* `result` ([mgeShaderHandle](../../types/mgeShaderHandle)[])
+* `result` ([mgeShaderHandle](../types/mgeShaderHandle.md)[])
 
 ***
 
@@ -61,7 +61,7 @@ local shader = mgeShadersConfig.find({ name = ... })
 
 **Returns**:
 
-* `shader` ([mgeShaderHandle](../../types/mgeShaderHandle), nil)
+* `shader` ([mgeShaderHandle](../types/mgeShaderHandle.md), nil)
 
 ***
 
@@ -92,5 +92,5 @@ local shader = mgeShadersConfig.load({ name = ... })
 
 **Returns**:
 
-* `shader` ([mgeShaderHandle](../../types/mgeShaderHandle), nil)
+* `shader` ([mgeShaderHandle](../types/mgeShaderHandle.md), nil)
 

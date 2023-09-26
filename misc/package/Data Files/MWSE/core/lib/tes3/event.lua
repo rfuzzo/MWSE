@@ -1,4 +1,3 @@
----@enum tes3.event
 return {
 	["absorbedMagic"] = "absorbedMagic",
 	["activate"] = "activate",
@@ -101,6 +100,7 @@ return {
 	["magicCasted"] = "magicCasted",
 	["magicEffectRemoved"] = "magicEffectRemoved",
 	["magicEffectsResolved"] = "magicEffectsResolved",
+	["magicSelectionChanged"] = "magicSelectionChanged",
 	["menuEnter"] = "menuEnter",
 	["menuExit"] = "menuExit",
 	["meshLoad"] = "meshLoad",

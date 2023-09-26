@@ -8,7 +8,7 @@
 
 An abstract base class from which all the animation controllers inherit. It has all the functionality needed to control the timing and update animations.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `active`
@@ -110,7 +110,7 @@ The next animation controller in the list of controllers containing the calling 
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -143,7 +143,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -154,7 +154,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -176,7 +176,7 @@ The time at which the animation controller starts playing its animation.
 
 **Returns**:
 
-* `result` ([niObjectNET](../../types/niObjectNET))
+* `result` ([niObjectNET](../types/niObjectNET.md))
 
 ***
 
@@ -193,7 +193,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -265,7 +265,7 @@ myObject:setTarget(target)
 
 **Parameters**:
 
-* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+* `target` ([niObjectNET](../types/niObjectNET.md)): The new target to assign.
 
 ***
 

@@ -28,5 +28,5 @@ event.register(tes3.event.preLevelUp, preLevelUpCallback)
 
 ## Related events
 
-[levelUp](../levelUp/){ .md-button }
+[levelUp](./levelUp.md){ .md-button }
 

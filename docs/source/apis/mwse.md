@@ -52,7 +52,7 @@ The mwseTimerController responsible for game-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -63,7 +63,7 @@ The mwseTimerController responsible for real-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -74,7 +74,7 @@ The mwseTimerController responsible for simulate-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -125,8 +125,8 @@ local script, reference = mwse.getCurrentMorrowindScriptState()
 
 **Returns**:
 
-* `script` ([tes3script](../../types/tes3script), nil): The currently executing mwscript script, or nil if none is presently being executed.
-* `reference` ([tes3reference](../../types/tes3reference), nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
+* `script` ([tes3script](../types/tes3script.md), nil): The currently executing mwscript script, or nil if none is presently being executed.
+* `reference` ([tes3reference](../types/tes3reference.md), nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
 
 ***
 
@@ -222,7 +222,7 @@ local i18n = mwse.loadTranslations(mod)
 
 **Returns**:
 
-* `i18n` (function): The callable translation results.
+* `i18n` (fun(key: string, data: any?): string): The callable translation results.
 
 ***
 
@@ -277,7 +277,7 @@ local success = mwse.overrideScript(scriptId, callback)
 **Parameters**:
 
 * `scriptId` (string)
-* `callback` (fun(e: [mwseOverrideScriptCallbackData](../../types/mwseOverrideScriptCallbackData)))
+* `callback` (fun(e: [mwseOverrideScriptCallbackData](../types/mwseOverrideScriptCallbackData.md)))
 
 **Returns**:
 
@@ -329,6 +329,25 @@ local success = mwse.overrideScript(scriptId, callback)
 	end)
 
 	```
+
+***
+
+### `mwse.registerModConfig`
+<div class="search_terms" style="display: none">registermodconfig</div>
+
+This is the main function to register a mod's configuration. Only registered configurations appear in the Mod Config menu.
+
+```lua
+mwse.registerModConfig(name, { onCreate = ..., onSearch = ..., onClose = ... })
+```
+
+**Parameters**:
+
+* `name` (string)
+* `package` (table)
+	* `onCreate` (fun(modConfigContainer: [tes3uiElement](../types/tes3uiElement.md))): The function that creates the mod's configuration menu inside given `modConfigContainer`.
+	* `onSearch` (fun(searchText: string): boolean): *Optional*. A custom search handler function. This function should return true if this mod should show up in search results for given `searchText`.
+	* `onClose` (fun(modConfigContainer: [tes3uiElement](../types/tes3uiElement.md))): *Optional*. This function is called when the mod's configuration menu is closed. Typically, it's used to save the current config table.
 
 ***
 

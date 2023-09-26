@@ -27,5 +27,5 @@ event.register(tes3.event.loaded, loadedCallback)
 
 ## Related events
 
-[load](../load/){ .md-button }[loaded](../loaded/){ .md-button }
+[load](./load.md){ .md-button }[loaded](./loaded.md){ .md-button }
 

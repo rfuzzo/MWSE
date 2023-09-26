@@ -17,7 +17,7 @@ A vector that shows the size of the bounding box in each direction. Note that th
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -28,7 +28,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../types/tes3vector2.md))
 
 ***
 
@@ -83,7 +83,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -94,7 +94,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3itemStack](../types/tes3itemStack.md)[])
 
 ***
 
@@ -160,7 +160,7 @@ A vector that represents the 3D position of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -182,7 +182,7 @@ Access to the root mobile object movement flags from the previous frame, represe
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -193,5 +193,5 @@ A vector that represents the 3D velocity of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

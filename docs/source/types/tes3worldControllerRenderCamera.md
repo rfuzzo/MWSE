@@ -17,7 +17,7 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCameraData](../../types/tes3worldControllerRenderCameraData))
+* `result` ([tes3worldControllerRenderCameraData](../types/tes3worldControllerRenderCameraData.md))
 
 ***
 
@@ -28,7 +28,7 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -39,7 +39,7 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` ([niRenderer](../../types/niRenderer))
+* `result` ([niRenderer](../types/niRenderer.md))
 
 ***
 
@@ -50,5 +50,5 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 

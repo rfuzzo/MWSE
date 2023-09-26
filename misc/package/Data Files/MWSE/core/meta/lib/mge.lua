@@ -212,3 +212,9 @@ function mge.zoomOut(params) end
 --- @field amount number No description yet available.
 
 mge.lightingMode = require("mge.lightingMode")
+
+--- @alias mge.lightingMode
+---| `mge.lightingMode.perPixel`
+---| `mge.lightingMode.perPixelInteriorOnly`
+---| `mge.lightingMode.vertex`
+
