@@ -27,15 +27,6 @@ function Dropdown:enable()
 	end)
 end
 
-function Dropdown:update()
-	for _, option in ipairs(self.options) do
-		if option.label == self.elements.textBox.text then
-			self.variable.value = option.value
-		end
-	end
-	Parent.update(self)
-end
-
 --- @param option mwseMCMDropdownOption
 function Dropdown:selectOption(option)
 	self.elements.dropdownParent:destroyChildren()
@@ -43,7 +34,7 @@ function Dropdown:selectOption(option)
 	self.elements.textBox.text = option.label
 	self.dropdownActive = false
 
-	self:update()
+	Parent.update(self)
 end
 
 function Dropdown:createDropdown()
