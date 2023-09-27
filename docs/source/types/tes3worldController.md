@@ -72,7 +72,7 @@ A value in the range [0, 1]. The (relative) maximum distance setting for AI simu
 
 **Returns**:
 
-* `result` (tes3worldControllerRenderTarget)
+* `result` ([tes3worldControllerRenderTarget](../types/tes3worldControllerRenderTarget.md))
 
 ***
 

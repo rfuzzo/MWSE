@@ -6,7 +6,7 @@
 --- @class tes3worldController
 --- @field aiDistanceScale number A value in the range [0, 1]. The (relative) maximum distance setting for AI simulation. Corresponds to the AI distance option in the Options menu.
 --- @field allMobileActors tes3mobileCreature[]|tes3mobileNPC[]|tes3mobilePlayer[] *Read-only*. The list of all active mobile actors. Mobile actors expire after 72 hours if they have not been in a loaded cell.
---- @field armCamera tes3worldControllerRenderCamera *Read-only*. The access to the first person arms camera.
+--- @field armCamera tes3worldControllerRenderCamera|tes3worldControllerRenderTarget *Read-only*. The access to the first person arms camera.
 --- @field audioController tes3audioController *Read-only*. The audio controller.
 --- @field blindnessFader tes3fader *Read-only*. Screen overlay fader for the blind effect.
 --- @field characterRenderTarget tes3worldControllerRenderTarget *Read-only*. 
@@ -47,7 +47,7 @@
 --- @field maxFPS number Maximum framerate target for the engine's FPS limiter.
 --- @field mediumArmorHitSound tes3sound The sound played when a medium armor piece is hit.
 --- @field menuAlpha number A value in the range [0, 1]. The alpha value of the black background of menus. Corresponds to the "Menu transparency" option in the Options menu.
---- @field menuCamera tes3worldControllerRenderCamera *Read-only*. The access to the camera used to render menus.
+--- @field menuCamera tes3worldControllerRenderCamera|tes3worldControllerRenderTarget *Read-only*. The access to the camera used to render menus.
 --- @field menuClickSound tes3sound The sound played when a UI button or other control is clicked.
 --- @field menuController tes3uiMenuController *Read-only*. The controller responsible for the menu system.
 --- @field menuSizeSound tes3sound Unused sound. Not used when a menu is resized.
@@ -71,12 +71,12 @@
 --- @field rechargingItems tes3rechargingItem[] *Read-only*. A list of enchanted items that are recharging. Items in the list may not all belong to the player.
 --- @field shaderWaterReflectTerrain boolean If pixel shader water reflection includes terrain. Not functional with MGE enabled.
 --- @field shaderWaterReflectUpdate number Period between reflection updates for pixel shader water. Not functional with MGE enabled.
---- @field shadowCamera tes3worldControllerRenderCamera *Read-only*. The access to the camera used for shadows rendering.
+--- @field shadowCamera tes3worldControllerRenderCamera|tes3worldControllerRenderTarget *Read-only*. The access to the camera used for shadows rendering.
 --- @field shadows integer An integer in the range of `0` to `6`. Controls the amount of actor shadows drawn. The maximum value of `6` is loose; it is determined by the "Number of Shadows" INI setting. Corresponds to the "Real-time shadows" option in the Options menu.
 --- @field showSubtitles boolean If subtitles are shown. Corresponds to the "Subtitles" option in the Options menu.
 --- @field simulationTimeScalar number A scalar used for simulation time. At the start of every frame, the `deltaTime` is multiplied by this value. Doing this here is safer than doing it in another event.
 --- @field splashController tes3splashController *Read-only*. Access to the splash controller.
---- @field splashscreenCamera tes3worldControllerRenderCamera *Read-only*. The access to the camera used to render splashscreens.
+--- @field splashscreenCamera tes3worldControllerRenderCamera|tes3worldControllerRenderTarget *Read-only*. The access to the camera used to render splashscreens.
 --- @field stopGameLoop boolean When true, the game simulation loop will stop. Not normally used, and may have other unknown effects.
 --- @field sunglareFader tes3fader *Read-only*. Screen overlay fader for sunglare.
 --- @field systemTime number *Read-only*. Time in milliseconds since the program was started.
@@ -90,7 +90,7 @@
 --- @field weatherController tes3weatherController *Read-only*. The weather controller.
 --- @field werewolfFader tes3fader *Read-only*. Screen overlay fader for werewolf vision.
 --- @field werewolfFOV number The camera FOV when the player is a werewolf.
---- @field worldCamera tes3worldControllerRenderCamera *Read-only*. The access to the world camera.
+--- @field worldCamera tes3worldControllerRenderCamera|tes3worldControllerRenderTarget *Read-only*. The access to the world camera.
 --- @field year tes3globalVariable *Read-only*. The `Year` global variable, indicating the current year.
 tes3worldController = {}
 
