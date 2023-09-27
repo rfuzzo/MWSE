@@ -36,43 +36,39 @@ function KeyBinder:getLetter(keyCode)
 	end
 end
 
-local mouseWheel = {
-	up = 1,
-	down = -1,
+local mouseWheelDirectionName = {
+	[1] = "Mouse wheel up",
+	[-1] = "Mouse wheel down",
 }
 
 --- @param wheel integer|nil
 --- @return string|nil result
 function KeyBinder:getMouseWheelText(wheel)
-	if wheel == mouseWheel.up then
-		return mwse.mcm.i18n("Mouse wheel up")
-	elseif wheel == mouseWheel.down then
-		return mwse.mcm.i18n("Mouse wheel down")
+	local name = mouseWheelDirectionName[wheel]
+	if name then
+		return mwse.mcm.i18n(name)
 	end
 end
 
-local mouseButtonMap = {
-	left = 0,
-	right = 1,
-	middle = 2,
+local mouseButtonName = {
+	[0] = "Left mouse button",
+	[1] = "Right mouse button",
+	[2] = "Middle mouse button",
 }
 
 --- @param buttonIndex number|nil
 --- @return string|nil result
 function KeyBinder:getMouseButtonText(buttonIndex)
-	if not buttonIndex then
+	-- Only work with button indices supporte by the inputController
+	if not buttonIndex or buttonIndex > 7 or buttonIndex < 0 then
 		return
 	end
-
-	if buttonIndex == mouseButtonMap.left then
-		return mwse.mcm.i18n("Left mouse button")
-	elseif buttonIndex == mouseButtonMap.right then
-		return mwse.mcm.i18n("Right mouse button")
-	elseif buttonIndex == mouseButtonMap.middle then
-		return mwse.mcm.i18n("Middle mouse button")
-	else
-		return string.format(mwse.mcm.i18n("Mouse %s"), buttonIndex)
+	local name = mouseButtonName[buttonIndex]
+	if name then
+		return mwse.mcm.i18n(name)
 	end
+
+	return string.format(mwse.mcm.i18n("Mouse %s"), buttonIndex)
 end
 
 --- @param keyCombo mwseKeyMouseCombo
@@ -94,7 +90,7 @@ function KeyBinder:getComboString(keyCombo)
 	-- Add failsafe for malformed keyCombos
 	if not comboText then
 		local inspect = require("inspect")
-		mwse.log("[KeyBinder]: couldn't resolve any text for the given combo:\n%s",	inspect(keyCombo))
+		mwse.log("[KeyBinder]: couldn't resolve any text for the given combo:\n%s", inspect(keyCombo))
 		comboText = string.format("{%s}", mwse.mcm.i18n("unknown key"))
 	end
 
