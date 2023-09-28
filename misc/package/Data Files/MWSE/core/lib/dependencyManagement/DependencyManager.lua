@@ -84,22 +84,20 @@ function DependencyManager:checkDependencies()
         return true
     end
 
-    -- Don't check dependencies if a mod't plugin is not active.
+    -- Don't check dependencies if a mod's plugin is not active.
     -- Log if there is metadata.toml pointing to a partially installed/uninstalled mod.
     local plugin = self.metadata.package.plugin
     local pluginExists = plugin and util.pluginExists(plugin)
-    local pluginDisabled = pluginExists and not tes3.isModActive(plugin)
 
     local luaMod = self.metadata.tools and self.metadata.tools.mwse and self.metadata.tools.mwse["lua-mod"]
     local luaModExists = luaMod and util.luaModExists(luaMod)
 
-    local luaOnly = luaMod and not plugin or false
-    local pluginOnly = plugin and not luaMod or false
-    local luaPlugin = luaMod and plugin and true or false
-
-    local uncomplete = (luaOnly and not luaModExists) or
-                       (pluginOnly and not pluginExists) or
-                       (luaPlugin and not (luaModExists and pluginExists))
+    local uncomplete = false
+    if luaMod and not luaModExists then
+        uncomplete = true
+    elseif plugin and not pluginExists then
+        uncomplete = true
+    end
 
     if uncomplete then
         self.logger:warn("Metadata file (%s) found pointing to missing mod files:",
@@ -117,11 +115,9 @@ function DependencyManager:checkDependencies()
         return true
     end
 
+    local pluginDisabled = pluginExists and not tes3.isModActive(plugin)
     if pluginDisabled then
-        if self.showFailureMessage then
-            self.logger:info("Plugin \"%s\" is not active, skipping dependency check.", plugin)
-        end
-
+        self.logger:info("Plugin \"%s\" is not active, skipping dependency check.", plugin)
         return true
     end
 
