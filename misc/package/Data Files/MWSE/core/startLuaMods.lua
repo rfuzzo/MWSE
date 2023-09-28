@@ -5,7 +5,7 @@ local function execLuaMod(runtime)
 	-- Check for dependencies if we need to.
 	if (runtime.metadata and runtime.metadata.dependencies) then
 		-- Generate a name from the key if we need one.
-		local name = runtime.package and runtime.package.name
+		local name = runtime.metadata.package and runtime.metadata.package.name
 		if (not name) then
 			name = runtime.key
 		end

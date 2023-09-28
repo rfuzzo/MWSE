@@ -63,4 +63,17 @@ function util.getMissingAssets(assets)
     return missingAssets
 end
 
+---@param plugin string
+function util.pluginExists(plugin)
+	local path = tes3.installDirectory .. "\\Data Files\\" .. plugin
+	return lfs.fileexists(path)
+end
+
+---@param modName string
+function util.luaModExists(modName)
+	modName = modName:lower()
+	---@diagnostic disable-next-line: undefined-field
+	return mwse.activeLuaMods[modName] or false
+end
+
 return util
