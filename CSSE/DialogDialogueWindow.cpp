@@ -488,6 +488,15 @@ namespace se::cs::dialog::dialogue_window {
 		saveInfoColumnWidths(hWnd);
 	}
 
+
+	void OnCurrentTextEditChanged(HWND hWnd) {
+		using namespace se::cs::winui;
+		auto hDlgCurrentTextEdit = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_EDIT);
+		auto textCharCount = Edit_GetTextLength(hDlgCurrentTextEdit);
+
+		SetDlgItemInt(hWnd, CONTROL_ID_CURRENT_TEXT_CHAR_COUNT, textCharCount, FALSE);
+	}
+
 	constexpr auto MIN_WIDTH = 1113u;
 	constexpr auto MIN_HEIGHT = 700u;
 
@@ -568,6 +577,13 @@ namespace se::cs::dialog::dialogue_window {
 
 		auto hDlgShowModifiedOnly = CreateWindowExA(NULL, WC_BUTTON, "Show modified only", BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON, hInstance, NULL);
 		SendMessageA(hDlgShowModifiedOnly, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+
+		auto hDlgCurrentTextCharCount = CreateWindowExA(NULL, WC_STATIC, "0", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_CURRENT_TEXT_CHAR_COUNT, hInstance, NULL);
+		SendMessageA(hDlgCurrentTextCharCount, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+		OnCurrentTextEditChanged(hWnd);
+
+		auto hDlgCurrentTextMaxCharCount = CreateWindowExA(NULL, WC_STATIC, "/512", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_CURRENT_TEXT_MAX_CHAR_COUNT, hInstance, NULL);
+		SendMessageA(hDlgCurrentTextMaxCharCount, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
 
 		// Make it so the window can be maximized and generally resized.
 		RemoveStyles(hWnd, DS_MODALFRAME);
@@ -798,6 +814,12 @@ namespace se::cs::dialog::dialogue_window {
 			MoveWindow(hDlgCurrentTextEdit, currentX, currentY, BOTTOM_MIDDLE_WIDTH, TOP_INFO_TEXT_HEIGHT, FALSE);
 			currentY += TOP_INFO_TEXT_HEIGHT + BASIC_PADDING;
 
+			auto hDlgCurrentTextCharCount = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_CHAR_COUNT);
+			MoveWindow(hDlgCurrentTextCharCount, currentX + BOTTOM_MIDDLE_WIDTH - 48, currentY + 10, 18, 20, FALSE);
+
+			auto hDlgCurrentTextMaxCharCount = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_MAX_CHAR_COUNT);
+			MoveWindow(hDlgCurrentTextMaxCharCount, currentX + BOTTOM_MIDDLE_WIDTH - 30, currentY +10 , 23, 20, FALSE);
+
 			// Speaker Condition button (area)
 			auto hDlgSpeakerConditionButton = GetDlgItem(hWnd, CONTROL_ID_SPEAKER_CONDITION_BUTTON);
 			MoveWindow(hDlgSpeakerConditionButton, currentX, currentY, BOTTOM_MIDDLE_WIDTH, SPEAKER_CONDITION_HEIGHT, FALSE);
@@ -962,6 +984,13 @@ namespace se::cs::dialog::dialogue_window {
 				break;
 			}
 			break;
+		case EN_CHANGE:
+			switch (id) {
+			case CONTROL_ID_CURRENT_TEXT_EDIT:
+				OnCurrentTextEditChanged(hWnd);
+				break;
+			}
+			break;
 		}
 	}
 
@@ -1100,6 +1129,7 @@ namespace se::cs::dialog::dialogue_window {
 		switch (message->idFrom) {
 		case CONTROL_ID_INFO_LIST:
 			PatchDialogProc_BeforeNotify_InfoList(hWnd, msg, wParam, message);
+			OnCurrentTextEditChanged(hWnd);
 			break;
 		}
 	}
