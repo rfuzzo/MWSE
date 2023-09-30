@@ -3,8 +3,8 @@
 #include "LuaUtil.h"
 
 namespace NI {
-	const auto NI_TriShapeData_ctor = reinterpret_cast<void(__thiscall*)(TriShapeData*, unsigned short, TES3::Vector3*, TES3::Vector3*, PackedColor*, TES3::Vector2*, unsigned short, unsigned short*, int)>(0x6E4690);
-	Pointer<TriShapeData> TriShapeData::create(unsigned short _vertexCount, TES3::Vector3* _vertices, TES3::Vector3* _normals, PackedColor* _colors, TES3::Vector2* _textureCoords, unsigned short _triangleCount, unsigned short* _triangleList, int unused) {
+	const auto NI_TriShapeData_ctor = reinterpret_cast<void(__thiscall*)(TriShapeData*, unsigned short, TES3::Vector3*, TES3::Vector3*, PackedColor*, TES3::Vector2*, unsigned short, Triangle*, int)>(0x6E4690);
+	Pointer<TriShapeData> TriShapeData::create(unsigned short _vertexCount, TES3::Vector3* _vertices, TES3::Vector3* _normals, PackedColor* _colors, TES3::Vector2* _textureCoords, unsigned short _triangleCount, Triangle* _triangleList, int unused) {
 		auto ptr = mwse::tes3::_new<TriShapeData>();
 		NI_TriShapeData_ctor(ptr, _vertexCount, _vertices, _normals, _colors, _textureCoords, _triangleCount, _triangleList, unused);
 		return ptr;
@@ -36,10 +36,10 @@ namespace NI {
 			ZeroMemory(textureCoords, sizeof(Vector2) * textureCoordTotal);
 		}
 
-		unsigned short* triangleList = nullptr;
+		Triangle* triangleList = nullptr;
 		if (triangleCount) {
-			triangleList = mwse::tes3::_new<unsigned short>(triangleCount);
-			ZeroMemory(triangleList, sizeof(unsigned short) * triangleCount);
+			triangleList = mwse::tes3::_new<Triangle>(triangleCount);
+			ZeroMemory(triangleList, sizeof(Triangle) * triangleCount);
 		}
 
 		// Create data and update texture set count after creation, as the constructor call assumes there is only 0 or 1 texture set.
@@ -73,10 +73,10 @@ namespace NI {
 			memcpy_s(_textureCoords, sizeof(TES3::Vector2) * textureCoordTotal, textureCoords, sizeof(TES3::Vector2) * textureCoordTotal);
 		}
 
-		unsigned short* _triangleList = nullptr;
+		Triangle* _triangleList = nullptr;
 		if (triangleList) {
-			_triangleList = mwse::tes3::_new<unsigned short>(triangleListLength);
-			memcpy_s(_triangleList, sizeof(unsigned short) * triangleListLength, triangleList, sizeof(unsigned short) * triangleListLength);
+			_triangleList = mwse::tes3::_new<Triangle>(triangleListLength);
+			memcpy_s(_triangleList, sizeof(Triangle) * triangleListLength, triangleList, sizeof(Triangle) * triangleListLength);
 		}
 
 		// Create data and update texture set count after creation, as the constructor call assumes there is only 0 or 1 texture set.
