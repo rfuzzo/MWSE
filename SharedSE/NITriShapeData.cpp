@@ -4,9 +4,9 @@
 #include "MemoryUtil.h"
 
 namespace NI {
-	Pointer<TriShapeData> TriShapeData::create(unsigned short _vertexCount, Vector3* _vertices, Vector3* _normals, PackedColor* _colors, Vector2* _textureCoords, unsigned short _triangleCount, unsigned short* _triangleList, int unused) {
+	Pointer<TriShapeData> TriShapeData::create(unsigned short _vertexCount, Vector3* _vertices, Vector3* _normals, PackedColor* _colors, Vector2* _textureCoords, unsigned short _triangleCount, Triangle* _triangleList, int unused) {
 #if defined(SE_NI_TRISHAPEDATA_FNADDR_CREATE) && SE_NI_TRISHAPEDATA_FNADDR_CREATE > 0
-		const auto NI_TriShapeData_ctor = reinterpret_cast<void(__thiscall*)(TriShapeData*, unsigned short, Vector3*, Vector3*, PackedColor*, Vector2*, unsigned short, unsigned short*, int)>(SE_NI_TRISHAPEDATA_FNADDR_CREATE);
+		const auto NI_TriShapeData_ctor = reinterpret_cast<void(__thiscall*)(TriShapeData*, unsigned short, Vector3*, Vector3*, PackedColor*, Vector2*, unsigned short, Triangle*, int)>(SE_NI_TRISHAPEDATA_FNADDR_CREATE);
 
 		auto ptr = se::memory::_new<TriShapeData>();
 		NI_TriShapeData_ctor(ptr, _vertexCount, _vertices, _normals, _colors, _textureCoords, _triangleCount, _triangleList, unused);
@@ -40,10 +40,10 @@ namespace NI {
 			memcpy_s(_textureCoords, sizeof(Vector2) * vertexCount, textureCoords, sizeof(Vector2) * vertexCount);
 		}
 
-		unsigned short* _triangleList = nullptr;
+		Triangle* _triangleList = nullptr;
 		if (triangleList) {
-			_triangleList = se::memory::_new<unsigned short>(triangleListLength);
-			memcpy_s(_triangleList, sizeof(unsigned short) * triangleListLength, triangleList, sizeof(unsigned short) * triangleListLength);
+			_triangleList = se::memory::_new<Triangle>(triangleCount);
+			memcpy_s(_triangleList, sizeof(Triangle) * triangleCount, triangleList, sizeof(Triangle) * triangleCount);
 		}
 
 		auto result = create(vertexCount, _vertices, _normals, _colors, _textureCoords, triangleCount, _triangleList);

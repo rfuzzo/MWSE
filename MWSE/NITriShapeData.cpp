@@ -75,8 +75,8 @@ namespace NI {
 
 		Triangle* _triangleList = nullptr;
 		if (triangleList) {
-			_triangleList = mwse::tes3::_new<Triangle>(triangleListLength);
-			memcpy_s(_triangleList, sizeof(Triangle) * triangleListLength, triangleList, sizeof(Triangle) * triangleListLength);
+			_triangleList = mwse::tes3::_new<Triangle>(triangleCount);
+			memcpy_s(_triangleList, sizeof(Triangle) * triangleCount, triangleList, sizeof(Triangle) * triangleCount);
 		}
 
 		// Create data and update texture set count after creation, as the constructor call assumes there is only 0 or 1 texture set.
