@@ -47,7 +47,7 @@ namespace TES3 {
 		float physicalDamage; // 0xC
 		unsigned char aiBehaviourState; // 0x10
 		AttackAnimationState animStateAttack; // 0x11
-		char blockingState; // 0x12
+		unsigned char blockingState; // 0x12
 		unsigned char maybe_animGroupKnockdown; // 0x13
 		PhysicalAttackType physicalAttackType; // 0x14
 		unsigned char currentAnimLayer; // 0x15

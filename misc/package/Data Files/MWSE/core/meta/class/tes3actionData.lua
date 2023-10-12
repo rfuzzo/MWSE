@@ -18,6 +18,7 @@
 --- 12    | Greet
 --- @field animationAttackState number The actor's animation state. Maps to values in [`tes3.animationState`](https://mwse.github.io/MWSE/references/animation-states/) namespace.
 --- @field attackSwing number When attacking, this value represents how much the weapon has been pulled back. The value ranges from [0.0 - 1.0].
+--- @field blockingState number A state index that indicates an actor's blocking state. It is zero when not blocking and non-zero when blocking. A value of 1 indicates a state transition from non-blocking to blocking, while a value of 2 means blocking is active (where the block animation is currently playing and should not be interrupted).
 --- @field currentAnimationGroup number Actor's current animation group. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field hitTarget tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|nil The actor's attack target. The target will be saved in `hitTarget` field until a new attack is made. Missing an attack will clear `hitTarget` field.
 --- @field lastBarterHoursPassed number No description yet available.

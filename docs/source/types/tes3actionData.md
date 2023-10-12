@@ -54,6 +54,17 @@ When attacking, this value represents how much the weapon has been pulled back. 
 
 ***
 
+### `blockingState`
+<div class="search_terms" style="display: none">blockingstate</div>
+
+A state index that indicates an actor's blocking state. It is zero when not blocking and non-zero when blocking. A value of 1 indicates a state transition from non-blocking to blocking, while a value of 2 means blocking is active (where the block animation is currently playing and should not be interrupted).
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `currentAnimationGroup`
 <div class="search_terms" style="display: none">currentanimationgroup</div>
 
