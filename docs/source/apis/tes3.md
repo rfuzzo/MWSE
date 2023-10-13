@@ -133,14 +133,15 @@ One of the core game objects.
 Registers a new armor slot. Adds a new place for armor pieces with a matching slot number to equip to.
 
 ```lua
-local wasAdded = tes3.addArmorSlot({ slot = ..., name = ..., weight = ..., scalar = ... })
+local wasAdded = tes3.addArmorSlot({ slot = ..., name = ..., key = ..., weight = ..., scalar = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `slot` (number): Armor slot number. A number greater than 10 to configure a slot for.
-	* `name` (string)
+	* `name` (string): The human-readable name for the armor slot.
+	* `key` (string): *Optional*. The key placed in the `tes3.armorSlot` table. If no key is provided, the name will be used.
 	* `weight` (number): *Default*: `0`. A stand-in for the armor base weight value, typically controlled by a GMST (e.g. iHelmWeight).
 	* `scalar` (number): *Default*: `0.1`. A multiplier with range 0.0-1.0 that controls how much of an item's armor value applies to a character's overall armor rating. For comparison, standard chest armor uses 0.3, helmets, greaves and pauldrons use 0.1, and gauntlets use 0.05.
 
@@ -156,14 +157,15 @@ local wasAdded = tes3.addArmorSlot({ slot = ..., name = ..., weight = ..., scala
 Registers a new clothing slot. Adds a new place for clothing pieces with a matching slot number to equip to.
 
 ```lua
-tes3.addClothingSlot({ slot = ..., name = ... })
+tes3.addClothingSlot({ slot = ..., name = ..., key = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `slot` (number): Clothing slot number. A number greater than 9 to configure a slot for.
-	* `name` (string)
+	* `name` (string): The human-readable name for the clothing slot.
+	* `key` (string): *Optional*. The key placed in the `tes3.clothingSlot` table. If no key is provided, the name will be used.
 
 ***
 

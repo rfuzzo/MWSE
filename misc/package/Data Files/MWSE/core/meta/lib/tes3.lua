@@ -20,7 +20,9 @@ tes3 = {}
 --- 
 --- `slot`: number — Armor slot number. A number greater than 10 to configure a slot for.
 --- 
---- `name`: string — No description yet available.
+--- `name`: string — The human-readable name for the armor slot.
+--- 
+--- `key`: string? — *Optional*. The key placed in the `tes3.armorSlot` table. If no key is provided, the name will be used.
 --- 
 --- `weight`: number? — *Default*: `0`. A stand-in for the armor base weight value, typically controlled by a GMST (e.g. iHelmWeight).
 --- 
@@ -31,7 +33,8 @@ function tes3.addArmorSlot(params) end
 ---Table parameter definitions for `tes3.addArmorSlot`.
 --- @class tes3.addArmorSlot.params
 --- @field slot number Armor slot number. A number greater than 10 to configure a slot for.
---- @field name string No description yet available.
+--- @field name string The human-readable name for the armor slot.
+--- @field key string? *Optional*. The key placed in the `tes3.armorSlot` table. If no key is provided, the name will be used.
 --- @field weight number? *Default*: `0`. A stand-in for the armor base weight value, typically controlled by a GMST (e.g. iHelmWeight).
 --- @field scalar number? *Default*: `0.1`. A multiplier with range 0.0-1.0 that controls how much of an item's armor value applies to a character's overall armor rating. For comparison, standard chest armor uses 0.3, helmets, greaves and pauldrons use 0.1, and gauntlets use 0.05.
 
@@ -40,13 +43,16 @@ function tes3.addArmorSlot(params) end
 --- 
 --- `slot`: number — Clothing slot number. A number greater than 9 to configure a slot for.
 --- 
---- `name`: string — No description yet available.
+--- `name`: string — The human-readable name for the clothing slot.
+--- 
+--- `key`: string? — *Optional*. The key placed in the `tes3.clothingSlot` table. If no key is provided, the name will be used.
 function tes3.addClothingSlot(params) end
 
 ---Table parameter definitions for `tes3.addClothingSlot`.
 --- @class tes3.addClothingSlot.params
 --- @field slot number Clothing slot number. A number greater than 9 to configure a slot for.
---- @field name string No description yet available.
+--- @field name string The human-readable name for the clothing slot.
+--- @field key string? *Optional*. The key placed in the `tes3.clothingSlot` table. If no key is provided, the name will be used.
 
 --- Adds an item to a given reference's inventory or mobile's inventory. The `reference` will be cloned if needed.
 --- @param params tes3.addItem.params This table accepts the following values:

@@ -2622,14 +2622,14 @@ namespace mwse::lua {
 		return false;
 	}
 
-	void addArmorSlot(sol::table params) {
+	void addArmorSlot(sol::this_state ts, sol::table params) {
 		sol::optional<int> slot = params["slot"];
 		if (!slot || (slot.value() >= TES3::ArmorSlot::First && slot.value() <= TES3::ArmorSlot::Last) || mwse::tes3::getArmorSlotData(slot.value())) {
 			throw std::exception("tes3.addArmorSlot: Invalid slot. An unusued slot must be provided.");
 		}
 
-		sol::optional<const char*> name = params["name"];
-		if (!name || name.value() == nullptr) {
+		sol::optional<std::string> name = params["name"];
+		if (!name || name.value().empty()) {
 			throw std::exception("tes3.addArmorSlot: No name provided for slot.");
 		}
 
@@ -2643,9 +2643,19 @@ namespace mwse::lua {
 		slotData->armorScalar = armorScalar.value_or(0.1f);
 
 		mwse::tes3::setArmorSlotData(slotData);
+
+		// Add the slot to the tes3.armorSlot table.
+		sol::state_view state = ts;
+		sol::optional<std::string> key = params["key"];
+		if (key) {
+			state["tes3"]["armorSlot"][key] = slot.value();
+		}
+		else {
+			state["tes3"]["armorSlot"][name] = slot.value();
+		}
 	}
 
-	void addClothingSlot(sol::table params) {
+	void addClothingSlot(sol::this_state ts, sol::table params) {
 		sol::optional<int> slot = params["slot"];
 		if (!slot || (slot.value() >= TES3::ClothingSlot::First && slot.value() <= TES3::ClothingSlot::Last) || mwse::tes3::getClothingSlotData(slot.value())) {
 			throw std::exception("tes3.addClothingSlot: Invalid slot. An unusued slot must be provided.");
@@ -2655,8 +2665,8 @@ namespace mwse::lua {
 			throw std::exception("tes3.addClothingSlot: Invalid slot. Value must be between 10 and 255.");
 		}
 
-		sol::optional<const char*> name = params["name"];
-		if (!name || name.value() == nullptr) {
+		sol::optional<std::string> name = params["name"];
+		if (!name || name.value().empty()) {
 			throw std::exception("tes3.addClothingSlot: No name provided for slot.");
 		}
 
@@ -2665,6 +2675,16 @@ namespace mwse::lua {
 		slotData->name = name.value();
 
 		mwse::tes3::setClothingSlotData(slotData);
+
+		// Add the slot to the tes3.clothingSlot table.
+		sol::state_view state = ts;
+		sol::optional<std::string> key = params["key"];
+		if (key) {
+			state["tes3"]["clothingSlot"][key] = slot.value();
+		}
+		else {
+			state["tes3"]["clothingSlot"][name] = slot.value();
+		}
 	}
 
 	// WARNING: This function doesn't persist through saves correctly and shouldn't be used.
