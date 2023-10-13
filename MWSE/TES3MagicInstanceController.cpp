@@ -31,6 +31,11 @@ namespace TES3 {
 		TES3_MagicInstanceController_retireMagicCastedByActor(this, reference);
 	}
 
+	const auto TES3_MagicInstanceController_interruptCasting = reinterpret_cast<void(__thiscall*)(MagicInstanceController*, Reference*)>(0x455610);
+	void MagicInstanceController::interruptCasting(Reference* reference) {
+		TES3_MagicInstanceController_interruptCasting(this, reference);
+	}
+
 	const auto TES3_UI_updateActiveMagicEffectIcons = reinterpret_cast<void(__cdecl*)()>(0x5E2480);
 	void MagicInstanceController::updateActiveMagicEffectIcons() {
 		TES3_UI_updateActiveMagicEffectIcons();

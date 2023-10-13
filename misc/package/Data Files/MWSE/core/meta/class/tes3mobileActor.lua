@@ -365,6 +365,17 @@ function tes3mobileActor:getWeaponSpeed() end
 --- @return boolean result No description yet available.
 function tes3mobileActor:hasUsedPower(power) end
 
+--- Induces hit stun on the actor. Without any parameters, it produces a brief stun that lasts about 1 second and prevents starting a new attack. It can produce other types of stun, see parameters. There are states where actors can't be stunned (such as already being in hit stun and paralysis). The function will return if the stun was successfuly applied.
+--- @param params tes3mobileActor.hitStun.params? This table accepts the following values:
+--- 
+--- `knockDown`: boolean? — *Optional*. Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting.
+--- @return boolean result No description yet available.
+function tes3mobileActor:hitStun(params) end
+
+---Table parameter definitions for `tes3mobileActor.hitStun`.
+--- @class tes3mobileActor.hitStun.params
+--- @field knockDown boolean? *Optional*. Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting.
+
 --- Determines if the actor is currently being affected by a given alchemy, enchantment, or spell.
 --- @param object tes3alchemy|tes3enchantment|tes3spell The magic to check for.
 --- @return boolean result No description yet available.

@@ -33,6 +33,7 @@ namespace TES3 {
 		void clearSpellEffect(Reference* reference, int castType, int percentChance, bool removeSpell);
 		MagicSourceInstance* getInstanceFromSerial(unsigned int serial);
 		void retireMagicCastedByActor(Reference* reference);
+		void interruptCasting(Reference* reference);
 
 		//
 		// Other related static functions.

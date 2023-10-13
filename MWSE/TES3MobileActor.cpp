@@ -1393,6 +1393,52 @@ namespace TES3 {
 		return false;
 	}
 
+	bool MobileActor::hitStun_lua(sol::optional<sol::table> params) {
+		auto knockDown = mwse::lua::getOptionalParam<bool>(params, "knockDown", false);
+
+		const auto animData = this->getAnimationData();
+		if (!animData) {
+			return false;
+		}
+
+		// Conditionals matching the hit stun mechanics.
+		auto animGroup = animData->currentAnimGroup[0];
+		const unsigned char Hit1 = 0x13, SwimHit3 = 0x1A;
+		if (!isNotKnockedDownOrOut() || (animGroup >= Hit1 && animGroup <= SwimHit3)) {
+			return false;
+		}
+			
+		if (knockDown) {
+			// Knockdown, heavy stun. When the character falls to their knees and takes seconds to recover.
+			WorldController::get()->magicInstanceController->interruptCasting(reference);
+			actionData.animStateAttack = AttackAnimationState::Knockdown;
+			return true;
+		}
+		else {
+			// Hit stun. When attacking or casting is interruped and the recovery animation is short.
+			// Note that this specific animation ID is detected and later converted to a randomized animation (Swim)Hit1-3.
+
+			// Conditionals matching the hit stun mechanics. Creatures are less interruptible.
+			auto animStateAttack = actionData.animStateAttack;
+			if (this->actorType != TES3::MobileActorType::Creature
+				|| (animStateAttack != TES3::AttackAnimationState::SwingUp
+				&& animStateAttack != TES3::AttackAnimationState::SwingDown
+				&& animStateAttack != TES3::AttackAnimationState::SwingHit
+				&& animStateAttack != TES3::AttackAnimationState::SwingFollowLight
+				&& animStateAttack != TES3::AttackAnimationState::SwingFollowMed
+				&& animStateAttack != TES3::AttackAnimationState::SwingFollowHeavy
+				&& animStateAttack != TES3::AttackAnimationState::Casting
+				&& animStateAttack != TES3::AttackAnimationState::CastingFollow
+				&& animStateAttack != TES3::AttackAnimationState::PickingProbing))
+			{
+				const unsigned char knockDownAnim = 0x22;
+				actionData.animGroupStunEffect = knockDownAnim;
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void MobileActor::updateOpacity() {
 		if (animationController.asActor) {
 			animationController.asActor->updateOpacity();

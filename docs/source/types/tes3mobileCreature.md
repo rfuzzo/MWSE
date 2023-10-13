@@ -2074,6 +2074,26 @@ local result = myObject:hasUsedPower(power)
 
 ***
 
+### `hitStun`
+<div class="search_terms" style="display: none">hitstun</div>
+
+Induces hit stun on the actor. Without any parameters, it produces a brief stun that lasts about 1 second and prevents starting a new attack. It can produce other types of stun, see parameters. There are states where actors can't be stunned (such as already being in hit stun and paralysis). The function will return if the stun was successfuly applied.
+
+```lua
+local result = myObject:hitStun({ knockDown = ... })
+```
+
+**Parameters**:
+
+* `params` (table): *Optional*.
+	* `knockDown` (boolean): *Optional*. Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isAffectedByObject`
 <div class="search_terms" style="display: none">isaffectedbyobject, affectedbyobject</div>
 

@@ -146,6 +146,7 @@ namespace mwse::lua {
 		usertypeDefinition["getSkillValue"] = &TES3::MobileActor::getSkillValue;
 		usertypeDefinition["getWeaponSpeed"] = &TES3::MobileActor::getWeaponSpeed;
 		usertypeDefinition["hasUsedPower"] = &TES3::MobileActor::hasUsedPower;
+		usertypeDefinition["hitStun"] = &TES3::MobileActor::hitStun_lua;
 		usertypeDefinition["kill"] = &TES3::MobileActor::kill;
 		usertypeDefinition["rechargePower"] = &TES3::MobileActor::rechargePower;
 		usertypeDefinition["resurrect"] = &TES3::MobileActor::resurrect_lua;
