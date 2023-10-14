@@ -19,17 +19,40 @@ A script context object, which allows variables to be get/set using the variable
 	---@return boolean
 	local function hasCompanionShare(reference)
 	
-		-- This shows that we can read any variable inside
-		-- `tes3scriptContext` objects as if it was normal Lua table
+		-- Any local script variable inside `tes3scriptContext`
+		-- objects can be read as if it were a normal Lua table
 		-- (`reference.context` is of `tes3scriptContext` type)
-		local companion = reference.context["companion"]
-		return (companion and
-				companion == 1 or
-				false
+		local companion = reference.context.companion
+		-- or:
+		-- local companion = reference.context["companion"]
+	
+		-- In addition, local script variables can be accessed from the tes3npc object:
+		-- myNpc.script.context.somVarName
+	
+		-- To change the variable value, do an assignment:
+		-- reference.context.companion = 0
+	
+		return (
+			companion and
+			companion == 1 or
+			false
 		)
 	end
 
 	```
+
+## Properties
+
+### `[string]`
+<div class="search_terms" style="display: none">[string]</div>
+
+*Read-only*. This allows indexing a local script variable by it's name. The variable's value can be read or modified this way. There is an example at the top of the page on doing this.
+
+**Returns**:
+
+* `result` (number, nil)
+
+***
 
 ## Methods
 

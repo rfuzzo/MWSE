@@ -186,7 +186,7 @@ Access to the light's flags, determining if the object creates darkness.
 ### `isOffByDefault`
 <div class="search_terms" style="display: none">isoffbydefault, offbydefault</div>
 
-Access to the light's flags, determining if the light won't be active initially.
+If true the light won't be active initially, and will only be lit when held by an actor.
 
 **Returns**:
 

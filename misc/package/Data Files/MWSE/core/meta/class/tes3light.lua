@@ -12,7 +12,7 @@
 --- @field isDynamic boolean Access to the light's flags, determining if the light affects dynamically moving objects.
 --- @field isFire boolean Access to the light's flags, determining if the light represents flame.
 --- @field isNegative boolean Access to the light's flags, determining if the object creates darkness.
---- @field isOffByDefault boolean Access to the light's flags, determining if the light won't be active initially.
+--- @field isOffByDefault boolean If true the light won't be active initially, and will only be lit when held by an actor.
 --- @field mesh string The path to the object's mesh.
 --- @field name string The player-facing name for the object.
 --- @field pulses boolean Access to the light's flags, determining if the light attenuation pulses.
