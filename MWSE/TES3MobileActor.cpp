@@ -1394,10 +1394,24 @@ namespace TES3 {
 	}
 
 	bool MobileActor::hitStun_lua(sol::optional<sol::table> params) {
+		auto cancel = mwse::lua::getOptionalParam<bool>(params, "cancel", false);
 		auto knockDown = mwse::lua::getOptionalParam<bool>(params, "knockDown", false);
 
 		const auto animData = this->getAnimationData();
 		if (!animData) {
+			return false;
+		}
+
+		if (cancel) {
+			// Attempt to cancel hit stun or knockdown.
+			if (actionData.animGroupStunEffect != 255) {
+				actionData.animGroupStunEffect = 255;
+				return true;
+			}
+			if (actionData.animStateAttack == AttackAnimationState::Knockdown) {
+				actionData.animStateAttack = AttackAnimationState::Ready;
+				return true;
+			}
 			return false;
 		}
 

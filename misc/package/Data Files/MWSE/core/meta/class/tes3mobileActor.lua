@@ -369,12 +369,15 @@ function tes3mobileActor:hasUsedPower(power) end
 --- @param params tes3mobileActor.hitStun.params? This table accepts the following values:
 --- 
 --- `knockDown`: boolean? — *Optional*. Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting.
+--- 
+--- `cancel`: boolean? — *Optional*. Cancels hit stun and knockdown when used on the same frame as the hit. For regular combat, it should be used in the events `damaged` or `damagedHandToHand`.
 --- @return boolean result No description yet available.
 function tes3mobileActor:hitStun(params) end
 
 ---Table parameter definitions for `tes3mobileActor.hitStun`.
 --- @class tes3mobileActor.hitStun.params
 --- @field knockDown boolean? *Optional*. Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting.
+--- @field cancel boolean? *Optional*. Cancels hit stun and knockdown when used on the same frame as the hit. For regular combat, it should be used in the events `damaged` or `damagedHandToHand`.
 
 --- Determines if the actor is currently being affected by a given alchemy, enchantment, or spell.
 --- @param object tes3alchemy|tes3enchantment|tes3spell The magic to check for.

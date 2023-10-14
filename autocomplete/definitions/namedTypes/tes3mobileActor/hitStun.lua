@@ -7,6 +7,7 @@ return {
 		optional = true,
 		tableParams = {
 			{ name = "knockDown", type = "boolean", optional = true, description = "Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting." },
+			{ name = "cancel", type = "boolean", optional = true, description = "Cancels hit stun and knockdown when used on the same frame as the hit. For regular combat, it should be used in the events `damaged` or `damagedHandToHand`." },
 		},
 	}},
 	valuetype = "boolean",
