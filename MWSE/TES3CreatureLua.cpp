@@ -59,6 +59,9 @@ namespace mwse::lua {
 			usertypeDefinition["flies"] = sol::property(&TES3::Creature::getFlies, &TES3::Creature::setFlies);
 			usertypeDefinition["walks"] = sol::property(&TES3::Creature::getWalks, &TES3::Creature::setWalks);
 
+			// Utility function bindings.
+			usertypeDefinition["createCopy"] = &TES3::Creature::createCopy_lua<TES3::Creature>;
+
 			// TODO: Deprecated. Remove before 2.1-stable.
 			usertypeDefinition["model"] = sol::property(&TES3::Creature::getModelPath, &TES3::Creature::setModelPath);
 		}
