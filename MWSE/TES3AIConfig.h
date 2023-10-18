@@ -13,8 +13,8 @@ namespace TES3 {
 		unsigned int merchantFlags; // 0x8
 		IteratedList<TravelDestination*> * travelDestinations; // 0xC
 
-		AIConfig() = delete;
-		~AIConfig() = delete;
+		AIConfig();
+		~AIConfig();
 
 		//
 		// Custom functions.

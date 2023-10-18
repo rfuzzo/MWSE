@@ -1347,6 +1347,19 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void toggleWaterShown() {
+		const auto dataHandler = DataHandler::get();
+		const auto waterRoot = dataHandler->waterRenderController->waterNode;
+
+		const auto wasShown = !waterRoot->getAppCulled();
+		if (wasShown) {
+			waterRoot->setAppCulled(true);
+		}
+		else {
+			waterRoot->setAppCulled(false);
+		}
+	}
+
 	void showContextAwareActionMenu(HWND hWndRenderWindow) {
 		auto menu = CreatePopupMenu();
 		if (menu == NULL) {
@@ -1384,11 +1397,13 @@ namespace se::cs::dialog::render_window {
 			TEST_FROM_REFERENCE_POSITION,
 			TEST_FROM_CAMERA_POSITION,
 			HIDE_LANDSCAPE,
+			HIDE_WATER,
 		};
 
 		/*
 		* Reserved hotkeys:
 		*   D: Hide/show landscape.
+		*   T: Hide/show water.
 		*   M: Toggle legacy object movement
 		*	H: Hide Selection
 		*	R: Restore Hidden References
@@ -1597,6 +1612,14 @@ namespace se::cs::dialog::render_window {
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
 		CheckMenuItem(menu, HIDE_LANDSCAPE, dataHandler->editorLandscapeRoot->getAppCulled() ? MFS_CHECKED : MFS_UNCHECKED);
 
+		menuItem.wID = HIDE_WATER;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = MFS_ENABLED;
+		menuItem.dwTypeData = (LPSTR)"Hide wa&ter";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, HIDE_WATER, dataHandler->waterRenderController->waterNode->getAppCulled() ? MFS_CHECKED : MFS_UNCHECKED);
+
 		menuItem.wID = RESERVED_NO_CALLBACK;
 		menuItem.fMask = MIIM_FTYPE | MIIM_ID;
 		menuItem.fType = MFT_SEPARATOR;
@@ -1717,6 +1740,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		case HIDE_LANDSCAPE:
 			toggleLandscapeShown();
+			break;
+		case HIDE_WATER:
+			toggleWaterShown();
 			break;
 		default:
 			log::stream << "Unknown render window context menu ID " << result << " used!" << std::endl;

@@ -1,8 +1,26 @@
 #include "TES3AIConfig.h"
 
 #include "TES3Class.h"
+#include "MemoryUtil.h"
 
 namespace TES3 {
+	AIConfig::AIConfig() {
+		hello = 30;
+		fight = 30;
+		flee = 30;
+		alarm = 0;
+		merchantFlags = 0;
+
+		travelDestinations = nullptr;
+	}
+
+	AIConfig::~AIConfig() {
+		if (travelDestinations) {
+			delete travelDestinations;
+			travelDestinations = nullptr;
+		}
+	}
+
 	bool AIConfig::tradesItemType(ObjectType::ObjectType objectType) const {
 		switch (objectType) {
 		case TES3::ObjectType::Alchemy:

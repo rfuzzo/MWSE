@@ -442,6 +442,7 @@ local vector = tes3vector3.new(x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
+| [tes3vector3](../types/tes3vector3.md) | number | [tes3vector3](../types/tes3vector3.md) | Standard vector addition. |
 | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | Standard vector addition. |
 
 ***
@@ -475,6 +476,7 @@ local vector = tes3vector3.new(x, y, z)
 
 | Left operand type | Right operand type | Result type | Description |
 | ----------------- | ------------------ | ----------- | ----------- |
+| [tes3vector3](../types/tes3vector3.md) | number | [tes3vector3](../types/tes3vector3.md) | Standard vector subtraction. |
 | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | [tes3vector3](../types/tes3vector3.md) | Standard vector subtraction. |
 
 ***
