@@ -5,7 +5,6 @@
 #include "WinUIUtil.h"
 
 namespace se::cs::dialog::landscape_edit_settings_window {
-
 	namespace LandscapeEditFlag {
 		enum LandscapeEditFlag : unsigned int {
 			ShowEditRadius = 0x1,
@@ -14,6 +13,12 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 			SoftenVertices = 0x8,
 		};
 	}
+
+	struct SelectedTextureInfo {
+		unsigned int width; // 0x0
+		unsigned int height; // 0x4
+		BITMAPINFO* bitmapInfo; // 0x8
+	};
 
 	using gLandscapeEditFlags = memory::ExternalGlobal<unsigned int, 0x6CE9C8>;
 
@@ -215,6 +220,28 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 		return PatchDialogProc_OverrideResult.value_or(vanillaResult);
 	}
 
+	void __fastcall PatchStretchLandscapePreviewTexture(SelectedTextureInfo* info, DWORD _EDX_, DRAWITEMSTRUCT* drawItem) {
+		using winui::GetRectHeight;
+		using winui::GetRectWidth;
+
+		const auto bitmapInfo = info->bitmapInfo;
+		if (bitmapInfo == nullptr) {
+			return;
+		}
+
+		// BLACKONWHITE won't work for us here.
+		SetStretchBltMode(drawItem->hDC, HALFTONE);
+		SetBrushOrgEx(drawItem->hDC, 0, 0, nullptr);
+
+		// Actually render our texture.
+		const auto rcItem = &drawItem->rcItem;
+		const auto ret = StretchDIBits(drawItem->hDC,
+			rcItem->left, rcItem->top, GetRectWidth(rcItem), GetRectHeight(rcItem),
+			0, 0, info->width, info->height,
+			bitmapInfo->bmiColors, bitmapInfo,
+			DIB_RGB_COLORS, SRCCOPY);
+	}
+
 	//
 	//
 	//
@@ -224,6 +251,9 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 		// Patch: Extend Render Window message handling.
 		genJumpEnforced(0x4036A7, 0x44D470, reinterpret_cast<DWORD>(PatchDialogProc));
+
+		// Patch: Fix rendering of textures in the terrain edit window.
+		genJumpEnforced(0x402D38, 0x475A80, reinterpret_cast<DWORD>(PatchStretchLandscapePreviewTexture));
 	}
 
 }
