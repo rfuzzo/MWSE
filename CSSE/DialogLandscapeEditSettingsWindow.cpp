@@ -220,6 +220,14 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 		return PatchDialogProc_OverrideResult.value_or(vanillaResult);
 	}
 
+	//
+	// Patch: Fix rendering of textures in the terrain edit window.
+	// 
+	// The CS by default uses the BLACKONWHITE bitmap stretching mode. For our textures this will just
+	// result in a black rectangle. We change that to use HALFTONE, to average blocks of pixels that
+	// are stretched down to fit the button render area.
+	//
+
 	void __fastcall PatchStretchLandscapePreviewTexture(SelectedTextureInfo* info, DWORD _EDX_, DRAWITEMSTRUCT* drawItem) {
 		using winui::GetRectHeight;
 		using winui::GetRectWidth;
