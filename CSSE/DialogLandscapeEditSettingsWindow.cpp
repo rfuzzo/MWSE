@@ -243,7 +243,7 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 		// Actually render our texture.
 		const auto rcItem = &drawItem->rcItem;
-		const auto ret = StretchDIBits(drawItem->hDC,
+		StretchDIBits(drawItem->hDC,
 			rcItem->left, rcItem->top, GetRectWidth(rcItem), GetRectHeight(rcItem),
 			0, 0, info->width, info->height,
 			bitmapInfo->bmiColors, bitmapInfo,
