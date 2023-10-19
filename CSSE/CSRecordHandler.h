@@ -37,21 +37,21 @@ namespace se::cs {
 		int unknown_0xC;
 		ModelLoader* modelLoader; // 0x10
 		GameSettingsContainer* gameSettingsHandler; // 0x14
-		NI::IteratedList<BaseObject*>* races; // 0x18
+		NI::IteratedList<Race*>* races; // 0x18
 		NI::IteratedList<LandTexture*>* landTextures; // 0x1C
-		NI::IteratedList<BaseObject*>* classes; // 0x20
-		NI::IteratedList<BaseObject*>* factions; // 0x24
+		NI::IteratedList<Class*>* classes; // 0x20
+		NI::IteratedList<Faction*>* factions; // 0x24
 		NI::IteratedList<Script*>* scripts; // 0x28
 		int unknown_0x2C;
 		int unknown_0x30;
 		int unknown_0x34;
 		NI::IteratedList<Dialogue*>* dialogues; // 0x38
-		NI::IteratedList<BaseObject*>* regions; // 0x3C
+		NI::IteratedList<Region*>* regions; // 0x3C
 		NI::IteratedList<BaseObject*>* birthsigns; // 0x40
 		NI::IteratedList<BaseObject*>* startScripts; // 0x44
 		Skill_dummy skills[27]; // 0x48
 		MagicEffect_dummy magicEffects[143]; // 0x558
-		StlList<BaseObject*>* lights; // 0x9B0C
+		StlList<Light*>* lights; // 0x9B0C
 		Substructure_9B10 unknown_0x9B10;
 		int unknown_0xA470;
 		int unknown_0xA474;
