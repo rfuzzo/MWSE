@@ -30,6 +30,8 @@
 #include "DialogSearchAndReplaceWindow.h"
 #include "DialogTextSearchWindow.h"
 
+#include "TextureRenderer.h"
+
 #include "MemoryUtil.h"
 #include "PathUtil.h"
 #include "StringUtil.h"
@@ -535,6 +537,7 @@ namespace se::cs {
 		dialog::script_list_window::installPatches();
 		dialog::search_and_replace_window::installPatches();
 		dialog::text_search_window::installPatches();
+		TextureRenderer::installPatches();
 	}
 
 	void CSSE::UpdateCurrentDirectory() const {
