@@ -131,12 +131,22 @@ namespace se::cs::dialog::dialogue_window {
 		return true;
 	}
 
+	void OnCurrentTextEditChanged(HWND hWnd) {
+		using namespace se::cs::winui;
+		auto hDlgCurrentTextEdit = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_EDIT);
+		auto textCharCount = Edit_GetTextLength(hDlgCurrentTextEdit);
+
+		SetDlgItemInt(hWnd, CONTROL_ID_CURRENT_TEXT_CHAR_COUNT, textCharCount, FALSE);
+	}
+
 	void resumeRenderingAndRepaint(HWND parent, DWORD childId) {
+		// Update the current text count.
+		OnCurrentTextEditChanged(parent);
+
 		auto child = GetDlgItem(parent, childId);
 		SendMessageA(child, WM_SETREDRAW, TRUE, NULL);
 		RedrawWindow(child, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
 	}
-
 
 	void restoreInfoColumnWidths(HWND hWnd) {
 		const auto infoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
@@ -486,15 +496,6 @@ namespace se::cs::dialog::dialogue_window {
 	void PatchDialogProc_BeforeDestroy(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Save column info.
 		saveInfoColumnWidths(hWnd);
-	}
-
-
-	void OnCurrentTextEditChanged(HWND hWnd) {
-		using namespace se::cs::winui;
-		auto hDlgCurrentTextEdit = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_EDIT);
-		auto textCharCount = Edit_GetTextLength(hDlgCurrentTextEdit);
-
-		SetDlgItemInt(hWnd, CONTROL_ID_CURRENT_TEXT_CHAR_COUNT, textCharCount, FALSE);
 	}
 
 	constexpr auto MIN_WIDTH = 1113u;
@@ -1129,7 +1130,6 @@ namespace se::cs::dialog::dialogue_window {
 		switch (message->idFrom) {
 		case CONTROL_ID_INFO_LIST:
 			PatchDialogProc_BeforeNotify_InfoList(hWnd, msg, wParam, message);
-			OnCurrentTextEditChanged(hWnd);
 			break;
 		}
 	}
