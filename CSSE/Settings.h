@@ -153,6 +153,22 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} object_window;
 
+		struct LandscapeWindowSettings {
+			int x_position = 0;
+			int y_position = 71;
+
+			WindowSize size = { 436, 483 };
+
+			ColumnSettings column_id = { 175u };
+			ColumnSettings column_used = { 37u };
+			ColumnSettings column_filename{ 147u };
+
+			bool show_preview_enabled = false;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		} landscape_window;
+
 		struct ColorTheme {
 			std::array<unsigned char, 3> highlight_deleted_object_color = { 255, 235, 235 };
 			std::array<unsigned char, 3> highlight_modified_from_master_color = { 235, 255, 235 };
