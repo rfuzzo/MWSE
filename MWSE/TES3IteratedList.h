@@ -173,7 +173,11 @@ namespace TES3 {
 #endif
 
 		IteratedList() {
+#if !defined(MWSE_NO_CUSTOM_ALLOC) || MWSE_NO_CUSTOM_ALLOC == 0
+			virtualTable = reinterpret_cast<VirtualTable*>(0x7477AC);
+#else
 			virtualTable = nullptr;
+#endif
 			count = 0;
 			head = nullptr;
 			tail = nullptr;
@@ -183,7 +187,11 @@ namespace TES3 {
 		IteratedList(const IteratedList& other) = delete;
 		IteratedList& operator=(const IteratedList&) = delete;
 
-		~IteratedList() { virtualTable->destructor(this, false); }
+		~IteratedList() {
+			if (virtualTable) {
+				virtualTable->destructor(this, false);
+			}
+		}
 
 		reference operator[](size_type index) const { return *(begin() + index); }
 

@@ -305,6 +305,41 @@ namespace se::cs {
 	}
 
 	//
+	// Landscape Edit Settings Window
+	//
+
+	void Settings_t::LandscapeWindowSettings::from_toml(const toml::value& v) {
+		x_position = toml::find_or(v, "x_position", x_position);
+		y_position = toml::find_or(v, "y_position", y_position);
+
+		size = toml::find_or(v, "size", size);
+
+		column_id = toml::find_or(v, "column_id", column_id);
+		column_used = toml::find_or(v, "column_used", column_used);
+		column_filename = toml::find_or(v, "column_filename", column_filename);
+
+		show_preview_enabled = toml::find_or(v, "show_preview_enabled", show_preview_enabled);
+	}
+
+	toml::value Settings_t::LandscapeWindowSettings::into_toml() const {
+		return toml::value(
+			{
+
+				{ "x_position", x_position },
+				{ "y_position", y_position },
+
+				{ "size", size },
+
+				{ "column_id", column_id },
+				{ "column_used", column_used },
+				{ "column_filename", column_filename },
+
+				{ "show_preview_enabled", show_preview_enabled},
+			}
+		);
+	}
+
+	//
 	// Color theme
 	// 
 
@@ -488,6 +523,7 @@ namespace se::cs {
 		dialogue_window = toml::find_or(v, "dialogue_window", dialogue_window);
 		object_window = toml::find_or(v, "object_window", object_window);
 		render_window = toml::find_or(v, "render_window", render_window);
+		landscape_window = toml::find_or(v, "landscape_window", landscape_window);
 		color_theme = toml::find_or(v, "color_theme", color_theme);
 		quickstart = toml::find_or(v, "quickstart", quickstart);
 		script_editor = toml::find_or(v, "script_editor", script_editor);
@@ -505,6 +541,7 @@ namespace se::cs {
 				{ "dialogue_window", dialogue_window },
 				{ "object_window", object_window },
 				{ "render_window", render_window },
+				{ "landscape_window", landscape_window},
 				{ "color_theme", color_theme },
 				{ "quickstart", quickstart },
 				{ "script_editor", script_editor },
