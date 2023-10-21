@@ -171,7 +171,7 @@ local converted = mwse.iconv(languageCode, utf8string)
 
 **Parameters**:
 
-* `languageCode` (integer): Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
+* `languageCode` ([tes3.languageCode](../references/language-codes.md)): Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
 * `utf8string` (string): The string to convert
 
 **Returns**:
@@ -255,7 +255,7 @@ local result = mwse.longToString(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` ([tes3.objectType](../references/object-types.md), number)
 
 **Returns**:
 
