@@ -140,7 +140,7 @@ The root of the scene graph on which the next picking operation will be performe
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
