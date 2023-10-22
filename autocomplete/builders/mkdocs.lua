@@ -23,6 +23,7 @@ local typeLinks = {
 	["ni.animCycleType"] = "[ni.animCycleType](../references/ni/animation-cycle-types.md)",
 	["ni.animType"] = "[ni.animType](../references/ni/animation-types.md)",
 	["ni.cameraClearFlags"] = "[ni.cameraClearFlags](../references/ni/camera-clear-flags.md)",
+	["ni.eulerRotKeyOrder"] = "[ni.eulerRotKeyOrder](../references/ni/euler-rotation-key-orders.md)",
 	["ni.lookAtControllerAxis"] = "[ni.lookAtControllerAxis](../references/ni/look-at-controller-axes.md)",
 	["ni.pickIntersectType"] = "[ni.pickIntersectType](../references/ni/pick-intersection-types.md)",
 	["ni.textureFormatPrefsAlphaFormat"] = "[ni.textureFormatPrefsAlphaFormat](../references/ni/texture-format-preference-alpha-formats.md)",
@@ -104,21 +105,33 @@ local function getTypeLink(type)
 	end
 
 	local valueType = type:match("[%w%.]+")
-	local namespace, field = type:match("([_%a][_%w]+)%.(.*)")
+	local isArray = type:endswith("[]")
+	local namespace, field = type:match("([_%a][_%w]+)%.(.*)") --[[@as string]]
+	if isArray then
+		-- Exclude the ending square brackets [].
+		namespace, field = type:sub(1, -3):match("([_%a][_%w]+)%.(.*)") --[[@as string]]
+	end
 	local enums = common.getEnumerationsMap(namespace)
 	local isEnum = enums and enums[field]
 
 	if classes[valueType] then
-		local isArray = type:endswith("[]")
 		typeLinks[type] = string.format("[%s](../types/%s.md)%s", valueType, valueType, isArray and "[]" or "")
 	elseif isEnum then
+		local enumName = namespace .. "." .. field
+		if isArray then
+			local cached = typeLinks[enumName]
+			if cached then
+				typeLinks[type] = cached .. "[]"
+				return typeLinks[type]
+			end
+		end
 		local filename = splitCamelCase(field)
 		local basepath = "../references/"
 		-- Reference pages for enumeration tables in tes3 namespace are one folder up
 		if namespace ~= "tes3" then
 			basepath = basepath .. namespace .. "/"
 		end
-		typeLinks[type] = string.format("[%s](%s%ss.md)", type, basepath, filename)
+		typeLinks[type] = string.format("[%s](%s%ss.md)%s", enumName, basepath, filename, isArray and "[]" or "")
 	else
 		-- Cache the types without any entry in the docs (e.g. primitive Lua types, string constants, etc.)
 		typeLinks[type] = type

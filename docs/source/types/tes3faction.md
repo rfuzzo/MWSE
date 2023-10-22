@@ -18,7 +18,7 @@ This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 
 **Returns**:
 
-* `result` (table&lt;integer, [tes3.attribute](../references/attributes.md)&gt;)
+* `result` ([tes3.attribute](../references/attributes.md)[])
 
 ***
 
@@ -194,7 +194,7 @@ The player's current reputation in the faction.
 
 **Returns**:
 
-* `result` (table&lt;integer, [tes3.skill](../references/skills.md)&gt;)
+* `result` ([tes3.skill](../references/skills.md)[])
 
 ***
 

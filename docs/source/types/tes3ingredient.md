@@ -73,7 +73,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` (table&lt;integer, [tes3.effect](../references/magic-effects.md)&gt;)
+* `result` ([tes3.effect](../references/magic-effects.md)[])
 
 ***
 
