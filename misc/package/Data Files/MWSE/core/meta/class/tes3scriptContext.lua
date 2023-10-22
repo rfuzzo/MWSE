@@ -2,23 +2,15 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A script context object, which allows variables to be get/set using the variable name.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3scriptContext).
 --- @class tes3scriptContext
 --- @operator len: number
+--- @field [string] number|nil *Read-only*. This allows indexing a local script variable by it's name. The variable's value can be read or modified this way. There is an example at the top of the page on doing this.
 tes3scriptContext = {}
 
 --- This method fetches all of the script's variables as a table.
---- @return table<string, table> results The table with all of script's variable names as keys.
---- 
---- Each entry has following fields:
---- 
----  1. type  - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
----  2. index - the order of occurance of the variable in the script, starting from `0`
----  3. value - this can have `nil` value
---- 
+--- @return table<string, tes3scriptVariableData> results A table with all of the script's variable names as keys.
 function tes3scriptContext:getVariableData() end
 

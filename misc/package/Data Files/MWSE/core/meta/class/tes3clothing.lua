@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A clothing game object.
 --- @class tes3clothing : tes3item, tes3physicalObject, tes3object, tes3baseObject
 --- @field enchantCapacity number The object's enchantment capacity.
@@ -14,7 +12,7 @@
 --- @field name string The player-facing name for the object.
 --- @field parts tes3wearablePart[] An array-style table of the [`tes3wearablePart`](https://mwse.github.io/MWSE/types/tes3wearablePart/) data on the object.
 --- @field script tes3script The script that runs on the object.
---- @field slot number The slot used by the clothing object. Maps to values in [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/) namespace.
+--- @field slot tes3.clothingSlot The slot used by the clothing object. Maps to values in [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/) namespace.
 --- @field slotName string The name of the slot used by the clothing object.
 --- @field value number The value of the object. For this object type, its maximum value is 65535. Larger numbers will overflow.
 --- @field weight number The weight of the object.

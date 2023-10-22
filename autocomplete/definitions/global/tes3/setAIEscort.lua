@@ -7,8 +7,8 @@ return {
 		tableParams = {
 			{ name = "reference", type = "tes3mobileActor|tes3reference", description = "The escorting actor." },
 			{ name = "target", type = "tes3reference|tes3mobileActor", description = "The actor being escorted." },
-			{ name = "destination", type = "tes3vector3|table" },
-			{ name = "duration", type = "number", optional = true, default = 0, description = "How long the escorter will do the escorting, in hours." },
+			{ name = "destination", type = "tes3vector3|number[]" },
+			{ name = "duration", type = "integer", optional = true, default = 0, description = "How long the escorter will do the escorting, in hours." },
 			{ name = "cell", type = "tes3cell|string", optional = true },
 			{ name = "reset", type = "boolean", optional = true, default = true },
 		},

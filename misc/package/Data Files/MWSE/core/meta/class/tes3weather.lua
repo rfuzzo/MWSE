@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that contains base weather information shared by inheriting weather structures.
 --- @class tes3weather
 --- @field ambientDayColor tes3vector3 *Read-only*. The weather's ambient day color. The values can range from 0 to 1.
@@ -22,7 +20,7 @@
 --- @field fogSunriseColor tes3vector3 *Read-only*. The weather's fog sunrise color. The values can range from 0 to 1.
 --- @field fogSunsetColor tes3vector3 *Read-only*. The weather's fog sunset color. The values can range from 0 to 1.
 --- @field glareView number The weather's glare view.
---- @field index number *Read-only*. The weather's index ID. Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @field index tes3.weather *Read-only*. The weather's index ID. Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 --- @field landFogDayDepth number The weather's land fog day depth value.
 --- @field landFogNightDepth number The weather's land fog night depth value.
 --- @field name string *Read-only*. The weather's user-friendly name, hardcoded in English to match the INI settings name. These values can be `"Ashstorm"`, `"Blight"`, `"Blizzard"`, `"Clear"`, `"Cloudy"`, `"Foggy"`, `"Overcast"`, `"Rain"`, `"Snow"`, or `"Thunderstorm"` as appropriate.
@@ -38,5 +36,3 @@
 --- @field transitionDelta number The weather's transition delta.
 --- @field underwaterSoundState boolean *Read-only*. The weather's underwater sound state flag. This value will be `true`, while the player is underwater.
 --- @field windSpeed number The weather's wind speed.
-tes3weather = {}
-

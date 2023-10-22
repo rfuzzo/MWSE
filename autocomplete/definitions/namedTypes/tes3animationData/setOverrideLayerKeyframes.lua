@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "kfData", type = "tes3keyframeDefinition", description = "" },
 	},
-	returns = { name = "success", type = "boolean" }
+	returns = {{ name = "success", type = "boolean" }}
 }

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A mobile object for a the player.
 --- @class tes3mobilePlayer : tes3mobileNPC, tes3mobileActor, tes3mobileObject
 --- @field alwaysRun boolean Toggle flag for if the player should always run.
@@ -38,8 +36,8 @@
 --- @field restHoursRemaining integer How many hours are left while resting.
 --- @field skillProgress number[] *Read-only*. Array-style table access to skill progress for each of the 27 skills.
 --- 
---- !!! attention
---- 	The first index in the array is 1, but skill indices in tes3.skill table start from 0.
+--- !!! warning
+--- 	The first index in the array is 1, but skill indices in `tes3.skill` table start from 0.
 --- @field sleeping boolean Toggle flag for if the player is currently sleeping.
 --- @field telekinesis number Direct access to the player's telekinesis effect attribute.
 --- @field traveling boolean Toggle flag for if the player is currently travelling.
@@ -51,21 +49,21 @@
 tes3mobilePlayer = {}
 
 --- Exercises a skill, providing experience in it. Invokes `exerciseSkill` event.
---- @param skill integer The skill index to give experience to. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
+--- @param skill tes3.skill The skill index to give experience to. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 --- @param progress number The amount of experience to grant.
 function tes3mobilePlayer:exerciseSkill(skill, progress) end
 
 --- Returns the total progress needed to progress the skill to the next level. The actual amount of progress needed is the floor of the value returned by this function.
---- @param skill integer The skill index to check. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
+--- @param skill tes3.skill The skill index to check. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 --- @return number progressNeeded No description yet available.
 function tes3mobilePlayer:getSkillProgressRequirement(skill) end
 
 --- Checks to see if a skill is ready to be leveled up, and performs any levelup logic.
---- @param skill integer The skill index to check for leveling. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
+--- @param skill tes3.skill The skill index to check for leveling. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 function tes3mobilePlayer:progressSkillLevelIfRequirementsMet(skill) end
 
 --- Increments the player's skill to the next level, while respecting all level up mechanics.
---- @param skill integer The skill index to increase. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
+--- @param skill tes3.skill The skill index to increase. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 --- @return integer newLevel No description yet available.
 function tes3mobilePlayer:progressSkillToNextLevel(skill) end
 

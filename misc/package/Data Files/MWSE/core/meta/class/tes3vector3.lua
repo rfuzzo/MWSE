@@ -2,17 +2,17 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A simple trio of floating-point numbers.
 --- @class tes3vector3
+--- @operator add(number): tes3vector3
 --- @operator add(tes3vector3): tes3vector3
 --- @operator div(number): tes3vector3
 --- @operator len: number
 --- @operator mul(tes3vector3): tes3vector3
 --- @operator mul(number): tes3vector3
+--- @operator sub(number): tes3vector3
 --- @operator sub(tes3vector3): tes3vector3
---- @field angle number The angle between the vector and the water plane.
+--- @operator unm: tes3vector3
 --- @field b number The third value in the vector. An alias for `z`.
 --- @field g number The second value in the vector. An alias for `y`.
 --- @field r number The first value in the vector. An alias for `x`.
@@ -27,6 +27,11 @@ tes3vector3 = {}
 --- @param z number? *Default*: `0`. No description yet available.
 --- @return tes3vector3 vector No description yet available.
 function tes3vector3.new(x, y, z) end
+
+--- The returns the angle between the two vectors in radians.
+--- @param vec tes3vector3 No description yet available.
+--- @return number result No description yet available.
+function tes3vector3:angle(vec) end
 
 --- Creates a copy of the vector.
 --- @return tes3vector3 result No description yet available.
@@ -43,6 +48,8 @@ function tes3vector3:cross(vec) end
 function tes3vector3:distance(vec) end
 
 --- Calculates the dot product with another vector.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3vector3/#dot).
 --- @param vec tes3vector3 No description yet available.
 --- @return number result No description yet available.
 function tes3vector3:dot(vec) end
@@ -87,4 +94,8 @@ function tes3vector3:outerProduct(vec) end
 --- Converts the vector to `niColor` object.
 --- @return niColor result No description yet available.
 function tes3vector3:toColor() end
+
+--- Converts the vector to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3vector3:__tostring() end
 

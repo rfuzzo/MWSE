@@ -66,6 +66,9 @@ namespace mwse::lua {
 			usertypeDefinition["female"] = sol::property(&TES3::NPC::getIsFemale, &TES3::NPC::setIsFemale);
 			usertypeDefinition["autoCalc"] = sol::property(&TES3::NPC::getAutoCalc, &TES3::NPC::setAutoCalc);
 
+			// Utility function bindings.
+			//usertypeDefinition["createCopy"] = &TES3::NPC::createCopy_lua<TES3::NPC>; // NPC serialization does not support saving new NPCs at the moment.
+
 			// TODO: Deprecated. Remove before 2.1-stable.
 			usertypeDefinition["model"] = sol::property(&TES3::NPC::getModelPath, &TES3::NPC::setModelPath);
 			usertypeDefinition["essential"] = sol::property(&TES3::NPC::getIsEssential_legacy, &TES3::NPC::setIsEssential_legacy);

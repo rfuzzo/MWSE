@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is raised when an enchantment price is being determined.",
+	related = { "calcBarterPrice", "calcEnchantmentPrice", "calcRepairPrice", "calcSpellmakingPrice", "calcSpellPrice", "calcTrainingPrice", "calcTravelPrice" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",
@@ -47,7 +48,7 @@ return {
 			description = "The soul contained in the soul gem.",
 		},
 		["castType"] = {
-			type = "number",
+			type = "tes3.enchantmentType",
 			readOnly = true,
 			description = "The enchantment cast type. Maps to `tes3.enchantmentType.*`.",
 		},

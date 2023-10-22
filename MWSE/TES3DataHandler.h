@@ -177,6 +177,8 @@ namespace TES3 {
 
 		const char* getBaseAnimationFile(int isFemale = 0, int firstPerson = 0) const;
 
+		GameFile* getGameFile(const char* name);
+
 		//
 		// Custom functions.
 		//
@@ -286,7 +288,7 @@ namespace TES3 {
 		char unknown_0xB4E6;
 		char unknown_0xB4E7;
 		HashMap<const char*, NI::Pointer<NI::SourceTexture>>* textures; // 0xB4E8
-		void * waterController;
+		WaterController* waterController;
 		int unknown_0xB4F0;
 		int unknown_0xB4F4;
 		char unknown_0xB4F8;
@@ -354,6 +356,7 @@ namespace TES3 {
 		//
 
 		Vector3 getLastExteriorPosition();
+		float getLowestZInCurrentCell() const;
 
 		void addSound(Sound* sound, Reference* reference = nullptr, int playbackFlags = 0, unsigned char volume = 250, float pitch = 1.0f, bool isVoiceover = false, int unknown = 0);
 		Sound* addSoundById(const char* soundId, Reference* reference = 0, int playbackFlags = 0, unsigned char volume = 250, float pitch = 1.0f, int unknown = 0);
@@ -383,7 +386,8 @@ namespace TES3 {
 		// Debug values.
 		//
 
-		static const char* currentlyLoadingMesh;
+		static std::unordered_map<DWORD, std::string_view> currentlyLoadingMeshes;
+		static std::recursive_mutex currentlyLoadingMeshesMutex;
 
 	};
 	static_assert(sizeof(DataHandler) == 0xB558, "TES3::DataHandler failed size validation");

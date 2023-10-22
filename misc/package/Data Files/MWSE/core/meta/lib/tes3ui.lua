@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The tes3ui library provides access to manipulating the game's GUI.
 --- @class tes3uilib
 tes3ui = {}
@@ -11,7 +9,7 @@ tes3ui = {}
 --- Sends all text input to the specified element.  Calling this function with a nil argument will release text input and allow keybinds to work. Suppresses most keybinds while active, except the Journal open/close keybind (it's up to the individual menu implementation).
 --- 
 --- Only one element can have control of input, and there is no automatic restoration of control if one element takes control from another. Be careful of conflicts with other users of this function.
---- @param element tes3uiElement? *Optional*. No description yet available.
+--- @param element tes3uiElement|nil The element to focus, or `nil` to clear focus.
 function tes3ui.acquireTextInput(element) end
 
 --- When used in a mouse event, causes the element to capture further mouse events even when the cursor goes outside the element. Setting mouse capture should always be accompanied by releasing it on a complementary event. This is commonly used for dragging, so that it can continue even if the mouse moves slightly outside the element.
@@ -91,7 +89,7 @@ function tes3ui.createResponseText(params) end
 --- @field type integer? *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
 --- @field index integer? *Optional*. The answer index for the response. Only used for `choice` responses.
 
---- Creates a tooltip menu, which can be an empty menu, an item tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.
+--- Creates a tooltip menu, which can be an empty menu, an item tooltip, a skill tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uicreatetooltipmenu).
 --- @param params tes3ui.createTooltipMenu.params? This table accepts the following values:
@@ -101,6 +99,8 @@ function tes3ui.createResponseText(params) end
 --- `itemData`: tes3itemData? — *Optional*. The item data for the item.
 --- 
 --- `spell`: tes3spell? — *Optional*. The spell to create a tooltip for.
+--- 
+--- `skill`: tes3skill? — *Optional*. The skill to create a tooltip for.
 --- @return tes3uiElement result No description yet available.
 function tes3ui.createTooltipMenu(params) end
 
@@ -109,6 +109,7 @@ function tes3ui.createTooltipMenu(params) end
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil *Optional*. The item to create a tooltip for. If not specified, the tooltip will be empty.
 --- @field itemData tes3itemData? *Optional*. The item data for the item.
 --- @field spell tes3spell? *Optional*. The spell to create a tooltip for.
+--- @field skill tes3skill? *Optional*. The skill to create a tooltip for.
 
 --- Requests menu mode be activated on a menu with a given id.
 --- @param id string|number No description yet available.
@@ -142,15 +143,18 @@ function tes3ui.getMenuOnTop() end
 
 --- Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
 --- 
---- ![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png){ loading = lazy }
+--- ![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png)
+--- 
 --- *Above: All the palette colors in-game with default settings. Note that some entries are entirely black. In order of appearance, those are backgroundColor, blackColor, and journalTopicColor.*
 --- 
---- @param name string The name of the palette color. Maps to values in [`tes3.palette`](https://mwse.github.io/MWSE/references/palettes/) enumeration.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uigetpalette).
+--- @param name tes3.palette The name of the palette color. Maps to values in [`tes3.palette`](https://mwse.github.io/MWSE/references/palettes/) enumeration.
 --- @return number[] palette An array containing the RGB color values, in the range [0.0, 1.0].
 function tes3ui.getPalette(name) end
 
 --- Returns the mobile actor currently providing services, or the actor the player is talking to.
---- @return tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer result No description yet available.
+--- @return tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer result No description yet available.
 function tes3ui.getServiceActor() end
 
 --- Returns the UI scale, set in MGE.
@@ -200,7 +204,7 @@ function tes3ui.refreshTooltip() end
 --- 
 --- The registry namespace is shared between Property and UI_ID. It is advisable to use a namespace prefix to avoid collisions with other mods.
 --- @param s string No description yet available.
---- @return number result No description yet available.
+--- @return integer result No description yet available.
 function tes3ui.registerID(s) end
 
 --- Registers a property name, returning a Property. Once a property is registered, this function always returns the same Property.
@@ -214,7 +218,7 @@ function tes3ui.registerProperty(s) end
 --- @param reference tes3reference|nil No description yet available.
 function tes3ui.setConsoleReference(reference) end
 
---- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
+--- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/general/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
 --- @param text string No description yet available.
 function tes3ui.showBookMenu(text) end
 
@@ -318,13 +322,53 @@ function tes3ui.showInventorySelectMenu(params) end
 --- @return boolean wasShown No description yet available.
 function tes3ui.showJournal() end
 
+--- Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
+--- @param params tes3ui.showMessageMenu.params This table accepts the following values:
+--- 
+--- `id`: string? — *Default*: `MenuMessage`. The menu ID of the message menu.
+--- 
+--- `buttons`: tes3ui.showMessageMenu.params.button[] — **Required** The list of buttons.
+--- 
+--- `callbackParams`: table? — *Optional*. The table of parameters to pass to the callback functions.
+--- 
+--- `cancels`: boolean? — *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+--- 
+--- `cancelText`: string? — *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+--- 
+--- `cancelCallback`: function? — *Optional*. The function to call when the user clicks the cancel button.
+--- 
+--- `header`: string|nil|fun(): string — *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- 
+--- `message`: string|nil|fun(): string — *Optional*. The message at the top of the messagebox. Can also be a function that returns a string.
+--- 
+--- `customBlock`: nil|fun(parent: tes3uiElement) — *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
+--- 
+--- `page`: integer? — *Default*: `1`. No description yet available.
+--- 
+--- `pageSize`: integer? — *Default*: `30`. No description yet available.
+function tes3ui.showMessageMenu(params) end
+
+---Table parameter definitions for `tes3ui.showMessageMenu`.
+--- @class tes3ui.showMessageMenu.params
+--- @field id string? *Default*: `MenuMessage`. The menu ID of the message menu.
+--- @field buttons tes3ui.showMessageMenu.params.button[] **Required** The list of buttons.
+--- @field callbackParams table? *Optional*. The table of parameters to pass to the callback functions.
+--- @field cancels boolean? *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+--- @field cancelText string? *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+--- @field cancelCallback function? *Optional*. The function to call when the user clicks the cancel button.
+--- @field header string|nil|fun(): string *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- @field message string|nil|fun(): string *Optional*. The message at the top of the messagebox. Can also be a function that returns a string.
+--- @field customBlock nil|fun(parent: tes3uiElement) *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
+--- @field page integer? *Default*: `1`. No description yet available.
+--- @field pageSize integer? *Default*: `30`. No description yet available.
+
 --- Creates a new notify menu with a formatted string. A notify menu is a toast-style display that shows at the bottom of the screen. It will expire after an amount of time, determined by the length of the message and the `fMessageTimePerChar` GMST.
 --- @param string string The message to display. If it supports formatting, additional arguments are used.
 --- @param ... any? Optional values to feed to formatting found in the first parameter.
 --- @return tes3uiElement menu The notify menu created.
 function tes3ui.showNotifyMenu(string, ...) end
 
---- Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
+--- Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/general/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
 --- @param text string No description yet available.
 function tes3ui.showScrollMenu(text) end
 

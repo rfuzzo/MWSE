@@ -23,7 +23,7 @@ namespace TES3 {
 		Knockdown = 0xE,
 		KnockedOut = 0xF,
 		PickingProbing = 0x10,
-		Unknown_0x11 = 0x11,
+		Wait = 0x11,
 		Dying = 0x12,
 		Dead = 0x13,
 	};
@@ -45,10 +45,10 @@ namespace TES3 {
 		float attackSwing; // 0x4
 		float swingTimer; // 0x8
 		float physicalDamage; // 0xC
-		signed char aiBehaviourState; // 0x10
+		unsigned char aiBehaviourState; // 0x10
 		AttackAnimationState animStateAttack; // 0x11
-		char blockingState; // 0x12
-		unsigned char maybe_animGroupKnockdown; // 0x13
+		unsigned char blockingState; // 0x12
+		unsigned char animGroupStunEffect; // 0x13
 		PhysicalAttackType physicalAttackType; // 0x14
 		unsigned char currentAnimLayer; // 0x15
 		unsigned char currentAnimGroup; // 0x16

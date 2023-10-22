@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Provides various OS-specific functions.
 --- @class oslib
 os = {}
@@ -35,7 +33,11 @@ function os.execute(command) end
 --- @return string|nil result No description yet available.
 function os.getClipboardText() end
 
---- Opens the given `url` in the default browser. This has an advantage over using `os.execute("show https://my.url")` in that it does not create a command prompt window.
+--- Returns the command line array for the currently execution. This almost always has one value, which is the (potentially relative) path to Morrowind.exe
+--- @return string[] commandLine An array of strings that reprents the command line.
+function os.getCommandLine() end
+
+--- Opens the given `url` in the default browser. This has an advantage over using `os.execute("start https://my.url")` in that it does not create a command prompt window.
 --- @param url string The URL to open.
 function os.openURL(url) end
 

@@ -2,13 +2,22 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Wander AI package causing an actor to move around at random. Actors will choose points to walk to based on the path grid of the cell they are in.
 --- 
---- 	Idle nodes represent the percentage chance the actor will stand still and perform the particular idle animation. Each idle is checked, and the one that passes with the highest roll is played. If no Idle passes the random roll, the actor will move (walk)
+--- Idle nodes represent the percentage chance the actor will stand still and perform the particular idle animation. Each idle is checked, and the one that passes with the highest roll is played. If no Idle passes the random roll, the actor will move (walk).
+--- 
 --- @class tes3aiPackageWander : tes3aiPackage
 --- @field activationTarget tes3reference 
 --- @field idles tes3aiPackageWanderIdleNode[] *Read-only*. This is a table with chances that the actor will play corresponding idle animation.
-tes3aiPackageWander = {}
-
+--- 
+--- Index | Animation description
+--- ----- | -------------------------------------------------
+--- 1     | Looking around
+--- 2     | Looking behind
+--- 3     | Scratching head and then shaking it
+--- 4     | Shifting clothing or armor on shoulder
+--- 5     | Yawn, strech, look around
+--- 6     | Looks at fingers and then looks around furtively
+--- 7     | Puts right fist above heart and bows head
+--- 8     | Reaches for the weapon
+--- 

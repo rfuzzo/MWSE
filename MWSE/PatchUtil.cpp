@@ -5,6 +5,8 @@
 #include "Log.h"
 
 #include "TES3Actor.h"
+#include "TES3ActorAnimationController.h"
+#include "TES3AudioController.h"
 #include "TES3BodyPartManager.h"
 #include "TES3Cell.h"
 #include "TES3Class.h"
@@ -21,13 +23,16 @@
 #include "TES3MobManager.h"
 #include "TES3Reference.h"
 #include "TES3Script.h"
+#include "TES3Sound.h"
 #include "TES3UIElement.h"
 #include "TES3UIInventoryTile.h"
 #include "TES3VFXManager.h"
 #include "TES3WorldController.h"
 
+#include "NICollisionSwitch.h"
 #include "NIFlipController.h"
 #include "NILinesData.h"
+#include "NISortAdjustNode.h"
 #include "NIUVController.h"
 
 #include "BitUtil.h"
@@ -43,6 +48,47 @@
 #include "CodePatchUtil.h"
 
 namespace mwse::patch {
+
+#ifndef _DEBUG
+	// Release builds.
+	constexpr auto INSTALL_MINIDUMP_HOOK = true;
+#else
+	// Debug builds.
+	constexpr auto INSTALL_MINIDUMP_HOOK = false;
+#endif
+
+	const char* SafeGetObjectId(const TES3::BaseObject* object) {
+		__try {
+			return object->getObjectID();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
+			return nullptr;
+		}
+	}
+
+	const char* SafeGetSourceFile(const TES3::BaseObject* object) {
+		__try {
+			return object->getSourceFilename();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
+			return nullptr;
+		}
+	}
+
+	template <typename T>
+	void safePrintObjectToLog(const char* title, const T* object) {
+		if (object) {
+			auto id = SafeGetObjectId(object);
+			auto source = SafeGetSourceFile(object);
+			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
+			if (id) {
+				log::prettyDump(object);
+			}
+		}
+		else {
+			log::getLog() << "  " << title << ": nullptr" << std::endl;
+		}
+	}
 
 	//
 	// Patch: Enable
@@ -98,12 +144,12 @@ namespace mwse::patch {
 		auto athletics = &TES3::DataHandler::get()->nonDynamicData->skills[TES3::SkillID::Athletics];
 
 		// If we're running, use the first progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Running) {
+		if (mobilePlayer->getMovementFlagRunning()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[0] * worldController->deltaTime);
 		}
 
 		// If we're swimming, use the second progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Swimming) {
+		if (mobilePlayer->getMovementFlagSwimming()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[1] * worldController->deltaTime);
 		}
 	}
@@ -642,6 +688,200 @@ namespace mwse::patch {
 	const size_t PatchLoadActiveMagicEffect_size = 0x32;
 
 	//
+	// Patch: Fix crash in NPC flee logic when trying to pick a random node from a pathgrid with 0 nodes.
+	// 
+
+	TES3::PathGrid* __fastcall PatchCellGetPathGridWithNodes(TES3::Cell* cell) {
+		auto pathGrid = cell->pathGrid;
+		if (pathGrid && pathGrid->nodeCount == 0) {
+			return nullptr;
+		}
+		return pathGrid;
+	}
+
+	//
+	// Patch: UI element image mirroring on negative image scale.
+	// 
+
+	// Mirror image texcoords with negative image scale.
+	void __cdecl PatchUIElementTexcoordWrite(TES3::UI::Element* element, TES3::Vector2* texCoords) {
+		float left = 0.0f, top = 0.0f, right = 1.0f, bottom = 1.0f;
+
+		if (element->imageScaleX < 0) {
+			std::swap(left, right);
+		}
+		if (element->imageScaleY < 0) {
+			std::swap(top, bottom);
+		}
+		texCoords[0].x = left;
+		texCoords[0].y = top;
+		texCoords[1].x = left;
+		texCoords[1].y = bottom;
+		texCoords[2].x = right;
+		texCoords[2].y = top;
+		texCoords[3].x = right;
+		texCoords[3].y = bottom;
+	}
+
+	// Change pixel width/height calculation to floor(abs(imageScale{X,Y} * texture{Width,Height}) + 0.5)
+	const float f_half = 0.5f;
+	__declspec(naked) void PatchUIUpdateLayoutImageContent1() {
+		__asm {
+			fmulp	st(1), st			// imageScale * textureDimension
+			fabs						// abs
+			fadd	[f_half]			// + 0.5
+			fstp	qword ptr [esp]		// double argument for floor
+		}
+	}
+	const size_t PatchUIUpdateLayoutImageContent1_size = 0xD;
+
+	// Replace texcoord writer.
+	__declspec(naked) void PatchUIUpdateLayoutImageContent2() {
+		__asm {
+			push eax		// texcoord data pointer
+			push esi		// UiElement pointer
+			nop				// call to patch placeholder
+			nop
+			nop
+			nop
+			nop
+			add esp, 8
+			xor ecx, ecx
+			jmp $ + 0x51
+		}
+	}
+	const size_t PatchUIUpdateLayoutImageContent2_size = 0x11;
+
+	//
+	// Patch: When adjusting effects mix volume, update looping audio volume correctly.
+	//
+	
+	void __fastcall PatchSetLoopingSoundBufferVolume(TES3::AudioController* audio, DWORD unused, TES3::SoundEvent* soundEvent, unsigned char volume) {
+		unsigned char adjustedVolume = (unsigned char)(float(volume) * float(soundEvent->sound->volume) / 255.0f);
+		audio->setSoundBufferVolume(soundEvent->soundBuffer, adjustedVolume);
+	}
+
+	//
+	// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix cloning with no accumulator.
+	//
+
+	const auto NI_SortAdjustNode_Display = reinterpret_cast<void(__thiscall*)(NI::SortAdjustNode*, NI::Camera*)>(0x6DE030);
+	const auto NI_ClusterAccumulator_RegisterObject = reinterpret_cast<void(__thiscall*)(NI::Accumulator*, NI::AVObject*)>(0x6CF200);
+
+	void __fastcall PatchNISortAdjustNodeDisplay(NI::SortAdjustNode* node, DWORD unused, NI::Camera* camera) {
+		// Add extra sort adjust mode for accumulating a node instead of geom.
+		auto accumulator = camera->renderer->accumulator.get();
+		if (node->sortingMode == NI::SortAdjustMode::SORTING_ORDERED_SUBTREE_MWSE
+			&& accumulator != nullptr
+			&& accumulator->isInstanceOfType(NI::RTTIStaticPtr::NiAlphaAccumulator)) {
+			NI_ClusterAccumulator_RegisterObject(accumulator, node);
+		}
+		else {
+			NI_SortAdjustNode_Display(node, camera);
+		}
+	}
+
+	NI::Object* __fastcall PatchNISortAdjustNodeCloneAccumulator(NI::Accumulator* accumulator) {
+		// Only call createClone if accumulator exists.
+		return accumulator ? accumulator->vTable.asObject->createClone(accumulator) : nullptr;
+	}
+
+	//
+	// Patch: Improve error reporting by including the source mod next to object IDs in load error messages.
+	//
+
+	static char tempErrorMessageObjectID[256];
+
+	const char* __fastcall PatchGetImprovedObjectIdentifier(TES3::Object* object) {
+		const auto id = object->getObjectID();
+		const auto source = object->sourceMod ? object->sourceMod->filename : "no source";
+		std::snprintf(tempErrorMessageObjectID, sizeof(tempErrorMessageObjectID), "%s' (%s)", id, source);
+		return tempErrorMessageObjectID;
+	}
+
+	//
+	// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+	//
+
+	const auto TES3_VFXManager_createFromSaveData = reinterpret_cast<TES3::VFX* (__thiscall*)(TES3::VFXManager*, TES3::PhysicalObject*, TES3::Reference*, TES3::VFXSerialized*, float)>(0x468620);
+
+	TES3::VFX* __fastcall PatchVFXManagerCreateFromSaveData(TES3::VFXManager* vfxManager, DWORD unused, TES3::PhysicalObject* effect, TES3::Reference* reference, TES3::VFXSerialized* serializedVFX, float verticalOffset) {
+		// Do not load VFX with maxAge <= 0.001f, as they are persistent and may have accumulated in saves from before these fixes.
+		if (serializedVFX->maxAge <= 0.001f) {
+			return nullptr;
+		}
+
+		return TES3_VFXManager_createFromSaveData(vfxManager, effect, reference, serializedVFX, verticalOffset);
+	}
+
+	// Patch: Land textures loading/unloading flag array overflow bug. Increase array from 500 to 4096 elements and fix bounds checks.
+
+	const unsigned short Land_LTEX_isLoaded_size = 4096;
+	bool Land_LTEX_isLoaded[Land_LTEX_isLoaded_size];
+
+	__declspec(naked) void PatchLandUnloadTexturesBoundsCheck() {
+		__asm {
+			// Replace index >= 500 and index != -1 with a single unsigned comparison against the new size.
+			cmp ax, 4096 // immediate arg = Land_LTEX_isLoaded_size
+			jnb $ + 0xAB
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+		}
+	}
+	const size_t PatchLandUnloadTexturesBoundsCheck_size = 0x10;
+	
+	__declspec(naked) void PatchLandLoadTexturesBoundsCheck() {
+		__asm {
+			// Replace index >= 500 and index != -1 with a single unsigned comparison against the new size.
+			cmp cx, 4096 // immediate arg = Land_LTEX_isLoaded_size
+			jnb $ + 0xF5
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+		}
+	}
+	const size_t PatchLandLoadTexturesBoundsCheck_size = 0x11;
+
+	//
+	// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
+	// 
+	// Leaving here since the reporter couldn't reproduce the crash on a new save, but we'll want information next time this happens.
+	//
+
+	void __fastcall PatchSetAnimControllerMobile(TES3::ActorAnimationController* animController, DWORD _EDX_, TES3::MobileActor* mobile) {
+		if (mobile == nullptr) {
+			return;
+		}
+
+		// Try to get more information about this crash.
+		if (mobile->reference->getSceneGraphNode() == nullptr) {
+			log::getLog() << "No scene graph found when attempting to add animation controller to reference. Doing what we can with the reference. Please report this to the #mwse channel in the Morrowind Modding Community discord." << std::endl;
+			safePrintObjectToLog("Reference", mobile->reference);
+		}
+
+		// Perform overwritten code, but use getRotationMatrix to fall back to reference rotation values.
+		animController->mobileActor = mobile;
+		animController->animationData = mobile->getAnimationData();
+		animController->groundPlaneRotation = mobile->reference->getRotationMatrix();
+	}
+
+	//
+	// Patch: Log stack traces of problematic UI pointer issues.
+	//
+
+	void __cdecl PatchLogUIMemoryPointerErrors(const char* message) {
+		lua::logStackTrace("Lua traceback at time of invalid access:");
+		tes3::logErrorAndSavePoint(message);
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -679,6 +919,7 @@ namespace mwse::patch {
 		genCallEnforced(0x4BCB7E, 0x55D950, *reinterpret_cast<DWORD*>(&killCounter_save));
 #endif
 
+		// Patch: Post-simulate event just before tickClock.
 		// Patch: Don't truncate hour when advancing time past midnight.
 		// Also don't nudge time forward by small extra increments when resting.
 		auto WorldController_tickClock = &TES3::WorldController::tickClock;
@@ -829,9 +1070,9 @@ namespace mwse::patch {
 #endif
 
 		// Patch: Fix crash when trying to draw cell markers that don't fit on the map.
-		auto NonDynamicData_drawCellMapMarker = &TES3::NonDynamicData::drawCellMapMarker;
-		genCallEnforced(0x4C840F, 0x4C8540, *reinterpret_cast<DWORD*>(&NonDynamicData_drawCellMapMarker));
-		genCallEnforced(0x4C8520, 0x4C8540, *reinterpret_cast<DWORD*>(&NonDynamicData_drawCellMapMarker));
+		// Compatible with MCP map expansion.
+		writeValueEnforced<DWORD>(0x4C85BC + 2, 0x200, 0x1F7);
+		writeValueEnforced<DWORD>(0x4C85CC + 1, 0x200, 0x1F7);
 
 		// Patch: Optimize ShowMap (and FillMap) mwscript command.
 		auto NonDynamicData_showLocationOnMap = &TES3::NonDynamicData::showLocationOnMap;
@@ -851,6 +1092,10 @@ namespace mwse::patch {
 
 		// Patch: Always clone scene graph nodes.
 		writeValueEnforced(0x4EF9FB, BYTE(0x02), BYTE(0x00));
+
+		// Patch: Always copy all NiExtraData on clone, instead of only the first NiStringExtraData.
+		genJumpUnprotected(0x4E8295, 0x4E82BB);
+		genJumpUnprotected(0x4E82C4, 0x4E82CE);
 
 		// Patch: Update player first and third person animations when the idle flag is pausing the controller.
 		genCallUnprotected(0x41B836, reinterpret_cast<DWORD>(PatchUpdateAllIdles));
@@ -892,23 +1137,7 @@ namespace mwse::patch {
 		// Patch: Fix crash when releasing a clone of a light with no reference.
 		genCallEnforced(0x4D260C, 0x4E5170, reinterpret_cast<DWORD>(PatchReleaseLightEntityForReference));
 
-		// Patch: Cache values between dialogue filters.
-		auto Dialogue_getFilteredInfo = &TES3::Dialogue::getFilteredInfo;
-		genCallEnforced(0x40B8EE, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x4B2F51, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5290B2, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x52931A, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF01C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF17C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF25C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF33C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF43C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF51C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF62C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5C05F7, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5C0A48, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5C0A67, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x6004E9, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		// Patch: Cache values between dialogue filters. The actual override that makes use of this cache is in LuaManager for its hooks.
 		genCallUnprotected(0x4B1646, reinterpret_cast<DWORD>(PatchDialogueFilterCacheGetDisposition), 0x6);
 		genCallUnprotected(0x4B167B, reinterpret_cast<DWORD>(PatchDialogueFilterCacheGetDisposition), 0x6);
 
@@ -922,6 +1151,151 @@ namespace mwse::patch {
 
 		// Patch: Set ActiveMagicEffect.isIllegalSummon correctly on loading a savegame.
 		writePatchCodeUnprotected(0x454826, (BYTE*)&PatchLoadActiveMagicEffect, PatchLoadActiveMagicEffect_size);
+
+		// Patch: Fix crash in NPC flee logic when trying to pick a random node from a pathgrid with 0 nodes.
+		genCallEnforced(0x549E76, 0x4E2850, reinterpret_cast<DWORD>(PatchCellGetPathGridWithNodes));
+
+		// Patch: UI element image mirroring on negative image scale.
+		writePatchCodeUnprotected(0x57DE02, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
+		writePatchCodeUnprotected(0x57DE3F, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
+		writePatchCodeUnprotected(0x57E1E8, (BYTE*)&PatchUIUpdateLayoutImageContent2, PatchUIUpdateLayoutImageContent2_size);
+		genCallUnprotected(0x57E1E8 + 0x2, reinterpret_cast<DWORD>(PatchUIElementTexcoordWrite));
+
+		// Patch: When adjusting effects mix volume, update looping audio volume correctly.
+		writeValueEnforced<BYTE>(0x5A1F24, 0x52, 0x56);
+		genCallEnforced(0x5A1F25, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
+		writeValueEnforced<BYTE>(0x5A1FC5, 0x52, 0x56);
+		genCallEnforced(0x5A1FC6, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
+		// Fix Sound::changeVolume scaling constant to be 1/255.
+		writeValueEnforced<DWORD>(0x510C6C, 0x74A9E4, 0x746910);
+
+		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix cloning with no accumulator.
+		overrideVirtualTableEnforced(0x750580, 0x78, 0x6DE030, reinterpret_cast<DWORD>(PatchNISortAdjustNodeDisplay));
+		genCallUnprotected(0x6DE21B, reinterpret_cast<DWORD>(PatchNISortAdjustNodeCloneAccumulator));
+
+		// Patch: Add pick proxy behaviour to NiCollisionSwitch.
+		auto CollisionSwitch_linkObject = &NI::CollisionSwitch::linkObject;
+		auto CollisionSwitch_findIntersectons = &NI::CollisionSwitch::findIntersections;
+		overrideVirtualTableEnforced(0x74F418, 0x10, 0x6D7100, *reinterpret_cast<DWORD*>(&CollisionSwitch_linkObject));
+		overrideVirtualTableEnforced(0x74F418, 0x88, 0x6D6E10, *reinterpret_cast<DWORD*>(&CollisionSwitch_findIntersectons));
+
+		// Patch: Improve error reporting by including the source mod next to object IDs in load error messages.
+		// In Cell::loadReference:
+		const BYTE patchImprovedErrorIDArgs0[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs1[] = { 0x8B, 0xCD, 0x90 };
+		const BYTE patchImprovedErrorIDArgs2[] = { 0x50, 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs3[] = { 0x51, 0x8B, 0xCA };
+		const BYTE patchImprovedErrorIDArgs4[] = { 0x8B, 0x32 };
+		const BYTE patchImprovedErrorIDArgs5[] = { 0x8B, 0xCA };
+		const BYTE patchImprovedErrorIDArgs6[] = { 0x51, 0x8B, 0xCA };
+		genCallUnprotected(0x4DE71A, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DE78D, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DE98C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DEA86, patchImprovedErrorIDArgs0, sizeof(patchImprovedErrorIDArgs0));
+		genCallUnprotected(0x4DEA88, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DED73, patchImprovedErrorIDArgs1, sizeof(patchImprovedErrorIDArgs1));
+		genCallUnprotected(0x4DED76, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DF1A5, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DF21B, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DF42C, patchImprovedErrorIDArgs2, sizeof(patchImprovedErrorIDArgs2));
+		genCallUnprotected(0x4DF42F, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DF454, patchImprovedErrorIDArgs3, sizeof(patchImprovedErrorIDArgs3));
+		genCallUnprotected(0x4DF457, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DF551, patchImprovedErrorIDArgs4, sizeof(patchImprovedErrorIDArgs4));
+		genCallUnprotected(0x4DF553, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DF5FD, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DF7A4, patchImprovedErrorIDArgs5, sizeof(patchImprovedErrorIDArgs5));
+		genCallUnprotected(0x4DF7A6, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4DF7DB, patchImprovedErrorIDArgs6, sizeof(patchImprovedErrorIDArgs6));
+		genCallUnprotected(0x4DF7DE, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DF89A, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DF922, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DF9E4, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFAA3, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFB7C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFC0E, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFCB5, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFDB3, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFEAA, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFF50, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4DFFC1, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4E035E, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4E037C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4E08E7, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		// In link-resolve functions:
+		const BYTE patchImprovedErrorIDArgs7[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs8[] = { 0x8B, 0xCF };
+		const BYTE patchImprovedErrorIDArgs9[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs10[] = { 0x8B, 0xCD, 0x90 };
+		const BYTE patchImprovedErrorIDArgs11[] = { 0x8B, 0xCB };
+		const BYTE patchImprovedErrorIDArgs12[] = { 0x8B, 0xCD, 0x90 };
+		const BYTE patchImprovedErrorIDArgs13[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs14[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs15[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs16[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs17[] = { 0x8B, 0xCF };
+		const BYTE patchImprovedErrorIDArgs18[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs19[] = { 0x8B, 0xCE };
+		const BYTE patchImprovedErrorIDArgs20[] = { 0x8B, 0xCB };
+		genCallUnprotected(0x40FCA5, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x480DDF, patchImprovedErrorIDArgs7, sizeof(patchImprovedErrorIDArgs7));
+		genCallUnprotected(0x480DE1, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x49D121, patchImprovedErrorIDArgs8, sizeof(patchImprovedErrorIDArgs8));
+		genCallUnprotected(0x49D123, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x49FAEF, patchImprovedErrorIDArgs9, sizeof(patchImprovedErrorIDArgs9));
+		genCallUnprotected(0x49FAF1, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A0686, patchImprovedErrorIDArgs10, sizeof(patchImprovedErrorIDArgs10));
+		genCallUnprotected(0x4A0689, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A212E, patchImprovedErrorIDArgs11, sizeof(patchImprovedErrorIDArgs11));
+		genCallUnprotected(0x4A2130, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A2F96, patchImprovedErrorIDArgs12, sizeof(patchImprovedErrorIDArgs12));
+		genCallUnprotected(0x4A2F99, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A53EF, patchImprovedErrorIDArgs13, sizeof(patchImprovedErrorIDArgs13));
+		genCallUnprotected(0x4A53F1, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A5995, patchImprovedErrorIDArgs14, sizeof(patchImprovedErrorIDArgs14));
+		genCallUnprotected(0x4A5997, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A5F2F, patchImprovedErrorIDArgs15, sizeof(patchImprovedErrorIDArgs15));
+		genCallUnprotected(0x4A5F31, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4A64BF, patchImprovedErrorIDArgs16, sizeof(patchImprovedErrorIDArgs16));
+		genCallUnprotected(0x4A64C1, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4AC3FA, patchImprovedErrorIDArgs17, sizeof(patchImprovedErrorIDArgs17));
+		genCallUnprotected(0x4AC3FC, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4CF800, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4D0B60, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4D1D56, patchImprovedErrorIDArgs18, sizeof(patchImprovedErrorIDArgs18));
+		genCallUnprotected(0x4D1D58, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4D7284, patchImprovedErrorIDArgs19, sizeof(patchImprovedErrorIDArgs19));
+		genCallUnprotected(0x4D7286, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		genCallUnprotected(0x4E6C0C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+		writeBytesUnprotected(0x4F2132, patchImprovedErrorIDArgs20, sizeof(patchImprovedErrorIDArgs20));
+		genCallUnprotected(0x4F2134, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+
+		// Patch: Ensure VFX with maxAge <= 0.001f are cleared when clearing data on load game, instead of leaking.
+		auto VFXManager_reset = &TES3::VFXManager::reset;
+		genCallEnforced(0x4C6F00, 0x469390, *reinterpret_cast<DWORD*>(&VFXManager_reset));
+
+		// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+		genCallEnforced(0x46A04B, 0x468620, reinterpret_cast<DWORD>(PatchVFXManagerCreateFromSaveData));
+
+		// Patch: LTEX loading/unloading array overflow bug. Increase array from 500 to 4096 elements and fix bounds checks.
+		writeValueEnforced(0x4CDF09, 500 / 4, Land_LTEX_isLoaded_size / 4);
+		writeValueEnforced(0x4CDF0E, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writePatchCodeUnprotected(0x4CDF58, (BYTE*)&PatchLandUnloadTexturesBoundsCheck, PatchLandUnloadTexturesBoundsCheck_size);
+		writeValueEnforced(0x4CDF6D, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writeValueEnforced(0x4CDF7E, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+
+		writeValueEnforced(0x4CECAE, 500 / 4, Land_LTEX_isLoaded_size / 4);
+		writeValueEnforced(0x4CECB3, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writePatchCodeUnprotected(0x4CECD3, (BYTE*)&PatchLandLoadTexturesBoundsCheck, PatchLandLoadTexturesBoundsCheck_size);
+		writeValueEnforced(0x4CECE9, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writeValueEnforced(0x4CEDB1, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+
+		// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
+		genCallEnforced(0x521773, 0x53DE70, reinterpret_cast<DWORD>(PatchSetAnimControllerMobile));
+
+		// Provide lua stack traces with invalid UI access.
+		genCallEnforced(0x581484, 0x476E20, reinterpret_cast<DWORD>(PatchLogUIMemoryPointerErrors));
+		genCallEnforced(0x582DFA, 0x476E20, reinterpret_cast<DWORD>(PatchLogUIMemoryPointerErrors));
 	}
 
 	void installPostLuaPatches() {
@@ -1024,43 +1398,27 @@ namespace mwse::patch {
 		return bRet;
 	}
 
-	const char* SafeGetObjectId(const TES3::BaseObject* object) {
-		__try {
-			return object->getObjectID();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
-			return nullptr;
-		}
-	}
-
-	const char* SafeGetSourceFile(const TES3::BaseObject* object) {
-		__try {
-			return object->getSourceFilename();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
-			return nullptr;
-		}
-	}
-
-	template <typename T>
-	void safePrintObjectToLog(const char* title, const T* object) {
-		if (object) {
-			auto id = SafeGetObjectId(object);
-			auto source = SafeGetSourceFile(object);
-			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
-			if (id) {
-				log::prettyDump(object);
+	const char* GetThreadName(DWORD threadId) {
+		const auto dataHandler = TES3::DataHandler::get();
+		if (dataHandler) {
+			if (threadId == dataHandler->mainThreadID) {
+				return "Main";
+			}
+			else if (threadId == dataHandler->backgroundThreadID) {
+				return "Background";
 			}
 		}
-		else {
-			log::getLog() << "  " << title << ": nullptr" << std::endl;
-		}
+
+		return "Unknown";
+	}
+
+	const char* GetThreadName() {
+		return GetThreadName(GetCurrentThreadId());
 	}
 
 	void CreateMiniDump(EXCEPTION_POINTERS* pep) {
-		log::getLog() << std::endl;
-		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to NullCascade@gmail.com or to NullCascade#1010 on Discord." << std::endl;
-		log::getLog() << "Additional support can be found in the #mwse channel at the Morrowind Modding Community Discord: https://discord.me/mwmods" << std::endl;
+		log::getLog() << std::dec << std::endl;
+		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to the #mwse channel at the Morrowind Modding Community Discord: https://discord.me/mwmods" << std::endl;
 
 #ifdef APPVEYOR_BUILD_NUMBER
 		log::getLog() << "MWSE version: " << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << "-" << APPVEYOR_BUILD_NUMBER << std::endl;
@@ -1091,8 +1449,13 @@ namespace mwse::patch {
 		}
 
 		// Show if we failed to load a mesh.
-		if (TES3::DataHandler::currentlyLoadingMesh) {
-			log::getLog() << "Currently loading mesh: " << TES3::DataHandler::currentlyLoadingMesh << std::endl;
+		if (!TES3::DataHandler::currentlyLoadingMeshes.empty()) {
+			TES3::DataHandler::currentlyLoadingMeshesMutex.lock();
+			const auto worldController = TES3::WorldController::get();
+			for (const auto& itt : TES3::DataHandler::currentlyLoadingMeshes) {
+				log::getLog() << "Currently loading mesh: " << itt.second << "; Thread: " << GetThreadName(itt.first) << std::endl;
+			}
+			TES3::DataHandler::currentlyLoadingMeshesMutex.unlock();
 		}
 
 		// Open the file.
@@ -1151,11 +1514,11 @@ namespace mwse::patch {
 	}
 
 	bool installMiniDumpHook() {
-#ifndef _DEBUG
-		// Create our hook.
-		return genCallEnforced(0x7279AD, 0x416E10, reinterpret_cast<DWORD>(onWinMain));
-#else
-		return true;
-#endif
+		if constexpr (INSTALL_MINIDUMP_HOOK) {
+			return genCallEnforced(0x7279AD, 0x416E10, reinterpret_cast<DWORD>(onWinMain));
+		}
+		else {
+			return true;
+		}
 	}
 }

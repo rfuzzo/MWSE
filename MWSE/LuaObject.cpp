@@ -19,6 +19,8 @@ namespace mwse::lua {
 			return std::make_unique<ObjectCreator<TES3::Container>>();
 		case TES3::ObjectType::Enchantment:
 			return std::make_unique<ObjectCreator<TES3::Enchantment>>();
+		case TES3::ObjectType::Light:
+			return std::make_unique<ObjectCreator<TES3::Light>>();
 		case TES3::ObjectType::Misc:
 			return std::make_unique<ObjectCreator<TES3::Misc>>();
 		case TES3::ObjectType::Sound:

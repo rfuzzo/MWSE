@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A set of 4 floating-point numbers.
 --- @class tes3vector4
 --- @operator add(tes3vector4): tes3vector4
@@ -33,4 +31,8 @@ function tes3vector4:copy() end
 --- Calculates the length of the vector.
 --- @return number result No description yet available.
 function tes3vector4:length() end
+
+--- Converts the vector to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3vector4:__tostring() end
 

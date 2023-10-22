@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A controller for audio. It holds data on the status of the current and next music tracks, volume settings and other related facilities. All the volumes are expressed in range [0, 1].
 --- @class tes3audioController
 --- @field currentMusicFilePath string File path of the currently playing music track. The path can not be longer than 260 characters.
@@ -11,7 +9,7 @@
 --- @field listenerPosition tes3vector3 The sound listener position.
 --- @field musicDuration number *Read-only*. The duration of the currently playing music track.
 --- @field musicFadeBeginTimestamp number The timestamp at which currently playing music track started fading in. So, it's a timestamp at which currently playing music track started.
---- @field musicNextTrackStartTimestamp number 
+--- @field musicNextTrackStartTimestamp number The timestamp at which next track will start playing.
 --- @field musicNextTrackVolume number The volume of the next track.
 --- @field musicPosition number Current play time for currently playing music track.
 --- @field nextMusicFilePath string File path of the music track which is to be played next. The path can not be longer than 260 characters.
@@ -41,7 +39,7 @@ function tes3audioController:changeMusicTrack(params) end
 --- @field volume number? *Default*: `1`. Allows changing the volume of the music track.
 
 --- Final volume of a provided type of audio, after master volume and its own volume adjustments. Music volume is an exception since it isn't affected by master volume.
---- @param mix number The type of sound mix to perform a check for. Accepts values from [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) namespace.
+--- @param mix tes3.soundMix The type of sound mix to perform a check for. Accepts values from [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) namespace.
 --- @return number volume No description yet available.
 function tes3audioController:getMixVolume(mix) end
 

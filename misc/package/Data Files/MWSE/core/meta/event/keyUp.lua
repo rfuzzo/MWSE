@@ -2,13 +2,11 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The key event fires when a key is released.
 --- @class keyUpEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
---- @field isAltDown number *Read-only*. True if either alt key is held.
---- @field isControlDown number *Read-only*. True if either control key is held.
---- @field isShiftDown number *Read-only*. True if either shift key is held.
---- @field isSuperDown number *Read-only*. True if super (Windows key) is held.
---- @field keyCode number *Read-only*. The scan code of the key that raised the event.
+--- @field isAltDown boolean *Read-only*. True if either alt key is held.
+--- @field isControlDown boolean *Read-only*. True if either control key is held.
+--- @field isShiftDown boolean *Read-only*. True if either shift key is held.
+--- @field isSuperDown boolean *Read-only*. True if super (Windows key) is held.
+--- @field keyCode tes3.scanCode *Read-only*. The scan code of the key that raised the event. Maps to values in [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/) table.

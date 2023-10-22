@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Removes an item from a given reference's inventory.]],
+	description = [[Removes an item from a given reference's inventory. Items without itemData will be removed first. The `reference` will be cloned if needed.]],
 	arguments = {{
 		name = "params",
 		type = "table",

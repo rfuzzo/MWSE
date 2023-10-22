@@ -1,6 +1,3 @@
--- Removes "Undefined global `mwseConfig`." warnings
---- @diagnostic disable:undefined-global
-
 local function saveConfig()
 	local values = {}
 	for k, _ in pairs(mwseConfig.getDefaults()) do
@@ -51,6 +48,16 @@ local config = {
 				},
 				{
 					class = "OnOffButton",
+					label = i18n("replaceDialogueFiltering.label"),
+					description = i18n("replaceDialogueFiltering.description"),
+					variable = {
+						id = "ReplaceDialogueFiltering",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
+				},
+				{
+					class = "OnOffButton",
 					label = i18n("patchNiFlipController.label"),
 					description = i18n("patchNiFlipController.description"),
 					variable = {
@@ -88,7 +95,27 @@ local config = {
 						class = "TableVariable",
 						table = mwseConfig,
 					},
-				}
+				},
+				{
+					class = "OnOffButton",
+					label = i18n("enableDependencyChecks.label"),
+					description = i18n("enableDependencyChecks.description"),
+					variable = {
+						id = "EnableDependencyChecks",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
+				},
+				{
+					class = "OnOffButton",
+					label = i18n("enableLuaErrorNotifications.label"),
+					description = i18n("enableLuaErrorNotifications.description"),
+					variable = {
+						id = "EnableLuaErrorNotifications",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
+				},
 			},
 			sidebarComponents = {
 				{

@@ -2,9 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
---- This event is triggered when a reference is activated.
+--- This event is triggered when a reference becomes active because its cell has been loaded, or it has been placed or moved to an active cell. Current notable exception: when loading a save game that's in the same cell as the player, the cell stays active and unmodified references will not trigger referenceActivated. This exception may be resolved with future patches.
 --- @class referenceActivatedEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
 --- @field reference tes3reference *Read-only*. The reference which was activated.

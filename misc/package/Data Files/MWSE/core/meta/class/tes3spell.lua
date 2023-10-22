@@ -2,14 +2,12 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A spell game object.
 --- @class tes3spell : tes3object, tes3baseObject
 --- @field alwaysSucceeds boolean A flag that determines if casting the spell will always succeed.
 --- @field autoCalc boolean Determines if the magicka cost for the spell is autocalculated, and if the spell may be automatically assigned to NPCs if they are skillful enough to cast it.
 --- @field basePurchaseCost number Calculates the base cost to purchase the spell. This value is not adjusted by mercantile skills.
---- @field castType number The spell's cast type. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/references/spell-types/) constants.
+--- @field castType tes3.spellType The spell's cast type. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/references/spell-types/) constants.
 --- @field effects tes3effect[] *Read-only*. An array-style table of the [`tes3effect`](https://mwse.github.io/MWSE/types/tes3effect/) data on the object.
 --- @field flags number A bit field for the spell's flags.
 --- @field isActiveCast boolean *Read-only*. True if the spell is actively cast. If false, the spell's effects are always passively affecting the owner.
@@ -31,14 +29,14 @@ function tes3spell.create(id, name) end
 --- 
 --- `checkMagicka`: boolean? — *Default*: `true`. Determines if the caster's magicka should be taken into account during the calculation.
 --- 
---- `caster`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The caster to perform the calculation against.
+--- `caster`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The caster to perform the calculation against.
 --- @return number result No description yet available.
 function tes3spell:calculateCastChance(params) end
 
 ---Table parameter definitions for `tes3spell.calculateCastChance`.
 --- @class tes3spell.calculateCastChance.params
 --- @field checkMagicka boolean? *Default*: `true`. Determines if the caster's magicka should be taken into account during the calculation.
---- @field caster tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The caster to perform the calculation against.
+--- @field caster tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The caster to perform the calculation against.
 
 --- Creates a copy of this object.
 --- @param params tes3spell.createCopy.params This table accepts the following values:
@@ -62,17 +60,17 @@ function tes3spell:createCopy(params) end
 function tes3spell:getActiveEffectCount() end
 
 --- Gets the first index of an effect ID in the spell effect table. Returns `-1` if provided effect doesn't exist in the spell
---- @param effectId number A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+--- @param effectId tes3.effect A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 --- @return integer result No description yet available.
 function tes3spell:getFirstIndexOfEffect(effectId) end
 
 --- Returns the effect of the spell that a given actor is least proficient with.
---- @param actor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3npc|tes3npcInstance The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
+--- @param actor tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3npc|tes3npcInstance The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
 --- @return tes3effect|nil effect The least proficient effect, or `nil` if the spell has no valid effects.
 function tes3spell:getLeastProficientEffect(actor) end
 
 --- Returns the school of the least proficient effect on the spell, for a given actor.
---- @param actor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3npc|tes3npcInstance The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
---- @return number|nil schoolID The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
+--- @param actor tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3npc|tes3npcInstance The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
+--- @return tes3.magicSchool|nil schoolID The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
 function tes3spell:getLeastProficientSchool(actor) end
 

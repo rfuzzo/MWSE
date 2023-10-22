@@ -25,6 +25,7 @@ tes3.contentType = require("tes3.contentType")
 tes3.creatureType = require("tes3.creatureType")
 tes3.crimeType = require("tes3.crimeType")
 tes3.damageSource = require("tes3.damageSource")
+tes3.dialogueFilterContext = require("tes3.dialogueFilterContext")
 tes3.dialoguePage = require("tes3.dialoguePage")
 tes3.dialogueType = require("tes3.dialogueType")
 tes3.effect = require("tes3.effect")
@@ -49,7 +50,7 @@ tes3.merchantService = require("tes3.merchantService")
 tes3.musicSituation = require("tes3.musicSituation")
 tes3.niType = require("tes3.niType")
 tes3.objectType = require("tes3.objectType")
-tes3.palette  = require("tes3.palette")
+tes3.palette = require("tes3.palette")
 tes3.partIndex = require("tes3.partIndex")
 tes3.physicalAttackType = require("tes3.physicalAttackType")
 tes3.quickKeyType = require("tes3.quickKeyType")
@@ -152,11 +153,24 @@ end
 
 -- Function to compare two keybind objects for equality. Useful in key events.
 function tes3.isKeyEqual(params)
-	if (params.actual.keyCode ~= params.expected.keyCode
-		or (params.actual.isShiftDown or false) ~= (params.expected.isShiftDown or false)
-		or (params.actual.isControlDown or false) ~= (params.expected.isControlDown or false)
-		or (params.actual.isAltDown or false) ~= (params.expected.isAltDown or false)
-		or (params.actual.isSuperDown or false) ~= (params.expected.isSuperDown or false)) then
+	local actual = params.actual
+	local expected = params.expected
+
+	-- Handle mouseWheelEventData
+	local actualMouseWheel = actual.mouseWheel or actual.delta and math.clamp(actual.delta, -1, 1)
+	local expectedMouseWheel = expected.mouseWheel or expected.delta and math.clamp(expected.delta, -1, 1)
+
+	-- Handle mouseDownEventData
+	local actualMouseButton = actual.mouseButton or actual.button
+	local expectedMouseButton = expected.mouseButton or expected.button
+
+	if ((actual.keyCode or false)  ~= (expected.keyCode or false)
+		or (actual.isShiftDown or false) ~= (expected.isShiftDown or false)
+		or (actual.isControlDown or false) ~= (expected.isControlDown or false)
+		or (actual.isAltDown or false) ~= (expected.isAltDown or false)
+		or (actual.isSuperDown or false) ~= (expected.isSuperDown or false)
+		or (actualMouseButton or false) ~= (expectedMouseButton or false)
+		or (actualMouseWheel or false) ~= (expectedMouseWheel or false)) then
 		return false
 	end
 
@@ -195,10 +209,27 @@ function tes3.onMainMenu()
 	return tes3.worldController.charGenState.value == 0
 end
 
+local function getLuaModRuntime(key)
+	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()]
+end
+
+function tes3.getLuaModMetadata(key)
+	local runtime = getLuaModRuntime(key)
+	if (not runtime) then
+		return
+	end
+
+	return runtime.metadata
+end
+
 -- Checks to see if a lua mod is active.
 function tes3.isLuaModActive(key)
-	---@diagnostic disable-next-line: undefined-field
-	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()] == true
+	local runtime = getLuaModRuntime(key)
+	if (not runtime) then
+		return false
+	end
+
+	return runtime.initialized == true
 end
 
 return tes3

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Represents an individual instance of a magic effect being applied to a reference.
 --- @class tes3magicEffectInstance
 --- @field createdData tes3equipmentStack *Read-only*. The bound or summoned data associated with the instance, for summoned creatures or items. The stack's object will be a reference in the case of summoned creatures.
@@ -18,9 +16,7 @@
 --- @field lastUsedWeapon tes3equipmentStack *Read-only*. No description yet available.
 --- @field magnitude number The magnitude of the effect, before any resistances are applied.
 --- @field resistedPercent number The percentage of the magic effect that has been resisted. A value of `100` indicates that the magic effect has been completely resisted, whereas a value of `0` indicates it has not been resisted and is applied with its full magnitude. Values over `100` cause the magic effect to heal the actor instead of harming it, if it is a damaging magic effect.
---- @field state number The state of this magic effect instance. Maps to [`tes3.spellState`](https://mwse.github.io/MWSE/references/spell-states/) constants.
+--- @field state tes3.spellState The state of this magic effect instance. Maps to [`tes3.spellState`](https://mwse.github.io/MWSE/references/spell-states/) constants.
 --- @field target tes3reference No description yet available.
 --- @field timeActive number The time since the effect started affecting its target in seconds.
 --- @field visual tes3vfx The associated visual effect.
-tes3magicEffectInstance = {}
-

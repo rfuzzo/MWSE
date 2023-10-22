@@ -2,12 +2,10 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A data structure, off of the world controller, that handles input.
 --- @class tes3inputController
 --- @field creationFlags number *Read-only*. A bit field representing device capabilities and settings.
---- @field inputMaps tes3inputConfig[] *Read-only*. The array-style access to input bindings ([tes3inputConfig](https://mwse.github.io/MWSE/types/tes3inputConfig/) objects).
+--- @field inputMaps tes3inputConfig[] *Read-only*. The array-style access to input bindings.
 --- @field keyboardState number[] *Read-only*. The array-style access to raw key states.
 --- @field mouseState tes3directInputMouseState *Read-only*. The raw DirectInput mouse state.
 --- @field previousKeyboardState number[] *Read-only*. The array-style access to the previous frame's raw key states.
@@ -27,17 +25,17 @@ function tes3inputController:isCapsLockActive() end
 function tes3inputController:isControlDown() end
 
 --- Performs a key down test for a given scan key code.
---- @param key number The scan code to test. Constants available through [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/).
+--- @param key tes3.scanCode The scan code to test. Constants available through [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/).
 --- @return boolean result No description yet available.
 function tes3inputController:isKeyDown(key) end
 
 --- Checks to see if a given scan code is pressed, and wasn't pressed last frame.
---- @param key number The scan code to test. Constants available through [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/).
+--- @param key tes3.scanCode The scan code to test. Constants available through [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/).
 --- @return boolean result No description yet available.
 function tes3inputController:isKeyPressedThisFrame(key) end
 
 --- Checks to see if a given scan code is released, and was pressed last frame.
---- @param key number The scan code to test. Constants available through [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/).
+--- @param key tes3.scanCode The scan code to test. Constants available through [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/).
 --- @return boolean result No description yet available.
 function tes3inputController:isKeyReleasedThisFrame(key) end
 
@@ -65,8 +63,8 @@ function tes3inputController:isShiftDown() end
 function tes3inputController:isSuperDown() end
 
 --- Performs a test for a given keybind, and optionally a transition state.
---- @param key number The keybind to test. Constants available through [`tes3.keybind`](https://mwse.github.io/MWSE/references/keybinds/).
---- @param transition number? *Optional*. Transition state, e.g. down, or up. Constants available through [`tes3.keyTransition`](https://mwse.github.io/MWSE/references/key-transitions/).
+--- @param key tes3.keybind The keybind to test. Constants available through [`tes3.keybind`](https://mwse.github.io/MWSE/references/keybinds/).
+--- @param transition tes3.keyTransition? *Optional*. Transition state, e.g. down, or up. Constants available through [`tes3.keyTransition`](https://mwse.github.io/MWSE/references/key-transitions/).
 --- @return boolean result No description yet available.
 function tes3inputController:keybindTest(key, transition) end
 

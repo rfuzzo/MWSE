@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event fires when an item in the inventory is filtered.",
+	related = { "filterBarterMenu", "filterContentsMenu", "filterInventory" },
 	eventData = {
 		["tile"] = {
 			type = "tes3inventoryTile",

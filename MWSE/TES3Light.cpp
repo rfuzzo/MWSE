@@ -7,6 +7,16 @@
 #include "TES3Reference.h"
 
 namespace TES3 {
+	const auto TES3_Light_ctor = reinterpret_cast<void(__thiscall*)(Light*)>(0x4D1BA0);
+	Light::Light() {
+		TES3_Light_ctor(this);
+	}
+
+	const auto TES3_Light_dtor = reinterpret_cast<void(__thiscall*)(Light*)>(0x4D1C90);
+	Light::~Light() {
+		TES3_Light_dtor(this);
+	}
+
 	bool Light::getIsDynamic() const {
 		return (flags & LightFlags::Dynamic);
 	}

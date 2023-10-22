@@ -6,7 +6,8 @@ return {
 		type = "table",
 		tableParams = {
 			{ name = "slot", type = "number", description = "Clothing slot number. A number greater than 9 to configure a slot for." },
-			{ name = "name", type = "string" },
+			{ name = "name", type = "string", description = "The human-readable name for the clothing slot." },
+			{ name = "key", type = "string", optional = true, description = "The key placed in the `tes3.clothingSlot` table. If no key is provided, the name will be used." },
 		},
 	}},
 }

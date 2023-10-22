@@ -5,7 +5,7 @@ hide:
 
 # Magic Effects, Modded
 
-These effects build off of the [standard magic effects](../magic-effects). If you would like to add your effect to the list, consider [editing this page online](https://github.com/MWSE/MWSE/edit/master/docs/source/references/magic-effects-modded.md), and submitting your change as a pull request. Alternatively, create [an issue](https://github.com/MWSE/MWSE/issues/new?assignees=&labels=custom-effect-id&template=claim-effect-id.md&title=) to list the information that needs to be added.
+These effects build off of the [standard magic effects](./magic-effects.md). If you would like to add your effect to the list, consider [editing this page online](https://github.com/MWSE/MWSE/edit/master/docs/source/references/magic-effects-modded.md), and submitting your change as a pull request. Alternatively, create [an issue](https://github.com/MWSE/MWSE/issues/new?assignees=&labels=custom-effect-id&template=claim-effect-id.md&title=) to list the information that needs to be added.
 
 !!! warning
 	When registering a new effect ID, both the index and the value must be unique! Two mods cannot use the same magic effect id of `420`, nor can they both have the index of `tes3.effect.summonCreeper`.
@@ -202,6 +202,8 @@ These effects build off of the [standard magic effects](../magic-effects). If yo
 | pocket                       | **_701_** | [Extradimensional Pockets](https://www.nexusmods.com/morrowind/mods/50499)                         |
 | multiRecall                  | 702       | [4NM - Total Gameplay Overhaul](https://www.nexusmods.com/morrowind/mods/47015)                    |
 | boundarrow                   | 704       | [Bound Ammo](https://www.nexusmods.com/morrowind/mods/50766)                                       |
+| boundbolt                    | 705       | [Bound Ammo (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)                   |
+| boundcrossbow                | 706       | [Bound Ammo (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)                   |
 | animatedWeapon               | 711       | [Animate Weapon Spell](https://www.nexusmods.com/morrowind/mods/50165)                             |
 | enchantDrain                 | 786       | [Enchant Drain](https://www.nexusmods.com/morrowind/mods/51124)                                    |
 | soulRelease                  | 787       | [Obedient Summons](https://www.nexusmods.com/morrowind/mods/51472)                                 |
@@ -209,9 +211,21 @@ These effects build off of the [standard magic effects](../magic-effects). If yo
 | fortifyIntelligence          | 791       | [Class Starting Spells](https://www.nexusmods.com/morrowind/mods/49010)                            |
 | fortifyAgility               | 793       | [Class Starting Spells](https://www.nexusmods.com/morrowind/mods/49010)                            |
 | fortifyPersonality           | 796       | [Class Starting Spells](https://www.nexusmods.com/morrowind/mods/49010)                            |
+| healthLeech                  | 900       | [Leech Effects](https://www.nexusmods.com/morrowind/mods/52943)                                    |
+| magickaLeech                 | 901       | [Leech Effects](https://www.nexusmods.com/morrowind/mods/52943)                                    |
+| fatigueLeech                 | 902       | [Leech Effects](https://www.nexusmods.com/morrowind/mods/52943)                                    |
 | forbidSleep                  | 1201      | [Vaermina's Quest - Dreams of the Escaped](https://www.nexusmods.com/morrowind/mods/49172)         |
 | summonCorruptedDouble        | 1202      | [Vaermina's Quest - Dreams of the Escaped](https://www.nexusmods.com/morrowind/mods/49172)         |
 | summonCorruptedDoublePotion  | 1203      | [Vaermina's Quest - Dreams of the Escaped](https://www.nexusmods.com/morrowind/mods/49172)         |
+| storeSoul                    | 3300      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul1                  | 3301      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul2                  | 3302      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul3                  | 3303      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul4                  | 3304      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul5                  | 3305      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul6                  | 3306      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul7                  | 3307      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
+| summonSoul8                  | 3308      | [Summon Souls](https://www.nexusmods.com/morrowind/mods/53418)                                     |
 | summonAshGolem               | 7700      | [Atronach Expansion](https://www.nexusmods.com/morrowind/mods/22189)                               |
 | summonBoneGolem              | 7701      | [Atronach Expansion](https://www.nexusmods.com/morrowind/mods/22189)                               |
 | summonCrystalGolem           | 7702      | [Atronach Expansion](https://www.nexusmods.com/morrowind/mods/22189)                               |
@@ -224,4 +238,5 @@ These effects build off of the [standard magic effects](../magic-effects). If yo
 | ss20SoulManipulation         | 8113      | [Pimp My Shrine - The Daedric Legend of Vernaccus](https://www.nexusmods.com/morrowind/mods/49173) |
 | ss20ManipulateSouls          | 8114      | [Pimp My Shrine - The Daedric Legend of Vernaccus](https://www.nexusmods.com/morrowind/mods/49173) |
 | selfRepair                   | 8500      | [DRIP - Dynamic Randomised Item Properties](https://www.nexusmods.com/morrowind/mods/51242)        |
+| identify                     | 9599      | [Unidentified Items (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)           |
 | npcSoulTrap                  | 10000     | [Seph's NPC Soul Trapping](https://www.nexusmods.com/morrowind/mods/50744)                         |

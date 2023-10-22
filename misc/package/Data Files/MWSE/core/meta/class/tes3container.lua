@@ -2,16 +2,16 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A container object that has not been cloned. Typically represents the raw information edited in the construction set.
 --- @class tes3container : tes3actor, tes3physicalObject, tes3object, tes3baseObject
 --- @field capacity number The amount of weight that the container can hold.
 --- @field isInstance boolean Always returns false.
 --- @field mesh string The path to the object's mesh.
 --- @field name string The player-facing name for the object.
---- @field organic boolean Determines if the container's organic flag is enabled.
---- @field respawns boolean Determines if the container's respawn flag is enabled.
+--- @field organic boolean Determines if the container's organic flag is enabled. The name of this property comes from the Construction Set. If a container is flagged as organic, no items can be stored inside such containers. In vanilla, those are all plants, mushrooms, and ores. In addition, resupplying guild supply chests are implemented as organic and respawning containers.
+--- @field respawns boolean Determines if the container's respawn flag is enabled. Only the organic containers can have respawn flag set.
+--- 
+--- The global script variable, "MonthsToRespawn" is decremented at the end of each month. If it reaches zero at the first day of next month, it is reset to `iMonthsToRespawn` (GMST) and all respawning containers are refilled.
 --- @field script tes3script The script that runs on the object.
 tes3container = {}
 

@@ -2,21 +2,21 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A reference is a sort of container structure for objects. It holds a base object, as well as various variables associated with that object that make it unique.
 --- 
 --- For example, many doors may share the same base object. However, each door reference might have a different owner, different lock/trap statuses, etc. that make the object unique.
 --- @class tes3reference : tes3object, tes3baseObject
 --- @field activationReference tes3reference The current reference, if any, that this reference will activate.
---- @field attachments table<string, tes3bodyPartManager|tes3itemData|tes3lightNode|tes3lockNode|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3travelDestinationNode|tes3animationData> *Read-only*. A table with friendly named access to all supported attachments.
+--- @field attachments table<string, tes3bodyPartManager|tes3itemData|tes3lightNode|tes3lockNode|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3travelDestinationNode|tes3animationData> *Read-only*. A table with friendly named access to all supported attachments.
 --- @field baseObject tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon *Read-only*. This is similar to the object field, but is guaranteed to provide the base-most object. If object is an actor clone, the base actor will be given instead.
 --- @field bodyPartManager tes3bodyPartManager|nil *Read-only*. Access to the reference's body part manager, if available. Typically this is only available on NPC references.
 --- @field cell tes3cell *Read-only*. The cell that the reference is currently in.
 --- @field context tes3scriptContext *Read-only*. Access to the script context for this reference and its associated script.
 --- @field data table A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the `tes3itemData` structure. To store data that doesn't get serialized to/from the save, use `tempData`.
+--- 
+--- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field destination tes3travelDestinationNode|nil *Read-only*. Returns the travel destination node for this reference, or `nil`. This can be used to determine where a given door links to.
---- @field facing number Convenient access to the z-component of the reference's orientation. Setting the facing sets the reference as modified.
+--- @field facing number Convenient access to the z-component of the reference's orientation in range of [-PI, PI] for actors and [0, 2PI] radians for all the other references. The North is facing of 0. Setting the facing sets the reference as modified.
 --- @field forwardDirection tes3vector3 *Read-only*. The normalized forward or Y direction vector of the reference.
 --- @field hasNoCollision boolean Sets the no-collision flag on this reference, and recalculates collision groups. Use the [`setNoCollisionFlag()`](https://mwse.github.io/MWSE/types/tes3reference/?h=setnocollisionflag#setnocollisionflag) function to manage collision group recalculation instead.
 --- @field isDead boolean|nil *Read-only*. Returns `true` if the object is dead, `false` if they are alive, or `nil` if that couldn't be determined.
@@ -26,13 +26,13 @@
 --- @field itemData tes3itemData Gets or sets the attached `itemData` for this reference. If set to `nil`, the item data will be unhooked but not deleted.
 --- @field leveledBaseReference tes3reference|nil *Read-only*. If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is `nil`.
 --- @field light niPointLight|niSpotLight *Read-only*. Direct access to the scene graph light, if a dynamic light is set.
---- @field lockNode tes3lockNode *Read-only*. Quick access to the reference's lock node, if any.
+--- @field lockNode tes3lockNode|nil *Read-only*. Quick access to the reference's lock node, if any. Doors or containers that aren't locked nor trapped have this property set to `nil`.
 --- @field mesh string The path to the object's mesh.
 --- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3mobilePlayer|tes3mobileProjectile|tes3mobileSpellProjectile|tes3mobileSpellProjectile|nil *Read-only*. Access to the attached mobile object, if applicable.
 --- @field nextNode tes3reference *Read-only*. The next reference in the parent reference list.
 --- @field nodeData tes3reference *Read-only*. Redundant access to this object, for iterating over a tes3referenceList.
 --- @field object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3repairTool|tes3static|tes3weapon *Read-only*. The object that the reference is for, such as a weapon, armor, or actor.
---- @field orientation tes3vector3 Access to the reference's orientation, in XYZ Euler angles in Radians. Changing the orientation marks the reference as modified.
+--- @field orientation tes3vector3 Access to the reference's orientation, in XYZ Euler angles in radians in [0, 2 PI] except for actors. For actors, the Z angle is in range [-PI, PI] radians. Changing the orientation marks the reference as modified.
 --- @field position tes3vector3 Access to the reference's position. Setting the position sets the reference as modified.
 --- 
 --- For actors, the axes are:
@@ -43,7 +43,7 @@
 --- 
 --- @field previousNode tes3reference *Read-only*. The previous reference in the parent reference list.
 --- @field rightDirection tes3vector3 *Read-only*. The normalized right or X direction vector of the reference.
---- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The scene graph node that the reference uses for rendering.
+--- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode|nil *Read-only*. The scene graph node that the reference uses for rendering.
 --- @field sourceFormId number No description yet available.
 --- @field sourceModId number No description yet available.
 --- @field stackSize number Access to the size of a stack, if the reference represents one or more items.
@@ -53,6 +53,8 @@
 --- @field targetFormId number No description yet available.
 --- @field targetModId number No description yet available.
 --- @field tempData table As with the `data` field, a generic lua table that data can be written to. No information in this table will persist into saves. For item references, this is the same table as on the `tes3itemData` structure.
+--- 
+--- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field upDirection tes3vector3 *Read-only*. The normalized up or Z direction vector of the reference.
 tes3reference = {}
 
@@ -61,11 +63,11 @@ tes3reference = {}
 function tes3reference:activate(reference) end
 
 --- Unsets a bit in the reference's action data attachment
---- @param flagIndex integer The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+--- @param flagIndex tes3.actionFlag The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 function tes3reference:clearActionFlag(flagIndex) end
 
---- Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory.
---- @return boolean result No description yet available.
+--- Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory. Also, marks the new cloned reference as modified.
+--- @return boolean cloned Returns `true` if the reference was successfully cloned. Returns `false` if the reference was already cloned or can't be cloned.
 function tes3reference:clone() end
 
 --- Disables the reference, removes all its attachments, resets its scale, and sets the reference to be deleted.
@@ -110,7 +112,7 @@ function tes3reference:getOrCreateAttachedDynamicLight(light, phase) end
 function tes3reference:onCloseInventory() end
 
 --- Sets a bit in the reference's action data attachment.
---- @param flagIndex integer The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+--- @param flagIndex tes3.actionFlag The action flag to clear. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 function tes3reference:setActionFlag(flagIndex) end
 
 --- Sets the dynamic lighting state of the reference using the global data handler.
@@ -122,7 +124,7 @@ function tes3reference:setDynamicLighting() end
 function tes3reference:setNoCollisionFlag(hasNoCollision, updateCollisions) end
 
 --- Returns the flag's value in the reference's action data attachment.
---- @param flagIndex integer The action flag to test. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
+--- @param flagIndex tes3.actionFlag The action flag to test. Maps to values in [`tes3.actionFlag`](https://mwse.github.io/MWSE/references/action-flags/) namespace.
 --- @return boolean result No description yet available.
 function tes3reference:testActionFlag(flagIndex) end
 

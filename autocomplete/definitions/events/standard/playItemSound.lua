@@ -1,6 +1,7 @@
 return {
 	type = "event",
-	description = "This event is triggered when the game is about to play a sound from an item. Can be blocked to play custom sound instead.",
+	description = "This event is triggered when the game is about to play a sound when an item gets added or removed from an inventory. Can be blocked to play custom sound instead.",
+	related = { "soundObjectPlay" },
 	eventData = {
 		["item"] = {
 			type = "tes3baseObject",
@@ -8,7 +9,7 @@ return {
 			description = "The item for which the sound is about to be played.",
 		},
 		["state"] = {
-			type = "number",
+			type = "tes3.itemSoundState",
 			readOnly = true,
 			description = "Maps to values in [tes3.itemSoundState](https://mwse.github.io/MWSE/references/item-sound-states/) namespace.",
 		},

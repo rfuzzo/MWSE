@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- One of the movement events, **calcRunSpeed** is used when calculating when the player is running, but not swimming or flying.
 --- 
 --- The movement event flow is described below:
@@ -11,7 +9,7 @@
 --- - Running: [calcWalkSpeed](https://mwse.github.io/MWSE/events/calcWalkSpeed) -> **calcRunSpeed** -> [calcMoveSpeed](https://mwse.github.io/MWSE/events/calcMoveSpeed)
 --- @class calcRunSpeedEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
---- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor whose speed is being calculated.
+--- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor whose speed is being calculated.
 --- @field reference tes3reference *Read-only*. mobile’s related reference.
 --- @field speed number The previous speed calculated, starting with the base engine values.
 --- @field type number *Read-only*. The type of movement that was calculated. This is always 2 for this event.

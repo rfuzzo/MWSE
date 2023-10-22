@@ -209,6 +209,7 @@ namespace mwse::lua {
 			if (!result.valid()) {
 				sol::error error = result;
 				log::getLog() << "Lua error encountered in timer callback:" << std::endl << error.what() << std::endl;
+				reportErrorInGame("timer", error);
 
 				// Cancel the timer.
 				cancelTimer(timer);

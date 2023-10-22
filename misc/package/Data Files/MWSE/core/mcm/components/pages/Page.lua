@@ -1,13 +1,20 @@
 --[[
-	A basic Page. Components are displayed in a vertical scroll pane. 
+	A basic Page. Components are displayed in a vertical scroll pane.
 ]]--
+
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
 
 local Parent = require("mcm.components.categories.Category")
 
+--- @class mwseMCMPage
 local Page = Parent:new()
 Page.componentType = "Page"
 Page.indent = 6
 
+--- @param data mwseMCMPage.new.data|nil
+--- @return mwseMCMPage page
 function Page:new(data)
 	local t = Parent:new(data)
 
@@ -24,10 +31,11 @@ function Page:new(data)
 	end
 	setmetatable(t, self)
 	self.__index = self
-	return t
+	return t --[[@as mwseMCMPage]]
 
 end
 
+--- @param parentBlock tes3uiElement
 function Page:createLabel(parentBlock)
 	if self.showHeader then
 		Parent.createLabel(self, parentBlock)
@@ -48,6 +56,7 @@ function Page:disable()
 	end
 end
 
+--- @param parentBlock tes3uiElement
 function Page:createOuterContainer(parentBlock)
 	local border
 

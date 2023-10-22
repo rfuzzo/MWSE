@@ -2,17 +2,16 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The mwse library provides methods for interacting with MWSE itself, rather than direct TES3 objects.
 --- @class mwselib
 --- @field buildDate number A numerical representation of the date that version of MWSE currently being used was built on.
 --- 
 --- Formatted as YYYYMMDD.
+--- @field buildNumber integer Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor (these builds are installed using the MWSE-Update). Equal to `UINT_MAX` in regular builds. This number is used for [mod metadata](https://mwse.github.io/MWSE/guides/metadata/#dependencies-section) files, when a mod depends on MWSE being installed.
 --- @field gameTimers mwseTimerController The mwseTimerController responsible for game-type timers.
 --- @field realTimers mwseTimerController The mwseTimerController responsible for real-type timers.
 --- @field simulateTimers mwseTimerController The mwseTimerController responsible for simulate-type timers.
---- @field version number A numerical representation of the release version of MWSE currently being used.
+--- @field version integer A numerical representation of the release version of MWSE currently being used.
 --- 
 --- Formatted as AAABBBCCC, where A is the major version, BBB is the minor version, and CCC is the patch version. BBB and CCC are forward-padded.
 --- 
@@ -21,7 +20,7 @@ mwse = {}
 
 --- Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 --- @param scriptId string No description yet available.
---- @return boolean result No description yet available.
+--- @return boolean success No description yet available.
 function mwse.clearScriptOverride(scriptId) end
 
 --- This function returns information on the current mwscript execution state.
@@ -30,16 +29,27 @@ function mwse.clearScriptOverride(scriptId) end
 function mwse.getCurrentMorrowindScriptState() end
 
 --- Equivalent to mwse.version.
---- @return number result No description yet available.
+--- @return integer result No description yet available.
 function mwse.getVersion() end
 
 --- Returns the amount of memory used, in bytes.
 --- @return number result No description yet available.
 function mwse.getVirtualMemoryUsage() end
 
+--- Converts the provided string in UTF8 encoding to Morrowind's codepage base encoding.
+--- @param languageCode tes3.languageCode Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
+--- @param utf8string string The string to convert
+--- @return string converted No description yet available.
+function mwse.iconv(languageCode, utf8string) end
+
 --- Loads a config table from Data Files\\MWSE\\config\\{fileName}.json.
---- 	
---- If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.
+--- 
+--- If the default values table is passed:
+--- 
+---  - Empty keys in the config will be filled in using its values.
+---  - If no file exists, the function will return the default table.
+---  - In json, tables can be either arrays with integer keys or dictionaries with string keys. If your configuration table is mixed (has both string and integer indices), saving and loading from json will effectively convert all your integer indices to strings. This function will convert your configuration table's integer indices back if defaults table is given.
+--- 
 --- @param fileName string The non-extensioned name of the config file.
 --- @param defaults table? *Optional*. A table of default values.
 --- @return table result No description yet available.
@@ -47,7 +57,7 @@ function mwse.loadConfig(fileName, defaults) end
 
 --- Loads translations from the i18n folder for a given mod. This is locale-aware, using the result from `tes3.getLanguage()`. See the [mod translations guide](https://mwse.github.io/MWSE/guides/mod-translations/) for more information.
 --- @param mod string Name of the folder that your main.lua mod can be found in.
---- @return function i18n The callable translation results.
+--- @return fun(key: string, data: any?): string i18n The callable translation results.
 function mwse.loadTranslations(mod) end
 
 --- This function writes information to the mwse.log file in the user's installation directory.
@@ -58,17 +68,36 @@ function mwse.loadTranslations(mod) end
 function mwse.log(message, ...) end
 
 --- Converts a TES3 object type (e.g. from tes3.objectType) into an uppercase, 4-character string.
---- @param type number No description yet available.
+--- @param type tes3.objectType|number No description yet available.
 --- @return string result No description yet available.
 function mwse.longToString(type) end
 
 --- Configures MWSE to execute a given function instead when a script would run.
+--- 
+--- In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling `mwscript.stopScript()`.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse/#mwseoverridescript).
 --- @param scriptId string No description yet available.
---- @param callback function No description yet available.
---- @return boolean result No description yet available.
+--- @param callback fun(e: mwseOverrideScriptCallbackData) No description yet available.
+--- @return boolean success No description yet available.
 function mwse.overrideScript(scriptId, callback) end
+
+--- This is the main function to register a mod's configuration. Only registered configurations appear in the Mod Config menu.
+--- @param name string No description yet available.
+--- @param package mwse.registerModConfig.package This table accepts the following values:
+--- 
+--- `onCreate`: fun(modConfigContainer: tes3uiElement) — The function that creates the mod's configuration menu inside given `modConfigContainer`.
+--- 
+--- `onSearch`: nil|fun(searchText: string): boolean — *Optional*. A custom search handler function. This function should return true if this mod should show up in search results for given `searchText`.
+--- 
+--- `onClose`: nil|fun(modConfigContainer: tes3uiElement) — *Optional*. This function is called when the mod's configuration menu is closed. Typically, it's used to save the current config table.
+function mwse.registerModConfig(name, package) end
+
+---Table parameter definitions for `mwse.registerModConfig`.
+--- @class mwse.registerModConfig.package
+--- @field onCreate fun(modConfigContainer: tes3uiElement) The function that creates the mod's configuration menu inside given `modConfigContainer`.
+--- @field onSearch nil|fun(searchText: string): boolean *Optional*. A custom search handler function. This function should return true if this mod should show up in search results for given `searchText`.
+--- @field onClose nil|fun(modConfigContainer: tes3uiElement) *Optional*. This function is called when the mod's configuration menu is closed. Typically, it's used to save the current config table.
 
 --- Saves a config table to Data Files\\MWSE\\config\\{fileName}.json.
 --- @param fileName string No description yet available.
@@ -81,4 +110,9 @@ function mwse.saveConfig(fileName, object, config) end
 --- @param tag string No description yet available.
 --- @return number result No description yet available.
 function mwse.stringToLong(tag) end
+
+--- Determines whether a key is pressed. A wrapper for `GetAsyncKeyState` function in Win32 API.
+--- @param VK_key integer No description yet available.
+--- @return boolean result No description yet available.
+function mwse.virtualKeyPressed(VK_key) end
 

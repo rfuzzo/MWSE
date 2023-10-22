@@ -1,7 +1,7 @@
 return {
 	type = "event",
-	description = "This event fires when a dialogue info object is filtered.",
-	related = { "infoGetText", "infoLinkResolve", "infoResponse", "infoFilter", "postInfoResponse" },
+	description = "This event fires when a dialogue info object is filtered. This allows blocking dialogue lines from showing up.",
+	related = { "dialogueFiltered", "infoGetText", "infoLinkResolve", "infoResponse", "infoFilter", "postInfoResponse" },
 	eventData = {
 		["info"] = {
 			type = "tes3dialogueInfo",
@@ -19,7 +19,7 @@ return {
 			description = "The reference.",
 		},
 		["source"] = {
-			type = "number",
+			type = "integer",
 			readOnly = true,
 			description = "The source.",
 		},
@@ -30,8 +30,13 @@ return {
 		},
 		["passes"] = {
 			type = "boolean",
-			readOnly = true,
-			description = "Indicates if the filter passes.",
+			description = "Indicates if the filter passes. Set to false to block a line.",
 		},
 	},
+	examples = {
+		["blocking"] = {
+			title = "Blocking greeting lines",
+			description = "To block a certain dialogue line efficiently, it's best to check if the line passes first. Only if the line passes do the other checks. Since the game checks each line until it finds one which passes, your callback function registered on this event will be called many times. So, this early out will prevent the game from stalling."
+		}
+	}
 }

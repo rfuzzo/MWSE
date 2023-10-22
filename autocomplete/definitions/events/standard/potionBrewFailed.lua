@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "The potionBrewFailed event is raised when the player fails a potion brew attempt.",
+	related = { "potionBrewed", "potionBrewSkillCheck" },
 	eventData = {
 		["alembic"] = {
 			type = "tes3apparatus",

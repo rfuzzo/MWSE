@@ -94,8 +94,10 @@ namespace mwse::lua {
 					}
 					else {
 						sol::error error = result;
-						const char* errorSource = target->name.cString ? target->name.cString : "(unnamed)";
-						log::getLog() << "Lua error encountered during UI before-event from element " << errorSource << ":" << std::endl << error.what() << std::endl;
+						char errorSource[256];
+						std::snprintf(errorSource, sizeof(errorSource), "uiElement %s", target->name.cString ? target->name.cString : "(unnamed)");
+						log::getLog() << "Lua error encountered during UI before-event from " << errorSource << ":" << std::endl << error.what() << std::endl;
+						reportErrorInGame(errorSource, error);
 						return true;
 					}
 				}
@@ -136,8 +138,10 @@ namespace mwse::lua {
 				}
 				else {
 					sol::error error = result;
-					const char* errorSource = target->name.cString ? target->name.cString : "(unnamed)";
-					log::getLog() << "Lua error encountered during UI event from element " << errorSource << ":" << std::endl << error.what() << std::endl;
+					char errorSource[256];
+					std::snprintf(errorSource, sizeof(errorSource), "uiElement %s", target->name.cString ? target->name.cString : "(unnamed)");
+					log::getLog() << "Lua error encountered during UI event from " << errorSource << ":" << std::endl << error.what() << std::endl;
+					reportErrorInGame(errorSource, error);
 					return true;
 				}
 			}
@@ -192,8 +196,10 @@ namespace mwse::lua {
 					}
 					else {
 						sol::error error = result;
-						const char* errorSource = target->name.cString ? target->name.cString : "(unnamed)";
-						log::getLog() << "Lua error encountered during UI after-event from element " << errorSource << ":" << std::endl << error.what() << std::endl;
+						char errorSource[256];
+						std::snprintf(errorSource, sizeof(errorSource), "uiElement %s", target->name.cString ? target->name.cString : "(unnamed)");
+						log::getLog() << "Lua error encountered during UI after-event from " << errorSource << ":" << std::endl << error.what() << std::endl;
+						reportErrorInGame(errorSource, error);
 						return true;
 					}
 				}

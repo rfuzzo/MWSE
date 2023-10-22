@@ -52,6 +52,9 @@ namespace mwse::lua {
 			//usertypeDefinition["animationGroupSoundgens"] = sol::readonly_property(&TES3::AnimationData::getAnimationGroupSoundgens);
 			usertypeDefinition["animGroupLayerIndicies"] = sol::readonly_property(&TES3::AnimationData::getAnimGroupLayerIndicies);
 			usertypeDefinition["approxRootTravelSpeeds"] = sol::readonly_property(&TES3::AnimationData::getApproxRootTravelSpeeds);
+			usertypeDefinition["blinkMorphEndTime"] = sol::readonly_property(&TES3::AnimationData::blinkMorphEndTime);
+			usertypeDefinition["blinkMorphStartTime"] = sol::readonly_property(&TES3::AnimationData::blinkMorphStartTime);
+			usertypeDefinition["castSpeed"] = sol::property(&TES3::AnimationData::getCastSpeed, &TES3::AnimationData::setCastSpeed);
 			usertypeDefinition["currentAnimGroupLayers"] = sol::readonly_property(&TES3::AnimationData::getCurrentAnimGroupLayers);
 			usertypeDefinition["currentAnimGroups"] = sol::readonly_property(&TES3::AnimationData::getCurrentAnimGroups);
 			usertypeDefinition["currentNodeIndices"] = sol::readonly_property(&TES3::AnimationData::getCurrentNodeIndices);
@@ -61,6 +64,7 @@ namespace mwse::lua {
 			usertypeDefinition["hasOverrideAnimations"] = sol::readonly_property(&TES3::AnimationData::hasOverrideAnimations);
 			usertypeDefinition["headGeometry"] = &TES3::AnimationData::headGeometry;
 			usertypeDefinition["headNode"] = &TES3::AnimationData::headNode;
+			usertypeDefinition["headMorphTiming"] = &TES3::AnimationData::headMorphTiming;
 			usertypeDefinition["keyframeLayers"] = sol::readonly_property(&TES3::AnimationData::getKeyframeLayers);
 			usertypeDefinition["lipsyncLevel"] = &TES3::AnimationData::lipsyncLevel;
 			usertypeDefinition["loopCounts"] = sol::readonly_property(&TES3::AnimationData::getLoopCounts);
@@ -72,10 +76,13 @@ namespace mwse::lua {
 			usertypeDefinition["spine1Node"] = &TES3::AnimationData::spine1Node;
 			usertypeDefinition["spine2Node"] = &TES3::AnimationData::spine2Node;
 			usertypeDefinition["spineAngle"] = &TES3::AnimationData::spineAngle;
+			usertypeDefinition["timeToNextBlink"] = &TES3::AnimationData::timeToNextBlink;
+			usertypeDefinition["talkMorphEndTime"] = sol::readonly_property(&TES3::AnimationData::talkMorphEndTime);
+			usertypeDefinition["talkMorphStartTime"] = sol::readonly_property(&TES3::AnimationData::talkMorphStartTime);
 			usertypeDefinition["timings"] = sol::readonly_property(&TES3::AnimationData::getTimings);
 			usertypeDefinition["weaponSpeed"] = &TES3::AnimationData::weaponSpeed;
 
-			// Basic function bondings.
+			// Basic function bindings.
 			usertypeDefinition["getReference"] = &TES3::AnimationData::getReference;
 			usertypeDefinition["playAnimationGroup"] = &TES3::AnimationData::playAnimationGroup;
 			usertypeDefinition["playAnimationGroupForIndex"] = &TES3::AnimationData::playAnimationGroupForIndex;

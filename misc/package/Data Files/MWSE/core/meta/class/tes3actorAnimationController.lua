@@ -2,15 +2,13 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Works in conjuction with mobile AI to perform idle, movement, and attack animations. Holds data on the status of the current and next desired animation states for the different body sections that can be animated.
 --- @class tes3actorAnimationController
 --- @field alphaProperty niAlphaProperty The alpha property applied to the actor. Controls the opacity/opaqueness of the actor.
 --- @field animationData tes3animationData Access to the actor's animation data.
---- @field animGroupIdle integer The actor's idle animation. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
+--- @field animGroupIdle tes3.animationGroup The actor's idle animation. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 --- @field animGroupIdle2 integer 
---- @field animGroupMovement integer The actor's movement animations group. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
+--- @field animGroupMovement tes3.animationGroup The actor's movement animations group. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 --- @field attachTiming number 
 --- @field attackFollowTiming number 
 --- @field groundPlaneRotation tes3matrix33 The rotation of the actor around the up-down axis. When converted to euler angles, this axis corresponds to the z axis. The rotation range is [-PI, PI], where rotation of 0 corresponds to the game north.
@@ -19,7 +17,7 @@
 --- @field maxAttackTiming number This it the time of the actor's attack animation in their `.kf` file, when the attack animation is fully charged. It's updated for the attacks from different directions.
 --- @field minAttackTiming number This it the time of the actor's attack animation in their `.kf` file, at the earliest point the attack animation can end (when the attack button is just clicked and released). It's updated for the attacks from different directions.
 --- @field minHitTiming number This it the time of the actor's attack animation in their `.kf`, played during the hit phase for the minimally charged attack. It's updated for the attacks from different directions.
---- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor that this controller is responsible for.
+--- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor that this controller is responsible for.
 --- @field patchedOverrideState integer 
 --- @field remainingBlockTime number 
 --- @field shouldJump integer 

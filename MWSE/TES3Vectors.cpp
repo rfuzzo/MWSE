@@ -188,9 +188,21 @@ namespace TES3 {
 		return Vector3(x + vec3.x, y + vec3.y, z + vec3.z);
 	}
 
+	Vector3 Vector3::operator+(const float value) const {
+		return Vector3(x + value, y + value, z + value);
+	}
+
 	Vector3 Vector3::operator-(const Vector3& vec3) const {
 		return Vector3(x - vec3.x, y - vec3.y, z - vec3.z);
 	}
+
+	Vector3 Vector3::operator-(const float value) const {
+		return Vector3(x - value, y - value, z - value);
+	}
+
+	Vector3 Vector3::operator-() const {
+		return Vector3(-x, -y, -z);
+	};
 
 	Vector3 Vector3::operator*(const Vector3& vec3) const {
 		return Vector3(x * vec3.x, y * vec3.y, z * vec3.z);
@@ -617,6 +629,34 @@ namespace TES3 {
 		return result;
 	}
 
+	Vector3 Matrix33::getForwardVector() {
+		return Vector3(m0.y, m1.y, m2.y);
+	}
+
+	Vector3 Matrix33::getRightVector() {
+		return Vector3(m0.x, m1.x, m2.x);
+	}
+
+	Vector3 Matrix33::getUpVector() {
+		return Vector3(m0.z, m1.z, m2.z);
+	}
+
+	void Matrix33::lookAt(Vector3 direction, Vector3 worldUp) {
+		auto forward = direction.normalized();
+		auto left = worldUp.crossProduct(&forward);
+		left.normalize();
+		auto up = forward.crossProduct(&left);
+		m0.x = -left.x;
+		m1.x = -left.y;
+		m2.x = -left.z;
+		m0.y = forward.x;
+		m1.y = forward.y;
+		m2.y = forward.z;
+		m0.z = up.x;
+		m1.z = up.y;
+		m2.z = up.z;
+	};
+
 	//
 	// Matrix44
 	//
@@ -811,9 +851,58 @@ namespace TES3 {
 	// Transform
 	//
 
+	Transform::Transform() {
+		this->toIdentity();
+	}
+
+	Transform::Transform(const Matrix33& rotation, const Vector3& translation, const float scale) :
+		rotation(rotation),
+		translation(translation),
+		scale(scale)
+	{
+	}
+
+	Transform Transform::operator*(const Transform& transform) {
+		return {
+			rotation * transform.rotation,
+			rotation * transform.translation * scale + translation,
+			scale * transform.scale
+		};
+	}
+
+	Vector3 Transform::operator*(const Vector3& vector) {
+		return rotation * vector * scale + translation;
+	}
+
+	bool Transform::invert(Transform* out) const {
+		if (scale == 0.0f) {
+			return false;
+		}
+		bool success = rotation.invert(&out->rotation);
+		if (!success) {
+			return false;
+		}
+		out->scale = 1.0f / scale;
+		out->translation = -(out->rotation * translation * out->scale);
+		return true;
+	}
+
+	std::tuple<Transform, bool> Transform::invert() const {
+		auto transform = Transform();
+		bool valid = invert(&transform);
+		return std::make_tuple(transform, valid);
+	}
+
 	Transform Transform::copy() const {
 		return *this;
 	}
 
+	void Transform::toIdentity() {
+		rotation.toIdentity();
+		translation.x = 0.0f;
+		translation.y = 0.0f;
+		translation.z = 0.0f;
+		scale = 1.0f;
+	}
 }
 

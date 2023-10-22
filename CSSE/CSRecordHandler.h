@@ -5,7 +5,7 @@
 #include "NIIteratedList.h"
 #include "NIProperty.h"
 
-#include "BasicLinkedList.h"
+#include "StlList.h"
 #include "LinkedObjectsList.h"
 
 namespace se::cs {
@@ -18,7 +18,12 @@ namespace se::cs {
 
 	struct RecordHandler {
 		struct GameSettingsContainer {
-
+			HWND hFilteredSettingsList;
+			HWND hSettingsTabs;
+			int currentTabLParam;
+			int unknown_0xC;
+			GameSetting* gameSettings[1520]; // 0x10
+			int unknown_0x17D0;
 		};
 		struct Substructure_9B10 {
 			BYTE padding[0x960];
@@ -32,21 +37,21 @@ namespace se::cs {
 		int unknown_0xC;
 		ModelLoader* modelLoader; // 0x10
 		GameSettingsContainer* gameSettingsHandler; // 0x14
-		NI::IteratedList<BaseObject*>* races; // 0x18
+		NI::IteratedList<Race*>* races; // 0x18
 		NI::IteratedList<LandTexture*>* landTextures; // 0x1C
-		NI::IteratedList<BaseObject*>* classes; // 0x20
-		NI::IteratedList<BaseObject*>* factions; // 0x24
+		NI::IteratedList<Class*>* classes; // 0x20
+		NI::IteratedList<Faction*>* factions; // 0x24
 		NI::IteratedList<Script*>* scripts; // 0x28
 		int unknown_0x2C;
 		int unknown_0x30;
 		int unknown_0x34;
 		NI::IteratedList<Dialogue*>* dialogues; // 0x38
-		NI::IteratedList<BaseObject*>* regions; // 0x3C
+		NI::IteratedList<Region*>* regions; // 0x3C
 		NI::IteratedList<BaseObject*>* birthsigns; // 0x40
 		NI::IteratedList<BaseObject*>* startScripts; // 0x44
 		Skill_dummy skills[27]; // 0x48
 		MagicEffect_dummy magicEffects[143]; // 0x558
-		BasicLinkedList<BaseObject*>* lights; // 0x9B0C
+		StlList<Light*>* lights; // 0x9B0C
 		Substructure_9B10 unknown_0x9B10;
 		int unknown_0xA470;
 		int unknown_0xA474;
@@ -64,9 +69,9 @@ namespace se::cs {
 		int unknown_0xABA8;
 		int unknown_0xABAC;
 		NI::Pointer<NI::Property> handlerCollisionWireframeProperty; // 0xABB0
-		BasicLinkedList<GameFile*>* availableDataFiles; // 0x1BB4
+		StlList<GameFile*>* availableDataFiles; // 0x1BB4
 		GameFile* activeGameFiles[256]; // 0xABB8
-		BasicLinkedList<BaseObject*>* cells; // 0xAFB8
+		StlList<Cell*>* cells; // 0xAFB8
 		int unknown_0xAFBC;
 		int unknown_0xAFC0;
 		char unknown_0xAFC4[260];
@@ -92,6 +97,17 @@ namespace se::cs {
 		size_t getCellCount() const;
 		Cell* getCellByIndex(size_t index) const;
 		Cell* getCellByID(const char* id) const;
+
+		const char* getBaseAnimation(int sex, bool firstPerson = false) const;
+		bool isBaseAnimation(const char* animation) const;
+
+		GameSetting* getGameSettingForSkill(int id) const;
+		GameSetting* getGameSettingForEffect(int id) const;
+
+		void getNameForEffect(char* buffer, size_t bufferSize, int effect, int attribute, int skill) const;
+
+		GameFile* getAvailableGameFileByIndex(unsigned int index) const;
 	};
 	static_assert(sizeof(RecordHandler) == 0xB0F8, "RecordHandler failed size validation");
+	static_assert(sizeof(RecordHandler::GameSettingsContainer) == 0x17D4, "RecordHandler::GameSettingsContainer failed size validation");
 }

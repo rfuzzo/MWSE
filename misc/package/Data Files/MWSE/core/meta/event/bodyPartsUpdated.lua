@@ -2,12 +2,10 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- This event is triggered when an actor's body parts have finished updating. This typically triggers when an actor is first rendered, or when their equipment changes.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/events/bodyPartsUpdated).
 --- @class bodyPartsUpdatedEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
---- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor whose body parts were updated.
+--- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor whose body parts were updated.
 --- @field reference tes3reference *Read-only*. The reference for the actor whose body parts were updated.

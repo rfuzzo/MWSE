@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core light object. This isn't actually a light in the rendering engine, but something like a lamp or torch.
 --- @class tes3light : tes3item, tes3physicalObject, tes3object, tes3baseObject
 --- @field canCarry boolean Access to the light's flags, determining if the light can be carried.
@@ -14,7 +12,7 @@
 --- @field isDynamic boolean Access to the light's flags, determining if the light affects dynamically moving objects.
 --- @field isFire boolean Access to the light's flags, determining if the light represents flame.
 --- @field isNegative boolean Access to the light's flags, determining if the object creates darkness.
---- @field isOffByDefault boolean Access to the light's flags, determining if the light won't be active initially.
+--- @field isOffByDefault boolean If true the light won't be active initially, and will only be lit when held by an actor.
 --- @field mesh string The path to the object's mesh.
 --- @field name string The player-facing name for the object.
 --- @field pulses boolean Access to the light's flags, determining if the light attenuation pulses.
@@ -26,6 +24,23 @@
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
 tes3light = {}
+
+--- Creates a copy of this object.
+--- @param params tes3light.createCopy.params This table accepts the following values:
+--- 
+--- `id`: string? — *Optional*. The new object's ID. If one is not provided, a randomly generated one will be used.
+--- 
+--- `addToObjectList`: boolean? — *Default*: `true`. If true, the object will be added to the data handler. If this is false, the new object may not have a randomly generated ID. Do not use this without knowing the implications.
+--- 
+--- `sourceless`: boolean? — *Default*: `false`. If true, the object will be made sourceless, and will not be serialized to the save game. If the object is copied outside of a save game, the object will **always** be sourceless.
+--- @return tes3light newObject No description yet available.
+function tes3light:createCopy(params) end
+
+---Table parameter definitions for `tes3light.createCopy`.
+--- @class tes3light.createCopy.params
+--- @field id string? *Optional*. The new object's ID. If one is not provided, a randomly generated one will be used.
+--- @field addToObjectList boolean? *Default*: `true`. If true, the object will be added to the data handler. If this is false, the new object may not have a randomly generated ID. Do not use this without knowing the implications.
+--- @field sourceless boolean? *Default*: `false`. If true, the object will be made sourceless, and will not be serialized to the save game. If the object is copied outside of a save game, the object will **always** be sourceless.
 
 --- Gets the time remaining for a light, given a `tes3itemData`, `tes3reference`, or `tes3equipmentStack`.
 --- @param data tes3reference|tes3itemData|tes3equipmentStack No description yet available.

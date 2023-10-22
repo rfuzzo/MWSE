@@ -91,6 +91,8 @@ namespace TES3 {
 		// This is true everywhere but when checking if the game needs to declone inventories.
 		Actor* getActor();
 
+		int getItemCount(Item* item);
+		int getItemCount_lua(sol::object itemOrItemId);
 		bool containsItem(Item * item, ItemData * data = nullptr);
 
 		float calculateContainedWeight() const;

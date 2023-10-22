@@ -1,9 +1,16 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.settings.TextField")
+
+--- @class mwseMCMParagraphField
 local ParagraphField = Parent:new()
 
 function ParagraphField:enable()
 	self.elements.inputField.text = self.variable.value
 
+	--- @param element tes3uiElement
 	local function registerAcquireText(element)
 		element:register("mouseClick", function()
 			tes3ui.acquireTextInput(self.elements.inputField)
@@ -14,6 +21,7 @@ function ParagraphField:enable()
 	registerAcquireText(self.elements.textInput)
 end
 
+--- @param element tes3uiElement
 function ParagraphField:registerEnterKey(element)
 	element:register("keyEnter", function()
 		local inputController = tes3.worldController.inputController
@@ -27,6 +35,7 @@ function ParagraphField:registerEnterKey(element)
 	end)
 end
 
+--- @param parentBlock tes3uiElement
 function ParagraphField:makeComponent(parentBlock)
 	local border = parentBlock:createBlock()
 	border.widthProportional = 1.0
@@ -55,6 +64,7 @@ function ParagraphField:makeComponent(parentBlock)
 
 	-- mouseOvers
 	table.insert(self.mouseOvers, self.elements.label)
+	--- @param children tes3uiElement[]
 	local function addMouseovers(children)
 		for _, element in ipairs(children) do
 			table.insert(self.mouseOvers, element)

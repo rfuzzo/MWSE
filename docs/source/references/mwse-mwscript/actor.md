@@ -118,7 +118,7 @@ This is a wrapper for the vanilla Equip function that can take variable input.
 
 **Parameters:**
 
-- `long` **attributeID**: The [Attribute](../../attributes) ID to get the value of.
+- `long` **attributeID**: The [Attribute](../attributes.md) ID to get the value of.
 
 **Returned:**
 
@@ -136,7 +136,7 @@ Returns the current value of the referenced object's attribute.
 
 **Parameters:**
 
-- `long` **attributeID**: The [Attribute](../../attributes) ID to get the value of.
+- `long` **attributeID**: The [Attribute](../attributes.md) ID to get the value of.
 
 **Returned:**
 
@@ -169,7 +169,7 @@ Returns the base amount of barter gold assigned to the NPC (or creature). This i
 
 **Parameters:**
 
-- `long` **skillID**: The [Skill ID](../../skills) to get the value of.
+- `long` **skillID**: The [Skill ID](../skills.md) to get the value of.
 
 **Returned:**
 
@@ -289,7 +289,7 @@ Returns a reference to the reference NPC/creature's combat target, or `0` if the
 
 **Returned:**
 
-- `long` **objectType**: The [Object Type](../../object-types) of the equipped magical source.
+- `long` **objectType**: The [Object Type](../object-types.md) of the equipped magical source.
 - `string` **objectID**: The object ID of the spell or enchantment selected.
 
 Returns the currently equipped spell or enchanted item. This is specifically the object that appears in the equipped magic slot and includes on-use magical items as well as spells.
@@ -382,7 +382,7 @@ Index | Type      | Contents
 8     | `long`    | Playable flag.
 9     | `long`    | Beast flag.
 
-The skill bonuses array begins with index 0 holding the number of skill bonuses (a value between 0 and 7). Pairs of values are then returned. The odd indexes hold the [Skill](../../skills) while the even indexes hold the bonus to the given skill.
+The skill bonuses array begins with index 0 holding the number of skill bonuses (a value between 0 and 7). Pairs of values are then returned. The odd indexes hold the [Skill](../skills.md) while the even indexes hold the bonus to the given skill.
 
 The starting attributes array contains the following values:
 
@@ -453,7 +453,7 @@ Value  | Service
 
 **Parameters:**
 
-- `long` **skillID**: The [Skill](../../skills) ID to get the value of.
+- `long` **skillID**: The [Skill](../skills.md) ID to get the value of.
 
 **Returned:**
 
@@ -531,7 +531,7 @@ Returns `1` if the NPC is female and 0 otherwise.
 
 **Parameters:**
 
-- `long` **attributeID**: The [Attribute](../../attributes) ID to modify.
+- `long` **attributeID**: The [Attribute](../attributes.md) ID to modify.
 - `float` **value**: The value to modify the attribute by.
 
 **Returned:**

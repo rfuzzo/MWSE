@@ -3,6 +3,7 @@
 #include "LuaManager.h"
 
 #include "LuaJournalEvent.h"
+#include "LuaDialogueFilteredEvent.h"
 
 #include "LuaUtil.h"
 
@@ -13,6 +14,27 @@
 #include "TES3WorldController.h"
 
 namespace TES3 {
+
+	//
+	// DialogueName
+	//
+
+	nonstd::span<DialogueName> DialogueName::getVoices() {
+		return nonstd::span(reinterpret_cast<DialogueName*>(0x793248), (size_t)VoiceType::COUNT);
+	}
+
+	nonstd::span<DialogueName> DialogueName::getGreetings() {
+		return nonstd::span(reinterpret_cast<DialogueName*>(0x793280), (size_t)GreetingType::COUNT);
+	}
+
+	nonstd::span<DialogueName> DialogueName::getResponses() {
+		return nonstd::span(reinterpret_cast<DialogueName*>(0x7932D0), (size_t)ResponseType::COUNT);
+	}
+
+	//
+	// Dialogue
+	//
+
 	const char* Dialogue::getObjectID() const {
 		return name;
 	}
@@ -101,18 +123,7 @@ namespace TES3 {
 		return nullptr;
 	}
 
-	DialogueInfo* Dialogue::getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag) {
-		auto info = getFilteredInfo(actor, reference, flag);
-		if (info == nullptr) {
-			auto dialogue = getDialogue(3, 0);
-			if (dialogue) {
-				info = dialogue->getFilteredInfo(actor, reference, flag);
-			}
-		}
-		return info;
-	}
-
-	const auto TES3_Dialogue_getFilteredInfo = reinterpret_cast<DialogueInfo* (__thiscall*)(Dialogue*, Actor*, Reference*, bool)>(0x4B29E0);
+	const auto TES3_Dialogue_getFilteredInfo = reinterpret_cast<DialogueInfo * (__thiscall*)(Dialogue*, Actor*, Reference*, bool)>(0x4B29E0);
 	DialogueInfo* Dialogue::getFilteredInfo(Actor* actor, Reference* reference, bool flag) {
 		// Cache some heavier values.
 		if (actor->objectType == ObjectType::NPC) {
@@ -126,9 +137,22 @@ namespace TES3 {
 		auto result = TES3_Dialogue_getFilteredInfo(this, actor, reference, flag);
 
 		// Clean any cached values.
-		cachedActorDisposition = {};
+		cachedActorDisposition.reset();
 
 		return result;
+	}
+
+	DialogueInfo* Dialogue::getFilteredInfoWithContext(Actor* actor, Reference* reference, bool flag, GetFilteredInfoContext context) {
+		auto info = getFilteredInfo(actor, reference, flag);
+		if (info == nullptr) {
+			return nullptr;
+		}
+
+		if (mwse::lua::event::DialogueFilteredEvent::getEventEnabled()) {
+			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::DialogueFilteredEvent(this, info, actor, reference, context));
+		}
+
+		return info;
 	}
 
 	std::string Dialogue::toJson() {
@@ -146,13 +170,57 @@ namespace TES3 {
 		return addToJournal(index, actor);
 	}
 
+	DialogueInfo* Dialogue::getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag, GetFilteredInfoContext context) {
+		auto info = getFilteredInfoWithContext(actor, reference, flag, context);
+		if (info == nullptr) {
+			auto dialogue = getDialogue(3, 0);
+			if (dialogue) {
+				info = dialogue->getFilteredInfoWithContext(actor, reference, flag, context);
+			}
+		}
+		return info;
+	}
+
 	DialogueInfo* Dialogue::getDeepFilteredInfo_lua(sol::table params) {
-		TES3::MobileActor* mobile = mwse::lua::getOptionalParamMobileActor(params, "actor");
-		return getDeepFilteredInfo(reinterpret_cast<TES3::Actor*>(mobile->reference->baseObject), mobile->reference, true);
+		using namespace mwse::lua;
+		using namespace mwse::lua::event;
+		const auto mobile = getOptionalParamMobileActor(params, "actor");
+		const auto context = (GetFilteredInfoContext)getOptionalParam(params, "context", (int)GetFilteredInfoContext::Script);
+		return getDeepFilteredInfo(reinterpret_cast<TES3::Actor*>(mobile->reference->baseObject), mobile->reference, true, context);
 	}
 
 	DialogueInfo* Dialogue::getJournalInfo(sol::optional<int> index) const {
 		return getJournalInfoForIndex(index.value_or(journalIndex));
+	}
+
+	VoiceType Dialogue::getVoiceType() const {
+		const auto voices = DialogueName::getVoices();
+		for (size_t i = 0; i < voices.size(); ++i) {
+			if (voices[i].dialogue == this) {
+				return (VoiceType)i;
+			}
+		}
+		return VoiceType::Invalid;
+	}
+
+	GreetingType Dialogue::getGreetingType() const {
+		const auto greetings = DialogueName::getGreetings();
+		for (size_t i = 0; i < greetings.size(); ++i) {
+			if (greetings[i].dialogue == this) {
+				return (GreetingType)i;
+			}
+		}
+		return GreetingType::Invalid;
+	}
+
+	ResponseType Dialogue::getResponseType() const {
+		const auto responses = DialogueName::getResponses();
+		for (size_t i = 0; i < responses.size(); ++i) {
+			if (responses[i].dialogue == this) {
+				return (ResponseType)i;
+			}
+		}
+		return ResponseType::Invalid;
 	}
 
 	const auto TES3_getDialogue = reinterpret_cast<Dialogue* (__cdecl*)(int, int)>(0x4B2C00);

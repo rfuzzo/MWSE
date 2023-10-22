@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Represents 2D arrays of pixel values, as well as pyramids of multiple mipmap levels, each of 2D arrays of pixel values. Also contains information representing the format of the pixels and dimensions of the arrays.
 --- @class niPixelData : niObject
 --- @field bytesPerPixel number *Read-only*. The number of bytes per pixel.
@@ -26,13 +24,13 @@ function niPixelData:createSourceTexture() end
 --- @param mipMapLevel number? *Default*: `0`. The mipmap level to fill with the provided color. The finest (largest) mipmap level is level 0.
 function niPixelData:fill(data, mipMapLevel) end
 
---- Returns the height of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
---- @param mipMapLevel number? *Default*: `0`. No description yet available.
+--- Returns the height of the mipmap level at the given index, where level 1 is the finest (largest) mipmap level, and level `mipMapLevels` is the coarsest (smallest) mipmap level.
+--- @param mipMapLevel number? *Default*: `1`. No description yet available.
 --- @return number result No description yet available.
 function niPixelData:getHeight(mipMapLevel) end
 
---- Returns the width of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
---- @param mipMapLevel number? *Default*: `0`. No description yet available.
+--- Returns the width of the mipmap level at the given index, where level 1 is the finest (largest) mipmap level, and level `mipMapLevels` is the coarsest (smallest) mipmap level.
+--- @param mipMapLevel number? *Default*: `1`. No description yet available.
 --- @return number result No description yet available.
 function niPixelData:getWidth(mipMapLevel) end
 

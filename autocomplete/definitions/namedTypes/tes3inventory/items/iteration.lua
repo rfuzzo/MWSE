@@ -17,6 +17,10 @@ local function iterItems(ref)
 			if stack.variables then
 				for _, data in pairs(stack.variables) do
 					if data then
+						-- Note that data.count is always 1 for items in inventories.
+						-- That field is only relevant for items in the game world, which
+						-- are stored as references. In that case tes3itemData.count field
+						-- contains the amount of items in the in-game-world stack of items.
 						coroutine.yield(item, data.count, data)
 						count = count - data.count
 					end

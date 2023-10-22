@@ -176,6 +176,33 @@ namespace TES3 {
 		actorFlags |= (value << ActorFlagCreature::BloodBitsFirst);
 	}
 
+	int Actor::getEquipmentValue(bool useDurability) const {
+		int value = 0;
+		for (const auto& stack : equipment) {
+			const auto item = static_cast<Item*>(stack->object);
+			if (item->objectType == ObjectType::Armor || item->objectType == ObjectType::Clothing) {
+				value += item->getBaseBarterValue(false, useDurability);
+			}
+		}
+		return value;
+	}
+
+	int Actor::getEquipmentValue_lua(sol::table params) const {
+		const auto useDurability = mwse::lua::getOptionalParam(params, "useDurability", false);
+		return getEquipmentValue(useDurability);
+	}
+
+	sol::optional<int> Actor::getSoulValue() {
+		switch (objectType) {
+		case ObjectType::Creature:
+			return static_cast<Creature*>(this)->getSoulValue();
+		case ObjectType::NPC:
+			return static_cast<NPC*>(this)->getSoulValue();
+		}
+
+		return {};
+	}
+
 	SpellList* Actor::getSpellList() {
 		if (objectType == TES3::ObjectType::NPC) {
 			if (isBaseActor()) {

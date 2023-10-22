@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A 4 by 4 matrix. You can perform following arithmetic with this type: `==`.
 --- @class tes3matrix44
 --- @operator add(tes3matrix44): tes3matrix44
@@ -17,10 +15,10 @@
 tes3matrix44 = {}
 
 --- Creates a new 4 by 4 matrix from 4 provided vectors or 16 numbers. Creates an empty matrix if nothing is provided.
---- @param w0 number? *Default*: `0`. No description yet available.
---- @param x0 number? *Default*: `0`. No description yet available.
---- @param y0 number? *Default*: `0`. No description yet available.
---- @param z0 number? *Default*: `0`. No description yet available.
+--- @param w0 number|tes3vector4|nil *Default*: `0`. No description yet available.
+--- @param x0 number|tes3vector4|nil *Default*: `0`. No description yet available.
+--- @param y0 number|tes3vector4|nil *Default*: `0`. No description yet available.
+--- @param z0 number|tes3vector4|nil *Default*: `0`. No description yet available.
 --- @param w1 number? *Default*: `0`. No description yet available.
 --- @param x1 number? *Default*: `0`. No description yet available.
 --- @param y1 number? *Default*: `0`. No description yet available.
@@ -33,12 +31,8 @@ tes3matrix44 = {}
 --- @param x3 number? *Default*: `0`. No description yet available.
 --- @param y3 number? *Default*: `0`. No description yet available.
 --- @param z3 number? *Default*: `0`. No description yet available.
---- @param w tes3vector4? *Optional*. No description yet available.
---- @param x tes3vector4? *Optional*. No description yet available.
---- @param y tes3vector4? *Optional*. No description yet available.
---- @param z tes3vector4? *Optional*. No description yet available.
 --- @return tes3matrix44 matrix No description yet available.
-function tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3, w, x, y, z) end
+function tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3) end
 
 --- Creates a copy of the matrix.
 --- @return tes3matrix44 result No description yet available.
@@ -46,4 +40,8 @@ function tes3matrix44:copy() end
 
 --- Zeroes out all values in the matrix.
 function tes3matrix44:toZero() end
+
+--- Converts the matrix to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3matrix44:__tostring() end
 

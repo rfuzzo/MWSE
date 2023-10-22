@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core game object used for storing both active and non-dynamic gameplay data.
 --- @class tes3dataHandler
 --- @field backgroundThread number *Read-only*. A Windows handle to the background processing thread.
@@ -18,15 +16,18 @@
 --- @field dontThreadLoad boolean Access to dontThreadLoad setting.
 --- @field exteriorCells tes3dataHandlerExteriorCellData[] *Read-only*. A table of nine [`tes3cellExteriorData`](https://mwse.github.io/MWSE/types/tes3cellExteriorData/) objects for all loaded exterior cells.
 --- @field lastExteriorCell tes3cell *Read-only*. Access to the last visited exterior cell.
+--- @field lowestZInCurrentCell number *Read-only*. The Z coordinate of the lowest point in the current cell, which is the bottom of the bounding box of the lowest object. Only valid for interiors.
+--- 
+--- This is used by the engine to check for the player falling out of bounds.
 --- @field mainThread number *Read-only*. A Windows handle to the main execution thread.
 --- @field mainThreadId number *Read-only*. The thread ID for the main execution thread.
 --- @field nonDynamicData tes3nonDynamicData *Read-only*. A child structure where core game objects are held.
 --- @field suppressThreadLoad boolean Access to suppressThreadLoad setting.
 --- @field threadSleepTime number *Read-only*. No description yet available.
 --- @field useCellTransitionFader boolean An engine flag that controls if there is a fade in/out between cells.
---- @field worldLandscapeRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Access to the root of the scene graph of all the currently loaded terrain. It's nine cells in total when the player is in exterior cell. While the player is in interior cell this node is culled.
---- @field worldObjectRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Access to the root of the scene graph containing all the static objects, and lights that can't be picked up. In addition, the player's scene graph is a child node of this root node.
---- @field worldPickObjectRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Access to the root of the scene graph containing all the objects that can be interacted with (NPCs, items, harvestable plants, activators, doors...), but also some objects that are only rendered in the Construction Set such as sound emmiting activator objects with EditorMarker.NIF mesh.
+--- @field worldLandscapeRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Access to the root of the scene graph of all the currently loaded terrain. It's nine cells in total when the player is in exterior cell. While the player is in interior cell this node is culled.
+--- @field worldObjectRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Access to the root of the scene graph containing all the static objects, and lights that can't be picked up. In addition, the player's scene graph is a child node of this root node.
+--- @field worldPickObjectRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Access to the root of the scene graph containing all the objects that can be interacted with (NPCs, items, harvestable plants, activators, doors...), but also some objects that are only rendered in the Construction Set such as sound emmiting activator objects with EditorMarker.NIF mesh.
 tes3dataHandler = {}
 
 --- No description yet available.

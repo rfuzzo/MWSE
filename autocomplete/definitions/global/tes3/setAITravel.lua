@@ -6,7 +6,7 @@ return {
 		type = "table",
 		tableParams = {
 			{ name = "reference", type = "tes3mobileActor|tes3reference" },
-			{ name = "destination", type = "tes3vector3|table" },
+			{ name = "destination", type = "tes3vector3|number[]" },
 			{ name = "reset", type = "boolean", optional = true, default = true },
 		},
 	}},

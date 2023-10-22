@@ -2,14 +2,12 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Class used in the picking intersection system within the game engine. Using a ray, the engine performs picking operations on a scene graph or any subtree. Given a ray and a subtree, the subtree is traversed and matching nodes are added to an array.
 --- @class niPick
---- @field coordinateType integer The coordinate type for the object. Maps to values in [`ni.pickCoordinateType`](https://mwse.github.io/MWSE/references/ni/pick-coordinate-types/) table.
+--- @field coordinateType ni.pickCoordinateType The coordinate type for the object. Maps to values in [`ni.pickCoordinateType`](https://mwse.github.io/MWSE/references/ni/pick-coordinate-types/) table.
 --- @field frontOnly boolean If true, back face triangles (those with clockwise winding order) are culled prior to intersection calculations. If false, intersections of ray with triangles are computed regardless of triangle orientation.
 ---
---- @field intersectType integer The intersect type for the object. Maps to values in [`ni.pickIntersectType`](https://mwse.github.io/MWSE/references/ni/pick-intersection-types/) table.
+--- @field intersectType ni.pickIntersectType The intersect type for the object. Maps to values in [`ni.pickIntersectType`](https://mwse.github.io/MWSE/references/ni/pick-intersection-types/) table.
 --- @field lastAddedRecord niPickRecord The pick record that was last added to the object.
 --- @field observeAppCullFlag boolean If true, the pick stops if it encounters an object with the 'app culled' flag set.  If false, the pick will continue over 'app culled' objects.
 ---
@@ -20,7 +18,7 @@
 --- @field returnSmoothNormal boolean If true and if vertex normals exist, then a unit-length normal vector is interpolated from the vertex normals and returned during the picking operation.
 --- @field returnTexture boolean If true, texture coordinates are returned for the point of intersection of triangles during the picking operation.
 --- @field root niBillboardNode|niCollisionSwitch|niNode|niSwitchNode The root of the scene graph on which the next picking operation will be performed.
---- @field sortType integer The sort type for the object. Maps to values in [`ni.pickSortType`](https://mwse.github.io/MWSE/references/ni/pick-sort-types/) table.
+--- @field sortType ni.pickSortType The sort type for the object. Maps to values in [`ni.pickSortType`](https://mwse.github.io/MWSE/references/ni/pick-sort-types/) table.
 niPick = {}
 
 --- Clears the results of any previous picking operation.

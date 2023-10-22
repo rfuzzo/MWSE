@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An NPC object that has been cloned. Typically represents an NPC that has been instanced in the world.
 --- @class tes3npcInstance : tes3actor, tes3physicalObject, tes3object, tes3baseObject
 --- @field aiConfig tes3aiConfig *Read-only*. A substructure off of actors that contains information on the current AI configuration.
@@ -27,7 +25,7 @@
 --- @field level number *Read-only*. Quick access to the base NPC's level.
 --- @field magicka number *Read-only*. Quick access to the base NPC's magicka.
 --- @field mesh string The path to the object's mesh.
---- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile that the object is represented by.
+--- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile that the object is represented by.
 --- @field name string Quick access to the base NPC's name.
 --- @field race tes3race *Read-only*. Quick access to the base NPC's race.
 --- @field reference tes3reference *Read-only*. The reference that the object is represented by.
@@ -35,10 +33,10 @@
 --- @field script tes3script *Read-only*. Quick access to the base NPC's script.
 --- @field skills number[] Quick access to the base NPC's skills.
 --- @field soul number|nil The soul value for this NPC's base object. This is typically `nil`, unless the `calcSouLValue` event provides one for the base actor.
---- @field spells tes3spellList *Read-only*. Quick access to the base NPC's spell list. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, spell in pairs(npc.spells.iterator) do print(spell.name) end`
+--- @field spells tes3spellList|tes3spell[] *Read-only*. Quick access to the NPC's spell list. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is iterated over using `pairs`. E.g. `for _, spell in pairs(npc.spells) do print(spell.name) end`
 --- @field weight number *Read-only*. Convenience access to the NPCs (race) weight.
 tes3npcInstance = {}
 
---- Causes the NPC to reevaluate his/hers equipment choices and equip the best available.
+--- Causes the NPC to reevaluate his/hers equipment choices and equip the best available. Then, the visible body parts will be updated.
 function tes3npcInstance:reevaluateEquipment() end
 

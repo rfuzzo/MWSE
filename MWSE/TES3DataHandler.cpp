@@ -32,42 +32,62 @@ namespace TES3 {
 	Cell* DataHandler::previousVisitedCell = nullptr;
 	bool DataHandler::dontThreadLoad = false;
 	bool DataHandler::suppressThreadLoad = false;
-	const char* DataHandler::currentlyLoadingMesh = nullptr;
+	std::unordered_map<DWORD, std::string_view> DataHandler::currentlyLoadingMeshes = {};
+	std::recursive_mutex DataHandler::currentlyLoadingMeshesMutex = {};
+
+	std::string_view pushLoadingMesh(const std::string_view path) {
+		const auto threadId = GetCurrentThreadId();
+
+		DataHandler::currentlyLoadingMeshesMutex.lock();
+
+		std::string_view previousMesh;
+		const auto existing = DataHandler::currentlyLoadingMeshes.find(threadId);
+		if (existing != DataHandler::currentlyLoadingMeshes.end()) {
+			previousMesh = existing->second;
+			DataHandler::currentlyLoadingMeshes.erase(existing);
+		}
+
+		if (!path.empty()) {
+			DataHandler::currentlyLoadingMeshes[threadId] = path;
+		}
+
+		DataHandler::currentlyLoadingMeshesMutex.unlock();
+
+		return previousMesh;
+	}
 
 	//
 	// MeshData
 	//
 
 	const auto TES3_MeshData_loadMesh = reinterpret_cast<NI::Node * (__thiscall*)(MeshData*, const char*)>(0x4EE0A0);
-	NI::Node* MeshData::loadMesh(const char* path) {
+	NI::Node* MeshData::loadMesh(const char* rawPath) {
 		// Allow changing the desired mesh path.
-		std::string meshPath = path;
+		std::string meshPath = rawPath;
 		if (mwse::lua::event::MeshLoadEvent::getEventEnabled()) {
 			auto handle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::table response = handle.triggerEvent(new mwse::lua::event::MeshLoadEvent(path));
+			sol::table response = handle.triggerEvent(new mwse::lua::event::MeshLoadEvent(rawPath));
 			if (response.valid()) {
-				meshPath = response.get_or("path", path);
+				meshPath = response.get_or("path", rawPath);
 			}
 		}
-		path = meshPath.c_str();
 
 		// Store the loading path for debugging purposes.
-		auto previouslyLoadingMesh = DataHandler::currentlyLoadingMesh;
-		DataHandler::currentlyLoadingMesh = path;
+		auto previouslyLoadingMesh = pushLoadingMesh(meshPath);
 
 		// Check the loaded NIF count to see if anything new was loaded.
 		auto countBefore = NIFs->count;
 
 		// Actually load the mesh.
-		auto mesh = TES3_MeshData_loadMesh(this, path);
+		auto mesh = TES3_MeshData_loadMesh(this, meshPath.c_str());
 
 		// If the loaded mesh count increased, send off an event to 
 		if (mesh && NIFs->count > countBefore && mwse::lua::event::MeshLoadedEvent::getEventEnabled()) {
-			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MeshLoadedEvent(path, mesh));
+			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MeshLoadedEvent(meshPath.c_str(), mesh));
 		}
 
 		// Clean up debug information.
-		DataHandler::currentlyLoadingMesh = previouslyLoadingMesh;
+		pushLoadingMesh(previouslyLoadingMesh);
 
 		return mesh;
 	}
@@ -89,32 +109,30 @@ namespace TES3 {
 	};
 	static_assert(sizeof(LoadTempMeshNode) == sizeof(TES3::HashMap<char*, NI::Pointer<NI::AVObject>>::Node), "Temp mesh load node size mismatch!");
 
-	NI::Pointer<NI::Node> MeshData::loadMeshUncached(const char* path) {
+	NI::Pointer<NI::Node> MeshData::loadMeshUncached(const char* rawPath) {
 		// Allow changing the desired mesh path.
-		std::string meshPath = path;
+		std::string meshPath = rawPath;
 		if (mwse::lua::event::MeshLoadEvent::getEventEnabled()) {
 			auto handle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::table response = handle.triggerEvent(new mwse::lua::event::MeshLoadEvent(path));
+			sol::table response = handle.triggerEvent(new mwse::lua::event::MeshLoadEvent(rawPath));
 			if (response.valid()) {
-				meshPath = response.get_or("path", path);
+				meshPath = response.get_or("path", rawPath);
 			}
 		}
-		path = meshPath.c_str();
 
 		// Store the loading path for debugging purposes.
-		auto previouslyLoadingMesh = DataHandler::currentlyLoadingMesh;
-		DataHandler::currentlyLoadingMesh = path;
+		auto previouslyLoadingMesh = pushLoadingMesh(meshPath);
 
 		// Actually load the mesh.
-		auto mesh = LoadTempMeshNode(path).mesh;
+		auto mesh = LoadTempMeshNode(meshPath.c_str()).mesh;
 
 		// If the loaded mesh count increased, send off an event to 
 		if (mesh && mwse::lua::event::MeshLoadedEvent::getEventEnabled()) {
-			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MeshLoadedEvent(path, mesh));
+			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::MeshLoadedEvent(meshPath.c_str(), mesh));
 		}
 
 		// Clean up debug information.
-		DataHandler::currentlyLoadingMesh = previouslyLoadingMesh;
+		pushLoadingMesh(previouslyLoadingMesh);
 
 		return mesh;
 	}
@@ -219,7 +237,19 @@ namespace TES3 {
 			eventFileName += ".ess";
 		}
 
+		// Bugfix: Preserve lowestZInCurrentCell when reloading a save in an interior cell.
+		// The engine resets it to -FLT_MAX instead of recalculating it if the player is in the same cell before and after loading.
+		float* pLowestZInCurrentCell = reinterpret_cast<float*>(0x7B217C);
+		float previousLowestZInCurrentCell = *pLowestZInCurrentCell;
+
 		bool loaded = TES3_NonDynamicData_loadGameInGame(this, eventFileName.c_str());
+
+		// Bugfix: In interior, restore previous lowestZInCurrentCell if has been reset.
+		if (loaded && TES3::DataHandler::get()->currentInteriorCell != nullptr) {
+			if (*pLowestZInCurrentCell == -FLT_MAX) {
+				*pLowestZInCurrentCell = previousLowestZInCurrentCell;
+			}
+		}
 
 		// Pass a follow-up event if we successfully loaded and clear timers.
 		if (loaded) {
@@ -402,17 +432,18 @@ namespace TES3 {
 
 	const auto TES3_NonDynamicData_drawCellMapMarker = reinterpret_cast<void(__thiscall*)(TES3::NonDynamicData*, TES3::Cell*, int)>(0x4C8540);
 	void NonDynamicData::drawCellMapMarker(Cell* cell, int unused) {
-		// Fix crash when trying to render cells too far out.
-		if (cell->getGridY() < -27) {
-			return;
-		}
-
+		// Vanilla crash is patched in PatchUtil.cpp
 		TES3_NonDynamicData_drawCellMapMarker(this, cell, unused);
 	}
 
 	const auto TES3_NonDynamicData_getBaseAnimationFile = reinterpret_cast<const char* (__thiscall*)(const TES3::NonDynamicData*, int, int)>(0x4C2720);
 	const char* NonDynamicData::getBaseAnimationFile(int isFemale, int firstPerson) const {
 		return TES3_NonDynamicData_getBaseAnimationFile(this, isFemale, firstPerson);
+	}
+
+	const auto TES3_NonDynamicData_getGameFile = reinterpret_cast<GameFile* (__thiscall*)(TES3::NonDynamicData*, const char*)>(0x4BAF80);
+	GameFile* NonDynamicData::getGameFile(const char* name) {
+		return TES3_NonDynamicData_getGameFile(this, name);
 	}
 
 	std::reference_wrapper<Skill[27]> NonDynamicData::getSkills() {
@@ -426,7 +457,7 @@ namespace TES3 {
 	sol::table NonDynamicData::getMagicEffects_lua(sol::this_state ts) {
 		sol::state_view state = ts;
 		sol::table results = state.create_table();
-		for (auto itt : magicEffects->effectObjects) {
+		for (const auto& itt : magicEffects->effectObjects) {
 			results[itt.second->id + 1] = itt.second;
 		}
 		return results;
@@ -450,6 +481,10 @@ namespace TES3 {
 			auto macp = TES3::WorldController::get()->getMobilePlayer();
 			return macp->reference->position;
 		}
+	}
+
+	float DataHandler::getLowestZInCurrentCell() const {
+		return *reinterpret_cast<float*>(0x7B217C);
 	}
 
 	const auto TES3_DataHandler_addSound = reinterpret_cast<void(__thiscall*)(DataHandler*, Sound*, Reference*, int, unsigned char, float, bool, int)>(0x48BD40);

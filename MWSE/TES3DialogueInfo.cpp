@@ -4,25 +4,26 @@
 #include "LuaInfoFilterEvent.h"
 
 #include "TES3Actor.h"
+#include "TES3Cell.h"
 #include "TES3Class.h"
 #include "TES3DataHandler.h"
-#include "TES3Dialogue.h"
+#include "TES3DialogueFilterContext.h"
 #include "TES3Faction.h"
-#include "TES3MobileNPC.h"
+#include "TES3MobilePlayer.h"
+#include "TES3NPC.h"
 #include "TES3Race.h"
-#include "TES3Cell.h"
-
-#include "MemoryUtil.h"
 
 #include "BitUtil.h"
+#include "MemoryUtil.h"
+
+#include "MWSEConfig.h"
 
 namespace TES3 {
-	const auto TES3_DialogueInfo_getText = reinterpret_cast<const char* (__thiscall*)(DialogueInfo*)>(0x4B1B80);
+	const auto TES3_DialogueInfo_getText = reinterpret_cast<const char* (__thiscall*)(const DialogueInfo*)>(0x4B1B80);
 	const auto TES3_DialogueInfo_loadId = reinterpret_cast<bool(__thiscall*)(DialogueInfo*)>(0x4B1A10);
 	const auto TES3_DialogueInfo_unloadId = reinterpret_cast<void(__thiscall*)(DialogueInfo*)>(0x4AF3A0);
-	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(DialogueInfo*, Object*, Reference*, int, Dialogue*)>(0x4B0190);
 
-	const char* DialogueInfo::getText() {
+	const char* DialogueInfo::getText() const {
 		return TES3_DialogueInfo_getText(this);
 	}
 
@@ -34,13 +35,185 @@ namespace TES3 {
 		TES3_DialogueInfo_unloadId(this);
 	}
 
-	bool DialogueInfo::filter(Object * actor, Reference * reference, int source, Dialogue * dialogue) {
-		bool result = TES3_DialogueInfo_filter(this, actor, reference, source, dialogue);
+	bool DialogueInfo::filterVanillaReplacer(Object * speaker, Reference * reference, FilterSource source, Dialogue * dialogue) const {
+		if (getDeleted()) {
+			return false;
+		}
+
+		DialogueFilterContext context(speaker, reference, source, dialogue, this);
+
+		// Check for actor condition.
+		if (context.filterActor && context.speakerBaseActor != context.filterActor) {
+			return false;
+		}
+		if (context.speakerBaseActor->objectType == ObjectType::Creature && context.filterActor == nullptr) {
+			return false;
+		}
+
+		// Check for cell condition.
+		if (context.filterCell) {
+			auto playerCell = DataHandler::get()->currentCell;
+			if (!playerCell) {
+				return false;
+			}
+
+			std::string_view cellId = context.filterCell->getObjectID();
+			if (_strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0) {
+				return false;
+			}
+		}
+
+		// Check for player faction membership/rank.
+		if (context.filterPlayerFaction) {
+			if (!context.filterPlayerFaction->getPlayerJoined()) {
+				return false;
+			}
+			if (pcRank != -1 && pcRank > context.filterPlayerFaction->getEffectivePlayerRank()) {
+				return false;
+			}
+		}
+
+		// NPC only conditions.
+		if (context.speakerBaseActor->objectType == ObjectType::NPC) {
+			const auto speakerFaction = context.speakerBaseActor->getFaction();
+
+			// Check for race condition.
+			if (context.filterRace && context.speakerBaseActor->getRace() != context.filterRace) {
+				return false;
+			}
+
+			// Check for sex condition.
+			const auto npcIsFemale = (npcSex == 1);
+			if (npcSex != -1 && context.speakerBaseActor->isFemale() != npcIsFemale) {
+				return false;
+			}
+
+			// Check for class condition.
+			if (context.filterClass && context.speakerBaseActor->getClass() != context.filterClass) {
+				return false;
+			}
+
+			// Check for player faction membership/rank in speaker's faction.
+			if (pcRank != -1 && !context.filterPlayerFaction) {
+				if (speakerFaction == nullptr || pcRank > speakerFaction->getEffectivePlayerRank()) {
+					return false;
+				}
+			}
+
+			// Check for faction condition, with no-faction special case.
+			if (context.filterFaction) {
+				if (reinterpret_cast<int>(context.filterFaction) == -1 && speakerFaction != nullptr) {
+					return false;
+				}
+				if (speakerFaction != context.filterFaction) {
+					return false;
+				}
+			}
+
+			// Check for faction rank condition.
+			if (npcRank != -1 && (speakerFaction == nullptr || context.speakerBaseActor->getFactionRank() < npcRank)) {
+				return false;
+			}
+
+			// Check for disposition.
+			if (context.speakerMobile) {
+				const auto mobileNPC = static_cast<MobileNPC*>(context.speakerMobile);
+				// Service refusal disposition checks are flipped for some reason?
+				if (dialogue->getResponseType() == ResponseType::ServiceRefusal) {
+					if (source != FilterSource::None && disposition && mobileNPC->getDisposition() >= disposition) {
+						return false;
+					}
+				}
+				else if (source != FilterSource::None) {
+					if (mobileNPC->getDisposition() < disposition) {
+						return false;
+					}
+				}
+			}
+		}
+
+		// Check for conditionals.
+		for (auto i = 0; i < 6; ++i) {
+			auto& conditionalContext = context.conditionalContexts[i];
+			if (conditionalContext.conditional == nullptr) {
+				continue;
+			}
+
+			// Load the necessary data to compare against.
+			conditionalContext.load();
+
+			// Were we given an explicit result?
+			if (conditionalContext.resultOverride) {
+				if (conditionalContext.resultOverride.value()) {
+					continue;
+				}
+				else {
+					return false;
+				}
+			}
+
+			// Otherwise compare the value we got back.
+			if (conditionalContext.compareValue) {
+				const auto compareValue = conditionalContext.compareValue.value();
+				const auto compareAgainst = conditionalContext.conditional->compareValue;
+
+				bool conditionResult = false;
+				switch (conditionalContext.compareOperator) {
+				case DialogueConditionalComparator::Equal:
+					conditionResult = compareValue == compareAgainst;
+					break;
+				case DialogueConditionalComparator::NotEqual:
+					conditionResult = compareValue != compareAgainst;
+					break;
+				case DialogueConditionalComparator::Greater:
+					conditionResult = compareValue > compareAgainst;
+					break;
+				case DialogueConditionalComparator::GreaterEqual:
+					conditionResult = compareValue >= compareAgainst;
+					break;
+				case DialogueConditionalComparator::Less:
+					conditionResult = compareValue < compareAgainst;
+					break;
+				case DialogueConditionalComparator::LessEqual:
+					conditionResult = compareValue <= compareAgainst;
+					break;
+				default:
+#if _DEBUG
+					throw std::runtime_error("Invalid comparison operator specified.");
+#else
+					return false;
+#endif
+				}
+
+				if (conditionResult) {
+					continue;
+				} else {
+					return false;
+				}
+			}
+
+			// If we've fallen to this point then we have no input and some error condition is reached. Filter out.
+			return false;
+		}
+
+		// If nothing stopped us from getting to this point, congrats, we can use this info.
+		return true;
+	}
+
+	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(const DialogueInfo*, Object*, Reference*, DialogueInfo::FilterSource, Dialogue*)>(0x4B0190);
+	bool DialogueInfo::filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) {
+		auto result = false;
+		if (mwse::Configuration::ReplaceDialogueFiltering) {
+			result = filterVanillaReplacer(speaker, reference, source, dialogue);
+		}
+		else {
+			result = TES3_DialogueInfo_filter(this, speaker, reference, source, dialogue);
+		}
 
 		if (mwse::lua::event::InfoFilterEvent::getEventEnabled()) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
 			auto stateHandle = luaManager.getThreadSafeStateHandle();
-			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::InfoFilterEvent(this, actor, reference, source, dialogue, result));
+			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::InfoFilterEvent(this, speaker, reference, (int)source, dialogue, result));
 			sol::object passes = eventData["passes"];
 			if (passes.is<bool>()) {
 				result = passes.as<bool>();
@@ -91,6 +264,15 @@ namespace TES3 {
 			TES3_DialogueInfo_lastLoadedScript[length] = '\0';
 			strcpy(TES3_DialogueInfo_lastLoadedScript, text);
 		}
+	}
+
+	const char* DialogueInfo::getSoundPath() {
+		for (auto node = conditions; node; node = node->next) {
+			if (node->tag == DialogueInfoFilterType::SoundPath) {
+				return node->soundPath;
+			}
+		}
+		return nullptr;
 	}
 
 	sol::optional<std::string> DialogueInfo::getID() {

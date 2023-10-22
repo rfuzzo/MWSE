@@ -2,9 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
---- This event is triggered when a reference is deactivated.
+--- This event is triggered when a reference is deactivated because it has been removed from the world, or is no longer in an active cell.
 --- @class referenceDeactivatedEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
 --- @field reference tes3reference *Read-only*. The reference which was deactivated.

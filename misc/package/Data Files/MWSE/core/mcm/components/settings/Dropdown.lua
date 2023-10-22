@@ -1,5 +1,10 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.settings.Setting")
 
+--- @class mwseMCMDropdown
 local Dropdown = Parent:new()
 Dropdown.idleColor = tes3ui.getPalette("normal_color")
 Dropdown.overColor = tes3ui.getPalette("normal_over_color")
@@ -22,22 +27,14 @@ function Dropdown:enable()
 	end)
 end
 
-function Dropdown:update()
-	for _, option in ipairs(self.options) do
-		if option.label == self.elements.textBox.text then
-			self.variable.value = option.value
-		end
-	end
-	Parent.update(self)
-end
-
+--- @param option mwseMCMDropdownOption
 function Dropdown:selectOption(option)
 	self.elements.dropdownParent:destroyChildren()
 	self.variable.value = option.value
 	self.elements.textBox.text = option.label
 	self.dropdownActive = false
 
-	self:update()
+	Parent.update(self)
 end
 
 function Dropdown:createDropdown()
@@ -68,17 +65,32 @@ function Dropdown:createDropdown()
 			end
 		end
 		self.elements.dropdown = dropdown
-		dropdown:getTopLevelParent():updateLayout()
+		dropdown:getTopLevelMenu():updateLayout()
 
 		-- Destroy dropdown
 	else
 		self.elements.dropdownParent:destroyChildren()
 		self.dropdownActive = false
-		self.elements.dropdownParent:getTopLevelParent():updateLayout()
+		self.elements.dropdownParent:getTopLevelMenu():updateLayout()
 	end
+
+	--- @param element tes3uiElement
+	local function recursiveContentsChanged(element)
+		if not element then
+			return
+		end
+
+		if element.widget and element.widget.contentsChanged then
+			element.widget:contentsChanged()
+		end
+		recursiveContentsChanged(element.parent)
+	end
+	-- Recursively go back to parent and call contentsChanged because scrolling is affected.
+	recursiveContentsChanged(self.elements.outerContainer.parent)
 
 end
 
+--- @param parentBlock tes3uiElement
 function Dropdown:makeComponent(parentBlock)
 
 	local border = parentBlock:createThinBorder()
@@ -108,11 +120,13 @@ function Dropdown:makeComponent(parentBlock)
 
 end
 
+--- @param parentBlock tes3uiElement
 function Dropdown:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.paddingRight = self.indent -- * 2
 end
 
+--- @param parentBlock tes3uiElement
 function Dropdown:createContentsContainer(parentBlock)
 	self:createLabel(parentBlock)
 	self:createInnerContainer(parentBlock)

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An NPC object that has not been cloned. Typically represents the raw information edited in the construction set.
 --- @class tes3npc : tes3actor, tes3physicalObject, tes3object, tes3baseObject
 --- @field aiConfig tes3aiConfig *Read-only*. A substructure off of actors that contains information on the current AI configuration.
@@ -33,7 +31,5 @@
 --- @field script tes3script The script that runs on the object.
 --- @field skills number[] A table of twenty seven numbers, representing the base values for the NPC's skills.
 --- @field soul number|nil The soul value for this NPC. This is typically `nil`, unless the `calcSouLValue` event provides one for this actor.
---- @field spells tes3spellList *Read-only*. A list of spells that the actor has access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, spell in pairs(npc.spells.iterator) do print(spell.name) end`
+--- @field spells tes3spellList|tes3spell[] *Read-only*. A list of spells that the actor has access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is iterated over using `pairs`. E.g. `for _, spell in pairs(npc.spells) do print(spell.name) end`
 --- @field weight number *Read-only*. Convenience access to the NPCs (race) weight.
-tes3npc = {}
-

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- niGeometryData objects contain the geometry data necessary to render a niGeometry object. When a niGeometry-based object is created, the actual geometry data is stored in an attached niGeometryData object.
 --- 
 --- The distinction between niGeometry and niGeometryData (and other pairs of NetImmerse classes with similarly distinguished names, such as niTriShape and niTriShapeData) is that niGeometry stores data that cannot be shared when an object is instanced, and niGeometryData stores data that can be shared when an object is instanced. So, for example, when a scene graph is cloned, duplicate copies of the niGeometry objects in the original scene graph are created for the new scene graph, but new niGeometryData objects are not created. Instead, the newly-created niGeometry objects refer to the same niGeometryData objects referred to by the original scene graph.
@@ -21,7 +19,7 @@ niGeometryData = {}
 
 --- Tells the renderer that the object has changed. Should be called after you have finished changing any vertex data.
 --- 
---- If you have altered vertex positions, you may need to also call `updateModelBound`_. You should call it if vertices have been moved outside the bounds of the original model.
+--- If you have altered vertex positions, you may need to also call `updateModelBound`. You should call it if vertices have been moved outside the bounds of the original model.
 function niGeometryData:markAsChanged() end
 
 --- Updates the geometry bounds to match the vertex data. You should call it if vertices have been moved outside the bounds of the original model, or if the effective bounds have become significantly smaller. 

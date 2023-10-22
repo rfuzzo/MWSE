@@ -1,5 +1,5 @@
 return {
 	type = "value",
-	description = [[Access to the light's flags, determining if the light won't be active initially.]],
+	description = [[If true the light won't be active initially, and will only be lit when held by an actor.]],
 	valuetype = "boolean",
 }

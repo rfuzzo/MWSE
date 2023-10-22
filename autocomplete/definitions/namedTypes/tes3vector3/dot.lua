@@ -4,5 +4,11 @@ return {
 	arguments = {
 		{ name = "vec", type = "tes3vector3" },
 	},
-	valuetype = "number",
+	returns = { type = "number", name = "result" },
+	examples = {
+		["..\\..\\niSwitchNode\\niSwitchNode\\reflection"] = {
+			title = "The visualization of vector reflection",
+			description = "outDirection = inDirection - (normal * inDirection:dot(normal) * 2)"
+		}
+	}
 }

@@ -10,11 +10,41 @@ namespace se::cs {
 			const char* next; // 0x8
 		};
 		struct Condition {
-			int function; // 0x0
+			union {
+				int integer;
+				const char* string;
+				BaseObject* object;
+				Dialogue* dialogue;
+			} compareValue; // 0x0
 			char type; // 0x4
 			char unknown_0x5;
 			int compareOp; //0x8
 			float value; // 0xC
+
+			enum CompareOp {
+				Equal,
+				NotEqual,
+				GreaterThan,
+				GreaterThanOrEqual,
+				LessThan,
+				LessThanOrEqual,
+			};
+
+			enum Type {
+				TypeNone,
+				TypeFunction,
+				TypeGlobal,
+				TypeLocal,
+				TypeJournal,
+				TypeItem,
+				TypeDead,
+				TypeNotID,
+				TypeNotFaction,
+				TypeNotClass,
+				TypeNotRace,
+				TypeNotCell,
+				TypeNotLocal,
+			};
 		};
 		LoadLinkNode* loadLinkNodes; // 0x10
 		bool hasSound; // 0x14
@@ -32,6 +62,10 @@ namespace se::cs {
 		BaseObject* filterCell; // 0x98
 		BaseObject* filterPlayerFaction; // 0x9C
 		const char* soundId; // 0xA0
+
+		Dialogue* getDialogue() const;
+
+		bool filter(Object* actor, Reference* reference = nullptr, int source = 1, Dialogue* dialogue = nullptr) const;
 	};
 	static_assert(sizeof(DialogueInfo) == 0xA4, "TES3::DialogueInfo failed size validation");
 	static_assert(sizeof(DialogueInfo::LoadLinkNode) == 0xC, "TES3::DialogueInfo::LoadLinkNode failed size validation");

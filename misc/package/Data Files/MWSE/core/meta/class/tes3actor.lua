@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An Actor (not to be confused with a Mobile Actor) is an object that can be cloned and that has an inventory. Creatures, NPCs, and containers are all considered actors.
 --- 
 --- It is standard for creatures and NPCs to be composed of an actor and a mobile actor, linked together with a reference.
@@ -13,8 +11,19 @@
 --- @field blood integer Friendly access to actor's blood type, in [0, 7] range. The available blood types are defined in the Morrowind.ini file, and assigned to the actor via the Construction Set.
 --- @field cloneCount number *Read-only*. The number of clones that exist of this actor.
 --- @field equipment tes3equipmentStack[] *Read-only*. The items currently equipped to the actor.
---- @field inventory tes3inventory *Read-only*. The items currently carried by the actor.
+--- @field inventory tes3inventory|tes3itemStack[] *Read-only*. The items currently carried by the actor.
 tes3actor = {}
+
+--- Returns the combined value of all the items worn by the actor.
+--- @param params tes3actor.getEquipmentValue.params This table accepts the following values:
+--- 
+--- `useDurability`: boolean? — *Default*: `false`. If true, damaged items will have a proportionally lower value.
+--- @return number value The value of each equipped item added together.
+function tes3actor:getEquipmentValue(params) end
+
+---Table parameter definitions for `tes3actor.getEquipmentValue`.
+--- @class tes3actor.getEquipmentValue.params
+--- @field useDurability boolean? *Default*: `false`. If true, damaged items will have a proportionally lower value.
 
 --- Checks if the actor has provided item equipped.
 --- @param item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to perform a check for.
@@ -23,7 +32,7 @@ tes3actor = {}
 function tes3actor:hasItemEquipped(item, itemData) end
 
 --- Checks if the actor will offer a service in dialogue. This an offer and may still be refused by dialogue checks. To also get the result of dialogue checks, use [`tes3.checkMerchantOffersService()`](https://mwse.github.io/MWSE/apis/tes3/#tes3checkmerchantoffersservice).
---- @param service number Use one of the values in the [`tes3.merchantService.*`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+--- @param service tes3.merchantService Use one of the values in the [`tes3.merchantService.*`](https://mwse.github.io/MWSE/references/merchant-services/) table.
 --- @return boolean result No description yet available.
 function tes3actor:offersService(service) end
 
@@ -32,7 +41,7 @@ function tes3actor:offersService(service) end
 function tes3actor:onInventoryClose(reference) end
 
 --- Checks if the actor will buy and sell items of a given object type. e.g. `actor:tradesItemType(tes3.objectType.repairItem)`
---- @param objectType number Accepts values from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
+--- @param objectType tes3.objectType Accepts values from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
 --- @return boolean result No description yet available.
 function tes3actor:tradesItemType(objectType) end
 

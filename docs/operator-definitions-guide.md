@@ -1,6 +1,6 @@
 # Operator Definitions Guide
 
-Operator overloads are documented similarly to the methods of their parent class. The operator oveload definition file is just a regular Lua table. The name of the needs to be the same as the Lua [operator metamethod](http://lua-users.org/wiki/MetatableEvents) name without the two leading underscores. The supported operators are:
+Operator overloads are documented similarly to the methods of their parent class. The operator oveload definition file is just a regular Lua table. The name of the operator needs to be the same as the Lua [operator metamethod](http://lua-users.org/wiki/MetatableEvents) name without the two leading underscores. The supported operators are:
 - unm - unary minus
 - add - addition
 - sub - subtraction
@@ -30,7 +30,7 @@ The format of the `overloads` table:
 
 An example of a typical operator definition:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\tes3matrix33\mul.lua
 return {
 	type = "operator", -- Necessary for operator definitions
@@ -44,12 +44,12 @@ return {
 
 Here is an example of the unary length (`#`) operator definition:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\tes3vector3\len.lua
 return {
 	type = "operator",
 	overloads = {
-		{ resultType = "number", description = "Evaluates to the vector's length in [game units](https://mwse.github.io/MWSE/references/other/game-units/)." },
+		{ resultType = "number", description = "Evaluates to the vector's length in [game units](https://mwse.github.io/MWSE/references/general/game-units/)." },
 	}
 }
 ```

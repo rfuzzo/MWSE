@@ -3,8 +3,19 @@
 #include "CSDefines.h"
 #include "NIDefines.h"
 
+#include "MemoryUtil.h"
+
 namespace se::cs {
 	struct DataHandler {
+		struct WaterRenderController {
+			bool unknown_0x0;
+			bool unknown_0x1;
+			NI::Node* waterNode; // 0x4
+			int surfaceTiles; // 0x8
+			const char* waterTexture; // 0xC
+			int surfaceTileCount; // 0x10
+			int tileTextureDivisor; // 0x14
+		};
 		RecordHandler* recordHandler;
 		int unknown_4;
 		int unknown_8;
@@ -83,8 +94,8 @@ namespace se::cs {
 		NI::Node* editorObjectRoot; // 0x12C
 		int unknown_130;
 		NI::Node* editorLandscapeRoot; // 0x134
-		int unknown_138;
-		int unknown_13C;
+		NI::DirectionalLight* editorDirectionalLight; // 0x138
+		NI::FogProperty* editorFogProperty; // 0x13C
 		int unknown_140;
 		int unknown_144;
 		int unknown_148;
@@ -11624,7 +11635,7 @@ namespace se::cs {
 		int unknown_B580;
 		int unknown_B584;
 		int unknown_B588;
-		int unknown_B58C;
+		WaterRenderController* waterRenderController; // 0xB58C
 		int unknown_B590;
 		int unknown_B594;
 		int unknown_B598;
@@ -11644,11 +11655,21 @@ namespace se::cs {
 		int unknown_B5D0;
 		int unknown_B5D4;
 
-		void maybeUpdateLightForReference(Reference* reference);
+		//
+		// Other related this-call functions.
+		//
+
+		void updateLightingForNonLightReference(Reference* reference);
 		void updateAllLights();
 
+		//
+		// Custom functions
+		//
+
+		void updateLightingForReference(Reference* reference);
+
 		static DataHandler* get() {
-			return *reinterpret_cast<DataHandler**>(0x6CE8F0);
+			return memory::ExternalGlobal<DataHandler*, 0x6CE8F0>::get();
 		}
 	};
 }

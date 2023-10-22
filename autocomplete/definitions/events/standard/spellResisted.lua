@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event triggers when a magic effect has been resisted by an actor, including magic effects from sources like spells, enchantments and potions. This event can trigger multiple times per source, once for each resisted effect.",
+	related = { "absorbedMagic", "spellResist" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",

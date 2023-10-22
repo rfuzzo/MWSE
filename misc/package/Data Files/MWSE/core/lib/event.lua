@@ -28,7 +28,6 @@ local function eventSorter(a, b)
 	return eventPriorities[a] > eventPriorities[b]
 end
 
----@diagnostic disable-next-line:undefined-global
 local disableableEvents = mwseDisableableEventManager
 
 function this.register(eventType, callback, options)
@@ -163,8 +162,137 @@ function this.clear(eventType, filter)
 	end
 end
 
-local function onEventError(error)
-	mwse.log("Error in event callback: %s\n%s", error, debug.traceback())
+-- Custom error notifications
+
+local errorNotifier = {
+	visible_error_limit = 8,
+	timeout_duration = 8.0,
+	eventType = nil,
+	displayed = {},
+	mod_totals = {}
+}
+
+-- Expose to MWSE
+this.errorNotifier = errorNotifier
+
+function errorNotifier.createMenu()
+	local menu = tes3ui.createMenu{ id = "MWSE:ErrorNotify", fixedFrame = true, modal = false, loadable = false }
+	menu.autoWidth = false
+	menu.autoHeight = true
+	menu.absolutePosAlignX = nil
+	menu.absolutePosAlignY = nil
+	menu.positionX = 8 - menu.maxWidth / 2
+	menu.positionY = menu.maxHeight / 2 - 8
+	menu.width = 900
+	menu.minWidth = 900
+	menu.minHeight = 0
+
+	local f = menu:getContentElement()
+	f.contentPath = nil
+	f.borderAllSides = 0
+	f.paddingAllSides = 6
+	f.flowDirection = tes3.flowDirection.topToBottom
+
+	local t = f:createLabel{ text = "Lua errors" }
+	t.color = { 0.9, 0.9, 0.9 }
+	t.borderBottom = 4
+
+	local m = f:createBlock{ id = "MWSE:ErrorNotify_Listing" }
+	m.widthProportional = 1
+	m.autoHeight = true
+	m.flowDirection = tes3.flowDirection.topToBottom
+
+	for i = 1, errorNotifier.visible_error_limit do
+		local t = m:createLabel{ text = "" }
+		t.color = { 0.8, 0.8, 0.65 }
+		t.widthProportional = 1
+		t.height = 0
+		t.borderBottom = 2
+		t.wrapText = true
+		t.visible = false
+	end
+
+	menu:updateLayout()
+	return menu
+end
+
+function errorNotifier.clearMsg()
+	errorNotifier.displayed = {}
+	errorNotifier.timer = nil
+
+	local menu = tes3ui.findMenu("MWSE:ErrorNotify")
+	if menu then
+		local list = menu:findChild("MWSE:ErrorNotify_Listing")
+		for i = 1, errorNotifier.visible_error_limit do
+			list.children[i].text = ""
+			list.children[i].visible = false
+		end
+
+		menu.visible = false
+		menu:updateLayout()
+	end
+end
+
+function errorNotifier.updateMenu()
+	local menu = tes3ui.findMenu("MWSE:ErrorNotify")
+	if not menu then
+		menu = errorNotifier.createMenu()
+	end
+
+	local list = menu:findChild("MWSE:ErrorNotify_Listing")
+	for i, display in ipairs(errorNotifier.displayed) do
+		list.children[i].text = display.msg
+		list.children[i].visible = true
+
+		if i >= errorNotifier.visible_error_limit then
+			break
+		end
+	end
+
+	-- Double re-layout to fix wrapping text heights.
+	menu.visible = true
+	menu:updateLayout()
+	menu:updateLayout()
+
+	if errorNotifier.timer then
+		errorNotifier.timer:reset()
+	else
+		errorNotifier.timer = timer.start{type = timer.real, duration = errorNotifier.timeout_duration, callback = errorNotifier.clearMsg, persist = false}
+	end
+end
+
+function errorNotifier.addMsg(errSource, modName, sourceFile, lineNum, errText)
+	local firstErrLine = string.match(errText, "([^\n]+)")
+	local errorCount = (errorNotifier.mod_totals[modName] or 0) + 1
+	errorNotifier.mod_totals[modName] = errorCount
+
+	local s = string.format("Mod: %s            Source: %s\n%s:%d > %s", modName, errSource, sourceFile, lineNum, firstErrLine)
+
+	-- Maintain list at fixed length
+	if #errorNotifier.displayed == errorNotifier.visible_error_limit then
+		table.remove(errorNotifier.displayed, 1)
+	end
+	table.insert(errorNotifier.displayed, { mod = modName, msg = s })
+
+	errorNotifier.updateMenu()
+end
+
+function errorNotifier.reportError(errSource, err)
+	if not mwseConfig.EnableLuaErrorNotifications then return end
+
+	local filePath, lineNum, errText = string.match(err, "[^:]+\\mods\\([^:]+):(%d+):%s*(.+)")
+
+	if filePath and errText then
+		local modName, sourceFile = string.match(filePath, "(.+)\\([^\\]+)")
+		if modName then
+			errorNotifier.addMsg(errSource, modName, sourceFile, lineNum, errText)
+		end
+	end
+end
+
+local function onEventError(err)
+	mwse.log("Error in event callback: %s\n%s", err, debug.traceback())
+	errorNotifier.reportError("event " .. errorNotifier.eventType, err)
 end
 
 function this.trigger(eventType, payload, options)
@@ -177,6 +305,9 @@ function this.trigger(eventType, payload, options)
 
 	local callbacks = table.copy(getEventTable(eventType, options.filter))
 	for _, callback in pairs(callbacks) do
+		-- Inform error notifier of current eventType.
+		errorNotifier.eventType = eventType
+
 		local status, result = xpcall(callback, onEventError, payload)
 		if (status == false) then
 			result = nil

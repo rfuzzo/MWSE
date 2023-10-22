@@ -139,23 +139,25 @@ namespace TES3 {
 	}
 
 	float Sound::getVolume() {
-		return (float)volume / 250.0f;
+		return float(volume) / 255.0f;
 	}
 
 	void Sound::setVolume(float volume) {
-		float currentScale = 1.0f;
-		if (soundBuffer && soundBuffer->lpSoundBuffer) {
-			if (this->volume == 0) {
-				currentScale = 0.0f;
-			}
-			else {
-				currentScale = (float)soundBuffer->volume / (float)this->volume;
-			}
+		auto vol = (unsigned char)(volume * 255.0f);
+		adjustPlayingSoundVolume(vol);
+		this->volume = vol;
+	}
+
+	void Sound::adjustPlayingSoundVolume(unsigned char volume) {
+		if (!(soundBuffer && soundBuffer->lpSoundBuffer)) {
+			return;
 		}
 
-		this->volume = volume * 250;
-
-		setVolumeRaw(currentScale);
+		// Assume the sound is an effect. Other methods of recalculating volume are subject to rounding errors.
+		auto audio = WorldController::get()->audioController;
+		auto finalVolume = float(audio->volumeMaster) * float(audio->volumeEffects) * float(volume) / (250.0f*255.0f);
+		finalVolume = std::min(250.0f, finalVolume);
+		audio->setSoundBufferVolume(soundBuffer, (unsigned char)finalVolume);
 	}
 
 	std::string Sound::toJson() const {

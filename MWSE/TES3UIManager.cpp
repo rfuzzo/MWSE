@@ -20,7 +20,9 @@
 #include "TES3WorldController.h"
 
 #include "LuaConsoleReferenceChangedEvent.h"
+#include "LuaMagicSelectionChangedEvent.h"
 #include "LuaShowRestWaitMenuEvent.h"
+#include "LuaUiSkillTooltipEvent.h"
 #include "LuaUiSpellTooltipEvent.h"
 
 #include "TES3UIManagerLua.h"
@@ -179,6 +181,21 @@ namespace TES3::UI {
 
 			// Clean up temp element.
 			tempElement->destroy();
+			return menu;
+		}
+
+		auto skill = getOptionalParamObject<TES3::Skill>(params, "skill");
+		if (skill) {
+			// Build the tooltip.
+			const auto TES3_buildSkillTooltip = reinterpret_cast<void(__cdecl*)(char)>(0x6297F0);
+			TES3_buildSkillTooltip(skill->skill);
+
+			// Fire off the related event.
+			if (mwse::lua::event::UiSkillTooltipEvent::getEventEnabled()) {
+				mwse::lua::LuaManager& luaManager = mwse::lua::LuaManager::getInstance();
+				luaManager.getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::UiSkillTooltipEvent(menu, skill->skill, 0));
+			}
+
 			return menu;
 		}
 
@@ -591,12 +608,30 @@ namespace TES3::UI {
 
 	const auto TES3_UI_UpdateCurrentMagicFromSpell = reinterpret_cast<void(__cdecl*)(const char*, const char*, Spell*)>(0x5F4E70);
 	void updateCurrentMagicFromSpell(const char* iconPath, const char* spellName, Spell* spell) {
+		// Call original code.
 		TES3_UI_UpdateCurrentMagicFromSpell(iconPath, spellName, spell);
+
+		// Fire event. Deselects when spell is nullptr.
+		if (mwse::lua::event::MagicSelectionChangedEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			sol::object response = stateHandle.triggerEvent(new mwse::lua::event::MagicSelectionChangedEvent(spell));
+		}
 	}
 
-	const auto TES3_UI_UpdateCurrentMagicFromEquipmentStack = reinterpret_cast<void(__cdecl*)(char*, const char*, EquipmentStack*)>(0x5F4DB0);
-	void updateCurrentMagicFromEquipmentStack(EquipmentStack* equipmentStack) {
-		TES3_UI_UpdateCurrentMagicFromEquipmentStack(nullptr, nullptr, equipmentStack);
+	const auto TES3_UI_UpdateCurrentMagicFromEquipmentStack = reinterpret_cast<void(__cdecl*)(const char*, const char*, EquipmentStack*)>(0x5F4DB0);
+	void updateCurrentMagicFromEquipmentStack(const char* iconPath, const char* itemName, EquipmentStack* equipmentStack) {
+		// Call original code.
+		TES3_UI_UpdateCurrentMagicFromEquipmentStack(iconPath, itemName, equipmentStack);
+
+		// Fire event.
+		if (equipmentStack) {
+			auto enchantment = equipmentStack->object->getEnchantment();
+
+			if (enchantment && mwse::lua::event::MagicSelectionChangedEvent::getEventEnabled()) {
+				auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+				sol::object response = stateHandle.triggerEvent(new mwse::lua::event::MagicSelectionChangedEvent(enchantment, equipmentStack->object));
+			}
+		}
 	}
 
 	const auto TES3_UpdateEncumbrance = reinterpret_cast<void(__cdecl*)()>(0x5CD1B0);
@@ -1097,6 +1132,41 @@ namespace TES3::UI {
 		pushNewUIID(0x5CA67B, "MenuInventory_bottom_layout");
 		pushNewUIID(0x5CA68B, "MenuInventory_character_layout");
 		pushNewUIID(0x5CA818, "MenuInventory_items_layout");
+		pushNewUIID(0x5CCAEF, "itemTile_column");
+		pushNewUIID(0x5CB155, "itemTile_column");
+		pushNewUIID(0x5CCBD2, "itemTile_tile");
+		pushNewUIID(0x5CCCB5, "itemTile_shadow");
+		pushNewUIID(0x5CCDC0, "itemTile_icon");
+		//On drop
+		pushNewUIID(0x5CC021, "itemTile_tile");
+		pushNewUIID(0x5CC102, "itemTile_shadow");
+		pushNewUIID(0x5CC20D, "itemTile_icon");
+
+		// Container Menu (MenuContents)
+		pushNewUIID(0x5B69B8, "itemTile_column");
+		pushNewUIID(0x5B49BE, "itemTile_column");
+		pushNewUIID(0x5B6A92, "itemTile_tile");
+		pushNewUIID(0x5B6B4A, "itemTile_shadow");
+		pushNewUIID(0x5B6C69, "itemTile_icon");
+		//On drop
+		pushNewUIID(0x5B63A1, "itemTile_tile");
+		pushNewUIID(0x5B6455, "itemTile_shadow");
+		pushNewUIID(0x5B6573, "itemTile_icon");
+
+		// Barter Menu (MenuBarter)
+		pushNewUIID(0x5A579B, "itemTile_column");
+		pushNewUIID(0x5A40AE, "itemTile_column");
+		pushNewUIID(0x5A5883, "itemTile_tile");
+		pushNewUIID(0x5A5959, "itemTile_shadow");
+		pushNewUIID(0x5A5A8D, "itemTile_icon");
+		//On drop
+		pushNewUIID(0x5A4D49, "itemTile_tile");
+		pushNewUIID(0x5A4E1C, "itemTile_shadow");
+		pushNewUIID(0x5A4F27, "itemTile_icon");
+
+		// Cursor Icon
+		pushNewUIID(0x5D1708, "itemTile_shadow");
+		pushNewUIID(0x5D1813, "itemTile_icon");
 
 		// Status Menu (MenuStat)
 		pushNewUIID(0x624F7F, "MenuStat_layout");

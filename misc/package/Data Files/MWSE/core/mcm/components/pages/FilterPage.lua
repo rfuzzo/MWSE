@@ -1,31 +1,46 @@
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.pages.SideBarPage")
 
+--- @class mwseMCMFilterPage
 local FilterPage = Parent:new()
 FilterPage.placeholderSearchText = mwse.mcm.i18n("Search...")
 
 function FilterPage:filterComponents()
+	local searchText = self.elements.searchBarInput.text:lower()
 	for _, component in ipairs(self.components) do
 		-- look for search text inside setting label
-		if component.label:lower():find(self.elements.searchBarInput.text:lower()) then
-			component.elements.outerContainer.visible = true
-		else
-			component.elements.outerContainer.visible = false
+		local label = component.label and component.label:lower()
+		if label then
+			if label:find(searchText) then
+				component.elements.outerContainer.visible = true
+			else
+				component.elements.outerContainer.visible = false
+			end
+
+			-- Do nothing for components without a label.
 		end
 	end
 end
 
 -- UI Methods
 
+--- @param parentBlock tes3uiElement
 function FilterPage:createDescription(parentBlock)
-	if self.description then
-		local description = parentBlock:createLabel{ text = self.description }
-		description.autoHeight = true
-		description.widthProportional = 1.0
-		description.wrapText = true
-		self.elements.description = description
+	if not self.description then
+		return
 	end
+
+	local description = parentBlock:createLabel{ text = self.description }
+	description.autoHeight = true
+	description.widthProportional = 1.0
+	description.wrapText = true
+	self.elements.description = description
 end
 
+--- @param parentBlock tes3uiElement
 function FilterPage:createSearchBar(parentBlock)
 
 	local searchBar = parentBlock:createThinBorder({ id = tes3ui.registerID("PageSearchBar") })
@@ -47,6 +62,7 @@ function FilterPage:createSearchBar(parentBlock)
 	-- Get text input straight away
 	tes3ui.acquireTextInput(input)
 	-- and also on mouseClick
+	--- @param element tes3uiElement
 	local function registerInput(element)
 		element:register("mouseClick", function()
 			tes3ui.acquireTextInput(input)
@@ -61,7 +77,8 @@ function FilterPage:createSearchBar(parentBlock)
 		local inputController = tes3.worldController.inputController
 		local pressedTab = (inputController:isKeyDown(tes3.scanCode.tab))
 		local backspacedNothing = ((inputController:isKeyDown(tes3.scanCode.delete) or
-		                    inputController:isKeyDown(tes3.scanCode.backspace)) and input.text == self.placeholderSearchText)
+		                            inputController:isKeyDown(tes3.scanCode.backspace))
+		                            and input.text == self.placeholderSearchText)
 
 		if pressedTab then
 			-- Prevent alt-tabbing from creating spacing.
@@ -89,6 +106,7 @@ function FilterPage:createSearchBar(parentBlock)
 
 end
 
+--- @param parentBlock tes3uiElement
 function FilterPage:createLeftColumn(parentBlock)
 	local outerContainer = parentBlock:createThinBorder()
 	outerContainer.flowDirection = "top_to_bottom"
@@ -102,6 +120,7 @@ function FilterPage:createLeftColumn(parentBlock)
 	self.elements.outerContainer = outerContainer
 end
 
+--- @param parentBlock tes3uiElement
 function FilterPage:createSubcomponentsContainer(parentBlock)
 
 	local contentsScrollPane = parentBlock:createVerticalScrollPane({
@@ -123,6 +142,7 @@ function FilterPage:createSubcomponentsContainer(parentBlock)
 
 end
 
+--- @param parentBlock tes3uiElement
 function FilterPage:createContentsContainer(parentBlock)
 	self:createSearchBar(parentBlock)
 	self:createSubcomponentsContainer(parentBlock)

@@ -3,7 +3,13 @@
 		A Slider Setting
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.settings.Setting")
+
+--- @class mwseMCMSlider
 local Slider = Parent:new()
 Slider.min = 0
 Slider.max = 100
@@ -15,7 +21,7 @@ function Slider:updateValueLabel()
 	local labelText = ""
 
 	if self.elements.slider then
-		newValue = self.elements.slider.widget.current + self.min ---@diagnostic disable-line
+		newValue = tostring(self.elements.slider.widget.current + self.min)
 	end
 
 	if string.find(self.label, "%s", 1, true) then
@@ -34,6 +40,7 @@ function Slider:update()
 	Parent.update(self)
 end
 
+--- @param element tes3uiElement
 function Slider:registerSliderElement(element)
 	-- click
 	element:register("mouseClick", function(e)
@@ -77,6 +84,7 @@ end
 
 -- UI creation functions
 
+--- @param parentBlock tes3uiElement
 function Slider:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
 	self.elements.outerContainer.widthProportional = 1.0
@@ -84,6 +92,7 @@ function Slider:createOuterContainer(parentBlock)
 	self.elements.outerContainer.flowDirection = "top_to_bottom"
 end
 
+--- @param parentBlock tes3uiElement
 function Slider:createLabel(parentBlock)
 	Parent.createLabel(self, parentBlock)
 	self:updateValueLabel()
@@ -96,6 +105,7 @@ function Slider:createLabel(parentBlock)
 	table.insert(self.mouseOvers, sliderValueLabel)]] --
 end
 
+--- @param parentBlock tes3uiElement
 function Slider:makeComponent(parentBlock)
 	local sliderBlock = parentBlock:createBlock()
 	sliderBlock.flowDirection = "left_to_right"

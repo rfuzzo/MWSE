@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An apparatus game object.
 --- @class tes3apparatus : tes3item, tes3physicalObject, tes3object, tes3baseObject
 --- @field icon string The path to the object's icon.
@@ -11,8 +9,6 @@
 --- @field name string The player-facing name for the object.
 --- @field quality number The quality of the apparatus.
 --- @field script tes3script The script that runs on the object.
---- @field type number The type of the apparatus. Maps to values in [`tes3.apparatusType`](https://mwse.github.io/MWSE/references/apparatus-types/) namespace.
+--- @field type tes3.apparatusType The type of the apparatus. Maps to values in [`tes3.apparatusType`](https://mwse.github.io/MWSE/references/apparatus-types/) namespace.
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
-tes3apparatus = {}
-

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The event library helps to instruct mwse to call a given function when a specific action is taken in the game.
 --- @class eventlib
 --- @field register fun(eventId: string, callback: fun(e: table): boolean?, options: table?)
@@ -25,9 +23,11 @@
 --- @field register fun(eventId: '"calcArmorRating"', callback: fun(e: calcArmorRatingEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcBarterPrice"', callback: fun(e: calcBarterPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcBlockChance"', callback: fun(e: calcBlockChanceEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"calcChargenStats"', callback: fun(e: calcChargenStatsEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcEnchantmentPrice"', callback: fun(e: calcEnchantmentPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcFlySpeed"', callback: fun(e: calcFlySpeedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcHitChance"', callback: fun(e: calcHitChanceEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"calcHitDetectionCone"', callback: fun(e: calcHitDetectionConeEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcMoveSpeed"', callback: fun(e: calcMoveSpeedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcRepairPrice"', callback: fun(e: calcRepairPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcRestInterrupt"', callback: fun(e: calcRestInterruptEventData): boolean?, options: table?)
@@ -42,6 +42,7 @@
 --- @field register fun(eventId: '"calcTrainingPrice"', callback: fun(e: calcTrainingPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcTravelPrice"', callback: fun(e: calcTravelPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcWalkSpeed"', callback: fun(e: calcWalkSpeedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"cameraControl"', callback: fun(e: cameraControlEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellActivated"', callback: fun(e: cellActivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellChanged"', callback: fun(e: cellChangedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellDeactivated"', callback: fun(e: cellDeactivatedEventData): boolean?, options: table?)
@@ -65,6 +66,7 @@
 --- @field register fun(eventId: '"determineAction"', callback: fun(e: determineActionEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"determinedAction"', callback: fun(e: determinedActionEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"dialogueEnvironmentCreated"', callback: fun(e: dialogueEnvironmentCreatedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"dialogueFiltered"', callback: fun(e: dialogueFilteredEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"disposition"', callback: fun(e: dispositionEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"enchantChargeUse"', callback: fun(e: enchantChargeUseEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"enchantedItemCreateFailed"', callback: fun(e: enchantedItemCreateFailedEventData): boolean?, options: table?)
@@ -104,6 +106,7 @@
 --- @field register fun(eventId: '"magicCasted"', callback: fun(e: magicCastedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"magicEffectRemoved"', callback: fun(e: magicEffectRemovedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"magicEffectsResolved"', callback: fun(e: magicEffectsResolvedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"magicSelectionChanged"', callback: fun(e: magicSelectionChangedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"menuEnter"', callback: fun(e: menuEnterEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"menuExit"', callback: fun(e: menuExitEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"meshLoad"', callback: fun(e: meshLoadEventData): boolean?, options: table?)
@@ -115,6 +118,7 @@
 --- @field register fun(eventId: '"mouseButtonDown"', callback: fun(e: mouseButtonDownEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"mouseButtonUp"', callback: fun(e: mouseButtonUpEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"mouseWheel"', callback: fun(e: mouseWheelEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"musicChangeTrack"', callback: fun(e: musicChangeTrackEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"musicSelectTrack"', callback: fun(e: musicSelectTrackEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"objectInvalidated"', callback: fun(e: objectInvalidatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"playGroup"', callback: fun(e: playGroupEventData): boolean?, options: table?)
@@ -133,10 +137,12 @@
 --- @field register fun(eventId: '"referenceActivated"', callback: fun(e: referenceActivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"referenceDeactivated"', callback: fun(e: referenceDeactivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"referenceSceneNodeCreated"', callback: fun(e: referenceSceneNodeCreatedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"repair"', callback: fun(e: repairEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"restInterrupt"', callback: fun(e: restInterruptEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"save"', callback: fun(e: saveEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"saved"', callback: fun(e: savedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"simulate"', callback: fun(e: simulateEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"simulated"', callback: fun(e: simulatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"skillRaised"', callback: fun(e: skillRaisedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"soundObjectPlay"', callback: fun(e: soundObjectPlayEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"spellCast"', callback: fun(e: spellCastEventData): boolean?, options: table?)
@@ -155,6 +161,7 @@
 --- @field register fun(eventId: '"uiPreEvent"', callback: fun(e: uiPreEventEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"uiRefreshed"', callback: fun(e: uiRefreshedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"uiShowRestMenu"', callback: fun(e: uiShowRestMenuEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"uiSkillTooltip"', callback: fun(e: uiSkillTooltipEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"uiSpellTooltip"', callback: fun(e: uiSpellTooltipEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"unequipped"', callback: fun(e: unequippedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"vfxCreated"', callback: fun(e: vfxCreatedEventData): boolean?, options: table?)
@@ -167,12 +174,12 @@
 event = {}
 
 --- Removes all callbacks registered for a given event.
---- @param eventId string? *Optional*. No description yet available.
+--- @param eventId string|tes3.event|nil *Optional*. No description yet available.
 --- @param filter userdata|string|number|nil *Optional*. No description yet available.
 function event.clear(eventId, filter) end
 
 --- Returns true for a function previously registered to an event with `event.register()`.
---- @param eventId string No description yet available.
+--- @param eventId string|tes3.event No description yet available.
 --- @param callback function No description yet available.
 --- @param options event.isRegistered.options? This table accepts the following values:
 --- 
@@ -185,7 +192,7 @@ function event.isRegistered(eventId, callback, options) end
 --- @field filter userdata|string|number|nil *Optional*. Allows searching for a callback function registered with the specified filter.
 
 --- Registers a function to be called when an event is raised.
---- @param eventId string No description yet available.
+--- @param eventId string|tes3.event No description yet available.
 --- @param callback function No description yet available.
 --- @param options event.register.options? This table accepts the following values:
 --- 
@@ -203,7 +210,7 @@ function event.register(eventId, callback, options) end
 --- @field priority number? *Optional*. Event callback with higher priority is executed before callback with lower priority. Typically used to make certain mods compatible.
 
 --- Triggers an event. This can be used to trigger custom events with specific data.
---- @param eventId string No description yet available.
+--- @param eventId string|tes3.event No description yet available.
 --- @param payload table? *Optional*. No description yet available.
 --- @param options event.trigger.options? This table accepts the following values:
 --- 
@@ -216,7 +223,7 @@ function event.trigger(eventId, payload, options) end
 --- @field filter userdata|string|number|nil *Optional*. Assigning a filter will make the event callbacks with filters matching this one to be executed first. All the other unfiltered callbacks are executed after.
 
 --- Unregisters a function previously registered for an event with `event.register()`.
---- @param eventId string No description yet available.
+--- @param eventId string|tes3.event No description yet available.
 --- @param callback function No description yet available.
 --- @param options event.unregister.options? This table accepts the following values:
 --- 

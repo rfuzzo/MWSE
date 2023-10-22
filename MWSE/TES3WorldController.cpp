@@ -5,6 +5,7 @@
 #include "TES3GameFile.h"
 #include "TES3GameSetting.h"
 #include "TES3GlobalVariable.h"
+#include "TES3MagicInstanceController.h"
 #include "TES3MobManager.h"
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
@@ -18,6 +19,7 @@
 #include "TES3Util.h"
 
 #include "LuaPlayItemSoundEvent.h"
+#include "LuaSimulatedEvent.h"
 
 #include "LuaManager.h"
 
@@ -31,7 +33,7 @@ namespace TES3 {
 		return fovDegrees;
 	}
 
-	const auto TES3_WorldControllerRenderCamera_CameraData_SetFOV = reinterpret_cast<void(__thiscall*)(WorldControllerRenderCamera::CameraData*, float)>(0x632270);
+	const auto TES3_WorldControllerRenderCamera_CameraData_SetFOV = reinterpret_cast<void(__thiscall*)(WorldControllerRenderCamera::CameraData*, float)>(0x50F8C0);
 	void WorldControllerRenderCamera::CameraData::setFOV(float degrees) {
 		TES3_WorldControllerRenderCamera_CameraData_SetFOV(this, degrees);
 	}
@@ -439,6 +441,7 @@ namespace TES3 {
 	// WorldController
 	//
 
+	float WorldController::realDeltaTime = 0.0f;
 	float WorldController::simulationTimeScalar = 1.0f;
 
 	WorldController * WorldController::get() {
@@ -565,7 +568,52 @@ namespace TES3 {
 		TES3_WorldController_rechargerAddItem(this, item, enchantment, itemData);
 	}
 
+	bool WorldController::getLevitationDisabled() const {
+		return flagLevitationDisabled;
+	}
+
+	void WorldController::setLevitationDisabled(bool disable) {
+		if (disable) {
+			// Ensure active leviation is cancelled. Logic copied from mwscript DisableLevitation.
+			auto macp = getMobilePlayer();
+			magicInstanceController->removeSpellsByEffect(macp->reference, EffectID::Levitate, 100);
+
+			if (macp->getEffectAttributeLevitate()) {
+				macp->setEffectAttributeLevitate(0);
+				macp->vTable.mobileNPC->setLevitating(macp, false);
+				if (!macp->getMovementFlagFlying() && !macp->getMovementFlagSwimming()) {
+					macp->vTable.mobileNPC->jumpingFalling(macp, true);
+				}
+			}
+		}
+
+		flagLevitationDisabled = disable;
+	}
+
+	int WorldController::getShadowLevel() const {
+		return bShadows;
+	}
+
+	const auto TES3_ShadowManager_setUseRealtimeShadows = reinterpret_cast<void(__thiscall*)(void*, bool)>(0x4360F0);
+	void WorldController::setShadowLevel(int shadows) {
+		// Check for state change.
+		const auto hadShadowsBefore = bShadows > 0;
+		const auto hasShadowsNow = shadows > 0;
+
+		bShadows = shadows;
+		if (hadShadowsBefore != hasShadowsNow) {
+			TES3_ShadowManager_setUseRealtimeShadows(shadowManager, hasShadowsNow);
+		}
+	}
+
 	void WorldController::tickClock() {
+		// Run post-simulate event before updating game time.
+		if (mwse::lua::event::SimulatedEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+			stateHandle.triggerEvent(new mwse::lua::event::SimulatedEvent());
+		}
+
 		gvarGameHour->value += (deltaTime * gvarTimescale->value) / 3600.0f;
 		checkForDayWrapping();
 	}
@@ -640,5 +688,20 @@ namespace TES3 {
 		if (respawnContainers) {
 			ndd->respawnContainers();
 		}
+	}
+
+	bool WorldController::isChargenStarted() const {
+		// Chargenstate is 0 on the main menu.
+		return gvarCharGenState->value != 0.0;
+	}
+
+	bool WorldController::isChargenRunning() const {
+		// Chargenstate is set to 10 in vanilla, but this isn't guaranteed with mods, so instead check that it's > 0
+		return gvarCharGenState->value > 0.0;
+	}
+
+	bool WorldController::isChargenFinished() const {
+		// Vanilla sets Chargenstate to -1 once finished.
+		return gvarCharGenState->value < 0.0;
 	}
 }

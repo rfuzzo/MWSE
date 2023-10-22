@@ -1,9 +1,15 @@
 --[[
-	A clickable hyperlink 
+	A clickable hyperlink
 ]]--
+
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
 
 local Parent = require("mcm.components.infos.Info")
 
+--- @class mwseMCMHyperlink
+--- @field exec string *Deprecated*
 local Hyperlink = Parent:new()
 Hyperlink.sExecute = mwse.mcm.i18n("Open web browser?")
 
@@ -19,6 +25,7 @@ function Hyperlink:execute()
 	})
 end
 
+--- @param parentBlock tes3uiElement
 function Hyperlink:makeComponent(parentBlock)
 	-- Convert legacy exec param to a URL.
 	if (not self.url and self.exec) then

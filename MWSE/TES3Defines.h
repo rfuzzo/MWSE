@@ -51,6 +51,7 @@ namespace TES3 {
 	struct DataHandler;
 	struct Dialogue;
 	struct DialogueConditional;
+	struct DialogueFilterContext;
 	struct DialogueInfo;
 	struct Door;
 	struct Effect;
@@ -145,6 +146,7 @@ namespace TES3 {
 	struct Vector4;
 	struct VFX;
 	struct VFXManager;
+	struct WaterController;
 	struct Weapon;
 	struct WearablePart;
 	struct Weather;

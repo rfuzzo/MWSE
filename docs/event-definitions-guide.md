@@ -1,10 +1,13 @@
 # Event Definitions Guide
 
+When writing definitions for a new event add an entry to the `tes3.event` table and related [reference table](https://github.com/MWSE/MWSE/blob/master/docs/source/references/events.md).
+
 Event definitions are formatted as regular Lua tables. The available fields are:
 | Field       | Type      | Description |
 | ----------- | --------- | ----------- |
-| type        | `string`  |  This flag is used when generating syntax highlighting files. This should always be `"event"` for event definitions. |
+| type        | `string`  | This flag is used when generating syntax highlighting files. This should always be `"event"` for event definitions. |
 | description | `string`  | The description for the event. |
+| related     | `table`   | An array of strings with event names that will be linked as related on the documentation web page. You can see the end result [here](https://mwse.github.io/MWSE/events/calcMoveSpeed/). See: `autocomplete\definitions\events\standard\attack.lua` file for an example. |
 | eventData   | `table`   | A table describing the data made available by the event. |
 | filter      | `string`  | This allow specifying by which of the eventData parameters the event can be filtered. The name of the parameter should be enclosed in `""`. |
 | blockable   | `boolean` | Only needs to be present when the event indeed is blockable. In that case `true` should be passed here. |
@@ -25,7 +28,7 @@ eventData table entries can have the following fields:
 
 An example of a event definition is the `activate` event definition file found in autocomplete\definitions\events\standard:
 
-```Lua
+```lua
 -- autocomplete\definitions\events\standard\activate.lua
 return {
 	type = "event",

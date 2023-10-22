@@ -23,11 +23,11 @@ namespace TES3 {
 	}
 
 	bool BodyPart::getIsPlayable() {
-		return getFlag(TES3::BodyPartFlag::Playable);
+		return !getFlag(TES3::BodyPartFlag::NotPlayable);
 	}
 
 	void BodyPart::setIsPlayable(bool value) {
-		setFlag(TES3::BodyPartFlag::Playable, value);
+		setFlag(TES3::BodyPartFlag::NotPlayable, !value);
 	}
 }
 

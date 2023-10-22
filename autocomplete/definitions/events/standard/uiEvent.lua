@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "uiEvent is triggered through various UI events. This includes scrolling through panes, clicking buttons, selecting icons, or a host of other UI-related activities.",
+	related = { "uiPreEvent" },
 	eventData = {
 		["block"] = {
 			type = "tes3uiElement",
@@ -18,7 +19,7 @@ return {
 			description = "The calling element's parent.",
 		},
 		["property"] = {
-			type = "number",
+			type = "tes3.uiProperty",
 			readOnly = true,
 			description = "The property identifier that is being triggered.",
 		},

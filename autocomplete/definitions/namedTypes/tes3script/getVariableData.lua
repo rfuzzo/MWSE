@@ -1,16 +1,12 @@
 return {
 	type = "method",
-	description = [[This method fetches all of the script's variables as a table.]],
+	description = [[This method fetches all of the script's variables as a table. Returns nil if the script has no variables.]],
+	arguments = {
+		{ name = "useLocals", type = "boolean", optional = true, description = "" },
+	},
 	returns = {{
 		name = "results",
-		type = "table",
-		description = [[The table with all of script's variable names as keys.
-
-Each entry has the following fields:
-
- 1. type - `s`, `f` or `l`, which stand for `short`, `float`, and `long`
- 2. index - the order of occurrence of the variable in the script, starting from `0`
- 3. value - this can have `nil` value
-]]
+		type = "table<string, tes3scriptVariableData>|nil",
+		description = [[A table with all of the script's variable names as keys.]]
 	}},
 }

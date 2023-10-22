@@ -2,13 +2,9 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core game object used for storing camera objects.
 --- @class tes3worldControllerRenderCamera
 --- @field cameraData tes3worldControllerRenderCameraData *Read-only*. The additional data of the camera.
---- @field cameraRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The root scene node of the camera.
+--- @field cameraRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. The immediate parent node of the camera. Those are `"World Camera Root"`, `"Menu Camera Root"`, etc.
 --- @field renderer niRenderer *Read-only*. The renderer of the camera.
---- @field root niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. 
-tes3worldControllerRenderCamera = {}
-
+--- @field root niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. The top-most node of the scene graph in which this camera is found. Those are `"World Scene Graph Root"`, `"Menu Scene Graph Root"`, etc.

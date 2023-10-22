@@ -2,11 +2,9 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A faction game object.
 --- @class tes3faction : tes3baseObject
---- @field attributes number[] *Read-only*. An array-style table holding the two attributes that govern advancement. Maps to values in [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) namespace.
+--- @field attributes tes3.attribute[] *Read-only*. An array-style table holding the two attributes that govern advancement. Maps to values in [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) namespace.
 --- @field name string The faction's player-facing name.
 --- @field playerExpelled boolean The player's expelled state in the faction.
 --- @field playerJoined boolean The player's join state for the faction.
@@ -14,8 +12,13 @@
 --- @field playerReputation number The player's current reputation in the faction.
 --- @field ranks tes3factionRank[] *Read-only*. An array-style table holding the ten related [`tes3factionRank`](https://mwse.github.io/MWSE/types/tes3factionRank/)s.
 --- @field reactions tes3factionReaction[] *Read-only*. A collection of [`tes3factionReaction`](https://mwse.github.io/MWSE/types/tes3factionReaction/)s.
---- @field skills number[] *Read-only*. An array-style table holding the seven skills that govern advancement. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
+--- @field skills tes3.skill[] *Read-only*. An array-style table holding the seven skills that govern advancement. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 tes3faction = {}
+
+--- For this faction, this function finds the best reaction for another faction that the player has joined. It returns that reaction and its associated faction, or `nil` for both values if the no relationship is applicable.
+--- @return number|nil reaction The reaction, if any, that is best for the faction.
+--- @return tes3faction|nil faction The faction association, if any, that is best for the faction.
+function tes3faction:getHighestJoinedReaction() end
 
 --- For this faction, this function finds the worst reaction for another faction that the player has joined. It returns that reaction and its associated faction, or `nil` for both values if the no relationship is applicable.
 --- @return number|nil reaction The reaction, if any, that is worst for the player.

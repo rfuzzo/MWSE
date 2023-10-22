@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A simple pair of floating-point numbers.
 --- @class tes3vector2
 --- @operator add(tes3vector2): tes3vector2
@@ -36,4 +34,8 @@ function tes3vector2:normalize() end
 --- Get a normalized copy of the vector.
 --- @return tes3vector2 result No description yet available.
 function tes3vector2:normalized() end
+
+--- Converts the vector to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3vector2:__tostring() end
 

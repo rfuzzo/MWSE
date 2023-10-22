@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that contains region information.
 --- @class tes3region : tes3baseObject
 --- @field name string The region's name. It must be a string less than 32 characters long.
@@ -24,7 +22,7 @@
 tes3region = {}
 
 --- Changes the current weather for the region to the provided weather-type parameter.
---- @param weatherId number Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @param weatherId tes3.weather Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 function tes3region:changeWeather(weatherId) end
 
 --- Changes the weather to a random weather type.
