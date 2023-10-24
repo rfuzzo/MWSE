@@ -1476,13 +1476,13 @@ namespace se::cs::dialog::render_window {
 		/*
 		* Reserved hotkeys:
 		*   D: Hide/show landscape.
-		*   T: Hide/show water.
 		*   M: Toggle legacy object movement
+		*   T: Hide/show water.
+		*	E: Change Reference Data
 		*	H: Hide Selection
 		*	R: Restore Hidden References
 		*	S: Set Snapping Axis
 		*	W: Toggle world axis rotation
-		*	A: Change Reference Data
 		*/
 
 		MENUITEMINFO menuItem = {};
