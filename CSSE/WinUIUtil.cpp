@@ -128,7 +128,7 @@ namespace se::cs::winui {
 
 	std::string GetWindowTextA(HWND hWnd) {
 		std::string text;
-		text.resize(GetWindowTextLengthA(hWnd));
+		text.resize(GetWindowTextLengthA(hWnd) + 1);
 		GetWindowTextA(hWnd, text.data(), text.capacity());
 		return std::move(text);
 	}
