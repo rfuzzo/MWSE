@@ -280,7 +280,7 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 		// Give IDs to controls that don't normally have one.
 		SetWindowIdByValue(hWnd, "Height", CONTROL_ID_HEIGHT_GROUPBOX);
 		SetWindowIdByValue(hWnd, "Edit Radius:", CONTROL_ID_EDIT_RADIUS_STATIC);
-		SetWindowIdByValue(hWnd, "Edit Falloff %", CONTROL_ID_EDIT_FALLOFF_STATIC);
+		SetWindowIdByValue(hWnd, "Edit Falloff %:", CONTROL_ID_EDIT_FALLOFF_STATIC);
 		SetWindowIdByValue(hWnd, "Texture", CONTROL_ID_TEXTURE_GROUPBOX);
 		SetWindowIdByValue(hWnd, "Selected\nTexture:", CONTROL_ID_SELECTED_TEXTURE_STATIC);
 		SetWindowIdByValue(hWnd, "Vertex Color", CONTROL_ID_VERTEX_COLOR_GROUPBOX);
@@ -293,7 +293,7 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 		RemoveStyles(hWnd, DS_MODALFRAME | WS_SYSMENU);
 		AddStyles(hWnd, WS_POPUP | WS_CAPTION | WS_SIZEBOX);
-
+		
 		auto hInstance = (HINSTANCE)GetWindowLongA(hWnd, GWLP_HINSTANCE);
 		auto font = SendMessageA(hWnd, WM_GETFONT, FALSE, FALSE);
 
@@ -357,6 +357,15 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 		constexpr auto BUTTON_HEIGHT = 23;
 		constexpr auto BUTTON_WIDTH = 80;
+
+		constexpr auto HEIGHT_STATIC_WIDTH = 64;
+		constexpr auto HEIGHT_STATIC_HEIGHT = 16;
+
+		constexpr auto HEIGHT_EDIT_WIDTH = 68;
+		constexpr auto HEIGHT_EDIT_HEIGHT = 20;
+
+		constexpr auto HEIGHT_CHECKBOX_WIDTH = 93;
+		constexpr auto HEIGHT_CHECKBOX_HEIGHT = 13;
 
 		// Extra padding needed to keep the controls within the window
 		constexpr auto BOTTOM_GHOST_HEIGHT = 99;
@@ -422,11 +431,42 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 		// Height Groupbox
 		{
-			const auto currentX = WINDOW_EDGE_PADDING;
+			auto currentX = WINDOW_EDGE_PADDING;
 			auto currentY = WINDOW_EDGE_PADDING;
 
 			auto heightGroupbox = GetDlgItem(hWnd, CONTROL_ID_HEIGHT_GROUPBOX);
 			MoveWindow(heightGroupbox, currentX, currentY, sectionWidth, HEIGHT_SECTION_HEIGHT, FALSE);
+			currentY += 18;
+			currentX += 20;
+
+			auto editRadiusStatic = GetDlgItem(hWnd, CONTROL_ID_EDIT_RADIUS_STATIC);
+			MoveWindow(editRadiusStatic, currentX, currentY + 4, HEIGHT_STATIC_WIDTH, HEIGHT_STATIC_HEIGHT, FALSE);
+			currentX += 69;
+
+			auto editRadiusEdit = GetDlgItem(hWnd, CONTROL_ID_EDIT_RADIUS_EDIT);
+			MoveWindow(editRadiusEdit, currentX, currentY, HEIGHT_EDIT_WIDTH, HEIGHT_EDIT_HEIGHT, FALSE);
+			currentX += 88;
+
+			auto flattenVerticesCheckbox = GetDlgItem(hWnd, CONTROL_ID_FLATTEN_VERTICES_CHECKBOX);
+			MoveWindow(flattenVerticesCheckbox, currentX, currentY + 5, HEIGHT_CHECKBOX_WIDTH, HEIGHT_CHECKBOX_HEIGHT, FALSE);
+			currentX += 104;
+
+			auto softenVerticesCheckbox = GetDlgItem(hWnd, CONTROL_ID_SOFTEN_VERTICES_CHECKBOX);
+			MoveWindow(softenVerticesCheckbox, currentX, currentY + 5, HEIGHT_CHECKBOX_WIDTH, HEIGHT_CHECKBOX_HEIGHT, FALSE);
+
+			currentX = WINDOW_EDGE_PADDING + 20;
+			currentY += 31;
+
+			auto editFalloffStatic = GetDlgItem(hWnd, CONTROL_ID_EDIT_FALLOFF_STATIC);
+			MoveWindow(editFalloffStatic, currentX, currentY + 3, HEIGHT_STATIC_WIDTH, HEIGHT_STATIC_HEIGHT, FALSE);
+			currentX += 68;
+
+			auto editFalloffEdit = GetDlgItem(hWnd, CONTROL_ID_EDIT_FALLOFF_EDIT);
+			MoveWindow(editFalloffEdit, currentX, currentY, HEIGHT_EDIT_WIDTH, HEIGHT_EDIT_HEIGHT, FALSE);
+			currentX += 133;
+
+			auto showEditRadius = GetDlgItem(hWnd, CONTROL_ID_SHOW_EDIT_RADIUS_CHECKBOX);
+			MoveWindow(showEditRadius, currentX, currentY + 4, HEIGHT_CHECKBOX_WIDTH + 10, HEIGHT_CHECKBOX_HEIGHT, FALSE);
 		}
 
 		// Texture Section
