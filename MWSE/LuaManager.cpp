@@ -1218,9 +1218,11 @@ namespace mwse::lua {
 	bool __cdecl AttributeSpellEffect(TES3::MagicSourceInstance* sourceInstance, bool positiveModifier, TES3::Statistic* statistic, void* attributeTypeInfo, TES3::MagicEffectInstance* effectInstance, float delta, int effectIndex) {
 		mwse::lua::event::DamageEvent::m_MagicSourceInstance = sourceInstance;
 		mwse::lua::event::DamageEvent::m_MagicEffectInstance = effectInstance;
+		mwse::lua::event::DamageEvent::m_MagicEffectIndex = effectIndex;
 		auto result = TES3_AttributeSpellEffect(sourceInstance, positiveModifier, statistic, attributeTypeInfo, effectInstance, delta, effectIndex);
 		mwse::lua::event::DamageEvent::m_MagicSourceInstance = nullptr;
 		mwse::lua::event::DamageEvent::m_MagicEffectInstance = nullptr;
+		mwse::lua::event::DamageEvent::m_MagicEffectIndex = -1;
 		return result;
 	}
 
