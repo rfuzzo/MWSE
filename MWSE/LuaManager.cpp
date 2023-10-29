@@ -259,6 +259,7 @@
 #include "LuaReferenceActivatedEvent.h"
 #include "LuaRepairEvent.h"
 #include "LuaRestInterruptEvent.h"
+#include "LuaShieldBlockedEvent.h"
 #include "LuaSimulateEvent.h"
 #include "LuaSkillRaisedEvent.h"
 #include "LuaSpellCastedEvent.h"
@@ -1221,6 +1222,26 @@ namespace mwse::lua {
 		mwse::lua::event::DamageEvent::m_MagicSourceInstance = nullptr;
 		mwse::lua::event::DamageEvent::m_MagicEffectInstance = nullptr;
 		return result;
+	}
+
+	//
+	// Shield blocked event.
+	//
+
+	const auto TES3_MobileActor_ApplyShieldWear = reinterpret_cast<void(__thiscall*)(TES3::MobileActor*, float)>(0x558690);
+	void __fastcall OnShieldWearFromBlocking(TES3::MobileActor* target, DWORD _UNUSED_, float damage) {
+		// Trigger event. Allow event to modify shield wear.
+		if (event::ShieldBlockedEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+			sol::table eventData = stateHandle.triggerEvent(new event::ShieldBlockedEvent(target, damage));
+			if (eventData.valid()) {
+				damage = eventData["conditionDamage"];
+			}
+		}
+
+		// Call original function.
+		TES3_MobileActor_ApplyShieldWear(target, damage);
 	}
 
 	//
@@ -4839,6 +4860,9 @@ namespace mwse::lua {
 
 		// Event: Damage(d)HandToHand
 		genCallEnforced(0x5576D4, 0x5581B0, reinterpret_cast<DWORD>(OnApplyFatigueDamageFromAttack_Wrapper));
+
+		// Event: Shield blocked
+		genCallEnforced(0x5575EF, 0x558690, reinterpret_cast<DWORD>(OnShieldWearFromBlocking));
 
 		// Event: Spell cast resolution
 		genCallEnforced(0x5156B2, 0x4AA950, reinterpret_cast<DWORD>(OnSpellCastResolution));
