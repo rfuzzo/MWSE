@@ -1230,13 +1230,22 @@ namespace mwse::lua {
 	// Shield blocked event.
 	//
 
+	static __declspec(naked) void patchOnShieldWearFromBlocking() {
+		__asm {
+			push eax	// damage
+			push esi	// attacker
+			push ebp	// target
+		}
+	}
+	const size_t patchOnShieldWearFromBlocking_size = 0x3;
+
 	const auto TES3_MobileActor_ApplyShieldWear = reinterpret_cast<void(__thiscall*)(TES3::MobileActor*, float)>(0x558690);
-	void __fastcall OnShieldWearFromBlocking(TES3::MobileActor* target, DWORD _UNUSED_, float damage) {
+	void __stdcall OnShieldWearFromBlocking(TES3::MobileActor* target, TES3::MobileActor* attacker, float damage) {
 		// Trigger event. Allow event to modify shield wear.
 		if (event::ShieldBlockedEvent::getEventEnabled()) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
 			auto stateHandle = luaManager.getThreadSafeStateHandle();
-			sol::table eventData = stateHandle.triggerEvent(new event::ShieldBlockedEvent(target, damage));
+			sol::table eventData = stateHandle.triggerEvent(new event::ShieldBlockedEvent(target, attacker, damage));
 			if (eventData.valid()) {
 				damage = eventData["conditionDamage"];
 			}
@@ -4864,6 +4873,7 @@ namespace mwse::lua {
 		genCallEnforced(0x5576D4, 0x5581B0, reinterpret_cast<DWORD>(OnApplyFatigueDamageFromAttack_Wrapper));
 
 		// Event: Shield blocked
+		writePatchCodeUnprotected(0x5575EC, (BYTE*)&patchOnShieldWearFromBlocking, patchOnShieldWearFromBlocking_size);
 		genCallEnforced(0x5575EF, 0x558690, reinterpret_cast<DWORD>(OnShieldWearFromBlocking));
 
 		// Event: Spell cast resolution

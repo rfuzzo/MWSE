@@ -7,10 +7,15 @@ return {
 			readOnly = true,
 			description = "The shield's condition will be reduced by this amount. It is initially equal to the pre-armor-mitigation damage value of the strike.",
 		},
+		["attacker"] = {
+			type = "tes3mobileActor",
+			readOnly = true,
+			description = "The mobile actor dealing the damage.",
+		},
 		["mobile"] = {
 			type = "tes3mobileActor",
 			readOnly = true,
-			description = "The mobile which is blocking the strike.",
+			description = "The mobile actor which is blocking the strike.",
 		},
 		["reference"] = {
 			type = "tes3reference",

@@ -7,9 +7,10 @@
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	ShieldBlockedEvent::ShieldBlockedEvent(TES3::MobileActor* mobileActor, float damage) :
+	ShieldBlockedEvent::ShieldBlockedEvent(TES3::MobileActor* mobileActor, TES3::MobileActor* attacker, float damage) :
 		ObjectFilteredEvent("shieldBlocked", mobileActor->reference),
 		m_MobileActor(mobileActor),
+		m_Attacker(attacker),
 		m_ConditionDamage(damage)
 	{
 
@@ -21,6 +22,7 @@ namespace mwse::lua::event {
 		auto eventData = state.create_table();
 
 		eventData["conditionDamage"] = m_ConditionDamage;
+		eventData["attacker"] = m_Attacker;
 		eventData["mobile"] = m_MobileActor;
 		eventData["reference"] = m_MobileActor->reference;
 
