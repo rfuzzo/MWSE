@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. However, it does not control transitions to combat music, which in the future will be available in another event.
+The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. The event can be blocked, which prevents a new explore or battle track from being chosen randomly. Blocking only works if `eventData.music` is not set.
 
 ```lua
 --- @param e musicSelectTrackEventData
@@ -16,10 +16,18 @@ event.register(tes3.event.musicSelectTrack, musicSelectTrackCallback)
 ```
 
 !!! tip
+	This event supports blocking by setting `e.block` to `true` or returning `false`. Blocking the event prevents vanilla behavior from happening. For example, blocking an `equip` event prevents the item from being equipped.
+
+!!! tip
 	An event can be claimed by setting `e.claim` to `true`, or by returning `false` from the callback. Claiming the event prevents any lower priority callbacks from being called.
 
 ## Event Data
 
 * `music` (string): *Optional*. If set to the path of a given track (relative to Data Files/music), it will play the given path instead of a random one.
-* `situation` (number): *Read-only*. Maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/), indicating combat or non-combat music.
+* `situation` ([tes3.musicSituation](../references/music-situations.md)): *Read-only*. Maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/), indicating combat or non-combat music.
+
+
+## Related events
+
+[musicChangeTrack](./musicChangeTrack.md){ .md-button }
 

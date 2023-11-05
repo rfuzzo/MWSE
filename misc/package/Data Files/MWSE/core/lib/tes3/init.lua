@@ -153,11 +153,24 @@ end
 
 -- Function to compare two keybind objects for equality. Useful in key events.
 function tes3.isKeyEqual(params)
-	if (params.actual.keyCode ~= params.expected.keyCode
-		or (params.actual.isShiftDown or false) ~= (params.expected.isShiftDown or false)
-		or (params.actual.isControlDown or false) ~= (params.expected.isControlDown or false)
-		or (params.actual.isAltDown or false) ~= (params.expected.isAltDown or false)
-		or (params.actual.isSuperDown or false) ~= (params.expected.isSuperDown or false)) then
+	local actual = params.actual
+	local expected = params.expected
+
+	-- Handle mouseWheelEventData
+	local actualMouseWheel = actual.mouseWheel or actual.delta and math.clamp(actual.delta, -1, 1)
+	local expectedMouseWheel = expected.mouseWheel or expected.delta and math.clamp(expected.delta, -1, 1)
+
+	-- Handle mouseDownEventData
+	local actualMouseButton = actual.mouseButton or actual.button
+	local expectedMouseButton = expected.mouseButton or expected.button
+
+	if ((actual.keyCode or false)  ~= (expected.keyCode or false)
+		or (actual.isShiftDown or false) ~= (expected.isShiftDown or false)
+		or (actual.isControlDown or false) ~= (expected.isControlDown or false)
+		or (actual.isAltDown or false) ~= (expected.isAltDown or false)
+		or (actual.isSuperDown or false) ~= (expected.isSuperDown or false)
+		or (actualMouseButton or false) ~= (expectedMouseButton or false)
+		or (actualMouseWheel or false) ~= (expectedMouseWheel or false)) then
 		return false
 	end
 

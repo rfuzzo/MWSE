@@ -3,6 +3,8 @@
 
 --- @meta
 --- Base class that represents the nodes of a scene graph. A node can have any number of child nodes.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/niNode).
 --- @class niNode : niAVObject, niObjectNET, niObject
 --- @field children niAmbientLight[]|niBillboardNode[]|niCamera[]|niCollisionSwitch[]|niDirectionalLight[]|niNode[]|niParticles[]|niPointLight[]|niRotatingParticles[]|niSortAdjustNode[]|niSpotLight[]|niSwitchNode[]|niTextureEffect[]|niTriShape[] *Read-only*. The children of the node. Can have `nil` entries.
 --- @field effectList niDynamicEffectLinkedList *Read-only*. The effect list of the node. Attached effects affect the node and all of its child subtree geometry.
@@ -46,7 +48,7 @@ function niNode:detachChildAt(index) end
 function niNode:detachEffect(effect) end
 
 --- Gets the effect of the given type.
---- @param type integer Use the values from [`ni.dynamicEffectType`](https://mwse.github.io/MWSE/references/ni/dynamic-effect-types/) table.
+--- @param type ni.dynamicEffectType Use the values from [`ni.dynamicEffectType`](https://mwse.github.io/MWSE/references/ni/dynamic-effect-types/) table.
 --- @return niAmbientLight|niDirectionalLight|niPointLight|niSpotLight|niTextureEffect|nil effect No description yet available.
 function niNode:getEffect(type) end
 

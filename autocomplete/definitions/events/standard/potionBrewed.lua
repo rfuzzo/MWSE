@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "The potionBrewed event is raised when the player brews a new potion.",
+	related = { "potionBrewFailed", "potionBrewSkillCheck" },
 	eventData = {
 		["object"] = {
 			type = "tes3alchemy",

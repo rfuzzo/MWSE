@@ -20,5 +20,10 @@ event.register(tes3.event.combatStopped, combatStoppedCallback)
 
 ## Event Data
 
-* `actor` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor who has left combat.
+* `actor` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor who has left combat.
+
+
+## Related events
+
+[combatStart](./combatStart.md){ .md-button }[combatStarted](./combatStarted.md){ .md-button }[combatStop](./combatStop.md){ .md-button }[combatStopped](./combatStopped.md){ .md-button }
 

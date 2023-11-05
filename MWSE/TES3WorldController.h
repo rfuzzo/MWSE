@@ -429,18 +429,26 @@ namespace TES3 {
 		void setAIDistanceScale(float scale);
 
 		void rechargerAddItem(Object* item, ItemData* itemData, Enchantment* enchantment);
+		bool getLevitationDisabled() const;
+		void setLevitationDisabled(bool disable);
 
 		//
 		// Custom functions.
 		//
 
+		int getShadowLevel() const;
+		void setShadowLevel(int shadows);
 		_declspec(dllexport) void tickClock();
 		_declspec(dllexport) void checkForDayWrapping();
+		bool isChargenStarted() const;
+		bool isChargenRunning() const;
+		bool isChargenFinished() const;
 
 		//
 		// Helpful static variables.
 		//
 
+		static float realDeltaTime;
 		static float simulationTimeScalar;
 	};
 	static_assert(sizeof(WorldController) == 0x374, "TES3::WorldController failed size validation");

@@ -17,18 +17,18 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` ([tes3worldControllerRenderCameraData](../../types/tes3worldControllerRenderCameraData))
+* `result` ([tes3worldControllerRenderCameraData](../types/tes3worldControllerRenderCameraData.md))
 
 ***
 
 ### `cameraRoot`
 <div class="search_terms" style="display: none">cameraroot</div>
 
-*Read-only*. The root scene node of the camera.
+*Read-only*. The immediate parent node of the camera. Those are `"World Camera Root"`, `"Menu Camera Root"`, etc.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -39,16 +39,16 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` ([niRenderer](../../types/niRenderer))
+* `result` ([niRenderer](../types/niRenderer.md))
 
 ***
 
 ### `root`
 <div class="search_terms" style="display: none">root</div>
 
-*Read-only*. 
+*Read-only*. The top-most node of the scene graph in which this camera is found. Those are `"World Scene Graph Root"`, `"Menu Scene Graph Root"`, etc.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 

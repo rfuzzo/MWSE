@@ -215,6 +215,8 @@ local function loadLocaleFile(mod, locale)
 	return success
 end
 
+--- @param mod string
+--- @return fun(key: string, data: any?): string i18n
 function mwse.loadTranslations(mod)
 	-- Lazy set language, since tes3.getLanguage() isn't available.
 	local language = tes3.getLanguage() or "eng"
@@ -900,12 +902,40 @@ function mwse.getConfig(key)
 	return mwseConfig[key]
 end
 
+local function getDefaultConfigForSerializing()
+	local defaults = table.copy(mwseConfig.getDefaults())
+
+	-- We don't want to override the build number with defaults if one isn't provided.
+	defaults.BuildNumber = nil
+
+	return defaults
+end
+
 -- Load user config values.
-local userConfig = mwse.loadConfig("MWSE", mwseConfig.getDefaults())
+local defaultConfig = mwseConfig.getDefaults()
+local userConfig = mwse.loadConfig("MWSE", getDefaultConfigForSerializing())
 for k, v in pairs(userConfig) do
 	if (not mwse.setConfig(k, v)) then
 		mwse.log("WARNING: User config key '%s' could not be assigned to '%s'.", k, v)
 	end
+end
+
+-- Update build number.
+-- TODO: Add an actual migration map to parse and go through.
+local lastBuildNumber = userConfig.BuildNumber or 0
+if (mwse.buildNumber ~= lastBuildNumber) then
+	-- Build 3260 sets ReplaceDialogueFiltering to be enabled by default.
+	if (lastBuildNumber <= 3260) then
+		mwse.setConfig("ReplaceDialogueFiltering", defaultConfig["ReplaceDialogueFiltering"])
+	end
+
+	if (lastBuildNumber > 0) then
+		mwse.log("MWSE build updated from %d to %d.", lastBuildNumber, mwse.buildNumber)
+	else
+		mwse.log("MWSE build initialized to %d.", mwse.buildNumber)
+	end
+
+	userConfig.BuildNumber = mwse.buildNumber
 end
 
 -- Refresh the file so that it shows users what other values can be tweaked.

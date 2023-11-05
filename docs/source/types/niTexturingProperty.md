@@ -8,7 +8,7 @@
 
 A rendering property that controls the methods used to filter texture pixels, and blend texture colors and vertex colors.
 
-This type inherits the following: [niProperty](../../types/niProperty), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niProperty](../types/niProperty.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `applyMode`
@@ -18,7 +18,7 @@ The texture apply mode. The texture apply mode controls how the vertex colors ar
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.texturingPropertyApplyMode](../references/ni/texturing-property-apply-modes.md))
 
 ***
 
@@ -29,7 +29,7 @@ Gets or set the base map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil)
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil)
 
 ***
 
@@ -40,7 +40,7 @@ Gets or set the bump map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil)
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil)
 
 ***
 
@@ -62,7 +62,7 @@ Gets or set the bump map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -73,7 +73,7 @@ Gets or set the dark map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil)
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil)
 
 ***
 
@@ -95,7 +95,7 @@ Gets or set the detail map. Can be set to nil to delete it. Note that doing so w
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil)
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil)
 
 ***
 
@@ -106,7 +106,7 @@ Gets or set the detail map. Can be set to nil to delete it. Note that doing so w
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -117,7 +117,7 @@ Gets or set the gloss map. Can be set to nil to delete it. Note that doing so wi
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil)
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil)
 
 ***
 
@@ -128,7 +128,7 @@ Gets or set the glow map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil)
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil)
 
 ***
 
@@ -139,7 +139,7 @@ Gets or set the glow map. Can be set to nil to delete it. Note that doing so wil
 
 **Returns**:
 
-* `result` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap)[])
+* `result` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md)[])
 
 ***
 
@@ -183,7 +183,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -194,7 +194,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -205,7 +205,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.propertyType](../references/ni/property-types.md))
 
 ***
 
@@ -222,11 +222,11 @@ local map, index = myObject:addDecalMap(texture)
 
 **Parameters**:
 
-* `texture` ([niTexture](../../types/niTexture)): *Optional*. The texture to assign to the new decal.
+* `texture` ([niTexture](../types/niTexture.md)): *Optional*. The texture to assign to the new decal.
 
 **Returns**:
 
-* `map` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap), nil): A newly created decal map.
+* `map` ([niTexturingPropertyMap](../types/niTexturingPropertyMap.md), nil): A newly created decal map.
 * `index` (integer, nil): The index of the newly added decal map.
 
 ***
@@ -242,7 +242,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -257,7 +257,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -276,7 +276,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -295,7 +295,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -314,7 +314,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -359,7 +359,7 @@ local result = myObject:hasStringDataWith(value)
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -367,7 +367,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -378,7 +378,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -386,7 +386,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -405,7 +405,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -442,7 +442,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -457,7 +457,7 @@ local removed = myObject:removeDecalMap(index)
 
 **Parameters**:
 
-* `index` (integer): The index of the decal to remove. The available indices are between `ni.texturingPropertyMapType.decalFirst` and `ni.texturingPropertyMapType.decalLast`.
+* `index` ([ni.texturingPropertyMapType](../references/ni/texturing-property-map-types.md)): The index of the decal to remove. The available indices are between `ni.texturingPropertyMapType.decalFirst` and `ni.texturingPropertyMapType.decalLast`.
 
 **Returns**:
 
@@ -476,7 +476,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 

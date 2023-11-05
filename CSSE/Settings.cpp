@@ -8,17 +8,87 @@ namespace se::cs {
 	const Settings_t default_settings;
 
 	//
+	// Common help structures
+	//
+
+	void Settings_t::ColumnSettings::from_toml(const toml::value& v) {
+		width = toml::find_or(v, "width", width);
+	}
+
+	toml::value Settings_t::ColumnSettings::into_toml() const {
+		return toml::value(
+			{
+				{ "width", width },
+			}
+		);
+	}
+
+	Settings_t::WindowSize::WindowSize(size_t cx, size_t cy) {
+		width = cx;
+		height = cy;
+	}
+
+	Settings_t::WindowSize::WindowSize(const SIZE& fromSize) {
+		width = fromSize.cx;
+		height = fromSize.cy;
+	}
+
+	void Settings_t::WindowSize::from_toml(const toml::value& v) {
+		width = toml::find_or(v, "width", width);
+		height = toml::find_or(v, "height", height);
+	}
+
+	toml::value Settings_t::WindowSize::into_toml() const {
+		return toml::value(
+			{
+				{ "width", width },
+				{ "height", height },
+			}
+		);
+	}
+
+	//
 	// Dialogue Window
 	//
 
 	void Settings_t::DialogueWindowSettings::from_toml(const toml::value& v) {
 		highlight_modified_items = toml::find_or(v, "highlight_modified_items", highlight_modified_items);
+
+		size = toml::find_or(v, "size", size);
+
+		column_text = toml::find_or(v, "column_text", column_text);
+		column_info_id = toml::find_or(v, "column_info_id", column_info_id);
+		column_disp_index = toml::find_or(v, "column_disp_index", column_disp_index);
+		column_id = toml::find_or(v, "column_id", column_id);
+		column_faction = toml::find_or(v, "column_faction", column_faction);
+		column_cell = toml::find_or(v, "column_cell", column_cell);
+		column_condition1 = toml::find_or(v, "column_condition1", column_condition1);
+		column_condition2 = toml::find_or(v, "column_condition2", column_condition2);
+		column_condition3 = toml::find_or(v, "column_condition3", column_condition3);
+		column_condition4 = toml::find_or(v, "column_condition4", column_condition4);
+		column_condition5 = toml::find_or(v, "column_condition5", column_condition5);
+		column_condition6 = toml::find_or(v, "column_condition6", column_condition6);
 	}
 
 	toml::value Settings_t::DialogueWindowSettings::into_toml() const {
 		return toml::value(
 			{
 				{ "highlight_modified_items", highlight_modified_items },
+
+				{ "size", size },
+
+				{ "column_text", column_text },
+				{ "column_info_id", column_info_id },
+				{ "column_disp_index", column_disp_index },
+				{ "column_id", column_id },
+				{ "column_faction", column_faction },
+				{ "column_cell", column_cell },
+				{ "column_condition1", column_condition1 },
+				{ "column_condition2", column_condition2 },
+				{ "column_condition3", column_condition3 },
+				{ "column_condition4", column_condition4 },
+				{ "column_condition5", column_condition5 },
+				{ "column_condition6", column_condition6 },
 			}
 		);
 	}
@@ -63,21 +133,12 @@ namespace se::cs {
 	// Object Window
 	//
 
-	void Settings_t::ObjectWindowSettings::ColumnSettings::from_toml(const toml::value& v) {
-		width = toml::find_or(v, "width", width);
-	}
-
-	toml::value Settings_t::ObjectWindowSettings::ColumnSettings::into_toml() const {
-		return toml::value(
-			{
-				{ "width", width },
-			}
-		);
-	}
-
 	void Settings_t::ObjectWindowSettings::from_toml(const toml::value& v) {
 		// Backwards compatibility.
 		clear_filter_on_tab_switch = toml::find_or(v, "clear_on_tab_switch", clear_filter_on_tab_switch);
+
+		// Tab settings.
+		use_button_style_tabs = toml::find_or(v, "use_button_style_tabs", use_button_style_tabs);
 
 		// Search settings
 		clear_filter_on_tab_switch = toml::find_or(v, "clear_filter_on_tab_switch", clear_filter_on_tab_switch);
@@ -88,6 +149,7 @@ namespace se::cs {
 		filter_by_enchantment_id = toml::find_or(v, "filter_by_enchantment_id", filter_by_enchantment_id);
 		filter_by_script_id = toml::find_or(v, "filter_by_script_id", filter_by_script_id);
 		filter_by_book_text = toml::find_or(v, "filter_by_book_text", filter_by_book_text);
+		filter_by_faction = toml::find_or(v, "filter_by_faction", filter_by_faction);
 		highlight_modified_items = toml::find_or(v, "highlight_modified_items", highlight_modified_items);
 		case_sensitive = toml::find_or(v, "case_sensitive", case_sensitive);
 		use_regex = toml::find_or(v, "use_regex", use_regex);
@@ -138,6 +200,7 @@ namespace se::cs {
 		column_script = toml::find_or(v, "column_script", column_script);
 		column_sound = toml::find_or(v, "column_sound", column_sound);
 		column_spell_pc_start = toml::find_or(v, "column_spell_pc_start", column_spell_pc_start);
+		column_spell_range = toml::find_or(v, "column_spell_range", column_spell_range);
 		column_type = toml::find_or(v, "column_type", column_type);
 		column_uses = toml::find_or(v, "column_uses", column_uses);
 		column_value = toml::find_or(v, "column_value", column_value);
@@ -158,6 +221,9 @@ namespace se::cs {
 	toml::value Settings_t::ObjectWindowSettings::into_toml() const {
 		return toml::value(
 			{
+				// Tab settings
+				{ "use_button_style_tabs", use_button_style_tabs },
+
 				// Search settings
 				{ "clear_filter_on_tab_switch", clear_filter_on_tab_switch },
 				{ "filter_by_id", filter_by_id },
@@ -167,6 +233,7 @@ namespace se::cs {
 				{ "filter_by_enchantment_id", filter_by_enchantment_id },
 				{ "filter_by_script_id", filter_by_script_id },
 				{ "filter_by_book_text", filter_by_book_text },
+				{ "filter_by_faction", filter_by_faction },
 				{ "highlight_modified_items", highlight_modified_items },
 				{ "case_sensitive", case_sensitive },
 				{ "use_regex", use_regex },
@@ -217,6 +284,7 @@ namespace se::cs {
 				{ "column_script", column_script },
 				{ "column_sound", column_sound },
 				{ "column_spell_pc_start", column_spell_pc_start },
+				{ "column_spell_range", column_spell_range },
 				{ "column_type", column_type },
 				{ "column_uses", column_uses },
 				{ "column_value", column_value },
@@ -234,6 +302,69 @@ namespace se::cs {
 				{ "column_weight_class", column_weight_class },
 			}
 		);
+	}
+
+	//
+	// Landscape Edit Settings Window
+	//
+
+	void Settings_t::LandscapeWindowSettings::from_toml(const toml::value& v) {
+		x_position = toml::find_or(v, "x_position", x_position);
+		y_position = toml::find_or(v, "y_position", y_position);
+
+		size = toml::find_or(v, "size", size);
+
+		column_id = toml::find_or(v, "column_id", column_id);
+		column_used = toml::find_or(v, "column_used", column_used);
+		column_filename = toml::find_or(v, "column_filename", column_filename);
+
+		show_preview_enabled = toml::find_or(v, "show_preview_enabled", show_preview_enabled);
+	}
+
+	toml::value Settings_t::LandscapeWindowSettings::into_toml() const {
+		return toml::value(
+			{
+
+				{ "x_position", x_position },
+				{ "y_position", y_position },
+
+				{ "size", size },
+
+				{ "column_id", column_id },
+				{ "column_used", column_used },
+				{ "column_filename", column_filename },
+
+				{ "show_preview_enabled", show_preview_enabled},
+			}
+		);
+	}
+
+	//
+	// Color theme
+	// 
+
+	void Settings_t::ColorTheme::from_toml(const toml::value& v) {
+		// Modified object highlight
+		highlight_deleted_object_color = toml::find_or(v, "highlight_deleted_object_color", highlight_deleted_object_color);
+		highlight_modified_from_master_color = toml::find_or(v, "highlight_modified_from_master_color", highlight_modified_from_master_color);
+		highlight_modified_new_object_color = toml::find_or(v, "highlight_modified_new_object_color", highlight_modified_new_object_color);
+	}
+
+	toml::value Settings_t::ColorTheme::into_toml() const {
+		return toml::value(
+			{
+				// Modified object highlight
+				{ "highlight_deleted_object_color", highlight_deleted_object_color },
+				{ "highlight_modified_from_master_color", highlight_modified_from_master_color },
+				{ "highlight_modified_new_object_color", highlight_modified_new_object_color },
+			}
+		);
+	}
+
+	void Settings_t::ColorTheme::packColors() {
+		highlight_deleted_object_packed_color = RGB(highlight_deleted_object_color[0], highlight_deleted_object_color[1], highlight_deleted_object_color[2]);
+		highlight_modified_from_master_packed_color = RGB(highlight_modified_from_master_color[0], highlight_modified_from_master_color[1], highlight_modified_from_master_color[2]);
+		highlight_modified_new_object_packed_color = RGB(highlight_modified_new_object_color[0], highlight_modified_new_object_color[1], highlight_modified_new_object_color[2]);
 	}
 
 	//
@@ -391,11 +522,15 @@ namespace se::cs {
 		enabled = toml::find_or(v, "enabled", enabled);
 		dialogue_window = toml::find_or(v, "dialogue_window", dialogue_window);
 		object_window = toml::find_or(v, "object_window", object_window);
-		quickstart = toml::find_or(v, "quickstart", quickstart);
 		render_window = toml::find_or(v, "render_window", render_window);
+		landscape_window = toml::find_or(v, "landscape_window", landscape_window);
+		color_theme = toml::find_or(v, "color_theme", color_theme);
+		quickstart = toml::find_or(v, "quickstart", quickstart);
 		script_editor = toml::find_or(v, "script_editor", script_editor);
 		test_environment = toml::find_or(v, "test_environment", test_environment);
 		openmw = toml::find_or(v, "openmw", openmw);
+
+		color_theme.packColors();
 	}
 
 	toml::value Settings_t::into_toml() const {
@@ -406,6 +541,8 @@ namespace se::cs {
 				{ "dialogue_window", dialogue_window },
 				{ "object_window", object_window },
 				{ "render_window", render_window },
+				{ "landscape_window", landscape_window},
+				{ "color_theme", color_theme },
 				{ "quickstart", quickstart },
 				{ "script_editor", script_editor },
 				{ "test_environment", test_environment },

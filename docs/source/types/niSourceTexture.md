@@ -8,7 +8,7 @@
 
 A texture that represent both static and dynamic content, as NiSourceTexture data objects can have their pixel data modified on the fly to implement dynamic texture behavior.
 
-This type inherits the following: [niTexture](../../types/niTexture), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niTexture](../types/niTexture.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -42,6 +42,42 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 
 * `result` (string)
 
+??? example "Example: Sampling landscape texture under the crosshair/mouse cursor"
+
+	```lua
+	
+	local function onEnterFrame()
+		local cursor = tes3.getCursorPosition()
+		local camera = tes3.worldController.worldCamera.cameraData.camera
+		local position, direction = camera:windowPointToRay({ cursor.x, cursor.y })
+	
+		local hit = tes3.rayTest({
+			position = position,
+			direction = direction,
+			-- Let's ray test agains terrain
+			root = tes3.game.worldLandscapeRoot
+		})
+		if not hit or not hit.object then return end
+	
+		local texturingProperty = hit.object.texturingProperty
+		if not texturingProperty then return end
+	
+		local baseMap = texturingProperty.maps[1]
+		if not baseMap or not baseMap.texture then return end
+	
+		tes3.messageBox(baseMap.texture.fileName)
+	end
+	
+	local function onLoaded()
+		if event.isRegistered(tes3.event.enterFrame, onEnterFrame) then return end
+	
+		event.register(tes3.event.enterFrame, onEnterFrame)
+	end
+	
+	event.register(tes3.event.loaded, onLoaded)
+
+	```
+
 ***
 
 ### `formatPrefs`
@@ -51,7 +87,7 @@ The `NiFormatPrefs` of the texture.
 
 **Returns**:
 
-* `result` ([niFormatPrefs](../../types/niFormatPrefs))
+* `result` ([niFormatPrefs](../types/niFormatPrefs.md))
 
 ***
 
@@ -95,7 +131,7 @@ The app-level pixel data.
 
 **Returns**:
 
-* `result` ([niPixelData](../../types/niPixelData))
+* `result` ([niPixelData](../types/niPixelData.md))
 
 ***
 
@@ -128,7 +164,7 @@ The app-level pixel data.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -139,7 +175,7 @@ The app-level pixel data.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -167,7 +203,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -193,7 +229,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -212,7 +248,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -231,7 +267,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -250,7 +286,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -295,7 +331,7 @@ local result = myObject:hasStringDataWith(value)
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -303,7 +339,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -314,7 +350,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -322,7 +358,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -352,7 +388,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -389,7 +425,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -404,7 +440,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -461,5 +497,5 @@ local texture = niSourceTexture.createFromPath(path, useCached)
 
 **Returns**:
 
-* `texture` ([niSourceTexture](../../types/niSourceTexture))
+* `texture` ([niSourceTexture](../types/niSourceTexture.md))
 

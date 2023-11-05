@@ -14,7 +14,14 @@ namespace mwse {
 	bool Configuration::LetterboxMovies = false;
 	bool Configuration::EnableLogColors = false;
 	bool Configuration::EnableDependencyChecks = true;
-	bool Configuration::ReplaceDialogueFiltering = false;
+	bool Configuration::ReplaceDialogueFiltering = true;
+	bool Configuration::EnableLuaErrorNotifications = false;
+#ifdef APPVEYOR_BUILD_NUMBER
+	UINT Configuration::BuildNumber = APPVEYOR_BUILD_NUMBER;
+#else
+	UINT Configuration::BuildNumber = UINT_MAX;
+#endif
+
 
 	// Allow default values to be accessed later.
 	sol::table defaultConfig;
@@ -51,5 +58,7 @@ namespace mwse {
 		DECLARE_CONFIG(EnableLogColors)
 		DECLARE_CONFIG(EnableDependencyChecks)
 		DECLARE_CONFIG(ReplaceDialogueFiltering)
+		DECLARE_CONFIG(EnableLuaErrorNotifications)
+		DECLARE_CONFIG(BuildNumber)
 	}
 }

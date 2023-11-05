@@ -4,5 +4,11 @@ return {
 	arguments = {
 		{ name = "point", type = "tes3vector3", description = "The target point to calculate the facing angle." },
 	},
-	returns = { name = "angle", type = "number", description = "In range of [-180, 180] in degrees." }
+	returns = { name = "angle", type = "number", description = "In range of [-180, 180] in degrees." },
+	examples = {
+		["viewCone"] = {
+			title = "View cone testing",
+			description = "Using the `getViewToPoint` we can check whether a reference is inside a cone in front of the player."
+		}
+	}
 }

@@ -6,6 +6,10 @@ To request a feature, visit the [Construction Set Extender Development issue](ht
 
 For a list of recent changes, [visit the CSSE project folder commit history](https://github.com/MWSE/MWSE/commits/master/CSSE).
 
+!!! tip The Morrowind Script Extender
+
+	This project also improves Morrowind's execution. Read more about fixes and features for the core game on the [patches](https://mwse.github.io/MWSE/references/general/patches/) page.
+
 ## Requirements
 
 CSSE requires [MGE XE](https://www.nexusmods.com/morrowind/mods/41102?) v0.14.3 (released July 29, 2022) or later in order to be automatically loaded into the Construction Set.
@@ -35,6 +39,8 @@ If you are strictly an OpenMW user but also a TES Construction Set user, you nee
 If you are using [Construction Set Better UI](https://www.nexusmods.com/morrowind/mods/50311), CSSE will not automatically load. To get CSSE to work with Better UI, you will need to rename the Better UI executable to "TES Construction Set" and replace the existing vanilla CS file. Be sure to back the original up first!
 
 ## Features
+
+Prefer to learn from videos? Danae has made [a non-exhaustive summary video of the CSSE](https://www.youtube.com/watch?v=uGOA7MIKsw0), last updated May 5th, 2023.
 
 ### General
 
@@ -97,6 +103,7 @@ chargenstate = -1.0
 ### Object Window
 
 * Significantly improved UI responsiveness.
+* The tab style has been changed to be more button-like. This prevents tabs from moving around.
 * Added a footer to the window, with a new filter input. This input can be focused by using CTRL+F while the Object Window is active. This can be used to filter objects by a matching id, name, icon, model, enchantment, script, or book text fragments.
 	* Regex search options and case-sensitive search options can be enabled in the config file.
 * The footer also supports a toggle button to only show modified objects.
@@ -105,6 +112,12 @@ chargenstate = -1.0
 * Fixed issue where box selection in the object window would cause the mouse to snap to the edge of the screen.
 * Modified objects are highlighted with a light green background.
 * Deleted objects are highlighted with a light red background.
+* The spell list lists the range of the spell.
+
+### Actor Editing Windows
+
+* The AI window opens more quickly.
+* Clicking on the return button in the AI window when no cell has been loaded no longer crashes the CS.
 
 ### Dialogue Window
 
@@ -118,6 +131,8 @@ chargenstate = -1.0
 	* The journal conditions (name/finished/restart) are shown but disabled for other dialogue types.
 	* The general UI has minor other position layout changes.
 * Select all control (Ctrl+A) now functions in the edit boxes.
+* The window will remember the user preferences for column widths, as well as the overall window size.
+* Conditional columns display the value being compared against to make it easier at a glance what the INFO requires.
 
 ### Render Window
 
@@ -136,6 +151,7 @@ chargenstate = -1.0
 	* Restore hidden references, restoring to view any references hidden with the hide selection option.
 	* Set or clear the QuickStart data from the current render window perspective.
 	* Set the testing environment to use the selected reference position/rotation or that of the camera.
+	* Hide landscape.
 * The field of view (FOV) and antialiasing (multisamples) can be overwritten in the config file.
 * The update rate of the render window can be changed from the default of 25 FPS. By default it now runs at (up to) 60 FPS.
 * Fixed an issue with bound calculations. Any bound-related functions, such as focusing the camera (C or T keys) on a light will never send the camera into the stratosphere.

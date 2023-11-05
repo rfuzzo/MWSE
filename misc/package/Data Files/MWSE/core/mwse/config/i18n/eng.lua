@@ -18,6 +18,8 @@ return {
 	["enableLogColors.description"] = "If enabled, log colors will be enabled in the console. However, this will make the mwse.log file more difficult to read in a text editor.",
 	["enableDependencyChecks.label"] = "Enable Dependency Checks",
 	["enableDependencyChecks.description"] = "If enabled, MWSE will check for dependencies of mods and warn the user if they are missing.",
-	["replaceDialogueFiltering.label"] = "[BETA] Replace Dialogue Filtering",
-	["replaceDialogueFiltering.description"] = "If enabled, MWSE will replace the logic for dialogue filtering. This feature is currently in beta. Please give feedback on any issues encountered with it.",
+	["replaceDialogueFiltering.label"] = "Replace Dialogue Filtering",
+	["replaceDialogueFiltering.description"] = "If enabled, MWSE will replace the logic for dialogue filtering. This feature is currently in public testing.",
+	["enableLuaErrorNotifications.label"] = "Enable lua error notifications",
+	["enableLuaErrorNotifications.description"] = "If enabled, notification pop-ups will appear when a lua error is logged. They contain the mod name and a short error description only. Many released mods cause frequent non-critical errors, so this mode is primarily intended for use in development and bugfixing.",
 }

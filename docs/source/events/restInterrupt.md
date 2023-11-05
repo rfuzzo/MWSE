@@ -23,7 +23,12 @@ event.register(tes3.event.restInterrupt, restInterruptCallback)
 
 ## Event Data
 
-* `creature` ([tes3creature](../../types/tes3creature), [tes3npc](../../types/tes3npc), [tes3leveledCreature](../../types/tes3leveledCreature)): The creature that is interrupting rest. Can be set to a creature, NPC, or leveled creature.
+* `creature` ([tes3creature](../types/tes3creature.md), [tes3npc](../types/tes3npc.md), [tes3leveledCreature](../types/tes3leveledCreature.md)): The creature that is interrupting rest. Can be set to a creature, NPC, or leveled creature.
 * `resting` (boolean): *Read-only*. If true, the player is attempting to rest, as opposed to wait.
 * `waiting` (boolean): *Read-only*. If true, the player is attempting to wait, as opposed to rest.
+
+
+## Related events
+
+[calcRestInterrupt](./calcRestInterrupt.md){ .md-button }
 

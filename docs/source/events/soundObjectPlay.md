@@ -29,6 +29,11 @@ event.register(tes3.event.soundObjectPlay, soundObjectPlayCallback)
 * `flags` (number): A flag whether the sound is looping or not. 0 means the sound doesn't loop, 1 means the sound loops.
 * `isNot3D` (boolean): 
 * `pitch` (number): The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
-* `sound` ([tes3sound](../../types/tes3sound)): The sound about to be played.
+* `sound` ([tes3sound](../types/tes3sound.md)): The sound about to be played.
 * `volume` (number): The volume of the sound. In range [1, 250].
+
+
+## Related events
+
+[playItemSound](./playItemSound.md){ .md-button }
 

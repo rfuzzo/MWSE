@@ -84,6 +84,7 @@
 #include "LuaCalcTrainingPriceEvent.h"
 #include "LuaCalcTravelPriceEvent.h"
 #include "LuaEnchantChargeUseEvent.h"
+#include "LuaMusicChangeTrackEvent.h"
 
 #include "BitUtil.h"
 #include "MathUtil.h"
@@ -335,21 +336,31 @@ namespace mwse::lua {
 			return false;
 		}
 
-		// Clamp volume. RIP no std::clamp.
-		volume = std::max(0.0, volume);
-		volume = std::min(volume, 1.0);
+		// Clamp volume.
+		volume = std::clamp(volume, 0.0, 1.0);
 
 		// Apply mix and rescale to 0-250
-		volume *= 250.0 * TES3::WorldController::get()->audioController->getMixVolume(TES3::AudioMixType(mix));
+		const auto worldController = TES3::WorldController::get();
+		volume *= 250.0 * worldController->audioController->getMixVolume(TES3::AudioMixType(mix));
 
-		if (soundPath) {
-			bool isVoiceover = getOptionalParam<bool>(params, "isVoiceover", false);
-			TES3::DataHandler::get()->addTemporySound(soundPath, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch, isVoiceover, sound);
-			return true;
+		// Only allow positional sounds if we are loaded in and have a player reference.
+		const auto mobilePlayer = worldController->getMobilePlayer();
+		if (mobilePlayer) {
+			if (soundPath) {
+				bool isVoiceover = getOptionalParam<bool>(params, "isVoiceover", false);
+				TES3::DataHandler::get()->addTemporySound(soundPath, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch, isVoiceover, sound);
+				return true;
+			}
+			else if (sound) {
+				TES3::DataHandler::get()->addSound(sound, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch);
+				return true;
+			}
 		}
-		else if (sound) {
-			TES3::DataHandler::get()->addSound(sound, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch);
-			return true;
+
+		// Try to fall back on direct-playing a sound.
+		if (sound) {
+			const auto flags = loop ? TES3::SoundPlayFlags::Loop : NULL;
+			return sound->play(flags, volume, pitch, true);
 		}
 
 		return false;
@@ -411,8 +422,9 @@ namespace mwse::lua {
 			char path[260];
 
 			std::snprintf(path, sizeof(path), "Data Files/music/%s", relativePath);
-			worldController->audioController->changeMusicTrack(path, int(1000.0f * crossfade), volume);
+			event::MusicChangeTrackEvent::ms_Context = "lua";
 			worldController->musicSituation = TES3::MusicSituation(situation);
+			worldController->audioController->changeMusicTrack(path, int(1000.0f * crossfade), volume);
 		}
 	}
 
@@ -499,8 +511,9 @@ namespace mwse::lua {
 	}
 
 	void loadGame(const char* fileName) {
-		// Char Gen State will equal 0 in the menu.
-		if (TES3::WorldController::get()->gvarCharGenState->value == 0.0f) {
+		auto worldController = TES3::WorldController::get();
+		// Char Gen State will equal 0 (NONE) in the menu.
+		if (!worldController->isChargenFinished() && !worldController->isChargenRunning()) {
 			TES3::DataHandler::get()->nonDynamicData->loadGameMainMenu(fileName);
 		}
 		else {
@@ -691,6 +704,14 @@ namespace mwse::lua {
 		auto attribute = getOptionalParam<int>(params, "attribute", -1);
 		auto skill = getOptionalParam<int>(params, "skill", -1);
 		return std::move(effect->getComplexName(attribute, skill));
+	}
+
+	sol::optional<NI::Camera*> getCamera() {
+		auto worldController = TES3::WorldController::get();
+		if (worldController) {
+			return worldController->worldCamera.cameraData.camera;
+		}
+		return sol::optional<NI::Camera*>();
 	}
 
 	sol::optional<TES3::Vector3> getCameraVector() {
@@ -1797,14 +1818,34 @@ namespace mwse::lua {
 	}
 
 	TES3::Cell* getCell(sol::table params) {
-		// If we were given a name, try that.
-		sol::optional<const char*> cellId = params["id"];
-		if (cellId) {
-			return TES3::DataHandler::get()->nonDynamicData->getCellByName(cellId.value());
+		const auto dataHandler = TES3::DataHandler::get();
+		if (dataHandler == nullptr) {
+			throw std::runtime_error("Cell data has not yet been initialized.");
 		}
 
-		// Otherwise try to use X/Y.
-		return TES3::DataHandler::get()->nonDynamicData->getCellByGrid(params["x"], params["y"]);
+		// If we were given a name, try that.
+		const auto id = getOptionalParam<const char*>(params, "id");
+		if (id) {
+			return dataHandler->nonDynamicData->getCellByName(id.value());
+		}
+
+		// If we were given x/y coordinates use that.
+		const auto gridX = getOptionalParam<int>(params, "x");
+		const auto gridY = getOptionalParam<int>(params, "y");
+		if (gridX && gridY) {
+			return dataHandler->nonDynamicData->getCellByGrid(gridX.value(), gridY.value());
+		}
+
+		// If we were given a position, try that.
+		const auto position = getOptionalParamVector3(params, "position");
+		if (position) {
+			const auto gridX = TES3::Cell::toGridCoord(position.value().x);
+			const auto gridY = TES3::Cell::toGridCoord(position.value().y);
+			return dataHandler->nonDynamicData->getCellByGrid(gridX, gridY);
+		}
+
+		// Incorrect call made. Throw an error.
+		throw std::invalid_argument("Invalid call. Must provide an id, position, or grid X and Y coordinates.");
 	}
 
 	void fadeIn(sol::optional<sol::table> params) {
@@ -2436,10 +2477,16 @@ namespace mwse::lua {
 			TES3::MagicSourceCombo sourceCombo = spell;
 			auto serial = magicInstanceController->activateSpell(reference, nullptr, &sourceCombo);
 			if (serial != 0) {
-				// Force bypass resistances.
 				auto instance = magicInstanceController->getInstanceFromSerial(serial);
 				if (instance) {
+					// Force bypass resistances.
 					instance->bypassResistances = getOptionalParam(params, "bypassResistances", true);
+					// Process twice so that it becomes active immediately. State transitions are pre-cast -> casting -> working.
+					// This makes the effects immediately visible in menu mode.
+					// It also prevents a bad state where tes3.removeSpell only removes the spell but not the effect,
+					// because it's not active on the target yet.
+					instance->process(0);
+					instance->process(0);
 				}
 			}
 		}
@@ -2519,8 +2566,15 @@ namespace mwse::lua {
 
 		// Update GUI elements if necessary.
 		auto mobilePlayer = TES3::WorldController::get()->getMobilePlayer();
-		if (mobilePlayer && mobile == mobilePlayer && spell->isActiveCast() && getOptionalParam(params, "updateGUI", true)) {
-			TES3_UI_removeSpellFromGUIList(spell);
+		if (mobilePlayer && mobile == mobilePlayer && getOptionalParam(params, "updateGUI", true)) {
+			if (spell->isActiveCast()) {
+				// Magic menu spell list.
+				TES3_UI_removeSpellFromGUIList(spell);
+			}
+			else {
+				// Active effects icon bar.
+				TES3::MagicInstanceController::updateActiveMagicEffectIcons();
+			}
 		}
 
 		// Update modified flags.
@@ -2576,14 +2630,14 @@ namespace mwse::lua {
 		return false;
 	}
 
-	void addArmorSlot(sol::table params) {
+	void addArmorSlot(sol::this_state ts, sol::table params) {
 		sol::optional<int> slot = params["slot"];
 		if (!slot || (slot.value() >= TES3::ArmorSlot::First && slot.value() <= TES3::ArmorSlot::Last) || mwse::tes3::getArmorSlotData(slot.value())) {
 			throw std::exception("tes3.addArmorSlot: Invalid slot. An unusued slot must be provided.");
 		}
 
-		sol::optional<const char*> name = params["name"];
-		if (!name || name.value() == nullptr) {
+		sol::optional<std::string> name = params["name"];
+		if (!name || name.value().empty()) {
 			throw std::exception("tes3.addArmorSlot: No name provided for slot.");
 		}
 
@@ -2597,9 +2651,19 @@ namespace mwse::lua {
 		slotData->armorScalar = armorScalar.value_or(0.1f);
 
 		mwse::tes3::setArmorSlotData(slotData);
+
+		// Add the slot to the tes3.armorSlot table.
+		sol::state_view state = ts;
+		sol::optional<std::string> key = params["key"];
+		if (key) {
+			state["tes3"]["armorSlot"][key] = slot.value();
+		}
+		else {
+			state["tes3"]["armorSlot"][name] = slot.value();
+		}
 	}
 
-	void addClothingSlot(sol::table params) {
+	void addClothingSlot(sol::this_state ts, sol::table params) {
 		sol::optional<int> slot = params["slot"];
 		if (!slot || (slot.value() >= TES3::ClothingSlot::First && slot.value() <= TES3::ClothingSlot::Last) || mwse::tes3::getClothingSlotData(slot.value())) {
 			throw std::exception("tes3.addClothingSlot: Invalid slot. An unusued slot must be provided.");
@@ -2609,8 +2673,8 @@ namespace mwse::lua {
 			throw std::exception("tes3.addClothingSlot: Invalid slot. Value must be between 10 and 255.");
 		}
 
-		sol::optional<const char*> name = params["name"];
-		if (!name || name.value() == nullptr) {
+		sol::optional<std::string> name = params["name"];
+		if (!name || name.value().empty()) {
 			throw std::exception("tes3.addClothingSlot: No name provided for slot.");
 		}
 
@@ -2619,6 +2683,16 @@ namespace mwse::lua {
 		slotData->name = name.value();
 
 		mwse::tes3::setClothingSlotData(slotData);
+
+		// Add the slot to the tes3.clothingSlot table.
+		sol::state_view state = ts;
+		sol::optional<std::string> key = params["key"];
+		if (key) {
+			state["tes3"]["clothingSlot"][key] = slot.value();
+		}
+		else {
+			state["tes3"]["clothingSlot"][name] = slot.value();
+		}
 	}
 
 	// WARNING: This function doesn't persist through saves correctly and shouldn't be used.
@@ -5901,6 +5975,7 @@ namespace mwse::lua {
 		tes3["getAnimationGroups"] = getCurrentAnimationGroups;
 		tes3["getAnimationTiming"] = getAnimationTiming;
 		tes3["getArchiveList"] = getArchiveList;
+		tes3["getCamera"] = getCamera;
 		tes3["getCameraPosition"] = getCameraPosition;
 		tes3["getCameraVector"] = getCameraVector;
 		tes3["getCell"] = getCell;

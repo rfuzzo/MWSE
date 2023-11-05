@@ -9,7 +9,7 @@ hide:
 	These values are available in Lua by their index in the `tes3.effect` table. For example, `tes3.effect.fortifySkill` has a value of `83`.
 
 !!! note
-	Custom effects can be added, expanding the `tes3.effect` table. See the [Magic Effects, Modded](../magic-effects-modded) reference page for more information.
+	Custom effects can be added, expanding the `tes3.effect` table. See the [Magic Effects, Modded](./magic-effects-modded.md) reference page for more information.
 
 Index                    | Value
 ------------------------ | -----

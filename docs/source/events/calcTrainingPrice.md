@@ -21,9 +21,14 @@ event.register(tes3.event.calcTrainingPrice, calcTrainingPriceCallback)
 ## Event Data
 
 * `basePrice` (number): *Read-only*. The price before adjustment.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the trainer the player is interacting with.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor of the trainer the player is interacting with.
 * `price` (number): The adjusted price of the training.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. mobile’s related reference.
-* `skill` ([tes3statisticSkill](../../types/tes3statisticSkill)): *Read-only*. The ID of the skill to be trained.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. mobile’s related reference.
+* `skill` ([tes3statisticSkill](../types/tes3statisticSkill.md)): *Read-only*. The ID of the skill to be trained.
 * `skillId` (number): *Read-only*. The ID of the skill to be trained.
+
+
+## Related events
+
+[calcBarterPrice](./calcBarterPrice.md){ .md-button }[calcEnchantmentPrice](./calcEnchantmentPrice.md){ .md-button }[calcRepairPrice](./calcRepairPrice.md){ .md-button }[calcSpellmakingPrice](./calcSpellmakingPrice.md){ .md-button }[calcSpellPrice](./calcSpellPrice.md){ .md-button }[calcTrainingPrice](./calcTrainingPrice.md){ .md-button }[calcTravelPrice](./calcTravelPrice.md){ .md-button }
 

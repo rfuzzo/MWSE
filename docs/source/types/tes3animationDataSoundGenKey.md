@@ -28,7 +28,7 @@ The sound played at this sound generator key.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 

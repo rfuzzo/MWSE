@@ -279,7 +279,7 @@ namespace TES3 {
 	}
 
 	void loadFunctionAlarmed(DialogueFilterContext::ConditionalContext* context) {
-		const auto isAlarmed = context->parentContext->speakerMobile->actionData.aiBehaviourState == AIBehavior::Alarmed;
+		const auto isAlarmed = context->parentContext->speakerMobile->actionData.aiBehaviorState == AIBehavior::Alarmed;
 		context->compareValue = isAlarmed ? 1.0f : 0.0f;
 	}
 
@@ -405,7 +405,7 @@ namespace TES3 {
 	}
 
 	void loadFunctionFriendHit(DialogueFilterContext::ConditionalContext* context) {
-		context->compareValue = context->parentContext->speakerMobile->friendlyFireHits;
+		context->compareValue = context->parentContext->speakerMobile->friendlyFireHitCount;
 	}
 
 	void loadFunctionFight(DialogueFilterContext::ConditionalContext* context) {
@@ -593,46 +593,62 @@ namespace TES3 {
 	}
 
 	void loadNotID(DialogueFilterContext::ConditionalContext* context) {
-		context->resultOverride = context->conditional->actor == context->parentContext->speakerBaseActor;
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->actor) {
+			context->resultOverride = context->conditional->actor != context->parentContext->speakerBaseActor;
+		}
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotFaction(DialogueFilterContext::ConditionalContext* context) {
-		if (context->conditional->faction == nullptr) {
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->faction) {
+			context->resultOverride = context->conditional->faction != context->parentContext->speakerBaseActor->getFaction();
+		}
+		else {
 			context->resultOverride = true;
 		}
-
-		context->resultOverride = context->conditional->faction == context->parentContext->speakerBaseActor->getFaction();
 	}
 
 	void loadNotClass(DialogueFilterContext::ConditionalContext* context) {
-		if (context->conditional->class_ == nullptr) {
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->class_) {
+			context->resultOverride = context->conditional->class_ != context->parentContext->speakerBaseActor->getClass();
+		}
+		else {
 			context->resultOverride = true;
 		}
-
-		context->resultOverride = context->conditional->class_ == context->parentContext->speakerBaseActor->getClass();
 	}
 
 	void loadNotRace(DialogueFilterContext::ConditionalContext* context) {
-		if (context->conditional->race == nullptr) {
+		// This conditional bypasses compareValue comparisons.
+		if (context->conditional->race) {
+			context->resultOverride = context->conditional->race != context->parentContext->speakerBaseActor->getRace();
+		}
+		else {
 			context->resultOverride = true;
 		}
-
-		context->resultOverride = context->conditional->race == context->parentContext->speakerBaseActor->getRace();
 	}
 
 	void loadNotCell(DialogueFilterContext::ConditionalContext* context) {
-		const auto filterCell = context->conditional->cell;
-		if (context->conditional->cell == nullptr) {
-			return;
-		}
-
+		// This conditional bypasses compareValue comparisons.
 		auto playerCell = DataHandler::get()->currentCell;
 		if (playerCell == nullptr) {
+			context->resultOverride = false;
 			return;
 		}
 
-		std::string_view cellId = filterCell->getObjectID();
-		context->resultOverride = _strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0;
+		// Prefix comparison of cell id.
+		const auto filterCell = context->conditional->cell;
+		if (filterCell) {
+			std::string_view cellId = filterCell->getObjectID();
+			context->resultOverride = _strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0;
+		}
+		else {
+			context->resultOverride = true;
+		}
 	}
 
 	void loadNotLocal(DialogueFilterContext::ConditionalContext* context) {

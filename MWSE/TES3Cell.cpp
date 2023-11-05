@@ -225,6 +225,10 @@ namespace TES3 {
 	}
 
 	void Cell::setCellInactive() {
+		if (activeCells.find(this) == activeCells.end()) {
+			return;
+		}
+
 		// Fire off reference inactive events.
 		for (auto ref : actors) ref->setReferenceInactive();
 		for (auto ref : persistentRefs) ref->setReferenceInactive();

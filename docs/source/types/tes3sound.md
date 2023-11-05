@@ -8,7 +8,7 @@
 
 A sound object created in the TES3 CS.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -117,7 +117,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 

@@ -20,6 +20,11 @@ event.register(tes3.event.mobileActivated, mobileActivatedCallback)
 
 ## Event Data
 
-* `mobile` ([tes3mobileObject](../../types/tes3mobileObject)): *Read-only*. The activated mobile object.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference that the mobile object has been activated for.
+* `mobile` ([tes3mobileObject](../types/tes3mobileObject.md)): *Read-only*. The activated mobile object.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference that the mobile object has been activated for.
+
+
+## Related events
+
+[mobileActivated](./mobileActivated.md){ .md-button }[mobileDeactivated](./mobileDeactivated.md){ .md-button }
 

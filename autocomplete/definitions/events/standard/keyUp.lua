@@ -1,29 +1,30 @@
 return {
 	type = "event",
 	description = "The key event fires when a key is released.",
+	related = { "keyDown" },
 	eventData = {
 		["keyCode"] = {
-			type = "number",
+			type = "tes3.scanCode",
 			readOnly = true,
-			description = "The scan code of the key that raised the event.",
+			description = "The scan code of the key that raised the event. Maps to values in [`tes3.scanCode`](https://mwse.github.io/MWSE/references/scan-codes/) table.",
 		},
 		["isShiftDown"] = {
-			type = "number",
+			type = "boolean",
 			readOnly = true,
 			description = "True if either shift key is held.",
 		},
 		["isControlDown"] = {
-			type = "number",
+			type = "boolean",
 			readOnly = true,
 			description = "True if either control key is held.",
 		},
 		["isAltDown"] = {
-			type = "number",
+			type = "boolean",
 			readOnly = true,
 			description = "True if either alt key is held.",
 		},
 		["isSuperDown"] = {
-			type = "number",
+			type = "boolean",
 			readOnly = true,
 			description = "True if super (Windows key) is held.",
 		},

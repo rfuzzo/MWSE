@@ -18,7 +18,7 @@ Index                 | Value        | CS ID   | Description             | MWSE 
 --------------------- | ------------ | ------- | ----------------------- | ---------
 activator             | `1230259009` | ACTI    | Activator               | tes3activator
 alchemy               | `1212369985` | ALCH    | Alchemy                 | tes3alchemy
-ammunition            | `1330466113` | AMMO    | Ammunition              | tes3weapon
+ammunition            | `1330466113` | AMMO    | Ammunition              | tes3weapon. Arrows and bolts.
 apparatus             | `1095782465` | APPA    | Apparatus               | tes3apparatus
 armor                 | `1330467393` | ARMO    | Armor                   | tes3armor
 birthsign             | `1313297218` | BSGN    | Birthsign               | tes3birthsign
@@ -27,8 +27,8 @@ book                  | `1263488834` | BOOK    | Book                    | tes3b
 cell                  | `1280066883` | CELL    | Cell                    | tes3cell
 class                 | `1396788291` | CLAS    | Class                   | tes3class
 clothing              | `1414483011` | CLOT    | Clothing                | tes3clothing
-container             | `1414418243` | CONT    | Container               | tes3container
-creature              | `1095062083` | CREA    | Creature                | tes3creature
+container             | `1414418243` | CONT    | Container               | tes3container or tes3containerInstance
+creature              | `1095062083` | CREA    | Creature                | tes3creature or tes3creatureInstance
 dialogue              | `1279347012` | DIAL    | Dialogue Topic          | tes3dialogue
 dialogueInfo          | `1330007625` | INFO    | Dialogue Response       | tes3dialogueInfo
 door                  | `1380929348` | DOOR    | Door                    | tes3door
@@ -44,7 +44,7 @@ light                 | `1212631372` | LIGH    | Light                   | tes3l
 lockpick              | `1262702412` | LOCK    | Lockpick                | tes3lockpick
 magicEffect           | `1178945357` | MGEF    | Magic Effect            | tes3magicEffect
 miscItem              | `1129531725` | MISC    | Misc Item               | tes3misc
-mobileActor           | `1413693773` | MACT    | Mobile Actor            | tes3mobileActor?
+mobileActor           | `1413693773` | MACT    | Mobile Actor            | tes3mobileActor
 mobileCreature        | `1380139341` | MACR    | Mobile Creature         | tes3mobileCreature
 mobileNPC             | `1212367181` | MACH    | Mobile NPC              | tes3mobileNPC
 mobilePlayer          | `1346584909` | MACP    | Mobile Player           | tes3mobilePlayer
@@ -65,4 +65,4 @@ soundGenerator        | `1195658835` | SNDG    | Sound Generator         | tes3s
 spell                 | `1279610963` | SPEL    | Spell                   | tes3spell
 startScript           | `1380143955` | SSCR    | Start Script            | tes3startScript
 static                | `1413567571` | STAT    | Static                  | tes3static
-weapon                | `1346454871` | WEAP    | Weapon                  | tes3weapon
+weapon                | `1346454871` | WEAP    | Weapon                  | tes3weapon. Thrown weapons also go here.

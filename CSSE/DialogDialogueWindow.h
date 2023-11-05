@@ -78,6 +78,8 @@ namespace se::cs::dialog::dialogue_window {
 	constexpr UINT CONTROL_ID_SHARED_BY_STATIC = 2011;
 	constexpr UINT CONTROL_ID_CURRENT_RESULT_STATIC = 2012;
 	constexpr UINT CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON = 2013;
+	constexpr UINT CONTROL_ID_CURRENT_TEXT_CHAR_COUNT = 2014;
+	constexpr UINT CONTROL_ID_CURRENT_TEXT_MAX_CHAR_COUNT = 2015;
 
 	// Global variables
 	using ghWnd = memory::ExternalGlobal<HWND, 0x6CE9A0>;

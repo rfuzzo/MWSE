@@ -3,12 +3,14 @@
 
 --- @meta
 --- This event fires when a crime is witnessed by an actor.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/events/crimeWitnessed).
 --- @class crimeWitnessedEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
 --- @field position tes3vector3 *Read-only*. The position that the crime ocurred at.
 --- @field realTimestamp number *Read-only*. The timestamp that the crime ocurred at.
---- @field type string *Read-only*. The type of crime that was committed. The type can be "attack", "killing", "stealing", "pickpocket", "theft", "trespass", and "werewolf". Crime "theft" is raised when picking up owned items. Crime "trespass" is raised when lockpicking, probing or sleeping in owned beds.
---- @field value number *Read-only*. The bounty value of the crime.
+--- @field type string *Read-only*. The type of crime that was committed. The type can be "attack", "killing", "stealing", "pickpocket", "theft", "trespass", and "werewolf". Crime "theft" is raised when picking up owned items. Crime "trespass" is raised when lockpicking, probing, using Open magic on owned doors or chests and sleeping in owned beds.
+--- @field value number *Read-only*. The total stolen items value of the crime. Only valid for thefts. See the example below to calculate the bounty incurred on each crime type.
 --- @field victim tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|tes3faction *Read-only*. The victim of the crime, as a general actor base object or faction.
 --- @field victimFaction tes3faction *Read-only*. The faction that the crime was against, assuming the victim is, or is in, one.
 --- @field victimMobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile of the victim, if applicable, giving access to the unique victim.

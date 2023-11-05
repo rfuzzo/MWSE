@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event can be used to prevent the player from resting by returning false.",
+	related = { "uiShowRestMenu" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",

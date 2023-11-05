@@ -55,10 +55,5 @@ BOOL CDataBoundPropertyGridProperty::OnUpdateValue() {
 		break;
 	}
 
-#if _DEBUG
-	// TODO: Remove this so the component can be reused for non-settings.
-	se::cs::settings.save();
-#endif
-
 	return TRUE;
 }

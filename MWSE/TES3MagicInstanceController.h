@@ -33,7 +33,13 @@ namespace TES3 {
 		void clearSpellEffect(Reference* reference, int castType, int percentChance, bool removeSpell);
 		MagicSourceInstance* getInstanceFromSerial(unsigned int serial);
 		void retireMagicCastedByActor(Reference* reference);
+		void interruptCasting(Reference* reference);
 
+		//
+		// Other related static functions.
+		//
+
+		static void updateActiveMagicEffectIcons();
 	};
 	static_assert(sizeof(MagicInstanceController) == 0x38, "TES3::MagicInstanceController failed size validation");
 }

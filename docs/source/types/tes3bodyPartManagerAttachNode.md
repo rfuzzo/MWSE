@@ -28,7 +28,7 @@ The NiNode-derived object for the object's loaded mesh.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -39,7 +39,7 @@ The rotation for this Attachment node.
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -50,5 +50,5 @@ The translation for this Attachment node.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

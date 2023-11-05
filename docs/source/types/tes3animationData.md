@@ -19,18 +19,18 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
 ### `animationGroups`
 <div class="search_terms" style="display: none">animationgroups</div>
 
-*Read-only*. The animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
+*Read-only*. A table of the animation group objects, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 
 **Returns**:
 
-* `result` (tes3animationGroup[])
+* `result` (table&lt;[tes3.animationGroup](../references/animation-groups.md), tes3animationGroup&gt;)
 
 ***
 
@@ -41,7 +41,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` (number[])
+* `result` (table&lt;[tes3.animationGroup](../references/animation-groups.md), number&gt;)
 
 ***
 
@@ -52,7 +52,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` (number[])
+* `result` (table&lt;[tes3.animationGroup](../references/animation-groups.md), [tes3.activeBodyPartLayer](../references/active-body-part-layers.md)&gt;)
 
 ***
 
@@ -63,7 +63,29 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` (number[])
+* `result` (table&lt;[tes3.animationGroup](../references/animation-groups.md), number&gt;)
+
+***
+
+### `blinkMorphEndTime`
+<div class="search_terms" style="display: none">blinkmorphendtime</div>
+
+Blink animation end time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `blinkMorphStartTime`
+<div class="search_terms" style="display: none">blinkmorphstarttime</div>
+
+Blink animation start time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
 
 ***
 
@@ -149,7 +171,7 @@ The time in seconds since the last update.
 ### `hasOverrideAnimations`
 <div class="search_terms" style="display: none">hasoverrideanimations, overrideanimations</div>
 
-*Read-only*. 
+*Read-only*. True if the actor has some custom animations in the override layer. For example, drumming or sitting. These are assigned in the Construction Set or using [tes3.loadAnimation](https://mwse.github.io/MWSE/apis/tes3/#tes3loadanimation).
 
 **Returns**:
 
@@ -164,7 +186,18 @@ The time in seconds since the last update.
 
 **Returns**:
 
-* `result` ([niGeometry](../../types/niGeometry))
+* `result` ([niGeometry](../types/niGeometry.md))
+
+***
+
+### `headMorphTiming`
+<div class="search_terms" style="display: none">headmorphtiming</div>
+
+The timing offset of the head morph controller. Used to select either blinking or lipsync animations. Actively updated by the animation system during blinking or voiceovers. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
 
 ***
 
@@ -175,7 +208,7 @@ The time in seconds since the last update.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -186,7 +219,7 @@ The time in seconds since the last update.
 
 **Returns**:
 
-* `result` ([tes3animationDataSequenceGroup](../../types/tes3animationDataSequenceGroup)[])
+* `result` ([tes3animationDataSequenceGroup](../types/tes3animationDataSequenceGroup.md)[])
 
 ***
 
@@ -197,8 +230,8 @@ This value indicates whether the NPC is speaking or not. The table below describ
 
 Value      | Behavior
 ---------- | ---------
-      -1   | The NPC isn't speaking.
- 0.0 - 1.0 | The NPC is speaking. The `lipsyncLevel` can be `0.0` when there is a silent part in the sound file the NPC is currently speaking.
+      -1.0 | The NPC isn't speaking.
+ 0.0 - 1.0 | The NPC is speaking. The value roughly corresponds to the current loudness of the voiceover line. The `lipsyncLevel` is `0.0` when there is a silent part in the sound file the NPC is currently speaking. Also, the speaking actor's mouth is opened more when the value is higher.
 
 
 **Returns**:
@@ -251,7 +284,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -284,7 +317,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -295,7 +328,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -306,7 +339,7 @@ Value      | Behavior
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -321,6 +354,39 @@ Value      | Behavior
 
 ***
 
+### `talkMorphEndTime`
+<div class="search_terms" style="display: none">talkmorphendtime</div>
+
+Lipsync animation end time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `talkMorphStartTime`
+<div class="search_terms" style="display: none">talkmorphstarttime</div>
+
+Lipsync animation start time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `timeToNextBlink`
+<div class="search_terms" style="display: none">timetonextblink</div>
+
+The time in seconds until the next blink. It is fixed at 0 while the blink animation plays.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `timings`
 <div class="search_terms" style="display: none">timings</div>
 
@@ -328,7 +394,7 @@ The time in seconds indicating the current position within the animation for eac
 
 **Returns**:
 
-* `result` (number[])
+* `result` (table&lt;[tes3.animationBodySection](../references/animation-body-sections.md), number&gt;)
 
 ***
 
@@ -356,7 +422,7 @@ local result = myObject:getReference()
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -371,8 +437,8 @@ myObject:playAnimationGroup(animationGroup, startFlag, loopCount)
 
 **Parameters**:
 
-* `animationGroup` (number): The animation group to play. A value from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
-* `startFlag` (number): A flag for starting the group with, using [`tes3.animationStartFlag`](https://mwse.github.io/MWSE/references/animation-start-flags/) constants.
+* `animationGroup` ([tes3.animationGroup](../references/animation-groups.md)): The animation group to play. A value from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
+* `startFlag` ([tes3.animationStartFlag](../references/animation-start-flags.md)): A flag for starting the group with, using [`tes3.animationStartFlag`](https://mwse.github.io/MWSE/references/animation-start-flags/) constants.
 * `loopCount` (number): If provided, the animation will repeat its loop section a given number of times. To make an animation play through once, set loopCount = 0, while -1 is used for infinite looping.
 
 ***
@@ -388,9 +454,9 @@ myObject:playAnimationGroupForIndex(animationGroup, triIndex, startFlag, loopCou
 
 **Parameters**:
 
-* `animationGroup` (number): The animation group to play. A value from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
-* `triIndex` (number): The body section on which to play the animation. A value from [`tes3.animationBodySection`](https://mwse.github.io/MWSE/references/animation-body-sections/) namespace.
-* `startFlag` (number): A flag for starting the group with, using [`tes3.animationStartFlag`](https://mwse.github.io/MWSE/references/animation-start-flags/) constants.
+* `animationGroup` ([tes3.animationGroup](../references/animation-groups.md)): The animation group to play. A value from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
+* `triIndex` ([tes3.animationBodySection](../references/animation-body-sections.md)): The body section on which to play the animation. A value from [`tes3.animationBodySection`](https://mwse.github.io/MWSE/references/animation-body-sections/) namespace.
+* `startFlag` ([tes3.animationStartFlag](../references/animation-start-flags.md)): A flag for starting the group with, using [`tes3.animationStartFlag`](https://mwse.github.io/MWSE/references/animation-start-flags/) constants.
 * `loopCount` (number): If provided, the animation will repeat its loop section a given number of times. To make an animation play through once, set loopCount = 0, while -1 is used for infinite looping.
 
 ***
@@ -406,7 +472,7 @@ myObject:setHeadNode(head)
 
 **Parameters**:
 
-* `head` ([niNode](../../types/niNode)): 
+* `head` ([niNode](../types/niNode.md)): 
 
 ***
 

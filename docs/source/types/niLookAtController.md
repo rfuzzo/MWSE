@@ -10,7 +10,7 @@ Orients an axis of the controlled object towards a lookAt target. The axis is se
 
 Warning: The lookAt property is not reference counted, so this controller must be removed, or lookAt set to nil before the lookAt object is deleted.
 
-This type inherits the following: [niTimeController](../../types/niTimeController), [niObject](../../types/niObject)
+This type inherits the following: [niTimeController](../types/niTimeController.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `active`
@@ -33,7 +33,7 @@ Maps to values in [`ni.animType`](https://mwse.github.io/MWSE/references/ni/anim
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animType](../references/ni/animation-types.md))
 
 ***
 
@@ -41,15 +41,16 @@ Maps to values in [`ni.animType`](https://mwse.github.io/MWSE/references/ni/anim
 <div class="search_terms" style="display: none">axis</div>
 
 A number representing the axis that points at the lookAt object. `flip` determines which end of this axis points at the target.
-`0` X axis
-`1` Y axis
-`2` Z axis
+
+- `0` X axis
+- `1` Y axis
+- `2` Z axis
 
 Maps to values in [`ni.lookAtControllerAxis`](https://mwse.github.io/MWSE/references/ni/look-at-controller-axes/) table.
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.lookAtControllerAxis](../references/ni/look-at-controller-axes.md))
 
 ***
 
@@ -62,7 +63,7 @@ Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animCycleType](../references/ni/animation-cycle-types.md))
 
 ***
 
@@ -128,7 +129,7 @@ The object that this controller will point towards. This is not a reference coun
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -150,7 +151,7 @@ The next animation controller in the list of controllers containing the calling 
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -183,7 +184,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -194,7 +195,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -216,7 +217,7 @@ The time at which the animation controller starts playing its animation.
 
 **Returns**:
 
-* `result` ([niObjectNET](../../types/niObjectNET))
+* `result` ([niObjectNET](../types/niObjectNET.md))
 
 ***
 
@@ -233,14 +234,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -248,7 +249,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -259,7 +260,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -267,7 +268,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -305,7 +306,7 @@ myObject:setTarget(target)
 
 **Parameters**:
 
-* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+* `target` ([niObjectNET](../types/niObjectNET.md)): The new target to assign.
 
 ***
 

@@ -5,6 +5,7 @@
 #include "Log.h"
 
 #include "TES3Actor.h"
+#include "TES3ActorAnimationController.h"
 #include "TES3AudioController.h"
 #include "TES3BodyPartManager.h"
 #include "TES3Cell.h"
@@ -28,6 +29,7 @@
 #include "TES3VFXManager.h"
 #include "TES3WorldController.h"
 
+#include "NICollisionSwitch.h"
 #include "NIFlipController.h"
 #include "NILinesData.h"
 #include "NISortAdjustNode.h"
@@ -54,6 +56,39 @@ namespace mwse::patch {
 	// Debug builds.
 	constexpr auto INSTALL_MINIDUMP_HOOK = false;
 #endif
+
+	const char* SafeGetObjectId(const TES3::BaseObject* object) {
+		__try {
+			return object->getObjectID();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
+			return nullptr;
+		}
+	}
+
+	const char* SafeGetSourceFile(const TES3::BaseObject* object) {
+		__try {
+			return object->getSourceFilename();
+		}
+		__except (EXCEPTION_EXECUTE_HANDLER) {
+			return nullptr;
+		}
+	}
+
+	template <typename T>
+	void safePrintObjectToLog(const char* title, const T* object) {
+		if (object) {
+			auto id = SafeGetObjectId(object);
+			auto source = SafeGetSourceFile(object);
+			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
+			if (id) {
+				log::prettyDump(object);
+			}
+		}
+		else {
+			log::getLog() << "  " << title << ": nullptr" << std::endl;
+		}
+	}
 
 	//
 	// Patch: Enable
@@ -109,12 +144,12 @@ namespace mwse::patch {
 		auto athletics = &TES3::DataHandler::get()->nonDynamicData->skills[TES3::SkillID::Athletics];
 
 		// If we're running, use the first progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Running) {
+		if (mobilePlayer->getMovementFlagRunning()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[0] * worldController->deltaTime);
 		}
 
 		// If we're swimming, use the second progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Swimming) {
+		if (mobilePlayer->getMovementFlagSwimming()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[1] * worldController->deltaTime);
 		}
 	}
@@ -758,10 +793,92 @@ namespace mwse::patch {
 	static char tempErrorMessageObjectID[256];
 
 	const char* __fastcall PatchGetImprovedObjectIdentifier(TES3::Object* object) {
-		const char* id = object->getObjectID();
-		const char* source = object->sourceMod ? object->sourceMod->filename : "no source";
+		const auto id = object->getObjectID();
+		const auto source = object->sourceMod ? object->sourceMod->filename : "no source";
 		std::snprintf(tempErrorMessageObjectID, sizeof(tempErrorMessageObjectID), "%s' (%s)", id, source);
 		return tempErrorMessageObjectID;
+	}
+
+	//
+	// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+	//
+
+	const auto TES3_VFXManager_createFromSaveData = reinterpret_cast<TES3::VFX* (__thiscall*)(TES3::VFXManager*, TES3::PhysicalObject*, TES3::Reference*, TES3::VFXSerialized*, float)>(0x468620);
+
+	TES3::VFX* __fastcall PatchVFXManagerCreateFromSaveData(TES3::VFXManager* vfxManager, DWORD unused, TES3::PhysicalObject* effect, TES3::Reference* reference, TES3::VFXSerialized* serializedVFX, float verticalOffset) {
+		// Do not load VFX with maxAge <= 0.001f, as they are persistent and may have accumulated in saves from before these fixes.
+		if (serializedVFX->maxAge <= 0.001f) {
+			return nullptr;
+		}
+
+		return TES3_VFXManager_createFromSaveData(vfxManager, effect, reference, serializedVFX, verticalOffset);
+	}
+
+	// Patch: Land textures loading/unloading flag array overflow bug. Increase array from 500 to 4096 elements and fix bounds checks.
+
+	const unsigned short Land_LTEX_isLoaded_size = 4096;
+	bool Land_LTEX_isLoaded[Land_LTEX_isLoaded_size];
+
+	__declspec(naked) void PatchLandUnloadTexturesBoundsCheck() {
+		__asm {
+			// Replace index >= 500 and index != -1 with a single unsigned comparison against the new size.
+			cmp ax, 4096 // immediate arg = Land_LTEX_isLoaded_size
+			jnb $ + 0xAB
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+		}
+	}
+	const size_t PatchLandUnloadTexturesBoundsCheck_size = 0x10;
+	
+	__declspec(naked) void PatchLandLoadTexturesBoundsCheck() {
+		__asm {
+			// Replace index >= 500 and index != -1 with a single unsigned comparison against the new size.
+			cmp cx, 4096 // immediate arg = Land_LTEX_isLoaded_size
+			jnb $ + 0xF5
+			nop
+			nop
+			nop
+			nop
+			nop
+			nop
+		}
+	}
+	const size_t PatchLandLoadTexturesBoundsCheck_size = 0x11;
+
+	//
+	// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
+	// 
+	// Leaving here since the reporter couldn't reproduce the crash on a new save, but we'll want information next time this happens.
+	//
+
+	void __fastcall PatchSetAnimControllerMobile(TES3::ActorAnimationController* animController, DWORD _EDX_, TES3::MobileActor* mobile) {
+		if (mobile == nullptr) {
+			return;
+		}
+
+		// Try to get more information about this crash.
+		if (mobile->reference->getSceneGraphNode() == nullptr) {
+			log::getLog() << "No scene graph found when attempting to add animation controller to reference. Doing what we can with the reference. Please report this to the #mwse channel in the Morrowind Modding Community discord." << std::endl;
+			safePrintObjectToLog("Reference", mobile->reference);
+		}
+
+		// Perform overwritten code, but use getRotationMatrix to fall back to reference rotation values.
+		animController->mobileActor = mobile;
+		animController->animationData = mobile->getAnimationData();
+		animController->groundPlaneRotation = mobile->reference->getRotationMatrix();
+	}
+
+	//
+	// Patch: Log stack traces of problematic UI pointer issues.
+	//
+
+	void __cdecl PatchLogUIMemoryPointerErrors(const char* message) {
+		lua::logStackTrace("Lua traceback at time of invalid access:");
+		tes3::logErrorAndSavePoint(message);
 	}
 
 	//
@@ -802,6 +919,7 @@ namespace mwse::patch {
 		genCallEnforced(0x4BCB7E, 0x55D950, *reinterpret_cast<DWORD*>(&killCounter_save));
 #endif
 
+		// Patch: Post-simulate event just before tickClock.
 		// Patch: Don't truncate hour when advancing time past midnight.
 		// Also don't nudge time forward by small extra increments when resting.
 		auto WorldController_tickClock = &TES3::WorldController::tickClock;
@@ -1055,6 +1173,12 @@ namespace mwse::patch {
 		overrideVirtualTableEnforced(0x750580, 0x78, 0x6DE030, reinterpret_cast<DWORD>(PatchNISortAdjustNodeDisplay));
 		genCallUnprotected(0x6DE21B, reinterpret_cast<DWORD>(PatchNISortAdjustNodeCloneAccumulator));
 
+		// Patch: Add pick proxy behaviour to NiCollisionSwitch.
+		auto CollisionSwitch_linkObject = &NI::CollisionSwitch::linkObject;
+		auto CollisionSwitch_findIntersectons = &NI::CollisionSwitch::findIntersections;
+		overrideVirtualTableEnforced(0x74F418, 0x10, 0x6D7100, *reinterpret_cast<DWORD*>(&CollisionSwitch_linkObject));
+		overrideVirtualTableEnforced(0x74F418, 0x88, 0x6D6E10, *reinterpret_cast<DWORD*>(&CollisionSwitch_findIntersectons));
+
 		// Patch: Improve error reporting by including the source mod next to object IDs in load error messages.
 		// In Cell::loadReference:
 		const BYTE patchImprovedErrorIDArgs0[] = { 0x8B, 0xCE };
@@ -1145,6 +1269,33 @@ namespace mwse::patch {
 		genCallUnprotected(0x4E6C0C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
 		writeBytesUnprotected(0x4F2132, patchImprovedErrorIDArgs20, sizeof(patchImprovedErrorIDArgs20));
 		genCallUnprotected(0x4F2134, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+
+		// Patch: Ensure VFX with maxAge <= 0.001f are cleared when clearing data on load game, instead of leaking.
+		auto VFXManager_reset = &TES3::VFXManager::reset;
+		genCallEnforced(0x4C6F00, 0x469390, *reinterpret_cast<DWORD*>(&VFXManager_reset));
+
+		// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+		genCallEnforced(0x46A04B, 0x468620, reinterpret_cast<DWORD>(PatchVFXManagerCreateFromSaveData));
+
+		// Patch: LTEX loading/unloading array overflow bug. Increase array from 500 to 4096 elements and fix bounds checks.
+		writeValueEnforced(0x4CDF09, 500 / 4, Land_LTEX_isLoaded_size / 4);
+		writeValueEnforced(0x4CDF0E, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writePatchCodeUnprotected(0x4CDF58, (BYTE*)&PatchLandUnloadTexturesBoundsCheck, PatchLandUnloadTexturesBoundsCheck_size);
+		writeValueEnforced(0x4CDF6D, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writeValueEnforced(0x4CDF7E, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+
+		writeValueEnforced(0x4CECAE, 500 / 4, Land_LTEX_isLoaded_size / 4);
+		writeValueEnforced(0x4CECB3, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writePatchCodeUnprotected(0x4CECD3, (BYTE*)&PatchLandLoadTexturesBoundsCheck, PatchLandLoadTexturesBoundsCheck_size);
+		writeValueEnforced(0x4CECE9, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+		writeValueEnforced(0x4CEDB1, DWORD(0x7CA9E0), reinterpret_cast<DWORD>(Land_LTEX_isLoaded));
+
+		// Patch: Fall back to reference rotation values when initializing animation controllers without a scene node.
+		genCallEnforced(0x521773, 0x53DE70, reinterpret_cast<DWORD>(PatchSetAnimControllerMobile));
+
+		// Provide lua stack traces with invalid UI access.
+		genCallEnforced(0x581484, 0x476E20, reinterpret_cast<DWORD>(PatchLogUIMemoryPointerErrors));
+		genCallEnforced(0x582DFA, 0x476E20, reinterpret_cast<DWORD>(PatchLogUIMemoryPointerErrors));
 	}
 
 	void installPostLuaPatches() {
@@ -1247,24 +1398,6 @@ namespace mwse::patch {
 		return bRet;
 	}
 
-	const char* SafeGetObjectId(const TES3::BaseObject* object) {
-		__try {
-			return object->getObjectID();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
-			return nullptr;
-		}
-	}
-
-	const char* SafeGetSourceFile(const TES3::BaseObject* object) {
-		__try {
-			return object->getSourceFilename();
-		}
-		__except (EXCEPTION_EXECUTE_HANDLER) {
-			return nullptr;
-		}
-	}
-
 	const char* GetThreadName(DWORD threadId) {
 		const auto dataHandler = TES3::DataHandler::get();
 		if (dataHandler) {
@@ -1283,25 +1416,9 @@ namespace mwse::patch {
 		return GetThreadName(GetCurrentThreadId());
 	}
 
-	template <typename T>
-	void safePrintObjectToLog(const char* title, const T* object) {
-		if (object) {
-			auto id = SafeGetObjectId(object);
-			auto source = SafeGetSourceFile(object);
-			log::getLog() << "  " << title << ": " << (id ? id : "<memory corrupted>") << " (" << (source ? source : "<memory corrupted>") << ")" << std::endl;
-			if (id) {
-				log::prettyDump(object);
-			}
-		}
-		else {
-			log::getLog() << "  " << title << ": nullptr" << std::endl;
-		}
-	}
-
 	void CreateMiniDump(EXCEPTION_POINTERS* pep) {
 		log::getLog() << std::dec << std::endl;
-		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to NullCascade@gmail.com or to NullCascade#1010 on Discord." << std::endl;
-		log::getLog() << "Additional support can be found in the #mwse channel at the Morrowind Modding Community Discord: https://discord.me/mwmods" << std::endl;
+		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to the #mwse channel at the Morrowind Modding Community Discord: https://discord.me/mwmods" << std::endl;
 
 #ifdef APPVEYOR_BUILD_NUMBER
 		log::getLog() << "MWSE version: " << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << "-" << APPVEYOR_BUILD_NUMBER << std::endl;

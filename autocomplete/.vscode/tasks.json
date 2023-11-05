@@ -34,6 +34,15 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "Check for missing definitions",
+			"type": "shell",
+			"command": ".\\lua\\lua.exe",
+			"args": [
+				".\\builders\\youforgotsomething.lua"
+			],
+			"problemMatcher": []
+		},
+		{
 			"label": "Build All",
 			"command": "echo",
 			"args": [

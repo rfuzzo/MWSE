@@ -12,7 +12,7 @@ niRenderer = {}
 function niRenderer:setRenderTarget(texture) end
 
 --- This method returns the last rendered frame in the form of niPixelData.
---- @param bounds integer[] These four values are used to take only a specific sub region (in pixels) from the framebuffer. If non provided, the taken screenshot will include the whole screen.
+--- @param bounds integer[]? *Optional*. These four values are used to take only a specific sub region (in pixels) from the framebuffer. If not provided, the taken screenshot will include the whole screen.
 --- @return niPixelData screenshot No description yet available.
 function niRenderer:takeScreenshot(bounds) end
 

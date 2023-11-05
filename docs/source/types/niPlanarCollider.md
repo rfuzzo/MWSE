@@ -8,7 +8,7 @@
 
 This modifier makes particles bounce off of a rectangle.
 
-This type inherits the following: [niParticleCollider](../../types/niParticleCollider), [niParticleModifier](../../types/niParticleModifier), [niObject](../../types/niObject)
+This type inherits the following: [niParticleCollider](../types/niParticleCollider.md), [niParticleModifier](../types/niParticleModifier.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `collisionPoint`
@@ -18,7 +18,7 @@ This type inherits the following: [niParticleCollider](../../types/niParticleCol
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -40,7 +40,7 @@ Access to the generic time controller for particle systems.
 
 **Returns**:
 
-* `result` ([niParticleSystemController](../../types/niParticleSystemController))
+* `result` ([niParticleSystemController](../types/niParticleSystemController.md))
 
 ***
 
@@ -73,7 +73,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier))
+* `result` ([niParticleModifier](../types/niParticleModifier.md))
 
 ***
 
@@ -84,7 +84,7 @@ The coefficients in the point-normal form equation of the plane.
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4))
+* `result` ([tes3vector4](../types/tes3vector4.md))
 
 ***
 
@@ -95,7 +95,7 @@ The center point of the collider.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -128,7 +128,7 @@ The fraction of the original amount of energy the particle retains after a colli
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -139,7 +139,7 @@ The fraction of the original amount of energy the particle retains after a colli
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -172,7 +172,7 @@ The x axis, lying in the plane of the collider.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -183,7 +183,7 @@ The y axis, lying in the plane of the collider.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -200,14 +200,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -215,7 +215,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -226,7 +226,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -234,7 +234,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 

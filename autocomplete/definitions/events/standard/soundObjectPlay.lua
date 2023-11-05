@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event triggers before certain object sounds are about to be played. For example, item pickup sounds.",
+	related = { "playItemSound" },
 	eventData = {
 		["sound"] = {
 			type = "tes3sound",

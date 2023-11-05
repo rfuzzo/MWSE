@@ -33,6 +33,10 @@ namespace se::cs::dialog::render_window {
 	__int16 lastCursorPosX = 0;
 	__int16 lastCursorPosY = 0;
 
+	std::default_random_engine generator;
+	std::uniform_real_distribution<float> rotationDistribution(0.0, 360.0);
+	std::uniform_real_distribution<float> scaleDistribution(0.5, 2.0);
+
 	using gRenderWindowHandle = memory::ExternalGlobal<HWND, 0x6CE93C>;
 
 	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
@@ -50,6 +54,8 @@ namespace se::cs::dialog::render_window {
 
 	using gCurrentCell = memory::ExternalGlobal<Cell*, 0x6CF7B8>;
 
+	using gIsTranslating = memory::ExternalGlobal<bool, 0x6CF782>;
+	using gIsRotating = memory::ExternalGlobal<bool, 0x6CF783>;
 	using gIsHoldingV = memory::ExternalGlobal<bool, 0x6CF789>;
 	using gIsHoldingX = memory::ExternalGlobal<bool, 0x6CF786>;
 	using gIsHoldingY = memory::ExternalGlobal<bool, 0x6CF787>;
@@ -173,24 +179,31 @@ namespace se::cs::dialog::render_window {
 		}
 
 		NI::Vector3 intersection;
+		float zDistObject = 0.0f;
+		float zDistLandscape = 0.0f;
 
-		auto pick = SceneGraphController::get()->objectPick;
-		if (pick->pickObjectsWithSkinDeforms(&origin, &direction)) {
-			intersection = pick->results[0]->intersection;
+		auto objectPick = SceneGraphController::get()->objectPick;
+		if (objectPick->pickObjectsWithSkinDeforms(&origin, &direction)) {
+			intersection = objectPick->results[0]->intersection;
+			zDistObject = (intersection - origin).dotProduct(&camera->worldDirection);
+		}
+
+		auto landscapePick = SceneGraphController::get()->landscapePick;
+		if (landscapePick->pickObjects(&origin, &direction)) {
+			intersection = landscapePick->results[0]->intersection;
+			zDistLandscape = (intersection - origin).dotProduct(&camera->worldDirection);
+		}
+		
+		if (zDistObject == 0.0f && zDistLandscape == 0.0f) {
+			return 0.0;
+		}
+
+		if (zDistObject != 0.0f && zDistLandscape != 0.0f) {
+			return std::fmin(zDistObject, zDistLandscape);
 		}
 		else {
-			auto pick = SceneGraphController::get()->landscapePick;
-			if (pick->pickObjects(&origin, &direction)) {
-				intersection = pick->results[0]->intersection;
-			}
-			else {
-				return 0.0;
-			}
+			return std::fmax(zDistObject, zDistLandscape);
 		}
-
-		float zDist = (intersection - origin).dotProduct(&camera->worldDirection);
-
-		return zDist;
 	}
 
 	struct CameraPanContext {
@@ -305,7 +318,7 @@ namespace se::cs::dialog::render_window {
 			rotationAxis = SelectionData::RotationAxis::Z;
 		}
 
-		auto widgets = SceneGraphController::get()->widgets;
+		auto widgets = SceneGraphController::get()->getWidgets();
 		if (isHoldingAxisKey()) {
 			widgets->setPosition(selectionData->bound.center);
 			widgets->show();
@@ -774,7 +787,7 @@ namespace se::cs::dialog::render_window {
 		planeOrigin = planeOrigin + context.cursorOffset;
 
 		// Align the plane to the locked axis if applicable.
-		auto widgets = SceneGraphController::get()->widgets;
+		auto widgets = SceneGraphController::get()->getWidgets();
 		bool isAxisLocked = lockX || lockY || lockZ;
 		if (isAxisLocked) {
 			planeNormal = camera->worldDirection;
@@ -863,8 +876,10 @@ namespace se::cs::dialog::render_window {
 			auto reference = target->reference;
 			reference->position = intersection + (reference->position - planeOrigin);
 			reference->unknown_0x10 = reference->position;
-			reference->sceneNode->localTranslate = reference->position;
-			reference->sceneNode->update(0.0f, true, true);
+			if (reference->sceneNode) {
+				reference->sceneNode->localTranslate = reference->position;
+				reference->sceneNode->update(0.0f, true, true);
+			}
 
 			// Avoid lighting updates when moving large number of targets.
 			if (selectionData->numberOfTargets <= 20) {
@@ -1064,6 +1079,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	bool PickLandscapeTexture(HWND hWnd) {
+		using landscape_edit_settings_window::getLandscapeEditingEnabled;
 		using landscape_edit_settings_window::getEditLandscapeColor;
 		using landscape_edit_settings_window::setSelectTexture;
 		using gLandscapeEditWindowHandle = landscape_edit_settings_window::gWindowHandle;
@@ -1073,7 +1089,12 @@ namespace se::cs::dialog::render_window {
 			return false;
 		}
 
-		// Make sure we are in texture edit mode.
+		// Make sure we're in landscape editing mode.
+		if (!getLandscapeEditingEnabled()) {
+			return false;
+		}
+
+		// Make sure we aren't in landscape color edit mode.
 		if (getEditLandscapeColor()) {
 			return false;
 		}
@@ -1133,9 +1154,70 @@ namespace se::cs::dialog::render_window {
 			NI::Matrix33 rotation;
 			auto orientation = reference->yetAnotherOrientation;
 			rotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
-			
+
+			reference->updateRotationMatrixForRaceAndSex(rotation);
 			reference->sceneNode->setLocalRotationMatrix(&rotation);
 			reference->sceneNode->localTranslate = reference->position; 
+			reference->sceneNode->localScale = reference->getScale();
+			reference->sceneNode->update(0.0f, true, true);
+
+			DataHandler::get()->updateLightingForReference(reference);
+
+			reference->setAsEdited();
+		}
+
+		selectionData->recalculateBound();
+
+		// An undo checkpoint is required before and after the movement or it will crash later on.
+		UndoManager::get()->storeCheckpoint(UndoManager::Action::Moved);
+	}
+
+	void resetOrRandomizeSelection(bool rotX, bool rotY, bool rotZ, bool scale, bool randZ, bool randScale) {
+		auto selectionData = SelectionData::get();
+		unsigned int i = 0;
+
+		// An undo checkpoint is required before and after the movement or it will crash later on.
+		UndoManager::get()->storeCheckpoint(UndoManager::Action::Moved);
+
+		for (auto target = selectionData->firstTarget; i < SelectionData::get()->numberOfTargets; target = target->next, i++) {
+			auto reference = target->reference;
+
+			if (rotX) {
+				reference->yetAnotherOrientation.x = 0.0;
+			}
+			if (rotY) {
+				reference->yetAnotherOrientation.y = 0.0;
+			}
+			if (rotZ) {
+				reference->yetAnotherOrientation.z = 0.0;
+			}
+
+			if (scale) {
+				reference->setScale(1.0);
+			}
+
+			if (randZ) {
+				reference->yetAnotherOrientation.z = rotationDistribution(generator);
+			}
+
+			if (randScale) {
+				reference->setScale(scaleDistribution(generator));
+			}
+
+			// Not sure exactly why these exist...
+
+			reference->unknown_0x10 = reference->position;
+			reference->orientationNonAttached = reference->yetAnotherOrientation;
+
+			// Update Scene Graph.
+
+			NI::Matrix33 rotation;
+			auto orientation = reference->yetAnotherOrientation;
+			rotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
+
+			reference->updateRotationMatrixForRaceAndSex(rotation);
+			reference->sceneNode->setLocalRotationMatrix(&rotation);
+			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->localScale = reference->getScale();
 			reference->sceneNode->update(0.0f, true, true);
 
@@ -1311,13 +1393,45 @@ namespace se::cs::dialog::render_window {
 		settings.save();
 	}
 
+	void toggleLandscapeShown() {
+		using namespace landscape_edit_settings_window;
+
+		auto dataHandler = DataHandler::get();
+		auto landscapeRoot = dataHandler->editorLandscapeRoot;
+
+		const auto wasShown = !landscapeRoot->getAppCulled();
+
+		if (wasShown) {
+			setLandscapeEditingEnabled(false);
+			landscapeRoot->setAppCulled(true);
+		}
+		else {
+			setLandscapeEditingEnabled(true, true);
+			landscapeRoot->setAppCulled(false);
+		}
+	}
+
+	void toggleWaterShown() {
+		const auto dataHandler = DataHandler::get();
+		const auto waterRoot = dataHandler->waterRenderController->waterNode;
+
+		const auto wasShown = !waterRoot->getAppCulled();
+		if (wasShown) {
+			waterRoot->setAppCulled(true);
+		}
+		else {
+			waterRoot->setAppCulled(false);
+		}
+	}
+
 	void showContextAwareActionMenu(HWND hWndRenderWindow) {
 		auto menu = CreatePopupMenu();
 		if (menu == NULL) {
 			return;
 		}
 
-		auto recordHandler = DataHandler::get()->recordHandler;
+		auto dataHandler = DataHandler::get();
+		auto recordHandler = dataHandler->recordHandler;
 		auto selectionData = SelectionData::get();
 		const bool hasReferencesSelected = selectionData->numberOfTargets > 0;
 
@@ -1346,15 +1460,29 @@ namespace se::cs::dialog::render_window {
 			CLEAR_STATE_FROM_QUICKSTART,
 			TEST_FROM_REFERENCE_POSITION,
 			TEST_FROM_CAMERA_POSITION,
+			HIDE_LANDSCAPE,
+			HIDE_WATER,
+			RESET_ROTATION_X,
+			RESET_ROTATION_Y,
+			RESET_ROTATION_Z,
+			RESET_SCALE,
+			RESET_ROTATION_X_AND_Y,
+			RESET_ROTATION_AND_SCALE,
+			RANDOMIZE_ROTATION_Z,
+			RANDOMIZE_SCALE,
+			RANDOMIZE_ROTATION_Z_AND_SCALE,
 		};
 
 		/*
 		* Reserved hotkeys:
+		*   D: Hide/show landscape.
+		*   M: Toggle legacy object movement
+		*   T: Hide/show water.
+		*	E: Change Reference Data
 		*	H: Hide Selection
 		*	R: Restore Hidden References
 		*	S: Set Snapping Axis
 		*	W: Toggle world axis rotation
-		*   M: Toggle legacy object movement
 		*/
 
 		MENUITEMINFO menuItem = {};
@@ -1510,6 +1638,100 @@ namespace se::cs::dialog::render_window {
 		menuItem.dwTypeData = (LPSTR)"Align References";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
 
+		MENUITEMINFO subMenuReferenceData = {};
+		subMenuReferenceData.cbSize = sizeof(MENUITEMINFO);
+		subMenuReferenceData.hSubMenu = CreateMenu();
+
+		{
+			unsigned int subIndex = 0;
+
+			menuItem.wID = RESET_ROTATION_X;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Reset Rotation &X";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESET_ROTATION_Y;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Reset Rotation &Y";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESET_ROTATION_Z;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Reset Rotation &Z";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESET_SCALE;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Reset &Scale";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESET_ROTATION_X_AND_Y;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Reset Rotation X and Y";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESET_ROTATION_AND_SCALE;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Reset Rotation and Scale";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RANDOMIZE_ROTATION_Z;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Randomize Rotation Z";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RANDOMIZE_SCALE;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Randomize Scale";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RANDOMIZE_ROTATION_Z_AND_SCALE;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"&Randomize Rotation Z and Scale";
+			InsertMenuItemA(subMenuReferenceData.hSubMenu, subIndex++, TRUE, &menuItem);
+		}
+
+		menuItem.wID = RESERVED_NO_CALLBACK;
+		menuItem.fMask = MIIM_SUBMENU | MIIM_TYPE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = hasReferencesSelected ? MFS_ENABLED : MFS_DISABLED;
+		menuItem.hSubMenu = subMenuReferenceData.hSubMenu;
+		menuItem.dwTypeData = (LPSTR)"R&eference Data";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
 		menuItem.wID = USE_GROUP_SCALING;
 		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
 		menuItem.fType = MFT_STRING;
@@ -1544,6 +1766,27 @@ namespace se::cs::dialog::render_window {
 		menuItem.fState = MFS_ENABLED;
 		menuItem.dwTypeData = (LPSTR)"&Restore Hidden References";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = RESERVED_NO_CALLBACK;
+		menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+		menuItem.fType = MFT_SEPARATOR;
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = HIDE_LANDSCAPE;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = MFS_ENABLED;
+		menuItem.dwTypeData = (LPSTR)"Hide lan&dscape";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, HIDE_LANDSCAPE, dataHandler->editorLandscapeRoot->getAppCulled() ? MFS_CHECKED : MFS_UNCHECKED);
+
+		menuItem.wID = HIDE_WATER;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = MFS_ENABLED;
+		menuItem.dwTypeData = (LPSTR)"Hide wa&ter";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, HIDE_WATER, dataHandler->waterRenderController->waterNode->getAppCulled() ? MFS_CHECKED : MFS_UNCHECKED);
 
 		menuItem.wID = RESERVED_NO_CALLBACK;
 		menuItem.fMask = MIIM_FTYPE | MIIM_ID;
@@ -1643,6 +1886,33 @@ namespace se::cs::dialog::render_window {
 		case ALIGN_SELECTION_ALL:
 			alignSelection(true, true, true, true, true, true, true);
 			break;
+		case RESET_ROTATION_X:
+			resetOrRandomizeSelection(true, false, false, false, false, false);
+			break;
+		case RESET_ROTATION_Y:
+			resetOrRandomizeSelection(false, true, false, false, false, false);
+			break;
+		case RESET_ROTATION_Z:
+			resetOrRandomizeSelection(false, false, true, false, false, false);
+			break;
+		case RESET_SCALE:
+			resetOrRandomizeSelection(false, false, false, true, false, false);
+			break;
+		case RESET_ROTATION_X_AND_Y:
+			resetOrRandomizeSelection(true, true, false, false, false, false);
+			break;
+		case RESET_ROTATION_AND_SCALE:
+			resetOrRandomizeSelection(true, true, true, true, false, false);
+			break;
+		case RANDOMIZE_ROTATION_Z:
+			resetOrRandomizeSelection(false, false, false, false, true, false);
+			break;
+		case RANDOMIZE_SCALE:
+			resetOrRandomizeSelection(false, false, false, false, false, true);
+			break;
+		case RANDOMIZE_ROTATION_Z_AND_SCALE:
+			resetOrRandomizeSelection(false, false, false, false, true, true);
+			break;
 		case USE_GROUP_SCALING:
 			settings.render_window.use_group_scaling = !settings.render_window.use_group_scaling;
 			settings.save();
@@ -1663,6 +1933,12 @@ namespace se::cs::dialog::render_window {
 		case TEST_FROM_CAMERA_POSITION:
 			setTestingPositionToCamera();
 			break;
+		case HIDE_LANDSCAPE:
+			toggleLandscapeShown();
+			break;
+		case HIDE_WATER:
+			toggleWaterShown();
+			break;
 		default:
 			log::stream << "Unknown render window context menu ID " << result << " used!" << std::endl;
 		}
@@ -1676,8 +1952,28 @@ namespace se::cs::dialog::render_window {
 		PatchDialogProc_OverrideResult = TRUE;
 	}
 
+	void PatchDialogProc_BeforeMouseMove(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Cache cursor position.
+		lastCursorPosX = LOWORD(lParam);
+		lastCursorPosY = HIWORD(lParam);
+	}
+
 	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		movementContext.reset();
+	}
+
+	void PatchDialogProc_BeforeLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Prevent selection changes during object rotation mode. Prevents non-undoable changes, and a crash if the selection becomes empty.
+		if (gIsRotating::get()) {
+			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
+	void PatchDialogProc_BeforeLMouseDoubleClick(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Prevent opening details dialog during object rotation mode.
+		if (gIsRotating::get()) {
+			PatchDialogProc_OverrideResult = FALSE;
+		}
 	}
 
 	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -1772,7 +2068,7 @@ namespace se::cs::dialog::render_window {
 
 	void PatchDialogProc_AfterKeyUp_XYZ(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Hide widgets if they are no longer needed.
-		auto widgets = SceneGraphController::get()->widgets;
+		auto widgets = SceneGraphController::get()->getWidgets();
 		if (!isHoldingAxisKey() && widgets->isShown()) {
 			widgets->hide();
 			movementContext.reset();
@@ -1790,13 +2086,6 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void PatchDialogProc_AfterInitDialog(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		// Initialize widget controller.
-		auto sgController = SceneGraphController::get();
-		sgController->widgets = new WidgetsController();
-		sgController->sceneRoot->attachChild(sgController->widgets->root);
-	}
-
 	namespace CustomWindowMessage {
 		constexpr UINT SetCameraPosition = 0x40Eu;
 	}
@@ -1806,11 +2095,16 @@ namespace se::cs::dialog::render_window {
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
-			lastCursorPosX = LOWORD(lParam);
-			lastCursorPosY = HIWORD(lParam);
+			PatchDialogProc_BeforeMouseMove(hWnd, msg, wParam, lParam);
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONUP:
+			PatchDialogProc_BeforeLMouseButtonUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONDBLCLK:
+			PatchDialogProc_BeforeLMouseDoubleClick(hWnd, msg, wParam, lParam);
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
@@ -1843,9 +2137,6 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_LBUTTONUP:
 			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
-			break;
-		case WM_INITDIALOG:
-			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
 			break;
 		}
 

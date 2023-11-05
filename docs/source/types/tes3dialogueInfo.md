@@ -8,7 +8,7 @@
 
 A child for a given dialogue. Whereas a dialogue may be a conversation topic, a `tes3dialogueInfo` would be an individual response.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `actor`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` ([tes3actor](../../types/tes3actor))
+* `result` ([tes3actor](../types/tes3actor.md))
 
 ***
 
@@ -40,7 +40,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -84,7 +84,7 @@ The actor that the player first heard the info from.
 
 **Returns**:
 
-* `result` ([tes3actor](../../types/tes3actor))
+* `result` ([tes3actor](../types/tes3actor.md))
 
 ***
 
@@ -161,7 +161,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` ([tes3class](../../types/tes3class))
+* `result` ([tes3class](../types/tes3class.md))
 
 ***
 
@@ -172,7 +172,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` ([tes3faction](../../types/tes3faction))
+* `result` ([tes3faction](../types/tes3faction.md))
 
 ***
 
@@ -183,7 +183,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` ([tes3actor](../../types/tes3actor))
+* `result` ([tes3actor](../types/tes3actor.md))
 
 ***
 
@@ -227,7 +227,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -315,7 +315,7 @@ If true, references of this object can store temporary or persistent lua data.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.dialogueType](../references/dialogue-types.md))
 
 ***
 
@@ -347,10 +347,10 @@ local result = myObject:filter(actor, reference, source, dialogue)
 
 **Parameters**:
 
-* `actor` ([tes3object](../../types/tes3object))
-* `reference` ([tes3reference](../../types/tes3reference))
+* `actor` ([tes3object](../types/tes3object.md))
+* `reference` ([tes3reference](../types/tes3reference.md))
 * `source` (number)
-* `dialogue` ([tes3dialogue](../../types/tes3dialogue))
+* `dialogue` ([tes3dialogue](../types/tes3dialogue.md))
 
 **Returns**:
 
@@ -369,7 +369,7 @@ local dialogue = myObject:findDialogue()
 
 **Returns**:
 
-* `dialogue` ([tes3dialogue](../../types/tes3dialogue))
+* `dialogue` ([tes3dialogue](../types/tes3dialogue.md))
 
 ***
 
@@ -399,5 +399,5 @@ myObject:runScript(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference)): The reference on which to run the script on.
+* `reference` ([tes3reference](../types/tes3reference.md)): The reference on which to run the script on.
 

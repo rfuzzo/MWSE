@@ -20,12 +20,12 @@ event.register(tes3.event.potionBrewed, potionBrewedCallback)
 
 ## Event Data
 
-* `alembic` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The alembic apparatus used to create the potion.
-* `calcinator` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The calcinator apparatus used to create the potion.
-* `ingredients` ([tes3ingredient](../../types/tes3ingredient)[]): *Read-only*. Ingredients which were used to create the potion.
-* `mortar` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The mortar apparatus used to create the potion.
-* `object` ([tes3alchemy](../../types/tes3alchemy)): *Read-only*. The potion created by the player.
-* `retort` ([tes3apparatus](../../types/tes3apparatus)): *Read-only*. The retort apparatus used to create the potion.
+* `alembic` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The alembic apparatus used to create the potion.
+* `calcinator` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The calcinator apparatus used to create the potion.
+* `ingredients` ([tes3ingredient](../types/tes3ingredient.md)[]): *Read-only*. Ingredients which were used to create the potion.
+* `mortar` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The mortar apparatus used to create the potion.
+* `object` ([tes3alchemy](../types/tes3alchemy.md)): *Read-only*. The potion created by the player.
+* `retort` ([tes3apparatus](../types/tes3apparatus.md)): *Read-only*. The retort apparatus used to create the potion.
 
 ## Examples
 
@@ -52,4 +52,9 @@ event.register(tes3.event.potionBrewed, potionBrewedCallback)
 	end)
 
 	```
+
+
+## Related events
+
+[potionBrewFailed](./potionBrewFailed.md){ .md-button }[potionBrewSkillCheck](./potionBrewSkillCheck.md){ .md-button }
 

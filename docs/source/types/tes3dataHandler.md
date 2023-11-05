@@ -83,7 +83,7 @@ Access to the current ambient water sound.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -94,7 +94,7 @@ Access to the current ambient water sound.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -105,7 +105,7 @@ Access to the current ambient water sound.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -127,7 +127,7 @@ Access to dontThreadLoad setting.
 
 **Returns**:
 
-* `result` ([tes3dataHandlerExteriorCellData](../../types/tes3dataHandlerExteriorCellData)[])
+* `result` ([tes3dataHandlerExteriorCellData](../types/tes3dataHandlerExteriorCellData.md)[])
 
 ***
 
@@ -138,7 +138,20 @@ Access to dontThreadLoad setting.
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
+
+***
+
+### `lowestZInCurrentCell`
+<div class="search_terms" style="display: none">lowestzincurrentcell</div>
+
+*Read-only*. The Z coordinate of the lowest point in the current cell, which is the bottom of the bounding box of the lowest object. Only valid for interiors.
+
+This is used by the engine to check for the player falling out of bounds.
+
+**Returns**:
+
+* `result` (number)
 
 ***
 
@@ -171,7 +184,7 @@ Access to dontThreadLoad setting.
 
 **Returns**:
 
-* `result` ([tes3nonDynamicData](../../types/tes3nonDynamicData))
+* `result` ([tes3nonDynamicData](../types/tes3nonDynamicData.md))
 
 ***
 
@@ -215,7 +228,7 @@ An engine flag that controls if there is a fade in/out between cells.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -226,7 +239,7 @@ An engine flag that controls if there is a fade in/out between cells.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -237,7 +250,7 @@ An engine flag that controls if there is a fade in/out between cells.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 

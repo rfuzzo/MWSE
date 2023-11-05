@@ -17,7 +17,31 @@ lfs.remakedir(lfs.join(docsSourceFolder, "events"))
 local globals = {}
 local classes = {}
 local events = {}
-local typeLinks = {}
+local typeLinks = {
+	-- The automatic link resolving doesn't work for these enumerations.
+	-- These came as warnings in the output of the mkdocs - Start Server task defined at: "docs/.vscode/tasks.json"
+	["ni.animCycleType"] = "[ni.animCycleType](../references/ni/animation-cycle-types.md)",
+	["ni.animType"] = "[ni.animType](../references/ni/animation-types.md)",
+	["ni.cameraClearFlags"] = "[ni.cameraClearFlags](../references/ni/camera-clear-flags.md)",
+	["ni.eulerRotKeyOrder"] = "[ni.eulerRotKeyOrder](../references/ni/euler-rotation-key-orders.md)",
+	["ni.lookAtControllerAxis"] = "[ni.lookAtControllerAxis](../references/ni/look-at-controller-axes.md)",
+	["ni.pickIntersectType"] = "[ni.pickIntersectType](../references/ni/pick-intersection-types.md)",
+	["ni.textureFormatPrefsAlphaFormat"] = "[ni.textureFormatPrefsAlphaFormat](../references/ni/texture-format-preference-alpha-formats.md)",
+	["ni.textureFormatPrefsMipFlag"] = "[ni.textureFormatPrefsMipFlag](../references/ni/texture-format-preference-mip-flags.md)",
+	["ni.textureFormatPrefsPixelLayout"] = "[ni.textureFormatPrefsPixelLayout](../references/ni/texture-format-preference-pixel-layouts.md)",
+	["ni.zBufferPropertyTestFunction"] = "[ni.zBufferPropertyTestFunction](../references/ni/z-buffer-property-test-functions.md)",
+	["tes3.armorWeightClass"] = "[tes3.armorWeightClass](../references/armor-weight-classes.md)",
+	["tes3.dialogueFilterContext"] = "[tes3.dialogueFilterContext](../references/dialogue-filter-context.md)",
+	["tes3.effect"] = "[tes3.effect](../references/magic-effects.md)",
+	["tes3.soundGenType"] = "[tes3.soundGenType](../references/sound-generator-types.md)",
+	["tes3.gmst"] = "[tes3.gmst](../references/gmst.md)",
+	["tes3.justifyText"] = "[tes3.justifyText](../references/justify-text.md)",
+	["tes3.partIndex"] = "[tes3.partIndex](../references/part-indices.md)",
+	["tes3.soundMix"] = "[tes3.soundMix](../references/sound-mix-types.md)",
+	["tes3.uiElementType"] = "[tes3.uiElementType](../references/tes3uiElement-types.md)",
+	["tes3.uiProperty"] = "[tes3.uiProperty](../references/ui-properties.md)",
+	["tes3.weather"] = "[tes3.weather](../references/weather-types.md)",
+}
 
 --
 -- Utility functions.
@@ -39,8 +63,8 @@ common.compilePath(lfs.join(common.pathDefinitions, "events", "standard"), event
 -- Building
 --
 
----@param packages package[]
----@return package[] packages The provided packages without the deprecated fields.
+--- @param packages package[]
+--- @return package[] packages The provided packages without the deprecated fields.
 local function removeDeprecated(packages)
 	for i, package in ipairs(packages) do
 		if package.deprecated then
@@ -55,7 +79,7 @@ local function buildParentChain(className)
 	local package = assert(classes[className])
 	local ret = ""
 	if (classes[className]) then
-		ret = string.format("[%s](../../types/%s)", className, className)
+		ret = string.format("[%s](../types/%s.md)", className, className)
 	else
 		ret = className
 	end
@@ -65,18 +89,51 @@ local function buildParentChain(className)
 	return ret
 end
 
----@param type string Supports array annotation. For example: "tes3weather[]".
+--- @param enum string
+local function splitCamelCase(enum)
+	-- Make the first letter uppercase
+	enum = enum:gsub("^%l", string.upper)
+	-- Insert dash between lowercase and uppercase character
+	enum = enum:gsub( "(%l)(%u)", "%1-%2" )
+	return enum:lower()
+end
+
+--- @param type string Supports array annotation. For example: "tes3weather[]".
 local function getTypeLink(type)
 	if typeLinks[type] then
 		return typeLinks[type]
 	end
 
-	local isArray = type:endswith("[]")
 	local valueType = type:match("[%w%.]+")
+	local isArray = type:endswith("[]")
+	local namespace, field = type:match("([_%a][_%w]+)%.(.*)") --[[@as string]]
+	if isArray then
+		-- Exclude the ending square brackets [].
+		namespace, field = type:sub(1, -3):match("([_%a][_%w]+)%.(.*)") --[[@as string]]
+	end
+	local enums = common.getEnumerationsMap(namespace)
+	local isEnum = enums and enums[field]
 
 	if classes[valueType] then
-		typeLinks[type] = string.format("[%s](../../types/%s)%s", valueType, valueType, isArray and "[]" or "")
+		typeLinks[type] = string.format("[%s](../types/%s.md)%s", valueType, valueType, isArray and "[]" or "")
+	elseif isEnum then
+		local enumName = namespace .. "." .. field
+		if isArray then
+			local cached = typeLinks[enumName]
+			if cached then
+				typeLinks[type] = cached .. "[]"
+				return typeLinks[type]
+			end
+		end
+		local filename = splitCamelCase(field)
+		local basepath = "../references/"
+		-- Reference pages for enumeration tables in tes3 namespace are one folder up
+		if namespace ~= "tes3" then
+			basepath = basepath .. namespace .. "/"
+		end
+		typeLinks[type] = string.format("[%s](%s%ss.md)%s", enumName, basepath, filename, isArray and "[]" or "")
 	else
+		-- Cache the types without any entry in the docs (e.g. primitive Lua types, string constants, etc.)
 		typeLinks[type] = type
 	end
 
@@ -84,14 +141,16 @@ local function getTypeLink(type)
 end
 
 --- This function converts a union of types to an array. E.g.:<br>
---- "table<integer, tes3ref|tes3mobile>|fun(self: infoGetTextEventData|string): boolean, string|integer" to<br>
---- {<br>
----    "table<integer, tes3ref|tes3mobile>",<br>
----    "fun(self: infoGetTextEventData|string): boolean, string",<br>
----    "integer",<br>
---- }<br>
----@param union string
----@return string[]
+--- `"table<integer, tes3ref|tes3mobile>|fun(self: infoGetTextEventData|string): boolean, string|integer"` to:
+--- ```lua
+--- {
+---    "table<integer, tes3ref|tes3mobile>",
+---    "fun(self: infoGetTextEventData|string): boolean, string",
+---    "integer",
+--- }
+--- ```
+--- @param union string
+--- @return string[]
 local function breakoutUnion(union)
 	local types = {}
 
@@ -123,9 +182,9 @@ local function breakoutUnion(union)
 	return types
 end
 
----@param type string
----@param nested boolean?
----@return string
+--- @param type string
+--- @param nested boolean?
+--- @return string
 local function breakoutTypeLinks(type, nested)
 	local types = breakoutUnion(type)
 
@@ -133,7 +192,9 @@ local function breakoutTypeLinks(type, nested)
 		-- Support "table<x, y>" as type, in HTML < and > signs have a special meaning.
 		-- Use "&lt;" and "&gt;" instead.
 		if t:startswith("table<") then
-			local keyType, valueType = t:match("table<(%w+), (.+)>")
+			local keyType, valueType = t:match("(%b<,) (.*)>")
+			-- Let's remove the "<" from the beginning and "," at the end
+			keyType = keyType:sub(2, -2)
 			keyType = breakoutTypeLinks(keyType, true)
 			valueType = breakoutTypeLinks(valueType, true)
 
@@ -180,6 +241,18 @@ local function breakoutTypeLinks(type, nested)
 		end
 	end
 	return table.concat(types, nested and "|" or ", ")
+end
+
+--- Converts the `related` table in event definitions to a set of markdown buttons:
+--- https://squidfunk.github.io/mkdocs-material/reference/buttons/#adding-buttons
+--- @param related string[]
+--- @return string
+local function relatedButtons(related)
+	local ret = { "\n## Related events\n\n" }
+	for _, eventName in ipairs(related) do
+		ret[#ret + 1] = string.format("[%s](./%s.md){ .md-button }", eventName, eventName)
+	end
+	return table.concat(ret)
 end
 
 --- comment
@@ -268,7 +341,12 @@ local function writeOperatorPackage(file, operator, package)
 		file:write("| Left operand type | Right operand type | Result type | Description |\n")
 		file:write("| ----------------- | ------------------ | ----------- | ----------- |\n")
 		for _, overload in ipairs(operator.overloads) do
-			file:write(string.format("| %s | %s | %s | %s |\n", getTypeLink(package.namespace), getTypeLink(overload.rightType), getTypeLink(overload.resultType), overload.description or ""))
+			file:write(string.format("| %s | %s | %s | %s |\n",
+				getTypeLink(package.namespace),
+				getTypeLink(overload.rightType),
+				getTypeLink(overload.resultType),
+				overload.description or "")
+			)
 		end
 	else
 		file:write("| Result type | Description |\n")
@@ -281,14 +359,46 @@ local function writeOperatorPackage(file, operator, package)
 	file:write("\n")
 end
 
+--- This function is used to write out examples of a package.
+--- @param file file* The file to write to.
+--- @param package package The package whose examples will be written out.
+local function writeExamples(file, package)
+	local exampleType = "???"
+	if (package.type == "event") then
+		file:write("## Examples\n\n")
+		exampleType = "!!!"
+	end
+
+	local exampleKeys = table.keys(package.examples, true)
+	for _, name in ipairs(exampleKeys) do
+		local example = package.examples[name]
+		file:write(string.format("%s example \"Example: %s\"\n\n", exampleType, example.title or name))
+		if (example.description) then
+			file:write(string.format("\t%s\n\n", string.gsub(example.description, "\n\n", "\n\n\t")))
+		end
+		file:write(string.format("\t```lua\n"))
+
+		local path = nil
+		if (package.type == "class") then
+			path = lfs.join(package.folder, package.key, package.key, name .. ".lua")
+		else
+			path = lfs.join(package.folder, package.key, name .. ".lua")
+		end
+		for line in io.lines(path) do
+			file:write(string.format("\t%s\n", line))
+		end
+		file:write(string.format("\n\t```\n\n"))
+	end
+end
+
 --- This function is used to write out properties, methods, functions, and operators of a package.
----@param file file* The file to write to.
----@param package package The package whose fields that will be written out.
----@param field string The name of the fields to write. Can be "values", "methods", "functions", and "operators"
----@param fieldName string The name of the section for the fields.
----@param writeFunction fun(file: file*, package: package, from: package) The function that write a single package definition.
----@param writeRule boolean If true a horizontal rule will be written before the section.
----@return boolean written True if at least one field was written to file.
+--- @param file file* The file to write to.
+--- @param package package The package whose fields that will be written out.
+--- @param field string The name of the fields to write. Can be "values", "methods", "functions", and "operators"
+--- @param fieldName string The name of the section for the fields.
+--- @param writeFunction fun(file: file*, package: package, from: package) The function that write a single package definition.
+--- @param writeRule boolean If true a horizontal rule will be written before the section.
+--- @return boolean written True if at least one field was written to file.
 local function writeFields(file, package, field, fieldName, writeFunction, writeRule)
 	local fields = table.values(getPackageComponentsArray(package, field), sortPackagesByKey)
 	fields = removeDeprecated(fields)
@@ -312,13 +422,20 @@ local function writeFields(file, package, field, fieldName, writeFunction, write
 	return false
 end
 
----@param file file*
----@param package any
+--- @param file file*
+--- @param package any
 local function writePackageDetails(file, package)
 	-- Write description.
 	file:write(string.format("%s\n\n", common.getDescriptionString(package)))
-	if (package.type == "class" and package.inherits) then
-		file:write(string.format("This type inherits the following: %s\n", buildParentChain(package.inherits)))
+	if (package.type == "class") then
+		if (package.inherits) then
+			file:write(string.format("This type inherits the following: %s\n", buildParentChain(package.inherits)))
+		end
+
+		-- Write class examples before the methods and properties
+		if (package.examples) then
+			writeExamples(file, package)
+		end
 	elseif (package.type == "event") then
 		file:write(string.format("```lua\n--- @param e %sEventData\nlocal function %sCallback(e)\nend\nevent.register(tes3.event.%s, %sCallback)\n```\n\n", package.key, package.key, package.key, package.key))
 		if (package.filter) then
@@ -358,7 +475,7 @@ local function writePackageDetails(file, package)
 
 	local returns = common.getConsistentReturnValues(package)
 	if (package.type == "method" or package.type == "function") then
-		file:write(string.format("```lua\n",  package.namespace))
+		file:write(string.format("```lua\n", package.namespace))
 		if (returns) then
 			local returnNames = {}
 			for i, ret in ipairs(returns) do
@@ -416,33 +533,13 @@ local function writePackageDetails(file, package)
 		end
 	end
 
-	if (package.examples) then
-		local exampleType = "???"
-		if (package.type == "event") then
-			file:write("## Examples\n\n")
-			exampleType = "!!!"
-		end
+	-- Class examples were written before
+	if (package.examples and not (package.type == "class")) then
+		writeExamples(file, package)
+	end
 
-		local exampleKeys = table.keys(package.examples, true)
-		for _, name in ipairs(exampleKeys) do
-			local example = package.examples[name]
-			file:write(string.format("%s example \"Example: %s\"\n\n", exampleType, example.title or name))
-			if (example.description) then
-				file:write(string.format("\t%s\n\n", string.gsub(example.description, "\n\n", "\n\n\t")))
-			end
-			file:write(string.format("\t```lua\n"))
-
-			local path = nil
-			if (package.type == "class") then
-				path = lfs.join(package.folder, package.key, package.key, name .. ".lua")
-			else
-				path = lfs.join(package.folder, package.key, name .. ".lua")
-			end
-			for line in io.lines(path) do
-				file:write(string.format("\t%s\n", line))
-			end
-			file:write(string.format("\n\t```\n\n"))
-		end
+	if (package.type == "event" and package.related) then
+		file:write(relatedButtons(package.related), "\n\n")
 	end
 end
 

@@ -39,7 +39,7 @@ The calculated ordering priority value of the shader, that allows auto-sorting o
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -48,16 +48,17 @@ The calculated ordering priority value of the shader, that allows auto-sorting o
 
 Lists the shader's editable variables. The result table has the variable names as keys, and the variable types as values. To get and set the actual variable, use the expression `shaderHandle.<variableName>`.
 
-	Variable types are:
-	'b' boolean
-	'i' integer
-	'f' float
-	's' string
-	'a' float array
-	'2' vec2
-	'3' vec3
-	'4' vec4
-	'm' matrix
+Variable types are:
+
+- 'b' boolean
+- 'i' integer
+- 'f' float
+- 's' string
+- 'a' float array
+- '2' vec2
+- '3' vec3
+- '4' vec4
+- 'm' matrix
 
 **Returns**:
 
@@ -67,16 +68,46 @@ Lists the shader's editable variables. The result table has the variable names a
 
 ## Methods
 
+### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
+
+Serializes the object to json.
+
+```lua
+local result = myObject:__tojson()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
+### `__tostring`
+<div class="search_terms" style="display: none">__tostring</div>
+
+Serializes the object to string.
+
+```lua
+local result = myObject:__tostring()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `reload`
 <div class="search_terms" style="display: none">reload</div>
 
 Reloads and recompiles the shader. Returns if the reload was successful.
 
 ```lua
-local result = myObject:reload()
+local success = myObject:reload()
 ```
 
 **Returns**:
 
-* `result` (boolean)
+* `success` (boolean)
 

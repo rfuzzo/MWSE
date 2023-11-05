@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-An active magic effect.
+Data about a magic effect currently active on a particular mobile actor. It is accessed from `tes3mobileActor.activeMagicEffectList`. The data is a subset of the full data from a `tes3magicEffectInstance`, but does not require extra lookups to access, making it faster to scan through an actor's magic effects.
 
 ## Properties
 
@@ -17,7 +17,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([tes3.attribute](../references/attributes.md))
 
 ***
 
@@ -39,7 +39,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([tes3.effect](../references/magic-effects.md))
 
 ***
 
@@ -61,7 +61,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance))
+* `result` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md))
 
 ***
 
@@ -83,7 +83,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance))
+* `result` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md))
 
 ***
 
@@ -149,7 +149,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` ([tes3mobileCreature](../../types/tes3mobileCreature), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobilePlayer](../../types/tes3mobilePlayer))
+* `result` ([tes3mobileCreature](../types/tes3mobileCreature.md), [tes3mobileNPC](../types/tes3mobileNPC.md), [tes3mobilePlayer](../types/tes3mobilePlayer.md))
 
 ***
 
@@ -160,7 +160,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect))
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md))
 
 ***
 
@@ -171,7 +171,7 @@ An active magic effect.
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect))
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md))
 
 ***
 
@@ -193,5 +193,5 @@ An active magic effect.
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([tes3.skill](../references/skills.md))
 

@@ -26,8 +26,13 @@ event.register(tes3.event.absorbedMagic, absorbedMagicCallback)
 ## Event Data
 
 * `absorb` (number): The amount of magicka to restore to the actor.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that absorbed the spell.
-* `source` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell)): *Read-only*. The magic source.
-* `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source.
-* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The actor that absorbed the spell.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor that absorbed the spell.
+* `source` ([tes3alchemy](../types/tes3alchemy.md), [tes3enchantment](../types/tes3enchantment.md), [tes3spell](../types/tes3spell.md)): *Read-only*. The magic source.
+* `sourceInstance` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md)): *Read-only*. The unique instance of the magic source.
+* `target` ([tes3reference](../types/tes3reference.md)): *Read-only*. The actor that absorbed the spell.
+
+
+## Related events
+
+[spellResist](./spellResist.md){ .md-button }[spellResisted](./spellResisted.md){ .md-button }
 

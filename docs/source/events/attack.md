@@ -27,10 +27,10 @@ event.register(tes3.event.attack, attackCallback)
 
 ## Event Data
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor making the attack.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the reference that is attacking.
-* `targetMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor being attacked. May be nil, e.g. if nothing was targeted.
-* `targetReference` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the reference being attacked. May be nil, e.g. if nothing was targeted.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor making the attack.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. A shortcut to the reference that is attacking.
+* `targetMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor being attacked. May be nil, e.g. if nothing was targeted.
+* `targetReference` ([tes3reference](../types/tes3reference.md)): *Read-only*. A shortcut to the reference being attacked. May be nil, e.g. if nothing was targeted.
 
 ## Examples
 
@@ -51,4 +51,9 @@ event.register(tes3.event.attack, attackCallback)
 	event.register(tes3.event.attack, myOnAttackCallback)
 
 	```
+
+
+## Related events
+
+[attackStart](./attackStart.md){ .md-button }[attackHit](./attackHit.md){ .md-button }
 

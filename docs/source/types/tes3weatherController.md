@@ -61,7 +61,7 @@ The current fog color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -72,7 +72,7 @@ The current sky color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -83,7 +83,7 @@ The current sky color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather))
+* `result` ([tes3weather](../types/tes3weather.md))
 
 ***
 
@@ -182,7 +182,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3region](../../types/tes3region))
+* `result` ([tes3region](../types/tes3region.md))
 
 ***
 
@@ -193,7 +193,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3moon](../../types/tes3moon))
+* `result` ([tes3moon](../types/tes3moon.md))
 
 ***
 
@@ -204,7 +204,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather))
+* `result` ([tes3weather](../types/tes3weather.md))
 
 ***
 
@@ -215,7 +215,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3weatherControllerParticle](../../types/tes3weatherControllerParticle)[])
+* `result` ([tes3weatherControllerParticle](../types/tes3weatherControllerParticle.md)[])
 
 ***
 
@@ -226,7 +226,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3weatherControllerParticle](../../types/tes3weatherControllerParticle)[])
+* `result` ([tes3weatherControllerParticle](../types/tes3weatherControllerParticle.md)[])
 
 ***
 
@@ -237,7 +237,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -248,7 +248,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niDirectionalLight](../../types/niDirectionalLight))
+* `result` ([niDirectionalLight](../types/niDirectionalLight.md))
 
 ***
 
@@ -259,7 +259,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -270,7 +270,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -281,7 +281,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -292,7 +292,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -303,7 +303,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -314,7 +314,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -325,7 +325,7 @@ The hours remaining.
 
 **Returns**:
 
-* `result` ([tes3moon](../../types/tes3moon))
+* `result` ([tes3moon](../types/tes3moon.md))
 
 ***
 
@@ -424,7 +424,7 @@ The sunglare fader color. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -556,7 +556,7 @@ The underwater color, represented as a vector. The values can range from 0 to 1.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -629,11 +629,11 @@ The underwater sunset fog value.
 ### `weathers`
 <div class="search_terms" style="display: none">weathers</div>
 
-*Read-only*. Array-style table for the different weather types. Each object in the table is a [tes3weather](https://mwse.github.io/MWSE/types/tes3weather/). The indices in the table map to the values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+*Read-only*. Array-style table with weather objects for each weather type. The indices in the table map to the values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather)[])
+* `result` (table&lt;[tes3.weather](../references/weather-types.md), [tes3weather](../types/tes3weather.md)&gt;)
 
 ***
 
@@ -644,7 +644,7 @@ The wind velocity for the current weather.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -655,7 +655,7 @@ The wind velocity for the next weather.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -690,7 +690,7 @@ myObject:switchImmediate(weatherId)
 
 **Parameters**:
 
-* `weatherId` (number): Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+* `weatherId` ([tes3.weather](../references/weather-types.md)): Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
 ***
 
@@ -705,7 +705,7 @@ myObject:switchTransition(weatherId)
 
 **Parameters**:
 
-* `weatherId` (number): Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+* `weatherId` ([tes3.weather](../references/weather-types.md)): Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
 ***
 

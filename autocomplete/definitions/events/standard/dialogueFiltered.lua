@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event fires whenever a tes3dialogueInfo has been selected for a given tes3dialogue. This includes but is not limited to showing greetings, finding voice overs, and calculating service requirements.",
+	related = { "dialogueFiltered", "infoGetText", "infoLinkResolve", "infoResponse", "infoFilter", "postInfoResponse" },
 	eventData = {
 		["dialogue"] = {
 			type = "tes3dialogue",
@@ -23,7 +24,7 @@ return {
 			description = "Any associated reference for the query.",
 		},
 		["context"] = {
-			type = "number",
+			type = "tes3.dialogueFilterContext",
 			readOnly = true,
 			description = "What caused the dialogue filtering. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.",
 		},

@@ -22,3 +22,8 @@ event.register(tes3.event.infoLinkResolve, infoLinkResolveCallback)
 
 * `topic` (string): The topic that activates when this hyperlink is clicked. Initially set to the link text. Set this value to change the target topic.
 
+
+## Related events
+
+[dialogueFiltered](./dialogueFiltered.md){ .md-button }[infoGetText](./infoGetText.md){ .md-button }[infoLinkResolve](./infoLinkResolve.md){ .md-button }[infoResponse](./infoResponse.md){ .md-button }[infoFilter](./infoFilter.md){ .md-button }[postInfoResponse](./postInfoResponse.md){ .md-button }
+

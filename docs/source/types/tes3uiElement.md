@@ -8,7 +8,7 @@
 
 A UI element, the main building block of the UI system. All elements are created with methods on a parent Element.  Elements are very configurable, and have many HTML-like layout features. All layout properties can be set to `nil` to reset them to the default value, which will deactivate any related layout mode.
 
-Elements can have custom data attached using their `Property`_ key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
+Elements can have custom data attached using their `Property` key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
 
 ## Properties
 
@@ -184,7 +184,7 @@ See childOffsetX.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement)[])
+* `result` ([tes3uiElement](../types/tes3uiElement.md)[])
 
 ***
 
@@ -228,7 +228,7 @@ The file path to the image or model content of this element. Only used if `conte
 
 **Returns**:
 
-* `result` (string)
+* `result` ([tes3.contentType](../references/content-types.md))
 
 ***
 
@@ -246,11 +246,11 @@ Disables user actions on this element. Widgets may stop accepting mouse and keyb
 ### `flowDirection`
 <div class="search_terms" style="display: none">flowdirection</div>
 
-Can have values `"left_to_right"` or `"top_to_bottom"`. These values are available as [`tes3.flowDirection`](https://mwse.github.io/MWSE/references/flow-directions/) enumeration. Indicates which direction child elements are laid out.
+Indicates which direction child elements are laid out. These values are available as [`tes3.flowDirection`](https://mwse.github.io/MWSE/references/flow-directions/) enumeration.
 
 **Returns**:
 
-* `result` (string)
+* `result` ([tes3.flowDirection](../references/flow-directions.md))
 
 ***
 
@@ -357,11 +357,11 @@ Image scaling multipliers. Only applies to image elements. `0` disables scaling 
 ### `justifyText`
 <div class="search_terms" style="display: none">justifytext</div>
 
-Can have values `"left"`, `"center"`, or `"right"`. Controls text justification. Maps to values in the [`tes3.justifyText`](https://mwse.github.io/MWSE/references/justify-text/) table. To work correctly for center/right justification, `wrapText` must be `true`.
+Controls text justification. To work correctly for center/right justification, `wrapText` must be `true`. Maps to values in the [`tes3.justifyText`](https://mwse.github.io/MWSE/references/justify-text/) table.
 
 **Returns**:
 
-* `result` (string)
+* `result` ([tes3.justifyText](../references/justify-text.md))
 
 ***
 
@@ -482,7 +482,7 @@ The top padding size in pixels. When this is set to `-1`, the `paddingAllSides` 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -548,7 +548,7 @@ When set to `true` on image and NIF elements, the image or NIF is scaled to fit 
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -573,7 +573,7 @@ The underlying texture for the element. This assumes that the element is of an e
 
 **Returns**:
 
-* `result` ([niSourceTexture](../../types/niSourceTexture))
+* `result` ([niSourceTexture](../types/niSourceTexture.md))
 
 ***
 
@@ -584,7 +584,7 @@ The underlying texture for the element. This assumes that the element is of an e
 
 **Returns**:
 
-* `result` (string)
+* `result` ([tes3.uiElementType](../references/tes3uiElement-types.md))
 
 ***
 
@@ -606,7 +606,7 @@ Access to element specific properties. This will be `nil` if there are no elemen
 
 **Returns**:
 
-* `result` ([tes3uiWidget](../../types/tes3uiWidget), nil)
+* `result` ([tes3uiWidget](../types/tes3uiWidget.md), nil)
 
 ***
 
@@ -662,13 +662,13 @@ local copy = myObject:copy({ to = ..., copyChildren = ..., copyProperties = ... 
 **Parameters**:
 
 * `params` (table)
-	* `to` ([tes3uiElement](../../types/tes3uiElement)): The element to create the copy in. Will be the parent of the newly created element.
+	* `to` ([tes3uiElement](../types/tes3uiElement.md)): The element to create the copy in. Will be the parent of the newly created element.
 	* `copyChildren` (boolean): *Default*: `true`. If `true`, all children will also be copied to the newly created element.
 	* `copyProperties` (boolean): *Default*: `true`. If `true`, all properties will be copied to the newly created element.
 
 **Returns**:
 
-* `copy` ([tes3uiElement](../../types/tes3uiElement)): The created copy.
+* `copy` ([tes3uiElement](../types/tes3uiElement.md)): The created copy.
 
 ***
 
@@ -688,7 +688,7 @@ local result = myObject:createBlock({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -711,7 +711,7 @@ local result = myObject:createButton({ id = ..., text = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -730,12 +730,12 @@ local result = myObject:createCycleButton({ id = ..., options = ..., index = ...
 
 * `params` (table)
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `options` ([tes3uiCycleButtonOption](../../types/tes3uiCycleButtonOption)[]): An array of options for the button to cycle through. At minimum the option must have a `text` property defined, to show on the button. If a `value` is provided, it can be accessed through the `.widget`'s `.value` property.
+	* `options` ([tes3uiCycleButtonOption](../types/tes3uiCycleButtonOption.md)[]): An array of options for the button to cycle through. At minimum the option must have a `text` property defined, to show on the button. If a `value` is provided, it can be accessed through the `.widget`'s `.value` property.
 	* `index` (number): *Optional*. The index selected by default.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -755,7 +755,7 @@ local result = myObject:createDivider({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -779,7 +779,7 @@ local result = myObject:createFillBar({ id = ..., current = ..., max = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -787,6 +787,8 @@ local result = myObject:createFillBar({ id = ..., current = ..., max = ... })
 <div class="search_terms" style="display: none">createhorizontalscrollpane, horizontalscrollpane</div>
 
 Creates a horizontally scrolling pane.
+
+Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
 
 Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 
@@ -801,7 +803,7 @@ local result = myObject:createHorizontalScrollPane({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -826,7 +828,7 @@ local element = myObject:createHyperlink({ id = ..., text = ..., url = ..., conf
 
 **Returns**:
 
-* `element` ([tes3uiElement](../../types/tes3uiElement))
+* `element` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -846,7 +848,7 @@ local result = myObject:createHypertext({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -867,7 +869,7 @@ local result = myObject:createImage({ id = ..., path = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -890,7 +892,7 @@ local result = myObject:createImageButton({ id = ..., idle = ..., over = ..., pr
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -911,7 +913,7 @@ local result = myObject:createLabel({ id = ..., text = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -921,18 +923,18 @@ local result = myObject:createLabel({ id = ..., text = ... })
 Creates a NIF model from a file. Still under research.
 
 ```lua
-local result = myObject:createNif({ id = ..., text = ... })
+local result = myObject:createNif({ id = ..., path = ... })
 ```
 
 **Parameters**:
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `text` (string): A model path. This path is relative to `Data Files`.
+	* `path` (string): A model path. This path is relative to `Data Files`.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -954,7 +956,7 @@ local result = myObject:createParagraphInput({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -971,12 +973,12 @@ local result = myObject:createRect({ id = ..., color = ..., randomizeColor = ...
 
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
-	* `color` ([tes3vector3](../../types/tes3vector3), table): *Optional*. The fill color for the element.
+	* `color` ([tes3vector3](../types/tes3vector3.md), number[]): *Optional*. The fill color for the element.
 	* `randomizeColor` (boolean): *Default*: `false`. If true, the creation color will be randomized.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1002,7 +1004,7 @@ local result = myObject:createSlider({ id = ..., current = ..., max = ..., step 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1028,7 +1030,7 @@ local result = myObject:createSliderVertical({ id = ..., current = ..., max = ..
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1054,7 +1056,7 @@ local result = myObject:createTextInput({ id = ..., text = ..., placeholderText 
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1074,11 +1076,11 @@ local result = myObject:createTextSelect({ id = ..., text = ..., state = ... })
 * `params` (table): *Optional*.
 	* `id` (string, number): *Optional*. An identifier to help find this element later.
 	* `text` (string): *Optional*. The text to display.
-	* `state` (number): *Default*: `tes3.uiState.normal`. The initial interaction state.
+	* `state` ([tes3.uiState](../references/ui-states.md)): *Default*: `tes3.uiState.normal`. The initial interaction state.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1098,7 +1100,7 @@ local result = myObject:createThinBorder({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1106,6 +1108,8 @@ local result = myObject:createThinBorder({ id = ... })
 <div class="search_terms" style="display: none">createverticalscrollpane, verticalscrollpane</div>
 
 Creates a vertically scrolling pane. Useful as a list box.
+
+Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
 
 Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 
@@ -1120,7 +1124,7 @@ local result = myObject:createVerticalScrollPane({ id = ... })
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ??? example "Example: Sorting the child elements in a scroll pane"
 
@@ -1144,7 +1148,7 @@ local result = myObject:createVerticalScrollPane({ id = ... })
 ### `destroy`
 <div class="search_terms" style="display: none">destroy</div>
 
-Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+Deletes an element and all its child elements. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
 
 ```lua
 myObject:destroy()
@@ -1155,7 +1159,9 @@ myObject:destroy()
 ### `destroyChildren`
 <div class="search_terms" style="display: none">destroychildren</div>
 
-Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`, the input is automatically released.
+
+Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 
 ```lua
 myObject:destroyChildren()
@@ -1178,7 +1184,7 @@ local result = myObject:findChild(id)
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1193,7 +1199,7 @@ myObject:forwardEvent(id)
 
 **Parameters**:
 
-* `id` ([tes3uiEventData](../../types/tes3uiEventData)): The original UI event.
+* `id` ([tes3uiEventData](../types/tes3uiEventData.md)): The original UI event.
 
 ***
 
@@ -1210,7 +1216,7 @@ local result = myObject:getContentElement()
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1359,7 +1365,7 @@ local result = myObject:getTopLevelMenu()
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -1369,8 +1375,12 @@ local result = myObject:getTopLevelMenu()
 Restores the menu's position and size information from the Morrowind.ini file. This may only be called on top-level parents.
 
 ```lua
-myObject:loadMenuPosition()
+local success = myObject:loadMenuPosition()
 ```
+
+**Returns**:
+
+* `success` (boolean): True if the menu was restored.
 
 ***
 
@@ -1380,16 +1390,17 @@ myObject:loadMenuPosition()
 Copies this element to a new parent, then destroys this element. This function can have unintended consequences. The specifics of what exact elements are being copied is important.
 
 ```lua
-local copy = myObject:move(to)
+local copy = myObject:move({ to = ... })
 ```
 
 **Parameters**:
 
-* `to` ([tes3uiElement](../../types/tes3uiElement)): Where to create the copy.
+* `params` (table)
+	* `to` ([tes3uiElement](../types/tes3uiElement.md)): Where to create the copy.
 
 **Returns**:
 
-* `copy` ([tes3uiElement](../../types/tes3uiElement)): The created copy.
+* `copy` ([tes3uiElement](../types/tes3uiElement.md)): The created copy.
 
 ***
 
@@ -1400,61 +1411,64 @@ Sets an `event` handler, which can add or override an existing event handler. Th
 
 The original Morrowind callback is captured and can be invoked with the `forwardEvent` method on the event argument. If there is an existing Lua callback, it is replaced.
 
-	Standard events:
-		**mouseLeave**
-			Mouse cursor moving outside an element. Triggers once.
-		**mouseOver**
-			Mouse cursor moving over an element. Triggers once.
-		**mouseDown**
-			Left mouse button down over an element.
-		**mouseClick**
-			Left mouse button up over an element, after a mouseDown over the element.
-		**mouseScrollUp**
-			..
-		**mouseScrollDown**
-			Mouse wheel scrolling.
-		**mouseDoubleClick**
-			Standard double-click.
-		**mouseStillIdle**
-			Mouse cursor positioned outside an element. Triggers every frame.
-		**mouseStillOver**
-			Mouse cursor positioned over an element. Triggers every frame.
-		**mouseStillPressed**
-			Mouse cursor positioned over an element, after a mouseDown over the element. Triggers every frame.
-		**mouseStillPressedOutside**
-			Apparently not working in the engine. Mouse cursor positioned outside an element, after a mouseDown over the element. Triggers every frame.
-		**mouseRelease**
-			Left mouse button up over an element.
-		**keyPress**
-			A raw key press.
-		**keyEnter**
-			The Return key is pressed.
-		**help**
-			On mouseover, but also marking the element as having a tooltip. Create a tooltip within the callback using the `tes3ui.createTooltipMenu` function.
-		**focus**
-			When a menu is clicked on, and moved on top of other menus.
-		**unfocus**
-			Just before another menu is clicked on, or a widget in that menu receives an event, or when the menu mode is toggled off. You may return false from this event to prevent the menu from being deselected, and to prevent leaving menu mode.
-		**preUpdate**
-			Before the menu layout is updated.
-		**update**
-			After the menu layout is updated.
-		**destroy**
-			When the UI element is destroyed, before any data or children are destroyed.
+Standard events:
 
-	Widget-specific events:
-		Slider:
-			**PartScrollBar_changed**
-				Triggers on value change; moving the slider is not enough if the value is the same.
+* **mouseLeave**
+	Mouse cursor moving outside an element. Triggers once.
+* **mouseOver**
+	Mouse cursor moving over an element. Triggers once.
+* **mouseDown**
+	Left mouse button down over an element.
+* **mouseClick**
+	Left mouse button up over an element, after a mouseDown over the element.
+* **mouseScrollUp**
+	Mouse wheel scrolling.
+* **mouseScrollDown**
+	Mouse wheel scrolling.
+* **mouseDoubleClick**
+	Standard double-click.
+* **mouseStillIdle**
+	Mouse cursor positioned outside an element. Triggers every frame.
+* **mouseStillOver**
+	Mouse cursor positioned over an element. Triggers every frame.
+* **mouseStillPressed**
+	Mouse cursor positioned over an element, after a mouseDown over the element. Triggers every frame.
+* **mouseStillPressedOutside**
+	Apparently not working in the engine. Mouse cursor positioned outside an element, after a mouseDown over the element. Triggers every frame.
+* **mouseRelease**
+	Left mouse button up over an element.
+* **keyPress**
+	A raw key press.
+* **keyEnter**
+	The Return key is pressed.
+* **help**
+	On mouseover, but also marking the element as having a tooltip. Create a tooltip within the callback using the `tes3ui.createTooltipMenu` function.
+* **focus**
+	When a menu is clicked on, and moved on top of other menus.
+* **unfocus**
+	Just before another menu is clicked on, or a widget in that menu receives an event, or when the menu mode is toggled off. You may return false from this event to prevent the menu from being deselected, and to prevent leaving menu mode.
+* **preUpdate**
+	Before the menu layout is updated.
+* **update**
+	After the menu layout is updated.
+* **destroy**
+	When the UI element is destroyed, before any data or children are destroyed.
 
+Widget-specific events:
 
-Event forwarding
--------------------------------------------------------------------------------
+* Slider:
+	* **PartScrollBar_changed**
+		Triggers on value change; moving the slider is not enough if the value is the same.
 
-The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the `forwardEvent` method.  Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback.
+#### Event forwarding
+***
+
+The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the `forwardEvent` method. Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback.
 
 **Example**
 ```lua
+---@param e tes3uiEventData
+---@return boolean? block
 local function onClick(e)
 	-- pre-event code
 	e.source:forwardEvent(e)
@@ -1462,39 +1476,9 @@ local function onClick(e)
 end
 
 local button = menu:findChild("MenuExample_Ok")
-button:register("mouseClick", onClick)
+button:register(tes3.uiEvent.mouseClick, onClick)
 ```
 
-Event handler
--------------------------------------------------------------------------------
-
-The standard type signature for events.
-
-	`boolean`_ eventHandler(**EventData** e)
-		Returns: `optional`
-			Returning `false` may cancel an interaction for certain events. e.g. unfocus
-
-		EventData:
-			**source** (`Element`_)
-				The source element of the event.
-
-			**id** (`number`_)
-				The numeric id of the event type.
-
-			**widget** (`Element`_)
-				The widget element that the source belongs to, if the element is a sub-part of a widget. May not be accurate if the element is not a sub-part.
-
-			**data0** (`number`_)
-				..
-
-			**data1** (`number`_)
-				Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer. For keyboard events, data0 is the `scan code`_.
-
-			**relativeX** (`number`_)
-				..
-
-			**relativeY** (`number`_)
-				For mouse events only. X and Y coordinates of the pointer relative to the top-left of the element.
 
 ```lua
 myObject:register(eventID, callback)
@@ -1502,8 +1486,8 @@ myObject:register(eventID, callback)
 
 **Parameters**:
 
-* `eventID` (string): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
-* `callback` (function): The callback function.
+* `eventID` ([tes3.uiEvent](../references/ui-events.md)): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
+* `callback` (integer, fun(e: [tes3uiEventData](../types/tes3uiEventData.md)): boolean?): The callback function. Returning `false` from this function may cancel an interaction for certain events, such as unfocus.
 
 ***
 
@@ -1518,8 +1502,8 @@ myObject:registerAfter(eventID, callback)
 
 **Parameters**:
 
-* `eventID` (string): The event id.
-* `callback` (function): The callback function.
+* `eventID` ([tes3.uiEvent](../references/ui-events.md)): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
+* `callback` (integer, fun(e: [tes3uiEventData](../types/tes3uiEventData.md)): boolean?): The callback function.
 
 ***
 
@@ -1534,15 +1518,15 @@ myObject:registerBefore(eventID, callback)
 
 **Parameters**:
 
-* `eventID` (string): The event id.
-* `callback` (function): The callback function.
+* `eventID` ([tes3.uiEvent](../references/ui-events.md)): The event id. Maps to values in [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/).
+* `callback` (integer, fun(e: [tes3uiEventData](../types/tes3uiEventData.md)): boolean?): The callback function.
 
 ***
 
 ### `reorderChildren`
 <div class="search_terms" style="display: none">reorderchildren</div>
 
-Moves the layout order of the children of this element. `count` elements are taken from starting child `Element`_ or index (0-based) `moveFrom`, and moved before the child `Element`_ or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
+Moves the layout order of the children of this element. `count` elements are taken from starting child `Element` or index (0-based) `moveFrom`, and moved before the child `Element` or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 
 Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
 
@@ -1552,8 +1536,8 @@ local result = myObject:reorderChildren(insertBefore, moveFrom, count)
 
 **Parameters**:
 
-* `insertBefore` ([tes3uiElement](../../types/tes3uiElement), number): The insertion point (or its 0-based child index).
-* `moveFrom` ([tes3uiElement](../../types/tes3uiElement), number): The first child (or 0-based child index) to be moved.
+* `insertBefore` ([tes3uiElement](../types/tes3uiElement.md), number): The insertion point (or its 0-based child index).
+* `moveFrom` ([tes3uiElement](../types/tes3uiElement.md), number): The first child (or 0-based child index) to be moved.
 * `count` (number): The number of child elements to move.
 
 **Returns**:
@@ -1602,6 +1586,20 @@ myObject:setPropertyBool(property, value)
 
 * `property` (number, string): The property to set.
 * `value` (boolean): The value to set.
+
+??? example "Example: Make a UI element update its transparency based on the Menu Transparency setting."
+
+	This will automatically update the menu's transparency recursively. A requirement is that the menu background is of "rect" contentType.
+
+	```lua
+	
+	--- A menu created before
+	---@type tes3uiElement
+	local menu
+	
+	menu:setPropertyBool("use_global_alpha", true)
+
+	```
 
 ***
 
@@ -1696,7 +1694,7 @@ myObject:sortChildren(sortFunction)
 
 **Parameters**:
 
-* `sortFunction` (function): The function to sort with. Like most sorting functions, this is given two arguments to compare.
+* `sortFunction` (fun(a: [tes3uiElement](../types/tes3uiElement.md), b: [tes3uiElement](../types/tes3uiElement.md)): boolean): The function to sort with. Like most sorting functions, this is given two arguments to compare.
 
 ***
 
@@ -1711,7 +1709,7 @@ myObject:triggerEvent(eventID)
 
 **Parameters**:
 
-* `eventID` ([tes3uiEventData](../../types/tes3uiEventData), string): The event, or event ID.
+* `eventID` ([tes3uiEventData](../types/tes3uiEventData.md), string): The event, or event ID.
 
 ***
 
@@ -1777,7 +1775,7 @@ local wasUnregistered = myObject:unregisterBefore(eventID, callback)
 ### `updateLayout`
 <div class="search_terms" style="display: none">updatelayout, layout</div>
 
-Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized.
+Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized. e.g. `menu:updateLayout()` or `element:getTopLevelMenu():updateLayout()`
 
 ```lua
 myObject:updateLayout()

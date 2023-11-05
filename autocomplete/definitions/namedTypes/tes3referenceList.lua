@@ -8,7 +8,7 @@ return {
 		},
 		["..\\..\\tes3cell\\actors\\genericIterator"] = {
 			title = "Generic iterator function",
-			description = "In this more involved example, we used the corouting API from the Lua standard library to construct a generic iterator function. The iterReferenceList() function can then be used directly inside a for loop."
+			description = "In this more involved example, we used the coroutine API from the Lua standard library to construct a generic iterator function. The iterReferenceList() function can then be used directly inside a for loop."
 		}
 	}
 }

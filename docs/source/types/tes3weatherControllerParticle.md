@@ -28,7 +28,7 @@ The visual used for the particle.
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -39,7 +39,7 @@ The visual used for the particle.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -61,7 +61,7 @@ The velocity of the particle.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -72,5 +72,5 @@ The velocity of the particle.
 
 **Returns**:
 
-* `result` ([tes3weatherController](../../types/tes3weatherController))
+* `result` ([tes3weatherController](../types/tes3weatherController.md))
 

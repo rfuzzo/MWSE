@@ -4,6 +4,10 @@ namespace TES3 {
 	template <typename T>
 	class IteratedList {
 	public:
+		struct VirtualTable {
+			void(__thiscall* destructor)(IteratedList<T>*, bool); // 0x0
+		};
+
 		class Node {
 		public:
 			Node* previous;
@@ -157,7 +161,7 @@ namespace TES3 {
 		// General access functions.
 		//
 
-		void* virtualTable;
+		VirtualTable* virtualTable;
 		size_type count;
 		Node* head;
 		Node* tail;
@@ -169,7 +173,11 @@ namespace TES3 {
 #endif
 
 		IteratedList() {
+#if !defined(MWSE_NO_CUSTOM_ALLOC) || MWSE_NO_CUSTOM_ALLOC == 0
+			virtualTable = reinterpret_cast<VirtualTable*>(0x7477AC);
+#else
 			virtualTable = nullptr;
+#endif
 			count = 0;
 			head = nullptr;
 			tail = nullptr;
@@ -179,7 +187,11 @@ namespace TES3 {
 		IteratedList(const IteratedList& other) = delete;
 		IteratedList& operator=(const IteratedList&) = delete;
 
-		~IteratedList() { clear(); }
+		~IteratedList() {
+			if (virtualTable) {
+				virtualTable->destructor(this, false);
+			}
+		}
 
 		reference operator[](size_type index) const { return *(begin() + index); }
 

@@ -24,6 +24,6 @@ event.register(tes3.event.collideWater, collideWaterCallback)
 ## Event Data
 
 * `inWater` (boolean): *Read-only*. 
-* `mobile` ([tes3mobileObject](../../types/tes3mobileObject)): *Read-only*. Mobile object which collided.
-* `reference` ([tes3mobileObject](../../types/tes3mobileObject)): *Read-only*. `mobile`'s reference.
+* `mobile` ([tes3mobileObject](../types/tes3mobileObject.md)): *Read-only*. Mobile object which collided.
+* `reference` ([tes3mobileObject](../types/tes3mobileObject.md)): *Read-only*. `mobile`'s reference.
 

@@ -20,8 +20,16 @@ event.register(tes3.event.projectileHitActor, projectileHitActorCallback)
 
 ## Event Data
 
-* `firingReference` ([tes3reference](../../types/tes3reference)): *Read-only*. Reference to the actor that fired the projectile.
-* `firingWeapon` ([tes3weapon](../../types/tes3weapon)): *Read-only*. The weapon that fired the projectile.
-* `mobile` ([tes3mobileProjectile](../../types/tes3mobileProjectile)): *Read-only*. The mobile projectile that is expiring.
-* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. Reference to the actor that was hit.
+* `collisionPoint` ([tes3vector3](../types/tes3vector3.md)): *Read-only*. The collision point of the mobile projectile.
+* `firingReference` ([tes3reference](../types/tes3reference.md)): *Read-only*. Reference to the actor that fired the projectile.
+* `firingWeapon` ([tes3weapon](../types/tes3weapon.md)): *Read-only*. The weapon that fired the projectile.
+* `mobile` ([tes3mobileProjectile](../types/tes3mobileProjectile.md)): *Read-only*. The mobile projectile that is expiring.
+* `position` ([tes3vector3](../types/tes3vector3.md)): *Read-only*. The position of the mobile projectile at collision.
+* `target` ([tes3reference](../types/tes3reference.md)): *Read-only*. Reference to the actor that was hit.
+* `velocity` ([tes3vector3](../types/tes3vector3.md)): *Read-only*. The velocity of the mobile projectile at collision.
+
+
+## Related events
+
+[projectileHitActor](./projectileHitActor.md){ .md-button }[projectileHitObject](./projectileHitObject.md){ .md-button }[projectileHitTerrain](./projectileHitTerrain.md){ .md-button }[projectileExpire](./projectileExpire.md){ .md-button }
 

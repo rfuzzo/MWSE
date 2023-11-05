@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is called when determining the price of repairing an item. It can be used to override the repair cost.",
+	related = { "calcBarterPrice", "calcEnchantmentPrice", "calcRepairPrice", "calcSpellmakingPrice", "calcSpellPrice", "calcTrainingPrice", "calcTravelPrice" },
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",

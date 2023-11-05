@@ -20,7 +20,7 @@ mwse = {}
 
 --- Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 --- @param scriptId string No description yet available.
---- @return boolean result No description yet available.
+--- @return boolean success No description yet available.
 function mwse.clearScriptOverride(scriptId) end
 
 --- This function returns information on the current mwscript execution state.
@@ -37,7 +37,7 @@ function mwse.getVersion() end
 function mwse.getVirtualMemoryUsage() end
 
 --- Converts the provided string in UTF8 encoding to Morrowind's codepage base encoding.
---- @param languageCode integer Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
+--- @param languageCode tes3.languageCode Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
 --- @param utf8string string The string to convert
 --- @return string converted No description yet available.
 function mwse.iconv(languageCode, utf8string) end
@@ -57,7 +57,7 @@ function mwse.loadConfig(fileName, defaults) end
 
 --- Loads translations from the i18n folder for a given mod. This is locale-aware, using the result from `tes3.getLanguage()`. See the [mod translations guide](https://mwse.github.io/MWSE/guides/mod-translations/) for more information.
 --- @param mod string Name of the folder that your main.lua mod can be found in.
---- @return function i18n The callable translation results.
+--- @return fun(key: string, data: any?): string i18n The callable translation results.
 function mwse.loadTranslations(mod) end
 
 --- This function writes information to the mwse.log file in the user's installation directory.
@@ -68,7 +68,7 @@ function mwse.loadTranslations(mod) end
 function mwse.log(message, ...) end
 
 --- Converts a TES3 object type (e.g. from tes3.objectType) into an uppercase, 4-character string.
---- @param type number No description yet available.
+--- @param type tes3.objectType|number No description yet available.
 --- @return string result No description yet available.
 function mwse.longToString(type) end
 
@@ -78,9 +78,26 @@ function mwse.longToString(type) end
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse/#mwseoverridescript).
 --- @param scriptId string No description yet available.
---- @param callback function No description yet available.
---- @return boolean result No description yet available.
+--- @param callback fun(e: mwseOverrideScriptCallbackData) No description yet available.
+--- @return boolean success No description yet available.
 function mwse.overrideScript(scriptId, callback) end
+
+--- This is the main function to register a mod's configuration. Only registered configurations appear in the Mod Config menu.
+--- @param name string No description yet available.
+--- @param package mwse.registerModConfig.package This table accepts the following values:
+--- 
+--- `onCreate`: fun(modConfigContainer: tes3uiElement) — The function that creates the mod's configuration menu inside given `modConfigContainer`.
+--- 
+--- `onSearch`: nil|fun(searchText: string): boolean — *Optional*. A custom search handler function. This function should return true if this mod should show up in search results for given `searchText`.
+--- 
+--- `onClose`: nil|fun(modConfigContainer: tes3uiElement) — *Optional*. This function is called when the mod's configuration menu is closed. Typically, it's used to save the current config table.
+function mwse.registerModConfig(name, package) end
+
+---Table parameter definitions for `mwse.registerModConfig`.
+--- @class mwse.registerModConfig.package
+--- @field onCreate fun(modConfigContainer: tes3uiElement) The function that creates the mod's configuration menu inside given `modConfigContainer`.
+--- @field onSearch nil|fun(searchText: string): boolean *Optional*. A custom search handler function. This function should return true if this mod should show up in search results for given `searchText`.
+--- @field onClose nil|fun(modConfigContainer: tes3uiElement) *Optional*. This function is called when the mod's configuration menu is closed. Typically, it's used to save the current config table.
 
 --- Saves a config table to Data Files\\MWSE\\config\\{fileName}.json.
 --- @param fileName string No description yet available.

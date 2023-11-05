@@ -8,7 +8,7 @@
 
 A mobile object for a creature.
 
-This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor), [tes3mobileObject](../../types/tes3mobileObject)
+This type inherits the following: [tes3mobileActor](../types/tes3mobileActor.md), [tes3mobileObject](../types/tes3mobileObject.md)
 ## Properties
 
 ### `actionBeforeCombat`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 
 **Returns**:
 
-* `result` ([tes3actionData](../../types/tes3actionData))
+* `result` ([tes3actionData](../types/tes3actionData.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 
 **Returns**:
 
-* `result` ([tes3actionData](../../types/tes3actionData))
+* `result` ([tes3actionData](../types/tes3actionData.md))
 
 ***
 
@@ -51,7 +51,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect)[])
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md)[])
 
 ***
 
@@ -62,7 +62,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.actorType](../references/actor-types.md))
 
 ***
 
@@ -73,7 +73,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -84,7 +84,7 @@ Friendly access to the actor's flag that controls if AI is active.
 
 **Returns**:
 
-* `result` ([tes3aiPlanner](../../types/tes3aiPlanner), nil)
+* `result` ([tes3aiPlanner](../types/tes3aiPlanner.md), nil)
 
 ***
 
@@ -106,7 +106,7 @@ The actor's alarm AI value.
 
 **Returns**:
 
-* `result` ([tes3actorAnimationController](../../types/tes3actorAnimationController))
+* `result` ([tes3actorAnimationController](../types/tes3actorAnimationController.md))
 
 ***
 
@@ -164,7 +164,7 @@ Direct access to the actor's attack bonus effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic)[])
+* `result` ([tes3statistic](../types/tes3statistic.md)[])
 
 ***
 
@@ -197,7 +197,7 @@ A vector that shows the size of the bounding box in each direction. Note that th
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -208,7 +208,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 
 **Returns**:
 
-* `result` ([tes3vector2](../../types/tes3vector2))
+* `result` ([tes3vector2](../types/tes3vector2.md))
 
 ***
 
@@ -263,7 +263,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -307,7 +307,7 @@ Direct access to the actor's chameleon effect attribute.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference), nil)
+* `result` ([tes3reference](../types/tes3reference.md), nil)
 
 ***
 
@@ -318,7 +318,7 @@ Direct access to the actor's chameleon effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -329,7 +329,7 @@ Direct access to the actor's chameleon effect attribute.
 
 **Returns**:
 
-* `result` ([tes3combatSession](../../types/tes3combatSession), nil)
+* `result` ([tes3combatSession](../types/tes3combatSession.md), nil)
 
 ***
 
@@ -351,7 +351,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -362,7 +362,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md), [tes3enchantment](../types/tes3enchantment.md))
 
 ***
 
@@ -384,7 +384,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -395,7 +395,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -417,7 +417,7 @@ This is the time measured in hours from the beginning of the game when the actor
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -472,7 +472,18 @@ The actor's flee AI value.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md)[])
+
+***
+
+### `friendlyFireHitCount`
+<div class="search_terms" style="display: none">friendlyfirehitcount</div>
+
+The number of times the player has hit this actor with friendly fire. The actor will turn on the player on the fourth hit if it is not already in combat. The game will not increase this past 4, and will reset it to 0 at the end of combat.
+
+**Returns**:
+
+* `result` (number)
 
 ***
 
@@ -560,7 +571,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -604,7 +615,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor)[])
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md)[])
 
 ***
 
@@ -626,7 +637,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -648,7 +659,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -659,7 +670,7 @@ A vector that represents the 3D acceleration of the object.
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3itemStack](../types/tes3itemStack.md)[])
 
 ***
 
@@ -814,6 +825,21 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 **Returns**:
 
 * `result` (boolean)
+
+??? example "Example: Checking if a mobile actor is moving"
+
+	There are many movement flags for mobile actors. To check if a mobile actor is moving at all, we need to check if the mobile is moving in each possible direction.
+
+	```lua
+	
+	--- Returns true if the mobile is moving.
+	---@param mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer
+	---@return boolean
+	local function isMoving(mobile)
+		return mobile.isMovingForward or mobile.isMovingBack or mobile.isMovingLeft or mobile.isMovingRight
+	end
+
+	```
 
 ***
 
@@ -989,7 +1015,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1000,7 +1026,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1011,7 +1037,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1022,7 +1048,7 @@ Direct access to the actor's levitate effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1090,7 +1116,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 
 **Returns**:
 
-* `result` ([tes3creatureInstance](../../types/tes3creatureInstance))
+* `result` ([tes3creatureInstance](../types/tes3creatureInstance.md))
 
 ***
 
@@ -1101,7 +1127,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -1123,7 +1149,7 @@ Direct access to the actor's paralyze effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1145,7 +1171,7 @@ A vector that represents the 3D position of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -1167,7 +1193,7 @@ The currently equipped ammo, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -1189,7 +1215,7 @@ The currently equipped shield, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -1200,7 +1226,7 @@ The currently equipped weapon, if any.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack), nil)
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md), nil)
 
 ***
 
@@ -1211,7 +1237,7 @@ The currently equipped weapon, if any.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -1398,7 +1424,7 @@ Direct access to the actor's silence effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic)[])
+* `result` ([tes3statistic](../types/tes3statistic.md)[])
 
 ***
 
@@ -1420,7 +1446,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1442,7 +1468,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1453,7 +1479,7 @@ Direct access to the actor's sound effect attribute.
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1508,7 +1534,7 @@ The currently equipped light.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -1530,7 +1556,7 @@ A vector that represents the 3D velocity of the object.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -1618,7 +1644,7 @@ A flag for if the actor has a weapon ready or being readied (visible and held in
 
 **Returns**:
 
-* `result` ([tes3statistic](../../types/tes3statistic))
+* `result` ([tes3statistic](../types/tes3statistic.md))
 
 ***
 
@@ -1638,7 +1664,7 @@ local result = myObject:applyDamage({ damage = ..., applyArmor = ..., resistAttr
 * `params` (table)
 	* `damage` (number): The amount of damage to apply.
 	* `applyArmor` (boolean): *Default*: `false`. If armor should mitigate the incoming damage. If the player is the target, armor experience will be gained.
-	* `resistAttribute` (number): *Optional*. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
+	* `resistAttribute` ([tes3.effectAttribute](../references/effect-attributes.md)): *Optional*. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
 	* `applyDifficulty` (boolean): *Default*: `false`. If the game difficulty modifier should be applied. Must be used with the `playerAttack` argument to apply the correct modifier.
 	* `playerAttack` (boolean): *Optional*. If the attack came from the player. Used for difficulty calculation.
 	* `doNotChangeHealth` (boolean): *Default*: `false`. If all armor effects except the health change should be applied. These include hit sounds, armor condition damage, and player experience gain from being hit.
@@ -1695,7 +1721,7 @@ local result = myObject:calcEffectiveDamage({ damage = ..., applyArmor = ..., re
 * `params` (table)
 	* `damage` (number): The amount of damage to apply.
 	* `applyArmor` (boolean): *Default*: `false`. If armor should mitigate the incoming damage.
-	* `resistAttribute` (number): *Optional*. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
+	* `resistAttribute` ([tes3.effectAttribute](../references/effect-attributes.md)): *Optional*. The resistance attribute that is applied to the damage. It can reduce damage or exploit weakness. Uses values from [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
 
 **Returns**:
 
@@ -1715,11 +1741,11 @@ local result = myObject:calculateJumpVelocity({ direction = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `direction` ([tes3vector2](../../types/tes3vector2)): *Optional*. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.
+	* `direction` ([tes3vector2](../types/tes3vector2.md)): *Optional*. The ground direction vector used to calculate the velocity. If not specified, a zero-length direction vector for a regular jump without movement will be used.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -1735,7 +1761,7 @@ local result = myObject:doJump({ velocity = ..., applyFatigueCost = ..., allowMi
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `velocity` ([tes3vector3](../../types/tes3vector3)): *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
+	* `velocity` ([tes3vector3](../types/tes3vector3.md)): *Optional*. The initial velocity of the jump. If not specified, the velocity of a regular jump without movement will be used.
 	* `applyFatigueCost` (boolean): *Default*: `true`. If `true`, reduces the actor's current fatigue by the amount a regular jump would currently cost. Will not reduce fatigue if `false`.
 	* `allowMidairJumping` (boolean): *Default*: `false`. If `true`, enables the jump to be performed while already jumping or falling. Does not work during levitation or other methods of flying.
 
@@ -1757,8 +1783,8 @@ local itemEquipped = myObject:equip({ item = ..., itemData = ..., addItem = ...,
 **Parameters**:
 
 * `params` (table)
-	* `item` ([tes3item](../../types/tes3item), string): The item to equip.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data of the specific item to equip, if a specific item is required.
+	* `item` ([tes3item](../types/tes3item.md), string): The item to equip.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. The item data of the specific item to equip, if a specific item is required.
 	* `addItem` (boolean): *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
 	* `selectBestCondition` (boolean): *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 	* `selectWorstCondition` (boolean): *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
@@ -1781,15 +1807,38 @@ local result = myObject:equipMagic({ source = ..., itemData = ..., equipItem = .
 **Parameters**:
 
 * `params` (table)
-	* `source` ([tes3spell](../../types/tes3spell), [tes3item](../../types/tes3item), string): The source of the magic to equip.
+	* `source` ([tes3spell](../types/tes3spell.md), [tes3item](../types/tes3item.md), string): The source of the magic to equip.
 
 		Spells must be castable. Castable spells have a `castType` of `tes3.spellType.spell` or `tes3.spellType.power`. The actor is not required to know this spell.
 
 		Items must have a castable enchantment. Castable enchantments have a `castType` of `tes3.enchantmentType.onUse` or `tes3.enchantmentType.castOnce`. The actor is not required to have this item in their inventory, unless `equipItem` is `true`.
 
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. Only valid if an item has been assigned to `source`. The item data of the specific item to equip.
 	* `equipItem` (boolean): *Default*: `false`. Only valid if an item has been assigned to `source`. If `true`, the item assigned to `source` will be equipped. Requires the actor to have the item in their inventory. If `false`, `itemData` must not be nil.
 	* `updateGUI` (boolean): *Default*: `true`. Only valid if this actor is the player. If `false`, the player GUI will not be updated to reflect the change to equipped magic.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `forceWeaponAttack`
+<div class="search_terms" style="display: none">forceweaponattack</div>
+
+Causes the actor to perform a weapon swing immediately towards its current target. For the player, it will swing and release immediately (minimum damage), and also may hit any target in range.
+
+The actor must be in combat, with its weapon or hands readied, to be able to swing its weapon. This function does not interrupt existing attacks, casting, or any other actions. It returns true if it was able to start the weapon swing.
+
+```lua
+local result = myObject:forceWeaponAttack({ attackType = ..., swing = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `attackType` ([tes3.physicalAttackType](../references/physical-attack-types.md)): *Optional*. The physical attack type to use for melee weapons (slash, chop, thrust). Maps to values in [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/references/physical-attack-types/) namespace. When not specified, it uses a weighted random attack type for NPCs and creatures.
+	* `swing` (number): *Optional*. The strength of the attack swing, in the range [0 to 1]. When not specified, the attack swing is randomized. This value cannot affect the player swing, as player attacks are driven by input.
 
 **Returns**:
 
@@ -1809,12 +1858,12 @@ local result = myObject:getActiveMagicEffects({ effect = ..., serial = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `effect` (integer): *Optional*. The magic effect ID to search for, from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+	* `effect` ([tes3.effect](../references/magic-effects.md)): *Optional*. The magic effect ID to search for, from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 	* `serial` (integer): *Optional*. The magic instance serial to search for.
 
 **Returns**:
 
-* `result` ([tes3activeMagicEffect](../../types/tes3activeMagicEffect)[])
+* `result` ([tes3activeMagicEffect](../types/tes3activeMagicEffect.md)[])
 
 ***
 
@@ -1859,7 +1908,7 @@ local timestamp = myObject:getPowerUseTimestamp(power)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 
 **Returns**:
 
@@ -1878,11 +1927,11 @@ local result = myObject:getSkillStatistic(skillId)
 
 **Parameters**:
 
-* `skillId` (number): The index of the skill statistic to fetch. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
+* `skillId` ([tes3.skill](../references/skills.md)): The index of the skill statistic to fetch. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
 **Returns**:
 
-* `result` ([tes3statisticSkill](../../types/tes3statisticSkill))
+* `result` ([tes3statisticSkill](../types/tes3statisticSkill.md))
 
 ***
 
@@ -1897,7 +1946,7 @@ local result = myObject:getSkillValue(skillId)
 
 **Parameters**:
 
-* `skillId` (number): The index of the skill statistic's value to fetch. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
+* `skillId` ([tes3.skill](../references/skills.md)): The index of the skill statistic's value to fetch. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
 **Returns**:
 
@@ -1916,7 +1965,7 @@ local angle = myObject:getViewToActor(mobile)
 
 **Parameters**:
 
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): The target actor to calculate the facing angle.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): The target actor to calculate the facing angle.
 
 **Returns**:
 
@@ -1935,11 +1984,39 @@ local angle = myObject:getViewToPoint(point)
 
 **Parameters**:
 
-* `point` ([tes3vector3](../../types/tes3vector3)): The target point to calculate the facing angle.
+* `point` ([tes3vector3](../types/tes3vector3.md)): The target point to calculate the facing angle.
 
 **Returns**:
 
 * `angle` (number): In range of [-180, 180] in degrees.
+
+??? example "Example: View cone testing"
+
+	Using the `getViewToPoint` we can check whether a reference is inside a cone in front of the player.
+
+	```lua
+	-- These are view cone sizes in degrees
+	local viewCone = {
+		first = 30,
+		third = 45,
+	}
+	
+	--- This will return true if the target is inside player's view cone.
+	--- It doesn't perform any checks if there is line connecting the player
+	--- and reference. In other words this won't check if the reference
+	--- isn't actually visible if it's covered by a building for example.
+	---@param ref tes3reference
+	---@return boolean
+	local function inPCViewCone(ref)
+		local angle = math.abs(tes3.mobilePlayer:getViewToPoint(ref.position))
+		local cone = (tes3.is3rdPerson() and viewCone.third) or viewCone.first
+		if angle < cone then
+			return true
+		end
+		return false
+	end
+
+	```
 
 ***
 
@@ -1955,7 +2032,7 @@ local angle = myObject:getViewToPointWithFacing(facing, point)
 **Parameters**:
 
 * `facing` (number): The facing angle in radians. The values should be in [0, PI] interval.
-* `point` ([tes3vector3](../../types/tes3vector3)): The target point to calculate the facing angle.
+* `point` ([tes3vector3](../types/tes3vector3.md)): The target point to calculate the facing angle.
 
 **Returns**:
 
@@ -1989,7 +2066,28 @@ local result = myObject:hasUsedPower(power)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hitStun`
+<div class="search_terms" style="display: none">hitstun</div>
+
+Induces hit stun on the actor. Without any parameters, it produces a brief stun that lasts about 1 second and prevents starting a new attack. It can produce other types of stun, see parameters. There are states where actors can't be stunned (such as already being in hit stun and paralysis). The function will return if the stun was successfuly applied.
+
+```lua
+local result = myObject:hitStun({ knockDown = ..., cancel = ... })
+```
+
+**Parameters**:
+
+* `params` (table): *Optional*.
+	* `knockDown` (boolean): *Optional*. Changes the stun type to knockdown. This is when the character falls to their knees and takes several seconds to recover. It will interrupt spell casting.
+	* `cancel` (boolean): *Optional*. Cancels hit stun and knockdown when used on the same frame as the hit. For regular combat, it should be used in the events `damaged` or `damagedHandToHand`.
 
 **Returns**:
 
@@ -2008,7 +2106,7 @@ local result = myObject:isAffectedByObject(object)
 
 **Parameters**:
 
-* `object` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell)): The magic to check for.
+* `object` ([tes3alchemy](../types/tes3alchemy.md), [tes3enchantment](../types/tes3enchantment.md), [tes3spell](../types/tes3spell.md)): The magic to check for.
 
 **Returns**:
 
@@ -2038,7 +2136,7 @@ local result = myObject:rechargePower(power)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 
 **Returns**:
 
@@ -2074,7 +2172,7 @@ myObject:setPowerUseTimestamp(power, timestamp)
 
 **Parameters**:
 
-* `power` ([tes3spell](../../types/tes3spell)): The spell object for the power.
+* `power` ([tes3spell](../types/tes3spell.md)): The spell object for the power.
 * `timestamp` (number): The timestamp of the moment the power was casted, or 24 hours before the recharge point. The timestamp units are hours. The current time as a timestamp can be accessed at [`tes3.getSimulationTimestamp()`](https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp).
 
 ***
@@ -2090,7 +2188,7 @@ myObject:startCombat(target)
 
 **Parameters**:
 
-* `target` ([tes3mobileActor](../../types/tes3mobileActor))
+* `target` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -2132,11 +2230,11 @@ local itemUnequipped = myObject:unequip({ item = ..., itemData = ..., type = ...
 **Parameters**:
 
 * `params` (table)
-	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to unequip.
-	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data of the specific item to unequip, if a specific item is required.
-	* `type` (number): *Optional*. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) can be passed here.
-	* `armorSlot` (number): *Optional*. The armor slot to unequip. Maps to values in [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) namespace.
-	* `clothingSlot` (number): *Optional*. The clothing slot to unequip. Maps to values in [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/) namespace
+	* `item` ([tes3item](../types/tes3item.md), string): *Optional*. The item to unequip.
+	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. The item data of the specific item to unequip, if a specific item is required.
+	* `type` ([tes3.objectType](../references/object-types.md)): *Optional*. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) can be passed here.
+	* `armorSlot` ([tes3.armorSlot](../references/armor-slots.md)): *Optional*. The armor slot to unequip. Maps to values in [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) namespace.
+	* `clothingSlot` ([tes3.clothingSlot](../references/clothing-slots.md)): *Optional*. The clothing slot to unequip. Maps to values in [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/) namespace
 
 **Returns**:
 
@@ -2172,7 +2270,7 @@ myObject:updateDerivedStatistics(attribute)
 
 **Parameters**:
 
-* `attribute` ([tes3statistic](../../types/tes3statistic)): *Optional*. Limits the update to statistics derived from this attribute.  e.g. `mobile:updateDerivedStatistics(mobile.strength)`. If not present, all derived statistics will be updated.
+* `attribute` ([tes3statistic](../types/tes3statistic.md)): *Optional*. Limits the update to statistics derived from this attribute.  e.g. `mobile:updateDerivedStatistics(mobile.strength)`. If not present, all derived statistics will be updated.
 
 ***
 

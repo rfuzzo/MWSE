@@ -148,9 +148,9 @@ function table.deepcopy(t)
 	return copy
 end
 
----@param t table
----@param value any
----@return boolean
+--- @param t table
+--- @param value any
+--- @return boolean
 function table.removevalue(t, value)
 	local i = table.find(t, value)
 	if (i ~= nil) then
@@ -244,9 +244,9 @@ end
 -- Cache the original lfs.rmdir and replace it with a version that supports recursion.
 lfs.rmdir_old = lfs.rmdir
 
----@param dir string
----@param recursive boolean
----@return boolean
+--- @param dir string
+--- @param recursive boolean
+--- @return boolean
 function lfs.rmdir(dir, recursive)
 	-- Default to not being recursive.
 	local recursive = recursive or false
@@ -267,7 +267,7 @@ function lfs.rmdir(dir, recursive)
 	return lfs.rmdir_old(dir)
 end
 
----@param path string
+--- @param path string
 function lfs.remakedir(path)
 	assert(lfs.rmdir(path, true))
 	assert(lfs.mkdir(path))
@@ -393,13 +393,18 @@ end
 -- Package compilation
 --
 
+--- @class exampleTable
+--- @field title string|nil The example title.
+--- @field description string|nil The description of the example.
+
 --- @class package
---- @field key package The name of the file that generated this package.
+--- @field key string The name of the file that generated this package.
 --- @field type string The type definition for the package.
 --- @field folder string The folder that the package was created from.
 --- @field parent package The package this package is a child of.
 --- @field namespace string The full namespace of the package.
 --- @field deprecated boolean Allows marking definitions as deprecated. Those definitions aren't written to the web documentation.
+--- @field examples table<string, exampleTable>|nil A table containing the examples. Keys are the example's name/path to the example file.
 
 --- @class packageLib : package
 --- @field children table<string, package>|nil
@@ -410,7 +415,7 @@ end
 --- @field inherits string The class that this class descends from.
 --- @field isAbstract boolean
 --- @field methods package[]|nil
---- @field allDescendents string
+--- @field allDescendents table<string, packageClass>
 --- @field directDescendents table<string, packageClass>
 
 --- @class packageFunction : package
@@ -575,6 +580,49 @@ function common.compileInheritances(classes)
 			end
 		end
 	end
+end
+
+--- A map for enumerations files. The layout is:
+--- ```lua
+--- {
+--- 	["ni"] = {
+--- 		["animCycleType"] = "path\\to\\enum\\file\\enumNamespace\\enumName.lua"
+--- 	},
+--- 	["mge"] = {},
+--- 	...
+--- }
+--- ```
+--- @class libraryEnumerations
+--- @field [string] table<string, string>
+
+---@type libraryEnumerations
+local enumerations = {}
+local fileBlacklist = {
+	["init"] = true,
+}
+
+--- Returns a map of all the enumeration files and paths to those files in the following format:
+--- `["lib.enumName"] = "path.to.enum`
+--- @param namespace string
+--- @return table<string, string> For example: `["tes3.actorType"] = "path\\to\\enum`
+function common.getEnumerationsMap(namespace)
+	local enums = enumerations[namespace]
+	if enums then
+		return enums
+	end
+
+	local directory = lfs.join(common.pathAutocomplete, "..", "misc", "package", "Data Files", "MWSE", "core", "lib", namespace)
+	for entry in lfs.dir(directory) do
+		local extension = entry:match("[^.]+$")
+		if (extension == "lua") then
+			local filename = entry:match("[^/]+$"):sub(1, -1 * (#extension + 2))
+			if (not fileBlacklist[filename]) then
+				enums = enums or {}
+				enums[filename] = lfs.join(directory, entry)
+			end
+		end
+	end
+	return enums
 end
 
 

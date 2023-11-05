@@ -131,10 +131,56 @@ namespace se::cs::dialog::dialogue_window {
 		return true;
 	}
 
+	void OnCurrentTextEditChanged(HWND hWnd) {
+		using namespace se::cs::winui;
+		auto hDlgCurrentTextEdit = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_EDIT);
+		auto textCharCount = Edit_GetTextLength(hDlgCurrentTextEdit);
+
+		SetDlgItemInt(hWnd, CONTROL_ID_CURRENT_TEXT_CHAR_COUNT, textCharCount, FALSE);
+	}
+
 	void resumeRenderingAndRepaint(HWND parent, DWORD childId) {
+		// Update the current text count.
+		OnCurrentTextEditChanged(parent);
+
 		auto child = GetDlgItem(parent, childId);
 		SendMessageA(child, WM_SETREDRAW, TRUE, NULL);
 		RedrawWindow(child, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+	}
+
+	void restoreInfoColumnWidths(HWND hWnd) {
+		const auto infoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
+
+		ListView_SetColumnWidth(infoList, 0, settings.dialogue_window.column_text.width);
+		ListView_SetColumnWidth(infoList, 1, settings.dialogue_window.column_info_id.width);
+		ListView_SetColumnWidth(infoList, 2, settings.dialogue_window.column_disp_index.width);
+		ListView_SetColumnWidth(infoList, 3, settings.dialogue_window.column_id.width);
+		ListView_SetColumnWidth(infoList, 4, settings.dialogue_window.column_faction.width);
+		ListView_SetColumnWidth(infoList, 5, settings.dialogue_window.column_cell.width);
+		ListView_SetColumnWidth(infoList, 6, settings.dialogue_window.column_condition1.width);
+		ListView_SetColumnWidth(infoList, 7, settings.dialogue_window.column_condition2.width);
+		ListView_SetColumnWidth(infoList, 8, settings.dialogue_window.column_condition3.width);
+		ListView_SetColumnWidth(infoList, 9, settings.dialogue_window.column_condition4.width);
+		ListView_SetColumnWidth(infoList, 10, settings.dialogue_window.column_condition5.width);
+		ListView_SetColumnWidth(infoList, 11, settings.dialogue_window.column_condition6.width);
+	}
+
+
+	void saveInfoColumnWidths(HWND hWnd) {
+		const auto infoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
+
+		settings.dialogue_window.column_text.width = ListView_GetColumnWidth(infoList, 0);
+		settings.dialogue_window.column_info_id.width = ListView_GetColumnWidth(infoList, 1);
+		settings.dialogue_window.column_disp_index.width = ListView_GetColumnWidth(infoList, 2);
+		settings.dialogue_window.column_id.width = ListView_GetColumnWidth(infoList, 3);
+		settings.dialogue_window.column_faction.width = ListView_GetColumnWidth(infoList, 4);
+		settings.dialogue_window.column_cell.width = ListView_GetColumnWidth(infoList, 5);
+		settings.dialogue_window.column_condition1.width = ListView_GetColumnWidth(infoList, 6);
+		settings.dialogue_window.column_condition2.width = ListView_GetColumnWidth(infoList, 7);
+		settings.dialogue_window.column_condition3.width = ListView_GetColumnWidth(infoList, 8);
+		settings.dialogue_window.column_condition4.width = ListView_GetColumnWidth(infoList, 9);
+		settings.dialogue_window.column_condition5.width = ListView_GetColumnWidth(infoList, 10);
+		settings.dialogue_window.column_condition6.width = ListView_GetColumnWidth(infoList, 11);
 	}
 
 	//
@@ -421,6 +467,7 @@ namespace se::cs::dialog::dialogue_window {
 	void PatchDialogProc_BeforeInitialize(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		using winui::GetStyle;
 		using winui::SetStyle;
+		using winui::ResizeAndCenterWindow;
 
 		// Begin measure of initialization time.
 		if constexpr (LOG_PERFORMANCE_RESULTS) {
@@ -446,10 +493,18 @@ namespace se::cs::dialog::dialogue_window {
 		}
 	}
 
+	void PatchDialogProc_BeforeDestroy(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Save column info.
+		saveInfoColumnWidths(hWnd);
+	}
+
+	constexpr auto MIN_WIDTH = 1113u;
+	constexpr auto MIN_HEIGHT = 700u;
+
 	void PatchDialogProc_GetMinMaxInfo(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		auto info = (LPMINMAXINFO)lParam;
-		info->ptMinTrackSize.x = 1113;
-		info->ptMinTrackSize.y = 700;
+		const auto info = (LPMINMAXINFO)lParam;
+		info->ptMinTrackSize.x = MIN_WIDTH;
+		info->ptMinTrackSize.y = MIN_HEIGHT;
 
 		forcedReturnType = 0;
 	}
@@ -461,6 +516,9 @@ namespace se::cs::dialog::dialogue_window {
 		using se::cs::winui::RemoveStyles;
 		using se::cs::winui::ResizeAndCenterWindow;
 		using se::cs::winui::SetWindowIdByValue;
+
+		// Restore column widths.
+		restoreInfoColumnWidths(hWnd);
 
 		// Reenable redraw.
 		if constexpr (ENABLE_ALL_OPTIMIZATIONS) {
@@ -521,24 +579,22 @@ namespace se::cs::dialog::dialogue_window {
 		auto hDlgShowModifiedOnly = CreateWindowExA(NULL, WC_BUTTON, "Show modified only", BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON, hInstance, NULL);
 		SendMessageA(hDlgShowModifiedOnly, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
 
+		auto hDlgCurrentTextCharCount = CreateWindowExA(NULL, WC_STATIC, "0", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_CURRENT_TEXT_CHAR_COUNT, hInstance, NULL);
+		SendMessageA(hDlgCurrentTextCharCount, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+		OnCurrentTextEditChanged(hWnd);
+
+		auto hDlgCurrentTextMaxCharCount = CreateWindowExA(NULL, WC_STATIC, "/512", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_CURRENT_TEXT_MAX_CHAR_COUNT, hInstance, NULL);
+		SendMessageA(hDlgCurrentTextMaxCharCount, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+
 		// Make it so the window can be maximized and generally resized.
 		RemoveStyles(hWnd, DS_MODALFRAME);
 		AddStyles(hWnd, WS_SIZEBOX | WS_MAXIMIZEBOX);
 
-		// Enforce minimum size.
-		constexpr auto MIN_WIDTH = 1113;
-		constexpr auto MIN_HEIGHT = 720;
-		RECT windowRect = {};
-		GetClientRect(hWnd, &windowRect);
-		auto windowWidth = GetRectWidth(&windowRect);
-		auto windowHeight = GetRectHeight(&windowRect);
-		if (windowWidth < MIN_WIDTH || windowHeight < MIN_HEIGHT) {
-			ResizeAndCenterWindow(hWnd, MIN_WIDTH, MIN_HEIGHT);
-		}
-		else {
-			// Force a resize anyway to put elements in the right position.
-			SendMessageA(hWnd, WM_SIZE, SIZE_RESTORED, MAKELPARAM(windowWidth, windowHeight));
-		}
+		// Restore size, with enforced minimum.
+		const auto& settingsSize = settings.dialogue_window.size;
+		const auto width = std::max(settingsSize.width, MIN_WIDTH);
+		const auto height = std::max(settingsSize.height, MIN_HEIGHT);
+		ResizeAndCenterWindow(hWnd, width, height);
 
 		// Finish measure of initialization time.
 		if constexpr (LOG_PERFORMANCE_RESULTS) {
@@ -560,11 +616,12 @@ namespace se::cs::dialog::dialogue_window {
 				if (object) {
 					// Background color highlighting.
 					if (object->getDeleted()) {
-						lplvcd->clrTextBk = RGB(255, 235, 235);
+						lplvcd->clrTextBk = settings.color_theme.highlight_deleted_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 					else if (object->getModified()) {
-						lplvcd->clrTextBk = RGB(235, 255, 235);
+						// Modified color highlighting. Different colors for modified-master or mod-added object.
+						lplvcd->clrTextBk = object->isFromMaster() ? settings.color_theme.highlight_modified_from_master_packed_color : settings.color_theme.highlight_modified_new_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 				}
@@ -690,8 +747,8 @@ namespace se::cs::dialog::dialogue_window {
 		using winui::GetRectWidth;
 		using winui::TabCtrl_GetInteriorRect;
 
-		const auto windowWidth = LOWORD(lParam);
-		const auto windowHeight = HIWORD(lParam);
+		const auto clientWidth = LOWORD(lParam);
+		const auto clientHeight = HIWORD(lParam);
 		
 		RECT tempRect = {};
 
@@ -703,7 +760,7 @@ namespace se::cs::dialog::dialogue_window {
 			constexpr auto FILTER_FOR_AREA_SIZE = STATIC_HEIGHT + COMBO_HEIGHT * 2 + BASIC_PADDING * 2;
 
 			// Dialogue type tabs
-			const auto topicsAreaSize = windowHeight - FILTER_FOR_AREA_SIZE - BASIC_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
+			const auto topicsAreaSize = clientHeight - FILTER_FOR_AREA_SIZE - BASIC_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
 			auto hDlgTopicTabs = GetDlgItem(hWnd, CONTROL_ID_TOPIC_TABS);
 			MoveWindow(hDlgTopicTabs, currentX, currentY, LEFT_SECTION_WIDTH, topicsAreaSize, FALSE);
 
@@ -734,29 +791,35 @@ namespace se::cs::dialog::dialogue_window {
 			int currentX = WINDOW_EDGE_PADDING + LEFT_SECTION_WIDTH + BIG_PADDING;
 			int currentY = WINDOW_EDGE_PADDING;
 
-			const auto infoListWidth = windowWidth - LEFT_SECTION_WIDTH - BIG_PADDING - WINDOW_EDGE_PADDING * 2;
+			const auto infoListWidth = clientWidth - LEFT_SECTION_WIDTH - BIG_PADDING - WINDOW_EDGE_PADDING * 2;
 
 			auto hDlgInfoStatic = GetDlgItem(hWnd, CONTROL_ID_INFO_STATIC);
 			MoveWindow(hDlgInfoStatic, currentX, currentY, infoListWidth, STATIC_HEIGHT, FALSE);
 			currentY += STATIC_HEIGHT + BASIC_PADDING;
 
 			auto hDlgInfoList = GetDlgItem(hWnd, CONTROL_ID_INFO_LIST);
-			MoveWindow(hDlgInfoList, currentX, currentY, infoListWidth, windowHeight - currentY - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING - BASIC_PADDING, FALSE);
+			MoveWindow(hDlgInfoList, currentX, currentY, infoListWidth, clientHeight - currentY - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING - BASIC_PADDING, FALSE);
 		}
 
 		// INFO details section
 		{
 			// Calculate fixed sizes.
-			const auto BOTTOM_MIDDLE_WIDTH = windowWidth - LEFT_SECTION_WIDTH - BOTTOM_RIGHT_SECTION_WIDTH - BIG_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
+			const auto BOTTOM_MIDDLE_WIDTH = clientWidth - LEFT_SECTION_WIDTH - BOTTOM_RIGHT_SECTION_WIDTH - BIG_PADDING * 2 - WINDOW_EDGE_PADDING * 2;
 
 			// Temp values.
 			auto currentX = WINDOW_EDGE_PADDING + LEFT_SECTION_WIDTH + BIG_PADDING;
-			auto currentY = windowHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
+			auto currentY = clientHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
 
 			// Info text edit
 			auto hDlgCurrentTextEdit = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_EDIT);
 			MoveWindow(hDlgCurrentTextEdit, currentX, currentY, BOTTOM_MIDDLE_WIDTH, TOP_INFO_TEXT_HEIGHT, FALSE);
 			currentY += TOP_INFO_TEXT_HEIGHT + BASIC_PADDING;
+
+			auto hDlgCurrentTextCharCount = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_CHAR_COUNT);
+			MoveWindow(hDlgCurrentTextCharCount, currentX + BOTTOM_MIDDLE_WIDTH - 48, currentY + 10, 18, 20, FALSE);
+
+			auto hDlgCurrentTextMaxCharCount = GetDlgItem(hWnd, CONTROL_ID_CURRENT_TEXT_MAX_CHAR_COUNT);
+			MoveWindow(hDlgCurrentTextMaxCharCount, currentX + BOTTOM_MIDDLE_WIDTH - 30, currentY +10 , 23, 20, FALSE);
 
 			// Speaker Condition button (area)
 			auto hDlgSpeakerConditionButton = GetDlgItem(hWnd, CONTROL_ID_SPEAKER_CONDITION_BUTTON);
@@ -846,8 +909,8 @@ namespace se::cs::dialog::dialogue_window {
 		// Bottom right section.
 		{
 			constexpr auto EXTRA_PADDING_ABOVE_OK_BUTTON = 16;
-			const auto currentX = windowWidth - BOTTOM_RIGHT_SECTION_WIDTH - WINDOW_EDGE_PADDING;
-			auto currentY = windowHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
+			const auto currentX = clientWidth - BOTTOM_RIGHT_SECTION_WIDTH - WINDOW_EDGE_PADDING;
+			auto currentY = clientHeight - BOTTOM_SECTION_HEIGHT - WINDOW_EDGE_PADDING;
 
 			// Shared By static
 			auto hDlgSharedByStatic = GetDlgItem(hWnd, CONTROL_ID_SHARED_BY_STATIC);
@@ -894,11 +957,17 @@ namespace se::cs::dialog::dialogue_window {
 
 			// OK button
 			auto hDlgOkButton = GetDlgItem(hWnd, CONTROL_ID_OK_BUTTON);
-			MoveWindow(hDlgOkButton, currentX, windowHeight - BIG_BUTTON_HEIGHT - WINDOW_EDGE_PADDING, BOTTOM_RIGHT_SECTION_WIDTH, BIG_BUTTON_HEIGHT, FALSE);
+			MoveWindow(hDlgOkButton, currentX, clientHeight - BIG_BUTTON_HEIGHT - WINDOW_EDGE_PADDING, BOTTOM_RIGHT_SECTION_WIDTH, BIG_BUTTON_HEIGHT, FALSE);
 		}
 
 		// Force redraw. Embrace the flicker.
 		RedrawWindow(hWnd, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+
+		// Store window size for later restoration.
+		SIZE winSize = {};
+		if (winui::GetWindowSize(hWnd, winSize)) {
+			settings.dialogue_window.size = winSize;
+		}
 
 		forcedReturnType = TRUE;
 	}
@@ -916,6 +985,152 @@ namespace se::cs::dialog::dialogue_window {
 				break;
 			}
 			break;
+		case EN_CHANGE:
+			switch (id) {
+			case CONTROL_ID_CURRENT_TEXT_EDIT:
+				OnCurrentTextEditChanged(hWnd);
+				break;
+			}
+			break;
+		}
+	}
+
+	const auto functionNames = reinterpret_cast<const char**>(0x6A5A38);
+	const auto compareText = reinterpret_cast<const char**>(0x6A5A20);
+
+	int GetInverseCompareOperator(int compareOp) {
+		using CompareOp = DialogueInfo::Condition::CompareOp;
+		switch (compareOp) {
+		case CompareOp::Equal:
+			return CompareOp::NotEqual;
+		case CompareOp::NotEqual:
+			return CompareOp::Equal;
+		case CompareOp::GreaterThan:
+			return CompareOp::LessThanOrEqual;
+		case CompareOp::GreaterThanOrEqual:
+			return CompareOp::LessThan;
+		case CompareOp::LessThan:
+			return CompareOp::GreaterThanOrEqual;
+		case CompareOp::LessThanOrEqual:
+			return CompareOp::GreaterThan;
+		}
+		return compareOp;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition, bool invert, const char* wrapper = nullptr) {
+		if (condition->compareValue.object == nullptr) {
+			forcedReturnType = FALSE;
+			return;
+		}
+
+		const auto id = condition->compareValue.object->getObjectID();
+		const auto compare = invert ? compareText[GetInverseCompareOperator(condition->compareOp)] : compareText[condition->compareOp];
+
+		if (wrapper) {
+			sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s(%s) %s %d", wrapper, id, compare, (int)condition->value);
+		}
+		else {
+			sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", id, compare, (int)condition->value);
+		}
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_ObjectDialogue(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition, bool invert) {
+		if (condition->compareValue.dialogue == nullptr || condition->compareValue.dialogue->id == nullptr) {
+			forcedReturnType = FALSE;
+			return;
+		}
+
+		const auto id = condition->compareValue.dialogue->id;
+		const auto compare = invert ? compareText[GetInverseCompareOperator(condition->compareOp)] : compareText[condition->compareOp];
+
+		sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", id, compare, (int)condition->value);
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition, bool invert) {
+		const auto compare = invert ? compareText[GetInverseCompareOperator(condition->compareOp)] : compareText[condition->compareOp];
+
+		sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", condition->compareValue.string, compare, (int)condition->value);
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Function(NMLVDISPINFOA* displayInfo, DialogueInfo* info, DialogueInfo::Condition* condition) {
+		const auto function = functionNames[condition->compareValue.integer];
+		const auto compare = compareText[condition->compareOp];
+
+		sprintf_s(displayInfo->item.pszText, displayInfo->item.cchTextMax, "%s %s %d", function, compare, (int)condition->value);
+
+		forcedReturnType = FALSE;
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar(HWND hWnd, UINT msg, WPARAM wParam, NMLVDISPINFOA* lParam) {
+		const auto info = reinterpret_cast<DialogueInfo*>(lParam->item.lParam);
+		const auto conditionIndex = lParam->item.iSubItem - 6;
+		const auto condition = &info->conditions[conditionIndex];
+
+		switch (condition->type) {
+		case DialogueInfo::Condition::TypeFunction:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Function(lParam, info, condition);
+			break;
+		case DialogueInfo::Condition::TypeGlobal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeLocal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeJournal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_ObjectDialogue(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeItem:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, false);
+			break;
+		case DialogueInfo::Condition::TypeDead:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, false, "dead");
+			break;
+		case DialogueInfo::Condition::TypeNotID:
+		case DialogueInfo::Condition::TypeNotFaction:
+		case DialogueInfo::Condition::TypeNotClass:
+		case DialogueInfo::Condition::TypeNotRace:
+		case DialogueInfo::Condition::TypeNotCell:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_Object(lParam, info, condition, true);
+			break;
+		case DialogueInfo::Condition::TypeNotLocal:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar_String(lParam, info, condition, true);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo(HWND hWnd, UINT msg, WPARAM wParam, NMLVDISPINFOA* lParam) {
+		switch (lParam->item.iSubItem) {
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo_FunVar(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify_InfoList(HWND hWnd, UINT msg, WPARAM wParam, NMHDR* lParam) {
+		switch (lParam->code) {
+		case LVN_GETDISPINFO:
+			PatchDialogProc_BeforeNotify_InfoList_GetDisplayInfo(hWnd, msg, wParam, (NMLVDISPINFOA*)lParam);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto message = reinterpret_cast<NMHDR*>(lParam);
+		switch (message->idFrom) {
+		case CONTROL_ID_INFO_LIST:
+			PatchDialogProc_BeforeNotify_InfoList(hWnd, msg, wParam, message);
+			break;
 		}
 	}
 
@@ -926,11 +1141,17 @@ namespace se::cs::dialog::dialogue_window {
 		case WM_INITDIALOG:
 			PatchDialogProc_BeforeInitialize(hWnd, msg, wParam, lParam);
 			break;
+		case WM_DESTROY:
+			PatchDialogProc_BeforeDestroy(hWnd, msg, wParam, lParam);
+			break;
 		case WM_SIZE:
 			PatchDialogProc_BeforeSize(hWnd, msg, wParam, lParam);
 			break;
 		case WM_COMMAND:
 			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
+			break;
+		case WM_NOTIFY:
+			PatchDialogProc_BeforeNotify(hWnd, msg, wParam, lParam);
 			break;
 		}
 

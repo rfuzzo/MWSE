@@ -190,7 +190,7 @@ namespace TES3 {
 		short readiedAmmoCount; // 0x368
 		short corpseHourstamp; // 0x36A
 		short greetDuration; // 0x36C
-		signed char friendlyFireHits; // 0x36E
+		signed char friendlyFireHitCount; // 0x36E
 		char unknown_0x36F; // Undefined.
 		float holdBreathTime; // 0x370
 		int unknown_0x374;
@@ -227,6 +227,8 @@ namespace TES3 {
 		float calculateArmorRating(int * armorItemCount = nullptr) const;
 		float getArmorRating_lua() const;
 
+		AnimationData* getAnimationData() const;
+
 		//
 		// Other related this-call functions.
 		//
@@ -237,8 +239,11 @@ namespace TES3 {
 
 		float getFacing() const;
 		float getViewToPoint(const Vector3* point) const;
+		float getViewToPoint_lua(sol::object point) const;
 		float getViewToPointWithFacing(float facing, const Vector3* point) const;
+		float getViewToPointWithFacing_lua(float facing, sol::object point) const;
 		float getViewToActor(const TES3::MobileActor* mobile) const;
+		float getViewToActor_lua(sol::object mobile) const;
 
 		float getBootsWeight() const;
 		float getWeaponSpeed() const;
@@ -339,6 +344,8 @@ namespace TES3 {
 
 		bool getWeaponReady() const;
 		void setWeaponReady(bool value);
+		bool forceWeaponAttack_lua(sol::optional<sol::table> params);
+		bool hitStun_lua(sol::optional<sol::table> params);
 
 		void updateOpacity();
 		void notifyActorDeadOrDestroyed(MobileActor* mobileActor);

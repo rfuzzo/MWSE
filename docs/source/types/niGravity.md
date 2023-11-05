@@ -8,7 +8,7 @@
 
 This modifer applies force, constant over time, to particles in the parent niParticleSystemController.
 
-This type inherits the following: [niParticleModifier](../../types/niParticleModifier), [niObject](../../types/niObject)
+This type inherits the following: [niParticleModifier](../types/niParticleModifier.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ Access to the generic time controller for particle systems.
 
 **Returns**:
 
-* `result` ([niParticleSystemController](../../types/niParticleSystemController))
+* `result` ([niParticleSystemController](../types/niParticleSystemController.md))
 
 ***
 
@@ -40,7 +40,7 @@ The direction of action for planar gravity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -64,7 +64,7 @@ Maps to values in [`ni.gravityForceType`](https://mwse.github.io/MWSE/references
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.gravityForceType](../references/ni/gravity-force-types.md))
 
 ***
 
@@ -75,7 +75,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier))
+* `result` ([niParticleModifier](../types/niParticleModifier.md))
 
 ***
 
@@ -86,7 +86,7 @@ The position of the center used when applying spherical gravity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -108,7 +108,7 @@ The position of the center used when applying spherical gravity.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -119,7 +119,7 @@ The position of the center used when applying spherical gravity.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -136,14 +136,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -151,7 +151,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -162,7 +162,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -170,7 +170,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 

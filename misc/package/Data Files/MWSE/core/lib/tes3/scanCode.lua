@@ -1,4 +1,3 @@
----@enum tes3.scanCode
 return {
 	["esc"] = 1,
 	["escape"] = 1,
@@ -173,8 +172,21 @@ return {
 	["insert"] = 210,
 	["delete"] = 211,
 	["numpadEnter"] = 156,
+	["printScreen"] = 183,
+	["pause"] = 197,
 	["home"] = 199,
 	["end"] = 207,
 	["pageUp"] = 201,
-	["pageDown"] = 209
+	["pageDown"] = 209,
+	["lWindows"] = 219,
+	["leftWindows"] = 219,
+	["lSuper"] = 219,
+	["leftSuper"] = 219,
+	["rWindows"] = 220,
+	["rightWindows"] = 220,
+	["rSuper"] = 220,
+	["rightSuper"] = 220,
+	["apps"] = 221,
+	["appMenu"] = 221,
+	["menu"] = 221,
 }

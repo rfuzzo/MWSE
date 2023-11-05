@@ -23,10 +23,10 @@ event.register(tes3.event.barterOffer, barterOfferCallback)
 
 ## Event Data
 
-* `buying` ([tes3inventoryTile](../../types/tes3inventoryTile)[]): *Read-only*. The objects being bought. These items will be transfered to player's inventory on a successful bartering event.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the merchant the player is interacting with.
+* `buying` ([tes3inventoryTile](../types/tes3inventoryTile.md)[]): *Read-only*. The objects being bought. These items will be transfered to player's inventory on a successful bartering event.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor of the merchant the player is interacting with.
 * `offer` (number): *Read-only*. Offered gold amount.
-* `selling` ([tes3inventoryTile](../../types/tes3inventoryTile)[]): *Read-only*. The objects being sold. These items will be transfered to bartender's inventory on a successful bartering event.
+* `selling` ([tes3inventoryTile](../types/tes3inventoryTile.md)[]): *Read-only*. The objects being sold. These items will be transfered to bartender's inventory on a successful bartering event.
 * `success` (boolean): Whether the trade was accepted or not.
 * `value` (number): *Read-only*. Total value in gold of items being traded. Negative means the player owes coin, positive means the player gets coin.
 

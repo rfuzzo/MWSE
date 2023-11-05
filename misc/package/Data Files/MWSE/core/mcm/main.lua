@@ -6,11 +6,11 @@
 ]]--
 
 --- Storage for mod config packages.
---- @type table<string, table>
+--- @type table<string, mwseModConfig>
 local configMods = {}
 
 --- The current package that we are configuring.
---- @type table?
+--- @type mwseModConfig?
 local currentModConfig = nil
 
 --- The previously selected element.
@@ -18,14 +18,16 @@ local currentModConfig = nil
 local previousModConfigSelector = nil
 
 --- Reusable access to UI elements.
---- @type tes3uiElement
+--- @type tes3uiElement?
 local modConfigContainer = nil
 
 -- Expose the mcm API.
+
 mwse.mcm = require("mcm.mcm")
 mwse.mcm.i18n = mwse.loadTranslations("mcm")
 
--- Callback for when a mod name has been clicked in the left pane.
+--- Callback for when a mod name has been clicked in the left pane.
+--- @param e tes3uiEventData
 local function onClickModName(e)
 	-- If we have a current mod, fire its close event.
 	if (currentModConfig and currentModConfig.onClose) then
@@ -60,13 +62,13 @@ local function onClickModName(e)
 	end
 
 	-- Change the mod config title bar to include the mod's name.
-	local menu = tes3ui.findMenu("MWSE:ModConfigMenu")
+	local menu = tes3ui.findMenu("MWSE:ModConfigMenu") --[[@as tes3uiElement]]
 	menu.text = mwse.mcm.i18n("Mod Configuration - %s", { e.source.text })
 	menu:updateLayout()
 end
 
 --- Callback for when the close button has been clicked.
---- @param e keyDownEventData
+--- @param e keyDownEventData|tes3uiEventData
 local function onClickCloseButton(e)
 	event.unregister("keyDown", onClickCloseButton, { filter = tes3.scanCode.escape })
 
@@ -92,11 +94,13 @@ local function onClickCloseButton(e)
 	end
 end
 
+--- @param a string
+--- @param b string
 local function caseInsensitiveSorter(a, b)
 	return a:lower() < b:lower()
 end
 
----@param e tes3uiEventData
+--- @param e tes3uiEventData
 local function focusSearchBar(e)
 	local searchBar = e.source:findChild("SearchBar")
 	if (not searchBar) then return end
@@ -104,6 +108,8 @@ local function focusSearchBar(e)
 	tes3ui.acquireTextInput(searchBar)
 end
 
+--- @param modName string
+--- @param searchText string
 local function filterModByName(modName, searchText)
 	-- Perform a basic search.
 	local nameMatch = modName:lower():find(searchText, nil, true)
@@ -122,7 +128,7 @@ local function filterModByName(modName, searchText)
 	return false
 end
 
----@param e tes3uiEventData
+--- @param e tes3uiEventData
 local function onSearchUpdated(e)
 	local lowerSearchText = e.source.text:lower()
 	local mcm = e.source:getTopLevelMenu()
@@ -135,7 +141,7 @@ local function onSearchUpdated(e)
 	modList.widget:contentsChanged()
 end
 
----@param e tes3uiEventData
+--- @param e tes3uiEventData
 local function onSearchCleared(e)
 	local mcm = e.source:getTopLevelMenu()
 	local modList = mcm:findChild("ModList")
@@ -161,9 +167,6 @@ local function onClickModConfigButton()
 
 	local menu = tes3ui.findMenu("MWSE:ModConfigMenu")
 	if (not menu) then
-		-- Fix dumb lua extensions.
-		--- @cast menu tes3uiElement
-
 		-- Create the main menu frame.
 		menu = tes3ui.createMenu({ id = "MWSE:ModConfigMenu", dragFrame = true })
 		menu.text = mwse.mcm.i18n("Mod Configuration")
@@ -267,7 +270,10 @@ local function onClickModConfigButton()
 		bottomBlock.childAlignX = 1.0
 
 		-- Add a close button to the bottom block.
-		local closeButton = bottomBlock:createButton({ id = "MWSE:ModConfigMenu_Close", text = tes3.findGMST(tes3.gmst.sClose).value })
+		local closeButton = bottomBlock:createButton({
+			id = "MWSE:ModConfigMenu_Close",
+			text = tes3.findGMST(tes3.gmst.sClose).value --[[@as string]]
+		})
 		closeButton:register("mouseClick", onClickCloseButton)
 		event.register("keyDown", onClickCloseButton, { filter = tes3.scanCode.escape })
 
@@ -341,12 +347,19 @@ local function onCreatedMenuOptions(e)
 end
 event.register("uiActivated", onCreatedMenuOptions, { filter = "MenuOptions" })
 
--- Define a new function in the mwse namespace that lets mods register for mod config.
+--- @class mwseModConfig : mwse.registerModConfig.package
+--- @field name string
+--- @field hidden boolean
+
+--- Define a new function in the mwse namespace that lets mods register for mod config.
+--- @param name string
+--- @param package mwse.registerModConfig.package
 function mwse.registerModConfig(name, package)
 	-- Prevent duplicate registration.
 	if (configMods[name] ~= nil) then
 		error(string.format("mwse.registerModConfig: A mod with the name %s has already been registered!", name))
 	end
+	--- @cast package mwseModConfig
 
 	-- Add the package to the list.
 	package.name = name

@@ -27,7 +27,7 @@ Documentation can also be built locally for testing or personal use. To do this 
 The following modules need to be installed:
 
 ```bat
-pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin mkdocs-mermaid2-plugin
+pip install mkdocs mkdocs-material mkdocs-awesome-pages-plugin mkdocs-mermaid2-plugin mkdocs-git-revision-date-localized-plugin
 ```
 
 Another build task is available in vscode to live test the docs locally.

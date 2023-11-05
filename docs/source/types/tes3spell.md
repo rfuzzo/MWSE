@@ -8,7 +8,7 @@
 
 A spell game object.
 
-This type inherits the following: [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `alwaysSucceeds`
@@ -62,7 +62,7 @@ The spell's cast type. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/re
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.spellType](../references/spell-types.md))
 
 ***
 
@@ -95,7 +95,7 @@ The spell's cast type. Maps to [`tes3.spellType`](https://mwse.github.io/MWSE/re
 
 **Returns**:
 
-* `result` ([tes3effect](../../types/tes3effect)[])
+* `result` ([tes3effect](../types/tes3effect.md)[])
 
 ??? example "Example: Determining if a spell is hostile"
 
@@ -204,7 +204,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -226,7 +226,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -237,7 +237,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -270,7 +270,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -292,7 +292,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -303,7 +303,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -381,7 +381,7 @@ local result = myObject:calculateCastChance({ checkMagicka = ..., caster = ... }
 
 * `params` (table)
 	* `checkMagicka` (boolean): *Default*: `true`. Determines if the caster's magicka should be taken into account during the calculation.
-	* `caster` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor)): The caster to perform the calculation against.
+	* `caster` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md)): The caster to perform the calculation against.
 
 **Returns**:
 
@@ -407,7 +407,7 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 **Returns**:
 
-* `newObject` ([tes3spell](../../types/tes3spell))
+* `newObject` ([tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -437,7 +437,7 @@ local result = myObject:getFirstIndexOfEffect(effectId)
 
 **Parameters**:
 
-* `effectId` (number): A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+* `effectId` ([tes3.effect](../references/magic-effects.md)): A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 
@@ -456,11 +456,11 @@ local effect = myObject:getLeastProficientEffect(actor)
 
 **Parameters**:
 
-* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), [tes3npc](../../types/tes3npc), [tes3npcInstance](../../types/tes3npcInstance)): The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
+* `actor` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), [tes3npc](../types/tes3npc.md), [tes3npcInstance](../types/tes3npcInstance.md)): The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
 
 **Returns**:
 
-* `effect` ([tes3effect](../../types/tes3effect), nil): The least proficient effect, or `nil` if the spell has no valid effects.
+* `effect` ([tes3effect](../types/tes3effect.md), nil): The least proficient effect, or `nil` if the spell has no valid effects.
 
 ***
 
@@ -475,9 +475,9 @@ local schoolID = myObject:getLeastProficientSchool(actor)
 
 **Parameters**:
 
-* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), [tes3npc](../../types/tes3npc), [tes3npcInstance](../../types/tes3npcInstance)): The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
+* `actor` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), [tes3npc](../types/tes3npc.md), [tes3npcInstance](../types/tes3npcInstance.md)): The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
 
 **Returns**:
 
-* `schoolID` (number, nil): The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
+* `schoolID` ([tes3.magicSchool](../references/magic-schools.md), nil): The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
 

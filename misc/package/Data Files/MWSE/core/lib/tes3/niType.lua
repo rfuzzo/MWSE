@@ -1,4 +1,3 @@
----@enum tes3.niType
 return {
 	["AvoidNode"] = 0x7DD794,
 	["BrickNiExtraData"] = 0x7D1D48,

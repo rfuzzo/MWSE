@@ -22,5 +22,10 @@ event.register(tes3.event.weatherTransitionFinished, weatherTransitionFinishedCa
 
 ## Event Data
 
-* `to` ([tes3weather](../../types/tes3weather)): The weather object that will be transitioned to.
+* `to` ([tes3weather](../types/tes3weather.md)): The weather object that will be transitioned to.
+
+
+## Related events
+
+[weatherCycled](./weatherCycled.md){ .md-button }[weatherTransitionFinished](./weatherTransitionFinished.md){ .md-button }[weatherChangedImmediate](./weatherChangedImmediate.md){ .md-button }[weatherTransitionStarted](./weatherTransitionStarted.md){ .md-button }[weatherChangedImmediate](./weatherChangedImmediate.md){ .md-button }
 

@@ -39,7 +39,7 @@ The sound listener position.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -68,7 +68,7 @@ The timestamp at which currently playing music track started fading in. So, it's
 ### `musicNextTrackStartTimestamp`
 <div class="search_terms" style="display: none">musicnexttrackstarttimestamp</div>
 
-
+The timestamp at which next track will start playing.
 
 **Returns**:
 
@@ -217,7 +217,7 @@ local volume = myObject:getMixVolume(mix)
 
 **Parameters**:
 
-* `mix` (number): The type of sound mix to perform a check for. Accepts values from [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) namespace.
+* `mix` ([tes3.soundMix](../references/sound-mix-types.md)): The type of sound mix to perform a check for. Accepts values from [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) namespace.
 
 **Returns**:
 

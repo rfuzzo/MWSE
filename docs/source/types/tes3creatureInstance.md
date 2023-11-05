@@ -8,7 +8,7 @@
 
 A creature object that has been cloned. Typically represents a creature that has been instanced in the world.
 
-This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3actor](../types/tes3actor.md), [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `actorFlags`
@@ -29,7 +29,7 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 
 **Returns**:
 
-* `result` ([tes3aiConfig](../../types/tes3aiConfig))
+* `result` ([tes3aiConfig](../types/tes3aiConfig.md))
 
 ??? example "Example: Checking if a creature offers traveling service"
 
@@ -58,7 +58,7 @@ Simplified access to the base creature's attacks. A table of three attacks, repr
 
 **Returns**:
 
-* `result` ([tes3rangeInt](../../types/tes3rangeInt)[])
+* `result` ([tes3rangeInt](../types/tes3rangeInt.md)[])
 
 ***
 
@@ -91,7 +91,7 @@ Friendly access to actor's barter gold amount.
 
 **Returns**:
 
-* `result` ([tes3creature](../../types/tes3creature))
+* `result` ([tes3creature](../types/tes3creature.md))
 
 ***
 
@@ -135,7 +135,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -179,7 +179,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack)[])
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md)[])
 
 ***
 
@@ -234,7 +234,7 @@ Access to the creature's flies flag.
 
 **Returns**:
 
-* `result` ([tes3inventory](../../types/tes3inventory), [tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3inventory](../types/tes3inventory.md), [tes3itemStack](../types/tes3itemStack.md)[])
 
 ***
 
@@ -333,7 +333,7 @@ The path to the object's mesh.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -366,7 +366,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -388,7 +388,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -399,7 +399,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -421,7 +421,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -432,7 +432,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -465,7 +465,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -476,7 +476,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -487,7 +487,7 @@ The script that runs on the object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -520,7 +520,7 @@ Simplified access to the base creature's sound generator. A creature to use inst
 
 **Returns**:
 
-* `result` ([tes3creature](../../types/tes3creature))
+* `result` ([tes3creature](../types/tes3creature.md))
 
 ***
 
@@ -553,7 +553,7 @@ The soruceless flag of the object.
 
 **Returns**:
 
-* `result` ([tes3spellList](../../types/tes3spellList), [tes3spell](../../types/tes3spell)[])
+* `result` ([tes3spellList](../types/tes3spellList.md), [tes3spell](../types/tes3spell.md)[])
 
 ***
 
@@ -564,7 +564,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 
@@ -597,7 +597,7 @@ Simplified access to the base creature's type. The type of the creature, maps to
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.creatureType](../references/creature-types.md))
 
 ***
 
@@ -630,7 +630,7 @@ Access to the creature's walks flag.
 
 **Returns**:
 
-* `result` ([tes3weapon](../../types/tes3weapon))
+* `result` ([tes3weapon](../types/tes3weapon.md))
 
 ***
 
@@ -682,8 +682,8 @@ local result = myObject:hasItemEquipped(item, itemData)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item), string): The item to perform a check for.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*.
+* `item` ([tes3item](../types/tes3item.md), string): The item to perform a check for.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*.
 
 **Returns**:
 
@@ -702,7 +702,7 @@ local result = myObject:offersService(service)
 
 **Parameters**:
 
-* `service` (number): Use one of the values in the [`tes3.merchantService.*`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+* `service` ([tes3.merchantService](../references/merchant-services.md)): Use one of the values in the [`tes3.merchantService.*`](https://mwse.github.io/MWSE/references/merchant-services/) table.
 
 **Returns**:
 
@@ -721,14 +721,14 @@ myObject:onInventoryClose(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
 ### `reevaluateEquipment`
 <div class="search_terms" style="display: none">reevaluateequipment</div>
 
-Causes the creature to reevaluate its equipment choices and equip the best available.
+Causes the creature to reevaluate its equipment choices and equip the best available. Then, the visible body parts will be updated.
 
 ```lua
 myObject:reevaluateEquipment()
@@ -747,7 +747,7 @@ local result = myObject:tradesItemType(objectType)
 
 **Parameters**:
 
-* `objectType` (number): Accepts values from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
+* `objectType` ([tes3.objectType](../references/object-types.md)): Accepts values from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
 
 **Returns**:
 

@@ -26,7 +26,12 @@ event.register(tes3.event.leveledItemPicked, leveledItemPickedCallback)
 
 ## Event Data
 
-* `list` ([tes3leveledItem](../../types/tes3leveledItem)): *Read-only*. The list responsible for creating a pick.
-* `pick` ([tes3item](../../types/tes3item)): The result of the pick by vanilla mechanism.
-* `spawner` ([tes3reference](../../types/tes3reference), nil): The reference for the inventory that the item is being picked in. In many cases this may be `nil`.
+* `list` ([tes3leveledItem](../types/tes3leveledItem.md)): *Read-only*. The list responsible for creating a pick.
+* `pick` ([tes3item](../types/tes3item.md)): The result of the pick by vanilla mechanism.
+* `spawner` ([tes3reference](../types/tes3reference.md), nil): The reference for the inventory that the item is being picked in. In a few cases this may be `nil`. Note that during actor cloning, the inventory is resolved before cloning is fully complete.
+
+
+## Related events
+
+[leveledCreaturePicked](./leveledCreaturePicked.md){ .md-button }[leveledItemPicked](./leveledItemPicked.md){ .md-button }
 

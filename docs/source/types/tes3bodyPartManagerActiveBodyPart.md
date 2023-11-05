@@ -17,7 +17,7 @@ Access to the body part object.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -39,7 +39,7 @@ The raw item object this active body part pertains to.
 
 **Returns**:
 
-* `result` ([tes3item](../../types/tes3item))
+* `result` ([tes3item](../types/tes3item.md))
 
 ***
 
@@ -50,5 +50,5 @@ The NiNode-derived object for the object's loaded mesh.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 

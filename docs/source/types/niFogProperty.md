@@ -8,7 +8,7 @@
 
 A rendering property that controls the appearance of fogging, also known as haze.
 
-This type inherits the following: [niProperty](../../types/niProperty), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niProperty](../types/niProperty.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `color`
@@ -29,7 +29,7 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -51,7 +51,7 @@ The fog density in normalized units [0.0, 1.0]. If set to 1.0, then the fogging 
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -95,7 +95,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -106,7 +106,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -117,7 +117,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.propertyType](../references/ni/property-types.md))
 
 ***
 
@@ -134,7 +134,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -149,7 +149,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -168,7 +168,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -187,7 +187,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -206,7 +206,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -251,7 +251,7 @@ local result = myObject:hasStringDataWith(value)
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -259,7 +259,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -270,7 +270,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -278,7 +278,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -297,7 +297,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -334,7 +334,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -349,7 +349,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 

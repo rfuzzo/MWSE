@@ -15,4 +15,9 @@ return {
 		},
 	},
 	blockable = true,
+	examples = {
+		["pacifism"] = {
+			title = "Stop certain actors from initiating combat with the player"
+		},
+	}
 }

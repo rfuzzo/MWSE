@@ -51,10 +51,19 @@ namespace se::cs {
 		BaseObject* unknown_0x58;
 		union {
 			float waterLevel;
-			BaseObject* region;
+			Region* region;
 		}; // 0x5C
 
 		bool getIsInterior() const;
+		bool getBehavesAsExterior() const;
+		bool getIsOrBehavesAsExterior() const;
+		int getGridX() const;
+		int getGridY() const;
+
+		Region* getRegion() const;
+
+		const char* getDisplayName() const;
+		std::string getEditorId() const;
 	};
 	static_assert(sizeof(Cell) == 0x60, "Cell failed size validation");
 }

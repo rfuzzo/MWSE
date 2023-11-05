@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is triggered just before the player levels up.",
+	related = { "levelUp" },
 	eventData = {
 		["level"] = {
 			type = "number",

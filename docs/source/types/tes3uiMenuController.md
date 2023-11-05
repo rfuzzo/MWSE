@@ -30,7 +30,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 
 **Returns**:
 
-* `result` ([tes3uiFontColor](../../types/tes3uiFontColor)[])
+* `result` ([tes3uiFontColor](../types/tes3uiFontColor.md)[])
 
 ***
 
@@ -52,7 +52,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 
@@ -63,7 +63,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 
 **Returns**:
 
-* `result` ([tes3uiMenuInputController](../../types/tes3uiMenuInputController))
+* `result` ([tes3uiMenuInputController](../types/tes3uiMenuInputController.md))
 
 ***
 
@@ -96,7 +96,7 @@ A flag that controls whether the magic menu is enabled or disabled. Magic menu i
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
 
 ***
 

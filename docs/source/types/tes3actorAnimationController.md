@@ -17,7 +17,7 @@ The alpha property applied to the actor. Controls the opacity/opaqueness of the 
 
 **Returns**:
 
-* `result` ([niAlphaProperty](../../types/niAlphaProperty))
+* `result` ([niAlphaProperty](../types/niAlphaProperty.md))
 
 ***
 
@@ -28,7 +28,7 @@ Access to the actor's animation data.
 
 **Returns**:
 
-* `result` ([tes3animationData](../../types/tes3animationData))
+* `result` ([tes3animationData](../types/tes3animationData.md))
 
 ***
 
@@ -39,7 +39,7 @@ The actor's idle animation. Maps to values in [`tes3.animationGroup`](https://mw
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([tes3.animationGroup](../references/animation-groups.md))
 
 ***
 
@@ -61,7 +61,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([tes3.animationGroup](../references/animation-groups.md))
 
 ***
 
@@ -94,7 +94,7 @@ The rotation of the actor around the up-down axis. When converted to euler angle
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -116,7 +116,7 @@ The material property applied to the actor.
 
 **Returns**:
 
-* `result` ([niMaterialProperty](../../types/niMaterialProperty))
+* `result` ([niMaterialProperty](../types/niMaterialProperty.md))
 
 ***
 
@@ -160,7 +160,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -237,7 +237,7 @@ The vertex color property applied to the actor.
 
 **Returns**:
 
-* `result` ([niVertexColorProperty](../../types/niVertexColorProperty))
+* `result` ([niVertexColorProperty](../types/niVertexColorProperty.md))
 
 ***
 
@@ -248,7 +248,7 @@ Only used for the player. When converted to euler angles, the rotation about x a
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 

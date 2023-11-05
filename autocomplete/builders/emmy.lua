@@ -29,19 +29,21 @@ common.log("Definitions folder: %s", common.pathDefinitions)
 local function getPackageLink(package)
 	local tokens = { common.urlBase, package.key }
 
-	if (package.type == "class") then
-		tokens = { common.urlBase, "types", package.key }
-	elseif (package.type == "class") then
-		tokens = { common.urlBase, "apis", package.namespace }
-	elseif (package.type == "event") then
-		tokens = { common.urlBase, "events", package.key }
-	elseif (package.parent) then
+	if (not package.parent) then
+		if (package.type == "class") then
+			tokens = { common.urlBase, "types", package.key }
+		elseif (package.type == "function") then
+			tokens = { common.urlBase, "apis", package.namespace }
+		elseif (package.type == "event") then
+			tokens = { common.urlBase, "events", package.key }
+		end
+	else
 		local parentType = package.parent.type
 		if (parentType == "lib") then
 			local token = string.gsub("#" .. package.namespace, "%.", "")
 			tokens = { common.urlBase, "apis", package.parent.namespace, token:lower() }
 		elseif (parentType == "class") then
-			tokens = { common.urlBase, "types", package.parent.key, "#" .. package.key }
+			tokens = { common.urlBase, "types", package.parent.key, "#" .. package.key:lower() }
 		end
 	end
 
@@ -50,10 +52,10 @@ end
 
 --- Only write table when necessary: for library packages or classes that
 --- have one or more methods or functions. This the avoids creation of tables
---- in the global namespace for virtual types - types that only existent
+--- in the global namespace for virtual types - types that only exist
 --- in the annotations.
----@param package packageClass
----@return boolean
+--- @param package packageClass
+--- @return boolean
 local function shouldCreateTable(package)
 	return (
 		package.type == "lib" or
@@ -79,14 +81,40 @@ local function formatDescription(description)
 	return "--- " .. formatLineBreaks(description)
 end
 
+--- @param types string[]
+local function insertNil(types)
+	local hasNil = false
+	for _, type in ipairs(types) do
+		if type == "nil" then
+			hasNil = true
+		elseif type:startswith("fun(") then
+			-- If the type ends with "|fun(): someReturnType", don't append nil
+			-- at the end. That won't make the argument optional, but will
+			-- change the type of the function's return value
+			table.insert(types, #types, "nil")
+			hasNil = true
+			break
+		end
+	end
+	if (not hasNil) then
+		table.insert(types, "nil")
+	end
+end
+
 local function getAllPossibleVariationsOfType(type, package)
 	if (not type) then
 		return nil
 	end
 
 	if (type:startswith("table<")) then
-		local keyType, valueType = type:match("table<(.+), (.+)>")
-		return string.format("table<%s, %s>", getAllPossibleVariationsOfType(keyType, package), getAllPossibleVariationsOfType(valueType, package))
+		local keyType, valueType, other = type:match("table<(.+), (.+)>(.*)")
+		other = getAllPossibleVariationsOfType(other:sub(2), package)
+		return string.format("table<%s, %s>%s%s",
+			getAllPossibleVariationsOfType(keyType, package),
+			getAllPossibleVariationsOfType(valueType, package),
+			other ~= "" and "|" or "",
+			other
+		)
 	end
 
 	local types = {}
@@ -108,15 +136,13 @@ local function getAllPossibleVariationsOfType(type, package)
 
 	if (package.optional or package.default ~= nil) then
 		-- If we only have one type, just add ? to it.
-		if (#types == 1) then
+		if (#types == 1 and (not types[1]:startswith("fun("))) then
 			if (not types[1]:endswith("?")) then
 				types[1] = types[1] .. "?"
 			end
 		else
 			-- Otherwise add `nil` to the list if it isn't already there.
-			if (not table.find(types, "nil")) then
-				table.insert(types, "nil")
-			end
+			insertNil(types)
 		end
 	end
 
@@ -210,18 +236,65 @@ local function buildParentChain(className)
 	return className
 end
 
-local function buildExternalRequires(package, file)
-	local fileBlacklist = {
-		["init"] = true,
-	}
-	local directory = lfs.join(common.pathAutocomplete, "..", "misc", "package", "Data Files", "MWSE", "core", "lib", package.key)
-	for entry in lfs.dir(directory) do
-		local extension = entry:match("[^.]+$")
-		if (extension == "lua") then
-			local filename = entry:match("[^/]+$"):sub(1, -1 * (#extension + 2))
-			if (not fileBlacklist[filename]) then
-				file:write(string.format('%s.%s = require("%s.%s")\n', package.key, filename, package.key, filename))
+--- @param namespace string Should look like: `"tes3.enumName.subEnumName"` or `"tes3.enumName"`. For example, `"tes3.activeBodyPart"` or `"tes3.dialoguePage.greeting"`.
+--- @param keys string[] These are the keys of the table to build.
+--- @param file file* The file to write to.
+local function buildAlias(namespace, keys, file)
+	file:write(string.format("--- @alias %s\n", namespace))
+	for _, key in ipairs(keys) do
+		if type(key) == "number" then
+			key = "[" .. key .. "]"
+		else
+			-- Capture "^[_%a]" matches all the letters + underscore -> valid first letter of lua identifier
+			-- Capture "[_%w]*$" matches all the letters + digits + underscore -> OK inside the key name
+			local enclose = not key:match("^[_%a][_%w]*$")
+			if enclose then
+				key = "[\"" .. key .. "\"]"
+			else
+				key = "." .. key
 			end
+		end
+		file:write(string.format("---| `%s%s`\n", namespace, key))
+	end
+	file:write("\n")
+end
+
+local function sortEnumsByFilename(A, B)
+	return A.filename:lower() < B.filename:lower()
+end
+
+local function buildExternalRequires(package, file)
+	local enumMap = common.getEnumerationsMap(package.key)
+	-- Not every "lib" has enumeration tables (e.g. debuglib)
+	if not enumMap then
+		return
+	end
+
+	-- Let's sort the enumerations
+	local enums = {}
+	for filename, path in pairs(common.getEnumerationsMap(package.key)) do
+		enums[#enums + 1] = {
+			filename = filename,
+			path = path,
+		}
+	end
+	table.sort(enums, sortEnumsByFilename)
+
+	for _, data in ipairs(enums) do
+		local namespace = package.key .. "." .. data.filename
+		file:write(string.format('%s = require("%s")\n\n', namespace, namespace))
+
+		local enumerationTable = dofile(data.path)
+		local keys = table.keys(enumerationTable, true)
+		local hasSubtables = type(enumerationTable[keys[1]]) == "table"
+		if hasSubtables then
+			for subNamespace, subEnumeration in pairs(enumerationTable) do
+				local completeNamespace = namespace .. "." .. subNamespace
+				local keys = table.keys(subEnumeration, true)
+				buildAlias(completeNamespace, keys, file)
+			end
+		else
+			buildAlias(namespace, keys, file)
 		end
 	end
 end

@@ -17,7 +17,7 @@ Access to the `niLight` object mantained by this `tes3lightNode` object.
 
 **Returns**:
 
-* `result` ([niLight](../../types/niLight))
+* `result` ([niLight](../types/niLight.md))
 
 ***
 

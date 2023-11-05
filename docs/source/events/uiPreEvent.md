@@ -26,9 +26,14 @@ event.register(tes3.event.uiPreEvent, uiPreEventCallback)
 
 ## Event Data
 
-* `parent` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The calling element's parent.
-* `property` (number): *Read-only*. The property identifier that is being triggered.
-* `source` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The UI element that is firing this event.
+* `parent` ([tes3uiElement](../types/tes3uiElement.md)): *Read-only*. The calling element's parent.
+* `property` ([tes3.uiProperty](../references/ui-properties.md)): *Read-only*. The property identifier that is being triggered.
+* `source` ([tes3uiElement](../types/tes3uiElement.md)): *Read-only*. The UI element that is firing this event.
 * `var1` (number): *Read-only*. One of two undefined variables related to the event.
 * `var2` (number): *Read-only*. One of two undefined variables related to the event.
+
+
+## Related events
+
+[uiEvent](./uiEvent.md){ .md-button }
 

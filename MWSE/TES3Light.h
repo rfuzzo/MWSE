@@ -37,8 +37,8 @@ namespace TES3 {
 		unsigned int flags; // 0x6C
 		Sound * sound; // 0x70
 
-		Light() = delete;
-		~Light() = delete;
+		Light();
+		~Light();
 
 		//
 		// Custom functions.

@@ -30,6 +30,7 @@ namespace mwse::lua::event {
 		eventData["isCast"] = m_MagicSource != nullptr;
 
 		if (m_MagicSource) {
+			eventData["sourceInstance"] = m_MagicSource;
 			eventData["item"] = m_MagicSource->castingItem;
 			eventData["itemData"] = m_MagicSource->castingItemCondition;
 		}

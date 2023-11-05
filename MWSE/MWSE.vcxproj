@@ -14,10 +14,18 @@
     <ClInclude Include="ArrayUtil.h" />
     <ClInclude Include="BitUtil.h" />
     <ClInclude Include="BSAnimationManager.h" />
+    <ClInclude Include="LuaCalcChargenStatsEvent.h" />
     <ClInclude Include="LuaCalcHitDetectionConeEvent.h" />
     <ClInclude Include="LuaDialogueFilteredEvent.h" />
+    <ClInclude Include="LuaMagicSelectionChangedEvent.h" />
+    <ClInclude Include="LuaMusicChangeTrackEvent.h" />
+    <ClInclude Include="LuaShieldBlockedEvent.h" />
+    <ClInclude Include="LuaSimulatedEvent.h" />
     <ClInclude Include="LuaUiSkillTooltipEvent.h" />
     <ClInclude Include="NIAccumulator.h" />
+    <ClInclude Include="NIAnimationData.h" />
+    <ClInclude Include="NIAnimationKey.h" />
+    <ClInclude Include="NIPathController.h" />
     <ClInclude Include="NISortAdjustNode.h" />
     <ClInclude Include="TES3DialogueFilterContext.h" />
     <ClInclude Include="TES3LandLua.h" />
@@ -48,11 +56,8 @@
     <ClInclude Include="MGEPostShadersLua.h" />
     <ClInclude Include="MGEUtilLua.h" />
     <ClInclude Include="NICollisionGroupLua.h" />
-    <ClInclude Include="NIColorData.h" />
-    <ClInclude Include="NIColorKey.h" />
     <ClInclude Include="NICopyTransformController.h" />
     <ClInclude Include="NIDX8TextureData.h" />
-    <ClInclude Include="NIPosData.h" />
     <ClInclude Include="NIQuaternion.h" />
     <ClInclude Include="NIQuaternionLua.h" />
     <ClInclude Include="NiRenderedTextureLua.h" />
@@ -492,6 +497,8 @@
     <ClInclude Include="TES3Vectors.h" />
     <ClInclude Include="TES3VectorsLua.h" />
     <ClInclude Include="TES3VFXManagerLua.h" />
+    <ClInclude Include="TES3WaterController.h" />
+    <ClInclude Include="TES3WaterControllerLua.h" />
     <ClInclude Include="TES3Weapon.h" />
     <ClInclude Include="TES3WeaponLua.h" />
     <ClInclude Include="TES3WearablePart.h" />
@@ -541,6 +548,7 @@
     <ClCompile Include="LuaButtonPressedEvent.cpp" />
     <ClCompile Include="LuaCalcArmorRatingEvent.cpp" />
     <ClCompile Include="LuaCalcBlockChanceEvent.cpp" />
+    <ClCompile Include="LuaCalcChargenStatsEvent.cpp" />
     <ClCompile Include="LuaCalcEnchantmentPriceEvent.cpp" />
     <ClCompile Include="LuaCalcHitArmorPieceEvent.cpp" />
     <ClCompile Include="LuaCalcHitChanceEvent.cpp" />
@@ -620,6 +628,7 @@
     <ClCompile Include="LuaLoadGameEvent.cpp" />
     <ClCompile Include="LuaMagicCastedEvent.cpp" />
     <ClCompile Include="LuaMagicEffectRemovedEvent.cpp" />
+    <ClCompile Include="LuaMagicSelectionChangedEvent.cpp" />
     <ClCompile Include="LuaMenuStateEvent.cpp" />
     <ClCompile Include="LuaMeshLoadedEvent.cpp" />
     <ClCompile Include="LuaMeshLoadEvent.cpp" />
@@ -635,6 +644,7 @@
     <ClCompile Include="LuaMouseButtonDownEvent.cpp" />
     <ClCompile Include="LuaMouseButtonUpEvent.cpp" />
     <ClCompile Include="LuaMouseWheelEvent.cpp" />
+    <ClCompile Include="LuaMusicChangeTrackEvent.cpp" />
     <ClCompile Include="LuaMusicSelectTrackEvent.cpp" />
     <ClCompile Include="LuaObject.cpp" />
     <ClCompile Include="LuaObjectFilteredEvent.cpp" />
@@ -643,6 +653,8 @@
     <ClCompile Include="LuaPlayAnimationGroupEvent.cpp" />
     <ClCompile Include="LuaPlayItemSoundEvent.cpp" />
     <ClCompile Include="LuaPostInfoResponseEvent.cpp" />
+    <ClCompile Include="LuaShieldBlockedEvent.cpp" />
+    <ClCompile Include="LuaSimulatedEvent.cpp" />
     <ClCompile Include="LuaPotionBrewedEvent.cpp" />
     <ClCompile Include="LuaPotionBrewFailedEvent.cpp" />
     <ClCompile Include="LuaPotionBrewSkillCheckEvent.cpp" />
@@ -693,13 +705,13 @@
     <ClCompile Include="MWSEConfig.cpp" />
     <ClCompile Include="MWSEUtilLua.cpp" />
     <ClCompile Include="NIAmbientLight.cpp" />
+    <ClCompile Include="NIAnimationKey.cpp" />
     <ClCompile Include="NIBillboardNode.cpp" />
     <ClCompile Include="NIBinaryStream.cpp" />
     <ClCompile Include="NICamera.cpp" />
     <ClCompile Include="NICollisionGroup.cpp" />
     <ClCompile Include="NICollisionGroupLua.cpp" />
     <ClCompile Include="NICollisionSwitch.cpp" />
-    <ClCompile Include="NIColorData.cpp" />
     <ClCompile Include="NICopyTransformController.cpp" />
     <ClCompile Include="NIDirectionalLight.cpp" />
     <ClCompile Include="NIDX8TextureData.cpp" />
@@ -707,6 +719,7 @@
     <ClCompile Include="NIExtraData.cpp" />
     <ClCompile Include="NIExtraDataLua.cpp" />
     <ClCompile Include="NIFlipController.cpp" />
+    <ClCompile Include="NIAnimationData.cpp" />
     <ClCompile Include="NIGeometry.cpp" />
     <ClCompile Include="NIGeometryData.cpp" />
     <ClCompile Include="NIGeometryDataLua.cpp" />
@@ -718,7 +731,7 @@
     <ClCompile Include="NIParticles.cpp" />
     <ClCompile Include="NIParticlesLua.cpp" />
     <ClCompile Include="NIParticleSystemController.cpp" />
-    <ClCompile Include="NIPosData.cpp" />
+    <ClCompile Include="NIPathController.cpp" />
     <ClCompile Include="NIProperty.cpp" />
     <ClCompile Include="NIQuaternion.cpp" />
     <ClCompile Include="NIQuaternionLua.cpp" />
@@ -768,6 +781,7 @@
     <ClCompile Include="TES3Land.cpp" />
     <ClCompile Include="TES3LandLua.cpp" />
     <ClCompile Include="TES3LandTextureLua.cpp" />
+    <ClCompile Include="TES3LoadScreenManager.cpp" />
     <ClCompile Include="TES3Lockpick.cpp" />
     <ClCompile Include="TES3MagicEffectController.cpp" />
     <ClCompile Include="MemoryUtil.cpp" />
@@ -952,6 +966,8 @@
     <ClCompile Include="TES3VectorsLua.cpp" />
     <ClCompile Include="TES3VFXManager.cpp" />
     <ClCompile Include="TES3VFXManagerLua.cpp" />
+    <ClCompile Include="TES3WaterController.cpp" />
+    <ClCompile Include="TES3WaterControllerLua.cpp" />
     <ClCompile Include="TES3Weapon.cpp" />
     <ClCompile Include="TES3WeaponLua.cpp" />
     <ClCompile Include="TES3WearablePart.cpp" />

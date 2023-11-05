@@ -1,4 +1,3 @@
----@enum tes3.event
 return {
 	["absorbedMagic"] = "absorbedMagic",
 	["activate"] = "activate",
@@ -18,6 +17,7 @@ return {
 	["calcArmorRating"] = "calcArmorRating",
 	["calcBarterPrice"] = "calcBarterPrice",
 	["calcBlockChance"] = "calcBlockChance",
+	["calcChargenStats"] = "calcChargenStats",
 	["calcEnchantmentPrice"] = "calcEnchantmentPrice",
 	["calcFlySpeed"] = "calcFlySpeed",
 	["calcHitChance"] = "calcHitChance",
@@ -100,6 +100,7 @@ return {
 	["magicCasted"] = "magicCasted",
 	["magicEffectRemoved"] = "magicEffectRemoved",
 	["magicEffectsResolved"] = "magicEffectsResolved",
+	["magicSelectionChanged"] = "magicSelectionChanged",
 	["menuEnter"] = "menuEnter",
 	["menuExit"] = "menuExit",
 	["meshLoad"] = "meshLoad",
@@ -111,6 +112,7 @@ return {
 	["mouseButtonDown"] = "mouseButtonDown",
 	["mouseButtonUp"] = "mouseButtonUp",
 	["mouseWheel"] = "mouseWheel",
+	["musicChangeTrack"] = "musicChangeTrack",
 	["musicSelectTrack"] = "musicSelectTrack",
 	["objectInvalidated"] = "objectInvalidated",
 	["playGroup"] = "playGroup",
@@ -133,7 +135,9 @@ return {
 	["restInterrupt"] = "restInterrupt",
 	["save"] = "save",
 	["saved"] = "saved",
+	["shieldBlocked"] = "shieldBlocked",
 	["simulate"] = "simulate",
+	["simulated"] = "simulated",
 	["skillRaised"] = "skillRaised",
 	["soundObjectPlay"] = "soundObjectPlay",
 	["spellCast"] = "spellCast",

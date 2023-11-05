@@ -2,6 +2,40 @@
 
 namespace se::cs {
 	struct Settings_t {
+		//
+		// Helper structures
+		//
+
+		struct ColumnSettings {
+			static constexpr auto DEFAULT_SIZE_ID = 100u;
+			static constexpr auto DEFAULT_SIZE_BOOL = 45u;
+			static constexpr auto DEFAULT_SIZE_SHORT = 45u;
+			static constexpr auto DEFAULT_SIZE_FLOAT = 45u;
+			static constexpr auto DEFAULT_SIZE_DIALOGUE_CONDITION = DEFAULT_SIZE_ID + DEFAULT_SIZE_SHORT;
+
+			size_t width = DEFAULT_SIZE_SHORT;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		};
+
+		struct WindowSize {
+			static constexpr auto SIZE_INVALID = 0;
+
+			size_t width = SIZE_INVALID;
+			size_t height = SIZE_INVALID;
+
+			WindowSize(size_t cx = SIZE_INVALID, size_t cy = SIZE_INVALID);
+			WindowSize(const SIZE& fromSize);
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		};
+
+		//
+		// The actual settings
+		//
+
 		struct RenderWindowSettings {
 			bool use_group_scaling = false;
 			bool use_legacy_camera = false;
@@ -19,23 +53,27 @@ namespace se::cs {
 		struct DialogueWindowSettings {
 			bool highlight_modified_items = true;
 
+			WindowSize size = { 633, 406 };
+
+			ColumnSettings column_text = { 125 };
+			ColumnSettings column_info_id = { 5 };
+			ColumnSettings column_disp_index = { ColumnSettings::DEFAULT_SIZE_SHORT };
+			ColumnSettings column_id = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_faction = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_cell = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_condition1 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition2 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition3 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition4 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition5 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+			ColumnSettings column_condition6 = { ColumnSettings::DEFAULT_SIZE_DIALOGUE_CONDITION };
+
 			void from_toml(const toml::value& v);
 			toml::value into_toml() const;
 		} dialogue_window;
 
 		struct ObjectWindowSettings {
-			struct ColumnSettings {
-				static constexpr auto DEFAULT_SIZE_ID = 100u;
-				static constexpr auto DEFAULT_SIZE_BOOL = 45u;
-				static constexpr auto DEFAULT_SIZE_SHORT = 45u;
-				static constexpr auto DEFAULT_SIZE_FLOAT = 45u;
-
-				size_t width = DEFAULT_SIZE_SHORT;
-
-				void from_toml(const toml::value& v);
-				toml::value into_toml() const;
-			};
-
+			bool use_button_style_tabs = true;
 			bool clear_filter_on_tab_switch = true;
 			bool filter_by_id = true;
 			bool filter_by_name = true;
@@ -44,6 +82,7 @@ namespace se::cs {
 			bool filter_by_enchantment_id = true;
 			bool filter_by_script_id = true;
 			bool filter_by_book_text = true;
+			bool filter_by_faction = true;
 			bool highlight_modified_items = true;
 			bool use_regex = false;
 			bool case_sensitive = false;
@@ -93,6 +132,7 @@ namespace se::cs {
 			ColumnSettings column_script = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_sound = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_spell_pc_start = { ColumnSettings::DEFAULT_SIZE_BOOL };
+			ColumnSettings column_spell_range = { ColumnSettings::DEFAULT_SIZE_SHORT };
 			ColumnSettings column_type = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_uses = { ColumnSettings::DEFAULT_SIZE_SHORT };
 			ColumnSettings column_value = { ColumnSettings::DEFAULT_SIZE_SHORT };
@@ -112,6 +152,36 @@ namespace se::cs {
 			void from_toml(const toml::value& v);
 			toml::value into_toml() const;
 		} object_window;
+
+		struct LandscapeWindowSettings {
+			int x_position = 0;
+			int y_position = 71;
+
+			WindowSize size = { 436, 483 };
+
+			ColumnSettings column_id = { 175u };
+			ColumnSettings column_used = { 37u };
+			ColumnSettings column_filename{ 147u };
+
+			bool show_preview_enabled = false;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		} landscape_window;
+
+		struct ColorTheme {
+			std::array<unsigned char, 3> highlight_deleted_object_color = { 255, 235, 235 };
+			std::array<unsigned char, 3> highlight_modified_from_master_color = { 235, 255, 235 };
+			std::array<unsigned char, 3> highlight_modified_new_object_color = { 215, 240, 255 };
+
+			unsigned int highlight_deleted_object_packed_color = 0xFFFFFF;
+			unsigned int highlight_modified_from_master_packed_color = 0xFFFFFF;
+			unsigned int highlight_modified_new_object_packed_color = 0xFFFFFF;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+			void packColors();
+		} color_theme;
 
 		struct QuickstartSettings {
 			bool enabled = false;

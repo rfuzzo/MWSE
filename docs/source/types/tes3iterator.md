@@ -8,56 +8,6 @@
 
 A collection that can be iterated over. Contains items in a simple linked list, and stores its head/tail.
 
-## Properties
-
-### `current`
-<div class="search_terms" style="display: none">current</div>
-
-*Read-only*. A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.
-
-**Returns**:
-
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
-
-***
-
-### `head`
-<div class="search_terms" style="display: none">head</div>
-
-*Read-only*. The first node in the collection.
-
-**Returns**:
-
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
-
-***
-
-### `tail`
-<div class="search_terms" style="display: none">tail</div>
-
-*Read-only*. The last node in the collection.
-
-**Returns**:
-
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
-
-***
-
-## Methods
-
-### `size`
-<div class="search_terms" style="display: none">size</div>
-
-*Read-only*. Returns the amount of items in the iterator.
-
-```lua
-local result = myObject:size()
-```
-
-**Returns**:
-
-* `result` (number)
-
 ??? example "Example: Iterating Lists"
 
 	In this example, a list is iterated using the pairs iterator function. The node can be used directly.
@@ -84,4 +34,54 @@ local result = myObject:size()
 	end
 
 	```
+
+## Properties
+
+### `current`
+<div class="search_terms" style="display: none">current</div>
+
+*Read-only*. A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.
+
+**Returns**:
+
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
+
+***
+
+### `head`
+<div class="search_terms" style="display: none">head</div>
+
+*Read-only*. The first node in the collection.
+
+**Returns**:
+
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
+
+***
+
+### `tail`
+<div class="search_terms" style="display: none">tail</div>
+
+*Read-only*. The last node in the collection.
+
+**Returns**:
+
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
+
+***
+
+## Methods
+
+### `size`
+<div class="search_terms" style="display: none">size</div>
+
+*Read-only*. Returns the amount of items in the iterator.
+
+```lua
+local result = myObject:size()
+```
+
+**Returns**:
+
+* `result` (number)
 

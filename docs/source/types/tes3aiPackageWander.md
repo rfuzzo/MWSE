@@ -11,7 +11,7 @@ Wander AI package causing an actor to move around at random. Actors will choose 
 Idle nodes represent the percentage chance the actor will stand still and perform the particular idle animation. Each idle is checked, and the one that passes with the highest roll is played. If no Idle passes the random roll, the actor will move (walk).
 
 
-This type inherits the following: [tes3aiPackage](../../types/tes3aiPackage)
+This type inherits the following: [tes3aiPackage](../types/tes3aiPackage.md)
 ## Properties
 
 ### `activationTarget`
@@ -21,7 +21,7 @@ This type inherits the following: [tes3aiPackage](../../types/tes3aiPackage)
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -32,7 +32,7 @@ The destination cell for escort and follow AI packages. For wander package, this
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -88,7 +88,7 @@ Index | Animation description
 
 **Returns**:
 
-* `result` ([tes3aiPackageWanderIdleNode](../../types/tes3aiPackageWanderIdleNode)[])
+* `result` ([tes3aiPackageWanderIdleNode](../types/tes3aiPackageWanderIdleNode.md)[])
 
 ***
 
@@ -154,7 +154,7 @@ Access to the actor to whom this AI package belongs.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -176,7 +176,7 @@ The target actor for activate, follow and escort AI packages.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -187,7 +187,7 @@ The final position to be reached by the escort, follow, and travel AI packages.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -198,5 +198,5 @@ The final position to be reached by the escort, follow, and travel AI packages.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.aiPackage](../references/ai-packages.md))
 

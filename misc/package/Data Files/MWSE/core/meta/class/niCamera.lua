@@ -17,7 +17,7 @@
 niCamera = {}
 
 --- This method clears the current render target of the camera's renderer. Uses flag values from [`ni.cameraClearFlags`](https://mwse.github.io/MWSE/references/ni/camera-clear-flags/).
---- @param flags number? *Default*: `ni.cameraClearFlags.all`. No description yet available.
+--- @param flags ni.cameraClearFlags? *Default*: `ni.cameraClearFlags.all`. No description yet available.
 function niCamera:clear(flags) end
 
 --- This method renders the currently-attached scene graph to the active renderer.
@@ -34,7 +34,9 @@ function niCamera:lookAtWorldPoint(point, up) end
 function niCamera:swapBuffers() end
 
 --- Given a screen space position, calculates the world position and outlook direction. This can be useful when trying to find a reference under a UI element, such as the cusor.
---- @param point tes3vector2 The screen position to calculate a world ray for. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/niCamera/#windowpointtoray).
+--- @param point tes3vector2|number[] The screen position to calculate a world ray for. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
 --- @return tes3vector3 origin The world point that the given screen position looks out from.
 --- @return tes3vector3 direction The look direction of the camera from the given origin point.
 function niCamera:windowPointToRay(point) end

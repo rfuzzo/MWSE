@@ -16,6 +16,7 @@
 
 #include "WindowMain.h"
 
+#include "DialogActorAIWindow.h"
 #include "DialogCellWindow.h"
 #include "DialogDialogueWindow.h"
 #include "DialogEditObjectWindow.h"
@@ -28,6 +29,8 @@
 #include "DialogScriptListWindow.h"
 #include "DialogSearchAndReplaceWindow.h"
 #include "DialogTextSearchWindow.h"
+
+#include "TextureRenderer.h"
 
 #include "MemoryUtil.h"
 #include "PathUtil.h"
@@ -154,7 +157,7 @@ namespace se::cs {
 			for (auto i = 0; i < recordHandler->activeModCount; ++i) {
 				auto file = recordHandler->activeGameFiles[i];
 				if (file->masters == nullptr) {
-					const auto cs_GameFile_CreateMasterArray = reinterpret_cast<bool(__thiscall*)(GameFile*, BasicLinkedList<GameFile*>*, bool)>(0x401D7F);
+					const auto cs_GameFile_CreateMasterArray = reinterpret_cast<bool(__thiscall*)(GameFile*, StlList<GameFile*>*, bool)>(0x401D7F);
 					cs_GameFile_CreateMasterArray(file, recordHandler->availableDataFiles, true);
 				}
 			}
@@ -186,6 +189,62 @@ namespace se::cs {
 		NI::Object* __fastcall NISortAdjustNodeCloneAccumulator(NI::Accumulator* accumulator) {
 			// Only call createClone if accumulator exists.
 			return accumulator ? accumulator->vTable.asObject->createClone(accumulator) : nullptr;
+		}
+
+		//
+		// Patch: Prevent rogue files from popping up.
+		//
+
+		HANDLE __stdcall CreateRootDirectoryFile(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile) {
+			const auto forcedPath = (path::getInstallPath() / lpFileName).string();
+			return CreateFileA(forcedPath.c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+		}
+
+		BOOL __stdcall DeleteRootDirectoryFile(LPCSTR lpFileName) {
+			const auto forcedPath = (path::getInstallPath() / lpFileName).string();
+			return DeleteFileA(forcedPath.c_str());
+		}
+
+		//
+		// Patch: Remember last chosen model directory.
+		//
+
+		std::optional<std::string> lastModelDirectory = {};
+
+		BOOL __stdcall GetOpenFileNameForModel(LPOPENFILENAMEA openData) {
+			// Use the last saved dir.
+			if (lastModelDirectory) {
+				openData->lpstrInitialDir = lastModelDirectory.value().c_str();
+			}
+
+			if (!GetOpenFileNameA(openData)) {
+				return FALSE;
+			}
+
+			lastModelDirectory = std::filesystem::canonical(openData->lpstrFile).parent_path().string();
+
+			return TRUE;
+		}
+
+		//
+		// Patch: Remember last chosen icon directory.
+		//
+
+		std::optional<std::string> lastIconDirectory = {};
+
+		BOOL __stdcall GetOpenFileNameForIcon(LPOPENFILENAMEA openData) {
+			// Use the last saved dir.
+			if (lastIconDirectory) {
+				openData->lpstrInitialDir = lastIconDirectory.value().c_str();
+			}
+
+			if (!GetOpenFileNameA(openData)) {
+				return FALSE;
+			}
+
+			lastIconDirectory = std::filesystem::canonical(openData->lpstrFile).parent_path().string();
+
+			return TRUE;
 		}
 
 		//
@@ -452,8 +511,20 @@ namespace se::cs {
 		overrideVirtualTableEnforced(0x67A5C8, 0x78, 0x5CF270, reinterpret_cast<DWORD>(patch::NISortAdjustNodeDisplay));
 		genCallUnprotected(0x5CF45B, reinterpret_cast<DWORD>(patch::NISortAdjustNodeCloneAccumulator));
 
+		// Patch: Prevent rogue files from popping up.
+		genCallUnprotected(0x4852C8, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x4852F2, reinterpret_cast<DWORD>(patch::DeleteRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x485359, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x485494, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x4857A6, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // ProgramFlow.txt
+
+		// Patch: Remember last used model/icon directories.
+		genCallEnforced(0x414EB4, 0x573290, reinterpret_cast<DWORD>(patch::GetOpenFileNameForIcon));
+		genCallEnforced(0x414C5E, 0x573290, reinterpret_cast<DWORD>(patch::GetOpenFileNameForModel));
+
 		// Install all our sectioned patches.
 		window::main::installPatches();
+		dialog::actor_ai_window::installPatches();
 		dialog::cell_window::installPatches();
 		dialog::dialogue_window::installPatches();
 		dialog::edit_object_window::installPatches();
@@ -466,6 +537,7 @@ namespace se::cs {
 		dialog::script_list_window::installPatches();
 		dialog::search_and_replace_window::installPatches();
 		dialog::text_search_window::installPatches();
+		TextureRenderer::installPatches();
 	}
 
 	void CSSE::UpdateCurrentDirectory() const {

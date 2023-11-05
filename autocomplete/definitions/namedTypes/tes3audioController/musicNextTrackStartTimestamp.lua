@@ -1,5 +1,5 @@
 return {
 	type = "value",
-	description = [[]],
+	description = [[The timestamp at which next track will start playing.]],
 	valuetype = "number",
 }

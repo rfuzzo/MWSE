@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "The uiSpellTooltip event triggers when a new tooltip is displayed for a spell. The tooltip will be already be built.",
+	related = { "uiObjectTooltip", "uiSkillTooltip" },
 	eventData = {
 		["tooltip"] = {
 			type = "tes3uiElement",

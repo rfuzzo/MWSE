@@ -37,7 +37,7 @@ Returns the current progress to the next level.
 
 **Parameters:**
 
-- `long` **skillID**: The [Skill](../../skills) ID to get the progress of.
+- `long` **skillID**: The [Skill](../skills.md) ID to get the progress of.
 
 **Returned:**
 
@@ -57,9 +57,9 @@ Returns the skill progress for the given skill ID. Returned values will be zero 
 
 **Returned:**
 
-- `long` **skillID**:  ID of the [Skill](../../skills) to be modified.
-- `long` **attributeID**: ID of the new governing [Attribute](../../attributes).
-- `long` **specialization**: The new [Specialization Type](../../specialization-types).
+- `long` **skillID**:  ID of the [Skill](../skills.md) to be modified.
+- `long` **attributeID**: ID of the new governing [Attribute](../attributes.md).
+- `long` **specialization**: The new [Specialization Type](../specializations.md).
 - `float` **action1**: Progress value for the 1st action.
 - `float` **action2**: Progress value for the 2nd action.
 - `float` **action3**: Progress value for the 3rd action.
@@ -96,7 +96,7 @@ Adds value to the progress to the next player level. If the new progress value i
 
 **Parameters:**
 
-- `long` **skillID**: The [Skill](../../skills) ID to modify.
+- `long` **skillID**: The [Skill](../skills.md) ID to modify.
 - `float` **value**: The value to modify the skill's progress by.
 - `long` **normalized**: flag indicating whether value is raw (`0`) or normalized (`1`)
 
@@ -165,7 +165,7 @@ Progress is stored in memory as a signed long (32 bits, max value = `2147483647`
 
 **Parameters:**
 
-- `long` **skillID**: The [Skill](../../skills) ID to modify.
+- `long` **skillID**: The [Skill](../skills.md) ID to modify.
 - `float` **value**: The value to set the skill's progress to.
 - `long` **normalized**: Flag indicating whether value is raw (`0`) or normalized (`1`)
 
@@ -182,9 +182,9 @@ Sets the current progress for the given skill. If the new progress value is less
 
 **Parameters:**
 
-- `long` **skillID**:  ID of the [Skill](../../skills) to be modified.
-- `long` **attributeID**: ID of the new governing [Attribute](../../attributes).
-- `long` **specialization**: The new [Specialization Type](../../specialization-types).
+- `long` **skillID**:  ID of the [Skill](../skills.md) to be modified.
+- `long` **attributeID**: ID of the new governing [Attribute](../attributes.md).
+- `long` **specialization**: The new [Specialization Type](../specializations.md).
 - `float` **action1**: Progress value for the 1st action.
 - `float` **action2**: Progress value for the 2nd action.
 - `float` **action3**: Progress value for the 3rd action.

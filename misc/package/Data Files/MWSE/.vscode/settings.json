@@ -30,6 +30,7 @@
 	],
 	// Disable diagnostic warnings for library files unless opened.
 	"Lua.diagnostics.libraryFiles": "Opened",
+	"Lua.type.weakUnionCheck": true,
 
 	// Ignore any potential 3rd party checks. We provide our definitions in core/meta.
 	"Lua.workspace.checkThirdParty": false,

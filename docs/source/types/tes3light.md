@@ -8,7 +8,7 @@
 
 A core light object. This isn't actually a light in the rendering engine, but something like a lamp or torch.
 
-This type inherits the following: [tes3item](../../types/tes3item), [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3item](../types/tes3item.md), [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -29,7 +29,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -163,12 +163,30 @@ Access to the light's flags, determining if the object creates darkness.
 
 * `result` (boolean)
 
+??? example "Example: Disabling negative lights"
+
+	```lua
+	
+	local function disableNegativeLights()
+		for light in tes3.iterateObjects(tes3.objectType.light) do
+			---@cast light tes3light
+	
+			if light.isNegative then
+				light.isOffByDefault = true
+				light.radius = 0
+			end
+		end
+	end
+	event.register(tes3.event.initialized, disableNegativeLights)
+
+	```
+
 ***
 
 ### `isOffByDefault`
 <div class="search_terms" style="display: none">isoffbydefault, offbydefault</div>
 
-Access to the light's flags, determining if the light won't be active initially.
+If true the light won't be active initially, and will only be lit when held by an actor.
 
 **Returns**:
 
@@ -216,7 +234,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -238,7 +256,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -249,7 +267,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -271,7 +289,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -326,7 +344,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -337,7 +355,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -348,7 +366,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -359,7 +377,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -392,7 +410,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 
@@ -457,6 +475,28 @@ local string = myObject:__tojson()
 
 ***
 
+### `createCopy`
+<div class="search_terms" style="display: none">createcopy, copy</div>
+
+Creates a copy of this object.
+
+```lua
+local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourceless = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `id` (string): *Optional*. The new object's ID. If one is not provided, a randomly generated one will be used.
+	* `addToObjectList` (boolean): *Default*: `true`. If true, the object will be added to the data handler. If this is false, the new object may not have a randomly generated ID. Do not use this without knowing the implications.
+	* `sourceless` (boolean): *Default*: `false`. If true, the object will be made sourceless, and will not be serialized to the save game. If the object is copied outside of a save game, the object will **always** be sourceless.
+
+**Returns**:
+
+* `newObject` ([tes3light](../types/tes3light.md))
+
+***
+
 ### `getTimeLeft`
 <div class="search_terms" style="display: none">gettimeleft, timeleft</div>
 
@@ -468,7 +508,7 @@ local result = myObject:getTimeLeft(data)
 
 **Parameters**:
 
-* `data` ([tes3reference](../../types/tes3reference), [tes3itemData](../../types/tes3itemData), [tes3equipmentStack](../../types/tes3equipmentStack))
+* `data` ([tes3reference](../types/tes3reference.md), [tes3itemData](../types/tes3itemData.md), [tes3equipmentStack](../types/tes3equipmentStack.md))
 
 **Returns**:
 

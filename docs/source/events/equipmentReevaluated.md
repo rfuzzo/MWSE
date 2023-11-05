@@ -23,7 +23,12 @@ event.register(tes3.event.equipmentReevaluated, equipmentReevaluatedCallback)
 
 ## Event Data
 
-* `actor` ([tes3actor](../../types/tes3actor)): *Read-only*. The actor that has reevaluated their equipment.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that has reevaluated their equipment.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference that has reevaluated their equipment.
+* `actor` ([tes3actor](../types/tes3actor.md)): *Read-only*. The actor that has reevaluated their equipment.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor that has reevaluated their equipment.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference that has reevaluated their equipment.
+
+
+## Related events
+
+[equip](./equip.md){ .md-button }[equipped](./equipped.md){ .md-button }[unequipped](./unequipped.md){ .md-button }
 

@@ -24,7 +24,7 @@ A node from a collection, which has a link to the previous and next node, as wel
 
 **Returns**:
 
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
 
 ***
 
@@ -35,5 +35,5 @@ A node from a collection, which has a link to the previous and next node, as wel
 
 **Returns**:
 
-* `result` ([tes3iteratorNode](../../types/tes3iteratorNode))
+* `result` ([tes3iteratorNode](../types/tes3iteratorNode.md))
 

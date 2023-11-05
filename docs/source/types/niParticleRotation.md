@@ -8,7 +8,7 @@
 
 This modifier rotates particles a constant rate.
 
-This type inherits the following: [niParticleModifier](../../types/niParticleModifier), [niObject](../../types/niObject)
+This type inherits the following: [niParticleModifier](../types/niParticleModifier.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ Access to the generic time controller for particle systems.
 
 **Returns**:
 
-* `result` ([niParticleSystemController](../../types/niParticleSystemController))
+* `result` ([niParticleSystemController](../types/niParticleSystemController.md))
 
 ***
 
@@ -29,7 +29,7 @@ The axis of rotation for the particles. If `.randomInitialAxis` is set to true t
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -40,7 +40,7 @@ Access to the next attached modifier.
 
 **Returns**:
 
-* `result` ([niParticleModifier](../../types/niParticleModifier))
+* `result` ([niParticleModifier](../types/niParticleModifier.md))
 
 ***
 
@@ -84,7 +84,7 @@ The speed at which each particle rotates.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -95,7 +95,7 @@ The speed at which each particle rotates.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -112,14 +112,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -127,7 +127,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -138,7 +138,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -146,7 +146,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 

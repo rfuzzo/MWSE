@@ -23,6 +23,11 @@ event.register(tes3.event.meshLoaded, meshLoadedCallback)
 
 ## Event Data
 
-* `node` ([niAVObject](../../types/niAVObject)): The niAVObject-derived object of the loaded mesh.
+* `node` ([niAVObject](../types/niAVObject.md)): The niAVObject-derived object of the loaded mesh.
 * `path` (string): The path to the mesh, relative to Data Files\Meshes
+
+
+## Related events
+
+[keyframesLoad](./keyframesLoad.md){ .md-button }[meshLoad](./meshLoad.md){ .md-button }
 

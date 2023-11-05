@@ -237,7 +237,19 @@ namespace TES3 {
 			eventFileName += ".ess";
 		}
 
+		// Bugfix: Preserve lowestZInCurrentCell when reloading a save in an interior cell.
+		// The engine resets it to -FLT_MAX instead of recalculating it if the player is in the same cell before and after loading.
+		float* pLowestZInCurrentCell = reinterpret_cast<float*>(0x7B217C);
+		float previousLowestZInCurrentCell = *pLowestZInCurrentCell;
+
 		bool loaded = TES3_NonDynamicData_loadGameInGame(this, eventFileName.c_str());
+
+		// Bugfix: In interior, restore previous lowestZInCurrentCell if has been reset.
+		if (loaded && TES3::DataHandler::get()->currentInteriorCell != nullptr) {
+			if (*pLowestZInCurrentCell == -FLT_MAX) {
+				*pLowestZInCurrentCell = previousLowestZInCurrentCell;
+			}
+		}
 
 		// Pass a follow-up event if we successfully loaded and clear timers.
 		if (loaded) {
@@ -445,7 +457,7 @@ namespace TES3 {
 	sol::table NonDynamicData::getMagicEffects_lua(sol::this_state ts) {
 		sol::state_view state = ts;
 		sol::table results = state.create_table();
-		for (auto itt : magicEffects->effectObjects) {
+		for (const auto& itt : magicEffects->effectObjects) {
 			results[itt.second->id + 1] = itt.second;
 		}
 		return results;
@@ -469,6 +481,10 @@ namespace TES3 {
 			auto macp = TES3::WorldController::get()->getMobilePlayer();
 			return macp->reference->position;
 		}
+	}
+
+	float DataHandler::getLowestZInCurrentCell() const {
+		return *reinterpret_cast<float*>(0x7B217C);
 	}
 
 	const auto TES3_DataHandler_addSound = reinterpret_cast<void(__thiscall*)(DataHandler*, Sound*, Reference*, int, unsigned char, float, bool, int)>(0x48BD40);

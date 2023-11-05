@@ -28,3 +28,8 @@ event.register(tes3.event.calcRestInterrupt, calcRestInterruptCallback)
 * `resting` (boolean): *Read-only*. If true, the player is attempting to rest, as opposed to wait.
 * `waiting` (boolean): *Read-only*. If true, the player is attempting to wait, as opposed to rest.
 
+
+## Related events
+
+[restInterrupt](./restInterrupt.md){ .md-button }
+

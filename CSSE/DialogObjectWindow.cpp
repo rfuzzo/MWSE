@@ -9,6 +9,8 @@
 #include "NIIteratedList.h"
 
 #include "CSBook.h"
+#include "CSFaction.h"
+#include "CSNPC.h"
 #include "CSScript.h"
 
 #include "EditBasicExtended.h"
@@ -232,6 +234,23 @@ namespace se::cs::dialog::object_window {
 			}
 		}
 
+		// Allow filtering by faction.
+		if (settings.object_window.filter_by_faction && object->objectType == ObjectType::NPC) {
+			const auto asNPC = static_cast<const NPC*>(object);
+			auto faction = asNPC->getFaction();
+			if (faction) {
+				// Basic ID check.
+				if (matchDispatcher(faction->getObjectID())) {
+					return true;
+				}
+
+				// Also check rank.
+				if (matchDispatcher(asNPC->getFactionRankName())) {
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -304,6 +323,12 @@ namespace se::cs::dialog::object_window {
 	void CALLBACK PatchDialogProc_AfterCreate(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		auto hInstance = (HINSTANCE)GetWindowLongA(hWnd, GWLP_HINSTANCE);
 
+		// Change the tabs to be button-based so that they don't have the selected tab stack always on the bottom.
+		const auto hDlgTabControl = GetDlgItem(hWnd, CONTROL_ID_TABS);
+		if (settings.object_window.use_button_style_tabs) {
+			winui::AddStyles(hDlgTabControl, TCS_BUTTONS);
+		}
+
 		// Ensure our custom filter box is added.
 		auto hDlgFilterEdit = GetDlgItem(hWnd, CONTROL_ID_FILTER_EDIT);
 		if (objectWindowSearchControl == NULL) {
@@ -352,11 +377,12 @@ namespace se::cs::dialog::object_window {
 				if (object) {
 					// Background color highlighting.
 					if (object->getDeleted()) {
-						lplvcd->clrTextBk = RGB(255, 235, 235);
+						lplvcd->clrTextBk = settings.color_theme.highlight_deleted_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 					else if (object->getModified()) {
-						lplvcd->clrTextBk = RGB(235, 255, 235);
+						// Modified color highlighting. Different colors for modified-master or mod-added object.
+						lplvcd->clrTextBk = object->isFromMaster() ? settings.color_theme.highlight_modified_from_master_packed_color : settings.color_theme.highlight_modified_new_object_packed_color;
 						SetWindowLongA(hWnd, DWLP_MSGRESULT, CDRF_NEWFONT);
 					}
 				}

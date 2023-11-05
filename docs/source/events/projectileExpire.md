@@ -20,7 +20,12 @@ event.register(tes3.event.projectileExpire, projectileExpireCallback)
 
 ## Event Data
 
-* `firingReference` ([tes3reference](../../types/tes3reference)): *Read-only*. Reference to the actor that fired the projectile.
-* `firingWeapon` ([tes3weapon](../../types/tes3weapon)): *Read-only*. The weapon that fired the projectile.
-* `mobile` ([tes3mobileProjectile](../../types/tes3mobileProjectile)): *Read-only*. The mobile projectile that is expiring.
+* `firingReference` ([tes3reference](../types/tes3reference.md)): *Read-only*. Reference to the actor that fired the projectile.
+* `firingWeapon` ([tes3weapon](../types/tes3weapon.md)): *Read-only*. The weapon that fired the projectile.
+* `mobile` ([tes3mobileProjectile](../types/tes3mobileProjectile.md)): *Read-only*. The mobile projectile that is expiring.
+
+
+## Related events
+
+[projectileHitActor](./projectileHitActor.md){ .md-button }[projectileHitObject](./projectileHitObject.md){ .md-button }[projectileHitTerrain](./projectileHitTerrain.md){ .md-button }[projectileExpire](./projectileExpire.md){ .md-button }
 

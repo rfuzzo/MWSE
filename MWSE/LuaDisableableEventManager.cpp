@@ -20,6 +20,7 @@
 #include "LuaCalcArmorRatingEvent.h"
 #include "LuaCalcBarterPriceEvent.h"
 #include "LuaCalcBlockChanceEvent.h"
+#include "LuaCalcChargenStatsEvent.h"
 #include "LuaCalcEnchantmentPriceEvent.h"
 #include "LuaCalcHitArmorPieceEvent.h"
 #include "LuaCalcHitChanceEvent.h"
@@ -94,6 +95,7 @@
 #include "LuaLoadGameEvent.h"
 #include "LuaMagicCastedEvent.h"
 #include "LuaMagicEffectRemovedEvent.h"
+#include "LuaMagicSelectionChangedEvent.h"
 #include "LuaMenuStateEvent.h"
 #include "LuaMeshLoadedEvent.h"
 #include "LuaMeshLoadEvent.h"
@@ -108,6 +110,7 @@
 #include "LuaMouseButtonDownEvent.h"
 #include "LuaMouseButtonUpEvent.h"
 #include "LuaMouseWheelEvent.h"
+#include "LuaMusicChangeTrackEvent.h"
 #include "LuaMusicSelectTrackEvent.h"
 #include "LuaObjectInvalidatedEvent.h"
 #include "LuaPickLockEvent.h"
@@ -128,7 +131,9 @@
 #include "LuaRestInterruptEvent.h"
 #include "LuaSavedGameEvent.h"
 #include "LuaSaveGameEvent.h"
+#include "LuaShieldBlockedEvent.h"
 #include "LuaShowRestWaitMenuEvent.h"
+#include "LuaSimulatedEvent.h"
 #include "LuaSimulateEvent.h"
 #include "LuaSkillExerciseEvent.h"
 #include "LuaSkillRaisedEvent.h"
@@ -182,6 +187,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["calcArmorRating"] = sol::property(&CalculateArmorRatingEvent::getEventEnabled, &CalculateArmorRatingEvent::setEventEnabled);
 		usertypeDefinition["calcBarterPrice"] = sol::property(&CalculateBarterPriceEvent::getEventEnabled, &CalculateBarterPriceEvent::setEventEnabled);
 		usertypeDefinition["calcBlockChance"] = sol::property(&CalcBlockChanceEvent::getEventEnabled, &CalcBlockChanceEvent::setEventEnabled);
+		usertypeDefinition["calcChargenStats"] = sol::property(&CalcChargenStatsEvent::getEventEnabled, &CalcChargenStatsEvent::setEventEnabled);
 		usertypeDefinition["calcEnchantmentPrice"] = sol::property(&CalculateEnchantmentPriceEvent::getEventEnabled, &CalculateEnchantmentPriceEvent::setEventEnabled);
 		usertypeDefinition["calcFlySpeed"] = sol::property(&CalculateMovementSpeed::getEventEnabled, &CalculateMovementSpeed::setEventEnabled);
 		usertypeDefinition["calcHitChance"] = sol::property(&CalcHitChanceEvent::getEventEnabled, &CalcHitChanceEvent::setEventEnabled);
@@ -259,6 +265,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["lockPick"] = sol::property(&PickLockEvent::getEventEnabled, &PickLockEvent::setEventEnabled);
 		usertypeDefinition["magicCasted"] = sol::property(&MagicCastedEvent::getEventEnabled, &MagicCastedEvent::setEventEnabled);
 		usertypeDefinition["magicEffectRemoved"] = sol::property(&MagicEffectRemovedEvent::getEventEnabled, &MagicEffectRemovedEvent::setEventEnabled);
+		usertypeDefinition["magicSelectionChanged"] = sol::property(&MagicSelectionChangedEvent::getEventEnabled, &MagicSelectionChangedEvent::setEventEnabled);
 		usertypeDefinition["menuEnter"] = sol::property(&MenuStateEvent::getEventEnabled, &MenuStateEvent::setEventEnabled);
 		usertypeDefinition["menuExit"] = sol::property(&MenuStateEvent::getEventEnabled, &MenuStateEvent::setEventEnabled);
 		usertypeDefinition["meshLoad"] = sol::property(&MeshLoadEvent::getEventEnabled, &MeshLoadEvent::setEventEnabled);
@@ -269,6 +276,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["mouseButtonDown"] = sol::property(&MouseButtonDownEvent::getEventEnabled, &MouseButtonDownEvent::setEventEnabled);
 		usertypeDefinition["mouseButtonUp"] = sol::property(&MouseButtonUpEvent::getEventEnabled, &MouseButtonUpEvent::setEventEnabled);
 		usertypeDefinition["mouseWheel"] = sol::property(&MouseWheelEvent::getEventEnabled, &MouseWheelEvent::setEventEnabled);
+		usertypeDefinition["musicChangeTrack"] = sol::property(&MusicChangeTrackEvent::getEventEnabled, &MusicChangeTrackEvent::setEventEnabled);
 		usertypeDefinition["musicSelectTrack"] = sol::property(&MusicSelectTrackEvent::getEventEnabled, &MusicSelectTrackEvent::setEventEnabled);
 		usertypeDefinition["objectInvalidated"] = sol::property(&ObjectInvalidatedEvent::getEventEnabled, &ObjectInvalidatedEvent::setEventEnabled);
 		usertypeDefinition["playGroup"] = sol::property(&PlayAnimationGroupEvent::getEventEnabled, &PlayAnimationGroupEvent::setEventEnabled);
@@ -291,7 +299,9 @@ namespace mwse::lua::event {
 		usertypeDefinition["restInterrupt"] = sol::property(&RestInterruptEvent::getEventEnabled, &RestInterruptEvent::setEventEnabled);
 		usertypeDefinition["save"] = sol::property(&SaveGameEvent::getEventEnabled, &SaveGameEvent::setEventEnabled);
 		usertypeDefinition["saved"] = sol::property(&SavedGameEvent::getEventEnabled, &SavedGameEvent::setEventEnabled);
+		usertypeDefinition["shieldBlocked"] = sol::property(&ShieldBlockedEvent::getEventEnabled, &ShieldBlockedEvent::setEventEnabled);
 		usertypeDefinition["simulate"] = sol::property(&SimulateEvent::getEventEnabled, &SimulateEvent::setEventEnabled);
+		usertypeDefinition["simulated"] = sol::property(&SimulatedEvent::getEventEnabled, &SimulatedEvent::setEventEnabled);
 		usertypeDefinition["skillRaised"] = sol::property(&SkillRaisedEvent::getEventEnabled, &SkillRaisedEvent::setEventEnabled);
 		usertypeDefinition["soundObjectPlay"] = sol::property(&SoundObjectPlayEvent::getEventEnabled, &SoundObjectPlayEvent::setEventEnabled);
 		usertypeDefinition["spellCast"] = sol::property(&SpellCastEvent::getEventEnabled, &SpellCastEvent::setEventEnabled);

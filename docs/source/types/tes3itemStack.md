@@ -6,43 +6,16 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-A complex container that holds a relationship between an item, and zero or more associated item datas.
+Item stack represents all copies of an item with the same id inside an inventory. This complex container holds a relationship between an item, and zero or more associated item datas. The `itemStack.variables` is a list of different itemData for each item in the stack, not a single itemData. Not every item in the stack needs to have associated itemData.
 
-Item stack represents all copies of an item with the same id. Some of those may have itemData and some may not. E.g. you might have two lockpicks and one of them has fewer uses remaining.
-So `itemStack.variables` is a list of different itemData for each thing in the stack, not a single itemData.
+For example, you might have five journeyman lockpicks:
 
-## Properties
+- 3 new ones (25 uses)
+- 1 with 23 uses
+- 1 with 18 uses
 
-### `count`
-<div class="search_terms" style="display: none">count</div>
+In this example, all of these lockpicks are represented by a single tes3itemStack object. The `stack.count` is 5. The `#stack.variables` is 2, since there are only 2 used lockpicks, with each having different itemData. The count of new lockpicks is equal to `stack.count - #stack.variables`.
 
-The total number of items in the stack.
-
-**Returns**:
-
-* `result` (integer)
-
-***
-
-### `object`
-<div class="search_terms" style="display: none">object</div>
-
-*Read-only*. The core game object that the stack represents.
-
-**Returns**:
-
-* `result` ([tes3item](../../types/tes3item))
-
-***
-
-### `variables`
-<div class="search_terms" style="display: none">variables</div>
-
-A collection of variables that are associated with the stack's object, or nil if there aren't any.
-
-**Returns**:
-
-* `result` ([tes3itemData](../../types/tes3itemData)[], nil)
 
 ??? example "Example: In the iterItems() function we can see that the an item stack can consist of items with itemData and items without it"
 
@@ -66,6 +39,10 @@ A collection of variables that are associated with the stack's object, or nil if
 				if stack.variables then
 					for _, data in pairs(stack.variables) do
 						if data then
+							-- Note that data.count is always 1 for items in inventories.
+							-- That field is only relevant for items in the game world, which
+							-- are stored as references. In that case tes3itemData.count field
+							-- contains the amount of items in the in-game-world stack of items.
 							coroutine.yield(item, data.count, data)
 							count = count - data.count
 						end
@@ -87,4 +64,37 @@ A collection of variables that are associated with the stack's object, or nil if
 	end
 
 	```
+
+## Properties
+
+### `count`
+<div class="search_terms" style="display: none">count</div>
+
+The total number of items in the stack.
+
+**Returns**:
+
+* `result` (integer)
+
+***
+
+### `object`
+<div class="search_terms" style="display: none">object</div>
+
+*Read-only*. The core game object that the stack represents.
+
+**Returns**:
+
+* `result` ([tes3item](../types/tes3item.md))
+
+***
+
+### `variables`
+<div class="search_terms" style="display: none">variables</div>
+
+A collection of variables that are associated with the stack's object, or nil if there aren't any.
+
+**Returns**:
+
+* `result` ([tes3itemData](../types/tes3itemData.md)[], nil)
 

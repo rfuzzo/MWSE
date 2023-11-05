@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is fired when an enchanted item has been created by the player.",
+	related = { "enchantedItemCreateFailed" },
 	eventData = {
 		["baseObject"] = {
 			type = "tes3item",

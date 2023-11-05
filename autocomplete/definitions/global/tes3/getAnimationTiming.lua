@@ -13,6 +13,9 @@ return {
 		["usage"] = {
 			title = "An elegent usage example",
 			description = [[The function returns animation timings for three body segments. This array can be nicely broken down into three variables using Lua's `unpack()` function.]]
+		},
+		["..\\getAnimationGroups\\usage"] = {
+			title = "Getting animation timings for bow animations",
 		}
 	}
 }

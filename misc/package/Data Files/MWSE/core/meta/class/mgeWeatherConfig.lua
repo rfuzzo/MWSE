@@ -6,96 +6,97 @@
 --- @class mgeWeatherConfig
 mgeWeatherConfig = {}
 
---- No description yet available.
---- @param weather number No description yet available.
+--- This function returns the distant fog settings for given weather type. These can be found in the Distant Land Weather Settings in MGE XE.
+--- @param weather tes3.weather Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @return mgeDistantFogTable result No description yet available.
 function mgeWeatherConfig.getDistantFog(weather) end
 
 --- Gets the PPL data for a weather from MGE. These are returned in a table with the `sun` and `ambient` keys, as well as the `weather` redefined. The result table can be modified, then sent back to `setPerPixelLighting`.
---- @param weather number No description yet available.
---- @return table<string, number> result No description yet available.
+--- @param weather tes3.weather Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @return mgePerPixelLightingTable result No description yet available.
 function mgeWeatherConfig.getPerPixelLighting(weather) end
 
 --- Gets the in- and out-scatter values from MGE. These are returned in a table with the `inscatter` and `outscatter` keys. The result table can be modified, then sent back to `setScattering`.
---- @return table<string, tes3vector3> scatters No description yet available.
+--- @return mgeScatteringTable scatters No description yet available.
 function mgeWeatherConfig.getScattering() end
 
 --- Gets the skylight scatter values from MGE. These are returned in a table with the `skylight` and `mix` keys. The result table can be modified, then sent back to `setSkylightScattering`.
---- @return table<string, number[]|number> scatters No description yet available.
+--- @return mgeSkylightScatteringTable scatters No description yet available.
 function mgeWeatherConfig.getSkylightScattering() end
 
 --- Gets the wind speed for a weather from MGE. This is returned in a table with the `speed` key, as well as the `weather` redefined. The result table can be modified, then sent back to `setWind`.
---- @param weather number No description yet available.
---- @return table<string, number> result A package containing the speed property.
+--- @param weather tes3.weather Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @return mgeWindTable result A package containing the speed property.
 function mgeWeatherConfig.getWind(weather) end
 
---- No description yet available.
---- @param params mgeWeatherConfig.setDistantFog.params This table accepts the following values:
+--- This is used to change the distant fog settings for given weather type.
+--- @param params mgeDistantFogTable|mgeWeatherConfig.setDistantFog.params This table accepts the following values:
 --- 
---- `weather`: number — No description yet available.
+--- `weather`: tes3.weather — Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 --- 
---- `distance`: number — No description yet available.
+--- `distance`: number — Corresponds to the value of "Fog range factor" setting for given weather in the Distant Land Weather Settings of MGE XE.
 --- 
---- `offset`: number — No description yet available.
+--- `offset`: number — Corresponds to the value of "Fog offset" setting for given weather in the Distant Land Weather Settings of MGE XE.
 function mgeWeatherConfig.setDistantFog(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setDistantFog`.
 --- @class mgeWeatherConfig.setDistantFog.params
---- @field weather number No description yet available.
---- @field distance number No description yet available.
---- @field offset number No description yet available.
+--- @field weather tes3.weather Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @field distance number Corresponds to the value of "Fog range factor" setting for given weather in the Distant Land Weather Settings of MGE XE.
+--- @field offset number Corresponds to the value of "Fog offset" setting for given weather in the Distant Land Weather Settings of MGE XE.
 
 --- Sets the PPL values for a weather in MGE. The result table of `getPerPixelLighting` can be modified then passed to this function.
---- @param params mgeWeatherConfig.setPerPixelLighting.params This table accepts the following values:
+--- @param params mgePerPixelLightingTable|mgeWeatherConfig.setPerPixelLighting.params This table accepts the following values:
 --- 
---- `weather`: number — No description yet available.
+--- `weather`: tes3.weather — Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 --- 
---- `sun`: number — No description yet available.
+--- `sun`: number — Corresponds to the value of "Sun brightness multiplier" setting for given weather in the Per-pixel Lighting Settings menu of MGE XE.
 --- 
---- `ambient`: number — No description yet available.
+--- `ambient`: number — Corresponds to the value of "Ambient brightness multiplier" setting for given weather in the Per-pixel Lighting Settings menu of MGE XE.
 function mgeWeatherConfig.setPerPixelLighting(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setPerPixelLighting`.
 --- @class mgeWeatherConfig.setPerPixelLighting.params
---- @field weather number No description yet available.
---- @field sun number No description yet available.
---- @field ambient number No description yet available.
+--- @field weather tes3.weather Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+--- @field sun number Corresponds to the value of "Sun brightness multiplier" setting for given weather in the Per-pixel Lighting Settings menu of MGE XE.
+--- @field ambient number Corresponds to the value of "Ambient brightness multiplier" setting for given weather in the Per-pixel Lighting Settings menu of MGE XE.
 
 --- Sets the in- and out-scatter values for MGE. The result table of `getScattering` can be modified then passed to this function.
---- @param params mgeWeatherConfig.setScattering.params This table accepts the following values:
+--- @param params mgeScatteringTable|mgeWeatherConfig.setScattering.params This table accepts the following values:
 --- 
---- `inscatter`: tes3vector3|table — No description yet available.
+--- `inscatter`: tes3vector3|number[] — No description yet available.
 --- 
---- `outscatter`: tes3vector3|table — No description yet available.
+--- `outscatter`: tes3vector3|number[] — No description yet available.
 function mgeWeatherConfig.setScattering(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setScattering`.
 --- @class mgeWeatherConfig.setScattering.params
---- @field inscatter tes3vector3|table No description yet available.
---- @field outscatter tes3vector3|table No description yet available.
+--- @field inscatter tes3vector3|number[] No description yet available.
+--- @field outscatter tes3vector3|number[] No description yet available.
 
 --- Sets the sky scatter values for MGE. The result table of `getSkylightScattering` can be modified then passed to this function.
---- @param params mgeWeatherConfig.setSkylightScattering.params This table accepts the following values:
+--- @param params mgeSkylightScatteringTable|mgeWeatherConfig.setSkylightScattering.params This table accepts the following values:
 --- 
---- `skylight`: tes3vector3|table — No description yet available.
+--- `skylight`: tes3vector3|number[] — No description yet available.
 --- 
 --- `mix`: number? — *Default*: `0.44`. No description yet available.
 function mgeWeatherConfig.setSkylightScattering(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setSkylightScattering`.
 --- @class mgeWeatherConfig.setSkylightScattering.params
---- @field skylight tes3vector3|table No description yet available.
+--- @field skylight tes3vector3|number[] No description yet available.
 --- @field mix number? *Default*: `0.44`. No description yet available.
 
 --- Sets the wind speed for a weather in MGE. The result table of `getWind` can be modified then passed to this function.
---- @param params mgeWeatherConfig.setWind.params This table accepts the following values:
+--- @param params mgeWindTable|mgeWeatherConfig.setWind.params This table accepts the following values:
 --- 
---- `weather`: number — No description yet available.
+--- `weather`: tes3.weather — Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 --- 
 --- `speed`: number — No description yet available.
 function mgeWeatherConfig.setWind(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setWind`.
 --- @class mgeWeatherConfig.setWind.params
---- @field weather number No description yet available.
+--- @field weather tes3.weather Maps to values in [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 --- @field speed number No description yet available.
 

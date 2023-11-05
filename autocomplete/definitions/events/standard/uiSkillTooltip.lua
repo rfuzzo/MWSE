@@ -4,6 +4,7 @@ return {
 
 Note that tooltips may have different width depending on which menu they were created in, between 230 and 432 pixels by default.
 	]],
+	related = { "uiObjectTooltip", "uiSpellTooltip" },
 	eventData = {
 		["tooltip"] = {
 			type = "tes3uiElement",

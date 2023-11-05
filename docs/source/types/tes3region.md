@@ -8,7 +8,7 @@
 
 A structure that contains region information.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -95,7 +95,7 @@ The region's name. It must be a string less than 32 characters long.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -117,7 +117,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3leveledCreature](../../types/tes3leveledCreature))
+* `result` ([tes3leveledCreature](../types/tes3leveledCreature.md))
 
 ***
 
@@ -128,7 +128,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3regionSound](../../types/tes3regionSound)[])
+* `result` ([tes3regionSound](../types/tes3regionSound.md)[])
 
 ***
 
@@ -172,7 +172,7 @@ The region's current weather.
 
 **Returns**:
 
-* `result` ([tes3weather](../../types/tes3weather))
+* `result` ([tes3weather](../types/tes3weather.md))
 
 ***
 
@@ -325,7 +325,7 @@ myObject:changeWeather(weatherId)
 
 **Parameters**:
 
-* `weatherId` (number): Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
+* `weatherId` ([tes3.weather](../references/weather-types.md)): Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
 ***
 

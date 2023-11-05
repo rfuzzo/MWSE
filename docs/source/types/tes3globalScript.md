@@ -17,7 +17,7 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 
 **Returns**:
 
-* `result` ([tes3scriptContext](../../types/tes3scriptContext))
+* `result` ([tes3scriptContext](../types/tes3scriptContext.md))
 
 ***
 
@@ -28,7 +28,7 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference), nil)
+* `result` ([tes3reference](../types/tes3reference.md), nil)
 
 ***
 
@@ -39,5 +39,5 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 

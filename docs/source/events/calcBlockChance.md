@@ -23,9 +23,9 @@ event.register(tes3.event.calcBlockChance, calcBlockChanceCallback)
 
 ## Event Data
 
-* `attacker` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the attacker mobile's reference.
-* `attackerMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile that is attacking.
+* `attacker` ([tes3reference](../types/tes3reference.md)): *Read-only*. A shortcut to the attacker mobile's reference.
+* `attackerMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile that is attacking.
 * `blockChance` (number): The block chance for the actor. This can be adjusted.
-* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. A shortcut to the target mobile's reference.
-* `targetMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile that is being attacked.
+* `target` ([tes3reference](../types/tes3reference.md)): *Read-only*. A shortcut to the target mobile's reference.
+* `targetMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile that is being attacked.
 

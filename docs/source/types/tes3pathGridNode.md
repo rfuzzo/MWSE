@@ -17,7 +17,7 @@ A node within a path grid.
 
 **Returns**:
 
-* `result` ([tes3pathGridNode](../../types/tes3pathGridNode)[])
+* `result` ([tes3pathGridNode](../types/tes3pathGridNode.md)[])
 
 ***
 
@@ -28,7 +28,7 @@ A node within a path grid.
 
 **Returns**:
 
-* `result` ([tes3pathGrid](../../types/tes3pathGrid))
+* `result` ([tes3pathGrid](../types/tes3pathGrid.md))
 
 ***
 
@@ -39,5 +39,5 @@ A node within a path grid.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

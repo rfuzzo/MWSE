@@ -5,10 +5,10 @@ return {
 	eventData = {
 		["path"] = {
 			type = "string",
-			description = "The path to the sound to play, relative to Data Files\\Sounds",
+			description = "The path to the sound to play, relative to Data Files\\Sounds. For some sounds, path can be an empty string.",
 		},
 		["reference"] = {
-			type = "tes3reference",
+			type = "tes3reference|nil",
 			description = "The reference which is emiting the sound.",
 		},
 		["flags"] = {

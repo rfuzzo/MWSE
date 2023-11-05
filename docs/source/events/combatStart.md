@@ -23,6 +23,33 @@ event.register(tes3.event.combatStart, combatStartCallback)
 
 ## Event Data
 
-* `actor` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor who is entering combat.
-* `target` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor who combat is being triggered against.
+* `actor` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor who is entering combat.
+* `target` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor who combat is being triggered against.
+
+## Examples
+
+!!! example "Example: Stop certain actors from initiating combat with the player"
+
+	```lua
+	
+	---@param actor tes3mobileActor
+	local function isPacifistTarget(actor)
+		-- Here you can filter if the actor should initiate combat with the player.
+		-- ...
+	end
+	
+	--- @param e combatStartEventData
+	local function forcedPacifism(e)
+		if (e.target == tes3.player and isPacifistTarget(e.actor)) then
+			return false
+		end
+	end
+	event.register(tes3.event.combatStart, forcedPacifism)
+
+	```
+
+
+## Related events
+
+[combatStart](./combatStart.md){ .md-button }[combatStarted](./combatStarted.md){ .md-button }[combatStop](./combatStop.md){ .md-button }[combatStopped](./combatStopped.md){ .md-button }
 

@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This event is triggered when a reference is deactivated.
+This event is triggered when a reference is deactivated because it has been removed from the world, or is no longer in an active cell.
 
 ```lua
 --- @param e referenceDeactivatedEventData
@@ -23,5 +23,10 @@ event.register(tes3.event.referenceDeactivated, referenceDeactivatedCallback)
 
 ## Event Data
 
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference which was deactivated.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference which was deactivated.
+
+
+## Related events
+
+[referenceActivated](./referenceActivated.md){ .md-button }[referenceDeactivated](./referenceDeactivated.md){ .md-button }
 

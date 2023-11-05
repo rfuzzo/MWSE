@@ -48,7 +48,7 @@ The combat distance.
 ### `lastUseTimestamp`
 <div class="search_terms" style="display: none">lastusetimestamp</div>
 
-No description yet available.
+Used by the MCP to implement enchanted item cooldown.
 
 **Returns**:
 
@@ -63,7 +63,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -86,16 +86,16 @@ The next action. From observed behavior, this roughly maps to:
 Value | Behavior
 ----- | ---------
 0     | Undecided
-1	  | Use melee weapon
-2	  | Use marksman weapon
-3	  | Use hand to hand attacks
-4	  | Use on-touch offensive spell
-5	  | Use on-target offensive spell
-6	  | Use summon spell
-7	  | Flee
-8	  | Cast on-self empowering spell (For example, Ancestor Guardian)
-9	  | MaybeEquipUseItem?
-10	  | Use enchanted item
+1     | Use melee weapon
+2     | Use marksman weapon
+3     | Use hand to hand attacks
+4     | Use on-touch offensive spell
+5     | Use on-target offensive spell
+6     | Use summon spell
+7     | Flee
+8     | Cast on-self empowering spell (For example, Ancestor Guardian)
+9     | MaybeEquipUseItem?
+10    | Use enchanted item
 
 
 **Returns**:
@@ -107,11 +107,11 @@ Value | Behavior
 ### `selectedItem`
 <div class="search_terms" style="display: none">selecteditem</div>
 
-No description yet available.
+A potion or an enchanted item whose spell will be used.
 
 **Returns**:
 
-* `result` ([tes3itemStack](../../types/tes3itemStack))
+* `result` ([tes3itemStack](../types/tes3itemStack.md))
 
 ***
 
@@ -122,7 +122,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -133,7 +133,7 @@ This field containg the spell the actor is currently casting. If not in casting 
 
 **Returns**:
 
-* `result` ([tes3spell](../../types/tes3spell))
+* `result` ([tes3spell](../types/tes3spell.md))
 
 ***
 
@@ -144,12 +144,12 @@ This field containg the spell the actor is currently casting. If not in casting 
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
-### `selectionPriority`
-<div class="search_terms" style="display: none">selectionpriority</div>
+### `spellPriority`
+<div class="search_terms" style="display: none">spellpriority</div>
 
 No description yet available.
 
@@ -172,7 +172,7 @@ myObject:changeEquipment(equipmentStack)
 
 **Parameters**:
 
-* `equipmentStack` ([tes3equipmentStack](../../types/tes3equipmentStack)): An item to equip.
+* `equipmentStack` ([tes3equipmentStack](../types/tes3equipmentStack.md)): An item to equip.
 
 ***
 
@@ -187,7 +187,7 @@ local result = myObject:selectAlchemyWithEffect(id)
 
 **Parameters**:
 
-* `id` (integer)
+* `id` ([tes3.effect](../references/magic-effects.md)): Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
 **Returns**:
 

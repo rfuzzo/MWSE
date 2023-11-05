@@ -10,7 +10,7 @@ A door game object. Data specific to a single door is stored on the door referen
 
 There is a special-case door with id ``PrisonMarker`` used for finding the nearest prison when the player is sent to jail. You should normally exclude this if you are iterating over all doors. Use the ``object.isLocationMarker`` property to detect these markers.
 
-This type inherits the following: [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -31,7 +31,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -42,7 +42,7 @@ The sound to be played when the door closes.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -130,7 +130,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -152,7 +152,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -163,7 +163,7 @@ The sound to be played when the door opens.
 
 **Returns**:
 
-* `result` ([tes3sound](../../types/tes3sound))
+* `result` ([tes3sound](../types/tes3sound.md))
 
 ***
 
@@ -174,7 +174,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -196,7 +196,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -218,7 +218,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -229,7 +229,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -240,7 +240,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -273,7 +273,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 

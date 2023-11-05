@@ -13,22 +13,11 @@ A substructure of mobile actors that provides information about the current or p
 ### `aiBehaviorState`
 <div class="search_terms" style="display: none">aibehaviorstate</div>
 
-The behavior state of the [tes3actionData](https://mwse.github.io/MWSE/types/tes3actionData). This maps to values in [`tes3.aiBehaviorState`](https://mwse.github.io/MWSE/references/ai-behavior-states/) namespace.
-
-Value | Behavior
------ | ---------
--1    | Undecided
- 0    | Hello
- 2    | Idle
- 3    | Attack
- 4    | Avoid
- 6    | Flee
- 8    | Walk
-12    | Greet
+The behavior state. This maps to values in [`tes3.aiBehaviorState`](https://mwse.github.io/MWSE/references/ai-behavior-states/) namespace.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.aiBehaviorState](../references/ai-behavior-states.md))
 
 ***
 
@@ -39,7 +28,7 @@ The actor's animation state. Maps to values in [`tes3.animationState`](https://m
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.animationState](../references/animation-states.md))
 
 ***
 
@@ -54,6 +43,17 @@ When attacking, this value represents how much the weapon has been pulled back. 
 
 ***
 
+### `blockingState`
+<div class="search_terms" style="display: none">blockingstate</div>
+
+A state index that indicates an actor's blocking state. It is zero when not blocking and non-zero when blocking. A value of 1 indicates a state transition from non-blocking to blocking, while a value of 2 means blocking is active (where the block animation is currently playing and should not be interrupted).
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `currentAnimationGroup`
 <div class="search_terms" style="display: none">currentanimationgroup</div>
 
@@ -61,7 +61,7 @@ Actor's current animation group. Maps to values in [`tes3.animationGroup`](https
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.animationGroup](../references/animation-groups.md))
 
 ***
 
@@ -72,7 +72,7 @@ The actor's attack target. The target will be saved in `hitTarget` field until a
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor), nil)
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md), nil)
 
 ***
 
@@ -94,7 +94,7 @@ The currently nocked projectile the associated actor is using. It is available w
 
 **Returns**:
 
-* `result` ([tes3mobileProjectile](../../types/tes3mobileProjectile))
+* `result` ([tes3mobileProjectile](../types/tes3mobileProjectile.md))
 
 ***
 
@@ -103,9 +103,36 @@ The currently nocked projectile the associated actor is using. It is available w
 
 A number from the [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/references/physical-attack-types/) enumeration identifying the physical attack type. Can be `tes3.physicalAttackType.slash`, `.chop`, `.thrust`, `.projectile`, `.creature1`, `.creature2`, or `.creature3.`
 
+Proper time to change the attack direction is the [attackStart](https://mwse.github.io/MWSE/events/attackStart/) event. See the example below to see how.
+
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.physicalAttackType](../references/physical-attack-types.md))
+
+??? example "Example: Changing axe attack direction"
+
+	```lua
+	
+	-- In this example, we force the attack
+	-- direction for axes to always be chop
+	
+	---@param e attackStartEventData
+	local function onAttackStart(e)
+		local mobile = e.reference.mobile
+		if not mobile then return end
+	
+		local weapon = mobile.readiedWeapon.object --[[@as tes3weapon]]
+	
+		if weapon.type == tes3.weaponType.axeOneHand
+		or weapon.type == tes3.weaponType.axeTwoHand then
+			-- Now actually change the attack direction
+			e.attackType = tes3.physicalAttackType.chop
+		end
+	end
+	
+	event.register(tes3.event.attackStart, onAttackStart)
+
+	```
 
 ***
 
@@ -127,7 +154,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -138,7 +165,7 @@ The actor's attack target, stored until the actor attacks successfully again. In
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor), nil)
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md), nil)
 
 ***
 
@@ -149,5 +176,5 @@ If moving to a location, this is the position to be walked to.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 

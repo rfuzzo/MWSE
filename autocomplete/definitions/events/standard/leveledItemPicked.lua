@@ -16,7 +16,7 @@ return {
 		["spawner"] = {
 			type = "tes3reference|nil",
 			--readOnly = true,
-			description = "The reference for the inventory that the item is being picked in. In many cases this may be `nil`.",
+			description = "The reference for the inventory that the item is being picked in. In a few cases this may be `nil`. Note that during actor cloning, the inventory is resolved before cloning is fully complete.",
 		},
 	},
 	filter = "list",

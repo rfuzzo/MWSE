@@ -8,7 +8,7 @@
 
 A rendering property that allows the application to set the test and write modes of the renderer's Z-buffer and to set the comparison function used for the Z-buffer test.
 
-This type inherits the following: [niProperty](../../types/niProperty), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niProperty](../types/niProperty.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `controller`
@@ -18,7 +18,7 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -73,7 +73,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -84,7 +84,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -95,7 +95,7 @@ The Z-buffer test function used. Maps to values in [`ni.zBufferPropertyTestFunct
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.zBufferPropertyTestFunction](../references/ni/z-buffer-property-test-functions.md))
 
 ***
 
@@ -106,7 +106,7 @@ The Z-buffer test function used. Maps to values in [`ni.zBufferPropertyTestFunct
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.propertyType](../references/ni/property-types.md))
 
 ***
 
@@ -123,7 +123,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -138,7 +138,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -157,7 +157,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -176,7 +176,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -195,7 +195,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -240,7 +240,7 @@ local result = myObject:hasStringDataWith(value)
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -248,7 +248,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -259,7 +259,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -267,7 +267,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -286,7 +286,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -323,7 +323,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -338,7 +338,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -390,5 +390,5 @@ local property = niZBufferProperty.new()
 
 **Returns**:
 
-* `property` ([niZBufferProperty](../../types/niZBufferProperty))
+* `property` ([niZBufferProperty](../types/niZBufferProperty.md))
 

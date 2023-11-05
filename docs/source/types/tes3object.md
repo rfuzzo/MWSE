@@ -8,7 +8,7 @@
 
 Almost anything that can be represented in the Construction Set is based on this structure.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -84,7 +84,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -106,7 +106,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -117,7 +117,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -139,7 +139,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -161,7 +161,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -172,7 +172,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 

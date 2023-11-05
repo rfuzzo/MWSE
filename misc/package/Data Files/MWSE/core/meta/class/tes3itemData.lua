@@ -2,7 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- A set of variables that differentiates one item from another.
+--- A set of variables that differentiates one item from another. The game adds itemData to items on equipping.
 --- @class tes3itemData
 --- @field charge number The charge of the item. Provides incorrect values on misc items, which instead have a soul actor.
 --- @field condition number The condition/health of the item. Provides incorrect values on light items, which instead have a `timeLeft` property.

@@ -25,3 +25,8 @@ event.register(tes3.event.meshLoad, meshLoadCallback)
 
 * `path` (string): The path to the mesh, relative to Data Files\Meshes
 
+
+## Related events
+
+[keyframesLoad](./keyframesLoad.md){ .md-button }[meshLoaded](./meshLoaded.md){ .md-button }
+

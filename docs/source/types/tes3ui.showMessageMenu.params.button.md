@@ -13,11 +13,11 @@ Layout for the buttons table passed to `tes3ui.showMessageMenu` function.
 ### `callback`
 <div class="search_terms" style="display: none">callback</div>
 
-The function to call when this button is clicked.
+The function to call when this button is clicked. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 
 **Returns**:
 
-* `result` (fun(callbackParams: table))
+* `result` (nil, fun(callbackParams: table))
 
 ***
 
@@ -28,7 +28,7 @@ Function that, if provided, determines whether the button will call the callback
 
 **Returns**:
 
-* `result` (fun(callbackParams: table): boolean, nil)
+* `result` (nil, fun(callbackParams: table): boolean, nil)
 
 ***
 
@@ -39,7 +39,7 @@ If set, the button will only be visible if this function returns true. This func
 
 **Returns**:
 
-* `result` (fun(callbackParams: table): boolean, nil)
+* `result` (nil, fun(callbackParams: table): boolean, nil)
 
 ***
 
@@ -61,7 +61,7 @@ A table with header and text that will display as a tooltip when an enabled butt
 
 **Returns**:
 
-* `result` ([tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), nil)
+* `result` (nil, [tes3ui.showMessageMenu.params.tooltip](../types/tes3ui.showMessageMenu.params.tooltip.md), fun(callbackParams: table): [tes3ui.showMessageMenu.params.tooltip](../types/tes3ui.showMessageMenu.params.tooltip.md), nil)
 
 ***
 
@@ -72,5 +72,5 @@ The tooltip to show when the button is disabled. Can be a simple string or a tab
 
 **Returns**:
 
-* `result` (string, [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), nil)
+* `result` (nil, string, [tes3ui.showMessageMenu.params.tooltip](../types/tes3ui.showMessageMenu.params.tooltip.md), fun(callbackParams: table): [tes3ui.showMessageMenu.params.tooltip](../types/tes3ui.showMessageMenu.params.tooltip.md), nil)
 

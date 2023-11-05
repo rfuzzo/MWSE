@@ -20,7 +20,12 @@ namespace se::cs::dialog::render_window {
 	struct WidgetsController;
 
 	struct SceneGraphController : SceneGraphControllerVanilla {
+	private:
 		WidgetsController* widgets; // 0x24
+
+	public:
+		void clearWidgets();
+		WidgetsController* getWidgets();
 
 		static bool __cdecl initialize(SceneGraphController* controller);
 

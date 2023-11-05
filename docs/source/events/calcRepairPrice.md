@@ -21,9 +21,14 @@ event.register(tes3.event.calcRepairPrice, calcRepairPriceCallback)
 ## Event Data
 
 * `basePrice` (number): *Read-only*. The price before adjustment.
-* `item` ([tes3item](../../types/tes3item)): *Read-only*. The item to be repaired.
-* `itemData` ([tes3item](../../types/tes3item)): *Read-only*. Variable node. The data associated with item. This may be nil.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor of the merchant the player is interacting with.
+* `item` ([tes3item](../types/tes3item.md)): *Read-only*. The item to be repaired.
+* `itemData` ([tes3item](../types/tes3item.md)): *Read-only*. Variable node. The data associated with item. This may be nil.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor of the merchant the player is interacting with.
 * `price` (number): The adjusted price of repairing item.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. mobile’s related reference.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. mobile’s related reference.
+
+
+## Related events
+
+[calcBarterPrice](./calcBarterPrice.md){ .md-button }[calcEnchantmentPrice](./calcEnchantmentPrice.md){ .md-button }[calcRepairPrice](./calcRepairPrice.md){ .md-button }[calcSpellmakingPrice](./calcSpellmakingPrice.md){ .md-button }[calcSpellPrice](./calcSpellPrice.md){ .md-button }[calcTrainingPrice](./calcTrainingPrice.md){ .md-button }[calcTravelPrice](./calcTravelPrice.md){ .md-button }
 

@@ -8,7 +8,7 @@
 
 A container object that has not been cloned. Typically represents the raw information edited in the construction set.
 
-This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physicalObject](../../types/tes3physicalObject), [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3actor](../types/tes3actor.md), [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `actorFlags`
@@ -62,7 +62,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3boundingBox](../../types/tes3boundingBox))
+* `result` ([tes3boundingBox](../types/tes3boundingBox.md))
 
 ***
 
@@ -117,7 +117,7 @@ The amount of weight that the container can hold.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack)[])
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md)[])
 
 ***
 
@@ -139,7 +139,7 @@ The amount of weight that the container can hold.
 
 **Returns**:
 
-* `result` ([tes3inventory](../../types/tes3inventory), [tes3itemStack](../../types/tes3itemStack)[])
+* `result` ([tes3inventory](../types/tes3inventory.md), [tes3itemStack](../types/tes3itemStack.md)[])
 
 ***
 
@@ -205,7 +205,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -227,14 +227,14 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
 ### `organic`
 <div class="search_terms" style="display: none">organic</div>
 
-Determines if the container's organic flag is enabled.
+Determines if the container's organic flag is enabled. The name of this property comes from the Construction Set. If a container is flagged as organic, no items can be stored inside such containers. In vanilla, those are all plants, mushrooms, and ores. In addition, resupplying guild supply chests are implemented as organic and respawning containers.
 
 **Returns**:
 
@@ -249,7 +249,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -271,14 +271,16 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
 ### `respawns`
 <div class="search_terms" style="display: none">respawns</div>
 
-Determines if the container's respawn flag is enabled.
+Determines if the container's respawn flag is enabled. Only the organic containers can have respawn flag set.
+
+The global script variable, "MonthsToRespawn" is decremented at the end of each month. If it reaches zero at the first day of next month, it is reset to `iMonthsToRespawn` (GMST) and all respawning containers are refilled.
 
 **Returns**:
 
@@ -304,7 +306,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -315,7 +317,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -326,7 +328,7 @@ The script that runs on the object.
 
 **Returns**:
 
-* `result` ([tes3script](../../types/tes3script))
+* `result` ([tes3script](../types/tes3script.md))
 
 ***
 
@@ -359,7 +361,7 @@ A list of actors that the object has been stolen from.
 
 **Returns**:
 
-* `result` ([tes3baseObject](../../types/tes3baseObject)[])
+* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
 
 ***
 
@@ -409,7 +411,7 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 **Returns**:
 
-* `newObject` ([tes3container](../../types/tes3container))
+* `newObject` ([tes3container](../types/tes3container.md))
 
 ***
 
@@ -444,8 +446,8 @@ local result = myObject:hasItemEquipped(item, itemData)
 
 **Parameters**:
 
-* `item` ([tes3item](../../types/tes3item), string): The item to perform a check for.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*.
+* `item` ([tes3item](../types/tes3item.md), string): The item to perform a check for.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*.
 
 **Returns**:
 
@@ -464,7 +466,7 @@ local result = myObject:offersService(service)
 
 **Parameters**:
 
-* `service` (number): Use one of the values in the [`tes3.merchantService.*`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+* `service` ([tes3.merchantService](../references/merchant-services.md)): Use one of the values in the [`tes3.merchantService.*`](https://mwse.github.io/MWSE/references/merchant-services/) table.
 
 **Returns**:
 
@@ -483,7 +485,7 @@ myObject:onInventoryClose(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -498,7 +500,7 @@ local result = myObject:tradesItemType(objectType)
 
 **Parameters**:
 
-* `objectType` (number): Accepts values from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
+* `objectType` ([tes3.objectType](../references/object-types.md)): Accepts values from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
 
 **Returns**:
 

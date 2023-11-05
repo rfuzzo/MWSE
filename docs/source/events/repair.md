@@ -21,10 +21,10 @@ event.register(tes3.event.repair, repairCallback)
 ## Event Data
 
 * `chance` (number): The percent chance of the repair being successful. This can be changed to modify the player's chance of repairing. It is not limited at 100.
-* `item` ([tes3item](../../types/tes3item)): *Read-only*. The item being repaired.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data relevant to the repaired item.
+* `item` ([tes3item](../types/tes3item.md)): *Read-only*. The item being repaired.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Read-only*. The item data relevant to the repaired item.
 * `repairAmount` (number): The amount of condition that will be restored to the item.
-* `repairer` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The actor performing the repair. Note that this is currently always the player, but this may change in future updates.
-* `tool` ([tes3repairTool](../../types/tes3repairTool)): *Read-only*. The repair tool being used.
-* `toolData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data relevant to repair tool.
+* `repairer` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The actor performing the repair. Note that this is currently always the player, but this may change in future updates.
+* `tool` ([tes3repairTool](../types/tes3repairTool.md)): *Read-only*. The repair tool being used.
+* `toolData` ([tes3itemData](../types/tes3itemData.md)): *Read-only*. The item data relevant to repair tool.
 

@@ -62,8 +62,14 @@ namespace mwse::lua {
 			usertypeDefinition["new"] = sol::constructors<TES3::Vector3(), TES3::Vector3(float, float, float)>();
 
 			// Operator overloading.
-			usertypeDefinition[sol::meta_function::addition] = &TES3::Vector3::operator+;
-			usertypeDefinition[sol::meta_function::subtraction] = sol::resolve<TES3::Vector3(const TES3::Vector3&) const>(&TES3::Vector3::operator-);
+			usertypeDefinition[sol::meta_function::addition] = sol::overload(
+				sol::resolve<TES3::Vector3(const TES3::Vector3&) const>(&TES3::Vector3::operator+),
+				sol::resolve<TES3::Vector3(const float) const>(&TES3::Vector3::operator+)
+			);
+			usertypeDefinition[sol::meta_function::subtraction] = sol::overload(
+				sol::resolve<TES3::Vector3(const TES3::Vector3&) const>(&TES3::Vector3::operator-),
+				sol::resolve<TES3::Vector3(const float) const>(&TES3::Vector3::operator-)
+			);
 			usertypeDefinition[sol::meta_function::unary_minus] = sol::resolve<TES3::Vector3() const>(&TES3::Vector3::operator-);;
 			usertypeDefinition[sol::meta_function::multiplication] = sol::overload(
 				sol::resolve<TES3::Vector3(const TES3::Vector3&) const>(&TES3::Vector3::operator*),
@@ -196,6 +202,7 @@ namespace mwse::lua {
 			usertypeDefinition["toRotationZ"] = &TES3::Matrix33::toRotationZ;
 			usertypeDefinition["toZero"] = &TES3::Matrix33::toZero;
 			usertypeDefinition["transpose"] = &TES3::Matrix33::transpose;
+			usertypeDefinition["lookAt"] = &TES3::Matrix33::lookAt;
 
 			// Handle functions with out values.
 			usertypeDefinition["invert"] = &TES3::Matrix33::invert_lua;

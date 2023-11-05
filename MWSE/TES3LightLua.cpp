@@ -53,6 +53,7 @@ namespace mwse::lua {
 		usertypeDefinition["name"] = sol::property(&TES3::Light::getName, &TES3::Light::setName);
 
 		// Methods.
+		usertypeDefinition["createCopy"] = &TES3::Light::createCopy_lua<TES3::Light>;
 		usertypeDefinition["getTimeLeft"] = &TES3::Light::getTimeLeft_lua;
 
 		// TODO: Deprecated. Remove before 2.1-stable.

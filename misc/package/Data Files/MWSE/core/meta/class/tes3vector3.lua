@@ -4,11 +4,13 @@
 --- @meta
 --- A simple trio of floating-point numbers.
 --- @class tes3vector3
+--- @operator add(number): tes3vector3
 --- @operator add(tes3vector3): tes3vector3
 --- @operator div(number): tes3vector3
 --- @operator len: number
 --- @operator mul(tes3vector3): tes3vector3
 --- @operator mul(number): tes3vector3
+--- @operator sub(number): tes3vector3
 --- @operator sub(tes3vector3): tes3vector3
 --- @operator unm: tes3vector3
 --- @field b number The third value in the vector. An alias for `z`.
@@ -46,6 +48,8 @@ function tes3vector3:cross(vec) end
 function tes3vector3:distance(vec) end
 
 --- Calculates the dot product with another vector.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3vector3/#dot).
 --- @param vec tes3vector3 No description yet available.
 --- @return number result No description yet available.
 function tes3vector3:dot(vec) end

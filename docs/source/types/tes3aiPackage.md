@@ -17,7 +17,7 @@ The destination cell for escort and follow AI packages. For wander package, this
 
 **Returns**:
 
-* `result` ([tes3cell](../../types/tes3cell))
+* `result` ([tes3cell](../types/tes3cell.md))
 
 ***
 
@@ -116,7 +116,7 @@ Access to the actor to whom this AI package belongs.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -138,7 +138,7 @@ The target actor for activate, follow and escort AI packages.
 
 **Returns**:
 
-* `result` ([tes3mobileActor](../../types/tes3mobileActor))
+* `result` ([tes3mobileActor](../types/tes3mobileActor.md))
 
 ***
 
@@ -149,7 +149,7 @@ The final position to be reached by the escort, follow, and travel AI packages.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -160,5 +160,5 @@ The final position to be reached by the escort, follow, and travel AI packages.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.aiPackage](../references/ai-packages.md))
 

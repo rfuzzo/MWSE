@@ -8,7 +8,7 @@
 
 Contains skinning data that may be shared by multiple `NiSkinInstance` objects.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `boneData`
@@ -18,7 +18,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niSkinDataBoneData](../../types/niSkinDataBoneData)[])
+* `result` ([niSkinDataBoneData](../types/niSkinDataBoneData.md)[])
 
 ***
 
@@ -29,7 +29,7 @@ Access to the container with the skinning data optimized for hardware skinning. 
 
 **Returns**:
 
-* `result` ([niSkinPartition](../../types/niSkinPartition), nil)
+* `result` ([niSkinPartition](../types/niSkinPartition.md), nil)
 
 ***
 
@@ -51,7 +51,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -62,7 +62,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -73,7 +73,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -95,7 +95,7 @@ Defines the translation of the root bone in the bind pose from the parent node o
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -112,14 +112,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -127,7 +127,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -138,7 +138,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -146,7 +146,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 

@@ -8,7 +8,7 @@
 
 A core object representing a character race.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `abilities`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` ([tes3spellList](../../types/tes3spellList), [tes3spell](../../types/tes3spell)[])
+* `result` ([tes3spellList](../types/tes3spellList.md), [tes3spell](../types/tes3spell.md)[])
 
 ***
 
@@ -29,7 +29,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` ([tes3raceBaseAttribute](../../types/tes3raceBaseAttribute)[])
+* `result` ([tes3raceBaseAttribute](../types/tes3raceBaseAttribute.md)[])
 
 ***
 
@@ -84,7 +84,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3raceBodyParts](../../types/tes3raceBodyParts))
+* `result` ([tes3raceBodyParts](../types/tes3raceBodyParts.md))
 
 ***
 
@@ -106,7 +106,7 @@ Raw bit-based flags.
 
 **Returns**:
 
-* `result` ([tes3raceHeightWeight](../../types/tes3raceHeightWeight))
+* `result` ([tes3raceHeightWeight](../types/tes3raceHeightWeight.md))
 
 ***
 
@@ -150,7 +150,7 @@ Access to the playable race flag.
 
 **Returns**:
 
-* `result` ([tes3raceBodyParts](../../types/tes3raceBodyParts))
+* `result` ([tes3raceBodyParts](../types/tes3raceBodyParts.md))
 
 ***
 
@@ -194,7 +194,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -216,7 +216,7 @@ The persistent flag of the object.
 
 **Returns**:
 
-* `result` ([tes3raceSkillBonus](../../types/tes3raceSkillBonus)[])
+* `result` ([tes3raceSkillBonus](../types/tes3raceSkillBonus.md)[])
 
 ***
 
@@ -260,7 +260,7 @@ If true, references of this object can store temporary or persistent lua data.
 
 **Returns**:
 
-* `result` ([tes3raceHeightWeight](../../types/tes3raceHeightWeight))
+* `result` ([tes3raceHeightWeight](../types/tes3raceHeightWeight.md))
 
 ***
 

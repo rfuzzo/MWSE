@@ -26,3 +26,8 @@ event.register(tes3.event.keyframesLoad, keyframesLoadCallback)
 * `path` (string): The path to the keyframes file, relative to Data Files\Meshes.
 * `sequenceName` (string): The name of the associated NiSequence object.
 
+
+## Related events
+
+[meshLoad](./meshLoad.md){ .md-button }[meshLoaded](./meshLoaded.md){ .md-button }
+

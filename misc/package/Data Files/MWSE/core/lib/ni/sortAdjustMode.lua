@@ -1,4 +1,3 @@
----@enum ni.sortAdjustMode
 return {
 	["inherit"] = 0,
 	["off"] = 1,

@@ -8,7 +8,7 @@
 
 A collection of position, rotation, and scale keys used on NiKeyframeControllers.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `positionKeyCount`
@@ -29,7 +29,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niPosKey](../../types/niPosKey)[])
+* `result` ([niPosKey](../types/niPosKey.md)[])
 
 ***
 
@@ -40,7 +40,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animationKeyType](../references/ni/animation-key-types.md))
 
 ***
 
@@ -73,7 +73,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRotKey](../../types/niRotKey)[])
+* `result` ([niRotKey](../types/niRotKey.md)[])
 
 ***
 
@@ -84,7 +84,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animationKeyType](../references/ni/animation-key-types.md))
 
 ***
 
@@ -95,7 +95,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -106,7 +106,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -128,7 +128,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` ([niFloatKey](../../types/niFloatKey)[])
+* `result` ([niFloatKey](../types/niFloatKey.md)[])
 
 ***
 
@@ -139,7 +139,7 @@ This type inherits the following: [niObject](../../types/niObject)
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animationKeyType](../references/ni/animation-key-types.md))
 
 ***
 
@@ -156,14 +156,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -171,7 +171,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -182,7 +182,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -190,7 +190,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -214,4 +214,15 @@ local success = myObject:saveBinary(path)
 **Returns**:
 
 * `success` (boolean): If true the object was successfully serialized.
+
+***
+
+### `updateDerivedValues`
+<div class="search_terms" style="display: none">updatederivedvalues, derivedvalues</div>
+
+This updates the keyframe data's position, rotation, and scale keys as is appropriate for their key types.
+
+```lua
+myObject:updateDerivedValues()
+```
 

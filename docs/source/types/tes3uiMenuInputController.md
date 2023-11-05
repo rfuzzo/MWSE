@@ -28,7 +28,7 @@ A handle back to the main menu controller.
 
 **Returns**:
 
-* `result` ([tes3uiMenuController](../../types/tes3uiMenuController))
+* `result` ([tes3uiMenuController](../types/tes3uiMenuController.md))
 
 ***
 
@@ -39,7 +39,23 @@ The element that is currently focused for text input.
 
 **Returns**:
 
-* `result` ([tes3uiElement](../../types/tes3uiElement))
+* `result` ([tes3uiElement](../types/tes3uiElement.md), nil)
+
+??? example "Example: Checking if text input is active"
+
+	```lua
+	
+	---@return boolean isTextInputActive
+	local function isTextInputActive()
+		local menuController = tes3.worldController.menuController
+		local inputFocus = menuController.inputController.textInputFocus
+		if (not inputFocus or not inputFocus.visible) then
+			return false
+		end
+		return true
+	end
+
+	```
 
 ***
 

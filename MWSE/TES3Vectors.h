@@ -60,7 +60,9 @@ namespace TES3 {
 		bool operator==(const Vector3& vector) const;
 		bool operator!=(const Vector3& vector) const;
 		Vector3 operator+(const Vector3&) const;
+		Vector3 operator+(const float) const;
 		Vector3 operator-(const Vector3&) const;
+		Vector3 operator-(const float) const;
 		Vector3 operator-() const;
 		Vector3 operator*(const Vector3&) const;
 		Vector3 operator*(const float) const;
@@ -184,6 +186,8 @@ namespace TES3 {
 		Vector3 getForwardVector();
 		Vector3 getRightVector();
 		Vector3 getUpVector();
+
+		void lookAt(Vector3 direction, Vector3 worldUp);
 
 		bool reorthogonalize();
 

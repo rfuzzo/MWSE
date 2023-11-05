@@ -8,7 +8,7 @@ return {
 			tableParams = {
 				{
 					name = "type",
-					type = "number",
+					type = "tes3.crimeType",
 					optional = true,
 					default = "tes3.crimeType.theft",
 					description = "The type of crime to be committed. Maps to values in the [`tes3.crimeType`](https://mwse.github.io/MWSE/references/crime-types/) table."
@@ -25,7 +25,7 @@ return {
 					type = "number",
 					optional = true,
 					default = "0",
-					description = "Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects."
+					description = "Only valid if `type` is `tes3.crimeType.theft`. The value of the stolen objects. There in **no** need to multiply the value by `fCrimeStealing` GMST - the engine will handle that."
 				},
 				{
 					name = "forceDetection",

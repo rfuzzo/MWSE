@@ -20,6 +20,7 @@
 #include "TES3ActorAnimationController.h"
 #include "TES3Alchemy.h"
 #include "TES3AudioController.h"
+#include "TES3CombatSession.h"
 #include "TES3Enchantment.h"
 #include "TES3DataHandler.h"
 #include "TES3GameSetting.h"
@@ -165,6 +166,10 @@ namespace TES3 {
 		return calculateArmorRating(nullptr);
 	}
 
+	AnimationData* MobileActor::getAnimationData() const {
+		return vTable.mobileActor->getAnimationAttachment(this);
+	}
+
 	const auto TES3_MobileActor_applyPhysicalHit = reinterpret_cast<void(__thiscall*)(MobileActor*, MobileActor*, MobileActor*, float, float, MobileProjectile*, bool)>(0x5568F0);
 	void MobileActor::applyPhysicalHit(MobileActor* attacker, MobileActor* defender, float damage, float swing, MobileProjectile* projectile, bool alwaysPlayHitVoice) {
 		// Setup damage event data.
@@ -207,7 +212,7 @@ namespace TES3 {
 		else if (this->isDead()) {
 			// Custom resurrect logic that revives with minimal state changes.
 			actionData.animStateAttack = AttackAnimationState::Idle;
-			actionData.aiBehaviourState = 0;
+			actionData.aiBehaviorState = 0;
 			actionData.currentAnimGroup = 0xFF;
 			actorFlags &= ~(MobileActorFlag::SpellReadied | MobileActorFlag::WeaponDrawn);
 			movementFlags = 0;
@@ -333,7 +338,7 @@ namespace TES3 {
 
 			// Update the GUI if desired.
 			if (updateGUI) {
-				UI::updateCurrentMagicFromEquipmentStack(equipmentStackPointer);
+				UI::updateCurrentMagicFromEquipmentStack(nullptr, nullptr, equipmentStackPointer);
 				UI::updateMagicMenuSelection();
 			}
 		}
@@ -386,13 +391,34 @@ namespace TES3 {
 		return getViewToPointWithFacing(getFacing(), point);
 	}
 
+	float MobileActor::getViewToPoint_lua(sol::object point) const {
+		if (!point.is<const Vector3*>()) {
+			throw std::invalid_argument("Invalid 'point' parameter.");
+		}
+		return getViewToPoint(point.as<const Vector3*>());
+	}
+
 	const auto TES3_MobileActor_getViewToPointWithFacing = reinterpret_cast<float(__thiscall*)(const MobileActor*, float, const Vector3*)>(0x5264C0);
 	float MobileActor::getViewToPointWithFacing(float facing, const Vector3* point) const {
 		return TES3_MobileActor_getViewToPointWithFacing(this, facing, point);
 	}
 
+	float MobileActor::getViewToPointWithFacing_lua(float facing, sol::object point) const {
+		if (!point.is<const Vector3*>()) {
+			throw std::invalid_argument("Invalid 'point' parameter.");
+		}
+		return getViewToPointWithFacing(facing, point.as<const Vector3*>());
+	}
+
 	float MobileActor::getViewToActor(const TES3::MobileActor* mobile) const {
 		return getViewToPointWithFacing(getFacing(), &mobile->reference->position);
+	}
+
+	float MobileActor::getViewToActor_lua(sol::object mobile) const {
+		if (!mobile.is<const TES3::MobileActor*>()) {
+			throw std::invalid_argument("Invalid 'mobile' parameter.");
+		}
+		return getViewToActor(mobile.as<const TES3::MobileActor*>());
 	}
 
 	const auto TES3_MobileActor_getBootsWeight = reinterpret_cast<float(__thiscall*)(const MobileActor*)>(0x526F30);
@@ -1283,6 +1309,148 @@ namespace TES3 {
 			// Start unreadying action.
 			actionData.animStateAttack = AttackAnimationState::UnreadyWeap;
 		}
+	}
+
+	bool MobileActor::forceWeaponAttack_lua(sol::optional<sol::table> params) {
+		auto attackType = mwse::lua::getOptionalParam<int>(params, "attackType");
+		auto swing = mwse::lua::getOptionalParam<float>(params, "swing");
+
+		// This function is based on CombatSession::checkAttackWithWeapon.
+		// It is modified to start an attack without reach or timer checks.
+		const auto isWeaponAnimNotCreatureAttack = reinterpret_cast<bool(__thiscall*)(MobileActor*)>(0x528050);
+		if (actionData.target == nullptr) {
+			return false;
+		}
+		if (isWeaponAnimNotCreatureAttack(this) && !getFlagWeaponDrawn()) {
+			return false;
+		}
+		if (readiedWeapon && readiedWeapon->object->getSceneGraphNode() == nullptr) {
+			return false;
+		}
+
+		if (actionData.animStateAttack == AttackAnimationState::Wait) {
+			actionData.animStateAttack = AttackAnimationState::Idle;
+		}
+
+		auto animState = actionData.animStateAttack;
+		auto animGroup = actionData.currentAnimGroup;
+		const unsigned char Hit1 = 0x13, SwimHit3 = 0x1A;
+
+		if (animState == AttackAnimationState::Idle
+			|| (animState == AttackAnimationState::ReadyingWeap && animGroup >= Hit1 && animGroup <= SwimHit3)) {
+			auto data_animGroupNoteClass = reinterpret_cast<int*>(0x78B0A8);
+			auto weaponAnimGroup = this->vTable.mobileActor->getReadiedWeaponAnimationGroup(this);
+
+			switch (data_animGroupNoteClass[weaponAnimGroup]) {
+			case 2: // Creature attack
+			{
+				int roll100 = mwse::tes3::rand() % 100;
+				if (roll100 < 33) {
+					actionData.physicalAttackType = PhysicalAttackType::Creature1;
+				}
+				else if (roll100 < 66) {
+					actionData.physicalAttackType = PhysicalAttackType::Creature2;
+				}
+				else {
+					actionData.physicalAttackType = PhysicalAttackType::Creature3;
+				}
+				break;
+			}
+			case 3: // Projectile weapon
+				if (!getMobileActorMovementFlag(ActorMovement::Swimming)) {
+					actionData.physicalAttackType = PhysicalAttackType::Projectile;
+				}
+				break;
+			case 7: // Melee weapon
+				const auto getWeightedRandomAttackDirection = reinterpret_cast<PhysicalAttackType(__thiscall*)(CombatSession*)>(0x5373B0);
+				if (attackType) {
+					actionData.physicalAttackType = (PhysicalAttackType)attackType.value();
+				}
+				else if (combatSession) {
+					actionData.physicalAttackType = getWeightedRandomAttackDirection(combatSession);
+				}
+				else {
+					actionData.physicalAttackType = PhysicalAttackType::Slash;
+				}
+				break;
+			}
+
+			float attackSwingReleaseAt;
+			if (swing) {
+				attackSwingReleaseAt = swing.value();
+			}
+			else {
+				// Vanilla randomized swing.
+				attackSwingReleaseAt = 0.1f + 0.01f * (mwse::tes3::rand() % 100);
+				attackSwingReleaseAt = std::min(1.0f, attackSwingReleaseAt);
+			}
+			if (combatSession) {
+				combatSession->combatDelayTimer = 0;
+			}
+			animationController.asActor->startAttackAnimation(attackSwingReleaseAt);
+			return true;
+		}
+		return false;
+	}
+
+	bool MobileActor::hitStun_lua(sol::optional<sol::table> params) {
+		auto cancel = mwse::lua::getOptionalParam<bool>(params, "cancel", false);
+		auto knockDown = mwse::lua::getOptionalParam<bool>(params, "knockDown", false);
+
+		const auto animData = this->getAnimationData();
+		if (!animData) {
+			return false;
+		}
+
+		if (cancel) {
+			// Attempt to cancel hit stun or knockdown.
+			if (actionData.animGroupStunEffect != 255) {
+				actionData.animGroupStunEffect = 255;
+				return true;
+			}
+			if (actionData.animStateAttack == AttackAnimationState::Knockdown) {
+				actionData.animStateAttack = AttackAnimationState::Ready;
+				return true;
+			}
+			return false;
+		}
+
+		// Conditionals matching the hit stun mechanics.
+		auto animGroup = animData->currentAnimGroup[0];
+		const unsigned char Hit1 = 0x13, SwimHit3 = 0x1A;
+		if (!isNotKnockedDownOrOut() || (animGroup >= Hit1 && animGroup <= SwimHit3)) {
+			return false;
+		}
+			
+		if (knockDown) {
+			// Knockdown, heavy stun. When the character falls to their knees and takes seconds to recover.
+			WorldController::get()->magicInstanceController->interruptCasting(reference);
+			actionData.animStateAttack = AttackAnimationState::Knockdown;
+			return true;
+		}
+		else {
+			// Hit stun. When attacking or casting is interruped and the recovery animation is short.
+			// Note that this specific animation ID is detected and later converted to a randomized animation (Swim)Hit1-3.
+
+			// Conditionals matching the hit stun mechanics. Creatures are less interruptible.
+			auto animStateAttack = actionData.animStateAttack;
+			if (this->actorType != TES3::MobileActorType::Creature
+				|| (animStateAttack != TES3::AttackAnimationState::SwingUp
+				&& animStateAttack != TES3::AttackAnimationState::SwingDown
+				&& animStateAttack != TES3::AttackAnimationState::SwingHit
+				&& animStateAttack != TES3::AttackAnimationState::SwingFollowLight
+				&& animStateAttack != TES3::AttackAnimationState::SwingFollowMed
+				&& animStateAttack != TES3::AttackAnimationState::SwingFollowHeavy
+				&& animStateAttack != TES3::AttackAnimationState::Casting
+				&& animStateAttack != TES3::AttackAnimationState::CastingFollow
+				&& animStateAttack != TES3::AttackAnimationState::PickingProbing))
+			{
+				const unsigned char knockDownAnim = 0x22;
+				actionData.animGroupStunEffect = knockDownAnim;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void MobileActor::updateOpacity() {

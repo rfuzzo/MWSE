@@ -8,7 +8,7 @@
 
 An abstract base class from which all the animation controllers inherit. It has all the functionality needed to control the timing and update animations.
 
-This type inherits the following: [niObject](../../types/niObject)
+This type inherits the following: [niObject](../types/niObject.md)
 ## Properties
 
 ### `active`
@@ -31,7 +31,7 @@ Maps to values in [`ni.animType`](https://mwse.github.io/MWSE/references/ni/anim
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animType](../references/ni/animation-types.md))
 
 ***
 
@@ -44,7 +44,7 @@ Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni
 
 **Returns**:
 
-* `result` (integer)
+* `result` ([ni.animCycleType](../references/ni/animation-cycle-types.md))
 
 ***
 
@@ -110,7 +110,7 @@ The next animation controller in the list of controllers containing the calling 
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -143,7 +143,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -154,7 +154,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -176,7 +176,7 @@ The time at which the animation controller starts playing its animation.
 
 **Returns**:
 
-* `result` ([niObjectNET](../../types/niObjectNET))
+* `result` ([niObjectNET](../types/niObjectNET.md))
 
 ***
 
@@ -193,14 +193,14 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -208,7 +208,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -219,7 +219,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -227,7 +227,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -265,7 +265,7 @@ myObject:setTarget(target)
 
 **Parameters**:
 
-* `target` ([niObjectNET](../../types/niObjectNET)): The new target to assign.
+* `target` ([niObjectNET](../types/niObjectNET.md)): The new target to assign.
 
 ***
 

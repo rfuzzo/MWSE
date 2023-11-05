@@ -23,7 +23,12 @@ event.register(tes3.event.uiSkillTooltip, uiSkillTooltipCallback)
 
 ## Event Data
 
-* `skill` ([tes3skill](../../types/tes3skill)): *Read-only*. The skill being examined.
-* `tooltip` ([tes3uiElement](../../types/tes3uiElement)): *Read-only*. The newly created tooltip element. Due to timeouts and target changes, it may be destroyed at any time.
+* `skill` ([tes3skill](../types/tes3skill.md)): *Read-only*. The skill being examined.
+* `tooltip` ([tes3uiElement](../types/tes3uiElement.md)): *Read-only*. The newly created tooltip element. Due to timeouts and target changes, it may be destroyed at any time.
 * `type` (integer): *Read-only*. 1 where the tooltip is being created by MenuStat, and includes progress to the next skill level up, and 0 for every other instance including tes3ui.createTooltipMenu().
+
+
+## Related events
+
+[uiObjectTooltip](./uiObjectTooltip.md){ .md-button }[uiSpellTooltip](./uiSpellTooltip.md){ .md-button }
 

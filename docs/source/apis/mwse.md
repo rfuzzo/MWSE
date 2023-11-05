@@ -52,7 +52,7 @@ The mwseTimerController responsible for game-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -63,7 +63,7 @@ The mwseTimerController responsible for real-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -74,7 +74,7 @@ The mwseTimerController responsible for simulate-type timers.
 
 **Returns**:
 
-* `result` ([mwseTimerController](../../types/mwseTimerController))
+* `result` ([mwseTimerController](../types/mwseTimerController.md))
 
 ***
 
@@ -101,7 +101,7 @@ It is usually better to use `mwse.buildDate` instead.
 Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 
 ```lua
-local result = mwse.clearScriptOverride(scriptId)
+local success = mwse.clearScriptOverride(scriptId)
 ```
 
 **Parameters**:
@@ -110,7 +110,7 @@ local result = mwse.clearScriptOverride(scriptId)
 
 **Returns**:
 
-* `result` (boolean)
+* `success` (boolean)
 
 ***
 
@@ -125,8 +125,8 @@ local script, reference = mwse.getCurrentMorrowindScriptState()
 
 **Returns**:
 
-* `script` ([tes3script](../../types/tes3script), nil): The currently executing mwscript script, or nil if none is presently being executed.
-* `reference` ([tes3reference](../../types/tes3reference), nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
+* `script` ([tes3script](../types/tes3script.md), nil): The currently executing mwscript script, or nil if none is presently being executed.
+* `reference` ([tes3reference](../types/tes3reference.md), nil): The currently executing mwscript script's associated reference. This will be nil for global scripts, or nil if no script is presently being executed.
 
 ***
 
@@ -171,7 +171,7 @@ local converted = mwse.iconv(languageCode, utf8string)
 
 **Parameters**:
 
-* `languageCode` (integer): Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
+* `languageCode` ([tes3.languageCode](../references/language-codes.md)): Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
 * `utf8string` (string): The string to convert
 
 **Returns**:
@@ -222,7 +222,7 @@ local i18n = mwse.loadTranslations(mod)
 
 **Returns**:
 
-* `i18n` (function): The callable translation results.
+* `i18n` (fun(key: string, data: any?): string): The callable translation results.
 
 ***
 
@@ -255,7 +255,7 @@ local result = mwse.longToString(type)
 
 **Parameters**:
 
-* `type` (number)
+* `type` ([tes3.objectType](../references/object-types.md), number)
 
 **Returns**:
 
@@ -271,17 +271,17 @@ Configures MWSE to execute a given function instead when a script would run.
 In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling `mwscript.stopScript()`.
 
 ```lua
-local result = mwse.overrideScript(scriptId, callback)
+local success = mwse.overrideScript(scriptId, callback)
 ```
 
 **Parameters**:
 
 * `scriptId` (string)
-* `callback` (function)
+* `callback` (fun(e: [mwseOverrideScriptCallbackData](../types/mwseOverrideScriptCallbackData.md)))
 
 **Returns**:
 
-* `result` (boolean)
+* `success` (boolean)
 
 ??? example "Example: Here is an example of the most common use case for this function."
 
@@ -290,37 +290,29 @@ local result = mwse.overrideScript(scriptId, callback)
 	-- with our own raceCheck() function that does the same thing.
 	
 	local raceCheckScriptID = "RaceCheck"
+	local raceMap = {
+		["argonian"] = 1,
+		["breton"] = 2,
+		["dark elf"] = 3,
+		["high elf"] = 4,
+		["imperial"] = 5,
+		["khajiit"] = 6,
+		["nord"] = 7,
+		["orc"] = 8,
+		["redguard"] = 9,
+		["wood elf"] = 10,
+	}
 	
 	local function raceCheck()
-		-- This is almost always the desired behavior,
-		-- since we are overriding the script.
+		-- It's almost always the desired behavior to stop the mwscript,
+		-- since we are overriding the it.
 		---@diagnostic disable-next-line: deprecated
 		mwscript.stopScript({ script = raceCheckScriptID })
 	
 		local pcRaceID = tes3.player.object.race.id:lower()
 		local PCRace = tes3.findGlobal("PCRace")
 	
-		if pcRaceID == "argonian" then
-			PCRace.value = 1
-		elseif pcRaceID == "breton" then
-			PCRace.value = 2
-		elseif pcRaceID == "dark elf" then
-			PCRace.value = 3
-		elseif pcRaceID == "high elf" then
-			PCRace.value = 4
-		elseif pcRaceID == "imperial" then
-			PCRace.value = 5
-		elseif pcRaceID == "khajiit" then
-			PCRace.value = 6
-		elseif pcRaceID == "nord" then
-			PCRace.value = 7
-		elseif pcRaceID == "orc" then
-			PCRace.value = 8
-		elseif pcRaceID == "redguard" then
-			PCRace.value = 9
-		elseif pcRaceID == "wood elf" then
-			PCRace.value = 10
-		end
+		PCRace.value = raceMap[pcRaceID]
 	end
 	
 	-- Script overrides can be queued when initialited event triggers.
@@ -329,6 +321,25 @@ local result = mwse.overrideScript(scriptId, callback)
 	end)
 
 	```
+
+***
+
+### `mwse.registerModConfig`
+<div class="search_terms" style="display: none">registermodconfig</div>
+
+This is the main function to register a mod's configuration. Only registered configurations appear in the Mod Config menu.
+
+```lua
+mwse.registerModConfig(name, { onCreate = ..., onSearch = ..., onClose = ... })
+```
+
+**Parameters**:
+
+* `name` (string)
+* `package` (table)
+	* `onCreate` (fun(modConfigContainer: [tes3uiElement](../types/tes3uiElement.md))): The function that creates the mod's configuration menu inside given `modConfigContainer`.
+	* `onSearch` (fun(searchText: string): boolean): *Optional*. A custom search handler function. This function should return true if this mod should show up in search results for given `searchText`.
+	* `onClose` (fun(modConfigContainer: [tes3uiElement](../types/tes3uiElement.md))): *Optional*. This function is called when the mod's configuration menu is closed. Typically, it's used to save the current config table.
 
 ***
 

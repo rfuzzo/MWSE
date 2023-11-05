@@ -8,7 +8,7 @@
 
 An enchantment game object.
 
-This type inherits the following: [tes3object](../../types/tes3object), [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -29,7 +29,7 @@ The enchantment's cast type. Maps to [`tes3.enchantmentType`](https://mwse.githu
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.enchantmentType](../references/enchantment-types.md))
 
 ***
 
@@ -73,7 +73,7 @@ The cost of using the enchantment.
 
 **Returns**:
 
-* `result` ([tes3effect](../../types/tes3effect)[])
+* `result` ([tes3effect](../types/tes3effect.md)[])
 
 ??? example "Example: Determining if an enchantment is hostile"
 
@@ -160,7 +160,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -182,7 +182,7 @@ The next object in parent collection's list.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -193,7 +193,7 @@ The collection responsible for holding this object.
 
 **Returns**:
 
-* `result` ([tes3referenceList](../../types/tes3referenceList))
+* `result` ([tes3referenceList](../types/tes3referenceList.md))
 
 ***
 
@@ -215,7 +215,7 @@ The previous object in parent collection's list.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3object](../types/tes3object.md))
 
 ***
 
@@ -237,7 +237,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -248,7 +248,7 @@ The scene graph node for this object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -320,7 +320,7 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 **Returns**:
 
-* `newObject` ([tes3enchantment](../../types/tes3enchantment))
+* `newObject` ([tes3enchantment](../types/tes3enchantment.md))
 
 ***
 
@@ -350,7 +350,7 @@ local index = myObject:getFirstIndexOfEffect(effectId)
 
 **Parameters**:
 
-* `effectId` (number): The effectId to perform a check for. Maps to [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) constants, including magic effects added with [`tes3.addMagicEffect()`](https://mwse.github.io/MWSE/apis/tes3/#tes3addmagiceffect).
+* `effectId` ([tes3.effect](../references/magic-effects.md)): The effectId to perform a check for. Maps to [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) constants, including magic effects added with [`tes3.addMagicEffect()`](https://mwse.github.io/MWSE/apis/tes3/#tes3addmagiceffect).
 
 **Returns**:
 

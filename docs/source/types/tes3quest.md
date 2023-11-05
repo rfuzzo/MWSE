@@ -8,7 +8,7 @@
 
 A representation of a quest, with associated dialogue and info.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -40,7 +40,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3dialogue](../../types/tes3dialogue)[])
+* `result` ([tes3dialogue](../types/tes3dialogue.md)[])
 
 ***
 
@@ -73,7 +73,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3dialogueInfo](../../types/tes3dialogueInfo)[])
+* `result` ([tes3dialogueInfo](../types/tes3dialogueInfo.md)[])
 
 ***
 
@@ -106,7 +106,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 

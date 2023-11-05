@@ -23,9 +23,14 @@ event.register(tes3.event.equipped, equippedCallback)
 
 ## Event Data
 
-* `actor` ([tes3actor](../../types/tes3actor)): *Read-only*. The actor that has equipped the item.
-* `item` ([tes3baseObject](../../types/tes3baseObject)): *Read-only*. The object that has been equipped.
-* `itemData` ([tes3itemData](../../types/tes3itemData)): *Read-only*. The item data of item.
-* `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile actor that has equipped the item.
-* `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference to the mobile actor that has equipped the item.
+* `actor` ([tes3actor](../types/tes3actor.md)): *Read-only*. The actor that has equipped the item.
+* `item` ([tes3baseObject](../types/tes3baseObject.md)): *Read-only*. The object that has been equipped.
+* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Read-only*. The item data of item.
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile actor that has equipped the item.
+* `reference` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference to the mobile actor that has equipped the item.
+
+
+## Related events
+
+[equip](./equip.md){ .md-button }[equipped](./equipped.md){ .md-button }[unequipped](./unequipped.md){ .md-button }
 

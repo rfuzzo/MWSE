@@ -8,7 +8,7 @@
 
 An object representing a birthsign.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -106,7 +106,7 @@ The player-facing name for the object.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -150,7 +150,7 @@ The soruceless flag of the object.
 
 **Returns**:
 
-* `result` ([tes3spellList](../../types/tes3spellList), [tes3spell](../../types/tes3spell)[])
+* `result` ([tes3spellList](../types/tes3spellList.md), [tes3spell](../types/tes3spell.md)[])
 
 ***
 

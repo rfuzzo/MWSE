@@ -2,12 +2,18 @@
 	Info field that shows mouseover information for settings
 ]]--
 
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local Parent = require("mcm.components.infos.Info")
 
+--- @class mwseMCMMouseOverInfo
 local MouseOverInfo = Parent:new()
 MouseOverInfo.triggerOn = "MCM:MouseOver"
 MouseOverInfo.triggerOff = "MCM:MouseLeave"
 
+--- @param component mwseMCMComponent|nil
 function MouseOverInfo:updateInfo(component)
 	-- If component has a description, update mouseOver
 	-- Or return to original text on mouseLeave
@@ -16,11 +22,13 @@ function MouseOverInfo:updateInfo(component)
 	self:update()
 end
 
+--- @param parentBlock tes3uiElement
 function MouseOverInfo:makeComponent(parentBlock)
 
 	Parent.makeComponent(self, parentBlock)
 	local info = self.elements.info
 
+	--- @param component mwseMCMMouseOverInfo
 	local function updateInfo(component)
 		self:updateInfo(component)
 	end

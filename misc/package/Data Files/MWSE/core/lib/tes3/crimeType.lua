@@ -1,4 +1,3 @@
----@enum tes3.crimeType
 return {
 	["attack"] = 1,
 	["killing"] = 2,

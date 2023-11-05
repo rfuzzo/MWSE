@@ -8,7 +8,7 @@
 
 Object that represent a camera. Position and orientation is determined by parent properties. This enables the cameras to be attached to scene graph objects and follow them automatically, as they move.
 
-This type inherits the following: [niAVObject](../../types/niAVObject), [niObjectNET](../../types/niObjectNET), [niObject](../../types/niObject)
+This type inherits the following: [niAVObject](../types/niAVObject.md), [niObjectNET](../types/niObjectNET.md), [niObject](../types/niObject.md)
 ## Properties
 
 ### `alphaProperty`
@@ -18,7 +18,7 @@ Convenient access to this object's alpha property. Setting this value to be nil 
 
 **Returns**:
 
-* `result` ([niAlphaProperty](../../types/niAlphaProperty), nil)
+* `result` ([niAlphaProperty](../types/niAlphaProperty.md), nil)
 
 ***
 
@@ -40,7 +40,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 
 **Returns**:
 
-* `result` ([niTimeController](../../types/niTimeController))
+* `result` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -51,7 +51,7 @@ The culling planes of the camera: near, far, left, right, top, and bottom.
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4)[])
+* `result` ([tes3vector4](../types/tes3vector4.md)[])
 
 ***
 
@@ -62,7 +62,7 @@ The culling planes of the camera: near, far, left, right, top, and bottom.
 
 **Returns**:
 
-* `result` ([niExtraData](../../types/niExtraData))
+* `result` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -84,7 +84,7 @@ Convenient access to this object's fog property. Setting this value to be nil wi
 
 **Returns**:
 
-* `result` ([niFogProperty](../../types/niFogProperty), nil)
+* `result` ([niFogProperty](../types/niFogProperty.md), nil)
 
 ***
 
@@ -106,7 +106,7 @@ Convenient access to this object's material property. Setting this value to be n
 
 **Returns**:
 
-* `result` ([niMaterialProperty](../../types/niMaterialProperty), nil)
+* `result` ([niMaterialProperty](../types/niMaterialProperty.md), nil)
 
 ***
 
@@ -128,7 +128,7 @@ The human-facing name of the given object.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -139,7 +139,7 @@ The port on the backbuffer of the camera. Represents the rectangular portion of 
 
 **Returns**:
 
-* `result` ([tes3vector4](../../types/tes3vector4))
+* `result` ([tes3vector4](../types/tes3vector4.md))
 
 ***
 
@@ -150,7 +150,7 @@ The port on the backbuffer of the camera. Represents the rectangular portion of 
 
 **Returns**:
 
-* `result` ([niPropertyLinkedList](../../types/niPropertyLinkedList))
+* `result` ([niPropertyLinkedList](../types/niPropertyLinkedList.md))
 
 ***
 
@@ -172,7 +172,7 @@ The port on the backbuffer of the camera. Represents the rectangular portion of 
 
 **Returns**:
 
-* `result` ([niRenderer](../../types/niRenderer))
+* `result` ([niRenderer](../types/niRenderer.md))
 
 ***
 
@@ -183,7 +183,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([tes3matrix33](../../types/tes3matrix33))
+* `result` ([tes3matrix33](../types/tes3matrix33.md))
 
 ***
 
@@ -194,7 +194,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -205,7 +205,7 @@ The object's local rotation matrix.
 
 **Returns**:
 
-* `result` ([niRTTI](../../types/niRTTI))
+* `result` ([niRTTI](../types/niRTTI.md))
 
 ***
 
@@ -227,7 +227,7 @@ The object's local uniform scaling factor.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -238,7 +238,7 @@ Convenient access to this object's stencil property. Setting this value to be ni
 
 **Returns**:
 
-* `result` ([niStencilProperty](../../types/niStencilProperty), nil)
+* `result` ([niStencilProperty](../types/niStencilProperty.md), nil)
 
 ***
 
@@ -249,7 +249,7 @@ Convenient access to this object's texturing property. Setting this value to be 
 
 **Returns**:
 
-* `result` ([niTexturingProperty](../../types/niTexturingProperty), nil)
+* `result` ([niTexturingProperty](../types/niTexturingProperty.md), nil)
 
 ***
 
@@ -260,7 +260,7 @@ The object's local translation vector.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -271,7 +271,7 @@ The object's local velocity.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -282,7 +282,7 @@ Convenient access to this object's vertex coloring property. Setting this value 
 
 **Returns**:
 
-* `result` ([niVertexColorProperty](../../types/niVertexColorProperty), nil)
+* `result` ([niVertexColorProperty](../types/niVertexColorProperty.md), nil)
 
 ***
 
@@ -304,7 +304,7 @@ The world coordinates of the object's bounds origin.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -326,7 +326,7 @@ Defines the X-axis of the camera.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -337,7 +337,7 @@ Defines the Z-axis of the camera.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -348,7 +348,7 @@ The world-to-camera transform matrix in row-major order.
 
 **Returns**:
 
-* `result` ([tes3matrix44](../../types/tes3matrix44))
+* `result` ([tes3matrix44](../types/tes3matrix44.md))
 
 ***
 
@@ -359,7 +359,7 @@ The object's transformations in the world space.
 
 **Returns**:
 
-* `result` ([tes3transform](../../types/tes3transform))
+* `result` ([tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -370,7 +370,7 @@ Defines the Y-axis of the camera.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -381,7 +381,7 @@ Convenient access to this object's z-buffer property. Setting this value to be n
 
 **Returns**:
 
-* `result` ([niZBufferProperty](../../types/niZBufferProperty), nil)
+* `result` ([niZBufferProperty](../types/niZBufferProperty.md), nil)
 
 ***
 
@@ -398,7 +398,7 @@ myObject:addExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -413,7 +413,7 @@ myObject:attachProperty(property)
 
 **Parameters**:
 
-* `property` ([niProperty](../../types/niProperty))
+* `property` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -428,7 +428,7 @@ myObject:clear(flags)
 
 **Parameters**:
 
-* `flags` (number): *Default*: `ni.cameraClearFlags.all`.
+* `flags` ([ni.cameraClearFlags](../references/ni/camera-clear-flags.md)): *Default*: `ni.cameraClearFlags.all`.
 
 ***
 
@@ -469,7 +469,7 @@ local result = myObject:clone()
 
 **Returns**:
 
-* `result` ([niObject](../../types/niObject))
+* `result` ([niObject](../types/niObject.md))
 
 ***
 
@@ -484,7 +484,7 @@ myObject:copyTransforms(source)
 
 **Parameters**:
 
-* `source` ([niAVObject](../../types/niAVObject), [tes3transform](../../types/tes3transform))
+* `source` ([niAVObject](../types/niAVObject.md), [tes3transform](../types/tes3transform.md))
 
 ***
 
@@ -499,7 +499,7 @@ local result = myObject:detachAllProperties()
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty)[])
+* `result` ([niProperty](../types/niProperty.md)[])
 
 ***
 
@@ -514,11 +514,11 @@ local result = myObject:detachProperty(type)
 
 **Parameters**:
 
-* `type` (integer): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
+* `type` ([ni.propertyType](../references/ni/property-types.md)): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -537,7 +537,7 @@ local reference = myObject:getGameReference(searchParents)
 
 **Returns**:
 
-* `reference` ([tes3reference](../../types/tes3reference))
+* `reference` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -556,7 +556,7 @@ local result = myObject:getObjectByName(name)
 
 **Returns**:
 
-* `result` ([niAVObject](../../types/niAVObject))
+* `result` ([niAVObject](../types/niAVObject.md))
 
 ***
 
@@ -571,11 +571,11 @@ local result = myObject:getProperty(type)
 
 **Parameters**:
 
-* `type` (integer): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
+* `type` ([ni.propertyType](../references/ni/property-types.md)): The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
 **Returns**:
 
-* `result` ([niProperty](../../types/niProperty))
+* `result` ([niProperty](../types/niProperty.md))
 
 ***
 
@@ -594,7 +594,7 @@ local extra = myObject:getStringDataStartingWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -613,7 +613,7 @@ local extra = myObject:getStringDataWith(value)
 
 **Returns**:
 
-* `extra` ([niStringExtraData](../../types/niStringExtraData))
+* `extra` ([niStringExtraData](../types/niStringExtraData.md))
 
 ***
 
@@ -681,7 +681,7 @@ local result = myObject:isFrustumCulled(camera)
 
 **Parameters**:
 
-* `camera` ([niCamera](../../types/niCamera))
+* `camera` ([niCamera](../types/niCamera.md))
 
 **Returns**:
 
@@ -692,7 +692,7 @@ local result = myObject:isFrustumCulled(camera)
 ### `isInstanceOfType`
 <div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
-Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type, or of a type derived from the given type.
 
 ```lua
 local result = myObject:isInstanceOfType(type)
@@ -700,7 +700,7 @@ local result = myObject:isInstanceOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -711,7 +711,7 @@ local result = myObject:isInstanceOfType(type)
 ### `isOfType`
 <div class="search_terms" style="display: none">isoftype, oftype</div>
 
-Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+Determines if the object is of a given type.
 
 ```lua
 local result = myObject:isOfType(type)
@@ -719,7 +719,7 @@ local result = myObject:isOfType(type)
 
 **Parameters**:
 
-* `type` (number): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
+* `type` ([ni.type](../references/ni/types.md)): Use values in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
 **Returns**:
 
@@ -738,8 +738,8 @@ local success = myObject:lookAtWorldPoint(point, up)
 
 **Parameters**:
 
-* `point` ([tes3vector3](../../types/tes3vector3))
-* `up` ([tes3vector3](../../types/tes3vector3))
+* `point` ([tes3vector3](../types/tes3vector3.md))
+* `up` ([tes3vector3](../types/tes3vector3.md))
 
 **Returns**:
 
@@ -758,7 +758,7 @@ myObject:prependController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -817,7 +817,7 @@ myObject:removeController(controller)
 
 **Parameters**:
 
-* `controller` ([niTimeController](../../types/niTimeController))
+* `controller` ([niTimeController](../types/niTimeController.md))
 
 ***
 
@@ -832,7 +832,7 @@ myObject:removeExtraData(extraData)
 
 **Parameters**:
 
-* `extraData` ([niExtraData](../../types/niExtraData))
+* `extraData` ([niExtraData](../types/niExtraData.md))
 
 ***
 
@@ -937,12 +937,48 @@ local origin, direction = myObject:windowPointToRay(point)
 
 **Parameters**:
 
-* `point` ([tes3vector2](../../types/tes3vector2)): The screen position to calculate a world ray for. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
+* `point` ([tes3vector2](../types/tes3vector2.md), number[]): The screen position to calculate a world ray for. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
 
 **Returns**:
 
-* `origin` ([tes3vector3](../../types/tes3vector3)): The world point that the given screen position looks out from.
-* `direction` ([tes3vector3](../../types/tes3vector3)): The look direction of the camera from the given origin point.
+* `origin` ([tes3vector3](../types/tes3vector3.md)): The world point that the given screen position looks out from.
+* `direction` ([tes3vector3](../types/tes3vector3.md)): The look direction of the camera from the given origin point.
+
+??? example "Example: Sampling landscape texture under the crosshair/mouse cursor"
+
+	```lua
+	
+	local function onEnterFrame()
+		local cursor = tes3.getCursorPosition()
+		local camera = tes3.worldController.worldCamera.cameraData.camera
+		local position, direction = camera:windowPointToRay({ cursor.x, cursor.y })
+	
+		local hit = tes3.rayTest({
+			position = position,
+			direction = direction,
+			-- Let's ray test agains terrain
+			root = tes3.game.worldLandscapeRoot
+		})
+		if not hit or not hit.object then return end
+	
+		local texturingProperty = hit.object.texturingProperty
+		if not texturingProperty then return end
+	
+		local baseMap = texturingProperty.maps[1]
+		if not baseMap or not baseMap.texture then return end
+	
+		tes3.messageBox(baseMap.texture.fileName)
+	end
+	
+	local function onLoaded()
+		if event.isRegistered(tes3.event.enterFrame, onEnterFrame) then return end
+	
+		event.register(tes3.event.enterFrame, onEnterFrame)
+	end
+	
+	event.register(tes3.event.loaded, onLoaded)
+
+	```
 
 ***
 
@@ -957,9 +993,9 @@ local screenPosition = myObject:worldPointToScreenPoint(point)
 
 **Parameters**:
 
-* `point` ([tes3vector3](../../types/tes3vector3)): The world position to calculate screen position for.
+* `point` ([tes3vector3](../types/tes3vector3.md)): The world position to calculate screen position for.
 
 **Returns**:
 
-* `screenPosition` ([tes3vector2](../../types/tes3vector2)): The screen space position. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
+* `screenPosition` ([tes3vector2](../types/tes3vector2.md)): The screen space position. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
 

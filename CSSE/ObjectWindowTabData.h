@@ -49,7 +49,7 @@ namespace se::cs::dialog::object_window {
 		virtual void getDisplayInfo(LPNMLVDISPINFOA displayInfo) const = 0;
 		virtual int sortObject(const Object* lParam1, const Object* lParam2, bool sortOrderAsc) const = 0;
 
-		using ColumnSettings = Settings_t::ObjectWindowSettings::ColumnSettings;
+		using ColumnSettings = Settings_t::ColumnSettings;
 		virtual ColumnSettings& getSettings() const = 0;
 
 		void insert(HWND hWnd, size_t index) const;
@@ -130,6 +130,7 @@ namespace se::cs::dialog::object_window {
 	DEFINE_COLUMN(Rank);
 	DEFINE_COLUMN(Script);
 	DEFINE_COLUMN(Sound);
+	DEFINE_COLUMN(SpellRange);
 	DEFINE_COLUMN(Type);
 	DEFINE_COLUMN(Uses);
 	DEFINE_COLUMN(Value);
@@ -221,6 +222,7 @@ namespace se::cs::dialog::object_window {
 		static TabColumnRace tabColumnRace;
 		static TabColumnScript tabColumnScript;
 		static TabColumnSound tabColumnSound;
+		static TabColumnSpellRange tabColumnSpellRange;
 		static TabColumnType tabColumnType;
 		static TabColumnUses tabColumnUses;
 		static TabColumnValue tabColumnValue;

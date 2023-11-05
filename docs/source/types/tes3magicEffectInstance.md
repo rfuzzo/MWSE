@@ -17,7 +17,7 @@ Represents an individual instance of a magic effect being applied to a reference
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -72,7 +72,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -83,7 +83,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -94,7 +94,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -105,7 +105,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -116,7 +116,7 @@ The effective magnitude of the effect, after all resistances are applied.
 
 **Returns**:
 
-* `result` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `result` ([tes3equipmentStack](../types/tes3equipmentStack.md))
 
 ***
 
@@ -149,7 +149,7 @@ The state of this magic effect instance. Maps to [`tes3.spellState`](https://mws
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.spellState](../references/spell-states.md))
 
 ***
 
@@ -160,7 +160,7 @@ No description yet available.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 
@@ -182,5 +182,5 @@ The associated visual effect.
 
 **Returns**:
 
-* `result` ([tes3vfx](../../types/tes3vfx))
+* `result` ([tes3vfx](../types/tes3vfx.md))
 

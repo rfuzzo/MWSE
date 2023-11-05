@@ -17,7 +17,7 @@ A collection of active managed visual effects.
 
 **Returns**:
 
-* `result` ([tes3vfx](../../types/tes3vfx)[])
+* `result` ([tes3vfx](../types/tes3vfx.md)[])
 
 ***
 
@@ -28,5 +28,18 @@ The root node that general VFXs are attached to.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
+
+***
+
+## Methods
+
+### `reset`
+<div class="search_terms" style="display: none">reset</div>
+
+Removes all active vfx.
+
+```lua
+myObject:reset()
+```
 

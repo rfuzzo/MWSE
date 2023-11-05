@@ -157,21 +157,21 @@ namespace TES3 {
 		int (__thiscall* getWeaponAttackMax)(MobileActor*); // 0xC0
 		void (__thiscall* calculateWeaponDamage)(MobileActor*); // 0xC4
 		float (__thiscall* getWeaponSwingWeightProduct)(MobileActor*); // 0xC8
-		AnimationData* (__thiscall* getAnimationAttachment)(MobileActor*); // 0xCC
+		AnimationData* (__thiscall* getAnimationAttachment)(const MobileActor*); // 0xCC
 		SkillStatistic * (__thiscall* getSkillStatistic)(MobileActor*, int); // 0xD0
 		float (__thiscall* getSkillValue)(const MobileActor*, int); // 0xD4
 		void (__thiscall* getVampire)(MobileActor*);
 		void (__thiscall* setVampire)(MobileActor*);
 		float (__thiscall* applyArmorRating)(MobileActor*, float, float, bool); // 0xE0
 		float (__thiscall* calculateArmorRating)(const MobileActor*, int*); // 0xE4
-		void (__thiscall* getReadiedWeaponCurrentSkill)(MobileActor*); // 0xE8
-		void (__thiscall* getReadiedWeaponAnimationGroup)(MobileActor*); // 0xEC
+		float (__thiscall* getReadiedWeaponCurrentSkill)(MobileActor*); // 0xE8
+		unsigned char (__thiscall* getReadiedWeaponAnimationGroup)(MobileActor*); // 0xEC
 		void (__thiscall* onWeaponEquip)(MobileActor*); // 0xF0
 		void (__thiscall* onReleaseProjectile)(MobileActor*); // 0xF4
 		void (__thiscall* onNewProjectile)(MobileActor*); // 0xF8
 		void (__thiscall* resolveArrowBone)(MobileActor*); // 0xFC
 		void (__thiscall* setArrowBone)(MobileActor*, NI::Node*); // 0x100
-		void (__thiscall* unknown_0x104)(MobileActor*); // 0x104
+		bool (__thiscall* dropObjectRayTests)(MobileActor*, float, NI::Node*, float*, Vector3*, unsigned char*); // 0x104
 	};
 	static_assert(sizeof(MobileActor_vTable) == 0x108, "TES3::MobileActor_vTable failed size validation");
 

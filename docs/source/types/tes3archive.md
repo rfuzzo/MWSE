@@ -28,7 +28,7 @@ Loaded data from a BSA file.
 
 **Returns**:
 
-* `result` ([tes3archive](../../types/tes3archive))
+* `result` ([tes3archive](../types/tes3archive.md))
 
 ***
 
@@ -61,7 +61,7 @@ Loaded data from a BSA file.
 
 **Returns**:
 
-* `result` ([tes3archiveOffsetSizeData](../../types/tes3archiveOffsetSizeData)[])
+* `result` ([tes3archiveOffsetSizeData](../types/tes3archiveOffsetSizeData.md)[])
 
 ***
 

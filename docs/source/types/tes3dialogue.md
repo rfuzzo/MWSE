@@ -8,7 +8,7 @@
 
 A parent-level dialogue, such as a topic, voice, greeting, persuasion response, or journal.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `blocked`
@@ -62,7 +62,7 @@ The blocked state of the object.
 
 **Returns**:
 
-* `result` ([tes3dialogueInfo](../../types/tes3dialogueInfo)[])
+* `result` ([tes3dialogueInfo](../types/tes3dialogueInfo.md)[])
 
 ***
 
@@ -106,7 +106,7 @@ The modification state of the object since the last save.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -161,7 +161,7 @@ If true, references of this object can store temporary or persistent lua data.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.dialogueType](../references/dialogue-types.md))
 
 ***
 
@@ -195,7 +195,7 @@ local result = myObject:addToJournal({ index = ..., actor = ... })
 
 * `params` (table)
 	* `index` (number): *Default*: `0`.
-	* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): *Default*: `tes3.player`.
+	* `actor` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string): *Default*: `tes3.player`.
 
 **Returns**:
 
@@ -215,12 +215,12 @@ local result = myObject:getInfo({ actor = ..., context = ... })
 **Parameters**:
 
 * `params` (table)
-	* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
-	* `context` (number): *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
+	* `actor` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string)
+	* `context` ([tes3.dialogueFilterContext](../references/dialogue-filter-context.md)): *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
 
 **Returns**:
 
-* `result` ([tes3dialogueInfo](../../types/tes3dialogueInfo))
+* `result` ([tes3dialogueInfo](../types/tes3dialogueInfo.md))
 
 ***
 
@@ -239,7 +239,7 @@ local journalInfo = myObject:getJournalInfo(index)
 
 **Returns**:
 
-* `journalInfo` ([tes3dialogueInfo](../../types/tes3dialogueInfo))
+* `journalInfo` ([tes3dialogueInfo](../types/tes3dialogueInfo.md))
 
 ***
 

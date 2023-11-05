@@ -17,7 +17,7 @@ The body part object used for female actors.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -28,7 +28,7 @@ The body part object used for male actors.
 
 **Returns**:
 
-* `result` ([tes3bodyPart](../../types/tes3bodyPart))
+* `result` ([tes3bodyPart](../types/tes3bodyPart.md))
 
 ***
 
@@ -39,5 +39,5 @@ The type of the wearable part. Maps to [`tes3.activeBodyPart`](https://mwse.gith
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.activeBodyPart](../references/active-body-parts.md))
 

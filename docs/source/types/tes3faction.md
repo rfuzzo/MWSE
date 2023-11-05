@@ -8,7 +8,7 @@
 
 A faction game object.
 
-This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
 ## Properties
 
 ### `attributes`
@@ -18,7 +18,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` (number[])
+* `result` ([tes3.attribute](../references/attributes.md)[])
 
 ***
 
@@ -106,7 +106,7 @@ The faction's player-facing name.
 
 **Returns**:
 
-* `result` (number)
+* `result` ([tes3.objectType](../references/object-types.md))
 
 ***
 
@@ -172,7 +172,7 @@ The player's current reputation in the faction.
 
 **Returns**:
 
-* `result` ([tes3factionRank](../../types/tes3factionRank)[])
+* `result` ([tes3factionRank](../types/tes3factionRank.md)[])
 
 ***
 
@@ -183,7 +183,7 @@ The player's current reputation in the faction.
 
 **Returns**:
 
-* `result` ([tes3factionReaction](../../types/tes3factionReaction)[])
+* `result` ([tes3factionReaction](../types/tes3factionReaction.md)[])
 
 ***
 
@@ -194,7 +194,7 @@ The player's current reputation in the faction.
 
 **Returns**:
 
-* `result` (number[])
+* `result` ([tes3.skill](../references/skills.md)[])
 
 ***
 
@@ -260,7 +260,7 @@ local reaction, faction = myObject:getHighestJoinedReaction()
 **Returns**:
 
 * `reaction` (number, nil): The reaction, if any, that is best for the faction.
-* `faction` ([tes3faction](../../types/tes3faction), nil): The faction association, if any, that is best for the faction.
+* `faction` ([tes3faction](../types/tes3faction.md), nil): The faction association, if any, that is best for the faction.
 
 ***
 
@@ -276,7 +276,7 @@ local reaction, faction = myObject:getLowestJoinedReaction()
 **Returns**:
 
 * `reaction` (number, nil): The reaction, if any, that is worst for the player.
-* `faction` ([tes3faction](../../types/tes3faction), nil): The faction association, if any, that is worst for the player.
+* `faction` ([tes3faction](../types/tes3faction.md), nil): The faction association, if any, that is worst for the player.
 
 ***
 
@@ -310,7 +310,7 @@ local reaction = myObject:getReactionWithFaction(faction)
 
 **Parameters**:
 
-* `faction` ([tes3faction](../../types/tes3faction)): Another faction to get a reaction for.
+* `faction` ([tes3faction](../types/tes3faction.md)): Another faction to get a reaction for.
 
 **Returns**:
 

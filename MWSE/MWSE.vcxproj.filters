@@ -1620,15 +1620,6 @@
     <ClInclude Include="LuaVFXCreatedEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
-    <ClInclude Include="NIColorData.h">
-      <Filter>Header Files\DataAdapters\NI</Filter>
-    </ClInclude>
-    <ClInclude Include="NIColorKey.h">
-      <Filter>Header Files\DataAdapters\NI</Filter>
-    </ClInclude>
-    <ClInclude Include="NIPosData.h">
-      <Filter>Header Files\DataAdapters\NI</Filter>
-    </ClInclude>
     <ClInclude Include="LuaDialogueEnvironmentCreatedEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
@@ -1710,7 +1701,37 @@
     <ClInclude Include="LuaCalcHitDetectionConeEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
+    <ClInclude Include="LuaCalcChargenStatsEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
     <ClInclude Include="LuaDialogueFilteredEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="TES3WaterController.h">
+      <Filter>Header Files\DataAdapters\TES3\_Unsorted_</Filter>
+    </ClInclude>
+    <ClInclude Include="TES3WaterControllerLua.h">
+      <Filter>Header Files\Lua\Bindings\TES3</Filter>
+    </ClInclude>
+    <ClInclude Include="NIAnimationData.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="NIAnimationKey.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="NIPathController.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaSimulatedEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaMusicChangeTrackEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaMagicSelectionChangedEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaShieldBlockedEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
   </ItemGroup>
@@ -3635,12 +3656,6 @@
     <ClCompile Include="LuaVFXCreatedEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
-    <ClCompile Include="NIColorData.cpp">
-      <Filter>Source Files\DataAdapters\NI</Filter>
-    </ClCompile>
-    <ClCompile Include="NIPosData.cpp">
-      <Filter>Source Files\DataAdapters\NI</Filter>
-    </ClCompile>
     <ClCompile Include="NIKeyframeController.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
@@ -3725,7 +3740,40 @@
     <ClCompile Include="LuaCalcHitDetectionConeEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
+    <ClCompile Include="LuaCalcChargenStatsEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
+    </ClCompile>
     <ClCompile Include="LuaDialogueFilteredEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="TES3WaterController.cpp">
+      <Filter>Source Files\DataAdapters\TES3</Filter>
+    </ClCompile>
+    <ClCompile Include="TES3WaterControllerLua.cpp">
+      <Filter>Source Files\Lua\Bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="NIAnimationData.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="NIAnimationKey.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="NIPathController.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaSimulatedEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaMusicChangeTrackEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="TES3LoadScreenManager.cpp">
+      <Filter>Source Files\DataAdapters\TES3</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaMagicSelectionChangedEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaShieldBlockedEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
   </ItemGroup>

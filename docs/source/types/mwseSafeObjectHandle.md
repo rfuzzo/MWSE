@@ -8,36 +8,6 @@
 
 A handle to safely operate on ([tes3object](https://mwse.github.io/MWSE/types/tes3object/)).
 
-## Methods
-
-### `getObject`
-<div class="search_terms" style="display: none">getobject, object</div>
-
-Returns the object of this handle.
-
-```lua
-local result = myObject:getObject()
-```
-
-**Returns**:
-
-* `result` ([tes3reference](../../types/tes3reference))
-
-***
-
-### `valid`
-<div class="search_terms" style="display: none">valid</div>
-
-Returns true if the object of this handle is still valid. Objects that are invalid do no longer exist and cannot be used.
-
-```lua
-local valid = myObject:valid()
-```
-
-**Returns**:
-
-* `valid` (boolean)
-
 ??? example "Example: An example of usage"
 
 	```lua
@@ -64,4 +34,34 @@ local valid = myObject:valid()
 	end
 
 	```
+
+## Methods
+
+### `getObject`
+<div class="search_terms" style="display: none">getobject, object</div>
+
+Returns the object of this handle.
+
+```lua
+local result = myObject:getObject()
+```
+
+**Returns**:
+
+* `result` ([tes3reference](../types/tes3reference.md))
+
+***
+
+### `valid`
+<div class="search_terms" style="display: none">valid</div>
+
+Returns true if the object of this handle is still valid. Objects that are invalid do no longer exist and cannot be used.
+
+```lua
+local valid = myObject:valid()
+```
+
+**Returns**:
+
+* `valid` (boolean)
 

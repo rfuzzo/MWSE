@@ -23,7 +23,7 @@ end
 myFunctionName("foo")
 ```
 
-For a broader introduction to the Lua scripting language, refer to the [Introduction to Lua](../introduction-to-lua) guide.
+For a broader introduction to the Lua scripting language, refer to the [Introduction to Lua](./introduction-to-lua.md) guide.
 
 ## Morrowind Object Types
 
@@ -37,7 +37,7 @@ local skooma = tes3.getObject("potion_skooma_01")
 skooma.name = "No-No Juice"
 ```
 
-A complete list of exposed TES3 types and their associated properties/functions can be seen on the respective `tes3 types`_ page.
+A complete list of exposed TES3 types and their associated properties/functions can be seen on the respective `tes3 types` page.
 
 
 ## Events
@@ -65,14 +65,14 @@ We can also pass filters to events. For the key event, the filter is the key tha
 event.register(tes3.event.key, myKeyEvent, { filter = tes3.scanCode.u })
 ```
 
-For a broader introduction to event based programming, refer to the [Introduction to Event Based Programming](../introduction-to-event-based-programming) guide.
+For a broader introduction to event based programming, refer to the [Introduction to Event Based Programming](./introduction-to-event-based-programming.md) guide.
 
 The details of which events are available and what event data is exposed to them can be found on the events page.
 
 
 ## Support Libraries
 
-On top of all this are support libraries to help make modding easier. An example library is [timer](../../apis/timer), which helps to manage time-based operations.
+On top of all this are support libraries to help make modding easier. An example library is [timer](../apis/timer.md), which helps to manage time-based operations.
 
 ```lua
 -- Define the function we want to call when our timer completes.
@@ -126,4 +126,4 @@ OpenMW will not be adding compatibility with MWSE mods, legacy or Lua-based. But
 
 ## Getting Started
 
-Not sure where to start? Take a look at setting up a [Development Workflow](../development-workflows), Then, try the [Creating a Mod](../creating-a-mod) guide, which covers the creation of a new mod from start to finish using MWSE-Lua.
+Not sure where to start? Take a look at setting up a [Development Workflow](./development-workflows.md), Then, try the [Creating a Mod](./creating-a-mod.md) guide, which covers the creation of a new mod from start to finish using MWSE-Lua.

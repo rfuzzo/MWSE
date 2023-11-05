@@ -28,7 +28,7 @@ The node the VFX was created to attach to, if it was created for node attachment
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode), nil)
+* `result` ([niNode](../types/niNode.md), nil)
 
 ***
 
@@ -50,7 +50,7 @@ The cloned node of the associated `effectObject`.
 
 **Returns**:
 
-* `result` ([niNode](../../types/niNode))
+* `result` ([niNode](../types/niNode.md))
 
 ***
 
@@ -61,7 +61,7 @@ The object responsible for this VFX's appearance. Its scene node is cloned into 
 
 **Returns**:
 
-* `result` ([tes3physicalObject](../../types/tes3physicalObject))
+* `result` ([tes3physicalObject](../types/tes3physicalObject.md))
 
 ***
 
@@ -127,7 +127,7 @@ The position the VFX was created at.
 
 **Returns**:
 
-* `result` ([tes3vector3](../../types/tes3vector3))
+* `result` ([tes3vector3](../types/tes3vector3.md))
 
 ***
 
@@ -138,7 +138,7 @@ The position the VFX was created at.
 
 **Returns**:
 
-* `result` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance))
+* `result` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md))
 
 ***
 
@@ -160,7 +160,7 @@ The reference the target is associated with, if any.
 
 **Returns**:
 
-* `result` ([tes3reference](../../types/tes3reference))
+* `result` ([tes3reference](../types/tes3reference.md))
 
 ***
 

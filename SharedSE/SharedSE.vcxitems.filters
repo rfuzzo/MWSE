@@ -141,7 +141,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)NIBound.h">
       <Filter>Header Files\NI</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)BasicLinkedList.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)StlList.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)NIBoundingBox.h">

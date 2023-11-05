@@ -24,3 +24,8 @@ event.register(tes3.event.loaded, loadedCallback)
 * `newGame` (boolean): *Read-only*. If true, a new game was started.
 * `quickload` (boolean): *Read-only*. If true, the load came from the quickload system.
 
+
+## Related events
+
+[load](./load.md){ .md-button }[loaded](./loaded.md){ .md-button }
+

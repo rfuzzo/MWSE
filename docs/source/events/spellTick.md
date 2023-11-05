@@ -26,13 +26,13 @@ event.register(tes3.event.spellTick, spellTickCallback)
 
 ## Event Data
 
-* `caster` ([tes3reference](../../types/tes3reference)): *Read-only*. The caster of the spell.
+* `caster` ([tes3reference](../types/tes3reference.md)): *Read-only*. The caster of the spell.
 * `deltaTime` (number): *Read-only*. The number of seconds since the last spell tick.
-* `effect` ([tes3magicEffect](../../types/tes3magicEffect)): *Read-only*. The individual effect structure on source.
-* `effectId` (number): *Read-only*. The magic effect ID that is being ticked. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) namespace.
+* `effect` ([tes3magicEffect](../types/tes3magicEffect.md)): *Read-only*. The individual effect structure on source.
+* `effectId` ([tes3.effect](../references/magic-effects.md)): *Read-only*. The magic effect ID that is being ticked. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) namespace.
 * `effectIndex` (number): *Read-only*. The index of the effect in source’s effects list.
-* `effectInstance` ([tes3magicEffectInstance](../../types/tes3magicEffectInstance)): *Read-only*. The unique instance of the magic effect.
-* `source` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell)): *Read-only*. The magic source.
-* `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source.
-* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the spell. For self-targeted spells, this matches caster.
+* `effectInstance` ([tes3magicEffectInstance](../types/tes3magicEffectInstance.md)): *Read-only*. The unique instance of the magic effect.
+* `source` ([tes3alchemy](../types/tes3alchemy.md), [tes3enchantment](../types/tes3enchantment.md), [tes3spell](../types/tes3spell.md)): *Read-only*. The magic source.
+* `sourceInstance` ([tes3magicSourceInstance](../types/tes3magicSourceInstance.md)): *Read-only*. The unique instance of the magic source.
+* `target` ([tes3reference](../types/tes3reference.md)): *Read-only*. The target of the spell. For self-targeted spells, this matches caster.
 

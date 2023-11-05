@@ -17,7 +17,7 @@ A container mapping a reputation for an associated faction.
 
 **Returns**:
 
-* `result` ([tes3faction](../../types/tes3faction))
+* `result` ([tes3faction](../types/tes3faction.md))
 
 ***
 
