@@ -101,8 +101,10 @@ function TextField:makeComponent(parentBlock)
 		border.minHeight = self.minHeight
 	end
 
-	local inputField = border:createTextInput()
-	inputField.text = self.variable.defaultSetting or ""
+	local inputField = border:createTextInput({
+		text = self.variable.defaultSetting or "",
+		numeric = self.numbersOnly,
+	})
 	inputField.widthProportional = 1.0
 	inputField.autoHeight = true
 	inputField.widget.lengthLimit = nil
