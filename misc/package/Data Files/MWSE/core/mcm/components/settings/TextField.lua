@@ -103,7 +103,7 @@ function TextField:makeComponent(parentBlock)
 
 	local inputField = border:createTextInput({
 		text = self.variable.defaultSetting or "",
-		numeric = self.numbersOnly,
+		numeric = self.variable.numbersOnly,
 	})
 	inputField.widthProportional = 1.0
 	inputField.autoHeight = true
