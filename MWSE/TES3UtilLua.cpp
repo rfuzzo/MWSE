@@ -957,7 +957,13 @@ namespace mwse::lua {
 
 		// Our pick is configured. Let's run it! (Use normalized direction for skinned mesh fix later.)
 		auto directionNormalized = direction.value().normalized();
-		auto pickSuccess = rayTestCache->pickObjects(&position.value(), &directionNormalized, false, maxDistance);
+		auto pickSuccess = false;
+		if (getOptionalParam<bool>(params, "accurateSkinned", false)) {
+			pickSuccess = rayTestCache->pickObjectsWithSkinDeforms(&position.value(), &directionNormalized, false, maxDistance);
+		}
+		else {
+			pickSuccess = rayTestCache->pickObjects(&position.value(), &directionNormalized, false, maxDistance);
+		}
 
 		// Restore previous cull states.
 		for (auto itt = ignoreRestoreList.begin(); itt != ignoreRestoreList.end(); ++itt) {
