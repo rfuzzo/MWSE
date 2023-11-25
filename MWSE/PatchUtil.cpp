@@ -887,7 +887,12 @@ namespace mwse::patch {
 	//
 
 	bool __fastcall PatchPickSkinnedAware(NI::Pick* pick, DWORD _EDX_, TES3::Vector3* origin, TES3::Vector3* direction, bool append, float maxDist) {
-		return pick->pickObjectsWithSkinDeforms(origin, direction, append, maxDist);
+		if (Configuration::UseSkinnedAccurateActivationRaytests) {
+			return pick->pickObjectsWithSkinDeforms(origin, direction, append, maxDist);
+		}
+		else {
+			return pick->pickObjects(origin, direction, append, maxDist);
+		}
 	}
 
 	//
