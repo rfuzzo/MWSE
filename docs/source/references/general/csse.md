@@ -54,6 +54,7 @@ Prefer to learn from videos? Danae has made [a non-exhaustive summary video of t
 * Loading an active file without manually loading its masters will no longer lead to a potential crash.
 * Opening the Construction Set through Mod Organizer 2 is no longer slowed by the number of active MO2 mod folders.
 * The NetImmerse NiLinesData structure loads correctly.
+* Symbolically linked files now list and load correctly.
 
 #### Testing from the Construction Set
 
