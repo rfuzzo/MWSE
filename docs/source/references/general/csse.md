@@ -163,11 +163,6 @@ The following changes to the rendering window apply when landscape editing:
 * The terrain editing disc is no longer hidden when hiding objects (Shift+C).
 * You can use control+right mouse button to sample the texture at the cursor's position. This will select the matching texture under the cursor automatically in the landscape editing menu.
 
-### Text Search Window
-
-* Full searches work correctly on long text, such as script or book text.
-* Searches can be performed with regex, or made case-sensitive through the settings window.
-
 ### Search & Replace Window
 
 * Optimized performance of initial display by 80% (e.g. 1.9 seconds instead of 9.7 seconds).
@@ -175,6 +170,8 @@ The following changes to the rendering window apply when landscape editing:
 ### Text Search Window
 
 * Elements may now be double clicked to open the relevant edit window. The right context will be shown, if applicable. For example, a faction will be automatically selected, or a particular INFO record will be displayed.
+* Full searches work correctly on long text, such as script or book text.
+* Searches can be performed with regex, or made case-sensitive through the settings window.
 
 ### Cell View
 
