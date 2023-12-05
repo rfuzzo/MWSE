@@ -19,6 +19,8 @@
     <ClInclude Include="LuaDialogueFilteredEvent.h" />
     <ClInclude Include="LuaMagicSelectionChangedEvent.h" />
     <ClInclude Include="LuaMusicChangeTrackEvent.h" />
+    <ClInclude Include="LuaObjectCopiedEvent.h" />
+    <ClInclude Include="LuaObjectCreatedEvent.h" />
     <ClInclude Include="LuaShieldBlockedEvent.h" />
     <ClInclude Include="LuaSimulatedEvent.h" />
     <ClInclude Include="LuaUiSkillTooltipEvent.h" />
@@ -647,6 +649,8 @@
     <ClCompile Include="LuaMusicChangeTrackEvent.cpp" />
     <ClCompile Include="LuaMusicSelectTrackEvent.cpp" />
     <ClCompile Include="LuaObject.cpp" />
+    <ClCompile Include="LuaObjectCopiedEvent.cpp" />
+    <ClCompile Include="LuaObjectCreatedEvent.cpp" />
     <ClCompile Include="LuaObjectFilteredEvent.cpp" />
     <ClCompile Include="LuaObjectInvalidatedEvent.cpp" />
     <ClCompile Include="LuaPickLockEvent.cpp" />
