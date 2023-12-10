@@ -30,6 +30,8 @@ Contributing to MWSE requires a copy of [Visual Studio 2022](https://www.visuals
 
 - Workloads:
 	- Desktop development with C++
+- Individual Components:
+	- C++ MFC (only required for Construction Set Extender development)
 
 #### LuaJIT
 
