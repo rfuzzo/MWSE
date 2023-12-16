@@ -12,19 +12,24 @@ namespace se::cs::dialog::render_window {
 
 	struct WidgetsController {
 		NI::Pointer<NI::Node> root;
-		NI::Pointer<NI::SwitchNode> axisMovementWidget;
-		NI::Pointer<NI::Geometry> debugUnitSphere;
-		NI::Pointer<NI::Geometry> debugUnitPlane;
+		NI::Pointer<NI::SwitchNode> axisLines;
+		NI::Pointer<NI::Node> gridRoot;
 		NI::Pointer<NI::Geometry> debugUnitArrows;
+		NI::Pointer<NI::Geometry> debugUnitPlane;
+		NI::Pointer<NI::Geometry> debugUnitSphere;
 
 		WidgetsController();
 		~WidgetsController();
 
 		void show();
 		void hide();
-		bool isShown() const;
+		bool isShown();
 
-		void setPosition(NI::Vector3& position);
 		void setAxis(WidgetsAxis axis);
+		void setPosition(NI::Vector3& position);
+
+		void updateGrid(NI::Vector3& position, float radius, int gridSnap);
+		void showGrid();
+		void hideGrid();
 	};
 }

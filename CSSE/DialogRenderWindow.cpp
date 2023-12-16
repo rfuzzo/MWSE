@@ -89,6 +89,16 @@ namespace se::cs::dialog::render_window {
 		return gRenderControlFlags::get() & RenderControlFlags::SnapToAngle;
 	}
 
+	bool isControlDown() {
+		using windows::isKeyDown;
+		return isKeyDown(VK_CONTROL);
+	}
+
+	bool isAltDown() {
+		using windows::isKeyDown;
+		return isKeyDown(VK_MENU);
+	}
+
 	struct NetImmerseInstance {
 		struct VirtualTable {
 			void* dtor; // 0x0
@@ -342,7 +352,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		const auto snapAngle = math::degreesToRadians((float)gSnapAngleInDegrees::get());
-		const bool isSnapping = isAngleSnapping() && (snapAngle != 0.0f);
+		const bool isSnapping = (isControlDown() || isAngleSnapping()) && (snapAngle != 0.0f);
 
 		NI::Vector3 orientation = cumulativeRot;
 		if (isSnapping) {
@@ -849,7 +859,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Apply grid snap.
-		if (isGridSnapping()) {
+		if (isGridSnapping() || isControlDown()) {
 			auto increment = gSnapGrid::get();
 			if (increment != 0.0f) {
 				// "Unlocked" movement defaults to XY axis.
@@ -1984,6 +1994,39 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_BeforeMouseWheel(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		if (isControlDown()) {
+			// Allows Control+MouseWheel to adjust grid snap setting.
+			// Set override flag so we don't also modify camera zoom.
+			PatchDialogProc_OverrideResult = TRUE;
+
+			short wheelDelta = HIWORD(wParam);
+			auto gridSnap = std::max(gSnapGrid::get(), 1);
+			
+			if (wheelDelta > 0 && gridSnap < 8192) {
+				// increase grid snap on wheel up
+				gSnapGrid::set(math::roundDownToPowerOfTwo(gridSnap << 1));
+			}
+			else if (wheelDelta < 0 && gridSnap > 1) {
+				// decrease grid snap on wheel down
+				gSnapGrid::set(math::roundDownToPowerOfTwo(gridSnap >> 1));
+			}
+			else {
+				// grid snap is already at min/max
+				return;
+			}
+
+			auto widgets = SceneGraphController::get()->getWidgets();
+			auto target = SelectionData::get()->getLastTarget();
+			if (target) {
+				auto sceneNode = target->reference->sceneNode;
+				widgets->updateGrid(sceneNode->localTranslate, sceneNode->worldBoundRadius, gridSnap);
+				widgets->showGrid();
+				gRenderNextFrame::set(true);
+			}
+		}
+	}
+
 	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		if (RenderController::get()->node == nullptr) {
 			PatchDialogProc_OverrideResult = FALSE;
@@ -2057,10 +2100,46 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_AfterControlDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto increment = std::max(gSnapGrid::get(), 1);
+		auto widgets = SceneGraphController::get()->getWidgets();
+		auto target = SelectionData::get()->getLastTarget();
+		if (target) {
+			auto sceneNode = target->reference->sceneNode;
+			widgets->updateGrid(sceneNode->localTranslate, sceneNode->worldBoundRadius, increment);
+			widgets->showGrid();
+
+			// If we're moving on Z axis, align the grid vertically.
+			if (gIsHoldingZ::get()) {
+				auto camera = RenderController::get()->camera;
+
+				auto up = sceneNode->worldTransform.translation - camera->worldTransform.translation;
+				up.z = 0.0;
+				up.normalize();
+
+				auto left = NI::Vector3(0, 0, 1).crossProduct(&up);
+				auto forward = up.crossProduct(&left);
+
+				widgets->gridRoot->setLocalRotationMatrix(&NI::Matrix33(
+					-left.x, forward.x, up.x,
+					-left.y, forward.y, up.y,
+					-left.z, forward.z, up.z
+				));
+			}
+			// Otherwise we're on XY axes, clear any vertical alignment.
+			else {
+				widgets->gridRoot->getLocalRotationMatrix()->toIdentity();
+			}
+		}
+	}
+
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
 			showContextAwareActionMenu(hWnd);
+			break;
+		case VK_CONTROL:
+			PatchDialogProc_AfterControlDown(hWnd, msg, wParam, lParam);
 			break;
 		}
 	}
@@ -2075,12 +2154,21 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_AfterKeyUp_Control(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto widgets = SceneGraphController::get()->getWidgets();
+		widgets->hideGrid();
+		gRenderNextFrame::set(true);
+	}
+
 	void PatchDialogProc_AfterKeyUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'X':
 		case 'Y':
 		case 'Z':
 			PatchDialogProc_AfterKeyUp_XYZ(hWnd, msg, wParam, lParam);
+			break;
+		case VK_CONTROL:
+			PatchDialogProc_AfterKeyUp_Control(hWnd, msg, wParam, lParam);
 			break;
 		}
 	}
@@ -2095,6 +2183,11 @@ namespace se::cs::dialog::render_window {
 		switch (msg) {
 		case WM_MOUSEMOVE:
 			PatchDialogProc_BeforeMouseMove(hWnd, msg, wParam, lParam);
+			lastCursorPosX = LOWORD(lParam);
+			lastCursorPosY = HIWORD(lParam);
+			break;
+		case WM_MOUSEWHEEL:
+			PatchDialogProc_BeforeMouseWheel(hWnd, msg, wParam, lParam);
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
