@@ -1,9 +1,11 @@
 #include "RenderWindowWidgets.h"
+#include "DialogRenderWindow.h"
 
 #include "CSDataHandler.h"
 #include "CSRecordHandler.h"
 #include "CSModelLoader.h"
 
+#include "NICamera.h"
 #include "NIMatrix33.h"
 #include "NILines.h"
 #include "NILinesData.h"
@@ -99,7 +101,63 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void WidgetsController::updateGrid(NI::Vector3& position, float radius, int gridSnap) {
+	void WidgetsController::setGridPosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap) {
+		if (gridRoot) {
+			// Set position
+			{
+				// If not snapping we default to XY axis.
+				auto snapXY = !snapX && !snapY && !snapZ;
+				if (snapX || snapXY) {
+					position.x = std::roundf(position.x / gridSnap) * gridSnap;
+				}
+				if (snapY || snapXY) {
+					position.y = std::roundf(position.y / gridSnap) * gridSnap;
+				}
+				if (snapZ) {
+					position.z = std::roundf(position.z / gridSnap) * gridSnap;
+				}
+				gridRoot->localTranslate = position;
+			}
+			// Set rotation
+			{
+				// If we're moving on Z axis, align the grid vertically.
+				if (snapZ) {
+					const auto worldUp = NI::Vector3(0, 0, 1);
+					auto camera = RenderController::get()->camera;
+
+					auto up = position - camera->worldTransform.translation;
+					up.z = 0.0;
+					up.normalize();
+
+					auto left = worldUp.crossProduct(&up);
+					left.normalize();
+
+					auto forward = up.crossProduct(&left);
+					forward.normalize();
+
+					auto rotation = NI::Matrix33(
+						-left.x, forward.x, up.x,
+						-left.y, forward.y, up.y,
+						-left.z, forward.z, up.z
+					);
+					rotation.reorthogonalize();
+
+					gridRoot->setLocalRotationMatrix(&rotation);
+				}
+				// Otherwise we're on XY axes, clear any vertical alignment.
+				else {
+					gridRoot->getLocalRotationMatrix()->toIdentity();
+				}
+			}
+			// Set Scale
+			{
+				float f = std::max(float(gridSnap), 1.0f);
+				gridRoot->localScale = f / 2.0f;
+			}
+		}
+	}
+
+	void WidgetsController::calcGridGeometry(float radius, int gridSnap) {
 		if (!gridRoot) {
 			return;
 		}
@@ -170,19 +228,14 @@ namespace se::cs::dialog::render_window {
 				node->setModelData(linesData);
 			}
 		}
-
-		gridRoot->localTranslate = position;
-		gridRoot->localScale = gridSize / 2.0f;
-
-		gridRoot->setAppCulled(false);
-		gridRoot->update();
-		gridRoot->updateEffects();
-		gridRoot->updateProperties();
 	}
 
 	void WidgetsController::showGrid() {
 		if (gridRoot) {
 			gridRoot->setAppCulled(false);
+			gridRoot->update();
+			gridRoot->updateEffects();
+			gridRoot->updateProperties();
 		}
 	}
 

@@ -28,7 +28,8 @@ namespace se::cs::dialog::render_window {
 		void setAxis(WidgetsAxis axis);
 		void setPosition(NI::Vector3& position);
 
-		void updateGrid(NI::Vector3& position, float radius, int gridSnap);
+		void calcGridGeometry(float radius, int gridSnap);
+		void setGridPosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap);
 		void showGrid();
 		void hideGrid();
 	};

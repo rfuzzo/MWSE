@@ -90,13 +90,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	bool isControlDown() {
-		using windows::isKeyDown;
-		return isKeyDown(VK_CONTROL);
-	}
-
-	bool isAltDown() {
-		using windows::isKeyDown;
-		return isKeyDown(VK_MENU);
+		return windows::isKeyDown(VK_CONTROL);
 	}
 
 	struct NetImmerseInstance {
@@ -1994,6 +1988,35 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void updateGrid() {
+		auto widgets = SceneGraphController::get()->getWidgets();
+		if (!widgets) {
+			return;
+		}
+
+		auto target = SelectionData::get()->getLastTarget();
+		if (!target) {
+			return;
+		}
+
+		auto sceneNode = target->reference->sceneNode;
+
+		widgets->calcGridGeometry(
+			sceneNode->worldBoundRadius,
+			gSnapGrid::get()
+		);
+		widgets->setGridPosition(
+			sceneNode->localTranslate,
+			gIsHoldingX::get(),
+			gIsHoldingY::get(),
+			gIsHoldingZ::get(),
+			gSnapGrid::get()
+		);
+		widgets->showGrid();
+
+		gRenderNextFrame::set(true);
+	}
+
 	void PatchDialogProc_BeforeMouseWheel(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		if (isControlDown()) {
 			// Allows Control+MouseWheel to adjust grid snap setting.
@@ -2001,8 +2024,8 @@ namespace se::cs::dialog::render_window {
 			PatchDialogProc_OverrideResult = TRUE;
 
 			short wheelDelta = HIWORD(wParam);
-			auto gridSnap = std::max(gSnapGrid::get(), 1);
-			
+			auto gridSnap = gSnapGrid::get();
+
 			if (wheelDelta > 0 && gridSnap < 8192) {
 				// increase grid snap on wheel up
 				gSnapGrid::set(math::roundDownToPowerOfTwo(gridSnap << 1));
@@ -2016,14 +2039,7 @@ namespace se::cs::dialog::render_window {
 				return;
 			}
 
-			auto widgets = SceneGraphController::get()->getWidgets();
-			auto target = SelectionData::get()->getLastTarget();
-			if (target) {
-				auto sceneNode = target->reference->sceneNode;
-				widgets->updateGrid(sceneNode->localTranslate, sceneNode->worldBoundRadius, gridSnap);
-				widgets->showGrid();
-				gRenderNextFrame::set(true);
-			}
+			updateGrid();
 		}
 	}
 
@@ -2100,46 +2116,17 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void PatchDialogProc_AfterControlDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		auto increment = std::max(gSnapGrid::get(), 1);
-		auto widgets = SceneGraphController::get()->getWidgets();
-		auto target = SelectionData::get()->getLastTarget();
-		if (target) {
-			auto sceneNode = target->reference->sceneNode;
-			widgets->updateGrid(sceneNode->localTranslate, sceneNode->worldBoundRadius, increment);
-			widgets->showGrid();
-
-			// If we're moving on Z axis, align the grid vertically.
-			if (gIsHoldingZ::get()) {
-				auto camera = RenderController::get()->camera;
-
-				auto up = sceneNode->worldTransform.translation - camera->worldTransform.translation;
-				up.z = 0.0;
-				up.normalize();
-
-				auto left = NI::Vector3(0, 0, 1).crossProduct(&up);
-				auto forward = up.crossProduct(&left);
-
-				widgets->gridRoot->setLocalRotationMatrix(&NI::Matrix33(
-					-left.x, forward.x, up.x,
-					-left.y, forward.y, up.y,
-					-left.z, forward.z, up.z
-				));
-			}
-			// Otherwise we're on XY axes, clear any vertical alignment.
-			else {
-				widgets->gridRoot->getLocalRotationMatrix()->toIdentity();
-			}
-		}
-	}
-
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
 			showContextAwareActionMenu(hWnd);
 			break;
 		case VK_CONTROL:
-			PatchDialogProc_AfterControlDown(hWnd, msg, wParam, lParam);
+			auto wasKeyDown = (HIWORD(lParam) & KF_REPEAT) == KF_REPEAT;
+			if (!wasKeyDown) {
+				log::stream << "UPDATE GRID" << std::endl;
+				updateGrid();
+			}
 			break;
 		}
 	}
