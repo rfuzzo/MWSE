@@ -2407,5 +2407,9 @@ namespace se::cs::dialog::render_window {
 		// Patch: Customize render window update rate.
 		const auto limitTimeInMS = (BYTE)std::floor(1.0f / float(settings.render_window.fps_limit) * 1000.0f);
 		writeValueEnforced<BYTE>(0x45BF58 + 0x1, 40u, limitTimeInMS);
+
+		// Patch: Extend the selection widget to a full NiNode on references.
+		genJumpEnforced(0x40235B, 0x540D50, &Reference::createSelectionWidget);
+
 	}
 }

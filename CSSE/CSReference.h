@@ -38,8 +38,6 @@ namespace se::cs {
 	static_assert(sizeof(LightAttachmentNode) == 0x8, "TES3::LightAttachmentNode failed size validation");
 	typedef AttachmentWithNode<LightAttachmentNode> LightAttachment;
 
-	constexpr bool USE_EXPANDED_SELECTION_WIDGET = false;
-
 	struct Reference : Object {
 		struct ReferenceData {
 			PhysicalObject* baseObject; // 0x0

@@ -30,14 +30,14 @@ namespace se::cs {
 			return false;
 		}
 
-		// Enhance the selection widget.
-		if constexpr (USE_EXPANDED_SELECTION_WIDGET) {
-			auto newNode = NI::Node::create();
-			auto originalParent = selectionWidget->parentNode;
-			newNode->attachChild(selectionWidget.get());
+		// Create a new wrapper node for the selection bounding box widget.
+		auto newNode = NI::Node::create();
+		auto originalParent = selectionWidget->parentNode;
+		newNode->attachChild(selectionWidget.get());
+		if (originalParent) {
 			originalParent->attachChild(selectionWidget);
-			selectionWidget = newNode;
 		}
+		selectionWidget = newNode;
 
 		return true;
 	}
