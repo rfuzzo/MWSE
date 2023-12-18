@@ -1969,6 +1969,12 @@ namespace se::cs::dialog::render_window {
 				return;
 			}
 
+			// Grid snapping is not currently not implemented for legacy movement mode.
+			bool useLegacyObjectMovement = settings.render_window.use_legacy_object_movement;
+			if (useLegacyObjectMovement && gIsTranslating::get()) {
+				return;
+			}
+
 			auto widgets = SceneGraphController::get()->getWidgets();
 			if (!widgets) {
 				return;
