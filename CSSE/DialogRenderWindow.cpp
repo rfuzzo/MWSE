@@ -2215,7 +2215,7 @@ namespace se::cs::dialog::render_window {
 			}
 			break;
 		case 'X':
-			// If we are modifying an object, prevent the default undo function from happening.
+			// If we are modifying an object, prevent the default cut function from happening.
 			if (isModifyingObject()) {
 				resetCumulativeRotationValues();
 				gIsHoldingX::set(true);
@@ -2223,7 +2223,7 @@ namespace se::cs::dialog::render_window {
 			}
 			break;
 		case 'Y':
-			// If we are modifying an object, prevent the default undo function from happening.
+			// If we are modifying an object, prevent the default redo function from happening.
 			if (isModifyingObject()) {
 				resetCumulativeRotationValues();
 				gIsHoldingY::set(true);
