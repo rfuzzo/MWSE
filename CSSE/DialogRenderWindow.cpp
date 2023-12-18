@@ -1963,6 +1963,12 @@ namespace se::cs::dialog::render_window {
 
 	namespace grid {
 		static void update() {
+			// Angle snapping is not currently not implemented for legacy rotation mode.
+			bool useWorldAxisRotation = settings.render_window.use_world_axis_rotations_by_default;
+			if (!useWorldAxisRotation && gIsRotating::get()) {
+				return;
+			}
+
 			auto widgets = SceneGraphController::get()->getWidgets();
 			if (!widgets) {
 				return;
