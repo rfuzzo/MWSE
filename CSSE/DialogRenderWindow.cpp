@@ -758,8 +758,9 @@ namespace se::cs::dialog::render_window {
 			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 
-		// When holding alt perform align-to-surface behavior.
-		if (isKeyDown(VK_MENU)) {
+		// When holding alt perform align-to-surface behavior. 
+		// Disallow while control is down (grid snap enabled).
+		if (isKeyDown(VK_MENU) && !isControlDown()) {
 			return Patch_AlignToSurfaceDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 
