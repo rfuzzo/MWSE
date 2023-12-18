@@ -261,8 +261,8 @@ namespace se::cs::dialog::render_window {
 			return;
 		}
 
-		auto innerRadius = radius;
-		auto outerRadius = radius * 1.2f;
+		auto innerRadius = radius * 1.2f;
+		auto outerRadius = radius * 1.4f;
 
 		auto lines = NI::Lines::create(vertexCount, true, false);
 		auto linesData = lines->getModelData();
