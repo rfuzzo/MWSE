@@ -1052,8 +1052,6 @@ namespace se::cs::dialog::render_window {
 	// Patch: Extend Render Window message handling.
 	//
 
-	static std::optional<LRESULT> PatchDialogProc_OverrideResult = {};
-
 	NI::Texture* getLandscapeTextureUnderCursor() {
 		auto rendererController = RenderController::get();
 		auto sceneGraphController = SceneGraphController::get();
@@ -1433,7 +1431,7 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void showContextAwareActionMenu(HWND hWndRenderWindow) {
+	void showContextAwareActionMenu(HWND hWndRenderWindow, std::optional<LRESULT>& overrideDialogResult) {
 		auto menu = CreatePopupMenu();
 		if (menu == NULL) {
 			return;
@@ -1958,7 +1956,7 @@ namespace se::cs::dialog::render_window {
 
 		// We also stole paint stuff, so repaint.
 		SendMessage(hWndRenderWindow, WM_PAINT, 0, 0);
-		PatchDialogProc_OverrideResult = TRUE;
+		overrideDialogResult = TRUE;
 	}
 
 	namespace grid {
@@ -2057,37 +2055,37 @@ namespace se::cs::dialog::render_window {
 		movementContext.reset();
 	}
 
-	void PatchDialogProc_BeforeLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		// Prevent selection changes during object rotation mode. Prevents non-undoable changes, and a crash if the selection becomes empty.
 		if (gIsRotating::get()) {
-			PatchDialogProc_OverrideResult = FALSE;
+			overrideDialogResult = FALSE;
 		}
 	}
 
-	void PatchDialogProc_BeforeLMouseDoubleClick(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeLMouseDoubleClick(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		// Prevent opening details dialog during object rotation mode.
 		if (gIsRotating::get()) {
-			PatchDialogProc_OverrideResult = FALSE;
+			overrideDialogResult = FALSE;
 		}
 	}
 
-	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		constexpr auto comboPickLandscapeTexture = MK_CONTROL | MK_RBUTTON;
 		if ((wParam & comboPickLandscapeTexture) == comboPickLandscapeTexture) {
 			if (PickLandscapeTexture(hWnd)) {
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 		}
 	}
 
-	void PatchDialogProc_BeforeMouseWheel(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeMouseWheel(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		using windows::isControlDown;
 		using windows::isRightMouseDown;
 
 		if (isControlDown()) {
 			// Allows Control+MouseWheel to adjust grid snap setting.
 			// Set override flag so we don't also modify camera zoom.
-			PatchDialogProc_OverrideResult = TRUE;
+			overrideDialogResult = TRUE;
 
 			short delta = HIWORD(wParam);
 			
@@ -2118,9 +2116,9 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		if (RenderController::get()->node == nullptr) {
-			PatchDialogProc_OverrideResult = FALSE;
+			overrideDialogResult = FALSE;
 		}
 	}
 
@@ -2159,7 +2157,7 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void PatchDialogProc_BeforeKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		using windows::isControlDown;
 
 		// Decode parameters.
@@ -2181,13 +2179,13 @@ namespace se::cs::dialog::render_window {
 		case VK_OEM_4: // [
 			if (landscapeEditWindow) {
 				landscape_edit_settings_window::decrementEditRadius();
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case VK_OEM_6: // ]
 			if (landscapeEditWindow) {
 				landscape_edit_settings_window::incrementEditRadius();
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case 'F':
@@ -2195,7 +2193,7 @@ namespace se::cs::dialog::render_window {
 				if (!wasKeyDown) {
 					landscape_edit_settings_window::setFlattenLandscapeVertices(!landscape_edit_settings_window::getFlattenLandscapeVertices());
 				}
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case 'S':
@@ -2203,7 +2201,7 @@ namespace se::cs::dialog::render_window {
 				if (!wasKeyDown) {
 					landscape_edit_settings_window::setSoftenLandscapeVertices(!landscape_edit_settings_window::getSoftenLandscapeVertices());
 				}
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case 'O':
@@ -2211,7 +2209,7 @@ namespace se::cs::dialog::render_window {
 				if (!wasKeyDown) {
 					landscape_edit_settings_window::setEditLandscapeColor(!landscape_edit_settings_window::getEditLandscapeColor());
 				}
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case 'X':
@@ -2219,7 +2217,7 @@ namespace se::cs::dialog::render_window {
 			if (isModifyingObject()) {
 				resetCumulativeRotationValues();
 				gIsHoldingX::set(true);
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case 'Y':
@@ -2227,7 +2225,7 @@ namespace se::cs::dialog::render_window {
 			if (isModifyingObject()) {
 				resetCumulativeRotationValues();
 				gIsHoldingY::set(true);
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		case 'Z':
@@ -2235,7 +2233,7 @@ namespace se::cs::dialog::render_window {
 			if (isModifyingObject()) {
 				resetCumulativeRotationValues();
 				gIsHoldingZ::set(true);
-				PatchDialogProc_OverrideResult = TRUE;
+				overrideDialogResult = TRUE;
 			}
 			break;
 		}
@@ -2252,10 +2250,10 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam, std::optional<LRESULT>& overrideDialogResult) {
 		switch (wParam) {
 		case 'Q':
-			showContextAwareActionMenu(hWnd);
+			showContextAwareActionMenu(hWnd, overrideDialogResult);
 			break;
 		case VK_CONTROL:
 			auto wasKeyDown = (HIWORD(lParam) & KF_REPEAT) == KF_REPEAT;
@@ -2303,8 +2301,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		const auto previousOverride = PatchDialogProc_OverrideResult;
-		PatchDialogProc_OverrideResult.reset();
+		std::optional<LRESULT> overrideResult;
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
@@ -2313,35 +2310,33 @@ namespace se::cs::dialog::render_window {
 			lastCursorPosY = HIWORD(lParam);
 			break;
 		case WM_MOUSEWHEEL:
-			PatchDialogProc_BeforeMouseWheel(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeMouseWheel(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		case WM_LBUTTONUP:
-			PatchDialogProc_BeforeLMouseButtonUp(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeLMouseButtonUp(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case WM_LBUTTONDBLCLK:
-			PatchDialogProc_BeforeLMouseDoubleClick(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeLMouseDoubleClick(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case WM_RBUTTONDOWN:
-			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case WM_KEYDOWN:
-			PatchDialogProc_BeforeKeyDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeKeyDown(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case CustomWindowMessage::SetCameraPosition:
-			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case WM_TIMER:
 			PatchDialogProc_BeforeTimer(hWnd, msg, wParam, lParam);
 			break;
 		}
 
-		if (PatchDialogProc_OverrideResult) {
-			const auto result = PatchDialogProc_OverrideResult.value();
-			PatchDialogProc_OverrideResult = previousOverride;
-			return result;
+		if (overrideResult) {
+			return overrideResult.value();
 		}
 
 		// Call original function.
@@ -2350,7 +2345,7 @@ namespace se::cs::dialog::render_window {
 
 		switch (msg) {
 		case WM_KEYDOWN:
-			PatchDialogProc_AfterKeyDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_AfterKeyDown(hWnd, msg, wParam, lParam, overrideResult);
 			break;
 		case WM_KEYUP:
 			PatchDialogProc_AfterKeyUp(hWnd, msg, wParam, lParam);
@@ -2366,9 +2361,7 @@ namespace se::cs::dialog::render_window {
 			break;
 		}
 
-		const auto result = PatchDialogProc_OverrideResult.value_or(vanillaResult);
-		PatchDialogProc_OverrideResult = previousOverride;
-		return result;
+		return overrideResult.value_or(vanillaResult);
 	}
 
 	//
