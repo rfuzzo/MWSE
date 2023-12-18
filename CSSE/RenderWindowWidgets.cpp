@@ -166,6 +166,8 @@ namespace se::cs::dialog::render_window {
 			flags[i] = (i % 2) == 0;
 		}
 
+		linesData->updateModelBound();
+
 		for (auto& child : gridRoot->children) {
 			if (child->isInstanceOfType(NI::RTTIStaticPtr::NiLines)) {
 				auto node = static_cast<NI::Lines*>(child.get());
@@ -283,6 +285,8 @@ namespace se::cs::dialog::render_window {
 			flags[i]     = 1;
 			flags[i + 1] = 0;
 		}
+
+		linesData->updateModelBound();
 
 		for (auto& child : gridRoot->children) {
 			child->setAppCulled(true);
