@@ -2229,16 +2229,13 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		using windows::isLeftMouseDown;
-		using windows::isRightMouseDown;
-
 		switch (wParam) {
 		case 'Q':
 			showContextAwareActionMenu(hWnd);
 			break;
 		case VK_CONTROL:
 			auto wasKeyDown = (HIWORD(lParam) & KF_REPEAT) == KF_REPEAT;
-			if (!wasKeyDown && (isLeftMouseDown() || isRightMouseDown())) {
+			if (!wasKeyDown && (gIsTranslating::get() || gIsRotating::get())) {
 				grid::update();
 			}
 			break;
