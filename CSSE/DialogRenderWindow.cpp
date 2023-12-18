@@ -49,6 +49,7 @@ namespace se::cs::dialog::render_window {
 	using gSnapGrid = memory::ExternalGlobal<int, 0x6CE9A8>;
 	using gSnapAngleInDegrees = memory::ExternalGlobal<int, 0x6CE9AC>;
 	using gCumulativeRotationValues = memory::ExternalGlobal<NI::Vector3, 0x6CF760>;
+	using gPreviousCumulativeRotationValues = memory::ExternalGlobal<NI::Vector3, 0x6CF4A8>;
 
 	using gRenderWindowPick = memory::ExternalGlobal<NI::Pick, 0x6CF528>;
 
@@ -76,6 +77,8 @@ namespace se::cs::dialog::render_window {
 	using gRenderControlFlags = memory::ExternalGlobal<DWORD, 0x6CE9A4>;
 	using gAutoSaveTime = memory::ExternalGlobal<int, 0x6CEA38>;
 
+	const auto resetCumulativeRotationValues = reinterpret_cast<void(__stdcall*)()>(0x466470);
+
 	// Convenience function to see if X, Y, or Z are held down.
 	bool isHoldingAxisKey() {
 		return gIsHoldingX::get() || gIsHoldingY::get() || gIsHoldingZ::get();
@@ -89,16 +92,8 @@ namespace se::cs::dialog::render_window {
 		return gRenderControlFlags::get() & RenderControlFlags::SnapToAngle;
 	}
 
-	bool isControlDown() {
-		return windows::isKeyDown(VK_CONTROL);
-	}
-
-	bool isLeftMouseDown() {
-		return windows::isKeyDown(VK_LBUTTON);
-	}
-
-	bool isRightMouseDown() {
-		return windows::isKeyDown(VK_RBUTTON);
+	bool isModifyingObject() {
+		return gIsTranslating::get() || gIsRotating::get() || gIsScaling::get();
 	}
 
 	struct NetImmerseInstance {
@@ -309,6 +304,7 @@ namespace se::cs::dialog::render_window {
 	const auto TES3_CS_OriginalRotationLogic = reinterpret_cast<bool(__cdecl*)(void*, SelectionData::Target*, int, SelectionData::RotationAxis)>(0x4652D0);
 	bool __cdecl Patch_ReplaceRotationLogic(void* unknown1, SelectionData::Target* firstTarget, int relativeMouseDelta, SelectionData::RotationAxis rotationAxis) {
 		using windows::isKeyDown;
+		using windows::isControlDown;
 
 		// Allow holding ALT modifier to do vanilla behavior.
 		bool useWorldAxisRotation = settings.render_window.use_world_axis_rotations_by_default;
@@ -749,6 +745,7 @@ namespace se::cs::dialog::render_window {
 	const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
 	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using windows::isKeyDown;
+		using windows::isControlDown;
 
 		auto selectionData = SelectionData::get();
 		auto lastTarget = selectionData->getLastTarget();
@@ -1965,6 +1962,8 @@ namespace se::cs::dialog::render_window {
 
 	namespace grid {
 		static void update() {
+			using windows::isRightMouseDown;
+
 			auto widgets = SceneGraphController::get()->getWidgets();
 			if (!widgets) {
 				return;
@@ -2067,6 +2066,9 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_BeforeMouseWheel(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using windows::isControlDown;
+		using windows::isRightMouseDown;
+
 		if (isControlDown()) {
 			// Allows Control+MouseWheel to adjust grid snap setting.
 			// Set override flag so we don't also modify camera zoom.
@@ -2128,22 +2130,22 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_AfterRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using windows::isControlDown;
+
 		if (isControlDown()) {
 			grid::update();
 		}
 	}
 
 	void PatchDialogProc_AfterRMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using windows::isControlDown;
+
 		if (isControlDown()) {
 			grid::hide();
 		}
 	}
 
 	void PatchDialogProc_BeforeKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		auto editorWindow = landscape_edit_settings_window::gWindowHandle::get();
-		if (!editorWindow) {
-			return;
-		}
 
 		// Decode parameters.
 		auto vkCode = LOWORD(wParam);
@@ -2157,39 +2159,77 @@ namespace se::cs::dialog::render_window {
 		auto repeatCount = LOWORD(lParam);
 		auto isKeyReleased = (keyFlags & KF_UP) == KF_UP;
 
-		using namespace landscape_edit_settings_window;
+
+		auto landscapeEditWindow = landscape_edit_settings_window::gWindowHandle::get();
 
 		switch (wParam) {
 		case VK_OEM_4: // [
-			decrementEditRadius();
-			PatchDialogProc_OverrideResult = TRUE;
+			if (landscapeEditWindow) {
+				landscape_edit_settings_window::decrementEditRadius();
+				PatchDialogProc_OverrideResult = TRUE;
+			}
 			break;
 		case VK_OEM_6: // ]
-			incrementEditRadius();
-			PatchDialogProc_OverrideResult = TRUE;
+			if (landscapeEditWindow) {
+				landscape_edit_settings_window::incrementEditRadius();
+				PatchDialogProc_OverrideResult = TRUE;
+			}
 			break;
 		case 'F':
-			if (!wasKeyDown) {
-				setFlattenLandscapeVertices(!getFlattenLandscapeVertices());
+			if (landscapeEditWindow) {
+				if (!wasKeyDown) {
+					landscape_edit_settings_window::setFlattenLandscapeVertices(!landscape_edit_settings_window::getFlattenLandscapeVertices());
+				}
+				PatchDialogProc_OverrideResult = TRUE;
 			}
-			PatchDialogProc_OverrideResult = TRUE;
 			break;
 		case 'S':
-			if (!wasKeyDown) {
-				setSoftenLandscapeVertices(!getSoftenLandscapeVertices());
+			if (landscapeEditWindow) {
+				if (!wasKeyDown) {
+					landscape_edit_settings_window::setSoftenLandscapeVertices(!landscape_edit_settings_window::getSoftenLandscapeVertices());
+				}
+				PatchDialogProc_OverrideResult = TRUE;
 			}
-			PatchDialogProc_OverrideResult = TRUE;
 			break;
 		case 'O':
-			if (!wasKeyDown) {
-				setEditLandscapeColor(!getEditLandscapeColor());
+			if (landscapeEditWindow) {
+				if (!wasKeyDown) {
+					landscape_edit_settings_window::setEditLandscapeColor(!landscape_edit_settings_window::getEditLandscapeColor());
+				}
+				PatchDialogProc_OverrideResult = TRUE;
 			}
-			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'X':
+			// If we are modifying an object, prevent the default undo function from happening.
+			if (isModifyingObject()) {
+				resetCumulativeRotationValues();
+				gIsHoldingX::set(true);
+				PatchDialogProc_OverrideResult = TRUE;
+			}
+			break;
+		case 'Y':
+			// If we are modifying an object, prevent the default undo function from happening.
+			if (isModifyingObject()) {
+				resetCumulativeRotationValues();
+				gIsHoldingY::set(true);
+				PatchDialogProc_OverrideResult = TRUE;
+			}
+			break;
+		case 'Z':
+			// If we are modifying an object, prevent the default undo function from happening.
+			if (isModifyingObject()) {
+				resetCumulativeRotationValues();
+				gIsHoldingZ::set(true);
+				PatchDialogProc_OverrideResult = TRUE;
+			}
 			break;
 		}
 	}
 
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using windows::isLeftMouseDown;
+		using windows::isRightMouseDown;
+
 		switch (wParam) {
 		case 'Q':
 			showContextAwareActionMenu(hWnd);
