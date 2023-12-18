@@ -2241,7 +2241,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Handle pressing a new axis key while we were already in grid/angle snapping mode.
-		if (!wasKeyDown && isControlDown && isModifyingObject()) {
+		if (!wasKeyDown && isControlDown() && isModifyingObject()) {
 			switch (wParam) {
 			case 'X':
 			case 'Y':
