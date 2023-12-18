@@ -1963,8 +1963,6 @@ namespace se::cs::dialog::render_window {
 
 	namespace grid {
 		static void update() {
-			using windows::isRightMouseDown;
-
 			auto widgets = SceneGraphController::get()->getWidgets();
 			if (!widgets) {
 				return;
@@ -1977,14 +1975,18 @@ namespace se::cs::dialog::render_window {
 
 			auto sceneNode = target->reference->sceneNode;
 			
-			auto isRotating = isRightMouseDown();
-			if (isRotating) {
+			if (gIsRotating::get()) {
 				widgets->updateAngleGuideGeometry(
 					sceneNode->worldBoundRadius,
 					gSnapAngleInDegrees::get()
 				);
-				widgets->gridRoot->localScale = 1.0;
-				widgets->gridRoot->getLocalRotationMatrix()->toIdentity();
+				widgets->updateAngleGuidePosition(
+					sceneNode->localTranslate,
+					gIsHoldingX::get(),
+					gIsHoldingY::get(),
+					gIsHoldingZ::get(),
+					gSnapAngleInDegrees::get()
+				);
 			}
 			else {
 				widgets->updateGridGeometry(
@@ -2077,8 +2079,7 @@ namespace se::cs::dialog::render_window {
 
 			short delta = HIWORD(wParam);
 			
-			auto isRotating = isRightMouseDown();
-			if (isRotating) {
+			if (gIsRotating::get()) {
 				auto& steps = settings.render_window.angle_steps;
 				if (steps.size() == 0) {
 					return;

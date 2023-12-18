@@ -28,12 +28,14 @@ namespace se::cs::dialog::render_window {
 		void setAxis(WidgetsAxis axis);
 		void setPosition(NI::Vector3& position);
 
-		void updateGridGeometry(float radius, int gridSnap);
-		void updateGridPosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap);
 		void showGrid();
 		void hideGrid();
 		bool isGridShown();
 
+		void updateGridGeometry(float radius, int gridSnap);
+		void updateGridPosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap);
+
 		void updateAngleGuideGeometry(float radius, float angleSnap);
+		void updateAngleGuidePosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap);
 	};
 }

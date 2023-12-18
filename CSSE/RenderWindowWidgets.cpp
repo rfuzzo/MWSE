@@ -299,4 +299,12 @@ namespace se::cs::dialog::render_window {
 			node->setAppCulled(false);
 		}
 	}
+	void WidgetsController::updateAngleGuidePosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap) {
+		if (!gridRoot) {
+			return;
+		}
+		gridRoot->localRotation->toIdentity();
+		gridRoot->localTranslate = position;
+		gridRoot->localScale = 1.0;
+	}
 }
