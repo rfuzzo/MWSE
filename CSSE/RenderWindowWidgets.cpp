@@ -101,63 +101,7 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void WidgetsController::setGridPosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap) {
-		if (gridRoot) {
-			// Set position
-			{
-				// If not snapping we default to XY axis.
-				auto snapXY = !snapX && !snapY && !snapZ;
-				if (snapX || snapXY) {
-					position.x = std::roundf(position.x / gridSnap) * gridSnap;
-				}
-				if (snapY || snapXY) {
-					position.y = std::roundf(position.y / gridSnap) * gridSnap;
-				}
-				if (snapZ) {
-					position.z = std::roundf(position.z / gridSnap) * gridSnap;
-				}
-				gridRoot->localTranslate = position;
-			}
-			// Set rotation
-			{
-				// If we're moving on Z axis, align the grid vertically.
-				if (snapZ) {
-					const auto worldUp = NI::Vector3(0, 0, 1);
-					auto camera = RenderController::get()->camera;
-
-					auto up = position - camera->worldTransform.translation;
-					up.z = 0.0;
-					up.normalize();
-
-					auto left = worldUp.crossProduct(&up);
-					left.normalize();
-
-					auto forward = up.crossProduct(&left);
-					forward.normalize();
-
-					auto rotation = NI::Matrix33(
-						-left.x, forward.x, up.x,
-						-left.y, forward.y, up.y,
-						-left.z, forward.z, up.z
-					);
-					rotation.reorthogonalize();
-
-					gridRoot->setLocalRotationMatrix(&rotation);
-				}
-				// Otherwise we're on XY axes, clear any vertical alignment.
-				else {
-					gridRoot->getLocalRotationMatrix()->toIdentity();
-				}
-			}
-			// Set Scale
-			{
-				float f = std::max(float(gridSnap), 1.0f);
-				gridRoot->localScale = f / 2.0f;
-			}
-		}
-	}
-
-	void WidgetsController::calcGridGeometry(float radius, int gridSnap) {
+	void WidgetsController::updateGridGeometry(float radius, int gridSnap) {
 		if (!gridRoot) {
 			return;
 		}
@@ -171,7 +115,7 @@ namespace se::cs::dialog::render_window {
 		int g = 2.0f * (gridRadius / gridSize);
 
 		// Needs an even number of vertices for NiLines to work.
-		g += (g % 2) != 0; 
+		g += (g % 2) != 0;
 
 		unsigned int vertexCount = g + 2;
 		if (vertexCount > 32767) {
@@ -226,8 +170,62 @@ namespace se::cs::dialog::render_window {
 			if (child->isInstanceOfType(NI::RTTIStaticPtr::NiLines)) {
 				auto node = static_cast<NI::Lines*>(child.get());
 				node->setModelData(linesData);
+				node->setAppCulled(false);
 			}
 		}
+	}
+
+	void WidgetsController::updateGridPosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap) {
+		if (!gridRoot) {
+			return;
+		}
+		// Set position
+		// If not snapping we default to XY axis.
+		auto snapXY = !snapX && !snapY && !snapZ;
+		if (snapX || snapXY) {
+			position.x = std::roundf(position.x / gridSnap) * gridSnap;
+		}
+		if (snapY || snapXY) {
+			position.y = std::roundf(position.y / gridSnap) * gridSnap;
+		}
+		if (snapZ) {
+			position.z = std::roundf(position.z / gridSnap) * gridSnap;
+		}
+		gridRoot->localTranslate = position;
+
+		// Set rotation
+		// If we're moving on Z axis, align the grid vertically.
+		if (snapZ) {
+			const auto worldUp = NI::Vector3(0, 0, 1);
+			auto camera = RenderController::get()->camera;
+
+			auto up = position - camera->worldTransform.translation;
+			up.z = 0.0;
+			up.normalize();
+
+			auto left = worldUp.crossProduct(&up);
+			left.normalize();
+
+			auto forward = up.crossProduct(&left);
+			forward.normalize();
+
+			auto rotation = NI::Matrix33(
+				-left.x, forward.x, up.x,
+				-left.y, forward.y, up.y,
+				-left.z, forward.z, up.z
+			);
+			rotation.reorthogonalize();
+
+			gridRoot->setLocalRotationMatrix(&rotation);
+		}
+		// Otherwise we're on XY axes, clear any vertical alignment.
+		else {
+			gridRoot->getLocalRotationMatrix()->toIdentity();
+		}
+
+		// Set Scale
+		float f = std::max(float(gridSnap), 1.0f);
+		gridRoot->localScale = f / 2.0f;
 	}
 
 	void WidgetsController::showGrid() {
@@ -242,6 +240,59 @@ namespace se::cs::dialog::render_window {
 	void WidgetsController::hideGrid() {
 		if (gridRoot) {
 			gridRoot->setAppCulled(true);
+		}
+	}
+
+	bool WidgetsController::isGridShown() {
+		return gridRoot && !gridRoot->getAppCulled();
+	}
+
+	void WidgetsController::updateAngleGuideGeometry(float radius, float angleSnap) {
+		if (!gridRoot) {
+			return;
+		}
+
+		float angleRadians = math::degreesToRadians(angleSnap);
+
+		unsigned int vertexCount = int(math::M_2PIf / angleRadians) * 2;
+		if (vertexCount > 32767) {
+			return;
+		}
+
+		auto innerRadius = radius;
+		auto outerRadius = radius * 1.2f;
+
+		auto lines = NI::Lines::create(vertexCount, true, false);
+		auto linesData = lines->getModelData();
+
+		auto vertices = linesData->vertex;
+		auto colors = linesData->color;
+		auto flags = linesData->lineSegmentFlags;
+
+		for (auto i = 0u; i < vertexCount; i += 2) {
+			auto angle = angleRadians * float(i / 2);
+			float cs = cos(angle);
+			float sn = sin(angle);
+
+			vertices[i]     = { innerRadius * cs, innerRadius * sn, 0.0 };
+			vertices[i + 1] = { outerRadius * cs, outerRadius * sn, 0.0 };
+
+			colors[i]     = { 255, 255, 255, 255 / 2 };
+			colors[i + 1] = { 255, 255, 255, 255 / 2 };
+
+			flags[i]     = 1;
+			flags[i + 1] = 0;
+		}
+
+		for (auto& child : gridRoot->children) {
+			child->setAppCulled(true);
+		}
+
+		auto& child = gridRoot->children[0];
+		if (child->isInstanceOfType(NI::RTTIStaticPtr::NiLines)) {
+			auto node = static_cast<NI::Lines*>(child.get());
+			node->setModelData(linesData);
+			node->setAppCulled(false);
 		}
 	}
 }

@@ -93,6 +93,14 @@ namespace se::cs::dialog::render_window {
 		return windows::isKeyDown(VK_CONTROL);
 	}
 
+	bool isLeftMouseDown() {
+		return windows::isKeyDown(VK_LBUTTON);
+	}
+
+	bool isRightMouseDown() {
+		return windows::isKeyDown(VK_RBUTTON);
+	}
+
 	struct NetImmerseInstance {
 		struct VirtualTable {
 			void* dtor; // 0x0
@@ -1955,6 +1963,76 @@ namespace se::cs::dialog::render_window {
 		PatchDialogProc_OverrideResult = TRUE;
 	}
 
+	namespace grid {
+		static void update() {
+			auto widgets = SceneGraphController::get()->getWidgets();
+			if (!widgets) {
+				return;
+			}
+
+			auto target = SelectionData::get()->getLastTarget();
+			if (!target) {
+				return;
+			}
+
+			auto sceneNode = target->reference->sceneNode;
+			
+			auto isRotating = isRightMouseDown();
+			if (isRotating) {
+				widgets->updateAngleGuideGeometry(
+					sceneNode->worldBoundRadius,
+					gSnapAngleInDegrees::get()
+				);
+				widgets->gridRoot->localScale = 1.0;
+				widgets->gridRoot->getLocalRotationMatrix()->toIdentity();
+			}
+			else {
+				widgets->updateGridGeometry(
+					sceneNode->worldBoundRadius,
+					gSnapGrid::get()
+				);
+				widgets->updateGridPosition(
+					sceneNode->localTranslate,
+					gIsHoldingX::get(),
+					gIsHoldingY::get(),
+					gIsHoldingZ::get(),
+					gSnapGrid::get()
+				);
+			}
+
+			widgets->showGrid();
+
+			gRenderNextFrame::set(true);
+		}
+
+		static void hide() {
+			auto widgets = SceneGraphController::get()->getWidgets();
+			if (widgets->isGridShown()) {
+				widgets->hideGrid();
+				gRenderNextFrame::set(true);
+			}
+		}
+
+		static int prevStep(std::vector<int>& steps, int current) {
+			for (auto i = steps.size() - 1; i; --i) {
+				if (steps[i] < current) {
+					return steps[i];
+				}
+			}
+			return steps[0];
+		}
+
+		static int nextStep(std::vector<int>& steps, int current) {
+			for (auto i = 0; i < steps.size(); ++i) {
+				if (steps[i] > current) {
+					return steps[i];
+				}
+			}
+			return steps[steps.size() - 1];
+		}
+
+	}
+
 	void PatchDialogProc_BeforeMouseMove(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Cache cursor position.
 		lastCursorPosX = LOWORD(lParam);
@@ -1988,58 +2066,39 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void updateGrid() {
-		auto widgets = SceneGraphController::get()->getWidgets();
-		if (!widgets) {
-			return;
-		}
-
-		auto target = SelectionData::get()->getLastTarget();
-		if (!target) {
-			return;
-		}
-
-		auto sceneNode = target->reference->sceneNode;
-
-		widgets->calcGridGeometry(
-			sceneNode->worldBoundRadius,
-			gSnapGrid::get()
-		);
-		widgets->setGridPosition(
-			sceneNode->localTranslate,
-			gIsHoldingX::get(),
-			gIsHoldingY::get(),
-			gIsHoldingZ::get(),
-			gSnapGrid::get()
-		);
-		widgets->showGrid();
-
-		gRenderNextFrame::set(true);
-	}
-
 	void PatchDialogProc_BeforeMouseWheel(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		if (isControlDown()) {
 			// Allows Control+MouseWheel to adjust grid snap setting.
 			// Set override flag so we don't also modify camera zoom.
 			PatchDialogProc_OverrideResult = TRUE;
 
-			short wheelDelta = HIWORD(wParam);
-			auto gridSnap = gSnapGrid::get();
+			short delta = HIWORD(wParam);
+			
+			auto isRotating = isRightMouseDown();
+			if (isRotating) {
+				auto& steps = settings.render_window.angle_steps;
+				if (steps.size() == 0) {
+					return;
+				}
 
-			if (wheelDelta > 0 && gridSnap < 8192) {
-				// increase grid snap on wheel up
-				gSnapGrid::set(math::roundDownToPowerOfTwo(gridSnap << 1));
-			}
-			else if (wheelDelta < 0 && gridSnap > 1) {
-				// decrease grid snap on wheel down
-				gSnapGrid::set(math::roundDownToPowerOfTwo(gridSnap >> 1));
+				auto current = gSnapAngleInDegrees::get();
+				gSnapAngleInDegrees::set(
+					delta > 0 ? grid::prevStep(steps, current) : grid::nextStep(steps, current)
+				);
 			}
 			else {
-				// grid snap is already at min/max
-				return;
+				auto& steps = settings.render_window.grid_steps;
+				if (steps.size() == 0) {
+					return;
+				}
+
+				auto current = gSnapGrid::get();
+				gSnapGrid::set(
+					delta > 0 ? grid::nextStep(steps, current) : grid::prevStep(steps, current)
+				);
 			}
 
-			updateGrid();
+			grid::update();
 		}
 	}
 
@@ -2057,12 +2116,26 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_AfterLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		grid::hide();
+
 		// see: Patch_ReplaceScalingLogic
 		if (selectionNeedsScaleUpdate) {
 			selectionNeedsScaleUpdate = false;
 			for (auto target = SelectionData::get()->firstTarget; target; target = target->next) {
 				target->reference->setScale(target->reference->sceneNode->localScale);
 			}
+		}
+	}
+
+	void PatchDialogProc_AfterRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		if (isControlDown()) {
+			grid::update();
+		}
+	}
+
+	void PatchDialogProc_AfterRMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		if (isControlDown()) {
+			grid::hide();
 		}
 	}
 
@@ -2123,9 +2196,8 @@ namespace se::cs::dialog::render_window {
 			break;
 		case VK_CONTROL:
 			auto wasKeyDown = (HIWORD(lParam) & KF_REPEAT) == KF_REPEAT;
-			if (!wasKeyDown) {
-				log::stream << "UPDATE GRID" << std::endl;
-				updateGrid();
+			if (!wasKeyDown && (isLeftMouseDown() || isRightMouseDown())) {
+				grid::update();
 			}
 			break;
 		}
@@ -2142,9 +2214,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_AfterKeyUp_Control(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		auto widgets = SceneGraphController::get()->getWidgets();
-		widgets->hideGrid();
-		gRenderNextFrame::set(true);
+		grid::hide();
 	}
 
 	void PatchDialogProc_AfterKeyUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -2216,6 +2286,12 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_LBUTTONUP:
 			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_RBUTTONDOWN:
+			PatchDialogProc_AfterRMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case WM_RBUTTONUP:
+			PatchDialogProc_AfterRMouseButtonUp(hWnd, msg, wParam, lParam);
 			break;
 		}
 
