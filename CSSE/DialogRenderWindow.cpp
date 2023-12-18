@@ -2275,8 +2275,8 @@ namespace se::cs::dialog::render_window {
 			gRenderNextFrame::set(true);
 		}
 		
-		// If we released the Z key, and we are still showing the grid, revert it back to a horizontal display.
-		if (wParam == 'Z' && widgets->isGridShown()) {
+		// If we released an X/Y/Z key update the grid to show the right angle.
+		if (widgets->isGridShown()) {
 			grid::update();
 		}
 	}
