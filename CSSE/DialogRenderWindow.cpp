@@ -2303,6 +2303,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		const auto previousOverride = PatchDialogProc_OverrideResult;
 		PatchDialogProc_OverrideResult.reset();
 
 		switch (msg) {
@@ -2338,7 +2339,9 @@ namespace se::cs::dialog::render_window {
 		}
 
 		if (PatchDialogProc_OverrideResult) {
-			return PatchDialogProc_OverrideResult.value();
+			const auto result = PatchDialogProc_OverrideResult.value();
+			PatchDialogProc_OverrideResult = previousOverride;
+			return result;
 		}
 
 		// Call original function.
@@ -2363,7 +2366,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		}
 
-		return PatchDialogProc_OverrideResult.value_or(vanillaResult);
+		const auto result = PatchDialogProc_OverrideResult.value_or(vanillaResult);
+		PatchDialogProc_OverrideResult = previousOverride;
+		return result;
 	}
 
 	//
