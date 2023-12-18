@@ -2148,6 +2148,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_BeforeKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using windows::isControlDown;
 
 		// Decode parameters.
 		auto vkCode = LOWORD(wParam);
@@ -2225,6 +2226,17 @@ namespace se::cs::dialog::render_window {
 				PatchDialogProc_OverrideResult = TRUE;
 			}
 			break;
+		}
+
+		// Handle pressing a new axis key while we were already in grid/angle snapping mode.
+		if (!wasKeyDown && isControlDown && isModifyingObject()) {
+			switch (wParam) {
+			case 'X':
+			case 'Y':
+			case 'Z':
+				grid::update();
+				break;
+			}
 		}
 	}
 
