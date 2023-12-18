@@ -299,11 +299,26 @@ namespace se::cs::dialog::render_window {
 			node->setAppCulled(false);
 		}
 	}
+
 	void WidgetsController::updateAngleGuidePosition(NI::Vector3 position, bool snapX, bool snapY, bool snapZ, int gridSnap) {
 		if (!gridRoot) {
 			return;
 		}
-		gridRoot->localRotation->toIdentity();
+
+		auto direction = NI::Vector3(0.0, 0.0, 1.0);
+		if (snapX) {
+			direction.x = 1.0f;
+		}
+		else if (snapY) {
+			direction.y = 1.0f;
+		}
+		else if (snapZ) {
+			direction.z = 1.0f;
+		}
+
+		NI::Matrix33 rotation;
+		rotation.toRotationDifference(NI::Vector3(0, 0, 1), direction);
+		gridRoot->setLocalRotationMatrix(&rotation);
 		gridRoot->localTranslate = position;
 		gridRoot->localScale = 1.0;
 	}
