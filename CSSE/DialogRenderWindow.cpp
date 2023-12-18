@@ -2262,6 +2262,11 @@ namespace se::cs::dialog::render_window {
 			movementContext.reset();
 			gRenderNextFrame::set(true);
 		}
+		
+		// If we released the Z key, and we are still showing the grid, revert it back to a horizontal display.
+		if (wParam == 'Z' && widgets->isGridShown()) {
+			grid::update();
+		}
 	}
 
 	void PatchDialogProc_AfterKeyUp_Control(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
