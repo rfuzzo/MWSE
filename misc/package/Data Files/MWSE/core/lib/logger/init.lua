@@ -253,7 +253,7 @@ function Logger.new(params)
     if parentLog == nil then
         loggers[params.modName] = log
     else
-        parentLog.children[params.modName] = log
+        parentLog.children[params.moduleName] = log
     end
 
     log:setLevel(params.level) -- checks if it was `nil`
