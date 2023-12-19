@@ -550,7 +550,7 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeCommand(DialogProcContext& context) {
 		const auto hWnd = context.getWindowHandle();
-		switch (context.getCommandNotificationCode()) {
+		switch (context.getCommandControlIdentifier()) {
 		case MENU_ID_CSSE_SETTINGS:
 			showSettingsDialog(hWnd);
 			break;
@@ -942,7 +942,7 @@ namespace se::cs::window::main {
 	}
 
 	void PatchDialogProc_AfterCommand(DialogProcContext& context) {
-		switch (context.getCommandNotificationCode()) {
+		switch (context.getCommandControlIdentifier()) {
 		case WM_COMMAND_TOGGLE_LANDSCAPE_EDITING:
 			PatchDialogProc_AfterCommand_ToggleLandscapeEditing(context);
 			break;
