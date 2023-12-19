@@ -179,6 +179,7 @@ end)
 
 uw:finish()
 
+Logger = dofile "Logger"
 uw:start("properties of child loggers")
 
 uw:test("setLevel", function()
@@ -270,8 +271,110 @@ uw:test("includeTimestamp", function()
 
 
 end)
+uw:finish()
+
+Logger = dofile "Logger"
+
+uw:start("Printing: _makeHeader")
+uw:test("no module name", function()
+    local logger = Logger.new{modName="my mod", level="DEBUG"} ---@type Logger
+    uw:expect(logger:_makeHeader("DEBUG")).toBe("my mod: DEBUG")
+end)
+
+uw:test("module name", function()
+    local logger = Logger.new{modName="my mod", moduleName="my module", level="DEBUG"} ---@type Logger
+    uw:expect(logger:_makeHeader("DEBUG")).toBe("my mod (my module): DEBUG")
+end)
+uw:finish()
 
 
+Logger = dofile "Logger"
 
+uw:start("Printing: write")
+
+local test_str
+
+uw:mock(_G, "print", function(s) test_str = s end)
+
+
+uw:test("no module name", function()
+    local logger = Logger.new{modName="my mod", level="DEBUG"} ---@type Logger
+    logger:debug("this %s a %s %i", "is", "test", 23)
+    uw:expect(test_str).toBe("[my mod: DEBUG] this is a test 23")
+end)
+
+uw:test("module name", function()
+    local logger = Logger.new{modName="my mod", moduleName="my module", level="DEBUG"} ---@type Logger
+    logger:debug("this %s a %s %i", "is", "test", 23)
+    uw:expect(test_str).toBe("[my mod (my module): DEBUG] this is a test 23")
+end)
+
+uw:test("module name (again)", function()
+    local logger = Logger.new{modName="my mod1", moduleName="my module", level="INFO"} ---@type Logger
+    -- other stuff will try to print things, just make sure it's not the expected result
+    logger:info("this %s a %s %i", "is", "test", 23)
+    uw:expect(test_str).toBe("[my mod1 (my module): INFO] this is a test 23")
+end)
+test_str = nil
+
+
+uw:test("printing only happens at appropriate log levels", function()
+    local logger = Logger.new{modName="my mod1", moduleName="my module", level="INFO"} ---@type Logger
+    -- other stuff will try to print things, just make sure it's not the expected result
+    logger:debug("this %s a %s %i", "is", "test", 23)
+    uw:expect(test_str).NOT.toBe("[my mod1 (my module): DEBUG] this is a test 23")
+end)
+uw:clearMocks()
+
+uw:finish()
+
+
+Logger = dofile "Logger"
+
+uw:start("Printing: writet")
+
+test_str = nil
+
+uw:mock(_G, "print", function(s) test_str = s end)
+
+
+uw:test("msg (no module name)", function()
+    local logger = Logger.new{modName="my mod", level="DEBUG"} ---@type Logger
+    logger:debugt{msg="this %s a %s %i", args={"is","test", 23}}
+    uw:expect(test_str).toBe("[my mod: DEBUG] this is a test 23")
+end)
+
+uw:test("msg (w/ module name)", function()
+    local logger = Logger.new{modName="my mod", moduleName="my module", level="DEBUG"} ---@type Logger
+    logger:debugt{msg="this %s a %s %i", args={"is","test", 23}}
+    uw:expect(test_str).toBe("[my mod (my module): DEBUG] this is a test 23")
+end)
+
+
+uw:test("sep (no module name)", function()
+    local logger = Logger.new{modName="my mod", level="DEBUG"} ---@type Logger
+    logger:debugt{sep=", ", args={"printing arguments", "second", "third", "now starting associative arguments", a="first_assoc", b="second_assoc"}}
+    uw:expect(test_str).toBe("[my mod: DEBUG] printing arguments, second, third, now starting associative arguments, a=first_assoc, b=second_assoc")
+end)
+
+uw:test("sep (w/ module name)", function()
+    local logger = Logger.new{modName="my mod", moduleName="my module", level="DEBUG"} ---@type Logger
+    logger:debugt{sep=", ", args={"printing arguments", "second", "third", "now starting associative arguments", a="first_assoc", b="second_assoc"}}
+    uw:expect(test_str).toBe("[my mod (my module): DEBUG] printing arguments, second, third, now starting associative arguments, a=first_assoc, b=second_assoc")
+end)
+
+test_str = nil
+
+
+uw:test("printing only happens at appropriate log levels", function()
+    local logger = Logger.new{modName="my mod1", moduleName="my module", level="INFO"} ---@type Logger
+    logger:debugt{sep=", ", args={"printing arguments", "second", "third", "now starting associative arguments", a="first_assoc", b="second_assoc"}}
+    -- other stuff will try to print things, just make sure it's not the expected result
+    uw:expect(test_str).NOT.toBe("[my mod1 (my module): DEBUG] printing arguments, second, third, now starting associative arguments, a=first_assoc, b=second_assoc")
+end)
+-- need to do this so results can be printed
+uw:clearMocks()
+
+uw:finish()
 
 uw:finish(true)
