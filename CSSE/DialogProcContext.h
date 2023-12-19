@@ -31,6 +31,7 @@ namespace se::cs {
 		NMLVDISPINFOA* getNotificationListViewDisplayInfo() const;
 		NMLVCUSTOMDRAW* getNotificationCustomDraw() const;
 		NMITEMACTIVATE* getNotificationItemActivateData() const;
+		NMTTDISPINFOA* getNotificationTooltipGetDisplayInfo() const;
 
 
 		// WM_COMMAND

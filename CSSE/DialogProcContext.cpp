@@ -85,6 +85,14 @@ namespace se::cs {
 		return (LPNMITEMACTIVATE)getNotificationData();
 	}
 
+	NMTTDISPINFOA* DialogProcContext::getNotificationTooltipGetDisplayInfo() const {
+		const auto data = getNotificationData();
+#if _DEBUG
+		assert(data && data->code == TTN_GETDISPINFO);
+#endif
+		return (LPNMTTDISPINFOA)data;
+	}
+
 	WORD DialogProcContext::getCommandNotificationCode() const {
 #if _DEBUG
 		assert(getMessage() == WM_COMMAND);
