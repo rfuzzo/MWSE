@@ -2029,7 +2029,8 @@ namespace se::cs::dialog::render_window {
 		}
 
 		static int prevStep(const std::vector<int>& steps, int current) {
-			for (const auto step : steps) {
+			for (auto itt = steps.rbegin(); itt != steps.rend(); ++itt) {
+				const auto& step = *itt;
 				if (step < current) {
 					return step;
 				}
