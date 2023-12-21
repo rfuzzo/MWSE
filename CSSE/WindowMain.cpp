@@ -971,14 +971,14 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_AfterInitialize(DialogProcContext& context) {
 		const auto hWnd = context.getWindowHandle();
-		auto statusWindow = FindWindowEx(hWnd, NULL, MAKEINTATOM(0xC0AC), NULL);
+		auto statusWindow = FindWindowEx(hWnd, NULL, "msctls_statusbar32", NULL);
 
 		if (!statusWindow) {
 			return;
 		}
 
-		int partLengths[4] = { 220, 330, 575, -1 };
-		SendMessage(statusWindow, SB_SETPARTS, (WPARAM)4, (LPARAM)partLengths);
+		int partsRightEdgePositions[4] = { 220, 330, 800, -1 };
+		SendMessage(statusWindow, SB_SETPARTS, (WPARAM)4, (LPARAM)partsRightEdgePositions);
 	}
 
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
