@@ -2204,6 +2204,14 @@ namespace se::cs::dialog::render_window {
 				context.setResult(TRUE);
 			}
 			break;
+		case 'H':
+			// Ctrl+H -> Open "Search and Replace" menu.
+			if (isControlDown()) {
+				SendMessageA(window::main::ghWnd::get(), WM_COMMAND, window::main::WM_COMMAND_OPEN_SEARCH_AND_REPLACE, 0);
+				context.setResult(TRUE);
+			}
+			// H otherwise opens the terrain window.
+			break;
 		case 'S':
 			if (landscapeEditWindow) {
 				if (!context.getKeyWasDown()) {
