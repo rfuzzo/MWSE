@@ -28,6 +28,7 @@
 #include "RenderWindowWidgets.h"
 
 #include "DialogLandscapeEditSettingsWindow.h"
+#include "WindowMain.h"
 
 #include "DialogProcContext.h"
 
@@ -2164,10 +2165,25 @@ namespace se::cs::dialog::render_window {
 
 	void PatchDialogProc_BeforeKeyDown(DialogProcContext& context) {
 		using windows::isControlDown;
+		using windows::isShiftDown;
 
-		auto landscapeEditWindow = landscape_edit_settings_window::gWindowHandle::get();
+		const auto landscapeEditWindow = landscape_edit_settings_window::gWindowHandle::get();
+
+		const auto selectionData = SelectionData::get();
 
 		switch (context.getKeyVirtualCode()) {
+		case VK_F2:
+			if (selectionData->firstTarget) {
+				const auto reference = selectionData->firstTarget->reference;
+				if (isShiftDown()) {
+					window::main::showObjectEditWindow(reference->baseObject);
+				}
+				else {
+					window::main::showObjectEditWindow(reference);
+				}
+				context.setResult(TRUE);
+			}
+			break;
 		case VK_OEM_4: // [
 			if (landscapeEditWindow) {
 				landscape_edit_settings_window::decrementEditRadius();
