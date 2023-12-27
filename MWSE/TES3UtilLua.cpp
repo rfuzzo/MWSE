@@ -4615,7 +4615,7 @@ namespace mwse::lua {
 		sol::state_view state = thisState;
 		sol::table result = state.create_table();
 		for (size_t i = 0; i < animGroup->actionCount; ++i, noteLabel += 8) {
-			result[*noteLabel] = animGroup->actionTimes[i];
+			result[*noteLabel] = animGroup->actionTimings[i];
 		}
 		return result;
 	}
