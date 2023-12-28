@@ -30,7 +30,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 **Returns**:
 
-* `result` (table&lt;[tes3.animationGroup](../references/animation-groups.md), tes3animationGroup&gt;)
+* `result` (table&lt;[tes3.animationGroup](../references/animation-groups.md), [tes3animationGroup](../types/tes3animationGroup.md)&gt;)
 
 ***
 
