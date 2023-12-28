@@ -61,7 +61,7 @@
 #include "TES3MobileCreature.h"
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
-#include "TES3PlayerAnimationController.h" 
+#include "TES3PlayerAnimationController.h"
 #include "TES3Race.h"
 #include "TES3Reference.h"
 #include "TES3Region.h"
@@ -482,7 +482,7 @@ namespace mwse::lua {
 			// Set up our event callback.
 			LuaManager::getInstance().setButtonPressedCallback(params["callback"]);
 
-			// Temporary hook into the function that creates message boxes. 
+			// Temporary hook into the function that creates message boxes.
 			reinterpret_cast<void(__cdecl*)(const char*, ...)>(0x5F1AA0)(message.c_str(), buttonTextStruct, NULL);
 			return TES3::UI::findMenu("MenuMessage");
 		}
@@ -3318,7 +3318,7 @@ namespace mwse::lua {
 		auto playerMobile = worldController->getMobilePlayer();
 		if (mobile == playerMobile) {
 			if (getOptionalParam<bool>(params, "playSound", true)) {
-				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
+				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Up);
 			}
 
 			if (getOptionalParam<bool>(params, "showMessage", false)) {
@@ -3493,9 +3493,9 @@ namespace mwse::lua {
 		// Play the relevant sound.
 		auto worldController = TES3::WorldController::get();
 		auto playerMobile = worldController->getMobilePlayer();
-		if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
+		if (mobile == playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
 			if (mobile == playerMobile) {
-				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Up);
+				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
 			}
 		}
 
@@ -3728,10 +3728,10 @@ namespace mwse::lua {
 		// Play the relevant sound.
 		if (playerMobile && getOptionalParam<bool>(params, "playSound", true)) {
 			if (toMobile == playerMobile) {
-				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
+				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Up);
 			}
 			else if (fromMobile == playerMobile) {
-				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Up);
+				worldController->playItemUpDownSound(item, TES3::ItemSoundState::Down);
 			}
 		}
 
@@ -5499,7 +5499,7 @@ namespace mwse::lua {
 			throw std::invalid_argument("Invalid positional params provided. Must provided two references or two positions/heights.");
 		}
 
-		// 
+		//
 		sol::optional<TES3::Vector3> position2;
 		float height1, height2;
 
