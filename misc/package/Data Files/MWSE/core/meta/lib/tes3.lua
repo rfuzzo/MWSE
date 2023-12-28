@@ -2765,6 +2765,43 @@ function tes3.testLineOfSight(params) end
 --- @return boolean was3rdPerson No description yet available.
 function tes3.togglePOV() end
 
+--- Moves all the items in one reference's inventory to another. Both `to` and `from` objects will be cloned. The function will update the GUI for the `to` and `from` references. This function preserves the `tes3itemData` of the transferred items and handles leveled lists. The function can do either partial or complete transfer. Limiting transfer by capacity only works for containers, other actors can get over-encumbered after this operation.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3transferinventory).
+--- @param params tes3.transferInventory.params This table accepts the following values:
+--- 
+--- `from`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to take items from.
+--- 
+--- `to`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — Who to give items to.
+--- 
+--- `filter`: nil|fun(item: tes3item, itemData?: tes3itemData): boolean — *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
+--- 
+--- `playSound`: boolean? — *Default*: `true`. If false, the up/down sound won't be played.
+--- 
+--- `limitCapacity`: boolean? — *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, partial transfer is made.
+--- 
+--- `completeTransfer`: boolean? — *Default*: `false`. Use this to disable partial transfers. If `limitCapacity` is set to true, passing `completeTransfer = true` will only transfer the items from one inventory to the other if and only if all the items can fit inside the destination inventory. This argument only works if `limitCapacity` is `true`.
+--- 
+--- `reevaluateEquipment`: boolean? — *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does not affect the player.
+--- 
+--- `equipProjectiles`: boolean? — *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
+--- 
+--- `checkCrime`: boolean? — *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
+--- @return boolean transferred Returns `true` if at least one item was transferred. If both `limitCapacity` and `completeTransfer` were passed as `true` the function returns `true` if the whole inventory was successfully transferred.
+function tes3.transferInventory(params) end
+
+---Table parameter definitions for `tes3.transferInventory`.
+--- @class tes3.transferInventory.params
+--- @field from tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to take items from.
+--- @field to tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give items to.
+--- @field filter nil|fun(item: tes3item, itemData?: tes3itemData): boolean *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
+--- @field playSound boolean? *Default*: `true`. If false, the up/down sound won't be played.
+--- @field limitCapacity boolean? *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, partial transfer is made.
+--- @field completeTransfer boolean? *Default*: `false`. Use this to disable partial transfers. If `limitCapacity` is set to true, passing `completeTransfer = true` will only transfer the items from one inventory to the other if and only if all the items can fit inside the destination inventory. This argument only works if `limitCapacity` is `true`.
+--- @field reevaluateEquipment boolean? *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does not affect the player.
+--- @field equipProjectiles boolean? *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
+--- @field checkCrime boolean? *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
+
 --- Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred. If transfering more than one item, the items without itemData will be transferred first. Both the `from` and `to` references will be cloned if needed.
 --- @param params tes3.transferItem.params This table accepts the following values:
 --- 
