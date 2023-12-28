@@ -10,4 +10,4 @@
 --- @field groupId number *Read-only*. The animation group ID. Useful when iterating through groups using nextGroup.
 --- @field nextGroup tes3animationGroup *Read-only*. The next animation group in this keyframe data.
 --- @field soundGenCount number *Read-only*. The number of soundgen note keys.
---- @field soundGenKeys tes3animationGroupSoundgenKey[] *Read-only*. An array containing the soundgens.
+--- @field soundGenKeys tes3animationGroupSoundGenKey[] *Read-only*. An array containing the soundgens.

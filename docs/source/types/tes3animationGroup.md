@@ -83,5 +83,5 @@ A game object that astores animation group data from loaded keyframe data.
 
 **Returns**:
 
-* `result` (tes3animationGroupSoundgenKey[])
+* `result` ([tes3animationGroupSoundGenKey](../types/tes3animationGroupSoundGenKey.md)[])
 
