@@ -4369,6 +4369,23 @@ namespace mwse::lua {
 		}
 	}
 
+	void setExpelled(sol::table params) {
+		TES3::Faction* faction = getOptionalParamObject<TES3::Faction>(params, "faction");
+		if (faction == nullptr) {
+			throw std::invalid_argument("Invalid 'faction' parameter provided");
+		}
+
+		if (getOptionalParam<bool>(params, "expelled", true)) {
+			faction->setPlayerExpelled(true);
+			std::string message = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::sExpelledMessage]->value.asString;
+			message.append(faction->getName());
+			TES3::UI::showMessageBox(message.c_str(), nullptr, true);
+		}
+		else {
+			faction->setPlayerExpelled(false);
+		}
+	}
+
 	sol::optional<std::tuple<unsigned char, unsigned char, unsigned char>> getCurrentAnimationGroups(sol::table params) {
 		TES3::Reference* reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -6161,6 +6178,7 @@ namespace mwse::lua {
 		tes3["setAnimationTiming"] = setAnimationTiming;
 		tes3["setDestination"] = setDestination;
 		tes3["setEnabled"] = setEnabled;
+		tes3["setExpelled"] = setExpelled;
 		tes3["setGlobal"] = setGlobal;
 		tes3["setItemIsStolen"] = setItemIsStolen;
 		tes3["setJournalIndex"] = setJournalIndex;
