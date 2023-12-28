@@ -7,7 +7,7 @@
 --- @field bsaLoader tes3bsaLoader One of the core game objects, responsible for loaded BSA files.
 --- @field dataHandler tes3dataHandler One of the core game objects.
 --- @field game tes3game One of the core game objects.
---- @field installDirectory string The currently executed root Morrowind installation path.
+--- @field installDirectory string The currently executed root Morrowind installation path (The folder containing Morrowind.exe).
 --- @field magicSchoolSkill table<tes3.magicSchool, tes3.skill> This table is used to convert numerical magic school IDs to their respective skill IDs. These constants will return their respective `tes3.skill` constants.
 --- @field mobilePlayer tes3mobilePlayer The player's mobile actor.
 --- @field player tes3reference A reference to the player.

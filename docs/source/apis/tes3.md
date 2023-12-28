@@ -46,7 +46,7 @@ One of the core game objects.
 ### `tes3.installDirectory`
 <div class="search_terms" style="display: none">installdirectory</div>
 
-The currently executed root Morrowind installation path.
+The currently executed root Morrowind installation path (The folder containing Morrowind.exe).
 
 **Returns**:
 
