@@ -99,8 +99,8 @@ namespace TES3 {
 		return std::ref(currentAnimGroup);
 	}
 
-	std::reference_wrapper<decltype(AnimationData::currentNodeIndices)> AnimationData::getCurrentNodeIndices() {
-		return std::ref(currentNodeIndices);
+	std::reference_wrapper<decltype(AnimationData::currentActionIndices)> AnimationData::getCurrentActionIndices() {
+		return std::ref(currentActionIndices);
 	}
 
 	std::reference_wrapper<decltype(AnimationData::loopCounts)> AnimationData::getLoopCounts() {
@@ -123,23 +123,23 @@ namespace TES3 {
 		return std::ref(currentAnimGroupLayer);
 	}
 
-	std::reference_wrapper<decltype(AnimationData::animGroupLayerIndex)> AnimationData::getAnimGroupLayerIndicies() {
-		return std::ref(animGroupLayerIndex);
+	std::reference_wrapper<decltype(AnimationData::animGroupLayerIndices)> AnimationData::getAnimGroupLayerIndices() {
+		return std::ref(animGroupLayerIndices);
 	}
 
-	std::reference_wrapper<decltype(AnimationData::approxRootTravelSpeed)> AnimationData::getApproxRootTravelSpeeds() {
-		return std::ref(approxRootTravelSpeed);
+	std::reference_wrapper<decltype(AnimationData::approxRootTravelDistances)> AnimationData::getApproxRootTravelDistances() {
+		return std::ref(approxRootTravelDistances);
 	}
 
 	std::reference_wrapper<decltype(AnimationData::currentSoundGenIndices)> AnimationData::getCurrentSoundGenIndices() {
 		return std::ref(currentSoundGenIndices);
 	}
 
-	std::reference_wrapper<decltype(AnimationData::animationGroupSoundGenCounts)> AnimationData::getAnimationGroupSoundGenCounts() {
-		return std::ref(animationGroupSoundGenCounts);
+	std::reference_wrapper<decltype(AnimationData::animGroupSoundGenCounts)> AnimationData::getAnimGroupSoundGenCounts() {
+		return std::ref(animGroupSoundGenCounts);
 	}
 
-	std::reference_wrapper<decltype(AnimationData::animationGroupSoundGens)> AnimationData::getAnimationGroupSoundGens() {
-		return std::ref(animationGroupSoundGens);
+	std::reference_wrapper<decltype(AnimationData::animGroupSoundGens)> AnimationData::getAnimGroupSoundGens() {
+		return std::ref(animGroupSoundGens);
 	}
 }
