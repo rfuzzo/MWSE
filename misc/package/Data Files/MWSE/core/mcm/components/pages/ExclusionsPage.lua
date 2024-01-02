@@ -64,7 +64,7 @@ end
 local function getSortedObjectList(params)
 	local list = {}
 
-	for obj  in tes3.iterateObjects(params.objectType) do
+	for obj in tes3.iterateObjects(params.objectType) do
 		local doAdd = true
 		-- Check that all filters match
 		for field, value in pairs(params.objectFilters or {}) do
