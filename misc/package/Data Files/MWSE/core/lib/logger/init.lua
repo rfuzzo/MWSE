@@ -12,7 +12,6 @@ local colors = require("logger.colors")
 
 local LoggerMetatable = {
     -- make new loggers by calling `Logger`
-    __call=function (cls, ...) return cls.new(...) end,
     __tostring = function(self) return ("Logger") end
 }
 
@@ -140,9 +139,6 @@ setmetatable(Logger, LoggerMetatable)
 -- metatable used by log objects
 local logMetatable = {
     __call = function(self, ...) self:debug(...) end,
-    __lt = function(num, self) return num < self.level end,
-    __le = function(num, self) return num <= self.level end,
-    __len = function(self) return self.level end,
     __index = Logger,
     ---@param self Logger
     ---@param str string
@@ -188,7 +184,7 @@ In addition to `modName`, you may specify
 - `level`: the logging level to start this logger at. This is the same as making a new logger and then calling `log:setLevel(level)`
 - `writeToFile`: either a boolean saying we should write to a file, or the name of a file to write to. If false (the default), then log messages will be written to `MWSE.log`
 ]]
----@param params Logger.newParams
+---@param params string|Logger.newParams
 function Logger.new(params)
     -- if it's just a string, treat it as the `modName`
     if type(params) == "string" then
@@ -774,9 +770,8 @@ function Logger:addToMCM(componentOrParams, config, createCategory)
         description = componentOrParams.description
     end
 
-    if component == nil then component = componentOrParams end
-
-    if label == nil then label = "Logging Level" end
+    component = component or componentOrParams
+    label = label or "Logging Level"
 
     if description == nil then 
         description = "\z
@@ -784,9 +779,11 @@ function Logger:addToMCM(componentOrParams, config, createCategory)
             unless you're troubleshooting something. Each setting includes all the log messages of the previous setting. Here is an \z
             explanation of the options:\n\n\t\z
             \z
-            NONE: Absolutely nothing will be printed to the log.\n\n\t\z
+            NONE: Absolutely nothing will be logged.\n\n\t\z
             \z
-            PROBLEMS: If the mod has any problems, those will be written to the log. Nothing else will be written to the log.\n\n\t\z
+            ERROR: Error messages will be logged.\n\n\t\z
+            \z
+            WARN: Warning messages will be logged.\n\n\t\z
             \z
             INFO: Some basic behavior of the mod will be logged, but nothing extreme.\n\n\t\z
             \z
@@ -800,10 +797,17 @@ function Logger:addToMCM(componentOrParams, config, createCategory)
     end
 
     
-
+    local logLevelKey -- so that we support both camelcase and snakecase in people's configs
 
     -- `setLevel` makes sure the value passed is a number, so it's chill
-    if config then self:setLevel(config.logLevel) end
+    if config then
+            if config.logLevel then
+                logLevelKey = "logLevel"
+            else
+                logLevelKey = "log_level"
+            end
+        self:setLevel(config[logLevelKey]) 
+    end
 
     
         
@@ -818,18 +822,21 @@ function Logger:addToMCM(componentOrParams, config, createCategory)
     end
 
     local logOptions = {}
-    local i
-    for str, num in pairs(LogLevel) do
-        i = num + 1 -- `Logger.LEVEL` starts at 0, and we want `logOptions` to start at 1.
-        logOptions[i] = {label = str, value = num}
+    for lvl = Logger.LEVEL.NONE, Logger.LEVEL.TRACE do
+        local str = table.find(Logger.LEVEL, lvl)
+        table.insert(logOptions, {label=str, value=str})
     end
     
     logSettings:createDropdown{label =label, description = description, options = logOptions,
-        variable = (config and mwse.mcm.createTableVariable{ id = "logLevel", table = config}) or nil,
-        callback = function (dropdown)
-            self:setLevel(dropdown.variable.value)
-            self("updated log level to %i (%s)", self.level, self:getLevelStr())
-        end
+        variable = mwse.mcm.createCustom{
+            getter=function () return self:getLevelStr() end,
+            setter = function (_, newValue)
+                self:setLevel(newValue)
+                self("updated log level to %i (%s)", self.level, self:getLevelStr())
+
+                if config and logLevelKey then config[logLevelKey] = self:getLevelStr() end
+            end
+        },
     }
 end
 

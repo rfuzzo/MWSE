@@ -8,7 +8,7 @@ local Logger = require "Logger" ---@type Logger
 
 uw:start("Object creation (no module name)")
 uw:test("passing a string", function()
-    local log = Logger "my mod1" ---@type Logger
+    local log = Logger.new "my mod1" ---@type Logger
 
     uw:expect(log.modName).toBe("my mod1")
     uw:expect(log.moduleName).toBe(nil)
@@ -24,7 +24,7 @@ uw:test("passing a string", function()
 end)
 
 uw:test("passing a table", function()
-    local log = Logger{modName="my mod2"} ---@type Logger
+    local log = Logger.new{modName="my mod2"} ---@type Logger
 
     uw:expect(log.modName).toBe("my mod2")
     uw:expect(log.moduleName).toBe(nil)
@@ -84,7 +84,7 @@ Logger = dofile("Logger")
 uw:start("object creation (with module name)")
 
 uw:test("passing a string", function()
-    local log = Logger "my mod6/my module" ---@type Logger
+    local log = Logger.new "my mod6/my module" ---@type Logger
 
     uw:expect(log.modName).toBe("my mod6")
     uw:expect(log.moduleName).toBe("my module")
@@ -100,7 +100,7 @@ uw:test("passing a string", function()
 end)
 
 uw:test("passing a table", function()
-    local log = Logger{modName="my mod7", moduleName="my module"} ---@type Logger
+    local log = Logger.new{modName="my mod7", moduleName="my module"} ---@type Logger
 
     uw:expect(log.modName).toBe("my mod7")
     uw:expect(log.moduleName).toBe("my module")
@@ -114,7 +114,7 @@ uw:test("passing a table", function()
 end)
 
 uw:test("passing a table, but including the module name in modName", function()
-    local log = Logger{modName="my mod8/my module"} ---@type Logger
+    local log = Logger.new{modName="my mod8/my module"} ---@type Logger
 
     uw:expect(log.modName).toBe("my mod8")
     uw:expect(log.moduleName).toBe("my module")
