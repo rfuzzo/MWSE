@@ -60,7 +60,8 @@ end
 function Category:update()
 	for _, component in ipairs(self.components) do
 		if component.update then
-			component.update()
+			-- TODO: remove this note. This caused errors in Info:update() - attempting to index self, a nil value
+			component:update()
 		end
 	end
 end
