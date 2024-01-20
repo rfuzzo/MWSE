@@ -15,7 +15,8 @@ Several functions in this library (e.g., `find`, `gfind`, `gsub`), make use of [
 <div class="search_terms" style="display: none">endswith</div>
 
 Returns `true` if a `string` ends with a given substring.
-Note: this function does not use pattern matching.
+This function **does not** use pattern matching.
+
 
 ```lua
 local result = string.endswith(s, pattern)
@@ -82,18 +83,18 @@ Returns a string where one string has been inserted into another, after a specif
 For example, `string.insert("12345678", "abcdefgh", 5)` will return `"12345abcdefgh678"`.
 
 ```lua
-local inserted = string.insert(s1, s2, position)
+local result = string.insert(s1, s2, position)
 ```
 
 **Parameters**:
 
 * `s1` (string): The string to insert into.
 * `s2` (string): The string to insert.
-* `position` (number): An index of `s1`. `s2` will be inserted after this index.
+* `position` (integer): An index of `s1`. The `s2` `string` will be inserted after this index.
 
 **Returns**:
 
-* `inserted` (string): A copy of `s1`, with `s2` inserted into it, after the specified position.
+* `result` (string): A copy of `s1`, with `s2` inserted into it after the specified `position`.
 
 ***
 
@@ -119,7 +120,7 @@ local pattern, startindex, endindex = string.multifind(s, patterns, index, plain
 
 **Returns**:
 
-* `pattern` (string): *Optional*. The first pattern that was succesfully matched. this will be an entry of the `patterns` table. If no patterns matched, this will be `nil`.
+* `pattern` (string): *Optional*. If a pattern was matched, then this will be the first pattern that was matched. If no patterns matched, this will be `nil`.
 * `startindex` (integer): *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` begins.
 * `endindex` (integer): *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.
 
@@ -149,7 +150,7 @@ local split = string.split(str, sep)
 <div class="search_terms" style="display: none">startswith</div>
 
 Returns `true` if a `string` begins with a given substring.
-	Note: this function does not use pattern matching.
+This function **does not** use pattern matching.
 
 ```lua
 local result = string.startswith(s, substring)

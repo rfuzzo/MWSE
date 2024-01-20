@@ -50,7 +50,7 @@ If `value` is not found in `t`, then `nil` is returned.
 
 If `compval` is given, then it must be a function that takes one value and returns the value to use for comparisons. For example, to compare arrays based on their first entry, you can write `compvalue = function( value ) return value[1] end`.
 
-NOTE: `compval` is different from the `comp` that is specified in the `binsearch` function.
+Note that `compval` is different from the `comp` that is specified in the `binsearch` function.
 
 If `reversed == true`, then the search assumes that `t` is sorted in reverse order (i.e., largest value at position 1).
 Note that specifying `reversed` requires specifying `compval`. 

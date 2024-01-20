@@ -13,7 +13,7 @@ The `patterns` are checked in the order they are passed. i.e., this function wil
 	},
 	returns = {
 		{name = "pattern", type="string", optional=true, 
-			description="The first pattern that was succesfully matched. this will be an entry of the `patterns` table. If no patterns matched, this will be `nil`."
+			description="If a pattern was matched, then this will be the first pattern that was matched. If no patterns matched, this will be `nil`."
 		},
 		{name = "startindex", type="integer", description="If a `pattern` was matched, this is the index of `s` where the matching `pattern` begins.", optional=true,},
 		{name = "endindex", type="integer", description="If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.", optional=true,},

@@ -8,7 +8,8 @@
 string = {}
 
 --- Returns `true` if a `string` ends with a given substring.
---- Note: this function does not use pattern matching.
+--- This function **does not** use pattern matching.
+--- 
 --- @param s string No description yet available.
 --- @param pattern string No description yet available.
 --- @return boolean result No description yet available.
@@ -47,8 +48,8 @@ function string.format(format, ...) end
 --- For example, `string.insert("12345678", "abcdefgh", 5)` will return `"12345abcdefgh678"`.
 --- @param s1 string The string to insert into.
 --- @param s2 string The string to insert.
---- @param position number An index of `s1`. `s2` will be inserted after this index.
---- @return string inserted A copy of `s1`, with `s2` inserted into it, after the specified position.
+--- @param position integer An index of `s1`. The `s2` `string` will be inserted after this index.
+--- @return string result A copy of `s1`, with `s2` inserted into it after the specified `position`.
 function string.insert(s1, s2, position) end
 
 --- Performs the logic of `string.find` on a `string` `s`, using a `table` of patterns.
@@ -60,7 +61,7 @@ function string.insert(s1, s2, position) end
 --- @param patterns table An array-style `table` that contains the patterns to match.
 --- @param index integer? *Default*: `1`. Start index of the `find`. (Same meaning as in `string.find`.)
 --- @param plain boolean? *Default*: `false`. If `true`, then a normal search will be performed instead of a pattern search. (Same meaning as in `string.find`.)
---- @return string? pattern *Optional*. The first pattern that was succesfully matched. this will be an entry of the `patterns` table. If no patterns matched, this will be `nil`.
+--- @return string? pattern *Optional*. If a pattern was matched, then this will be the first pattern that was matched. If no patterns matched, this will be `nil`.
 --- @return integer? startindex *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` begins.
 --- @return integer? endindex *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.
 function string.multifind(s, patterns, index, plain) end
@@ -72,7 +73,7 @@ function string.multifind(s, patterns, index, plain) end
 function string.split(str, sep) end
 
 --- Returns `true` if a `string` begins with a given substring.
---- 	Note: this function does not use pattern matching.
+--- This function **does not** use pattern matching.
 --- @param s string No description yet available.
 --- @param substring string No description yet available.
 --- @return boolean result No description yet available.
