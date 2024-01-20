@@ -2,7 +2,8 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- This library provides generic functions for string manipulation, such as finding and extracting substrings, and pattern matching. When indexing a string in Lua, the first character is at position 1 (not at 0, as in C). Indices are allowed to be negative and are interpreted as indexing backwards, from the end of the string. Thus, the last character is at position -1, and so on.
+--- This library provides generic functions for string manipulation, such as finding and extracting substrings, and pattern matching. When indexing a string in Lua, the first character is at position `1` (not at `0`, as in C). Indices are allowed to be negative and are interpreted as indexing backwards, from the end of the string. Thus, the last character is at position `-1`, and so on.
+--- Several functions in this library (e.g., `find`, `gfind`, `gsub`), make use of [Lua patterns](https://www.lua.org/pil/20.2.html).
 --- @class stringlib
 string = {}
 
@@ -40,11 +41,13 @@ function string.endswith(s, pattern) end
 --- @return string result No description yet available.
 function string.format(format, values) end
 
---- Returns a string where one string has been inserted into another at a given position.
+--- Returns a string where one string has been inserted into another, after a specified position.
+--- 		
+--- 	For example, `string.insert("12345678", "abcdefgh", 5)` will return `"12345abcdefgh678"`.
 --- @param s1 string The string to insert into.
 --- @param s2 string The string to insert.
 --- @param position number The position to insert s2 into s1.
---- @return string inserted A copy of s1 with s2 inserted into it.
+--- @return string inserted A copy of `s1`, with `s2` inserted into it.
 function string.insert(s1, s2, position) end
 
 --- Performs the logic of find, using a table of patterns.
@@ -56,7 +59,7 @@ function string.insert(s1, s2, position) end
 --- @param plain boolean? *Default*: `false`. If true, a normal search instead of a pattern search will be performed.
 function string.multifind(s, pattern, index, plain) end
 
---- Returns an array-style table with `str` split by `sep`. The `sep`erator is not part of the results. By default the `sep`erator is `%s`, splitting the given `str`ing by spaces.
+--- Returns an array-style table with a `string` split by a specified separator. The seperator is not part of the results. By default the `sep=="%s"`, which will result in `str` getting split by whitespace characters (e.g. spaces and tabs).
 --- @param str string The string to split.
 --- @param sep string? *Default*: `"%s"`. The token to split the string by.
 --- @return string[] split No description yet available.
@@ -68,7 +71,7 @@ function string.split(str, sep) end
 --- @return boolean result No description yet available.
 function string.startswith(s, pattern) end
 
---- Returns a copy of the string, with whitespace removed from the start and end.
+--- Returns a copy of the string, with whitespace characters (e.g. spaces and tabs) removed from the start and end.
 --- @param s string No description yet available.
 --- @return string trimmed No description yet available.
 function string.trim(s) end

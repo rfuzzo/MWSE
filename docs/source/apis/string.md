@@ -6,7 +6,8 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This library provides generic functions for string manipulation, such as finding and extracting substrings, and pattern matching. When indexing a string in Lua, the first character is at position 1 (not at 0, as in C). Indices are allowed to be negative and are interpreted as indexing backwards, from the end of the string. Thus, the last character is at position -1, and so on.
+This library provides generic functions for string manipulation, such as finding and extracting substrings, and pattern matching. When indexing a string in Lua, the first character is at position `1` (not at `0`, as in C). Indices are allowed to be negative and are interpreted as indexing backwards, from the end of the string. Thus, the last character is at position `-1`, and so on.
+Several functions in this library (e.g., `find`, `gfind`, `gsub`), make use of [Lua patterns](https://www.lua.org/pil/20.2.html).
 
 ## Functions
 
@@ -75,7 +76,9 @@ local result = string.format(format, values)
 ### `string.insert`
 <div class="search_terms" style="display: none">insert</div>
 
-Returns a string where one string has been inserted into another at a given position.
+Returns a string where one string has been inserted into another, after a specified position.
+		
+	For example, `string.insert("12345678", "abcdefgh", 5)` will return `"12345abcdefgh678"`.
 
 ```lua
 local inserted = string.insert(s1, s2, position)
@@ -89,7 +92,7 @@ local inserted = string.insert(s1, s2, position)
 
 **Returns**:
 
-* `inserted` (string): A copy of s1 with s2 inserted into it.
+* `inserted` (string): A copy of `s1`, with `s2` inserted into it.
 
 ***
 
@@ -116,7 +119,7 @@ string.multifind(s, pattern, index, plain)
 ### `string.split`
 <div class="search_terms" style="display: none">split</div>
 
-Returns an array-style table with `str` split by `sep`. The `sep`erator is not part of the results. By default the `sep`erator is `%s`, splitting the given `str`ing by spaces.
+Returns an array-style table with a `string` split by a specified separator. The seperator is not part of the results. By default the `sep=="%s"`, which will result in `str` getting split by whitespace characters (e.g. spaces and tabs).
 
 ```lua
 local split = string.split(str, sep)
@@ -156,7 +159,7 @@ local result = string.startswith(s, pattern)
 ### `string.trim`
 <div class="search_terms" style="display: none">trim</div>
 
-Returns a copy of the string, with whitespace removed from the start and end.
+Returns a copy of the string, with whitespace characters (e.g. spaces and tabs) removed from the start and end.
 
 ```lua
 local trimmed = string.trim(s)

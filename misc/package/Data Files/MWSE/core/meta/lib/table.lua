@@ -2,7 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- This library provides generic functions for table manipulation. It provides all its functions inside the table table.
+--- This library provides generic functions for table manipulation. It provides all its functions inside the `table` table.
 --- @class tablelib
 table = {}
 
@@ -17,17 +17,17 @@ function table.bininsert(t, value, comp) end
 
 --- Performs a binary search for a given value.
 --- 
---- If the value is found: It returns a table holding all the mathing indices (e.g. { startindice,endindice } ) endindice may be the same as startindice if only one matching indice was found
+--- If the `value` is found, a table holding all the matching indices is returned. (e.g. `{ startindice, endindice }`.) If only one matching indice was found, `startindice` will be the same as `endindice`.
 --- 
---- If compval is given: then it must be a function that takes one value and returns a second value2, to be compared with the input value, e.g.: compvalue = function( value ) return value[1] end
+--- If `compval` is given, then it must be a function that takes one value and returns the value to use for comparisons. For example, to compare arrays based on their first entry, you can write `compvalue = function( value ) return value[1] end`.
 --- 
---- If reversed is set to true: then the search assumes that the table is sorted in reverse order (largest value at position 1) note when reversed is given compval must be given as well, it can be nil/_ in this case
+--- If `reversed == true`, then the search assumes that `t` is sorted in reverse order (i.e., largest value at position 1). Note that specifying `reversed` requires specifying `compval`. You can circumvent this by passing `nil` for `compval`. e.g., `binsearch(tbl, value, nil, true)`.
 --- 
---- Return value: on success: a table holding matching indices (e.g. { startindice,endindice } ) on failure: nil
+--- Return value: on success: a table holding matching indices (e.g. { startindice, endindice } ) on failure: nil
 --- @param t table No description yet available.
---- @param value unknown No description yet available.
---- @param compval unknown? *Optional*. No description yet available.
---- @param reversed unknown? *Optional*. No description yet available.
+--- @param value unknown The value to search for.
+--- @param compval function? *Optional*. A function that returns the value to use in comparisons.
+--- @param reversed boolean? *Optional*. No description yet available.
 --- @return table result No description yet available.
 function table.binsearch(t, value, compval, reversed) end
 
@@ -59,9 +59,11 @@ function table.copymissing(to, from) end
 --- @return table result No description yet available.
 function table.deepcopy(t) end
 
---- Returns true if the table is empty, otherwise, it returns false.
+--- Checks if a table is empty. 
+--- 	
+--- 	If `deepCheck==true`, then tables are allowed to have nested subtables, so long as those subtables are empty. e.g., `table.empty({ {}, {} }, true) == true`, while `table.empty({ {}, {} }) == false`.
 --- @param t table No description yet available.
---- @param deepCheck boolean? *Default*: `false`. If true, subtables will also be checked to see if they are empty.
+--- @param deepCheck boolean? *Default*: `false`. If `true`, subtables will also be checked to see if they are empty.
 --- @return boolean result No description yet available.
 function table.empty(t, deepCheck) end
 

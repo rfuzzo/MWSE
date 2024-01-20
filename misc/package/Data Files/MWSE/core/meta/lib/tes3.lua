@@ -2,7 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- The tes3 library provides the majority of the functions for interacting with the game system.
+--- The `tes3` library provides the majority of the functions for interacting with the game system.
 --- @class tes3lib
 --- @field bsaLoader tes3bsaLoader One of the core game objects, responsible for loaded BSA files.
 --- @field dataHandler tes3dataHandler One of the core game objects.

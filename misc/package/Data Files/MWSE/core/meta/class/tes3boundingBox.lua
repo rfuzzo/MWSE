@@ -3,6 +3,8 @@
 
 --- @meta
 --- A pair of vectors marking a bounding box.
+--- 	
+--- 	Note: bounding boxes will always be centered at the world origin. i.e., their midpoint will always be `(0,0,0)`. You may want to offset the `min` and `max` of the bounding box by a specified position before use.
 --- @class tes3boundingBox
 --- @field max tes3vector3 The maximum bound of the box.
 --- @field min tes3vector3 The minimum bound of the box.
