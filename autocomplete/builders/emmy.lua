@@ -182,7 +182,6 @@ local function writeFunction(package, file, namespaceOverride)
 				description = description .. string.format("\n\n`%s`: %s — %s", tableArgument.name or "unknown", getAllPossibleVariationsOfType(tableArgument.type, tableArgument) or "any", formatLineBreaks(common.getDescriptionString(tableArgument)))
 			end
 		end
-		-- !!! changed to default to "any". before it defaulted to `nil`.
 		file:write(string.format("--- @param %s %s %s\n", 
 			argument.name or "unknown", 
 			getAllPossibleVariationsOfType(type, argument) or "any", 

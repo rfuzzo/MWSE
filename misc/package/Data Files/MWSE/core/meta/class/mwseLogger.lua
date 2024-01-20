@@ -12,8 +12,8 @@ mwseLogger = {}
 --- Assert a condition and log an error if it fails.
 --- @param condition boolean No description yet available.
 --- @param message string No description yet available.
---- @param formatValues variadic? *Optional*. Formatting and additional parameters matching string.format's usage.
-function mwseLogger:assert(condition, message, formatValues) end
+--- @param ... any? *Optional*. Formatting arguments. These are passed to `string.format`.
+function mwseLogger:assert(condition, message, ...) end
 
 --- Log debug message.
 --- @param message string No description yet available.

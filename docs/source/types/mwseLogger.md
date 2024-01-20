@@ -51,14 +51,14 @@ Name of the mod, also counts as unique id of the logger.
 Assert a condition and log an error if it fails.
 
 ```lua
-myObject:assert(condition, message, formatValues)
+myObject:assert(condition, message, ...)
 ```
 
 **Parameters**:
 
 * `condition` (boolean)
 * `message` (string)
-* `formatValues` (variadic): *Optional*. Formatting and additional parameters matching string.format's usage.
+* `...` (any): *Optional*. Formatting arguments. These are passed to `string.format`.
 
 ***
 
