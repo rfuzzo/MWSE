@@ -38,9 +38,9 @@ function string.endswith(s, pattern) end
 --- `%p`	  | Pointer address.										| b8000000
 --- `%%`	  | The literal `%` character.							  | %
 --- @param format string The format string to use for the output.
---- @param values any? *Optional*. Values to format into the given string.
+--- @param ... any? *Optional*. Values to format into the specified `string`.
 --- @return string result No description yet available.
-function string.format(format, values) end
+function string.format(format, ...) end
 
 --- Returns a string where one string has been inserted into another, after a specified position.
 --- 		
