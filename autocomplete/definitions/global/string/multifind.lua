@@ -12,10 +12,10 @@ The `patterns` are checked in the order they are passed. i.e., this function wil
 		{ name = "plain", type = "boolean", optional = true, default = false, description = "If `true`, then a normal search will be performed instead of a pattern search. (Same meaning as in `string.find`.)" },
 	},
 	returns = {
-		{name = "pattern", type="string", optional=true, 
-			description="If a pattern was matched, then this will be the first pattern that was matched. If no patterns matched, this will be `nil`."
+		{ name = "pattern", type = "string", optional = true, 
+			description = "If a pattern was matched, then this will be the first pattern that was matched. If no patterns matched, this will be `nil`."
 		},
-		{name = "startindex", type="integer", description="If a `pattern` was matched, this is the index of `s` where the matching `pattern` begins.", optional=true,},
-		{name = "endindex", type="integer", description="If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.", optional=true,},
+		{ name = "startindex", type = "integer", description = "If a `pattern` was matched, this is the index of `s` where the matching `pattern` begins.", optional = true },
+		{ name = "endindex", type = "integer", description = "If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.", optional = true },
 	},
 }

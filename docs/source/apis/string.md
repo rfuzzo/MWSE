@@ -129,7 +129,9 @@ local pattern, startindex, endindex = string.multifind(s, patterns, index, plain
 ### `string.split`
 <div class="search_terms" style="display: none">split</div>
 
-Returns an array-style table with a `string` split by a specified separator. The seperator is not part of the results. By default the `sep=="%s"`, which will result in `str` getting split by whitespace characters (e.g. spaces and tabs).
+Returns an array-style table with a `string` split by a specified separator.
+The seperator is not part of the results. 
+By default the `sep == "%s"`, which will result in `str` getting split by whitespace characters (e.g. spaces and tabs).
 
 ```lua
 local split = string.split(str, sep)

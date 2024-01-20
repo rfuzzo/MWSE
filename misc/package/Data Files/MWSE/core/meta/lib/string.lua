@@ -66,7 +66,9 @@ function string.insert(s1, s2, position) end
 --- @return integer? endindex *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.
 function string.multifind(s, patterns, index, plain) end
 
---- Returns an array-style table with a `string` split by a specified separator. The seperator is not part of the results. By default the `sep=="%s"`, which will result in `str` getting split by whitespace characters (e.g. spaces and tabs).
+--- Returns an array-style table with a `string` split by a specified separator.
+--- The seperator is not part of the results. 
+--- By default the `sep == "%s"`, which will result in `str` getting split by whitespace characters (e.g. spaces and tabs).
 --- @param str string The string to split.
 --- @param sep string? *Default*: `"%s"`. The token to split the string by.
 --- @return string[] split No description yet available.
