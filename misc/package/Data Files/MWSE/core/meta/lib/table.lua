@@ -6,24 +6,34 @@
 --- @class tablelib
 table = {}
 
---- Inserts a given value through BinaryInsert into the table sorted by [, comp].
+--- Inserts a given value through BinaryInsert into an array-style `table` `t`, assuming `t` was sorted by `comp`.
 --- 
---- If 'comp' is given, then it must be a function that receives two table elements, and returns true when the first is less than the second, e.g. comp = function(a, b) return a > b end, will give a sorted table, with the biggest value on position 1. [, comp] behaves as in table.sort(table, value [, comp]) returns the index where 'value' was inserted
+--- If 'comp' is given, then it must be a function that receives two values in `t` and returns `true` when the first is less than the second.
+--- i.e., `comp(a,b) == true` would mean `a` is less than `b`.
+--- 
+--- If you want to sort in reverse order, you may set `comp=function(a,b) return a > b end`.
+--- 
+--- This function will return the index where `value` was inserted into `t`.
 --- @param t table No description yet available.
 --- @param value unknown No description yet available.
---- @param comp unknown? *Optional*. No description yet available.
+--- @param comp nil|fun(a,b):boolean *Optional*. No description yet available.
 --- @return number result No description yet available.
 function table.bininsert(t, value, comp) end
 
---- Performs a binary search for a given value.
+--- Performs a binary search for a given `value` inside a specified `table` `t`.
 --- 
---- If the `value` is found, a table holding all the matching indices is returned. (e.g. `{ startindice, endindice }`.) If only one matching indice was found, `startindice` will be the same as `endindice`.
+--- If the `value` is found in `t`, then a `table` providing the range of all matching indices is returned. (e.g. `{ startindice, endindice }`.) 
+--- If only one matching index was found, then `startindice` will be the same as `endindice`.
+--- 
+--- If `value` is not found in `t`, then `nil` is returned.
 --- 
 --- If `compval` is given, then it must be a function that takes one value and returns the value to use for comparisons. For example, to compare arrays based on their first entry, you can write `compvalue = function( value ) return value[1] end`.
 --- 
---- If `reversed == true`, then the search assumes that `t` is sorted in reverse order (i.e., largest value at position 1). Note that specifying `reversed` requires specifying `compval`. You can circumvent this by passing `nil` for `compval`. e.g., `binsearch(tbl, value, nil, true)`.
+--- NOTE: `compval` is different from the `comp` that is specified in the `binsearch` function.
 --- 
---- Return value: on success: a table holding matching indices (e.g. { startindice, endindice } ) on failure: nil
+--- If `reversed == true`, then the search assumes that `t` is sorted in reverse order (i.e., largest value at position 1).
+--- Note that specifying `reversed` requires specifying `compval`. 
+--- You can circumvent this by passing `nil` for `compval`. e.g., `binsearch(tbl, value, nil, true)`.
 --- @param t table No description yet available.
 --- @param value unknown The value to search for.
 --- @param compval function? *Optional*. A function that returns the value to use in comparisons.
@@ -67,7 +77,7 @@ function table.deepcopy(t) end
 --- @return boolean result No description yet available.
 function table.empty(t, deepCheck) end
 
---- Returns the key for a given value, or nil if the table does not contain the value.
+--- Returns the key for a given value, or `nil` if the table does not contain the value.
 --- @param t table No description yet available.
 --- @param value unknown No description yet available.
 --- @return unknown result No description yet available.

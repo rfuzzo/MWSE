@@ -14,7 +14,8 @@ Several functions in this library (e.g., `find`, `gfind`, `gsub`), make use of [
 ### `string.endswith`
 <div class="search_terms" style="display: none">endswith</div>
 
-Returns true if a string ends with a given pattern.
+Returns `true` if a `string` ends with a given substring.
+Note: this function does not use pattern matching.
 
 ```lua
 local result = string.endswith(s, pattern)
@@ -78,7 +79,7 @@ local result = string.format(format, values)
 
 Returns a string where one string has been inserted into another, after a specified position.
 		
-	For example, `string.insert("12345678", "abcdefgh", 5)` will return `"12345abcdefgh678"`.
+For example, `string.insert("12345678", "abcdefgh", 5)` will return `"12345abcdefgh678"`.
 
 ```lua
 local inserted = string.insert(s1, s2, position)
@@ -88,31 +89,39 @@ local inserted = string.insert(s1, s2, position)
 
 * `s1` (string): The string to insert into.
 * `s2` (string): The string to insert.
-* `position` (number): The position to insert s2 into s1.
+* `position` (number): An index of `s1`. `s2` will be inserted after this index.
 
 **Returns**:
 
-* `inserted` (string): A copy of `s1`, with `s2` inserted into it.
+* `inserted` (string): A copy of `s1`, with `s2` inserted into it, after the specified position.
 
 ***
 
 ### `string.multifind`
 <div class="search_terms" style="display: none">multifind</div>
 
-Performs the logic of find, using a table of patterns.
+Performs the logic of `string.find` on a `string` `s`, using a `table` of patterns.
 
-If any of the available patterns match, the matching pattern is returned followed by the normal results of the find.
+If any of the `patterns` are found in `s`, then the matching `pattern` will be returned, followed by the normal results of `string.find`.
+	
+The `patterns` are checked in the order they are passed. i.e., this function will first try to match `patterns[1]`, then `patterns[2]`, and so on.
 
 ```lua
-string.multifind(s, pattern, index, plain)
+local pattern, startindex, endindex = string.multifind(s, patterns, index, plain)
 ```
 
 **Parameters**:
 
-* `s` (string): The string to perform finds on.
-* `pattern` (table): An array-style table that contains pattern strings.
-* `index` (number): *Default*: `1`. Start index of the find.
-* `plain` (boolean): *Default*: `false`. If true, a normal search instead of a pattern search will be performed.
+* `s` (string): The `string` to `find` `patterns` in.
+* `patterns` (table): An array-style `table` that contains the patterns to match.
+* `index` (integer): *Default*: `1`. Start index of the `find`. (Same meaning as in `string.find`.)
+* `plain` (boolean): *Default*: `false`. If `true`, then a normal search will be performed instead of a pattern search. (Same meaning as in `string.find`.)
+
+**Returns**:
+
+* `pattern` (string): *Optional*. The first pattern that was succesfully matched. this will be an entry of the `patterns` table. If no patterns matched, this will be `nil`.
+* `startindex` (integer): *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` begins.
+* `endindex` (integer): *Optional*. If a `pattern` was matched, this is the index of `s` where the matching `pattern` ends.
 
 ***
 
@@ -139,16 +148,17 @@ local split = string.split(str, sep)
 ### `string.startswith`
 <div class="search_terms" style="display: none">startswith</div>
 
-Returns true if a string begins with a given pattern.
+Returns `true` if a `string` begins with a given substring.
+	Note: this function does not use pattern matching.
 
 ```lua
-local result = string.startswith(s, pattern)
+local result = string.startswith(s, substring)
 ```
 
 **Parameters**:
 
 * `s` (string)
-* `pattern` (string)
+* `substring` (string)
 
 **Returns**:
 
