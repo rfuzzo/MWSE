@@ -83,7 +83,7 @@ end
 function Slider:updateValueLabel()
 
 	local value = self:convertToLabelValue(self.variable.value)
-	
+
 	if string.find(self.label, "%s", nil, true) then
 		self.elements.label.text = self.label:format(value)
 	else
