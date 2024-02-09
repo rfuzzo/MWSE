@@ -13,7 +13,7 @@ TextField.sNewValue = mwse.mcm.i18n("New value: '%s'")
 TextField.defaultSetting = ""
 
 function TextField:enable()
-	self.elements.inputField.text = self.variable.value or ""
+	self.elements.inputField.text = self.variable.value and self:convertToLabelValue(self.variable.value) or ""
 
 	self.elements.border:register("mouseClick", function()
 		tes3ui.acquireTextInput(self.elements.inputField)
@@ -58,7 +58,7 @@ end
 
 function TextField:callback()
 	-- default messageBox on update
-	tes3.messageBox(self.sNewValue, self.variable.value)
+	tes3.messageBox(self.sNewValue, self:convertToLabelValue(self.variable.value))
 end
 
 --- @param parentBlock tes3uiElement

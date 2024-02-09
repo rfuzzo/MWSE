@@ -60,4 +60,9 @@ function Setting:createContentsContainer(parentBlock)
 	self:makeComponent(self.elements.innerContainer)
 end
 
+
+function Setting:convertToLabelValue(variableValue)
+	return variableValue
+end
+
 return Setting

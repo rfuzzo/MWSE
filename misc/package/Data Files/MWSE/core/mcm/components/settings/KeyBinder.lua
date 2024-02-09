@@ -23,8 +23,10 @@ KeyBinder.allowMouse = false
 
 --- @return string result
 function KeyBinder:getText()
-	return self:getComboString(self.variable.value)
+	return self:convertToLabelValue(self.variable.value)
 end
+
+
 
 --- @param keyCode integer|nil
 --- @return string|nil letter
@@ -111,6 +113,7 @@ function KeyBinder:getComboString(keyCombo)
 	return (prefix .. comboText)
 end
 
+KeyBinder.convertToLabelValue = KeyBinder.getComboString
 
 --- @param e keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
 function KeyBinder:keySelected(e)
