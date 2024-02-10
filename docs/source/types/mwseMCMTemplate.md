@@ -245,6 +245,28 @@ Set to the value of `sCancel` GMST.
 
 ***
 
+### `searchChildDescriptions`
+<div class="search_terms" style="display: none">searchchilddescriptions</div>
+
+If true, when the user searches the MCM list, all the pages and settings in this MCM template will be searched over. The matching will be performed on setting `description` fields.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `searchChildLabels`
+<div class="search_terms" style="display: none">searchchildlabels</div>
+
+If true, when the user searches the MCM list, all the pages and settings in this MCM template will be searched over. The matching will be performed on setting `label` and `text` fields.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `sNo`
 <div class="search_terms" style="display: none">sno</div>
 
@@ -686,7 +708,7 @@ local component = myObject:getComponent({ class = ..., label = ..., indent = ...
 Creates a new Template.
 
 ```lua
-local template = myObject:new({ name = ..., label = ..., headerImagePath = ..., onClose = ..., onSearch = ..., pages = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., inGameOnly = ..., postCreate = ..., class = ..., parentComponent = ... })
+local template = myObject:new({ name = ..., label = ..., headerImagePath = ..., onClose = ..., searchChildLabels = ..., searchChildDescriptions = ..., onSearch = ..., pages = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., inGameOnly = ..., postCreate = ..., class = ..., parentComponent = ... })
 ```
 
 **Parameters**:
@@ -696,6 +718,8 @@ local template = myObject:new({ name = ..., label = ..., headerImagePath = ..., 
 	* `label` (string): *Optional*. Used in place of `name` if that argument isn't passed. You need to pass at least one of the `name` and `label` arguments. If `headerImagePath` is not passed, a UI element will be created with `label` as text.
 	* `headerImagePath` (string): *Optional*. Set it to display an image at the top of your menu. Path is relative to `Data Files/`. The image must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024, etc.).
 	* `onClose` (fun(modConfigContainer: [tes3uiElement](../types/tes3uiElement.md))): *Optional*. Set this to a function which will be called when the menu is closed. Useful for saving variables, such as TableVariable.
+	* `searchChildLabels` (boolean): *Default*: `true`. If true, default search handler will search through all the page and setting `label` and `text` fields in this MCM template.
+	* `searchChildDescriptions` (boolean): *Default*: `true`. If true, default search handler will search through all the page and setting `description` fields in this MCM template.
 	* `onSearch` (fun(searchText: string): boolean): *Optional*. A custom search handler function. This function should return true if this mod Template should show up in search results for given `searchText`.
 	* `pages` (mwseMCMPage.new.data[]): *Optional*. You can create pages for the template directly here. The entries in the array must specify the class of the page.
 	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
@@ -716,7 +740,7 @@ local template = myObject:new({ name = ..., label = ..., headerImagePath = ..., 
 ### `onSearchInternal`
 <div class="search_terms" style="display: none">onsearchinternal</div>
 
-This method calls the `onSearch` handler if it exists.
+Performs searching routine for given `searchText`.
 
 ```lua
 local result = myObject:onSearchInternal(searchText)
@@ -728,7 +752,7 @@ local result = myObject:onSearchInternal(searchText)
 
 **Returns**:
 
-* `result` (boolean)
+* `result` (boolean): True if given `searchText` matches this MCM template.
 
 ***
 
@@ -769,7 +793,7 @@ myObject:printComponent(component)
 ### `register`
 <div class="search_terms" style="display: none">register</div>
 
-A convenience function that registers the mod's configuration menu using its Template.
+A convenience function that registers the mod's configuration menu using its Template. In addition, sets `self:onSearchInternal` as the `onSearch` handler.
 
 You don't need to call `mwse.registerModConfig` or `mwse.mcm.register` if calling this function.
 
