@@ -8,7 +8,7 @@
 --- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
 --- @diagnostic disable: duplicate-set-field
 
-local Parent = require("mcm.components.settings.VariableButton")
+local Parent = require("mcm.components.settings.Button")
 
 
 
@@ -16,7 +16,7 @@ local Parent = require("mcm.components.settings.VariableButton")
 local OnOffButton = Parent:new()
 
 function OnOffButton:convertToLabelValue(variableValue)
-	return variableValue and tes3.findGMST(tes3.gmst.sOn).value or tes3.findGMST(tes3.gmst.sOff).value
+	return tes3.findGMST(variableValue and tes3.gmst.sOn or tes3.gmst.sOff).value
 end
 
 function OnOffButton:press()

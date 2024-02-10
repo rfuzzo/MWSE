@@ -10,14 +10,14 @@
 
 
 
-local Parent = require("mcm.components.settings.VariableButton")
+local Parent = require("mcm.components.settings.Button")
 
 
 --- @class mwseMCMYesNoButton
 local YesNoButton = Parent:new()
 
 function YesNoButton:convertToLabelValue(variableValue)
-	return variableValue and tes3.findGMST(tes3.gmst.sYes).value or tes3.findGMST(tes3.gmst.sNo).value
+	return tes3.findGMST(variableValue and tes3.gmst.sYes or tes3.gmst.sNo).value
 end
 
 function YesNoButton:press()

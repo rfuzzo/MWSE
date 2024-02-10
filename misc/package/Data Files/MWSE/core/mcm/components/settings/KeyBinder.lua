@@ -21,11 +21,6 @@ local KeyBinder = Parent:new()
 KeyBinder.allowCombinations = true
 KeyBinder.allowMouse = false
 
---- @return string result
-function KeyBinder:getText()
-	return self:convertToLabelValue(self.variable.value)
-end
-
 
 
 --- @param keyCode integer|nil
