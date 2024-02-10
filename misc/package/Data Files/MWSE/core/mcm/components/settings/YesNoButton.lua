@@ -12,12 +12,21 @@
 
 local Parent = require("mcm.components.settings.VariableButton")
 
+
 --- @class mwseMCMYesNoButton
 local YesNoButton = Parent:new()
 
 function YesNoButton:convertToLabelValue(variableValue)
 	return variableValue and tes3.findGMST(tes3.gmst.sYes).value or tes3.findGMST(tes3.gmst.sNo).value
 end
+
+function YesNoButton:press()
+	-- Toggle variable
+	self.variable.value = not self.variable.value
+	-- Do this after changing the variable so the callback is correct, and the text is updated
+	self:update()
+end
+
 
 return YesNoButton
 

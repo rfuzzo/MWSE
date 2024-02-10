@@ -19,4 +19,11 @@ function OnOffButton:convertToLabelValue(variableValue)
 	return variableValue and tes3.findGMST(tes3.gmst.sOn).value or tes3.findGMST(tes3.gmst.sOff).value
 end
 
+function OnOffButton:press()
+	-- Toggle variable
+	self.variable.value = not self.variable.value
+	-- Do this after changing the variable so the callback is correct, and the text is updated
+	self:update()
+end
+
 return OnOffButton
