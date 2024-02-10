@@ -367,6 +367,21 @@ local result = myObject:checkDisabled()
 
 ***
 
+### `convertToLabelValue`
+<div class="search_terms" style="display: none">converttolabelvalue</div>
+
+This function specifies how values stored in the `variable` field should correspond to values displayed by this setting.
+
+```lua
+myObject:convertToLabelValue(variableValue)
+```
+
+**Parameters**:
+
+* `variableValue` (number)
+
+***
+
 ### `create`
 <div class="search_terms" style="display: none">create</div>
 

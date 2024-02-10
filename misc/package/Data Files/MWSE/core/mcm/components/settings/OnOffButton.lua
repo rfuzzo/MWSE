@@ -16,7 +16,7 @@ local Parent = require("mcm.components.settings.Button")
 local OnOffButton = Parent:new()
 
 function OnOffButton:convertToLabelValue(variableValue)
-	return tes3.findGMST(variableValue and tes3.gmst.sOn or tes3.gmst.sOff).value
+	return variableValue and self.sOn or self.sOff
 end
 
 function OnOffButton:press()
