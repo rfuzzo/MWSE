@@ -36,6 +36,7 @@ local favoriteIcons = {
 	-- hover over a favorite to remove it 
 	over = "textures/mwse/menu_modconfig_favorite_over.dds",
 	pressed = "textures/mwse/menu_modconfig_favorite_pressed.dds",
+	id = "FavoriteButton"
 }
 
 -- its a local variable which means i have more freedom to name it terribly
@@ -44,6 +45,7 @@ local notFavoriteIcons = {
 	-- hover over a favorite to remove it 
 	over = "textures/mwse/menu_modconfig_not_favorite_over.dds",
 	pressed = "textures/mwse/menu_modconfig_not_favorite_pressed.dds",
+	id = "FavoriteButton"
 }
 
 --- sort the given packages
@@ -63,24 +65,10 @@ end
 -- update the image icons for the various states of the favorite button
 ---@param imageButton tes3uiElement
 local function updateFavoriteImageButton(imageButton, favorite)
-	
-	local iconTable
-	if favorite then
-		iconTable = favoriteIcons
-		-- use apha to "hide" the icons while still preserving functionality
-		imageButton.children[1].alpha = 1.0
-		imageButton.children[2].alpha = 0.8
-		imageButton.children[3].alpha = 0.0
-	else
-		iconTable = notFavoriteIcons
-		imageButton.children[1].alpha = 0.0
-		imageButton.children[2].alpha = 0.5
-		imageButton.children[3].alpha = 1.0
-	end
+	local iconTable = favorite and favoriteIcons or notFavoriteIcons
 	imageButton.children[1].contentPath = iconTable.idle
 	imageButton.children[2].contentPath = iconTable.over
 	imageButton.children[3].contentPath = iconTable.pressed
-	
 end
 
 local function loadFavoriteData()
@@ -360,20 +348,25 @@ local function onClickModConfigButton()
 			entryBlock.widthProportional = 1.0
 			entryBlock.childAlignY = 0.5
 
-			entryBlock:createTextSelect({ id = "ModEntry", text = package.name })
-				      :register("mouseClick", onClickModName)
+			local entry = entryBlock:createTextSelect({ id = "ModEntry", text = package.name })
+			entry:register("mouseClick", onClickModName)
+			entry.widthProportional = 1
+			entry.heightProportional = 1
 
-			local iconTable = package.favorite and favoriteIcons or notFavoriteIcons
+			local iconTable = entry.favorite and favoriteIcons or notFavoriteIcons
+
 			local imageButton = entryBlock:createImageButton(iconTable)
-			updateFavoriteImageButton(imageButton, package.favorite)
+			updateFavoriteImageButton(imageButton, entry.favorite)
 			imageButton.childAlignY = 0.5
+			imageButton.absolutePosAlignX = .95
+			imageButton.absolutePosAlignY = .5
 
 			imageButton:register(tes3.uiEvent.mouseClick, onClickFavoriteButton)
 			---@param image tes3uiElement
 			for _, image in ipairs(imageButton.children) do
 				image.scaleMode = true
-				image.height = 20
-				image.width = 20
+				image.height = 16
+				image.width = 16
 				image.paddingTop = 3
 			end
 			
