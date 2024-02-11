@@ -1,4 +1,4 @@
-local DistanceSlider = mwse.mcm.createSlider{
+mwse.mcm.createSlider{
     parent = myPage,
     label = "My distance slider",
     variable = mwse.mcm.createTableVariable{id = "distance", config = myConfig},

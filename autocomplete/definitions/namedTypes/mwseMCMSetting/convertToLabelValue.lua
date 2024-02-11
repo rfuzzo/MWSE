@@ -4,4 +4,7 @@ return {
 	arguments = {
 		{ name = "variableValue", type = "number" }
 	},
+	returns = {{
+		name = "labelValue", type = "number|string"
+	}},
 }

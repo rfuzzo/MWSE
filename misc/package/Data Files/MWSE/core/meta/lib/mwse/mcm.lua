@@ -884,6 +884,8 @@ function mwse.mcm.createPlayerData(variable) end
 --- 
 --- The same is done by this function if you pass both `parent` and `data` arguments.
 --- 
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse.mcm/#mwsemcmcreateslider).
 --- @param parent tes3uiElement|mwse.mcm.createSlider.data The UI element inside which the new Slider will be created.
 --- @param data mwse.mcm.createSlider.data? This table accepts the following values:
 --- 

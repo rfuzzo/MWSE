@@ -18,4 +18,7 @@ This can be overwritten in the `createNewSlider` method, allowing for custom for
                 In this example, it will be used to create a slider that stores a `tes3.skill` constant in the config, and then displays the name of the corresponding skill."
 		},
 	},
+	returns = {{
+		name = "labelValue", type = "number|string"
+	}}
 }

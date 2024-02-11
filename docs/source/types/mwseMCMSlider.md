@@ -364,19 +364,23 @@ The default behavior is to consistently format decimal places (i.e., if `decimal
 This can be overwritten in the `createNewSlider` method, allowing for custom formatting of variable values.
 
 ```lua
-myObject:convertToLabelValue(variableValue)
+local labelValue = myObject:convertToLabelValue(variableValue)
 ```
 
 **Parameters**:
 
 * `variableValue` (number)
 
+**Returns**:
+
+* `labelValue` (number, string)
+
 ??? example "Example: DistanceSlider"
 
 	The following example shows how the `convertToLabelValue` parameter can be used to create a slider for a config setting that handles distances. The config setting will be stored using game units, but the displayed value will be in real-world units. Recall that 1 game unit corresponds to 22.1 feet, and 1 foot is 0.3048 meters.
 
 	```lua
-	local DistanceSlider = mwse.mcm.createSlider{
+	mwse.mcm.createSlider{
 	    parent = myPage,
 	    label = "My distance slider",
 	    variable = mwse.mcm.createTableVariable{id = "distance", config = myConfig},
@@ -406,7 +410,7 @@ myObject:convertToLabelValue(variableValue)
 	Here is an (admittedly less practical) example to help highlight the different ways `convertToLabelValue` can be used. In this example, it will be used to create a slider that stores a `tes3.skill` constant in the config, and then displays the name of the corresponding skill.
 
 	```lua
-	local DistanceSlider = mwse.mcm.createSlider{
+	mwse.mcm.createSlider{
 	    parent = myPage,
 	    label = "My skill slider",
 	    variable = mwse.mcm.createTableVariable{id = "skillId", config = myConfig},

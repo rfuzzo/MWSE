@@ -15,6 +15,7 @@ mwseMCMSetting = {}
 
 --- This function specifies how values stored in the `variable` field should correspond to values displayed by this setting.
 --- @param variableValue number No description yet available.
+--- @return number|string labelValue No description yet available.
 function mwseMCMSetting:convertToLabelValue(variableValue) end
 
 --- This method creates the UI elements that comprise this Setting.

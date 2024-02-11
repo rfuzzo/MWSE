@@ -307,12 +307,16 @@ local result = myObject:checkDisabled()
 This function specifies how values stored in the `variable` field should correspond to values displayed by this setting.
 
 ```lua
-myObject:convertToLabelValue(variableValue)
+local labelValue = myObject:convertToLabelValue(variableValue)
 ```
 
 **Parameters**:
 
 * `variableValue` (number)
+
+**Returns**:
+
+* `labelValue` (number, string)
 
 ***
 

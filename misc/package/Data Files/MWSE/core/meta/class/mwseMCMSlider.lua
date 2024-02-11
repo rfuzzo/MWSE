@@ -19,6 +19,7 @@ mwseMCMSlider = {}
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/types/mwseMCMSlider/#converttolabelvalue).
 --- @param variableValue number No description yet available.
+--- @return number|string labelValue No description yet available.
 function mwseMCMSlider:convertToLabelValue(variableValue) end
 
 --- This function specifies how values stored in the slider widget should correspond to values stored in the `variable` field.
