@@ -36,7 +36,7 @@ local favoriteIcons = {
 	-- hover over a favorite to remove it 
 	over = "textures/mwse/menu_modconfig_favorite_over.dds",
 	pressed = "textures/mwse/menu_modconfig_favorite_pressed.dds",
-	id = "FavoriteButton"
+	-- id = "FavoriteButton"
 }
 
 -- its a local variable which means i have more freedom to name it terribly
@@ -45,20 +45,22 @@ local notFavoriteIcons = {
 	-- hover over a favorite to remove it 
 	over = "textures/mwse/menu_modconfig_not_favorite_over.dds",
 	pressed = "textures/mwse/menu_modconfig_not_favorite_pressed.dds",
-	id = "FavoriteButton"
+	-- id = "FavoriteButton"
 }
+
 
 --- sort the given packages
 ---@param a mwseModConfig
 ---@param b mwseModConfig
 ---@return boolean -- true if `a < b`
 local function sortPackages(a, b)
-	if a.favorite ~= b.favorite then
+	-- mwse.log("comparing %s with %s", packagetostring(a), packagetostring(b))
+	if not a.favorite ~= not b.favorite then
 		-- `true` if `a` is favorited and `b` isn't (so `a < b`)
 		-- `false` if `b` is favorited and `a` isn't (so `b < a`)
-		return a.favorite
-	end
 
+		return a.favorite == true
+	end
 	return a.name:lower() < b.name:lower()
 end
 
@@ -192,7 +194,7 @@ local function onClickFavoriteButton(e)
 		return 
 	end
 
-	modListContents:sortChildren(function (a, b)
+	modListContents:sortChildren(function(a, b)
 		return sortPackages(configMods[a.children[1].text], configMods[b.children[1].text])
 	end)
 
@@ -353,10 +355,10 @@ local function onClickModConfigButton()
 			entry.widthProportional = 1
 			entry.heightProportional = 1
 
-			local iconTable = entry.favorite and favoriteIcons or notFavoriteIcons
+			local iconTable = package.favorite and favoriteIcons or notFavoriteIcons
 
 			local imageButton = entryBlock:createImageButton(iconTable)
-			updateFavoriteImageButton(imageButton, entry.favorite)
+			updateFavoriteImageButton(imageButton, package.favorite)
 			imageButton.childAlignY = 0.5
 			imageButton.absolutePosAlignX = .95
 			imageButton.absolutePosAlignY = .5
@@ -510,5 +512,6 @@ end
 event.register("initialized", onInitialized, { priority = 100 })
 
 event.register('initialized',function (e)
+	timer.start{ callback = loadFavoriteData, duration = 0.5, type = timer.real}
 	loadFavoriteData() -- only need to do it once when the game loads
-end)
+end, {priority = -1000000})
