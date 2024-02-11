@@ -360,8 +360,9 @@ local function onClickModConfigButton()
 			local imageButton = entryBlock:createImageButton(iconTable)
 			updateFavoriteImageButton(imageButton, package.favorite)
 			imageButton.childAlignY = 0.5
-			imageButton.absolutePosAlignX = .95
-			imageButton.absolutePosAlignY = .5
+			imageButton.absolutePosAlignX = .97
+			-- imageButton.absolutePosAlignY = 1.0
+			imageButton.absolutePosAlignY = 0.5
 
 			imageButton:register(tes3.uiEvent.mouseClick, onClickFavoriteButton)
 			---@param image tes3uiElement
