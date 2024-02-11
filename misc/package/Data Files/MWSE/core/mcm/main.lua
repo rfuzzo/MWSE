@@ -30,20 +30,20 @@ local modConfigContainer = nil
 mwse.mcm = require("mcm.mcm")
 mwse.mcm.i18n = mwse.loadTranslations("mcm")
 
-
+-- credit to Pherim for the default icons
 local favoriteIcons = {
-	idle = "textures/mwse/menu_modconfig_favorite.dds",
+	idle = "textures/mwse/menu_modconfig_favorite_idle.dds",
 	-- hover over a favorite to remove it 
-	over = "textures/mwse/menu_modconfig_favorite_over_remove.dds",
-	pressed = "textures/mwse/menu_modconfig_favorite.dds",
+	over = "textures/mwse/menu_modconfig_favorite_over.dds",
+	pressed = "textures/mwse/menu_modconfig_favorite_pressed.dds",
 }
 
 -- its a local variable which means i have more freedom to name it terribly
 local notFavoriteIcons = {
-	idle = "textures/mwse/menu_modconfig_favorite.dds",
-	-- hover over a "not favorite" to add it 
-	over = "textures/mwse/menu_modconfig_favorite_over_add.dds",
-	pressed = "textures/mwse/menu_modconfig_favorite.dds",
+	idle = "textures/mwse/menu_modconfig_not_favorite_idle.dds",
+	-- hover over a favorite to remove it 
+	over = "textures/mwse/menu_modconfig_not_favorite_over.dds",
+	pressed = "textures/mwse/menu_modconfig_not_favorite_pressed.dds",
 }
 
 --- sort the given packages
@@ -184,8 +184,8 @@ end
 local function onClickFavoriteButton(e)
 
 
-	-- `source` is the button, which is left of the mod name, so we need to to up and then down
-	local package = configMods[e.source.parent.children[2].text]
+	-- `source` is the button, which is right of the mod name, so we need to to up and then down-left
+	local package = configMods[e.source.parent.children[1].text]
 	package.favorite = not package.favorite
 	
 	updateFavoriteImageButton(e.source, package.favorite)
@@ -205,7 +205,7 @@ local function onClickFavoriteButton(e)
 	end
 
 	modListContents:sortChildren(function (a, b)
-		return sortPackages(configMods[a.children[2].text], configMods[b.children[2].text])
+		return sortPackages(configMods[a.children[1].text], configMods[b.children[1].text])
 	end)
 
 	modList:getTopLevelMenu():updateLayout()
@@ -247,7 +247,7 @@ local function onSearchUpdated(e)
 	local modList = mcm:findChild("ModList")
 	local modListContents = modList:getContentElement()
 	for _, child in ipairs(modListContents.children) do
-		child.visible = filterModByName(child.children[2].text, lowerSearchText)
+		child.visible = filterModByName(child.children[1].text, lowerSearchText)
 	end
 	mcm:updateLayout()
 	modList.widget:contentsChanged()
@@ -360,7 +360,9 @@ local function onClickModConfigButton()
 			entryBlock.widthProportional = 1.0
 			entryBlock.childAlignY = 0.5
 
-			
+			entryBlock:createTextSelect({ id = "ModEntry", text = package.name })
+				      :register("mouseClick", onClickModName)
+
 			local iconTable = package.favorite and favoriteIcons or notFavoriteIcons
 			local imageButton = entryBlock:createImageButton(iconTable)
 			updateFavoriteImageButton(imageButton, package.favorite)
@@ -376,8 +378,7 @@ local function onClickModConfigButton()
 			end
 			
 			
-			local entry = entryBlock:createTextSelect({ id = "ModEntry", text = package.name })
-			entry:register("mouseClick", onClickModName)
+			
 		end
 
 		-- Create container for mod content. This will be deleted whenever the pane is reloaded.
