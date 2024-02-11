@@ -441,7 +441,7 @@ local button = myObject:createCycleButton({ label = ..., description = ..., opti
 Creates a new nested DecimalSlider.
 
 ```lua
-local slider = myObject:createDecimalSlider({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ... })
+local slider = myObject:createDecimalSlider({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., convertToLabelValue = ..., postCreate = ... })
 ```
 
 **Parameters**:
@@ -464,6 +464,7 @@ local slider = myObject:createDecimalSlider({ label = ..., variable = ..., defau
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `convertToLabelValue` (fun(self: [mwseMCMDecimalSlider](../types/mwseMCMDecimalSlider.md), variableValue: number): number, string): *Optional*. Define a custom formatting function for displaying variable values.
 	* `postCreate` (fun(self: [mwseMCMDecimalSlider](../types/mwseMCMDecimalSlider.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 **Returns**:
@@ -784,7 +785,7 @@ local paragraphField = myObject:createParagraphField({ label = ..., buttonText =
 Creates a new nested `PercentageSlider`.
 
 ```lua
-local slider = myObject:createPercentageSlider({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ... })
+local slider = myObject:createPercentageSlider({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., convertToLabelValue = ..., postCreate = ... })
 ```
 
 **Parameters**:
@@ -807,6 +808,7 @@ local slider = myObject:createPercentageSlider({ label = ..., variable = ..., de
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `convertToLabelValue` (fun(self: [mwseMCMPercentageSlider](../types/mwseMCMPercentageSlider.md), variableValue: number): number, string): *Optional*. Define a custom formatting function for displaying variable values.
 	* `postCreate` (fun(self: [mwseMCMPercentageSlider](../types/mwseMCMPercentageSlider.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 **Returns**:
@@ -849,7 +851,7 @@ local category = myObject:createSideBySideBlock({ label = ..., description = ...
 Creates a new nested Slider.
 
 ```lua
-local slider = myObject:createSlider({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ... })
+local slider = myObject:createSlider({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., convertToLabelValue = ..., postCreate = ... })
 ```
 
 **Parameters**:
@@ -872,6 +874,7 @@ local slider = myObject:createSlider({ label = ..., variable = ..., defaultSetti
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `convertToLabelValue` (fun(self: [mwseMCMSlider](../types/mwseMCMSlider.md), variableValue: number): number, string): *Optional*. Define a custom formatting function for displaying variable values.
 	* `postCreate` (fun(self: [mwseMCMSlider](../types/mwseMCMSlider.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 **Returns**:

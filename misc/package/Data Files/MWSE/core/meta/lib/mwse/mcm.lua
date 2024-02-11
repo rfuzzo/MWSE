@@ -300,6 +300,8 @@ function mwse.mcm.createCycleButton(parent, data) end
 --- 
 --- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
 --- 
+--- `convertToLabelValue`: fun(self: mwseMCMDecimalSlider, variableValue: number): number|nil|string — *Optional*. Define a custom formatting function for displaying variable values.
+--- 
 --- `postCreate`: nil|fun(self: mwseMCMDecimalSlider) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- @return mwseMCMDecimalSlider slider No description yet available.
 function mwse.mcm.createDecimalSlider(parent, data) end
@@ -323,6 +325,7 @@ function mwse.mcm.createDecimalSlider(parent, data) end
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 --- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
+--- @field convertToLabelValue fun(self: mwseMCMDecimalSlider, variableValue: number): number|nil|string *Optional*. Define a custom formatting function for displaying variable values.
 --- @field postCreate nil|fun(self: mwseMCMDecimalSlider) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 --- Creates a new Dropdown inside given `parent` menu.
@@ -822,6 +825,8 @@ function mwse.mcm.createParagraphField(parent, data) end
 --- 
 --- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
 --- 
+--- `convertToLabelValue`: fun(self: mwseMCMPercentageSlider, variableValue: number): number|nil|string — *Optional*. Define a custom formatting function for displaying variable values.
+--- 
 --- `postCreate`: nil|fun(self: mwseMCMPercentageSlider) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- @return mwseMCMPercentageSlider slider No description yet available.
 function mwse.mcm.createPercentageSlider(parent, data) end
@@ -845,6 +850,7 @@ function mwse.mcm.createPercentageSlider(parent, data) end
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 --- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
+--- @field convertToLabelValue fun(self: mwseMCMPercentageSlider, variableValue: number): number|nil|string *Optional*. Define a custom formatting function for displaying variable values.
 --- @field postCreate nil|fun(self: mwseMCMPercentageSlider) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 --- Creates a new PlayerData variable.
@@ -923,6 +929,8 @@ function mwse.mcm.createPlayerData(variable) end
 --- 
 --- `childSpacing`: integer? — *Optional*. The bottom border size in pixels. Used on all the child components.
 --- 
+--- `convertToLabelValue`: fun(self: mwseMCMSlider, variableValue: number): number|nil|string — *Optional*. Define a custom formatting function for displaying variable values.
+--- 
 --- `postCreate`: nil|fun(self: mwseMCMSlider) — *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 --- @return mwseMCMDecimalSlider|mwseMCMPercentageSlider|mwseMCMSlider slider No description yet available.
 function mwse.mcm.createSlider(parent, data) end
@@ -946,6 +954,7 @@ function mwse.mcm.createSlider(parent, data) end
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 --- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
+--- @field convertToLabelValue fun(self: mwseMCMSlider, variableValue: number): number|nil|string *Optional*. Define a custom formatting function for displaying variable values.
 --- @field postCreate nil|fun(self: mwseMCMSlider) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
 --- Creates a new TableVariable.
