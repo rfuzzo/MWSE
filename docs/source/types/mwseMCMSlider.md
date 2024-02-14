@@ -406,7 +406,7 @@ local labelValue = myObject:convertToLabelValue(variableValue)
 	    parent = myPage,
 	    label = "My distance slider",
 	    variable = mwse.mcm.createTableVariable{id = "distance", config = myConfig},
-	    convertToValueLabel = function(self, variableValue)
+	    convertToLabelValue = function(self, variableValue)
 	        local feet = variableValue / 22.1
 		    local meters = 0.3048 * feet
 	        if self.decimalPlaces == 0 then
@@ -436,7 +436,7 @@ local labelValue = myObject:convertToLabelValue(variableValue)
 	    parent = myPage,
 	    label = "My skill slider",
 	    variable = mwse.mcm.createTableVariable{id = "skillId", config = myConfig},
-	    convertToValueLabel = function(self, variableValue)
+	    convertToLabelValue = function(self, variableValue)
 	        local skillName = tes3.getSkillName(math.round(variableValue))
 	        if skillName then 
 	            return skillName
@@ -697,7 +697,7 @@ myObject:makeComponent(parentBlock)
 Creates a new Slider.
 
 ```lua
-local slider = myObject:new({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ..., class = ..., componentType = ..., parentComponent = ... })
+local slider = myObject:new({ label = ..., variable = ..., defaultSetting = ..., min = ..., max = ..., step = ..., jump = ..., decimalPlaces = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., convertToLabelValue = ..., postCreate = ..., class = ..., componentType = ..., parentComponent = ... })
 ```
 
 **Parameters**:
@@ -720,6 +720,7 @@ local slider = myObject:new({ label = ..., variable = ..., defaultSetting = ...,
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
 	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
+	* `convertToLabelValue` (fun(self: [mwseMCMSlider](../types/mwseMCMSlider.md), variableValue: number): number, string): *Optional*. Define a custom formatting function for displaying variable values.
 	* `postCreate` (fun(self: [mwseMCMSlider](../types/mwseMCMSlider.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 	* `class` (string): *Optional*.
 	* `componentType` (string): *Optional*.

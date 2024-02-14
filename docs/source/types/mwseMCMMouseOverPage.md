@@ -912,7 +912,7 @@ local slider = myObject:createSlider({ label = ..., variable = ..., defaultSetti
 	    parent = myPage,
 	    label = "My distance slider",
 	    variable = mwse.mcm.createTableVariable{id = "distance", config = myConfig},
-	    convertToValueLabel = function(self, variableValue)
+	    convertToLabelValue = function(self, variableValue)
 	        local feet = variableValue / 22.1
 		    local meters = 0.3048 * feet
 	        if self.decimalPlaces == 0 then
@@ -942,7 +942,7 @@ local slider = myObject:createSlider({ label = ..., variable = ..., defaultSetti
 	    parent = myPage,
 	    label = "My skill slider",
 	    variable = mwse.mcm.createTableVariable{id = "skillId", config = myConfig},
-	    convertToValueLabel = function(self, variableValue)
+	    convertToLabelValue = function(self, variableValue)
 	        local skillName = tes3.getSkillName(math.round(variableValue))
 	        if skillName then 
 	            return skillName
