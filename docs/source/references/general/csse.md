@@ -105,26 +105,14 @@ chargenstate = -1.0
 
 * The status bars at the bottom of the construction set have been widened. They should always have enough room to show the relevent information.
 
-### Object Window
-
-* Significantly improved UI responsiveness.
-* The tab style has been changed to be more button-like. This prevents tabs from moving around.
-* Added a footer to the window, with a new filter input. This input can be focused by using CTRL+F while the Object Window is active. This can be used to filter objects by a matching id, name, icon, model, enchantment, script, or book text fragments.
-	* Regex search options and case-sensitive search options can be enabled in the config file.
-* The footer also supports a toggle button to only show modified objects.
-* The data rendering and behavior has been completely rewritten. Strings and alignment is more consistent. New columns can be added.
-	* A new modified column is displayed, showing if the object is modified. This can be sorted on.
-* Fixed issue where box selection in the object window would cause the mouse to snap to the edge of the screen.
-* Modified objects are highlighted with a light green background.
-* Deleted objects are highlighted with a light red background.
-* The spell list lists the range of the spell.
-* The creature list now shows the soul value of creatures.
-* Objects can be marked as deprecated in a content file's metadata file. An array of IDs can be provided under `tools.csse.deprecated`. Objects matching these IDs will not be displayed in the Object Window.
-
 ### Actor Editing Windows
 
 * The AI window opens more quickly.
 * Clicking on the return button in the AI window when no cell has been loaded no longer crashes the CS.
+
+### Cell View
+
+* Significantly improved UI responsiveness.
 
 ### Dialogue Window
 
@@ -145,6 +133,22 @@ chargenstate = -1.0
 	* Filter with render window cell: The currently open cell in the render window will be used instead of the reference's current cell when filtering dialogue.
 	* Ignore cell filter: Cell filtering will be ignored completely; any cell will assume to pass.
 * When filtering by an actor and choosing local variables to filter by, only locals already defined on that actor's script will show in the dropdown list.
+
+### Object Window
+
+* Significantly improved UI responsiveness.
+* The tab style has been changed to be more button-like. This prevents tabs from moving around.
+* Added a footer to the window, with a new filter input. This input can be focused by using CTRL+F while the Object Window is active. This can be used to filter objects by a matching id, name, icon, model, enchantment, script, or book text fragments.
+	* Regex search options and case-sensitive search options can be enabled in the config file.
+* The footer also supports a toggle button to only show modified objects.
+* The data rendering and behavior has been completely rewritten. Strings and alignment is more consistent. New columns can be added.
+	* A new modified column is displayed, showing if the object is modified. This can be sorted on.
+* Fixed issue where box selection in the object window would cause the mouse to snap to the edge of the screen.
+* Modified objects are highlighted with a light green background.
+* Deleted objects are highlighted with a light red background.
+* The spell list lists the range of the spell.
+* The creature list now shows the soul value of creatures.
+* Objects can be marked as deprecated in a content file's metadata file. An array of IDs can be provided under `tools.csse.deprecated`. Objects matching these IDs will not be displayed in the Object Window.
 
 ### Render Window
 
@@ -193,7 +197,3 @@ The following changes to the rendering window apply when landscape editing:
 ### Use Report
 
 * Rows in the first list can now be double-clicked. Doing so will bring up a window to edit the related object.
-
-### Cell View
-
-* Significantly improved UI responsiveness.
