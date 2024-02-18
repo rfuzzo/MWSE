@@ -36,10 +36,7 @@ namespace se::cs::dialog::use_report_window {
 		case CONTROL_ID_USED_BY_OBJECTS_LIST_VIEW:
 			PatchDialogProc_BeforeNotify_FromObjectsList(context);
 			break;
-		case CONTROL_ID_USED_IN_CELLS_LIST_VIEW:
-			break;
 		}
-		(LPNMITEMACTIVATE)context.getLParam();
 	}
 
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
