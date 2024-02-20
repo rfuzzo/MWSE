@@ -26,11 +26,7 @@ KeyBinder.allowMouse = false
 --- @param keyCode integer|nil
 --- @return string|nil letter
 function KeyBinder:getLetter(keyCode)
-	local letter = table.find(tes3.scanCode, keyCode)
-	local returnString = tes3.scanCodeToNumber[keyCode] or letter
-	if returnString then
-		return string.upper(returnString)
-	end
+	return tes3.getKeyName(keyCode)
 end
 
 local mouseWheelDirectionName = {
