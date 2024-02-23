@@ -32,6 +32,8 @@ namespace TES3 {
 	}
 
 	struct NPCBase : Actor {
+		static constexpr auto OBJECT_TYPE = ObjectType::NPC;
+
 		// No data, this is only used for shared functions.
 
 		NPCBase() = delete;
@@ -136,6 +138,7 @@ namespace TES3 {
 
 		Class* getBaseClass();
 		Faction* getBaseFaction();
+		unsigned char getBaseFactionRank();
 		Race* getBaseRace();
 		Script* getBaseScript();
 		SpellList* getBaseSpellList();

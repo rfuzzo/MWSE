@@ -129,6 +129,9 @@
     <ClCompile Include="DialogProcContext.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="DialogUseReportWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CSSE.def">
@@ -426,6 +429,12 @@
     </ClInclude>
     <ClInclude Include="DialogProcContext.h">
       <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CSDoor.h">
+      <Filter>Header Files\CS</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogUseReportWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

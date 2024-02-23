@@ -12,6 +12,7 @@
 #include "CSGameFile.h"
 #include "CSGameSetting.h"
 #include "CSRecordHandler.h"
+#include "CSReference.h"
 #include "CSScript.h"
 
 #include "NICamera.h"
@@ -39,8 +40,8 @@ namespace se::cs::window::main {
 	struct ObjectEditLParam {
 		ObjectType::ObjectType objectType; // 0x0
 		BaseObject* object; // 0x4
-		int unknown_0x8;
-		int unknown_0xC;
+		Reference* reference; // 0x8
+		Reference::ReferenceData* referenceData; // 0xC
 	};
 
 	HWND showComboBasedEditWindow(const BaseObject* object, HWND hWnd, LPCSTR lpTemplateName, DLGPROC dlgProc, int comboBoxId) {
@@ -307,9 +308,19 @@ namespace se::cs::window::main {
 	}
 
 	HWND showDefaultObjectEditWindow(BaseObject* object) {
+		Reference* reference = nullptr;
+		if (object->objectType == ObjectType::Reference) {
+			reference = static_cast<Reference*>(object);
+			object = reference->baseObject;
+		}
+
 		ObjectEditLParam lParam = {};
 		lParam.objectType = object->objectType;
 		lParam.object = object;
+		lParam.reference = reference;
+		if (reference) {
+			lParam.referenceData = &reference->referenceData;
+		}
 
 		DLGPROC proc = (DLGPROC)0x402F9A;
 		switch (object->objectType) {
@@ -550,7 +561,7 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeCommand(DialogProcContext& context) {
 		const auto hWnd = context.getWindowHandle();
-		switch (context.getCommandNotificationCode()) {
+		switch (context.getCommandControlIdentifier()) {
 		case MENU_ID_CSSE_SETTINGS:
 			showSettingsDialog(hWnd);
 			break;
@@ -942,7 +953,7 @@ namespace se::cs::window::main {
 	}
 
 	void PatchDialogProc_AfterCommand(DialogProcContext& context) {
-		switch (context.getCommandNotificationCode()) {
+		switch (context.getCommandControlIdentifier()) {
 		case WM_COMMAND_TOGGLE_LANDSCAPE_EDITING:
 			PatchDialogProc_AfterCommand_ToggleLandscapeEditing(context);
 			break;
@@ -967,6 +978,18 @@ namespace se::cs::window::main {
 			}
 			testAfterSave.reset();
 		}
+	}
+
+	void PatchDialogProc_AfterInitialize(DialogProcContext& context) {
+		const auto hWnd = context.getWindowHandle();
+		auto statusWindow = FindWindowEx(hWnd, NULL, "msctls_statusbar32", NULL);
+
+		if (!statusWindow) {
+			return;
+		}
+
+		int partsRightEdgePositions[4] = { 220, 330, 800, -1 };
+		SendMessage(statusWindow, SB_SETPARTS, (WPARAM)4, (LPARAM)partsRightEdgePositions);
 	}
 
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -1005,6 +1028,9 @@ namespace se::cs::window::main {
 			break;
 		case WM_SAVE:
 			PatchDialogProc_AfterSave(context);
+			break;
+		case WM_FINISH_INITIALIZATION:
+			PatchDialogProc_AfterInitialize(context);
 			break;
 		}
 

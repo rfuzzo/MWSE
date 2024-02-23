@@ -93,6 +93,7 @@
 #include "TES3AILua.h"
 #include "TES3AlchemyLua.h"
 #include "TES3AnimationDataLua.h"
+#include "TES3AnimationGroupLua.h"
 #include "TES3ApparatusLua.h"
 #include "TES3ArchiveLua.h"
 #include "TES3ArmorLua.h"
@@ -172,6 +173,7 @@
 #include "NIExtraDataLua.h"
 #include "NIGeometryDataLua.h"
 #include "NILightLua.h"
+#include "NILinesLua.h"
 #include "NINodeLua.h"
 #include "NIObjectLua.h"
 #include "NIParticlesLua.h"
@@ -477,6 +479,7 @@ namespace mwse::lua {
 		bindTES3AI();
 		bindTES3Alchemy();
 		bindTES3AnimationData();
+		bindTES3AnimationGroup();
 		bindTES3Apparatus();
 		bindTES3Archive();
 		bindTES3Armor();
@@ -560,6 +563,7 @@ namespace mwse::lua {
 		bindNIGeometryData();
 		bindNINode();
 		bindNIObject();
+		bindNILines();
 		bindNILight();
 		bindNIParticles();
 		bindNIPick();
@@ -4211,6 +4215,22 @@ namespace mwse::lua {
 	}
 
 	//
+	// Patch: calcMoveSpeed event for creatures.
+	//
+	
+	__declspec(naked) void patchCreatureCalcMoveSpeed() {
+		__asm {
+			mov ecx, esi	// Size: 0x2
+			nop				// Replaced with a call generation. Can't do so here, because offsets aren't accurate.
+			nop				// ^
+			nop				// ^
+			nop				// ^
+			nop				// ^ Size: 0x5
+		}
+	}
+	const size_t patchCreatureCalcMoveSpeed_size = 0x7;
+
+	//
 	// Allow changing the delta time scalar in a safer spot.
 	//
 
@@ -5019,6 +5039,14 @@ namespace mwse::lua {
 		genCallEnforced(0x540C7D, 0x53E1A0, *reinterpret_cast<DWORD*>(&calculateMoveSpeed));
 		genCallEnforced(0x55968B, 0x53E1A0, *reinterpret_cast<DWORD*>(&calculateMoveSpeed));
 
+		// Event: Calculate creature movement speed (animation only). Creature anim code doesn't use the 0x53E1A0 helper function.
+		auto calculateCreatureMovementSpeed = &TES3::ActorAnimationController::calculateCreatureMovementSpeed;
+		writePatchCodeUnprotected(0x540BB1, reinterpret_cast<BYTE*>(patchCreatureCalcMoveSpeed), patchCreatureCalcMoveSpeed_size);
+		genCallUnprotected(0x540BB1 + 2, *reinterpret_cast<DWORD*>(&calculateCreatureMovementSpeed));
+		genNOPUnprotected(0x540C19, 0xA);
+		writePatchCodeUnprotected(0x540C19, reinterpret_cast<BYTE*>(patchCreatureCalcMoveSpeed), patchCreatureCalcMoveSpeed_size);
+		genCallUnprotected(0x540C19 + 2, *reinterpret_cast<DWORD*>(&calculateCreatureMovementSpeed));
+
 		// Event: Calculate walk speed.
 		auto calculateCreatureWalkSpeed = &TES3::MobileCreature::calculateWalkSpeed;
 		auto calculateNPCWalkSpeed = &TES3::MobileNPC::calculateWalkSpeed;
@@ -5035,7 +5063,6 @@ namespace mwse::lua {
 		// Event: Calculate swim speed.
 		auto calculateSwimSpeed = &TES3::MobileActor::calculateSwimSpeed;
 		genCallEnforced(0x53E227, 0x5270B0, *reinterpret_cast<DWORD*>(&calculateSwimSpeed));
-		genCallEnforced(0x540BB3, 0x5270B0, *reinterpret_cast<DWORD*>(&calculateSwimSpeed));
 		genCallEnforced(0x548D87, 0x5270B0, *reinterpret_cast<DWORD*>(&calculateSwimSpeed));
 
 		// Event: Calculate swim "run" speed.

@@ -107,6 +107,7 @@ namespace se::cs {
 			ColumnSettings column_count = { ColumnSettings::DEFAULT_SIZE_SHORT };
 			ColumnSettings column_creature_bipedal = { ColumnSettings::DEFAULT_SIZE_BOOL };
 			ColumnSettings column_creature_movement_type = { ColumnSettings::DEFAULT_SIZE_ID };
+			ColumnSettings column_creature_soul = { ColumnSettings::DEFAULT_SIZE_SHORT };
 			ColumnSettings column_creature_sound = { ColumnSettings::DEFAULT_SIZE_ID };
 			ColumnSettings column_creature_use_weapon_and_shield = { ColumnSettings::DEFAULT_SIZE_BOOL };
 			ColumnSettings column_effect = { ColumnSettings::DEFAULT_SIZE_ID };
@@ -164,6 +165,11 @@ namespace se::cs {
 			ColumnSettings column_id = { 175u };
 			ColumnSettings column_used = { 37u };
 			ColumnSettings column_filename{ 147u };
+
+			std::array<float, 3> edit_circle_vertex = { 1.0f, 0.0f, 0.0f };
+			std::array<float, 3> edit_circle_soften_vertex = { 0.0f, 0.0f, 1.0f };
+			std::array<float, 3> edit_circle_flatten_vertex = { 0.0f, 1.0f, 0.0f };
+			std::array<float, 3> edit_circle_color_vertex = { 1.0f, 1.0f, 0.0f };
 
 			bool show_preview_enabled = false;
 

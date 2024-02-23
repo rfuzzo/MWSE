@@ -16,18 +16,20 @@
 
 #include "CSCell.h"
 #include "CSDataHandler.h"
+#include "CSDoor.h"
 #include "CSGameFile.h"
 #include "CSLandTexture.h"
 #include "CSRecordHandler.h"
 #include "CSReference.h"
 #include "CSStatic.h"
 
-#include "Settings.h"
 #include "RenderWindowSceneGraphController.h"
 #include "RenderWindowSelectionData.h"
 #include "RenderWindowWidgets.h"
+#include "Settings.h"
 
 #include "DialogLandscapeEditSettingsWindow.h"
+#include "WindowMain.h"
 
 #include "DialogProcContext.h"
 
@@ -55,8 +57,6 @@ namespace se::cs::dialog::render_window {
 
 	using gRenderWindowPick = memory::ExternalGlobal<NI::Pick, 0x6CF528>;
 
-	using gCurrentCell = memory::ExternalGlobal<Cell*, 0x6CF7B8>;
-
 	using gIsTranslating = memory::ExternalGlobal<bool, 0x6CF782>;
 	using gIsRotating = memory::ExternalGlobal<bool, 0x6CF783>;
 	using gIsHoldingV = memory::ExternalGlobal<bool, 0x6CF789>;
@@ -66,7 +66,11 @@ namespace se::cs::dialog::render_window {
 	using gIsScaling = memory::ExternalGlobal<bool, 0x6CF785>;
 	using gIsPanning = memory::ExternalGlobal<bool, 0x6CF78A>;
 
-	using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
+	void renderNextFrame() {
+		using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
+		gRenderNextFrame::set(true);
+
+	}
 
 	namespace RenderControlFlags {
 		enum RenderControlFlags : DWORD {
@@ -2017,19 +2021,20 @@ namespace se::cs::dialog::render_window {
 
 			widgets->showGrid();
 
-			gRenderNextFrame::set(true);
+			renderNextFrame();
 		}
 
 		static void hide() {
 			auto widgets = SceneGraphController::get()->getWidgets();
 			if (widgets->isGridShown()) {
 				widgets->hideGrid();
-				gRenderNextFrame::set(true);
+				renderNextFrame();
 			}
 		}
 
 		static int prevStep(const std::vector<int>& steps, int current) {
-			for (const auto step : steps) {
+			for (auto itt = steps.rbegin(); itt != steps.rend(); ++itt) {
+				const auto& step = *itt;
 				if (step < current) {
 					return step;
 				}
@@ -2161,12 +2166,72 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void focusReference(const Reference* reference) {
+		const auto CS_DataHandler_403A8F = reinterpret_cast<void(__thiscall*)(DataHandler*, Cell*, const NI::Vector3*)>(0x403A8F);
+		const auto CS_DataHandler_4034B8 = reinterpret_cast<void(__thiscall*)(DataHandler*, const NI::Vector3*)>(0x4034B8);
+		const auto CS_SendCommandToLoadCell = reinterpret_cast<void(__cdecl*)(const NI::Vector3*, const Reference*)>(0x403A12);
+
+		const auto dataHandler = DataHandler::get();
+		const auto cell = reference->getCell();
+		if (cell->getIsInterior()) {
+			CS_DataHandler_403A8F(dataHandler, cell, &reference->position);
+		}
+		else if (dataHandler->currentInteriorCell) {
+			CS_DataHandler_4034B8(dataHandler, &reference->position);
+		}
+
+		CS_SendCommandToLoadCell(&reference->position, reference);
+	}
+
+	void PatchDialogProc_BeforeKeyDown_F2(DialogProcContext& context) {
+		using windows::isControlDown;
+		using windows::isShiftDown;
+
+		const auto selectionData = SelectionData::get();
+		if (selectionData->firstTarget == nullptr) {
+			return;
+		}
+
+		const auto reference = selectionData->firstTarget->reference;
+
+		// If we are holding the shift key, open the base object editor.
+		if (isShiftDown()) {
+			window::main::showObjectEditWindow(reference->baseObject);
+		}
+		// If control is down, focus the associated marker/door.
+		else if (isControlDown()) {
+			const auto baseObject = reference->baseObject;
+			// Door markers focus the associated door.
+			if (baseObject == Static::gDoorMarker::get()) {
+				const auto loadDoor = reference->getDoorMarkerBackReference();
+				if (loadDoor) {
+					focusReference(loadDoor);
+				}
+			}
+			else if (baseObject->objectType == ObjectType::Door) {
+				const auto travelDestination = reference->getTravelDestination();
+				if (travelDestination) {
+					focusReference(travelDestination->destination);
+				}
+			}
+		}
+		// If no modifier keys are pressed, edit the reference.
+		else {
+			window::main::showObjectEditWindow(reference);
+		}
+
+		context.setResult(TRUE);
+	}
+
 	void PatchDialogProc_BeforeKeyDown(DialogProcContext& context) {
 		using windows::isControlDown;
 
-		auto landscapeEditWindow = landscape_edit_settings_window::gWindowHandle::get();
+		const auto landscapeEditWindow = landscape_edit_settings_window::gWindowHandle::get();
 
 		switch (context.getKeyVirtualCode()) {
+		case VK_F2:
+			PatchDialogProc_BeforeKeyDown_F2(context);
+			break;
 		case VK_OEM_4: // [
 			if (landscapeEditWindow) {
 				landscape_edit_settings_window::decrementEditRadius();
@@ -2186,6 +2251,14 @@ namespace se::cs::dialog::render_window {
 				}
 				context.setResult(TRUE);
 			}
+			break;
+		case 'H':
+			// Ctrl+H -> Open "Search and Replace" menu.
+			if (isControlDown()) {
+				SendMessageA(window::main::ghWnd::get(), WM_COMMAND, window::main::WM_COMMAND_OPEN_SEARCH_AND_REPLACE, 0);
+				context.setResult(TRUE);
+			}
+			// H otherwise opens the terrain window.
 			break;
 		case 'S':
 			if (landscapeEditWindow) {
@@ -2208,6 +2281,10 @@ namespace se::cs::dialog::render_window {
 			if (isModifyingObject()) {
 				resetCumulativeRotationValues();
 				gIsHoldingX::set(true);
+				context.setResult(TRUE);
+			}
+			// Prevent attempting to cut when there's nothing selected.
+			else if (isControlDown() && SelectionData::get()->firstTarget == nullptr) {
 				context.setResult(TRUE);
 			}
 			break;
@@ -2260,7 +2337,7 @@ namespace se::cs::dialog::render_window {
 		if (!isHoldingAxisKey() && widgets->isShown()) {
 			widgets->hide();
 			movementContext.reset();
-			gRenderNextFrame::set(true);
+			renderNextFrame();
 		}
 
 		// If we released an X/Y/Z key update the grid to show the right angle.

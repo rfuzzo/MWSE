@@ -30,6 +30,7 @@
     <ClInclude Include="NIAnimationKey.h" />
     <ClInclude Include="NIPathController.h" />
     <ClInclude Include="NISortAdjustNode.h" />
+    <ClInclude Include="TES3AnimationGroupLua.h" />
     <ClInclude Include="TES3DialogueFilterContext.h" />
     <ClInclude Include="TES3LandLua.h" />
     <ClInclude Include="LuaActiveMagicEffectIconsUpdatedEvent.h" />
@@ -288,6 +289,7 @@
     <ClInclude Include="NIStream.h" />
     <ClInclude Include="NITimeController.h" />
     <ClInclude Include="NITimeControllerLua.h" />
+    <ClInclude Include="NILinesLua.h" />
     <ClInclude Include="NITriShapeLua.h" />
     <ClInclude Include="TES3AIData.h" />
     <ClInclude Include="TES3AILua.h" />
@@ -731,7 +733,6 @@
     <ClCompile Include="NIGeometryDataLua.cpp" />
     <ClCompile Include="NIKeyframeController.cpp" />
     <ClCompile Include="NIKeyframeManager.cpp" />
-    <ClCompile Include="NILinesData.cpp" />
     <ClCompile Include="NILookAtController.cpp" />
     <ClCompile Include="NIParticleModifier.cpp" />
     <ClCompile Include="NIParticles.cpp" />
@@ -758,6 +759,8 @@
     <ClCompile Include="NITriangle.cpp" />
     <ClCompile Include="NITriBasedGeometry.cpp" />
     <ClCompile Include="NITriBasedGeometryData.cpp" />
+    <ClCompile Include="NILines.cpp" />
+    <ClCompile Include="NILinesData.cpp" />
     <ClCompile Include="NITriShape.cpp" />
     <ClCompile Include="NITriShapeData.cpp" />
     <ClCompile Include="NIUVController.cpp" />
@@ -769,6 +772,7 @@
     <ClCompile Include="TES3ActorAnimationControllerLua.cpp" />
     <ClCompile Include="TES3AnimationDataLua.cpp" />
     <ClCompile Include="TES3AnimationGroup.cpp" />
+    <ClCompile Include="TES3AnimationGroupLua.cpp" />
     <ClCompile Include="TES3Apparatus.cpp" />
     <ClCompile Include="TES3Archive.cpp" />
     <ClCompile Include="TES3ArchiveLua.cpp" />
@@ -819,6 +823,7 @@
     <ClCompile Include="NISwitchNodeLua.cpp" />
     <ClCompile Include="NITexture.cpp" />
     <ClCompile Include="NITimeControllerLua.cpp" />
+    <ClCompile Include="NILinesLua.cpp" />
     <ClCompile Include="NITriShapeLua.cpp" />
     <ClCompile Include="NIUtil.cpp" />
     <ClCompile Include="PatchUtil.cpp" />

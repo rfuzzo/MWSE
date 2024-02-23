@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-The tes3 library provides the majority of the functions for interacting with the game system.
+The `tes3` library provides the majority of the functions for interacting with the game system.
 
 ## Properties
 
@@ -46,7 +46,7 @@ One of the core game objects.
 ### `tes3.installDirectory`
 <div class="search_terms" style="display: none">installdirectory</div>
 
-The currently executed root Morrowind installation path.
+The currently executed root Morrowind installation path (The folder containing Morrowind.exe).
 
 **Returns**:
 
@@ -226,6 +226,8 @@ local createdData = tes3.addItemData({ to = ..., item = ..., updateGUI = ... })
 
 This function creates a new journal entry. It can be called once the world controller is loaded.
 
+The text uses the same HTML-style formatting as books, which has different layout to regular dialogue. Use `<BR>` for line breaks that can span pages instead of `\\n`.
+
 ```lua
 tes3.addJournalEntry({ text = ..., showMessage = ... })
 ```
@@ -289,44 +291,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	* `targetsSkills` (boolean): *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
 	* `unreflectable` (boolean): *Default*: `true`. A flag which controls whether this effect can be reflected.
 	* `usesNegativeLighting` (boolean): *Default*: `true`. A flag which controls whether this effect uses negative lighting.
-	* `onTick` (fun(e: [tes3magicEffectTickEventData](../types/tes3magicEffectTickEventData.md))): *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
-		- `tickParams` (table)
-			- `effectId` (number)
-			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
-			- `deltaTime` (number): The time passed since the last tick of the spell.
-			- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
-			- `effectIndex` (number): The index of the effect in the spell.
-
-		In addition, a function registered as `onTick` can also call the following methods:
-
-		- trigger(`triggerParams`): Allows the effect to run through the normal spell event system.
-			**Parameters:**
-			- `triggerParams` (table)
-				- `negateOnExpiry` (boolean): *Optional. Default:* `true` If this flag is `true`, the effect will be negated on expiry.
-				- `isUncapped` (boolean): *Optional.*
-				- `attribute` ([tes3.effectAttribute](https://mwse.github.io/MWSE/references/effect-attributes/)): *Optional. Default:* `tes3.effectAttribute.nonResistable` The attribute used in resistance calculations agains this effect. Maps to values in [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
-				- `type` ([tes3.effectEventType](https://mwse.github.io/MWSE/references/effect-event-types/)): *Optional. Default:* `tes3.effectEventType.boolean`. This flag controls how the effect behaves. For example, `tes3.effectEventType.modStatistic` will make the effect work as calling `tes3.modStatistic`. Maps to values in [`tes3.effectEventType`](https://mwse.github.io/MWSE/references/effect-event-types/) namespace.
-				- `value` (number): *Optional. Default:* `0`. The variable this effect changes.
-				- `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must return boolean values.
-					**Parameters**
-					- `resistParams` (table)
-						- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
-						- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
-						- `effectIndex` (number): The index of the effect in the spell.
-
-		- triggerBoundWeapon(`id`): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID.
-			**Parameters:**
-			- `id` (string): The ID of the weapon object to summon.
-
-		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
-			**Parameters:**
-			- `id` (string): The ID of the armor object to summon.
-			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
-
-		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
-			**Parameters:**
-			- `id` (string): The ID of the creature object to summon.
-
+	* `onTick` (fun(e: [tes3magicEffectTickEventData](../types/tes3magicEffectTickEventData.md))): *Optional*. A function which will be called on each tick of a spell containing this effect. Note: `dt` (frame time) scaling is handled automatically. This function typically calls `e:trigger()` to run the effect through the normal spell event system.
 	* `onCollision` (fun(e: [tes3magicEffectCollisionEventData](../types/tes3magicEffectCollisionEventData.md))): *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 
 **Returns**:
@@ -484,7 +449,7 @@ local wasAdded = tes3.addSoulGem({ item = ... })
 
 * `wasAdded` (boolean)
 
-??? example "Example: Make the Dwemer Tube a Soul gem. Also, make sure Fargoth's soul alway ends up in it if the player has one avilable."
+??? example "Example: Make Dwemer Tubes be treated as Soul gems. Also, make sure Fargoth's soul always ends up in one if the player has one avilable."
 
 	```lua
 	local function onInitialized()
@@ -716,7 +681,7 @@ local price = tes3.calculatePrice({ object = ..., basePrice = ..., buying = ...,
 	* `training` (boolean): *Default*: `false`. If `true`, a [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event will be triggered, passing the given `skill` ID.
 	* `count` (number): *Default*: `1`. If `bartering`, the count passed to the [calcBarterPrice](https://mwse.github.io/MWSE/events/calcBarterPrice) event.
 	* `itemData` ([tes3itemData](../types/tes3itemData.md)): *Optional*. If `bartering` or `repairing`, the item data passed to the [calcBarterPrice](https://mwse.github.io/MWSE/events/calcBarterPrice) or [calcRepairPrice](https://mwse.github.io/MWSE/events/calcRepairPrice) event.
-	* `skill` ([tes3.skill](../references/skills.md), integer): If `training`, the skill ID passed to the [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
+	* `skill` ([tes3.skill](../references/skills.md), integer): *Optional*. If `training`, the skill ID passed to the [calcTrainingPrice](https://mwse.github.io/MWSE/events/calcTrainingPrice) event. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 
 **Returns**:
 
@@ -2364,6 +2329,7 @@ local level = tes3.getLockLevel({ reference = ... })
 <div class="search_terms" style="display: none">getluamodmetadata, luamodmetadata</div>
 
 Fetches the contents of the [metadata file](https://mwse.github.io/MWSE/guides/metadata/) associated with a given lua mod key.
+The mod key should match the value of `lua-mod` specified in the `[tools.mwse]` section of the relevant metadata file.
 
 ```lua
 local metadata = tes3.getLuaModMetadata(modKey)
@@ -2375,7 +2341,7 @@ local metadata = tes3.getLuaModMetadata(modKey)
 
 **Returns**:
 
-* `metadata` (table, nil)
+* `metadata` (MWSE.Metadata, nil)
 
 ***
 
@@ -3299,7 +3265,7 @@ local iterator = tes3.iterate(iterator)
 ### `tes3.iterateObjects`
 <div class="search_terms" style="display: none">iterateobjects</div>
 
-Iteration function used for looping over game options.
+Iteration function used for looping over game objects.
 
 ```lua
 local objectIterator = tes3.iterateObjects(filter)
@@ -3506,7 +3472,7 @@ local inMenuMode = tes3.menuMode()
 Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
 
 ```lua
-local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., showInDialog = ..., duration = ... }, formatAdditions)
+local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., showInDialog = ..., duration = ... }, ...)
 ```
 
 **Parameters**:
@@ -3517,7 +3483,7 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 	* `callback` (fun(e: [tes3messageBoxCallbackData](../types/tes3messageBoxCallbackData.md))): *Optional*. The callback function will be executed after a button was pressed. The callback function will be passed a table with `button` field corresponding to 0-based index of the button from passed `buttons` array.
 	* `showInDialog` (boolean): *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 	* `duration` (number): *Optional*. Overrides how long the toast-style message remains visible.
-* `formatAdditions` (variadic): *Optional*. Only used if messageOrParams is a string.
+* `...` (any): *Optional*. Formatting arguments. These are passed to `string.format`, provided `messageOrParams` is a `string`.
 
 **Returns**:
 
@@ -3578,7 +3544,7 @@ tes3.modStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., b
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string)
 	* `attribute` ([tes3.attribute](../references/attributes.md)): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 	* `skill` ([tes3.skill](../references/skills.md)): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
-	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 	* `base` (number): *Optional*. If set, the base value will be modified.
 	* `current` (number): *Optional*. If set, the current value will be modified.
 	* `value` (number): *Optional*. If set, both the base and current value will be modified.
@@ -3637,6 +3603,31 @@ local onMainMenu = tes3.onMainMenu()
 **Returns**:
 
 * `onMainMenu` (boolean)
+
+***
+
+### `tes3.payMerchant`
+<div class="search_terms" style="display: none">paymerchant</div>
+
+Pays a merchant a specified amount of gold and updates the merchant's "last barter timer". This should be used to simulate paying for services. You may also want to play a trade-related sound of your choice upon successful completion.
+
+If `cost` is positive, then that amount of gold will be removed from the player's inventory and added to the merchant's available barter gold.
+
+If `cost` is negative, then that amount of gold will be added to the player's inventory and removed from the merchant's available barter gold.
+
+```lua
+local success = tes3.payMerchant({ merchant = ..., cost = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `merchant` ([tes3mobileActor](../types/tes3mobileActor.md)): The merchant to pay.
+	* `cost` (number): The amount of gold to pay the merchant. If negative, the merchant will pay the player.
+
+**Returns**:
+
+* `success` (boolean): `true` if the transaction completed. `false` if there was not enough gold.
 
 ***
 
@@ -4378,6 +4369,23 @@ local success = tes3.setEnabled({ reference = ..., toggle = ..., enabled = ... }
 
 ***
 
+### `tes3.setExpelled`
+<div class="search_terms" style="display: none">setexpelled, expelled</div>
+
+This function can expel and undo expelled state for the player in the given faction.
+
+```lua
+tes3.setExpelled({ faction = ..., expelled = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `faction` ([tes3faction](../types/tes3faction.md)): The faction the player will be expelled from.
+	* `expelled` (boolean): *Default*: `true`. Passing `false` will make the player regain membership.
+
+***
+
 ### `tes3.setGlobal`
 <div class="search_terms" style="display: none">setglobal, global</div>
 
@@ -4570,7 +4578,7 @@ tes3.setStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., b
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string)
 	* `attribute` ([tes3.attribute](../references/attributes.md), integer): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 	* `skill` ([tes3.skill](../references/skills.md), integer): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
-	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 	* `base` (number): *Optional*. If set, the base value will be set.
 	* `current` (number): *Optional*. If set, the current value will be set.
 	* `value` (number): *Optional*. If set, both the base and current value will be set.
@@ -4892,6 +4900,69 @@ local was3rdPerson = tes3.togglePOV()
 **Returns**:
 
 * `was3rdPerson` (boolean)
+
+***
+
+### `tes3.transferInventory`
+<div class="search_terms" style="display: none">transferinventory</div>
+
+Moves all the items in one reference's inventory to another. Both `to` and `from` objects will be cloned. The function will update the GUI for the `to` and `from` references. This function preserves the `tes3itemData` of the transferred items and handles leveled lists. The function can do either partial or complete transfer. Limiting transfer by capacity only works for containers, other actors can get over-encumbered after this operation.
+
+```lua
+local transferred = tes3.transferInventory({ from = ..., to = ..., filter = ..., playSound = ..., limitCapacity = ..., completeTransfer = ..., reevaluateEquipment = ..., equipProjectiles = ..., checkCrime = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `from` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md), string): Who to take items from.
+	* `to` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md), string): Who to give items to.
+	* `filter` (fun(item: [tes3item](../types/tes3item.md), itemData: [tes3itemData](../types/tes3itemData.md)): boolean): *Optional*. You can pass a filter function to only transfer certain type of items. The `filter` function is called for each item in the `from`'s inventory. Note that not all the items may have itemData.
+	* `playSound` (boolean): *Default*: `true`. If false, the up/down sound won't be played.
+	* `limitCapacity` (boolean): *Default*: `true`. If false, items can be placed into containers that shouldn't normally be allowed. This includes organic containers and containers that are full. If this argument is set to `true` the whole `from`'s inventory might not fit into the destination inventory. In that case, partial transfer is made.
+	* `completeTransfer` (boolean): *Default*: `false`. Use this to disable partial transfers. If `limitCapacity` is set to true, passing `completeTransfer = true` will only transfer the items from one inventory to the other if and only if all the items can fit inside the destination inventory. This argument only works if `limitCapacity` is `true`.
+	* `reevaluateEquipment` (boolean): *Default*: `true`. If true, and the if in the transferred items are armor, clothing, or weapon items, the actors will reevaluate their equipment choices to see if the new items are worth equipping. This does not affect the player.
+	* `equipProjectiles` (boolean): *Default*: `true`. If true, and the `to` reference has the same projectile already equipped, the stacks will be merged.
+	* `checkCrime` (boolean): *Default*: `false`. If true, and the `to` reference is the player, the function will check if the player has access to the `from` reference's inventory. If not, appropriate crime reactions will be triggered.
+
+**Returns**:
+
+* `transferred` (boolean): Returns `true` if at least one item was transferred. If both `limitCapacity` and `completeTransfer` were passed as `true` the function returns `true` if the whole inventory was successfully transferred.
+
+??? example "Example: Transfering target's weapons to the player's inventory"
+
+	```lua
+	
+	-- Pressing i key while looking at a container, NPC or creature
+	-- will transfer the target's weapons to the player.
+	
+	---@param e keyDownEventData
+	local function onKeyDown(e)
+		local target = tes3.getPlayerTarget()
+		if not target then
+			tes3.messageBox("No target!")
+			return
+		end
+	
+		tes3.transferInventory({
+			from = target,
+			to = tes3.player,
+			---@param item tes3item
+			---@param itemData tes3itemData?
+			---@return boolean
+			filter = function(item, itemData)
+				-- You can use the itemData to filter more specifically
+				if item.objectType == tes3.objectType.weapon then
+					return true
+				end
+				return false
+			end,
+			limitCapacity = false,
+		})
+	end
+	event.register(tes3.event.keyDown, onKeyDown, { filter = tes3.scanCode.i })
+
+	```
 
 ***
 

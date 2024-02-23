@@ -178,6 +178,7 @@ namespace se::cs {
 		column_count = toml::find_or(v, "column_count", column_count);
 		column_creature_bipedal = toml::find_or(v, "column_creature_bipedal", column_creature_bipedal);
 		column_creature_movement_type = toml::find_or(v, "column_creature_movement_type", column_creature_movement_type);
+		column_creature_soul = toml::find_or(v, "column_creature_soul", column_creature_soul);
 		column_creature_sound = toml::find_or(v, "column_creature_sound", column_creature_sound);
 		column_creature_use_weapon_and_shield = toml::find_or(v, "column_creature_use_weapon_and_shield", column_creature_use_weapon_and_shield);
 		column_effect = toml::find_or(v, "column_effect", column_effect);
@@ -262,6 +263,7 @@ namespace se::cs {
 				{ "column_count", column_count },
 				{ "column_creature_bipedal", column_creature_bipedal },
 				{ "column_creature_movement_type", column_creature_movement_type },
+				{ "column_creature_soul", column_creature_soul },
 				{ "column_creature_sound", column_creature_sound },
 				{ "column_creature_use_weapon_and_shield", column_creature_use_weapon_and_shield },
 				{ "column_effect", column_effect },
@@ -322,6 +324,11 @@ namespace se::cs {
 		column_id = toml::find_or(v, "column_id", column_id);
 		column_used = toml::find_or(v, "column_used", column_used);
 		column_filename = toml::find_or(v, "column_filename", column_filename);
+
+		edit_circle_vertex = toml::find_or(v, "edit_circle_vertex", edit_circle_vertex);
+		edit_circle_soften_vertex = toml::find_or(v, "edit_circle_soften_vertex", edit_circle_soften_vertex);
+		edit_circle_flatten_vertex = toml::find_or(v, "edit_circle_flatten_vertex", edit_circle_flatten_vertex);
+		edit_circle_color_vertex = toml::find_or(v, "edit_circle_color_vertex", edit_circle_color_vertex);
 
 		show_preview_enabled = toml::find_or(v, "show_preview_enabled", show_preview_enabled);
 	}

@@ -16,6 +16,7 @@
 
 #include "TES3Util.h"
 
+#include "TES3Actor.h"
 #include "TES3Alchemy.h"
 #include "TES3Cell.h"
 #include "TES3DialogueInfo.h"
@@ -471,6 +472,10 @@ namespace TES3 {
 		return results;
 	}
 
+	bool NonDynamicData::objectExists(const std::string_view& id) {
+		return resolveObject(id.data()) != nullptr;
+	}
+
 	//
 	// DataHandler
 	//
@@ -479,10 +484,10 @@ namespace TES3 {
 		return *reinterpret_cast<TES3::DataHandler**>(0x7C67E0);
 	}
 
-	Vector3 DataHandler::getLastExteriorPosition() {
+	Vector3 DataHandler::getLastExteriorPosition() const {
 		if (currentInteriorCell && lastExteriorCellPositionX != INT_MAX && lastExteriorCellPositionY != INT_MAX) {
-			auto x = float(lastExteriorCellPositionX * TES3::Cell::exteriorGridWidth);
-			auto y = float(lastExteriorCellPositionY * TES3::Cell::exteriorGridWidth);
+			const auto x = float(lastExteriorCellPositionX * TES3::Cell::exteriorGridWidth);
+			const auto y = float(lastExteriorCellPositionY * TES3::Cell::exteriorGridWidth);
 			return Vector3(x, y, 0.0f);
 		}
 		else {
