@@ -5,20 +5,66 @@ Based on the `mwseLogger` made by Merlord.
 Current version made by herbert100.
 ]]
 
+local colors = require("herbert100.logger.colors")
 
-local colors = require("logger.colors")
+local sf = string.format
 
-
-
-local LoggerMetatable = {
+local loggerMetatable = {
     -- make new loggers by calling `Logger`
-    __tostring = function(self) return ("Logger") end
+    __call=function (cls, ...) return cls.new(...) end,
+    __tostring = function(self) return "Logger" end
 }
 
 
 
+local function getActiveModInfo(offset)
+    local src = debug.getinfo(3 + (offset or 0), "S").source
+    if not src then return end
+    
+    local parts = src:split("\\/")
+    table.remove(parts, 1) -- first part will be "@^"
+    local luaParts = {} -- without "Data Files"/"MWSE"/"mods"/
+    for i=4, #parts do
+        luaParts[i-3] = parts[i]
+    end
+    local info = {
+        parts = parts, 
+        luaParts = luaParts, 
+        filename = parts[#parts],
+        lua_parent_name = parts[3],
+        path = table.concat(parts, "\\"),
+        lua_path = table.concat(luaParts, "\\"),
+    }
+    info.dir = info.path:sub(1, -#info.filename - 2) -- -1 because it's lua, then another -1 to kill the "\\"
+    
+    local metadata = tes3.getLuaModMetadata(luaParts[1] .. "." .. luaParts[2]) ---@type MWSE.Metadata?
+    if metadata then
+        info.dir_has_author_name = true
+        -- table.remove(parts, 1)
+    else
+        metadata = tes3.getLuaModMetadata(parts[1])
+        
+    end
+    if metadata then
+        info.metadata = metadata
+        info.dir_has_author_name = info.dir_has_author_name or false
+    else
+		local one_dir_up = info.dir:gsub("\\[^\\]+$", "")
+        info.dir_has_author_name = not (lfs.fileexists(one_dir_up .. "\\main.lua") or lfs.fileexists(one_dir_up .. "\\init.lua"))
+    end
+    return info
+end
 
----@type table<string, Logger>
+---@alias mwseLogger.LEVEL
+---|0                       NONE: Nothing will be printed
+---|1                       ERROR: Error messages will be printed
+---|2                       WARN: Warning messages will be printed
+---|3                       INFO: Only crucial information will be printed
+---|4                       DEBUG: Debug messages will be printed
+---|5                       TRACE: Many debug messages will be printed
+
+
+---@type table<string, mwseLogger[]>
 local loggers = {}
 
 
@@ -88,17 +134,16 @@ Additionally, you can write
 
 **NOTE:** The `log` **must** be on the `>=` side of the comparison if using this syntax. Writing `log <= 4` will result in an error. 
 ]]
----@class Logger
+---@class mwseLogger
 ---@field modName string the name of the mod this logger is for
----@field level Logger.LEVEL
+---@field level mwseLogger.LEVEL
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
----@field children table<string, Logger> all the child logggers, indexed by their `moduleName`
 ---@field useColors boolean should colors be used when writing log statements? Default: `false`
 ---@field writeToFile boolean if true, we will write the log contents to a file with the same name as this mod.
 ---@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
 ---@field file file*? the file the log is being written to, if `writeToFile == true`, otherwise its nil.
+---@field LEVEL table<mwseLogger.LEVEL_STRING, mwseLogger.LEVEL>
 local Logger = {
-    ---@type table<Logger.LEVEL_STRING, Logger.LEVEL>
     LEVEL = {
         NONE = 0,
         ERROR = 1,
@@ -108,24 +153,20 @@ local Logger = {
         TRACE = 5
     }
 }
-setmetatable(Logger, LoggerMetatable)
+setmetatable(Logger, loggerMetatable)
 
 
----@alias Logger.LEVEL
 ---|`Logger.LEVEL.NONE`     Nothing will be printed
 ---|`Logger.LEVEL.ERROR`    Error messages will be printed
 ---|`Logger.LEVEL.WARN`     Warning messages will be printed
 ---|`Logger.LEVEL.INFO`     Crucial information will be printed
 ---|`Logger.LEVEL.DEBUG`    Debug messages will be printed
 ---|`Logger.LEVEL.TRACE`    Many debug messages will be printed
----|0                       NONE: Nothing will be printed
----|1                       ERROR: Error messages will be printed
----|2                       WARN: Warning messages will be printed
----|3                       INFO: Only crucial information will be printed
----|4                       DEBUG: Debug messages will be printed
----|5                       TRACE: Many debug messages will be printed
 
----@alias Logger.LEVEL_STRING
+
+
+
+---@alias mwseLogger.LEVEL_STRING
 ---|"NONE"      Nothing will be printed
 ---|"ERROR"     Error messages will be printed
 ---|"WARN"      Warning messages will be printed
@@ -134,25 +175,26 @@ setmetatable(Logger, LoggerMetatable)
 ---|"TRACE"     Many debug messages will be printed
 
 
-
-
 -- metatable used by log objects
-local logMetatable = {
+local log_metatable = {
     __call = function(self, ...) self:debug(...) end,
+    __lt = function(num, self) return num < self.level end,
+    __le = function(num, self) return num <= self.level end,
+    __len = function(self) return self.level end,
     __index = Logger,
-    ---@param self Logger
+    ---@param self mwseLogger
     ---@param str string
     __concat = function(self, str)
         return self:makeChild(str)
     end,
     __tostring = function(self)
         if self.moduleName then 
-            return string.format(
+            return sf(
                 "Logger(modName=\"%s\", moduleName=\"%s\", level=%i, levelStr=%s)",
                 self.modName, self.moduleName, self.level, table.find(Logger.LEVEL, self.level)
             )
         else
-            return string.format(
+            return sf(
                     "Logger(modName=\"%s\", level=%i, levelStr=%s)",
                     self.modName, self.level, table.find(Logger.LEVEL, self.level)
                 )
@@ -160,11 +202,56 @@ local logMetatable = {
     end,
 }
 
+local function getModAndModuleNames(modName)
+    local actualModName, moduleName
+    local index = modName:find("/")
+    if index then
+        actualModName = modName:sub(1,index-1)
+        moduleName = modName:sub(index+1)
+    else
+        actualModName = modName
+    end
+    return actualModName, moduleName
+end
+
+---@return string? modName, string? moduleName
+local function getModInfoFromSource()
+    local info = getActiveModInfo(1)
+    if not info then return end
+
+    local modName, moduleName
+    if info.metadata then
+        local package = info.metadata.package
+        modName = package.name 
+    end
+
+    local s, e = 2, #info.luaParts
+    if info.dir_has_author_name then
+        s = 3
+        modName = modName or info.luaParts[2]
+    else
+        modName = modName or info.luaParts[1]
+    end
+    local last_part = info.parts[#info.parts]
+    if last_part == "main.lua" or last_part == "init.lua" then
+        e = e - 1
+    else
+        info.luaParts[e] = last_part:sub(1,-5) -- remove the ".lua" 
+    end
+    local module_parts = {}
+    for i=s, e do
+        table.insert(module_parts, info.luaParts[i])
+    end
+    if next(module_parts) ~= nil then
+        moduleName = table.concat(module_parts, "/")
+    end
+    return modName, moduleName
+end
 
 
----@class Logger.newParams
----@field modName string the name of the mod this logger is for
----@field level Logger.LEVEL|Logger.LEVEL_STRING|nil the log level to set this object to. Default: "INFO"
+---@class mwseLogger.newParams
+---@field modName string? the name of the mod this logger is for
+---@field level mwseLogger.LEVEL|mwseLogger.LEVEL_STRING|nil the log level to set this object to. Default: "INFO"
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
 ---@field useColors boolean? should colors be used when writing log statements? Default: `false`
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
@@ -184,83 +271,118 @@ In addition to `modName`, you may specify
 - `level`: the logging level to start this logger at. This is the same as making a new logger and then calling `log:setLevel(level)`
 - `writeToFile`: either a boolean saying we should write to a file, or the name of a file to write to. If false (the default), then log messages will be written to `MWSE.log`
 ]]
----@param params string|Logger.newParams
+---@param params mwseLogger.newParams|string?
+---@return mwseLogger
 function Logger.new(params)
     -- if it's just a string, treat it as the `modName`
-    if type(params) == "string" then
+    if not params then
+        params = {}
+    elseif type(params) == "string" then
         params = {modName=params} 
     end
+    local modName, moduleName = params.modName, params.moduleName
     -- do some error checking to make sure `params` are correct
-    assert(params.modName ~= nil, "Error: Could not create a Logger because modName was nil.")
-    assert(type(params.modName) == "string", "Error: Could not create a Logger. modName must be a string.")
+    if not modName then
+        modName, moduleName = getModInfoFromSource()
+    end
+    assert(modName ~= nil, "Error: Could not create a Logger because modName was nil.")
+    assert(type(modName) == "string", "Error: Could not create a Logger. modName must be a string.")
 
-    if params.moduleName == nil then
-        params.modName, params.moduleName = unpack(params.modName:split("/"))
+    if moduleName == nil then
+        modName, moduleName = getModAndModuleNames(modName)
     end
 
-    local parentLog
-    -- if a logger for the given mod has already been made
-    if loggers[params.modName] then 
-        local log = loggers[params.modName]
-        
-        if params.moduleName ~= nil then
-            -- we were given a `moduleName`, so we should check if that given child log exists
-            if log.children[params.moduleName] then
-                -- return the child if it exists
-                return log.children[params.moduleName]
-            else
-                -- otherwise, mark that the log we're making is a child of this log.
-                parentLog = log
-                -- copy over information from parentLog into `params`, taking care to not overwrite `params`
-                for _,k in ipairs{"useColors", "writeToFile", "level", "includeTimestamp"} do
-                    if params[k] == nil then
-                        params[k] = parentLog[k]
-                    end
-                end
+    local log ---@type mwseLogger?
 
-            end
-        else
-            return log
-        end
-    end
+    -- first try to get it
+    log = Logger.get(modName, moduleName)
 
-    ---@type Logger
-    local log = {
-        modName = params.modName,
-        moduleName = params.moduleName,
+    if log then return log end
+
+    -- now we know the log doesn't exist
+
+    log = {
+        modName = modName,
+        moduleName = moduleName,
         useColors=params.useColors or false,
         writeToFile = params.writeToFile or false,
         level = Logger.LEVEL.INFO, -- we'll set it with the dedicated function so we can do fancy stuff
         includeTimestamp = params.includeTimestamp or false,
-        children = {},
     }
 
-    if log.writeToFile then
-        local fileName
-        if type(log.writeToFile) == "string" then 
-            fileName = log.writeToFile
-        else
-            fileName = log.modName .. ".log"
-        end
-        log.file = io.open(fileName, "w")
-    end
-    setmetatable(log, logMetatable)
     
-    if parentLog == nil then
-        loggers[params.modName] = log
+    -- if there are already loggers with this `modName`, get the most recent one, and then
+    -- update this new loggers values to those of the most recent logger. (if those values weren't specified in `params`)
+    if loggers[modName] and #loggers[modName] > 0 then
+        local parent = loggers[modName][#loggers[modName]]
+        for _, k in ipairs{"useColors", "writeToFile", "includeTimestamp"} do
+            if params[k] == nil then
+                log[k] = parent[k]
+            end
+        end
+        -- set the default value to the parent log level, we will call `setLevel` later
+        -- this will do the the following:
+        -- if `params.level` was invalid, nothing will happen and `parent.level` will be used.
+        -- if `params.level` was valid, then every logger registered to this mod will be updated.
+        log.level = parent.level
     else
-        parentLog.children[params.moduleName] = log
+        -- this is the first logger with this `modName`, so we should intialize the array
+        loggers[modName] = {}
     end
 
-    log:setLevel(params.level) -- checks if it was `nil`
+    table.insert(loggers[modName], log)
 
-    return log -- this gets sent right into the `init` method below, but it's metatable gets set first.
+    setmetatable(log, log_metatable)
+    log:setLevel(params.level)
+
+    if params.writeToFile == nil then
+        log:setWriteToFile(log.writeToFile, true)
+    else
+        log:setWriteToFile(params.writeToFile)
+    end
+
+
+    return log
 end
 
 
 
+---@param writeToFile string|boolean
+---@param onlyThisLogger boolean? should we only update this logger? Default: false
+function Logger:setWriteToFile(writeToFile, onlyThisLogger)
+    if writeToFile == nil then return end
 
+    local _loggers = onlyThisLogger and {self} or loggers[self.modName]
 
+    if writeToFile == false then
+        for _, log in ipairs(_loggers) do
+            if log.file then
+                log.file:close()
+                log.file = nil
+            end
+            log.writeToFile = false
+        end
+        return
+    end
+
+    for _, log in ipairs(_loggers) do
+        local filename
+        if writeToFile == true then
+            if log.moduleName then
+                filename = sf("%s\\%s.log",log.modName,log.moduleName)
+            else
+                filename = log.modName .. ".log"
+            end
+        else
+            filename = writeToFile
+        end
+        if log.file then
+            log.file:close()
+        end
+        log.file = io.open(filename, "w")
+        log.writeToFile = true
+    end
+end
 
 
 
@@ -281,17 +403,17 @@ The difference between `.get` and `.new` is that if a logger does not exist, `.n
 ]]
 ---@param modName string name of the mod
 ---@param moduleName string the name of the module
----@return Logger? logger
+---@return mwseLogger? logger
 function Logger.get(modName, moduleName)
     if moduleName == nil then
-        modName, moduleName = unpack(modName:split("/"))
+        modName, moduleName = getModAndModuleNames(modName)
     end
-    local log = loggers[modName]
-    if log then
-        if moduleName ~= nil then 
-            return log.children[moduleName]
+    if loggers[modName] then
+        for _, log in ipairs(loggers[modName]) do
+            if log.moduleName == moduleName then
+                return log
+            end
         end
-        return log
     end
 end
 
@@ -300,25 +422,27 @@ function Logger:getLevelStr()
     return table.find(Logger.LEVEL, self.level)
 end
 
+--- returns all the loggers associated with this modName (can pass a Logger as well)
+function Logger.getLoggers(modNameOrLogger) 
+    return type(modNameOrLogger) == "table"  and loggers[modNameOrLogger.modName]
+        or loggers[modNameOrLogger] 
+        or false
+end
 
 function Logger:makeChild(moduleName)
     return self.new{
         modName=self.modName,
         level=self.level,
-        moduleName=moduleName, 
+        moduleName=moduleName,
         useColors=self.useColors,
         writeToFile=self.writeToFile,
         includeTimestamp=self.includeTimestamp
     }
 end
-local LogLevel = Logger.LEVEL
 
 
---- get the parent of this logger. only really used internally
----@return Logger
-function Logger:getParent()
-    return loggers[self.modName]
-end
+local LOG_LEVEL = Logger.LEVEL
+
 
 
 --[[Change the current logging level. You can specify a string or number.
@@ -327,29 +451,29 @@ e.g. to set the `log.level` to "DEBUG", you can write any of the following:
 2) `log:setLevel(4)`
 3) `log:setLevel(Logger.LEVEL.DEBUG)`
 ]]
----@param self Logger
----@param level Logger.LEVEL|Logger.LEVEL_STRING
+---@param self mwseLogger
+---@param level mwseLogger.LEVEL|mwseLogger.LEVEL_STRING
 function Logger:setLevel(level)
     
 
     local lvl -- the actual level we should use, instead of a string or something
-    if LogLevel[level] then 
-        lvl = LogLevel[level]
+    if LOG_LEVEL[level] then
+        lvl = LOG_LEVEL[level]
+
     elseif type(level) == "number" then 
-        if LogLevel.NONE <= level and level <= LogLevel.TRACE then
+        if LOG_LEVEL.NONE <= level and level <= LOG_LEVEL.TRACE then
             ---@diagnostic disable-next-line: assign-type-mismatch
             lvl = level
         end
-    elseif type(level) == "string" and LogLevel[level:upper()] then 
-        lvl = LogLevel[level:upper()]
+
+    elseif type(level) == "string" then
+        lvl = LOG_LEVEL[level:upper()]
     end
-    if lvl then
-        -- make sure we updated all registered loggers for the mod, not just this one
-        local parent = self:getParent()
-        parent.level = lvl
-        for _, child in pairs(parent.children) do
-            child.level = lvl
-        end
+
+    if not lvl then return end
+
+    for _, log in ipairs(loggers[self.modName]) do
+        log.level = lvl
     end
 end
 
@@ -357,30 +481,27 @@ end
 ---@param includeTimestamp boolean Whether logs should use timestamps
 function Logger:setIncludeTimestamp(includeTimestamp)
     -- we need to know what to do
-    if includeTimestamp == nil then return end
-    local parent = self:getParent()
-
-    parent.includeTimestamp = includeTimestamp
-    for _, logger in pairs(parent.children) do
-        logger.includeTimestamp = includeTimestamp
+    if includeTimestamp then
+        for _, log in ipairs(loggers[self.modName]) do
+            log.includeTimestamp = includeTimestamp
+        end
     end
-
 end
 
 --- for internal use only. it generates the header message that will be enclosed in square brackets when printing log messages.
-function Logger:_makeHeader(LogStr)
-    local header_t = {}
-    
+function Logger:_makeHeader(logStr)
+    local headerTbl = {}
+    local lineno = debug.getinfo(4,"l").currentline
     if self.moduleName ~= nil then
-        header_t[1] = string.format("%s (%s):", self.modName, self.moduleName)
+        headerTbl[1] = sf("%s (%s): %i", self.modName, self.moduleName, lineno)
     else
-        header_t[1] = string.format("%s:", self.modName)
+        headerTbl[1] = sf("%s: %i", self.modName, lineno)
     end
     if self.useColors then
         -- e.g. turn "ERROR" into "ERROR" (but written in red)
-        LogStr = colors(string.format("%%{%s}%s", COLORS[LogStr], LogStr))
+        logStr = colors(sf("%%{%s}%s", COLORS[logStr], logStr))
     end
-    header_t[#header_t+1] = LogStr
+    headerTbl[#headerTbl+1] = logStr
     if self.includeTimestamp then
         local socket = require("socket")
         local timestamp = socket.gettime()
@@ -391,26 +512,36 @@ function Logger:_makeHeader(LogStr)
         local timeTable = os.date("*t", timestamp)
 
         -- format time components into H:M:S:MS string
-        local formattedTime = string.format(": %02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
-        header_t[#header_t+1] = formattedTime
+        local formattedTime = sf(": %02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
+        headerTbl[#headerTbl+1] = formattedTime
     end
-    return table.concat(header_t," ")
+    return table.concat(headerTbl," ")
 end
 
 --- write to log. only used internally
----@param LogStr Logger.LEVEL_STRING
-function Logger:write(LogStr,...)
-    local s, s1, s2
-    local n, header = select("#",...), self:_makeHeader(LogStr)
-    
+---@param logStr mwseLogger.LEVEL_STRING
+function Logger:write(logStr, ...)
+    local s
+    local n, header = select("#",...), self:_makeHeader(logStr)
     if n == 1 then
-        s = string.format("[%s] %s", header, ...)
+        s = sf("[%s] %s", header, ...)
     else
-        s1, s2 = ...
-        if n == 2 and type(s2) == "function" then 
-            s = string.format("[%s] %s", header, string.format(s1, s2()))
+        local s1, s2 = ...
+        if type(s1) == "function" then
+            if n == 2 then
+                s = sf( "[%s] %s", header, sf( s1(s2) ) )
+            else
+                s = sf( "[%s] %s", header, sf( s1(select(2, ...)) ) )
+            end
+
+        elseif type(s2) == "function" then
+            if n == 2 then
+                s = sf("[%s] %s", header, sf( s1, s2() ) )
+            else
+                s = sf( "[%s] %s", header, sf(s1, s2(select(3, ...))))
+            end
         else
-            s = string.format("[%s] %s", header, string.format(s1, select(2,...)))
+            s = sf("[%s] %s", header, sf(...) )
         end
     end
 
@@ -428,416 +559,109 @@ end
 
 --[[ Write an error message, if the current `log.level` permits it. 
 
+If one parameter is passed, that paramter will be printed normally.
+
 **Passing multiple parameters:**
-If multiple parameters are passed, then `string.format` will be called on the first parameter. You have two options for formatting strings:
-1) pass the formatting options as regular arguments.
-    - e.g., `log:trace("The %s today is %i %s", "weather", 20, "degrees")`
-    - So, `log:trace(s, ...)` and `log:trace(string.format(s, ...))` will print the same things.
-    - the only difference is that in the first case, `string.format` will be called AFTER the `log.level` is checked.
-2) pass the formatting options as a `function`.
-    - e.g., `log:trace("The %s today is %i, %s", function() return "weather", 20, "degrees" end)
-    - So, `log:trace(s, func)` and `log:trace(string.format(s, func() )) will print the same things.
-    - The key difference is that both `string.format` AND `func` will only be called after the `log.level` is checked.
-    - This could be very nice for performance reasons, if you're printing complicated debugging messages.
+1) If you type `log:debug(str, ...)`, then the output will be the same as
+```log:debug(string.format(str,...))```
+2) If you type `log:debug(func, ...)`, then the output will be the same as 
+```log:debug(func, ...) == log:debug(string.format(func(...)))```
+3) If you type `log:debug(str, func, ...)` then the output will be the same as 
+```log:debug(string.format(str, func(...) ))```
 
-
-**Passing a single parameter:**
-If only a single parameter is passed, `string.format` will NOT be called. This is to avoid unexpected errors from writing strings 
-that inadvertently contain formatting specifiers.
+**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
----@param ... string the strings to write the log
+---@param ... any the strings to write the log
 function Logger:error(...)
-    if self.level >= LogLevel.ERROR then self:write("ERROR", ...) end
+    if self.level >= LOG_LEVEL.ERROR then self:write("ERROR", ...) end
 end
 
 
 --[[ Write a warning message, if the current `log.level` permits it. 
 
+If one parameter is passed, that paramter will be printed normally.
+
 **Passing multiple parameters:**
-If multiple parameters are passed, then `string.format` will be called on the first parameter. You have two options for formatting strings:
-1) pass the formatting options as regular arguments.
-    - e.g., `log:trace("The %s today is %i %s", "weather", 20, "degrees")`
-    - So, `log:trace(s, ...)` and `log:trace(string.format(s, ...))` will print the same things.
-    - the only difference is that in the first case, `string.format` will be called AFTER the `log.level` is checked.
-2) pass the formatting options as a `function`.
-    - e.g., `log:trace("The %s today is %i, %s", function() return "weather", 20, "degrees" end)
-    - So, `log:trace(s, func)` and `log:trace(string.format(s, func() )) will print the same things.
-    - The key difference is that both `string.format` AND `func` will only be called after the `log.level` is checked.
-    - This could be very nice for performance reasons, if you're printing complicated debugging messages.
+1) If you type `log:debug(str, ...)`, then the output will be the same as
+```log:debug(string.format(str,...))```
+2) If you type `log:debug(func, ...)`, then the output will be the same as 
+```log:debug(func, ...) == log:debug(string.format(func(...)))```
+3) If you type `log:debug(str, func, ...)` then the output will be the same as 
+```log:debug(string.format(str, func(...) ))```
 
-
-**Passing a single parameter:**
-If only a single parameter is passed, `string.format` will NOT be called. This is to avoid unexpected errors from writing strings 
-that inadvertently contain formatting specifiers.
+**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
----@param ... string the strings to write the log
+---@param ... any the strings to write the log
 function Logger:warn(...)
-    if self.level >= LogLevel.WARN then self:write("WARN", ...) end
+    if self.level >= LOG_LEVEL.WARN then self:write("WARN", ...) end
 end
 
 --[[ Write an info message, if the current `log.level` permits it. 
 
+If one parameter is passed, that paramter will be printed normally.
+
 **Passing multiple parameters:**
-If multiple parameters are passed, then `string.format` will be called on the first parameter. You have two options for formatting strings:
-1) pass the formatting options as regular arguments.
-    - e.g., `log:trace("The %s today is %i %s", "weather", 20, "degrees")`
-    - So, `log:trace(s, ...)` and `log:trace(string.format(s, ...))` will print the same things.
-    - the only difference is that in the first case, `string.format` will be called AFTER the `log.level` is checked.
-2) pass the formatting options as a `function`.
-    - e.g., `log:trace("The %s today is %i, %s", function() return "weather", 20, "degrees" end)
-    - So, `log:trace(s, func)` and `log:trace(string.format(s, func() )) will print the same things.
-    - The key difference is that both `string.format` AND `func` will only be called after the `log.level` is checked.
-    - This could be very nice for performance reasons, if you're printing complicated debugging messages.
+1) If you type `log:debug(str, ...)`, then the output will be the same as
+```log:debug(string.format(str,...))```
+2) If you type `log:debug(func, ...)`, then the output will be the same as 
+```log:debug(func, ...) == log:debug(string.format(func(...)))```
+3) If you type `log:debug(str, func, ...)` then the output will be the same as 
+```log:debug(string.format(str, func(...) ))```
 
-
-**Passing a single parameter:**
-If only a single parameter is passed, `string.format` will NOT be called. This is to avoid unexpected errors from writing strings 
-that inadvertently contain formatting specifiers.
+**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
----@param ... string the strings to write the log
+---@param ... any the strings to write the log
 function Logger:info(...)
-    if self.level >= LogLevel.INFO then self:write("INFO", ...) end
+    if self.level >= LOG_LEVEL.INFO then self:write("INFO", ...) end
 end
 
 
 --[[ Write a debug message, if the current `log.level` permits it. 
 
+If one parameter is passed, that paramter will be printed normally.
+
 **Passing multiple parameters:**
-If multiple parameters are passed, then `string.format` will be called on the first parameter. You have two options for formatting strings:
-1) pass the formatting options as regular arguments.
-    - e.g., `log:trace("The %s today is %i %s", "weather", 20, "degrees")`
-    - So, `log:trace(s, ...)` and `log:trace(string.format(s, ...))` will print the same things.
-    - the only difference is that in the first case, `string.format` will be called AFTER the `log.level` is checked.
-2) pass the formatting options as a `function`.
-    - e.g., `log:trace("The %s today is %i, %s", function() return "weather", 20, "degrees" end)
-    - So, `log:trace(s, func)` and `log:trace(string.format(s, func() )) will print the same things.
-    - The key difference is that both `string.format` AND `func` will only be called after the `log.level` is checked.
-    - This could be very nice for performance reasons, if you're printing complicated debugging messages.
+1) If you type `log:debug(str, ...)`, then the output will be the same as
+```log:debug(string.format(str,...))```
+2) If you type `log:debug(func, ...)`, then the output will be the same as 
+```log:debug(func, ...) == log:debug(string.format(func(...)))```
+3) If you type `log:debug(str, func, ...)` then the output will be the same as 
+```log:debug(string.format(str, func(...) ))```
 
-
-**Passing a single parameter:**
-If only a single parameter is passed, `string.format` will NOT be called. This is to avoid unexpected errors from writing strings 
-that inadvertently contain formatting specifiers.
+**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
----@param ... string the strings to write the log
+---@param ... any the strings to write the log
 function Logger:debug(...)
-    if self.level >= LogLevel.DEBUG then self:write("DEBUG", ...) end
+    if self.level >= LOG_LEVEL.DEBUG then self:write("DEBUG", ...) end
 end
+
+-- redefine it to make it behave consistently with `debug.getinfo`
+log_metatable.__call = Logger.debug
 
 --[[ Write a trace message, if the current `log.level` permits it. 
 
+If one parameter is passed, that paramter will be printed normally.
+
 **Passing multiple parameters:**
-If multiple parameters are passed, then `string.format` will be called on the first parameter. You have two options for formatting strings:
-1) pass the formatting options as regular arguments.
-    - e.g., `log:trace("The %s today is %i %s", "weather", 20, "degrees")`
-    - So, `log:trace(s, ...)` and `log:trace(string.format(s, ...))` will print the same things.
-    - the only difference is that in the first case, `string.format` will be called AFTER the `log.level` is checked.
-2) pass the formatting options as a `function`.
-    - e.g., `log:trace("The %s today is %i, %s", function() return "weather", 20, "degrees" end)
-    - So, `log:trace(s, func)` and `log:trace(string.format(s, func() )) will print the same things.
-    - The key difference is that both `string.format` AND `func` will only be called after the `log.level` is checked.
-    - This could be very nice for performance reasons, if you're printing complicated debugging messages.
+1) If you type `log:debug(str, ...)`, then the output will be the same as
+```log:debug(string.format(str,...))```
+2) If you type `log:debug(func, ...)`, then the output will be the same as 
+```log:debug(func, ...) == log:debug(string.format(func(...)))```
+3) If you type `log:debug(str, func, ...)` then the output will be the same as 
+```log:debug(string.format(str, func(...) ))```
 
-
-**Passing a single parameter:**
-If only a single parameter is passed, `string.format` will NOT be called. This is to avoid unexpected errors from writing strings 
-that inadvertently contain formatting specifiers.
+**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
----@param ... string the strings to write the log
+---@param ... any the strings to write the log
 function Logger:trace(...)
-    if self.level >= LogLevel.TRACE then self:write("TRACE", ...) end
-end
-
-
-do
-
-    -- =========================================================================
-    -- table log formatting
-    -- =========================================================================
----@class Logger.writeParams
----@field sep string|boolean|nil if `true` or a `string`, then multiline printing will be used with this as the separator. (if `true`, then `\n\t` will be used).
----@field msg string? if passed, this is the message that will be formatted using `args`. otherwise, only `args` will be printed
----@field args table|(fun(): table) this is what will be passed to `string.format` or `table.concat`. if it's a `table`, it will be unpacked. if it's a `function`, it will be called and then unpacked. using a function is more efficient in the case that the message may not always be printed (e.g. debug messages)
-
----@param LogStr Logger.LEVEL_STRING
----@param t Logger.writeParams
-function Logger:writet(LogStr, t)
-    local header = self:_makeHeader(LogStr)
-    local s
-    
-    -- args is going to be what we're actually printing if `msg == nil`. it will support associative tables.
-    -- _args is just to deal with the case that `t.args` is a function
-    local args, _args = {}, (type(t.args) == "function" and t.args()) or t.args
-
-    local i,n = 1, #_args
-
-    if t.msg then
-        s = string.format("[%s] %s", header, t.msg:format(unpack(_args)))
-    else
-        local sep = (type(t.sep) == "string" and t.sep) or "\n\t"
-
-        for k,v in pairs(_args) do
-            if i <= n then      
-                table.insert(args,v)
-            else
-                table.insert(args,string.format("%s=%s",k,v))
-            end
-            i = i + 1
-        end
-        s = string.format("[%s] %s", header, table.concat(args, sep))
-    end
-
-    
-    if self.writeToFile ~= false then
-        self.file:write(s .. "\n"); self.file:flush()
-    else
-       print(s)
-    end
+    if self.level >= LOG_LEVEL.TRACE then self:write("TRACE", ...) end
 end
 
 
 
-
-
-
---[[## Write a warning message by passing in options as a table. 
-
-The two main syntaxes are:
-1) `sep`: defaults to "\n\t". The separator to use when printing multiple strings/numbers.
-2) `msg`: If passed, then this message will be formatted with `string.format`, using `args` as the format parameters.
-
-There are two ways to pass `args`:
-1) As a table, e.g.,  `log:debug{args={"string1", "string2"}}`
-2) As a function that returns a table, e.g., `log:debug{args=function() return {"string1", "string2"} end}`
-
-Here are some examples:
-- `log:warnt{msg="This %s message", args={"is a"}}` 
-    --> "This is a message"
-- `log:warnt{msg="The date is %s and the weather is %i degrees", args=function() return {"Tuesday", 20} end}`
-    --> "The date is Tuesday and the weather is 20 degrees"
-- `log:warnt{args={"Hello", "World", "It's lovely outside"}}`
-    --> "Hello\n\tWorld\n\tIt's lovely outside"
-- `log:warnt{sep=", ", args={"number1 = 10", "number2 = 15", "number3 = 20"}}`
-    --> "number1 = 10, number2 = 15, number3 = 20"
-]]
----@param self Logger
----@param writeParams Logger.writeParams
-function Logger:warnt(writeParams)
-    if self.level >= LogLevel.WARN then 
-        self:writet("WARN", writeParams)
-    end
-end
-
-
---[[## Write an error message by passing in options as a table. 
-
-The two main syntaxes are:
-1) `sep`: defaults to "\n\t". The separator to use when printing multiple strings/numbers.
-2) `msg`: If passed, then this message will be formatted with `string.format`, using `args` as the format parameters.
-
-There are two ways to pass `args`:
-1) As a table, e.g.,  `log:debug{args={"string1", "string2"}}`
-2) As a function that returns a table, e.g., `log:debug{args=function() return {"string1", "string2"} end}`
-
-Here are some examples:
-- `log:warnt{msg="This %s message", args={"is a"}}` 
-    --> "This is a message"
-- `log:warnt{msg="The date is %s and the weather is %i degrees", args=function() return {"Tuesday", 20} end}`
-    --> "The date is Tuesday and the weather is 20 degrees"
-- `log:warnt{args={"Hello", "World", "It's lovely outside"}}`
-    --> "Hello\n\tWorld\n\tIt's lovely outside"
-- `log:warnt{sep=", ", args={"number1 = 10", "number2 = 15", "number3 = 20"}}`
-    --> "number1 = 10, number2 = 15, number3 = 20"
-]]
----@param writeParams Logger.writeParams
-function Logger:errort(writeParams)
-    if self.level >= LogLevel.ERROR then 
-        self:writet("ERROR", writeParams)
-    end
-end
-
---[[## Write an info message by passing in options as a table. 
-
-The two main syntaxes are:
-1) `sep`: defaults to "\n\t". The separator to use when printing multiple strings/numbers.
-2) `msg`: If passed, then this message will be formatted with `string.format`, using `args` as the format parameters.
-
-There are two ways to pass `args`:
-1) As a table, e.g.,  `log:debug{args={"string1", "string2"}}`
-2) As a function that returns a table, e.g., `log:debug{args=function() return {"string1", "string2"} end}`
-
-Here are some examples:
-- `log:warnt{msg="This %s message", args={"is a"}}` 
-    --> "This is a message"
-- `log:warnt{msg="The date is %s and the weather is %i degrees", args=function() return {"Tuesday", 20} end}`
-    --> "The date is Tuesday and the weather is 20 degrees"
-- `log:warnt{args={"Hello", "World", "It's lovely outside"}}`
-    --> "Hello\n\tWorld\n\tIt's lovely outside"
-- `log:warnt{sep=", ", args={"number1 = 10", "number2 = 15", "number3 = 20"}}`
-    --> "number1 = 10, number2 = 15, number3 = 20"
-]]
----@param self Logger
----@param writeParams Logger.writeParams
-function Logger:infot(writeParams)
-    if self.level >= LogLevel.INFO then 
-        self:writet("INFO", writeParams)
-    end
-end
-
---[[## Write a debug message by passing in options as a table. 
-
-The two main syntaxes are:
-1) `sep`: defaults to "\n\t". The separator to use when printing multiple strings/numbers.
-2) `msg`: If passed, then this message will be formatted with `string.format`, using `args` as the format parameters.
-
-There are two ways to pass `args`:
-1) As a table, e.g.,  `log:debug{args={"string1", "string2"}}`
-2) As a function that returns a table, e.g., `log:debug{args=function() return {"string1", "string2"} end}`
-
-Here are some examples:
-- `log:warnt{msg="This %s message", args={"is a"}}` 
-    --> "This is a message"
-- `log:warnt{msg="The date is %s and the weather is %i degrees", args=function() return {"Tuesday", 20} end}`
-    --> "The date is Tuesday and the weather is 20 degrees"
-- `log:warnt{args={"Hello", "World", "It's lovely outside"}}`
-    --> "Hello\n\tWorld\n\tIt's lovely outside"
-- `log:warnt{sep=", ", args={"number1 = 10", "number2 = 15", "number3 = 20"}}`
-    --> "number1 = 10, number2 = 15, number3 = 20"
-]]
----@param self Logger
----@param writeParams Logger.writeParams
-function Logger:debugt(writeParams)
-    if self.level >= LogLevel.DEBUG then 
-        self:writet("DEBUG", writeParams)
-    end
-end
-
---[[## Write a trace message by passing in options as a table. 
-
-The two main syntaxes are:
-1) `sep`: defaults to "\n\t". The separator to use when printing multiple strings/numbers.
-2) `msg`: If passed, then this message will be formatted with `string.format`, using `args` as the format parameters.
-
-There are two ways to pass `args`:
-1) As a table, e.g.,  `log:debug{args={"string1", "string2"}}`
-2) As a function that returns a table, e.g., `log:debug{args=function() return {"string1", "string2"} end}`
-
-Here are some examples:
-- `log:warnt{msg="This %s message", args={"is a"}}` 
-    --> "This is a message"
-- `log:warnt{msg="The date is %s and the weather is %i degrees", args=function() return {"Tuesday", 20} end}`
-    --> "The date is Tuesday and the weather is 20 degrees"
-- `log:warnt{args={"Hello", "World", "It's lovely outside"}}`
-    --> "Hello\n\tWorld\n\tIt's lovely outside"
-- `log:warnt{sep=", ", args={"number1 = 10", "number2 = 15", "number3 = 20"}}`
-    --> "number1 = 10, number2 = 15, number3 = 20"
-]]
----@param self Logger
----@param writeParams Logger.writeParams
-function Logger:tracet(writeParams)
-    if self.level >= LogLevel.TRACE then 
-        self:writet("TRACE", writeParams)
-    end
-end
-
-end
-
-
-
-
----@class Logger.addToMCMParams
----@field component mwseMCMPage|mwseMCMSideBarPage|mwseMCMCategory The Page/Category to which this setting will be added.
----@field config table? the config to store the logLevel in. Recommended. If not provided, the `logLevel` will reset to "INFO" each time the mod is launched.
----@field createCategory boolean? should a subcategory be made for the log settings? Default: a new category will be created, so long as `component` is not a `mwseMCMCategory`
----@field label string? the label to be shown for the setting. Default: "Log Settings"
----@field description string? The description to show for the log settings. Usually not necesssary. If not provided, a default one will be provided.
-
---- Add this logger to the passed MCM category/page. You can pass arguments in a table or directly as function parameters.
----@param componentOrParams Logger.addToMCMParams|table The parameters, or the Page/Category to which this setting will be added.
----@param config table? the config to store the logLevel in 
----@param createCategory boolean? should a subcategory be made for the log settings? makes it easier to read the description. default: true
-function Logger:addToMCM(componentOrParams, config, createCategory)
-
-    local label, description, component
-
-    -- if it's not a page or category
-    if type(componentOrParams) == "table" and not componentOrParams.componentType then 
-        component = componentOrParams.component
-        config = config or componentOrParams.config
-        createCategory = createCategory or componentOrParams.createCategory
-
-        label = componentOrParams.label
-        description = componentOrParams.description
-    end
-
-    component = component or componentOrParams
-    label = label or "Logging Level"
-
-    if description == nil then 
-        description = "\z
-            Change the current logging settings. You can probably ignore this setting. A value of 'PROBLEMS' or 'INFO' is recommended, \n\z
-            unless you're troubleshooting something. Each setting includes all the log messages of the previous setting. Here is an \z
-            explanation of the options:\n\n\t\z
-            \z
-            NONE: Absolutely nothing will be logged.\n\n\t\z
-            \z
-            ERROR: Error messages will be logged.\n\n\t\z
-            \z
-            WARN: Warning messages will be logged.\n\n\t\z
-            \z
-            INFO: Some basic behavior of the mod will be logged, but nothing extreme.\n\n\t\z
-            \z
-            DEBUG: A lot of the inner workings will be logged. You may notice a decrease in performance.\n\n\t\z
-            \z
-            TRACE: Even more internal workings will be logged. The log file may be hard to read, unless you have a specific thing you're looking for.\z
-        \z
-    "
-    elseif description == false then 
-        description = nil
-    end
-
-    
-    local logLevelKey -- so that we support both camelcase and snakecase in people's configs
-
-    -- `setLevel` makes sure the value passed is a number, so it's chill
-    if config then
-            if config.logLevel then
-                logLevelKey = "logLevel"
-            else
-                logLevelKey = "log_level"
-            end
-        self:setLevel(config[logLevelKey]) 
-    end
-
-    
-        
-
-    local logSettings -- this is where the new setting will be added.
-    
-    -- if `createCategory == true` or `createCategory` wasn't specified, and we aren't creating this component inside a category
-    if createCategory == true or (createCategory == nil and component.componentType ~= "Category") then
-        logSettings = component:createCategory{label="Log Settings", description = description}
-    else
-        logSettings = component
-    end
-
-    local logOptions = {}
-    for lvl = Logger.LEVEL.NONE, Logger.LEVEL.TRACE do
-        local str = table.find(Logger.LEVEL, lvl)
-        table.insert(logOptions, {label=str, value=str})
-    end
-    
-    logSettings:createDropdown{label =label, description = description, options = logOptions,
-        variable = mwse.mcm.createCustom{
-            getter=function () return self:getLevelStr() end,
-            setter = function (_, newValue)
-                self:setLevel(newValue)
-                self("updated log level to %i (%s)", self.level, self:getLevelStr())
-
-                if config and logLevelKey then config[logLevelKey] = self:getLevelStr() end
-            end
-        },
-    }
-end
-
-return Logger
+return Logger ---@type mwseLogger
