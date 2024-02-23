@@ -11,7 +11,6 @@ local sf = string.format
 
 local loggerMetatable = {
     -- make new loggers by calling `Logger`
-    __call=function (cls, ...) return cls.new(...) end,
     __tostring = function(self) return "Logger" end
 }
 
@@ -177,16 +176,8 @@ setmetatable(Logger, loggerMetatable)
 
 -- metatable used by log objects
 local log_metatable = {
-    __call = function(self, ...) self:debug(...) end,
-    __lt = function(num, self) return num < self.level end,
-    __le = function(num, self) return num <= self.level end,
-    __len = function(self) return self.level end,
+    __call = function(self, ...) self:debug(...) end, -- redefined later 
     __index = Logger,
-    ---@param self mwseLogger
-    ---@param str string
-    __concat = function(self, str)
-        return self:makeChild(str)
-    end,
     __tostring = function(self)
         if self.moduleName then 
             return sf(
