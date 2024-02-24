@@ -12,6 +12,7 @@
 
 local Parent = require("mcm.components.settings.Slider")
 
+--- @deprecated
 --- @class mwseMCMDecimalSlider
 local DecimalSlider = Parent:new()
 DecimalSlider.min = 0.0
