@@ -994,12 +994,13 @@ tes3ui.suppressTooltip(suppress)
 Gets font height metrics for a font.
 
 ```lua
-local maxGlyphHeight, lineHeight = tes3ui.textLayout.getFontHeight(font)
+local maxGlyphHeight, lineHeight = tes3ui.textLayout.getFontHeight({ font = ... })
 ```
 
 **Parameters**:
 
-* `font` (number): *Default*: `0`. The index of the font.
+* `params` (table)
+	* `font` (number): *Default*: `0`. The index of the font.
 
 **Returns**:
 
@@ -1014,14 +1015,15 @@ local maxGlyphHeight, lineHeight = tes3ui.textLayout.getFontHeight(font)
 Calculates expected size information for text content.
 
 ```lua
-local width, height, verticalAdvance = tes3ui.textLayout.getTextExtent(text, font, firstLineOnly)
+local width, height, verticalAdvance = tes3ui.textLayout.getTextExtent({ text = ..., font = ..., firstLineOnly = ... })
 ```
 
 **Parameters**:
 
-* `text` (string): The text to use.
-* `font` (number): *Default*: `0`. The index of the font.
-* `firstLineOnly` (boolean): *Default*: `false`. Only process the first line of the text.
+* `params` (table)
+	* `text` (string): The text to use.
+	* `font` (number): *Default*: `0`. The index of the font.
+	* `firstLineOnly` (boolean): *Default*: `false`. Only process the first line of the text.
 
 **Returns**:
 
@@ -1037,14 +1039,16 @@ local width, height, verticalAdvance = tes3ui.textLayout.getTextExtent(text, fon
 Performs word wrapping of text.
 
 ```lua
-local wrappedText, lineCount = tes3ui.textLayout.wrapText(text, font, maxWidth)
+local wrappedText, lineCount = tes3ui.textLayout.wrapText({ text = ..., font = ..., maxWidth = ..., ignoreLinkDelimiters = ... })
 ```
 
 **Parameters**:
 
-* `text` (string): The text to wrap.
-* `font` (number): *Default*: `0`. The index of the font.
-* `maxWidth` (number): *Default*: `-1`. The wrapping width in pixels.
+* `params` (table)
+	* `text` (string): The text to wrap.
+	* `font` (number): *Default*: `0`. The index of the font.
+	* `maxWidth` (number): *Default*: `-1`. The wrapping width in pixels.
+	* `ignoreLinkDelimiters` (boolean): *Default*: `false`.
 
 **Returns**:
 
