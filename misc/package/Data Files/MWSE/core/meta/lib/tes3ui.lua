@@ -390,6 +390,29 @@ function tes3ui.stealHelpMenu() end
 --- @param suppress boolean Turns on suppression if true, immediately hiding any active tooltip and further world object tooltips. Turns off suppression if false.
 function tes3ui.suppressTooltip(suppress) end
 
+--- Gets font height metrics for a font.
+--- @param font number? *Default*: `0`. The index of the font.
+--- @return number maxGlyphHeight Maximum pixel height of a single line of text.
+--- @return number lineHeight Pixel spacing between lines in a paragraph.
+function tes3ui.textLayout.getFontHeight(font) end
+
+--- Calculates expected size information for text content.
+--- @param text string The text to use.
+--- @param font number? *Default*: `0`. The index of the font.
+--- @param firstLineOnly boolean? *Default*: `false`. Only process the first line of the text.
+--- @return number width Pixel width of the widest line of the text.
+--- @return number height Pixel height of a label containing this text. Includes the extra space and rounding added by the label layout.
+--- @return number verticalAdvance The vertical displacement that a following text element would use. It is zero for text without newlines, and increases with each newline.
+function tes3ui.textLayout.getTextExtent(text, font, firstLineOnly) end
+
+--- Performs word wrapping of text.
+--- @param text string The text to wrap.
+--- @param font number? *Default*: `0`. The index of the font.
+--- @param maxWidth number? *Default*: `-1`. The wrapping width in pixels.
+--- @return string wrappedText The wrapped text, with `\n` as line breaks.
+--- @return number lineCount The number of lines in the output wrapped text.
+function tes3ui.textLayout.wrapText(text, font, maxWidth) end
+
 --- Forces the game to update the barter menu's tile GUI elements.
 function tes3ui.updateBarterMenuTiles() end
 
