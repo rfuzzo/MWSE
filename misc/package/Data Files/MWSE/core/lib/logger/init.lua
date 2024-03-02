@@ -33,6 +33,7 @@ local loggers = {}
 ---@operator call (Logger.newParams?): Logger
 ---@field modName string the name of the mod this logger is for
 ---@field level Logger.LEVEL
+---@field filePath string the relative path to the file this logger was defined in.
 ---@field modDir string
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
 ---@field writeToFile boolean if true, we will write the log contents to a file with the same name as this mod.
@@ -87,6 +88,13 @@ local logMetatable = {
     -- gonna override this later so that it's exactly equal to `Logger.debug`. this is needed for line number stuff to work properly
     __call = function(self, ...) self:debug(...) end,
     __index = Logger,
+    __newindex = function(self, k, v)
+        if k == "logLevel" then
+            self:setLevel(v)
+        else
+            rawset(self, k, v)
+        end
+    end,
     
     __tostring = function(self)
         return sf("Logger(modName=%q, moduleName=%s, modDir=%q, level=%i (%s))",
@@ -142,8 +150,8 @@ local function getModInfoFromSource()
     -- use mod information to generate logger fields
     -- =========================================================================
 
-    -- `modName` and `moduleName` don't want the author folder, but `modDir `does.
-    local modName, moduleName, modDir
+    -- `modName` and `filePath` don't want the author folder, but `modDir `does.
+    local modName, filePath, modDir
     if metadata then
         local package = metadata.package ---@diagnostic disable-next-line: undefined-field
         modName = package.shortName or package.shortName or package.name 
@@ -156,10 +164,10 @@ local function getModInfoFromSource()
     modName = modName or luaParts[cutoff]
     --[[ generate module name by combining everything together, ignoring the mod root.
         examples: 
-            "herbert100/more quickloot/common.lua" ~> `moduleName = "common.lua"`
-            "herbert100/more quickloot/managers/organic.lua" ~> `moduleName = "managers/organic.lua"`
+            "herbert100/more quickloot/common.lua" ~> `filePath = "common.lua"`
+            "herbert100/more quickloot/managers/organic.lua" ~> `filePath = "managers/organic.lua"`
     ]]
-    moduleName = table.concat(table.filterarray(luaParts, function(i) return i > cutoff end), "/")
+    filePath = table.concat(table.filterarray(luaParts, function(i) return i > cutoff end), "/")
     if hasAuthorName then
         -- e.g. modDir = "herbert100.more quickloot"
         modDir = luaParts[1] .. "." .. luaParts[2]
@@ -167,7 +175,7 @@ local function getModInfoFromSource()
         -- e.g. modDir = "Expeditious Exit"
         modDir = luaParts[1]
     end
-    return modName, moduleName, modDir
+    return modName, filePath, modDir
 end
 
 
@@ -199,24 +207,13 @@ function Logger.new(params, params2)
         params = {}
     elseif type(params) == "string" then
         params = {modName=params} 
-
-    -- check if the user typed "Logger:new" instead of "Logger.new"
-    elseif params == Logger then
-        params = params2 or {}
-
-    -- check if the user called "log:new" (i.e., if they called `new` on a logger object)
-    elseif getmetatable(params) == logMetatable then
-        -- so, let's combine the data from the given logger
-        params2 = params2 or {} -- make sure `params2` exists
-        table.copymissing(params2, params) -- copy over the stuff
-        params = params2 -- rest of the code only cares about `params`
     end
 
     local modName, moduleName = params.modName, params.moduleName
     -- do some error checking to make sure `params` are correct
     
     
-    local srcModName, srcModuleName, srcModDir = getModInfoFromSource()
+    local srcModName, filePath, srcModDir = getModInfoFromSource()
 
     local modDir = params.modDir or srcModDir
     
@@ -227,7 +224,6 @@ function Logger.new(params, params2)
     else
         modName = srcModName
     end
-    moduleName = moduleName or srcModuleName
 
     assert(modName ~= nil, "Error: Could not create a Logger because modName was nil.")
     assert(type(modName) == "string", "Error: Could not create a Logger. modName must be a string.")
@@ -239,7 +235,7 @@ function Logger.new(params, params2)
     end
 
     -- first try to get it
-    local log = Logger.get(modName, moduleName)
+    local log = Logger.get(modName, filePath)
 
     if log then return log end
 
@@ -249,8 +245,8 @@ function Logger.new(params, params2)
         modName = modName,
         modDir = modDir,
         moduleName = moduleName,
+        filePath = filePath,
         includeLineNumber = true,
-        writeToFile = params.writeToFile or false,
         level = Logger.LEVEL.INFO, -- we'll set it with the dedicated function so we can do fancy stuff
         includeTimestamp = params.includeTimestamp or false,
     }
@@ -280,13 +276,18 @@ function Logger.new(params, params2)
     -- this will update the logging level of all other registered loggers, but only if `params.level` exists and is valid 
     log:setLevel(params.level)
 
-
-    if params.writeToFile == nil then
-        -- no `writeToFile` param, so lets update this logger to do the same thing everybody else is doing
-        log:setWriteToFile(log.writeToFile, false)
-    else
-        -- `writeToFile` was specified, so lets update everybody
+    if params.writeToFile ~= nil then
+        -- pave the way forward for our logging brethren
         log:setWriteToFile(params.writeToFile)
+    else
+        -- no behavior specified, so do whatever everybody else is doing
+        for _, logger in ipairs(loggerTbl) do 
+            if logger.file then
+                log:setWriteToFile(true, false)
+                break
+            end
+        end
+        
     end
 
 
@@ -319,7 +320,6 @@ function Logger:setWriteToFile(writeToFile, updateChildren)
                 log.file:close()
                 log.file = nil
             end
-            log.writeToFile = false
         end
         return
     end
@@ -342,10 +342,6 @@ function Logger:setWriteToFile(writeToFile, updateChildren)
             log.file:close()
         end
         log.file = io.open(filename, "w")
-        log.writeToFile = true
-
-
-
     end
 end
 
@@ -363,9 +359,9 @@ local COLORS = {
 
 --[[Get a previously registered logger with the specified `modDir`.]]
 ---@param modDir string name of the mod
----@param moduleName string the name of the module
+---@param filePath string the relative filepath of this logger
 ---@return Logger? logger
-function Logger.getByDir(modDir, moduleName)
+function Logger.getByDir(modDir, filePath)
     local loggerTbl
 
     for _, loggersByModName in pairs(loggers) do
@@ -377,12 +373,12 @@ function Logger.getByDir(modDir, moduleName)
 
     if not loggerTbl then return end
 
-    if not moduleName then 
+    if not filePath then 
         return loggerTbl[1]
     end
 
     for _, log in ipairs(loggerTbl) do
-        if log.moduleName == moduleName then
+        if log.moduleName == filePath then
             return log
         end
     end
@@ -391,19 +387,19 @@ end
 -- get a specified logger. If `moduleName` evaluates to `false`, then any logger with a matching `modName` will be returned (if such a logger exists).
     -- if `moduleName` does not evaluate to `false`, then this function will only return a logger if it can find one that matches the `modName` and the `moduleName`.
 ---@param modName string name of the mod
----@param moduleName string? the name of the module
+---@param filePath string? the relative file path of the module
 ---@return Logger? logger
-function Logger.get(modName, moduleName)
+function Logger.get(modName, filePath)
     local loggerTbl = loggers[modName]
-    if not loggerTbl then 
-        return 
-    end
-    if not moduleName then 
+
+    if not loggerTbl then return end
+
+    if not filePath then 
         return loggerTbl[1]
     end
 
     for _, log in ipairs(loggerTbl) do
-        if log.moduleName == moduleName then
+        if log.filePath == filePath then
             return log
         end
     end
@@ -424,7 +420,6 @@ function Logger:makeChild(moduleName)
         modName=self.modName,
         level=self.level,
         moduleName=moduleName,
-        writeToFile=self.writeToFile,
         includeTimestamp=self.includeTimestamp
     }
 end
@@ -467,6 +462,10 @@ function Logger:setLevel(level)
 end
 
 
+
+
+
+
 ---@param includeTimestamp boolean Whether logs should use timestamps
 function Logger:setIncludeTimestamp(includeTimestamp)
     -- we need to know what to do
@@ -479,6 +478,7 @@ end
 
 
 ---@class Logger.Record
+---@field msg string|any|fun(...):... arguments passed to Logger:debug, Logger:info, etc
 ---@field args any[] arguments passed to Logger:debug, Logger:info, etc
 ---@field level Logger.LEVEL logging level
 ---@field lineNumber integer? the line number, if enabled for this logger
@@ -489,8 +489,9 @@ end
 ---@param level Logger.LEVEL
 ---@param offset integer? for the line number to be accurate, this method assumes it's getting called 2 levels deep (i.e.). the offset adjusts this
 ---@return Logger.Record record
-function Logger:makeRecord(args, level, offset)
+function Logger:makeRecord(msg, args, level, offset)
     return {
+        msg = msg,
         args = args, 
         level = level,
         timestamp = socket.gettime(),
@@ -505,15 +506,20 @@ function Logger:makeHeader(record)
     -- we're going to shove various things into here, and then making the string via
     -- `table.concat(headerT, " | ")
     local headerT = {}
-
+    local name
+    if self.moduleName then
+        name = sf("%s (%s)", self.modName, self.moduleName)
+    else
+        name = self.modName
+    end
     if record.lineNumber then
-        if self.moduleName then
-            headerT = {self.modName, sf("%s:%i", self.moduleName, record.lineNumber)}
+        if self.filePath then
+            headerT = {name, sf("%s:%i", self.filePath, record.lineNumber)}
         else
-            headerT = {sf("%s:%i", self.modName, record.lineNumber)}
+            headerT = {sf("%s:%i", name, record.lineNumber)}
         end
     else
-        headerT = {self.modName, self.moduleName}
+        headerT = {name, self.filePath}
 
     end
     local levelStr = LEVEL_STRINGS[record.level]
@@ -545,25 +551,25 @@ end
 function Logger:format(record)
     local header = self:makeHeader(record)
 
-    local logMsg
+    local formattedMsg
+    local msg = record.msg
     local args = record.args
     local n = #args
-    if n == 1 then
-        logMsg = args[1]
+    if n == 0 then
+        formattedMsg = msg
     else
-        local s1, s2 = args[1], args[2]
-        if type(s1) == "function" then
-            if n == 2 then
-                logMsg = sf(s1(s2))
+        if type(msg) == "function" then
+            if n == 1 then
+                formattedMsg = sf(msg(args[1]))
             else
-                logMsg = sf(s1(table.unpack(args, 2)))
+                formattedMsg = sf(msg(table.unpack(args)))
             end
 
-        elseif type(s2) == "function" then
-            if n == 2 then
-                logMsg = sf( s1, s2())
+        elseif type(args[1]) == "function" then
+            if n == 1 then
+                formattedMsg = sf(msg, args[1]())
             else
-                logMsg =  sf(s1, s2(table.unpack(args, 3)))
+                formattedMsg =  sf(msg, args[1](table.unpack(args, 2)))
 
                 -- the commented out code works, but comes with a performance hit
                 -- and (at the moment) i don't think it's worth it
@@ -581,32 +587,27 @@ function Logger:format(record)
                 -- end
             end
         else
-            logMsg = sf(table.unpack(args))
+            formattedMsg = sf(msg, table.unpack(args))
         end
     end
-    return sf("[%s] %s", header, logMsg)
+    return sf("[%s] %s", header, formattedMsg)
 
-
-    
-    -- if self.writeToFile ~= false then
-    --     self.file:write(s .. "\n"); self.file:flush()
-    -- else
-    --    print(s)
-    -- end
 end
+
+
 
 
 -- make the logging functions
 for levelStr, level in pairs(LOG_LEVEL) do
     -- e.g., "DEBUG" -> "debug"
-    Logger[levelStr:lower()] = function(self, ...)
+    Logger[levelStr:lower()] = function(self, msg, ...)
         if self.level < level then return end
 
-        if self.writeToFile and self.file then
-            self.file:write(self:format(self:makeRecord({...}, level)), "\n")
+        if self.file then
+            self.file:write(self:format(self:makeRecord(msg, {...}, level)), "\n")
             self.file:flush()
         else
-            print(self:format(self:makeRecord({...}, level)))
+            print(self:format(self:makeRecord(msg, {...}, level)))
         end
     end
 end
@@ -619,7 +620,7 @@ logMetatable.__call = Logger.debug
 function Logger:debug(...)
     if self.level < LOG_LEVEL.DEBUG then return end
     
-    if self.writeToFile and self.file then
+    if self.file then
         self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.DEBUG)), "\n")
         self.file:flush()
     else
@@ -643,11 +644,34 @@ function Logger:writeInitializedMessage(version)
     -- need to do it this way so the call to `debug.getinfo` lines up. super hacky :/
     local record
     if version then
-        record = self:makeRecord({"Initialized version %s.", version}, LOG_LEVEL.INFO)
+        record = self:makeRecord("Initialized version %s.", {version}, LOG_LEVEL.INFO)
     else
-        record = self:makeRecord({"Mod initialized."}, LOG_LEVEL.INFO)
+        record = self:makeRecord("Mod initialized.", {}, LOG_LEVEL.INFO)
     end
     print(self:format(record))
 end
+
+
+
+-- =============================================================================
+-- BACKWARDS COMPATIBILITY
+-- =============================================================================
+
+
+-- support the old way
+---@deprecated 
+Logger.setLogLevel = Logger.setLevel
+
+
+-- support the old way
+---@deprecated 
+Logger.getLogger = Logger.get
+
+---@deprecated
+function Logger:doLog(levelStr)
+    -- make sure they gave us a valid logging level, and that we are at or below that logging level
+    return LOG_LEVEL[levelStr] and LOG_LEVEL[levelStr] <= self.level
+end
+
 
 return Logger ---@type Logger
