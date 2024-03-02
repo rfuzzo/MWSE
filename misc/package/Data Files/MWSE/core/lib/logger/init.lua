@@ -5,56 +5,18 @@ Based on the `mwseLogger` made by Merlord.
 Current version made by herbert100.
 ]]
 
-local colors = require("herbert100.logger.colors")
-
+local colors = require("logger.colors")
 local sf = string.format
 
-local loggerMetatable = {
+local LoggerMetatable = {
     -- make new loggers by calling `Logger`
-    __tostring = function(self) return "Logger" end
+    __call=function (cls, ...) return cls.new(...) end, -- gonna override this later
+    __tostring = function() return "Logger" end
 }
 
 
 
-local function getActiveModInfo(offset)
-    local src = debug.getinfo(3 + (offset or 0), "S").source
-    if not src then return end
-    
-    local parts = src:split("\\/")
-    table.remove(parts, 1) -- first part will be "@^"
-    local luaParts = {} -- without "Data Files"/"MWSE"/"mods"/
-    for i=4, #parts do
-        luaParts[i-3] = parts[i]
-    end
-    local info = {
-        parts = parts, 
-        luaParts = luaParts, 
-        filename = parts[#parts],
-        lua_parent_name = parts[3],
-        path = table.concat(parts, "\\"),
-        lua_path = table.concat(luaParts, "\\"),
-    }
-    info.dir = info.path:sub(1, -#info.filename - 2) -- -1 because it's lua, then another -1 to kill the "\\"
-    
-    local metadata = tes3.getLuaModMetadata(luaParts[1] .. "." .. luaParts[2]) ---@type MWSE.Metadata?
-    if metadata then
-        info.dir_has_author_name = true
-        -- table.remove(parts, 1)
-    else
-        metadata = tes3.getLuaModMetadata(parts[1])
-        
-    end
-    if metadata then
-        info.metadata = metadata
-        info.dir_has_author_name = info.dir_has_author_name or false
-    else
-		local one_dir_up = info.dir:gsub("\\[^\\]+$", "")
-        info.dir_has_author_name = not (lfs.fileexists(one_dir_up .. "\\main.lua") or lfs.fileexists(one_dir_up .. "\\init.lua"))
-    end
-    return info
-end
-
----@alias mwseLogger.LEVEL
+---@alias Logger.LEVEL
 ---|0                       NONE: Nothing will be printed
 ---|1                       ERROR: Error messages will be printed
 ---|2                       WARN: Warning messages will be printed
@@ -63,7 +25,7 @@ end
 ---|5                       TRACE: Many debug messages will be printed
 
 
----@type table<string, mwseLogger[]>
+---@type table<string, Logger[]>
 local loggers = {}
 
 
@@ -133,15 +95,17 @@ Additionally, you can write
 
 **NOTE:** The `log` **must** be on the `>=` side of the comparison if using this syntax. Writing `log <= 4` will result in an error. 
 ]]
----@class mwseLogger
+---@class Logger
+---@operator call (Logger.newParams?): Logger
 ---@field modName string the name of the mod this logger is for
----@field level mwseLogger.LEVEL
+---@field level Logger.LEVEL
+---@field modDir string
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
 ---@field useColors boolean should colors be used when writing log statements? Default: `false`
 ---@field writeToFile boolean if true, we will write the log contents to a file with the same name as this mod.
----@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
+---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
+---@field includeLineNumber boolean should the current time be printed when writing log messages? Default: `false`
 ---@field file file*? the file the log is being written to, if `writeToFile == true`, otherwise its nil.
----@field LEVEL table<mwseLogger.LEVEL_STRING, mwseLogger.LEVEL>
 local Logger = {
     LEVEL = {
         NONE = 0,
@@ -152,8 +116,10 @@ local Logger = {
         TRACE = 5
     }
 }
-setmetatable(Logger, loggerMetatable)
+setmetatable(Logger, LoggerMetatable)
 
+
+local LEVEL_STRINGS = table.invert(Logger.LEVEL)
 
 ---|`Logger.LEVEL.NONE`     Nothing will be printed
 ---|`Logger.LEVEL.ERROR`    Error messages will be printed
@@ -165,7 +131,7 @@ setmetatable(Logger, loggerMetatable)
 
 
 
----@alias mwseLogger.LEVEL_STRING
+---@alias Logger.LEVEL_STRING
 ---|"NONE"      Nothing will be printed
 ---|"ERROR"     Error messages will be printed
 ---|"WARN"      Warning messages will be printed
@@ -174,22 +140,32 @@ setmetatable(Logger, loggerMetatable)
 ---|"TRACE"     Many debug messages will be printed
 
 
+local communalKeys = {
+    modName = true,
+    modDir = true,
+    -- moduleName = false,
+    includeLineNumber = true,
+    useColors = true,
+    writeToFile = true,
+    level = true,
+    includeTimestamp = true,
+}
 -- metatable used by log objects
-local log_metatable = {
-    __call = function(self, ...) self:debug(...) end, -- redefined later 
+local logMetatable = {
+    __call = function(self, ...) self:debug(...) end,
+    __lt = function(num, self) return num < self.level end,
+    __le = function(num, self) return num <= self.level end,
+    __len = function(self) return self.level end,
     __index = Logger,
+    ---@param self Logger
+    ---@param str string
+    __concat = function(self, str)
+        return self:makeChild(str)
+    end,
     __tostring = function(self)
-        if self.moduleName then 
-            return sf(
-                "Logger(modName=\"%s\", moduleName=\"%s\", level=%i, levelStr=%s)",
-                self.modName, self.moduleName, self.level, table.find(Logger.LEVEL, self.level)
-            )
-        else
-            return sf(
-                    "Logger(modName=\"%s\", level=%i, levelStr=%s)",
-                    self.modName, self.level, table.find(Logger.LEVEL, self.level)
-                )
-        end
+        return sf("Logger(modName=%q, moduleName=%s, modDir=%q, level=%i (%s))",
+            self.modName, self.moduleName and sf("%q", self.moduleName), self.modDir, self.level, self:getLevelStr()
+        )
     end,
 }
 
@@ -205,46 +181,77 @@ local function getModAndModuleNames(modName)
     return actualModName, moduleName
 end
 
----@return string? modName, string? moduleName
+
+---@return string? modName, string? moduleName, string? modDir
 local function getModInfoFromSource()
-    local info = getActiveModInfo(1)
-    if not info then return end
 
-    local modName, moduleName
-    if info.metadata then
-        local package = info.metadata.package
-        modName = package.name 
+    -- =========================================================================
+    -- generate relevant mod information
+    -- =========================================================================
+
+    local src = debug.getinfo(3, "S").source
+    if not src then return end
+    -- parts of the path without "@^\Data Files\MWSE\mods\"
+    local luaParts = table.filterarray(src:split("\\/"), function (i) return i >= 5 end)
+    
+    local hasAuthorName = false
+
+    ---@type MWSE.Metadata?
+    local metadata = tes3.getLuaModMetadata(luaParts[1] .. "." .. luaParts[2])
+    if metadata then
+        hasAuthorName = true
+    else
+        metadata = tes3.getLuaModMetadata(luaParts[1])
+    end
+    if metadata then
+        hasAuthorName = hasAuthorName or false
+    else
+        local oneDirUp = table.concat({"Data Files", "MWSE", "mods", luaParts[1]}, "\\")
+        hasAuthorName = not (lfs.fileexists(oneDirUp .. "\\main.lua") or lfs.fileexists(oneDirUp .. "\\init.lua"))
+        
     end
 
-    local s, e = 2, #info.luaParts
-    if info.dir_has_author_name then
-        s = 3
-        modName = modName or info.luaParts[2]
+
+    -- =========================================================================
+    -- use mod information to generate logger fields
+    -- =========================================================================
+
+    -- `modName` and `moduleName` don't want the author folder, but `modDir `does.
+    local modName, moduleName, modDir
+    if metadata then
+        local package = metadata.package ---@diagnostic disable-next-line: undefined-field
+        modName = package.shortName or package.shortName or package.name 
+    end
+
+    -- actual mod information starts at index 2 if there's an author name
+    local cutoff = hasAuthorName and 2 or 1
+
+    -- if the module name doesn't exist, use the mod folder name (excluding the author name)
+    modName = modName or luaParts[cutoff]
+    --[[ generate module name by combining everything together, ignoring the mod root.
+        examples: 
+            "herbert100/more quickloot/common.lua" ~> `moduleName = "common.lua"`
+            "herbert100/more quickloot/managers/organic.lua" ~> `moduleName = "managers/organic.lua"`
+    ]]
+    moduleName = table.concat(table.filterarray(luaParts, function(i) return i > cutoff end), "/")
+    if hasAuthorName then
+        -- e.g. modDir = "herbert100.more quickloot"
+        modDir = luaParts[1] .. "." .. luaParts[2]
     else
-        modName = modName or info.luaParts[1]
+        -- e.g. modDir = "Expeditious Exit"
+        modDir = luaParts[1]
     end
-    local last_part = info.parts[#info.parts]
-    if last_part == "main.lua" or last_part == "init.lua" then
-        e = e - 1
-    else
-        info.luaParts[e] = last_part:sub(1,-5) -- remove the ".lua" 
-    end
-    local module_parts = {}
-    for i=s, e do
-        table.insert(module_parts, info.luaParts[i])
-    end
-    if next(module_parts) ~= nil then
-        moduleName = table.concat(module_parts, "/")
-    end
-    return modName, moduleName
+    return modName, moduleName, modDir
 end
 
 
----@class mwseLogger.newParams
+---@class Logger.newParams
 ---@field modName string? the name of the mod this logger is for
----@field level mwseLogger.LEVEL|mwseLogger.LEVEL_STRING|nil the log level to set this object to. Default: "INFO"
+---@field modDir string? the name of the mod this logger is for
+---@field level Logger.LEVEL|Logger.LEVEL_STRING|nil the log level to set this object to. Default: "INFO"
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
 ---@field useColors boolean? should colors be used when writing log statements? Default: `false`
+---@field includeLineNumber boolean? should the current line be printed when writing log messages? Default: `true`
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
 ---@field writeToFile string|boolean|nil whether to write the log messages to a file, or the name of the file to write to. if `false` or `nil`, messages will be written to `MWSE.log`
 
@@ -262,31 +269,57 @@ In addition to `modName`, you may specify
 - `level`: the logging level to start this logger at. This is the same as making a new logger and then calling `log:setLevel(level)`
 - `writeToFile`: either a boolean saying we should write to a file, or the name of a file to write to. If false (the default), then log messages will be written to `MWSE.log`
 ]]
----@param params mwseLogger.newParams|string?
----@return mwseLogger
-function Logger.new(params)
+---@param params Logger.newParams|string?
+---@return Logger
+function Logger.new(params, params2)
     -- if it's just a string, treat it as the `modName`
     if not params then
         params = {}
     elseif type(params) == "string" then
         params = {modName=params} 
+
+    -- check if the user typed "Logger:new" instead of "Logger.new"
+    elseif params == Logger then
+        params = params2 or {}
+        -- mwse.log("new was called on logger. making params = %s", inspect(params))
+
+    -- check if the user called "log:new" (i.e., if they called `new` on a logger object)
+    elseif getmetatable(params) == logMetatable then
+        -- so, let's combine the data from the given logger
+        -- mwse.log("logger made with logmetatable!")
+        params2 = params2 or {} -- make sure `params2` exists
+        table.copymissing(params2, params) -- copy over the stuff
+        params = params2 -- rest of the code only cares about `params`
     end
+
     local modName, moduleName = params.modName, params.moduleName
     -- do some error checking to make sure `params` are correct
-    if not modName then
-        modName, moduleName = getModInfoFromSource()
+    
+    
+    local srcModName, srcModuleName, srcModDir = getModInfoFromSource()
+
+    local modDir = params.modDir or srcModDir
+    
+    if modName then
+        if not moduleName then
+            modName, moduleName = getModAndModuleNames(modName)
+        end
+    else
+        modName = srcModName
     end
+    moduleName = moduleName or srcModuleName
+
     assert(modName ~= nil, "Error: Could not create a Logger because modName was nil.")
     assert(type(modName) == "string", "Error: Could not create a Logger. modName must be a string.")
 
-    if moduleName == nil then
-        modName, moduleName = getModAndModuleNames(modName)
+    if not modDir then
+        modDir = modName
+        -- who logs the logger?
+        mwse.log("[Logger: ERROR] modDir for %q (module %q) was nil! this isn't supposed to happen!!", modName, moduleName)
     end
 
-    local log ---@type mwseLogger?
-
     -- first try to get it
-    log = Logger.get(modName, moduleName)
+    local log = Logger.get(modName, moduleName)
 
     if log then return log end
 
@@ -294,36 +327,43 @@ function Logger.new(params)
 
     log = {
         modName = modName,
+        modDir = modDir,
         moduleName = moduleName,
+        includeLineNumber = true,
         useColors=params.useColors or false,
         writeToFile = params.writeToFile or false,
         level = Logger.LEVEL.INFO, -- we'll set it with the dedicated function so we can do fancy stuff
         includeTimestamp = params.includeTimestamp or false,
     }
 
+    -- mwse.log("making new log = %s", inspect(log))
     
     -- if there are already loggers with this `modName`, get the most recent one, and then
     -- update this new loggers values to those of the most recent logger. (if those values weren't specified in `params`)
-    if loggers[modName] and #loggers[modName] > 0 then
-        local parent = loggers[modName][#loggers[modName]]
-        for _, k in ipairs{"useColors", "writeToFile", "includeTimestamp"} do
+    local loggerTbl = loggers[modName]
+    if loggerTbl and #loggerTbl > 0 then
+        -- mwse.log("logger tbl for %q is %s", modName, inspect(loggerTbl, {depth=2}))
+        local latest = loggerTbl[#loggerTbl]
+        -- mwse.log("latest logger is %s", inspect(latest, {depth=1}))
+        
+        for k in pairs(communalKeys) do
             if params[k] == nil then
-                log[k] = parent[k]
+                -- mwse.log("setting Logger(%s (%s))[%q] = %s", modName, moduleName, k, latest[k])
+                log[k] = latest[k]
             end
         end
-        -- set the default value to the parent log level, we will call `setLevel` later
-        -- this will do the the following:
-        -- if `params.level` was invalid, nothing will happen and `parent.level` will be used.
-        -- if `params.level` was valid, then every logger registered to this mod will be updated.
-        log.level = parent.level
     else
         -- this is the first logger with this `modName`, so we should intialize the array
-        loggers[modName] = {}
+        loggerTbl = {}
+        loggers[modName] = loggerTbl
     end
 
-    table.insert(loggers[modName], log)
+    -- mwse.log("updated log. it's now %s", inspect(log))
 
-    setmetatable(log, log_metatable)
+    table.insert(loggerTbl, log)
+
+    setmetatable(log, logMetatable)
+    -- this will update the logging level of all other registered loggers, but only if `params.level` exists and is valid 
     log:setLevel(params.level)
 
     if params.writeToFile == nil then
@@ -336,42 +376,51 @@ function Logger.new(params)
     return log
 end
 
+LoggerMetatable.__call = Logger.new
 
+-- failsafe
+for k in pairs(communalKeys) do
+    Logger["set_" .. k] = function(self, v)
+        for _, logger in ipairs(loggers[self.modName]) do
+            logger[k] = v
+        end
+    end
+end
 
 ---@param writeToFile string|boolean
 ---@param onlyThisLogger boolean? should we only update this logger? Default: false
 function Logger:setWriteToFile(writeToFile, onlyThisLogger)
     if writeToFile == nil then return end
 
-    local _loggers = onlyThisLogger and {self} or loggers[self.modName]
+    local relevantLoggers = onlyThisLogger and {self} or loggers[self.modName]
 
-    if writeToFile == false then
-        for _, log in ipairs(_loggers) do
-            if log.file then
+    if not writeToFile then
+        for _, log in ipairs(relevantLoggers) do
+            if log.file then 
                 log.file:close()
-                log.file = nil
+                rawset(log, "file", nil)
             end
-            log.writeToFile = false
+            rawset(log, "writeToFile", false)
         end
         return
     end
-
-    for _, log in ipairs(_loggers) do
+    for _, log in ipairs(relevantLoggers) do
         local filename
         if writeToFile == true then
             if log.moduleName then
-                filename = sf("%s\\%s.log",log.modName,log.moduleName)
+                filename = sf("%s\\%s.log",log.modDir, log.moduleName)
             else
-                filename = log.modName .. ".log"
+                filename = log.modDir .. ".log"
             end
         else
             filename = writeToFile
         end
+        -- close old file
         if log.file then
             log.file:close()
         end
-        log.file = io.open(filename, "w")
-        log.writeToFile = true
+       rawset(log, "file", io.open(filename, "w"))
+       rawset(log, "writeToFile", true)
     end
 end
 
@@ -387,23 +436,50 @@ local COLORS = {
     TRACE =  "bright white",
 }
 
---[[Get a previously registered logger with the specified `modName`.
-
-**Note:** Calling `Logger.new(modName)` will also return a previously registered logger if it exists.
-The difference between `.get` and `.new` is that if a logger does not exist, `.new` will create one, while `.get` will not.
-]]
----@param modName string name of the mod
+--[[Get a previously registered logger with the specified `modDir`.]]
+---@param modDir string name of the mod
 ---@param moduleName string the name of the module
----@return mwseLogger? logger
-function Logger.get(modName, moduleName)
-    if moduleName == nil then
-        modName, moduleName = getModAndModuleNames(modName)
+---@return Logger? logger
+function Logger.getByDir(modDir, moduleName)
+    local loggerTbl
+
+    for _, loggersByModName in pairs(loggers) do
+        if loggersByModName[1].modDir == modDir then
+            loggerTbl = loggersByModName
+            break
+        end
     end
-    if loggers[modName] then
-        for _, log in ipairs(loggers[modName]) do
-            if log.moduleName == moduleName then
-                return log
-            end
+
+    if not loggerTbl then return end
+
+    if not moduleName then 
+        return loggerTbl[1]
+    end
+
+    for _, log in ipairs(loggerTbl) do
+        if log.moduleName == moduleName then
+            return log
+        end
+    end
+end
+
+-- get a specified logger. If `moduleName` evaluates to `false`, then any logger with a matching `modName` will be returned (if such a logger exists).
+    -- if `moduleName` does not evaluate to `false`, then this function will only return a logger if it can find one that matches the `modName` and the `moduleName`.
+---@param modName string name of the mod
+---@param moduleName string? the name of the module
+---@return Logger? logger
+function Logger.get(modName, moduleName)
+    local loggerTbl = loggers[modName]
+    if not loggerTbl then 
+        return 
+    end
+    if not moduleName then 
+        return loggerTbl[1]
+    end
+
+    for _, log in ipairs(loggerTbl) do
+        if log.moduleName == moduleName then
+            return log
         end
     end
 end
@@ -414,10 +490,8 @@ function Logger:getLevelStr()
 end
 
 --- returns all the loggers associated with this modName (can pass a Logger as well)
-function Logger.getLoggers(modNameOrLogger) 
-    return type(modNameOrLogger) == "table"  and loggers[modNameOrLogger.modName]
-        or loggers[modNameOrLogger] 
-        or false
+function Logger.getLoggers(modName) 
+    return loggers[modName]
 end
 
 function Logger:makeChild(moduleName)
@@ -432,7 +506,7 @@ function Logger:makeChild(moduleName)
 end
 
 
-local LOG_LEVEL = Logger.LEVEL
+local LOGLEVEL = Logger.LEVEL
 
 
 
@@ -442,29 +516,29 @@ e.g. to set the `log.level` to "DEBUG", you can write any of the following:
 2) `log:setLevel(4)`
 3) `log:setLevel(Logger.LEVEL.DEBUG)`
 ]]
----@param self mwseLogger
----@param level mwseLogger.LEVEL|mwseLogger.LEVEL_STRING
+---@param self Logger
+---@param level Logger.LEVEL|Logger.LEVEL_STRING
 function Logger:setLevel(level)
     
 
     local lvl -- the actual level we should use, instead of a string or something
-    if LOG_LEVEL[level] then
-        lvl = LOG_LEVEL[level]
+    if LOGLEVEL[level] then
+        lvl = LOGLEVEL[level]
 
     elseif type(level) == "number" then 
-        if LOG_LEVEL.NONE <= level and level <= LOG_LEVEL.TRACE then
+        if LOGLEVEL.NONE <= level and level <= LOGLEVEL.TRACE then
             ---@diagnostic disable-next-line: assign-type-mismatch
             lvl = level
         end
-
     elseif type(level) == "string" then
-        lvl = LOG_LEVEL[level:upper()]
+        lvl = LOGLEVEL[level:upper()]
     end
+    if lvl then 
+        for _, logger in ipairs(loggers[self.modName]) do
+            -- mwse.log("setting Logger(%s (%s)).level = %s", logger.modName, logger.moduleName, lvl)
 
-    if not lvl then return end
-
-    for _, log in ipairs(loggers[self.modName]) do
-        log.level = lvl
+            logger.level = lvl
+        end
     end
 end
 
@@ -479,23 +553,55 @@ function Logger:setIncludeTimestamp(includeTimestamp)
     end
 end
 
---- for internal use only. it generates the header message that will be enclosed in square brackets when printing log messages.
-function Logger:_makeHeader(logStr)
-    local headerTbl = {}
-    local lineno = debug.getinfo(4,"l").currentline
-    if self.moduleName ~= nil then
-        headerTbl[1] = sf("%s (%s): %i", self.modName, self.moduleName, lineno)
+
+---@class Logger.Record
+---@field args any[] arguments passed to Logger:debug, Logger:info, etc
+---@field level Logger.LEVEL logging level
+---@field lineNumber integer? the line number, if enabled for this logger
+---@field timestamp number the timestamp of this message
+
+local socket = require("socket")
+
+---@param args any[] arguments passed to Logger:debug, Logger:info, etc
+---@param level Logger.LEVEL
+---@param offset integer? for the line number to be accurate, this method assumes it's getting called 2 levels deep (i.e.). the offset adjusts this
+---@return Logger.Record record
+function Logger:makeRecord(args, level, offset)
+    return {
+        args = args, 
+        level = level,
+        timestamp = socket.gettime(),
+        lineNumber = debug.getinfo(3 + (offset or 0), "l").currentline
+    }
+end
+
+
+---@param record Logger.Record
+---@return string
+function Logger:makeHeader(record)
+    -- we're going to shove various things into here, and then making the string via
+    -- `table.concat(headerT, " | ")
+    local headerT = {}
+
+    if record.lineNumber then
+        if self.moduleName then
+            headerT = {self.modName, sf("%s:%i", self.moduleName, record.lineNumber)}
+        else
+            headerT = {sf("%s:%i", self.modName, record.lineNumber)}
+        end
     else
-        headerTbl[1] = sf("%s: %i", self.modName, lineno)
+        headerT = {self.modName, self.moduleName}
+
     end
+    local levelStr = LEVEL_STRINGS[record.level]
     if self.useColors then
         -- e.g. turn "ERROR" into "ERROR" (but written in red)
-        logStr = colors(sf("%%{%s}%s", COLORS[logStr], logStr))
+        levelStr = colors(sf("%%{%s}%s", COLORS[levelStr], levelStr))
     end
-    headerTbl[#headerTbl+1] = logStr
+    table.insert(headerT, levelStr)
+
     if self.includeTimestamp then
-        local socket = require("socket")
-        local timestamp = socket.gettime()
+        local timestamp = record.timestamp
         local milliseconds = math.floor((timestamp % 1) * 1000)
         timestamp = math.floor(timestamp)
 
@@ -503,48 +609,67 @@ function Logger:_makeHeader(logStr)
         local timeTable = os.date("*t", timestamp)
 
         -- format time components into H:M:S:MS string
-        local formattedTime = sf(": %02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
-        headerTbl[#headerTbl+1] = formattedTime
+        local formattedTime = sf("%02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
+        table.insert(headerT, formattedTime)
     end
-    return table.concat(headerTbl," ")
+    return table.concat(headerT, " | ")
 end
 
---- write to log. only used internally
----@param logStr mwseLogger.LEVEL_STRING
-function Logger:write(logStr, ...)
-    local s
-    local n, header = select("#",...), self:_makeHeader(logStr)
+-- default formatter. can be overridden by users
+---@param record Logger.Record
+---@return string
+function Logger:format(record)
+    local header = self:makeHeader(record)
+
+    local logMsg
+    local args = record.args
+    local n = #args
     if n == 1 then
-        s = sf("[%s] %s", header, ...)
+        logMsg = args[1]
     else
-        local s1, s2 = ...
+        local s1, s2 = args[1], args[2]
         if type(s1) == "function" then
             if n == 2 then
-                s = sf( "[%s] %s", header, sf( s1(s2) ) )
+                logMsg = sf(s1(s2))
             else
-                s = sf( "[%s] %s", header, sf( s1(select(2, ...)) ) )
+                logMsg = sf(s1(table.unpack(args, 2)))
             end
 
         elseif type(s2) == "function" then
             if n == 2 then
-                s = sf("[%s] %s", header, sf( s1, s2() ) )
+                logMsg = sf( s1, s2())
             else
-                s = sf( "[%s] %s", header, sf(s1, s2(select(3, ...))))
+                logMsg =  sf(s1, s2(table.unpack(args, 3)))
+
+                -- the commented out code works, but comes with a performance hit
+                -- and (at the moment) i don't think it's worth it
+
+                -- local params = debug.getinfo(s2, "u").nparams
+                -- need to offset by 2 because `s1` and `s2` are counted in `n`
+                -- if n - 2 > params then
+                    -- pass arguments `3, ..., (3 + params - 1)` to `s2`
+                    -- then pass the remaining arugments `(3 + params), ...` to `sf`
+                    -- s = sf( "[%s] %s", header, sf( s1, s2(select(3, ...)), select(3 + params, ...) ) )
+                -- else
+                    -- pass all arguments to `s2`
+                    -- this has to be done separately to allow `s2` to return multiple values
+                    -- s = sf( "[%s] %s", header, sf(s1, s2(select(3, ...))))
+                -- end
             end
         else
-            s = sf("[%s] %s", header, sf(...) )
+            logMsg = sf(table.unpack(args))
         end
     end
+    return sf("[%s] %s", header, logMsg)
+
 
     
-    if self.writeToFile ~= false then
-        self.file:write(s .. "\n"); self.file:flush()
-    else
-       print(s)
-    end
+    -- if self.writeToFile ~= false then
+    --     self.file:write(s .. "\n"); self.file:flush()
+    -- else
+    --    print(s)
+    -- end
 end
-
-
 
 
 
@@ -560,12 +685,18 @@ If one parameter is passed, that paramter will be printed normally.
 3) If you type `log:debug(str, func, ...)` then the output will be the same as 
 ```log:debug(string.format(str, func(...) ))```
 
-**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
 So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
 ---@param ... any the strings to write the log
 function Logger:error(...)
-    if self.level >= LOG_LEVEL.ERROR then self:write("ERROR", ...) end
+    if self.level < LOGLEVEL.ERROR then return end
+
+    if self.file then
+        self.file:write(self:format(self:makeRecord({...}, LOGLEVEL.ERROR)))
+    else
+        print(self:format(self:makeRecord({...}, LOGLEVEL.ERROR)))
+    end
 end
 
 
@@ -581,12 +712,18 @@ If one parameter is passed, that paramter will be printed normally.
 3) If you type `log:debug(str, func, ...)` then the output will be the same as 
 ```log:debug(string.format(str, func(...) ))```
 
-**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
 So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
 ---@param ... any the strings to write the log
 function Logger:warn(...)
-    if self.level >= LOG_LEVEL.WARN then self:write("WARN", ...) end
+    if self.level < LOGLEVEL.WARN then return end
+    
+    if self.file then
+        self.file:write(self:format(self:makeRecord({...}, LOGLEVEL.WARN)))
+    else
+        print(self:format(self:makeRecord({...}, LOGLEVEL.WARN)))
+    end
 end
 
 --[[ Write an info message, if the current `log.level` permits it. 
@@ -601,12 +738,18 @@ If one parameter is passed, that paramter will be printed normally.
 3) If you type `log:debug(str, func, ...)` then the output will be the same as 
 ```log:debug(string.format(str, func(...) ))```
 
-**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
 So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
 ---@param ... any the strings to write the log
 function Logger:info(...)
-    if self.level >= LOG_LEVEL.INFO then self:write("INFO", ...) end
+    if self.level <  LOGLEVEL.INFO then return end
+    
+    if self.file then
+        self.file:write(self:format(self:makeRecord({...}, LOGLEVEL.INFO)))
+    else
+        print(self:format(self:makeRecord({...}, LOGLEVEL.INFO)))
+    end
 end
 
 
@@ -622,16 +765,21 @@ If one parameter is passed, that paramter will be printed normally.
 3) If you type `log:debug(str, func, ...)` then the output will be the same as 
 ```log:debug(string.format(str, func(...) ))```
 
-**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
 So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
 ---@param ... any the strings to write the log
 function Logger:debug(...)
-    if self.level >= LOG_LEVEL.DEBUG then self:write("DEBUG", ...) end
+    if self.level < LOGLEVEL.DEBUG then return end
+    
+    if self.file then
+        self.file:write(self:format(self:makeRecord({...}, LOGLEVEL.DEBUG)))
+    else
+        print(self:format(self:makeRecord({...}, LOGLEVEL.DEBUG)))
+    end
 end
 
--- redefine it to make it behave consistently with `debug.getinfo`
-log_metatable.__call = Logger.debug
+logMetatable.__call = Logger.debug
 
 --[[ Write a trace message, if the current `log.level` permits it. 
 
@@ -645,14 +793,38 @@ If one parameter is passed, that paramter will be printed normally.
 3) If you type `log:debug(str, func, ...)` then the output will be the same as 
 ```log:debug(string.format(str, func(...) ))```
 
-**Note:** there is an advantage to using this syntax: functions will be called _only_ if you're at the appropriate logging level. 
+**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
 So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
 ---@param ... any the strings to write the log
 function Logger:trace(...)
-    if self.level >= LOG_LEVEL.TRACE then self:write("TRACE", ...) end
+    if self.level < LOGLEVEL.TRACE then return end
+    
+    if self.file then
+        self.file:write(self:format(self:makeRecord({...}, LOGLEVEL.TRACE)))
+    else
+        print(self:format(self:makeRecord({...}, LOGLEVEL.TRACE)))
+    end
 end
 
 
+function Logger:writeInitMessage(version)
+    if self.level < Logger.LEVEL.INFO then return end
 
-return Logger ---@type mwseLogger
+    if not version then
+        local metadata = tes3.getLuaModMetadata(self.modDir)
+        if metadata then
+            version = metadata.package.version
+        end
+    end
+    -- need to do it this way so the call to `debug.getinfo` lines up. super hacky :/
+    local record
+    if version then
+        record = self:makeRecord({"Initialized version %s.", version}, LOGLEVEL.INFO)
+    else
+        record = self:makeRecord({"Mod initialized."}, LOGLEVEL.INFO)
+    end
+    print(self:format(record))
+end
+
+return Logger ---@type Logger
