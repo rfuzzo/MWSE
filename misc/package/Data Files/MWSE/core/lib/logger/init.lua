@@ -65,15 +65,6 @@ local LEVEL_STRINGS = table.invert(Logger.LEVEL)
 
 
 
----@alias Logger.LEVEL_STRING
----|"NONE"      Nothing will be printed
----|"ERROR"     Error messages will be printed
----|"WARN"      Warning messages will be printed
----|"INFO"      Crucial information will be printed
----|"DEBUG"     Debug messages will be printed
----|"TRACE"     Many debug messages will be printed
-
-
 local communalKeys = {
     modName = true,
     modDir = true,
@@ -90,7 +81,7 @@ local logMetatable = {
     __index = Logger,
     __newindex = function(self, k, v)
         if k == "logLevel" then
-            self:setLevel(v)
+            self:setLogLevel(v)
         else
             rawset(self, k, v)
         end
@@ -182,7 +173,7 @@ end
 ---@class Logger.newParams
 ---@field modName string? the name of the mod this logger is for
 ---@field modDir string? the name of the mod this logger is for
----@field level Logger.LEVEL|Logger.LEVEL_STRING|nil the log level to set this object to. Default: "INFO"
+---@field level Logger.LEVEL? the log level to set this object to. Default: "LEVEL.INFO"
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
 ---@field includeLineNumber boolean? should the current line be printed when writing log messages? Default: `true`
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
@@ -201,7 +192,7 @@ In addition to `modName`, you may specify
 ]]
 ---@param params Logger.newParams|string?
 ---@return Logger
-function Logger.new(params, params2)
+function Logger.new(params)
     -- if it's just a string, treat it as the `modName`
     if not params then
         params = {}
@@ -435,30 +426,16 @@ e.g. to set the `log.level` to "DEBUG", you can write any of the following:
 3) `log:setLevel(Logger.LEVEL.DEBUG)`
 ]]
 ---@param self Logger
----@param level Logger.LEVEL|Logger.LEVEL_STRING
+---@param level Logger.LEVEL
 function Logger:setLevel(level)
     
-
-    local lvl -- the actual level we should use, instead of a string or something
-    if LOG_LEVEL[level] then
-        lvl = LOG_LEVEL[level]
-
-    elseif type(level) == "number" then 
-        if LOG_LEVEL.NONE <= level and level <= LOG_LEVEL.TRACE then
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            lvl = level
-        end
-    elseif type(level) == "string" then
-        lvl = LOG_LEVEL[level:upper()]
+    if not level or type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
+        return
     end
-
-    if lvl then
-        for _, logger in ipairs(loggers[self.modName]) do
-
-            logger.level = lvl
-        end
+    
+    for _, logger in ipairs(loggers[self.modName]) do
+        logger.level = level
     end
-
 end
 
 
@@ -469,10 +446,9 @@ end
 ---@param includeTimestamp boolean Whether logs should use timestamps
 function Logger:setIncludeTimestamp(includeTimestamp)
     -- we need to know what to do
-    if includeTimestamp ~= nil then
-        for _, log in ipairs(loggers[self.modName]) do
-            log.includeTimestamp = includeTimestamp
-        end
+    if includeTimestamp == nil then return end
+    for _, log in ipairs(loggers[self.modName]) do
+        log.includeTimestamp = includeTimestamp
     end
 end
 
@@ -499,27 +475,27 @@ function Logger:makeRecord(msg, args, level, offset)
     }
 end
 
-
+---@param logger Logger
 ---@param record Logger.Record
 ---@return string
-function Logger:makeHeader(record)
+local function makeHeader(logger, record)
     -- we're going to shove various things into here, and then making the string via
     -- `table.concat(headerT, " | ")
     local headerT = {}
     local name
-    if self.moduleName then
-        name = sf("%s (%s)", self.modName, self.moduleName)
+    if logger.moduleName then
+        name = sf("%s (%s)", logger.modName, logger.moduleName)
     else
-        name = self.modName
+        name = logger.modName
     end
     if record.lineNumber then
-        if self.filePath then
-            headerT = {name, sf("%s:%i", self.filePath, record.lineNumber)}
+        if logger.filePath then
+            headerT = {name, sf("%s:%i", logger.filePath, record.lineNumber)}
         else
             headerT = {sf("%s:%i", name, record.lineNumber)}
         end
     else
-        headerT = {name, self.filePath}
+        headerT = {name, logger.filePath}
 
     end
     local levelStr = LEVEL_STRINGS[record.level]
@@ -530,7 +506,7 @@ function Logger:makeHeader(record)
     end
     table.insert(headerT, levelStr)
 
-    if self.includeTimestamp then
+    if logger.includeTimestamp then
         local timestamp = record.timestamp
         local milliseconds = math.floor((timestamp % 1) * 1000)
         timestamp = math.floor(timestamp)
@@ -549,48 +525,26 @@ end
 ---@param record Logger.Record
 ---@return string
 function Logger:format(record)
-    local header = self:makeHeader(record)
 
-    local formattedMsg
     local msg = record.msg
     local args = record.args
     local n = #args
     if n == 0 then
-        formattedMsg = msg
-    else
-        if type(msg) == "function" then
-            if n == 1 then
-                formattedMsg = sf(msg(args[1]))
-            else
-                formattedMsg = sf(msg(table.unpack(args)))
-            end
-
-        elseif type(args[1]) == "function" then
-            if n == 1 then
-                formattedMsg = sf(msg, args[1]())
-            else
-                formattedMsg =  sf(msg, args[1](table.unpack(args, 2)))
-
-                -- the commented out code works, but comes with a performance hit
-                -- and (at the moment) i don't think it's worth it
-
-                -- local params = debug.getinfo(s2, "u").nparams
-                -- need to offset by 2 because `s1` and `s2` are counted in `n`
-                -- if n - 2 > params then
-                    -- pass arguments `3, ..., (3 + params - 1)` to `s2`
-                    -- then pass the remaining arugments `(3 + params), ...` to `sf`
-                    -- s = sf( "[%s] %s", header, sf( s1, s2(select(3, ...)), select(3 + params, ...) ) )
-                -- else
-                    -- pass all arguments to `s2`
-                    -- this has to be done separately to allow `s2` to return multiple values
-                    -- s = sf( "[%s] %s", header, sf(s1, s2(select(3, ...))))
-                -- end
-            end
-        else
-            formattedMsg = sf(msg, table.unpack(args))
-        end
+        return msg
     end
-    return sf("[%s] %s", header, formattedMsg)
+    if type(msg) == "function" then
+        if n == 1 then
+            return sf(msg(args[1]))
+        end
+        return sf(msg(table.unpack(args)))
+
+    elseif type(args[1]) == "function" then
+        if n == 1 then
+            return sf(msg, args[1]())
+        end
+        return  sf(msg, args[1](table.unpack(args, 2)))
+    end
+    return sf(msg, table.unpack(args))
 
 end
 
@@ -603,33 +557,25 @@ for levelStr, level in pairs(LOG_LEVEL) do
     Logger[levelStr:lower()] = function(self, msg, ...)
         if self.level < level then return end
 
+        local record = self:makeRecord(msg, {...}, level)
+
+        local str = sf("[%s] %s", makeHeader(self, record), self:format(record))
+
         if self.file then
-            self.file:write(self:format(self:makeRecord(msg, {...}, level)), "\n")
+            self.file:write(str, "\n")
             self.file:flush()
         else
-            print(self:format(self:makeRecord(msg, {...}, level)))
+            print(str)
         end
     end
 end
 
+-- i am a very good programmer
+Logger.none = nil
+
 -- update `call` to be the same as `debug`. this is so that the line numbers are pulled correctly when using the metamethod.
+---@diagnostic disable-next-line: undefined-field
 logMetatable.__call = Logger.debug
-
-
---[[ here's an example of how the `for` loop above will generate the `debug` method:
-function Logger:debug(...)
-    if self.level < LOG_LEVEL.DEBUG then return end
-    
-    if self.file then
-        self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.DEBUG)), "\n")
-        self.file:flush()
-    else
-        print(self:format(self:makeRecord({...}, LOG_LEVEL.DEBUG)))
-    end
-end
-]]
-
-
 
 
 function Logger:writeInitializedMessage(version)
@@ -660,7 +606,15 @@ end
 
 -- support the old way
 ---@deprecated 
-Logger.setLogLevel = Logger.setLevel
+---@param levelStr string
+function Logger:setLogLevel(levelStr)
+    local level = LOG_LEVEL[levelStr]
+    if not level then return end
+
+    for _, logger in ipairs(loggers[self.modName]) do
+        logger.level = level
+    end
+end
 
 
 -- support the old way
