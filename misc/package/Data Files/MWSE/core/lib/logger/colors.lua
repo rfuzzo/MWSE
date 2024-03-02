@@ -1,26 +1,25 @@
---[[Logging colors.
+local function isWindows()
+	return false
+	-- return type(package) == 'table' and type(package.config) == 'string' and package.config:sub(1,1) == '\\'
+end
 
-Original file made by Merlord.
-
-Updated by herbert100.
-]]
-
--- local function isWindows()
--- 	return false
--- 	-- return type(package) == 'table' and type(package.config) == 'string' and package.config:sub(1,1) == '\\'
--- end
-
--- local supported = not isWindows() or os.getenv("ANSICON")
-
+local supported = not isWindows()
+if isWindows() then
+	supported = os.getenv("ANSICON")
+end
 
 local keys = {
+	-- reset
 	reset = 0,
+
+	-- misc
 	bright = 1,
 	dim = 2,
 	underline = 4,
 	blink = 5,
 	reverse = 7,
 	hidden = 8,
+
 	-- foreground colors
 	black = 30,
 	red = 31,
@@ -30,6 +29,7 @@ local keys = {
 	magenta = 35,
 	cyan = 36,
 	white = 37,
+
 	-- background colors
 	blackbg = 40,
 	redbg = 41,
@@ -41,43 +41,45 @@ local keys = {
 	whitebg = 47,
 }
 
-local pattern = "%%{([a-z%s]*)}"
--- local escape_string = string.char(27) .. '[%dm'
 local escapeString = string.char(27) .. '[%dm'
-local resetStr = escapeString:format(keys.reset)
+local function escapeNumber(number)
+	return escapeString:format(number)
+end
 
--- this function is given a string of the form "`key1` `key2` ...", where each `key` is an index of the table `keys`
-	-- it will then convert each `key` to the ansicolor delimiter used by the terminal
-local function parseColors(str)
+local function escapeKeys(str)
+
+	if not supported then
+		return ""
+	end
+
 	local buffer = {}
 	local number
-	for word in str:gmatch("[a-z]+") do
-		if word ~= "" then 
-			number = keys[word]
-			assert(number, "Unknown key: " .. word)
-			table.insert(buffer, escapeString:format(number))
-		end
+	for word in str:gmatch("%w+") do
+		number = keys[word]
+		assert(number, "Unknown key: " .. word)
+		table.insert(buffer, escapeNumber(number))
 	end
-	return table.concat(buffer, " ")
+
+	return table.concat(buffer)
+end
+
+local function replaceCodes(str)
+	str = string.gsub(str, "(%%{(.-)})", function(_, str)
+		return escapeKeys(str)
+	end)
+	return str
 end
 
 -- public
 
-local colors = {}
+local function ansicolors(str)
+	str = tostring(str or '')
 
-function colors.noReset(str)
-	if str == nil then return "" end
-	return str:gsub(pattern, parseColors)
+	return replaceCodes('%{reset}' .. str .. '%{reset}')
 end
 
-setmetatable(colors, {
+return setmetatable({ noReset = replaceCodes }, {
 	__call = function(_, str)
-		if str == nil then return "" end
-		return table.concat({
-			resetStr,
-			str:gsub(pattern, parseColors), 
-			resetStr
-		})
-	end
+		return ansicolors(str)
+	end,
 })
-return colors
