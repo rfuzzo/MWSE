@@ -280,9 +280,12 @@ function Logger.new(params, params2)
     -- this will update the logging level of all other registered loggers, but only if `params.level` exists and is valid 
     log:setLevel(params.level)
 
+
     if params.writeToFile == nil then
-        log:setWriteToFile(log.writeToFile, true)
+        -- no `writeToFile` param, so lets update this logger to do the same thing everybody else is doing
+        log:setWriteToFile(log.writeToFile, false)
     else
+        -- `writeToFile` was specified, so lets update everybody
         log:setWriteToFile(params.writeToFile)
     end
 
