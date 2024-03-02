@@ -35,7 +35,6 @@ local loggers = {}
 ---@field level Logger.LEVEL
 ---@field modDir string
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
----@field useColors boolean should colors be used when writing log statements? Default: `false`
 ---@field writeToFile boolean if true, we will write the log contents to a file with the same name as this mod.
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
 ---@field includeLineNumber boolean should the current time be printed when writing log messages? Default: `false`
@@ -79,7 +78,6 @@ local communalKeys = {
     modDir = true,
     -- moduleName = false,
     includeLineNumber = true,
-    useColors = true,
     writeToFile = true,
     level = true,
     includeTimestamp = true,
@@ -178,7 +176,6 @@ end
 ---@field modDir string? the name of the mod this logger is for
 ---@field level Logger.LEVEL|Logger.LEVEL_STRING|nil the log level to set this object to. Default: "INFO"
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
----@field useColors boolean? should colors be used when writing log statements? Default: `false`
 ---@field includeLineNumber boolean? should the current line be printed when writing log messages? Default: `true`
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
 ---@field writeToFile string|boolean|nil whether to write the log messages to a file, or the name of the file to write to. if `false` or `nil`, messages will be written to `MWSE.log`
@@ -191,7 +188,6 @@ New objects can be created in the following ways:
 - `log = Logger.new{modName="MODNAME", level=LEVEL?, ...}`
 
 In addition to `modName`, you may specify
-- `useColors`: whether to use colors when printing log messages.
 - `level`: the logging level to start this logger at. This is the same as making a new logger and then calling `log:setLevel(level)`
 - `writeToFile`: either a boolean saying we should write to a file, or the name of a file to write to. If false (the default), then log messages will be written to `MWSE.log`
 ]]
@@ -254,7 +250,6 @@ function Logger.new(params, params2)
         modDir = modDir,
         moduleName = moduleName,
         includeLineNumber = true,
-        useColors=params.useColors or false,
         writeToFile = params.writeToFile or false,
         level = Logger.LEVEL.INFO, -- we'll set it with the dedicated function so we can do fancy stuff
         includeTimestamp = params.includeTimestamp or false,
@@ -307,11 +302,13 @@ for k in pairs(communalKeys) do
 end
 
 ---@param writeToFile string|boolean
----@param onlyThisLogger boolean? should we only update this logger? Default: false
-function Logger:setWriteToFile(writeToFile, onlyThisLogger)
+---@param updateChildren boolean? should we update the child loggers? default: true
+function Logger:setWriteToFile(writeToFile, updateChildren)
     if writeToFile == nil then return end
 
-    local relevantLoggers = onlyThisLogger and {self} or loggers[self.modName]
+    if updateChildren == nil then updateChildren = true end
+
+    local relevantLoggers = updateChildren and loggers[self.modName] or {self}
 
     if not writeToFile then
         for _, log in ipairs(relevantLoggers) do
@@ -424,7 +421,6 @@ function Logger:makeChild(moduleName)
         modName=self.modName,
         level=self.level,
         moduleName=moduleName,
-        useColors=self.useColors,
         writeToFile=self.writeToFile,
         includeTimestamp=self.includeTimestamp
     }
@@ -518,7 +514,8 @@ function Logger:makeHeader(record)
 
     end
     local levelStr = LEVEL_STRINGS[record.level]
-    if self.useColors then
+
+    if mwse.getConfig("EnableLogColors") then
         -- e.g. turn "ERROR" into "ERROR" (but written in red)
         levelStr = colors(sf("%%{%s}%s", COLORS[levelStr], levelStr))
     end
@@ -596,154 +593,42 @@ function Logger:format(record)
 end
 
 
+-- make the logging functions
+for levelStr, level in pairs(LOG_LEVEL) do
+    -- e.g., "DEBUG" -> "debug"
+    Logger[levelStr:lower()] = function(self, ...)
+        if self.level < level then return end
 
---[[ Write an error message, if the current `log.level` permits it. 
-
-If one parameter is passed, that paramter will be printed normally.
-
-**Passing multiple parameters:**
-1) If you type `log:debug(str, ...)`, then the output will be the same as
-```log:debug(string.format(str,...))```
-2) If you type `log:debug(func, ...)`, then the output will be the same as 
-```log:debug(func, ...) == log:debug(string.format(func(...)))```
-3) If you type `log:debug(str, func, ...)` then the output will be the same as 
-```log:debug(string.format(str, func(...) ))```
-
-**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
-So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
-]]
----@param ... any the strings to write the log
-function Logger:error(...)
-    if self.level < LOG_LEVEL.ERROR then return end
-
-    if self.writeToFile and self.file then
-        self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.ERROR)), "\n")
-        self.file:flush()
-    else
-        print(self:format(self:makeRecord({...}, LOG_LEVEL.ERROR)))
+        if self.writeToFile and self.file then
+            self.file:write(self:format(self:makeRecord({...}, level)), "\n")
+            self.file:flush()
+        else
+            print(self:format(self:makeRecord({...}, level)))
+        end
     end
 end
 
-
---[[ Write a warning message, if the current `log.level` permits it. 
-
-If one parameter is passed, that paramter will be printed normally.
-
-**Passing multiple parameters:**
-1) If you type `log:debug(str, ...)`, then the output will be the same as
-```log:debug(string.format(str,...))```
-2) If you type `log:debug(func, ...)`, then the output will be the same as 
-```log:debug(func, ...) == log:debug(string.format(func(...)))```
-3) If you type `log:debug(str, func, ...)` then the output will be the same as 
-```log:debug(string.format(str, func(...) ))```
-
-**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
-So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
-]]
----@param ... any the strings to write the log
-function Logger:warn(...)
-    if self.level < LOG_LEVEL.WARN then return end
-    
-    if self.writeToFile and self.file then
-        self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.WARN)), "\n")
-        self.file:flush()
-
-    else
-        print(self:format(self:makeRecord({...}, LOG_LEVEL.WARN)))
-    end
-end
-
---[[ Write an info message, if the current `log.level` permits it. 
-
-If one parameter is passed, that paramter will be printed normally.
-
-**Passing multiple parameters:**
-1) If you type `log:debug(str, ...)`, then the output will be the same as
-```log:debug(string.format(str,...))```
-2) If you type `log:debug(func, ...)`, then the output will be the same as 
-```log:debug(func, ...) == log:debug(string.format(func(...)))```
-3) If you type `log:debug(str, func, ...)` then the output will be the same as 
-```log:debug(string.format(str, func(...) ))```
-
-**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
-So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
-]]
----@param ... any the strings to write the log
-function Logger:info(...)
-    if self.level <  LOG_LEVEL.INFO then return end
-    
-    if self.writeToFile and self.file then
-        self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.INFO)), "\n")
-        self.file:flush()
-
-    else
-        print(self:format(self:makeRecord({...}, LOG_LEVEL.INFO)))
-    end
-end
+-- update `call` to be the same as `debug`. this is so that the line numbers are pulled correctly when using the metamethod.
+logMetatable.__call = Logger.debug
 
 
---[[ Write a debug message, if the current `log.level` permits it. 
-
-If one parameter is passed, that paramter will be printed normally.
-
-**Passing multiple parameters:**
-1) If you type `log:debug(str, ...)`, then the output will be the same as
-```log:debug(string.format(str,...))```
-2) If you type `log:debug(func, ...)`, then the output will be the same as 
-```log:debug(func, ...) == log:debug(string.format(func(...)))```
-3) If you type `log:debug(str, func, ...)` then the output will be the same as 
-```log:debug(string.format(str, func(...) ))```
-
-**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
-So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
-]]
----@param ... any the strings to write the log
+--[[ here's an example of how the `for` loop above will generate the `debug` method:
 function Logger:debug(...)
     if self.level < LOG_LEVEL.DEBUG then return end
     
     if self.writeToFile and self.file then
-
         self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.DEBUG)), "\n")
         self.file:flush()
-
     else
-
         print(self:format(self:makeRecord({...}, LOG_LEVEL.DEBUG)))
     end
 end
-
-logMetatable.__call = Logger.debug
-
---[[ Write a trace message, if the current `log.level` permits it. 
-
-If one parameter is passed, that paramter will be printed normally.
-
-**Passing multiple parameters:**
-1) If you type `log:debug(str, ...)`, then the output will be the same as
-```log:debug(string.format(str,...))```
-2) If you type `log:debug(func, ...)`, then the output will be the same as 
-```log:debug(func, ...) == log:debug(string.format(func(...)))```
-3) If you type `log:debug(str, func, ...)` then the output will be the same as 
-```log:debug(string.format(str, func(...) ))```
-
-**Note:** there is an advantage to using this syntax: functions will be called Only_ if you're at the appropriate logging level. 
-So, it's fine to pass functions that take a long time to compute. they will only be evaluated if the logging level is high enough.
 ]]
----@param ... any the strings to write the log
-function Logger:trace(...)
-    if self.level < LOG_LEVEL.TRACE then return end
-    
-    if self.writeToFile and self.file then
-        self.file:write(self:format(self:makeRecord({...}, LOG_LEVEL.TRACE)), "\n")
-        self.file:flush()
-    else
-
-        print(self:format(self:makeRecord({...}, LOG_LEVEL.TRACE)))
-    end
-end
 
 
-function Logger:writeInitMessage(version)
+
+
+function Logger:writeInitializedMessage(version)
     if self.level < Logger.LEVEL.INFO then return end
 
     if not version then
