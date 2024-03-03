@@ -29,6 +29,25 @@ local LoggerMetatable = {
 local loggers = {}
 
 
+---@class Logger.Record
+---@field msg string|any|fun(...):... arguments passed to Logger:debug, Logger:info, etc
+---@field args any[] arguments passed to Logger:debug, Logger:info, etc
+---@field level Logger.LEVEL logging level
+---@field lineNumber integer? the line number, if enabled for this logger
+---@field timestamp number? the timestamp of this message
+
+
+---@class Logger.newParams
+---@field modName string? the name of the mod this logger is for
+---@field modDir string? the name of the mod this logger is for
+---@field level Logger.LEVEL? the log level to set this object to. Default: "LEVEL.INFO"
+---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
+---@field includeLineNumber boolean? should the current line be printed when writing log messages? Default: `true`
+---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
+---@field writeToFile string|boolean|nil whether to write the log messages to a file, or the name of the file to write to. if `false` or `nil`, messages will be written to `MWSE.log`
+
+
+
 ---@class Logger
 ---@operator call (Logger.newParams?): Logger
 ---@field modName string the name of the mod this logger is for
@@ -36,7 +55,6 @@ local loggers = {}
 ---@field filePath string the relative path to the file this logger was defined in.
 ---@field modDir string
 ---@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
----@field writeToFile boolean if true, we will write the log contents to a file with the same name as this mod.
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
 ---@field includeLineNumber boolean should the current time be printed when writing log messages? Default: `false`
 ---@field file file*? the file the log is being written to, if `writeToFile == true`, otherwise its nil.
@@ -168,16 +186,6 @@ local function getModInfoFromSource()
     end
     return modName, filePath, modDir
 end
-
-
----@class Logger.newParams
----@field modName string? the name of the mod this logger is for
----@field modDir string? the name of the mod this logger is for
----@field level Logger.LEVEL? the log level to set this object to. Default: "LEVEL.INFO"
----@field moduleName string? the module this logger belongs to, or `nil` if it's a general purpose logger
----@field includeLineNumber boolean? should the current line be printed when writing log messages? Default: `true`
----@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
----@field writeToFile string|boolean|nil whether to write the log messages to a file, or the name of the file to write to. if `false` or `nil`, messages will be written to `MWSE.log`
 
 
 --[[##Create a new logger for a mod with the specified `modName`. 
@@ -464,12 +472,6 @@ function Logger:setIncludeTimestamp(includeTimestamp)
 end
 
 
----@class Logger.Record
----@field msg string|any|fun(...):... arguments passed to Logger:debug, Logger:info, etc
----@field args any[] arguments passed to Logger:debug, Logger:info, etc
----@field level Logger.LEVEL logging level
----@field lineNumber integer? the line number, if enabled for this logger
----@field timestamp number the timestamp of this message
 
 
 ---@param args any[] arguments passed to Logger:debug, Logger:info, etc
@@ -481,7 +483,7 @@ function Logger:makeRecord(msg, args, level, offset)
         msg = msg,
         args = args, 
         level = level,
-        timestamp = socket.gettime(),
+        timestamp = self.includeTimestamp and socket.gettime() or nil,
         lineNumber = self.includeLineNumber and debug.getinfo(3 + (offset or 0), "l").currentline or nil
     }
 end
@@ -517,8 +519,8 @@ local function makeHeader(logger, record)
     end
     table.insert(headerT, levelStr)
 
-    if logger.includeTimestamp then
-        local timestamp = record.timestamp
+    if record.timestamp then
+        local timestamp = record.timestamp ---@type number
         local milliseconds = math.floor((timestamp % 1) * 1000)
         timestamp = math.floor(timestamp)
 
