@@ -121,6 +121,15 @@ local function getModAndModuleNames(modName)
 end
 
 
+-- these will be checked against `newInfo.source` to see whether we've gone too far up the stack when trying to get the filepath
+-- of the file constructing this logger
+local badFilePaths = {
+    [string.lower("@Data Files\\MWSE\\core\\initialize.lua")] = true,
+    [string.lower("@.\\Data Files\\MWSE\\core\\lib\\logger\\init.lua")] = true,
+    [string.lower("=[C]")] = true,
+}
+
+
 ---@return string? modName, string? moduleName, string? modDir
 local function getModInfoFromSource()
 
@@ -128,12 +137,32 @@ local function getModInfoFromSource()
     -- generate relevant mod information
     -- =========================================================================
 
-    local src = debug.getinfo(3, "S").source
+    
+
+    -- iterate up a few times to get the correct path when people use logger factories
+    -- i.e., we want to handle the case where a mod constructs a logger by 
+    -- calling another function that constructs that logger
+
+    local info, newInfo
+    local i = 2
+    repeat
+        i = i + 1
+        info = newInfo
+        newInfo = debug.getinfo(i, "S")
+    until not newInfo or badFilePaths[newInfo.source:lower()]
+
+    local src = info and info.source
     if not src then return end
+
+
     -- parts of the path without "@^\Data Files\MWSE\mods\"
     local luaParts = table.filterarray(src:split("\\/"), function (i) return i >= 5 end)
     
+    -- this happens if the logger is being constructed in a tail-recursive way
+    if #luaParts == 0 then return end
+
     local hasAuthorName = false
+
 
     ---@type MWSE.Metadata?
     local metadata = tes3.getLuaModMetadata(luaParts[1] .. "." .. luaParts[2])
@@ -146,6 +175,7 @@ local function getModInfoFromSource()
         hasAuthorName = hasAuthorName or false
     else
         local oneDirUp = table.concat({"Data Files", "MWSE", "mods", luaParts[1]}, "\\")
+        local lfs = require("lfs")
         hasAuthorName = not (lfs.fileexists(oneDirUp .. "\\main.lua") or lfs.fileexists(oneDirUp .. "\\init.lua"))
         
     end
@@ -163,23 +193,28 @@ local function getModInfoFromSource()
     end
 
     -- actual mod information starts at index 2 if there's an author name
-    local cutoff = hasAuthorName and 2 or 1
+    local cutoff
 
+    if hasAuthorName and #luaParts > 2 then
+        -- e.g. modDir = "herbert100.more quickloot"
+        modDir = luaParts[1] .. "." .. luaParts[2]
+        cutoff = 2
+    else
+        -- e.g. modDir = "Expeditious Exit"
+        modDir = luaParts[1]
+        cutoff = 1
+    end
     -- if the module name doesn't exist, use the mod folder name (excluding the author name)
     modName = modName or luaParts[cutoff]
+
+    
     --[[ generate module name by combining everything together, ignoring the mod root.
         examples: 
             "herbert100/more quickloot/common.lua" ~> `filePath = "common.lua"`
             "herbert100/more quickloot/managers/organic.lua" ~> `filePath = "managers/organic.lua"`
     ]]
     filePath = table.concat(table.filterarray(luaParts, function(i) return i > cutoff end), "/")
-    if hasAuthorName then
-        -- e.g. modDir = "herbert100.more quickloot"
-        modDir = luaParts[1] .. "." .. luaParts[2]
-    else
-        -- e.g. modDir = "Expeditious Exit"
-        modDir = luaParts[1]
-    end
+
     return modName, filePath, modDir
 end
 
@@ -209,8 +244,9 @@ function Logger.new(params)
     local moduleName = params.moduleName
     -- do some error checking to make sure `params` are correct
     
-    
+
     local srcModName, filePath, srcModDir = getModInfoFromSource()
+    -- local srcModName, filePath, srcModDir = "A", "B", "C"
 
     local modDir = params.modDir or srcModDir
     
@@ -222,13 +258,14 @@ function Logger.new(params)
         modName = srcModName
     end
 
+
     assert(modName ~= nil, "Error: Could not create a Logger because modName was nil.")
     assert(type(modName) == "string", "Error: Could not create a Logger. modName must be a string.")
 
     if not modDir then
         modDir = modName
         -- who logs the logger?
-        mwse.log("[Logger: ERROR] modDir for %q (module %q) was nil! this isn't supposed to happen!!", modName, moduleName)
+        print(fmt("[Logger: ERROR] modDir for %q (module %q) was nil! this isn't supposed to happen!!", modName, moduleName))
     end
 
     -- first try to get it
@@ -375,8 +412,8 @@ function Logger:setLevel(level)
     if not level then return end
 
     if type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
-        mwse.log("[mwseLogger: ERROR] Invalid parameter (%q) was passed to setLevel. \z
-            This method only accepts constants from the Logger.LEVEL table.", level)
+        print(fmt("[mwseLogger: ERROR] Invalid parameter (%q) was passed to setLevel. \z
+            This method only accepts constants from the Logger.LEVEL table.", level))
         return
     end
 
