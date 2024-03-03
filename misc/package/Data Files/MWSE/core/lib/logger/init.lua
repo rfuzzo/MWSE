@@ -200,7 +200,9 @@ function Logger.new(params)
         params = {modName=params} 
     end
 
-    local modName, moduleName = params.modName, params.moduleName
+    ---@diagnostic disable-next-line: undefined-field
+    local modName = params.modName or params.name -- support old constructor
+    local moduleName = params.moduleName
     -- do some error checking to make sure `params` are correct
     
     
@@ -264,21 +266,28 @@ function Logger.new(params)
     table.insert(loggerTbl, log)
 
     setmetatable(log, logMetatable)
-    -- this will update the logging level of all other registered loggers, but only if `params.level` exists and is valid 
-    log:setLevel(params.level)
+
+    -- set the logging level.
+    -- we're doing it here so that all the other loggers are updated as well, provided `params.level` is valid.
+    ---@diagnostic disable-next-line: undefined-field
+    if params.logLevel then
+        -- they used the old syntax, so use the old method
+        ---@diagnostic disable-next-line: undefined-field, deprecated
+        log:setLogLevel(params.logLevel)
+    else
+        -- they used the new syntax, so use the new method
+        log:setLevel(params.level)
+    end
 
     if params.writeToFile ~= nil then
         -- pave the way forward for our logging brethren
         log:setWriteToFile(params.writeToFile)
     else
-        -- no behavior specified, so do whatever everybody else is doing
-        for _, logger in ipairs(loggerTbl) do 
-            if logger.file then
-                log:setWriteToFile(true, false)
-                break
-            end
+        -- no behavior specified, so do whatever the last guy was doing
+        local latest = loggerTbl[#loggerTbl - 1]
+        if latest and latest.file then
+            log:setWriteToFile(true, false)
         end
-        
     end
 
 
@@ -297,13 +306,13 @@ for k in pairs(communalKeys) do
 end
 
 ---@param writeToFile string|boolean
----@param updateChildren boolean? should we update the child loggers? default: true
-function Logger:setWriteToFile(writeToFile, updateChildren)
+---@param updateAllLoggers boolean? should we update every other logger? Default: true
+function Logger:setWriteToFile(writeToFile, updateAllLoggers)
     if writeToFile == nil then return end
 
-    if updateChildren == nil then updateChildren = true end
+    if updateAllLoggers == nil then updateAllLoggers = true end
 
-    local relevantLoggers = updateChildren and loggers[self.modName] or {self}
+    local relevantLoggers = updateAllLoggers and loggers[self.modName] or {self}
 
     if not writeToFile then
         for _, log in ipairs(relevantLoggers) do
@@ -315,7 +324,8 @@ function Logger:setWriteToFile(writeToFile, updateChildren)
         return
     end
     for _, log in ipairs(relevantLoggers) do
-        local filename
+        local filename = writeToFile
+        -- if it's `true` instead of a `string`, we should generate a valid filename.
         if writeToFile == true then
             if log.moduleName then
                 filename = sf("Data Files\\MWSE\\mods\\%s\\%s.log",
@@ -325,8 +335,6 @@ function Logger:setWriteToFile(writeToFile, updateChildren)
             else
                 filename = "Data Files\\MWSE\\mods\\" .. log.modDir:gsub("%.", "\\") .. ".log"
             end
-        else
-            filename = writeToFile
         end
         -- close old file
         if log.file then
@@ -428,8 +436,11 @@ e.g. to set the `log.level` to "DEBUG", you can write any of the following:
 ---@param self Logger
 ---@param level Logger.LEVEL
 function Logger:setLevel(level)
-    
-    if not level or type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
+    if not level then return end
+
+    if type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
+        mwse.log("[mwseLogger: ERROR] Invalid parameter (%q) was passed to setLevel. \z
+            This method only accepts constants from the Logger.LEVEL table.", level)
         return
     end
     
@@ -530,22 +541,29 @@ function Logger:format(record)
     local args = record.args
     local n = #args
     if n == 0 then
-        return msg
-    end
-    if type(msg) == "function" then
+        -- dont change the message
+    elseif type(msg) == "function" then
+        -- everything was passed as a function
+
         if n == 1 then
-            return sf(msg(args[1]))
+            msg = sf(msg(args[1]))
+        else
+            msg = sf(msg(table.unpack(args)))
         end
-        return sf(msg(table.unpack(args)))
 
     elseif type(args[1]) == "function" then
-        if n == 1 then
-            return sf(msg, args[1]())
-        end
-        return  sf(msg, args[1](table.unpack(args, 2)))
-    end
-    return sf(msg, table.unpack(args))
+        -- formatting parameters were passed as a function
 
+        if n == 1 then
+            msg = sf(msg, args[1]())
+        else
+            msg =  sf(msg, args[1](table.unpack(args, 2)))
+        end
+    else
+        -- nothing was passed as a function, format the message normally
+        msg = sf(msg, table.unpack(args))
+    end
+    return sf("[%s] %s", makeHeader(self, record), msg)
 end
 
 
@@ -554,12 +572,12 @@ end
 -- make the logging functions
 for levelStr, level in pairs(LOG_LEVEL) do
     -- e.g., "DEBUG" -> "debug"
-    Logger[levelStr:lower()] = function(self, msg, ...)
+    ---@param self Logger
+    Logger[string.lower(levelStr)] = function(self, msg, ...)
         if self.level < level then return end
 
-        local record = self:makeRecord(msg, {...}, level)
 
-        local str = sf("[%s] %s", makeHeader(self, record), self:format(record))
+        local str = self:format(self:makeRecord(msg, {...}, level))
 
         if self.file then
             self.file:write(str, "\n")
