@@ -7,14 +7,7 @@ Current version made by herbert100.
 
 local colors = require("logger.colors")
 local socket = require("socket")
-
-local sf = string.format
-
-local LoggerMetatable = {
-    __tostring = function() return "Logger" end
-}
-
-
+local fmt = string.format
 
 ---@alias Logger.LEVEL
 ---|0                       NONE: Nothing will be printed
@@ -23,10 +16,12 @@ local LoggerMetatable = {
 ---|3                       INFO: Only crucial information will be printed
 ---|4                       DEBUG: Debug messages will be printed
 ---|5                       TRACE: Many debug messages will be printed
-
-
----@type table<string, Logger[]>
-local loggers = {}
+---|`Logger.LEVEL.NONE`     Nothing will be printed
+---|`Logger.LEVEL.ERROR`    Error messages will be printed
+---|`Logger.LEVEL.WARN`     Warning messages will be printed
+---|`Logger.LEVEL.INFO`     Crucial information will be printed
+---|`Logger.LEVEL.DEBUG`    Debug messages will be printed
+---|`Logger.LEVEL.TRACE`    Many debug messages will be printed
 
 
 ---@class Logger.Record
@@ -45,7 +40,6 @@ local loggers = {}
 ---@field includeLineNumber boolean? should the current line be printed when writing log messages? Default: `true`
 ---@field includeTimestamp boolean? should the current time be printed when writing log messages? Default: `false`
 ---@field writeToFile string|boolean|nil whether to write the log messages to a file, or the name of the file to write to. if `false` or `nil`, messages will be written to `MWSE.log`
-
 
 
 ---@class Logger
@@ -68,30 +62,32 @@ local Logger = {
         TRACE = 5
     }
 }
-setmetatable(Logger, LoggerMetatable)
+setmetatable(Logger, { __tostring = function() return "Logger" end })
 
 local LOG_LEVEL = Logger.LEVEL
 local LEVEL_STRINGS = table.invert(Logger.LEVEL)
 
----|`Logger.LEVEL.NONE`     Nothing will be printed
----|`Logger.LEVEL.ERROR`    Error messages will be printed
----|`Logger.LEVEL.WARN`     Warning messages will be printed
----|`Logger.LEVEL.INFO`     Crucial information will be printed
----|`Logger.LEVEL.DEBUG`    Debug messages will be printed
----|`Logger.LEVEL.TRACE`    Many debug messages will be printed
+local COLORS = {
+	NONE =  "white",
+	WARN =  "bright yellow",
+	ERROR =  "bright red",
+	INFO =  "white",
+    DEBUG = "bright green",
+    TRACE =  "bright white",
+}
 
-
-
+---@type table<string, Logger[]>
+local loggers = {}
 
 local communalKeys = {
     modName = true,
     modDir = true,
-    -- moduleName = false,
     includeLineNumber = true,
     writeToFile = true,
     level = true,
     includeTimestamp = true,
 }
+
 -- metatable used by log objects
 local logMetatable = {
     -- gonna override this later so that it's exactly equal to `Logger.debug`. this is needed for line number stuff to work properly
@@ -106,8 +102,8 @@ local logMetatable = {
     end,
     
     __tostring = function(self)
-        return sf("Logger(modName=%q, moduleName=%s, modDir=%q, level=%i (%s))",
-            self.modName, self.moduleName and sf("%q", self.moduleName), self.modDir, self.level, self:getLevelStr()
+        return fmt("Logger(modName=%q, moduleName=%s, modDir=%q, level=%i (%s))",
+            self.modName, self.moduleName and fmt("%q", self.moduleName), self.modDir, self.level, self:getLevelStr()
         )
     end,
 }
@@ -303,14 +299,29 @@ function Logger.new(params)
 end
 
 
--- autogenerate methods to set communal keys. some of these will be overwritten later on.
--- the substring stuff is to to convert the first letter to uppercase, e.g. "level" -> "Level"
-for k in pairs(communalKeys) do
-    Logger["set" .. k:sub(1,1):upper() .. k:sub(2)] = function(self, v)
-        for _, logger in ipairs(loggers[self.modName]) do
-            logger[k] = v
-        end
+-- updates a key for all loggers
+---@param self Logger
+---@param key string|number
+---@param value any
+local function updateKey(self, key, value)
+    for _, logger in ipairs(loggers[self.modName]) do
+        logger[key] = value
     end
+end
+
+-- autogenerate methods to set communal keys. some of these will be overwritten later on.
+-- the substring stuff is to to convert the first letter to uppercase, e.g. "setLevel" instead of "setlevel"
+for key in pairs(communalKeys) do
+    Logger["set" .. key:sub(1,1):upper() .. key:sub(2)] = function(self, value)
+        updateKey(self, key, value)
+    end
+end
+
+---@param includeTimestamp boolean Whether logs should use timestamps
+function Logger:setIncludeTimestamp(includeTimestamp)
+    -- we need to know what to do
+    if includeTimestamp == nil then return end
+    updateKey(self, "includeTimestamp", includeTimestamp)
 end
 
 ---@param writeToFile string|boolean
@@ -336,7 +347,7 @@ function Logger:setWriteToFile(writeToFile, updateAllLoggers)
         -- if it's `true` instead of a `string`, we should generate a valid filename.
         if writeToFile == true then
             if log.moduleName then
-                filename = sf("Data Files\\MWSE\\mods\\%s\\%s.log",
+                filename = fmt("Data Files\\MWSE\\mods\\%s\\%s.log",
                     log.modDir:gsub("%.", "\\"), 
                     log.moduleName:gsub("%.lua$", ""):gsub("%.", "\\")
                 )
@@ -352,17 +363,27 @@ function Logger:setWriteToFile(writeToFile, updateAllLoggers)
     end
 end
 
+--[[Change the current logging level. You can specify a string or number.
+e.g. to set the `log.level` to "DEBUG", you can write any of the following:
+1) `log:setLevel("DEBUG")`
+2) `log:setLevel(4)`
+3) `log:setLevel(Logger.LEVEL.DEBUG)`
+]]
+---@param self Logger
+---@param level Logger.LEVEL
+function Logger:setLevel(level)
+    if not level then return end
+
+    if type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
+        mwse.log("[mwseLogger: ERROR] Invalid parameter (%q) was passed to setLevel. \z
+            This method only accepts constants from the Logger.LEVEL table.", level)
+        return
+    end
+
+    updateKey(self, "level", level)
+end
 
 
-
-local COLORS = {
-	NONE =  "white",
-	WARN =  "bright yellow",
-	ERROR =  "bright red",
-	INFO =  "white",
-    DEBUG = "bright green",
-    TRACE =  "bright white",
-}
 
 --[[Get a previously registered logger with the specified `modDir`.]]
 ---@param modDir string name of the mod
@@ -372,7 +393,7 @@ function Logger.getByDir(modDir, filePath)
     local loggerTbl
 
     for _, loggersByModName in pairs(loggers) do
-        if loggersByModName[1].modDir == modDir then
+        if loggersByModName[1] and loggersByModName[1].modDir == modDir then
             loggerTbl = loggersByModName
             break
         end
@@ -422,54 +443,11 @@ function Logger.getLoggers(modName)
     return loggers[modName]
 end
 
-function Logger:makeChild(moduleName)
-    return self.new{
-        modName=self.modName,
-        level=self.level,
-        moduleName=moduleName,
-        includeTimestamp=self.includeTimestamp
-    }
-end
 
 
 
 
 
---[[Change the current logging level. You can specify a string or number.
-e.g. to set the `log.level` to "DEBUG", you can write any of the following:
-1) `log:setLevel("DEBUG")`
-2) `log:setLevel(4)`
-3) `log:setLevel(Logger.LEVEL.DEBUG)`
-]]
----@param self Logger
----@param level Logger.LEVEL
-function Logger:setLevel(level)
-    if not level then return end
-
-    if type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
-        mwse.log("[mwseLogger: ERROR] Invalid parameter (%q) was passed to setLevel. \z
-            This method only accepts constants from the Logger.LEVEL table.", level)
-        return
-    end
-    
-    for _, logger in ipairs(loggers[self.modName]) do
-        logger.level = level
-    end
-end
-
-
-
-
-
-
----@param includeTimestamp boolean Whether logs should use timestamps
-function Logger:setIncludeTimestamp(includeTimestamp)
-    -- we need to know what to do
-    if includeTimestamp == nil then return end
-    for _, log in ipairs(loggers[self.modName]) do
-        log.includeTimestamp = includeTimestamp
-    end
-end
 
 
 
@@ -497,15 +475,15 @@ local function makeHeader(logger, record)
     local headerT = {}
     local name
     if logger.moduleName then
-        name = sf("%s (%s)", logger.modName, logger.moduleName)
+        name = fmt("%s (%s)", logger.modName, logger.moduleName)
     else
         name = logger.modName
     end
     if record.lineNumber then
         if logger.filePath then
-            headerT = {name, sf("%s:%i", logger.filePath, record.lineNumber)}
+            headerT = {name, fmt("%s:%i", logger.filePath, record.lineNumber)}
         else
-            headerT = {sf("%s:%i", name, record.lineNumber)}
+            headerT = {fmt("%s:%i", name, record.lineNumber)}
         end
     else
         headerT = {name, logger.filePath}
@@ -515,7 +493,7 @@ local function makeHeader(logger, record)
 
     if mwse.getConfig("EnableLogColors") then
         -- e.g. turn "ERROR" into "ERROR" (but written in red)
-        levelStr = colors(sf("%%{%s}%s", COLORS[levelStr], levelStr))
+        levelStr = colors(fmt("%%{%s}%s", COLORS[levelStr], levelStr))
     end
     table.insert(headerT, levelStr)
 
@@ -528,7 +506,7 @@ local function makeHeader(logger, record)
         local timeTable = os.date("*t", timestamp)
 
         -- format time components into H:M:S:MS string
-        local formattedTime = sf("%02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
+        local formattedTime = fmt("%02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
         table.insert(headerT, formattedTime)
     end
     return table.concat(headerT, " | ")
@@ -548,24 +526,24 @@ function Logger:format(record)
         -- everything was passed as a function
 
         if n == 1 then
-            msg = sf(msg(args[1]))
+            msg = fmt(msg(args[1]))
         else
-            msg = sf(msg(table.unpack(args)))
+            msg = fmt(msg(table.unpack(args)))
         end
 
     elseif type(args[1]) == "function" then
         -- formatting parameters were passed as a function
 
         if n == 1 then
-            msg = sf(msg, args[1]())
+            msg = fmt(msg, args[1]())
         else
-            msg =  sf(msg, args[1](table.unpack(args, 2)))
+            msg =  fmt(msg, args[1](table.unpack(args, 2)))
         end
     else
         -- nothing was passed as a function, format the message normally
-        msg = sf(msg, table.unpack(args))
+        msg = fmt(msg, table.unpack(args))
     end
-    return sf("[%s] %s", makeHeader(self, record), msg)
+    return fmt("[%s] %s", makeHeader(self, record), msg)
 end
 
 
@@ -631,9 +609,7 @@ function Logger:setLogLevel(levelStr)
     local level = LOG_LEVEL[levelStr]
     if not level then return end
 
-    for _, logger in ipairs(loggers[self.modName]) do
-        logger.level = level
-    end
+    updateKey(self, "level", level)
 end
 
 
