@@ -547,8 +547,6 @@ function Logger:format(record)
 end
 
 
-
-
 -- make the logging functions
 for levelStr, level in pairs(LOG_LEVEL) do
     -- e.g., "DEBUG" -> "debug"
@@ -576,6 +574,25 @@ Logger.none = nil
 logMetatable.__call = Logger.debug
 
 
+function Logger:assert(condition, msg, ...)
+    if condition then return end
+
+    -- cant call `Logger:error` because we need the call to `debug.getinfo` to produce the correct line number. super hacky :/
+    local str = self:format(self:makeRecord(msg, {...}, LOG_LEVEL.ERROR))
+
+    if self.level >= LOG_LEVEL.ERROR then
+        if self.file then
+            self.file:write(str, "\n")
+            self.file:flush()
+        else
+            print(str)
+        end
+    end
+
+    assert(condition, str)
+
+end
+
 function Logger:writeInitializedMessage(version)
     if self.level < Logger.LEVEL.INFO then return end
 
@@ -585,14 +602,24 @@ function Logger:writeInitializedMessage(version)
             version = metadata.package.version
         end
     end
-    -- need to do it this way so the call to `debug.getinfo` lines up. super hacky :/
+    -- need to do it this way so the call to `debug.getinfo` produces the correct line number. super hacky :/
     local record
     if version then
         record = self:makeRecord("Initialized version %s.", {version}, LOG_LEVEL.INFO)
     else
         record = self:makeRecord("Mod initialized.", {}, LOG_LEVEL.INFO)
     end
-    print(self:format(record))
+
+    local str = self:format(record)
+
+    if self.level >= LOG_LEVEL.ERROR then
+        if self.file then
+            self.file:write(str, "\n")
+            self.file:flush()
+        else
+            print(str)
+        end
+    end
 end
 
 
