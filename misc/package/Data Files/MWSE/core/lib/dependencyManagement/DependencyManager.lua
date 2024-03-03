@@ -67,6 +67,7 @@ function DependencyManager.new(e)
         self.logger = MWSELogger.new {
             name = self.name,
             logLevel = e.logLevel or "INFO",
+            modDir = e.metadata and e.metadata.tools and e.metadata.tools.mwse and e.metadata.tools.mwse["lua-mod"]
         }
     end
     self.logger:assert(type(self.metadata) == "table",

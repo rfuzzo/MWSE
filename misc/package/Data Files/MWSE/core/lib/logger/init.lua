@@ -125,6 +125,7 @@ end
 -- of the file constructing this logger
 local badFilePaths = {
     [string.lower("@Data Files\\MWSE\\core\\initialize.lua")] = true,
+    [string.lower("@Data Files\\MWSE\\core\\startLuaMods.lua")] = true,
     [string.lower("@.\\Data Files\\MWSE\\core\\lib\\logger\\init.lua")] = true,
     [string.lower("=[C]")] = true,
 }
@@ -189,7 +190,8 @@ local function getModInfoFromSource()
     local modName, filePath, modDir
     if metadata then
         local package = metadata.package ---@diagnostic disable-next-line: undefined-field
-        modName = package.shortName or package.shortName or package.name 
+        modName = package.shortName or package.shortName or package.name
+        modDir = metadata.tools.mwse["lua-mod"]
     end
 
     -- actual mod information starts at index 2 if there's an author name
@@ -197,11 +199,11 @@ local function getModInfoFromSource()
 
     if hasAuthorName and #luaParts > 2 then
         -- e.g. modDir = "herbert100.more quickloot"
-        modDir = luaParts[1] .. "." .. luaParts[2]
+        modDir = modDir or (luaParts[1] .. "." .. luaParts[2])
         cutoff = 2
     else
         -- e.g. modDir = "Expeditious Exit"
-        modDir = luaParts[1]
+        modDir = modDir or luaParts[1]
         cutoff = 1
     end
     -- if the module name doesn't exist, use the mod folder name (excluding the author name)
@@ -265,7 +267,7 @@ function Logger.new(params)
     if not modDir then
         modDir = modName
         -- who logs the logger?
-        print(fmt("[Logger: ERROR] modDir for %q (module %q) was nil! this isn't supposed to happen!!", modName, moduleName))
+        print(fmt("[Logger: ERROR] modDir for %q (module %q) was nil! this isn't supposed to happen!!\n%s", modName, moduleName, debug.traceback()))
     end
 
     -- first try to get it
@@ -413,7 +415,7 @@ function Logger:setLevel(level)
 
     if type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
         print(fmt("[mwseLogger: ERROR] Invalid parameter (%q) was passed to setLevel. \z
-            This method only accepts constants from the Logger.LEVEL table.", level))
+            This method only accepts constants from the Logger.LEVEL table.\n%s", level, debug.traceback()))
         return
     end
 

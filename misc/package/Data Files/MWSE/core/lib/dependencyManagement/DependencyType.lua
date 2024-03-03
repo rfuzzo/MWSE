@@ -1,7 +1,9 @@
 local logging = require("logging.logger")
 local logger = logging.new{
     name = "DependencyType",
-    level = "INFO"
+    logLevel = "INFO",
+    modDir = "DependencyManager",
+    moduleName = "DependencyType"
 }
 ---@class MWSE.DependencyType.ResolveButton
 ---@field text string The text to display on the button.
