@@ -189,9 +189,13 @@ local function getModInfoFromSource()
     -- `modName` and `filePath` don't want the author folder, but `modDir `does.
     local modName, filePath, modDir
     if metadata then
-        local package = metadata.package ---@diagnostic disable-next-line: undefined-field
-        modName = package.shortName or package.shortName or package.name
-        modDir = metadata.tools.mwse["lua-mod"]
+        local package = metadata.package
+        if package then
+            modName = package.name
+        end
+        if metadata.tools and metadata.tools.mwse then
+            modDir = metadata.tools.mwse["lua-mod"]
+        end
     end
 
     -- actual mod information starts at index 2 if there's an author name
