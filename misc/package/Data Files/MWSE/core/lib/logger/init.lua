@@ -275,7 +275,7 @@ function Logger.new(params)
     end
 
     -- first try to get it
-    local log = Logger.get(modName, filePath)
+    local log = Logger.get(modName, moduleName, filePath)
 
     if log then return log end
 
@@ -458,20 +458,23 @@ end
 -- get a specified logger. If `moduleName` evaluates to `false`, then any logger with a matching `modName` will be returned (if such a logger exists).
     -- if `moduleName` does not evaluate to `false`, then this function will only return a logger if it can find one that matches the `modName` and the `moduleName`.
 ---@param modName string name of the mod
+---@param moduleName string? the relative file path of the module
 ---@param filePath string? the relative file path of the module
 ---@return Logger? logger
-function Logger.get(modName, filePath)
+function Logger.get(modName, moduleName, filePath)
     local loggerTbl = loggers[modName]
 
     if not loggerTbl then return end
 
-    if not filePath then 
+    if not moduleName and not filePath then 
         return loggerTbl[1]
     end
 
-    for _, log in ipairs(loggerTbl) do
-        if log.filePath == filePath then
-            return log
+    for _, logger in ipairs(loggerTbl) do
+        if  (not filePath or filePath == logger.filePath)
+        and (not moduleName or moduleName == logger.moduleName)
+        then
+            return logger
         end
     end
 end

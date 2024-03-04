@@ -12,13 +12,12 @@ function DependencyNotifier:new(e)
     self.__index = self
     o.logger = e.logger
     if not self.logger then
-        local name = e.packageName
-        and e.packageName .. ".DependencyNotifier"
-            or "DependencyNotifier"
         local MWSELogger = require("logging.logger")
         self.logger = MWSELogger.new {
-            name = name,
-            logLevel = "INFO"
+            modName = "DependencyNotifier",
+            moduleName = e.packageName,
+            logLevel = "INFO",
+            
         }
     end
     o.failedDependencies = e.failedDependencies

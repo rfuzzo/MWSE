@@ -57,14 +57,13 @@ function DependencyManager.new(e)
     self.logger = e.logger
     self.metadata = e.metadata
     self.showFailureMessage = table.get(e, "showFailureMessage", true)
-    self.name = e.metadata
-        and e.metadata.package
-        and e.metadata.package.name
-        and e.metadata.package.name .. ".DependencyManager"
-        or "DependencyManager"
+    local moduleName = e.metadata and e.metadata.package and e.metadata.package.name
+    self.name = moduleName and moduleName .. ".DependencyManager" or "DependencyManager"
     if not self.logger then
         local MWSELogger = require("logging.logger")
         self.logger = MWSELogger.new {
+            modName = "DependencyManager",
+            moduleName = moduleName,
             name = self.name,
             logLevel = e.logLevel or "INFO",
             modDir = e.metadata and e.metadata.tools and e.metadata.tools.mwse and e.metadata.tools.mwse["lua-mod"]
