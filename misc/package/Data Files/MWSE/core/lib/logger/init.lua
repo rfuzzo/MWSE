@@ -102,7 +102,7 @@ local logMetatable = {
     end,
     
     __tostring = function(self)
-        return fmt("Logger(modName=%q, moduleName=%s, modDir=%q, level=%i (%s))",
+        return fmt("Logger(modName: %q, moduleName: %s, modDir: %q, level: %i (%s))",
             self.modName, self.moduleName and fmt("%q", self.moduleName), self.modDir, self.level, self:getLevelStr()
         )
     end,
@@ -229,7 +229,7 @@ end
 
 New objects can be created in the following ways:
 - `log = Logger.new("MODNAME")`
-- `log = Logger.new{modName="MODNAME", level=LEVEL?, ...}`
+- `log = Logger.new{modName = "MODNAME", level = LEVEL?, ...}`
 
 In addition to `modName`, you may specify
 - `level`: the logging level to start this logger at. This is the same as making a new logger and then calling `log:setLevel(level)`
@@ -242,7 +242,7 @@ function Logger.new(params)
     if not params then
         params = {}
     elseif type(params) == "string" then
-        params = {modName=params} 
+        params = {modNam = params} 
     end
 
     ---@diagnostic disable-next-line: undefined-field
@@ -275,7 +275,7 @@ function Logger.new(params)
     end
 
     -- first try to get it
-    local log = Logger.get(modName, moduleName, filePath)
+    local log = Logger.get{modName = modName, moduleName = moduleName, filePath = filePath}
 
     if log then return log end
 
@@ -455,22 +455,36 @@ function Logger.getByDir(modDir, filePath)
     end
 end
 
--- get a specified logger. If `moduleName` evaluates to `false`, then any logger with a matching `modName` will be returned (if such a logger exists).
-    -- if `moduleName` does not evaluate to `false`, then this function will only return a logger if it can find one that matches the `modName` and the `moduleName`.
----@param modName string name of the mod
----@param moduleName string? the relative file path of the module
----@param filePath string? the relative file path of the module
+---@class Logger.get.params
+---@field modName string
+---@field moduleName string? this will only be checked if it evaluates to `true`.
+---@field filePath string? this will only be checked if it evaluates to `true`.
+
+-- get a new logger. you can pass either a `modName`, or a table containing a `modName`, `moduleName`, and/or `filePath`.
+-- the `moduleName`s and `filePath`s of loggers will only be checked if the corresponding parameter evaluates to `true`
+---@param p Logger.get.params|string
 ---@return Logger? logger
-function Logger.get(modName, moduleName, filePath)
-    local loggerTbl = loggers[modName]
+function Logger.get(p)
+    if not p then return end
+
+    if type(p) == "string" then
+        p = {modName = p}
+    elseif not p.modName then 
+        return
+    end
+
+    local loggerTbl = loggers[p.modName]
 
     if not loggerTbl then return end
+
+    local moduleName, filePath = p.moduleName, p.filePath
 
     if not moduleName and not filePath then 
         return loggerTbl[1]
     end
 
     for _, logger in ipairs(loggerTbl) do
+        -- only check for equality if the relevant parameter was passed
         if  (not filePath or filePath == logger.filePath)
         and (not moduleName or moduleName == logger.moduleName)
         then
