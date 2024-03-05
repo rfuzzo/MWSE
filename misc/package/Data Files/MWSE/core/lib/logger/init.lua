@@ -86,6 +86,7 @@ local communalKeys = {
     writeToFile = true,
     level = true,
     includeTimestamp = true,
+    format = true,
 }
 
 -- metatable used by log objects
@@ -95,6 +96,7 @@ local logMetatable = {
     __index = Logger,
     __newindex = function(self, k, v)
         if k == "logLevel" then
+            -- this will upgrade everybody's log level
             self:setLogLevel(v)
         else
             rawset(self, k, v)
@@ -300,7 +302,8 @@ function Logger.new(params)
         
         for k in pairs(communalKeys) do
             if params[k] == nil then
-                log[k] = latest[k]
+                -- only copy stuff if it's not nil
+                log[k] = rawget(latest, k)
             end
         end
     else
