@@ -60,7 +60,14 @@ local Logger = {
         INFO = 3,
         DEBUG = 4,
         TRACE = 5
-    }
+    },
+    -- modName = nil,
+    -- modDir = nil,
+    moduleName = nil,
+    -- filePath = nil,
+    includeLineNumber = true,
+    level = 3,
+    includeTimestamp = false,
 }
 setmetatable(Logger, { __tostring = function() return "Logger" end })
 
@@ -110,19 +117,6 @@ local logMetatable = {
     end,
 }
 
-local function getModAndModuleNames(modName)
-    local actualModName, moduleName
-    local index = modName:find("/")
-    if index then
-        actualModName = modName:sub(1,index-1)
-        moduleName = modName:sub(index+1)
-    else
-        actualModName = modName
-    end
-    return actualModName, moduleName
-end
-
-
 -- these will be checked against `newInfo.source` to see whether we've gone too far up the stack when trying to get the filepath
 -- of the file constructing this logger
 local badFilePaths = {
@@ -159,7 +153,7 @@ local function getModInfoFromSource()
 
 
     -- parts of the path without "@^\Data Files\MWSE\mods\"
-    local luaParts = table.filterarray(src:split("\\/"), function (i) return i >= 5 end)
+    local luaParts = table.filterarray(src:split("\\/"), function(i) return i >= 5 end)
     
     -- this happens if the logger is being constructed in a tail-recursive way
     if #luaParts == 0 then return end
@@ -167,11 +161,12 @@ local function getModInfoFromSource()
     local hasAuthorName = false
 
 
-    ---@type MWSE.Metadata?
-    local metadata = tes3.getLuaModMetadata(luaParts[1] .. "." .. luaParts[2])
+    -- first check for metadata when `luaParts[1]` is the mod author directory
+    local metadata = tes3.getLuaModMetadata(luaParts[1] .. "." .. luaParts[2]) ---@type MWSE.Metadata?
     if metadata then
         hasAuthorName = true
     else
+        -- then check for metadata when `luaParts[1]` is the mod root directory
         metadata = tes3.getLuaModMetadata(luaParts[1])
     end
     if metadata then
@@ -240,11 +235,9 @@ In addition to `modName`, you may specify
 ---@param params Logger.newParams|string?
 ---@return Logger
 function Logger.new(params)
-    -- if it's just a string, treat it as the `modName`
-    if not params then
-        params = {}
-    elseif type(params) == "string" then
-        params = {modNam = params} 
+    params = params or {}
+    if type(params) == "string" then
+        params = {modName = params}
     end
 
     ---@diagnostic disable-next-line: undefined-field
@@ -254,27 +247,17 @@ function Logger.new(params)
     
 
     local srcModName, filePath, srcModDir = getModInfoFromSource()
-    -- local srcModName, filePath, srcModDir = "A", "B", "C"
 
     local modDir = params.modDir or srcModDir
     
-    if modName then
-        if not moduleName then
-            modName, moduleName = getModAndModuleNames(modName)
-        end
-    else
-        modName = srcModName
-    end
+    -- use the folder name if no mod name was provided
+    modName = modName or srcModName
 
 
-    assert(modName ~= nil, "Error: Could not create a Logger because modName was nil.")
-    assert(type(modName) == "string", "Error: Could not create a Logger. modName must be a string.")
+    assert(modName ~= nil, "[Logger: ERROR] Could not create a Logger because modName was nil.")
+    assert(type(modName) == "string", "[Logger: ERROR] Could not create a Logger. modName must be a string.")
 
-    if not modDir then
-        modDir = modName
-        -- who logs the logger?
-        print(fmt("[Logger: ERROR] modDir for %q (module %q) was nil! this isn't supposed to happen!!\n%s", modName, moduleName, debug.traceback()))
-    end
+    
 
     -- first try to get it
     local log = Logger.get{modName = modName, moduleName = moduleName, filePath = filePath}
@@ -283,63 +266,60 @@ function Logger.new(params)
 
     -- now we know the log doesn't exist
 
+    ---@diagnostic disable-next-line: missing-fields
     log = {
         modName = modName,
         modDir = modDir,
         moduleName = moduleName,
         filePath = filePath,
-        includeLineNumber = true,
         level = Logger.LEVEL.INFO, -- we'll set it with the dedicated function so we can do fancy stuff
-        includeTimestamp = params.includeTimestamp or false,
     }
 
-    
+    local loggerTbl = table.getset(loggers, modName, {})
+
     -- if there are already loggers with this `modName`, get the most recent one, and then
-    -- update this new loggers values to those of the most recent logger. (if those values weren't specified in `params`)
-    local loggerTbl = loggers[modName]
-    if loggerTbl and #loggerTbl > 0 then
+    -- update this new loggers values to those of the most recent logger.
+    -- this is so that loggers "inherit" parameters from their siblings
+    if #loggerTbl > 0 then
         local latest = loggerTbl[#loggerTbl]
-        
         for k in pairs(communalKeys) do
-            if params[k] == nil then
-                -- only copy stuff if it's not nil
-                log[k] = rawget(latest, k)
+            if rawget(log, k) == nil then
+                log[k] = latest[k]
             end
         end
-    else
-        -- this is the first logger with this `modName`, so we should intialize the array
-        loggerTbl = {}
-        loggers[modName] = loggerTbl
     end
-
 
     table.insert(loggerTbl, log)
 
-    setmetatable(log, logMetatable)
 
-    -- set the logging level.
-    -- we're doing it here so that all the other loggers are updated as well, provided `params.level` is valid.
-    ---@diagnostic disable-next-line: undefined-field
-    if params.logLevel then
-        -- they used the old syntax, so use the old method
-        ---@diagnostic disable-next-line: undefined-field, deprecated
-        log:setLogLevel(params.logLevel)
-    else
-        -- they used the new syntax, so use the new method
-        log:setLevel(params.level)
-    end
-
-    if params.writeToFile ~= nil then
-        -- pave the way forward for our logging brethren
-        log:setWriteToFile(params.writeToFile)
-    else
-        -- no behavior specified, so do whatever the last guy was doing
-        local latest = loggerTbl[#loggerTbl - 1]
-        if latest and latest.file then
-            log:setWriteToFile(true, false)
+    -- only print the warning after trying to import values from prior loggers
+    if not log.modDir then
+        log.modDir = modName
+        -- who logs the logger?
+        if log.moduleName then
+            print(fmt("[Logger: WARN] modDir for %q (module %q) was nil!", log.modName, log.moduleName))
+        else
+            print(fmt("[Logger: WARN] modDir for %q was nil!", log.modName))
         end
     end
 
+
+    setmetatable(log, logMetatable)
+
+    ---@diagnostic disable-next-line: undefined-field
+    if params.logLevel then
+        ---@diagnostic disable-next-line: deprecated, undefined-field
+        log:setLogLevel(params.logLevel)
+    end
+    
+    for k, v in pairs(params) do
+        if communalKeys[k] then
+            -- doing it this way so that we can respect custom set functions (i.e., `setWriteToFile`)
+            local funcName = "set" .. k:sub(1,1):upper() .. k:sub(2)
+            Logger[funcName](log, v)
+        end
+    end
+    
 
     return log
 end
@@ -361,13 +341,6 @@ for key in pairs(communalKeys) do
     Logger["set" .. key:sub(1,1):upper() .. key:sub(2)] = function(self, value)
         updateKey(self, key, value)
     end
-end
-
----@param includeTimestamp boolean Whether logs should use timestamps
-function Logger:setIncludeTimestamp(includeTimestamp)
-    -- we need to know what to do
-    if includeTimestamp == nil then return end
-    updateKey(self, "includeTimestamp", includeTimestamp)
 end
 
 ---@param writeToFile string|boolean
@@ -418,6 +391,7 @@ e.g. to set the `log.level` to "DEBUG", you can write any of the following:
 ---@param self Logger
 ---@param level Logger.LEVEL
 function Logger:setLevel(level)
+    -- no error message if `level` is `nil`
     if not level then return end
 
     if type(level) ~= "number" or level < LOG_LEVEL.NONE or level > LOG_LEVEL.TRACE then
@@ -505,13 +479,6 @@ end
 function Logger.getLoggers(modName) 
     return loggers[modName]
 end
-
-
-
-
-
-
-
 
 
 
@@ -617,7 +584,6 @@ for levelStr, level in pairs(LOG_LEVEL) do
     Logger[string.lower(levelStr)] = function(self, msg, ...)
         if self.level < level then return end
 
-
         local str = self:format(self:makeRecord(msg, {...}, level))
 
         if self.file then
@@ -675,13 +641,11 @@ function Logger:writeInitializedMessage(version)
 
     local str = self:format(record)
 
-    if self.level >= LOG_LEVEL.ERROR then
-        if self.file then
-            self.file:write(str, "\n")
-            self.file:flush()
-        else
-            print(str)
-        end
+    if self.file then
+        self.file:write(str, "\n")
+        self.file:flush()
+    else
+        print(str)
     end
 end
 
@@ -696,7 +660,7 @@ end
 ---@deprecated 
 ---@param levelStr string
 function Logger:setLogLevel(levelStr)
-    local level = LOG_LEVEL[levelStr]
+    local level = levelStr and LOG_LEVEL[levelStr]
     if not level then return end
 
     updateKey(self, "level", level)
