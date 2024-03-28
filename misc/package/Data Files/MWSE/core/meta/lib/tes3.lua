@@ -1142,6 +1142,11 @@ function tes3.getJournalIndex(params) end
 --- @class tes3.getJournalIndex.params
 --- @field id tes3dialogue|string No description yet available.
 
+--- Gets the name of a corresponding `tes3.scanCode`, using the appropriate GMSTs. The `keyName` returned by this function is the same `keyName` that would be used in the in-game Controls menu. For example, `tes3.getKeyName(tes3.scanCode.b)` will return `"B"`, and `tes3.getKeyName(tes3.scanCode.rshift)` will return `"Right Shift"`.
+--- @param keyCode tes3.scanCode No description yet available.
+--- @return string keyName A string representation of the given `keyCode`.
+function tes3.getKeyName(keyCode) end
+
 --- Returns how many times the player killed an actor. If no actor is specified, total number of kills player commited will be returned.
 --- @param params tes3.getKillCount.params? This table accepts the following values:
 --- 
