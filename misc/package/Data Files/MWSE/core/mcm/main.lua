@@ -9,6 +9,7 @@
 if not lfs.directoryexists("Data Files\\MWSE\\config\\core") then
 	lfs.mkdir("Data Files\\MWSE\\config\\core")
 end
+
 --- Storage for mod config packages.
 --- @type table<string, mwseModConfig>
 local configMods = {}
@@ -39,13 +40,11 @@ local favoriteIcons = {
 	-- id = "FavoriteButton"
 }
 
--- its a local variable which means i have more freedom to name it terribly
-local notFavoriteIcons = {
-	idle = "textures/mwse/menu_modconfig_not_favorite_idle.dds",
+local nonFavoriteIcons = {
+	idle = "textures/mwse/menu_modconfig_nonfavorite_idle.dds",
 	-- hover over a favorite to remove it 
-	over = "textures/mwse/menu_modconfig_not_favorite_over.dds",
-	pressed = "textures/mwse/menu_modconfig_not_favorite_pressed.dds",
-	-- id = "FavoriteButton"
+	over = "textures/mwse/menu_modconfig_nonfavorite_over.dds",
+	pressed = "textures/mwse/menu_modconfig_nonfavorite_pressed.dds",
 }
 
 
@@ -54,11 +53,11 @@ local notFavoriteIcons = {
 ---@param b mwseModConfig
 ---@return boolean -- true if `a < b`
 local function sortPackages(a, b)
-	-- mwse.log("comparing %s with %s", packagetostring(a), packagetostring(b))
+	-- check if `a` and `b` have different "favorite" statuses
+	-- `not a.favorite ~= not b.favorite` handles the case when `a.favorite == nil` and `b.favorite == false`
 	if not a.favorite ~= not b.favorite then
 		-- `true` if `a` is favorited and `b` isn't (so `a < b`)
 		-- `false` if `b` is favorited and `a` isn't (so `b < a`)
-
 		return a.favorite == true
 	end
 	return a.name:lower() < b.name:lower()
@@ -67,7 +66,7 @@ end
 -- update the image icons for the various states of the favorite button
 ---@param imageButton tes3uiElement
 local function updateFavoriteImageButton(imageButton, favorite)
-	local iconTable = favorite and favoriteIcons or notFavoriteIcons
+	local iconTable = favorite and favoriteIcons or nonFavoriteIcons
 	imageButton.children[1].contentPath = iconTable.idle
 	imageButton.children[2].contentPath = iconTable.over
 	imageButton.children[3].contentPath = iconTable.pressed
@@ -174,15 +173,11 @@ end
 local function onClickFavoriteButton(e)
 
 
-	-- `source` is the button, which is right of the mod name, so we need to to up and then down-left
+	-- `source` is the button, which is right of the mod name, so we need to up and then down-left
 	local package = configMods[e.source.parent.children[1].text]
 	package.favorite = not package.favorite
 	
 	updateFavoriteImageButton(e.source, package.favorite)
-
-
-
-
 
 	local menu = tes3ui.findMenu("MWSE:ModConfigMenu")
 	if not menu then return end
@@ -190,7 +185,7 @@ local function onClickFavoriteButton(e)
 	local modListContents = modList and modList:getContentElement()
 	
 	if not modListContents then 
-		tes3.messageBox("error! modlistcontents not found.")
+		mwse.log("error! modListContents not found.")
 		return 
 	end
 
@@ -200,7 +195,6 @@ local function onClickFavoriteButton(e)
 
 	modList:getTopLevelMenu():updateLayout()
 end
-
 
 --- @param e tes3uiEventData
 local function focusSearchBar(e)
@@ -269,7 +263,6 @@ local function onClickModConfigButton()
 
 	local menu = tes3ui.findMenu("MWSE:ModConfigMenu")
 	if (not menu) then
-		-- load the list of favorite mods
 
 		-- Create the main menu frame.
 		menu = tes3ui.createMenu({ id = "MWSE:ModConfigMenu", dragFrame = true })
@@ -326,9 +319,7 @@ local function onClickModConfigButton()
 		modList.widthProportional = 1.0
 		modList.heightProportional = 1.0
 		modList:setPropertyBool("PartScrollPane_hide_if_unneeded", true)
-		-- modList.paddingLeft = 5
 
-		-- make a list of config mods instead of config mod names, so we can sort by name and `favorite` status
 		local configModsList = {} --- @type mwseModConfig[]
 		for _, package in pairs(configMods) do
 			if not package.hidden then
@@ -342,7 +333,7 @@ local function onClickModConfigButton()
 		local modListContents = modList:getContentElement()
 
 		for _, package in ipairs(configModsList) do
-			local entryBlock = modListContents:createBlock{id="ModEntryBlock"}
+			local entryBlock = modListContents:createBlock{id = "ModEntryBlock"}
 			entryBlock.flowDirection = tes3.flowDirection.leftToRight
 			entryBlock.autoHeight = true
 			entryBlock.autoWidth = true
@@ -350,12 +341,14 @@ local function onClickModConfigButton()
 			entryBlock.widthProportional = 1.0
 			entryBlock.childAlignY = 0.5
 
-			local entry = entryBlock:createTextSelect({ id = "ModEntry", text = package.name })
-			entry:register("mouseClick", onClickModName)
-			entry.widthProportional = 1
-			entry.heightProportional = 1
+			local modNameButton = entryBlock:createTextSelect({ id = "ModEntry", text = package.name })
+			modNameButton:register("mouseClick", onClickModName)
+			modNameButton.wrapText = true
+			modNameButton.widthProportional = 0.95
+			modNameButton.borderRight = 16
+			modNameButton.heightProportional = 1
 
-			local iconTable = package.favorite and favoriteIcons or notFavoriteIcons
+			local iconTable = package.favorite and favoriteIcons or nonFavoriteIcons
 
 			local imageButton = entryBlock:createImageButton(iconTable)
 			updateFavoriteImageButton(imageButton, package.favorite)
@@ -372,9 +365,6 @@ local function onClickModConfigButton()
 				image.width = 16
 				image.paddingTop = 3
 			end
-			
-			
-			
 		end
 
 		-- Create container for mod content. This will be deleted whenever the pane is reloaded.
@@ -509,10 +499,6 @@ end
 --- Set this up to run before most other initialized callbacks.
 local function onInitialized()
 	event.trigger("modConfigReady")
+	loadFavoriteData() -- only need to do it once when the game loads
 end
 event.register("initialized", onInitialized, { priority = 100 })
-
-event.register('initialized',function (e)
-	timer.start{ callback = loadFavoriteData, duration = 0.5, type = timer.real}
-	loadFavoriteData() -- only need to do it once when the game loads
-end, {priority = -1000000})
