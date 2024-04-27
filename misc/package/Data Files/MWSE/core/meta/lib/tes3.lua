@@ -204,44 +204,7 @@ function tes3.addJournalEntry(params) end
 --- 
 --- `usesNegativeLighting`: boolean? — *Default*: `true`. A flag which controls whether this effect uses negative lighting.
 --- 
---- `onTick`: nil|fun(e: tes3magicEffectTickEventData) — *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
---- --- 		- `tickParams` (table)
---- --- 			- `effectId` (number)
---- --- 			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
---- --- 			- `deltaTime` (number): The time passed since the last tick of the spell.
---- --- 			- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
---- --- 			- `effectIndex` (number): The index of the effect in the spell.
---- --- 
---- --- 		In addition, a function registered as `onTick` can also call the following methods:
---- --- 
---- --- 		- trigger(`triggerParams`): Allows the effect to run through the normal spell event system.
---- --- 			**Parameters:**
---- --- 			- `triggerParams` (table)
---- --- 				- `negateOnExpiry` (boolean): *Optional. Default:* `true` If this flag is `true`, the effect will be negated on expiry.
---- --- 				- `isUncapped` (boolean): *Optional.*
---- --- 				- `attribute` ([tes3.effectAttribute](https://mwse.github.io/MWSE/references/effect-attributes/)): *Optional. Default:* `tes3.effectAttribute.nonResistable` The attribute used in resistance calculations agains this effect. Maps to values in [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
---- --- 				- `type` ([tes3.effectEventType](https://mwse.github.io/MWSE/references/effect-event-types/)): *Optional. Default:* `tes3.effectEventType.boolean`. This flag controls how the effect behaves. For example, `tes3.effectEventType.modStatistic` will make the effect work as calling `tes3.modStatistic`. Maps to values in [`tes3.effectEventType`](https://mwse.github.io/MWSE/references/effect-event-types/) namespace.
---- --- 				- `value` (number): *Optional. Default:* `0`. The variable this effect changes.
---- --- 				- `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must return boolean values.
---- --- 					**Parameters**
---- --- 					- `resistParams` (table)
---- --- 						- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
---- --- 						- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
---- --- 						- `effectIndex` (number): The index of the effect in the spell.
---- --- 
---- --- 		- triggerBoundWeapon(`id`): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID.
---- --- 			**Parameters:**
---- --- 			- `id` (string): The ID of the weapon object to summon.
---- --- 
---- --- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
---- --- 			**Parameters:**
---- --- 			- `id` (string): The ID of the armor object to summon.
---- --- 			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
---- --- 
---- --- 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
---- --- 			**Parameters:**
---- --- 			- `id` (string): The ID of the creature object to summon.
---- --- 
+--- `onTick`: nil|fun(e: tes3magicEffectTickEventData) — *Optional*. A function which will be called on each tick of a spell containing this effect. Note: `dt` (frame time) scaling is handled automatically. This function typically calls `e:trigger()` to run the effect through the normal spell event system.
 --- 
 --- `onCollision`: nil|fun(e: tes3magicEffectCollisionEventData) — *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 --- @return tes3magicEffect effect No description yet available.
@@ -285,44 +248,7 @@ function tes3.addMagicEffect(params) end
 --- @field targetsSkills boolean? *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
 --- @field unreflectable boolean? *Default*: `true`. A flag which controls whether this effect can be reflected.
 --- @field usesNegativeLighting boolean? *Default*: `true`. A flag which controls whether this effect uses negative lighting.
---- @field onTick nil|fun(e: tes3magicEffectTickEventData) *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
---- 		- `tickParams` (table)
---- 			- `effectId` (number)
---- 			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
---- 			- `deltaTime` (number): The time passed since the last tick of the spell.
---- 			- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
---- 			- `effectIndex` (number): The index of the effect in the spell.
---- 
---- 		In addition, a function registered as `onTick` can also call the following methods:
---- 
---- 		- trigger(`triggerParams`): Allows the effect to run through the normal spell event system.
---- 			**Parameters:**
---- 			- `triggerParams` (table)
---- 				- `negateOnExpiry` (boolean): *Optional. Default:* `true` If this flag is `true`, the effect will be negated on expiry.
---- 				- `isUncapped` (boolean): *Optional.*
---- 				- `attribute` ([tes3.effectAttribute](https://mwse.github.io/MWSE/references/effect-attributes/)): *Optional. Default:* `tes3.effectAttribute.nonResistable` The attribute used in resistance calculations agains this effect. Maps to values in [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
---- 				- `type` ([tes3.effectEventType](https://mwse.github.io/MWSE/references/effect-event-types/)): *Optional. Default:* `tes3.effectEventType.boolean`. This flag controls how the effect behaves. For example, `tes3.effectEventType.modStatistic` will make the effect work as calling `tes3.modStatistic`. Maps to values in [`tes3.effectEventType`](https://mwse.github.io/MWSE/references/effect-event-types/) namespace.
---- 				- `value` (number): *Optional. Default:* `0`. The variable this effect changes.
---- 				- `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must return boolean values.
---- 					**Parameters**
---- 					- `resistParams` (table)
---- 						- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
---- 						- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
---- 						- `effectIndex` (number): The index of the effect in the spell.
---- 
---- 		- triggerBoundWeapon(`id`): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID.
---- 			**Parameters:**
---- 			- `id` (string): The ID of the weapon object to summon.
---- 
---- 		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
---- 			**Parameters:**
---- 			- `id` (string): The ID of the armor object to summon.
---- 			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
---- 
---- 		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
---- 			**Parameters:**
---- 			- `id` (string): The ID of the creature object to summon.
---- 
+--- @field onTick nil|fun(e: tes3magicEffectTickEventData) *Optional*. A function which will be called on each tick of a spell containing this effect. Note: `dt` (frame time) scaling is handled automatically. This function typically calls `e:trigger()` to run the effect through the normal spell event system.
 --- @field onCollision nil|fun(e: tes3magicEffectCollisionEventData) *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 
 --- Causes a misc item to be recognized as a soul gem, so that it can be used for soul trapping.
@@ -1096,7 +1022,7 @@ function tes3.getDialogueInfo(params) end
 --- @field dialogue tes3dialogue|string The dialogue that the info belongs to.
 --- @field id string The numerical, unique id for the info object.
 
---- This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied.
+--- This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied. This function respects [`hasNoMagnitude`](https://mwse.github.io/MWSE/types/tes3magicEffect/#hasnomagnitude) flag, returning 0 for both `magnitude` and `effectiveMagnitude` for such effects.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3geteffectmagnitude).
 --- @param params tes3.getEffectMagnitude.params This table accepts the following values:
@@ -1266,8 +1192,9 @@ function tes3.getLockLevel(params) end
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
 
 --- Fetches the contents of the [metadata file](https://mwse.github.io/MWSE/guides/metadata/) associated with a given lua mod key.
+--- The mod key should match the value of `lua-mod` specified in the `[tools.mwse]` section of the relevant metadata file.
 --- @param modKey string The key for the lua mod, which must match the file location and the metadata file's `[tools.mwse]` contents.
---- @return table|nil metadata No description yet available.
+--- @return MWSE.Metadata|nil metadata No description yet available.
 function tes3.getLuaModMetadata(modKey) end
 
 --- Fetches the core game Magic Effect object for a given ID. Can return custom magic effects added with `tes3.addMagicEffect`.
@@ -1637,7 +1564,7 @@ function tes3.isModActive(filename) end
 --- @return fun(): tes3object iterator No description yet available.
 function tes3.iterate(iterator) end
 
---- Iteration function used for looping over game options.
+--- Iteration function used for looping over game objects.
 --- @param filter integer|integer[]|nil *Optional*. Maps to [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) constants.
 --- @return fun(): tes3object objectIterator No description yet available.
 function tes3.iterateObjects(filter) end
@@ -1742,7 +1669,7 @@ function tes3.messageBox(messageOrParams, ...) end
 --- 
 --- `skill`: tes3.skill? — *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
 --- 
---- `name`: string? — *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+--- `name`: string? — *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 --- 
 --- `base`: number? — *Optional*. If set, the base value will be modified.
 --- 
@@ -1760,7 +1687,7 @@ function tes3.modStatistic(params) end
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
 --- @field attribute tes3.attribute? *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 --- @field skill tes3.skill? *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
---- @field name string? *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+--- @field name string? *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 --- @field base number? *Optional*. If set, the base value will be modified.
 --- @field current number? *Optional*. If set, the current value will be modified.
 --- @field value number? *Optional*. If set, both the base and current value will be modified.
@@ -1774,21 +1701,23 @@ function tes3.newGame() end
 --- @return boolean onMainMenu No description yet available.
 function tes3.onMainMenu() end
 
---- Pays a merchant gold. The money is transferred to their barter gold (non-inventory trading gold), and also updates the last barter timer, so that it works the same way a transaction affeects the barter gold reset cycle. This is useful for simulating paying for services. The function will return true if there was enough gold to complete the payment.
+--- Pays a merchant a specified amount of gold and updates the merchant's "last barter timer". This should be used to simulate paying for services. You may also want to play a trade-related sound of your choice upon successful completion.
 --- 
---- A negative cost will allow payment from the merchant's barter gold to the player. You may also want to play a trade-related sound of your choice upon successful completion.
+--- If `cost` is positive, then that amount of gold will be removed from the player's inventory and added to the merchant's available barter gold.
+--- 
+--- If `cost` is negative, then that amount of gold will be added to the player's inventory and removed from the merchant's available barter gold.
 --- @param params tes3.payMerchant.params This table accepts the following values:
 --- 
 --- `merchant`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The merchant to pay.
 --- 
---- `cost`: number — The amount of gold to transfer to the merchant. May be negative to transfer gold to the player.
---- @return boolean success True if the transaction completed. False if there was not enough gold.
+--- `cost`: number — The amount of gold to pay the merchant. If negative, the merchant will pay the player.
+--- @return boolean success `true` if the transaction completed. `false` if there was not enough gold.
 function tes3.payMerchant(params) end
 
 ---Table parameter definitions for `tes3.payMerchant`.
 --- @class tes3.payMerchant.params
 --- @field merchant tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The merchant to pay.
---- @field cost number The amount of gold to transfer to the merchant. May be negative to transfer gold to the player.
+--- @field cost number The amount of gold to pay the merchant. If negative, the merchant will pay the player.
 
 --- Attempts a persuasion attempt on an actor, potentially adjusting their disposition. Returns true if the attempt was a success.
 --- @param params tes3.persuade.params This table accepts the following values:
@@ -1945,13 +1874,10 @@ function tes3.random(seed) end
 --- 
 --- !!! tip Improving performance of rayTest
 --- 
---- 		1. Keep maximum size of objects reasonable, as well as triangle counts
---- 
---- 		2. Whenever possible set a maxDistance in your rayTest calls
---- 
---- 		3. Keep a cached table of ignored objects that you pass to rayTest
---- 
---- 		4. Whenever possible call ray test on only a subset of the game's scene graph. It can be `worldPickRoot` for interactable objects, `worldLandscapeRoot`, or `worldObjectRoot` for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different `NiNode` you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.
+--- 	1. Keep maximum size of objects reasonable, as well as triangle counts
+--- 	2. Whenever possible set a maxDistance in your rayTest calls
+--- 	3. Keep a cached table of ignored objects that you pass to rayTest
+--- 	4. Whenever possible call ray test on only a subset of the game's scene graph. It can be `worldPickRoot` for interactable objects, `worldLandscapeRoot`, or `worldObjectRoot` for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different `NiNode` you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.
 --- 
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3raytest).
@@ -1985,7 +1911,7 @@ function tes3.random(seed) end
 --- 
 --- `returnTexture`: boolean? — *Default*: `false`. Calculate and return the texture coordinate at intersections.
 --- 
---- `ignore`: table<integer?, niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode|tes3reference|nil>|nil — *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
+--- `ignore`: table<integer?, niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode|tes3reference|nil>|nil — *Optional*. An array of references and/or scene graph nodes to cull from the result(s). In most cases when testing from the camera position, it's desirable to pass `ignore = { tes3.player }`.
 --- 
 --- `accurateSkinned`: boolean? — *Default*: `false`. If true, the raytest will deform skinned objects to accurately raytest against them. This significantly slows down the operation.
 --- @return niPickRecord|niPickRecord[]|nil result No description yet available.
@@ -2007,7 +1933,7 @@ function tes3.rayTest(params) end
 --- @field returnNormal boolean? *Default*: `false`. Calculate and return the vertex normal at intersections.
 --- @field returnSmoothNormal boolean? *Default*: `false`. Use normal interpolation for calculating vertex normals.
 --- @field returnTexture boolean? *Default*: `false`. Calculate and return the texture coordinate at intersections.
---- @field ignore table<integer?, niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode|tes3reference|nil>|nil *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
+--- @field ignore table<integer?, niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode|tes3reference|nil>|nil *Optional*. An array of references and/or scene graph nodes to cull from the result(s). In most cases when testing from the camera position, it's desirable to pass `ignore = { tes3.player }`.
 --- @field accurateSkinned boolean? *Default*: `false`. If true, the raytest will deform skinned objects to accurately raytest against them. This significantly slows down the operation.
 
 --- Simulates releasing a keyboard key.
@@ -2155,9 +2081,9 @@ function tes3.removeVisualEffect(params) end
 --- This function will compile and run a mwscript chunk of code. This is not ideal to use, but can be used for features not yet exposed to lua.
 --- @param params tes3.runLegacyScript.params This table accepts the following values:
 --- 
---- `script`: tes3script|string|nil — *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
+--- `script`: tes3script|string|nil — *Default*: `tes3.worldController.scriptCompileAndRun`. The base script to base the execution from.
 --- 
---- `source`: number — The compilation source to use. Defaults to tes3.scriptSource.default
+--- `source`: tes3.compilerSource? — *Default*: `tes3.compilerSource.default`. The compilation source to use.
 --- 
 --- `command`: string — The script text to compile and run.
 --- 
@@ -2173,8 +2099,8 @@ function tes3.runLegacyScript(params) end
 
 ---Table parameter definitions for `tes3.runLegacyScript`.
 --- @class tes3.runLegacyScript.params
---- @field script tes3script|string|nil *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
---- @field source number The compilation source to use. Defaults to tes3.scriptSource.default
+--- @field script tes3script|string|nil *Default*: `tes3.worldController.scriptCompileAndRun`. The base script to base the execution from.
+--- @field source tes3.compilerSource? *Default*: `tes3.compilerSource.default`. The compilation source to use.
 --- @field command string The script text to compile and run.
 --- @field variables tes3scriptVariables? *Optional*. If a reference is provided, the reference's variables will be used.
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string The reference to target for execution.
@@ -2548,7 +2474,7 @@ function tes3.setSourceless(object, sourceless) end
 --- 
 --- `skill`: tes3.skill|integer|nil — *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
 --- 
---- `name`: string? — *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+--- `name`: string? — *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 --- 
 --- `base`: number? — *Optional*. If set, the base value will be set.
 --- 
@@ -2564,7 +2490,7 @@ function tes3.setStatistic(params) end
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
 --- @field attribute tes3.attribute|integer|nil *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 --- @field skill tes3.skill|integer|nil *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
---- @field name string? *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+--- @field name string? *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 --- @field base number? *Optional*. If set, the base value will be set.
 --- @field current number? *Optional*. If set, the current value will be set.
 --- @field value number? *Optional*. If set, both the base and current value will be set.
@@ -3527,6 +3453,13 @@ tes3.codePatchFeature = require("tes3.codePatchFeature")
 ---| `tes3.codePatchFeature.waterwalkFix`
 ---| `tes3.codePatchFeature.weaponReachIssues`
 ---| `tes3.codePatchFeature.weaponResistanceChange`
+
+tes3.compilerSource = require("tes3.compilerSource")
+
+--- @alias tes3.compilerSource
+---| `tes3.compilerSource.console`
+---| `tes3.compilerSource.default`
+---| `tes3.compilerSource.dialogue`
 
 tes3.contentType = require("tes3.contentType")
 

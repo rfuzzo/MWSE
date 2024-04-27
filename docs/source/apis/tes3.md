@@ -291,44 +291,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 	* `targetsSkills` (boolean): *Default*: `true`. A flag which controls whether this effect targets a certain skill or skills.
 	* `unreflectable` (boolean): *Default*: `true`. A flag which controls whether this effect can be reflected.
 	* `usesNegativeLighting` (boolean): *Default*: `true`. A flag which controls whether this effect uses negative lighting.
-	* `onTick` (fun(e: [tes3magicEffectTickEventData](../types/tes3magicEffectTickEventData.md))): *Optional*. A function which will be called on each tick of a spell containing this effect. A table `tickParams` will be passed to the callback function. Note: `dt`(frame time) scaling is handled automatically.
-		- `tickParams` (table)
-			- `effectId` (number)
-			- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
-			- `deltaTime` (number): The time passed since the last tick of the spell.
-			- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
-			- `effectIndex` (number): The index of the effect in the spell.
-
-		In addition, a function registered as `onTick` can also call the following methods:
-
-		- trigger(`triggerParams`): Allows the effect to run through the normal spell event system.
-			**Parameters:**
-			- `triggerParams` (table)
-				- `negateOnExpiry` (boolean): *Optional. Default:* `true` If this flag is `true`, the effect will be negated on expiry.
-				- `isUncapped` (boolean): *Optional.*
-				- `attribute` ([tes3.effectAttribute](https://mwse.github.io/MWSE/references/effect-attributes/)): *Optional. Default:* `tes3.effectAttribute.nonResistable` The attribute used in resistance calculations agains this effect. Maps to values in [`tes3.effectAttribute`](https://mwse.github.io/MWSE/references/effect-attributes/) namespace.
-				- `type` ([tes3.effectEventType](https://mwse.github.io/MWSE/references/effect-event-types/)): *Optional. Default:* `tes3.effectEventType.boolean`. This flag controls how the effect behaves. For example, `tes3.effectEventType.modStatistic` will make the effect work as calling `tes3.modStatistic`. Maps to values in [`tes3.effectEventType`](https://mwse.github.io/MWSE/references/effect-event-types/) namespace.
-				- `value` (number): *Optional. Default:* `0`. The variable this effect changes.
-				- `resistanceCheck(resistParams)` (function): *Optional.* The function passed as `resistanceCheck` will be used on any of the game's spell resistance checks. For example, the only effect in vanilla Morrowind that implements this function is Water Walking. It disallows using a spell with Water Walking when the player is deep underwater, by setting it as expired. So, returning `true` from this function will set your effect to expired, and depending on your trigger code may stop processing. The function passed here must return boolean values.
-					**Parameters**
-					- `resistParams` (table)
-						- `sourceInstance` ([tes3magicSourceInstance](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/)): Access to the magic source of the effect instance.
-						- `effectInstance` ([tes3magicEffectInstance](https://mwse.github.io/MWSE/types/tes3magicEffectInstance/)): Access to the magic effect instance.
-						- `effectIndex` (number): The index of the effect in the spell.
-
-		- triggerBoundWeapon(`id`): Performs vanilla weapon summoning logic. It will create a summoned version of the weapon with provided ID.
-			**Parameters:**
-			- `id` (string): The ID of the weapon object to summon.
-
-		- triggerBoundArmor(`id`, `id2`): Performs vanilla armor summoning logic. It summons one armor object with the provided ID. To summon gauntlets, provide two IDs.
-			**Parameters:**
-			- `id` (string): The ID of the armor object to summon.
-			- `id2` (string): *Optional.* The ID of the additional gauntlet object to summon. The second item ID can only be a gauntlet object.
-
-		- triggerSummon(`id`): Performs vanilla creature summoning logic. It will create a summoned version of a creature with provided ID.
-			**Parameters:**
-			- `id` (string): The ID of the creature object to summon.
-
+	* `onTick` (fun(e: [tes3magicEffectTickEventData](../types/tes3magicEffectTickEventData.md))): *Optional*. A function which will be called on each tick of a spell containing this effect. Note: `dt` (frame time) scaling is handled automatically. This function typically calls `e:trigger()` to run the effect through the normal spell event system.
 	* `onCollision` (fun(e: [tes3magicEffectCollisionEventData](../types/tes3magicEffectCollisionEventData.md))): *Optional*. A function which will be called when a spell containing this spell effect collides with something.
 
 **Returns**:
@@ -486,7 +449,7 @@ local wasAdded = tes3.addSoulGem({ item = ... })
 
 * `wasAdded` (boolean)
 
-??? example "Example: Make the Dwemer Tube a Soul gem. Also, make sure Fargoth's soul alway ends up in it if the player has one avilable."
+??? example "Example: Make Dwemer Tubes be treated as Soul gems. Also, make sure Fargoth's soul always ends up in one if the player has one avilable."
 
 	```lua
 	local function onInitialized()
@@ -1992,7 +1955,7 @@ local dialogueInfo = tes3.getDialogueInfo({ dialogue = ..., id = ... })
 ### `tes3.getEffectMagnitude`
 <div class="search_terms" style="display: none">geteffectmagnitude, effectmagnitude</div>
 
-This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied.
+This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied. This function respects [`hasNoMagnitude`](https://mwse.github.io/MWSE/types/tes3magicEffect/#hasnomagnitude) flag, returning 0 for both `magnitude` and `effectiveMagnitude` for such effects.
 
 ```lua
 local effectiveMagnitude, magnitude = tes3.getEffectMagnitude({ reference = ..., effect = ..., skill = ..., attribute = ... })
@@ -2366,6 +2329,7 @@ local level = tes3.getLockLevel({ reference = ... })
 <div class="search_terms" style="display: none">getluamodmetadata, luamodmetadata</div>
 
 Fetches the contents of the [metadata file](https://mwse.github.io/MWSE/guides/metadata/) associated with a given lua mod key.
+The mod key should match the value of `lua-mod` specified in the `[tools.mwse]` section of the relevant metadata file.
 
 ```lua
 local metadata = tes3.getLuaModMetadata(modKey)
@@ -2377,7 +2341,7 @@ local metadata = tes3.getLuaModMetadata(modKey)
 
 **Returns**:
 
-* `metadata` (table, nil)
+* `metadata` (MWSE.Metadata, nil)
 
 ***
 
@@ -3301,7 +3265,7 @@ local iterator = tes3.iterate(iterator)
 ### `tes3.iterateObjects`
 <div class="search_terms" style="display: none">iterateobjects</div>
 
-Iteration function used for looping over game options.
+Iteration function used for looping over game objects.
 
 ```lua
 local objectIterator = tes3.iterateObjects(filter)
@@ -3580,7 +3544,7 @@ tes3.modStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., b
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string)
 	* `attribute` ([tes3.attribute](../references/attributes.md)): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 	* `skill` ([tes3.skill](../references/skills.md)): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
-	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 	* `base` (number): *Optional*. If set, the base value will be modified.
 	* `current` (number): *Optional*. If set, the current value will be modified.
 	* `value` (number): *Optional*. If set, both the base and current value will be modified.
@@ -3645,9 +3609,11 @@ local onMainMenu = tes3.onMainMenu()
 ### `tes3.payMerchant`
 <div class="search_terms" style="display: none">paymerchant</div>
 
-Pays a merchant gold. The money is transferred to their barter gold (non-inventory trading gold), and also updates the last barter timer, so that it works the same way a transaction affeects the barter gold reset cycle. This is useful for simulating paying for services. The function will return true if there was enough gold to complete the payment.
+Pays a merchant a specified amount of gold and updates the merchant's "last barter timer". This should be used to simulate paying for services. You may also want to play a trade-related sound of your choice upon successful completion.
 
-A negative cost will allow payment from the merchant's barter gold to the player. You may also want to play a trade-related sound of your choice upon successful completion.
+If `cost` is positive, then that amount of gold will be removed from the player's inventory and added to the merchant's available barter gold.
+
+If `cost` is negative, then that amount of gold will be added to the player's inventory and removed from the merchant's available barter gold.
 
 ```lua
 local success = tes3.payMerchant({ merchant = ..., cost = ... })
@@ -3657,11 +3623,11 @@ local success = tes3.payMerchant({ merchant = ..., cost = ... })
 
 * `params` (table)
 	* `merchant` ([tes3mobileActor](../types/tes3mobileActor.md)): The merchant to pay.
-	* `cost` (number): The amount of gold to transfer to the merchant. May be negative to transfer gold to the player.
+	* `cost` (number): The amount of gold to pay the merchant. If negative, the merchant will pay the player.
 
 **Returns**:
 
-* `success` (boolean): True if the transaction completed. False if there was not enough gold.
+* `success` (boolean): `true` if the transaction completed. `false` if there was not enough gold.
 
 ***
 
@@ -3848,13 +3814,10 @@ Performs a ray test and returns various information related to the result(s). If
 
 !!! tip Improving performance of rayTest
 
-		1. Keep maximum size of objects reasonable, as well as triangle counts
-
-		2. Whenever possible set a maxDistance in your rayTest calls
-
-		3. Keep a cached table of ignored objects that you pass to rayTest
-
-		4. Whenever possible call ray test on only a subset of the game's scene graph. It can be `worldPickRoot` for interactable objects, `worldLandscapeRoot`, or `worldObjectRoot` for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different `NiNode` you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.
+	1. Keep maximum size of objects reasonable, as well as triangle counts
+	2. Whenever possible set a maxDistance in your rayTest calls
+	3. Keep a cached table of ignored objects that you pass to rayTest
+	4. Whenever possible call ray test on only a subset of the game's scene graph. It can be `worldPickRoot` for interactable objects, `worldLandscapeRoot`, or `worldObjectRoot` for other static, non-interactable objects. You could even pass a smaller subset of the scene graph with a different `NiNode` you aquired yourself. If your mod's logic only needs specific things you can narrow it down for big performance improvement.
 
 
 ```lua
@@ -3878,7 +3841,7 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 	* `returnNormal` (boolean): *Default*: `false`. Calculate and return the vertex normal at intersections.
 	* `returnSmoothNormal` (boolean): *Default*: `false`. Use normal interpolation for calculating vertex normals.
 	* `returnTexture` (boolean): *Default*: `false`. Calculate and return the texture coordinate at intersections.
-	* `ignore` (table&lt;integer, [niNode](../types/niNode.md)|[tes3reference](../types/tes3reference.md)&gt;): *Optional*. An array of references and/or scene graph nodes to cull from the result(s).
+	* `ignore` (table&lt;integer, [niNode](../types/niNode.md)|[tes3reference](../types/tes3reference.md)&gt;): *Optional*. An array of references and/or scene graph nodes to cull from the result(s). In most cases when testing from the camera position, it's desirable to pass `ignore = { tes3.player }`.
 	* `accurateSkinned` (boolean): *Default*: `false`. If true, the raytest will deform skinned objects to accurately raytest against them. This significantly slows down the operation.
 
 **Returns**:
@@ -4169,8 +4132,8 @@ local executed = tes3.runLegacyScript({ script = ..., source = ..., command = ..
 **Parameters**:
 
 * `params` (table)
-	* `script` ([tes3script](../types/tes3script.md), string): *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
-	* `source` (number): The compilation source to use. Defaults to tes3.scriptSource.default
+	* `script` ([tes3script](../types/tes3script.md), string): *Default*: `tes3.worldController.scriptCompileAndRun`. The base script to base the execution from.
+	* `source` ([tes3.compilerSource](../references/compiler-sources.md)): *Default*: `tes3.compilerSource.default`. The compilation source to use.
 	* `command` (string): The script text to compile and run.
 	* `variables` (tes3scriptVariables): *Optional*. If a reference is provided, the reference's variables will be used.
 	* `reference` ([tes3reference](../types/tes3reference.md), [tes3mobileActor](../types/tes3mobileActor.md), string): The reference to target for execution.
@@ -4612,7 +4575,7 @@ tes3.setStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., b
 	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string)
 	* `attribute` ([tes3.attribute](../references/attributes.md), integer): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 	* `skill` ([tes3.skill](../references/skills.md), integer): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
-	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka, fatigue or encumbrance.
 	* `base` (number): *Optional*. If set, the base value will be set.
 	* `current` (number): *Optional*. If set, the current value will be set.
 	* `value` (number): *Optional*. If set, both the base and current value will be set.

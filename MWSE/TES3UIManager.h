@@ -103,11 +103,18 @@ namespace TES3::UI {
 
 	sol::table getPalette_lua(sol::this_state ts, const char* name);
 
+	void showMagicSelectMenu_lua(sol::table params);
 	void showInventorySelectMenu_lua(sol::table params);
 
 	void __cdecl createResponseText(Element* parent, const char* text, int type, int answerIndex = -1);
 	void createResponseText_lua(sol::table params);
 	void choice(const char* text, int index);
+
+	std::tuple<int, int> textLayoutGetFontHeight_lua(sol::table params);
+	void textLayoutGetTextExtent(TES3::Font* font, const char* text, float* out_width, float* out_verticalAdvance, int maxCharsOrLineMode, bool useLineHeight);
+	std::tuple<int, int, int> textLayoutGetTextExtent_lua(sol::table params);
+	int textLayoutWrapTextInPlace(TES3::Font* font, char* textBuffer, unsigned int maxWidth, bool ignoreLinkDelimiters, char newlineReplacement);
+	std::tuple<std::string, int> textLayoutWrapText_lua(sol::table params);
 
 	//
 	// Helper functions.

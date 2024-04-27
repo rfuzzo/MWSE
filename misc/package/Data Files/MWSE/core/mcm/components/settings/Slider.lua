@@ -5,17 +5,18 @@
 		MCM sliders allow specifying minimal value different than 0. The implementation adds/subtracts
 		`self.min` when reading/writing to the current tes3uiSlider's `widget.current` to account for
 		that offset (so tes3uiSlider's value range is [0, self.max - self.min]). In addition, children
-		may implement support for floating point values. This is accomplished by keeping the MCM slider's
-		variable in the desired floating point range and scaling it in `scaleToSliderRange` and
-		`scaleToVariableRange` methods when reading/writing to integer range used by the underlying
-		tes3uiSlider.
+		may implement support for different conversions (e.g. to support floating-point values).
+		This is accomplished by overloading the `convertToWidgetValue` and `convertToVariableValue` methods.
+
+		- The `Slider:convertToWidgetValue(variableValue)` method is responsible for taking in a variable value
+		and outputting the appropriate value to use on the slider widget.
+
+		- The `Slider:convertToVariableValue(widgetValue)` method is responsible for taking in a value stored
+		in a slider widget, and outputting the corresponding variable value.
 
 		Usually, children of this component implement some of the following methods:
-		- scaleToVariableRange - to convert from tes3uiSlider value range to variable's range
-		- scaleToSliderRange - to convert from variable value range to tes3uiSlider's range
-		- getNewValue - to read current from `self.elements.slider.widget.current` and convert that to range used by the variable
-		- updateValueLabel - to update `self.elements.label.text` based on newly-set `self.elements.slider.widget.current`
-		- getCurrentWidgetValue - to read current `self.variable.value` and convert that to the range of values used by slider widget
+		- convertToWidgetValue - convert variable value to widget value. this will automatically define `convertToVariableValue` as well.
+		- updateValueLabel - customize how the current variable value should be formatted in the widget display text.
 ]]--
 
 --- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
@@ -27,43 +28,98 @@ local Parent = require("mcm.components.settings.Setting")
 --- @class mwseMCMSlider
 local Slider = Parent:new()
 Slider.min = 0
+Slider.decimalPlaces = 0
 Slider.max = 100
 Slider.step = 1
 Slider.jump = 5
 
-function Slider:scaleToSliderRange(value)
-	return value
+
+function Slider:new(data)
+	-- initialize metatable, make variable, etc
+	local t = Parent.new(self, data)
+
+	-- range of values (as requested by the user, not taking slider behavior into account)
+	local dist = t.max - t.min
+
+	if rawget(t, "jump") == nil then
+		t.jump = math.min(dist, 5 * t.step)
+	end
+
+	assert(dist > 0, "mcm.Slider: Invalid 'max' and 'min' parameters provided. 'max' must be greater than 'min'.")
+	assert(t.step > 0, "mcm.Slider: Invalid 'step' parameter provided. It must be greater than 0.")
+	assert(t.jump > 0, "mcm.Slider: Invalid 'jump' parameter provided. It must be greater than 0.")
+
+	assert(
+		t.decimalPlaces % 1 == 0 and t.decimalPlaces >= 0,
+		"mcm.Slider: Invalid 'decimalPlaces' parameter provided. It must be a nonnegative whole number."
+	)
+
+	-- Avoid breaking existing mods that have variable min or max but a fixed step/jump.
+	-- Clamp instead of asserting.
+	if t.step > dist + math.epsilon then
+		mwse.log("mcm.Slider: 'step' parameter is greater than 'max' - 'min'")
+		mwse.log(debug.traceback())
+		t.step = dist
+	end
+	if t.jump > dist + math.epsilon then
+		mwse.log("mcm.Slider: 'jump' parameter is greater than 'max' - 'min'")
+		mwse.log(debug.traceback())
+		t.jump = dist
+	end
+
+	return t
 end
 
-function Slider:scaleToVariableRange(value)
-	return value
+
+function Slider:convertToWidgetValue(variableValue)
+	return (variableValue - self.min) * (10 ^ self.decimalPlaces)
 end
 
-function Slider:getNewValue()
-	local newValue = self.elements.slider.widget.current
-	return self:scaleToVariableRange(newValue) + self.min
+
+-- `y == C * x + a` ~> (y - a) / C == x
+
+function Slider:convertToVariableValue(widgetValue)
+	-- e.g., consider `min == 10`. Then
+	local a = self:convertToWidgetValue(0) 		-- `a == -10`
+	local C = self:convertToWidgetValue(1) - a	-- `C == -9 - (-10) == 1
+	return (widgetValue - a) / C				-- `returnVal == widgetValue + 10`
+end
+
+function Slider:convertToLabelValue(variableValue)
+	return self.decimalPlaces == 0 and variableValue
+		or string.format(table.concat{"%.", self.decimalPlaces, "f"}, variableValue)
 end
 
 function Slider:updateValueLabel()
-	local newValue = ""
-	local labelText = ""
 
-	if self.elements.slider then
-		newValue = tostring(self:getNewValue())
-	end
+	local value = self:convertToLabelValue(self.variable.value)
 
-	if string.find(self.label, "%s", 1, true) then
-		labelText = string.format(self.label, newValue)
+	if string.find(self.label, "%s", nil, true) then
+		self.elements.label.text = self.label:format(value)
 	else
-		labelText = self.label .. ": " .. newValue
+		self.elements.label.text = string.format("%s: %s", self.label, value)
 	end
-
-	self.elements.label.text = labelText
-
 end
 
+function Slider:updateVariableValue()
+	if self.elements.slider then
+		local widgetValue = self.elements.slider.widget.current
+		self.variable.value = self:convertToVariableValue(widgetValue)
+	end
+end
+
+-- update the value stored in the slider to the value stored in the variable
+function Slider:updateWidgetValue()
+	if self.elements.slider then
+		local widgetValue = self:convertToWidgetValue(self.variable.value)
+		self.elements.slider.widget.current = widgetValue
+	end
+end
+
+
+
 function Slider:update()
-	self.variable.value = self:getNewValue()
+	self:updateVariableValue()
 	Parent.update(self)
 end
 
@@ -79,15 +135,13 @@ function Slider:registerSliderElement(element)
 	end)
 end
 
-function Slider:getCurrentWidgetValue()
-	local newValue = self.variable.value - self.min
-	return self:scaleToSliderRange(newValue)
-end
+
 
 function Slider:enable()
 	Parent.enable(self)
+	-- if the variable exists, use it to update the widget and the displayed label
 	if self.variable.value then
-		self.elements.slider.widget.current = self:getCurrentWidgetValue()
+		self:updateWidgetValue()
 		self:updateValueLabel()
 	end
 
@@ -101,6 +155,7 @@ function Slider:enable()
 
 	-- But we want the label to update in real time so you can see where it's going to end up
 	self.elements.slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
+		self:updateVariableValue()
 		self:updateValueLabel()
 	end)
 end
@@ -109,8 +164,6 @@ function Slider:disable()
 	Parent.disable(self)
 
 	self.elements.slider.children[2].children[1].visible = false
-	-- self.elements.sliderValueLabel.color = tes3ui.getPalette("disabled_color")
-
 end
 
 -- UI creation functions
@@ -125,41 +178,30 @@ end
 function Slider:createLabel(parentBlock)
 	Parent.createLabel(self, parentBlock)
 	self:updateValueLabel()
-	--[[self.elements.label.autoWidth = true
-	self.elements.label.widthProportional = nil
-	self.elements.labelBlock.flowDirection = "left_to_right"
-
-	local sliderValueLabel = self.elements.labelBlock:createLabel({text = ": --" })
-	self.elements.sliderValueLabel = sliderValueLabel
-	table.insert(self.mouseOvers, sliderValueLabel)]] --
 end
 
 --- @param parentBlock tes3uiElement
 function Slider:makeComponent(parentBlock)
+
 	local sliderBlock = parentBlock:createBlock()
 	sliderBlock.flowDirection = tes3.flowDirection.leftToRight
 	sliderBlock.autoHeight = true
 	sliderBlock.widthProportional = 1.0
-	local range = self:scaleToSliderRange(self.max - self.min)
-	local slider = sliderBlock:createSlider({ current = 0, max = range })
-	slider.widthProportional = 1.0
 
-	-- Set custom values from setting data
-	slider.widget.step = self:scaleToSliderRange(self.step)
-	slider.widget.jump = self:scaleToSliderRange(self.jump)
+	local slider = sliderBlock:createSlider{
+		current = 0,
+		max = self:convertToWidgetValue(self.max),
+		-- get the `step` and `jump` by starting from `self.min`, incrementing a bit, then converting
+		-- to the slider settings and seeing where we end up
+		step = self:convertToWidgetValue(self.step + self.min),
+		jump = self:convertToWidgetValue(self.jump + self.min),
+	}
+	slider.widthProportional = 1.0
 
 	self.elements.slider = slider
 	self.elements.sliderBlock = sliderBlock
 
-	-- add mouseovers
-	table.insert(self.mouseOvers, sliderBlock)
-	-- Add every piece of the slider to the mouseOvers
-	for _, sliderElement in ipairs(slider.children) do
-		table.insert(self.mouseOvers, sliderElement)
-		for _, innerElement in ipairs(sliderElement.children) do
-			table.insert(self.mouseOvers, innerElement)
-		end
-	end
+	self:insertMouseovers(sliderBlock)
 end
 
 return Slider
