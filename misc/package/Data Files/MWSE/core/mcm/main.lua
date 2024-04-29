@@ -3,12 +3,7 @@
 
 	Part of the MWSE Project. This module is responsible for creating a uniform UI that mods can
 	extend to provide a single place for users to configure their mods.
-]]--
-
--- make config directory if it doesnt exist
-if not lfs.directoryexists("Data Files\\MWSE\\config\\core") then
-	lfs.mkdir("Data Files\\MWSE\\config\\core")
-end
+]]
 
 --- Storage for mod config packages.
 --- @type table<string, mwseModConfig>
@@ -25,6 +20,11 @@ local previousModConfigSelector = nil
 --- Reusable access to UI elements.
 --- @type tes3uiElement?
 local modConfigContainer = nil
+
+--- @type table
+local config = mwse.loadConfig("MWSE.MCM", {
+	favorites = {},
+})
 
 -- Expose the mcm API.
 
@@ -73,26 +73,25 @@ local function updateFavoriteImageButton(imageButton, favorite)
 end
 
 local function loadFavoriteData()
-	local data = json.loadfile("config\\core\\MCM Favorite Mods")
-	-- why am i not storing favorite mods as a set? 
-	for _, modName in pairs(data) do
+	for _, modName in ipairs(config.favorites) do
 		if configMods[modName] then
 			configMods[modName].favorite = true
 		end
 	end
-	for _, package in pairs(configMods) do
-		package.favorite = package.favorite or false -- make sure it's not `nil`
-	end
 end
 
 local function saveFavoriteMods()
-	local favoriteModNames = {}
+	-- Refresh the favorites array from current data.
+	config.favorites = {}
 	for _, package in pairs(configMods) do
 		if package.favorite then
-			table.insert(favoriteModNames, package.name)
+			table.insert(config.favorites, package.name)
 		end
 	end
-	json.savefile("config\\core\\MCM Favorite Mods", favoriteModNames)
+
+	-- TODO: Consider keeping track of favorites that are no longer installed.
+
+	mwse.saveConfig("MWSE.MCM", config)
 end
 
 
@@ -491,6 +490,7 @@ function mwse.registerModConfig(name, package)
 
 	-- Add the package to the list.
 	package.name = name
+	package.favorite = false
 	configMods[name] = package
 end
 
@@ -499,6 +499,8 @@ end
 --- Set this up to run before most other initialized callbacks.
 local function onInitialized()
 	event.trigger("modConfigReady")
-	loadFavoriteData() -- only need to do it once when the game loads
+
+	-- Once our mods are loaded, we can update their favorite sate.
+	loadFavoriteData()
 end
 event.register("initialized", onInitialized, { priority = 100 })
