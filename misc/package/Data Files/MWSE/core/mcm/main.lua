@@ -34,7 +34,7 @@ mwse.mcm.i18n = mwse.loadTranslations("mcm")
 -- credit to Pherim for the default icons
 local favoriteIcons = {
 	idle = "textures/mwse/menu_modconfig_favorite_idle.dds",
-	-- hover over a favorite to remove it 
+	-- hover over a favorite to remove it
 	over = "textures/mwse/menu_modconfig_favorite_over.dds",
 	pressed = "textures/mwse/menu_modconfig_favorite_pressed.dds",
 	-- id = "FavoriteButton"
@@ -42,7 +42,7 @@ local favoriteIcons = {
 
 local nonFavoriteIcons = {
 	idle = "textures/mwse/menu_modconfig_nonfavorite_idle.dds",
-	-- hover over a favorite to remove it 
+	-- hover over a favorite to remove it
 	over = "textures/mwse/menu_modconfig_nonfavorite_over.dds",
 	pressed = "textures/mwse/menu_modconfig_nonfavorite_pressed.dds",
 }
@@ -170,22 +170,20 @@ end
 --- Callback for when the favorite button has been clicked.
 --- @param e tes3uiEventData
 local function onClickFavoriteButton(e)
-
-
 	-- `source` is the button, which is right of the mod name, so we need to up and then down-left
 	local package = configMods[e.source.parent.children[1].text]
 	package.favorite = not package.favorite
-	
+
 	updateFavoriteImageButton(e.source, package.favorite)
 
 	local menu = tes3ui.findMenu("MWSE:ModConfigMenu")
 	if not menu then return end
 	local modList = menu:findChild("ModList")
 	local modListContents = modList and modList:getContentElement()
-	
-	if not modListContents then 
+
+	if not modListContents then
 		mwse.log("error! modListContents not found.")
-		return 
+		return
 	end
 
 	modListContents:sortChildren(function(a, b)
@@ -262,7 +260,6 @@ local function onClickModConfigButton()
 
 	local menu = tes3ui.findMenu("MWSE:ModConfigMenu")
 	if (not menu) then
-
 		-- Create the main menu frame.
 		menu = tes3ui.createMenu({ id = "MWSE:ModConfigMenu", dragFrame = true })
 		menu.text = mwse.mcm.i18n("Mod Configuration")
@@ -322,7 +319,7 @@ local function onClickModConfigButton()
 		local configModsList = {} --- @type mwseModConfig[]
 		for _, package in pairs(configMods) do
 			if not package.hidden then
-				table.insert(configModsList, package) 
+				table.insert(configModsList, package)
 			end
 		end
 
@@ -336,7 +333,7 @@ local function onClickModConfigButton()
 			entryBlock.flowDirection = tes3.flowDirection.leftToRight
 			entryBlock.autoHeight = true
 			entryBlock.autoWidth = true
-			
+
 			entryBlock.widthProportional = 1.0
 			entryBlock.childAlignY = 0.5
 
