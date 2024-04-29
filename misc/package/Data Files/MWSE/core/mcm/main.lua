@@ -26,6 +26,16 @@ local config = mwse.loadConfig("MWSE.MCM", {
 	favorites = {},
 })
 
+-- Try to migrate over existing favorites.
+if (table.empty(config.favorites) and lfs.fileexists("config\\core\\MCM Favorite Mods.json")) then
+	-- Migrate over the contents of the old file, and overwrite 
+	config.favorites = json.loadfile("config\\core\\MCM Favorite Mods")
+
+	-- Delete old file (and directory if it is empty).
+	os.remove("config\\core\\MCM Favorite Mods.json")
+	lfs.rmdir("config\\core", false)
+end
+
 -- Expose the mcm API.
 
 mwse.mcm = require("mcm.mcm")
@@ -497,7 +507,7 @@ end
 local function onInitialized()
 	event.trigger("modConfigReady")
 
-	-- Once our mods are loaded, we can update their favorite sate.
+	-- Once our mods are loaded, we can update their favorite state.
 	loadFavoriteData()
 end
 event.register("initialized", onInitialized, { priority = 100 })
