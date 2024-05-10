@@ -240,6 +240,8 @@ These effects build off of the [standard magic effects](./magic-effects.md). If 
 | selfRepair                   | 8500      | [DRIP - Dynamic Randomised Item Properties](https://www.nexusmods.com/morrowind/mods/51242)  |
 | identify                     | 9599      | [Unidentified Items (JosephMcKean Edit)](https://www.nexusmods.com/morrowind/mods/53161)            |
 | npcSoulTrap                  | 10000     | [Seph's NPC Soul Trapping](https://www.nexusmods.com/morrowind/mods/50744)                          |
+| fortifyMagickaRegen          | 23235     | [Fortify Magicka Regeneration](https://www.nexusmods.com/morrowind/mods/54158)                               |
+| drainMagickaRegen            | 23236     | [Fortify Magicka Regeneration](https://www.nexusmods.com/morrowind/mods/54158)                               |
 | bsRepairTarget               | 23331     | [Magical Repairing](https://www.nexusmods.com/morrowind/mods/54414)                               |
 | bsRepairArmor                | 23332     | [Magical Repairing](https://www.nexusmods.com/morrowind/mods/54414)                               |
 | bsRepairWeapon               | 23333     | [Magical Repairing](https://www.nexusmods.com/morrowind/mods/54414)                               |
