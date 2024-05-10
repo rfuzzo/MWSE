@@ -1169,6 +1169,17 @@ function tes3.getLanguageCode() end
 --- @return tes3vector3 vector3 No description yet available.
 function tes3.getLastExteriorPosition() end
 
+--- This function returns true if a mwscript is currently running. Only checks global scripts.
+--- @param params tes3.getLegacyScriptRunning.params This table accepts the following values:
+--- 
+--- `script`: tes3script|string — The script to check for.
+--- @return boolean isRunning No description yet available.
+function tes3.getLegacyScriptRunning(params) end
+
+---Table parameter definitions for `tes3.getLegacyScriptRunning`.
+--- @class tes3.getLegacyScriptRunning.params
+--- @field script tes3script|string The script to check for.
+
 --- Determines if a given reference is a locked door or container.
 --- @param params tes3.getLocked.params This table accepts the following values:
 --- 
@@ -2645,6 +2656,17 @@ function tes3.skipAnimationFrame(params) end
 ---Table parameter definitions for `tes3.skipAnimationFrame`.
 --- @class tes3.skipAnimationFrame.params
 --- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string The reference whose animation frame will be skipped.
+
+--- This function stops a global mwscript.
+--- @param params tes3.stopLegacyScript.params This table accepts the following values:
+--- 
+--- `script`: tes3script|string — The script to stop.
+--- @return boolean stopped No description yet available.
+function tes3.stopLegacyScript(params) end
+
+---Table parameter definitions for `tes3.stopLegacyScript`.
+--- @class tes3.stopLegacyScript.params
+--- @field script tes3script|string The script to stop.
 
 --- This function interrupts the current music to play the specified music track.
 --- @param params tes3.streamMusic.params This table accepts the following values:
