@@ -26,6 +26,7 @@ KeyBinder.allowMouse = false
 --- @param keyCode integer|nil
 --- @return string|nil letter
 function KeyBinder:getLetter(keyCode)
+	if not keyCode then return end
 	return tes3.getKeyName(keyCode)
 end
 

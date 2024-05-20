@@ -2208,7 +2208,9 @@ local index = tes3.getJournalIndex({ id = ... })
 ### `tes3.getKeyName`
 <div class="search_terms" style="display: none">getkeyname, keyname</div>
 
-Gets the name of a corresponding `tes3.scanCode`, using the appropriate GMSTs. The `keyName` returned by this function is the same `keyName` that would be used in the in-game Controls menu. For example, `tes3.getKeyName(tes3.scanCode.b)` will return `"B"`, and `tes3.getKeyName(tes3.scanCode.rshift)` will return `"Right Shift"`.
+Gets the name of a corresponding `tes3.scanCode`, using the appropriate GMSTs. The `keyName` returned by this function is the same `keyName` that would be used in the in-game Controls menu.
+
+For example, `tes3.getKeyName(tes3.scanCode.b)` will return `"B"`, and `tes3.getKeyName(tes3.scanCode.rshift)` will return `"Right Shift"`.
 
 ```lua
 local keyName = tes3.getKeyName(keyCode)

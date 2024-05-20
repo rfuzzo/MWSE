@@ -1,12 +1,10 @@
 ---@param keyCode tes3.scanCode
 function tes3.getKeyName(keyCode)
-    -- get the index of the appropriate GMST setting
-    -- the `%02X` does hexadecimal formatting and gives numbers `< 16` a leading 0.
-    --      so, `11` -> "0A" and `16` -> "10"
-    -- for example, if `keyCode == tes3.scanCode["2"] == 3`, then
-    --      `string.format("sKeyName_%02X", keyCode) == sKeyName_03`
+	-- This will get the index of the appropriate GMST setting.
+	-- The `%02X` performs hexadecimal formatting and makes sure numbers `< 16` have a leading 0. (e.g. `0A` instead of `A`.)
+	-- For an example of how this all works, `tes3.scanCode.h` (which has a value of `35`) will become `sKeyName_23`.
 	local index = tes3.gmst[string.format("sKeyName_%02X", keyCode)]
-    -- if the game setting exists, return its value
+	-- If the GMST exists, return its value.
 	if index then
 		return tes3.findGMST(index).value
 	end
