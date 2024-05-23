@@ -73,7 +73,7 @@ The index of the currently pressed mouse button.
 
 **Returns**:
 
-* `result` (number, nil)
+* `result` (integer, nil)
 
 ***
 

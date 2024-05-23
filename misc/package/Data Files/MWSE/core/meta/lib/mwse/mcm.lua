@@ -1194,6 +1194,21 @@ function mwse.mcm.createYesNoButton(parent, data) end
 --- @field childSpacing integer? *Optional*. The bottom border size in pixels. Used on all the child components.
 --- @field postCreate nil|fun(self: mwseMCMYesNoButton) *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
 
+--- This function returns a localized name for a key combination.
+--- @param keyCombo mwseKeyCombo|mwseKeyMouseCombo|mwseKeyMouseCombo|nil *Optional*. No description yet available.
+--- @return string|nil result No description yet available.
+function mwse.mcm.getKeyComboName(keyCombo) end
+
+--- This function returns a localized name of the mouse button. You can pass [`mouseButton`](https://mwse.github.io/MWSE/types/mwseKeyMouseCombo/#mousebutton) field of `mwseKeyMouseCombo` or [`e.button`](https://mwse.github.io/MWSE/events/mouseButtonDown/#event-data) from `mouseButtonDown` event data.
+--- @param buttonIndex integer? *Optional*. No description yet available.
+--- @return string|nil result No description yet available.
+function mwse.mcm.getMouseButtonName(buttonIndex) end
+
+--- This function returns a localized name for the mouse wheel direction. You can pass [`mouseWheel`](https://mwse.github.io/MWSE/types/mwseKeyMouseCombo/#mousewheel) field of `mwseKeyMouseCombo` or [`e.delta`](https://mwse.github.io/MWSE/events/mouseWheel/#event-data) from `mouseWheel` event data.
+--- @param mouseWheel integer? *Optional*. No description yet available.
+--- @return string|nil result No description yet available.
+function mwse.mcm.getMouseWheelName(mouseWheel) end
+
 --- A convenience function that registers the mod's configuration menu using its mwseMCMTemplate.
 --- 
 --- You don't need to call `mwse.registerModConfig` if calling this function.

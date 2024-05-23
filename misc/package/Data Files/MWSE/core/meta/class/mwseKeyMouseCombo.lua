@@ -4,7 +4,7 @@
 --- @meta
 --- A table with the data about mouse and keyboard key combination.
 --- @class mwseKeyMouseCombo : mwseKeyCombo
---- @field mouseButton number|nil The index of the currently pressed mouse button.
+--- @field mouseButton integer|nil The index of the currently pressed mouse button.
 --- @field mouseWheel integer|nil The mouse wheel action in the combination.
 --- 
 --- Value | Description

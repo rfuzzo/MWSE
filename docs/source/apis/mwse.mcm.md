@@ -919,6 +919,63 @@ local button = mwse.mcm.createYesNoButton(parent, { label = ..., description = .
 
 ***
 
+### `mwse.mcm.getKeyComboName`
+<div class="search_terms" style="display: none">getkeycomboname, keycomboname</div>
+
+This function returns a localized name for a key combination.
+
+```lua
+local result = mwse.mcm.getKeyComboName(keyCombo)
+```
+
+**Parameters**:
+
+* `keyCombo` ([mwseKeyCombo](../types/mwseKeyCombo.md), [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)): *Optional*.
+
+**Returns**:
+
+* `result` (string, nil)
+
+***
+
+### `mwse.mcm.getMouseButtonName`
+<div class="search_terms" style="display: none">getmousebuttonname, mousebuttonname</div>
+
+This function returns a localized name of the mouse button. You can pass [`mouseButton`](https://mwse.github.io/MWSE/types/mwseKeyMouseCombo/#mousebutton) field of `mwseKeyMouseCombo` or [`e.button`](https://mwse.github.io/MWSE/events/mouseButtonDown/#event-data) from `mouseButtonDown` event data.
+
+```lua
+local result = mwse.mcm.getMouseButtonName(buttonIndex)
+```
+
+**Parameters**:
+
+* `buttonIndex` (integer): *Optional*.
+
+**Returns**:
+
+* `result` (string, nil)
+
+***
+
+### `mwse.mcm.getMouseWheelName`
+<div class="search_terms" style="display: none">getmousewheelname, mousewheelname</div>
+
+This function returns a localized name for the mouse wheel direction. You can pass [`mouseWheel`](https://mwse.github.io/MWSE/types/mwseKeyMouseCombo/#mousewheel) field of `mwseKeyMouseCombo` or [`e.delta`](https://mwse.github.io/MWSE/events/mouseWheel/#event-data) from `mouseWheel` event data.
+
+```lua
+local result = mwse.mcm.getMouseWheelName(mouseWheel)
+```
+
+**Parameters**:
+
+* `mouseWheel` (integer): *Optional*.
+
+**Returns**:
+
+* `result` (string, nil)
+
+***
+
 ### `mwse.mcm.register`
 <div class="search_terms" style="display: none">register</div>
 
