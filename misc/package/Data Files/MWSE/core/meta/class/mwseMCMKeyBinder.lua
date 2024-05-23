@@ -47,22 +47,7 @@ function mwseMCMKeyBinder:createPopupMenu() end
 --- @return string result No description yet available.
 function mwseMCMKeyBinder:getComboString(keyCombo) end
 
---- Returns the letter the provided `keyCode` represents.
---- @param keyCode integer|nil No description yet available.
---- @return string|nil letter No description yet available.
-function mwseMCMKeyBinder:getLetter(keyCode) end
-
---- Returns a localized name for the mouse button of given index.
---- @param buttonIndex number|nil No description yet available.
---- @return string|nil result No description yet available.
-function mwseMCMKeyBinder:getMouseButtonText(buttonIndex) end
-
---- Returns a localized version of `"Mouse wheel up"` if `wheel` is 1 and `"Mouse wheel down"` if `wheel` is -1.
---- @param wheel integer|nil No description yet available.
---- @return string|nil result No description yet available.
-function mwseMCMKeyBinder:getMouseWheelText(wheel) end
-
---- Returns a string representing the key combo currently store in `variable`. For example, "Ctrl - C".
+--- Returns a string representing the key combo currently stored in `variable`. For example, "Ctrl - C".
 --- @return string result No description yet available.
 function mwseMCMKeyBinder:getText() end
 
@@ -138,9 +123,6 @@ function mwseMCMKeyBinder:new(data) end
 --- @field componentType string? *Optional*. No description yet available.
 --- @field parentComponent mwseMCMActiveInfo|mwseMCMButton|mwseMCMCategory|mwseMCMComponent|mwseMCMCycleButton|mwseMCMDropdown|mwseMCMExclusionsPage|mwseMCMFilterPage|mwseMCMHyperlink|mwseMCMInfo|mwseMCMKeyBinder|mwseMCMMouseOverInfo|mwseMCMMouseOverPage|mwseMCMOnOffButton|mwseMCMPage|mwseMCMParagraphField|mwseMCMPercentageSlider|mwseMCMSetting|mwseMCMSideBarPage|mwseMCMSideBySideBlock|mwseMCMSlider|mwseMCMTemplate|mwseMCMTextField|mwseMCMYesNoButton|nil *Optional*. No description yet available.
 
---- Calls `showKeyBindMessage` method.
-function mwseMCMKeyBinder:press() end
-
 --- Shows the rebind prompt popup. The popup is active until some valid input is given.
-function mwseMCMKeyBinder:showKeyBindMessage() end
+function mwseMCMKeyBinder:press() end
 

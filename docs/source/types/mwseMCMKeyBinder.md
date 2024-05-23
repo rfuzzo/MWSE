@@ -677,67 +677,10 @@ local component = myObject:getComponent({ class = ..., label = ..., indent = ...
 
 ***
 
-### `getLetter`
-<div class="search_terms" style="display: none">getletter, letter</div>
-
-Returns the letter the provided `keyCode` represents.
-
-```lua
-local letter = myObject:getLetter(keyCode)
-```
-
-**Parameters**:
-
-* `keyCode` (integer, nil)
-
-**Returns**:
-
-* `letter` (string, nil)
-
-***
-
-### `getMouseButtonText`
-<div class="search_terms" style="display: none">getmousebuttontext, mousebuttontext</div>
-
-Returns a localized name for the mouse button of given index.
-
-```lua
-local result = myObject:getMouseButtonText(buttonIndex)
-```
-
-**Parameters**:
-
-* `buttonIndex` (number, nil)
-
-**Returns**:
-
-* `result` (string, nil)
-
-***
-
-### `getMouseWheelText`
-<div class="search_terms" style="display: none">getmousewheeltext, mousewheeltext</div>
-
-Returns a localized version of `"Mouse wheel up"` if `wheel` is 1 and `"Mouse wheel down"` if `wheel` is -1.
-
-```lua
-local result = myObject:getMouseWheelText(wheel)
-```
-
-**Parameters**:
-
-* `wheel` (integer, nil)
-
-**Returns**:
-
-* `result` (string, nil)
-
-***
-
 ### `getText`
 <div class="search_terms" style="display: none">gettext, text</div>
 
-Returns a string representing the key combo currently store in `variable`. For example, "Ctrl - C".
+Returns a string representing the key combo currently stored in `variable`. For example, "Ctrl - C".
 
 ```lua
 local result = myObject:getText()
@@ -855,7 +798,7 @@ local data = myObject:prepareData(data)
 ### `press`
 <div class="search_terms" style="display: none">press</div>
 
-Calls `showKeyBindMessage` method.
+Shows the rebind prompt popup. The popup is active until some valid input is given.
 
 ```lua
 myObject:press()
@@ -905,17 +848,6 @@ myObject:setText(newText)
 **Parameters**:
 
 * `newText` (string)
-
-***
-
-### `showKeyBindMessage`
-<div class="search_terms" style="display: none">showkeybindmessage, keybindmessage</div>
-
-Shows the rebind prompt popup. The popup is active until some valid input is given.
-
-```lua
-myObject:showKeyBindMessage()
-```
 
 ***
 
