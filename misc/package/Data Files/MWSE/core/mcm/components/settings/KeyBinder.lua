@@ -6,7 +6,7 @@
 			isShiftDown = true/false,
 			isControlDown = true/false,
 			mouseWheel = integer/nil,
-			mouseButton = number/nil,
+			mouseButton = integer/nil,
 		}
 ]]--
 
@@ -14,89 +14,35 @@
 --- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
 --- @diagnostic disable: duplicate-set-field
 
-local Parent = require("mcm.components.settings.Button")
+local Parent = require("mcm.components.settings.Binder")
 
 --- @class mwseMCMKeyBinder
 local KeyBinder = Parent:new()
-KeyBinder.allowCombinations = true
 KeyBinder.allowMouse = false
+KeyBinder.popupId = tes3ui.registerID("KeyBinderPopup")
 
---- @param keyCombo mwseKeyMouseCombo
---- @return string result
-function KeyBinder:getComboString(keyCombo)
-	local comboText = mwse.mcm.getKeyComboName(keyCombo)
+-- TODO: Implement flags for enabling the binding of mouse wheel or mouse buttons separately
 
-	-- Add failsafe for malformed keyCombos
-	if not comboText then
-		mwse.log("[KeyBinder]: couldn't resolve any text for the given combo:\n%s", json.encode(keyCombo))
-		comboText = string.format("{%s}", mwse.mcm.i18n("unknown key"))
-	end
-
-	return comboText
-end
-
-KeyBinder.convertToLabelValue = KeyBinder.getComboString
-
---- @param e keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
-function KeyBinder:keySelected(e)
-	local variable = self.variable.value
-	variable.keyCode = e.keyCode or false
+--- @param e keyDownEventData|keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
+function KeyBinder:getKeyComboFromEventData(e)
+	local result = {
+		keyCode = e.keyCode or false
+	}
 
 	if self.allowMouse then
 		local wheel = e.delta and math.clamp(e.delta, -1, 1)
-		variable.mouseWheel = wheel or false
-		variable.mouseButton = e.button or false
+		result.mouseWheel = wheel or false
+		result.mouseButton = e.button or false
 	end
 
 	if self.allowCombinations then
-		variable.isAltDown = e.isAltDown
-		variable.isShiftDown = e.isShiftDown
-		variable.isControlDown = e.isControlDown
+		result.isAltDown = e.isAltDown
+		result.isShiftDown = e.isShiftDown
+		result.isControlDown = e.isControlDown
 	end
 
-	self:update()
-	self.elements.outerContainer:updateLayout()
+	return result
 end
-
-local popupId = tes3ui.registerID("KeyBinderPopup")
-
---- @return tes3uiElement menu
-function KeyBinder:createPopupMenu()
-	local menu = tes3ui.findHelpLayerMenu(popupId)
-
-	if not menu then
-		menu = tes3ui.createMenu({ id = popupId, fixedFrame = true })
-		menu.absolutePosAlignX = 0.5
-		menu.absolutePosAlignY = 0.5
-		menu.autoWidth = true
-		menu.autoHeight = true
-		menu.alpha = tes3.worldController.menuAlpha
-
-		local block = menu:createBlock()
-		block.autoWidth = true
-		block.autoHeight = true
-		block.paddingAllSides = 8
-		block.flowDirection = tes3.flowDirection.topToBottom
-
-		local headerText = mwse.mcm.i18n("SET NEW KEYBIND.")
-		if self.keybindName then
-			headerText = string.format(mwse.mcm.i18n("SET %s KEYBIND."), self.keybindName)
-		end
-		local header = block:createLabel({
-			text = headerText
-		})
-		header.color = tes3ui.getPalette(tes3.palette.headerColor)
-
-		block:createLabel({
-			text = mwse.mcm.i18n("Press any key to set the bind or ESC to cancel.")
-		})
-
-		tes3ui.enterMenuMode(popupId)
-	end
-	menu:getTopLevelMenu():updateLayout()
-	return menu
-end
-
 
 function KeyBinder:press()
 	self:createPopupMenu()
@@ -110,7 +56,7 @@ function KeyBinder:press()
 			event.unregister(tes3.event.mouseWheel, waitInput)
 		end
 
-		local popup = tes3ui.findMenu(popupId)
+		local popup = tes3ui.findMenu(self.popupId)
 		if popup then
 			popup:destroy()
 		end
@@ -120,7 +66,7 @@ function KeyBinder:press()
 			return
 		end
 
-		self:keySelected(e)
+		self:keySelected(self:getKeyComboFromEventData(e))
 	end
 
 	event.register(tes3.event.keyUp, waitInput)
@@ -128,16 +74,6 @@ function KeyBinder:press()
 		event.register(tes3.event.mouseButtonDown, waitInput)
 		event.register(tes3.event.mouseWheel, waitInput)
 	end
-end
-
--- UI methods
-
-
---- @param parentBlock tes3uiElement
-function KeyBinder:createOuterContainer(parentBlock)
-	Parent.createOuterContainer(self, parentBlock)
-	self.elements.outerContainer.autoWidth = false
-	-- self.elements.outerContainer.borderRight = self.indent
 end
 
 return KeyBinder
