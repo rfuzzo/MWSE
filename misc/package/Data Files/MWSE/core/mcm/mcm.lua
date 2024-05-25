@@ -74,7 +74,7 @@ end
 --- @return string|nil result
 function mcm.getKeyComboName(keyCombo)
 	local keyCode = keyCombo.keyCode
-	local comboText = keyCode and tes3.getKeyName(keyCode) or
+	local comboText = tes3.getKeyName(keyCode) or
 	                  mcm.getMouseWheelName(keyCombo.mouseWheel) or
 	                  mcm.getMouseButtonName(keyCombo.mouseButton)
 

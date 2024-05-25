@@ -19,11 +19,43 @@ local Parent = require("mcm.components.settings.Binder")
 --- @class mwseMCMKeyBinder
 local KeyBinder = Parent:new()
 KeyBinder.allowMouse = false
-KeyBinder.popupId = tes3ui.registerID("KeyBinderPopup")
 
 -- TODO: Implement flags for enabling the binding of mouse wheel or mouse buttons separately
 
---- @param e keyDownEventData|keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
+--- @param data mwseMCMKeyBinder.new.data|nil
+--- @return mwseMCMKeyBinder
+function KeyBinder:new(data)
+	local t = Parent:new(data)
+
+	setmetatable(t, self)
+	self.__index = self
+	--- @cast t mwseMCMKeyBinder
+
+	-- All KeyBinders observe keyboard input.
+	t.observeEvents = { [tes3.event.keyDown] = true }
+
+	-- Check if we also observe input from mouse.
+	if t.allowMouse then
+		t.observeEvents[tes3.event.mouseButtonDown] = true
+		t.observeEvents[tes3.event.mouseWheel] = true
+	end
+	return t
+end
+
+--- @param keyCombo mwseKeyMouseCombo
+function KeyBinder:isUnbound(keyCombo)
+	if keyCombo.keyCode ~= false then
+		return false
+	end
+
+	if self.allowMouse and (keyCombo.mouseWheel ~= false or keyCombo.mouseButton ~= false) then
+		return false
+	end
+
+	return true
+end
+
+--- @param e mwseKeyMouseCombo|keyDownEventData|keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
 function KeyBinder:getKeyComboFromEventData(e)
 	local result = {
 		keyCode = e.keyCode or false
@@ -42,38 +74,6 @@ function KeyBinder:getKeyComboFromEventData(e)
 	end
 
 	return result
-end
-
-function KeyBinder:press()
-	self:createPopupMenu()
-
-	--- @param e keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
-	local function waitInput(e)
-		-- Unregister this function once we got some input
-		event.unregister(tes3.event.keyUp, waitInput)
-		if self.allowMouse then
-			event.unregister(tes3.event.mouseButtonDown, waitInput)
-			event.unregister(tes3.event.mouseWheel, waitInput)
-		end
-
-		local popup = tes3ui.findMenu(self.popupId)
-		if popup then
-			popup:destroy()
-		end
-
-		-- Allow closing the menu using escape, wihout binding anything
-		if e.keyCode == tes3.scanCode.esc then
-			return
-		end
-
-		self:keySelected(self:getKeyComboFromEventData(e))
-	end
-
-	event.register(tes3.event.keyUp, waitInput)
-	if self.allowMouse then
-		event.register(tes3.event.mouseButtonDown, waitInput)
-		event.register(tes3.event.mouseWheel, waitInput)
-	end
 end
 
 return KeyBinder
