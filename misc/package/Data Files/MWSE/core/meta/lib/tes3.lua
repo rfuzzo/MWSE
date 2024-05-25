@@ -1146,7 +1146,7 @@ function tes3.getJournalIndex(params) end
 --- 
 --- For example, `tes3.getKeyName(tes3.scanCode.b)` will return `"B"`, and `tes3.getKeyName(tes3.scanCode.rshift)` will return `"Right Shift"`.
 --- @param keyCode tes3.scanCode No description yet available.
---- @return string keyName A string representation of the given `keyCode`.
+--- @return string|nil keyName A string representation of the given `keyCode`.
 function tes3.getKeyName(keyCode) end
 
 --- Returns how many times the player killed an actor. If no actor is specified, total number of kills player commited will be returned.

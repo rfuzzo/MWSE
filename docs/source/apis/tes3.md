@@ -2222,7 +2222,7 @@ local keyName = tes3.getKeyName(keyCode)
 
 **Returns**:
 
-* `keyName` (string): A string representation of the given `keyCode`.
+* `keyName` (string, nil): A string representation of the given `keyCode`.
 
 ***
 

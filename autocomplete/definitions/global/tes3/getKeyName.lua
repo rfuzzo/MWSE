@@ -8,5 +8,5 @@ return {
 		name = "keyCode",
 		type = "tes3.scanCode",
 	}},
-	returns = {{ name = "keyName", type = "string", description = "A string representation of the given `keyCode`." }},
+	returns = {{ name = "keyName", type = "string|nil", description = "A string representation of the given `keyCode`." }},
 }
