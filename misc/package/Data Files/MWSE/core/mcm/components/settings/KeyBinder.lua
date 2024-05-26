@@ -1,12 +1,12 @@
 --[[
 	Button Setting for binding a key/mouse combination. Variable returned in the form:
 		{
-			keyCode = tes3.scanCode/nil,
-			isAltDown = true/false,
-			isShiftDown = true/false,
-			isControlDown = true/false,
-			mouseWheel = integer/nil,
-			mouseButton = integer/nil,
+			keyCode = tes3.scanCode|nil,
+			mouseButton = integer|nil,
+			mouseWheel = integer|nil,
+			isAltDown = boolean|nil,
+			isShiftDown = boolean|nil,
+			isControlDown = boolean|nil,
 		}
 ]]--
 
@@ -40,40 +40,6 @@ function KeyBinder:new(data)
 		t.observeEvents[tes3.event.mouseWheel] = true
 	end
 	return t
-end
-
---- @param keyCombo mwseKeyMouseCombo
-function KeyBinder:isUnbound(keyCombo)
-	if keyCombo.keyCode ~= false then
-		return false
-	end
-
-	if self.allowMouse and (keyCombo.mouseWheel ~= false or keyCombo.mouseButton ~= false) then
-		return false
-	end
-
-	return true
-end
-
---- @param e mwseKeyMouseCombo|keyDownEventData|keyUpEventData|mouseButtonDownEventData|mouseWheelEventData
-function KeyBinder:getKeyComboFromEventData(e)
-	local result = {
-		keyCode = e.keyCode or false
-	}
-
-	if self.allowMouse then
-		local wheel = e.delta and math.clamp(e.delta, -1, 1)
-		result.mouseWheel = wheel or false
-		result.mouseButton = e.button or false
-	end
-
-	if self.allowCombinations then
-		result.isAltDown = e.isAltDown
-		result.isShiftDown = e.isShiftDown
-		result.isControlDown = e.isControlDown
-	end
-
-	return result
 end
 
 return KeyBinder

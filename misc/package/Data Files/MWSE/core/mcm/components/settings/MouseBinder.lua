@@ -1,11 +1,11 @@
 --[[
 	Button Setting for binding a mouse button + modifier key combination. Variable returned in the form:
 		{
-			mouseButton = integer/false,
-			mouseWheel = integer/false,
-			isAltDown = true/false,
-			isShiftDown = true/false,
-			isControlDown = true/false,
+			mouseButton = integer|nil,
+			mouseWheel = integer|nil,
+			isAltDown = boolean|nil,
+			isShiftDown = boolean|nil,
+			isControlDown = boolean|nil,
 		}
 ]]--
 
@@ -19,7 +19,7 @@ local Parent = require("mcm.components.settings.Binder")
 local MouseBinder = Parent:new()
 MouseBinder.allowButtons = true
 
---- @param data MouseBinder.new.data|nil
+--- @param data mwseMCMMouseBinder.new.data|nil
 --- @return mwseMCMMouseBinder
 function MouseBinder:new(data)
 	local t = Parent:new(data)
@@ -41,35 +41,6 @@ function MouseBinder:new(data)
 		t.observeEvents[tes3.event.mouseWheel] = true
 	end
 	return t
-end
-
---- @param keyCombo mwseKeyMouseCombo
-function MouseBinder:isUnbound(keyCombo)
-	local buttonBound = self.allowButtons and keyCombo.mouseButton ~= false
-	local wheelBound = self.allowWheel and keyCombo.mouseWheel ~= false
-
-	if buttonBound or wheelBound then
-		return false
-	end
-
-	return true
-end
-
---- @param e mouseButtonDownEventData|mouseWheelEventData
-function MouseBinder:getKeyComboFromEventData(e)
-	local wheel = e.delta and math.clamp(e.delta, -1, 1)
-	local result = {
-		mouseButton = e.button or false,
-		mouseWheel = wheel or false,
-	}
-
-	if self.allowCombinations then
-		result.isAltDown = e.isAltDown
-		result.isShiftDown = e.isShiftDown
-		result.isControlDown = e.isControlDown
-	end
-
-	return result
 end
 
 return MouseBinder

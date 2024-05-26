@@ -17,7 +17,7 @@
 --- },
 --- ```
 --- 
---- On the other hand, if the KeyBinder allows binding mouse keys in addition to keyboard keys, key combos are stored in the following format([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)):
+--- On the other hand, if the KeyBinder allows binding mouse keys in addition to keyboard keys, key combos are stored in the following format ([mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md)):
 --- 
 --- ```lua linenums="1"
 --- {

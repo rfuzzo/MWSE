@@ -16,6 +16,19 @@ local popupId = tes3ui.registerID("KeyMouseBinderPopup")
 local labelId = tes3ui.registerID("KeyMouseBinderLabel")
 
 --- @param keyCombo mwseKeyMouseCombo
+function Binder:isUnbound(keyCombo)
+	local keyBound = keyCombo.keyCode ~= nil
+	local buttonBound = keyCombo.mouseButton ~= nil
+	local wheelBound = keyCombo.mouseWheel ~= nil
+
+	if keyBound or buttonBound or wheelBound then
+		return false
+	end
+
+	return true
+end
+
+--- @param keyCombo mwseKeyMouseCombo
 --- @return string result
 function Binder:getComboString(keyCombo)
 	if self:isUnbound(keyCombo) then
@@ -33,6 +46,24 @@ function Binder:getComboString(keyCombo)
 end
 
 Binder.convertToLabelValue = Binder.getComboString
+
+--- @param e keyDownEventData|mouseButtonDownEventData|mouseWheelEventData|mwseKeyMouseCombo
+function Binder:getKeyComboFromEventData(e)
+	local wheel = e.delta and math.clamp(e.delta, -1, 1)
+	local result = {
+		keyCode = e.keyCode,
+		mouseButton = e.button,
+		mouseWheel = wheel,
+	}
+
+	if self.allowCombinations then
+		result.isAltDown = e.isAltDown
+		result.isShiftDown = e.isShiftDown
+		result.isControlDown = e.isControlDown
+	end
+
+	return result
+end
 
 --- @param keyCombo mwseKeyMouseCombo
 function Binder:keySelected(keyCombo)
