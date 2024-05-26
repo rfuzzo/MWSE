@@ -600,7 +600,7 @@ local helpText = myObject:getHelpText()
 ### `getKeyComboFromEventData`
 <div class="search_terms" style="display: none">getkeycombofromeventdata, keycombofromeventdata</div>
 
-Used to convert raw input event data into `mwseKeyMouseCombo`. This method needs to be implemented in children of Binder.
+Used to convert raw input event data into `mwseKeyMouseCombo`.
 
 ```lua
 local keyCombo = myObject:getKeyComboFromEventData(e)
@@ -649,7 +649,7 @@ myObject:insertMouseovers(element)
 ### `isUnbound`
 <div class="search_terms" style="display: none">isunbound, unbound</div>
 
-Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this Binder. This method needs to be implemented in children of Binder.
+Returns true if given `mwseKeyMouseCombo` represents unbound key.
 
 ```lua
 local isUnbound = myObject:isUnbound(keyCombo)

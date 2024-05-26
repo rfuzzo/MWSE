@@ -1,6 +1,6 @@
 return {
 	type = "method",
-	description = [[Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this Binder. This method needs to be implemented in children of Binder.]],
+	description = [[Returns true if given `mwseKeyMouseCombo` represents unbound key.]],
 	arguments = {
 		{ name = "keyCombo", type = "mwseKeyMouseCombo" }
 	},

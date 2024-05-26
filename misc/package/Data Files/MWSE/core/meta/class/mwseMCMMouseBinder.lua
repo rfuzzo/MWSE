@@ -10,16 +10,6 @@
 --- @field allowWheel boolean If true, the MouseBinder will let the user bind mouse wheel scroll up or down.
 mwseMCMMouseBinder = {}
 
---- Used to convert raw input event data into `mwseKeyMouseCombo`.
---- @param e mouseWheelEventData|mouseButtonDownEventData|mwseKeyMouseCombo No description yet available.
---- @return mwseKeyMouseCombo keyCombo No description yet available.
-function mwseMCMMouseBinder:getKeyComboFromEventData(e) end
-
---- Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this MouseBinder.
---- @param keyCombo mwseKeyMouseCombo No description yet available.
---- @return boolean isUnbound No description yet available.
-function mwseMCMMouseBinder:isUnbound(keyCombo) end
-
 --- Creates a new MouseBinder.
 --- @param data mwseMCMMouseBinder.new.data? This table accepts the following values:
 --- 

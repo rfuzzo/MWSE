@@ -23,12 +23,12 @@ function mwseMCMBinder:getComboString(keyCombo) end
 --- @return string helpText No description yet available.
 function mwseMCMBinder:getHelpText() end
 
---- Used to convert raw input event data into `mwseKeyMouseCombo`. This method needs to be implemented in children of Binder.
+--- Used to convert raw input event data into `mwseKeyMouseCombo`.
 --- @param e keyDownEventData|mouseWheelEventData|mouseButtonDownEventData|mwseKeyMouseCombo No description yet available.
 --- @return mwseKeyMouseCombo keyCombo No description yet available.
 function mwseMCMBinder:getKeyComboFromEventData(e) end
 
---- Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this Binder. This method needs to be implemented in children of Binder.
+--- Returns true if given `mwseKeyMouseCombo` represents unbound key.
 --- @param keyCombo mwseKeyMouseCombo No description yet available.
 --- @return boolean isUnbound No description yet available.
 function mwseMCMBinder:isUnbound(keyCombo) end

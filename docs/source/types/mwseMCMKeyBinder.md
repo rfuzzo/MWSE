@@ -740,7 +740,7 @@ myObject:insertMouseovers(element)
 ### `isUnbound`
 <div class="search_terms" style="display: none">isunbound, unbound</div>
 
-Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this KeyBinder.
+Returns true if given `mwseKeyMouseCombo` represents unbound key.
 
 ```lua
 local isUnbound = myObject:isUnbound(keyCombo)

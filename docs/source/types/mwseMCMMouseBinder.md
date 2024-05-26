@@ -632,7 +632,7 @@ local keyCombo = myObject:getKeyComboFromEventData(e)
 
 **Parameters**:
 
-* `e` (mouseWheelEventData, mouseButtonDownEventData, [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md))
+* `e` (keyDownEventData, mouseWheelEventData, mouseButtonDownEventData, [mwseKeyMouseCombo](../types/mwseKeyMouseCombo.md))
 
 **Returns**:
 
@@ -673,7 +673,7 @@ myObject:insertMouseovers(element)
 ### `isUnbound`
 <div class="search_terms" style="display: none">isunbound, unbound</div>
 
-Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this MouseBinder.
+Returns true if given `mwseKeyMouseCombo` represents unbound key.
 
 ```lua
 local isUnbound = myObject:isUnbound(keyCombo)

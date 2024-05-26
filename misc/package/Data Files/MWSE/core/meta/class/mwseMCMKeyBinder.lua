@@ -36,16 +36,6 @@
 --- @field allowMouse boolean If true, the keybinder will let the user use mouse buttons and scroll wheel in this keybinder.
 mwseMCMKeyBinder = {}
 
---- Used to convert raw input event data into `mwseKeyMouseCombo`.
---- @param e keyDownEventData|mouseWheelEventData|mouseButtonDownEventData|mwseKeyMouseCombo No description yet available.
---- @return mwseKeyMouseCombo keyCombo No description yet available.
-function mwseMCMKeyBinder:getKeyComboFromEventData(e) end
-
---- Returns true if given `mwseKeyMouseCombo` should be treated as unbound by this KeyBinder.
---- @param keyCombo mwseKeyMouseCombo No description yet available.
---- @return boolean isUnbound No description yet available.
-function mwseMCMKeyBinder:isUnbound(keyCombo) end
-
 --- Creates a new KeyBinder.
 --- @param data mwseMCMKeyBinder.new.data? This table accepts the following values:
 --- 
