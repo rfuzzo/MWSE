@@ -427,7 +427,8 @@ namespace TES3 {
 		_declspec(dllexport) void playItemUpDownSound(BaseObject* item, ItemSoundState state = ItemSoundState::Up, Reference* reference = nullptr);
 		_declspec(dllexport) float getSimulationTimestamp();
 		_declspec(dllexport) void processGlobalScripts();
-		_declspec(dllexport) void startGlobalScript(Script* script, const Reference* reference = nullptr);
+		_declspec(dllexport) void startGlobalScript(Script* script, Reference* reference = nullptr);
+		void startGlobalScriptBySourceID(Script* script, unsigned int sourceID);
 		_declspec(dllexport) void stopGlobalScript(Script* script);
 		_declspec(dllexport) bool isGlobalScriptRunning(const Script* script) const;
 
