@@ -2306,6 +2306,26 @@ local vector3 = tes3.getLastExteriorPosition()
 
 ***
 
+### `tes3.getLegacyScriptRunning`
+<div class="search_terms" style="display: none">getlegacyscriptrunning, legacyscriptrunning</div>
+
+This function returns true if a mwscript is currently running. Only checks global scripts.
+
+```lua
+local isRunning = tes3.getLegacyScriptRunning({ script = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `script` ([tes3script](../types/tes3script.md), string): The script to check for.
+
+**Returns**:
+
+* `isRunning` (boolean)
+
+***
+
 ### `tes3.getLocked`
 <div class="search_terms" style="display: none">getlocked, locked</div>
 
@@ -4869,6 +4889,26 @@ local musicTrackQueued = tes3.skipToNextMusicTrack({ path = ..., situation = ...
 **Returns**:
 
 * `musicTrackQueued` (boolean)
+
+***
+
+### `tes3.stopLegacyScript`
+<div class="search_terms" style="display: none">stoplegacyscript</div>
+
+This function stops a global mwscript.
+
+```lua
+local stopped = tes3.stopLegacyScript({ script = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `script` ([tes3script](../types/tes3script.md), string): The script to stop.
+
+**Returns**:
+
+* `stopped` (boolean)
 
 ***
 
