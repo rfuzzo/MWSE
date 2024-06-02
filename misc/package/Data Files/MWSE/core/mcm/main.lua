@@ -10,8 +10,15 @@
 local configMods = {}
 
 --- The current package that we are configuring.
+--- Used to properly deselect mod config menus when clicking on different mod names.
 --- @type mwseModConfig?
 local currentModConfig = nil
+
+--- Name of the last mod selected in the MCM.
+--- Used to reopen the most recently closed mod config menu when the MCM is reopened during a play session.
+--- Stored separately from `currentModConfig` for stability reasons.
+--- @type string
+local lastModName = nil
 
 --- The previously selected element.
 --- @type tes3uiElement?
@@ -28,7 +35,7 @@ local config = mwse.loadConfig("MWSE.MCM", {
 
 -- Try to migrate over existing favorites.
 if (table.empty(config.favorites) and lfs.fileexists("config\\core\\MCM Favorite Mods.json")) then
-	-- Migrate over the contents of the old file, and overwrite 
+	-- Migrate over the contents of the old file, and overwrite.
 	config.favorites = json.loadfile("config\\core\\MCM Favorite Mods")
 
 	-- Delete old file (and directory if it is empty).
@@ -90,9 +97,9 @@ local function toggleFavorited(mod)
 end
 
 --- sort the given packages
----@param a mwseModConfig
----@param b mwseModConfig
----@return boolean -- true if `a < b`
+--- @param a mwseModConfig
+--- @param b mwseModConfig
+--- @return boolean -- true if `a < b`
 local function sortPackages(a, b)
 	-- check if `a` and `b` have different "favorite" statuses
 	-- `not a.favorite ~= not b.favorite` handles the case when `a.favorite == nil` and `b.favorite == false`
@@ -120,6 +127,7 @@ end
 --- Callback for when a mod name has been clicked in the left pane.
 --- @param e tes3uiEventData
 local function onClickModName(e)
+	local modName = e.source.text
 	-- If we have a current mod, fire its close event.
 	if (currentModConfig and currentModConfig.onClose) then
 		local status, error = pcall(currentModConfig.onClose, modConfigContainer)
@@ -129,9 +137,9 @@ local function onClickModName(e)
 	end
 
 	-- Update the current mod package.
-	currentModConfig = configMods[e.source.text]
+	currentModConfig = configMods[modName]
 	if (not currentModConfig) then
-		error(string.format("No mod config could be found for key '%s'.", e.source.text))
+		error(string.format("No mod config could be found for key '%s'.", modName))
 		return
 	end
 
@@ -154,13 +162,23 @@ local function onClickModName(e)
 
 	-- Change the mod config title bar to include the mod's name.
 	local menu = tes3ui.findMenu("MWSE:ModConfigMenu") --[[@as tes3uiElement]]
-	menu.text = mwse.mcm.i18n("Mod Configuration - %s", { e.source.text })
+	menu.text = mwse.mcm.i18n("Mod Configuration - %s", { modName })
 	menu:updateLayout()
+	-- Record that this was the most recently opened mod config menu.
+	lastModName = modName
 end
+
+local keyBinderPopupId = tes3ui.registerID("KeyMouseBinderPopup")
 
 --- Callback for when the close button has been clicked.
 --- @param e keyDownEventData|tes3uiEventData
 local function onClickCloseButton(e)
+	-- Disallow closing MCM menu while KeyBinder popup is active
+	local keyBinderPopup = tes3ui.findMenu(keyBinderPopupId)
+	if keyBinderPopup then
+		return
+	end
+
 	event.unregister("keyDown", onClickCloseButton, { filter = tes3.scanCode.escape })
 
 	-- save the list of favorites
@@ -423,6 +441,15 @@ local function onClickModConfigButton()
 		-- Cause the menu to refresh itself.
 		menu:updateLayout()
 		modList.widget:contentsChanged()
+
+		if lastModName ~= nil then
+			for _, child in ipairs(modListContents.children) do
+				if child.children[1].text == lastModName then
+					child.children[1]:triggerEvent(tes3.uiEvent.mouseClick)
+					break
+				end
+			end
+		end
 	else
 		menu.visible = true
 	end
@@ -493,7 +520,7 @@ event.register("uiActivated", onCreatedMenuOptions, { filter = "MenuOptions" })
 --- @class mwseModConfig : mwse.registerModConfig.package
 --- @field name string
 --- @field hidden boolean hide it?
----@field favorite boolean is this mod a favorite
+--- @field favorite boolean is this mod a favorite
 
 --- Define a new function in the mwse namespace that lets mods register for mod config.
 --- @param name string
