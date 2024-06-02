@@ -2242,14 +2242,13 @@ namespace mwse::lua {
 		return true;
 	}
 
-	bool stopLegacyScript(sol::table params) {
-		auto script = getOptionalParamScript(params, "script");
-		if (script) {
-			TES3::WorldController::get()->stopGlobalScript(script);
-			return true;
+	void stopLegacyScript(sol::table params) {
+		const auto script = getOptionalParamScript(params, "script");
+		if (script == nullptr) {
+			throw std::runtime_error("Invalid 'script' parameter provided.");
 		}
 
-		return false;
+		TES3::WorldController::get()->stopGlobalScript(script);
 	}
 
 	bool force1stPerson() {

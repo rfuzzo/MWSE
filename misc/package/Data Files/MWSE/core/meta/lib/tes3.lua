@@ -2691,7 +2691,6 @@ function tes3.skipToNextMusicTrack(params) end
 --- @param params tes3.stopLegacyScript.params This table accepts the following values:
 --- 
 --- `script`: tes3script|string — The script to stop.
---- @return boolean stopped No description yet available.
 function tes3.stopLegacyScript(params) end
 
 ---Table parameter definitions for `tes3.stopLegacyScript`.

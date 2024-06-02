@@ -8,5 +8,4 @@ return {
 			{ name = "script", type = "tes3script|string", description = "The script to stop." },
 		},
 	}},
-	returns = {{ name = "stopped", type = "boolean" }},
 }

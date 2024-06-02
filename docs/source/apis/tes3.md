@@ -4898,17 +4898,13 @@ local musicTrackQueued = tes3.skipToNextMusicTrack({ path = ..., situation = ...
 This function stops a global mwscript.
 
 ```lua
-local stopped = tes3.stopLegacyScript({ script = ... })
+tes3.stopLegacyScript({ script = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `script` ([tes3script](../types/tes3script.md), string): The script to stop.
-
-**Returns**:
-
-* `stopped` (boolean)
 
 ***
 
