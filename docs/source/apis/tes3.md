@@ -4874,13 +4874,12 @@ tes3.skipAnimationFrame({ reference = ... })
 This function interrupts the current music to play a random new combat or explore track, as appropriate. The selected music track can be read from the audio controller's `.nextMusicFilePath` field.
 
 ```lua
-local musicTrackQueued = tes3.skipToNextMusicTrack({ path = ..., situation = ..., crossfade = ..., volume = ..., force = ... })
+local musicTrackQueued = tes3.skipToNextMusicTrack({ situation = ..., crossfade = ..., volume = ..., force = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `path` (string): Path to the music file, relative to Data Files/music/.
 	* `situation` ([tes3.musicSituation](../references/music-situations.md)): *Optional*. Determines what kind of gameplay situation the music should activate for. By default, the function will determine the right solution based on the player's combat state. This value maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/) constants.
 	* `crossfade` (number): *Default*: `1.0`. The duration in seconds of the crossfade from the old to the new track. The default is 1.0.
 	* `volume` (number): *Optional*. The volume at which the music will play. If no volume is provided, the user's volume setting will be used.

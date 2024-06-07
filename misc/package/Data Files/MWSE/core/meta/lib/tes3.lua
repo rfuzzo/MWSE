@@ -2667,8 +2667,6 @@ function tes3.skipAnimationFrame(params) end
 --- This function interrupts the current music to play a random new combat or explore track, as appropriate. The selected music track can be read from the audio controller's `.nextMusicFilePath` field.
 --- @param params tes3.skipToNextMusicTrack.params This table accepts the following values:
 --- 
---- `path`: string — Path to the music file, relative to Data Files/music/.
---- 
 --- `situation`: tes3.musicSituation? — *Optional*. Determines what kind of gameplay situation the music should activate for. By default, the function will determine the right solution based on the player's combat state. This value maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/) constants.
 --- 
 --- `crossfade`: number? — *Default*: `1.0`. The duration in seconds of the crossfade from the old to the new track. The default is 1.0.
@@ -2681,7 +2679,6 @@ function tes3.skipToNextMusicTrack(params) end
 
 ---Table parameter definitions for `tes3.skipToNextMusicTrack`.
 --- @class tes3.skipToNextMusicTrack.params
---- @field path string Path to the music file, relative to Data Files/music/.
 --- @field situation tes3.musicSituation? *Optional*. Determines what kind of gameplay situation the music should activate for. By default, the function will determine the right solution based on the player's combat state. This value maps to [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/) constants.
 --- @field crossfade number? *Default*: `1.0`. The duration in seconds of the crossfade from the old to the new track. The default is 1.0.
 --- @field volume number? *Optional*. The volume at which the music will play. If no volume is provided, the user's volume setting will be used.
