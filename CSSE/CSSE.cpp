@@ -250,6 +250,20 @@ namespace se::cs {
 		}
 
 		//
+		// Patch: Add default option for showing all icon types.
+		//
+
+		static const auto iconTypes = "Morrowind Icons (*.TGA, *.DDS)\0*.tga;*.dds\0Morrowind TGA Icons (*.TGA)\0*.tga\0Morrowind DDS Icons (*.DDS)\0*.dds\0\0";
+
+		const auto CS_RequestIconFilename = reinterpret_cast<int(__cdecl*)(HWND, const char*, const char*, const char*)>(0x414E10);
+		int __cdecl RequestIconFilename(HWND hWnd, const char* currentFilename, const char* successMessage, const char* filter) {
+			if (filter == nullptr) {
+				filter = iconTypes;
+			}
+			return CS_RequestIconFilename(hWnd, currentFilename, successMessage, filter);
+		}
+
+		//
 		// Create minidumps.
 		//
 
@@ -618,6 +632,9 @@ namespace se::cs {
 		// Patch: Remember last used model/icon directories.
 		genCallEnforced(0x414EB4, 0x573290, reinterpret_cast<DWORD>(patch::GetOpenFileNameForIcon));
 		genCallEnforced(0x414C5E, 0x573290, reinterpret_cast<DWORD>(patch::GetOpenFileNameForModel));
+
+		// Patch: Allow selecting both tga and dds icon files.
+		genJumpEnforced(0x402FF4, 0x414E10, reinterpret_cast<DWORD>(patch::RequestIconFilename));
 
 		// Patch: Respect targets when searching for symlinks.
 		writeDoubleWordUnprotected(0x6D99E8, reinterpret_cast<DWORD>(&patch::sizeForSymbolicLinks::findFirstFileA));
