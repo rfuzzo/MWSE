@@ -219,6 +219,9 @@ namespace se::cs {
 				openData->lpstrInitialDir = lastModelDirectory.value().c_str();
 			}
 
+			// Don't dereference symlinks.
+			openData->Flags |= OFN_NODEREFERENCELINKS;
+
 			if (!GetOpenFileNameA(openData)) {
 				return FALSE;
 			}
@@ -239,6 +242,9 @@ namespace se::cs {
 			if (lastIconDirectory) {
 				openData->lpstrInitialDir = lastIconDirectory.value().c_str();
 			}
+
+			// Don't dereference symlinks.
+			openData->Flags |= OFN_NODEREFERENCELINKS;
 
 			if (!GetOpenFileNameA(openData)) {
 				return FALSE;
