@@ -58,6 +58,11 @@ local function remapFilter(options, showWarnings)
 		filter = baseObject
 	end
 
+	-- Ignore objects that somehow don't have an ID.
+	if (not filter.id) then
+		return
+	end
+
 	-- Finally, objects are converted to their id.
 	options.filter = filter.id:lower()
 end
