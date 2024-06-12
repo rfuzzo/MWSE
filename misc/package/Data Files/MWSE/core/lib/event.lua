@@ -28,7 +28,35 @@ local function eventSorter(a, b)
 	return eventPriorities[a] > eventPriorities[b]
 end
 
-local disableableEvents = mwseDisableableEventManager
+local disableableEvents = mwseDisableableEventManager --- @diagnostic disable-line
+
+local function remapFilter(options)
+	-- We only care if we have a filter.
+	local filter = options.filter
+	if (not filter) then
+		return
+	end
+
+	-- We also only care about userdata.
+	if (type(filter) ~= "userdata") then
+		return
+	end
+
+	-- Which are tes3objects...
+	if (filter.objectType == nil) then
+		return
+	end
+
+	-- References get converted to the base object. Actors and containers get converted to their base object.
+	local baseObject = filter.baseObject
+	if (baseObject) then
+		mwse.log("Warning: Event registered to a non-base object '%s'. Switched to base object '%s'. Stacktrace:\n%s", filter, baseObject, debug.traceback())
+		filter = baseObject
+	end
+
+	-- Finally, objects are converted to their id.
+	options.filter = filter.id:lower()
+end
 
 function this.register(eventType, callback, options)
 	-- Validate event type.
@@ -53,26 +81,8 @@ function this.register(eventType, callback, options)
 		end
 	end
 
-	-- Handle conversions of filters.
-	if (options.filter) then
-		local filterType = type(options.filter)
-		if (filterType == "userdata") then
-			-- References get converted to the base object.
-			if (options.filter.objectType == tes3.objectType.reference) then
-				options.filter = options.filter.object
-				mwse.log("Warning: Event registered to reference. Reference-type filtering was deprecated on 2018-12-15, and will be removed in future versions. Please update accordingly.")
-				debug.traceback()
-			end
-
-			-- Actors and containers get converted to their base object.
-			local baseObject = options.filter.baseObject
-			if (baseObject) then
-				options.filter = baseObject
-				mwse.log("Warning: Event registered to actor clone. Switched to base object.")
-				debug.traceback()
-			end
-		end
-	end
+	-- Fix up any filters to use base object ids.
+	remapFilter(options)
 
 	-- Store this callback's priority.
 	eventPriorities[callback] = options.priority or 0
@@ -108,6 +118,9 @@ function this.unregister(eventType, callback, options)
 	-- Make sure options is an empty table if nothing else.
 	local options = options or {}
 
+	-- Fix up any filters to use base object ids.
+	remapFilter(options)
+
 	local callbacks = getEventTable(eventType, options.filter)
 	local removed = table.removevalue(callbacks, callback)
 	-- if (not removed) then
@@ -134,6 +147,9 @@ function this.isRegistered(eventType, callback, options)
 
 	-- Make sure options is an empty table if nothing else.
 	local options = options or {}
+
+	-- Fix up any filters to use base object ids.
+	remapFilter(options)
 
 	local callbacks = getEventTable(eventType, options.filter)
 	local found = table.find(callbacks, callback)
@@ -278,7 +294,7 @@ function errorNotifier.addMsg(errSource, modName, sourceFile, lineNum, errText)
 end
 
 function errorNotifier.reportError(errSource, err)
-	if not mwseConfig.EnableLuaErrorNotifications then return end
+	if not mwseConfig.EnableLuaErrorNotifications then return end --- @diagnostic disable-line
 
 	local filePath, lineNum, errText = string.match(err, "[^:]+\\mods\\([^:]+):(%d+):%s*(.+)")
 
@@ -299,6 +315,9 @@ function this.trigger(eventType, payload, options)
 	-- Make sure params are an empty table if nothing else.
 	local payload = payload or {}
 	local options = options or {}
+
+	-- Convert object filtering to base object/id filtering.
+	remapFilter(options)
 
 	payload.eventType = eventType
 	payload.eventFilter = options.filter
@@ -328,7 +347,8 @@ function this.trigger(eventType, payload, options)
 	-- At this point if we have a filter, we've run through the filtered events.
 	-- Fire off the unfiltered events too.
 	if (options.filter ~= nil) then
-		this.trigger(eventType, payload)
+		options.filter = nil
+		this.trigger(eventType, payload, options)
 	end
 
 	return payload
