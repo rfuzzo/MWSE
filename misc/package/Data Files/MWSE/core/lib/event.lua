@@ -30,7 +30,7 @@ end
 
 local disableableEvents = mwseDisableableEventManager --- @diagnostic disable-line
 
-local function remapFilter(options)
+local function remapFilter(options, showWarnings)
 	-- We only care if we have a filter.
 	local filter = options.filter
 	if (not filter) then
@@ -50,7 +50,11 @@ local function remapFilter(options)
 	-- References get converted to the base object. Actors and containers get converted to their base object.
 	local baseObject = filter.baseObject
 	if (baseObject and baseObject ~= filter) then
-		mwse.log("Warning: Event registered to a non-base object '%s'. Switched to base object '%s'. Stacktrace:\n%s", filter, baseObject, debug.traceback())
+		if (showWarnings) then
+			local givenType = table.find(tes3.objectType, filter.objectType)
+			local newType = table.find(tes3.objectType, baseObject.objectType)
+			mwse.log("Warning: Event registered to a non-base object '%s' (%s). Switched to base object '%s' (%s). Stacktrace:\n%s", filter, givenType, baseObject, newType, debug.traceback())
+		end
 		filter = baseObject
 	end
 
@@ -82,7 +86,7 @@ function this.register(eventType, callback, options)
 	end
 
 	-- Fix up any filters to use base object ids.
-	remapFilter(options)
+	remapFilter(options, true)
 
 	-- Store this callback's priority.
 	eventPriorities[callback] = options.priority or 0
@@ -119,7 +123,7 @@ function this.unregister(eventType, callback, options)
 	local options = options or {}
 
 	-- Fix up any filters to use base object ids.
-	remapFilter(options)
+	remapFilter(options, true)
 
 	local callbacks = getEventTable(eventType, options.filter)
 	local removed = table.removevalue(callbacks, callback)
@@ -149,7 +153,7 @@ function this.isRegistered(eventType, callback, options)
 	local options = options or {}
 
 	-- Fix up any filters to use base object ids.
-	remapFilter(options)
+	remapFilter(options, true)
 
 	local callbacks = getEventTable(eventType, options.filter)
 	local found = table.find(callbacks, callback)
@@ -317,7 +321,7 @@ function this.trigger(eventType, payload, options)
 	local options = options or {}
 
 	-- Convert object filtering to base object/id filtering.
-	remapFilter(options)
+	remapFilter(options, false)
 
 	payload.eventType = eventType
 	payload.eventFilter = options.filter
