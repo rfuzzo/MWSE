@@ -28,7 +28,7 @@ local function eventSorter(a, b)
 	return eventPriorities[a] > eventPriorities[b]
 end
 
-local disableableEvents = mwseDisableableEventManager
+local disableableEvents = mwseDisableableEventManager --- @diagnostic disable-line
 
 function this.register(eventType, callback, options)
 	-- Validate event type.
@@ -278,7 +278,7 @@ function errorNotifier.addMsg(errSource, modName, sourceFile, lineNum, errText)
 end
 
 function errorNotifier.reportError(errSource, err)
-	if not mwseConfig.EnableLuaErrorNotifications then return end
+	if not mwseConfig.EnableLuaErrorNotifications then return end --- @diagnostic disable-line
 
 	local filePath, lineNum, errText = string.match(err, "[^:]+\\mods\\([^:]+):(%d+):%s*(.+)")
 
