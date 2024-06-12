@@ -30,6 +30,10 @@ end
 
 local disableableEvents = mwseDisableableEventManager --- @diagnostic disable-line
 
+local remapObjectTypeDenyList = {
+	[tes3.objectType.dialogueInfo] = true,
+}
+
 local function remapFilter(options, showWarnings)
 	-- We only care if we have a filter.
 	local filter = options.filter
@@ -44,6 +48,11 @@ local function remapFilter(options, showWarnings)
 
 	-- Which are tes3objects...
 	if (filter.objectType == nil) then
+		return
+	end
+
+	-- DenyList certain object types from being filtered by ID.
+	if (remapObjectTypeDenyList[filter.objectType]) then
 		return
 	end
 
