@@ -49,7 +49,7 @@ local function remapFilter(options)
 
 	-- References get converted to the base object. Actors and containers get converted to their base object.
 	local baseObject = filter.baseObject
-	if (baseObject) then
+	if (baseObject and baseObject ~= filter) then
 		mwse.log("Warning: Event registered to a non-base object '%s'. Switched to base object '%s'. Stacktrace:\n%s", filter, baseObject, debug.traceback())
 		filter = baseObject
 	end
