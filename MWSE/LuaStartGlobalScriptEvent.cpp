@@ -8,7 +8,7 @@
 
 namespace mwse::lua::event {
 	StartGlobalScriptEvent::StartGlobalScriptEvent(TES3::Script* script, TES3::Reference* reference) :
-		ObjectFilteredEvent("startGlobalScript", m_Script),
+		ObjectFilteredEvent("startGlobalScript", script),
 		m_Script(script),
 		m_Reference(reference)
 	{
