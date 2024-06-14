@@ -13,6 +13,8 @@ if not tes3.isInitialized() then
 	))
 end
 
+local fileUtils = require("mcm.fileUtils")
+
 --- @class mwseMCMComponent
 local Component = {}
 Component.componentType = "Component"
@@ -113,7 +115,7 @@ function Component:getComponent(componentData)
 		mwse.log("ERROR: No class found for component:")
 		self:printComponent(componentData)
 	end
-	local componentClass = mwse.mcm.getComponentClass(componentData.class)
+	local componentClass = fileUtils.getComponentClass(componentData.class)
 	if componentClass then
 		componentData.parentComponent = self
 		return componentClass:new(componentData)

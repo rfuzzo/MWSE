@@ -127,73 +127,8 @@ end
 
 ]]--
 
+local fileUtils = require("mcm.fileUtils")
 local strLengthCreate = string.len("create")
-
-
-mcm.components = {}
-mcm.variables = {}
-local prefixLength = string.len("Data Files\\MWSE\\core\\")
-
--- Store component/variable paths so we only have to iterate the directory once. 
--- (Testing has shown this results in a noticeable boost in performance.)
-
-local componentPaths = {}
-local variablePaths = {}
-
-for filePath, dir, fileName in lfs.walkdir("data files\\mwse\\core\\mcm\\components\\") do
-	-- For example, when adding the path of `mwseMCMPage`:
-	-- The key   will be:  "Page" 
-	--        instead of:  "Page.lua"
-	-- The value will be:  "mcm.components.pages.Page" 
-	-- 		  instead of:  "data files\\mwse\\core\\mcm\\components\\pages\\Page.lua"
-	componentPaths[fileName:sub(1, fileName:len() - 4)] = filePath:sub(1 + prefixLength, filePath:len() - 4):gsub("[\\/]", ".")
-end
-
-for filePath, dir, fileName in lfs.walkdir("data files\\mwse\\core\\mcm\\variables\\") do
-	variablePaths[fileName:sub(1, fileName:len() - 4)] = filePath:sub(1 + prefixLength, filePath:len() - 4):gsub("[\\/]", ".")
-end
-
----@protected
----@param className string The name of the class of the `mwseMCMComponent` to search for.
----@return mwseMCMComponent?
-function mcm.getComponentClass(className)
-	local class = mcm.components[className]
-	if class then return class end
-	if className == "HyperLink" then
-		return mcm.getComponentClass("Hyperlink")
-	end
-	if className == "SidebarPage" then
-		return mcm.getComponentClass("SideBarPage")
-	end
-	local luaPath = componentPaths[className]
-	if luaPath then
-		class = include(luaPath)
-		if class and type(class) == "table" then
-			class.class = className -- Store it now so we don't have to do this every time.
-			mcm.components[className] = class
-			return class
-		end
-	end
-end
-
----@protected
----@param className string The name of the class of the `mwseMCMVariable` to search for.
----@return mwseMCMVariable?
-function mcm.getVariableClass(className)
-	local class = mcm.variables[className]
-	if class then return class end
-	local luaPath = variablePaths[className]
-	if luaPath then
-		class = include(luaPath)
-		if class and type(class) == "table" then
-			class.class = className -- Store it now so we don't have to do it every time.
-			mcm.variables[className] = class
-			return class
-		end
-	end
-end
-
-
 
 -- Add the `create<Component|Variable>` functions.
 -- This will be done via the `__index` metamethod as follows:
@@ -212,7 +147,7 @@ setmetatable(mcm, {__index=function (_, key) ---@param key string
 	local className = key:sub(strLengthCreate + 1)
 	
 	-- First check if it's a component.
-	local componentClass = mcm.getComponentClass(className)
+	local componentClass = fileUtils.getComponentClass(className)
 	if componentClass then
 
 		-- Store the function so we don't have to recreate it every time.
@@ -242,7 +177,7 @@ setmetatable(mcm, {__index=function (_, key) ---@param key string
 		return mcm[key]
 	end
 	-- Now check if it's a variable.
-	local variableClass = mcm.getVariableClass(className)
+	local variableClass = fileUtils.getVariableClass(className)
 	if variableClass then
 		-- Store the function so we don't have to recreate it every time.
 		mcm[key] = function(param1, param2)

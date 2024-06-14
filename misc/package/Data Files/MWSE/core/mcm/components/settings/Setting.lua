@@ -7,6 +7,7 @@
 --- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
 --- @diagnostic disable: duplicate-set-field
 
+local fileUtils = require("mcm.fileUtils")
 local Parent = require("mcm.components.Component")
 
 --- @class mwseMCMSetting
@@ -23,7 +24,7 @@ function Setting:new(data)
 	if data and data.variable then
 		-- create setting variable
 		t.variable.defaultSetting = t.variable.defaultSetting or t.defaultSetting
-		t.variable = mwse.mcm.getVariableClass(t.variable.class):new(t.variable)
+		t.variable = fileUtils.getVariableClass(t.variable.class):new(t.variable)
 	end
 
 	setmetatable(t, self)
