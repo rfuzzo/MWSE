@@ -380,7 +380,7 @@ local function onClickModConfigButton()
 			modNameButton.borderRight = 16
 			modNameButton.heightProportional = 1
 
-			local iconTable = isFavorite and favoriteIcons or nonFavoriteIcons
+			local iconTable = isFavorite(package.name) and favoriteIcons or nonFavoriteIcons
 
 			local imageButton = entryBlock:createImageButton(iconTable)
 			updateFavoriteImageButton(imageButton, isFavorite(package.name))
