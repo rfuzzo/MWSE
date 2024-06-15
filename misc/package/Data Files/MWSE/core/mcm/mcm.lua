@@ -178,13 +178,13 @@ setmetatable(mcm, {__index=function (_, key) ---@param key string
 	end
 	-- Now check if it's a variable.
 	local variableClass = fileUtils.getVariableClass(className)
-	if variableClass then
-		-- Store the function so we don't have to recreate it every time.
-		mcm[key] = function(param1, param2)
-			return variableClass:new(param2 or param1)
-		end
-		return mcm[key]
+	if not variableClass then return end
+
+	-- Store the function so we don't have to recreate it every time.
+	mcm[key] = function(param1, param2)
+		return variableClass:new(param2 or param1)
 	end
+	return mcm[key]
 end})
 
 

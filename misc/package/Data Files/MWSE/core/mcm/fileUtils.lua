@@ -14,15 +14,20 @@ local variablePaths = {}
 
 for filePath, dir, fileName in lfs.walkdir("data files\\mwse\\core\\mcm\\components\\") do
 	-- For example, when adding the path of `mwseMCMPage`:
-	-- The key   will be:  "Page" 
-	--        instead of:  "Page.lua"
-	-- The value will be:  "mcm.components.pages.Page" 
-	-- 		  instead of:  "data files\\mwse\\core\\mcm\\components\\pages\\Page.lua"
-	componentPaths[fileName:sub(1, fileName:len() - 4)] = filePath:sub(1 + prefixLength, filePath:len() - 4):gsub("[\\/]", ".")
+    -- "Page" instead of "Page.lua"
+    local className = fileName:sub(1, fileName:len() - 4) 
+    -- "mcm.components.pages.Page" instead of "data files\\mwse\\core\\mcm\\components\\pages\\Page.lua"
+    local luaPath = filePath:sub(1 + prefixLength, filePath:len() - 4):gsub("[\\/]", ".")
+	componentPaths[className] = luaPath
 end
+-- Add backwards compatibility by redirecting old component names to new ones.
+componentPaths.HyperLink = componentPaths.Hyperlink
+componentPaths.SidebarPage = componentPaths.SideBarPage
 
 for filePath, dir, fileName in lfs.walkdir("data files\\mwse\\core\\mcm\\variables\\") do
-	variablePaths[fileName:sub(1, fileName:len() - 4)] = filePath:sub(1 + prefixLength, filePath:len() - 4):gsub("[\\/]", ".")
+    local className = fileName:sub(1, fileName:len() - 4) 
+    local luaPath = filePath:sub(1 + prefixLength, filePath:len() - 4):gsub("[\\/]", ".")
+	variablePaths[className] = luaPath
 end
 
 local components = {}
@@ -34,21 +39,15 @@ local variables = {}
 function fileUtils.getComponentClass(className)
 	local class = components[className]
 	if class then return class end
-	if className == "HyperLink" then
-		return fileUtils.getComponentClass("Hyperlink")
-	end
-	if className == "SidebarPage" then
-		return fileUtils.getComponentClass("SideBarPage")
-	end
+
 	local luaPath = componentPaths[className]
-	if luaPath then
-		class = include(luaPath)
-		if class and type(class) == "table" then
-			class.class = className -- Store it now so we don't have to do this every time.
-			components[className] = class
-			return class
-		end
-	end
+    if not luaPath then return end
+    class = include(luaPath)
+    if not class or type(class) ~= "table" then return end
+
+    class.class = className -- Store it now so we don't have to do this every time.
+    components[className] = class
+    return class
 end
 
 ---@protected
@@ -58,14 +57,14 @@ function fileUtils.getVariableClass(className)
 	local class = variables[className]
 	if class then return class end
 	local luaPath = variablePaths[className]
-	if luaPath then
-		class = include(luaPath)
-		if class and type(class) == "table" then
-			class.class = className -- Store it now so we don't have to do it every time.
-			variables[className] = class
-			return class
-		end
-	end
+
+    if not luaPath then return end
+    class = include(luaPath)
+    if not class or type(class) ~= "table" then return end
+
+    class.class = className -- Store it now so we don't have to do it every time.
+    variables[className] = class
+    return class
 end
 
 return fileUtils
