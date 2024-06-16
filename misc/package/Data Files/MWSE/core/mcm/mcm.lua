@@ -130,18 +130,18 @@ end
 local fileUtils = require("mcm.fileUtils")
 local strLengthCreate = string.len("create")
 
--- Add the `create<Component|Variable>` functions.
--- This will be done via the `__index` metamethod as follows:
---	1. The first time a `create` function is called, it will trigger the `mcm.getComponent` function.
---		- This function will search the `mcm\\components` folder until it finds the relevant component.
---		- It will then cache that component so it only needs to search the filetree once.
---		- The component will be returned by `getComponent` (if it exists)
---	2. If no component is returned by `mcm.getComponent`, a similar search will be done on `mwseMCMVariable`s.
---  3. If a `mwseMCMComponent` or a `mwseMCMVariable` is returned by Step 1 or Step 2., we will:
---		- Create a new function processes the given data and returns a new instance of the relevant class.
---		- Store this new function in the `mcm` table (so this whole process only happens one time per call to `create<Component|Variable>`).
---		- Return this new function.
-setmetatable(mcm, {__index=function (_, key) ---@param key string
+--[[Add the `create<Component|Variable>` functions.
+This will be done via the `__index` metamethod as follows:
+1. The first time a `create` function is called, it will try to fetch the relevant class.
+	- This is done by calling `fileUtils.getComponentClass` and `fileUtils.getVariableClass`
+2. If a class was returned in Step 1:
+	- Create a new function sanitizes the input data and returns a new instance of the relevant class.
+	- Store this new function in the `mcm` table (so this whole process only happens one time per call to `create<Componen|Variablet>`).
+	- Return this new function (as the return-value of the `__index` metamethod).
+3. If a class WAS NOT returned in Step 1, then do nothing.
+]]
+---@param key string
+setmetatable(mcm, {__index = function(_, key)
 	if key:sub(1, strLengthCreate) ~= "create" then return end
 
 	local className = key:sub(strLengthCreate + 1)
