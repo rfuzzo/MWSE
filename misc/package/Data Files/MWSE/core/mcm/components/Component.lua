@@ -45,10 +45,6 @@ function Component:new(data)
 	return t
 end
 
-function Component:__index(key)
-	return self[key]
-end
-
 -- Prints the component table to the log
 --- @param component table?
 function Component:printComponent(component)
@@ -63,17 +59,6 @@ function Component:printComponent(component)
 	mwse.log("}")
 end
 
----@deprecated
---- @param data string|mwseMCMComponent.new.data|nil
---- @return mwseMCMComponent.new.data data
-function Component:prepareData(data)
-	data = data or {}
-	if type(data) == "string" then
-		data = { label = data }
-	end
-	data.parentComponent = self
-	return data
-end
 
 --- @alias mwseMCMComponentClass
 ---| "Category" # Categories

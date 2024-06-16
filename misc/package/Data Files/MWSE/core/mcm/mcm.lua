@@ -160,14 +160,14 @@ setmetatable(mcm, {__index=function (_, key) ---@param key string
 					parent = param1
 				end
 			end
-			data = data or "---"
-			if type(data) == "string" then
-				if componentClass.componentType == "Template" then
-					data = { name = data }
-				else
-					data = { label = data }
-				end
+
+			-- Sanitize data
+			if not data then
+				data = { label = "---"}
+			elseif type(data) == "string" then
+				data = { label = data}
 			end
+
 			local component = componentClass:new(data)
 			if parent then
 				component:create(parent)
@@ -176,15 +176,17 @@ setmetatable(mcm, {__index=function (_, key) ---@param key string
 		end
 		return mcm[key]
 	end
+
 	-- Now check if it's a variable.
 	local variableClass = fileUtils.getVariableClass(className)
-	if not variableClass then return end
-
-	-- Store the function so we don't have to recreate it every time.
-	mcm[key] = function(param1, param2)
-		return variableClass:new(param2 or param1)
+	if variableClass then
+		
+		-- Store the function so we don't have to recreate it every time.
+		mcm[key] = function(param1, param2)
+			return variableClass:new(param2 or param1)
+		end
+		return mcm[key]
 	end
-	return mcm[key]
 end})
 
 
