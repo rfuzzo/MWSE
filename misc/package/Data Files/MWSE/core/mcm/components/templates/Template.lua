@@ -28,15 +28,11 @@ function Template:new(data)
 			local componentClass = fileUtils.getComponentClass(page.class or "Page")
 			if not componentClass then
 				error(string.format("Could not intialize page %q", page.label))
-				goto nextPage
 			end
 			page.parentComponent = self
 			page = componentClass:new(page)
 		end
-		
 		table.insert(pages, page)
-
-		::nextPage::
 	end
 	t.pages = pages
 

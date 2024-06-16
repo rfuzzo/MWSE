@@ -110,15 +110,12 @@ function Category:createSubcomponents(parentBlock, components)
 			local componentClass = fileUtils.getComponentClass(component.class)
 			if not componentClass then
 				error(string.format("Could not intialize component %q", component.label))
-				goto nextComponent
 			end
 			component.parentComponent = self
 			componentClass:new(component) -- Modifies in-place, which is why it's okay to use in this loop.
 		end
 
 		component:create(parentBlock)
-
-		::nextComponent::
 	end
 end
 
