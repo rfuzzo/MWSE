@@ -13,8 +13,9 @@ local variables = {}  ---@type table<string, mwseMCMVariable>
 -- Files get `require`d in by the `fileUtils.get<Component|Variable>Class` functions. (They actually get `include`d for stability reasons.)
 -- Once a file has been `require`d by the `fileUtils.get<Component|Variable>Class` functions, its path will be removed from these tables.
 -- (Testing has shown that this approach results in a noticeable boost in performance.)
----@type table<string, string>, table<string, string>
-local componentPaths, variablePaths = {}, {}
+
+local componentPaths = {} ---@type table<string, string>
+local variablePaths = {}  ---@type table<string, string>
 
 local prefixLength = string.len("Data Files\\MWSE\\core\\")
 
