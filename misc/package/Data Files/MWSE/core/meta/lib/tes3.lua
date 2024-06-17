@@ -5561,6 +5561,7 @@ tes3.inventoryTileType = require("tes3.inventoryTileType")
 tes3.itemSoundState = require("tes3.itemSoundState")
 
 --- @alias tes3.itemSoundState
+---| `tes3.itemSoundState.consume`
 ---| `tes3.itemSoundState.direct`
 ---| `tes3.itemSoundState.down`
 ---| `tes3.itemSoundState.up`
