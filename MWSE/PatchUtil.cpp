@@ -393,7 +393,7 @@ namespace mwse::patch {
 
 			using namespace mwse::log;
 			auto& log = getLog();
-			log << "[MWSE] Fixed crash with invalid RemoveItem call. Report this to the #mwse channel in the Morrowind Modding Community Discord so we can narrow this down more. Dumping related objects." << std::endl;
+			log << "[MWSE] Fixed crash with invalid RemoveItem call. Report this to the MWSE GitHub (https://github.com/MWSE/MWSE/issues) so we can narrow this down more. Dumping related objects." << std::endl;
 
 			log << "Reference: " << self->getObjectID() << std::endl;
 			prettyDump(self);
@@ -866,7 +866,7 @@ namespace mwse::patch {
 
 		// Try to get more information about this crash.
 		if (mobile->reference->getSceneGraphNode() == nullptr) {
-			log::getLog() << "No scene graph found when attempting to add animation controller to reference. Doing what we can with the reference. Please report this to the #mwse channel in the Morrowind Modding Community discord." << std::endl;
+			log::getLog() << "No scene graph found when attempting to add animation controller to reference. Doing what we can with the reference. Please report this to the MWSE GitHub (https://github.com/MWSE/MWSE/issues)." << std::endl;
 			safePrintObjectToLog("Reference", mobile->reference);
 		}
 
@@ -1578,7 +1578,7 @@ namespace mwse::patch {
 
 	void CreateMiniDump(EXCEPTION_POINTERS* pep) {
 		log::getLog() << std::dec << std::endl;
-		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to the #mwse channel at the Morrowind Modding Community Discord: https://discord.me/mwmods" << std::endl;
+		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to the #mwse channel at the MWSE GitHub: https://github.com/MWSE/MWSE/issues" << std::endl;
 
 #ifdef APPVEYOR_BUILD_NUMBER
 		log::getLog() << "MWSE version: " << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << "-" << APPVEYOR_BUILD_NUMBER << std::endl;
