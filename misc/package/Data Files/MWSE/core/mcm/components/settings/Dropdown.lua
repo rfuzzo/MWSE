@@ -6,9 +6,9 @@ local Parent = require("mcm.components.settings.Setting")
 
 --- @class mwseMCMDropdown
 local Dropdown = Parent:new()
-Dropdown.idleColor = tes3ui.getPalette("normal_color")
-Dropdown.overColor = tes3ui.getPalette("normal_over_color")
-Dropdown.pressedColor = tes3ui.getPalette("normal_pressed_color")
+Dropdown.idleColor = tes3ui.getPalette(tes3.palette.normalColor)
+Dropdown.overColor = tes3ui.getPalette(tes3.palette.normalOverColor)
+Dropdown.pressedColor = tes3ui.getPalette(tes3.palette.normalPressedColor)
 
 function Dropdown:enable()
 	Parent.enable(self)
@@ -22,7 +22,7 @@ function Dropdown:enable()
 	end
 	self.elements.textBox.text = label
 	self.elements.textBox.color = self.idleColor
-	self.elements.textBox:register("mouseClick", function()
+	self.elements.textBox:register(tes3.uiEvent.mouseClick, function()
 		self:createDropdown()
 	end)
 end
@@ -41,7 +41,7 @@ function Dropdown:createDropdown()
 		self.dropdownActive = true
 		-- Create dropdown
 		local dropdown = self.elements.dropdownParent:createThinBorder()
-		dropdown.flowDirection = "top_to_bottom"
+		dropdown.flowDirection = tes3.flowDirection.topToBottom
 		dropdown.autoHeight = true
 		dropdown.widthProportional = 1.0
 		dropdown.paddingAllSides = 6
@@ -53,11 +53,11 @@ function Dropdown:createDropdown()
 			listItem.widthProportional = 1.0
 			listItem.autoHeight = true
 			listItem.borderBottom = 3
-			listItem.widget.idle = tes3ui.getPalette("normal_color")
-			listItem.widget.over = tes3ui.getPalette("normal_over_color")
-			listItem.widget.pressed = tes3ui.getPalette("normal_pressed_color")
+			listItem.widget.idle = self.idleColor
+			listItem.widget.over = self.overColor
+			listItem.widget.pressed = self.pressedColor
 
-			listItem:register("mouseClick", function()
+			listItem:register(tes3.uiEvent.mouseClick, function()
 				self:selectOption(option)
 			end)
 		end
@@ -102,7 +102,7 @@ function Dropdown:makeComponent(parentBlock)
 	local textBox = border:createTextSelect({ text = "---" })
 	self.elements.textBox = textBox
 
-	textBox.color = tes3ui.getPalette("disabled_color")
+	textBox.color = tes3ui.getPalette(tes3.palette.disabledColor)
 	textBox.widget.idle = self.idleColor
 	textBox.widget.over = self.overColor
 	textBox.widget.pressed = self.pressedColor
@@ -110,7 +110,7 @@ function Dropdown:makeComponent(parentBlock)
 	textBox.borderAllSides = 2
 
 	local dropdownParent = parentBlock:createBlock()
-	dropdownParent.flowDirection = "top_to_bottom"
+	dropdownParent.flowDirection = tes3.flowDirection.topToBottom
 	dropdownParent.widthProportional = 1.0
 	dropdownParent.autoHeight = true
 	self.elements.dropdownParent = dropdownParent
