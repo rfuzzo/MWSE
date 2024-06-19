@@ -47,21 +47,19 @@ function Dropdown:createDropdown()
 		dropdown.paddingAllSides = 6
 		dropdown.borderTop = 0
 		for _, option in ipairs(self.options) do
-			if option.value ~= self.variable.value then
 
-				local listItem = dropdown:createTextSelect({ text = option.label })
+			local listItem = dropdown:createTextSelect({ text = option.label })
 
-				listItem.widthProportional = 1.0
-				listItem.autoHeight = true
-				listItem.borderBottom = 3
-				listItem.widget.idle = tes3ui.getPalette("normal_color")
-				listItem.widget.over = tes3ui.getPalette("normal_over_color")
-				listItem.widget.pressed = tes3ui.getPalette("normal_pressed_color")
+			listItem.widthProportional = 1.0
+			listItem.autoHeight = true
+			listItem.borderBottom = 3
+			listItem.widget.idle = tes3ui.getPalette("normal_color")
+			listItem.widget.over = tes3ui.getPalette("normal_over_color")
+			listItem.widget.pressed = tes3ui.getPalette("normal_pressed_color")
 
-				listItem:register("mouseClick", function()
-					self:selectOption(option)
-				end)
-			end
+			listItem:register("mouseClick", function()
+				self:selectOption(option)
+			end)
 		end
 		self.elements.dropdown = dropdown
 		dropdown:getTopLevelMenu():updateLayout()
