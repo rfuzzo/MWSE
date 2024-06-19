@@ -30,9 +30,17 @@ end
 --- @param option mwseMCMDropdownOption
 function Dropdown:selectOption(option)
 	self.elements.dropdownParent:destroyChildren()
+	self.dropdownActive = false
+
+	-- No new option selected? Don't execute the callback.
+	if self.variable.value == option.value then
+		return
+	end
 	self.variable.value = option.value
 	self.elements.textBox.text = option.label
-	self.dropdownActive = false
+	if option.callback then
+		option.callback()
+	end
 	self:update()
 end
 
