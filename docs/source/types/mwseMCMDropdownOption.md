@@ -17,7 +17,7 @@ The function called once this option was selected in the dropdown menu.
 
 **Returns**:
 
-* `result` (function)
+* `result` (function, nil)
 
 ***
 
