@@ -82,9 +82,6 @@ end
 ---| "YesNoButton"
 ---| "Template" # Templates
 
---- @class mwseMCMComponent.getComponent.componentData
---- @field class mwseMCMComponentClass
-
 
 --- @param mouseOverList tes3uiElement[]?
 function Component:registerMouseOverElements(mouseOverList)

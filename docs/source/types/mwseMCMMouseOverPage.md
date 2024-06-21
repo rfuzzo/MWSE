@@ -395,7 +395,7 @@ local category = myObject:createCategory({ label = ..., description = ..., compo
 * `data` (table, string): *Optional*. If passing only a string, it will be used as label.
 	* `label` (string): *Optional*. The category label.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
-	* `components` (mwseMCMComponent.getComponent.componentData[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMCategory.md#getcomponent).
+	* `components` (mwseMCMComponent.new.data[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
@@ -853,7 +853,7 @@ local category = myObject:createSideBySideBlock({ label = ..., description = ...
 * `data` (table, string): *Optional*. If passing only a string, it will be used as label.
 	* `label` (string): *Optional*. The block label.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
-	* `components` (mwseMCMComponent.getComponent.componentData[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMSideBySideBlock.md#getcomponent).
+	* `components` (mwseMCMComponent.new.data[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
@@ -993,7 +993,7 @@ myObject:createSubcomponents(parentBlock, components)
 **Parameters**:
 
 * `parentBlock` ([tes3uiElement](../types/tes3uiElement.md))
-* `components` (mwseMCMComponent.getComponent.componentData[]): See description for [getComponent](./mwseMCMCategory.md#getcomponent).
+* `components` (mwseMCMComponent.new.data[]): This table is described at each Component's `new` method.
 
 ***
 
@@ -1118,7 +1118,7 @@ local page = myObject:new({ showHeader = ..., label = ..., noScroll = ..., compo
 	* `showHeader` (boolean): *Default*: `false`. The page's label will only be created if set to true.
 	* `label` (string): *Optional*. The page label.
 	* `noScroll` (boolean): *Default*: `true`. When set to true, the page will not have a scrollbar. Particularly useful if you want to use a [ParagraphField](./mwseMCMParagraphField.md), which is not compatible with scroll panes.
-	* `components` (mwseMCMComponent.getComponent.componentData[]): *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at [getComponent](./mwseMCMPage.md#getcomponent).
+	* `components` (mwseMCMComponent.new.data[]): *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at each Component's `new` method.
 	* `indent` (integer): *Default*: `6`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.

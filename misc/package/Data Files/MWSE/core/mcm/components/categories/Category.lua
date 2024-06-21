@@ -70,7 +70,7 @@ end
 
 function Category:checkDisabled()
 	-- allow the user to override the behavior
-	if self.inGameOnly then 
+	if self.inGameOnly then
 		return not tes3.player
 	end
 
@@ -101,7 +101,7 @@ function Category:createSubcomponentsContainer(parentBlock)
 end
 
 --- @param parentBlock tes3uiElement
---- @param components mwseMCMComponent.getComponent.componentData[]
+--- @param components mwseMCMComponent.new.data[]
 function Category:createSubcomponents(parentBlock, components)
 	for _, component in pairs(components or {}) do
 
@@ -115,6 +115,7 @@ function Category:createSubcomponents(parentBlock, components)
 			componentClass:new(component) -- Modifies in-place, which is why it's okay to use in this loop.
 		end
 
+		--- @cast component mwseMCMComponent
 		component:create(parentBlock)
 	end
 end
@@ -129,10 +130,10 @@ function Category:createContentsContainer(parentBlock)
 end
 
 function Category.__index(tbl, key)
-	-- If the `key` starts with `"create"`, and if there's an `mwse.mcm.create<Component>` method, 
+	-- If the `key` starts with `"create"`, and if there's an `mwse.mcm.create<Component>` method,
 	-- Make a new `Category.create<Component>` method.
 	-- Otherwise, look the value up in the `metatable`.
-	
+
 	if not key:startswith("create") or mwse.mcm[key] == nil then
 		return getmetatable(tbl)[key]
 	end
