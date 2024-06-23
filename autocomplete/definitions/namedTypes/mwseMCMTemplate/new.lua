@@ -9,11 +9,11 @@ return {
 			{ name = "label", type = "string", optional = true, description = "Used in place of `name` if that argument isn't passed. You need to pass at least one of the `name` and `label` arguments. If `headerImagePath` is not passed, a UI element will be created with `label` as text." },
 			{ name = "config", type = "table", optional = true, 
 				description = "Stores a config that should be used by this mods `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Page`s nested inside this template. \z
-					If provided, this config will be used to generate [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./namedTypes/mwseMCMSetting.md) made inside this template."
+					If provided, this config will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this template."
 			},
 			{ name = "defaultConfig", type = "table", optional = true, 
 				description = "Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` \z
-				field of any [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) created for this mod."
+				field of any [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) created for this mod."
 			},
 			{ name = "headerImagePath", type = "string", optional = true, description = "Set it to display an image at the top of your menu. Path is relative to `Data Files/`. The image must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024, etc.)." },
 			{ name = "onClose", type = "fun(modConfigContainer: tes3uiElement)", optional = true, description = "Set this to a function which will be called when the menu is closed. Useful for saving variables, such as TableVariable." },
