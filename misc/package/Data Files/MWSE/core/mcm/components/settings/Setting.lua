@@ -34,10 +34,12 @@ function Setting:new(data)
 		local defaultSetting = data.variable and data.variable.defaultSetting
 		if defaultSetting == nil then
 			defaultSetting = data.defaultSetting
-			if defaultSetting == nil and defaultConfig and configKey then
-				defaultSetting = defaultConfig[configKey]
-			end
 		end
+		-- Let's try again if we have to.
+		if defaultSetting == nil and defaultConfig and configKey then
+			defaultSetting = defaultConfig[configKey]
+		end
+		
 		-- No variable? Let's make one.
 		if t.variable == nil and config and configKey then
 			t.variable = TableVariable:new{
