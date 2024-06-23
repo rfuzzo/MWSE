@@ -22,7 +22,6 @@ Setting.restartRequiredMessage = mwse.mcm.i18n("The game must be restarted befor
 --- @return mwseMCMSetting
 function Setting:new(data)
 	local t = Parent:new(data)
-	self.__index = self
 
 	
 	if data then
@@ -59,6 +58,7 @@ function Setting:new(data)
 	end
 
 	setmetatable(t, self)
+	self.__index = self
 	--- @cast t mwseMCMSetting
 	return t
 end
