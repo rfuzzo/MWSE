@@ -10,6 +10,8 @@
 local fileUtils = require("mcm.fileUtils")
 local Parent = require("mcm.components.Component")
 
+local TableVariable = require("mcm.variables.TableVariable")
+
 --- @class mwseMCMSetting
 local Setting = Parent:new()
 Setting.componentType = "Setting"
@@ -20,15 +22,43 @@ Setting.restartRequiredMessage = mwse.mcm.i18n("The game must be restarted befor
 --- @return mwseMCMSetting
 function Setting:new(data)
 	local t = Parent:new(data)
+	self.__index = self
 
-	if data and data.variable then
-		-- create setting variable
-		t.variable.defaultSetting = t.variable.defaultSetting or t.defaultSetting
-		t.variable = fileUtils.getVariableClass(t.variable.class):new(t.variable)
+	
+	if data then
+		local configKey = data.configKey
+		local parent = data.parentComponent
+		local config = data.config or parent and parent.config
+		local defaultConfig = data.defaultConfig or parent and parent.defaultConfig
+
+		-- Get the default setting. Include `nil` checks so we can handle it being `false`.
+		local defaultSetting = data.variable and data.variable.defaultSetting
+		if defaultSetting == nil then
+			defaultSetting = data.defaultSetting
+			if defaultSetting == nil and defaultConfig and configKey then
+				defaultSetting = defaultConfig[configKey]
+			end
+		end
+		-- No variable? Let's make one.
+		if t.variable == nil and config and configKey then
+			t.variable = TableVariable:new{
+				id = configKey,
+				table = config,
+				converter = data.converter,
+				inGameOnly = data.inGameOnly,
+				defaultSetting = defaultSetting,
+				restartRequired = data.restartRequired,
+				restartRequiredMessage = data.restartRequiredMessage
+			}
+		-- Variable provided? Let's update it for backwards compatibility.
+		elseif t.variable ~= nil then
+			t.variable.defaultSetting = defaultSetting
+			t.variable.converter = t.variable.converter or data.converter
+			t.variable = fileUtils.getVariableClass(t.variable.class):new(t.variable)
+		end
 	end
 
 	setmetatable(t, self)
-	self.__index = self
 	--- @cast t mwseMCMSetting
 	return t
 end

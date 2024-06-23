@@ -466,7 +466,7 @@ myObject:insertMouseovers(element)
 Creates a new Setting.
 
 ```lua
-local setting = myObject:new({ label = ..., text = ..., variable = ..., defaultSetting = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ..., class = ..., componentType = ..., parentComponent = ... })
+local setting = myObject:new({ label = ..., text = ..., variable = ..., config = ..., defaultConfig = ..., configKey = ..., converter = ..., defaultSetting = ..., description = ..., callback = ..., inGameOnly = ..., restartRequired = ..., restartRequiredMessage = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., postCreate = ..., class = ..., componentType = ..., parentComponent = ... })
 ```
 
 **Parameters**:
@@ -475,6 +475,10 @@ local setting = myObject:new({ label = ..., text = ..., variable = ..., defaultS
 	* `label` (string): *Optional*. The Setting's label.
 	* `text` (string): *Optional*. The Setting's text.
 	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): *Optional*. A variable for this setting.
+	* `config` (table): *Default*: ``parentComponent.config``. The config to use when creating a `mwseMCMTableVariable` for this `Setting`. If provided, it will override the config stored in `parentComponent`. Otherwise, the value in `parentComponent` will be used.
+	* `defaultConfig` (table): *Default*: ``parentComponent.defaultConfig``. The `defaultConfig` to use when creating a `mwseMCMTableVariable` for this `Setting`. If provided, it will override the `defaultConfig` stored in `parentComponent`. Otherwise, the value in `parentComponent` will be used.
+	* `configKey` (string, number): *Optional*. The `configKey` used to create a new [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md). If this is provided, along with a `config` (which may be inherited from the `parentComponent`), then a new [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) variable will be created for this setting.
+	* `converter` (fun(newVal: unknown): unknown): *Optional*. Converter to pass to the variable being created.
 	* `defaultSetting` (unknown): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 	* `callback` (fun(self: [mwseMCMSetting](../types/mwseMCMSetting.md))): *Optional*. The custom function called when the player interacts with this Setting.

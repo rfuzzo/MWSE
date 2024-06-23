@@ -8,6 +8,22 @@ return {
 		tableParams = {
 			{ name = "label", type = "string", optional = true, description = "The category label." },
 			{ name = "description", type = "string", optional = true, description = "If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover." },
+			{ name = "config", type = "table", optional = true, 
+				description = "Stores a config that will be used by this mods `Setting`s. \z
+					Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one. \z
+					If provided, this config will be used to generate [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./namedTypes/mwseMCMSetting.md) made inside this `Category`/`Page`."
+			},
+			{ name = "defaultConfig", type = "table", optional = true, 
+				description = "Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` \z
+					field of any [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) created for this mod. \z
+					Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one."
+			},
+			{ name = "configKey", type = "string|number", optional = true, 
+				description = "This can be used to access subtables of the `config` and `defaultConfig` stored in this components `parentComponent`. "
+			},
+			{ name = "converter", type = "fun(newVal: unknown): unknown", optional = true, 
+				description = "Converter to pass to the variable being created."
+			},
 			{ name = "components", type = "mwseMCMComponent.new.data[]", optional = true, description = "Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method." },
 			{ name = "indent", type = "integer", optional = true, default = 12, description = "The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component." },
 			{ name = "childIndent", type = "integer", optional = true, description = "The left padding size in pixels. Used on all the child components." },

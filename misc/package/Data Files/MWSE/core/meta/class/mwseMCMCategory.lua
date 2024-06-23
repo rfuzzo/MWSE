@@ -962,6 +962,14 @@ function mwseMCMCategory:createYesNoButton(data) end
 --- 
 --- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 --- 
+--- `config`: table? — *Optional*. Stores a config that will be used by this mods `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./namedTypes/mwseMCMSetting.md) made inside this `Category`/`Page`.
+--- 
+--- `defaultConfig`: table? — *Optional*. Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) created for this mod. Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
+--- 
+--- `configKey`: string|number|nil — *Optional*. This can be used to access subtables of the `config` and `defaultConfig` stored in this components `parentComponent`. 
+--- 
+--- `converter`: nil|fun(newVal: unknown): unknown — *Optional*. Converter to pass to the variable being created.
+--- 
 --- `components`: mwseMCMComponent.new.data[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- 
 --- `indent`: integer? — *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
@@ -988,6 +996,10 @@ function mwseMCMCategory:new(data) end
 --- @class mwseMCMCategory.new.data
 --- @field label string? *Optional*. The category label.
 --- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
+--- @field config table? *Optional*. Stores a config that will be used by this mods `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./namedTypes/mwseMCMSetting.md) made inside this `Category`/`Page`.
+--- @field defaultConfig table? *Optional*. Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) created for this mod. Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
+--- @field configKey string|number|nil *Optional*. This can be used to access subtables of the `config` and `defaultConfig` stored in this components `parentComponent`. 
+--- @field converter nil|fun(newVal: unknown): unknown *Optional*. Converter to pass to the variable being created.
 --- @field components mwseMCMComponent.new.data[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- @field indent integer? *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.

@@ -261,6 +261,10 @@ function mwseMCMTemplate:createTabsBlock(parentBlock) end
 --- 
 --- `label`: string? — *Optional*. Used in place of `name` if that argument isn't passed. You need to pass at least one of the `name` and `label` arguments. If `headerImagePath` is not passed, a UI element will be created with `label` as text.
 --- 
+--- `config`: table? — *Optional*. Stores a config that should be used by this mods `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Page`s nested inside this template. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./namedTypes/mwseMCMSetting.md) made inside this template.
+--- 
+--- `defaultConfig`: table? — *Optional*. Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) created for this mod.
+--- 
 --- `headerImagePath`: string? — *Optional*. Set it to display an image at the top of your menu. Path is relative to `Data Files/`. The image must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024, etc.).
 --- 
 --- `onClose`: nil|fun(modConfigContainer: tes3uiElement) — *Optional*. Set this to a function which will be called when the menu is closed. Useful for saving variables, such as TableVariable.
@@ -295,6 +299,8 @@ function mwseMCMTemplate:new(data) end
 --- @class mwseMCMTemplate.new.data
 --- @field name string? *Optional*. The name field is the mod name, used to register the MCM, and is displayed in the mod list on the lefthand pane.
 --- @field label string? *Optional*. Used in place of `name` if that argument isn't passed. You need to pass at least one of the `name` and `label` arguments. If `headerImagePath` is not passed, a UI element will be created with `label` as text.
+--- @field config table? *Optional*. Stores a config that should be used by this mods `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Page`s nested inside this template. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./namedTypes/mwseMCMSetting.md) made inside this template.
+--- @field defaultConfig table? *Optional*. Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./namedTypes/mwseMCMTableVariable.md) created for this mod.
 --- @field headerImagePath string? *Optional*. Set it to display an image at the top of your menu. Path is relative to `Data Files/`. The image must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024, etc.).
 --- @field onClose nil|fun(modConfigContainer: tes3uiElement) *Optional*. Set this to a function which will be called when the menu is closed. Useful for saving variables, such as TableVariable.
 --- @field searchChildLabels boolean? *Default*: `true`. If true, default search handler will search through all the page and setting `label` and `text` fields in this MCM template.
