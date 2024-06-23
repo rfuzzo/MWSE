@@ -113,7 +113,7 @@ function mwseMCMCategory:createButton(data) end
 --- 
 --- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 --- 
---- `components`: mwseMCMComponent.getComponent.componentData[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMCategory.md#getcomponent).
+--- `components`: mwseMCMComponent.new.data[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- 
 --- `indent`: integer? — *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- 
@@ -133,7 +133,7 @@ function mwseMCMCategory:createCategory(data) end
 --- @class mwseMCMCategory.createCategory.data
 --- @field label string? *Optional*. The category label.
 --- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
---- @field components mwseMCMComponent.getComponent.componentData[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMCategory.md#getcomponent).
+--- @field components mwseMCMComponent.new.data[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- @field indent integer? *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
@@ -742,7 +742,7 @@ function mwseMCMCategory:createPercentageSlider(data) end
 --- 
 --- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 --- 
---- `components`: mwseMCMComponent.getComponent.componentData[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMSideBySideBlock.md#getcomponent).
+--- `components`: mwseMCMComponent.new.data[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- 
 --- `indent`: integer? — *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- 
@@ -762,7 +762,7 @@ function mwseMCMCategory:createSideBySideBlock(data) end
 --- @class mwseMCMCategory.createSideBySideBlock.data
 --- @field label string? *Optional*. The block label.
 --- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
---- @field components mwseMCMComponent.getComponent.componentData[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMSideBySideBlock.md#getcomponent).
+--- @field components mwseMCMComponent.new.data[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- @field indent integer? *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
@@ -839,7 +839,7 @@ function mwseMCMCategory:createSlider(data) end
 
 --- Creates UI element tree for all the given components by calling `component:create`.
 --- @param parentBlock tes3uiElement No description yet available.
---- @param components mwseMCMComponent.getComponent.componentData[] See description for [getComponent](./mwseMCMCategory.md#getcomponent).
+--- @param components mwseMCMComponent.new.data[] This table is described at each Component's `new` method.
 function mwseMCMCategory:createSubcomponents(parentBlock, components) end
 
 --- Creates Category's subcomponentsContainer UI element inside given `parentBlock`, and stores it in the `self.elements.subcomponentsContainer`. This is the parent UI element for all the UI elements of MCM Components that are in this Category.
@@ -962,7 +962,7 @@ function mwseMCMCategory:createYesNoButton(data) end
 --- 
 --- `description`: string? — *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
 --- 
---- `components`: mwseMCMComponent.getComponent.componentData[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMCategory.md#getcomponent).
+--- `components`: mwseMCMComponent.new.data[]? — *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- 
 --- `indent`: integer? — *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- 
@@ -988,7 +988,7 @@ function mwseMCMCategory:new(data) end
 --- @class mwseMCMCategory.new.data
 --- @field label string? *Optional*. The category label.
 --- @field description string? *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
---- @field components mwseMCMComponent.getComponent.componentData[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMCategory.md#getcomponent).
+--- @field components mwseMCMComponent.new.data[]? *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 --- @field indent integer? *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.

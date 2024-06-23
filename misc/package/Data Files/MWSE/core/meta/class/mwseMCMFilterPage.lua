@@ -42,7 +42,7 @@ function mwseMCMFilterPage:filterComponents() end
 --- 
 --- `placeholderSearchText`: string? — *Default*: `Search...`. The text shown in the search bar when no text is entered.
 --- 
---- `components`: mwseMCMComponent.getComponent.componentData[]? — *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at [getComponent](./mwseMCMFilterPage.md#getcomponent).
+--- `components`: mwseMCMComponent.new.data[]? — *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at each Component's `new` method.
 --- 
 --- `indent`: integer? — *Default*: `6`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- 
@@ -71,7 +71,7 @@ function mwseMCMFilterPage:new(data) end
 --- @field noScroll boolean? *Default*: `false`. When set to true, the page will not have a scrollbar. Particularly useful if you want to use a [ParagraphField](./mwseMCMParagraphField.md), which is not compatible with scroll panes.
 --- @field description string? *Optional*. Default sidebar text shown when the mouse isn't hovering over a component inside this Sidebar Page. It will be added to right column as a mwseMCMInfo.
 --- @field placeholderSearchText string? *Default*: `Search...`. The text shown in the search bar when no text is entered.
---- @field components mwseMCMComponent.getComponent.componentData[]? *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at [getComponent](./mwseMCMFilterPage.md#getcomponent).
+--- @field components mwseMCMComponent.new.data[]? *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at each Component's `new` method.
 --- @field indent integer? *Default*: `6`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 --- @field childIndent integer? *Optional*. The left padding size in pixels. Used on all the child components.
 --- @field paddingBottom integer? *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.

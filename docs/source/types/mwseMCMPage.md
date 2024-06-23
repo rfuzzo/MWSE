@@ -397,7 +397,7 @@ local category = myObject:createCategory({ label = ..., description = ..., compo
 * `data` (table, string): *Optional*. If passing only a string, it will be used as label.
 	* `label` (string): *Optional*. The category label.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
-	* `components` (mwseMCMComponent.getComponent.componentData[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMCategory.md#getcomponent).
+	* `components` (mwseMCMComponent.new.data[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
@@ -840,7 +840,7 @@ local category = myObject:createSideBySideBlock({ label = ..., description = ...
 * `data` (table, string): *Optional*. If passing only a string, it will be used as label.
 	* `label` (string): *Optional*. The block label.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
-	* `components` (mwseMCMComponent.getComponent.componentData[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at [getComponent](./mwseMCMSideBySideBlock.md#getcomponent).
+	* `components` (mwseMCMComponent.new.data[]): *Optional*. Use this if you want to directly create all the nested components in this Category. This table is described at each Component's `new` method.
 	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
@@ -980,7 +980,7 @@ myObject:createSubcomponents(parentBlock, components)
 **Parameters**:
 
 * `parentBlock` ([tes3uiElement](../types/tes3uiElement.md))
-* `components` (mwseMCMComponent.getComponent.componentData[]): See description for [getComponent](./mwseMCMCategory.md#getcomponent).
+* `components` (mwseMCMComponent.new.data[]): This table is described at each Component's `new` method.
 
 ***
 
@@ -1090,58 +1090,6 @@ myObject:enable()
 
 ***
 
-### `getComponent`
-<div class="search_terms" style="display: none">getcomponent, component</div>
-
-Creates a new Component of given class or returns the given Component.
-
-```lua
-local component = myObject:getComponent({ class = ..., label = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., inGameOnly = ..., postCreate = ..., parentComponent = ... })
-```
-
-**Parameters**:
-
-* `componentData` ([mwseMCMComponent](../types/mwseMCMComponent.md), table)
-	* `class` (string): The component type to get. On of the following:
-		- `"Template"`
-		- `"ExclusionsPage"`
-		- `"FilterPage"`
-		- `"MouseOverPage"`
-		- `"Page"`
-		- `"SideBarPage"`
-		- `"Category"`
-		- `"SideBySideBlock"`
-		- `"ActiveInfo"`
-		- `"Hyperlink"`
-		- `"Info"`
-		- `"MouseOverInfo"`
-		- `"Setting"`
-		- `"Button"`
-		- `"OnOffButton"`
-		- `"YesNoButton"`
-		- `"CycleButton"`
-		- `"KeyBinder"`
-		- `"Dropdown"`
-		- `"TextField"`
-		- `"ParagraphField"`
-		- `"Slider"`
-		- `"DecimalSlider"`
-		- `"PercentageSlider"`
-	* `label` (string): *Optional*. The label text to set for the new component. Not all component types have a label.
-	* `indent` (integer): *Default*: `12`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
-	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
-	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
-	* `childSpacing` (integer): *Optional*. The bottom border size in pixels. Used on all the child components.
-	* `inGameOnly` (boolean): *Default*: `false`.
-	* `postCreate` (fun(self: [mwseMCMComponent](../types/mwseMCMComponent.md))): *Optional*. Can define a custom formatting function to make adjustments to any element saved in `self.elements`.
-	* `parentComponent` ([mwseMCMComponent](../types/mwseMCMComponent.md)): *Optional*.
-
-**Returns**:
-
-* `component` ([mwseMCMComponent](../types/mwseMCMComponent.md))
-
-***
-
 ### `new`
 <div class="search_terms" style="display: none">new</div>
 
@@ -1157,7 +1105,7 @@ local page = myObject:new({ showHeader = ..., label = ..., noScroll = ..., compo
 	* `showHeader` (boolean): *Default*: `false`. The page's label will only be created if set to true.
 	* `label` (string): *Optional*. The label field is displayed in the tab for that page at the top of the menu. Defaults to: "Page {number}".
 	* `noScroll` (boolean): *Default*: `false`. When set to true, the page will not have a scrollbar. Particularly useful if you want to use a [ParagraphField](./mwseMCMParagraphField.md), which is not compatible with scroll panes.
-	* `components` (mwseMCMComponent.getComponent.componentData[]): *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at [getComponent](./mwseMCMPage.md#getcomponent).
+	* `components` (mwseMCMComponent.new.data[]): *Optional*. Use this if you want to directly create all the nested components in this Page. This table is described at each Component's `new` method.
 	* `indent` (integer): *Default*: `6`. The left padding size in pixels. Only used if the `childIndent` isn't set on the parent component.
 	* `childIndent` (integer): *Optional*. The left padding size in pixels. Used on all the child components.
 	* `paddingBottom` (integer): *Default*: `4`. The bottom border size in pixels. Only used if the `childSpacing` is unset on the parent component.
