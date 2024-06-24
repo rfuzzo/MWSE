@@ -42,6 +42,18 @@ function Category:new(data)
 	t.__index = self.__index
 	--- @cast t mwseMCMCategory
 
+	local parent = t.parentComponent
+	if not parent then return t end
+
+	local configKey = t.configKey
+	if not t.config and parent.config then
+		t.config = parent.config[configKey] or parent.config
+	end
+	
+	if not t.defaultConfig and parent.defaultConfig then
+		t.defaultConfig = parent.defaultConfig[configKey] or parent.defaultConfig
+	end
+
 	return t
 end
 
