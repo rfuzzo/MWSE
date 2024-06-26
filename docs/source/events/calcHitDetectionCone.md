@@ -31,3 +31,8 @@ event.register(tes3.event.calcHitDetectionCone, calcHitDetectionConeCallback)
 * `target` ([tes3reference](../types/tes3reference.md)): *Read-only*. The reference of the target. Only available at the second stage (weapon strike).
 * `targetMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile which is targetted. Only available at the second stage (weapon strike).
 
+
+## Related events
+
+[calcTouchSpellCone](./calcTouchSpellCone.md){ .md-button }
+

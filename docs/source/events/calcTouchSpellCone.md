@@ -29,3 +29,8 @@ event.register(tes3.event.calcTouchSpellCone, calcTouchSpellConeCallback)
 * `attackerMobile` ([tes3mobileActor](../types/tes3mobileActor.md)): *Read-only*. The mobile which is making the attack.
 * `reach` (number): The touch spell search range in world units.
 
+
+## Related events
+
+[calcHitDetectionCone](./calcHitDetectionCone.md){ .md-button }
+

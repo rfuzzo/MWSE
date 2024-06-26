@@ -1,6 +1,7 @@
 return {
 	type = "event",
 	description = "This event is raised just before a touch spell completes casting, to set up the hit detection cone for spell targets. See `calcHitDetectionCone` for the melee equivalent.",
+	related = { "calcHitDetectionCone" },
 	eventData = {
 		["attacker"] = {
 			type = "tes3reference",
