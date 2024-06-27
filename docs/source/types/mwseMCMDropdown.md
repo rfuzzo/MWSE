@@ -371,6 +371,7 @@ local result = myObject:checkDisabled()
 <div class="search_terms" style="display: none">converttolabelvalue</div>
 
 This function specifies how values stored in the `variable` field should correspond to values displayed by this setting.
+The default behavior is to return the `label` of the [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md) with a given `variableValue`.
 
 ```lua
 local labelValue = myObject:convertToLabelValue(variableValue)
@@ -378,11 +379,11 @@ local labelValue = myObject:convertToLabelValue(variableValue)
 
 **Parameters**:
 
-* `variableValue` (number)
+* `variableValue` (unknown): The value of a [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md) stored in `self.options`.
 
 **Returns**:
 
-* `labelValue` (number, string)
+* `labelValue` (string): The label of the corresponding [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md).
 
 ***
 
