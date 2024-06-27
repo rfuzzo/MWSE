@@ -23,10 +23,18 @@ Setting.restartRequiredMessage = mwse.mcm.i18n("The game must be restarted befor
 function Setting:new(data)
 	local t = Parent:new(data)
 
-	
+	-- Update the new object so that:
+	-- 1) it inherits `config`, `defaultConfig`, and `showDefaultSetting` values from parent component.
+	-- 2) its `variable` is properly initialized (or created from `config` and `configKey` parameters, if applicable).
 	if data then
 		local configKey = data.configKey
 		local parent = data.parentComponent
+
+		if parent and data.showDefaultSetting == nil then
+			-- Using `rawget` so we don't inherit a default value
+			t.showDefaultSetting = rawget(parent, "showDefaultSetting")
+		end
+
 		local config = data.config or parent and parent.config
 		local defaultConfig = data.defaultConfig or parent and parent.defaultConfig
 
@@ -102,6 +110,32 @@ end
 
 function Setting:convertToLabelValue(variableValue)
 	return variableValue
+end
+
+-- Returns the string that should be shown in the MouseOverInfo
+---@return string?
+function Setting:getMouseOverText()
+	local var = self.variable
+	local shouldAddDefaults = (self.showDefaultSetting and var and var.defaultSetting ~= nil)
+							  
+	if not shouldAddDefaults then
+		return self.description -- This has type `string|nil`
+	end
+
+	-- Now we add defaults to the description.
+	local defaultStr = self:convertToLabelValue(var.defaultSetting)
+
+	-- No description exists yet? Then we'll only write the default value.
+	if not self.description then
+		return string.format("%s: %s.", mwse.mcm.i18n("Default"), defaultStr)
+	end
+
+	return string.format(
+		"%s\n\n\z
+		 %s: %s.", 
+		self.description,
+		mwse.mcm.i18n("Default"), defaultStr
+	)
 end
 
 return Setting

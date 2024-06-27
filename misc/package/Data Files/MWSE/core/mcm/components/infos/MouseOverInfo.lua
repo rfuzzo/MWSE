@@ -13,11 +13,15 @@ local MouseOverInfo = Parent:new()
 MouseOverInfo.triggerOn = "MCM:MouseOver"
 MouseOverInfo.triggerOff = "MCM:MouseLeave"
 
+
+-- This function updates the `text` in this `Info` to be either the
+-- `description` of the `Component`, or the `self.text` parameter of the `Info`.
 --- @param component mwseMCMComponent|nil
 function MouseOverInfo:updateInfo(component)
+
 	-- If component has a description, update mouseOver
 	-- Or return to original text on mouseLeave
-	local newText = (component and component.description or self.text or "")
+	local newText = component and component:getMouseOverText() or self.text or "" 
 	self.elements.info.text = newText
 	self:update()
 end
