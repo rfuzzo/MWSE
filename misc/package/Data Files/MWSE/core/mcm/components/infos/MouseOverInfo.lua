@@ -30,9 +30,9 @@ end
 function MouseOverInfo:makeComponent(parentBlock)
 	Parent.makeComponent(self, parentBlock)
 
-	--- @param component mwseMCMMouseOverInfo
-	local function updateInfo(component)
-		self:updateInfo(component)
+	--- @param e {component: mwseMCMMouseOverInfo}
+	local function updateInfo(e)
+		self:updateInfo(e.component)
 	end
 
 	-- Register events
