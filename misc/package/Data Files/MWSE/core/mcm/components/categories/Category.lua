@@ -45,6 +45,11 @@ function Category:new(data)
 	local parent = t.parentComponent
 	if not parent then return t end
 
+	if t.showDefaultSetting == nil then
+		-- Using `rawget` so we don't inherit a default value
+		t.showDefaultSetting = rawget(parent, "showDefaultSetting")
+	end
+	
 	local configKey = t.configKey
 	if not t.config and parent.config then
 		t.config = parent.config[configKey] or parent.config
