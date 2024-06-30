@@ -20,6 +20,7 @@
 #include "TES3ActorAnimationController.h"
 #include "TES3Alchemy.h"
 #include "TES3AudioController.h"
+#include "TES3Cell.h"
 #include "TES3CombatSession.h"
 #include "TES3Enchantment.h"
 #include "TES3DataHandler.h"
@@ -237,6 +238,34 @@ namespace TES3 {
 		bool resetState = params.get_or("resetState", true);
 		bool moveToStartingLocation = params.get_or("moveToStartingLocation", false);
 		resurrect(resetState, moveToStartingLocation);
+	}
+
+	using gMaxHeadTrackingDistance = mwse::ExternalGlobal<float, 0x7C8784>;
+
+	void MobileActor::overrideHeadTrackingThisFrame(Reference* target) {
+		const auto animController = animationController.asActor;
+
+		if (target) {
+			if (isActive() && animController && reference->isInSameWorldspace(target)) {
+				// Allow overrides to acquire a track target at any distance.
+				float prevMaxHeadTrackingDistance = gMaxHeadTrackingDistance::get();
+				gMaxHeadTrackingDistance::set(std::numeric_limits<float>::max());
+
+				// Call vanilla code to set head target angle, including angle constraints.
+				animController->animationData->headTracking(reference, target);
+				// Set track distance to zero so that the AI doesn't examine other targets to track.
+				animController->animationData->headLookClosestDistance = 0;
+
+				// Restore global data.
+				gMaxHeadTrackingDistance::set(prevMaxHeadTrackingDistance);
+			}
+		}
+		else {
+			// Reset head tracking distance to allow AI to control it.
+			if (animController) {
+				animController->animationData->headLookClosestDistance = std::numeric_limits<float>::max();
+			}
+		}
 	}
 
 	bool MobileActor::equipMagic(Object* source, ItemData* itemData, bool equipItem, bool updateGUI) {

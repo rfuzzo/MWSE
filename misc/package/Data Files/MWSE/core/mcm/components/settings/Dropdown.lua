@@ -87,6 +87,10 @@ function Dropdown:createDropdown()
 		end
 		self.elements.dropdown = dropdown
 		dropdown:getTopLevelMenu():updateLayout()
+		
+		-- Show the setting description when picking an option
+		self:registerMouseOverElements(dropdown.children)
+		self:registerMouseOverElements({dropdown})
 
 		-- Destroy dropdown
 	else
@@ -125,6 +129,8 @@ function Dropdown:makeComponent(parentBlock)
 
 	local textBox = border:createTextSelect({ text = "---" })
 	self.elements.textBox = textBox
+	-- Show the setting description when hovering over the text box.
+	table.insert(self.mouseOvers, textBox)
 
 	textBox.color = tes3ui.getPalette(tes3.palette.disabledColor)
 	textBox.widget.idle = self.idleColor

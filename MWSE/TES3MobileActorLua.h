@@ -149,6 +149,7 @@ namespace mwse::lua {
 		usertypeDefinition["hasUsedPower"] = &TES3::MobileActor::hasUsedPower;
 		usertypeDefinition["hitStun"] = &TES3::MobileActor::hitStun_lua;
 		usertypeDefinition["kill"] = &TES3::MobileActor::kill;
+		usertypeDefinition["overrideHeadTrackingThisFrame"] = &TES3::MobileActor::overrideHeadTrackingThisFrame;
 		usertypeDefinition["rechargePower"] = &TES3::MobileActor::rechargePower;
 		usertypeDefinition["resurrect"] = &TES3::MobileActor::resurrect_lua;
 		usertypeDefinition["setPowerUseTimestamp"] = &TES3::MobileActor::setPowerUseTimestamp;

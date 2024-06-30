@@ -398,6 +398,14 @@ function tes3mobileActor:isAffectedByObject(object) end
 --- Kills the actor by setting its health to 0.
 function tes3mobileActor:kill() end
 
+--- 
+--- !!! warning
+--- 	This part of the API isn't fully understood yet and thus is considered experimental. That means that there can be breaking changes requiring the code using this part of the API to be rewritten. The MWSE team will not make any effort to keep backward compatibility with the mods using experimental APIs.
+--- 
+---  Causes the actor to look towards this reference, while obey the usual head turning constraints. This must be called every frame in the `simulate` event to work. It will override regular head look behaviour and the target may be at any distance in the same worldspace.
+--- @param target tes3reference No description yet available.
+function tes3mobileActor:overrideHeadTrackingThisFrame(target) end
+
 --- Makes a power immediately available for casting again.
 --- @param power tes3spell The spell object for the power.
 --- @return boolean result No description yet available.
