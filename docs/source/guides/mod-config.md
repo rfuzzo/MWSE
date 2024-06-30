@@ -3,7 +3,9 @@
 
 MWSE comes with a built-in framework for easily making a configuration menu for your mod. All configuration menus made in this way are accessible by pressing the "Mod Config" button in the pause menu. This guide covers the basic concepts and syntax of the Mod Configuration Menu (MCM), and provides some examples to help you get started. More in-depth information can be found on the [`mwse.mcm` API page](../apis/mwse.mcm.md).
 
-
+!!! note
+	The `mwse.mcm` API acts as a complete replacement for the [easyMCM](https://easymcm.readthedocs.io/en/latest/) framework. It is backwards compatible with easyMCM, and provides several new functionalities.
+	It's recommended that you use `mwse.mcm` instead of easyMCM.
 
 ## Simplest Example
 Here is the simplest code required to create a functional mod config:
