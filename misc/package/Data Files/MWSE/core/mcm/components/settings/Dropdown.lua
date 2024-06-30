@@ -10,6 +10,7 @@ Dropdown.idleColor = tes3ui.getPalette(tes3.palette.normalColor)
 Dropdown.overColor = tes3ui.getPalette(tes3.palette.normalOverColor)
 Dropdown.pressedColor = tes3ui.getPalette(tes3.palette.normalPressedColor)
 
+
 function Dropdown.new(class, data)
 	local obj = Parent.new(class, data)
 	obj.selectedOption = obj:getOption()
@@ -35,7 +36,7 @@ function Dropdown:enable()
 
 	self.selectedOption = self.selectedOption or self:getOption()
 
-	self.elements.textBox.text = self.selectedOption.label
+	self.elements.textBox.text = self.selectedOption and self.selectedOption.label
 	self.elements.textBox.color = self.idleColor
 	self.elements.textBox:register(tes3.uiEvent.mouseClick, function()
 		self:createDropdown()
