@@ -1,5 +1,5 @@
 
-# Mod Configuration Menu
+# Mod Configuration Menu (MCM)
 
 MWSE comes with a built-in framework for easily making a configuration menu for your mod. All configuration menus made in this way are accessible by pressing the "Mod Config" button in the pause menu. This guide covers the basic concepts and syntax of the Mod Configuration Menu (MCM), and provides some examples to help you get started. More in-depth information can be found on the [`mwse.mcm` API page](../apis/mwse.mcm.md).
 
@@ -48,7 +48,7 @@ local function registerModConfig()
 	-- Create a button under that controls the `"enabled"` 
 	-- setting in `myConfig`.
 	-- Clicking on this button will change `"enabled"` from `true`
-	-- to `false, and vic-versa.
+	-- to `false, and vice-versa.
 	page:createYesNoButton({ 
 		-- The `label` is the text that will be shown in your config menu.
 		-- It lets users know what the button does.
@@ -112,9 +112,9 @@ local function registerModConfig()
 end
 event.register(tes3.event.modConfigReady, registerModConfig)
 ```
-You should now see two additional sliders added to your mod.
+You should now see two additional sliders added to your configuration menu.
 
-It's also pretty common that mods would like certain things to happen whenever a key is pressed. 
+It's fairly common for mod authors to want certain things to happen whenever a certain key is pressed.
 So it would be nice if the MCM had some easy way of managing keybinds... Luckily, it does!
 
 ```lua hl_lines="8 9 10 11 12 13 14 15 46 47"
@@ -218,12 +218,12 @@ MCM has a lot of features, and one of the most commonly used components is the `
 
 	settings:createYesNoButton({
 		label = "Enable Mod",
+		configKey = "enabled",
 		-- This description will be displayed at the right panel if the button is moused over.
 		description =
 			"If this setting is enabled, the mod is enabled.\n\z
 			\n\z
 			If this setting is disabled, the mod is disabled."
-		variable = mwse.mcm:createTableVariable({ id = "enabled", table = config }),
 	})
 ```
 
@@ -245,7 +245,8 @@ This will result in the default values of settings automatically being displayed
 
 As your default config gets long, you might want to create a separate Lua file for it.
 
-```lua linenums="1" title="My Awesome Mod/config.lua"
+```lua linenums="1" title="My Awesome Mod/defaultConfig.lua"
+-- Define the defaultConfig in a separate file so we can access it later.
 local defaultConfig = {
 	enabled = true,
 	keybind = {
@@ -259,16 +260,20 @@ local defaultConfig = {
 		["ingred_scrap_metal_01"] = true,
 	}
 }
+return defaultConfig
+```
+
+```lua linenums="1" title="My Awesome Mod/config.lua"
+local defaultConfig = require("My Awesome Mod.defaultConfig")
 local config = mwse.loadConfig("My Awesome Mod", defaultConfig)
--- Return both the `config` and the `defaultConfig`, so that the MCM can properly
--- display default values.
-return config, defaultConfig
+return config
 ```
 
 We can then use the `require` function to import the `config` and `defaultConfig` in `main.lua`.
 
 ```lua linenums="1" title="My Awesome Mod/main.lua"
-local config, defaultConfig = require("MyMod.config")
+local config = require("My Awesome Mod.config")
+local defaultConfig = require("My Awesome Mod.defaultConfig")
 ```
 
 !!! note
