@@ -185,8 +185,8 @@ namespace TES3 {
 		int hello; // 0x358
 		int alarm; // 0x35C
 		int barterGold; // 0x360
-		short widthInUnits; // 0x364
-		short heightInUnits; // 0x366
+		unsigned short widthRescaled; // 0x364 // 11.5 fixed point
+		unsigned short heightRescaled; // 0x366 // 11.5 fixed point
 		short readiedAmmoCount; // 0x368
 		short corpseHourstamp; // 0x36A
 		short greetDuration; // 0x36C
@@ -333,6 +333,9 @@ namespace TES3 {
 
 		bool getMobileActorMovementFlag(ActorMovement::Flag) const;
 		void setMobileActorMovementFlag(ActorMovement::Flag, bool);
+
+		float getWidth() const;
+		float getHeight() const;
 
 		bool equipItem(Object* item, ItemData * itemData = nullptr, bool addItem = false, bool selectBestCondition = false, bool selectWorstCondition = false);
 		bool equip_lua(sol::object arg);

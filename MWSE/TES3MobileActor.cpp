@@ -1114,6 +1114,14 @@ namespace TES3 {
 		}
 	}
 
+	float MobileActor::getWidth() const {
+		return reference->getScale() * float(widthRescaled) / 32.0f;
+	}
+
+	float MobileActor::getHeight() const {
+		return reference->getScale() * float(heightRescaled) / 32.0f;
+	}
+
 	const auto TES3_MobileActor_wearItem = reinterpret_cast<void(__thiscall*)(MobileActor*, Object*, ItemData*, bool, bool)>(0x52C770);
 	bool MobileActor::equipItem(Object* item, ItemData* itemData, bool addItem, bool selectBestCondition, bool selectWorstCondition) {
 		Actor* actor = static_cast<Actor*>(reference->baseObject);
