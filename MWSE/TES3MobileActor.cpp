@@ -1997,26 +1997,6 @@ namespace TES3 {
 		powers.addKey(power, timestamp);
 	}
 
-	bool MobileActor::getMobToMobCollision() const {
-		if (actorFlags & TES3::MobileActorFlag::ActiveInSimulation) {
-			auto mobManager = TES3::WorldController::get()->mobManager;
-			return mobManager->hasMobileCollision(this);
-		}
-		return false;
-	}
-
-	void MobileActor::setMobToMobCollision(bool collide) {
-		if (actorFlags & TES3::MobileActorFlag::ActiveInSimulation) {
-			auto mobManager = TES3::WorldController::get()->mobManager;
-			if (collide) {
-				mobManager->enableMobileCollision(this);
-			}
-			else {
-				mobManager->disableMobileCollision(this);
-			}
-		}
-	}
-
 	sol::table MobileActor::getActiveMagicEffectsList_lua(sol::optional<sol::table> params) {
 		auto effectID = mwse::lua::getOptionalParam<int>(params, "effect");
 		auto serial = mwse::lua::getOptionalParam<unsigned int>(params, "serial");

@@ -482,9 +482,6 @@ namespace TES3 {
 		sol::optional<double> getPowerUseTimestamp(Spell* power) const;
 		void setPowerUseTimestamp(Spell* power, double timestamp);
 
-		bool getMobToMobCollision() const;
-		void setMobToMobCollision(bool collide);
-
 		sol::table getActiveMagicEffectsList_lua(sol::optional<sol::table> params);
 		ActiveMagicEffect* getActiveMagicEffects_legacy() const;
 		int getActiveMagicEffectCount_legacy() const;
