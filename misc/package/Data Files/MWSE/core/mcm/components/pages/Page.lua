@@ -46,12 +46,12 @@ function Page:disable()
 	-- Update and grey out page label
 	if self.elements.label then
 		self.elements.label.text = string.format("%s (%s)", self.elements.label.text, mwse.mcm.i18n("In-Game Only"))
-		self.elements.label.color = tes3ui.getPalette("disabled_color")
+		self.elements.label.color = tes3ui.getPalette(tes3.palette.disabledColor)
 	end
 	-- Grey out all child elements
 	for _, element in ipairs(self.elements.subcomponentsContainer.children) do
 		if element.color then
-			element.color = tes3ui.getPalette("disabled_color")
+			element.color = tes3ui.getPalette(tes3.palette.disabledColor)
 		end
 	end
 end
@@ -65,7 +65,7 @@ function Page:createOuterContainer(parentBlock)
 		border.heightProportional = 1.0
 		border.widthProportional = 1.0
 		border.autoHeight = true
-		border.flowDirection = "top_to_bottom"
+		border.flowDirection = tes3.flowDirection.topToBottom
 		border.paddingTop = 4
 		border.paddingLeft = 4
 	else
@@ -75,7 +75,7 @@ function Page:createOuterContainer(parentBlock)
 	end
 
 	local outerContainer = border:createBlock({ id = tes3ui.registerID("Page_OuterContainer") })
-	outerContainer.flowDirection = "top_to_bottom"
+	outerContainer.flowDirection = tes3.flowDirection.topToBottom
 	outerContainer.autoHeight = true
 	outerContainer.heightProportional = 1.0
 	outerContainer.widthProportional = 1.0

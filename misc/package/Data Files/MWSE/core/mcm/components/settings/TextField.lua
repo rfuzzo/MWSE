@@ -17,7 +17,7 @@ function TextField:enable()
 
 	--- @param e tes3uiElement
 	local function registerAcquireTextInput(e)
-		e:register("mouseClick", function()
+		e:register(tes3.uiEvent.mouseClick, function()
 			tes3ui.acquireTextInput(self.elements.inputField)
 		end)
 		for _, element in ipairs(e.children or {}) do
@@ -26,15 +26,15 @@ function TextField:enable()
 	end
 	registerAcquireTextInput(self.elements.border)
 
-	self.elements.submitButton:register("mouseClick", function(e)
+	self.elements.submitButton:register(tes3.uiEvent.mouseClick, function(e)
 		self:press()
 	end)
-	self.elements.submitButton.widget.state = 1
+	self.elements.submitButton.widget.state = tes3.uiState.normal
 end
 
 function TextField:disable()
 	Parent.disable(self)
-	self.elements.inputField.color = tes3ui.getPalette("disabled_color")
+	self.elements.inputField.color = tes3ui.getPalette(tes3.palette.disabledColor)
 end
 
 function TextField:update()
@@ -74,7 +74,7 @@ end
 --- @param parentBlock tes3uiElement
 function TextField:createInnerContainer(parentBlock)
 	Parent.createInnerContainer(self, parentBlock)
-	self.elements.innerContainer.flowDirection = "left_to_right"
+	self.elements.innerContainer.flowDirection = tes3.flowDirection.leftToRight
 
 end
 
@@ -83,7 +83,7 @@ function TextField:makeComponent(parentBlock)
 	local border = parentBlock:createThinBorder()
 	border.widthProportional = 1.0
 	border.autoHeight = true
-	border.flowDirection = "left_to_right"
+	border.flowDirection = tes3.flowDirection.leftToRight
 	if self.minHeight then
 		border.minHeight = self.minHeight
 	end
@@ -112,7 +112,7 @@ function TextField:makeComponent(parentBlock)
 
 	self:createSubmitButton(parentBlock)
 
-	inputField:register("keyEnter", function()
+	inputField:register(tes3.uiEvent.keyEnter, function()
 		self:update()
 	end)
 

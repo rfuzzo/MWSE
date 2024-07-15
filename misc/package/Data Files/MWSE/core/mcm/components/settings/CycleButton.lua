@@ -49,11 +49,11 @@ function CycleButton:makeComponent(parentBlock)
 end
 
 function CycleButton:enable()
-	self.elements.label.color = tes3ui.getPalette("normal_color")
+	self.elements.label.color = tes3ui.getPalette(tes3.palette.normalColor)
 end
 
 function CycleButton:disable()
-	self.elements.label.color = tes3ui.getPalette("disabled_color")
+	self.elements.label.color = tes3ui.getPalette(tes3.palette.disabledColor)
 end
 
 function CycleButton:convertToLabelValue(variableValue)

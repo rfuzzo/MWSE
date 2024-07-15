@@ -34,7 +34,7 @@ end
 --- @param parentBlock tes3uiElement
 function SideBarPage:createSidetoSideBlock(parentBlock)
 	local sideToSideBlock = parentBlock:createBlock()
-	sideToSideBlock.flowDirection = "left_to_right"
+	sideToSideBlock.flowDirection = tes3.flowDirection.leftToRight
 	sideToSideBlock.heightProportional = 1.0
 	sideToSideBlock.widthProportional = 1.0
 	self.elements.sideToSideBlock = sideToSideBlock
@@ -78,7 +78,7 @@ function SideBarPage:createRightColumn(parentBlock)
 	self.elements.mouseOver = mouseOver
 
 	--- event to hide default and show mouseover
-	--- @param e {component: mwseMCMComponent}
+	--- @param e { component: mwseMCMComponent }
 	local function doMouseOver(e)
 		local component = e.component
 		-- This results in `component:getMouseOverText()` getting called twice
@@ -99,7 +99,7 @@ function SideBarPage:createRightColumn(parentBlock)
 	-- register events
 	event.register(self.triggerOn, doMouseOver)
 	event.register(self.triggerOff, doMouseLeave)
-	parentBlock:register("destroy", function()
+	parentBlock:register(tes3.uiEvent.destroy, function()
 		event.unregister(self.triggerOn, doMouseOver)
 		event.unregister(self.triggerOff, doMouseLeave)
 	end)
