@@ -55,6 +55,17 @@ The type of this component.
 
 ***
 
+### `config`
+<div class="search_terms" style="display: none">config</div>
+
+Stores a config that should be used by this mod's `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Page`s nested inside this template. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this template.
+
+**Returns**:
+
+* `result` (table, nil)
+
+***
+
 ### `createContentsContainer`
 <div class="search_terms" style="display: none">createcontentscontainer, contentscontainer</div>
 
@@ -74,6 +85,17 @@ The currently displayed page in this Template.
 **Returns**:
 
 * `result` ([mwseMCMPage](../types/mwseMCMPage.md))
+
+***
+
+### `defaultConfig`
+<div class="search_terms" style="display: none">defaultconfig</div>
+
+Stores a default config that should be used by this mod's `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) created for this mod.
+
+**Returns**:
+
+* `result` (table, nil)
 
 ***
 
@@ -271,7 +293,7 @@ If true, when the user searches the MCM list, all the pages and settings in this
 <div class="search_terms" style="display: none">showdefaultsetting, defaultsetting</div>
 
 If `true`, then each `Page` created inside this `Template` will have `showDefaultSetting = true`. \z
-This is equivalent to manually writing `showDefaultSetting = true` in the constructor of each `Category` created in this `Template`.
+This is equivalent to manually writing `showDefaultSetting = true` in the constructor of each `Page` created in this `Template`.
 
 **Returns**:
 
@@ -729,9 +751,9 @@ local template = myObject:new({ name = ..., label = ..., config = ..., defaultCo
 * `data` (table)
 	* `name` (string): *Optional*. The name field is the mod name, used to register the MCM, and is displayed in the mod list on the lefthand pane.
 	* `label` (string): *Optional*. Used in place of `name` if that argument isn't passed. You need to pass at least one of the `name` and `label` arguments. If `headerImagePath` is not passed, a UI element will be created with `label` as text.
-	* `config` (table): *Optional*. Stores a config that should be used by this mods `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Page`s nested inside this template. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for the  any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this template.
-	* `defaultConfig` (table): *Optional*. Stores a default config that should be used by this mods `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) created for this mod.
-	* `showDefaultSetting` (boolean): *Default*: ``parentComponent.showDefaultSetting``. If `true`, then each `Setting` created inside this `Page`/`Category` will have `showDefaultSetting = true`. This is equivalent to manually writing `showDefaultSetting = true` in the constructor of each `Setting` created in this `Page`/`Category`.
+	* `config` (table): *Optional*. Stores a config that should be used by this mod's `Setting`s. Sub-configs can be accessed by passing a `configKey` to any `Page`s nested inside this template. If provided, this config will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this template.
+	* `defaultConfig` (table): *Optional*. Stores a default config that should be used by this mod's `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) created for this mod.
+	* `showDefaultSetting` (boolean): *Default*: ``parentComponent.showDefaultSetting``. If `true`, then each `Page` created inside this `Template` will have `showDefaultSetting = true`. This is equivalent to manually writing `showDefaultSetting = true` in the constructor of each `Page` created in this `Template`.
 	* `headerImagePath` (string): *Optional*. Set it to display an image at the top of your menu. Path is relative to `Data Files/`. The image must have power-of-2 dimensions (i.e. 16, 32, 64, 128, 256, 512, 1024, etc.).
 	* `onClose` (fun(modConfigContainer: [tes3uiElement](../types/tes3uiElement.md))): *Optional*. Set this to a function which will be called when the menu is closed. Useful for saving variables, such as TableVariable.
 	* `searchChildLabels` (boolean): *Default*: `true`. If true, default search handler will search through all the page and setting `label` and `text` fields in this MCM template.
