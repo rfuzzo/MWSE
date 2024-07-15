@@ -35,6 +35,11 @@ function Setting:insertMouseovers(element)
 	end
 end
 
+function Setting:setVariableValue(newValue)
+	self.variable.value = newValue
+	self:update()
+end
+
 function Setting:update()
 	if self.restartRequired then
 

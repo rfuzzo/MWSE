@@ -37,6 +37,11 @@ function TextField:disable()
 	self.elements.inputField.color = tes3ui.getPalette(tes3.palette.disabledColor)
 end
 
+function TextField:setVariableValue(newValue)
+	self.elements.inputField.text = newValue
+	Parent.update(self)
+end
+
 function TextField:update()
 	self.variable.value = self.elements.inputField.text
 

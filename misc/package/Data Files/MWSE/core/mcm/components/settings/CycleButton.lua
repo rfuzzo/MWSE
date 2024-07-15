@@ -48,6 +48,12 @@ function CycleButton:makeComponent(parentBlock)
 	table.insert(self.mouseOvers, button)
 end
 
+function CycleButton:setVariableValue(newValue)
+	self.elements.button.widget.value = newValue
+	self.elements.button:updateLayout()
+	Parent.setVariableValue(self, newValue)
+end
+
 function CycleButton:enable()
 	self.elements.label.color = tes3ui.getPalette(tes3.palette.normalColor)
 end
