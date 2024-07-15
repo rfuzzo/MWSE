@@ -1114,6 +1114,14 @@ namespace TES3 {
 		}
 	}
 
+	float MobileActor::getWidth() const {
+		return reference->getScale() * float(widthRescaled) / 32.0f;
+	}
+
+	float MobileActor::getHeight() const {
+		return reference->getScale() * float(heightRescaled) / 32.0f;
+	}
+
 	const auto TES3_MobileActor_wearItem = reinterpret_cast<void(__thiscall*)(MobileActor*, Object*, ItemData*, bool, bool)>(0x52C770);
 	bool MobileActor::equipItem(Object* item, ItemData* itemData, bool addItem, bool selectBestCondition, bool selectWorstCondition) {
 		Actor* actor = static_cast<Actor*>(reference->baseObject);
@@ -1995,26 +2003,6 @@ namespace TES3 {
 
 	void MobileActor::setPowerUseTimestamp(Spell* power, double timestamp) {
 		powers.addKey(power, timestamp);
-	}
-
-	bool MobileActor::getMobToMobCollision() const {
-		if (actorFlags & TES3::MobileActorFlag::ActiveInSimulation) {
-			auto mobManager = TES3::WorldController::get()->mobManager;
-			return mobManager->hasMobileCollision(this);
-		}
-		return false;
-	}
-
-	void MobileActor::setMobToMobCollision(bool collide) {
-		if (actorFlags & TES3::MobileActorFlag::ActiveInSimulation) {
-			auto mobManager = TES3::WorldController::get()->mobManager;
-			if (collide) {
-				mobManager->enableMobileCollision(this);
-			}
-			else {
-				mobManager->disableMobileCollision(this);
-			}
-		}
 	}
 
 	sol::table MobileActor::getActiveMagicEffectsList_lua(sol::optional<sol::table> params) {
