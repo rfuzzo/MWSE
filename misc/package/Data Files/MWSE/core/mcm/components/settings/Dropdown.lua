@@ -12,7 +12,7 @@ Dropdown.pressedColor = tes3ui.getPalette(tes3.palette.normalPressedColor)
 
 
 function Dropdown.new(class, data)
-	local obj = Parent.new(class, data)
+	local obj = Parent.new(class, data) --[[@as mwseMCMDropdown]]
 	obj.selectedOption = obj:getOption()
 	return obj
 end
@@ -88,7 +88,7 @@ function Dropdown:createDropdown()
 		end
 		self.elements.dropdown = dropdown
 		dropdown:getTopLevelMenu():updateLayout()
-		
+
 		-- Show the setting description when picking an option
 		self:registerMouseOverElements(dropdown.children)
 		self:registerMouseOverElements({dropdown})
@@ -106,8 +106,10 @@ function Dropdown:createDropdown()
 			return
 		end
 
-		if element.widget and element.widget.contentsChanged then
-			element.widget:contentsChanged()
+		local widget = element.widget
+		if widget and widget.contentsChanged then
+			--- @cast widget tes3uiScrollPane
+			widget:contentsChanged()
 		end
 		recursiveContentsChanged(element.parent)
 	end

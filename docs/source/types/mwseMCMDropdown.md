@@ -538,7 +538,7 @@ local option = myObject:getOption(optionValue)
 
 **Returns**:
 
-* `option` ([mwseMCMDropdownOption](../types/mwseMCMDropdownOption.md)): The corresponding [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md).
+* `option` ([mwseMCMDropdownOption](../types/mwseMCMDropdownOption.md), nil): The corresponding [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md).
 
 ***
 

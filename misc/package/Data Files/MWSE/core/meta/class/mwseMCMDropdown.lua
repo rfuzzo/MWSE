@@ -25,7 +25,7 @@ function mwseMCMDropdown:createDropdown() end
 
 --- Given an `optionValue`, this method will retrieve the first [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md) with a matching `value`, if such an option exists.
 --- @param optionValue unknown? *Default*: `self.variable.value`. No description yet available.
---- @return mwseMCMDropdownOption, nil option The corresponding [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md).
+--- @return mwseMCMDropdownOption|nil option The corresponding [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md).
 function mwseMCMDropdown:getOption(optionValue) end
 
 --- This method creates the border, textBox and dropdownParent UI elements of the Dropdown.
