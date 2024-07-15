@@ -433,7 +433,7 @@ myObject:createContentsContainer(parentBlock)
 Creates a new Exclusions Page in this Template.
 
 ```lua
-local page = myObject:createExclusionsPage({ showHeader = ..., label = ..., variable = ..., filters = ..., description = ..., toggleText = ..., leftListLabel  = ..., rightListLabel  = ..., showAllBlocked  = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., inGameOnly = ... })
+local page = myObject:createExclusionsPage({ showHeader = ..., label = ..., variable = ..., config = ..., defaultConfig = ..., configKey = ..., defaultSetting = ..., filters = ..., description = ..., toggleText = ..., leftListLabel  = ..., rightListLabel  = ..., showAllBlocked  = ..., indent = ..., childIndent = ..., paddingBottom = ..., childSpacing = ..., inGameOnly = ... })
 ```
 
 **Parameters**:
@@ -441,7 +441,11 @@ local page = myObject:createExclusionsPage({ showHeader = ..., label = ..., vari
 * `data` (table)
 	* `showHeader` (boolean): *Default*: `false`. The page's label will only be created if set to true.
 	* `label` (string): The label field is displayed in the tab for that page at the top of the menu. Defaults to: "Page {number}".
-	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): The Variable used to store blocked list entries.
+	* `variable` ([mwseMCMVariable](../types/mwseMCMVariable.md), [mwseMCMSettingNewVariable](../types/mwseMCMSettingNewVariable.md)): *Optional*. The Variable used to store blocked list entries.
+	* `config` (table): *Default*: ``parentComponent.config``. The config to use when creating a [`mwseMCMTableVariable`](./mwseMCMTableVariable.md) for this `ExclusionsPage`. If provided, it will override the config stored in `parentComponent`. Otherwise, the value in `parentComponent` will be used.
+	* `defaultConfig` (table): *Default*: ``parentComponent.defaultConfig``. The `defaultConfig` to use when creating a [`mwseMCMTableVariable`](./mwseMCMTableVariable.md) for this `ExclusionsPage`. If provided, it will override the `defaultConfig` stored in `parentComponent`. Otherwise, the value in `parentComponent` will be used.
+	* `configKey` (string, number): *Optional*. The `configKey` used to create a new [`mwseMCMTableVariable`](./mwseMCMTableVariable.md). If this is provided, along with a `config` (which may be inherited from the `parentComponent`), then a new [`mwseMCMTableVariable`](./mwseMCMTableVariable.md) variable will be created for this `ExclusionsPage`.
+	* `defaultSetting` (table&lt;string, boolean&gt;): *Optional*. If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value. If not provided, then the value in `defaultConfig` will be used, if possible.
 	* `filters` ([mwseMCMExclusionsPageFilter](../types/mwseMCMExclusionsPageFilter.md)[]): A list of filters. Filters control which items will appear in the lists of the Exclusions Page. At least one filter is required. See the [filter page](./mwseMCMExclusionsPageFilter.md) for description.
 	* `description` (string): *Optional*. Displayed at the top of the page above the lists.
 	* `toggleText` (string): *Optional*. The text for the button that toggles filtered items from one list to another. The default is a localised version of "Toggle Filtered".

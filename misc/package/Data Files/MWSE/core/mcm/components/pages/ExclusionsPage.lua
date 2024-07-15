@@ -8,6 +8,7 @@
 --- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
 --- @diagnostic disable: duplicate-set-field
 
+local utils = require("mcm.utils")
 local Parent = require("mcm.components.pages.Page")
 
 --- @class mwseMCMExclusionsPage
@@ -31,14 +32,7 @@ function ExclusionsPage:new(data)
 		t = data --[[@as mwseMCMExclusionsPage]]
 		local tabUID = ("Page_" .. t.label)
 		t.tabUID = tes3ui.registerID(tabUID)
-		-- create variable
-		local typePath = ("mcm.variables." .. t.variable.class)
-		if not t.variable.__index then
-			t.variable = require(typePath):new(t.variable)
-			if t.variable.value == nil then
-				t.variable.value = {}
-			end
-		end
+		utils.getOrInheritVariableData(t)
 	end
 	setmetatable(t, self)
 	self.__index = self
@@ -72,7 +66,7 @@ local function getSortedObjectList(params)
 				doAdd = false
 			end
 		end
-		
+
 		if params.noScripted and obj--[[@as tes3activator]].script ~= nil then
 			doAdd = false
 		end

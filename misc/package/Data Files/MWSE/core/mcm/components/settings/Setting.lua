@@ -7,10 +7,9 @@
 --- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
 --- @diagnostic disable: duplicate-set-field
 
-local fileUtils = require("mcm.fileUtils")
+local utils = require("mcm.utils")
 local Parent = require("mcm.components.Component")
 
-local TableVariable = require("mcm.variables.TableVariable")
 
 --- @class mwseMCMSetting
 local Setting = Parent:new()
@@ -21,55 +20,11 @@ Setting.restartRequiredMessage = mwse.mcm.i18n("The game must be restarted befor
 --- @param data mwseMCMSetting.new.data|nil
 --- @return mwseMCMSetting
 function Setting:new(data)
-	local t = Parent:new(data)
-
-	-- Update the new object so that:
-	-- 1) it inherits `config`, `defaultConfig`, and `showDefaultSetting` values from parent component.
-	-- 2) its `variable` is properly initialized (or created from `config` and `configKey` parameters, if applicable).
-	if data then
-		local configKey = data.configKey
-		local parent = data.parentComponent
-
-		if parent and data.showDefaultSetting == nil then
-			-- Using `rawget` so we don't inherit a default value
-			t.showDefaultSetting = rawget(parent, "showDefaultSetting")
-		end
-
-		local config = data.config or parent and parent.config
-		local defaultConfig = data.defaultConfig or parent and parent.defaultConfig
-
-		-- Get the default setting. Include `nil` checks so we can handle it being `false`.
-		local defaultSetting = data.variable and data.variable.defaultSetting
-		if defaultSetting == nil then
-			defaultSetting = data.defaultSetting
-		end
-		-- Let's try again if we have to.
-		if defaultSetting == nil and defaultConfig and configKey then
-			defaultSetting = defaultConfig[configKey]
-		end
-		
-		-- No variable? Let's make one.
-		if t.variable == nil and config and configKey then
-			t.variable = TableVariable:new{
-				id = configKey,
-				table = config,
-				converter = data.converter,
-				inGameOnly = data.inGameOnly,
-				defaultSetting = defaultSetting,
-				restartRequired = data.restartRequired,
-				restartRequiredMessage = data.restartRequiredMessage
-			}
-		-- Variable provided? Let's update it for backwards compatibility.
-		elseif t.variable ~= nil then
-			t.variable.defaultSetting = defaultSetting
-			t.variable.converter = t.variable.converter or data.converter
-			t.variable = fileUtils.getVariableClass(t.variable.class):new(t.variable)
-		end
-	end
-
+	--- @diagnostic disable: param-type-mismatch
+	local t = Parent:new(data) --[[@as mwseMCMSetting]]
+	utils.getOrInheritVariableData(t)
 	setmetatable(t, self)
 	self.__index = self
-	--- @cast t mwseMCMSetting
 	return t
 end
 
@@ -117,7 +72,7 @@ end
 function Setting:getMouseOverText()
 	local var = self.variable
 	local shouldAddDefaults = (self.showDefaultSetting and var and var.defaultSetting ~= nil)
-							  
+
 	if not shouldAddDefaults then
 		return self.description -- This has type `string|nil`
 	end
@@ -132,7 +87,7 @@ function Setting:getMouseOverText()
 
 	return string.format(
 		"%s\n\n\z
-		 %s: %s.", 
+		 %s: %s.",
 		self.description,
 		mwse.mcm.i18n("Default"), defaultStr
 	)
