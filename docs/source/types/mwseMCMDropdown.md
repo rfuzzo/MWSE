@@ -330,6 +330,17 @@ Set to the value of `sCancel` GMST.
 
 ***
 
+### `selectedOption`
+<div class="search_terms" style="display: none">selectedoption</div>
+
+The currently selected [`mwseMCMDropdownOption](./mwseMCMDropdownOption.md).
+
+**Returns**:
+
+* `result` ([mwseMCMDropdownOption](../types/mwseMCMDropdownOption.md), nil)
+
+***
+
 ### `showDefaultSetting`
 <div class="search_terms" style="display: none">showdefaultsetting, defaultsetting</div>
 
@@ -592,6 +603,25 @@ local text = myObject:getMouseOverText()
 **Returns**:
 
 * `text` (string, nil): The text to display. Returning `nil` means that the `mouseOverInfo` should display text from a different source. e.g. from the `description` of the relevant [`SideBarPage`](./mwseMCMSideBarPage.md).
+
+***
+
+### `getOption`
+<div class="search_terms" style="display: none">getoption, option</div>
+
+Given an `optionValue`, this method will retrieve the first [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md) with a matching `value`, if such an option exists.
+
+```lua
+local option = myObject:getOption(optionValue)
+```
+
+**Parameters**:
+
+* `optionValue` (unknown): *Default*: `self.variable.value`.
+
+**Returns**:
+
+* `option` ([mwseMCMDropdownOption](../types/mwseMCMDropdownOption.md), nil): The corresponding [`mwseMCMDropdownOption`](./mwseMCMDropdownOption.md).
 
 ***
 
