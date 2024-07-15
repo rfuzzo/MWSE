@@ -66,6 +66,28 @@ The type of this component.
 
 ***
 
+### `config`
+<div class="search_terms" style="display: none">config</div>
+
+If provided, this `config` will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this `Category`/`Page`. Subtables of this `config` can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
+
+**Returns**:
+
+* `result` (table, nil)
+
+***
+
+### `configKey`
+<div class="search_terms" style="display: none">configkey</div>
+
+This can be used to access subtables of the `config` and `defaultConfig` stored in this component's `parentComponent`. This ensures that the `config` and `defaultConfig` stay synchronized.
+
+**Returns**:
+
+* `result` (string, number, nil)
+
+***
+
 ### `createContentsContainer`
 <div class="search_terms" style="display: none">createcontentscontainer, contentscontainer</div>
 
@@ -74,6 +96,17 @@ This method creates the contents of a component. Not every component implements 
 **Returns**:
 
 * `result` (nil, fun(self: [mwseMCMComponent](../types/mwseMCMComponent.md), outerContainer: [tes3uiElement](../types/tes3uiElement.md)))
+
+***
+
+### `defaultConfig`
+<div class="search_terms" style="display: none">defaultconfig</div>
+
+Stores a default config that should be used by this mod's `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) created for this mod. Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
+
+**Returns**:
+
+* `result` (table, nil)
 
 ***
 
@@ -1159,7 +1192,7 @@ local category = myObject:new({ label = ..., description = ..., config = ..., de
 * `data` (table): *Optional*.
 	* `label` (string): *Optional*. The category label.
 	* `description` (string): *Optional*. If in a [Sidebar Page](../types/mwseMCMSideBarPage.md), the description will be shown on mouseover.
-	* `config` (table): *Optional*. If provided, this `config` will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this `Category`/`Page`. i.e., this parameter provides an alternative to explicitly constructing new variables. Subtables of this `config` can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
+	* `config` (table): *Optional*. If provided, this `config` will be used to generate [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) for any [`mwseMCMSetting`s](./mwseMCMSetting.md) made inside this `Category`/`Page`. I.e., this parameter provides an alternative to explicitly constructing new variables. Subtables of this `config` can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
 	* `defaultConfig` (table): *Optional*. Stores a default config that should be used by this mod's `Setting`s. This will initialize the `defaultSetting` field of any [`mwseMCMTableVariable`s](./mwseMCMTableVariable.md) created for this mod. Sub-configs can be accessed by passing a `configKey` to any `Category` that is nested inside this one.
 	* `configKey` (string, number): *Optional*. This can be used to access subtables of the `config` and `defaultConfig` stored in this component's `parentComponent`. This ensures that the `config` and `defaultConfig` stay synchronized.
 	* `showDefaultSetting` (boolean): *Default*: ``parentComponent.showDefaultSetting``. If `true`, then each `Setting` created inside this `Page`/`Category` will have `showDefaultSetting = true`. This is equivalent to manually writing `showDefaultSetting = true` in the constructor of each `Setting` created in this `Page`/`Category`.

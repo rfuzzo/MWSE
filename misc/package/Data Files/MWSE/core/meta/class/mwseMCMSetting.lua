@@ -6,6 +6,11 @@
 --- @class mwseMCMSetting : mwseMCMComponent
 --- @field callback nil|fun(self: mwseMCMSetting) The custom function called when the player interacts with this Setting.
 --- @field componentType "Setting" The type of this component.
+--- @field config table|nil The config to use when creating a [`mwseMCMTableVariable`](./mwseMCMTableVariable.md) for this `Setting`. If provided, it will override the config stored in `parentComponent`. Otherwise, the value in `parentComponent` will be used.
+--- @field configKey string|number|nil The `configKey` used to create a new [`mwseMCMTableVariable`](./mwseMCMTableVariable.md). If this is provided, along with a `config` (which may be inherited from the `parentComponent`), then a new [`mwseMCMTableVariable`](./mwseMCMTableVariable.md) variable will be created for this setting.
+--- @field converter (fun(newValue: unknown): unknown)|nil A converter to use for this component's `variable`.
+--- @field defaultConfig table|nil The `defaultConfig` to use when creating a [`mwseMCMTableVariable`](./mwseMCMTableVariable.md) for this `Setting`. If provided, it will override the `defaultConfig` stored in `parentComponent`. Otherwise, the value in `parentComponent` will be used.
+--- @field defaultSetting unknown|nil If `defaultSetting` wasn't passed in the `variable` table, can be passed here. The new variable will be initialized to this value. If not provided, then the value in `defaultConfig` will be used, if possible.
 --- @field inGameOnly boolean If true, the setting is disabled while the game is on main menu. If this is enabled, it will override the value of the `inGameOnly` parameter on this setting's `variable`.
 --- @field makeComponent nil|fun(self: mwseMCMSetting, innerContainer: tes3uiElement) This method must be implemented by child classes of mwseMCMSetting.
 --- @field restartRequired boolean If true, updating this Setting will notify the player to restart the game.
