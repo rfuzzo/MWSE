@@ -79,8 +79,7 @@ local function getSortedObjectList(params)
 	return list
 end
 
-local inspect = require("inspect")
-function ExclusionsPage:resetSettings()
+function ExclusionsPage:resetToDefault()
 	if self.variable.defaultSetting == nil then
 		return
 	end

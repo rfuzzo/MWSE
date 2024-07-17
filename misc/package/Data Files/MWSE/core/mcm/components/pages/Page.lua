@@ -83,7 +83,7 @@ function Page:createResetButton(parentBlock)
 			buttons = {{
 				text = mwse.mcm.i18n("Reset"),
 				callback = function()
-					self:resetSettings()
+					self:resetToDefault()
 				end
 			}}
 		})

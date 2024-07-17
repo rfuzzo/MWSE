@@ -62,19 +62,9 @@ function Category:new(data)
 end
 
 
-function Category:resetSettings()
+function Category:resetToDefault()
 	for _, component in ipairs(self.components) do
-		local variable = component.variable
-		if variable and variable.defaultSetting ~= nil then
-			--- @cast component mwseMCMSetting
-			component:setVariableValue(variable.defaultSetting)
-		end
-		-- Have we encountered a nested Category?
-		if component.components then
-			--- @cast component mwseMCMCategory
-			-- If so, also reset Settings in the nested Category.
-			component:resetSettings()
-		end
+		component:resetToDefault()
 	end
 end
 
