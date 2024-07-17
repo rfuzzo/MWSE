@@ -79,6 +79,17 @@ local function getSortedObjectList(params)
 	return list
 end
 
+local inspect = require("inspect")
+function ExclusionsPage:resetSettings()
+	mwse.log("defaultSetting:\n%s", inspect(self.variable.defaultSetting))
+	if self.variable.defaultSetting == nil then
+		return
+	end
+	self.variable.value = self.variable.defaultSetting
+	self.elements.outerContainer.parent:destroyChildren()
+	self:create(self.elements.outerContainer.parent)
+end
+
 function ExclusionsPage:resetSearchBars()
 	self.elements.searchBarInput.rightList.text = ""
 	self.elements.searchBarInput.leftList.text = ""
@@ -400,6 +411,11 @@ function ExclusionsPage:createList(parentBlock, listId)
 	list.heightProportional = 1.0
 	list.paddingLeft = 8
 	self.elements[listId] = list
+
+	if self.showReset and listId == "leftList" then
+		self:createResetButtonContainer(block)
+		self:createResetButton(self.elements.resetContainer)
+	end
 
 end
 

@@ -16,6 +16,7 @@ Page.indent = 6
 --- @param data mwseMCMPage.new.data|nil
 --- @return mwseMCMPage page
 function Page:new(data)
+	--- @diagnostic disable-next-line: param-type-mismatch
 	local t = Parent:new(data)
 
 	if data then
@@ -57,6 +58,42 @@ function Page:disable()
 end
 
 --- @param parentBlock tes3uiElement
+function Page:createResetButtonContainer(parentBlock)
+	local resetContainer = parentBlock:createBlock({ id = "ResetContainer" })
+	resetContainer.flowDirection = tes3.flowDirection.leftToRight
+	resetContainer.autoWidth = true
+	resetContainer.autoHeight = true
+	resetContainer.widthProportional = 1.0
+	resetContainer.childAlignX = 1.0
+	self.elements.resetContainer = resetContainer
+end
+
+--- @param parentBlock tes3uiElement
+function Page:createResetButton(parentBlock)
+	local reset = parentBlock:createButton({
+		id = "Reset_" .. self.componentType,
+		text = mwse.mcm.i18n("Reset")
+	})
+	reset.borderRight = 10
+	reset:registerAfter(tes3.uiEvent.mouseClick, function(e)
+		tes3ui.showMessageMenu({
+			message = mwse.mcm.i18n("Are you sure you want to reset your settings?"),
+			cancels = true,
+			leaveMenuMode = false,
+			buttons = {{
+				text = mwse.mcm.i18n("Reset"),
+				callback = function()
+					self:resetSettings()
+				end
+			}}
+		})
+	end)
+
+	self.elements.resetButton = reset
+end
+
+
+--- @param parentBlock tes3uiElement
 function Page:createOuterContainer(parentBlock)
 	local border
 
@@ -83,6 +120,21 @@ function Page:createOuterContainer(parentBlock)
 	outerContainer.paddingTop = self.indent
 
 	self.elements.outerContainer = outerContainer
+end
+
+--- @param parentBlock tes3uiElement
+function Page:create(parentBlock)
+	local mainContainer = parentBlock:createBlock({ id = tes3ui.registerID("Page_MainContainer") })
+	mainContainer.flowDirection = tes3.flowDirection.topToBottom
+	mainContainer.autoHeight = true
+	mainContainer.heightProportional = 1.0
+	mainContainer.widthProportional = 1.0
+
+	Parent.create(self, mainContainer)
+	if self.showReset then
+		self:createResetButtonContainer(mainContainer)
+		self:createResetButton(self.elements.resetContainer)
+	end
 end
 
 return Page
