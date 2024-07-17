@@ -81,11 +81,11 @@ end
 
 local inspect = require("inspect")
 function ExclusionsPage:resetSettings()
-	mwse.log("defaultSetting:\n%s", inspect(self.variable.defaultSetting))
 	if self.variable.defaultSetting == nil then
 		return
 	end
-	self.variable.value = self.variable.defaultSetting
+	-- Make sure we copy defaultSetting so that self.variable.value doesn't become the reference to this table.
+	self.variable.value = table.copy(self.variable.defaultSetting)
 	self.elements.outerContainer.parent:destroyChildren()
 	self:create(self.elements.outerContainer.parent)
 end
