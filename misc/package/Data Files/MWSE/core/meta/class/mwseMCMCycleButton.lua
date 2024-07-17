@@ -11,7 +11,7 @@ mwseMCMCycleButton = {}
 --- The default behavior is to return the `text` of the [`mwseMCMCycleButton`](./mwseMCMCycleButton.md) with a given `variableValue`.
 --- @param variableValue any The value of a [`mwseMCMCycleButton`](./mwseMCMCycleButton.md) stored in `self.options`.
 --- @return string labelValue The label of the corresponding [`mwseMCMCycleButton`](./mwseMCMCycleButton.md).
-function mwseMCMCycleButton:convertToLabelValue.lua(variableValue) end
+function mwseMCMCycleButton:convertToLabelValue(variableValue) end
 
 --- This method is unused in cycle button setting.
 function mwseMCMCycleButton:getText() end

@@ -425,30 +425,11 @@ local result = myObject:checkDisabled()
 ### `convertToLabelValue`
 <div class="search_terms" style="display: none">converttolabelvalue</div>
 
-This function specifies how values stored in the `variable` field should correspond to values displayed by this setting.
-
-```lua
-local labelValue = myObject:convertToLabelValue(variableValue)
-```
-
-**Parameters**:
-
-* `variableValue` (number)
-
-**Returns**:
-
-* `labelValue` (number, string)
-
-***
-
-### `convertToLabelValue.lua`
-<div class="search_terms" style="display: none">converttolabelvalue.lua</div>
-
 This function specifies how values stored in the `variable` field should correspond to values displayed by this CycleButton.
 The default behavior is to return the `text` of the [`mwseMCMCycleButton`](./mwseMCMCycleButton.md) with a given `variableValue`.
 
 ```lua
-local labelValue = myObject:convertToLabelValue.lua(variableValue)
+local labelValue = myObject:convertToLabelValue(variableValue)
 ```
 
 **Parameters**:
