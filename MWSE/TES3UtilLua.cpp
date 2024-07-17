@@ -1037,15 +1037,15 @@ namespace mwse::lua {
 
 		// Are we looking for a single result?
 		if (rayTestCache->pickType == NI::PickType::FIND_FIRST) {
-			return sol::make_object(state, *rayTestCache->results[0]);
+			return sol::make_object(state, rayTestCache->results[0]);
 		}
 
 		// We're now in multi-result mode. We'll store these in a table.
 		sol::table results = state.create_table();
 
 		// Go through and clone the results in a way that will play nice.
-		for (auto r : rayTestCache->results) {
-			results.add(*r);
+		for (auto& r : rayTestCache->results) {
+			results.add(r);
 		}
 
 		return results;
