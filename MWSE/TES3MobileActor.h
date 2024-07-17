@@ -337,7 +337,8 @@ namespace TES3 {
 		float getWidth() const;
 		float getHeight() const;
 
-		bool equipItem(Object* item, ItemData * itemData = nullptr, bool addItem = false, bool selectBestCondition = false, bool selectWorstCondition = false);
+		bool wearItem(Object* item, ItemData* itemData, bool selectBestCondition, bool selectWorstCondition, bool useEvents);
+		bool equipItem(Object* item, ItemData* itemData = nullptr, bool addItem = false, bool selectBestCondition = false, bool selectWorstCondition = false, bool useEvents = false);
 		bool equip_lua(sol::object arg);
 		bool unequip_lua(sol::table args);
 		bool equipMagic(Object* source, ItemData* itemData = nullptr, bool equipItem = false, bool updateGUI = true);
@@ -484,6 +485,9 @@ namespace TES3 {
 		bool rechargePower(Spell* power);
 		sol::optional<double> getPowerUseTimestamp(Spell* power) const;
 		void setPowerUseTimestamp(Spell* power, double timestamp);
+
+		bool getMobToMobCollision() const;
+		void setMobToMobCollision(bool collide);
 
 		sol::table getActiveMagicEffectsList_lua(sol::optional<sol::table> params);
 		ActiveMagicEffect* getActiveMagicEffects_legacy() const;

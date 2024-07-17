@@ -13,6 +13,8 @@
 #include "LuaDamageEvent.h"
 #include "LuaDamageHandToHandEvent.h"
 #include "LuaDeathEvent.h"
+#include "LuaEquipEvent.h"
+#include "LuaEquippedEvent.h"
 #include "LuaJumpEvent.h"
 #include "LuaMobileObjectCollisionEvent.h"
 
@@ -557,12 +559,12 @@ namespace TES3 {
 	const auto TES3_MobileActor_notifyActorDeadOrDestroyed = reinterpret_cast<void(__thiscall*)(MobileActor*, MobileActor*)>(0x51FEB0);
 	void MobileActor::notifyActorDeadOrDestroyed(MobileActor* mobileActor) {
 		TES3_MobileActor_notifyActorDeadOrDestroyed(this, mobileActor);
-	};
+	}
 
 	const auto TES3_MobileActor_retireMagic = reinterpret_cast<void(__thiscall*)(MobileActor*)>(0x52C990);
 	void MobileActor::retireMagic() {
 		TES3_MobileActor_retireMagic(this);
-	};
+	}
 
 	const auto TES3_MobileActor_applyHealthDamage = reinterpret_cast<bool(__thiscall*)(MobileActor*, float, bool, bool, bool)>(0x557CF0);
 	bool MobileActor::applyHealthDamage(float damage, bool isPlayerAttack, bool scaleWithDifficulty, bool doNotChangeHealth) {
@@ -1123,7 +1125,26 @@ namespace TES3 {
 	}
 
 	const auto TES3_MobileActor_wearItem = reinterpret_cast<void(__thiscall*)(MobileActor*, Object*, ItemData*, bool, bool)>(0x52C770);
-	bool MobileActor::equipItem(Object* item, ItemData* itemData, bool addItem, bool selectBestCondition, bool selectWorstCondition) {
+	bool MobileActor::wearItem(Object * item, ItemData * itemData, bool selectBestCondition, bool selectWorstCondition, bool useEvents) {
+		if (useEvents && mwse::lua::event::EquipEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::EquipEvent(reference, item, itemData));
+			if (eventData.valid() && eventData.get_or("block", false)) {
+				return false;
+			}
+		}
+
+		TES3_MobileActor_wearItem(this, item, itemData, selectBestCondition, selectWorstCondition);
+
+		if (useEvents && mwse::lua::event::EquippedEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			stateHandle.triggerEvent(new mwse::lua::event::EquippedEvent(static_cast<TES3::Actor*>(reference->baseObject), this, item, itemData));
+		}
+
+		return true;
+	}
+
+	bool MobileActor::equipItem(Object * item, ItemData * itemData, bool addItem, bool selectBestCondition, bool selectWorstCondition, bool useEvents) {
 		Actor* actor = static_cast<Actor*>(reference->baseObject);
 
 		// Equipping weapons while they are in use breaks animations and AI.
@@ -1139,7 +1160,7 @@ namespace TES3 {
 				if (actorType == MobileActorType::Player) {
 					UI::forcePlayerInventoryUpdate();
 				}
-				TES3_MobileActor_wearItem(this, item, itemData, false, false);
+				wearItem(item, itemData, false, false, useEvents);
 				return true;
 			}
 			return false;
@@ -1224,7 +1245,7 @@ namespace TES3 {
 			return true;
 		}
 
-		TES3_MobileActor_wearItem(this, item, itemData, false, false);
+		wearItem(item, itemData, false, false, useEvents);
 		return true;
 	}
 
