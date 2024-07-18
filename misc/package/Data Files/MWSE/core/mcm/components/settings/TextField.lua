@@ -55,6 +55,32 @@ function TextField:callback()
 	tes3.messageBox(self.sNewValue, self:convertToLabelValue(self.variable.value))
 end
 
+-- Returns the string that should be shown in the MouseOverInfo
+--- @return string?
+function TextField:getMouseOverText()
+	local var = self.variable
+	local shouldAddDefaults = (self.showDefaultSetting and var and var.defaultSetting ~= nil)
+
+	if not shouldAddDefaults then
+		return self.description -- This has type `string|nil`
+	end
+
+	-- Now we add defaults to the description.
+	local defaultStr = self:convertToLabelValue(var.defaultSetting)
+
+	-- No description exists yet? Then we'll only write the default value.
+	if not self.description then
+		return string.format("%s: \"%s\".", mwse.mcm.i18n("Default"), defaultStr)
+	end
+
+	return string.format(
+		"%s\n\n\z
+		 %s: \"%s\".",
+		self.description,
+		mwse.mcm.i18n("Default"), defaultStr
+	)
+end
+
 --- @param parentBlock tes3uiElement
 function TextField:createOuterContainer(parentBlock)
 	Parent.createOuterContainer(self, parentBlock)
