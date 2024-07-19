@@ -9,6 +9,7 @@
 
 local Parent = require("mcm.components.pages.Page")
 
+local Category = require("mcm.components.categories.Category")
 local Info = require("mcm.components.infos.Info")
 local MouseOverInfo = require("mcm.components.infos.MouseOverInfo")
 local MouseOverPage = require("mcm.components.pages.MouseOverPage")
@@ -105,6 +106,12 @@ function SideBarPage:createRightColumn(parentBlock)
 		event.unregister(self.triggerOff, doMouseLeave)
 	end)
 
+	-- Add Reset button
+	if self.showReset then
+		local rightColumnBorder = defaultView.parent
+		self:createResetButtonContainer(rightColumnBorder)
+		self:createResetButton(self.elements.resetContainer)
+	end
 end
 
 --- @param parentBlock tes3uiElement
@@ -112,6 +119,13 @@ function SideBarPage:createOuterContainer(parentBlock)
 	self:createSidetoSideBlock(parentBlock)
 	self:createLeftColumn(self.elements.sideToSideBlock)
 	self:createRightColumn(self.elements.sideToSideBlock)
+end
+
+--- Make sure we don't inherit createContentsContainer from Page since
+--- we don't want to have the Reset button on the left list.
+--- @param parentBlock tes3uiElement
+function SideBarPage:createContentsContainer(parentBlock)
+	Category.createContentsContainer(self, parentBlock)
 end
 
 return SideBarPage

@@ -318,6 +318,21 @@ function ExclusionsPage:createSearchBar(parentBlock, listName)
 end
 
 --- @param parentBlock tes3uiElement
+function ExclusionsPage:createResetButtonContainer(parentBlock)
+	local grow = parentBlock:createBlock({ id = tes3ui.registerID("Reset_LeftGrow") })
+	grow.autoWidth = true
+	grow.autoHeight = true
+
+	local resetContainer = parentBlock:createBlock({ id = tes3ui.registerID("Reset_InnerContainer") })
+	resetContainer.flowDirection = tes3.flowDirection.leftToRight
+	resetContainer.autoWidth = true
+	resetContainer.autoHeight = true
+	resetContainer.widthProportional = 1.0
+	resetContainer.childAlignX = 1.0
+	self.elements.resetContainer = resetContainer
+end
+
+--- @param parentBlock tes3uiElement
 function ExclusionsPage:createFiltersSection(parentBlock)
 
 	local block = parentBlock:createBlock{}

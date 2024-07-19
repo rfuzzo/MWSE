@@ -59,7 +59,20 @@ end
 
 --- @param parentBlock tes3uiElement
 function Page:createResetButtonContainer(parentBlock)
-	local resetContainer = parentBlock:createBlock({ id = "ResetContainer" })
+	local outerContainer = parentBlock:createBlock({ id = tes3ui.registerID("Reset_OuterContainer") })
+	outerContainer.autoHeight = true
+	outerContainer.autoWidth = true
+	outerContainer.flowDirection = tes3.flowDirection.topToBottom
+	outerContainer.widthProportional = 1.0
+	outerContainer.heightProportional = 1.0
+	outerContainer.childAlignY = 1.0
+
+	local grow = outerContainer:createBlock({ id = tes3ui.registerID("Reset_LeftGrow") })
+	grow.autoWidth = true
+	grow.autoHeight = true
+	grow.heightProportional = 1.0
+
+	local resetContainer = outerContainer:createBlock({ id = tes3ui.registerID("Reset_InnerContainer") })
 	resetContainer.flowDirection = tes3.flowDirection.leftToRight
 	resetContainer.autoWidth = true
 	resetContainer.autoHeight = true
@@ -71,13 +84,15 @@ end
 --- @param parentBlock tes3uiElement
 function Page:createResetButton(parentBlock)
 	local reset = parentBlock:createButton({
-		id = "Reset_" .. self.componentType,
+		id = tes3ui.registerID("Reset_" .. self.componentType),
 		text = mwse.mcm.i18n("Reset")
 	})
-	reset.borderRight = 10
 	reset:registerAfter(tes3.uiEvent.mouseClick, function(e)
 		tes3ui.showMessageMenu({
-			message = mwse.mcm.i18n("Are you sure you want to reset your settings?"),
+			message = mwse.mcm.i18n(
+				"Are you sure you want to reset all the settings on this page to their default values? \z
+				This action cannot be undone."
+			),
 			cancels = true,
 			leaveMenuMode = false,
 			buttons = {{
@@ -90,8 +105,19 @@ function Page:createResetButton(parentBlock)
 	end)
 
 	self.elements.resetButton = reset
+	parentBlock:getTopLevelMenu():updateLayout()
 end
 
+--- @param parentBlock tes3uiElement
+function Page:createContentsContainer(parentBlock)
+	Parent.createContentsContainer(self, parentBlock)
+	if self.showReset then
+		self:createResetButtonContainer(parentBlock)
+		self:createResetButton(self.elements.resetContainer)
+	end
+end
+
+local scrollPaneId = tes3ui.registerID("PartScrollPane_pane")
 
 --- @param parentBlock tes3uiElement
 function Page:createOuterContainer(parentBlock)
@@ -109,6 +135,9 @@ function Page:createOuterContainer(parentBlock)
 		border = parentBlock:createVerticalScrollPane({ id = tes3ui.registerID("Page_ScrollPane") })
 		border.heightProportional = 1.0
 		border.widthProportional = 1.0
+
+		local pane = border:findChild(scrollPaneId)
+		pane.heightProportional = 1.0
 	end
 
 	local outerContainer = border:createBlock({ id = tes3ui.registerID("Page_OuterContainer") })
@@ -120,21 +149,6 @@ function Page:createOuterContainer(parentBlock)
 	outerContainer.paddingTop = self.indent
 
 	self.elements.outerContainer = outerContainer
-end
-
---- @param parentBlock tes3uiElement
-function Page:create(parentBlock)
-	local mainContainer = parentBlock:createBlock({ id = tes3ui.registerID("Page_MainContainer") })
-	mainContainer.flowDirection = tes3.flowDirection.topToBottom
-	mainContainer.autoHeight = true
-	mainContainer.heightProportional = 1.0
-	mainContainer.widthProportional = 1.0
-
-	Parent.create(self, mainContainer)
-	if self.showReset then
-		self:createResetButtonContainer(mainContainer)
-		self:createResetButton(self.elements.resetContainer)
-	end
 end
 
 return Page

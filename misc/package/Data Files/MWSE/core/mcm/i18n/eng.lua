@@ -39,5 +39,5 @@ return {
 	["Clear"] = "Clear",
 	["Default"] = "Default",
 	["Reset"] = "Reset",
-	["Are you sure you want to reset your settings?"] = "Are you sure you want to reset your settings?",
+	["Are you sure you want to reset all the settings on this page to their default values? This action cannot be undone."] = "Are you sure you want to reset all the settings on this page to their default values? This action cannot be undone.",
 }
