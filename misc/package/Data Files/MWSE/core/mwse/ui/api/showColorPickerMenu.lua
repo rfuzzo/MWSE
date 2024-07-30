@@ -12,7 +12,6 @@
 -- TODO localize
 local strings = {
 	["Color Picker Menu"] = "Color Picker Menu",
-	["Done"] = "Done",
 }
 
 --- @param params tes3ui.showColorPickerMenu.params
@@ -76,7 +75,7 @@ function tes3ui.showColorPickerMenu(params)
 
 	local done = doneContainer:createButton({
 		id = tes3ui.registerID("MenuColorPicker_done_button"),
-		text = strings["Done"]
+		text = tes3.findGMST(tes3.gmst.sDone).value --[[@as string]]
 	})
 
 	done:register(tes3.uiEvent.mouseDown, function(e)
