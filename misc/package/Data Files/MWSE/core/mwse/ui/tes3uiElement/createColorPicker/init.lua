@@ -422,7 +422,16 @@ local function createPickerBlock(params, picker, parent)
 	huePicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local x = math.clamp(e.relativeX, 1, huePicker.width)
 		local y = math.clamp(e.relativeY, 1, huePicker.height)
+
+		local current = picker:getColor()
+		local currentHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+
 		local pickedColor = picker.hueBar:getPixel(x, y)
+		local pickedHSV = oklab.hsvlib_srgb_to_hsv(pickedColor)
+		-- Make sure we only change Hue when sliding over the hue picker.
+		currentHSV.h = pickedHSV.h
+		pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
+
 		hueChanged(picker, parent, pickedColor, picker.currentAlpha, currentPreview, mainPicker)
 
 		hueIndicator.absolutePosAlignY = y / huePicker.height

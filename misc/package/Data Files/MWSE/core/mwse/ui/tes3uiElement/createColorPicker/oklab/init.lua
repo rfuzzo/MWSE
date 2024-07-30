@@ -17,8 +17,8 @@ ffi.cdef[[
 	RGB hsv_to_srgb(HSV c);
 	HSV srgb_to_hsv(RGB rgb);
 ]]
-local oklab = ffi.load(".\\Data Files\\MWSE\\mods\\livecoding\\oklab\\liboklab.dll")
-local hsvlib = ffi.load(".\\Data Files\\MWSE\\mods\\livecoding\\oklab\\libhsv.dll")
+local oklab = ffi.load(".\\Data Files\\MWSE\\core\\mwse\\ui\\tes3uiElement\\createColorPicker\\oklab\\liboklab.dll")
+local hsvlib = ffi.load(".\\Data Files\\MWSE\\core\\mwse\\ui\\tes3uiElement\\createColorPicker\\oklab\\libhsv.dll")
 
 --- @class ffiImagePixel : ffi.cdata*
 --- @field r number Red in range [0, 1].
