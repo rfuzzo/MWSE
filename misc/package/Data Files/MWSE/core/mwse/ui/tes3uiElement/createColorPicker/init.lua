@@ -35,7 +35,7 @@ local strings = {
 --- @return ColorPickerPreviewsTable
 local function createPreviewElement(picker, parent, color, alpha, texture)
 	local standardPreview = parent:createRect({
-		id = tes3ui.registerID("ColorPicker_color_preview_left"),
+		id = UIID.preview.left,
 		color = { color.r, color.g, color.b },
 	})
 	standardPreview.width = picker.previewWidth / 2
@@ -43,7 +43,7 @@ local function createPreviewElement(picker, parent, color, alpha, texture)
 	standardPreview.borderLeft = 8
 
 	local checkersPreview = parent:createRect({
-		id = tes3ui.registerID("ColorPicker_color_preview_right"),
+		id = UIID.preview.right,
 		color = { 1.0, 1.0, 1.0 },
 	})
 	checkersPreview.width = picker.previewWidth / 2
@@ -161,7 +161,7 @@ local function createPickerBlock(params, picker, parent)
 	pickerContainer.flowDirection = tes3.flowDirection.topToBottom
 
 	local mainPicker = pickerContainer:createRect({
-		id = tes3ui.registerID("ColorPicker_main_picker"),
+		id = UIID.mainPicker,
 		color = { 1, 1, 1 },
 	})
 	mainPicker.borderTop = 8
@@ -248,7 +248,7 @@ local function createPickerBlock(params, picker, parent)
 		)
 	end
 
-	local previewContainer = mainRow:createBlock({ id = tes3ui.registerID("ColorPicker_color_preview_container") })
+	local previewContainer = mainRow:createBlock({ id = UIID.preview.topContainer })
 	previewContainer.flowDirection = tes3.flowDirection.topToBottom
 	previewContainer.autoWidth = true
 	previewContainer.autoHeight = true
@@ -260,7 +260,7 @@ local function createPickerBlock(params, picker, parent)
 		local x = math.clamp(e.relativeX, 1, mainPicker.width)
 		local y = math.clamp(e.relativeY, 1, mainPicker.height)
 		local pickedColor = picker.mainImage:getPixel(x, y)
-		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha, currentPreview)
+		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
 
 		x = x / mainPicker.width
 		y = y / mainPicker.height
@@ -273,7 +273,7 @@ local function createPickerBlock(params, picker, parent)
 		local x = math.clamp((slider.widget.current / CONSTANTS.SLIDER_SCALE) * mainPicker.width, 1, mainPicker.width)
 		local y = mainIndicator.absolutePosAlignY * mainPicker.height
 		local pickedColor = picker.mainImage:getPixel(x, y)
-		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha, currentPreview)
+		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
 
 		x = x / mainPicker.width
 		y = y / mainPicker.height
@@ -295,7 +295,7 @@ local function createPickerBlock(params, picker, parent)
 		currentHSV.h = pickedHSV.h
 		pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
 
-		update.hueChanged(picker, parent, pickedColor, picker.currentAlpha, currentPreview, mainPicker)
+		update.hueChanged(picker, parent, pickedColor, picker.currentAlpha)
 
 		hueIndicator.absolutePosAlignY = y / huePicker.height
 		mainRow:getTopLevelMenu():updateLayout()
@@ -304,7 +304,7 @@ local function createPickerBlock(params, picker, parent)
 	if params.alpha then
 		alphaPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 			local y = math.clamp(e.relativeY / alphaPicker.height, 0, 1)
-			update.colorSelected(picker, parent, picker.currentColor, 1 - y, currentPreview)
+			update.colorSelected(picker, parent, picker.currentColor, 1 - y)
 			alphaIndicator.absolutePosAlignY = y
 			mainRow:getTopLevelMenu():updateLayout()
 		end)
@@ -313,7 +313,7 @@ local function createPickerBlock(params, picker, parent)
 	if params.showOriginal then
 		--- @param e tes3uiEventData
 		local function resetColor(e)
-			update.hueChanged(picker, parent, params.initialColor, params.initialAlpha, currentPreview, mainPicker)
+			update.hueChanged(picker, parent, params.initialColor, params.initialAlpha)
 
 			mainIndicator.absolutePosAlignX = mainIndicatorInitialAbsolutePosAlignX
 			mainIndicator.absolutePosAlignY = mainIndicatorInitialAbsolutePosAlignY
@@ -364,8 +364,7 @@ end
 --- @param params tes3uiElement.createColorPicker.params
 --- @param picker ColorPicker
 --- @param parent tes3uiElement
---- @param onNewColorEntered fun(newColor: ffiImagePixel|ImagePixel, alpha: number)
-local function createDataBlock(params, picker, parent, onNewColorEntered)
+local function createDataBlock(params, picker, parent)
 	local dataRow = parent:createThinBorder({
 		id = tes3ui.registerID("ColorPicker_data_row_container")
 	})
@@ -401,10 +400,9 @@ local function createDataBlock(params, picker, parent, onNewColorEntered)
 
 	-- Update color after new value was entered.
 	input:registerAfter(tes3.uiEvent.keyEnter, function(e)
-		local color = format.hexToPixel(getInputValue(input))
-		-- Update other parts of the Color Picker
-		update.updateValueInput(parent, color, color.a)
-		onNewColorEntered(color, color.a)
+		local newColor, alpha = format.hexToPixel(getInputValue(input))
+		update.hueChanged(picker, parent, newColor, alpha)
+		update.updateIndicatorPositions(parent, newColor, alpha)
 	end)
 
 	local copyButton = dataRow:createButton({
@@ -450,18 +448,10 @@ local function createColorPickerWidget(params, parent)
 	container.autoWidth = true
 	container.autoHeight = true
 	container.flowDirection = tes3.flowDirection.topToBottom
-	local pickers = createPickerBlock(params, picker, container)
+	createPickerBlock(params, picker, container)
 
 	if params.showDataRow then
-		--- @param newColor ffiImagePixel|ImagePixel
-		--- @param alpha number
-		local function onNewColorEntered(newColor, alpha)
-			update.hueChanged(picker, parent, newColor, alpha, pickers.currentPreview, pickers.mainPicker)
-			-- TODO: looks like ffi can convert our ImagePixel table to ffiImagePixel when calling oklab.hsvlib_srgb_to_hsv
-			update.updateIndicatorPositions(parent, newColor, alpha)
-		end
-
-		createDataBlock(params, picker, container, onNewColorEntered)
+		createDataBlock(params, picker, container)
 	end
 
 	return picker

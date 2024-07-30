@@ -10,15 +10,22 @@ local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiIma
 local this = {}
 
 --- @param picker ColorPicker
---- @param previews ColorPickerPreviewsTable
+--- @param parent tes3uiElement
 --- @param newColor ffiImagePixel
 --- @param alpha number
-local function updatePreview(picker, previews, newColor, alpha)
-	-- TODO: make this function use findChild to find the needed preview elements to update.
-	previews.standardPreview.color = { newColor.r, newColor.g, newColor.b }
-	previews.standardPreview:updateLayout()
+local function updatePreview(picker, parent, newColor, alpha)
+	local previewsContainer = parent:findChild(UIID.preview.topContainer)
+	local currentContainer = previewsContainer.children[1]
+
+	-- standardPreview is a colored rect.
+	local standardPreview = currentContainer:findChild(UIID.preview.left)
+	standardPreview.color = { newColor.r, newColor.g, newColor.b }
+	standardPreview:updateLayout()
+
+	-- checkersPreview is the currently selected color alpha blended on checkered background.
+	local checkersPreview = currentContainer:findChild(UIID.preview.right)
 	picker:updatePreviewImage(newColor, alpha)
-	previews.checkersPreview.texture.pixelData:setPixelsFloat(picker.previewImage:toPixelBufferFloat())
+	checkersPreview.texture.pixelData:setPixelsFloat(picker.previewImage:toPixelBufferFloat())
 end
 
 --- @alias IndicatorID
@@ -96,13 +103,12 @@ end
 --- @param parent tes3uiElement
 --- @param newColor ffiImagePixel
 --- @param alpha number
---- @param previews ColorPickerPreviewsTable
-function this.colorSelected(picker, parent, newColor, alpha, previews)
+function this.colorSelected(picker, parent, newColor, alpha)
 	-- Make sure we don't create reference to the pixel picked from the mainImage.
 	-- We construct a new ffiPixel.
 	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
 	picker:setColor(newColor, alpha)
-	updatePreview(picker, previews, newColor, alpha)
+	updatePreview(picker, parent, newColor, alpha)
 	this.updateValueInput(parent, newColor, alpha)
 end
 
@@ -111,17 +117,15 @@ end
 --- @param parent tes3uiElement
 --- @param newColor ffiImagePixel|ImagePixel
 --- @param alpha number
---- @param previews ColorPickerPreviewsTable
---- @param mainPicker tes3uiElement
-function this.hueChanged(picker, parent, newColor, alpha, previews, mainPicker)
+function this.hueChanged(picker, parent, newColor, alpha)
 	-- Make sure we don't create reference to the pixel picked from the mainImage.
 	-- We construct a new ffiPixel.
 	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
-	this.colorSelected(picker, parent, newColor, alpha, previews)
+	this.colorSelected(picker, parent, newColor, alpha)
 	-- Now, also need to regenerate the image for the main picker since the Hue changed.
 	picker:updateMainImage(newColor)
 
-	-- TODO make this function use findChild to find the mainPicker element it needs to update.
+	local mainPicker = parent:findChild(UIID.mainPicker)
 	mainPicker.texture.pixelData:setPixelsFloat(picker.mainImage:toPixelBufferFloat())
 end
 

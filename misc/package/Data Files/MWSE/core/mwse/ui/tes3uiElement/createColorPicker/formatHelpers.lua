@@ -1,3 +1,8 @@
+local ffi = require("ffi")
+
+-- Defined in oklab\init.lua
+local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
+
 local this = {}
 
 --- @param p ffiImagePixel|ImagePixel
@@ -42,22 +47,29 @@ local function hexToColor(code)
 	return math.clamp(color / 255, 0, 1)
 end
 
+local ARGB_HEX_CODE_LEN = 8
+
 --- Parses given HTML hex code into an RGB(A) pixel.
 --- @param str string
---- @return ImagePixelArgument
+--- @return ffiImagePixel, number?
 function this.hexToPixel(str)
-	local pixel = {}
 	-- ARGB
-	if string.len(str) == 8 then
-		pixel.a = hexToColor(string.sub(str, 1, 2))
-		pixel.r = hexToColor(string.sub(str, 3, 4))
-		pixel.g = hexToColor(string.sub(str, 5, 6))
-		pixel.b = hexToColor(string.sub(str, 7, 8))
-	else -- RGB
-		pixel.r = hexToColor(string.sub(str, 1, 2))
-		pixel.g = hexToColor(string.sub(str, 3, 4))
-		pixel.b = hexToColor(string.sub(str, 5, 6))
+	if string.len(str) == ARGB_HEX_CODE_LEN then
+		local pixel = ffiPixel({
+			hexToColor(string.sub(str, 3, 4)),
+			hexToColor(string.sub(str, 5, 6)),
+			hexToColor(string.sub(str, 7, 8)),
+		})
+		local alpha = hexToColor(string.sub(str, 1, 2))
+		return pixel, alpha
 	end
+
+	-- RGB
+	local pixel = ffiPixel({
+		hexToColor(string.sub(str, 1, 2)),
+		hexToColor(string.sub(str, 3, 4)),
+		hexToColor(string.sub(str, 5, 6)),
+	})
 	return pixel
 end
 
