@@ -3,9 +3,10 @@
 --- @field heading? string
 --- @field initialColor ImagePixel
 --- @field initialAlpha? number
---- @field alpha? boolean If true the picker will also allow picking an alpha value.
---- @field showOriginal? boolean If true the picker will show original color below the currently picked color.
---- @field showDataRow? boolean If true the picker will show RGB(A) values of currently picked color in a label below the picker.
+--- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
+--- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
+--- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
+--- @field showSaturationSlider? boolean *Default: true*
 --- @field closeCallback? fun(selectedColor: ImagePixel, selectedAlpha: number|nil) Called when the color picker has been closed.
 --- @field leaveMenuMode? boolean
 
@@ -60,6 +61,7 @@ function tes3ui.showColorPickerMenu(params)
 		initialAlpha = params.initialAlpha,
 		showOriginal = params.showOriginal,
 		showDataRow = params.showDataRow,
+		showSaturationSlider = params.showSaturationSlider,
 	})
 
 	local doneContainer = bodyBlock:createBlock({ id = tes3ui.registerID("MenuColorPicker_done_container") })

@@ -39,7 +39,7 @@ local function getIndicators(parent)
 	local indicators = {}
 	for _, UIID in pairs(UIID.indicator) do
 		local indicator = parent:findChild(UIID)
-		-- Not every Color Picker will have alpha indicator.
+		-- Not every Color Picker will have alpha indicator or saturation slider.
 		if indicator then
 			local id = indicator:getLuaData("indicatorID")
 			indicators[id] = indicator
@@ -61,7 +61,10 @@ function this.updateIndicatorPositions(parent, newColor, alpha)
 		indicators.alpha.absolutePosAlignY = 1 - alpha
 	end
 	-- Update main picker's slider
-	indicators.slider.widget.current = hsv.s * CONSTANTS.SLIDER_SCALE
+	local slider = indicators.slider
+	if slider then
+		slider.widget.current = hsv.s * CONSTANTS.SLIDER_SCALE
+	end
 	indicators.hue:getTopLevelMenu():updateLayout()
 end
 

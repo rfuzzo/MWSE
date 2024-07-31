@@ -182,18 +182,22 @@ local function createPickerBlock(params, picker, parent)
 		mainIndicatorInitialAbsolutePosAlignX,
 		mainIndicatorInitialAbsolutePosAlignY
 	)
-	local slider = pickerContainer:createSlider({
-		id = UIID.indicator.slider,
-		step = 1,
-		jump = 1,
-		current = mainIndicatorInitialAbsolutePosAlignX * CONSTANTS.SLIDER_SCALE,
-		max = CONSTANTS.SLIDER_SCALE,
-	})
-	slider.width = picker.mainWidth
-	slider.borderBottom = 8
-	slider.borderLeft = 8
-	slider.borderRight = 8
-	slider:setLuaData("indicatorID", "slider")
+
+	local slider
+	if params.showSaturationSlider then
+		slider = pickerContainer:createSlider({
+			id = UIID.indicator.slider,
+			step = 1,
+			jump = 1,
+			current = mainIndicatorInitialAbsolutePosAlignX * CONSTANTS.SLIDER_SCALE,
+			max = CONSTANTS.SLIDER_SCALE,
+		})
+		slider.width = picker.mainWidth
+		slider.borderBottom = 8
+		slider.borderLeft = 8
+		slider.borderRight = 8
+		slider:setLuaData("indicatorID", "slider")
+	end
 
 	local huePicker = mainRow:createRect({
 		id = tes3ui.registerID("ColorPicker_hue_picker"),
@@ -268,23 +272,27 @@ local function createPickerBlock(params, picker, parent)
 		y = y / mainPicker.height
 		mainIndicator.absolutePosAlignX = x
 		mainIndicator.absolutePosAlignY = y
-		slider.widget.current = x * CONSTANTS.SLIDER_SCALE
+		if params.showSaturationSlider then
+			slider.widget.current = x * CONSTANTS.SLIDER_SCALE
+		end
 		mainRow:getTopLevelMenu():updateLayout()
 		parent.parent:triggerEvent("colorChanged")
 	end)
-	slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
-		local x = math.clamp((slider.widget.current / CONSTANTS.SLIDER_SCALE) * mainPicker.width, 1, mainPicker.width)
-		local y = mainIndicator.absolutePosAlignY * mainPicker.height
-		local pickedColor = picker.mainImage:getPixel(x, y)
-		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
+	if params.showSaturationSlider then
+		slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
+			local x = math.clamp((slider.widget.current / CONSTANTS.SLIDER_SCALE) * mainPicker.width, 1, mainPicker.width)
+			local y = mainIndicator.absolutePosAlignY * mainPicker.height
+			local pickedColor = picker.mainImage:getPixel(x, y)
+			update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
 
-		x = x / mainPicker.width
-		y = y / mainPicker.height
-		mainIndicator.absolutePosAlignX = x
-		mainIndicator.absolutePosAlignY = y
-		mainRow:getTopLevelMenu():updateLayout()
-		parent.parent:triggerEvent("colorChanged")
-	end)
+			x = x / mainPicker.width
+			y = y / mainPicker.height
+			mainIndicator.absolutePosAlignX = x
+			mainIndicator.absolutePosAlignY = y
+			mainRow:getTopLevelMenu():updateLayout()
+			parent.parent:triggerEvent("colorChanged")
+		end)
+	end
 
 	huePicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local x = math.clamp(e.relativeX, 1, huePicker.width)
@@ -323,7 +331,9 @@ local function createPickerBlock(params, picker, parent)
 
 			mainIndicator.absolutePosAlignX = mainIndicatorInitialAbsolutePosAlignX
 			mainIndicator.absolutePosAlignY = mainIndicatorInitialAbsolutePosAlignY
-			slider.widget.current = mainIndicatorInitialAbsolutePosAlignX * CONSTANTS.SLIDER_SCALE
+			if params.showSaturationSlider then
+				slider.widget.current = mainIndicatorInitialAbsolutePosAlignX * CONSTANTS.SLIDER_SCALE
+			end
 			hueIndicator.absolutePosAlignY = hueIndicatorInitialAbsolutePosAlignY
 			if params.alpha then
 				alphaIndicator.absolutePosAlignY = 1 - params.initialAlpha
@@ -429,10 +439,13 @@ end
 --- @param params tes3uiElement.createColorPicker.params
 --- @param parent tes3uiElement
 local function createColorPickerWidget(params, parent)
+	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPicker.params]]
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1
 	end
-	params = table.deepcopy(params)
+	params.showOriginal = table.get(params, "showOriginal", true)
+	params.showDataRow = table.get(params, "showDataRow", true)
+	params.showSaturationSlider = table.get(params, "showSaturationSlider", true)
 
 	local picker = ColorPicker:new({
 		mainWidth = CONSTANTS.PICKER_MAIN_WIDTH,
@@ -468,9 +481,10 @@ end
 --- @field id? string
 --- @field initialColor ImagePixel
 --- @field initialAlpha? number
---- @field alpha? boolean If true the picker will also allow picking an alpha value.
---- @field showOriginal? boolean If true the picker will show original color below the currently picked color.
---- @field showDataRow? boolean If true the picker will show RGB(A) values of currently picked color in a label below the picker.
+--- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
+--- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
+--- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
+--- @field showSaturationSlider? boolean *Default: true*
 
 ---@param params tes3uiElement.createColorPicker.params
 function tes3uiElement:createColorPicker(params)
