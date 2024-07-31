@@ -25,6 +25,11 @@ local strings = {
 --- @field standardPreview tes3uiElement
 --- @field checkersPreview tes3uiElement
 
+--- @param dimension integer
+local function scalePreview(dimension)
+	return math.floor(dimension * 0.85)
+end
+
 
 --- @param picker ColorPicker
 --- @param parent tes3uiElement
@@ -37,16 +42,16 @@ local function createPreviewElement(picker, parent, color, alpha, texture)
 		id = UIID.preview.left,
 		color = { color.r, color.g, color.b },
 	})
-	standardPreview.width = picker.previewWidth / 2
-	standardPreview.height = picker.previewHeight
+	standardPreview.width = scalePreview(picker.previewWidth / 2)
+	standardPreview.height = scalePreview(picker.previewHeight)
 	standardPreview.borderLeft = 8
 
 	local checkersPreview = parent:createRect({
 		id = UIID.preview.right,
 		color = { 1.0, 1.0, 1.0 },
 	})
-	checkersPreview.width = picker.previewWidth / 2
-	checkersPreview.height = picker.previewHeight
+	checkersPreview.width = scalePreview(picker.previewWidth / 2)
+	checkersPreview.height = scalePreview(picker.previewHeight)
 	checkersPreview.texture = texture
 	checkersPreview.imageFilter = false
 	checkersPreview.borderRight = 8
@@ -133,6 +138,10 @@ local function createIndicator(parent, id, absolutePosAlignX, absolutePosAlignY)
 	indicator.absolutePosAlignY = absolutePosAlignY
 	indicator:setLuaData("indicatorID", id)
 	return indicator
+end
+
+local function isShiftDown()
+	return tes3.worldController.inputController:isShiftDown()
 end
 
 --- @param params tes3uiElement.createColorPicker.params
@@ -258,6 +267,10 @@ local function createPickerBlock(params, picker, parent)
 	mainPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local x = math.clamp(e.relativeX, 1, mainPicker.width)
 		local y = math.clamp(e.relativeY, 1, mainPicker.height)
+		if isShiftDown() then
+			y = mainIndicator.absolutePosAlignY * mainPicker.height
+		end
+
 		local pickedColor = picker.mainImage:getPixel(x, y)
 		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
 
