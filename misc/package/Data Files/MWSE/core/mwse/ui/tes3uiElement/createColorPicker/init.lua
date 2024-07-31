@@ -4,7 +4,6 @@ local ColorPicker = require("mwse.ui.tes3uiElement.createColorPicker.ColorPicker
 local CONSTANTS = require("mwse.ui.tes3uiElement.createColorPicker.constants")
 local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
 local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
-local premultiply = require("mwse.ui.tes3uiElement.createColorPicker.premultiply")
 local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 local update = require("mwse.ui.tes3uiElement.createColorPicker.updateHelpers")
 
@@ -268,6 +267,7 @@ local function createPickerBlock(params, picker, parent)
 		mainIndicator.absolutePosAlignY = y
 		slider.widget.current = x * CONSTANTS.SLIDER_SCALE
 		mainRow:getTopLevelMenu():updateLayout()
+		parent.parent:triggerEvent("colorChanged")
 	end)
 	slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
 		local x = math.clamp((slider.widget.current / CONSTANTS.SLIDER_SCALE) * mainPicker.width, 1, mainPicker.width)
@@ -280,6 +280,7 @@ local function createPickerBlock(params, picker, parent)
 		mainIndicator.absolutePosAlignX = x
 		mainIndicator.absolutePosAlignY = y
 		mainRow:getTopLevelMenu():updateLayout()
+		parent.parent:triggerEvent("colorChanged")
 	end)
 
 	huePicker:register(tes3.uiEvent.mouseStillPressed, function(e)
@@ -299,6 +300,7 @@ local function createPickerBlock(params, picker, parent)
 
 		hueIndicator.absolutePosAlignY = y / huePicker.height
 		mainRow:getTopLevelMenu():updateLayout()
+		parent.parent:triggerEvent("colorChanged")
 	end)
 
 	if params.alpha then
@@ -307,6 +309,7 @@ local function createPickerBlock(params, picker, parent)
 			update.colorSelected(picker, parent, picker.currentColor, 1 - y)
 			alphaIndicator.absolutePosAlignY = y
 			mainRow:getTopLevelMenu():updateLayout()
+			parent.parent:triggerEvent("colorChanged")
 		end)
 	end
 
@@ -323,6 +326,7 @@ local function createPickerBlock(params, picker, parent)
 				alphaIndicator.absolutePosAlignY = 1 - params.initialAlpha
 			end
 			mainRow:getTopLevelMenu():updateLayout()
+			parent.parent:triggerEvent("colorChanged")
 		end
 		createPreview(picker, previewContainer, initialColor, params.initialAlpha, "Original", false, resetColor)
 	end
@@ -365,9 +369,7 @@ end
 --- @param picker ColorPicker
 --- @param parent tes3uiElement
 local function createDataBlock(params, picker, parent)
-	local dataRow = parent:createThinBorder({
-		id = tes3ui.registerID("ColorPicker_data_row_container")
-	})
+	local dataRow = parent:createThinBorder({ id = UIID.dataRowContainer })
 	dataRow.flowDirection = tes3.flowDirection.leftToRight
 	dataRow.autoHeight = true
 	dataRow.autoWidth = true
@@ -403,6 +405,7 @@ local function createDataBlock(params, picker, parent)
 		local newColor, alpha = format.hexToPixel(getInputValue(input))
 		update.hueChanged(picker, parent, newColor, alpha)
 		update.updateIndicatorPositions(parent, newColor, alpha)
+		parent.parent:triggerEvent("colorChanged")
 	end)
 
 	local copyButton = dataRow:createButton({
@@ -426,8 +429,7 @@ local function createColorPickerWidget(params, parent)
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1
 	end
-	-- The color picker stores color premultiplied by alpha
-	premultiply.pixel(params.initialColor, params.initialAlpha)
+	params = table.deepcopy(params)
 
 	local picker = ColorPicker:new({
 		mainWidth = CONSTANTS.PICKER_MAIN_WIDTH,
@@ -466,8 +468,6 @@ end
 --- @field alpha? boolean If true the picker will also allow picking an alpha value.
 --- @field showOriginal? boolean If true the picker will show original color below the currently picked color.
 --- @field showDataRow? boolean If true the picker will show RGB(A) values of currently picked color in a label below the picker.
---- @field closeCallback? fun(selectedColor: ImagePixel, selectedAlpha: number|nil) Called when the color picker has been closed.
-
 
 ---@param params tes3uiElement.createColorPicker.params
 function tes3uiElement:createColorPicker(params)

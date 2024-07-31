@@ -136,6 +136,12 @@ function ColorPicker:getColorAlpha()
 	return self:getColor(), self:getAlpha()
 end
 
+--- @return ImagePixelA
+function ColorPicker:getRGBA()
+	local c = self.currentColor
+	return { r = c.r, g = c.g, b = c.b, a = self.currentAlpha }
+end
+
 --- @param color ffiImagePixel
 function ColorPicker:updateMainImage(color)
 	local hsv = oklab.hsvlib_srgb_to_hsv(color)

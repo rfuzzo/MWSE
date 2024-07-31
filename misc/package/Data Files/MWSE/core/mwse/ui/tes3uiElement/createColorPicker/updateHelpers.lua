@@ -20,7 +20,6 @@ local function updatePreview(picker, parent, newColor, alpha)
 	-- standardPreview is a colored rect.
 	local standardPreview = currentContainer:findChild(UIID.preview.left)
 	standardPreview.color = { newColor.r, newColor.g, newColor.b }
-	standardPreview:updateLayout()
 
 	-- checkersPreview is the currently selected color alpha blended on checkered background.
 	local checkersPreview = currentContainer:findChild(UIID.preview.right)

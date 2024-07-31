@@ -18,7 +18,7 @@ end
 function this.imageData(image)
 	local r = {}
 	for y = 0, image.height - 1 do
-		local offset = image:getOffset(y)
+		local offset = y * image.width
 		for x = 1, image.width do
 			table.insert(r, this.pixel(image.data[offset + x]))
 		end

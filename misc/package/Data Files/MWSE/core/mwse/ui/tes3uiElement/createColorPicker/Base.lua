@@ -10,8 +10,4 @@ function Base:new(data)
 	return o
 end
 
--- function Base:__index(key)
--- 	return self[key]
--- end
-
 return Base

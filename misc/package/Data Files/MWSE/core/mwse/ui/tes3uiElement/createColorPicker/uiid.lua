@@ -11,6 +11,7 @@ local UIID = {
 		left = tes3ui.registerID("ColorPicker_color_preview_left"),
 		right = tes3ui.registerID("ColorPicker_color_preview_right"),
 	},
+	dataRowContainer = tes3ui.registerID("ColorPicker_data_row_container"),
 	textInput = tes3ui.registerID("ColorPicker_data_row_value_input"),
 }
 
