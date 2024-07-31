@@ -9,10 +9,7 @@
 --- @field closeCallback? fun(selectedColor: ImagePixel, selectedAlpha: number|nil) Called when the color picker has been closed.
 --- @field leaveMenuMode? boolean
 
--- TODO localize
-local strings = {
-	["Color Picker Menu"] = "Color Picker Menu",
-}
+local i18n = mwse.loadTranslations("..")
 
 --- @param params tes3ui.showColorPickerMenu.params
 function tes3ui.showColorPickerMenu(params)
@@ -44,7 +41,7 @@ function tes3ui.showColorPickerMenu(params)
 
 	headingBlock:createLabel({
 		id = tes3ui.registerID("MenuColorPicker_heading"),
-		text = params.heading or strings["Color Picker Menu"],
+		text = params.heading or i18n("Color Picker Menu"),
 	})
 	headingBlock:createDivider()
 

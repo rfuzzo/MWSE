@@ -9,17 +9,7 @@ local update = require("mwse.ui.tes3uiElement.createColorPicker.updateHelpers")
 
 -- Defined in oklab\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
-
--- TODO: these could use localization.
-local strings = {
-	["Color Picker Menu"] = "Color Picker Menu",
-	["Current"] = "Current",
-	["Original"] = "Original",
-	["Copy"] = "Copy",
-	["%q copied to clipboard."] = "%q copied to clipboard.",
-	["RGB: #"] = "RGB: #",
-	["ARGB: #"] = "ARGB: #",
-}
+local i18n = mwse.loadTranslations("..")
 
 --- @class ColorPickerPreviewsTable
 --- @field standardPreview tes3uiElement
@@ -77,7 +67,7 @@ local function createPreviewLabel(outerContainer, label)
 	labelContainer.paddingAllSides = 8
 	labelContainer:createLabel({
 		id = tes3ui.registerID("ColorPicker_color_preview_" .. label ),
-		text = strings[label]
+		text = i18n(label)
 	})
 end
 
@@ -391,10 +381,10 @@ local function createDataBlock(params, picker, parent)
 	dataRow.paddingAllSides = 4
 	dataRow.childAlignY = 0.5
 
-	local text = strings["RGB: #"]
+	local text = i18n("RGB: #")
 	local inputText = format.pixelToHex(params.initialColor)
 	if params.alpha then
-		text = strings["ARGB: #"]
+		text = i18n("ARGB: #")
 		local initialColor = table.copy(params.initialColor) --[[@as ImagePixelA]]
 		initialColor.a = params.initialAlpha
 		inputText = format.pixelToHex(initialColor)
@@ -423,12 +413,12 @@ local function createDataBlock(params, picker, parent)
 
 	local copyButton = dataRow:createButton({
 		id = tes3ui.registerID("ColorPicker_data_row_copy_button"),
-		text = strings["Copy"],
+		text = i18n("Copy"),
 	})
 	copyButton:register(tes3.uiEvent.mouseClick, function(e)
 		local text = getInputValue(input)
 		os.setClipboardText(text)
-		tes3.messageBox(strings["%q copied to clipboard."], text)
+		tes3.messageBox(i18n("%q copied to clipboard."), text)
 	end)
 
 	return {
