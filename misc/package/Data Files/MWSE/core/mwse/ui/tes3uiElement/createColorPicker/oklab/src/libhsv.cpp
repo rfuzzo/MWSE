@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 
 struct RGB {
 	float r;
@@ -124,4 +125,24 @@ extern "C" RGB hsv_to_srgb(HSV c)
 		out.b = 0.0f;
 	}
 	return out;
+}
+
+extern "C" void generate_main_picker(const double hue, RGB *data, const std::uint32_t width, const std::uint32_t height)
+{
+	double size = width * height + 1;
+	HSV hsv = { static_cast<float>(hue), 0.f, 0.f };
+	const float heightf = static_cast<float>(height);
+	const float widthf = static_cast<float>(width);
+
+	for (std::uint32_t y = 0; y < height; ++y)
+	{
+		std::uint32_t offset = y * width;
+		hsv.v = 1 - y / heightf;
+
+		for (std::uint32_t x = 1; x <= width; ++x)
+		{
+			hsv.s = x / widthf;
+			data[offset + x] = hsv_to_srgb(hsv);
+		}
+	}
 }

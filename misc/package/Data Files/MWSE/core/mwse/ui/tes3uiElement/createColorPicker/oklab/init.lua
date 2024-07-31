@@ -16,6 +16,7 @@ ffi.cdef[[
 	HSV srgb_to_okhsv(RGB rgb);
 	RGB hsv_to_srgb(HSV c);
 	HSV srgb_to_hsv(RGB rgb);
+	void generate_main_picker(const double hue, RGB *data, const uint32_t width, const uint32_t height);
 ]]
 local oklab = ffi.load(".\\Data Files\\MWSE\\core\\mwse\\ui\\tes3uiElement\\createColorPicker\\oklab\\liboklab")
 local hsvlib = ffi.load(".\\Data Files\\MWSE\\core\\mwse\\ui\\tes3uiElement\\createColorPicker\\oklab\\libhsv")
@@ -40,6 +41,12 @@ local this = {}
 
 this.hsvlib_hsv_to_srgb = hsvlib.hsv_to_srgb
 this.hsvlib_srgb_to_hsv = hsvlib.srgb_to_hsv
+
+--- @param hue number
+--- @param image Image
+function this.generate_image(hue, image)
+	hsvlib.generate_main_picker(hue, image.data, image.width, image.height)
+end
 
 function this.hsvtosrgb(hsv)
 	local arg = ffi.new("HSV")

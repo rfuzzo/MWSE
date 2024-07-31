@@ -153,18 +153,7 @@ end
 --- Generates main picker image for given Hue.
 --- @param hue number Hue in range [0, 360)
 function Image:mainPicker(hue)
-	local hsv = ffiHSV({ hue, 0.0, 0.0 })
-
-	for y = 0, self.height - 1 do
-		local offset = self:getOffset(y)
-		hsv.v = 1 - y / self.height
-
-		for x = 1, self.width do
-			hsv.s = x / self.width
-			local color = oklab.hsvlib_hsv_to_srgb(hsv)
-			self.data[offset + x] = color
-		end
-	end
+	oklab.generate_image(hue, self)
 end
 
 --- Modifies the Image in place.
