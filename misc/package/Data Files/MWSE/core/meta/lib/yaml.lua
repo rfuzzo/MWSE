@@ -12,7 +12,7 @@ yaml = {}
 function yaml.decode(input) end
 
 --- Loads a yaml file from `path`, using `yaml.decode`. Unlike the related `json.loadfile` function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the `path` string.
---- @param path string The file to write to, relative to the current working directory (typically the Morrowind installation folder).
+--- @param path string The file to read from, relative to the current working directory (typically the Morrowind installation folder).
 --- @return table? data The decoded data, or `nil` if the file could not be found.
 --- @return table? error Information about why the yaml file could not be decoded. This result will only be given if the operation fails.
 function yaml.loadFile(path) end
