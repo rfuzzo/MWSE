@@ -268,6 +268,10 @@ function math.isclose(a, b, absoluteTolerance, relativeTolerance)
 	return math.abs(a-b) <= math.max(relativeTolerance * math.max(math.abs(a), math.abs(b)), absoluteTolerance)
 end
 
+function math.nextPowerOfTwo(value)
+	return math.pow(2, math.ceil(math.log(value) / math.log(2)))
+end
+
 
 -------------------------------------------------
 -- Extend base API: table
@@ -854,6 +858,30 @@ end
 
 
 -------------------------------------------------
+-- Extend our base API: yaml
+-------------------------------------------------
+
+function yaml.loadFile(fileName)
+	-- Load the contents of the file.
+	local f = io.open(fileName, "r")
+	if (f == nil) then
+		return nil, { reason = "Could not open file." }
+	end
+
+	local fileContents = f:read("*all")
+	f:close()
+
+	-- Return decoded yaml.
+	local status, resultOrError = pcall(yaml.decode, fileContents)
+	if (status) then
+		return resultOrError
+	else
+		return nil, resultOrError
+	end
+end
+
+
+-------------------------------------------------
 -- Extend our base API: mwse
 -------------------------------------------------
 
@@ -861,7 +889,7 @@ function mwse.log(str, ...)
 	print(tostring(str):format(...))
 end
 
--- helper function for `mwse.loadConfig`. 
+-- helper function for `mwse.loadConfig`.
 -- this function is responsible for:
 -- 1) restoring numeric keys (i.e. keys that should be numbers, but were turned into strings by `json.savefile`)
 -- 2) adding missing values to `config` that are present in `defaultConfig`
@@ -903,7 +931,7 @@ end
 
 function mwse.loadConfig(fileName, defaults)
 	local result = json.loadfile(string.format("config\\%s", fileName))
-	
+
 	if not result and not defaults then return end
 
 	result = result or {} -- make sure the user gets something
