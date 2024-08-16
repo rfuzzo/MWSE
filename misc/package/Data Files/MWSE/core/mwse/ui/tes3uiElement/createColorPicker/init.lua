@@ -5,7 +5,7 @@ local CONSTANTS = require("mwse.ui.tes3uiElement.createColorPicker.constants")
 local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
 local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
 local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
-local update = require("mwse.ui.tes3uiElement.createColorPicker.updateHelpers")
+local validate = require("mwse.ui.tes3uiElement.createColorPicker.validate")
 
 -- Defined in oklab\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
@@ -67,11 +67,8 @@ local function createPreview(params, parent, color, alpha, label, labelOnTop, on
 		createPreviewLabel(outerContainer, label)
 	end
 
-	if onClickCallback then
-		preview:register(tes3.uiEvent.mouseDown, function(e)
-			onClickCallback(e)
-		end)
-	end
+	if not onClickCallback then return end
+	preview:register(tes3.uiEvent.mouseDown, onClickCallback)
 end
 
 
@@ -203,61 +200,53 @@ local function createPickerBlock(params, picker, parent)
 			tes3ui.captureMouseDrag(false)
 		end)
 
-		alphaIndicator = createIndicator(
-			alphaPicker,
-			"alpha",
-			0.5,
-			1 - params.initialAlpha
-		)
+		alphaIndicator = createIndicator(alphaPicker, "alpha", 0.5,	1 - params.initialAlpha)
 	end
 
-	local previewContainer = mainRow:createBlock({ id = UIID.preview.topContainer })
-	previewContainer.flowDirection = tes3.flowDirection.topToBottom
-	previewContainer.autoWidth = true
-	previewContainer.autoHeight = true
-
-	createPreview(params, previewContainer, initialColor, params.initialAlpha, "Current", true)
+	local previewContainer
+	if params.showPreviews then
+		previewContainer = mainRow:createBlock({ id = UIID.preview.topContainer })
+		previewContainer.flowDirection = tes3.flowDirection.topToBottom
+		previewContainer.autoWidth = true
+		previewContainer.autoHeight = true
+		createPreview(params, previewContainer, initialColor, params.initialAlpha, "Current", true)
+	end
 
 	-- Implement picking behavior
 	mainPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local x = math.clamp(e.relativeX, 1, mainPicker.width)
 		local y = math.clamp(e.relativeY, 1, mainPicker.height)
-		if isShiftDown() then
-			y = mainIndicator.absolutePosAlignY * mainPicker.height
-		end
-
 		local pickedColor = picker.mainImage:getPixel(x, y)
-		update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
-
-		x = x / mainPicker.width
-		y = y / mainPicker.height
-		mainIndicator.absolutePosAlignX = x
-		mainIndicator.absolutePosAlignY = y
-		if params.showSaturationSlider then
-			slider.widget.current = x * CONSTANTS.SLIDER_SCALE
+		if isShiftDown() then
+			local current = picker:getColor()
+			local pickedHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+			-- Only allow horizontal movement (saturation) while shift is pressed.
+			pickedHSV.s = x / mainPicker.width
+			pickedColor = oklab.hsvlib_hsv_to_srgb(pickedHSV)
 		end
-		mainRow:getTopLevelMenu():updateLayout()
+
+		picker:colorSelected(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
 	end)
 	if params.showSaturationSlider then
 		slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
 			local x = math.clamp((slider.widget.current / CONSTANTS.SLIDER_SCALE) * mainPicker.width, 1, mainPicker.width)
-			local y = mainIndicator.absolutePosAlignY * mainPicker.height
-			local pickedColor = picker.mainImage:getPixel(x, y)
-			update.colorSelected(picker, parent, pickedColor, picker.currentAlpha)
+			local current = picker:getColor()
+			local pickedHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+			pickedHSV.s = x / mainPicker.width
 
-			x = x / mainPicker.width
-			y = y / mainPicker.height
-			mainIndicator.absolutePosAlignX = x
-			mainIndicator.absolutePosAlignY = y
-			mainRow:getTopLevelMenu():updateLayout()
+			local pickedColor = oklab.hsvlib_hsv_to_srgb(pickedHSV)
+			picker:colorSelected(pickedColor, picker:getAlpha())
 			parent:triggerEvent("colorChanged")
 		end)
 	end
 
 	huePicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local x = math.clamp(e.relativeX, 1, huePicker.width)
-		local y = math.clamp(e.relativeY, 1, huePicker.height)
+		-- We don't pick the color from the last row in the hue picker.
+		-- The hue indicator would jump to the top of the hue picker if it was dragged all the way down.
+		-- I (C3pa) suppose this happens because of numerical instability of multiple conversions from sRGB -> HSV.
+		local y = math.clamp(e.relativeY, 1, huePicker.height - 1)
 
 		local current = picker:getColor()
 		local currentHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
@@ -268,38 +257,22 @@ local function createPickerBlock(params, picker, parent)
 		currentHSV.h = pickedHSV.h
 		pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
 
-		update.hueChanged(picker, parent, pickedColor, picker.currentAlpha)
-
-		hueIndicator.absolutePosAlignY = y / huePicker.height
-		mainRow:getTopLevelMenu():updateLayout()
+		picker:hueChanged(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
 	end)
 
 	if params.alpha then
 		alphaPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 			local y = math.clamp(e.relativeY / alphaPicker.height, 0, 1)
-			update.colorSelected(picker, parent, picker.currentColor, 1 - y)
-			alphaIndicator.absolutePosAlignY = y
-			mainRow:getTopLevelMenu():updateLayout()
+			picker:colorSelected(picker:getColor(), 1 - y)
 			parent:triggerEvent("colorChanged")
 		end)
 	end
 
-	if params.showOriginal then
+	if params.showPreviews and params.showOriginal then
 		--- @param e tes3uiEventData
 		local function resetColor(e)
-			update.hueChanged(picker, parent, params.initialColor, params.initialAlpha)
-
-			mainIndicator.absolutePosAlignX = mainIndicatorInitialAbsolutePosAlignX
-			mainIndicator.absolutePosAlignY = mainIndicatorInitialAbsolutePosAlignY
-			if params.showSaturationSlider then
-				slider.widget.current = mainIndicatorInitialAbsolutePosAlignX * CONSTANTS.SLIDER_SCALE
-			end
-			hueIndicator.absolutePosAlignY = hueIndicatorInitialAbsolutePosAlignY
-			if params.alpha then
-				alphaIndicator.absolutePosAlignY = 1 - params.initialAlpha
-			end
-			mainRow:getTopLevelMenu():updateLayout()
+			picker:hueChanged(params.initialColor, params.initialAlpha)
 			parent:triggerEvent("colorChanged")
 		end
 		createPreview(params, previewContainer, initialColor, params.initialAlpha, "Original", false, resetColor)
@@ -377,8 +350,7 @@ local function createDataBlock(params, picker, parent)
 	-- Update color after new value was entered.
 	input:registerAfter(tes3.uiEvent.keyEnter, function(e)
 		local newColor, alpha = format.hexToPixel(getInputValue(input))
-		update.hueChanged(picker, parent, newColor, alpha)
-		update.updateIndicatorPositions(parent, newColor, alpha)
+		picker:hueChanged(newColor, alpha)
 		parent:triggerEvent("colorChanged")
 	end)
 
@@ -402,9 +374,10 @@ end
 --- @field initialColor ImagePixel
 --- @field initialAlpha? number
 --- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
---- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
 --- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
 --- @field showSaturationSlider? boolean *Default: true*
+--- @field showPreviews boolean? *Default: true* If false the picker won't have any color preview widgets.
+--- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
 --- @field previewWidth integer? *Default: 64*
 --- @field previewHeight integer? *Default: 64*
 
@@ -412,13 +385,18 @@ end
 function tes3uiElement:createColorPicker(params)
 	assert(type(params) == "table", "Invalid parameters provided.")
 	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPicker.params]]
-	if (not params.alpha) or (not params.initialAlpha) then
-		params.initialAlpha = 1
-	end
 	params.alpha = table.get(params, "alpha", false)
+	params.showPreviews = table.get(params, "showPreviews", true)
 	params.showOriginal = table.get(params, "showOriginal", true)
 	params.showDataRow = table.get(params, "showDataRow", true)
 	params.showSaturationSlider = table.get(params, "showSaturationSlider", true)
+
+	if (not params.alpha) or (not params.initialAlpha) then
+		params.initialAlpha = 1
+	end
+	assert(validate.inUnitRange(params.initialAlpha), "Invalid 'initialAlpha' provided. Must be in unit range [0, 1].")
+	assert(validate.pixel(params.initialColor),
+		"Invalid 'initialColor' provided. Must be a table with RGB values in unit range [0, 1].")
 
 	-- When picker doesn't have checkerd preview, but has original preview let's make default
 	-- color preview width double the normal, so the current and original previews form a square.
@@ -433,11 +411,6 @@ function tes3uiElement:createColorPicker(params)
 		initialColor = params.initialColor,
 		initialAlpha = params.initialAlpha,
 	})
-
-	picker:setColor(
-		ffiPixel({ params.initialColor.r, params.initialColor.g, params.initialColor.b }),
-		params.initialAlpha
-	)
 
 	local container = self:createBlock({ id = params.id })
 	container.autoWidth = true

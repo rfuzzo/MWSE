@@ -4,11 +4,9 @@
 --- @field initialColor ImagePixel
 --- @field initialAlpha? number
 --- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
---- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
---- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
 --- @field showSaturationSlider? boolean *Default: true*
 --- @field closeCallback? fun(selectedColor: ImagePixel, selectedAlpha: number|nil) Called when the color picker has been closed.
---- @field leaveMenuMode? boolean
+--- @field leaveMenuMode? boolean *Default: false*
 
 local i18n = mwse.loadTranslations("..")
 
@@ -28,7 +26,6 @@ function tes3ui.showColorPickerMenu(params)
 	menu.childAlignY = 0.5
 	menu.autoWidth = true
 	menu.autoHeight = true
-	menu.minWidth = 500
 	menu.alpha = tes3.worldController.menuAlpha
 
 	-- Heading
@@ -60,8 +57,6 @@ function tes3ui.showColorPickerMenu(params)
 		alpha = params.alpha,
 		initialColor = params.initialColor,
 		initialAlpha = params.initialAlpha,
-		showOriginal = params.showOriginal,
-		showDataRow = params.showDataRow,
 		showSaturationSlider = params.showSaturationSlider,
 	})
 

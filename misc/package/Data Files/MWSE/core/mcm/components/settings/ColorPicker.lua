@@ -1,6 +1,5 @@
 local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
 local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
-local update = require("mwse.ui.tes3uiElement.createColorPicker.updateHelpers")
 
 local Parent = require("mcm.components.settings.Setting")
 
@@ -16,21 +15,13 @@ local ColorPicker = Parent:new()
 ColorPicker.initialColor = { r = 1.0, g = 1.0, b = 1.0 }
 ColorPicker.initialAlpha = 1.0
 
---- Used when a color with different Hue was picked.
---- @param newColor ffiImagePixel|ImagePixel
---- @param alpha number
-function ColorPicker:hueChanged(newColor, alpha)
-	local parent = self.elements.picker
-	local picker = parent.widget --[[@as ColorPicker]]
-	update.hueChanged(picker, parent, newColor, alpha)
-	update.updateIndicatorPositions(parent, newColor, alpha)
-end
-
 --- @param newValue ImagePixelA
 function ColorPicker:setVariableValue(newValue)
 	-- Make sure we don't create a reference to newValue table (which is usually self.variable.defaultSetting).
 	self.variable.value = table.copy(newValue)
-	self:hueChanged(newValue, newValue.a)
+	local parent = self.elements.picker
+	local picker = parent.widget --[[@as ColorPicker]]
+	picker:hueChanged(newValue, newValue.a)
 	self:update()
 end
 
@@ -91,7 +82,7 @@ function ColorPicker:makeComponent(parentBlock)
 	local initialAlpha = initialColor.a or self.initialAlpha
 
 	local pickerElement = parentBlock:createColorPicker({
-		id = "mwseMCMColorPicker",
+		id = tes3ui.registerID("mwseMCMColorPicker"),
 		initialColor = initialColor,
 		alpha = self.alpha,
 		initialAlpha = initialAlpha,

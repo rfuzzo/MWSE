@@ -1,5 +1,8 @@
 local ffi = require("ffi")
 
+-- This is the first file that declares `ffiPixel = ffi.typeof("RGB")`.
+-- We need these declarations first:
+local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
 -- Defined in oklab\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 
@@ -36,41 +39,22 @@ function this.pixelToHex(pixel)
 	end
 end
 
---- @param code string
---- @return number?
-local function hexToColor(code)
-	local color = tonumber(code, 16)
-	-- The user might have entered invalid hex code. We set that channel
-	-- to the value of currentColor in the keyEnter handler on the input.
-	if not color then return end
-	-- Make sure the entered color will be clamped to [0, 1].
-	return math.clamp(color / 255, 0, 1)
-end
-
 local ARGB_HEX_CODE_LEN = 8
 
 --- Parses given HTML hex code into an RGB(A) pixel.
 --- @param str string
 --- @return ffiImagePixel, number?
 function this.hexToPixel(str)
-	-- ARGB
-	if string.len(str) == ARGB_HEX_CODE_LEN then
-		local pixel = ffiPixel({
-			hexToColor(string.sub(str, 3, 4)),
-			hexToColor(string.sub(str, 5, 6)),
-			hexToColor(string.sub(str, 7, 8)),
-		})
-		local alpha = hexToColor(string.sub(str, 1, 2))
-		return pixel, alpha
-	end
-
-	-- RGB
-	local pixel = ffiPixel({
-		hexToColor(string.sub(str, 1, 2)),
-		hexToColor(string.sub(str, 3, 4)),
-		hexToColor(string.sub(str, 5, 6)),
+	local n = tonumber(str, 16)
+	local c = ffiPixel({
+		r = bit.rshift(bit.band(n, 0x00FF0000), 16) / 255,
+		g = bit.rshift(bit.band(n, 0x0000FF00),  8) / 255,
+		b = bit.band(n, 0x000000FF) / 255,
 	})
-	return pixel
+	if string.len(str) == ARGB_HEX_CODE_LEN then
+		return c, bit.rshift(n, 24) / 255
+	end
+	return c
 end
 
 return this

@@ -1,9 +1,11 @@
 local ffi = require("ffi")
 
 local Base = require("mwse.ui.tes3uiElement.createColorPicker.Base")
+local CONSTANTS = require("mwse.ui.tes3uiElement.createColorPicker.constants")
+local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
 local Image = require("mwse.ui.tes3uiElement.createColorPicker.Image")
 local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
-
+local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 
 -- Defined in oklab\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
@@ -15,6 +17,7 @@ local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiIma
 ---	@field alpha niSourceTexture
 
 --- @class ColorPicker
+--- @field element tes3uiElement Set by the tes3uiElement:makeLuaWidget
 --- @field mainWidth integer Width of the main picker.
 --- @field height integer Height of all the picker widgets.
 --- @field hueWidth integer Width of hue and alpha pickers.
@@ -92,13 +95,6 @@ function ColorPicker:new(data)
 	return t
 end
 
---- @param color ffiImagePixel
---- @param alpha number
-function ColorPicker:setColor(color, alpha)
-	self.currentColor = color
-	self.currentAlpha = alpha
-end
-
 function ColorPicker:getAlpha()
 	return self.currentAlpha
 end
@@ -119,10 +115,128 @@ function ColorPicker:getRGBA()
 	return { r = c.r, g = c.g, b = c.b, a = self.currentAlpha }
 end
 
+--- @alias IndicatorID
+---| "main"
+---| "hue"
+---| "alpha"
+---| "slider"
+
+--- @param parent tes3uiElement
+local function getIndicators(parent)
+	--- @type table<IndicatorID, tes3uiElement>
+	local indicators = {}
+	for _, UIID in pairs(UIID.indicator) do
+		local indicator = parent:findChild(UIID)
+		-- Not every Color Picker will have alpha indicator or saturation slider.
+		if indicator then
+			local id = indicator:getLuaData("indicatorID")
+			indicators[id] = indicator
+		end
+	end
+	return indicators
+end
+
+--- @param hsv ffiHSV
+--- @param alpha number?
+function ColorPicker:updateIndicatorPositions(hsv, alpha)
+	local indicators = getIndicators(self.element)
+
+	-- Update main picker's indicator
+	indicators.main.absolutePosAlignX = hsv.s
+	indicators.main.absolutePosAlignY = 1 - hsv.v
+	-- Update main picker's slider
+	local slider = indicators.slider
+	if slider then
+		slider.widget.current = hsv.s * CONSTANTS.SLIDER_SCALE
+	end
+
+	-- Update hue indicator
+	indicators.hue.absolutePosAlignY = hsv.h / 360
+
+	-- Update alpha indicator
+	if indicators.alpha then
+		indicators.alpha.absolutePosAlignY = 1 - alpha
+	end
+end
+
+--- @param newColor ffiImagePixel
+--- @param alpha number
+function ColorPicker:updatePreview(newColor, alpha)
+	-- Not every color picker has preview widgets.
+	local previewsContainer = self.element:findChild(UIID.preview.topContainer)
+	if not previewsContainer then return end
+	local previewElement = previewsContainer:findChild(UIID.preview.current)
+	if not previewElement then return end
+	local preview = previewElement.widget --[[@as ColorPreview]]
+	preview:setColor(newColor, alpha)
+end
+
+--- @param newColor ffiImagePixel|ImagePixel|ImagePixelA
+--- @param alpha number
+function ColorPicker:updateValueInput(newColor, alpha)
+	-- Not all color pickers have value input.
+	local input = self.element:findChild(UIID.textInput)
+	if not input then return end
+
+	-- Make sure we don't get NaNs in color text inputs. We clamp alpha here.
+	if alpha then
+		alpha = math.clamp(alpha, 0.0000001, 1.0)
+	end
+
+	local newText = ""
+	if input:getLuaData("hasAlpha") then
+		newText = format.pixelToHex({
+			r = newColor.r,
+			g = newColor.g,
+			b = newColor.b,
+			a = alpha,
+		})
+	else
+		newText = format.pixelToHex({
+			r = newColor.r,
+			g = newColor.g,
+			b = newColor.b,
+		})
+	end
+	input.text = newText
+end
+
 --- @param color ffiImagePixel
-function ColorPicker:updateMainImage(color)
-	local hsv = oklab.hsvlib_srgb_to_hsv(color)
+--- @param alpha number
+function ColorPicker:setColor(color, alpha)
+	self.currentColor = color
+	self.currentAlpha = alpha
+end
+
+--- Used to update current preview color and the text shown in the value input.
+--- Usually used when after a color was picked in the main or alpha pickers.
+--- @param newColor ImagePixel|ffiImagePixel
+--- @param alpha number
+function ColorPicker:colorSelected(newColor, alpha)
+	-- Make sure we don't create reference to the picked pixel.
+	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
+	self:setColor(newColor, alpha)
+	self:updatePreview(newColor, alpha)
+	self:updateValueInput(newColor, alpha)
+
+	local hsv = oklab.hsvlib_srgb_to_hsv(newColor)
+	self:updateIndicatorPositions(hsv, alpha)
+	self.element:updateLayout()
+end
+
+--- Updates all the elements of color picker. It's more expensive than `colorSelected` since it will
+--- regenerate the image for main picker.
+--- @param newColor ffiImagePixel|ImagePixel
+--- @param alpha number
+function ColorPicker:hueChanged(newColor, alpha)
+	-- Make sure we don't create reference to the picked pixel.
+	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
+	self:colorSelected(newColor, alpha)
+	-- Now, also need to regenerate the image for the main picker since the Hue changed.
+	local hsv = oklab.hsvlib_srgb_to_hsv(newColor)
 	self.mainImage:mainPicker(hsv.h)
+	local mainPicker = self.element:findChild(UIID.mainPicker)
+	mainPicker.texture.pixelData:setPixelsFloat(self.mainImage:toPixelBufferFloat())
 end
 
 return ColorPicker
