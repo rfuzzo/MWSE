@@ -44,7 +44,7 @@ function tes3ui.showColorPickerMenu(params)
 		id = tes3ui.registerID("MenuColorPicker_heading"),
 		text = params.heading or i18n("Color Picker Menu"),
 	})
-	headingBlock:createDivider()
+	headingBlock:createDivider({ id = tes3ui.registerID("MenuColorPicker_divider") })
 
 	-- Menu body
 	local bodyBlock = menu:createBlock({ id = tes3ui.registerID("MenuColorPicker_picker_container") })
@@ -56,6 +56,7 @@ function tes3ui.showColorPickerMenu(params)
 	bodyBlock.flowDirection = tes3.flowDirection.topToBottom
 
 	local pickerElement = bodyBlock:createColorPicker({
+		id = tes3ui.registerID("MenuColorPicker_widget"),
 		alpha = params.alpha,
 		initialColor = params.initialColor,
 		initialAlpha = params.initialAlpha,

@@ -9,22 +9,14 @@ local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 local this = {}
 
---- @param picker ColorPicker
 --- @param parent tes3uiElement
 --- @param newColor ffiImagePixel
 --- @param alpha number
-local function updatePreview(picker, parent, newColor, alpha)
+local function updatePreview(parent, newColor, alpha)
 	local previewsContainer = parent:findChild(UIID.preview.topContainer)
-	local currentContainer = previewsContainer.children[1]
-
-	-- standardPreview is a colored rect.
-	local standardPreview = currentContainer:findChild(UIID.preview.left)
-	standardPreview.color = { newColor.r, newColor.g, newColor.b }
-
-	-- checkersPreview is the currently selected color alpha blended on checkered background.
-	local checkersPreview = currentContainer:findChild(UIID.preview.right)
-	picker:updatePreviewImage(newColor, alpha)
-	checkersPreview.texture.pixelData:setPixelsFloat(picker.previewImage:toPixelBufferFloat())
+	local previewElement = previewsContainer:findChild(UIID.preview.current)
+	local preview = previewElement.widget --[[@as ColorPreview]]
+	preview:setColor(newColor, alpha)
 end
 
 --- @alias IndicatorID
@@ -110,7 +102,7 @@ function this.colorSelected(picker, parent, newColor, alpha)
 	-- We construct a new ffiPixel.
 	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
 	picker:setColor(newColor, alpha)
-	updatePreview(picker, parent, newColor, alpha)
+	updatePreview(parent, newColor, alpha)
 	this.updateValueInput(parent, newColor, alpha)
 end
 

@@ -180,9 +180,9 @@ function Image:verticalGradient(topColor, bottomColor)
 end
 
 --- Creates a checkered pattern.
---- @param size integer? The size of single square in pixels.
---- @param lightGray ImagePixel?
---- @param darkGray ImagePixel?
+--- @param size integer? *Default: 16*. The size of single square in pixels.
+--- @param lightGray ImagePixel? *Default: { r = 0.7, g = 0.7, b = 0.7 }*
+--- @param darkGray ImagePixel? *Default: { r = 0.5, g = 0.5, b = 0.5 }*
 function Image:toCheckerboard(size, lightGray, darkGray)
 	size = size or 16
 	local doubleSize = 2 * size

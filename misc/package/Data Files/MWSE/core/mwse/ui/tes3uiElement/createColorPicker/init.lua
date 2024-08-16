@@ -11,50 +11,6 @@ local update = require("mwse.ui.tes3uiElement.createColorPicker.updateHelpers")
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 local i18n = mwse.loadTranslations("..")
 
---- @class ColorPickerPreviewsTable
---- @field standardPreview tes3uiElement
---- @field checkersPreview tes3uiElement
-
---- @param dimension integer
-local function scalePreview(dimension)
-	return math.floor(dimension * 0.85)
-end
-
-
---- @param picker ColorPicker
---- @param parent tes3uiElement
---- @param color ffiImagePixel
---- @param alpha number
---- @param texture niSourceTexture
---- @return ColorPickerPreviewsTable
-local function createPreviewElement(picker, parent, color, alpha, texture)
-	local standardPreview = parent:createRect({
-		id = UIID.preview.left,
-		color = { color.r, color.g, color.b },
-	})
-	standardPreview.width = scalePreview(picker.previewWidth / 2)
-	standardPreview.height = scalePreview(picker.previewHeight)
-	standardPreview.borderLeft = 8
-
-	local checkersPreview = parent:createRect({
-		id = UIID.preview.right,
-		color = { 1.0, 1.0, 1.0 },
-	})
-	checkersPreview.width = scalePreview(picker.previewWidth / 2)
-	checkersPreview.height = scalePreview(picker.previewHeight)
-	checkersPreview.texture = texture
-	checkersPreview.imageFilter = false
-	checkersPreview.borderRight = 8
-
-	picker:updatePreviewImage(color, alpha)
-	checkersPreview.texture.pixelData:setPixelsFloat(picker.previewImage:toPixelBufferFloat())
-
-	return {
-		standardPreview = standardPreview,
-		checkersPreview = checkersPreview,
-	}
-end
-
 --- @param outerContainer tes3uiElement
 --- @param label string
 local function createPreviewLabel(outerContainer, label)
@@ -71,15 +27,14 @@ local function createPreviewLabel(outerContainer, label)
 	})
 end
 
---- @param picker ColorPicker
+--- @param params tes3uiElement.createColorPicker.params
 --- @param parent tes3uiElement
 --- @param color ffiImagePixel
 --- @param alpha number
 --- @param label string
 --- @param labelOnTop boolean
 --- @param onClickCallback? fun(e: tes3uiEventData)
---- @return ColorPickerPreviewsTable
-local function createPreview(picker, parent, color, alpha, label, labelOnTop, onClickCallback)
+local function createPreview(params, parent, color, alpha, label, labelOnTop, onClickCallback)
 	-- We don't want to create references to color.
 	local color = ffiPixel({ color.r, color.g, color.b })
 	local outerContainer = parent:createBlock({ id = tes3ui.registerID("ColorPicker_color_preview_outer_container") })
@@ -91,26 +46,26 @@ local function createPreview(picker, parent, color, alpha, label, labelOnTop, on
 		createPreviewLabel(outerContainer, label)
 	end
 
-	local innerContainer = outerContainer:createBlock({
-		id = tes3ui.registerID("ColorPicker_color_preview_inner_container")
+	local preview = outerContainer:createColorPreview({
+		id = UIID.preview[string.lower(label)],
+		color = color,
+		alpha = alpha,
+		width = params.previewWidth,
+		height = params.previewHeight,
+		hasAlphaPreview = params.alpha,
 	})
-	innerContainer.flowDirection = tes3.flowDirection.leftToRight
-	innerContainer.autoWidth = true
-	innerContainer.autoHeight = true
-
-	local previewTexture = picker.textures["preview" .. label]
-	local previews = createPreviewElement(picker, innerContainer, color, alpha, previewTexture)
+	preview.borderLeft = 8
+	preview.borderRight = 8
 
 	if not labelOnTop then
 		createPreviewLabel(outerContainer, label)
 	end
 
 	if onClickCallback then
-		innerContainer:register(tes3.uiEvent.mouseDown, function(e)
+		preview:register(tes3.uiEvent.mouseDown, function(e)
 			onClickCallback(e)
 		end)
 	end
-	return previews
 end
 
 
@@ -255,7 +210,7 @@ local function createPickerBlock(params, picker, parent)
 	previewContainer.autoWidth = true
 	previewContainer.autoHeight = true
 
-	local currentPreview = createPreview(picker, previewContainer, initialColor, params.initialAlpha, "Current", true)
+	createPreview(params, previewContainer, initialColor, params.initialAlpha, "Current", true)
 
 	-- Implement picking behavior
 	mainPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
@@ -341,14 +296,13 @@ local function createPickerBlock(params, picker, parent)
 			mainRow:getTopLevelMenu():updateLayout()
 			parent.parent:triggerEvent("colorChanged")
 		end
-		createPreview(picker, previewContainer, initialColor, params.initialAlpha, "Original", false, resetColor)
+		createPreview(params, previewContainer, initialColor, params.initialAlpha, "Original", false, resetColor)
 	end
 
 	return {
 		mainPicker = mainPicker,
 		huePicker = huePicker,
 		alphaPicker = alphaPicker,
-		currentPreview = currentPreview,
 	}
 end
 
@@ -382,6 +336,7 @@ end
 --- @param picker ColorPicker
 --- @param parent tes3uiElement
 local function createDataBlock(params, picker, parent)
+	-- TODO see if I want to set borderRight on this element to make enough space in MCM
 	local dataRow = parent:createThinBorder({ id = UIID.dataRowContainer })
 	dataRow.flowDirection = tes3.flowDirection.leftToRight
 	dataRow.autoHeight = true
@@ -428,7 +383,7 @@ local function createDataBlock(params, picker, parent)
 	copyButton:register(tes3.uiEvent.mouseClick, function(e)
 		local text = getInputValue(input)
 		os.setClipboardText(text)
-		tes3.messageBox(i18n("%q copied to clipboard."), text)
+		tes3.messageBox(i18n("%%q copied to clipboard."), text)
 	end)
 
 	return {
@@ -443,16 +398,21 @@ local function createColorPickerWidget(params, parent)
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1
 	end
+	params.alpha = table.get(params, "alpha", false)
 	params.showOriginal = table.get(params, "showOriginal", true)
 	params.showDataRow = table.get(params, "showDataRow", true)
 	params.showSaturationSlider = table.get(params, "showSaturationSlider", true)
+
+	-- When picker doesn't have checkerd preview, but has original preview let's make default
+	-- color preview width double the normal, so the current and original previews form a square.
+	if params.alpha == false and params.showOriginal then
+		params.previewWidth = table.get(params, "previewWidth", 128)
+	end
 
 	local picker = ColorPicker:new({
 		mainWidth = CONSTANTS.PICKER_MAIN_WIDTH,
 		height = CONSTANTS.PICKER_HEIGHT,
 		hueWidth = CONSTANTS.PICKER_VERTICAL_COLUMN_WIDTH,
-		previewWidth = CONSTANTS.PICKER_PREVIEW_WIDTH,
-		previewHeight = CONSTANTS.PICKER_PREVIEW_HEIGHT,
 		initialColor = params.initialColor,
 		initialAlpha = params.initialAlpha,
 	})
@@ -465,6 +425,7 @@ local function createColorPickerWidget(params, parent)
 	local container = parent:createBlock({ id = params.id })
 	container.autoWidth = true
 	container.autoHeight = true
+	container.widthProportional = 1.0
 	container.flowDirection = tes3.flowDirection.topToBottom
 	createPickerBlock(params, picker, container)
 
@@ -478,13 +439,15 @@ end
 
 
 --- @class tes3uiElement.createColorPicker.params
---- @field id? string
+--- @field id? string|integer
 --- @field initialColor ImagePixel
 --- @field initialAlpha? number
 --- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
 --- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
 --- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
 --- @field showSaturationSlider? boolean *Default: true*
+--- @field previewWidth integer? *Default: 64*
+--- @field previewHeight integer? *Default: 64*
 
 ---@param params tes3uiElement.createColorPicker.params
 function tes3uiElement:createColorPicker(params)
