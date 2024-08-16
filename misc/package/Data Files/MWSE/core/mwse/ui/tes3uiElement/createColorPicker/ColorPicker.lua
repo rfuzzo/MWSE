@@ -52,28 +52,33 @@ function ColorPicker:new(data)
 	t.currentColor = ffiPixel({ data.initialColor.r, data.initialColor.g, data.initialColor.b })
 	t.currentAlpha = t.initialAlpha
 
+	-- Make sure texture dimensions are powers of 2.
+	local height = math.nextPowerOfTwo(data.height)
+	local mainWidth = math.nextPowerOfTwo(data.mainWidth)
+	local hueWidth = math.nextPowerOfTwo(data.hueWidth)
+
 	t.mainImage = Image:new({
-		width = data.mainWidth,
-		height = data.height,
+		width = mainWidth,
+		height = height,
 	})
 	local startHSV = oklab.hsvlib_srgb_to_hsv(t.currentColor)
 	t.mainImage:mainPicker(startHSV.h)
 
 	t.hueBar = Image:new({
-		width = data.hueWidth,
-		height = data.height,
+		width = hueWidth,
+		height = height,
 	})
 	t.hueBar:verticalHueBar()
 
 	t.alphaCheckerboard = Image:new({
-		width = data.hueWidth,
-		height = data.height,
+		width = hueWidth,
+		height = height,
 	})
 	t.alphaCheckerboard:toCheckerboard()
 
 	t.alphaBar = Image:new({
-		width = data.hueWidth,
-		height = data.height,
+		width = hueWidth,
+		height = height,
 	})
 	t.alphaBar:verticalGradient(
 		{ r = 0.25, g = 0.25, b = 0.25, a = 1.0 },
@@ -83,9 +88,9 @@ function ColorPicker:new(data)
 
 	-- Create textures for this Color Picker
 	t.textures = {
-		main = niPixelData.new(data.mainWidth, data.height):createSourceTexture(),
-		hue = niPixelData.new(data.hueWidth, data.height):createSourceTexture(),
-		alpha = niPixelData.new(data.hueWidth, data.height):createSourceTexture(),
+		main = niPixelData.new(mainWidth, height):createSourceTexture(),
+		hue = niPixelData.new(hueWidth, height):createSourceTexture(),
+		alpha = niPixelData.new(hueWidth, height):createSourceTexture(),
 	}
 	for _, texture in pairs(t.textures) do
 		texture.isStatic = false

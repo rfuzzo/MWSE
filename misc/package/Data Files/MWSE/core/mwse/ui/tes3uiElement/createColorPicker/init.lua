@@ -11,6 +11,12 @@ local validate = require("mwse.ui.tes3uiElement.createColorPicker.validate")
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 local i18n = mwse.loadTranslations("..")
 
+--- Textures used in color picker are always next power of 2 and then scaled down.
+--- @param size integer
+local function getScaleFactor(size)
+	return size / math.nextPowerOfTwo(size)
+end
+
 --- @param outerContainer tes3uiElement
 --- @param label string
 local function createPreviewLabel(outerContainer, label)
@@ -92,6 +98,9 @@ local function isShiftDown()
 	return tes3.worldController.inputController:isShiftDown()
 end
 
+local SV_EPSILON = 0.01
+local HUE_EPSILON = 1e-3
+
 --- @param params tes3uiElement.createColorPicker.params
 --- @param picker ColorPicker
 --- @param parent tes3uiElement
@@ -123,8 +132,11 @@ local function createPickerBlock(params, picker, parent)
 	mainPicker.borderTop = 8
 	mainPicker.borderLeft = 8
 	mainPicker.borderRight = 8
-	mainPicker.width = picker.mainWidth
-	mainPicker.height = picker.height
+	mainPicker.width = params.mainWidth
+	mainPicker.height = params.height
+	mainPicker.imageScaleX = getScaleFactor(params.mainWidth)
+	mainPicker.imageScaleY = getScaleFactor(params.height)
+
 	mainPicker.texture = picker.textures.main
 	mainPicker.imageFilter = false
 	mainPicker.texture.pixelData:setPixelsFloat(picker.mainImage:toPixelBufferFloat())
@@ -162,8 +174,12 @@ local function createPickerBlock(params, picker, parent)
 		color = { 1, 1, 1 },
 	})
 	huePicker.borderAllSides = 8
-	huePicker.width = picker.hueWidth
-	huePicker.height = picker.height
+	huePicker.width = params.hueWidth
+	huePicker.height = params.height
+	huePicker.imageScaleX = getScaleFactor(params.hueWidth)
+	huePicker.imageScaleY = getScaleFactor(params.height)
+
+
 	huePicker.texture = picker.textures.hue
 	huePicker.imageFilter = false
 	huePicker.texture.pixelData:setPixelsFloat(picker.hueBar:toPixelBufferFloat())
@@ -180,16 +196,18 @@ local function createPickerBlock(params, picker, parent)
 		hueIndicatorInitialAbsolutePosAlignY
 	)
 
-	local alphaPicker
-	local alphaIndicator
+	local alphaPicker, alphaIndicator
 	if params.alpha then
 		alphaPicker = mainRow:createRect({
 			id = tes3ui.registerID("ColorPicker_alpha_picker"),
 			color = { 1, 1, 1 },
 		})
 		alphaPicker.borderAllSides = 8
-		alphaPicker.width = picker.hueWidth
-		alphaPicker.height = picker.height
+		alphaPicker.width = params.hueWidth
+		alphaPicker.height = params.height
+		alphaPicker.imageScaleX = getScaleFactor(params.hueWidth)
+		alphaPicker.imageScaleY = getScaleFactor(params.height)
+
 		alphaPicker.texture = picker.textures.alpha
 		alphaPicker.imageFilter = false
 		alphaPicker.texture.pixelData:setPixelsFloat(picker.alphaBar:toPixelBufferFloat())
@@ -200,7 +218,7 @@ local function createPickerBlock(params, picker, parent)
 			tes3ui.captureMouseDrag(false)
 		end)
 
-		alphaIndicator = createIndicator(alphaPicker, "alpha", 0.5,	1 - params.initialAlpha)
+		alphaIndicator = createIndicator(alphaPicker, "alpha", 0.5, 1 - params.initialAlpha)
 	end
 
 	local previewContainer
@@ -216,14 +234,17 @@ local function createPickerBlock(params, picker, parent)
 	mainPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local x = math.clamp(e.relativeX, 1, mainPicker.width)
 		local y = math.clamp(e.relativeY, 1, mainPicker.height)
-		local pickedColor = picker.mainImage:getPixel(x, y)
-		if isShiftDown() then
-			local current = picker:getColor()
-			local pickedHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
-			-- Only allow horizontal movement (saturation) while shift is pressed.
-			pickedHSV.s = x / mainPicker.width
-			pickedColor = oklab.hsvlib_hsv_to_srgb(pickedHSV)
+
+		local current = picker:getColor()
+		local pickedHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+		local s = math.remap(x, 1, mainPicker.width, SV_EPSILON, 1)
+		local v = math.clamp(1 - math.remap(y, 1, mainPicker.height, 0, 1), SV_EPSILON, 1)
+		pickedHSV.s = s
+		-- Only allow horizontal movement (saturation) while shift is pressed.
+		if not isShiftDown() then
+			pickedHSV.v = v
 		end
+		local pickedColor = oklab.hsvlib_hsv_to_srgb(pickedHSV)
 
 		picker:colorSelected(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
@@ -242,21 +263,15 @@ local function createPickerBlock(params, picker, parent)
 	end
 
 	huePicker:register(tes3.uiEvent.mouseStillPressed, function(e)
-		local x = math.clamp(e.relativeX, 1, huePicker.width)
-		-- We don't pick the color from the last row in the hue picker.
-		-- The hue indicator would jump to the top of the hue picker if it was dragged all the way down.
-		-- I (C3pa) suppose this happens because of numerical instability of multiple conversions from sRGB -> HSV.
-		local y = math.clamp(e.relativeY, 1, huePicker.height - 1)
-
+		local y = math.clamp(e.relativeY, 1, huePicker.height)
 		local current = picker:getColor()
 		local currentHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+		-- We don't pick the color from the very bottom in the hue picker.
+		-- The hue indicator would jump to the top of the hue picker if it was dragged all the way down.
+		-- I (C3pa) suppose this happens because of numerical instability of multiple conversions from sRGB -> HSV.
+		currentHSV.h = math.remap(y, 1, huePicker.height, 0, 360 - HUE_EPSILON)
 
-		local pickedColor = picker.hueBar:getPixel(x, y)
-		local pickedHSV = oklab.hsvlib_srgb_to_hsv(pickedColor)
-		-- Make sure we only change Hue when sliding over the hue picker.
-		currentHSV.h = pickedHSV.h
-		pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
-
+		local pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
 		picker:hueChanged(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
 	end)
@@ -374,6 +389,9 @@ end
 --- @field initialColor ImagePixel
 --- @field initialAlpha? number
 --- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
+--- @field height integer? *Default: 256* The height of the main, hue and optionally alpha pickers.
+--- @field mainWidth integer? *Default: 256* The width of the main picker.
+--- @field hueWidth integer? *Default: 32* The width of the hue and optionally alpha pickers.
 --- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
 --- @field showSaturationSlider? boolean *Default: true*
 --- @field showPreviews boolean? *Default: true* If false the picker won't have any color preview widgets.
@@ -386,6 +404,9 @@ function tes3uiElement:createColorPicker(params)
 	assert(type(params) == "table", "Invalid parameters provided.")
 	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPicker.params]]
 	params.alpha = table.get(params, "alpha", false)
+	params.height = table.get(params, "height", 256)
+	params.mainWidth = table.get(params, "mainWidth", 256)
+	params.hueWidth = table.get(params, "hueWidth", 32)
 	params.showPreviews = table.get(params, "showPreviews", true)
 	params.showOriginal = table.get(params, "showOriginal", true)
 	params.showDataRow = table.get(params, "showDataRow", true)
@@ -405,9 +426,9 @@ function tes3uiElement:createColorPicker(params)
 	end
 
 	local picker = ColorPicker:new({
-		mainWidth = CONSTANTS.PICKER_MAIN_WIDTH,
-		height = CONSTANTS.PICKER_HEIGHT,
-		hueWidth = CONSTANTS.PICKER_VERTICAL_COLUMN_WIDTH,
+		height = params.height,
+		mainWidth = params.mainWidth,
+		hueWidth = params.hueWidth,
 		initialColor = params.initialColor,
 		initialAlpha = params.initialAlpha,
 	})
