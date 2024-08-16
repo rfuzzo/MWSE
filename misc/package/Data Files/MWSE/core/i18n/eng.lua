@@ -47,4 +47,5 @@ return {
 	["%%q copied to clipboard."] = "%%q copied to clipboard.",
 	["RGB: #"] = "RGB: #",
 	["ARGB: #"] = "ARGB: #",
+	["Choose"] = "Choose",
 }
