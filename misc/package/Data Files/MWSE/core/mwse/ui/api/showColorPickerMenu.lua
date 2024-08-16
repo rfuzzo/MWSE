@@ -79,7 +79,7 @@ function tes3ui.showColorPickerMenu(params)
 	})
 
 	done:register(tes3.uiEvent.mouseDown, function(e)
-		local picker = pickerElement.widget.picker --[[@as ColorPicker]]
+		local picker = pickerElement.widget --[[@as ColorPicker]]
 		local color, alpha = picker:getColorAlpha()
 		menu:destroy()
 		if params.leaveMenuMode then

@@ -21,7 +21,7 @@ ColorPicker.initialAlpha = 1.0
 --- @param alpha number
 function ColorPicker:hueChanged(newColor, alpha)
 	local parent = self.elements.picker
-	local picker = parent.widget.picker --[[@as ColorPicker]]
+	local picker = parent.widget --[[@as ColorPicker]]
 	update.hueChanged(picker, parent, newColor, alpha)
 	update.updateIndicatorPositions(parent, newColor, alpha)
 end
@@ -99,8 +99,8 @@ function ColorPicker:makeComponent(parentBlock)
 		showDataRow = true,
 	})
 	-- Make sure our variable stays in sync with the currently picked color.
-	pickerElement:register("colorChanged", function(e)
-		local picker = pickerElement.widget.picker --[[@as ColorPicker]]
+	pickerElement:register("colorChanged", function()
+		local picker = pickerElement.widget --[[@as ColorPicker]]
 		self:updateVariableValue(picker:getRGBA())
 	end)
 

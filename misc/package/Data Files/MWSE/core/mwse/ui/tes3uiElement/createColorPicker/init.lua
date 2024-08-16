@@ -46,6 +46,11 @@ local function createPreview(params, parent, color, alpha, label, labelOnTop, on
 		createPreviewLabel(outerContainer, label)
 	end
 
+	local flowDirection = tes3.flowDirection.leftToRight
+	-- If we don't show original preview then we make current preview vertical.
+	if not params.showOriginal then
+		flowDirection = tes3.flowDirection.topToBottom
+	end
 	local preview = outerContainer:createColorPreview({
 		id = UIID.preview[string.lower(label)],
 		color = color,
@@ -53,6 +58,7 @@ local function createPreview(params, parent, color, alpha, label, labelOnTop, on
 		width = params.previewWidth,
 		height = params.previewHeight,
 		hasAlphaPreview = params.alpha,
+		flowDirection = flowDirection,
 	})
 	preview.borderLeft = 8
 	preview.borderRight = 8
@@ -231,7 +237,7 @@ local function createPickerBlock(params, picker, parent)
 			slider.widget.current = x * CONSTANTS.SLIDER_SCALE
 		end
 		mainRow:getTopLevelMenu():updateLayout()
-		parent.parent:triggerEvent("colorChanged")
+		parent:triggerEvent("colorChanged")
 	end)
 	if params.showSaturationSlider then
 		slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
@@ -245,7 +251,7 @@ local function createPickerBlock(params, picker, parent)
 			mainIndicator.absolutePosAlignX = x
 			mainIndicator.absolutePosAlignY = y
 			mainRow:getTopLevelMenu():updateLayout()
-			parent.parent:triggerEvent("colorChanged")
+			parent:triggerEvent("colorChanged")
 		end)
 	end
 
@@ -266,7 +272,7 @@ local function createPickerBlock(params, picker, parent)
 
 		hueIndicator.absolutePosAlignY = y / huePicker.height
 		mainRow:getTopLevelMenu():updateLayout()
-		parent.parent:triggerEvent("colorChanged")
+		parent:triggerEvent("colorChanged")
 	end)
 
 	if params.alpha then
@@ -275,7 +281,7 @@ local function createPickerBlock(params, picker, parent)
 			update.colorSelected(picker, parent, picker.currentColor, 1 - y)
 			alphaIndicator.absolutePosAlignY = y
 			mainRow:getTopLevelMenu():updateLayout()
-			parent.parent:triggerEvent("colorChanged")
+			parent:triggerEvent("colorChanged")
 		end)
 	end
 
@@ -294,7 +300,7 @@ local function createPickerBlock(params, picker, parent)
 				alphaIndicator.absolutePosAlignY = 1 - params.initialAlpha
 			end
 			mainRow:getTopLevelMenu():updateLayout()
-			parent.parent:triggerEvent("colorChanged")
+			parent:triggerEvent("colorChanged")
 		end
 		createPreview(params, previewContainer, initialColor, params.initialAlpha, "Original", false, resetColor)
 	end
@@ -373,7 +379,7 @@ local function createDataBlock(params, picker, parent)
 		local newColor, alpha = format.hexToPixel(getInputValue(input))
 		update.hueChanged(picker, parent, newColor, alpha)
 		update.updateIndicatorPositions(parent, newColor, alpha)
-		parent.parent:triggerEvent("colorChanged")
+		parent:triggerEvent("colorChanged")
 	end)
 
 	local copyButton = dataRow:createButton({
@@ -391,9 +397,20 @@ local function createDataBlock(params, picker, parent)
 	}
 end
 
---- @param params tes3uiElement.createColorPicker.params
---- @param parent tes3uiElement
-local function createColorPickerWidget(params, parent)
+--- @class tes3uiElement.createColorPicker.params
+--- @field id? string|integer
+--- @field initialColor ImagePixel
+--- @field initialAlpha? number
+--- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
+--- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
+--- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
+--- @field showSaturationSlider? boolean *Default: true*
+--- @field previewWidth integer? *Default: 64*
+--- @field previewHeight integer? *Default: 64*
+
+---@param params tes3uiElement.createColorPicker.params
+function tes3uiElement:createColorPicker(params)
+	assert(type(params) == "table", "Invalid parameters provided.")
 	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPicker.params]]
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1
@@ -422,7 +439,7 @@ local function createColorPickerWidget(params, parent)
 		params.initialAlpha
 	)
 
-	local container = parent:createBlock({ id = params.id })
+	local container = self:createBlock({ id = params.id })
 	container.autoWidth = true
 	container.autoHeight = true
 	container.widthProportional = 1.0
@@ -433,31 +450,10 @@ local function createColorPickerWidget(params, parent)
 		createDataBlock(params, picker, container)
 	end
 
-	return picker
-end
 
+	container:makeLuaWidget("colorPicker", picker)
 
-
---- @class tes3uiElement.createColorPicker.params
---- @field id? string|integer
---- @field initialColor ImagePixel
---- @field initialAlpha? number
---- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
---- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
---- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
---- @field showSaturationSlider? boolean *Default: true*
---- @field previewWidth integer? *Default: 64*
---- @field previewHeight integer? *Default: 64*
-
----@param params tes3uiElement.createColorPicker.params
-function tes3uiElement:createColorPicker(params)
-	local picker = createColorPickerWidget(params, self)
-
-	self:makeLuaWidget("colorPicker", {
-		picker = picker,
-	})
-
-	return self
+	return container
 end
 
 tes3ui.defineLuaWidget({

@@ -14,20 +14,18 @@ local function createPreviewElement(params, preview, parent)
 	standardPreview.width = params.width
 	standardPreview.height = params.height
 
-	local checkersPreview
-	if params.hasAlphaPreview then
-		checkersPreview = parent:createRect({
-			id = UIID.image,
-			color = { 1.0, 1.0, 1.0 },
-		})
-		-- We don't scale the image here, but the texture may be bigger than needed.
-		-- We rely on UI system to crop only the top left part of the texture.
-		checkersPreview.width = params.width
-		checkersPreview.height = params.height
-		checkersPreview.texture = preview.texture
-		checkersPreview.imageFilter = false
-		checkersPreview.texture.pixelData:setPixelsFloat(preview.image:toPixelBufferFloat())
-	end
+	if not params.hasAlphaPreview then return end
+	local checkersPreview = parent:createRect({
+		id = UIID.image,
+		color = { 1.0, 1.0, 1.0 },
+	})
+	-- We don't scale the image here, but the texture may be bigger than needed.
+	-- We rely on UI system to crop only the top left part of the texture.
+	checkersPreview.width = params.width
+	checkersPreview.height = params.height
+	checkersPreview.texture = preview.texture
+	checkersPreview.imageFilter = false
+	checkersPreview.texture.pixelData:setPixelsFloat(preview.image:toPixelBufferFloat())
 end
 
 --- @class tes3uiElement.createColorPreview.params
