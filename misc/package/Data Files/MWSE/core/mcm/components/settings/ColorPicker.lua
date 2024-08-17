@@ -1,3 +1,11 @@
+--[[
+	An inline color picker setting.
+]]--
+
+--- These types have annotations in the core\meta\ folder. Let's stop the warning spam here in the implementation.
+--- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
+--- @diagnostic disable: duplicate-set-field
+
 local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
 local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 
@@ -89,6 +97,7 @@ function ColorPicker:makeComponent(parentBlock)
 		showOriginal = true,
 		showDataRow = true,
 	})
+	pickerElement.borderAllSides = 8
 	-- Make sure our variable stays in sync with the currently picked color.
 	pickerElement:register("colorChanged", function()
 		local picker = pickerElement.widget --[[@as ColorPicker]]

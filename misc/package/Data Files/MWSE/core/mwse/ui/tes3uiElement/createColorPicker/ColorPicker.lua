@@ -15,6 +15,7 @@ local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiIma
 ---	@field main niSourceTexture
 ---	@field hue niSourceTexture
 ---	@field alpha niSourceTexture
+--- @field saturation niSourceTexture
 
 --- @class ColorPicker
 --- @field element tes3uiElement Set by the tes3uiElement:makeLuaWidget
@@ -23,6 +24,7 @@ local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiIma
 --- @field hueWidth integer Width of hue and alpha pickers.
 --- @field mainImage Image
 --- @field hueBar Image
+--- @field saturationBar Image
 --- @field alphaCheckerboard Image
 --- @field alphaBar Image
 --- @field textures ColorPickerTextureTable
@@ -70,6 +72,13 @@ function ColorPicker:new(data)
 	})
 	t.hueBar:verticalHueBar()
 
+	t.saturationBar = Image:new({
+		width = hueWidth,
+		height = height,
+	})
+	local hsv = oklab.hsvlib_srgb_to_hsv(t.currentColor)
+	t.saturationBar:verticalSaturationBar(hsv.h, hsv.v)
+
 	t.alphaCheckerboard = Image:new({
 		width = hueWidth,
 		height = height,
@@ -91,6 +100,7 @@ function ColorPicker:new(data)
 		main = niPixelData.new(mainWidth, height):createSourceTexture(),
 		hue = niPixelData.new(hueWidth, height):createSourceTexture(),
 		alpha = niPixelData.new(hueWidth, height):createSourceTexture(),
+		saturation = niPixelData.new(hueWidth, height):createSourceTexture(),
 	}
 	for _, texture in pairs(t.textures) do
 		texture.isStatic = false
@@ -124,6 +134,7 @@ end
 ---| "main"
 ---| "hue"
 ---| "alpha"
+---| "saturation"
 ---| "slider"
 
 --- @param parent tes3uiElement
@@ -153,6 +164,10 @@ function ColorPicker:updateIndicatorPositions(hsv, alpha)
 	local slider = indicators.slider
 	if slider then
 		slider.widget.current = hsv.s * CONSTANTS.SLIDER_SCALE
+	end
+
+	if indicators.saturation then
+		indicators.saturation.absolutePosAlignY = 1 - hsv.s
 	end
 
 	-- Update hue indicator
@@ -226,6 +241,13 @@ function ColorPicker:colorSelected(newColor, alpha)
 
 	local hsv = oklab.hsvlib_srgb_to_hsv(newColor)
 	self:updateIndicatorPositions(hsv, alpha)
+
+	local saturationPicker = self.element:findChild(UIID.saturationPicker)
+	if saturationPicker then
+		self.saturationBar:verticalSaturationBar(hsv.h, hsv.v)
+		saturationPicker.texture.pixelData:setPixelsFloat(self.saturationBar:toPixelBufferFloat())
+	end
+
 	self.element:updateLayout()
 end
 

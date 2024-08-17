@@ -169,6 +169,33 @@ local function createPickerBlock(params, picker, parent)
 		slider:setLuaData("indicatorID", "slider")
 	end
 
+	local saturationPicker
+	if params.showSaturationPicker then
+		saturationPicker = mainRow:createRect({
+			id = UIID.saturationPicker,
+			color = { 1, 1, 1 },
+		})
+		saturationPicker.borderAllSides = 8
+		saturationPicker.width = params.hueWidth
+		saturationPicker.height = params.height
+		saturationPicker.imageScaleX = getScaleFactor(params.hueWidth)
+		saturationPicker.imageScaleY = getScaleFactor(params.height)
+
+
+		saturationPicker.texture = picker.textures.saturation
+		saturationPicker.imageFilter = false
+		saturationPicker.texture.pixelData:setPixelsFloat(picker.saturationBar:toPixelBufferFloat())
+		saturationPicker:register(tes3.uiEvent.mouseDown, function(e)
+			tes3ui.captureMouseDrag(true)
+		end)
+		saturationPicker:register(tes3.uiEvent.mouseRelease, function(e)
+			tes3ui.captureMouseDrag(false)
+		end)
+		local saturationIndicator = createIndicator(
+			saturationPicker, "saturation", 0.5, 1 - initialHSV.s
+		)
+	end
+
 	local huePicker = mainRow:createRect({
 		id = tes3ui.registerID("ColorPicker_hue_picker"),
 		color = { 1, 1, 1 },
@@ -275,6 +302,19 @@ local function createPickerBlock(params, picker, parent)
 		picker:hueChanged(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
 	end)
+
+	if params.showSaturationPicker then
+		saturationPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
+			local y = math.clamp(e.relativeY, 1, saturationPicker.height)
+			local current = picker:getColor()
+			local currentHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+			currentHSV.s = math.clamp(1 - math.remap(y, 1, saturationPicker.height, 0, 1), SV_EPSILON, 1)
+
+			local pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
+			picker:colorSelected(pickedColor, picker:getAlpha())
+			parent:triggerEvent("colorChanged")
+		end)
+	end
 
 	if params.alpha then
 		alphaPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
@@ -394,6 +434,7 @@ end
 --- @field hueWidth integer? *Default: 32* The width of the hue and optionally alpha pickers.
 --- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
 --- @field showSaturationSlider? boolean *Default: true*
+--- @field showSaturationPicker boolean? *Default: true*
 --- @field showPreviews boolean? *Default: true* If false the picker won't have any color preview widgets.
 --- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
 --- @field previewWidth integer? *Default: 64*
@@ -411,6 +452,7 @@ function tes3uiElement:createColorPicker(params)
 	params.showOriginal = table.get(params, "showOriginal", true)
 	params.showDataRow = table.get(params, "showDataRow", true)
 	params.showSaturationSlider = table.get(params, "showSaturationSlider", true)
+	params.showSaturationPicker = table.get(params, "showSaturationPicker", true)
 
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1

@@ -45,7 +45,9 @@ end
 --- @param parentBlock tes3uiElement
 function PickerButton:createInnerContainer(parentBlock)
 	Parent.createInnerContainer(self, parentBlock)
-	self.elements.innerContainer.flowDirection = tes3.flowDirection.leftToRight
+	local innerContainer = self.elements.innerContainer
+	innerContainer.borderAllSides = 8
+	innerContainer.flowDirection = tes3.flowDirection.leftToRight
 end
 
 

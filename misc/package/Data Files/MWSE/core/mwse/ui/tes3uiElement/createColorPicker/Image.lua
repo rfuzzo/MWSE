@@ -150,6 +150,21 @@ function Image:verticalHueBar()
 	end
 end
 
+--- Modifies the Image in place. Fills the image into a vertical saturation bar. HSV value at the top is:
+--- `{ H = hue, s = 1.0, v = value }`, at the bottom `{ H = hue, s = 0.0, v = value }`
+--- @param hue number In range [0, 360)
+--- @param value number In range [0, 1]
+function Image:verticalSaturationBar(hue, value)
+	local hsv = ffiHSV({ hue, 1.0, value })
+	for y = 1, self.height do
+		local t = y / self.height
+
+		hsv.s = math.lerp(1.0, 0, t)
+		local color = oklab.hsvlib_hsv_to_srgb(hsv)
+		self:fillRow(y, color)
+	end
+end
+
 --- Generates main picker image for given Hue.
 --- @param hue number Hue in range [0, 360)
 function Image:mainPicker(hue)
