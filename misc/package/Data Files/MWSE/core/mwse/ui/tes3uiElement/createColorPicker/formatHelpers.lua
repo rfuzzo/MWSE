@@ -30,7 +30,7 @@ function this.imageData(image)
 end
 
 --- Formats given RGB(A) pixel into an HTML hex code.
---- @param pixel ImagePixelArgument|ffiImagePixel
+--- @param pixel ImagePixel|ImagePixelA|ffiImagePixel
 function this.pixelToHex(pixel)
 	if pixel.a then
 		return string.format("%02X%02X%02X%02X", pixel.a * 255, pixel.r * 255, pixel.g * 255, pixel.b * 255)

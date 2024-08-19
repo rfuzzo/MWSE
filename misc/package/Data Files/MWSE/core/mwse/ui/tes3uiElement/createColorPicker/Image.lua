@@ -18,13 +18,7 @@ local niPixelData_BYTES_PER_PIXEL = 4
 --- @class ImagePixelA : ImagePixel
 --- @field a number Alpha in range [0, 1].
 
---- @alias ImagePixelArgument ImagePixel|ImagePixelA
-
---- Pixel storing the color in premultiplied format.
---- @class PremulImagePixelA : ImagePixelA
-
-
---- An image helper class that stores RGBA color in premultiplied alpha format.
+--- An image helper class.
 --- @class Image
 --- @field width integer
 --- @field height integer
@@ -38,11 +32,9 @@ local Image = Base:new()
 --- @field data? ffiImagePixel[]
 --- @field alphas? number[]
 
---- @alias ImagePixelArray number[] # A 1-indexed array of 3 rgb colors
---- @alias ffiImagePixelInit ImagePixelArray|ImagePixel
+--- @alias ffiImagePixelInit number[]|ImagePixel
 
---- @alias hsvArray number[] # A 1-indexed array of 3 hsv values
---- @alias ffiHSVInit hsvArray|HSV
+--- @alias ffiHSVInit number[]|HSV
 
 -- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
@@ -124,7 +116,7 @@ function Image:fillColor(color, alpha)
 	end
 end
 
---- Modifies the Image in place. Works with **premultiplied** color.
+--- Modifies the Image in place.
 --- @param rowIndex integer
 --- @param color ffiImagePixel
 --- @param alpha number?
@@ -172,8 +164,8 @@ function Image:mainPicker(hue)
 end
 
 --- Modifies the Image in place.
---- @param topColor PremulImagePixelA
---- @param bottomColor PremulImagePixelA
+--- @param topColor ImagePixelA
+--- @param bottomColor ImagePixelA
 function Image:verticalGradient(topColor, bottomColor)
 	topColor.a = topColor.a or 1
 	bottomColor.a = bottomColor.a or 1

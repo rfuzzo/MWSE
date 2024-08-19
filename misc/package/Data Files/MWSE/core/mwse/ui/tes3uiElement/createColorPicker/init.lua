@@ -108,7 +108,11 @@ local function createPickerBlock(params, picker, parent)
 	local initialColor = ffiPixel({ params.initialColor.r, params.initialColor.g, params.initialColor.b })
 
 	local mainRow = parent:createBlock({ id = tes3ui.registerID("ColorPicker_picker_row_container") })
-	mainRow.flowDirection = tes3.flowDirection.leftToRight
+	if params.vertical then
+		mainRow.flowDirection = tes3.flowDirection.topToBottom
+	else
+		mainRow.flowDirection = tes3.flowDirection.leftToRight
+	end
 	mainRow.autoHeight = true
 	mainRow.autoWidth = true
 	mainRow.widthProportional = 1.0
@@ -169,9 +173,21 @@ local function createPickerBlock(params, picker, parent)
 		slider:setLuaData("indicatorID", "slider")
 	end
 
+	local otherPickersContainer = mainRow
+	-- In vertical configuration, we create other pickers in the second row below main picker.
+	if params.vertical then
+		otherPickersContainer = mainRow:createBlock({
+			id = tes3ui.registerID("ColorPicker_other_pickers_container")
+		})
+		otherPickersContainer.flowDirection = tes3.flowDirection.leftToRight
+		otherPickersContainer.autoWidth = true
+		otherPickersContainer.autoHeight = true
+	end
+
+
 	local saturationPicker
 	if params.showSaturationPicker then
-		saturationPicker = mainRow:createRect({
+		saturationPicker = otherPickersContainer:createRect({
 			id = UIID.saturationPicker,
 			color = { 1, 1, 1 },
 		})
@@ -196,7 +212,7 @@ local function createPickerBlock(params, picker, parent)
 		)
 	end
 
-	local huePicker = mainRow:createRect({
+	local huePicker = otherPickersContainer:createRect({
 		id = tes3ui.registerID("ColorPicker_hue_picker"),
 		color = { 1, 1, 1 },
 	})
@@ -225,7 +241,7 @@ local function createPickerBlock(params, picker, parent)
 
 	local alphaPicker, alphaIndicator
 	if params.alpha then
-		alphaPicker = mainRow:createRect({
+		alphaPicker = otherPickersContainer:createRect({
 			id = tes3ui.registerID("ColorPicker_alpha_picker"),
 			color = { 1, 1, 1 },
 		})
@@ -250,7 +266,7 @@ local function createPickerBlock(params, picker, parent)
 
 	local previewContainer
 	if params.showPreviews then
-		previewContainer = mainRow:createBlock({ id = UIID.preview.topContainer })
+		previewContainer = otherPickersContainer:createBlock({ id = UIID.preview.topContainer })
 		previewContainer.flowDirection = tes3.flowDirection.topToBottom
 		previewContainer.autoWidth = true
 		previewContainer.autoHeight = true
@@ -370,7 +386,6 @@ end
 --- @param picker ColorPicker
 --- @param parent tes3uiElement
 local function createDataBlock(params, picker, parent)
-	-- TODO see if I want to set borderRight on this element to make enough space in MCM
 	local dataRow = parent:createThinBorder({ id = UIID.dataRowContainer })
 	dataRow.flowDirection = tes3.flowDirection.leftToRight
 	dataRow.autoHeight = true
@@ -439,6 +454,7 @@ end
 --- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
 --- @field previewWidth integer? *Default: 64*
 --- @field previewHeight integer? *Default: 64*
+--- @field vertical boolean? *Default: false*. If *true*, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker.
 
 ---@param params tes3uiElement.createColorPicker.params
 function tes3uiElement:createColorPicker(params)
@@ -453,13 +469,15 @@ function tes3uiElement:createColorPicker(params)
 	params.showDataRow = table.get(params, "showDataRow", true)
 	params.showSaturationSlider = table.get(params, "showSaturationSlider", true)
 	params.showSaturationPicker = table.get(params, "showSaturationPicker", true)
+	params.vertical = table.get(params, "vertical", false)
 
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1
 	end
 	assert(validate.inUnitRange(params.initialAlpha), "Invalid 'initialAlpha' provided. Must be in unit range [0, 1].")
 	assert(validate.pixel(params.initialColor),
-		"Invalid 'initialColor' provided. Must be a table with RGB values in unit range [0, 1].")
+		"Invalid 'initialColor' provided. Must be a table with RGB values in unit range [0, 1]. Provided = %s.",
+		format.pixel(params.initialColor))
 
 	-- When picker doesn't have checkerd preview, but has original preview let's make default
 	-- color preview width double the normal, so the current and original previews form a square.

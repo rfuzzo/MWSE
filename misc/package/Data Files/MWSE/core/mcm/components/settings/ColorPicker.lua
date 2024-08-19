@@ -19,6 +19,7 @@ local Parent = require("mcm.components.settings.Setting")
 --- @field elements mwseMCMColorPickerElements
 --- @field alpha boolean
 --- @field variable mwseMCMTableVariable
+--- @field vertical boolean *Default: false*. If *true*, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker. Useful to make color picker fit inside SideBar and Filter pages.
 local ColorPicker = Parent:new()
 ColorPicker.initialColor = { r = 1.0, g = 1.0, b = 1.0 }
 ColorPicker.initialAlpha = 1.0
@@ -96,6 +97,7 @@ function ColorPicker:makeComponent(parentBlock)
 		initialAlpha = initialAlpha,
 		showOriginal = true,
 		showDataRow = true,
+		vertical = self.vertical,
 	})
 	pickerElement.borderAllSides = 8
 	-- Make sure our variable stays in sync with the currently picked color.
