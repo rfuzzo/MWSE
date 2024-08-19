@@ -17,6 +17,8 @@ ffi.cdef[[
 	RGB hsv_to_srgb(HSV c);
 	HSV srgb_to_hsv(RGB rgb);
 	void generate_main_picker(const double hue, RGB *data, const uint32_t width, const uint32_t height);
+	void generate_preview_image(const RGB color, const double alpha, RGB *destination, double *alphas, RGB *checkers, const int32_t width, const uint32_t height);
+	void generate_saturation_picker(const double hue, const double value, RGB *data, const uint32_t width, const uint32_t height);
 ]]
 local oklab = ffi.load(".\\Data Files\\MWSE\\core\\mwse\\ui\\tes3uiElement\\createColorPicker\\oklab\\liboklab")
 local hsvlib = ffi.load(".\\Data Files\\MWSE\\core\\mwse\\ui\\tes3uiElement\\createColorPicker\\oklab\\libhsv")
@@ -46,6 +48,25 @@ this.hsvlib_srgb_to_hsv = hsvlib.srgb_to_hsv
 --- @param image Image
 function this.generate_image(hue, image)
 	hsvlib.generate_main_picker(hue, image.data, image.width, image.height)
+end
+
+--- @param hue number Hue in range [0, 360)
+--- @param value number Value in range [0, 1]
+--- @param image Image
+function this.generate_saturation_bar(hue, value, image)
+	hsvlib.generate_saturation_picker(hue, value, image.data, image.width, image.height);
+end
+
+--- @param color ffiImagePixel
+--- @param alpha number
+--- @param destination Image
+--- @param checkers Image
+function this.generate_preview(color, alpha, destination, checkers)
+	hsvlib.generate_preview_image(
+		color, alpha,
+		destination.data, destination.alphas, checkers.data,
+		destination.width, destination.height
+	)
 end
 
 function this.hsvtosrgb(hsv)

@@ -152,6 +152,7 @@ local function getIndicators(parent)
 	return indicators
 end
 
+--- @private
 --- @param hsv ffiHSV
 --- @param alpha number?
 function ColorPicker:updateIndicatorPositions(hsv, alpha)
@@ -179,6 +180,7 @@ function ColorPicker:updateIndicatorPositions(hsv, alpha)
 	end
 end
 
+--- @private
 --- @param newColor ffiImagePixel
 --- @param alpha number
 function ColorPicker:updatePreview(newColor, alpha)
@@ -191,6 +193,7 @@ function ColorPicker:updatePreview(newColor, alpha)
 	preview:setColor(newColor, alpha)
 end
 
+--- @private
 --- @param newColor ffiImagePixel|ImagePixel|ImagePixelA
 --- @param alpha number
 function ColorPicker:updateValueInput(newColor, alpha)
@@ -221,6 +224,7 @@ function ColorPicker:updateValueInput(newColor, alpha)
 	input.text = newText
 end
 
+--- @private
 --- @param color ffiImagePixel
 --- @param alpha number
 function ColorPicker:setColor(color, alpha)

@@ -49,6 +49,7 @@ local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiIma
 local ffiHSV = ffi.typeof("HSV") --[[@as fun(init: ffiHSVInit?): ffiHSV]]
 -- Creates a 0-indexed array of ffiImagePixel
 local ffiPixelArray = ffi.typeof("RGB[?]") --[[@as fun(nelem: integer, init: ffiImagePixelInit[]?): ffiImagePixel[]=]]
+local ffiDoubleArray = ffi.typeof("double[?]") --[[@as fun(nelem: integer, init: number[])]]
 
 --- @param data Image.new.data
 --- @return Image
@@ -64,21 +65,25 @@ function Image:new(data)
 		t.data = ffiPixelArray(size + 1, t.data)
 	end
 
-	if not t.alphas then
-		t.alphas = table.new(size, 0)
+	if t.alphas == nil then
+		t.alphas = ffiDoubleArray(size + 1, { 1.0 })
+		-- Initialize the alphas to 1.0.
 		for y = 0, t.height - 1 do
 			local offset = y * t.width
 			for x = 1, t.width do
 				t.alphas[offset + x] = 1.0
 			end
 		end
+	-- Convert given table initializer into a C-array.
+	elseif not ffi.istype("double[?]", t.alphas) then
+		t.alphas = ffiDoubleArray(size + 1, t.alphas)
 	end
 
 	self.__index = self
 	return t
 end
 
---- @private
+--- @protected
 --- @param y integer
 function Image:getOffset(y)
 	return y * self.width
@@ -155,14 +160,7 @@ end
 --- @param hue number In range [0, 360)
 --- @param value number In range [0, 1]
 function Image:verticalSaturationBar(hue, value)
-	local hsv = ffiHSV({ hue, 1.0, value })
-	for y = 1, self.height do
-		local t = y / self.height
-
-		hsv.s = math.lerp(1.0, 0, t)
-		local color = oklab.hsvlib_hsv_to_srgb(hsv)
-		self:fillRow(y, color)
-	end
+	oklab.generate_saturation_bar(hue, value, self)
 end
 
 --- Generates main picker image for given Hue.
@@ -239,8 +237,8 @@ function Image:copy()
 	local data = ffiPixelArray(size + 1)
 	ffi.copy(data, self.data, ffi.sizeof("RGB[?]", size))
 
-	local alphas = table.new(size, 0)
-	table.copy(self.alphas, alphas)
+	local alphas = ffiDoubleArray(size + 1, { 1.0 })
+	ffi.copy(alphas, self.alphas, ffi.sizeof("double[?]", size))
 
 
 	local new = Image:new({

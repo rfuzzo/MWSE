@@ -2,6 +2,7 @@ local ffi = require("ffi")
 
 local Base = require("mwse.ui.tes3uiElement.createColorPicker.Base")
 local Image = require("mwse.ui.tes3uiElement.createColorPicker.Image")
+local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
 local UIID = require("mwse.ui.tes3uiElement.createColorPreview.uiid")
 
 -- Defined in oklab\init.lua
@@ -48,8 +49,7 @@ function ColorPreview:new(data)
 		width = data.width,
 		height = data.height,
 	})
-	t.image:fillColor(t.color, t.alpha)
-	t.image = t.image:blend(t.checkerboard, true) --[[@as Image]]
+	oklab.generate_preview(t.color, t.alpha, t.image, t.checkerboard)
 
 	t.texture = niPixelData.new(data.width, data.height):createSourceTexture()
 	t.texture.isStatic = false
@@ -73,8 +73,7 @@ function ColorPreview:setColor(color, alpha)
 	local colorPreview = container:findChild(UIID.image)
 	-- Not every preview has checkered preview.
 	if not colorPreview then return end
-	self.image:fillColor(color, alpha)
-	self.image = self.image:blend(self.checkerboard, true) --[[@as Image]]
+	oklab.generate_preview(color, alpha, self.image, self.checkerboard)
 	colorPreview.texture.pixelData:setPixelsFloat(self.image:toPixelBufferFloat())
 end
 
