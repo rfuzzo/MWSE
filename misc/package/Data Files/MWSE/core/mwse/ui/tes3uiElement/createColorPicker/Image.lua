@@ -1,7 +1,7 @@
 local ffi = require("ffi")
 
 local Base = require("mwse.ui.tes3uiElement.createColorPicker.Base")
-local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
+local colorUtils = require("mwse.ui.tes3uiElement.createColorPicker.colorUtils")
 
 local niPixelData_BYTES_PER_PIXEL = 4
 
@@ -44,7 +44,7 @@ local Image = Base:new()
 --- @alias hsvArray number[] # A 1-indexed array of 3 hsv values
 --- @alias ffiHSVInit hsvArray|HSV
 
--- Defined in oklab\init.lua
+-- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 local ffiHSV = ffi.typeof("HSV") --[[@as fun(init: ffiHSVInit?): ffiHSV]]
 -- Creates a 0-indexed array of ffiImagePixel
@@ -139,9 +139,11 @@ function Image:fillRow(rowIndex, color, alpha)
 end
 
 --- Modifies the Image in place. Fills the image into a vertical hue bar. HSV value at the top is:
---- `{ H = 0, s = 0.7, v = 0.85 }`, at the bottom `{ H = 360, s = 0.7, v = 0.85 }`
-function Image:verticalHueBar()
-	local hsv = ffiHSV({ 0, 0.7, 0.85 })
+--- `{ H = 0, s = saturation, v = value }`, at the bottom `{ H = 360, s = saturation, v = value }`
+--- @param saturation number? *Default: 0.55*. In range [0, 1].
+--- @param value number? *Default: 0.9*. In range [0, 1].
+function Image:verticalHueBar(saturation, value)
+	local hsv = ffiHSV({ 0, saturation or 0.55, value or 0.9 })
 
 	-- Lower level fill method will account for the 0-indexing of the underlying data array.
 	for y = 1, self.height do
@@ -150,8 +152,8 @@ function Image:verticalHueBar()
 		-- We lerp to 359.9999 since HSV { 360, 1.0, 1.0 } results in { r = 0, g = 0, b = 0 }
 		-- at the bottom of the hue picker which is a undesirable.
 		hsv.h = math.lerp(0, 359.9999, t)
-		local color = oklab.hsvlib_hsv_to_srgb(hsv)
-		self:fillRow(y, color)
+		local rowColor = colorUtils.HSVtosRGB(hsv)
+		self:fillRow(y, rowColor)
 	end
 end
 
@@ -160,13 +162,13 @@ end
 --- @param hue number In range [0, 360)
 --- @param value number In range [0, 1]
 function Image:verticalSaturationBar(hue, value)
-	oklab.generate_saturation_bar(hue, value, self)
+	colorUtils.generateSaturationPicker(hue, value, self)
 end
 
 --- Generates main picker image for given Hue.
 --- @param hue number Hue in range [0, 360)
 function Image:mainPicker(hue)
-	oklab.generate_image(hue, self)
+	colorUtils.generateMainPicker(hue, self)
 end
 
 --- Modifies the Image in place.

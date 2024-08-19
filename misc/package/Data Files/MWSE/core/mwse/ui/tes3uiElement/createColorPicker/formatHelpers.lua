@@ -2,8 +2,8 @@ local ffi = require("ffi")
 
 -- This is the first file that declares `ffiPixel = ffi.typeof("RGB")`.
 -- We need these declarations first:
-local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
--- Defined in oklab\init.lua
+local colorUtils = require("mwse.ui.tes3uiElement.createColorPicker.colorUtils")
+-- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 
 local this = {}

@@ -4,10 +4,10 @@ local Base = require("mwse.ui.tes3uiElement.createColorPicker.Base")
 local CONSTANTS = require("mwse.ui.tes3uiElement.createColorPicker.constants")
 local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
 local Image = require("mwse.ui.tes3uiElement.createColorPicker.Image")
-local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
+local colorUtils = require("mwse.ui.tes3uiElement.createColorPicker.colorUtils")
 local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 
--- Defined in oklab\init.lua
+-- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 
 
@@ -63,8 +63,8 @@ function ColorPicker:new(data)
 		width = mainWidth,
 		height = height,
 	})
-	local startHSV = oklab.hsvlib_srgb_to_hsv(t.currentColor)
-	t.mainImage:mainPicker(startHSV.h)
+	local hsv = colorUtils.sRGBtoHSV(t.currentColor)
+	t.mainImage:mainPicker(hsv.h)
 
 	t.hueBar = Image:new({
 		width = hueWidth,
@@ -76,7 +76,6 @@ function ColorPicker:new(data)
 		width = hueWidth,
 		height = height,
 	})
-	local hsv = oklab.hsvlib_srgb_to_hsv(t.currentColor)
 	t.saturationBar:verticalSaturationBar(hsv.h, hsv.v)
 
 	t.alphaCheckerboard = Image:new({
@@ -225,10 +224,10 @@ function ColorPicker:updateValueInput(newColor, alpha)
 end
 
 --- @private
---- @param color ffiImagePixel
+--- @param newColor ffiImagePixel
 --- @param alpha number
-function ColorPicker:setColor(color, alpha)
-	self.currentColor = color
+function ColorPicker:setColor(newColor, alpha)
+	self.currentColor = newColor
 	self.currentAlpha = alpha
 end
 
@@ -243,7 +242,7 @@ function ColorPicker:colorSelected(newColor, alpha)
 	self:updatePreview(newColor, alpha)
 	self:updateValueInput(newColor, alpha)
 
-	local hsv = oklab.hsvlib_srgb_to_hsv(newColor)
+	local hsv = colorUtils.sRGBtoHSV(newColor)
 	self:updateIndicatorPositions(hsv, alpha)
 
 	local saturationPicker = self.element:findChild(UIID.saturationPicker)
@@ -264,7 +263,7 @@ function ColorPicker:hueChanged(newColor, alpha)
 	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
 	self:colorSelected(newColor, alpha)
 	-- Now, also need to regenerate the image for the main picker since the Hue changed.
-	local hsv = oklab.hsvlib_srgb_to_hsv(newColor)
+	local hsv = colorUtils.sRGBtoHSV(newColor)
 	self.mainImage:mainPicker(hsv.h)
 	local mainPicker = self.element:findChild(UIID.mainPicker)
 	mainPicker.texture.pixelData:setPixelsFloat(self.mainImage:toPixelBufferFloat())

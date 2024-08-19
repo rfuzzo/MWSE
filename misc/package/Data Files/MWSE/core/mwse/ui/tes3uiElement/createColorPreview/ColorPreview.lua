@@ -2,10 +2,10 @@ local ffi = require("ffi")
 
 local Base = require("mwse.ui.tes3uiElement.createColorPicker.Base")
 local Image = require("mwse.ui.tes3uiElement.createColorPicker.Image")
-local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
+local colorUtils = require("mwse.ui.tes3uiElement.createColorPicker.colorUtils")
 local UIID = require("mwse.ui.tes3uiElement.createColorPreview.uiid")
 
--- Defined in oklab\init.lua
+-- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 
 --- @class ColorPreview
@@ -49,7 +49,7 @@ function ColorPreview:new(data)
 		width = data.width,
 		height = data.height,
 	})
-	oklab.generate_preview(t.color, t.alpha, t.image, t.checkerboard)
+	colorUtils.generatePreviewImage(t.color, t.alpha, t.image, t.checkerboard)
 
 	t.texture = niPixelData.new(data.width, data.height):createSourceTexture()
 	t.texture.isStatic = false
@@ -59,21 +59,21 @@ function ColorPreview:new(data)
 end
 
 
---- @param color ffiImagePixel
+--- @param newColor ffiImagePixel
 --- @param alpha number
-function ColorPreview:setColor(color, alpha)
-	self.color = color
+function ColorPreview:setColor(newColor, alpha)
+	self.color = newColor
 	self.alpha = alpha
 
 	-- self.element is set by the tes3uiElement:makeLuaWidget.
 	local container = self.element
 	local standardPreview = container:findChild(UIID.rect)
-	standardPreview.color = { color.r, color.g, color.b }
+	standardPreview.color = { newColor.r, newColor.g, newColor.b }
 
 	local colorPreview = container:findChild(UIID.image)
 	-- Not every preview has checkered preview.
 	if not colorPreview then return end
-	oklab.generate_preview(color, alpha, self.image, self.checkerboard)
+	colorUtils.generatePreviewImage(newColor, alpha, self.image, self.checkerboard)
 	colorPreview.texture.pixelData:setPixelsFloat(self.image:toPixelBufferFloat())
 end
 

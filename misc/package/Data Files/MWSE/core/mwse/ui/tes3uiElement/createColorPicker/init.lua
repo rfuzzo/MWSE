@@ -3,11 +3,11 @@ local ffi = require("ffi")
 local ColorPicker = require("mwse.ui.tes3uiElement.createColorPicker.ColorPicker")
 local CONSTANTS = require("mwse.ui.tes3uiElement.createColorPicker.constants")
 local format = require("mwse.ui.tes3uiElement.createColorPicker.formatHelpers")
-local oklab = require("mwse.ui.tes3uiElement.createColorPicker.oklab")
+local colorUtils = require("mwse.ui.tes3uiElement.createColorPicker.colorUtils")
 local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 local validate = require("mwse.ui.tes3uiElement.createColorPicker.validate")
 
--- Defined in oklab\init.lua
+-- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 local i18n = mwse.loadTranslations("..")
 
@@ -114,7 +114,7 @@ local function createPickerBlock(params, picker, parent)
 	mainRow.widthProportional = 1.0
 	mainRow.paddingAllSides = 4
 
-	local initialHSV = oklab.hsvlib_srgb_to_hsv(initialColor)
+	local initialHSV = colorUtils.sRGBtoHSV(initialColor)
 	local mainIndicatorInitialAbsolutePosAlignX = initialHSV.s
 	local mainIndicatorInitialAbsolutePosAlignY = 1 - initialHSV.v
 	local hueIndicatorInitialAbsolutePosAlignY = initialHSV.h / 360
@@ -263,7 +263,7 @@ local function createPickerBlock(params, picker, parent)
 		local y = math.clamp(e.relativeY, 1, mainPicker.height)
 
 		local current = picker:getColor()
-		local pickedHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+		local pickedHSV = colorUtils.sRGBtoHSV(ffiPixel({ current.r, current.g, current.b }))
 		local s = math.remap(x, 1, mainPicker.width, SV_EPSILON, 1)
 		local v = math.clamp(1 - math.remap(y, 1, mainPicker.height, 0, 1), SV_EPSILON, 1)
 		pickedHSV.s = s
@@ -271,7 +271,7 @@ local function createPickerBlock(params, picker, parent)
 		if not isShiftDown() then
 			pickedHSV.v = v
 		end
-		local pickedColor = oklab.hsvlib_hsv_to_srgb(pickedHSV)
+		local pickedColor = colorUtils.HSVtosRGB(pickedHSV)
 
 		picker:colorSelected(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
@@ -280,10 +280,10 @@ local function createPickerBlock(params, picker, parent)
 		slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
 			local x = math.clamp((slider.widget.current / CONSTANTS.SLIDER_SCALE) * mainPicker.width, 1, mainPicker.width)
 			local current = picker:getColor()
-			local pickedHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+			local pickedHSV = colorUtils.sRGBtoHSV(ffiPixel({ current.r, current.g, current.b }))
 			pickedHSV.s = x / mainPicker.width
 
-			local pickedColor = oklab.hsvlib_hsv_to_srgb(pickedHSV)
+			local pickedColor = colorUtils.HSVtosRGB(pickedHSV)
 			picker:colorSelected(pickedColor, picker:getAlpha())
 			parent:triggerEvent("colorChanged")
 		end)
@@ -292,13 +292,13 @@ local function createPickerBlock(params, picker, parent)
 	huePicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 		local y = math.clamp(e.relativeY, 1, huePicker.height)
 		local current = picker:getColor()
-		local currentHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+		local currentHSV = colorUtils.sRGBtoHSV(ffiPixel({ current.r, current.g, current.b }))
 		-- We don't pick the color from the very bottom in the hue picker.
 		-- The hue indicator would jump to the top of the hue picker if it was dragged all the way down.
 		-- I (C3pa) suppose this happens because of numerical instability of multiple conversions from sRGB -> HSV.
 		currentHSV.h = math.remap(y, 1, huePicker.height, 0, 360 - HUE_EPSILON)
 
-		local pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
+		local pickedColor = colorUtils.HSVtosRGB(currentHSV)
 		picker:hueChanged(pickedColor, picker:getAlpha())
 		parent:triggerEvent("colorChanged")
 	end)
@@ -307,10 +307,10 @@ local function createPickerBlock(params, picker, parent)
 		saturationPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 			local y = math.clamp(e.relativeY, 1, saturationPicker.height)
 			local current = picker:getColor()
-			local currentHSV = oklab.hsvlib_srgb_to_hsv(ffiPixel({ current.r, current.g, current.b }))
+			local currentHSV = colorUtils.sRGBtoHSV(ffiPixel({ current.r, current.g, current.b }))
 			currentHSV.s = math.clamp(1 - math.remap(y, 1, saturationPicker.height, 0, 1), SV_EPSILON, 1)
 
-			local pickedColor = oklab.hsvlib_hsv_to_srgb(currentHSV)
+			local pickedColor = colorUtils.HSVtosRGB(currentHSV)
 			picker:colorSelected(pickedColor, picker:getAlpha())
 			parent:triggerEvent("colorChanged")
 		end)
