@@ -251,7 +251,7 @@ function ColorPicker:colorSelected(newColor, alpha)
 		saturationPicker.texture.pixelData:setPixelsFloat(self.saturationBar:toPixelBufferFloat())
 	end
 
-	self.element:updateLayout()
+	self.element:getTopLevelMenu():updateLayout()
 end
 
 --- Updates all the elements of color picker. It's more expensive than `colorSelected` since it will

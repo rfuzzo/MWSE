@@ -474,10 +474,8 @@ function tes3uiElement:createColorPicker(params)
 	if (not params.alpha) or (not params.initialAlpha) then
 		params.initialAlpha = 1
 	end
-	assert(validate.inUnitRange(params.initialAlpha), "Invalid 'initialAlpha' provided. Must be in unit range [0, 1].")
-	assert(validate.pixel(params.initialColor),
-		"Invalid 'initialColor' provided. Must be a table with RGB values in unit range [0, 1]. Provided = %s.",
-		format.pixel(params.initialColor))
+	params.initialAlpha = math.clamp(params.initialAlpha, 0, 1)
+	params.initialColor = validate.clampColor(params.initialColor)
 
 	-- When picker doesn't have checkerd preview, but has original preview let's make default
 	-- color preview width double the normal, so the current and original previews form a square.

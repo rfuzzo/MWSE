@@ -22,5 +22,16 @@ function this.pixel(pixel)
 	return true
 end
 
+--- Returns a copy with all the channels clamped to unit range.
+--- @param color ImagePixel
+--- @return ImagePixel
+function this.clampColor(color)
+	return {
+		r = math.clamp(color.r, 0, 1),
+		g = math.clamp(color.g, 0, 1),
+		b = math.clamp(color.b, 0, 1),
+	}
+end
+
 
 return this
