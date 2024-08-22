@@ -6,31 +6,19 @@
 --- The warnings arise because each field set here is also 'set' in the annotations in the core\meta\ folder.
 --- @diagnostic disable: duplicate-set-field
 
-
-local ffi = require("ffi")
-
 local Parent = require("mcm.components.settings.ColorPicker")
 local Setting = require("mcm.components.settings.Setting")
 
--- Defined in oklab\init.lua
-local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
-
-
---- @class mwseMCMColorPickerButtonElements : mwseMCMComponentElements
---- @field preview tes3uiElement
---- @field button tes3uiElement
-
---- @class mwseMCMColorPickerButton : mwseMCMColorPicker
---- @field elements mwseMCMColorPickerButtonElements
+--- @class mwseMCMColorPickerButton
 local PickerButton = Parent:new()
 
---- @param newValue ImagePixelA
+--- @param newValue mwseColorATable
 function PickerButton:setVariableValue(newValue)
 	-- Make sure we don't create a reference to newValue table (which is usually self.variable.defaultSetting).
 	self.variable.value = table.copy(newValue)
 	local element = self.elements.preview
-	local preview = element.widget --[[@as ColorPreview]]
-	preview:setColor(ffiPixel({ newValue.r, newValue.g, newValue.b }), newValue.a)
+	local preview = element.widget --[[@as tes3uiColorPreview]]
+	preview:setColor(newValue --[[@as mwseColorTable]], newValue.a)
 	element:updateLayout()
 	self:update()
 end
@@ -53,7 +41,7 @@ end
 
 --- @param parentBlock tes3uiElement
 function PickerButton:makeComponent(parentBlock)
-	local variable = self.variable
+	local variable = self.variable --[[@as mwseMCMTableVariable]]
 	local initialColor = variable.value or variable.defaultSetting or self.initialColor
 	local initialAlpha = initialColor.a or self.initialAlpha
 
@@ -78,8 +66,8 @@ function PickerButton:makeComponent(parentBlock)
 			initialAlpha = self.variable.value.a,
 			alpha = self.alpha,
 			closeCallback = function(selectedColor, selectedAlpha)
-				--- @cast selectedColor ImagePixelA
-				selectedColor.a = selectedAlpha
+				--- @cast selectedColor mwseColorATable
+				selectedColor.a = selectedAlpha --[[@as number]]
 				self:setVariableValue(selectedColor)
 			end
 		})

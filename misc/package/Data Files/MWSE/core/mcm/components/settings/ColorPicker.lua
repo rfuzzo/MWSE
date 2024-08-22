@@ -11,31 +11,23 @@ local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 
 local Parent = require("mcm.components.settings.Setting")
 
-
---- @class mwseMCMColorPickerElements : mwseMCMComponentElements
---- @field picker tes3uiElement
-
---- @class mwseMCMColorPicker : mwseMCMSetting
---- @field elements mwseMCMColorPickerElements
---- @field alpha boolean
---- @field variable mwseMCMTableVariable
---- @field vertical boolean *Default: false*. If *true*, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker. Useful to make color picker fit inside SideBar and Filter pages.
+--- @class mwseMCMColorPicker
 local ColorPicker = Parent:new()
 ColorPicker.initialColor = { r = 1.0, g = 1.0, b = 1.0 }
 ColorPicker.initialAlpha = 1.0
 
---- @param newValue ImagePixelA
+--- @param newValue mwseColorATable
 function ColorPicker:setVariableValue(newValue)
 	-- Make sure we don't create a reference to newValue table (which is usually self.variable.defaultSetting).
 	self.variable.value = table.copy(newValue)
 	local parent = self.elements.picker
-	local picker = parent.widget --[[@as ColorPicker]]
-	picker:hueChanged(newValue, newValue.a)
+	local picker = parent.widget --[[@as tes3uiColorPicker]]
+	picker:hueChanged(newValue --[[@as mwseColorTable]], newValue.a)
 	self:update()
 end
 
 --- Updates the value stored in the variable. Doesn't update the widget.
---- @param newValue ImagePixelA
+--- @param newValue mwseColorATable
 function ColorPicker:updateVariableValue(newValue)
 	-- Make sure we don't create a reference to newValue table.
 	self.variable.value = table.copy(newValue)
@@ -86,7 +78,7 @@ end
 
 --- @param parentBlock tes3uiElement
 function ColorPicker:makeComponent(parentBlock)
-	local variable = self.variable
+	local variable = self.variable --[[@as mwseMCMTableVariable]]
 	local initialColor = variable.value or variable.defaultSetting or self.initialColor
 	local initialAlpha = initialColor.a or self.initialAlpha
 
@@ -101,8 +93,8 @@ function ColorPicker:makeComponent(parentBlock)
 	})
 	pickerElement.borderAllSides = 8
 	-- Make sure our variable stays in sync with the currently picked color.
-	pickerElement:register("colorChanged", function()
-		local picker = pickerElement.widget --[[@as ColorPicker]]
+	pickerElement:register( tes3.uiEvent.colorChanged, function()
+		local picker = pickerElement.widget --[[@as tes3uiColorPicker]]
 		self:updateVariableValue(picker:getRGBA())
 	end)
 

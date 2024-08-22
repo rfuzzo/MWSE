@@ -8,31 +8,11 @@ local UIID = require("mwse.ui.tes3uiElement.createColorPreview.uiid")
 -- Defined in colorUtils\init.lua
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 
---- @class ColorPreview
---- @field width integer Width of the individual preview image.
---- @field height integer Height of the individual preview image.
---- @field checkerSize integer?
---- @field lightGray ImagePixel?
---- @field darkGray ImagePixel?
---- @field image Image
---- @field checkerboard Image
---- @field texture niSourceTexture
---- @field color ffiImagePixel
---- @field alpha number
---- @field element tes3uiElement
+--- @class tes3uiColorPreview
 local ColorPreview = Base:new()
 
---- @class ColorPreview.new.data
---- @field width integer Width of the individual preview image.
---- @field height integer Height of the individual preview image.--- @field initialColor ImagePixel
---- @field checkerSize? integer? *Default: 16*
---- @field lightGray ImagePixel? *Default: { r = 0.7, g = 0.7, b = 0.7 }*
---- @field darkGray ImagePixel? *Default: { r = 0.5, g = 0.5, b = 0.5 }*
---- @field color ImagePixel
---- @field alpha number? *Default*: 1.0
-
---- @param data ColorPreview.new.data
---- @return ColorPreview
+--- @param data tes3uiElement.createColorPreview.params
+--- @return tes3uiColorPreview
 function ColorPreview:new(data)
 	local t = Base:new(data)
 	setmetatable(t, self)
@@ -59,9 +39,11 @@ function ColorPreview:new(data)
 end
 
 
---- @param newColor ffiImagePixel
---- @param alpha number
+--- @param newColor mwseColorTable|ffiImagePixel
+--- @param alpha number?
 function ColorPreview:setColor(newColor, alpha)
+	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
+	alpha = alpha or 1.0
 	self.color = newColor
 	self.alpha = alpha
 
@@ -81,7 +63,7 @@ function ColorPreview:getAlpha()
 	return self.alpha
 end
 
---- @return ImagePixel
+--- @return mwseColorTable
 function ColorPreview:getColor()
 	local c = self.color
 	return { r = c.r, g = c.g, b = c.b }
@@ -91,7 +73,7 @@ function ColorPreview:getColorAlpha()
 	return self:getColor(), self:getAlpha()
 end
 
---- @return ImagePixelA
+--- @return mwseColorATable
 function ColorPreview:getRGBA()
 	local c = self.color
 	return { r = c.r, g = c.g, b = c.b, a = self.alpha }

@@ -11,50 +11,28 @@ local UIID = require("mwse.ui.tes3uiElement.createColorPicker.uiid")
 local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiImagePixel]]
 
 
---- @class ColorPickerTextureTable
----	@field main niSourceTexture
----	@field hue niSourceTexture
----	@field alpha niSourceTexture
---- @field saturation niSourceTexture
-
---- @class ColorPicker
---- @field element tes3uiElement Set by the tes3uiElement:makeLuaWidget
---- @field mainWidth integer Width of the main picker.
---- @field height integer Height of all the picker widgets.
---- @field hueWidth integer Width of hue and alpha pickers.
---- @field mainImage Image
---- @field hueBar Image
---- @field saturationBar Image
---- @field alphaCheckerboard Image
---- @field alphaBar Image
---- @field textures ColorPickerTextureTable
---- @field currentColor ffiImagePixel
---- @field currentAlpha number
---- @field initialColor ImagePixel
---- @field initialAlpha number
+--- @class tes3uiColorPicker
 local ColorPicker = Base:new()
 
---- @class ColorPicker.new.data
+--- @class tes3uiColorPicker.new.data
 --- @field mainWidth integer Width of the main picker. **Remember, to use it as an engine texture use power of 2 dimensions.**
 --- @field height integer Height of all the picker widgets. **Remember, to use it as an engine texture use power of 2 dimensions.**
 --- @field hueWidth integer Width of hue and alpha pickers. **Remember, to use it as an engine texture use power of 2 dimensions.**
---- @field initialColor ImagePixel
+--- @field initialColor mwseColorTable
 --- @field initialAlpha number? *Default*: 1.0
 
---- @param data ColorPicker.new.data
---- @return ColorPicker
+--- @param data tes3uiColorPicker.new.data
+--- @return tes3uiColorPicker
 function ColorPicker:new(data)
 	local t = Base:new(data)
 	setmetatable(t, self)
 
-	if not data.initialAlpha then
-		t.initialAlpha = 1.0
-	end
-
+	t.initialAlpha = table.get(data, "initialAlpha", 1.0)
 	t.currentColor = ffiPixel({ data.initialColor.r, data.initialColor.g, data.initialColor.b })
 	t.currentAlpha = t.initialAlpha
 
 	-- Make sure texture dimensions are powers of 2.
+	-- We leave the passed UI sizes in picker member variables and use local variables here.
 	local height = math.nextPowerOfTwo(data.height)
 	local mainWidth = math.nextPowerOfTwo(data.mainWidth)
 	local hueWidth = math.nextPowerOfTwo(data.hueWidth)
@@ -113,7 +91,7 @@ function ColorPicker:getAlpha()
 	return self.currentAlpha
 end
 
---- @return ImagePixel
+--- @return mwseColorTable
 function ColorPicker:getColor()
 	local c = self.currentColor
 	return { r = c.r, g = c.g, b = c.b }
@@ -123,7 +101,7 @@ function ColorPicker:getColorAlpha()
 	return self:getColor(), self:getAlpha()
 end
 
---- @return ImagePixelA
+--- @return mwseColorATable
 function ColorPicker:getRGBA()
 	local c = self.currentColor
 	return { r = c.r, g = c.g, b = c.b, a = self.currentAlpha }
@@ -188,12 +166,12 @@ function ColorPicker:updatePreview(newColor, alpha)
 	if not previewsContainer then return end
 	local previewElement = previewsContainer:findChild(UIID.preview.current)
 	if not previewElement then return end
-	local preview = previewElement.widget --[[@as ColorPreview]]
+	local preview = previewElement.widget --[[@as tes3uiColorPreview]]
 	preview:setColor(newColor, alpha)
 end
 
 --- @private
---- @param newColor ffiImagePixel|ImagePixel|ImagePixelA
+--- @param newColor ffiImagePixel|mwseColorTable|mwseColorATable
 --- @param alpha number
 function ColorPicker:updateValueInput(newColor, alpha)
 	-- Not all color pickers have value input.
@@ -231,13 +209,13 @@ function ColorPicker:setColor(newColor, alpha)
 	self.currentAlpha = alpha
 end
 
---- Used to update current preview color and the text shown in the value input.
---- Usually used when after a color was picked in the main or alpha pickers.
---- @param newColor ImagePixel|ffiImagePixel
+--- Usually used when after a color was picked in the main, saturation or alpha pickers.
+--- @param newColor mwseColorTable|ffiImagePixel
 --- @param alpha number
 function ColorPicker:colorSelected(newColor, alpha)
 	-- Make sure we don't create reference to the picked pixel.
 	newColor = ffiPixel({ newColor.r, newColor.g, newColor.b })
+	alpha = alpha or 1.0
 	self:setColor(newColor, alpha)
 	self:updatePreview(newColor, alpha)
 	self:updateValueInput(newColor, alpha)
@@ -256,7 +234,7 @@ end
 
 --- Updates all the elements of color picker. It's more expensive than `colorSelected` since it will
 --- regenerate the image for main picker.
---- @param newColor ffiImagePixel|ImagePixel
+--- @param newColor mwseColorTable|ffiImagePixel
 --- @param alpha number
 function ColorPicker:hueChanged(newColor, alpha)
 	-- Make sure we don't create reference to the picked pixel.

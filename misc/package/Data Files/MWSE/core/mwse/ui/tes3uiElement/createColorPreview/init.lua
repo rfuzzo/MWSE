@@ -3,10 +3,10 @@ local UIID = require("mwse.ui.tes3uiElement.createColorPreview.uiid")
 local validate = require("mwse.ui.tes3uiElement.createColorPicker.validate")
 
 --- @param params tes3uiElement.createColorPreview.params
---- @param preview ColorPreview
+--- @param preview tes3uiColorPreview
 --- @param parent tes3uiElement
 local function createPreviewElement(params, preview, parent)
-	local color = params.color --[[@as ImagePixel]]
+	local color = params.color --[[@as mwseColorTable]]
 	local standardPreview = parent:createRect({
 		id = UIID.rect,
 		color = { color.r, color.g, color.b },
@@ -28,19 +28,8 @@ local function createPreviewElement(params, preview, parent)
 	checkersPreview.texture.pixelData:setPixelsFloat(preview.image:toPixelBufferFloat())
 end
 
---- @class tes3uiElement.createColorPreview.params
---- @field id string|number|nil
---- @field width integer? *Default: 64* Width of the individual preview image.
---- @field height integer? *Default: 64* Height of the individual preview image.
---- @field checkerSize? integer? *Default: 16*
---- @field lightGray ImagePixel? *Default: { r = 0.7, g = 0.7, b = 0.7 }*
---- @field darkGray ImagePixel? *Default: { r = 0.5, g = 0.5, b = 0.5 }*
---- @field color ImagePixel|ffiImagePixel? *Default: { r = 1.0, g = 1.0, b = 1.0 }*
---- @field alpha number? *Default: 1.0*
---- @field hasAlphaPreview boolean? *Default: true* If true the picker will also allow picking an alpha value.
---- @field flowDirection tes3.flowDirection? *Defaukt: tes3.flowDirection.leftToRight*
-
----@param params tes3uiElement.createColorPreview.params?
+--- @param params tes3uiElement.createColorPreview.params?
+--- @return tes3uiElement result
 function tes3uiElement:createColorPreview(params)
 	params = params or {}
 	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPreview.params]]

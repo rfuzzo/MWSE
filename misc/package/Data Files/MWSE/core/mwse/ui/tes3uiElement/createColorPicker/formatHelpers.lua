@@ -8,10 +8,11 @@ local ffiPixel = ffi.typeof("RGB") --[[@as fun(init: ffiImagePixelInit?): ffiIma
 
 local this = {}
 
---- @param p ffiImagePixel|ImagePixel
+--- @param p ffiImagePixel|mwseColorTable
 function this.pixel(p)
 	return string.format("{ r = %.3f, g = %.3f, b = %.3f }", p.r, p.g, p.b)
 end
+
 --- @param c ffiHSV
 function this.hsv(c)
 	return string.format("{ h = %.3f, s = %.3f, v = %.3f }", c.h, c.s, c.v)
@@ -30,7 +31,7 @@ function this.imageData(image)
 end
 
 --- Formats given RGB(A) pixel into an HTML hex code.
---- @param pixel ImagePixel|ImagePixelA|ffiImagePixel
+--- @param pixel mwseColorTable|mwseColorATable|ffiImagePixel
 function this.pixelToHex(pixel)
 	if pixel.a then
 		return string.format("%02X%02X%02X%02X", pixel.a * 255, pixel.r * 255, pixel.g * 255, pixel.b * 255)

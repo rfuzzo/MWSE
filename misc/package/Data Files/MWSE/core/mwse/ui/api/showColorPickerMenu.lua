@@ -1,13 +1,3 @@
---- @class tes3ui.showColorPickerMenu.params
---- @field id? string
---- @field heading? string
---- @field initialColor ImagePixel
---- @field initialAlpha? number
---- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
---- @field showSaturationSlider? boolean *Default: true*
---- @field closeCallback? fun(selectedColor: ImagePixel, selectedAlpha: number|nil) Called when the color picker has been closed.
---- @field leaveMenuMode? boolean *Default: false*
-
 local i18n = mwse.loadTranslations("..")
 
 --- @param params tes3ui.showColorPickerMenu.params
@@ -57,7 +47,6 @@ function tes3ui.showColorPickerMenu(params)
 		alpha = params.alpha,
 		initialColor = params.initialColor,
 		initialAlpha = params.initialAlpha,
-		showSaturationSlider = params.showSaturationSlider,
 	})
 
 	local doneContainer = bodyBlock:createBlock({ id = tes3ui.registerID("MenuColorPicker_done_container") })
@@ -74,7 +63,7 @@ function tes3ui.showColorPickerMenu(params)
 	})
 
 	done:register(tes3.uiEvent.mouseDown, function(e)
-		local picker = pickerElement.widget --[[@as ColorPicker]]
+		local picker = pickerElement.widget --[[@as tes3uiColorPicker]]
 		local color, alpha = picker:getColorAlpha()
 		menu:destroy()
 		if params.leaveMenuMode then

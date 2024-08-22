@@ -5,19 +5,6 @@ local colorUtils = require("mwse.ui.tes3uiElement.createColorPicker.colorUtils")
 
 local niPixelData_BYTES_PER_PIXEL = 4
 
---- @class HSV
---- @field h number Hue in range [0, 360)
---- @field s number Saturation in range [0, 1]
---- @field v number Value/brightness in range [0, 1]
-
---- @class ImagePixel
---- @field r number Red in range [0, 1].
---- @field g number Green in range [0, 1].
---- @field b number Blue in range [0, 1].
-
---- @class ImagePixelA : ImagePixel
---- @field a number Alpha in range [0, 1].
-
 --- An image helper class.
 --- @class Image
 --- @field width integer
@@ -32,7 +19,12 @@ local Image = Base:new()
 --- @field data? ffiImagePixel[]
 --- @field alphas? number[]
 
---- @alias ffiImagePixelInit number[]|ImagePixel
+--- @alias ffiImagePixelInit number[]|mwseColorTable
+
+--- @class HSV
+--- @field h number Hue in range [0, 360)
+--- @field s number Saturation in range [0, 1]
+--- @field v number Value/brightness in range [0, 1]
 
 --- @alias ffiHSVInit number[]|HSV
 
@@ -164,8 +156,8 @@ function Image:mainPicker(hue)
 end
 
 --- Modifies the Image in place.
---- @param topColor ImagePixelA
---- @param bottomColor ImagePixelA
+--- @param topColor mwseColorATable
+--- @param bottomColor mwseColorATable
 function Image:verticalGradient(topColor, bottomColor)
 	topColor.a = topColor.a or 1
 	bottomColor.a = bottomColor.a or 1
@@ -188,8 +180,8 @@ end
 
 --- Creates a checkered pattern.
 --- @param size integer? *Default: 16*. The size of single square in pixels.
---- @param lightGray ImagePixel? *Default: { r = 0.7, g = 0.7, b = 0.7 }*
---- @param darkGray ImagePixel? *Default: { r = 0.5, g = 0.5, b = 0.5 }*
+--- @param lightGray mwseColorTable? *Default: { r = 0.7, g = 0.7, b = 0.7 }*
+--- @param darkGray mwseColorTable? *Default: { r = 0.5, g = 0.5, b = 0.5 }*
 function Image:toCheckerboard(size, lightGray, darkGray)
 	size = size or 16
 	local doubleSize = 2 * size
@@ -229,10 +221,12 @@ end
 function Image:copy()
 	local size = self.height * self.width
 	local data = ffiPixelArray(size + 1)
-	ffi.copy(data, self.data, ffi.sizeof("RGB[?]", size))
+	local pixelBufferSize = ffi.sizeof("RGB[?]", size)
+	ffi.copy(data, self.data, pixelBufferSize)
 
 	local alphas = ffiDoubleArray(size + 1, { 1.0 })
-	ffi.copy(alphas, self.alphas, ffi.sizeof("double[?]", size))
+	local alphasSize = ffi.sizeof("double[?]", size)
+	ffi.copy(alphas, self.alphas, alphasSize)
 
 
 	local new = Image:new({

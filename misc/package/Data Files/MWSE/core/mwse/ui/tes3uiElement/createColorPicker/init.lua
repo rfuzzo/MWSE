@@ -102,7 +102,7 @@ local SV_EPSILON = 0.01
 local HUE_EPSILON = 1e-3
 
 --- @param params tes3uiElement.createColorPicker.params
---- @param picker ColorPicker
+--- @param picker tes3uiColorPicker
 --- @param parent tes3uiElement
 local function createPickerBlock(params, picker, parent)
 	local initialColor = ffiPixel({ params.initialColor.r, params.initialColor.g, params.initialColor.b })
@@ -290,7 +290,7 @@ local function createPickerBlock(params, picker, parent)
 		local pickedColor = colorUtils.HSVtosRGB(pickedHSV)
 
 		picker:colorSelected(pickedColor, picker:getAlpha())
-		parent:triggerEvent("colorChanged")
+		parent:triggerEvent(tes3.uiEvent.colorChanged)
 	end)
 	if params.showSaturationSlider then
 		slider:register(tes3.uiEvent.partScrollBarChanged, function(e)
@@ -301,7 +301,7 @@ local function createPickerBlock(params, picker, parent)
 
 			local pickedColor = colorUtils.HSVtosRGB(pickedHSV)
 			picker:colorSelected(pickedColor, picker:getAlpha())
-			parent:triggerEvent("colorChanged")
+			parent:triggerEvent(tes3.uiEvent.colorChanged)
 		end)
 	end
 
@@ -316,7 +316,7 @@ local function createPickerBlock(params, picker, parent)
 
 		local pickedColor = colorUtils.HSVtosRGB(currentHSV)
 		picker:hueChanged(pickedColor, picker:getAlpha())
-		parent:triggerEvent("colorChanged")
+		parent:triggerEvent(tes3.uiEvent.colorChanged)
 	end)
 
 	if params.showSaturationPicker then
@@ -328,7 +328,7 @@ local function createPickerBlock(params, picker, parent)
 
 			local pickedColor = colorUtils.HSVtosRGB(currentHSV)
 			picker:colorSelected(pickedColor, picker:getAlpha())
-			parent:triggerEvent("colorChanged")
+			parent:triggerEvent(tes3.uiEvent.colorChanged)
 		end)
 	end
 
@@ -336,7 +336,7 @@ local function createPickerBlock(params, picker, parent)
 		alphaPicker:register(tes3.uiEvent.mouseStillPressed, function(e)
 			local y = math.clamp(e.relativeY / alphaPicker.height, 0, 1)
 			picker:colorSelected(picker:getColor(), 1 - y)
-			parent:triggerEvent("colorChanged")
+			parent:triggerEvent(tes3.uiEvent.colorChanged)
 		end)
 	end
 
@@ -344,7 +344,7 @@ local function createPickerBlock(params, picker, parent)
 		--- @param e tes3uiEventData
 		local function resetColor(e)
 			picker:hueChanged(params.initialColor, params.initialAlpha)
-			parent:triggerEvent("colorChanged")
+			parent:triggerEvent(tes3.uiEvent.colorChanged)
 		end
 		createPreview(params, previewContainer, initialColor, params.initialAlpha, "Original", false, resetColor)
 	end
@@ -383,7 +383,7 @@ local function getInputValue(input)
 end
 
 --- @param params tes3uiElement.createColorPicker.params
---- @param picker ColorPicker
+--- @param picker tes3uiColorPicker
 --- @param parent tes3uiElement
 local function createDataBlock(params, picker, parent)
 	local dataRow = parent:createThinBorder({ id = UIID.dataRowContainer })
@@ -399,7 +399,7 @@ local function createDataBlock(params, picker, parent)
 	local inputText = format.pixelToHex(params.initialColor)
 	if params.alpha then
 		text = i18n("ARGB: #")
-		local initialColor = table.copy(params.initialColor) --[[@as ImagePixelA]]
+		local initialColor = table.copy(params.initialColor) --[[@as mwseColorATable]]
 		initialColor.a = params.initialAlpha
 		inputText = format.pixelToHex(initialColor)
 	end
@@ -421,7 +421,7 @@ local function createDataBlock(params, picker, parent)
 	input:registerAfter(tes3.uiEvent.keyEnter, function(e)
 		local newColor, alpha = format.hexToPixel(getInputValue(input))
 		picker:hueChanged(newColor, alpha)
-		parent:triggerEvent("colorChanged")
+		parent:triggerEvent(tes3.uiEvent.colorChanged)
 	end)
 
 	local copyButton = dataRow:createButton({
@@ -439,24 +439,8 @@ local function createDataBlock(params, picker, parent)
 	}
 end
 
---- @class tes3uiElement.createColorPicker.params
---- @field id? string|integer
---- @field initialColor ImagePixel
---- @field initialAlpha? number
---- @field alpha? boolean *Default: false* If true the picker will also allow picking an alpha value.
---- @field height integer? *Default: 256* The height of the main, hue and optionally alpha pickers.
---- @field mainWidth integer? *Default: 256* The width of the main picker.
---- @field hueWidth integer? *Default: 32* The width of the hue and optionally alpha pickers.
---- @field showDataRow? boolean *Default: true* If true the picker will show RGB(A) values of currently picked color in a label below the picker.
---- @field showSaturationSlider? boolean *Default: true*
---- @field showSaturationPicker boolean? *Default: true*
---- @field showPreviews boolean? *Default: true* If false the picker won't have any color preview widgets.
---- @field showOriginal? boolean *Default: true* If true the picker will show original color below the currently picked color.
---- @field previewWidth integer? *Default: 64*
---- @field previewHeight integer? *Default: 64*
---- @field vertical boolean? *Default: false*. If *true*, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker.
-
 ---@param params tes3uiElement.createColorPicker.params
+---@return tes3uiElement result
 function tes3uiElement:createColorPicker(params)
 	assert(type(params) == "table", "Invalid parameters provided.")
 	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPicker.params]]
