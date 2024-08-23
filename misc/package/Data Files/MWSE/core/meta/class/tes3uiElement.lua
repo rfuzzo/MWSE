@@ -148,11 +148,11 @@ function tes3uiElement:createButton(params) end
 --- Creates a color picker widget.
 --- 
 --- Color picker specific properties can be accessed through the `widget` property. The widget type for color pickers is [`tes3uiColorPicker`](https://mwse.github.io/MWSE/types/tes3uiColorPicker/).
---- @param params tes3uiElement.createColorPicker.params This table accepts the following values:
+--- @param params tes3uiElement.createColorPicker.params? This table accepts the following values:
 --- 
 --- `id`: string|integer|nil — *Optional*. An identifier to help find this element later.
 --- 
---- `initialColor`: mwseColorTable — The initial color for the picker.
+--- `initialColor`: mwseColorTable? — *Default*: `{ r = 1.0, g = 1.0, b = 1.0 }`. The initial color for the picker.
 --- 
 --- `alpha`: boolean? — *Default*: `false`. If `true` the picker will also allow picking an alpha value.
 --- 
@@ -185,7 +185,7 @@ function tes3uiElement:createColorPicker(params) end
 ---Table parameter definitions for `tes3uiElement.createColorPicker`.
 --- @class tes3uiElement.createColorPicker.params
 --- @field id string|integer|nil *Optional*. An identifier to help find this element later.
---- @field initialColor mwseColorTable The initial color for the picker.
+--- @field initialColor mwseColorTable? *Default*: `{ r = 1.0, g = 1.0, b = 1.0 }`. The initial color for the picker.
 --- @field alpha boolean? *Default*: `false`. If `true` the picker will also allow picking an alpha value.
 --- @field initialAlpha number? *Default*: `1`. The initial alpha value.
 --- @field vertical boolean? *Default*: `false`. If `true`, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker.

@@ -735,9 +735,9 @@ local result = myObject:createColorPicker({ id = ..., initialColor = ..., alpha 
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `id` (string, integer): *Optional*. An identifier to help find this element later.
-	* `initialColor` ([mwseColorTable](../types/mwseColorTable.md)): The initial color for the picker.
+	* `initialColor` ([mwseColorTable](../types/mwseColorTable.md)): *Default*: `{ r = 1.0, g = 1.0, b = 1.0 }`. The initial color for the picker.
 	* `alpha` (boolean): *Default*: `false`. If `true` the picker will also allow picking an alpha value.
 	* `initialAlpha` (number): *Default*: `1`. The initial alpha value.
 	* `vertical` (boolean): *Default*: `false`. If `true`, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker.

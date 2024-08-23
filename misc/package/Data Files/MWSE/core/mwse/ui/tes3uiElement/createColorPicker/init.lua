@@ -439,9 +439,10 @@ local function createDataBlock(params, picker, parent)
 	}
 end
 
----@param params tes3uiElement.createColorPicker.params
+---@param params tes3uiElement.createColorPicker.params?
 ---@return tes3uiElement result
 function tes3uiElement:createColorPicker(params)
+	params = params or {}
 	assert(type(params) == "table", "Invalid parameters provided.")
 	params = table.deepcopy(params) --[[@as tes3uiElement.createColorPicker.params]]
 	params.alpha = table.get(params, "alpha", false)
@@ -454,10 +455,9 @@ function tes3uiElement:createColorPicker(params)
 	params.showSaturationSlider = table.get(params, "showSaturationSlider", true)
 	params.showSaturationPicker = table.get(params, "showSaturationPicker", true)
 	params.vertical = table.get(params, "vertical", false)
-
-	if (not params.alpha) or (not params.initialAlpha) then
-		params.initialAlpha = 1
-	end
+	params.initialAlpha = table.get(params, "initialAlpha", 1.0)
+	params.initialColor = table.get(params, "initialColor", { r = 1.0, g = 1.0, b = 1.0 })
+	-- Make sure the colors are in [0, 1] range.
 	params.initialAlpha = math.clamp(params.initialAlpha, 0, 1)
 	params.initialColor = validate.clampColor(params.initialColor)
 

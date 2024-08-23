@@ -6,9 +6,10 @@ Color picker specific properties can be accessed through the `widget` property. 
 	arguments = {{
 		name = "params",
 		type = "table",
+		optional = true,
 		tableParams = {
 			{ name = "id", type = "string|integer", description = "An identifier to help find this element later.", optional = true },
-			{ name = "initialColor", type = "mwseColorTable", description = "The initial color for the picker." },
+			{ name = "initialColor", type = "mwseColorTable", optional = true, default = "{ r = 1.0, g = 1.0, b = 1.0 }", description = "The initial color for the picker." },
 			{ name = "alpha", type = "boolean", optional = true, default = false, description = "If `true` the picker will also allow picking an alpha value." },
 			{ name = "initialAlpha", type = "number", optional = true, default = 1.0, description = "The initial alpha value." },
 			{ name = "vertical", type = "boolean", optional = true, default = false, description = "If `true`, saturation, hue and alpha bars and color previews are created in the second row below the main picker. If `false` they are created in the same row as the main picker." },
