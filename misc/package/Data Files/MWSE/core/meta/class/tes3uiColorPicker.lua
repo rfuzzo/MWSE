@@ -37,6 +37,10 @@ function tes3uiColorPicker:getColor() end
 --- @return number alpha No description yet available.
 function tes3uiColorPicker:getColorAlpha() end
 
+--- Gets the current RGB color in an array. Usually used to feed the color from the color picker straight to another UI element, e.g. `myElement.color = pickerElement.widget:getColorArray()`.
+--- @return number[] arrayRGB No description yet available.
+function tes3uiColorPicker:getColorArray() end
+
 --- Gets the current color and alpha in a single table.
 --- @return mwseColorATable color No description yet available.
 function tes3uiColorPicker:getRGBA() end

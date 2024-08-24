@@ -229,6 +229,21 @@ local color, alpha = myObject:getColorAlpha()
 
 ***
 
+### `getColorArray`
+<div class="search_terms" style="display: none">getcolorarray, colorarray</div>
+
+Gets the current RGB color in an array. Usually used to feed the color from the color picker straight to another UI element, e.g. `myElement.color = pickerElement.widget:getColorArray()`.
+
+```lua
+local arrayRGB = myObject:getColorArray()
+```
+
+**Returns**:
+
+* `arrayRGB` (number[])
+
+***
+
 ### `getRGBA`
 <div class="search_terms" style="display: none">getrgba, rgba</div>
 

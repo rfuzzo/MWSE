@@ -107,6 +107,12 @@ function ColorPicker:getRGBA()
 	return { r = c.r, g = c.g, b = c.b, a = self.currentAlpha }
 end
 
+--- @return number[] arrayRGB
+function ColorPicker:getColorArray()
+	local c = self.currentColor
+	return { c.r, c.g, c.b }
+end
+
 --- @alias IndicatorID
 ---| "main"
 ---| "hue"
