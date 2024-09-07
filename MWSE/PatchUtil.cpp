@@ -38,7 +38,7 @@
 #include "NILinesData.h"
 #include "NIPick.h"
 #include "NISortAdjustNode.h"
-#include "NiTriBasedGeometry.h"
+#include "NiTriShape.h"
 #include "NIUVController.h"
 
 #include "BitUtil.h"
@@ -1157,6 +1157,51 @@ namespace mwse::patch {
 
 
 	//
+	// Patch: Allow per-shape control of whether software or hardware skinning is used.
+	//
+
+	const unsigned short FullSkinningFlag = 0x200;
+
+	__declspec(naked) void PatchNITriBasedGeom_Ctor1() {
+		__asm {
+			movzx eax, word ptr [esp + 0x1C]	// eax = zero extended triangleCount
+			mov dword ptr [esi], 0x751268		// Set NiTriBasedGeom vtable
+			mov [esi + 0x34], eax				// Write triangleCount and patchRenderFlags together
+			nop
+		}
+	}
+	const size_t PatchNITriBasedGeom_Ctor1_size = 0xF;
+
+	__declspec(naked) void PatchNITriBasedGeom_Ctor2() {
+		__asm {
+			xor edx, edx
+			mov [esi + 0x34], edx				// Write triangleCount and patchRenderFlags together
+			nop
+		}
+	}
+	const size_t PatchNITriBasedGeom_Ctor2_size = 0x6;
+
+	__declspec(naked) void PatchNIDX8Renderer_RenderShape() {
+		__asm {
+			nop
+			test word ptr [esi + 0x36], 0x200	// Skip hardware skinning if patchRenderFlags matches FullSkinningFlag
+			__asm _emit 0x75 __asm _emit 0x19	// jnz short $ + 0x1B (assembler can't output short offsets correctly)
+		}
+	}
+	const size_t PatchNIDX8Renderer_RenderShape_size = 0x8;
+
+	const auto NI_Geometry_LinkObject = reinterpret_cast<void(__thiscall*)(NI::Geometry*, NI::Stream*)>(0x6F47D0);
+	void __fastcall PatchNITriShape_LinkObject(NI::TriBasedGeometry* triShape, DWORD _EDX_, NI::Stream* stream) {
+		NI_Geometry_LinkObject(triShape, stream);
+
+		// Set flag in linked data.
+		if (triShape->flags & FullSkinningFlag) {
+			auto data = static_cast<NI::TriBasedGeometryData*>(triShape->modelData.get());
+			data->patchRenderFlags |= FullSkinningFlag;
+		}
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1593,6 +1638,12 @@ namespace mwse::patch {
 
 		// Patch: Allow bound armour function to also summon bracers and pauldrons.
 		genCallEnforced(0x466457, 0x465DE0, reinterpret_cast<DWORD>(PatchSwapBoundArmor));
+
+		// Patch: Allow per-shape control of whether software or hardware skinning is used.
+		writePatchCodeUnprotected(0x6FF0A8, (BYTE*)&PatchNITriBasedGeom_Ctor1, PatchNITriBasedGeom_Ctor1_size);
+		writePatchCodeUnprotected(0x6FF0F0, (BYTE*)&PatchNITriBasedGeom_Ctor2, PatchNITriBasedGeom_Ctor2_size);
+		writePatchCodeUnprotected(0x6ACF1F, (BYTE*)&PatchNIDX8Renderer_RenderShape, PatchNIDX8Renderer_RenderShape_size);
+		overrideVirtualTableEnforced(0x7508B0, offsetof(NI::TriShape_vTable, NI::TriShape_vTable::linkObject), 0x6E56D0, reinterpret_cast<DWORD>(PatchNITriShape_LinkObject));
 	}
 
 	void installPostLuaPatches() {
