@@ -635,8 +635,6 @@ function writeSubPackage(file, package, from)
 	writePackageDetails(file, package)
 end
 
-local inspect = require("builders.inspect")
-
 ---@param package package
 ---@param outDir string
 local function build(package, outDir)
