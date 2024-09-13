@@ -427,23 +427,26 @@ local function writeFields(file, package, field, fieldName, writeFunction, write
 	local fields = table.values(getPackageComponentsArray(package, field), sortPackagesByKey)
 	fields = removeDeprecated(fields)
 	local count = #fields
+	-- No field that aren't deprecated? Nothing to do here.
+	if (count == 0) then
+		return false
+	end
 
-	if (count > 0) then
-		if (writeRule) then
-			file:write("***\n\n")
-		end
-		file:write(string.format("## %s\n\n", fieldName))
-		for i, field in ipairs(fields) do
-			if (not field.deprecated) then
-				writeFunction(file, field, package)
-				if (i < count) then
-					file:write("***\n\n")
-				end
+	if (writeRule) then
+		file:write("***\n\n")
+	end
+
+	file:write(string.format("## %s\n\n", fieldName))
+
+	for i, field in ipairs(fields) do
+		if (not field.deprecated) then
+			writeFunction(file, field, package)
+			if (i < count) then
+				file:write("***\n\n")
 			end
 		end
-		return true
 	end
-	return false
+	return true
 end
 
 --- @param file file*
@@ -513,7 +516,7 @@ local function writePackageDetails(file, package)
 			if (package.type == "method") then
 				file:write(string.format("%s:%s(", "myObject", package.key))
 			else
-				file:write(string.format("%s.%s(", package.parent.namespace, package.key))
+				file:write(string.format("%s(", package.namespace))
 			end
 		else
 			file:write(string.format("%s(", package.key))
