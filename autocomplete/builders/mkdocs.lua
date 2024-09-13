@@ -635,6 +635,8 @@ function writeSubPackage(file, package, from)
 	writePackageDetails(file, package)
 end
 
+local inspect = require("builders.inspect")
+
 ---@param package package
 ---@param outDir string
 local function build(package, outDir)
@@ -663,15 +665,16 @@ local function build(package, outDir)
 		file:write("!!! warning\n\tThis API is deprecated. See below for more information about what to use instead.\n\n")
 	end
 
-	writePackageDetails(file, package)
+	-- Let's inline nested sub-libs to ensure that sub-globals are built.
+	for _, lib in ipairs(package.libs or {}) do
 
-	-- Ensure that sub-globals are built.
-	-- NOTE: This does not appear to be used anywhere.
-	if (package.libs) then
-		for _, lib in ipairs(package.libs) do
-			build(lib, outDir)
+		for _, child in ipairs(lib.functions or {}) do
+			child.key = string.format("%s.%s", lib.key, child.key)
+			table.insert(package.functions, child)
 		end
 	end
+
+	writePackageDetails(file, package)
 
 	-- Close up shop.
 	file:close()
