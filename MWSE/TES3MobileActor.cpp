@@ -1995,6 +1995,23 @@ namespace TES3 {
 		setMobileActorMovementFlag(TES3::ActorMovement::Walking, value);
 	}
 
+	bool MobileActor::isSpeaking() const {
+		if (!animationController.asActor) {
+			return false;
+		}
+
+		auto animData = animationController.asActor->animationData;
+		if (!animData) {
+			return false;
+		}
+
+		if (animData->lipsyncLevel != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
 	bool MobileActor::isAffectedByObject_lua(sol::object object) const {
 		if (object.is<TES3::Alchemy>()) {
 			return isAffectedByAlchemy(object.as<TES3::Alchemy*>());
