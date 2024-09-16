@@ -182,6 +182,7 @@ namespace mwse::lua {
 		usertypeDefinition["isKnockedOut"] = sol::readonly_property(&TES3::MobileActor::isKnockedOut);
 		usertypeDefinition["isParalyzed"] = sol::readonly_property(&TES3::MobileActor::isParalyzed);
 		usertypeDefinition["isReadyingWeapon"] = sol::readonly_property(&TES3::MobileActor::isReadyingWeapon);
+		usertypeDefinition["isSpeaking"] = sol::readonly_property(&TES3::MobileActor::isSpeaking);
 		usertypeDefinition["weaponReady"] = sol::property(&TES3::MobileActor::getWeaponReady, &TES3::MobileActor::setWeaponReady);
 		usertypeDefinition["width"] = sol::readonly_property(&TES3::MobileActor::getWidth);
 

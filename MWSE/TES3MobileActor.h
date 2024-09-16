@@ -478,6 +478,8 @@ namespace TES3 {
 		bool getMovementFlagWalking() const;
 		void setMovementFlagWalking(bool value);
 
+		bool isSpeaking() const;
+
 		bool isAffectedByObject_lua(sol::object object) const;
 
 		bool hasSummonEffect();
