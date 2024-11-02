@@ -168,6 +168,7 @@
 #include "TES3WeatherLua.h"
 #include "TES3WorldControllerLua.h"
 
+#include "NIBoundingVolumeLua.h"
 #include "NICameraLua.h"
 #include "NICollisionGroupLua.h"
 #include "NICollisionSwitchLua.h"
@@ -566,6 +567,7 @@ namespace mwse::lua {
 		bindTES3UIWidgets();
 
 		// Bind NI data types.
+		bindNIBoundingVolume();
 		bindNICamera();
 		bindNICollisionGroup();
 		bindNICollisionSwitch();
