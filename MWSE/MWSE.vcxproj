@@ -34,6 +34,7 @@
     <ClInclude Include="NIAnimationData.h" />
     <ClInclude Include="NIAnimationKey.h" />
     <ClInclude Include="NIBoundingVolumeLua.h" />
+    <ClInclude Include="NIBSAnimationNodeLua.h" />
     <ClInclude Include="NIPathController.h" />
     <ClInclude Include="NISortAdjustNode.h" />
     <ClInclude Include="TES3AnimationGroupLua.h" />
@@ -729,6 +730,8 @@
     <ClCompile Include="NIBillboardNode.cpp" />
     <ClCompile Include="NIBinaryStream.cpp" />
     <ClCompile Include="NIBoundingVolumeLua.cpp" />
+    <ClCompile Include="NIBSAnimationNode.cpp" />
+    <ClCompile Include="NIBSAnimationNodeLua.cpp" />
     <ClCompile Include="NICamera.cpp" />
     <ClCompile Include="NICollisionGroup.cpp" />
     <ClCompile Include="NICollisionGroupLua.cpp" />
