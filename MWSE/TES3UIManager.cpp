@@ -313,7 +313,7 @@ namespace TES3::UI {
 		const auto p_propMenuInventory_extra = reinterpret_cast<Property*>(0x7D396C);
 		const auto p_propMenuInventory_Thing = reinterpret_cast<Property*>(0x7D3A70);
 
-		// This call is required because owningWidget is resolved differently for tooltips for some reason.
+		// This call is required because owningWidget is resolved differently for tooltips compared to regular events.
 		const auto TES3_ui_findPartRootOrComponent = reinterpret_cast<Element* (__thiscall*)(Element*, Property)>(0x582B80);
 		auto tileElement = TES3_ui_findPartRootOrComponent(source, Property::null);
 
