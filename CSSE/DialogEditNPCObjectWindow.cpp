@@ -53,7 +53,7 @@ namespace se::cs::dialog::edit_npc_object_window {
 		setRedrawOnExpensiveWindows(context.getWindowHandle(), true);
 
 		if constexpr (LOG_PERFORMANCE_RESULTS) {
-			auto timeToInitialize = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - initializationTimer);
+			const auto timeToInitialize = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - initializationTimer);
 			log::stream << "Displaying NPC object data took " << timeToInitialize.count() << "ms" << std::endl;
 		}
 	}
