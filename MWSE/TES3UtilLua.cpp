@@ -212,7 +212,7 @@ namespace mwse::lua {
 		auto object = maybe.as<TES3::BaseObject*>();
 		if (object) {
 			TES3::DataHandler::get()->nonDynamicData->deleteObject(object);
-			object->vTable.base->destructor(object, true);
+			object->vTable.base->deleting_dtor(object, true);
 			return true;
 		}
 		return false;
