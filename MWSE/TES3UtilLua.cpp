@@ -4753,7 +4753,7 @@ namespace mwse::lua {
 		TES3::BaseObject* object = getOptionalParamObject<TES3::BaseObject>(params, "object");
 		if (object != nullptr) {
 			if (object->objectType == TES3::ObjectType::Alchemy) {
-				return mact->isAffectedByAlchemy(static_cast<TES3::Alchemy*>(object));
+				return mact->isAffectedBySimilarAlchemy(static_cast<TES3::Alchemy*>(object));
 			}
 			else if (object->objectType == TES3::ObjectType::Enchantment) {
 				return mact->isAffectedByEnchantment(static_cast<TES3::Enchantment*>(object));
