@@ -5673,7 +5673,8 @@ namespace mwse::lua {
 			height1 = reference1->baseObject->boundingBox->maximum.z;
 		}
 		else {
-			throw std::invalid_argument("Could not determine first reference's height data.");
+			// Possibly the asset or its collision is uninitialized. Assume height is zero instead of failing.
+			height1 = 0;
 		}
 
 		// Try to get the second reference's data.
@@ -5687,7 +5688,8 @@ namespace mwse::lua {
 			height2 = reference2->baseObject->boundingBox->maximum.z;
 		}
 		else {
-			throw std::invalid_argument("Could not determine second reference's height data.");
+			// Possibly the asset or its collision is uninitialized. Assume height is zero instead of failing.
+			height2 = 0;
 		}
 
 		return tes3::testLineOfSight(&position1.value(), height1, &position2.value(), height2);
