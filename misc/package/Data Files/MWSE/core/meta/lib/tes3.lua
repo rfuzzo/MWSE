@@ -1716,6 +1716,22 @@ function tes3.messageBox(messageOrParams, ...) end
 --- @field showInDialog boolean? *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- @field duration number? *Optional*. Overrides how long the toast-style message remains visible.
 
+--- Modifies the effective disposition of an NPC, and updates the dialogue UI if visible. The change is clamped so that effective disposition remains within the range 0-100. The change can be either permanent or temporary (limited to a dialogue session).
+--- @param params tes3.modDisposition.params This table accepts the following values:
+--- 
+--- `reference`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
+--- 
+--- `value`: integer — The change in disposition.
+--- 
+--- `temporary`: boolean? — *Default*: `false`. When true, the disposition change will only temporarily modify disposition while the dialogue window is open. Temporary changes have no effect outside dialogue.
+function tes3.modDisposition(params) end
+
+---Table parameter definitions for `tes3.modDisposition`.
+--- @class tes3.modDisposition.params
+--- @field reference tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
+--- @field value integer The change in disposition.
+--- @field temporary boolean? *Default*: `false`. When true, the disposition change will only temporarily modify disposition while the dialogue window is open. Temporary changes have no effect outside dialogue.
+
 --- Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3modstatistic).

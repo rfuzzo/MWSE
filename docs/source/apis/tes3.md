@@ -3605,6 +3605,24 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 
 ***
 
+### `tes3.modDisposition`
+<div class="search_terms" style="display: none">moddisposition, disposition</div>
+
+Modifies the effective disposition of an NPC, and updates the dialogue UI if visible. The change is clamped so that effective disposition remains within the range 0-100. The change can be either permanent or temporary (limited to a dialogue session).
+
+```lua
+tes3.modDisposition({ reference = ..., value = ..., temporary = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `reference` ([tes3mobileActor](../types/tes3mobileActor.md), [tes3reference](../types/tes3reference.md), string)
+	* `value` (integer): The change in disposition.
+	* `temporary` (boolean): *Default*: `false`. When true, the disposition change will only temporarily modify disposition while the dialogue window is open. Temporary changes have no effect outside dialogue.
+
+***
+
 ### `tes3.modStatistic`
 <div class="search_terms" style="display: none">modstatistic, statistic</div>
 
