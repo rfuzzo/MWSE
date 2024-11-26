@@ -23,7 +23,7 @@ namespace TES3 {
 		Conditional5,
 	};
 
-	constexpr auto DialogueInfoConditinalCount = 6u;
+	constexpr auto DialogueInfoConditionalCount = 6u;
 
 	namespace ObjectFlag {
 		typedef unsigned int value_type;
