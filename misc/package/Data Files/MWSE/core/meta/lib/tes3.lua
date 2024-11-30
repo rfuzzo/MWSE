@@ -535,6 +535,19 @@ function tes3.cast(params) end
 --- @field alwaysSucceeds boolean? *Default*: `true`. If `true`, the spell cannot fail and does not consume magicka. If `false`, it is cast using the actor's spell skill, and requires and takes enough magicka to cast. For NPCs, this only applies if `instant` is `true`.
 --- @field bypassResistances boolean? *Default*: `false`. If `true`, the spell will bypass the target's resistances. For NPCs, this only applies if `instant` is `true`.
 
+--- Changes the current weather, either with a transition period or immediately. It only affects the weather simulation system, independent of regional weather settings.
+--- @param params tes3.changeWeather.params This table accepts the following values:
+--- 
+--- `id`: tes3.weather|integer — Maps to [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) constants.
+--- 
+--- `immediate`: boolean? — *Optional*. When true, the weather changes immediately. When false, a transition to the selected weather is started.
+function tes3.changeWeather(params) end
+
+---Table parameter definitions for `tes3.changeWeather`.
+--- @class tes3.changeWeather.params
+--- @field id tes3.weather|integer Maps to [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) constants.
+--- @field immediate boolean? *Optional*. When true, the weather changes immediately. When false, a transition to the selected weather is started.
+
 --- Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).
 --- @param params tes3.checkMerchantOffersService.params This table accepts the following values:
 --- 

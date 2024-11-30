@@ -886,6 +886,23 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 
 ***
 
+### `tes3.changeWeather`
+<div class="search_terms" style="display: none">changeweather</div>
+
+Changes the current weather, either with a transition period or immediately. It only affects the weather simulation system, independent of regional weather settings.
+
+```lua
+tes3.changeWeather({ id = ..., immediate = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `id` ([tes3.weather](../references/weather-types.md), integer): Maps to [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) constants.
+	* `immediate` (boolean): *Optional*. When true, the weather changes immediately. When false, a transition to the selected weather is started.
+
+***
+
 ### `tes3.checkMerchantOffersService`
 <div class="search_terms" style="display: none">checkmerchantoffersservice</div>
 
