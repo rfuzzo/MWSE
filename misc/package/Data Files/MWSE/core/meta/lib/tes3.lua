@@ -766,7 +766,7 @@ function tes3.enableKey(keyCode) end
 --- 
 --- - The item cannot be found in the inventory.
 --- - The exact match cannot be found when itemData is provided.
---- - When a weapon is being used to attack, it cannot be replaced.
+--- - When a weapon is being used to attack, it cannot be replaced during the attack animation.
 --- @param params tes3.equip.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — The reference to perform the equip on.
@@ -775,7 +775,7 @@ function tes3.enableKey(keyCode) end
 --- 
 --- `itemData`: tes3itemData? — *Optional*. The item data of the specific item to equip, if a specific item is required.
 --- 
---- `addItem`: boolean? — *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
+--- `addItem`: boolean? — *Default*: `false`. If `true`, the item will be added to the actor's inventory if it is not already present.
 --- 
 --- `selectBestCondition`: boolean? — *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 --- 
@@ -790,7 +790,7 @@ function tes3.equip(params) end
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string The reference to perform the equip on.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to equip.
 --- @field itemData tes3itemData? *Optional*. The item data of the specific item to equip, if a specific item is required.
---- @field addItem boolean? *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
+--- @field addItem boolean? *Default*: `false`. If `true`, the item will be added to the actor's inventory if it is not already present.
 --- @field selectBestCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 --- @field selectWorstCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
 --- @field bypassEquipEvents boolean? *Default*: `false`. If `true`, this call will not raise any `equip`-related events.
