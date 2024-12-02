@@ -77,6 +77,17 @@ namespace se::cs::dialog::use_report_window {
 		}
 	}
 
+	void PatchDialogProc_AfterInitDialog(DialogProcContext& context) {
+		const auto hWnd = context.getWindowHandle();
+		const auto userData = context.getUserData<UserData>();
+
+		// Change the window title to include the object ID.
+		char buffer[256] = {};
+		if (sprintf_s(buffer, "Use Report: %s", userData->reportingObject->getObjectID()) > 0) {
+			SetWindowTextA(hWnd, buffer);
+		}
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		DialogProcContext context(hWnd, msg, wParam, lParam, 0x435B80);
 
@@ -95,7 +106,9 @@ namespace se::cs::dialog::use_report_window {
 		}
 
 		switch (msg) {
-
+		case WM_INITDIALOG:
+			PatchDialogProc_AfterInitDialog(context);
+			break;
 		}
 
 		return context.getResult();
