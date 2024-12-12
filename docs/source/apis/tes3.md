@@ -1587,6 +1587,27 @@ local gameSetting = tes3.findGMST(id)
 
 ***
 
+### `tes3.findQuest`
+<div class="search_terms" style="display: none">findquest, quest</div>
+
+Finds a journal quest log by dialogue topic or quest name. Pass either a journal dialogue id or a quest name. A quest can cover multiple dialogue journal topics under the same quest name. Quests are also where the flags for active and finished quests are tracked.
+
+```lua
+local quest = tes3.findQuest({ journal = ..., name = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `journal` ([tes3dialogue](../types/tes3dialogue.md), string): *Optional*. The dialogue journal id to look for.
+	* `name` (string): *Optional*. The quest name (as displayed in the journal) to look for.
+
+**Returns**:
+
+* `quest` ([tes3quest](../types/tes3quest.md))
+
+***
+
 ### `tes3.findRegion`
 <div class="search_terms" style="display: none">findregion, region</div>
 

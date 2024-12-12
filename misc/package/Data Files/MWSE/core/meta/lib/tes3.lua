@@ -922,6 +922,20 @@ function tes3.findGlobal(id) end
 --- @return tes3gameSetting gameSetting No description yet available.
 function tes3.findGMST(id) end
 
+--- Finds a journal quest log by dialogue topic or quest name. Pass either a journal dialogue id or a quest name. A quest can cover multiple dialogue journal topics under the same quest name. Quests are also where the flags for active and finished quests are tracked.
+--- @param params tes3.findQuest.params This table accepts the following values:
+--- 
+--- `journal`: tes3dialogue|string|nil — *Optional*. The dialogue journal id to look for.
+--- 
+--- `name`: string? — *Optional*. The quest name (as displayed in the journal) to look for.
+--- @return tes3quest quest No description yet available.
+function tes3.findQuest(params) end
+
+---Table parameter definitions for `tes3.findQuest`.
+--- @class tes3.findQuest.params
+--- @field journal tes3dialogue|string|nil *Optional*. The dialogue journal id to look for.
+--- @field name string? *Optional*. The quest name (as displayed in the journal) to look for.
+
 --- Fetches the core game region object for a given region ID. If the region with a given ID doesn't exist, nil is returned.
 --- @param params tes3.findRegion.params This table accepts the following values:
 --- 

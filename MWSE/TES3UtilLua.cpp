@@ -62,6 +62,7 @@
 #include "TES3MobilePlayer.h"
 #include "TES3NPC.h"
 #include "TES3PlayerAnimationController.h"
+#include "TES3Quest.h"
 #include "TES3Race.h"
 #include "TES3Reference.h"
 #include "TES3Region.h"
@@ -4517,6 +4518,48 @@ namespace mwse::lua {
 		return TES3::Dialogue::getDialogue(type, page);
 	}
 
+	TES3::Quest* findQuest(sol::table params) {
+		auto journalController = TES3::WorldController::get()->journalController;
+
+		sol::object journal = params["journal"];
+		TES3::Dialogue* dialogue = nullptr;
+
+		if (journal.is<TES3::Dialogue*>()) {
+			dialogue = journal.as<TES3::Dialogue*>();
+		}
+		else if (journal.is<const char*>()) {
+			auto dialogueId = journal.as<const char*>();
+			if (dialogueId) {
+				dialogue = TES3::DataHandler::get()->nonDynamicData->findDialogue(dialogueId);
+			}
+		}
+
+		if (dialogue) {
+			// Search by dialogue topic.
+			for (auto quest : *journalController) {
+				for (auto d : quest->dialogues) {
+					if (d == dialogue) {
+						return quest;
+					}
+				}
+			}
+			return nullptr;
+		}
+
+		auto name = getOptionalParam<const char*>(params, "name", nullptr);
+		if (name) {
+			// Search by quest name string.
+			for (auto quest : *journalController) {
+				if (_stricmp(name, quest->name) == 0) {
+					return quest;
+				}
+			}
+			return nullptr;
+		}
+
+		return nullptr;
+	}
+
 	bool setEnabled(sol::table params) {
 		TES3::Reference* reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -6244,6 +6287,7 @@ namespace mwse::lua {
 		tes3["findDialogue"] = findDialogue;
 		tes3["findGlobal"] = findGlobal;
 		tes3["findGMST"] = findGMST;
+		tes3["findQuest"] = findQuest;
 		tes3["findRegion"] = findRegion;
 		tes3["force1stPerson"] = force1stPerson;
 		tes3["force3rdPerson"] = force3rdPerson;
