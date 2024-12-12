@@ -1382,7 +1382,10 @@ function tes3.getQuickKey(params) end
 --- @class tes3.getQuickKey.params
 --- @field slot number The key to retrieve data for. This is a value between 1 and 9.
 
---- Fetches the first reference for a given base object ID.
+--- Fetches the first reference for a given base object ID. It will find the first clone if the object is an actor. It will scan every cell's references for a match, so performance must be considered when using this.
+--- 
+--- !!!note
+--- 	This is a slow operation, so ideally a reference should be looked up once on game load. Use a safe object handle to store references.
 --- @param id string? *Optional*. Passing "player" or "playersavegame" will return the player reference.
 --- @return tes3reference reference No description yet available.
 function tes3.getReference(id) end
