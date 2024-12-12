@@ -457,10 +457,7 @@ namespace mwse::lua {
 		const auto crossfade = getOptionalParam<double>(params, "crossfade", 1.0);
 		const auto volume = getOptionalParam<float>(params, "volume", audioController->getMusicVolume());
 
-		audioController->setNextMusicFilePath(nextTrack);
-		audioController->volumeNextTrack = volume;
-		audioController->timestampBeginFade = worldController->systemTimeMillis;
-		audioController->timestampNextTrackStart = worldController->systemTimeMillis + int(1000.0 * crossfade);
+		audioController->changeMusicTrack(nextTrack, int(1000.0 * crossfade), volume);
 
 		return true;
 	}
