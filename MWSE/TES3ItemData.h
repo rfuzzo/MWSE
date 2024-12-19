@@ -9,10 +9,10 @@ namespace mwse::lua {
 namespace TES3 {
 	struct ItemDataVanilla {
 		int count; // 0x0
-		BaseObject * owner; // 0x4
+		BaseObject* owner; // 0x4
 		union {
 			long requiredRank;
-			GlobalVariable * requiredVariable;
+			GlobalVariable* requiredVariable;
 		}; // 0x8
 		union {
 			int condition;
@@ -22,24 +22,24 @@ namespace TES3 {
 			float charge;
 			Actor* soul;
 		}; // 0x10
-		Script * script; // 0x14
-		ScriptVariables * scriptData; // 0x18
+		Script* script; // 0x14
+		ScriptVariables* scriptData; // 0x18
 
 		//
 		// Basic operators.
 		//
 
-		static void * operator new(size_t size);
-		static void operator delete(void *block);
+		static void* operator new(size_t size);
+		static void operator delete(void* block);
 
 		//
 		// Related static functions.
 		// 
 
-		static ItemDataVanilla * __fastcall ctor(ItemDataVanilla * self);
-		static void __fastcall dtor(ItemDataVanilla * self);
+		static ItemDataVanilla* __fastcall ctor(ItemDataVanilla* self);
+		static void __fastcall dtor(ItemDataVanilla* self);
 
-		static ItemDataVanilla * __fastcall createForObject(Object * object);
+		static ItemDataVanilla* __fastcall createForObject(Object* object);
 
 	};
 	static_assert(sizeof(ItemDataVanilla) == 0x1C, "TES3::ItemData failed size validation");
@@ -53,7 +53,7 @@ namespace TES3 {
 			sol::table data;
 			sol::table tempData;
 		};
-		LuaData * luaData;
+		LuaData* luaData;
 
 		//
 		// Overrides for vanilla handlers.
@@ -62,12 +62,12 @@ namespace TES3 {
 		ItemData();
 		~ItemData();
 
-		static ItemData * __fastcall ctor(ItemData * self);
-		static void __fastcall dtor(ItemData * self);
+		static ItemData* __fastcall ctor(ItemData* self);
+		static void __fastcall dtor(ItemData* self);
 
-		static ItemData * __cdecl createForObject(Object * object);
+		static ItemData* __cdecl createForObject(Object* object);
 
-		static bool __cdecl isFullyRepaired(ItemData * itemData, Item * item, bool ignoreOwnership = false);
+		static bool __cdecl isFullyRepaired(ItemData* itemData, Item* item, bool ignoreOwnership = false);
 
 		//
 		// Custom functions.
@@ -79,7 +79,7 @@ namespace TES3 {
 		sol::object getOwnerRequirement_lua(sol::this_state ts) const;
 		void setOwnerRequirement_lua(sol::object value);
 
-		Actor * getSoul() const;
+		Actor* getSoul() const;
 		void setSoul_lua(sol::object actor);
 
 		void setLuaDataTable(sol::object data);
