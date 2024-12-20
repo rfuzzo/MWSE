@@ -45,6 +45,14 @@ namespace TES3 {
 	static_assert(sizeof(ItemDataVanilla) == 0x1C, "TES3::ItemData failed size validation");
 
 
+	namespace ItemDataFlags {
+		typedef unsigned int value_type;
+
+		enum {
+			ItemDataFlag_BoundItem = 1,
+		};
+	}
+
 	struct ItemData : ItemDataVanilla {
 		class LuaData {
 		public:
@@ -54,6 +62,7 @@ namespace TES3 {
 			sol::table tempData;
 		};
 		LuaData* luaData;
+		ItemDataFlags::value_type flags;
 
 		//
 		// Overrides for vanilla handlers.
@@ -66,8 +75,9 @@ namespace TES3 {
 		static void __fastcall dtor(ItemData* self);
 
 		static ItemData* __cdecl createForObject(Object* object);
+		static ItemData* __cdecl createForBoundItem(Object* object);
 
-		static bool __cdecl isFullyRepaired(ItemData* itemData, Item* item, bool ignoreOwnership = false);
+		static bool __cdecl isItemDataStackable(ItemData* itemData, Item* item, bool ignoreOwnership = false);
 
 		//
 		// Custom functions.
@@ -81,6 +91,7 @@ namespace TES3 {
 
 		Actor* getSoul() const;
 		void setSoul_lua(sol::object actor);
+		bool isBoundItem() const;
 
 		void setLuaDataTable(sol::object data);
 		void setLuaTempDataTable(sol::object data);

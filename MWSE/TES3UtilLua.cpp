@@ -3434,7 +3434,7 @@ namespace mwse::lua {
 			itemData->owner = nullptr;
 
 			// Delete the item data if it's fully repaired.
-			if (TES3::ItemData::isFullyRepaired(itemData, item)) {
+			if (TES3::ItemData::isItemDataStackable(itemData, item)) {
 				delete itemData;
 				itemData = nullptr;
 			}
@@ -4047,7 +4047,7 @@ namespace mwse::lua {
 			}
 
 			// Check to see if the item is fully repaired.
-			if (!forceRemoval && !TES3::ItemData::isFullyRepaired(itemData, static_cast<TES3::Item*>(reference->baseObject), ignoreOwnership)) {
+			if (!forceRemoval && !TES3::ItemData::isItemDataStackable(itemData, static_cast<TES3::Item*>(reference->baseObject), ignoreOwnership)) {
 				return false;
 			}
 
@@ -4077,7 +4077,7 @@ namespace mwse::lua {
 		}
 
 		// Do we need to remove it?
-		if (!forceRemoval && !TES3::ItemData::isFullyRepaired(itemData, item, ignoreOwnership)) {
+		if (!forceRemoval && !TES3::ItemData::isItemDataStackable(itemData, item, ignoreOwnership)) {
 			return false;
 		}
 

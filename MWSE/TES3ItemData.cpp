@@ -63,6 +63,7 @@ namespace TES3 {
 	ItemData* ItemData::ctor(ItemData* self) {
 		ItemDataVanilla::ctor(self);
 		self->luaData = nullptr;
+		self->flags = 0;
 		return self;
 	}
 
@@ -110,12 +111,25 @@ namespace TES3 {
 		return itemData;
 	}
 
-	const auto TES3_IsItemFullyRepaired = reinterpret_cast<bool (__cdecl*)(ItemDataVanilla*, Item*, bool)>(0x4E7970);
-	bool ItemData::isFullyRepaired(ItemData* itemData, Item* item, bool ignoreOwnership) {
-		if (!TES3_IsItemFullyRepaired(itemData, item, ignoreOwnership)) {
+	ItemData* ItemData::createForBoundItem(Object* object) {
+		auto itemData = createForObject(object);
+		itemData->flags |= ItemDataFlags::ItemDataFlag_BoundItem;
+		return itemData;
+	}
+
+	const auto TES3_IsItemDataStackable = reinterpret_cast<bool (__cdecl*)(ItemDataVanilla*, Item*, bool)>(0x4E7970);
+	bool ItemData::isItemDataStackable(ItemData* itemData, Item* item, bool ignoreOwnership) {
+		// Bound items must not lose item data.
+		if (itemData->flags & ItemDataFlags::ItemDataFlag_BoundItem) {
 			return false;
 		}
 
+		// Vanilla checks.
+		if (!TES3_IsItemDataStackable(itemData, item, ignoreOwnership)) {
+			return false;
+		}
+
+		// Lua data.
 		if (itemData->luaData) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
 			static sol::protected_function fnTableEmpty = stateHandle.state["table"]["empty"];
@@ -213,6 +227,10 @@ namespace TES3 {
 		else if (actor.is<TES3::CreatureInstance*>()) {
 			soul = actor.as<TES3::CreatureInstance*>()->baseCreature;
 		}
+	}
+
+	bool ItemData::isBoundItem() const {
+		return (flags & ItemDataFlags::ItemDataFlag_BoundItem) != 0;
 	}
 
 	void ItemData::setLuaDataTable(sol::object data) {
