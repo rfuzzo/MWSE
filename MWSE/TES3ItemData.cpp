@@ -119,13 +119,17 @@ namespace TES3 {
 
 	const auto TES3_IsItemDataStackable = reinterpret_cast<bool (__cdecl*)(ItemDataVanilla*, Item*, bool)>(0x4E7970);
 	bool ItemData::isItemDataStackable(ItemData* itemData, Item* item, bool ignoreOwnership) {
-		// Bound items must not lose item data.
-		if (itemData->flags & ItemDataFlags::ItemDataFlag_BoundItem) {
-			return false;
-		}
+		// Note: itemData argument may be nullptr.
 
 		// Vanilla checks.
 		if (!TES3_IsItemDataStackable(itemData, item, ignoreOwnership)) {
+			return false;
+		}
+		
+		// Due to checks in TES3_IsItemDataStackable, after this point item and itemData are non-null.
+
+		// Bound items must not lose item data.
+		if (itemData->flags & ItemDataFlags::ItemDataFlag_BoundItem) {
 			return false;
 		}
 
