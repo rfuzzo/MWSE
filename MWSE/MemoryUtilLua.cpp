@@ -480,11 +480,11 @@ namespace mwse::lua {
 		strncpy_s(buffer, 512u, string, strlen(string));
 	}
 
-	DWORD addressOf(sol::stack_object object) {
-		if (object.is<void*>()) {
-			return (DWORD)object.as<void*>();
+	DWORD addressOf(void* object) {
+		if (object == nullptr) {
+			return NULL;
 		}
-		return NULL;
+		return *reinterpret_cast<DWORD*>(object);
 	}
 
 	void bindMWSEMemoryUtil() {
