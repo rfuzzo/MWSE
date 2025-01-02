@@ -1310,8 +1310,9 @@ namespace TES3 {
 			auto addItem = getOptionalParam<bool>(params, "addItem", false);
 			auto selectBestCondition = getOptionalParam<bool>(params, "selectBestCondition", false);
 			auto selectWorstCondition = getOptionalParam<bool>(params, "selectWorstCondition", false);
+			const auto bypassEquipEvents = getOptionalParam<bool>(params, "bypassEquipEvents", false);
 
-			return equipItem(item, itemData, addItem, selectBestCondition, selectWorstCondition);
+			return equipItem(item, itemData, addItem, selectBestCondition, selectWorstCondition, !bypassEquipEvents);
 		}
 
 		throw std::invalid_argument("Invalid parameter provided: must be a tes3item or table.");
