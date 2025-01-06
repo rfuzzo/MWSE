@@ -105,6 +105,10 @@ namespace TES3 {
 		return results;
 	}
 
+	nonstd::span<BYTE> Script::getByteCode() const {
+		return nonstd::span<BYTE>(machineCode, dataLength);
+	}
+
 	std::shared_ptr<mwse::lua::ScriptContext> Script::createContext() {
 		return std::make_shared<mwse::lua::ScriptContext>(this, &varValues);
 	}

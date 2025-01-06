@@ -66,7 +66,7 @@ namespace TES3 {
 		char ** floatVarNamePointers; // 0x4C
 		char * varNamePointers; // 0x50
 		int unknown_0x54; // equals zero?
-		void * machineCode; // 0x58
+		BYTE * machineCode; // 0x58
 		ScriptVariables varValues; // 0x5C
 
 		Script() = delete;
@@ -94,6 +94,7 @@ namespace TES3 {
 		//
 
 		sol::table getLocalVars_lua(sol::this_state ts, sol::optional<bool> useLocals = false);
+		nonstd::span<BYTE> getByteCode() const;
 		std::shared_ptr<mwse::lua::ScriptContext> createContext();
 
 		//

@@ -4,6 +4,7 @@
 --- @meta
 --- A script object.
 --- @class tes3script : tes3baseObject
+--- @field byteData number[] *Read-only*. A byte representation of instructions that the script will run.
 --- @field context tes3scriptContext *Read-only*. A special context used for getting and setting script's variables.
 --- @field floatVariableCount number *Read-only*. The number of variables of float type in the script.
 --- @field longVariableCount number *Read-only*. The number of variables of long type in the script.

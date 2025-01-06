@@ -488,7 +488,6 @@ namespace mwse::lua {
 	}
 
 	void dump(void* data, unsigned int length) {
-		// Deref sol thing.
 		log::prettyDump(data, length);
 	}
 

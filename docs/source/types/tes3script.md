@@ -22,6 +22,17 @@ The blocked state of the object.
 
 ***
 
+### `byteData`
+<div class="search_terms" style="display: none">bytedata</div>
+
+*Read-only*. A byte representation of instructions that the script will run.
+
+**Returns**:
+
+* `result` (number[])
+
+***
+
 ### `context`
 <div class="search_terms" style="display: none">context</div>
 
