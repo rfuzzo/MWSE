@@ -22,8 +22,8 @@ The blocked state of the object.
 
 ***
 
-### `byteData`
-<div class="search_terms" style="display: none">bytedata</div>
+### `byteCode`
+<div class="search_terms" style="display: none">bytecode</div>
 
 *Read-only*. A byte representation of instructions that the script will run.
 
