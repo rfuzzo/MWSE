@@ -2674,6 +2674,9 @@ namespace mwse::lua {
 	}
 
 	const auto TES3_UI_removeSpellFromGUIList = reinterpret_cast<void(__cdecl*)(TES3::Spell*)>(0x5E3BD0);
+	const auto TES3_UI_MenuMagic_refreshAll = reinterpret_cast<void(__cdecl*)(TES3::Spell*)>(0x5E3D10);
+	const auto TES3_UI_MenuMagic_deselectMagic = reinterpret_cast<void(__cdecl*)()>(0x5E4500);
+
 	bool removeSpell(sol::table params) {
 		// Get some complex inputs...
 		TES3::Reference* reference = nullptr;
@@ -2736,8 +2739,19 @@ namespace mwse::lua {
 		auto mobilePlayer = TES3::WorldController::get()->getMobilePlayer();
 		if (mobilePlayer && mobile == mobilePlayer && getOptionalParam(params, "updateGUI", true)) {
 			if (spell->isActiveCast()) {
-				// Magic menu spell list.
-				TES3_UI_removeSpellFromGUIList(spell);
+				// Deselect if currently selected.
+				if (mobilePlayer->currentSpell.source.asSpell == spell) {
+					TES3_UI_MenuMagic_deselectMagic();
+				}
+
+				// Magic menu spell list update.
+				if (spell->castType == TES3::SpellCastType::Spell) {
+					TES3_UI_removeSpellFromGUIList(spell);
+				}
+				else {
+					// Full list refresh is required for powers UI to update.
+					TES3_UI_MenuMagic_refreshAll(spell);
+				}
 			}
 			else {
 				// Active effects icon bar.
