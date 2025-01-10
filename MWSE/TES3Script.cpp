@@ -1,4 +1,4 @@
-#include "TES3Script.h"
+﻿#include "TES3Script.h"
 
 #include "TES3ScriptLua.h"
 
@@ -42,7 +42,7 @@ namespace TES3 {
 	}
 
 	sol::optional<unsigned int> Script::getShortVarIndex(const char* name) const {
-		for (int i = 0; i < shortCount; ++i) {
+		for (int i = 0; i < header.shortCount; ++i) {
 			const char* varName = shortVarNamePointers[i];
 			if (varName && _stricmp(name, varName) == 0) {
 				return i;
@@ -80,8 +80,13 @@ namespace TES3 {
 		currentlyExecutingScriptReference = nullptr;
 	}
 
+	void Script::setToCompiledResult(ScriptHeader* header, void* byteCode, const char* varNames, bool resolveParams) {
+		const auto TES3_Script_setToCompiledResult = reinterpret_cast<void(__thiscall*)(Script*, ScriptHeader*, void*, const char*, bool)>(0x4FDA40);
+		TES3_Script_setToCompiledResult(this, header, byteCode, varNames, resolveParams);
+	}
+
 	sol::table Script::getLocalVars_lua(sol::this_state ts, sol::optional<bool> useLocals) {
-		if (shortCount == 0 && longCount == 0 && floatCount == 0) {
+		if (header.shortCount == 0 && header.longCount == 0 && header.floatCount == 0) {
 			return sol::nil;
 		}
 
@@ -90,19 +95,19 @@ namespace TES3 {
 		sol::table results = state.create_table();
 
 		// Append any short variables.
-		for (int i = 0; i < shortCount; ++i) {
+		for (int i = 0; i < header.shortCount; ++i) {
 			const char* varName = shortVarNamePointers[i];
 			results[varName] = state.create_table_with("type", 's', "index", i, "value", getShortValue(i, useLocals.value_or(false)));
 		}
 
 		// Append any long variables.
-		for (int i = 0; i < longCount; ++i) {
+		for (int i = 0; i < header.longCount; ++i) {
 			const char* varName = longVarNamePointers[i];
 			results[varName] = state.create_table_with("type", 'l', "index", i, "value", getLongValue(i, useLocals.value_or(false)));
 		}
 
 		// Append any float variables.
-		for (int i = 0; i < floatCount; ++i) {
+		for (int i = 0; i < header.floatCount; ++i) {
 			const char* varName = floatVarNamePointers[i];
 			results[varName] = state.create_table_with("type", 'f', "index", i, "value", getFloatValue(i, useLocals.value_or(false)));
 		}
@@ -156,9 +161,9 @@ namespace TES3 {
 				switch (subrecordType.asUnsignedInt) {
 				case 'DHCS':
 				{
-					ScriptHeader header = {};
-					tempFile.readChunkData(&header);
-					if (mwse::string::iequal(name, header.name)) {
+					ScriptHeader chunkData = {};
+					tempFile.readChunkData(&chunkData);
+					if (mwse::string::iequal(chunkData.name, header.name)) {
 						scriptFound = true;
 					}
 					break;
@@ -181,13 +186,36 @@ namespace TES3 {
 	}
 
 	nonstd::span<BYTE> Script::getByteCode() const {
-		return nonstd::span<BYTE>(machineCode, dataLength);
+		return nonstd::span<BYTE>(machineCode, header.dataSize);
+	}
+
+	static TES3::ScriptCompiler scriptRecompiler;
+
+	bool Script::recompile(const char* text) {
+		if (!scriptRecompiler.compile(text)) {
+			return false;
+		}
+
+		setToCompiledResult(&scriptRecompiler.scriptHeader, scriptRecompiler.scriptBuffer, scriptRecompiler.scriptLineBuffer);
+
+		return true;
 	}
 
 	std::shared_ptr<mwse::lua::ScriptContext> Script::createContext() {
 		return std::make_shared<mwse::lua::ScriptContext>(this, &varValues);
 	}
 
+	unsigned int Script::getShortVariableCount() const {
+		return header.shortCount;
+	}
+
+	unsigned int Script::getLongVariableCount() const {
+		return header.longCount;
+	}
+
+	unsigned int Script::getFloatVariableCount() const {
+		return header.floatCount;
+	}
 }
 
 MWSE_SOL_CUSTOMIZED_PUSHER_DEFINE_TES3(TES3::Script)

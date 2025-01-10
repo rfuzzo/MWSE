@@ -29,8 +29,8 @@ namespace TES3 {
 		unsigned int shortCount; // 0x20
 		unsigned int longCount; // 0x24
 		unsigned int floatCount; // 0x28
-		unsigned int scriptDataSize; // 0x2C
-		unsigned int localVarSize; // 0x30
+		unsigned int dataSize; // 0x2C
+		unsigned int localVarNameSize; // 0x30
 	};
 	static_assert(sizeof(ScriptHeader) == 0x34, "TES3::ScriptHeader failed size validation");
 
@@ -45,11 +45,11 @@ namespace TES3 {
 		IteratedList<Variable*>* longVarList; // 0x44
 		IteratedList<Variable*>* floatVarList; // 0x48
 		char * scriptLineBuffer; // 0x4C
-		int unknown_0x50;
+		int currentLine;
 		int compiledScriptLength; // 0x54
 		unsigned char * scriptBuffer; // 0x58
-		char * commandIterator; // 0x5C
-		char * command; // 0x60
+		const char * commandIterator; // 0x5C
+		const char * command; // 0x60
 		int unknown_0x64;
 		int unknown_0x68;
 		unsigned char unknown_0x6C[512];
@@ -186,10 +186,10 @@ namespace TES3 {
 		int unknown_0x474;
 		int unknown_0x478;
 
-		ScriptCompiler() = delete;
-		~ScriptCompiler() = delete;
+		ScriptCompiler();
+		~ScriptCompiler();
 
-		bool compile(char* scriptText);
+		bool compile(const char* scriptText);
 		bool compileFunction(int function);
 
 		int parseFunctionName();
