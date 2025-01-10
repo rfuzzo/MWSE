@@ -256,6 +256,8 @@ function tes3mobileActor:doJump(params) end
 --- `selectBestCondition`: boolean? — *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 --- 
 --- `selectWorstCondition`: boolean? — *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
+--- 
+--- `playSound`: boolean? — *Default*: `true`. If `true`, the default item sound will be played for the item.
 --- @return boolean itemEquipped No description yet available.
 function tes3mobileActor:equip(params) end
 
@@ -266,6 +268,7 @@ function tes3mobileActor:equip(params) end
 --- @field addItem boolean? *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
 --- @field selectBestCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 --- @field selectWorstCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
+--- @field playSound boolean? *Default*: `true`. If `true`, the default item sound will be played for the item.
 
 --- Equips a spell or enchantment, optionally equipping the enchanted item if needed. Returns `false` if the item could not be equipped.
 --- @param params tes3mobileActor.equipMagic.params This table accepts the following values:

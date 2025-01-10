@@ -4473,6 +4473,8 @@ namespace mwse::lua {
 			}
 		}
 
+		TES3::WorldController::ItemUpDownSoundBlocker soundBlocker = !getOptionalParam<bool>(params, "playSound", true);
+
 		// Drop the item.
 		auto matchExact = itemData.has_value() || matchNoItemData;
 		mobile->dropItem(item, itemData.value_or(nullptr), count, !matchExact);
@@ -4516,6 +4518,7 @@ namespace mwse::lua {
 		const auto selectBestCondition = getOptionalParam<bool>(params, "selectBestCondition", false);
 		const auto selectWorstCondition = getOptionalParam<bool>(params, "selectWorstCondition", false);
 		const auto bypassEquipEvents = getOptionalParam<bool>(params, "bypassEquipEvents", false);
+		TES3::WorldController::ItemUpDownSoundBlocker soundBlocker = !getOptionalParam<bool>(params, "playSound", true);
 
 		return mobile->equipItem(item, itemData, addItem, selectBestCondition, selectWorstCondition, !bypassEquipEvents);
 	}

@@ -795,6 +795,8 @@ function tes3.enableKey(keyCode) end
 --- `selectWorstCondition`: boolean? — *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
 --- 
 --- `bypassEquipEvents`: boolean? — *Default*: `false`. If `true`, this call will not raise any `equip`-related events.
+--- 
+--- `playSound`: boolean? — *Default*: `true`. If `true`, the default item sound will be played for the item.
 --- @return boolean itemEquipped No description yet available.
 function tes3.equip(params) end
 
@@ -807,6 +809,7 @@ function tes3.equip(params) end
 --- @field selectBestCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 --- @field selectWorstCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
 --- @field bypassEquipEvents boolean? *Default*: `false`. If `true`, this call will not raise any `equip`-related events.
+--- @field playSound boolean? *Default*: `true`. If `true`, the default item sound will be played for the item.
 
 --- Similar to the vanilla FadeIn mwscript command.
 --- @param params tes3.fadeIn.params? This table accepts the following values:
