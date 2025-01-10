@@ -24,22 +24,27 @@ namespace TES3 {
 		};
 	}
 
+	struct ScriptHeader {
+		char name[32]; // 0x0
+		unsigned int shortCount; // 0x20
+		unsigned int longCount; // 0x24
+		unsigned int floatCount; // 0x28
+		unsigned int scriptDataSize; // 0x2C
+		unsigned int localVarSize; // 0x30
+	};
+	static_assert(sizeof(ScriptHeader) == 0x34, "TES3::ScriptHeader failed size validation");
+
 	struct ScriptCompiler {
 		typedef char Variable;
 
 		char ** shortVarNames; // 0x0
 		char ** longVarNames; // 0x4
 		char ** floatVarNames; // 0x8
-		char scriptOrCompilerId[32]; // 0xC
-		int shortVarCount;  // 0x2C
-		int longVarCount; // 0x30
-		int floatVarCount; // 0x34
-		int scriptDataSize; // 0x38
-		unsigned int localVariableCount; // 0x3C
+		ScriptHeader scriptHeader; // 0xC
 		IteratedList<Variable*>* shortVarList; // 0x40
 		IteratedList<Variable*>* longVarList; // 0x44
 		IteratedList<Variable*>* floatVarList; // 0x48
-		unsigned char * scriptLineBuffer; // 0x4C
+		char * scriptLineBuffer; // 0x4C
 		int unknown_0x50;
 		int compiledScriptLength; // 0x54
 		unsigned char * scriptBuffer; // 0x58

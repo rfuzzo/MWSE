@@ -5,7 +5,7 @@ namespace TES3 {
 		unknown_0x50 = 0;
 		compiledScriptLength = 0;
 		scriptBuffer[0] = 0;
-		memset(scriptOrCompilerId, 0, 0x34);
+		memset(&scriptHeader, 0, sizeof(ScriptHeader));
 		commandIterator = scriptText;
 		command = scriptText;
 
@@ -79,18 +79,18 @@ namespace TES3 {
 	}
 
 	void ScriptCompiler::linkVariable(Variable* var) {
-		if (scriptLineBuffer && localVariableCount < 4096) {
-			while (localVariableCount < 4096) {
+		if (scriptLineBuffer && scriptHeader.localVarSize < 4096) {
+			while (scriptHeader.localVarSize < 4096) {
 				if (!isalnum(*var)) {
 					if (*var != '-' && *var != '_') {
-						scriptLineBuffer[localVariableCount++] = 0;
+						scriptLineBuffer[scriptHeader.localVarSize++] = 0;
 						return;
 					}
 				}
 
-				scriptLineBuffer[localVariableCount] = *var;
+				scriptLineBuffer[scriptHeader.localVarSize] = *var;
 				var = var + 1;
-				localVariableCount++;
+				scriptHeader.localVarSize++;
 			}
 		}
 	}
