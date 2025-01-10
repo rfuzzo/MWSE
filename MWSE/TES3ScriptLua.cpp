@@ -178,6 +178,7 @@ namespace mwse::lua {
 			// Basic function binding.
 			usertypeDefinition["getVariableData"] = &TES3::Script::getLocalVars_lua;
 			usertypeDefinition["byteCode"] = sol::readonly_property(&TES3::Script::getByteCode);
+			usertypeDefinition["text"] = sol::readonly_property(&TES3::Script::getScriptText);
 
 			// Allow a special context to be exposed for reading variables.
 			usertypeDefinition["context"] = sol::readonly_property(&TES3::Script::createContext);

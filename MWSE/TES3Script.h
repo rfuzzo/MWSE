@@ -93,8 +93,10 @@ namespace TES3 {
 		// Custom functions.
 		//
 
-		sol::table getLocalVars_lua(sol::this_state ts, sol::optional<bool> useLocals = false);
+		sol::optional<std::string> getScriptText() const;
 		nonstd::span<BYTE> getByteCode() const;
+
+		sol::table getLocalVars_lua(sol::this_state ts, sol::optional<bool> useLocals = false);
 		std::shared_ptr<mwse::lua::ScriptContext> createContext();
 
 		//

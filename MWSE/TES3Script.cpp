@@ -2,9 +2,14 @@
 
 #include "TES3ScriptLua.h"
 
+#include "TES3GameFile.h"
 #include "TES3ItemData.h"
 #include "TES3Reference.h"
+#include "TES3WorldController.h"
+#include "TES3UIMenuController.h"
+#include "TES3ScriptCompiler.h"
 
+#include "StringUtil.h"
 
 namespace TES3 {
 	//
@@ -103,6 +108,76 @@ namespace TES3 {
 		}
 
 		return results;
+	}
+
+	sol::optional<std::string> Script::getScriptText() const {
+		if (sourceMod == nullptr) {
+			return {};
+		}
+
+		GameFile tempFile = GameFile(sourceMod->path, sourceMod->filename);
+		tempFile.collectActiveMods();
+		if (!tempFile.reopen()) {
+			return {};
+		}
+
+		union RecordType {
+			unsigned int asUnsignedInt;
+			ObjectType::ObjectType asObjectType;
+			char asChar[4];
+
+			RecordType() {
+				asUnsignedInt = 0;
+			}
+
+			RecordType(unsigned int v) {
+				asUnsignedInt = v;
+			}
+		};
+
+		do {
+			RecordType recordType = tempFile.getFirstSubrecord();
+			if (!recordType.asUnsignedInt) {
+				break;
+			}
+
+			if (recordType.asObjectType != ObjectType::Script) {
+				continue;
+			}
+
+			bool scriptFound = false;
+			do {
+				RecordType subrecordType = tempFile.getNextSubrecord();
+				if (!subrecordType.asUnsignedInt) {
+					break;
+				}
+
+
+				switch (subrecordType.asUnsignedInt) {
+				case 'DHCS':
+				{
+					ScriptHeader header = {};
+					tempFile.readChunkData(&header);
+					if (mwse::string::iequal(name, header.name)) {
+						scriptFound = true;
+					}
+					break;
+				}
+				case 'XTCS':
+				{
+					if (scriptFound) {
+						std::string result = {};
+						result.resize(tempFile.currentChunkHeader.size);
+						tempFile.readChunkData(result.data(), tempFile.currentChunkHeader.size);
+						return std::move(result);
+					}
+					break;
+				}
+				}
+			} while (tempFile.hasMoreRecords());
+		} while (tempFile.nextRecord());
+
+		return {};
 	}
 
 	nonstd::span<BYTE> Script::getByteCode() const {

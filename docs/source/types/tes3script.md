@@ -187,6 +187,17 @@ If true, references of this object can store temporary or persistent lua data.
 
 ***
 
+### `text`
+<div class="search_terms" style="display: none">text</div>
+
+*Read-only*. The plain text of the script. Note that line endings do not match the default lua line endings. This requires file IO, and is slow.
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ## Methods
 
 ### `__tojson`

@@ -9,6 +9,7 @@
 --- @field floatVariableCount number *Read-only*. The number of variables of float type in the script.
 --- @field longVariableCount number *Read-only*. The number of variables of long type in the script.
 --- @field shortVariableCount number *Read-only*. The number of variables of short type in the script.
+--- @field text string *Read-only*. The plain text of the script. Note that line endings do not match the default lua line endings. This requires file IO, and is slow.
 tes3script = {}
 
 --- This method fetches all of the script's variables as a table. Returns nil if the script has no variables.
