@@ -18,8 +18,8 @@
 namespace se::cs::dialog::cell_window {
 	using gActiveEditCell = memory::ExternalGlobal<Cell*, 0x6CDFF4>;
 
-	const auto CS_addAllToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const ReferenceList*)>(0x40E5B0);
-	const auto CS_refreshCellListView = reinterpret_cast<void(__cdecl*)(HWND)>(0x40E250);
+	const auto CS_AddAllToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const ReferenceList*)>(0x401442);
+	const auto CS_RefreshCellListView = reinterpret_cast<void(__cdecl*)(HWND)>(0x4037C4);
 
 	static HWND cellWindowSearchControl = NULL;
 
@@ -30,7 +30,31 @@ namespace se::cs::dialog::cell_window {
 	void __cdecl PatchSpeedUpCellViewDialog(HWND hWnd) {
 		SendMessageA(hWnd, WM_SETREDRAW, FALSE, NULL);
 
+		// Store the old index at the top of the list, so we can restore it later.
+		const auto oldTop = ListView_GetTopIndex(hWnd);
+
+		// Call the original function.
+		const auto CS_refreshCellListView = reinterpret_cast<void(__cdecl*)(HWND)>(0x40E250);
 		CS_refreshCellListView(hWnd);
+
+		// Always force it to sort.
+		SendMessageA(hWnd, LVM_SORTITEMS, memory::ExternalGlobal<WPARAM, 0x6CDF50>::get(), 0x4023CE);
+
+		// Hacky way to restore view... ensure the last item is visible, then the old top index.
+		const auto lastIndex = ListView_GetItemCount(hWnd);
+		ListView_EnsureVisible(hWnd, lastIndex - 1, TRUE);
+		ListView_EnsureVisible(hWnd, oldTop, TRUE);
+
+		// Also make sure the selected cell is preserved and visible.
+		const auto cell = gActiveEditCell::get();
+		if (cell) {
+			LVFINDINFOA findInfo = { LVFI_PARAM, NULL, (LPARAM)cell, {}, {} };
+			const auto index = ListView_FindItem(hWnd, 0, &findInfo);
+			if (index != -1) {
+				ListView_SetItemState(hWnd, index, LVIS_SELECTED, 0x7);
+				ListView_EnsureVisible(hWnd, index, TRUE);
+			}
+		}
 
 		SendMessageA(hWnd, WM_SETREDRAW, TRUE, NULL);
 	}
@@ -40,6 +64,7 @@ namespace se::cs::dialog::cell_window {
 			SendMessageA(hWnd, WM_SETREDRAW, FALSE, NULL);
 		}
 
+		const auto CS_addAllToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const ReferenceList*)>(0x40E5B0);
 		CS_addAllToRefsListView(hWnd, references);
 
 		if (references == &gActiveEditCell::get()->unknown_0x30) {
@@ -97,8 +122,8 @@ namespace se::cs::dialog::cell_window {
 
 		SendMessageA(refsListView, LVM_DELETEALLITEMS, 0, 0);
 		if (cell) {
-			CS_addAllToRefsListView(refsListView, &cell->unknown_0x40);
-			CS_addAllToRefsListView(refsListView, &cell->unknown_0x30);
+			CS_AddAllToRefsListView(refsListView, &cell->unknown_0x40);
+			CS_AddAllToRefsListView(refsListView, &cell->unknown_0x30);
 		}
 
 		SendMessageA(refsListView, WM_SETREDRAW, TRUE, NULL);
@@ -109,26 +134,7 @@ namespace se::cs::dialog::cell_window {
 		auto cellListView = GetDlgItem(hWnd, CONTROL_ID_CELL_LIST_VIEW);
 		auto cell = gActiveEditCell::get();
 
-		SendMessageA(cellListView, WM_SETREDRAW, FALSE, NULL);
-
-		CS_refreshCellListView(cellListView);
-		SendMessageA(cellListView, LVM_SORTITEMS, memory::ExternalGlobal<WPARAM, 0x6CDF50>::get(), 0);
-
-		// Select active cell.
-		if (cell) {
-			LVFINDINFOA findInfo = { LVFI_PARAM, NULL, (LPARAM)cell, {}, {} };
-			int index = SendDlgItemMessageA(hWnd, CONTROL_ID_CELL_LIST_VIEW, LVM_FINDITEM, -1, (LPARAM)&findInfo);
-			if (index != -1) {
-				LVITEMA listItem = {};
-				listItem.state = LVIS_SELECTED;
-				listItem.stateMask = LVIS_SELECTED;
-				SendDlgItemMessageA(hWnd, CONTROL_ID_CELL_LIST_VIEW, LVM_SETITEMSTATE, index, (LPARAM)&listItem);
-				SendDlgItemMessageA(hWnd, CONTROL_ID_CELL_LIST_VIEW, LVM_ENSUREVISIBLE, index, TRUE);
-			}
-		}
-
-		SendMessageA(cellListView, WM_SETREDRAW, TRUE, NULL);
-		RedrawWindow(cellListView, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+		CS_RefreshCellListView(cellListView);
 	}
 
 	void OnFilterEditChanged(HWND hWnd) {
