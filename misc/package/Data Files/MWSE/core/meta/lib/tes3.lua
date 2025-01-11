@@ -61,7 +61,7 @@ function tes3.addClothingSlot(params) end
 --- 
 --- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3item|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|tes3leveledItem|string — The item to add. If a leveled item is passed, it will be resolved and added.
 --- 
---- `itemData`: tes3itemData? — *Optional*. The item data for the item.
+--- `itemData`: tes3itemData? — *Optional*. The item data for the item. The owner, if set, will be cleared. Note that this may be deleted from memory then ignored if it has no other special information associated with it (i.e., it is fully repaired/charged, has no soul, and contains empty lua data).
 --- 
 --- `soul`: tes3creature|tes3npc|nil — *Optional*. For creating filled soul gems.
 --- 
@@ -85,7 +85,7 @@ function tes3.addItem(params) end
 --- @class tes3.addItem.params
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to give items to.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3item|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|tes3leveledItem|string The item to add. If a leveled item is passed, it will be resolved and added.
---- @field itemData tes3itemData? *Optional*. The item data for the item.
+--- @field itemData tes3itemData? *Optional*. The item data for the item. The owner, if set, will be cleared. Note that this may be deleted from memory then ignored if it has no other special information associated with it (i.e., it is fully repaired/charged, has no soul, and contains empty lua data).
 --- @field soul tes3creature|tes3npc|nil *Optional*. For creating filled soul gems.
 --- @field count number? *Default*: `1`. The maximum number of items to add.
 --- @field playSound boolean? *Default*: `true`. If `false`, the up/down sound for the item won't be played. This only applies if `reference` is the player.
@@ -2118,8 +2118,6 @@ function tes3.removeEffects(params) end
 --- 
 --- `itemData`: tes3itemData? — *Optional*. The item data for the exact item to remove.
 --- 
---- `deleteItemData`: tes3itemData? — *Optional*. Whether to delete the item data after remove succeeds. Automatically set if itemData is used. Does not need to be specified for normal usage.
---- 
 --- `count`: number? — *Default*: `1`. The maximum number of items to remove.
 --- 
 --- `playSound`: boolean? — *Default*: `true`. If false, the up/down sound for the item won't be played.
@@ -2135,7 +2133,6 @@ function tes3.removeItem(params) end
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string Who to remove items from.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3item|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to remove.
 --- @field itemData tes3itemData? *Optional*. The item data for the exact item to remove.
---- @field deleteItemData tes3itemData? *Optional*. Whether to delete the item data after remove succeeds. Automatically set if itemData is used. Does not need to be specified for normal usage.
 --- @field count number? *Default*: `1`. The maximum number of items to remove.
 --- @field playSound boolean? *Default*: `true`. If false, the up/down sound for the item won't be played.
 --- @field reevaluateEquipment boolean? *Default*: `true`. If true, and the item removed is armor, clothing, or a weapon, the actor will reevaluate its equipment choices to see if it needs to equip a new item. This does not affect the player.

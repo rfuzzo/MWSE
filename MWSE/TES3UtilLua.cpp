@@ -3601,7 +3601,6 @@ namespace mwse::lua {
 		}
 
 		TES3::ItemData* itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
-		auto deleteItemData = getOptionalParam<bool>(params, "deleteItemData", itemData != nullptr);
 
 		// Make sure we're dealing with actors.
 		TES3::Actor* actor = static_cast<TES3::Actor*>(reference->baseObject);
