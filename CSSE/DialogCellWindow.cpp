@@ -112,6 +112,7 @@ namespace se::cs::dialog::cell_window {
 		SendMessageA(cellListView, WM_SETREDRAW, FALSE, NULL);
 
 		CS_refreshCellListView(cellListView);
+		SendMessageA(cellListView, LVM_SORTITEMS, memory::ExternalGlobal<WPARAM, 0x6CDF50>::get(), 0);
 
 		// Select active cell.
 		if (cell) {
