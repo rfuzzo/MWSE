@@ -30,6 +30,7 @@ namespace se::cs {
 	struct LeveledItem;
 	struct Light;
 	struct Lockpick;
+	struct MagicEffect;
 	struct ModelLoader;
 	struct NPC;
 	struct Object;
