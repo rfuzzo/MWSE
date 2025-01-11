@@ -289,8 +289,6 @@ namespace se::cs::dialog::object_window {
 				SendMessageA(hDlgShowModifiedOnly, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
 				SendMessageA(hDlgFilterStatic, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
 				SendMessageA(hDlgFilterEdit, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
-
-				winui::dark_mode::MakeButtonControlDarkMode(hDlgShowModifiedOnly);
 			}
 			else {
 				log::stream << "ERROR: Could not create search control!" << std::endl;
