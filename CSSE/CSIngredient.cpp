@@ -17,8 +17,11 @@ namespace se::cs {
 	}
 
 	bool Ingredient::search(const std::string_view& needle, const SearchSettings& settings, std::regex* regex) const {
-		const auto recordHandler = DataHandler::get()->recordHandler;
+		if (Object::search(needle, settings, regex)) {
+			return true;
+		}
 
+		const auto recordHandler = DataHandler::get()->recordHandler;
 		for (auto i = 0; i < 4; ++i) {
 			const auto effectData = recordHandler->getMagicEffect(effects[i]);
 			if (effectData == nullptr) {
