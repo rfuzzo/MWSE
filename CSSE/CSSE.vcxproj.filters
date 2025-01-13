@@ -463,6 +463,9 @@
     <ClInclude Include="CSAlchemy.h">
       <Filter>Header Files\CS</Filter>
     </ClInclude>
+    <ClInclude Include="CSLand.h">
+      <Filter>Header Files\CS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

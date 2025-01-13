@@ -25,6 +25,7 @@ namespace se::cs {
 	struct GameSettingInitializer;
 	struct GlobalVariable;
 	struct ItemData;
+	struct Land;
 	struct LandTexture;
 	struct LeveledCreature;
 	struct LeveledItem;

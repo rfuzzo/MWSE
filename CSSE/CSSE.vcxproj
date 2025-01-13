@@ -234,6 +234,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="CSClass.h" />
     <ClInclude Include="CSDoor.h" />
     <ClInclude Include="CSGlobalVariable.h" />
+    <ClInclude Include="CSLand.h" />
     <ClInclude Include="CSMagicEffect.h" />
     <ClInclude Include="CSRace.h" />
     <ClInclude Include="CSRegion.h" />
