@@ -16,6 +16,7 @@
 #include "DialogProcContext.h"
 
 namespace se::cs::dialog::cell_window {
+	using gCellViewWindowHandle = memory::ExternalGlobal<HWND, 0x6CE954>;
 	using gActiveEditCell = memory::ExternalGlobal<Cell*, 0x6CDFF4>;
 
 	const auto CS_AddAllToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const ReferenceList*)>(0x401442);
@@ -27,34 +28,17 @@ namespace se::cs::dialog::cell_window {
 	static std::optional<std::regex> currentSearchRegex;
 	static bool modeShowModifiedOnly = false;
 
+	using gSuppressItemChangePropegation = memory::ExternalGlobal<bool, 0x6CDFF8>;
+	static int lastCellTopIndex = -1;
+
 	void __cdecl PatchSpeedUpCellViewDialog(HWND hWnd) {
 		SendMessageA(hWnd, WM_SETREDRAW, FALSE, NULL);
 
-		// Store the old index at the top of the list, so we can restore it later.
-		const auto oldTop = ListView_GetTopIndex(hWnd);
+		lastCellTopIndex = ListView_GetTopIndex(hWnd);
 
 		// Call the original function.
 		const auto CS_refreshCellListView = reinterpret_cast<void(__cdecl*)(HWND)>(0x40E250);
 		CS_refreshCellListView(hWnd);
-
-		// Always force it to sort.
-		SendMessageA(hWnd, LVM_SORTITEMS, memory::ExternalGlobal<WPARAM, 0x6CDF50>::get(), 0x4023CE);
-
-		// Hacky way to restore view... ensure the last item is visible, then the old top index.
-		const auto lastIndex = ListView_GetItemCount(hWnd);
-		ListView_EnsureVisible(hWnd, lastIndex - 1, TRUE);
-		ListView_EnsureVisible(hWnd, oldTop, TRUE);
-
-		// Also make sure the selected cell is preserved and visible.
-		const auto cell = gActiveEditCell::get();
-		if (cell) {
-			LVFINDINFOA findInfo = { LVFI_PARAM, NULL, (LPARAM)cell, {}, {} };
-			const auto index = ListView_FindItem(hWnd, 0, &findInfo);
-			if (index != -1) {
-				ListView_SetItemState(hWnd, index, LVIS_SELECTED, 0x7);
-				ListView_EnsureVisible(hWnd, index, TRUE);
-			}
-		}
 
 		SendMessageA(hWnd, WM_SETREDRAW, TRUE, NULL);
 	}
@@ -130,10 +114,42 @@ namespace se::cs::dialog::cell_window {
 		RedrawWindow(refsListView, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
 	}
 
+	void __cdecl SelectCell(Cell* cell) {
+		if (cell == nullptr) {
+			lastCellTopIndex = -1;
+			return;
+		}
+
+		gSuppressItemChangePropegation::set(true);
+
+		const auto hWnd = gCellViewWindowHandle::get();
+		const auto cellListView = GetDlgItem(hWnd, CONTROL_ID_CELL_LIST_VIEW);
+
+		// Always force it to sort.
+		SendMessageA(cellListView, LVM_SORTITEMS, memory::ExternalGlobal<WPARAM, 0x6CDF50>::get(), 0x4023CE);
+
+		// Hacky way to restore view... ensure the last item is visible, then the old top index.
+		if (lastCellTopIndex != -1) {
+			const auto lastIndex = ListView_GetItemCount(cellListView);
+			ListView_EnsureVisible(cellListView, lastIndex - 1, TRUE);
+			ListView_EnsureVisible(cellListView, lastCellTopIndex, TRUE);
+			lastCellTopIndex = -1;
+		}
+
+		// Also make sure the selected cell is preserved and visible.
+		const auto activeCell = gActiveEditCell::get();
+		LVFINDINFOA findInfo = { LVFI_PARAM, NULL, (LPARAM)cell, {}, {} };
+		const auto index = ListView_FindItem(cellListView, 0, &findInfo);
+		if (index != -1) {
+			ListView_SetItemState(cellListView, index, LVIS_SELECTED, LVIS_SELECTED);
+			ListView_EnsureVisible(cellListView, index, TRUE);
+		}
+
+		gSuppressItemChangePropegation::set(false);
+	}
+
 	void RefreshCellListView(HWND hWnd) {
 		auto cellListView = GetDlgItem(hWnd, CONTROL_ID_CELL_LIST_VIEW);
-		auto cell = gActiveEditCell::get();
-
 		CS_RefreshCellListView(cellListView);
 	}
 
@@ -172,6 +188,7 @@ namespace se::cs::dialog::cell_window {
 
 			// Search affects cell list.
 			RefreshCellListView(hWnd);
+			SelectCell(gActiveEditCell::get());
 		}
 	}
 
@@ -254,6 +271,7 @@ namespace se::cs::dialog::cell_window {
 			case CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON:
 				modeShowModifiedOnly = SendDlgItemMessageA(hWnd, id, BM_GETCHECK, 0, 0);
 				RefreshCellListView(hWnd);
+				SelectCell(gActiveEditCell::get());
 				RefreshRefsListView(hWnd);
 				break;
 			}
@@ -346,6 +364,9 @@ namespace se::cs::dialog::cell_window {
 
 		// Patch: Optimize displaying of cell view window.
 		genJumpEnforced(0x4037C4, 0x40E250, reinterpret_cast<DWORD>(PatchSpeedUpCellViewDialog));
+
+		// Patch: Preserve position when selecting new cells.
+		genJumpEnforced(0x404953, 0x4105D0, reinterpret_cast<DWORD>(SelectCell));
 
 		// Patch: Optimize displaying of cell objects view window.
 		genJumpEnforced(0x401442, 0x40E5B0, reinterpret_cast<DWORD>(PatchSpeedUpCellObjectViewDialog));
