@@ -1222,6 +1222,20 @@ namespace mwse::patch {
 	const size_t PatchNIDX8Renderer_RenderShape_size = 0x8;
 
 	//
+	// Patch: Fix cure spells incorrectly triggering MagicEffectState_Ending for magic that hasn't taken effect yet.
+	//
+
+	__declspec(naked) void PatchRemoveMagicsByEffect() {
+		__asm {
+			cmp byte ptr [esp + 0x4C], 5		// if (magicEffectInstance.state == MagicEffectState_Working)
+			jnz done
+			mov byte ptr [esp + 0x4C], 6		// magicEffectInstance.state = MagicEffectState_Ending
+		done:
+			ret
+		}
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1671,6 +1685,9 @@ namespace mwse::patch {
 		genCallEnforced(0x6E54C5, 0x6F15B0, reinterpret_cast<DWORD>(PatchNITriShapeCopyMembers));
 		writePatchCodeUnprotected(0x6ACF1F, (BYTE*)&PatchNIDX8Renderer_RenderShape, PatchNIDX8Renderer_RenderShape_size);
 		overrideVirtualTableEnforced(0x7508B0, offsetof(NI::TriShape_vTable, NI::TriShape_vTable::linkObject), 0x6E56D0, *reinterpret_cast<DWORD*>(&TriShape_linkObject));
+
+		// Patch: Fix cure spells incorrectly triggering MagicEffectState_Ending for magic that hasn't taken effect yet.
+		genCallUnprotected(0x4559B2, reinterpret_cast<DWORD>(PatchRemoveMagicsByEffect), 0x8);
 	}
 
 	void installPostLuaPatches() {
