@@ -239,6 +239,10 @@ namespace se::cs::dialog::cell_window {
 		const auto hWnd = context.getWindowHandle();
 		auto hInstance = (HINSTANCE)GetWindowLongA(hWnd, GWLP_HINSTANCE);
 
+		// Make it so only one row in the cell list can be selected at a time.
+		const auto hCellList = GetDlgItem(hWnd, CONTROL_ID_CELL_LIST_VIEW);
+		winui::AddStyles(hCellList, LVS_SINGLESEL);
+
 		// Ensure our custom filter box is added.
 		if (cellWindowSearchControl == NULL) {
 
