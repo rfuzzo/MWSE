@@ -1236,6 +1236,47 @@ namespace mwse::patch {
 	}
 
 	//
+	// Patch: Fix loading crashes where there are links to missing objects from mods that were removed.
+	//
+
+	// Prevent crashes when a casting item is no longer present.
+	__declspec(naked) void PatchMagicSourceInstanceDtor() {
+		__asm {
+			test edi, edi						// if (!castingItem)
+			__asm _emit 0x74 __asm _emit 0x45	// jz short $ + 0x47 (assembler can't output short offsets correctly)
+			lea esi, [edi+4]					// esi = &castingItem.objectType
+			mov eax, [esi]						// eax = castingItem.objectType
+			nop
+		}
+	}
+	const size_t PatchMagicSourceInstanceDtor_size = 0xA;
+
+	// Prevent deleting itemData when a soul trapped creature is no longer present.
+	__declspec(naked) void PatchSoulTrappedCreatureNotFound1() {
+		__asm {
+			add esp, 0x8
+			__asm _emit 0xEB __asm _emit 0x0D	// jmp short $ + 0xF (assembler can't output short offsets correctly)
+		}
+	}
+	const size_t PatchSoulTrappedCreatureNotFound1_size = 0x5;
+
+	__declspec(naked) void PatchSoulTrappedCreatureNotFound2() {
+		__asm {
+			add esp, 0x8
+			__asm _emit 0xEB __asm _emit 0x09	// jmp short $ + 0xB (assembler can't output short offsets correctly)
+		}
+	}
+	const size_t PatchSoulTrappedCreatureNotFound2_size = 0x5;
+
+	__declspec(naked) void PatchSoulTrappedCreatureNotFound3() {
+		__asm {
+			add esp, 0x8
+			__asm _emit 0xEB __asm _emit 0x17	// jmp short $ + 0x19 (assembler can't output short offsets correctly)
+		}
+	}
+	const size_t PatchSoulTrappedCreatureNotFound3_size = 0x5;
+
+	//
 	// Install all the patches.
 	//
 
@@ -1688,6 +1729,12 @@ namespace mwse::patch {
 
 		// Patch: Fix cure spells incorrectly triggering MagicEffectState_Ending for magic that hasn't taken effect yet.
 		genCallUnprotected(0x4559B2, reinterpret_cast<DWORD>(PatchRemoveMagicsByEffect), 0x8);
+
+		// Patch: Fix loading crashes where there are links to missing objects from mods that were removed.
+		writePatchCodeUnprotected(0x512485, (BYTE*)&PatchMagicSourceInstanceDtor, PatchMagicSourceInstanceDtor_size);
+		writePatchCodeUnprotected(0x49DEE1, (BYTE*)&PatchSoulTrappedCreatureNotFound1, PatchSoulTrappedCreatureNotFound1_size);
+		writePatchCodeUnprotected(0x4A4BEC, (BYTE*)&PatchSoulTrappedCreatureNotFound2, PatchSoulTrappedCreatureNotFound2_size);
+		writePatchCodeUnprotected(0x4D8DD7, (BYTE*)&PatchSoulTrappedCreatureNotFound3, PatchSoulTrappedCreatureNotFound3_size);
 	}
 
 	void installPostLuaPatches() {
