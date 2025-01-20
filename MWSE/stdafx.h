@@ -42,7 +42,6 @@
 
 // 3rd party library: span-lite
 // URL: https://github.com/martinmoene/span-lite
-#define span_CONFIG_SELECT_SPAN span_SPAN_NONSTD
 #include <nonstd/span.hpp>
 
 // DirectInput/Sound requirements.

@@ -1085,7 +1085,7 @@ namespace TES3 {
 	}
 
 	const auto TES3_MobileActor_isActive = reinterpret_cast<bool(__thiscall*)(const MobileActor*)>(0x50F5F0);
-	bool MobileActor::isActive() const {
+	bool MobileActor::isActive() {
 		return TES3_MobileActor_isActive(this);
 	}
 
@@ -1104,7 +1104,7 @@ namespace TES3 {
 		return TES3_MobileActor_persuade(this, random, persuasionIndex);
 	}
 
-	bool MobileActor::getIsWerewolf() const {
+	bool MobileActor::getIsWerewolf() {
 		return getMobileActorFlag(TES3::MobileActorFlag::Werewolf);
 	}
 

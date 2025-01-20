@@ -99,9 +99,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 		// Initialize log file.
 		mwse::log::OpenLog("MWSE.log");
 #ifdef APPVEYOR_BUILD_NUMBER
-		mwse::log::println("Morrowind Script Extender v{}.{}.{}-{} (built {}) hooked.", MWSE_VERSION_MAJOR, MWSE_VERSION_MINOR, MWSE_VERSION_PATCH, APPVEYOR_BUILD_NUMBER, __DATE__);
+		mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << "-" << APPVEYOR_BUILD_NUMBER << " (built " << __DATE__ << ") hooked." << std::endl;
 #else
-		mwse::log::println("Morrowind Script Extender v{}.{}.{} (built {}) hooked.", MWSE_VERSION_MAJOR, MWSE_VERSION_MINOR, MWSE_VERSION_PATCH, __DATE__);
+		mwse::log::getLog() << "Morrowind Script Extender v" << MWSE_VERSION_MAJOR << "." << MWSE_VERSION_MINOR << "." << MWSE_VERSION_PATCH << " (built " << __DATE__ << ") hooked." << std::endl;
 #endif
 
 		// Before we do anything else, ensure that we can make minidumps.
@@ -112,12 +112,12 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 		// Make sure we have the right version of MGE XE installed.
 		VersionStruct mgeVersion = GetMGEVersion();
 		if (mgeVersion.major == 0 && mgeVersion.minor == 0) {
-			mwse::log::println("Error: Could not determine MGE XE version.");
+			mwse::log::getLog() << "Error: Could not determine MGE XE version." << std::endl;
 			MessageBox(NULL, "MGE XE does not seem to be installed. Please install MGE XE v0.10.0.0 or later.", "MGE XE Check Failed", MB_ICONERROR | MB_OK);
 			exit(0);
 		}
 		else if (mgeVersion.major == 0 && mgeVersion.minor < 10) {
-			mwse::log::println("Invalid MGE XE version: {}.{}.{}", (int)mgeVersion.major, (int)mgeVersion.minor, (int)mgeVersion.patch);
+			mwse::log::getLog() << "Invalid MGE XE version: " << (int)mgeVersion.major << "." << (int)mgeVersion.minor << "." << (int)mgeVersion.patch << "." << (int)mgeVersion.build << std::endl;
 
 			std::stringstream ss;
 			ss << "Invalid MGE XE version found. Minimum version is 0.10.0.0." << std::endl;
@@ -126,7 +126,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 			exit(0);
 		}
 		else {
-			mwse::log::println("Found MGE XE. Version: {}.{}.{}", (int)mgeVersion.major, (int)mgeVersion.minor, (int)mgeVersion.patch);
+			mwse::log::getLog() << "Found MGE XE. Version: " << (int)mgeVersion.major << "." << (int)mgeVersion.minor << "." << (int)mgeVersion.patch << "." << (int)mgeVersion.build << std::endl;
 		}
 
 		// Legacy support for old updater exe swap method.
@@ -180,21 +180,22 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 
 			// Print them to the log.
 			log << std::dec;
-			for (auto i = 0u; i < enabledFeatures.size(); ++i) {
-				if (i != 0u) log << ", ";
+			for (auto i = 0U; i < enabledFeatures.size(); ++i) {
+				if (i != 0) log << ", ";
 				log << enabledFeatures[i];
 			}
 			log << std::endl;
 
 			// Make sure our necessary features are installed.
 			if (!mwse::mcp::getFeatureEnabled(mwse::mcp::feature::SavegameCorruptionFix)) {
-				mwse::log::println("The Morrowind Script Extender requires the Morrowind Code Patch \"Savegame Corruption Fix\" bugfix to be enabled. Ensure that you have installed it.");
-				MessageBox(NULL, "The Morrowind Script Extender requires the Morrowind Code Patch \"Savegame Corruption Fix\" bugfix to be enabled. Ensure that you have installed it.", "Morrowind Code Patch installation insufficient!", MB_OK | MB_APPLMODAL | MB_ICONERROR);
+				mwse::log::getLog() << "The Morrowind Script Extender requires the Morrowind Code Patch \"Savegame Corruption Fix\" bugfix to be. Ensure that you have installed it." << std::endl;
+				MessageBox(NULL, "The Morrowind Script Extender requires the Morrowind Code Patch \"Savegame Corruption Fix\" bugfix to be. Ensure that you have installed it.", "Morrowind Code Patch installation insufficient!", MB_OK | MB_APPLMODAL | MB_ICONERROR);
 				return FALSE;
 			}
 		}
 		else {
-			mwse::log::println("The Morrowind Script Extender requires the Morrowind Code Patch to be installed. Ensure that you have installed it, and have not deleted the mcpatch folder.");
+			mwse::log::getLog() << "The Morrowind Script Extender requires the Morrowind Code Patch to be installed. Ensure that you have installed it, and have not deleted the mcpatch folder." << std::endl;
+
 			auto result = MessageBox(NULL, "The Morrowind Script Extender requires the Morrowind Code Patch to be installed. Ensure that you have installed it, and have not deleted the mcpatch folder.\n\nWould you like to open the browser to visit the MCP download page?", "Morrowind Code Patch not installed!", MB_YESNO | MB_APPLMODAL | MB_ICONERROR);
 			if (result == IDYES) {
 				system("start https://www.nexusmods.com/morrowind/mods/19510?");
@@ -208,7 +209,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 
 		// Delay our lua hook until later, to ensure that Mod Organizer's VFS is hooked up.
 		if (!mwse::genCallEnforced(0x417195, 0x417880, reinterpret_cast<DWORD>(OnGameStructInitialized))) {
-			mwse::log::println("Could not hook MWSE-Lua initialization point!");
+			mwse::log::getLog() << "Could not hook MWSE-Lua initialization point!" << std::endl;
 			exit(1);
 		}
 	}

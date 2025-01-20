@@ -744,7 +744,7 @@ namespace mwse::lua {
 	sol::optional<NI::Camera*> getCamera() {
 		auto worldController = TES3::WorldController::get();
 		if (worldController) {
-			return worldController->worldCamera.cameraData.camera.get();
+			return worldController->worldCamera.cameraData.camera;
 		}
 		return sol::optional<NI::Camera*>();
 	}
