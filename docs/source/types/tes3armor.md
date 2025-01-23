@@ -499,6 +499,6 @@ myObject:setupBodyParts(bodyPartManager, isFemale, isFirstPerson)
 **Parameters**:
 
 * `bodyPartManager` ([tes3bodyPartManager](../types/tes3bodyPartManager.md))
-* `isFemale` (bool)
-* `isFirstPerson` (bool)
+* `isFemale` (boolean)
+* `isFirstPerson` (boolean)
 

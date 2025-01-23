@@ -38,7 +38,7 @@ function tes3clothing:createCopy(params) end
 
 --- Updates a body part manager for this piece of equipment, setting up all the necessary nodes for each layer.
 --- @param bodyPartManager tes3bodyPartManager No description yet available.
---- @param isFemale bool No description yet available.
---- @param isFirstPerson bool No description yet available.
+--- @param isFemale boolean No description yet available.
+--- @param isFirstPerson boolean No description yet available.
 function tes3clothing:setupBodyParts(bodyPartManager, isFemale, isFirstPerson) end
 
