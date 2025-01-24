@@ -10,7 +10,7 @@ An Actor (not to be confused with a Mobile Actor) is an object that can be clone
 
 It is standard for creatures and NPCs to be composed of an actor and a mobile actor, linked together with a reference.
 
-This type inherits the following: [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
+This type inherits the following: [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md).
 ## Properties
 
 ### `actorFlags`

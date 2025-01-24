@@ -10,7 +10,7 @@ A static game object. A non-animated object like a building or rock.
 
 There are special-case marker statics used for gameplay purposes, such as travel and intervention. Use the ``object.isLocationMarker`` property to detect these markers.
 
-This type inherits the following: [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md)
+This type inherits the following: [tes3physicalObject](../types/tes3physicalObject.md), [tes3object](../types/tes3object.md), [tes3baseObject](../types/tes3baseObject.md).
 ## Properties
 
 ### `blocked`

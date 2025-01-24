@@ -10,7 +10,7 @@ A representation of a journal quest log, with associated dialogue(s), infos and 
 
 Quests have a name, separate from the dialogue id, which is derived from a specially flagged info (the Quest Name flag) in the dialogue infos. Multiple dialogue topics with the same name are combined into one quest. The overall quest state of active or completed is tracked by the quest.
 
-This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md).
 ## Properties
 
 ### `blocked`

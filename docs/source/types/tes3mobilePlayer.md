@@ -8,7 +8,7 @@
 
 A mobile object for a the player.
 
-This type inherits the following: [tes3mobileNPC](../types/tes3mobileNPC.md), [tes3mobileActor](../types/tes3mobileActor.md), [tes3mobileObject](../types/tes3mobileObject.md)
+This type inherits the following: [tes3mobileNPC](../types/tes3mobileNPC.md), [tes3mobileActor](../types/tes3mobileActor.md), [tes3mobileObject](../types/tes3mobileObject.md).
 ## Properties
 
 ### `acrobatics`

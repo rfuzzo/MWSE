@@ -8,7 +8,7 @@
 
 A mobile object for a creature, NPC, or the player.
 
-This type inherits the following: [tes3mobileObject](../types/tes3mobileObject.md)
+This type inherits the following: [tes3mobileObject](../types/tes3mobileObject.md).
 ## Properties
 
 ### `actionBeforeCombat`

@@ -8,7 +8,7 @@
 
 Almost anything that can be represented in the Construction Set is based on this structure.
 
-This type inherits the following: [tes3baseObject](../types/tes3baseObject.md)
+This type inherits the following: [tes3baseObject](../types/tes3baseObject.md).
 ## Properties
 
 ### `blocked`
