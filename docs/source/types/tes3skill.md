@@ -187,6 +187,19 @@ The specialization in which the skill belongs. Maps to values in the [`tes3.spec
 
 ***
 
+### `supportsActivate`
+<div class="search_terms" style="display: none">supportsactivate</div>
+
+If true, the object supports activation. This includes all the items (excluding non-carriable lights), actors outside combat, activators, containers and doors.
+
+However, the activation of such an object may still be blocked via mwscript or a Lua script.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `supportsLuaData`
 <div class="search_terms" style="display: none">supportsluadata</div>
 

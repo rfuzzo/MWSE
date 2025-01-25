@@ -29,6 +29,7 @@ namespace mwse::lua {
 		usertypeDefinition["persistent"] = sol::property(&TES3::BaseObject::getPersistent, &TES3::BaseObject::setPersistent);
 		usertypeDefinition["blocked"] = sol::property(&TES3::BaseObject::getBlocked, &TES3::BaseObject::setBlocked);
 		usertypeDefinition["sourceless"] = sol::property(&TES3::BaseObject::getSourceless, &TES3::BaseObject::setSourceless);
+		usertypeDefinition["supportsActivate"] = sol::readonly_property(&TES3::BaseObject::supportsActivate);
 		usertypeDefinition["supportsLuaData"] = sol::property(&TES3::BaseObject::getSupportsLuaData);
 	}
 
