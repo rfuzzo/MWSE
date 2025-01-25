@@ -360,7 +360,7 @@ namespace TES3::UI {
 
 	std::string Element::toJson() const {
 		std::ostringstream ss;
-		ss << "\"tes3uiElement:" << id << ":" << name.cString << "\"";
+		ss << "\"tes3uiElement:" << id << ":" << (name.cString ? name.cString : "(unnamed)") << "\"";
 		return std::move(ss.str());
 	}
 
