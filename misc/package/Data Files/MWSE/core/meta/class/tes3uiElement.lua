@@ -498,6 +498,8 @@ function tes3uiElement:createSliderVertical(params) end
 --- `numeric`: boolean? — *Default*: `false`. If true, only numbers can be put into the input. The text value of the element will still be a string, and need to be converted using `tonumber`.
 --- 
 --- `autoFocus`: boolean? — *Default*: `false`. If true, the input will be automatically focused after creation.
+--- 
+--- `createBorder`: boolean? — *Default*: `false`. If true, a thin border will be created around the input box. By default it will have standard padding, and will have `widthProportional` set to `1.0`. It can be accessed by the return value's `.parent`.
 --- @return tes3uiElement result No description yet available.
 function tes3uiElement:createTextInput(params) end
 
@@ -508,6 +510,7 @@ function tes3uiElement:createTextInput(params) end
 --- @field placeholderText string? *Optional*. Placeholder text for the input. If the element is ever made empty, this will be displayed instead in the disabled text color.
 --- @field numeric boolean? *Default*: `false`. If true, only numbers can be put into the input. The text value of the element will still be a string, and need to be converted using `tonumber`.
 --- @field autoFocus boolean? *Default*: `false`. If true, the input will be automatically focused after creation.
+--- @field createBorder boolean? *Default*: `false`. If true, a thin border will be created around the input box. By default it will have standard padding, and will have `widthProportional` set to `1.0`. It can be accessed by the return value's `.parent`.
 
 --- Creates a selectable line of text, with configurable hover, click, and disabled colors. Can be used to create a list box by placing them in a ScrollPane.
 --- 
