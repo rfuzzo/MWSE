@@ -304,15 +304,14 @@ Approximated yaw axis in radians.
 Changes currently playing music track according to provided parameters.
 
 ```lua
-myObject:changeMusicTrack({ filename = ..., crossfade = ..., volume = ... })
+myObject:changeMusicTrack(filename, crossfade, volume)
 ```
 
 **Parameters**:
 
-* `params` (table)
-	* `filename` (string): File name of the new music track.
-	* `crossfade` (number): *Default*: `1000`. Duration of the crossfading between music tracks. Measured in miliseconds.
-	* `volume` (number): *Default*: `1`. Allows changing the volume of the music track.
+* `filename` (string): File name of the new music track.
+* `crossfade` (number): *Default*: `1000`. Duration of the crossfading between music tracks. Measured in miliseconds.
+* `volume` (number): *Default*: `1`. Allows changing the volume of the music track.
 
 ***
 
@@ -332,4 +331,26 @@ local volume = myObject:getMixVolume(mix)
 **Returns**:
 
 * `volume` (number)
+
+***
+
+### `pauseMusic`
+<div class="search_terms" style="display: none">pausemusic</div>
+
+Pauses the game's music.
+
+```lua
+myObject:pauseMusic()
+```
+
+***
+
+### `unpauseMusic`
+<div class="search_terms" style="display: none">unpausemusic</div>
+
+Unpauses the game's music.
+
+```lua
+myObject:unpauseMusic()
+```
 

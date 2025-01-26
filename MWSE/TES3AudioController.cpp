@@ -37,6 +37,16 @@ namespace TES3 {
 		TES3_AudioController_setMusicVolume(this, volume);
 	}
 
+	const auto TES3_AudioController_pauseMusic = reinterpret_cast<void(__thiscall*)(AudioController*)>(0x403570);
+	void AudioController::pauseMusic() {
+		TES3_AudioController_pauseMusic(this);
+	}
+
+	const auto TES3_AudioController_unpauseMusic = reinterpret_cast<void(__thiscall*)(AudioController*)>(0x4035E0);
+	void AudioController::unpauseMusic() {
+		TES3_AudioController_unpauseMusic(this);
+	}
+
 	bool AudioController::getAudioFlag(AudioFlag::Flag flag) const {
 		return (audioFlags & flag) != 0;
 	}

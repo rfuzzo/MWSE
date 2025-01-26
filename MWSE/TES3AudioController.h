@@ -93,6 +93,9 @@ namespace TES3 {
 
 		void setMusicVolume(float volume);
 
+		void pauseMusic();
+		void unpauseMusic();
+
 		//
 		// Custom functions.
 		//
