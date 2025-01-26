@@ -34,7 +34,7 @@ namespace mwse::lua {
 		usertypeDefinition["script"] = &TES3::Light::script;
 
 		// User-friendly access to flags.
-		usertypeDefinition["canCarry"] = sol::property(&TES3::Light::getCanCarry, &TES3::Light::setCanCarry); // Overrides tes3item definition.
+		usertypeDefinition["canCarry"] = sol::property(&TES3::Light::getCanCarry, &TES3::Light::setCanCarry);
 		usertypeDefinition["flickers"] = sol::property(&TES3::Light::getFlickers, &TES3::Light::setFlickers);
 		usertypeDefinition["flickersSlowly"] = sol::property(&TES3::Light::getFlickersSlowly, &TES3::Light::setFlickersSlowly);
 		usertypeDefinition["isDynamic"] = sol::property(&TES3::Light::getIsDynamic, &TES3::Light::setIsDynamic);

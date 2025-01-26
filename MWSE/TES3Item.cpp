@@ -59,7 +59,7 @@ namespace TES3 {
 		return value;
 	}
 
-	bool Item::getCanCarry() const {
+	bool Item::getIsCarriable() const {
 		if (objectType == TES3::ObjectType::Light) {
 			return static_cast<const TES3::Light*>(this)->getCanCarry();
 		}

@@ -11,8 +11,8 @@ namespace mwse::lua {
 		setUserdataForTES3PhysicalObject(usertypeDefinition);
 
 		// Functions exposed as properties.
-		usertypeDefinition["canCarry"] = sol::readonly_property(&T::getCanCarry);
 		usertypeDefinition["icon"] = sol::property(&T::getIconPath, &T::setIconPath);
+		usertypeDefinition["isCarriable"] = sol::readonly_property(&T::getIsCarriable);
 		usertypeDefinition["mesh"] = sol::property(&T::getModelPath, &T::setModelPath);
 		usertypeDefinition["name"] = sol::property(&T::getName, &T::setName);
 		usertypeDefinition["promptsEquipmentReevaluation"] = sol::readonly_property(&T::promptsEquipmentReevaluation);

@@ -121,6 +121,17 @@ The path to the object's icon. Relative to `Data Files\\icons\\`.
 
 ***
 
+### `isCarriable`
+<div class="search_terms" style="display: none">iscarriable, carriable</div>
+
+*Read-only*. If true, the item can be carried and interacted with normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isDynamic`
 <div class="search_terms" style="display: none">isdynamic, dynamic</div>
 

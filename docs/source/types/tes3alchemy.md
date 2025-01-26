@@ -44,17 +44,6 @@ The bounding box for the object.
 
 ***
 
-### `canCarry`
-<div class="search_terms" style="display: none">cancarry, carry</div>
-
-*Read-only*. If true, the item can be carried normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
-
-**Returns**:
-
-* `result` (boolean)
-
-***
-
 ### `deleted`
 <div class="search_terms" style="display: none">deleted</div>
 
@@ -139,6 +128,17 @@ The path to the object's icon. Relative to `Data Files\\icons\\`.
 **Returns**:
 
 * `result` (string)
+
+***
+
+### `isCarriable`
+<div class="search_terms" style="display: none">iscarriable, carriable</div>
+
+*Read-only*. If true, the item can be carried and interacted with normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 

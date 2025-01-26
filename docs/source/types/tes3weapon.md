@@ -33,17 +33,6 @@ The bounding box for the object.
 
 ***
 
-### `canCarry`
-<div class="search_terms" style="display: none">cancarry, carry</div>
-
-*Read-only*. If true, the item can be carried normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
-
-**Returns**:
-
-* `result` (boolean)
-
-***
-
 ### `chopMax`
 <div class="search_terms" style="display: none">chopmax</div>
 
@@ -169,6 +158,17 @@ Access to the flag that controls if this weapon bypasses the "Resist normal weap
 <div class="search_terms" style="display: none">isammo, ammo</div>
 
 *Read-only*. If true, the weapon is a type of ammunition. Arrows and bolts are ammunition, while thrown weapons aren't.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isCarriable`
+<div class="search_terms" style="display: none">iscarriable, carriable</div>
+
+*Read-only*. If true, the item can be carried and interacted with normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
 
 **Returns**:
 
