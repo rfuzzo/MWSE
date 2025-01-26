@@ -10,6 +10,17 @@ A controller for audio. It holds data on the status of the current and next musi
 
 ## Properties
 
+### `audioFlags`
+<div class="search_terms" style="display: none">audioflags</div>
+
+A bit set for audio flags.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `currentMusicFilePath`
 <div class="search_terms" style="display: none">currentmusicfilepath</div>
 
@@ -21,10 +32,98 @@ File path of the currently playing music track. The path can not be longer than 
 
 ***
 
+### `directSoundInitFailed`
+<div class="search_terms" style="display: none">directsoundinitfailed</div>
+
+A flag marking if the DirectSound initialization failed. Part of the audio flags.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `disableAudio`
 <div class="search_terms" style="display: none">disableaudio, audio</div>
 
 A flag which controls whether the audio is disabled or not.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `dsound3DChanged`
+<div class="search_terms" style="display: none">dsound3dchanged</div>
+
+A flag marking if the direct 3D sound has changed.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `dsound3DCommitted`
+<div class="search_terms" style="display: none">dsound3dcommitted</div>
+
+A flag marking if the direct 3D sound has been committed.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasStaticBuffers`
+<div class="search_terms" style="display: none">hasstaticbuffers, staticbuffers</div>
+
+A flag marking if there are static audio buffers. Part of the audio flags.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasStreamingBuffers`
+<div class="search_terms" style="display: none">hasstreamingbuffers, streamingbuffers</div>
+
+A flag marking if there are streaming audio buffers. Part of the audio flags.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isFilterGraphValid`
+<div class="search_terms" style="display: none">isfiltergraphvalid, filtergraphvalid</div>
+
+A flag marking if the music filter graph is valid. Part of the music flags.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isMusicPaused`
+<div class="search_terms" style="display: none">ismusicpaused, musicpaused</div>
+
+A flag marking if music is paused. Part of the music flags.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isMusicPlaying`
+<div class="search_terms" style="display: none">ismusicplaying, musicplaying</div>
+
+A flag marking if music is playing. Part of the music flags.
 
 **Returns**:
 
@@ -58,6 +157,17 @@ The sound listener position.
 <div class="search_terms" style="display: none">musicfadebegintimestamp</div>
 
 The timestamp at which currently playing music track started fading in. So, it's a timestamp at which currently playing music track started.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `musicFlags`
+<div class="search_terms" style="display: none">musicflags</div>
+
+A bit set for music flags.
 
 **Returns**:
 

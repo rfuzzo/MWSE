@@ -4,11 +4,21 @@
 --- @meta
 --- A controller for audio. It holds data on the status of the current and next music tracks, volume settings and other related facilities. All the volumes are expressed in range [0, 1].
 --- @class tes3audioController
+--- @field audioFlags number A bit set for audio flags.
 --- @field currentMusicFilePath string File path of the currently playing music track. The path can not be longer than 260 characters.
+--- @field directSoundInitFailed boolean A flag marking if the DirectSound initialization failed. Part of the audio flags.
 --- @field disableAudio boolean A flag which controls whether the audio is disabled or not.
+--- @field dsound3DChanged boolean A flag marking if the direct 3D sound has changed.
+--- @field dsound3DCommitted boolean A flag marking if the direct 3D sound has been committed.
+--- @field hasStaticBuffers boolean A flag marking if there are static audio buffers. Part of the audio flags.
+--- @field hasStreamingBuffers boolean A flag marking if there are streaming audio buffers. Part of the audio flags.
+--- @field isFilterGraphValid boolean A flag marking if the music filter graph is valid. Part of the music flags.
+--- @field isMusicPaused boolean A flag marking if music is paused. Part of the music flags.
+--- @field isMusicPlaying boolean A flag marking if music is playing. Part of the music flags.
 --- @field listenerPosition tes3vector3 The sound listener position.
 --- @field musicDuration number *Read-only*. The duration of the currently playing music track.
 --- @field musicFadeBeginTimestamp number The timestamp at which currently playing music track started fading in. So, it's a timestamp at which currently playing music track started.
+--- @field musicFlags number A bit set for music flags.
 --- @field musicNextTrackStartTimestamp number The timestamp at which next track will start playing.
 --- @field musicNextTrackVolume number The volume of the next track.
 --- @field musicPosition number Current play time for currently playing music track.

@@ -37,7 +37,81 @@ namespace TES3 {
 		TES3_AudioController_setMusicVolume(this, volume);
 	}
 
-	float AudioController::getMixVolume(AudioMixType mix) {
+	bool AudioController::getAudioFlag(AudioFlag::Flag flag) const {
+		return (audioFlags & flag) != 0;
+	}
+
+	void AudioController::setAudioFlag(AudioFlag::Flag flag, bool set) {
+		if (set) {
+			audioFlags |= flag;
+		}
+		else {
+			audioFlags &= ~flag;
+		}
+	}
+
+	bool AudioController::getHasStaticBuffers() const {
+		return getAudioFlag(AudioFlag::HasStaticBuffers);
+	}
+
+	void AudioController::setHasStaticBuffers(bool set) {
+		setAudioFlag(AudioFlag::HasStaticBuffers, set);
+	}
+
+	bool AudioController::getDirectSoundInitFailed() const {
+		return getAudioFlag(AudioFlag::DirectSoundInitFailed);
+	}
+
+	void AudioController::setDirectSoundInitFailed(bool set) {
+		setAudioFlag(AudioFlag::DirectSoundInitFailed, set);
+	}
+
+	bool AudioController::getHasStreamingBuffers() const {
+		return getAudioFlag(AudioFlag::HasStreamingBuffers);
+	}
+
+	void AudioController::setHasStreamingBuffers(bool set) {
+		setAudioFlag(AudioFlag::HasStreamingBuffers, set);
+	}
+
+	bool AudioController::getMusicFlag(MusicFlag::Flag flag) const {
+		return (musicFlags & flag) != 0;
+	}
+
+	void AudioController::setMusicFlag(MusicFlag::Flag flag, bool set) {
+		if (set) {
+			musicFlags |= flag;
+		}
+		else {
+			musicFlags &= ~flag;
+		}
+	}
+
+	bool AudioController::getIsFilterGraphValid() const {
+		return getMusicFlag(MusicFlag::FilterGraphValid);
+	}
+
+	void AudioController::setIsFilterGraphValid(bool set) {
+		setMusicFlag(MusicFlag::FilterGraphValid, set);
+	}
+
+	bool AudioController::getIsMusicPlaying() const {
+		return getMusicFlag(MusicFlag::Playing);
+	}
+
+	void AudioController::setIsMusicPlaying(bool set) {
+		setMusicFlag(MusicFlag::Playing, set);
+	}
+
+	bool AudioController::getIsMusicPaused() const {
+		return getMusicFlag(MusicFlag::Paused);
+	}
+
+	void AudioController::setIsMusicPaused(bool set) {
+		setMusicFlag(MusicFlag::Paused, set);
+	}
+
+	float AudioController::getMixVolume(AudioMixType mix) const {
 		float volume = 0.004f * volumeMaster;
 		switch (mix) {
 		case AudioMixType::Master:
@@ -59,7 +133,7 @@ namespace TES3 {
 		return volume;
 	}
 
-	float AudioController::getNormalizedMasterVolume() {
+	float AudioController::getNormalizedMasterVolume() const {
 		return 0.004f * volumeMaster;
 	}
 
@@ -68,7 +142,7 @@ namespace TES3 {
 		adjustLoopingSoundsVolume();
 	}
 
-	float AudioController::getNormalizedEffectsVolume() {
+	float AudioController::getNormalizedEffectsVolume() const {
 		return 0.004f * volumeEffects;
 	}
 
@@ -77,7 +151,7 @@ namespace TES3 {
 		adjustLoopingSoundsVolume();
 	}
 
-	float AudioController::getNormalizedVoiceVolume() {
+	float AudioController::getNormalizedVoiceVolume() const {
 		return 0.004f * volumeVoice;
 	}
 
@@ -85,7 +159,7 @@ namespace TES3 {
 		volumeVoice = uint8_t(std::clamp(value, 0.0f, 1.0f) * 250);
 	}
 
-	float AudioController::getNormalizedFootstepsVolume() {
+	float AudioController::getNormalizedFootstepsVolume() const {
 		return 0.004f * volumeFootsteps;
 	}
 
@@ -93,11 +167,11 @@ namespace TES3 {
 		volumeFootsteps = uint8_t(std::clamp(value, 0.0f, 1.0f) * 250);
 	}
 
-	float AudioController::getMusicVolume() {
+	float AudioController::getMusicVolume() const {
 		return volumeMusic;
 	}
 
-	const char* AudioController::getCurrentMusicFilePath() {
+	const char* AudioController::getCurrentMusicFilePath() const {
 		return currentMusicFilePath;
 	}
 
@@ -110,7 +184,7 @@ namespace TES3 {
 		strncpy_s(currentMusicFilePath, path, newLength);
 	}
 
-	const char* AudioController::getNextMusicFilePath() {
+	const char* AudioController::getNextMusicFilePath() const {
 		return nextMusicFilePath;
 	}
 
@@ -123,7 +197,7 @@ namespace TES3 {
 		strncpy_s(nextMusicFilePath, path, newLength);
 	}
 
-	double AudioController::getMusicDuration() {
+	double AudioController::getMusicDuration() const {
 		IMediaPosition * positioning;
 		if (musicGraph->QueryInterface(IID_IMediaPosition, (LPVOID*)&positioning) < 0) {
 			throw std::runtime_error("Music Error: Could not query IMediaPosition interface.");
@@ -139,7 +213,7 @@ namespace TES3 {
 		return duration;
 	}
 
-	double AudioController::getMusicPosition() {
+	double AudioController::getMusicPosition() const {
 		IMediaPosition * positioning;
 		if (musicGraph->QueryInterface(IID_IMediaPosition, (LPVOID*)&positioning) < 0) {
 			throw std::runtime_error("Music Error: Could not query IMediaPosition interface.");
