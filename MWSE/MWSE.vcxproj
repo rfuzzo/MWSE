@@ -39,6 +39,7 @@
     <ClInclude Include="NISortAdjustNode.h" />
     <ClInclude Include="TES3AnimationGroupLua.h" />
     <ClInclude Include="TES3DialogueFilterContext.h" />
+    <ClInclude Include="TES3ItemLua.h" />
     <ClInclude Include="TES3LandLua.h" />
     <ClInclude Include="LuaActiveMagicEffectIconsUpdatedEvent.h" />
     <ClInclude Include="LuaAttackHitEvent.h" />

@@ -33,6 +33,17 @@ The bounding box for the object.
 
 ***
 
+### `canCarry`
+<div class="search_terms" style="display: none">cancarry, carry</div>
+
+*Read-only*. If true, the item can be carried normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `deleted`
 <div class="search_terms" style="display: none">deleted</div>
 
@@ -52,6 +63,17 @@ The bounding box for the object.
 **Returns**:
 
 * `result` (boolean)
+
+***
+
+### `icon`
+<div class="search_terms" style="display: none">icon</div>
+
+The path to the object's icon. Relative to `Data Files\\icons\\`.
+
+**Returns**:
+
+* `result` (string)
 
 ***
 
@@ -77,6 +99,17 @@ True if this object is an editor marker for a gameplay location. These include t
 
 ***
 
+### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
+
+The path to the object's mesh. Relative to `Data Files\\meshes\\`.
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `modified`
 <div class="search_terms" style="display: none">modified, ified</div>
 
@@ -85,6 +118,17 @@ The modification state of the object since the last save.
 **Returns**:
 
 * `result` (boolean)
+
+***
+
+### `name`
+<div class="search_terms" style="display: none">name</div>
+
+The player-facing name for the object.
+
+**Returns**:
+
+* `result` (string)
 
 ***
 
@@ -154,6 +198,17 @@ The previous object in parent collection's list.
 
 ***
 
+### `promptsEquipmentReevaluation`
+<div class="search_terms" style="display: none">promptsequipmentreevaluation</div>
+
+*Read-only*. If true, the item should prompt equipment reevaluated when added to the actor's inventory. Thius is true for armor, clothing, and weapons.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `scale`
 <div class="search_terms" style="display: none">scale</div>
 
@@ -212,7 +267,7 @@ The sourceless flag of the object.
 ### `stolenList`
 <div class="search_terms" style="display: none">stolenlist</div>
 
-A list of actors that the object has been stolen from.
+*Read-only*. A non-mutable list of all actors that the item has been stolen from.
 
 **Returns**:
 

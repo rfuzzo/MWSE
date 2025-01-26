@@ -1773,6 +1773,9 @@
     <ClInclude Include="NIBoundingVolumeLua.h">
       <Filter>Header Files\Lua\Bindings\NI</Filter>
     </ClInclude>
+    <ClInclude Include="TES3ItemLua.h">
+      <Filter>Header Files\Lua\Bindings\TES3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -102,7 +102,7 @@ Access to the light's flags, determining if the light attenuation flickers slowl
 ### `icon`
 <div class="search_terms" style="display: none">icon</div>
 
-The path to the object's icon.
+The path to the object's icon. Relative to `Data Files\\icons\\`.
 
 **Returns**:
 
@@ -197,7 +197,7 @@ If true the light won't be active initially, and will only be lit when held by a
 ### `mesh`
 <div class="search_terms" style="display: none">mesh</div>
 
-The path to the object's mesh.
+The path to the object's mesh. Relative to `Data Files\\meshes\\`.
 
 **Returns**:
 
@@ -290,6 +290,17 @@ The previous object in parent collection's list.
 **Returns**:
 
 * `result` ([tes3object](../types/tes3object.md))
+
+***
+
+### `promptsEquipmentReevaluation`
+<div class="search_terms" style="display: none">promptsequipmentreevaluation</div>
+
+*Read-only*. If true, the item should prompt equipment reevaluated when added to the actor's inventory. Thius is true for armor, clothing, and weapons.
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 
@@ -406,7 +417,7 @@ The sourceless flag of the object.
 ### `stolenList`
 <div class="search_terms" style="display: none">stolenlist</div>
 
-A list of actors that the object has been stolen from.
+*Read-only*. A non-mutable list of all actors that the item has been stolen from.
 
 **Returns**:
 

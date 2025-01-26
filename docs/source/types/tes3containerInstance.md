@@ -367,17 +367,6 @@ The sourceless flag of the object.
 
 ***
 
-### `stolenList`
-<div class="search_terms" style="display: none">stolenlist</div>
-
-A list of actors that the object has been stolen from.
-
-**Returns**:
-
-* `result` ([tes3baseObject](../types/tes3baseObject.md)[])
-
-***
-
 ### `supportsActivate`
 <div class="search_terms" style="display: none">supportsactivate</div>
 

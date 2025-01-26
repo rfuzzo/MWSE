@@ -55,6 +55,17 @@ The bounding box for the object.
 
 ***
 
+### `canCarry`
+<div class="search_terms" style="display: none">cancarry, carry</div>
+
+*Read-only*. If true, the item can be carried normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `deleted`
 <div class="search_terms" style="display: none">deleted</div>
 
@@ -290,6 +301,17 @@ The previous object in parent collection's list.
 
 ***
 
+### `promptsEquipmentReevaluation`
+<div class="search_terms" style="display: none">promptsequipmentreevaluation</div>
+
+*Read-only*. If true, the item should prompt equipment reevaluated when added to the actor's inventory. Thius is true for armor, clothing, and weapons.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `scale`
 <div class="search_terms" style="display: none">scale</div>
 
@@ -381,7 +403,7 @@ The sourceless flag of the object.
 ### `stolenList`
 <div class="search_terms" style="display: none">stolenlist</div>
 
-A list of actors that the object has been stolen from.
+*Read-only*. A non-mutable list of all actors that the item has been stolen from.
 
 **Returns**:
 
