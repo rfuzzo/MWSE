@@ -11,6 +11,7 @@
 #include "TES3Cell.h"
 #include "TES3Class.h"
 #include "TES3CombatSession.h"
+#include "TES3Creature.h"
 #include "TES3CutscenePlayer.h"
 #include "TES3DataHandler.h"
 #include "TES3Dialogue.h"
@@ -1405,9 +1406,14 @@ namespace mwse::patch {
 
 	const auto TES3_ActorAnimationController_selectActorMovementAnim = reinterpret_cast<void(__thiscall*)(TES3::ActorAnimationController*)>(0x53F2D0);
 	void __fastcall PatchSelectActorMovementAnim(TES3::ActorAnimationController* animController) {
-		auto attackType = animController->mobileActor->actionData.physicalAttackType;
+		auto mobile = animController->mobileActor;
+		auto attackState = mobile->actionData.animStateAttack;
+		auto attackType = mobile->actionData.physicalAttackType;
 
-		if (animController->mobileActor->actorType == TES3::MobileActorType::Creature
+		// Check for non-biped creatures in an attack animation.
+		if (mobile->actorType == TES3::MobileActorType::Creature
+			&& attackState >= TES3::AttackAnimationState::SwingUp
+			&& attackState <= TES3::AttackAnimationState::SwingFollowHeavy
 			&& attackType >= TES3::PhysicalAttackType::Creature1
 			&& attackType <= TES3::PhysicalAttackType::Creature3) {
 
