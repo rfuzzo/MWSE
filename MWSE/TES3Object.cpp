@@ -791,16 +791,18 @@ namespace TES3 {
 	}
 
 	Reference* PhysicalObject::getReference() const {
-		if (auto thisRef = reinterpret_cast<Reference*>(referenceToThis); thisRef && thisRef->objectType == ObjectType::Reference) {
-			return thisRef;
-		}
-		else {
-			auto mobile = getMobile();
-			if (mobile) {
-				return mobile->reference;
+		__try {
+			if (auto thisRef = reinterpret_cast<Reference*>(referenceToThis); thisRef && thisRef->objectType == ObjectType::Reference) {
+				return thisRef;
+			}
+			else {
+				auto mobile = getMobile();
+				if (mobile) {
+					return mobile->reference;
+				}
 			}
 		}
-
+		__except (EXCEPTION_EXECUTE_HANDLER) {}
 		return nullptr;
 	}
 }
