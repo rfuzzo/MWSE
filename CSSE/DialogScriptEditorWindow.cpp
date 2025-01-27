@@ -10,6 +10,7 @@
 #include "CSGlobalVariable.h"
 
 #include "Settings.h"
+#include "LogUtil.h"
 
 namespace se::cs::dialog::script_editor_window {
 	GlobalVariable* __fastcall getCompilerGlobalVariable(RecordHandler* recordHandler, DWORD _EDX_, const char* id) {
@@ -32,6 +33,7 @@ namespace se::cs::dialog::script_editor_window {
 				result->sourceFile = recordHandler->activeFile;
 				result->setModified(true);
 				recordHandler->globals->push_back(result);
+				log::stream << "Created on-demand global variable '" << id << "'" << std::endl;
 			}
 		}
 
