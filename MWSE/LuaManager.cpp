@@ -747,6 +747,12 @@ namespace mwse::lua {
 		const auto TES3Game_loadAllPlugins = reinterpret_cast<bool(__thiscall*)(TES3::Game*)>(0x419CE0);
 		TES3Game_loadAllPlugins(game);
 
+		// Update compatibility globals.
+		const auto mwseBuildGlobal = TES3::DataHandler::get()->nonDynamicData->findGlobalVariable("MWSE_BUILD");
+		if (mwseBuildGlobal) {
+			mwseBuildGlobal->value = Configuration::BuildNumber;
+		}
+
 		// Trigger initialization.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 		stateHandle.triggerEvent(new event::GenericEvent("initialized"));
@@ -972,6 +978,12 @@ namespace mwse::lua {
 		auto stateHandle = luaManager.getThreadSafeStateHandle();
 		if (event::LoadedGameEvent::getEventEnabled()) {
 			stateHandle.triggerEvent(new event::LoadedGameEvent(nullptr, false, true));
+		}
+
+		// Update compatibility globals.
+		const auto mwseBuildGlobal = TES3::DataHandler::get()->nonDynamicData->findGlobalVariable("MWSE_BUILD");
+		if (mwseBuildGlobal) {
+			mwseBuildGlobal->value = Configuration::BuildNumber;
 		}
 	}
 

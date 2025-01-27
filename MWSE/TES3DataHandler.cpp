@@ -30,6 +30,8 @@
 #include "TES3UIManager.h"
 #include "TES3WorldController.h"
 
+#include "MWSEConfig.h"
+
 namespace TES3 {
 
 	Cell* DataHandler::previousVisitedCell = nullptr;
@@ -273,6 +275,12 @@ namespace TES3 {
 
 			// Extra things we want to do if we're successfully loading.
 			TES3::UI::setSuppressingHelpMenu(false);
+		}
+
+		// Update compatibility globals.
+		const auto mwseBuildGlobal = TES3::DataHandler::get()->nonDynamicData->findGlobalVariable("MWSE_BUILD");
+		if (mwseBuildGlobal) {
+			mwseBuildGlobal->value = mwse::Configuration::BuildNumber;
 		}
 
 		return loaded ? LoadGameResult::Success : LoadGameResult::Failure;
