@@ -1401,33 +1401,6 @@ namespace mwse::patch {
 	const size_t PatchCombatSessionNextActionPhysicalWeighting2_size = 0xB;
 
 	//
-	// Patch: Prevent non-biped creature attacks being instantly cancelled by movement.
-	//
-
-	const auto TES3_ActorAnimationController_selectActorMovementAnim = reinterpret_cast<void(__thiscall*)(TES3::ActorAnimationController*)>(0x53F2D0);
-	void __fastcall PatchSelectActorMovementAnim(TES3::ActorAnimationController* animController) {
-		auto mobile = animController->mobileActor;
-		auto attackState = mobile->actionData.animStateAttack;
-		auto attackType = mobile->actionData.physicalAttackType;
-
-		// Check for non-biped creatures in an attack animation.
-		if (mobile->actorType == TES3::MobileActorType::Creature
-			&& attackState >= TES3::AttackAnimationState::SwingUp
-			&& attackState <= TES3::AttackAnimationState::SwingFollowHeavy
-			&& attackType >= TES3::PhysicalAttackType::Creature1
-			&& attackType <= TES3::PhysicalAttackType::Creature3) {
-
-			// Set no movement animation, which would normally have priority over attack animations.
-			// Creatures will still move if their movement flags are set, using the walking animation average speed.
-			animController->animGroupMovement = 0xFF;
-		}
-		else {
-			// Run original code.
-			TES3_ActorAnimationController_selectActorMovementAnim(animController);
-		}
-	}
-
-	//
 	// Install all the patches.
 	//
 
@@ -1899,9 +1872,6 @@ namespace mwse::patch {
 		genCallUnprotected(0x5376BB + 0xA, reinterpret_cast<DWORD>(PatchCalculateEffectiveWeaponMult));
 		writePatchCodeUnprotected(0x5378BE, (BYTE*)&PatchCombatSessionNextActionPhysicalWeighting2, PatchCombatSessionNextActionPhysicalWeighting2_size);
 		genCallUnprotected(0x5378BE + 4, reinterpret_cast<DWORD>(PatchGetWeaponStackItemDataVariables));
-
-		// Patch: Prevent non-biped creature attacks being instantly cancelled by movement.
-		genCallEnforced(0x53E120, 0x53F2D0, reinterpret_cast<DWORD>(PatchSelectActorMovementAnim));
 	}
 
 	void installPostLuaPatches() {
