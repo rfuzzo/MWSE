@@ -469,6 +469,14 @@ namespace TES3 {
 		return nonstd::span(activeMods, activeModCount);
 	}
 
+	IteratedList<GlobalVariable*>* NonDynamicData::getGlobalsList() const {
+		if (globals == nullptr) {
+			return nullptr;
+		}
+
+		return &globals->variables;
+	}
+
 	sol::table NonDynamicData::getMagicEffects_lua(sol::this_state ts) {
 		sol::state_view state = ts;
 		sol::table results = state.create_table();
