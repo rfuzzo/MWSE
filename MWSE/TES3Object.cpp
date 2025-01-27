@@ -115,7 +115,7 @@ namespace TES3 {
 		BaseObject* asBase = getBaseObject();
 
 		if (asBase->isItem()) {
-			return static_cast<const Item*>(this)->getCanCarry();
+			return static_cast<const Item*>(this)->getIsCarriable();
 		}
 
 		if (asBase->objectType == ObjectType::NPC || asBase->objectType == ObjectType::Creature) {
