@@ -161,12 +161,16 @@ namespace TES3::UI {
 			return menu;
 		}
 
-		auto item = getOptionalParamObject<TES3::Item>(params, "item");
-		if (item) {
+		auto object = getOptionalParamObject<TES3::Object>(params, "object");
+		if (object == nullptr) {
+			// Backwards compatibility with the old item parameter.
+			object = getOptionalParamObject<TES3::Object>(params, "item");
+		}
+		if (object) {
 			auto itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
 			auto count = itemData ? itemData->count : 0;
 
-			WorldController::get()->menuController->menuInputController->displayObjectTooltip(item, itemData, count);
+			WorldController::get()->menuController->menuInputController->displayObjectTooltip(object, itemData, count);
 			return menu;
 		}
 
