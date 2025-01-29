@@ -29,6 +29,7 @@
 #include "TES3Reference.h"
 #include "TES3Script.h"
 #include "TES3Sound.h"
+#include "TES3SoundGenerator.h"
 #include "TES3UIElement.h"
 #include "TES3UIInventoryTile.h"
 #include "TES3UIMenuController.h"
@@ -1401,6 +1402,56 @@ namespace mwse::patch {
 	const size_t PatchCombatSessionNextActionPhysicalWeighting2_size = 0xB;
 
 	//
+	// Patch: Fix bug where sound generators that refer to missing creatures incorrectly become generic sound generators.
+	//
+
+	void __fastcall PatchAddSoundGenerator(TES3::IteratedList<TES3::SoundGenerator*>* list, DWORD _EDX_, TES3::SoundGenerator* soundGen) {
+		// The original code could not distinguish between generic soundgens without a creature record and a soundgen with a missing creature.
+		// This includes Construction Set code which converted missing creature soundgens into generic soundgens on save.
+		// Try to detect actual generic soundgens by ID prefix and skip other soundgens with missing creatures.
+
+		// Actual generic soundgens IDs start with "DEFAULT", e.g. "DEFAULT0001",
+		// while broken generic soundgens IDs start with a creature id, e.g. "BM frost boar0007"
+		if (soundGen->creature == nullptr && std::strncmp(soundGen->name, "DEFAULT", 7) != 0) {
+			return;
+		}
+
+		list->push_back(soundGen);
+	}
+
+	void __stdcall PatchLoadSoundGeneratorSetCreature(TES3::SoundGenerator* soundGenerator, TES3::Object* object) {
+		if (object && object->objectType == TES3::ObjectType::Creature) {
+			// Original code.
+			soundGenerator->creature = static_cast<TES3::Creature*>(object);
+		}
+		else {
+			// Mark deleted if the creature is missing.
+			soundGenerator->objectFlags |= TES3::ObjectFlag::Delete;
+		}
+	}
+
+	__declspec(naked) void PatchLoadSoundGenerator() {
+		__asm {
+			push eax		// push resolvedObject
+			push ebp		// push soundGenerator
+			call $			// Replace with call PatchLoadSoundGeneratorSetCreature
+			jmp $ + 0x11
+		}
+	}
+	const size_t PatchLoadSoundGenerator_size = 0xC;
+
+	void* __fastcall PatchNextSoundGen(TES3::IteratedList<TES3::SoundGenerator*>* list) {
+		auto next = list->cached_next();
+
+		// Skip deleted soundgens.
+		while (next && next->data->getDeleted()) {
+			next = list->cached_next();
+		}
+
+		return next;
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1872,6 +1923,12 @@ namespace mwse::patch {
 		genCallUnprotected(0x5376BB + 0xA, reinterpret_cast<DWORD>(PatchCalculateEffectiveWeaponMult));
 		writePatchCodeUnprotected(0x5378BE, (BYTE*)&PatchCombatSessionNextActionPhysicalWeighting2, PatchCombatSessionNextActionPhysicalWeighting2_size);
 		genCallUnprotected(0x5378BE + 4, reinterpret_cast<DWORD>(PatchGetWeaponStackItemDataVariables));
+
+		// Patch: Fix bug where sound generators that refer to missing creatures incorrectly become generic sound generators.
+		genCallEnforced(0x4BE4BD, 0x47E360, reinterpret_cast<DWORD>(PatchAddSoundGenerator));
+		genCallEnforced(0x4C7EED, 0x47E720, reinterpret_cast<DWORD>(PatchNextSoundGen));
+		writePatchCodeUnprotected(0x5116B7, (BYTE*)&PatchLoadSoundGenerator, PatchLoadSoundGenerator_size);
+		genCallUnprotected(0x5116B7 + 2, reinterpret_cast<DWORD>(PatchLoadSoundGeneratorSetCreature));
 	}
 
 	void installPostLuaPatches() {
