@@ -130,3 +130,14 @@ The state of the button. Controls which color set to use for its text. Maps to v
 
 * `result` ([tes3.uiState](../references/ui-states.md))
 
+***
+
+### `textElement`
+<div class="search_terms" style="display: none">textelement</div>
+
+Access to the child label element of the widget.
+
+**Returns**:
+
+* `result` ([tes3uiElement](../types/tes3uiElement.md))
+
