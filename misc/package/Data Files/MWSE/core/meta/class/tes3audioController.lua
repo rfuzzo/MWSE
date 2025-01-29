@@ -43,6 +43,11 @@ function tes3audioController:changeMusicTrack(filename, crossfade, volume) end
 --- @return number volume No description yet available.
 function tes3audioController:getMixVolume(mix) end
 
+--- Loads a music file and determines its duration, in seconds.
+--- @param path string The path to the music track, relative to the game installation directory.
+--- @return number duration The number of seconds of the track, in seconds.
+function tes3audioController:getMusicFileDuration(path) end
+
 --- Pauses the game's music.
 function tes3audioController:pauseMusic() end
 

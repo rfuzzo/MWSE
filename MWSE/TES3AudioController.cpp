@@ -268,6 +268,43 @@ namespace TES3 {
 		positioning->Release();
 	}
 
+	double AudioController::getMusicFileDuration(std::string_view& path) {
+		if (!std::filesystem::exists(path)) {
+			throw std::invalid_argument("No music file exists at path.");
+		}
+
+		const auto& CLSID_FilgraphManager = *reinterpret_cast<GUID*>(0x74B930);
+		const auto& IID_IGraphBuilder = *reinterpret_cast<GUID*>(0x74B8E0);
+		IGraphBuilder* graph = nullptr;
+		if (CoCreateInstance(CLSID_FilgraphManager, 0, 1u, IID_IGraphBuilder, (LPVOID*)&graph) < 0) {
+			throw std::runtime_error("Could not create graph builder.");
+		}
+
+		wchar_t buffer[MAX_PATH] = {};
+		MultiByteToWideChar(0, 0, path.data(), -1, buffer, MAX_PATH);
+		if (graph->RenderFile(buffer, 0) < 0) {
+			graph->Release();
+			throw std::runtime_error("Could not play file.");
+		}
+
+		IMediaPosition* positioning = nullptr;
+		if (graph->QueryInterface(IID_IMediaPosition, (LPVOID*)&positioning) < 0) {
+			graph->Release();
+			throw std::runtime_error("Could not query IMediaPosition interface.");
+		}
+
+		REFTIME duration;
+		if (positioning->get_Duration(&duration) < 0) {
+			positioning->Release();
+			graph->Release();
+			throw std::runtime_error("Could not fetch media position.");
+		}
+
+		positioning->Release();
+		graph->Release();
+		return duration;
+	}
+
 	void AudioController::changeMusicTrack_lua(const char* filename, sol::optional<int> crossfade, sol::optional<float> volume) {
 		mwse::lua::event::MusicChangeTrackEvent::ms_Context = "lua";
 		WorldController::get()->musicSituation = MusicSituation::Uninterruptible;

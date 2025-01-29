@@ -47,6 +47,7 @@ namespace mwse::lua {
 		usertypeDefinition["getMixVolume"] = &TES3::AudioController::getMixVolume;
 		usertypeDefinition["pauseMusic"] = &TES3::AudioController::pauseMusic;
 		usertypeDefinition["unpauseMusic"] = &TES3::AudioController::unpauseMusic;
+		usertypeDefinition["getMusicFileDuration"] = &TES3::AudioController::getMusicFileDuration;
 
 		// Functions exposed as properties.
 		usertypeDefinition["musicDuration"] = sol::readonly_property(&TES3::AudioController::getMusicDuration);

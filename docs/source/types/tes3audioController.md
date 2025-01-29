@@ -334,6 +334,25 @@ local volume = myObject:getMixVolume(mix)
 
 ***
 
+### `getMusicFileDuration`
+<div class="search_terms" style="display: none">getmusicfileduration, musicfileduration</div>
+
+Loads a music file and determines its duration, in seconds.
+
+```lua
+local duration = myObject:getMusicFileDuration(path)
+```
+
+**Parameters**:
+
+* `path` (string): The path to the music track, relative to the game installation directory.
+
+**Returns**:
+
+* `duration` (number): The number of seconds of the track, in seconds.
+
+***
+
 ### `pauseMusic`
 <div class="search_terms" style="display: none">pausemusic</div>
 
