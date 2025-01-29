@@ -2232,6 +2232,25 @@ local result = myObject:getBootsWeight()
 
 ***
 
+### `getEffectiveAttackDistance`
+<div class="search_terms" style="display: none">geteffectiveattackdistance, effectiveattackdistance</div>
+
+Returns the distance used for checking attack range. This is measured by the distance between the actors' bounding boxes edges, as if the actors were exactly facing each other. The number may be negative if the bounding boxes overlap.
+
+```lua
+local distance = myObject:getEffectiveAttackDistance(mobile)
+```
+
+**Parameters**:
+
+* `mobile` ([tes3mobileActor](../types/tes3mobileActor.md)): The target actor.
+
+**Returns**:
+
+* `distance` (number)
+
+***
+
 ### `getFatigueTerm`
 <div class="search_terms" style="display: none">getfatigueterm, fatigueterm</div>
 
