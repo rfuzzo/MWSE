@@ -1723,8 +1723,31 @@ myObject:removeProperty(property)
 
 ***
 
+### `reorder`
+<div class="search_terms" style="display: none">reorder</div>
+
+Re-orders an element to before or after a sibling element. Provide either a `before` or `after` parameter.
+
+```lua
+local result = myObject:reorder({ before = ..., after = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `before` ([tes3uiElement](../types/tes3uiElement.md)): The calling element will be moved to before this element.
+	* `after` ([tes3uiElement](../types/tes3uiElement.md)): The calling element will be moved to after this element.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `reorderChildren`
 <div class="search_terms" style="display: none">reorderchildren</div>
+
+This method is deprecated. Prefer to use `tes3uiElement.reorder` when moving single children.
 
 Moves the layout order of the children of this element. `count` elements are taken from starting child `Element` or index (0-based) `moveFrom`, and moved before the child `Element` or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 

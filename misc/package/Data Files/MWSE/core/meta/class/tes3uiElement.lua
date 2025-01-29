@@ -789,6 +789,22 @@ function tes3uiElement:registerBefore(eventID, callback, priority) end
 --- @param property number|string The property to set.
 function tes3uiElement:removeProperty(property) end
 
+--- Re-orders an element to before or after a sibling element. Provide either a `before` or `after` parameter.
+--- @param params tes3uiElement.reorder.params This table accepts the following values:
+--- 
+--- `before`: tes3uiElement — The calling element will be moved to before this element.
+--- 
+--- `after`: tes3uiElement — The calling element will be moved to after this element.
+--- @return boolean result No description yet available.
+function tes3uiElement:reorder(params) end
+
+---Table parameter definitions for `tes3uiElement.reorder`.
+--- @class tes3uiElement.reorder.params
+--- @field before tes3uiElement The calling element will be moved to before this element.
+--- @field after tes3uiElement The calling element will be moved to after this element.
+
+--- This method is deprecated. Prefer to use `tes3uiElement.reorder` when moving single children.
+--- 
 --- Moves the layout order of the children of this element. `count` elements are taken from starting child `Element` or index (0-based) `moveFrom`, and moved before the child `Element` or index (0-based) `insertBefore`. If `count` is -1, all children after `moveFrom` are moved. If any index is a negative number, then the index represents a distance from the end of the child list.
 --- 
 --- Returns `true` if the operation succeeded, or `false` if at least one argument was invalid.
