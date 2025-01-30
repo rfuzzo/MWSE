@@ -3667,6 +3667,7 @@ tes3.crimeType = require("tes3.crimeType")
 ---| `tes3.crimeType.theft`
 ---| `tes3.crimeType.trespass`
 ---| `tes3.crimeType.werewolf`
+---| `tes3.crimeType.witnessReaction`
 
 tes3.damageSource = require("tes3.damageSource")
 

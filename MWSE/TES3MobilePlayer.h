@@ -35,7 +35,7 @@ namespace TES3 {
 		sol::table getKeys_lua(sol::this_state ts) const;
 		int getValue_lua(const char* type) const;
 		void setValue_lua(const char* type, int value);
-		void modValue_lua(const char* type, int delta);
+		int modValue_lua(const char* type, int delta);
 	};
 
 	struct PlayerBounty {

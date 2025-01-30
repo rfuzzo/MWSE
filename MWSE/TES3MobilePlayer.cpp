@@ -52,9 +52,11 @@ namespace TES3 {
 		setValue(&indirect, value);
 	}
 
-	void BountyData::modValue_lua(const char* type, int delta) {
+	int BountyData::modValue_lua(const char* type, int delta) {
 		StdString indirect = type;
-		setValue(&indirect, getValue(&indirect) + delta);
+		const auto newValue = getValue(&indirect) + delta;
+		setValue(&indirect, newValue);
+		return newValue;
 	}
 
 	const auto TES3_MobilePlayer_exerciseSkill = reinterpret_cast<void(__thiscall*)(MobilePlayer*, int, float)>(0x56A5D0);
