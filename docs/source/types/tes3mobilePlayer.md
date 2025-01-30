@@ -360,6 +360,17 @@ The player's current bounty.
 
 ***
 
+### `bountyData`
+<div class="search_terms" style="display: none">bountydata</div>
+
+The player's bounty boutny data, which includes information on the bounty, as well as the number of infractions.
+
+**Returns**:
+
+* `result` ([tes3bountyData](../types/tes3bountyData.md))
+
+***
+
 ### `cameraHeight`
 <div class="search_terms" style="display: none">cameraheight</div>
 

@@ -16,12 +16,14 @@ namespace mwse::lua {
 		// Basic property binding.
 		usertypeDefinition["actionBeforeCombat"] = sol::readonly_property(&TES3::MobileActor::actionBeforeCombat);
 		usertypeDefinition["actionData"] = sol::readonly_property(&TES3::MobileActor::actionData);
+		usertypeDefinition["actorFlags"] = &TES3::MobileActor::actorFlags;
 		usertypeDefinition["actorType"] = sol::readonly_property(&TES3::MobileActor::actorType);
 		usertypeDefinition["aiPlanner"] = sol::readonly_property(&TES3::MobileActor::aiPlanner);
 		usertypeDefinition["alarm"] = &TES3::MobileActor::alarm;
 		usertypeDefinition["barterGold"] = &TES3::MobileActor::barterGold;
 		usertypeDefinition["collidingReference"] = sol::readonly_property(&TES3::MobileActor::collidingReference);
 		usertypeDefinition["combatSession"] = sol::readonly_property(&TES3::MobileActor::combatSession);
+		usertypeDefinition["committedCrimes"] = &TES3::MobileActor::committedCrimes;
 		usertypeDefinition["corpseHourstamp"] = &TES3::MobileActor::corpseHourstamp;
 		usertypeDefinition["currentEnchantedItem"] = sol::readonly_property(&TES3::MobileActor::currentEnchantedItem);
 		usertypeDefinition["encumbrance"] = sol::readonly_property(&TES3::MobileActor::encumbrance);
@@ -50,6 +52,7 @@ namespace mwse::lua {
 		usertypeDefinition["scanInterval"] = &TES3::MobileActor::scanInterval;
 		usertypeDefinition["scanTimer"] = sol::readonly_property(&TES3::MobileActor::scanTimer);
 		usertypeDefinition["torchSlot"] = &TES3::MobileActor::torchSlot;
+		usertypeDefinition["witnessedCrimes"] = &TES3::MobileActor::witnessedCrimes;
 
 		// Indirect bindings to unions and arrays.
 		usertypeDefinition["activeMagicEffectList"] = sol::readonly_property(&TES3::MobileActor::getActiveMagicEffectsList_lua);

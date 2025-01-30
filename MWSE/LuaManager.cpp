@@ -111,6 +111,7 @@
 #include "TES3CombatSessionLua.h"
 #include "TES3ContainerLua.h"
 #include "TES3CreatureLua.h"
+#include "TES3CrimeLua.h"
 #include "TES3DataHandlerLua.h"
 #include "TES3DialogueLua.h"
 #include "TES3DoorLua.h"
@@ -509,6 +510,7 @@ namespace mwse::lua {
 		bindTES3CombatSession();
 		bindTES3Container();
 		bindTES3Creature();
+		bindTES3Crime();
 		bindTES3DataHandler();
 		bindTES3Dialogue();
 		bindTES3Door();

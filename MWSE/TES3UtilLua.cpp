@@ -38,7 +38,6 @@
 #include "TES3Container.h"
 #include "TES3CombatSession.h"
 #include "TES3Creature.h"
-#include "TES3CrimeEventList.h"
 #include "TES3DataHandler.h"
 #include "TES3Dialogue.h"
 #include "TES3DialogueInfo.h"
@@ -1435,7 +1434,7 @@ namespace mwse::lua {
 
 		// Add the crime to the criminal's committed crimes list if there are witnesses.
 		if (crimeEvent.witnesses->count) {
-			crimeEvent.criminal->committedCrimes.insertCrime(&crimeEvent);
+			crimeEvent.criminal->committedCrimes.push_front(crimeEvent);
 			return true;
 		}
 

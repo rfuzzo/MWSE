@@ -38,6 +38,7 @@
     <ClInclude Include="NIPathController.h" />
     <ClInclude Include="NISortAdjustNode.h" />
     <ClInclude Include="TES3AnimationGroupLua.h" />
+    <ClInclude Include="TES3CrimeLua.h" />
     <ClInclude Include="TES3DialogueFilterContext.h" />
     <ClInclude Include="TES3ItemLua.h" />
     <ClInclude Include="TES3LandLua.h" />
@@ -308,9 +309,7 @@
     <ClInclude Include="TES3BodyPartLua.h" />
     <ClInclude Include="TES3CollisionLua.h" />
     <ClInclude Include="TES3CombatSessionLua.h" />
-    <ClInclude Include="TES3CrimeController.h" />
     <ClInclude Include="TES3CrimeEvent.h" />
-    <ClInclude Include="TES3CrimeEventList.h" />
     <ClInclude Include="DynamicLuaObject.h" />
     <ClInclude Include="TES3Fader.h" />
     <ClInclude Include="TES3FaderLua.h" />
@@ -800,6 +799,7 @@
     <ClCompile Include="TES3BodyPartManager.cpp" />
     <ClCompile Include="TES3Clothing.cpp" />
     <ClCompile Include="TES3Creature.cpp" />
+    <ClCompile Include="TES3CrimeLua.cpp" />
     <ClCompile Include="TES3CriticalSection.cpp" />
     <ClCompile Include="TES3DialogueConditional.cpp" />
     <ClCompile Include="TES3DialogueFilterContext.cpp" />
@@ -859,8 +859,6 @@
     <ClCompile Include="TES3CollisionLua.cpp" />
     <ClCompile Include="TES3CombatSession.cpp" />
     <ClCompile Include="TES3CombatSessionLua.cpp" />
-    <ClCompile Include="TES3CrimeController.cpp" />
-    <ClCompile Include="TES3CrimeEventList.cpp" />
     <ClCompile Include="TES3DialogueInfo.cpp" />
     <ClCompile Include="TES3Enchantment.cpp" />
     <ClCompile Include="TES3Fader.cpp" />
