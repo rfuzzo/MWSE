@@ -31,6 +31,10 @@
 --- @field waterLevel number|nil The water level in the cell. In extirior cells, water level is 0, while the interior cells can have custom water, usually set in the Construction Set, or don't have water at all. In that case, this property will be `nil`.
 tes3cell = {}
 
+--- Gets an exterior associated with this cell. If the cell is or behaves as an exterior, it returns the current cell. Otherwise it looks through load doors, searching for an exterior cell. If the cell links to multiple exteriors, there is no guarantee that the returned exterior is the closest one to the player.
+--- @return tes3cell? exterior An exterior cell linked to this cell.
+function tes3cell:getExteriorCell() end
+
 --- Determines if a given X/Y coordinate falls in the given cell. This will always be true for interior cells.
 --- @param x number The X position to test.
 --- @param y number The Y position to test.

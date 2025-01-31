@@ -516,6 +516,21 @@ local string = myObject:__tojson()
 
 ***
 
+### `getExteriorCell`
+<div class="search_terms" style="display: none">getexteriorcell, exteriorcell</div>
+
+Gets an exterior associated with this cell. If the cell is or behaves as an exterior, it returns the current cell. Otherwise it looks through load doors, searching for an exterior cell. If the cell links to multiple exteriors, there is no guarantee that the returned exterior is the closest one to the player.
+
+```lua
+local exterior = myObject:getExteriorCell()
+```
+
+**Returns**:
+
+* `exterior` ([tes3cell](../types/tes3cell.md)): An exterior cell linked to this cell.
+
+***
+
 ### `isPointInCell`
 <div class="search_terms" style="display: none">ispointincell, pointincell</div>
 
