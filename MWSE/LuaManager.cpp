@@ -6625,6 +6625,13 @@ namespace mwse::lua {
 		genCallEnforced(0x4EEFAA, 0x4F0CA0, *reinterpret_cast<DWORD*>(&baseObjectDestructor));
 		genCallEnforced(0x4F026F, 0x4F0CA0, *reinterpret_cast<DWORD*>(&baseObjectDestructor));
 		genCallEnforced(0x4F0C83, 0x4F0CA0, *reinterpret_cast<DWORD*>(&baseObjectDestructor));
+		
+		// Also clean up references, but do it just before deletion so we have more information.
+		auto referenceObjectDestructor = &TES3::Reference::dtor;
+		genJumpEnforced(0x49A675, 0x4E45C0, *reinterpret_cast<DWORD*>(&referenceObjectDestructor));
+		genCallEnforced(0x4DE528, 0x4E45C0, *reinterpret_cast<DWORD*>(&referenceObjectDestructor));
+		genCallEnforced(0x4E45A3, 0x4E45C0, *reinterpret_cast<DWORD*>(&referenceObjectDestructor));
+		genJumpEnforced(0x72D1B4, 0x4E45C0, *reinterpret_cast<DWORD*>(&referenceObjectDestructor));
 
 		// Allow area-of-effect magic effects and tes3.findActorsInProximity to hit/find incapacitated actors.
 		genJumpUnprotected(0x570341, 0x57034C);
