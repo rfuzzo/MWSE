@@ -294,6 +294,27 @@ local function standardKeyPressAfter(e)
 	element:getTopLevelMenu():updateLayout()
 end
 
+--- Standard post-keyDown event callback that all text input share, at a reasonably high priority.
+--- @param e tes3uiEventData
+local function onTextInputFocus(e)
+	local element = e.source
+	local lastIndex = element:getLuaData("mwse:lastCursorIndex") or #element.text
+	if (not element.rawText:find("|", 1, true)) then
+		element.rawText = string.insert(element.rawText, "|", lastIndex - 1)
+		element:setLuaData("mwse:lastCursorIndex", nil)
+		element:getTopLevelMenu():updateLayout()
+	end
+end
+
+--- Standard post-keyDown event callback that all text input share, at a reasonably high priority.
+--- @param e tes3uiEventData
+local function onTextInputUnfocus(e)
+	local element = e.source
+	element:setLuaData("mwse:lastCursorIndex", element.rawText:find("|", 1, true))
+	element.rawText = element.rawText:gsub("|", "")
+	element:getTopLevelMenu():updateLayout()
+end
+
 --- @param element tes3uiElement
 local function setupTextInput(element)
 	-- More sane default values.
@@ -302,6 +323,8 @@ local function setupTextInput(element)
 	-- Register some standard events, to improve input mapping, provide copy/paste support, and prevent garbage input.
 	element:registerBefore(tes3.uiEvent.keyPress, standardKeyPressBefore, 1000)
 	element:registerAfter(tes3.uiEvent.keyPress, standardKeyPressAfter, 1000)
+	element:registerAfter(tes3.uiEvent.inputFocus, onTextInputFocus)
+	element:registerAfter(tes3.uiEvent.inputUnfocus, onTextInputUnfocus)
 end
 
 --- @diagnostic disable-next-line
