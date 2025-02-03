@@ -25,7 +25,7 @@ local function standardKeyPressBeforePlaceholding(e)
 	local element = e.source
 	local characterEntered = common.ui.eventCallbackHelper.getCharacterPressed(e)
 
-	local placeholding = element:getLuaData("placeholding") --- @type boolean
+	local placeholding = element:getLuaData("mwse:placeholding") --- @type boolean
 	if (placeholding and #string.trim(characterEntered or "") == 0) then
 		return false
 	end
@@ -39,7 +39,7 @@ local function standardKeyPressBeforeNumeric(e)
 	local element = e.source
 	local characterEntered = common.ui.eventCallbackHelper.getCharacterPressed(e)
 
-	if (not characterEntered or not element:getLuaData("numeric") or not tonumber(characterEntered)) then
+	if (not characterEntered or not element:getLuaData("mwse:numeric") or not tonumber(characterEntered)) then
 		return
 	end
 
@@ -120,7 +120,7 @@ local function standardKeyPressBeforeCutCopyPaste(e)
 		local newText = string.insert(rawText, clipboardText, cursorPosition - 1)
 
 		-- Enforce numeric pasting.
-		if (element:getLuaData("numeric") and tonumber(newText:gsub("|", "")) == nil) then
+		if (element:getLuaData("mwse:numeric") and tonumber(newText:gsub("|", "")) == nil) then
 			return false
 		end
 
@@ -218,7 +218,7 @@ local function standardKeyPressBefore(e)
 	local isAltDown = inputController:isAltDown()
 
 	-- Update previous text.
-	element:setLuaData("previousText", element.text)
+	element:setLuaData("mwse:previousText", element.text)
 
 	-- Prevent tabs from inserting themselves for when alt-tabbing.
 	if (characterPressed == '\t' and isAltDown) then
@@ -262,17 +262,17 @@ local function standardKeyPressAfter(e)
 	local element = e.source
 
 	-- Check if we need to change back to placeholder text.
-	local placeholderText = element:getLuaData("placeholderText") --- @type string?
+	local placeholderText = element:getLuaData("mwse:placeholderText") --- @type string?
 	if (placeholderText and element.text == "") then
 		element.text = placeholderText
 		element.color = tes3ui.getPalette("disabled_color")
-		element:setLuaData("placeholding", true)
+		element:setLuaData("mwse:placeholding", true)
 
 		-- Raise textCleared event.
 		element:triggerEvent("textCleared")
 
 		-- Update previous text.
-		element:setLuaData("previousText", element.text)
+		element:setLuaData("mwse:previousText", element.text)
 
 		-- We don't need to do anything else from here.
 		return
@@ -280,16 +280,16 @@ local function standardKeyPressAfter(e)
 
 	-- Ungray the text.
 	element.color = tes3ui.getPalette("normal_color")
-	element:setLuaData("placeholding", false)
+	element:setLuaData("mwse:placeholding", false)
 
 	-- Raise textUpdated event.
-	local previousText = element:getLuaData("previousText") --- @type string?
+	local previousText = element:getLuaData("mwse:previousText") --- @type string?
 	if (element.text ~= previousText) then
 		element:triggerEvent("textUpdated")
 	end
 
 	-- Update previous text.
-	element:setLuaData("previousText", element.text)
+	element:setLuaData("mwse:previousText", element.text)
 
 	element:getTopLevelMenu():updateLayout()
 end
@@ -306,7 +306,7 @@ local function setupTextInput(element, params)
 	-- Allow placeholder text.
 	local placeholderText = params.placeholderText
 	if (placeholderText) then
-		element:setLuaData("placeholderText", placeholderText)
+		element:setLuaData("mwse:placeholderText", placeholderText)
 
 		-- If we weren't given text, set to the placeholder text.
 		if (params.text == nil) then
@@ -316,7 +316,7 @@ local function setupTextInput(element, params)
 		-- Fix color if we are using the placeholder text.
 		if (params.text == nil or params.text == placeholderText) then
 			element.color = tes3ui.getPalette("disabled_color")
-			element:setLuaData("placeholding", true)
+			element:setLuaData("mwse:placeholding", true)
 		end
 
 		element.widget.eraseOnFirstKey = true
@@ -324,7 +324,7 @@ local function setupTextInput(element, params)
 
 	-- Only allow numbers.
 	if (params.numeric) then
-		element:setLuaData("numeric", true)
+		element:setLuaData("mwse:numeric", true)
 	end
 
 	-- Handle focus.
