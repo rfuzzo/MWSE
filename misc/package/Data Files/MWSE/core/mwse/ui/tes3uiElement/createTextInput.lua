@@ -295,12 +295,40 @@ local function standardKeyPressAfter(e)
 end
 
 --- @param element tes3uiElement
-local function setupTextInput(element, params)
+local function setupTextInput(element)
+	-- More sane default values.
+	element.widget.lengthLimit = nil
+
+	-- Register some standard events, to improve input mapping, provide copy/paste support, and prevent garbage input.
+	element:registerBefore(tes3.uiEvent.keyPress, standardKeyPressBefore, 1000)
+	element:registerAfter(tes3.uiEvent.keyPress, standardKeyPressAfter, 1000)
+end
+
+--- @diagnostic disable-next-line
+function tes3uiElement:createTextInput(params)
 	params = params or {}
+
+	local parent = self
+	if (params.createBorder) then
+		parent = self:createThinBorder({ id = "MWSE:TextInputBorder"})
+		parent.autoHeight = true
+		parent.autoWidth = true
+		parent.paddingLeft = 5
+		parent.paddingRight = 5
+		parent.paddingTop = 3
+		parent.paddingBottom = 5
+		parent.widthProportional = 1.0
+		parent.consumeMouseEvents = true
+	end
+
+	-- With the below code to override all text inputs with standard features, we just need to create a normal text input.
+	local element = parent:_createTextInput(params) ---@diagnostic disable-line
 
 	-- Basic property setting.
 	if (params.text) then
 		element.text = params.text
+	else
+		element.rawText = ""
 	end
 
 	-- Allow placeholder text.
@@ -315,7 +343,7 @@ local function setupTextInput(element, params)
 
 		-- Fix color if we are using the placeholder text.
 		if (params.text == nil or params.text == placeholderText) then
-			element.color = tes3ui.getPalette("disabled_color")
+			element.color = tes3ui.getPalette(tes3.palette.disabledColor)
 			element:setLuaData("mwse:placeholding", true)
 		end
 
@@ -340,29 +368,7 @@ local function setupTextInput(element, params)
 		tes3ui.acquireTextInput(element)
 	end
 
-	-- Register some standard events, to improve input mapping, provide copy/paste support, and prevent garbage input.
-	element:registerBefore("keyPress", standardKeyPressBefore, 1000)
-	element:registerAfter("keyPress", standardKeyPressAfter, 1000)
-end
-
---- @diagnostic disable-next-line
-function tes3uiElement:createTextInput(params)
-	params = params or {}
-
-	local parent = self
-	if (params.createBorder) then
-		parent = self:createThinBorder({ id = "MWSE:TextInputBorder"})
-		parent.autoHeight = true
-		parent.autoWidth = true
-		parent.paddingLeft = 5
-		parent.paddingRight = 5
-		parent.paddingTop = 3
-		parent.paddingBottom = 5
-		parent.widthProportional = 1.0
-	end
-
-	-- With the below code to override all text inputs with standard features, we just need to create a normal text input.
-	return parent:_createTextInput(params) ---@diagnostic disable-line
+	return element
 end
 
 -- 
