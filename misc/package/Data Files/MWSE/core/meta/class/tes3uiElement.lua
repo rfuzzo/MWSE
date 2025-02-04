@@ -482,9 +482,7 @@ function tes3uiElement:createSliderVertical(params) end
 --- @field step number? *Default*: `1`. The change in value when clicking the left and right arrow buttons.
 --- @field jump number? *Default*: `5`. The change in value when clicking into the empty areas next to the slider handle.
 
---- Creates a clickable button, whose text changes linearly through options as it is clicked. Register the `valueChanged` event for when the option is cycled or changed via script.
---- 
---- Button specific properties can be accessed through the `widget` property. The widget type for buttons is [`tes3uiCycleButton`](https://mwse.github.io/MWSE/types/tes3uiCycleButton/).
+--- Creates a collection of elements meant to represent a tab-based interface. With the widget of this element, tabs can be added with `:addTab`, which will contain the content element of that tab. When the user clicks on each tab, other tab content panes will be hidden, in favor of the one associated with the clicked tab. See [`tes3uiTabContainer`](https://mwse.github.io/MWSE/types/tes3uiTabContainer/) for a what the widget provides.
 --- @param params tes3uiElement.createTabContainer.params This table accepts the following values:
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.

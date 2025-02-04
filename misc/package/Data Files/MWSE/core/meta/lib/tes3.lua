@@ -6453,6 +6453,8 @@ tes3.uiEvent = require("tes3.uiEvent")
 ---| `tes3.uiEvent.destroy`
 ---| `tes3.uiEvent.focus`
 ---| `tes3.uiEvent.help`
+---| `tes3.uiEvent.inputFocus`
+---| `tes3.uiEvent.inputUnfocus`
 ---| `tes3.uiEvent.keyEnter`
 ---| `tes3.uiEvent.keyPress`
 ---| `tes3.uiEvent.mouseClick`
