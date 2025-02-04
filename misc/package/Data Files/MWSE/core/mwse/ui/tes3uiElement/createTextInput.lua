@@ -25,6 +25,7 @@ local function standardKeyPressBeforePlaceholding(e)
 	local element = e.source
 	local characterEntered = common.ui.eventCallbackHelper.getCharacterPressed(e)
 
+	-- Prevent basically anything from happening if we are placeholding.
 	local placeholding = element:getLuaData("mwse:placeholding") --- @type boolean
 	if (placeholding and #string.trim(characterEntered or "") == 0) then
 		return false
@@ -99,6 +100,7 @@ local function standardKeyPressBeforeCutCopyPaste(e)
 			local cutText = string.sub(rawText, copyEnd + 1, #rawText)
 			element.rawText = cutText
 			element:getTopLevelMenu():updateLayout()
+			element:triggerEvent(tes3.uiEvent.textUpdated)
 		end
 
 		return false
@@ -151,11 +153,13 @@ local function standardKeyPressBeforeWordDeletion(e)
 		-- ctrl+backspace -> delete previous word
 		element.rawText = element.rawText:gsub("(%w*[%W]*)|", "|")
 		element:getTopLevelMenu():updateLayout()
+		element:triggerEvent(tes3.uiEvent.textUpdated)
 		return false
 	elseif (tes3.isKeyEqual({ actual = keyData, expected = keybindDeleteWordAhead })) then
 		-- ctrl+delete -> delete next word
 		element.rawText = element.rawText:gsub("|(%w*[%W]*)", "|")
 		element:getTopLevelMenu():updateLayout()
+		element:triggerEvent(tes3.uiEvent.textUpdated)
 		return false
 	end
 end
@@ -261,35 +265,11 @@ end
 local function standardKeyPressAfter(e)
 	local element = e.source
 
-	-- Check if we need to change back to placeholder text.
-	local placeholderText = element:getLuaData("mwse:placeholderText") --- @type string?
-	if (placeholderText and element.text == "") then
-		element.text = placeholderText
-		element.color = tes3ui.getPalette("disabled_color")
-		element:setLuaData("mwse:placeholding", true)
-
-		-- Raise textCleared event.
-		element:triggerEvent("textCleared")
-
-		-- Update previous text.
-		element:setLuaData("mwse:previousText", element.text)
-
-		-- We don't need to do anything else from here.
-		return
-	end
-
-	-- Ungray the text.
-	element.color = tes3ui.getPalette("normal_color")
-	element:setLuaData("mwse:placeholding", false)
-
 	-- Raise textUpdated event.
 	local previousText = element:getLuaData("mwse:previousText") --- @type string?
 	if (element.text ~= previousText) then
-		element:triggerEvent("textUpdated")
+		element:triggerEvent(tes3.uiEvent.textUpdated)
 	end
-
-	-- Update previous text.
-	element:setLuaData("mwse:previousText", element.text)
 
 	element:getTopLevelMenu():updateLayout()
 end
@@ -298,8 +278,11 @@ end
 --- @param e tes3uiEventData
 local function onTextInputFocus(e)
 	local element = e.source
-	local lastIndex = element:getLuaData("mwse:lastCursorIndex") or #element.text
-	if (not element.rawText:find("|", 1, true)) then
+
+	local placeholding = element:getLuaData("mwse:placeholding")
+	local hasCursor = (element.rawText:find("|", 1, true) ~= nil)
+	if (not placeholding and not hasCursor) then
+		local lastIndex = element:getLuaData("mwse:lastCursorIndex") or #element.text
 		element.rawText = string.insert(element.rawText, "|", lastIndex - 1)
 		element:setLuaData("mwse:lastCursorIndex", nil)
 		element:getTopLevelMenu():updateLayout()
@@ -315,6 +298,40 @@ local function onTextInputUnfocus(e)
 	element:getTopLevelMenu():updateLayout()
 end
 
+--- @param e tes3uiEventData
+local function onTextUpdated(e)
+	local element = e.source
+
+	local placeholding = element:getLuaData("mwse:placeholding")
+	local placeholderText = element:getLuaData("mwse:placeholderText")
+
+	-- Make sure a text cleared event fires.
+	if (element.text == "") then
+		-- Raise textCleared event.
+		element:triggerEvent(tes3.uiEvent.textCleared)
+		element:setLuaData("mwse:previousText", nil)
+		return
+	elseif (placeholding and element.text ~= placeholderText) then
+		-- Unset placeholding.
+		element.color = tes3ui.getPalette("normal_color")
+		element:setLuaData("mwse:placeholding", false)
+	end
+end
+
+--- @param e tes3uiEventData
+local function onTextCleared(e)
+	local element = e.source
+
+	-- Check if we need to change back to placeholder text.
+	local placeholderText = element:getLuaData("mwse:placeholderText") --- @type string?
+	if (placeholderText) then
+		element.text = placeholderText
+		element.color = tes3ui.getPalette("disabled_color")
+		element:setLuaData("mwse:placeholding", true)
+		return
+	end
+end
+
 --- @param element tes3uiElement
 local function setupTextInput(element)
 	-- More sane default values.
@@ -325,6 +342,8 @@ local function setupTextInput(element)
 	element:registerAfter(tes3.uiEvent.keyPress, standardKeyPressAfter, 1000)
 	element:registerAfter(tes3.uiEvent.inputFocus, onTextInputFocus)
 	element:registerAfter(tes3.uiEvent.inputUnfocus, onTextInputUnfocus)
+	element:registerAfter(tes3.uiEvent.textUpdated, onTextUpdated, -1000)
+	element:registerAfter(tes3.uiEvent.textCleared, onTextCleared)
 end
 
 --- @diagnostic disable-next-line
@@ -365,7 +384,7 @@ function tes3uiElement:createTextInput(params)
 		end
 
 		-- Fix color if we are using the placeholder text.
-		if (params.text == nil or params.text == placeholderText) then
+		if (element.text == placeholderText) then
 			element.color = tes3ui.getPalette(tes3.palette.disabledColor)
 			element:setLuaData("mwse:placeholding", true)
 		end
