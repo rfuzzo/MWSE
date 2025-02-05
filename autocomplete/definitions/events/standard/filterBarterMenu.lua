@@ -18,5 +18,9 @@ return {
 			readOnly = true,
 			description = "The item data for the item being filtered.",
 		},
+		["filter"] = {
+			type = "boolean|nil",
+			description = "If true, the item will be added to the barter menu."
+		},
 	},
 }
