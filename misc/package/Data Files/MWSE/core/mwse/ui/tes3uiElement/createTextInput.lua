@@ -23,11 +23,10 @@ end
 --- @return boolean?
 local function standardKeyPressBeforePlaceholding(e)
 	local element = e.source
-	local characterEntered = common.ui.eventCallbackHelper.getCharacterPressed(e)
 
 	-- Prevent basically anything from happening if we are placeholding.
 	local placeholding = element:getLuaData("mwse:placeholding") --- @type boolean
-	if (placeholding and #string.trim(characterEntered or "") == 0) then
+	if (placeholding and #string.trim(e.character or "") == 0) then
 		return false
 	end
 end
@@ -38,7 +37,7 @@ end
 --- @return boolean?
 local function standardKeyPressBeforeNumeric(e)
 	local element = e.source
-	local characterEntered = common.ui.eventCallbackHelper.getCharacterPressed(e)
+	local characterEntered = e.character
 
 	if (not characterEntered or not element:getLuaData("mwse:numeric") or not tonumber(characterEntered)) then
 		return
@@ -64,30 +63,22 @@ end
 --- @return boolean?
 local function standardKeyPressBeforeCutCopyPaste(e)
 	local element = e.source
-	local keyPressed = common.ui.eventCallbackHelper.getKeyPressed(e)
-	local characterPressed = common.ui.eventCallbackHelper.getCharacterPressed(e)
-	local inputController = tes3.worldController.inputController
 
 	-- Handle copy/cut/paste.
-	local isControlDown = inputController:isControlDown()
-	local isAltDown = inputController:isAltDown()
-	local isShiftDown = inputController:isShiftDown()
-	local isSuperDown = inputController:isSuperDown()
-	local keyData = { keyCode = characterPressed, isControlDown = isControlDown, isAltDown = isAltDown, isShiftDown = isShiftDown, isSuperDown = isSuperDown }
-	local keyBindCopy = { keyCode = 'c', isControlDown = true, isShiftDown = false, isSuperDown = false }
-	local isCopying = tes3.isKeyEqual({ actual = keyData, expected = keyBindCopy })
-	local keyBindCut = { keyCode = 'x', isControlDown = true, isShiftDown = false, isSuperDown = false }
-	local isCutting = tes3.isKeyEqual({ actual = keyData, expected = keyBindCut })
-	local keyBindPaste = { keyCode = 'v', isAltDown = false, isControlDown = true, isShiftDown = false, isSuperDown = false }
-	local isPasting = tes3.isKeyEqual({ actual = keyData, expected = keyBindPaste })
+	local keyBindCopy = { keyCode = tes3.keyboardCode.c, isControlDown = true, isShiftDown = false, isSuperDown = false }
+	local isCopying = tes3.isKeyEqual({ actual = e.keyData, expected = keyBindCopy })
+	local keyBindCut = { keyCode = tes3.keyboardCode.x, isControlDown = true, isShiftDown = false, isSuperDown = false }
+	local isCutting = tes3.isKeyEqual({ actual = e.keyData, expected = keyBindCut })
+	local keyBindPaste = { keyCode = tes3.keyboardCode.v, isAltDown = false, isControlDown = true, isShiftDown = false, isSuperDown = false }
+	local isPasting = tes3.isKeyEqual({ actual = e.keyData, expected = keyBindPaste })
 	if (isCopying or isCutting) then
 		-- Figure out where our cursor is.
 		local rawText = element.rawText
 		local cursorPosition = rawText and string.find(rawText, "|", 1, true) or 0
 
 		-- Figure out where we want to start copying. If we are holding alt, copy after the cursor. Otherwise copy up to it.
-		local copyStart = isAltDown and (cursorPosition + 1) or 1
-		local copyEnd = isAltDown and #rawText or (cursorPosition - 1)
+		local copyStart = e.keyData.isAltDown and (cursorPosition + 1) or 1
+		local copyEnd = e.keyData.isAltDown and #rawText or (cursorPosition - 1)
 
 		-- Copy our text.
 		local copyText = string.sub(rawText, copyStart, copyEnd)
@@ -138,24 +129,16 @@ end
 --- @return boolean?
 local function standardKeyPressBeforeWordDeletion(e)
 	local element = e.source
-	local keyPressed = common.ui.eventCallbackHelper.getKeyPressed(e)
-	local inputController = tes3.worldController.inputController
+	local keybindDeleteWordBehind = { keyCode = tes3.keyboardCode.backspace, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
+	local keybindDeleteWordAhead = { keyCode = tes3.keyboardCode.delete, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
 
-	local isControlDown = inputController:isControlDown()
-	local isAltDown = inputController:isAltDown()
-	local isShiftDown = inputController:isShiftDown()
-	local isSuperDown = inputController:isSuperDown()
-	local keyData = { keyCode = keyPressed, isControlDown = isControlDown, isAltDown = isAltDown, isShiftDown = isShiftDown, isSuperDown = isSuperDown }
-	local keybindDeleteWordBehind = { keyCode = 0, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
-	local keybindDeleteWordAhead = { keyCode = 7, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
-
-	if (tes3.isKeyEqual({ actual = keyData, expected = keybindDeleteWordBehind })) then
+	if (tes3.isKeyEqual({ actual = e.keyData, expected = keybindDeleteWordBehind })) then
 		-- ctrl+backspace -> delete previous word
 		element.rawText = element.rawText:gsub("(%w*[%W]*)|", "|")
 		element:getTopLevelMenu():updateLayout()
 		element:triggerEvent(tes3.uiEvent.textUpdated)
 		return false
-	elseif (tes3.isKeyEqual({ actual = keyData, expected = keybindDeleteWordAhead })) then
+	elseif (tes3.isKeyEqual({ actual = e.keyData, expected = keybindDeleteWordAhead })) then
 		-- ctrl+delete -> delete next word
 		element.rawText = element.rawText:gsub("|(%w*[%W]*)", "|")
 		element:getTopLevelMenu():updateLayout()
@@ -172,35 +155,27 @@ end
 --- @return boolean?
 local function standardKeyPressBeforeCursorMovement(e)
 	local element = e.source
-	local keyPressed = common.ui.eventCallbackHelper.getKeyPressed(e)
-	local inputController = tes3.worldController.inputController
+	local keybindMoveWordBehind = { keyCode = tes3.keyboardCode.leftArrow, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
+	local keybindMoveWordAhead = { keyCode = tes3.keyboardCode.rightArrow, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
+	local keybindMoveStart = { keyCode = tes3.keyboardCode.home, isControlDown = false, isAltDown = false, isShiftDown = false, isSuperDown = false }
+	local keybindMoveEnd = { keyCode = tes3.keyboardCode["end"], isControlDown = false, isAltDown = false, isShiftDown = false, isSuperDown = false }
 
-	local isControlDown = inputController:isControlDown()
-	local isAltDown = inputController:isAltDown()
-	local isShiftDown = inputController:isShiftDown()
-	local isSuperDown = inputController:isSuperDown()
-	local keyData = { keyCode = keyPressed, isControlDown = isControlDown, isAltDown = isAltDown, isShiftDown = isShiftDown, isSuperDown = isSuperDown }
-	local keybindMoveWordBehind = { keyCode = 1, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
-	local keybindMoveWordAhead = { keyCode = 2, isControlDown = true, isAltDown = false, isShiftDown = false, isSuperDown = false }
-	local keybindMoveStart = { keyCode = 5, isControlDown = false, isAltDown = false, isShiftDown = false, isSuperDown = false }
-	local keybindMoveEnd = { keyCode = 6, isControlDown = false, isAltDown = false, isShiftDown = false, isSuperDown = false }
-
-	if (tes3.isKeyEqual({ actual = keyData, expected = keybindMoveWordBehind })) then
+	if (tes3.isKeyEqual({ actual = e.keyData, expected = keybindMoveWordBehind })) then
 		-- ctrl+left -> move to previous word
 		element.rawText = element.rawText:gsub("(%w*[%W]*)|", "|%1")
 		element:getTopLevelMenu():updateLayout()
 		return false
-	elseif (tes3.isKeyEqual({ actual = keyData, expected = keybindMoveWordAhead })) then
+	elseif (tes3.isKeyEqual({ actual = e.keyData, expected = keybindMoveWordAhead })) then
 		-- ctrl+right -> move to next word
 		element.rawText = element.rawText:gsub("|(%w*[%W]*)", "%1|")
 		element:getTopLevelMenu():updateLayout()
 		return false
-	elseif (tes3.isKeyEqual({ actual = keyData, expected = keybindMoveStart })) then
+	elseif (tes3.isKeyEqual({ actual = e.keyData, expected = keybindMoveStart })) then
 		-- home -> move cursor to start
 		element.rawText = "|" .. element.rawText:gsub("|", "")
 		element:getTopLevelMenu():updateLayout()
 		return false
-	elseif (tes3.isKeyEqual({ actual = keyData, expected = keybindMoveEnd })) then
+	elseif (tes3.isKeyEqual({ actual = e.keyData, expected = keybindMoveEnd })) then
 		-- end -> move cursor to end
 		element.rawText = element.rawText:gsub("|", "") .. "|"
 		element:getTopLevelMenu():updateLayout()
@@ -217,7 +192,7 @@ end
 --- @return boolean?
 local function standardKeyPressBefore(e)
 	local element = e.source
-	local characterPressed = common.ui.eventCallbackHelper.getCharacterPressed(e)
+	local characterPressed = e.character
 	local inputController = tes3.worldController.inputController
 	local isAltDown = inputController:isAltDown()
 

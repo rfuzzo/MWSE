@@ -280,7 +280,9 @@ namespace mwse::patch {
 			return 0;
 		}
 
-		return inputController->readButtonPressed(key);
+		auto result = inputController->readButtonPressed(key);
+		TES3::UI::MenuInputController::lastKeyPressDIK = result ? *key : 0xFF;
+		return result;
 	}
 
 	//
