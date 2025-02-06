@@ -4093,6 +4093,7 @@ tes3.event = require("tes3.event")
 ---| `tes3.event.referenceActivated`
 ---| `tes3.event.referenceDeactivated`
 ---| `tes3.event.referenceSceneNodeCreated`
+---| `tes3.event.removedEquipmentBodyParts`
 ---| `tes3.event.repair`
 ---| `tes3.event.restInterrupt`
 ---| `tes3.event.save`
@@ -4123,6 +4124,7 @@ tes3.event = require("tes3.event")
 ---| `tes3.event.uiSkillTooltip`
 ---| `tes3.event.uiSpellTooltip`
 ---| `tes3.event.unequipped`
+---| `tes3.event.updateBodyPartsForItem`
 ---| `tes3.event.vfxCreated`
 ---| `tes3.event.weaponReadied`
 ---| `tes3.event.weaponUnreadied`

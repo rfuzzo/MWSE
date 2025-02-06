@@ -79,6 +79,9 @@ namespace TES3 {
 		// Custom functions.
 		//
 
+		void addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson) const;
+		void removeBodyPartsUnder(BodyPartManager* bodyPartManager) const;
+
 		float getArmorScalar() const;
 
 		// Overwrite vtable call to actually do something.

@@ -55,6 +55,9 @@ namespace TES3 {
 		// Custom functions.
 		//
 
+		void addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson) const;
+		void removeBodyPartsUnder(BodyPartManager* bodyPartManager) const;
+
 		void setIconPath(const char* path);
 		const char* getSlotName();
 

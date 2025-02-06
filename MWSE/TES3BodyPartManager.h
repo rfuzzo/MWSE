@@ -112,7 +112,7 @@ namespace TES3 {
 		NI::Node* getActiveBodyPartBaseNode(ActiveBodyPart::Layer layer, ActiveBodyPart::Index index);
 
 		void removeActiveBodyPart(ActiveBodyPart::Layer layer, ActiveBodyPart::Index index, bool setOverride = false, int overrideData = 0);
-		void setBodyPartForObject(PhysicalObject* object, ActiveBodyPart::Index index, BodyPart* bodyPart, bool isFirstPerson = false);
+		void setBodyPartForObject(const PhysicalObject* object, ActiveBodyPart::Index index, BodyPart* bodyPart, bool isFirstPerson = false);
 		void setBodyPartByIdForObject(PhysicalObject* object, ActiveBodyPart::Index index, const char* bodyPartId, bool isFirstPerson = false);
 
 		void removeEquippedLayers();

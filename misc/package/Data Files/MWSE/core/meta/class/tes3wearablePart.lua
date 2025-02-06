@@ -8,3 +8,11 @@
 --- @field female tes3bodyPart The body part object used for female actors.
 --- @field male tes3bodyPart The body part object used for male actors.
 --- @field type tes3.activeBodyPart The type of the wearable part. Maps to [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
+--- @field valid boolean If true, the wearable is valid, and should be operated with.
+tes3wearablePart = {}
+
+--- If true, the wearable is valid, and should be operated with.
+--- @param isFemale boolean If true, return the female part if it is valid. Otherwise, return the male part.
+--- @return tes3bodyPart result No description yet available.
+function tes3wearablePart:getPart(isFemale) end
+
