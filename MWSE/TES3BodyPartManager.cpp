@@ -51,8 +51,8 @@ namespace TES3 {
 		TES3_BodyPartManager_removeActiveBodyPart(this, layer, index, setOverride, overrideData);
 	}
 
-	const auto TES3_BodyPartManager_setBodyPartForItem = reinterpret_cast<void(__thiscall*)(BodyPartManager*, const PhysicalObject*, BodyPartManager::ActiveBodyPart::Index, BodyPart*, int)>(0x473CB0);
-	void BodyPartManager::setBodyPartForObject(const PhysicalObject* object, ActiveBodyPart::Index index, BodyPart* bodyPart, bool isFirstPerson) {
+	const auto TES3_BodyPartManager_setBodyPartForItem = reinterpret_cast<void(__thiscall*)(BodyPartManager*, PhysicalObject*, BodyPartManager::ActiveBodyPart::Index, BodyPart*, int)>(0x473CB0);
+	void BodyPartManager::setBodyPartForObject(PhysicalObject* object, ActiveBodyPart::Index index, BodyPart* bodyPart, bool isFirstPerson) {
 		if (mwse::lua::event::BodyPartAssignedEvent::getEventEnabled()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
 			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::BodyPartAssignedEvent(this, reference, object, index, bodyPart, isFirstPerson));

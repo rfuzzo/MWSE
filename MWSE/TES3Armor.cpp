@@ -149,13 +149,13 @@ namespace TES3 {
 	}
 
 	const auto TES3_Armor_setupBodyParts = reinterpret_cast<void(__thiscall*)(const Armor*, BodyPartManager*, bool, bool)>(0x4A1280);
-	void Armor::setupBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstPerson) const {
+	void Armor::setupBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstPerson) {
 		auto item = this;
 
 		// Add event replacing/adding body parts for an item.
 		if (mwse::lua::event::UpdateBodyPartsForItemEvent::getEventEnabled()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object eventResult = stateHandle.triggerEvent(new mwse::lua::event::UpdateBodyPartsForItemEvent(const_cast<Armor*>(this), bodyPartManager, isFemale, isFirstPerson));
+			sol::object eventResult = stateHandle.triggerEvent(new mwse::lua::event::UpdateBodyPartsForItemEvent(this, bodyPartManager, isFemale, isFirstPerson));
 			if (eventResult.valid()) {
 				sol::table eventData = eventResult;
 				if (eventData.get_or("block", false)) {
@@ -165,7 +165,7 @@ namespace TES3 {
 				isFemale = mwse::lua::getOptionalParam(eventData, "isFemale", isFemale);
 				const auto maybeItem = mwse::lua::getOptionalParamObject<Item>(eventData, "item");
 				if (maybeItem && maybeItem->objectType == OBJECT_TYPE) {
-					item = static_cast<const Armor*>(maybeItem);
+					item = static_cast<Armor*>(maybeItem);
 				}
 			}
 		}
@@ -174,7 +174,7 @@ namespace TES3 {
 		item->addActiveBodyParts(bodyPartManager, isFemale, isFirstPerson);
 	}
 
-	void Armor::addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson) const {
+	void Armor::addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson) {
 		for (const auto& wearable : parts) {
 			if (!wearable.isValid()) continue;
 

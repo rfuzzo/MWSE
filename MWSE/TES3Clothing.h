@@ -49,13 +49,13 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
-		void setupBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstPerson) const;
+		void setupBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstPerson);
 
 		//
 		// Custom functions.
 		//
 
-		void addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson) const;
+		void addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson);
 		void removeBodyPartsUnder(BodyPartManager* bodyPartManager) const;
 
 		void setIconPath(const char* path);

@@ -7,7 +7,7 @@
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	BodyPartAssignedEvent::BodyPartAssignedEvent(TES3::BodyPartManager* manager, TES3::Reference* reference, const TES3::PhysicalObject* object, TES3::BodyPartManager::ActiveBodyPart::Index index, TES3::BodyPart* bodyPart, bool isFirstPerson) :
+	BodyPartAssignedEvent::BodyPartAssignedEvent(TES3::BodyPartManager* manager, TES3::Reference* reference, TES3::PhysicalObject* object, TES3::BodyPartManager::ActiveBodyPart::Index index, TES3::BodyPart* bodyPart, bool isFirstPerson) :
 		ObjectFilteredEvent("bodyPartAssigned", reference),
 		m_BodyPartManager(manager),
 		m_Reference(reference),

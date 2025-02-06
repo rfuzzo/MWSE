@@ -73,13 +73,13 @@ namespace TES3 {
 		const char * getSlotName();
 		int getWeightClass();
 
-		void setupBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstPerson) const;
+		void setupBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstPerson);
 
 		//
 		// Custom functions.
 		//
 
-		void addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson) const;
+		void addActiveBodyParts(BodyPartManager* bodyPartManager, bool isFemale, bool isFirstperson);
 		void removeBodyPartsUnder(BodyPartManager* bodyPartManager) const;
 
 		float getArmorScalar() const;
