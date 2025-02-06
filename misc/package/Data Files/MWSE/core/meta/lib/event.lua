@@ -164,6 +164,7 @@
 --- @field register fun(eventId: '"spellTick"', callback: (fun(e: spellTickEventData): boolean?), options: table?)
 --- @field register fun(eventId: '"startGlobalScript"', callback: (fun(e: startGlobalScriptEventData): boolean?), options: table?)
 --- @field register fun(eventId: '"topicAdded"', callback: (fun(e: topicAddedEventData): boolean?), options: table?)
+--- @field register fun(eventId: '"topicsListUpdated"', callback: (fun(e: topicsListUpdatedEventData): boolean?), options: table?)
 --- @field register fun(eventId: '"trapDisarm"', callback: (fun(e: trapDisarmEventData): boolean?), options: table?)
 --- @field register fun(eventId: '"uiActivated"', callback: (fun(e: uiActivatedEventData): boolean?), options: table?)
 --- @field register fun(eventId: '"uiEvent"', callback: (fun(e: uiEventEventData): boolean?), options: table?)

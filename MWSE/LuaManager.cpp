@@ -6608,6 +6608,11 @@ namespace mwse::lua {
 		auto startGlobalScriptBySourceID = &TES3::WorldController::startGlobalScriptBySourceID;
 		genCallEnforced(0x4FF826, 0x40FA80, *reinterpret_cast<DWORD*>(&startGlobalScriptBySourceID));
 
+		// Event: topicsListUpdated
+		mwse::genCallEnforced(0x5C03A6, 0x5BE6C0, reinterpret_cast<DWORD>(TES3::UI::updateTopicsList));
+		mwse::genCallEnforced(0x5C06D0, 0x5BE6C0, reinterpret_cast<DWORD>(TES3::UI::updateTopicsList));
+		mwse::genCallEnforced(0x5C0AF6, 0x5BE6C0, reinterpret_cast<DWORD>(TES3::UI::updateTopicsList));
+
 		// UI framework hooks
 		TES3::UI::hook();
 

@@ -4112,6 +4112,7 @@ tes3.event = require("tes3.event")
 ---| `tes3.event.spellTick`
 ---| `tes3.event.startGlobalScript`
 ---| `tes3.event.topicAdded`
+---| `tes3.event.topicsListUpdated`
 ---| `tes3.event.trapDisarm`
 ---| `tes3.event.uiActivated`
 ---| `tes3.event.uiEvent`

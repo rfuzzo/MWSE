@@ -156,6 +156,7 @@ return {
 	["spellTick"] = "spellTick",
 	["startGlobalScript"] = "startGlobalScript",
 	["topicAdded"] = "topicAdded",
+	["topicsListUpdated"] = "topicsListUpdated",
 	["trapDisarm"] = "trapDisarm",
 	["uiActivated"] = "uiActivated",
 	["uiEvent"] = "uiEvent",

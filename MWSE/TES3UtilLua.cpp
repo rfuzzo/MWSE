@@ -6155,7 +6155,6 @@ namespace mwse::lua {
 		return worldController->fonts[0]->getSubstituteResult();
 	}
 
-	const auto TES3_UI_updateTopicsList = reinterpret_cast<void(__cdecl*)()>(0x5BE6C0);
 	bool addTopic(sol::optional<sol::table> params) {
 		const auto worldController = TES3::WorldController::get();
 		if (!worldController) {
@@ -6179,7 +6178,7 @@ namespace mwse::lua {
 		macp->addTopic(topic);
 
 		if (getOptionalParam<bool>(params, "updateGUI", true)) {
-			TES3_UI_updateTopicsList();
+			TES3::UI::updateTopicsList();
 		}
 
 		return macp->dialogueList->size() > topicCountBefore;
