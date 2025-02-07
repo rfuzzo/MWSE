@@ -1421,6 +1421,32 @@ namespace mwse::patch {
 	}
 
 	//
+	// Patch: Expand keyboard key translations
+	//
+
+	inline static void WritePatchKeyCharacter(unsigned int key, char character) {
+		writeValueEnforced<char>(0x775148 + key, 0, character); // US, Unshifted
+		writeValueEnforced<char>(0x775248 + key, 0, character); // US, Shifted
+		writeValueEnforced<char>(0x775348 + key, 0, character); // DE, Unshifted
+		writeValueEnforced<char>(0x775448 + key, 0, character); // DE, Shifted
+		writeValueEnforced<char>(0x775548 + key, 0, character); // FR, Unshifted
+		writeValueEnforced<char>(0x775648 + key, 0, character); // FR, Shifted
+	}
+
+	static void PatchExpandKeyboardCharacterTranslations() {
+		WritePatchKeyCharacter(DIK_NUMPAD0, '0');
+		WritePatchKeyCharacter(DIK_NUMPAD1, '1');
+		WritePatchKeyCharacter(DIK_NUMPAD2, '2');
+		WritePatchKeyCharacter(DIK_NUMPAD3, '3');
+		WritePatchKeyCharacter(DIK_NUMPAD4, '4');
+		WritePatchKeyCharacter(DIK_NUMPAD5, '5');
+		WritePatchKeyCharacter(DIK_NUMPAD6, '6');
+		WritePatchKeyCharacter(DIK_NUMPAD7, '7');
+		WritePatchKeyCharacter(DIK_NUMPAD8, '8');
+		WritePatchKeyCharacter(DIK_NUMPAD9, '9');
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1898,6 +1924,9 @@ namespace mwse::patch {
 
 		// Patch: Fix missing nullptr check when determining object types.
 		DoPatchSafeGetObjectType();
+
+		// Patch: Expand keyboard key translations
+		PatchExpandKeyboardCharacterTranslations();
 	}
 
 	void installPostLuaPatches() {
