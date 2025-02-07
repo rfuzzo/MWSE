@@ -2026,14 +2026,15 @@ namespace mwse::lua {
 	//
 
 	static void __fastcall OnCheckPlayerActivationTarget(TES3::Game* game) {
-		const auto targetBefore = game->playerTarget;
+		auto& previous = event::ActivationTargetChangedEvent::ms_PreviousReference;
+		previous = game->playerTarget;
 
 		const auto TES3_Game_CheckPlayerActivationTarget = reinterpret_cast<void(__thiscall*)(TES3::Game*)>(0x41CA50);
 		TES3_Game_CheckPlayerActivationTarget(game);
 
-		if (game->playerTarget != targetBefore && event::ActivationTargetChangedEvent::getEventEnabled()) {
+		if (game->playerTarget != previous && event::ActivationTargetChangedEvent::getEventEnabled()) {
 			auto& stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-			stateHandle.triggerEvent(new event::ActivationTargetChangedEvent(targetBefore, game->playerTarget));
+			stateHandle.triggerEvent(new event::ActivationTargetChangedEvent(game->playerTarget));
 		}
 	}
 
