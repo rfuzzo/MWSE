@@ -11,8 +11,8 @@
 --- @field valid boolean If true, the wearable is valid, and should be operated with.
 tes3wearablePart = {}
 
---- If true, the wearable is valid, and should be operated with.
+--- Convenience function to get the relevant body part. Pass `isFemale` if the desired body part is female. If no female body part exists, the male bodyPart will be returned. This returns `nil` for invalid wearables.
 --- @param isFemale boolean If true, return the female part if it is valid. Otherwise, return the male part.
---- @return tes3bodyPart result No description yet available.
+--- @return tes3bodyPart? result No description yet available.
 function tes3wearablePart:getPart(isFemale) end
 

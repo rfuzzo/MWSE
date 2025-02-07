@@ -8,6 +8,10 @@ namespace TES3 {
 	}
 
 	BodyPart* WearablePart::getPart(bool isFemale) const {
+		if (!isValid()) {
+			return nullptr;
+		}
+
 		const auto PART_INVALID = reinterpret_cast<BodyPart*>(-1);
 		if (isFemale && female && female != PART_INVALID) {
 			return female;

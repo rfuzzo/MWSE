@@ -59,7 +59,7 @@ If true, the wearable is valid, and should be operated with.
 ### `getPart`
 <div class="search_terms" style="display: none">getpart, part</div>
 
-If true, the wearable is valid, and should be operated with.
+Convenience function to get the relevant body part. Pass `isFemale` if the desired body part is female. If no female body part exists, the male bodyPart will be returned. This returns `nil` for invalid wearables.
 
 ```lua
 local result = myObject:getPart(isFemale)
