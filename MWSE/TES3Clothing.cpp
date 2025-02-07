@@ -82,6 +82,7 @@ namespace TES3 {
 			bodyPartManager->removeActiveBodyPart(Layer::Clothing, Index::LeftKnee, true, -1);
 			bodyPartManager->removeActiveBodyPart(Layer::Clothing, Index::RightUpperLeg, true, -1);
 			bodyPartManager->removeActiveBodyPart(Layer::Clothing, Index::LeftUpperLeg, true, -1);
+			bodyPartManager->removeActiveBodyPart(Layer::Clothing, Index::Skirt, true, -1);
 			bodyPartManager->removeActiveBodyPart(Layer::Armor, Index::Chest, true, -1);
 			bodyPartManager->removeActiveBodyPart(Layer::Armor, Index::Groin, true, -1);
 			bodyPartManager->removeActiveBodyPart(Layer::Armor, Index::RightForearm, true, -1);
