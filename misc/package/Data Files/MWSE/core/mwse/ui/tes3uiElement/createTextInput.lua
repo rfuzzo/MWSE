@@ -39,21 +39,22 @@ local function standardKeyPressBeforeNumeric(e)
 	local element = e.source
 	local characterEntered = e.character
 
-	if (not characterEntered or not element:getLuaData("mwse:numeric") or not tonumber(characterEntered)) then
+	if (not characterEntered or not element:getLuaData("mwse:numeric")) then
 		return
 	end
 
-	-- minus sign is okay so long as it's the first character
+	-- Minus sign is okay so long as it's the first character.
 	if characterEntered == "-" then
-		if element.text and #element.text > 0 then
+		if (element.rawText ~= "" and not element.rawText:startswith("|")) then
 			return false
 		end
-	-- periods are okay so long as there aren't any others 
+	-- Periods are okay so long as there aren't any others .
 	elseif characterEntered == "." then
 		if element.text and element.text:find("%.") then
 			return false
 		end
-	else
+	-- Otherwise all non-numbers are rejected.
+	elseif (tonumber(characterEntered) == nil) then
 		return false
 	end
 end
@@ -135,14 +136,14 @@ local function standardKeyPressBeforeWordDeletion(e)
 	if (tes3.isKeyEqual({ actual = e.keyData, expected = keybindDeleteWordBehind })) then
 		-- ctrl+backspace -> delete previous word
 		element.rawText = element.rawText:gsub("(%w*[%W]*)|", "|")
-		element:getTopLevelMenu():updateLayout()
 		element:triggerEvent(tes3.uiEvent.textUpdated)
+		element:getTopLevelMenu():updateLayout()
 		return false
 	elseif (tes3.isKeyEqual({ actual = e.keyData, expected = keybindDeleteWordAhead })) then
 		-- ctrl+delete -> delete next word
 		element.rawText = element.rawText:gsub("|(%w*[%W]*)", "|")
-		element:getTopLevelMenu():updateLayout()
 		element:triggerEvent(tes3.uiEvent.textUpdated)
+		element:getTopLevelMenu():updateLayout()
 		return false
 	end
 end
@@ -257,7 +258,7 @@ local function onTextInputFocus(e)
 	local placeholding = element:getLuaData("mwse:placeholding")
 	local hasCursor = (element.rawText:find("|", 1, true) ~= nil)
 	if (not placeholding and not hasCursor) then
-		local lastIndex = element:getLuaData("mwse:lastCursorIndex") or #element.text
+		local lastIndex = element:getLuaData("mwse:lastCursorIndex") or (#element.text + 1)
 		element.rawText = string.insert(element.rawText, "|", lastIndex - 1)
 		element:setLuaData("mwse:lastCursorIndex", nil)
 		element:getTopLevelMenu():updateLayout()
