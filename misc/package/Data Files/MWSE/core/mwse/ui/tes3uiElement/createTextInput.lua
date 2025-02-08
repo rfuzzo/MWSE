@@ -23,10 +23,18 @@ end
 --- @return boolean?
 local function standardKeyPressBeforePlaceholding(e)
 	local element = e.source
+	local characterPressed = e.character
 
 	-- Prevent basically anything from happening if we are placeholding.
 	local placeholding = element:getLuaData("mwse:placeholding") --- @type boolean
 	if (placeholding and #string.trim(e.character or "") == 0) then
+		return false
+	end
+
+	-- Prevent annoying first input, like ` in the console when opening, or whitespace spam when alt-tabbed.
+	local ignoredFirstCondition = (element.text == "" or tes3.worldController.inputController:isAltDown())
+	local ignoredFirstInput = (characterPressed == '\t' or characterPressed == " " or characterPressed == "`")
+	if (ignoredFirstCondition and ignoredFirstInput) then
 		return false
 	end
 end
@@ -194,16 +202,9 @@ end
 local function standardKeyPressBefore(e)
 	local element = e.source
 	local characterPressed = e.character
-	local inputController = tes3.worldController.inputController
-	local isAltDown = inputController:isAltDown()
 
 	-- Update previous text.
 	element:setLuaData("mwse:previousText", element.text)
-
-	-- Prevent tabs from inserting themselves for when alt-tabbing.
-	if (characterPressed == '\t' and isAltDown) then
-		return false
-	end
 
 	-- Are we in the placeholder state? Prevent garbage inputs.
 	local result = standardKeyPressBeforePlaceholding(e)
@@ -269,9 +270,12 @@ end
 --- @param e tes3uiEventData
 local function onTextInputUnfocus(e)
 	local element = e.source
-	element:setLuaData("mwse:lastCursorIndex", element.rawText:find("|", 1, true))
-	element.rawText = element.rawText:gsub("|", "")
-	element:getTopLevelMenu():updateLayout()
+	local placeholding = element:getLuaData("mwse:placeholding")
+	if (not placeholding) then
+		element:setLuaData("mwse:lastCursorIndex", element.rawText:find("|", 1, true))
+		element.rawText = element.rawText:gsub("|", "")
+		element:getTopLevelMenu():updateLayout()
+	end
 end
 
 --- @param e tes3uiEventData
@@ -291,6 +295,10 @@ local function onTextUpdated(e)
 		-- Unset placeholding.
 		element.color = tes3ui.getPalette("normal_color")
 		element:setLuaData("mwse:placeholding", false)
+		return
+	elseif (not placeholding and element.text == placeholderText) then
+		element.color = tes3ui.getPalette("disabled_color")
+		element:setLuaData("mwse:placeholding", true)
 	end
 end
 
