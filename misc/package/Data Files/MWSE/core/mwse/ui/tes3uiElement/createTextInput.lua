@@ -312,6 +312,11 @@ end
 local function onTextInputFocus(e)
 	local element = e.source
 
+	-- This mechanic breaks with this widget value. Ignore until we can find out where it is even used in the code.
+	if (element.widget.eraseOnFirstKey) then
+		return
+	end
+
 	local placeholding = element.widget:getIsPlaceholding()
 	local hasCursor = (element.rawText:find("|", 1, true) ~= nil)
 	if (not placeholding and not hasCursor) then
@@ -326,6 +331,12 @@ end
 --- @param e tes3uiEventData
 local function onTextInputUnfocus(e)
 	local element = e.source
+
+	-- This mechanic breaks with this widget value. Ignore until we can find out where it is even used in the code.
+	if (element.widget.eraseOnFirstKey) then
+		return
+	end
+
 	local placeholding = element.widget:getIsPlaceholding()
 	if (not placeholding) then
 		element:setLuaData("mwse:lastCursorIndex", element.rawText:find("|", 1, true))
