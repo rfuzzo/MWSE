@@ -945,6 +945,11 @@ function tes3.findQuest(params) end
 --- @field journal tes3dialogue|string|nil *Optional*. The dialogue journal id to look for.
 --- @field name string? *Optional*. The quest name (as displayed in the journal) to look for.
 
+--- Fetches the core game character race object for a given ID. If the race with a given ID doesn't exist, nil is returned.
+--- @param id string ID of the race to search for.
+--- @return tes3race? race No description yet available.
+function tes3.findRace(id) end
+
 --- Fetches the core game region object for a given region ID. If the region with a given ID doesn't exist, nil is returned.
 --- @param params tes3.findRegion.params This table accepts the following values:
 --- 
