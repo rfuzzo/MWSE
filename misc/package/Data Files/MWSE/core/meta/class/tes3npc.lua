@@ -14,8 +14,8 @@
 --- @field factionRank number The NPC's rank in their faction.
 --- @field fatigue number The actor's max fatigue.
 --- @field female boolean Direct access to the actor female flag.
---- @field hair tes3bodyPart The hair body part that the NPC will use.
---- @field head tes3bodyPart The head body part that the NPC will use.
+--- @field hair tes3bodyPart? The hair body part that the NPC will use.
+--- @field head tes3bodyPart? The head body part that the NPC will use.
 --- @field health number The actor's max health.
 --- @field height number *Read-only*. Convenience access to the NPCs (race) height.
 --- @field isAttacked boolean *Read-only*. If true, the actor's attacked flag is set.

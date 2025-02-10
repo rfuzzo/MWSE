@@ -581,7 +581,7 @@ function tes3uiElement:destroyChildren() end
 
 --- Finds a child element matching the `id` argument. Searches children recursively. Returns the first child element with a matching id, or `nil` if no match found.
 --- @param id string|number The id to search for.
---- @return tes3uiElement result No description yet available.
+--- @return tes3uiElement|nil result No description yet available.
 function tes3uiElement:findChild(id) end
 
 --- Forwards an event to the original Morrowind event handler, using this element as a source. This may be optionally called at any point in a callback. Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback. 

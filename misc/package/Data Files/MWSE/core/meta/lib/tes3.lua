@@ -878,12 +878,12 @@ function tes3.findActorsInProximity(params) end
 
 --- Fetches the core game birthsign object for a given birthsign ID. If the birthsign with a given ID doesn't exist, nil is returned.
 --- @param id string ID of the birthsign to search for.
---- @return tes3birthsign birthsign No description yet available.
+--- @return tes3birthsign? birthsign No description yet available.
 function tes3.findBirthsign(id) end
 
 --- Fetches the core game character class object for a given class ID. If the class with a given ID doesn't exist, nil is returned.
 --- @param id string ID of the class to search for.
---- @return tes3class class No description yet available.
+--- @return tes3class? class No description yet available.
 function tes3.findClass(id) end
 
 --- Using the same engine function used by the vanilla intervention spells, locations the first reference of a given object in the exterior world.
@@ -921,14 +921,14 @@ function tes3.findDialogue(params) end
 
 --- Fetches the core game object that represents a global variable.
 --- @param id string No description yet available.
---- @return tes3globalVariable globalVariable No description yet available.
+--- @return tes3globalVariable? globalVariable No description yet available.
 function tes3.findGlobal(id) end
 
 --- Fetches the core game object that represents a game setting. While this function accepts a name, it is recommended to use the [`tes3.GMST`](https://mwse.github.io/MWSE/references/gmst/) constants.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3findgmst).
 --- @param id tes3.gmst|integer|string No description yet available.
---- @return tes3gameSetting gameSetting No description yet available.
+--- @return tes3gameSetting? gameSetting No description yet available.
 function tes3.findGMST(id) end
 
 --- Finds a journal quest log by dialogue topic or quest name. Pass either a journal dialogue id or a quest name. A quest can cover multiple dialogue journal topics under the same quest name. Quests are also where the flags for active and finished quests are tracked.
@@ -937,7 +937,7 @@ function tes3.findGMST(id) end
 --- `journal`: tes3dialogue|string|nil — *Optional*. The dialogue journal id to look for.
 --- 
 --- `name`: string? — *Optional*. The quest name (as displayed in the journal) to look for.
---- @return tes3quest quest No description yet available.
+--- @return tes3quest? quest No description yet available.
 function tes3.findQuest(params) end
 
 ---Table parameter definitions for `tes3.findQuest`.
@@ -954,7 +954,7 @@ function tes3.findRace(id) end
 --- @param params tes3.findRegion.params This table accepts the following values:
 --- 
 --- `id`: string — ID of the region to search for.
---- @return tes3region region No description yet available.
+--- @return tes3region? region No description yet available.
 function tes3.findRegion(params) end
 
 ---Table parameter definitions for `tes3.findRegion`.

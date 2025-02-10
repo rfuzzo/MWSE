@@ -1323,7 +1323,7 @@ local result = myObject:findChild(id)
 
 **Returns**:
 
-* `result` ([tes3uiElement](../types/tes3uiElement.md))
+* `result` ([tes3uiElement](../types/tes3uiElement.md), nil)
 
 ***
 
