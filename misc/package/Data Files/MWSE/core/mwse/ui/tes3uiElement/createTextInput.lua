@@ -11,6 +11,62 @@
 
 local common = require("mwse.common")
 
+function tes3uiTextInput:clear() --- @diagnostic disable-line
+	self.element.text = ""
+	self.element:triggerEvent(tes3.uiEvent.textUpdated)
+end
+
+--- @return boolean
+function tes3uiTextInput:getIsPlaceholding() --- @diagnostic disable-line
+	return self.element:getLuaData("mwse:placeholding") == true
+end
+
+--- @param placeholding boolean
+function tes3uiTextInput:setIsPlaceholding(placeholding) --- @diagnostic disable-line
+	if (self:getIsPlaceholding() == placeholding) then return end
+	self.element:setLuaData("mwse:placeholding", placeholding)
+
+	local element = self.element --- @type tes3uiElement
+	local placeholdingText = self:getPlaceholdingText()
+	if (placeholding) then
+		-- Fire off an update/clear as if we were empty.
+		element.text = ""
+		element:triggerEvent(tes3.uiEvent.textUpdated)
+
+		-- Reset to placeholding text.
+		element.text = placeholdingText
+		element.color = tes3ui.getPalette(tes3.palette.disabledColor)
+	else
+		-- Clear any placeholding text.
+		if (element.text == placeholdingText) then
+			element.text = ""
+			element:triggerEvent(tes3.uiEvent.textUpdated)
+		end
+		element.color = tes3ui.getPalette(tes3.palette.normalColor)
+	end
+end
+
+function tes3uiTextInput:getPlaceholdingText() --- @diagnostic disable-line
+	return self.element:getLuaData("mwse:placeholderText")
+end
+
+function tes3uiTextInput:setPlaceholdingText(text) --- @diagnostic disable-line
+	if (self:getIsPlaceholding()) then
+		self.element.text = text
+	end
+	self.element:setLuaData("mwse:placeholderText", text)
+end
+
+--- @return boolean
+function tes3uiTextInput:getIsNumeric() --- @diagnostic disable-line
+	return self.element:getLuaData("mwse:numeric") == true
+end
+
+--- @param value boolean
+function tes3uiTextInput:setIsNumeric(value) --- @diagnostic disable-line
+	self.element:setLuaData("mwse:numeric", value)
+end
+
 -- Much of this code was adapted from UI Expansion. As such we need to disable one of their modules.
 local config = mwse.loadConfig("UI Expansion")
 if (config and config.components and config.components.textInput) then
@@ -26,8 +82,8 @@ local function standardKeyPressBeforePlaceholding(e)
 	local characterPressed = e.character
 
 	-- Prevent basically anything from happening if we are placeholding.
-	local placeholding = element:getLuaData("mwse:placeholding") --- @type boolean
-	if (placeholding and #string.trim(e.character or "") == 0) then
+	local placeholding = element.widget:getIsPlaceholding()
+	if (placeholding and string.len(string.trim(e.character or "")) == 0) then
 		return false
 	end
 
@@ -47,7 +103,7 @@ local function standardKeyPressBeforeNumeric(e)
 	local element = e.source
 	local characterEntered = e.character
 
-	if (not characterEntered or not element:getLuaData("mwse:numeric")) then
+	if (not characterEntered or not element.widget:getIsNumeric()) then
 		return
 	end
 
@@ -122,7 +178,7 @@ local function standardKeyPressBeforeCutCopyPaste(e)
 		local newText = string.insert(rawText, clipboardText, cursorPosition - 1)
 
 		-- Enforce numeric pasting.
-		if (element:getLuaData("mwse:numeric") and tonumber(newText:gsub("|", "")) == nil) then
+		if (element.widget:getIsNumeric() and tonumber(newText:gsub("|", "")) == nil) then
 			return false
 		end
 
@@ -256,7 +312,7 @@ end
 local function onTextInputFocus(e)
 	local element = e.source
 
-	local placeholding = element:getLuaData("mwse:placeholding")
+	local placeholding = element.widget:getIsPlaceholding()
 	local hasCursor = (element.rawText:find("|", 1, true) ~= nil)
 	if (not placeholding and not hasCursor) then
 		local lastIndex = element:getLuaData("mwse:lastCursorIndex") or (#element.text + 1)
@@ -270,7 +326,7 @@ end
 --- @param e tes3uiEventData
 local function onTextInputUnfocus(e)
 	local element = e.source
-	local placeholding = element:getLuaData("mwse:placeholding")
+	local placeholding = element.widget:getIsPlaceholding()
 	if (not placeholding) then
 		element:setLuaData("mwse:lastCursorIndex", element.rawText:find("|", 1, true))
 		element.rawText = element.rawText:gsub("|", "")
@@ -282,7 +338,7 @@ end
 local function onTextUpdated(e)
 	local element = e.source
 
-	local placeholding = element:getLuaData("mwse:placeholding")
+	local placeholding = element.widget:getIsPlaceholding()
 	local placeholderText = element:getLuaData("mwse:placeholderText")
 
 	-- Make sure a text cleared event fires.
@@ -293,12 +349,10 @@ local function onTextUpdated(e)
 		return
 	elseif (placeholding and element.text ~= placeholderText) then
 		-- Unset placeholding.
-		element.color = tes3ui.getPalette("normal_color")
-		element:setLuaData("mwse:placeholding", false)
+		element.widget:setIsPlaceholding(false)
 		return
 	elseif (not placeholding and element.text == placeholderText) then
-		element.color = tes3ui.getPalette("disabled_color")
-		element:setLuaData("mwse:placeholding", true)
+		element.widget:setIsPlaceholding(true)
 	end
 end
 
@@ -311,7 +365,7 @@ local function onTextCleared(e)
 	if (placeholderText) then
 		element.text = placeholderText
 		element.color = tes3ui.getPalette("disabled_color")
-		element:setLuaData("mwse:placeholding", true)
+		element.widget:setIsPlaceholding(true)
 		return
 	end
 end
@@ -360,25 +414,17 @@ function tes3uiElement:createTextInput(params)
 	-- Allow placeholder text.
 	local placeholderText = params.placeholderText
 	if (placeholderText) then
-		element:setLuaData("mwse:placeholderText", placeholderText)
+		element.widget:setPlaceholdingText(placeholderText)
 
 		-- If we weren't given text, set to the placeholder text.
-		if (params.text == nil) then
-			element.text = placeholderText
+		if (params.text == nil or params.text == placeholderText) then
+			element.widget:setIsPlaceholding(true)
 		end
-
-		-- Fix color if we are using the placeholder text.
-		if (element.text == placeholderText) then
-			element.color = tes3ui.getPalette(tes3.palette.disabledColor)
-			element:setLuaData("mwse:placeholding", true)
-		end
-
-		element.widget.eraseOnFirstKey = true
 	end
 
 	-- Only allow numbers.
 	if (params.numeric) then
-		element:setLuaData("mwse:numeric", true)
+		element.widget:setIsNumeric(true)
 	end
 
 	-- Handle focus.
