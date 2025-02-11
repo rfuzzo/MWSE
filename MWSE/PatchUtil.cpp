@@ -780,8 +780,10 @@ namespace mwse::patch {
 	//
 	
 	void __fastcall PatchSetLoopingSoundBufferVolume(TES3::AudioController* audio, DWORD unused, TES3::SoundEvent* soundEvent, unsigned char volume) {
-		unsigned char adjustedVolume = (unsigned char)(float(volume) * float(soundEvent->sound->volume) / 255.0f);
-		audio->setSoundBufferVolume(soundEvent->soundBuffer, adjustedVolume);
+		if (soundEvent->sound) {
+			volume = (unsigned char)(float(volume) * float(soundEvent->sound->volume) / 255.0f);
+		}
+		audio->setSoundBufferVolume(soundEvent->soundBuffer, volume);
 	}
 
 	//
