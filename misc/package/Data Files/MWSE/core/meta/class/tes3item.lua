@@ -9,5 +9,5 @@
 --- @field isCarriable boolean *Read-only*. If true, the item can be carried and interacted with normally in an inventory. While this is false for certain lights, they can still sometimes appear in an inventory, but cannot be interacted with.
 --- @field mesh string The path to the object's mesh. Relative to `Data Files\\meshes\\`.
 --- @field name string The player-facing name for the object.
---- @field promptsEquipmentReevaluation boolean *Read-only*. If true, the item should prompt equipment reevaluated when added to the actor's inventory. Thius is true for armor, clothing, and weapons.
+--- @field promptsEquipmentReevaluation boolean *Read-only*. If true, the item should prompt equipment reevaluated when added to the actor's inventory. Thus is true for armor, clothing, and weapons.
 --- @field stolenList tes3npc[]|tes3faction[] *Read-only*. A non-mutable list of all actors that the item has been stolen from.

@@ -10,7 +10,7 @@
 --- @field data1 number *Read-only*. Event-specific raw data values. For mouse events, these are the screen X and Y coordinates of the pointer.
 --- @field forwardSource tes3uiElement *Read-only*. No description yet available.
 --- @field id number *Read-only*. The ID of the event that is being triggered.
---- @field keyData mwseKeyCombo|mwseKeyMouseCombo|nil *Read-only*. For `tes3.uiEvent.keyPress` events, this is the raw DirectInput data associated with the input. Note that the `keyCode` provided here maps to DirectInput `tes3.keybaordCode` enums, and are not the virtual scan codes from `tes3.scanCode`.
+--- @field keyData mwseKeyCombo|mwseKeyMouseCombo|nil *Read-only*. For `tes3.uiEvent.keyPress` events, this is the raw DirectInput data associated with the input. Note that the `keyCode` provided here maps to DirectInput `tes3.keyboardCode` enums, and are not the virtual scan codes from `tes3.scanCode`.
 --- @field relativeX number|nil *Read-only*. For mouse-related events, this is the relative horizontal position for the current element.
 --- @field relativeY number|nil *Read-only*. For mouse-related events, this is the relative vertical position for the current element.
 --- @field source tes3uiElement *Read-only*. The element that owns the event.

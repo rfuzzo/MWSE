@@ -68,7 +68,7 @@ Contains information from a standard UI callback. This is the parameter passed t
 ### `keyData`
 <div class="search_terms" style="display: none">keydata</div>
 
-*Read-only*. For `tes3.uiEvent.keyPress` events, this is the raw DirectInput data associated with the input. Note that the `keyCode` provided here maps to DirectInput `tes3.keybaordCode` enums, and are not the virtual scan codes from `tes3.scanCode`.
+*Read-only*. For `tes3.uiEvent.keyPress` events, this is the raw DirectInput data associated with the input. Note that the `keyCode` provided here maps to DirectInput `tes3.keyboardCode` enums, and are not the virtual scan codes from `tes3.scanCode`.
 
 **Returns**:
 
