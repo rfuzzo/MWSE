@@ -3,6 +3,7 @@ local logger = logging.new{
     name = "DependencyType",
     logLevel = "INFO",
     modDir = "DependencyManager",
+    filePath = "DependencyType.lua",
     moduleName = "DependencyType"
 }
 ---@class MWSE.DependencyType.ResolveButton
@@ -37,6 +38,8 @@ function DependencyType.registerDependencyType(e)
     dependencyType.logger = logging.new{
         modName = "DependencyType",
         moduleName = e.id,
+        modDir = "dependencyManagment",
+        filePath = "DependencyType.lua",
         logLevel = e.logLevel or "INFO"
     }
     DependencyType.registeredDependencyTypes[e.id:lower()] = dependencyType
