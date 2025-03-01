@@ -53,6 +53,9 @@ local LOG_LEVEL = {
     TRACE = 5
 }
 
+--- This table takes in a log level string and spits out the corresponding numeric log level.
+--- This is defined to be the inversion of `LOG_LEVEL`.
+--- So, `LOG_LEVEL_STRINGS[number]` is equivalent to `table.find(LOG_LEVEL, number)`.
 ---@type table<Logger.LEVEL, string>
 local LOG_LEVEL_STRINGS = table.invert(LOG_LEVEL)
 
@@ -119,6 +122,7 @@ do
 --- In addition to displayed parameters, you can also pass a `modName`, a `filepath`, a `level` and a `filepath`.
 -- Although for the latter options, it's recommended you use the relevant methods instead.
 ---@class Logger.newParams
+---@field logToConsole bool? Should the output be written to the console?
 ---@field modName string? the name of the mod this logger is for. will be automatically retrieved if not provided
 ---@field modDir string? The directory that this mod operates in. Used to retrieve the `Mod_Info`.
 ---@field moduleName string|false? The name of a module that this logger belongs to.
@@ -152,12 +156,13 @@ do
 --- This allows a mod to have several different loggers that are all sychronized with each other.
 ---@class Logger.SharedData
 ---@field level Logger.LEVEL The logging level for this logger
+---@field logToConsole bool
 ---@field formatter Logger.formatter
 ---@field modName string name of the mod
 ---@field modDir string
 ---@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
 ---@field includeLineNumber boolean should the current time be printed when writing log messages? Default: `false`
----@field outputFile file*|false? The file the log is being written to, or `nil`.
+---@field outputFile file*|nil The file the log is being written to, or `nil`.
 ---@field abbreviateHeader boolean Print a shorter header?
 
 
@@ -268,7 +273,7 @@ local function getModNameAndDirAndFilepath(offset)
 		if runtime then
 			modDir = modDirWithAuthorName
 			modName = pathParts[2]
-		else -- no author directory
+		else -- No author directory.
 			---@diagnostic disable-next-line: undefined-field
 			runtime = mwse.activeLuaMods[pathParts[1]]
 		end
@@ -319,12 +324,21 @@ local Logger = {LOG_LEVEL = LOG_LEVEL}
 ---@type table<string, Logger[]>
 local registeredLoggers = {}
 
--- A set containing all the "communal keys", i.e., the keys stored in SharedData.
+--- A set containing all the "communal keys", i.e., the keys stored in SharedData.
 local COMMUNAL_KEYS = {
 	level = true,
+	--- Backwards compatibility: this was the old name of the `level` field.
+	--- This field will always be redirected to `SharedData.level`.
+	--- Note: This field should, from the users perspective, always be the string 
+	--- representation of the current logging level.
+	logLevel = true, 
 	formatter = true,
+	--- Backwards compatibility: this was the old name of the `modName` field.
+	--- This field will always be redirected to `SharedData.modName`.
+	name = true, 
 	modName = true,
 	modDir = true,
+	logToConsole = true,
 	includeTimestamp = true,
 	includeLineNumber = true,
 	outputFile = true,
@@ -346,7 +360,8 @@ local SHARED_DEFAULT_VALUES = {
     includeLineNumber = true,
     includeTimestamp = false,
     level = LOG_LEVEL.INFO,
-    outputFile = false,
+    outputFile = nil,
+	logToConsole = false,
 
     ---@param self Logger
     ---@param record Logger.Record
@@ -377,12 +392,10 @@ local SHARED_DEFAULT_VALUES = {
                 local info = debug.getinfo(a, "u")
                 if info.isvararg then break end
                 i = i + info.nparams
-			-- elseif aType == "table" and getmetatable(a).__tostring == nil then
 			elseif type(a) == "table" or type(a) == "userdata" then
 				table.insert(fmtArgs, inspect(a, INSPECT_PARAMS))
 			else
 				table.insert(fmtArgs, tostring(a))
-				-- table.insert(fmtArgs, tostring(a))
             end
             i = i + 1
         end
@@ -401,29 +414,51 @@ local SHARED_DEFAULT_VALUES = {
 		---@diagnostic disable-next-line: invisible
         local header = self:makeHeader(record)
 
-		-- If it's an error, print the traceback information.
-        if record.level == LOG_LEVEL.ERROR then
-            return header .. debug.traceback(str, record.stackLevel + 1)
-        else
-            return header .. str
-        end
+		return header .. str
     end
 }
 
+--- This is the metatable used by `SharedData` instances.
+--- There is only one metamethod that's implemented.
 ---@type metatable
-local SharedDataMeta = {__index = SHARED_DEFAULT_VALUES}
+local SharedDataMeta = {
+	--- This is responsible for looking up missing values in the `SHARED_DEFAULT_VALUES` table.
+	--- We also convert the older versions of field names to ensure backwards compatibility.
+	--- The general control flow structure is as follows:
+	--- 1) The user tries to index, for example, `logger.formatter`.
+	--- 2) `LoggerMeta.__index(logger, "formatter")` is called. 
+	--- 	- This metamethod realizes that `formatter` is a communal key, so it executes the following code:
+	--- 		```lua
+	--- 		logger.sharedData["formatter"]
+	--- 		```
+	--- 3) If no custom formatter was found (i.e., `logger.sharedData["formatter"] == nil)`, 
+	--- 	then this metamethod is called, and it returns the default formatter.
+	---@param self Logger.SharedData
+	---@param k string
+	__index = function(self, k)
+		if k == "name" then
+			-- Backwards compatibility: return the `modName`.
+			return rawget(self, "modName")
+		elseif k == "logLevel" then
+			-- Backwards compatibility: return the current logging level as a string.
+			return LOG_LEVEL_STRINGS[self.level]
+		else
+			-- Return the default value.
+			return SHARED_DEFAULT_VALUES[k]
+		end
+	end
+}
 
 
--- Function responsible for updating the output path of a logger.
--- This is only called in one place, but is pulled out to help with code readability.
+-- This function is responsible for updating the `outputFile` field of a logger.
+-- This is only called in one place, but is factored out to help with code readability.
 ---@param sharedData Logger.SharedData
 ---@param outputFile string|false|nil
 local function setOutputFile(sharedData, outputFile)
-		
 	---@type file*|false
 	local prevOutputFile = sharedData.outputFile
 
-	if outputFile == nil or prevOutputFile == outputFile then 
+	if prevOutputFile == outputFile then 
 		return
 	end
 
@@ -431,8 +466,8 @@ local function setOutputFile(sharedData, outputFile)
 		prevOutputFile:close()
 	end
 
-	if outputFile == false then
-		sharedData.outputFile = false
+	if outputFile == false or outputFile == nil then
+		sharedData.outputFile = nil
 		return
 	end
 
@@ -440,27 +475,36 @@ local function setOutputFile(sharedData, outputFile)
 		outputFile = fmt("%s/%s.log", 
 			LOG_FILE_PARENT_DIR, sharedData.modDir:gsub("[./\\]", "/")
 		)
+	-- sanitize the input string, 
 	elseif type(outputFile) == "string" then
-		-- sanitize it
-		if not outputFile:startswith(LOG_FILE_PARENT_DIR) then
-			outputFile = fmt("%s/%s", LOG_FILE_PARENT_DIR, outputFile)
-		end
+		-- If we're passed a string, we should ensure it's of the form `Data Files/MWSE/logs/%s.log`
+		-- And we should also make sure it's not equal to Data Files/MWSE/logs/MWSE.log
 		if not outputFile:endswith(".log") then
 			outputFile = outputFile .. ".log"
 		end
+		-- Invalid input, so do nothing and return.
+		if outputFile:lower() == "mwse.log" then
+			sharedData.outputFile = nil
+			return
+		end
+		if not outputFile:startswith(LOG_FILE_PARENT_DIR) then
+			outputFile = fmt("%s/%s", LOG_FILE_PARENT_DIR, outputFile)
+		end
+		
 	end
 
-	do -- ensure parent directory exists
+	do -- Ensure parent directory exists.
+	
 		---@type integer
 		local fileNameStart = assert(outputFile:find("[^/]+%.log$"), "Error: file stub could not be found!")
 		local parentDir = outputFile:sub(1, fileNameStart - 1)
 
 		if not lfs.directoryexists(parentDir) then
-			local absPath
-			for _, part in ipairs(parentDir:split "/") do
-				absPath = absPath and fmt("%s/%s", absPath, part) or part
-				if not lfs.directoryexists(absPath) then
-					lfs.mkdir(absPath)
+			local path
+			for _, pathPart in ipairs(parentDir:split "/") do
+				path = path and fmt("%s/%s", path, pathPart) or pathPart
+				if not lfs.directoryexists(path) then
+					lfs.mkdir(path)
 				end
 			end
 		end
@@ -476,19 +520,29 @@ There are currently three supported metamethods:
 	- If `k` IS a communal key: 
 		- This method returns `logger.sharedData[k]`.
 		- Note: `SharedData` implements its own `__index` metamethod, which is used to fetch default values.
-	- if `k` IS NOT a communal key:
+	- If `k` IS NOT a communal key:
 		- This method returns `Logger[k]`.
 		- This happens, for example, whenever `log:debug` is called. 
 		- (And also happens whenever any Logger method is called.)
+
 2) `__newindex`: Used to ensure communal keys are properly updated.
+	- Note that `__newindex` is triggered only if the `k` in question does not currently exist in the table.
+	- This okay for this implementation because we are only interesting in specifying custom behavior for communal keys,
+		and we take measures to ensure that communal values never get written directly to logger objects.
+	- Instead, communal values are stored in the `sharedData` field.
 	- Whenever the user writes `logger[k] = v`, this method will check if `k` is a communal key.
 	- If `k` IS a communal key:
-		-
+		- write the new value inside of `self.sharedData`.
+	- If `k` IS NOT a communal key:
+		- set the value normally.
+
+3) `__call`: This is shorthand for `log:debug`. This will be set later, once the `debug` method is defined.
 ]]
 ---@type metatable
 local LoggerMeta = {
 	---@param self Logger
 	__index = function (self, key)
+		-- Note: backwards compatibility is handled by `SharedData.__index`.
 		if COMMUNAL_KEYS[key] ~= nil then
 			---@diagnostic disable-next-line: invisible
 			return self.sharedData[key]
@@ -499,27 +553,32 @@ local LoggerMeta = {
 	---@param self Logger
 	__newindex = function (self, k, v)
 		if COMMUNAL_KEYS[k] == nil then
-			rawset(self, k, v) 
+			rawset(self, k, v)
+			return
 		end
-		-- past here, we know we need to change `self.sharedData` instead of `self`
+		-- Past here, we know we need to change `self.sharedData` instead of `self`.
 		---@diagnostic disable-next-line: invisible
 		local sharedData = self.sharedData
 
-		if k == "level" then
+		-- We also allow users to set the `logLevel` directly, for backwards compatibility.
+		-- In either case, we will update `sharedData.level.
+		if k == "level" or k == "logLevel" then
 			if not v then return end
 
-			-- if `v` is a string representation of a valid log level
+			-- If `v` is a string representation of a valid log level, store the numeric version.
 			if LOG_LEVEL[v] then
 				sharedData.level = LOG_LEVEL[v]
-				-- self("Updated log level to %s.", v)
-			-- if `v` is a numeric representation of a valid log level
+			-- If `v` is a numeric representation of a valid log level, store `v`.
 			elseif LOG_LEVEL_STRINGS[v] then
 				sharedData.level = v
-				-- self("Updated log level to %s.", LEVEL_STRINGS[v])
 			end
+
 		elseif k == "outputFile" then 
 			setOutputFile(sharedData, v)
-		else -- `k` is a communal key that doesn't need any special treatment
+		-- Backwards compatibility: convert to `name` to `modName`.
+		elseif k == "name" then
+			sharedData.modName = v
+		else -- `k` is a communal key that doesn't need any special treatment.
 			sharedData[k] = v
 		end
 	end,
@@ -537,7 +596,7 @@ function Logger.new(params, params2)
 
 
 	if type(params) == "table" then
-		-- update the parameters for backwards compatibility
+		-- Update the names of the parameters in-place, for backwards compatibility.
 		params.modName = params.modName or params.name
 		params.level = params.level or params.logLevel
 		params.filePath = params.filePath or params.filepath
@@ -546,42 +605,81 @@ function Logger.new(params, params2)
 	else
 		params = {}
 	end
+	if params.modName and type(params.modName) ~= "string" then
+		error("[Logger] No name provided.")
+	end
+
+
 
 	---@cast params -nil
 	---@cast params -string
 
+	-- We will temporarily store separate copies locally. 
+	-- This is so that, for example, an autogenerated `modName` does not replace 
+	-- a `modName` that was manually set in a sibling logger.
+	-- We will only set the `modName` and `modDir` to be the autogenerated values
+	-- 	if they could not be obtained from a sibling.
+	-- However, if `params.modName` is not nil, then we will update all the siblings using that value.
 
-	if not (params.modName and params.modDir and params.filePath) then
-		local modName, modDir, filePath = getModNameAndDirAndFilepath(2)
-		params.modName = params.modName or modName
-		params.modDir = params.modDir or modDir or params.modName
-		params.filePath = params.filePath or filePath
+	-- Note that we have to do this in a bit of a convulated order because we need to have
+	-- 	a `modDir` (either from `params` or from `getModNameAndDirAndFilepath`) in order to 
+	-- retrieve the table of sibling loggers.
+
+	-- This is `params.modName`, or the autogenerated `modName`.
+	local modName = params.modName
+	-- This is `params.modDir`, or the autogenerated `modDir`.
+	local modDir = params.modDir
+	-- This is `params.filePath`, or the autogenerated `filePath`.
+	local filePath = params.filePath
+	
+	if not (modName and modDir and filePath) then
+		local autoModName, autoModDir, autoFilePath = getModNameAndDirAndFilepath(2)
+		modName = modName or autoModName
+		modDir = modDir or autoModDir or modName
+		filePath = filePath or autoFilePath
 	end
 
-	assert(params.modName, "[Logger: ERROR] Could not create a Logger because the modName could not be found.")
+	assert(modName, "[Logger: ERROR] Could not create a Logger because the modName could not be found.")
 
 	
 	-- All of the loggers associated with the active mod.
 	---@type Logger[]
-	local siblings = table.getset(registeredLoggers, params.modDir, {})
+	local siblings = table.getset(registeredLoggers, modDir, {})
 
 	-- Check if this Logger has already been constructed.
+	-- If it has, update its communal values and then return it.
 	for _, sibling in pairs(siblings) do
-		if sibling.filePath == params.filePath and sibling.moduleName == params.moduleName then
+		if sibling.filePath == filePath and sibling.moduleName == params.moduleName then
+			for k in pairs(COMMUNAL_KEYS) do
+				local paramVal = params[k]
+				if paramVal ~= nil then
+					-- Note: This triggers the `__newindex` metamethod.
+					sibling[k] = paramVal
+				end
+			end
+			-- No need to create a new logger in this case.
 			return sibling
 		end
 	end
+	
+	-- The shared data used by our new logger.
+	-- If there are any sibling loggers, we'll fetch the `SharedData` from one of the siblings.
+	-- Otherwise (i.e. if this is the logger made for a certain mod), we'll make a new `SharedData`.
+	-- This approach ensures all loggers use the same `SharedData` table.
+	local sharedData
 
-	local sharedData = siblings[1] and siblings[1].sharedData
-	if not sharedData then
+	if siblings[1] then
+		sharedData = siblings[1].sharedData
+	else
+		-- We can't use the `modName` and `modDir` of any siblings, so use the autogenerated copies.
 		---@diagnostic disable-next-line: missing-fields
 		sharedData = setmetatable({ 
-			modDir = params.modDir,
-			modName = params.modName,
+			modDir = modDir,
+			modName = modName,
 			
 			-- Tiny optimization: store a copy of the logging level so that we don't trigger the
 			-- `__index` metamethod of `SharedData` whenever we check the logging level.
-			level = SHARED_DEFAULT_VALUES.level,
+			level = params.level or SHARED_DEFAULT_VALUES.level,
 		}, SharedDataMeta)
 	end
 
@@ -589,15 +687,17 @@ function Logger.new(params, params2)
 	---@diagnostic disable-next-line: missing-fields
 	local self = {
 		moduleName = params.moduleName, 
-		filePath = params.filePath, 
+		filePath = filePath, 
 		sharedData = sharedData,
 	}
 	setmetatable(self, LoggerMeta)
 
-	-- initialize the created object
-	
 	table.insert(siblings, self)
+
 	-- Update the values from the passed parameters.
+	-- This is where we get the payoff of storing the autogenerated `modName` and `modDir` locally,
+	-- as this loop will not overwrite the `modName` or `modDir` of existing loggers with the 
+	-- autogenerated values.
 	for k in pairs(COMMUNAL_KEYS) do
 
 		local paramVal = params[k]
@@ -666,7 +766,16 @@ function Logger.get(modDir, filePath)
 end
 
 ---@deprecated Use Logger.get
-Logger.getLogger = Logger.get
+function Logger.getLogger(modName)
+	for _, arr in pairs(registeredLoggers) do
+		if arr[1] and arr[1].sharedData.modName == modName then
+			return arr[1]
+		end
+	end
+	return false
+end
+
+
 
 
 ---@deprecated Use compare the `level` field directly with `Logger.LEVEL.DEBUG` (etc.)
@@ -756,7 +865,7 @@ function Logger:makeHeader(record)
 
 	-- add the log level string
 	do
-		local level = sharedData.level
+		local level = record.level
 		local levelStr
 		if mwse.getConfig("EnableLogColors") then
 			if sharedData.abbreviateHeader then
@@ -789,7 +898,7 @@ function Logger:makeHeader(record)
 end
 
 
--- Writes the string to a file or to the console
+-- Writes the string to a file and possibly also to the console.
 ---@protected
 function Logger:write(str)
     if self.outputFile then
@@ -798,6 +907,9 @@ function Logger:write(str)
     else
         print(str)
     end
+	if self.logToConsole then
+		tes3ui.log(str)
+	end
 end
 
 
@@ -807,6 +919,7 @@ end
 ---@param ... any
 function Logger:writeRecord(record, ...)
     self:write(self.sharedData.formatter(self, record, ...))
+	
 end
 
 -- Make dummy methods for typehinting purposes.
