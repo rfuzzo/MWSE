@@ -27,7 +27,7 @@ local util = require("dependencyManagement.util")
 ---@field dependencies MWSE.Metadata.Dependency[]
 
 ---@class DependencyManager.new.params
----@field logLevel Logger.LEVEL
+---@field logLevel Logger.LEVEL?
 ---@field metadata MWSE.Metadata The metadata of the mod using this dependency manager
 ---@field logger Logger? The logger to use for this dependency manager
 ---@field showFailureMessage boolean? Whether to show a message box if a dependency fails to load. Defaults to true.

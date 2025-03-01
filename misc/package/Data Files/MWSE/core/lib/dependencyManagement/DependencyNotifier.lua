@@ -1,6 +1,6 @@
 ---@class DependencyNotifier
 local DependencyNotifier = {
-    ---@type Logger
+    ---@type mwseLogger
     logger = nil,
     failedDependencies = nil,
     packageName = nil
