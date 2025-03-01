@@ -378,8 +378,10 @@ local SHARED_DEFAULT_VALUES = {
                 if info.isvararg then break end
                 i = i + info.nparams
 			-- elseif aType == "table" and getmetatable(a).__tostring == nil then
-			else
+			elseif type(a) == "table" or type(a) == "userdata" then
 				table.insert(fmtArgs, inspect(a, INSPECT_PARAMS))
+			else
+				table.insert(fmtArgs, tostring(a))
 				-- table.insert(fmtArgs, tostring(a))
             end
             i = i + 1
