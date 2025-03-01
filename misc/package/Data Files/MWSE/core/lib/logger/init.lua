@@ -45,12 +45,12 @@ local INSPECT_PARAMS = {
 
 
 local LOG_LEVEL = {
-    NONE  = 0,
-    ERROR = 1,
-    WARN  = 2,
-    INFO  = 3,
-    DEBUG = 4,
-    TRACE = 5
+	NONE  = 0,
+	ERROR = 1,
+	WARN  = 2,
+	INFO  = 3,
+	DEBUG = 4,
+	TRACE = 5
 }
 
 --- This table takes in a log level string and spits out the corresponding numeric log level.
@@ -138,18 +138,18 @@ do
 
 
 ---@alias Logger.LEVEL
----|0                       NONE: Nothing will be printed
----|1                       ERROR: Error messages will be printed
----|2                       WARN: Warning messages will be printed
----|3                       INFO: Only crucial information will be printed
----|4                       DEBUG: Debug messages will be printed
----|5                       TRACE: Many debug messages will be printed
----|`Logger.LEVEL.NONE`     Nothing will be printed
----|`Logger.LEVEL.ERROR`    Error messages will be printed
----|`Logger.LEVEL.WARN`     Warning messages will be printed
----|`Logger.LEVEL.INFO`     Crucial information will be printed
----|`Logger.LEVEL.DEBUG`    Debug messages will be printed
----|`Logger.LEVEL.TRACE`    Many debug messages will be printed
+---|0					   NONE: Nothing will be printed
+---|1					   ERROR: Error messages will be printed
+---|2					   WARN: Warning messages will be printed
+---|3					   INFO: Only crucial information will be printed
+---|4					   DEBUG: Debug messages will be printed
+---|5					   TRACE: Many debug messages will be printed
+---|`Logger.LEVEL.NONE`	 Nothing will be printed
+---|`Logger.LEVEL.ERROR`	Error messages will be printed
+---|`Logger.LEVEL.WARN`	 Warning messages will be printed
+---|`Logger.LEVEL.INFO`	 Crucial information will be printed
+---|`Logger.LEVEL.DEBUG`	Debug messages will be printed
+---|`Logger.LEVEL.TRACE`	Many debug messages will be printed
 
 
 --- Stores all the mod-level information for a logger. 
@@ -171,9 +171,9 @@ end
 local LOG_FILE_PARENT_DIR = "Data Files/MWSE/logs"
 local GET_MOD_INFO_MAX_ITERS = 15
 local BAD_FILEPATHS = {
-    [string.lower("@Data Files\\MWSE\\core\\initialize.lua")] = true,
-    [string.lower("@Data Files\\MWSE\\core\\startLuaMods.lua")] = true,
-    [string.lower("=[C]")] = true,
+	[string.lower("@Data Files\\MWSE\\core\\initialize.lua")] = true,
+	[string.lower("@Data Files\\MWSE\\core\\startLuaMods.lua")] = true,
+	[string.lower("=[C]")] = true,
 }
 
 ---Returns the `modName`, `modDir`, and `filepath` of the currently executing file. 
@@ -197,27 +197,27 @@ local function getModNameAndDirAndFilepath(offset)
 	---@type string
 	local filePath, newFilePath
 
-    local startingOffset = 1 + (offset or 0)
-    local newDebugInfo
+	local startingOffset = 1 + (offset or 0)
+	local newDebugInfo
 
-    -- max 10 iterations, but in reality we will only need to do at most like 4
-    for i = startingOffset, startingOffset + GET_MOD_INFO_MAX_ITERS do
-        newDebugInfo = debug.getinfo(i, "S")
-        
-        if not newDebugInfo then 
+	-- max 10 iterations, but in reality we will only need to do at most like 4
+	for i = startingOffset, startingOffset + GET_MOD_INFO_MAX_ITERS do
+		newDebugInfo = debug.getinfo(i, "S")
+		
+		if not newDebugInfo then 
 			-- we've gone too high up the stack
 			break
 		end
 		newFilePath = newDebugInfo.source:lower()
 
 
-        if BAD_FILEPATHS[newFilePath] then 
+		if BAD_FILEPATHS[newFilePath] then 
 			-- we've gone too high up the stack
-            break
-        end
+			break
+		end
 
 		filePath = newFilePath
-    end
+	end
 	if not filePath then return end
 
 
@@ -356,20 +356,20 @@ local SHARED_DEFAULT_VALUES = {
 	modDir = nil,
 	---@diagnostic disable-next-line: assign-type-mismatch
 	modName = nil,
-    abbreviateHeader = false,
-    includeLineNumber = true,
-    includeTimestamp = false,
-    level = LOG_LEVEL.INFO,
-    outputFile = nil,
+	abbreviateHeader = false,
+	includeLineNumber = true,
+	includeTimestamp = false,
+	level = LOG_LEVEL.INFO,
+	outputFile = nil,
 	logToConsole = false,
 
-    ---@param self Logger
-    ---@param record Logger.Record
-    ---@param ... any
-    formatter = function(self, record, ...)
-        local fmtArgs = {}
-        
-        local i, n = 1, select("#", ...)
+	---@param self Logger
+	---@param record Logger.Record
+	---@param ... any
+	formatter = function(self, record, ...)
+		local fmtArgs = {}
+		
+		local i, n = 1, select("#", ...)
 		--[[Format each of the arguments.
 			- Functions: will be called using the appropriate number of arguments.
 				- E.g., if `f` is defined to accept exactly two arguments, then
@@ -378,44 +378,44 @@ local SHARED_DEFAULT_VALUES = {
 			- Tables: will be passed to `json.encode`, unless they have a `tostring` metamethod.
 			- Everything else: will be sent to `tostring`.
 		]]
-        while i <= n do
-            local a = select(i, ...)
+		while i <= n do
+			local a = select(i, ...)
 			local aType = type(a)
-            if aType == "function" then
-                local s = i + 1
-                local rets = (s <= n) and {a(select(s, ...))} or {a()}
-                --- NOTE: return values are NOT pretty printed
-                for _, v in ipairs(rets) do
-                    table.insert(fmtArgs, v)
-                end
+			if aType == "function" then
+				local s = i + 1
+				local rets = (s <= n) and {a(select(s, ...))} or {a()}
+				--- NOTE: return values are NOT pretty printed
+				for _, v in ipairs(rets) do
+					table.insert(fmtArgs, v)
+				end
 
-                local info = debug.getinfo(a, "u")
-                if info.isvararg then break end
-                i = i + info.nparams
+				local info = debug.getinfo(a, "u")
+				if info.isvararg then break end
+				i = i + info.nparams
 			elseif type(a) == "table" or type(a) == "userdata" then
 				table.insert(fmtArgs, inspect(a, INSPECT_PARAMS))
 			else
 				table.insert(fmtArgs, tostring(a))
-            end
-            i = i + 1
-        end
+			end
+			i = i + 1
+		end
 		-- Create the return string.
-        local str
+		local str
 		-- Only call `string.format` if there's more than one argument.
 		-- This helps to avoid errors caused by users writing strings that they don't
 		-- expect will be formatted. 
 		-- e.g., `log:debug("progress: 50%")`
-        if #fmtArgs > 1 then
-            str = fmt(table.unpack(fmtArgs))
-        else
-            str = fmtArgs[1]
-        end
+		if #fmtArgs > 1 then
+			str = fmt(table.unpack(fmtArgs))
+		else
+			str = fmtArgs[1]
+		end
 
 		---@diagnostic disable-next-line: invisible
-        local header = self:makeHeader(record)
+		local header = self:makeHeader(record)
 
 		return header .. str
-    end
+	end
 }
 
 --- This is the metatable used by `SharedData` instances.
@@ -755,14 +755,14 @@ Logger.setLogLevel = Logger.setLevel
 ---@param filePath string? the relative filepath of this logger
 ---@return Logger? logger
 function Logger.get(modDir, filePath)
-    local arr = registeredLoggers[modDir]
-    if not arr then return end
-    if not filePath then return arr[1] end
-    for _, logger in ipairs(arr) do
-        if logger.filePath == filePath then
-            return logger
-        end
-    end
+	local arr = registeredLoggers[modDir]
+	if not arr then return end
+	if not filePath then return arr[1] end
+	for _, logger in ipairs(arr) do
+		if logger.filePath == filePath then
+			return logger
+		end
+	end
 end
 
 ---@deprecated Use Logger.get
@@ -791,23 +791,23 @@ end
 ---@param level Logger.LEVEL? The logging level to get the string for. Default: `self.level`.
 ---@return string
 function Logger:getLevelStr(level)
-    return LOG_LEVEL_STRINGS[level or self.level]
+	return LOG_LEVEL_STRINGS[level or self.level]
 end
 
 -- Returns all the siblings of this logger
 ---@return Logger[]
 function Logger:getSiblings()
-    return registeredLoggers[self.sharedData.modDir]
+	return registeredLoggers[self.sharedData.modDir]
 end
 
 --- returns all the loggers for a given mod directory (can pass a Logger as well)
 ---@param modDirOrLogger string|Logger
 function Logger.getLoggers(modDirOrLogger)
-    if type(modDirOrLogger) == "string" then
-        return registeredLoggers[modDirOrLogger]
-    elseif type(modDirOrLogger) == "table" and modDirOrLogger.modDir ~= nil then
-        return registeredLoggers[modDirOrLogger.modDir]
-    end
+	if type(modDirOrLogger) == "string" then
+		return registeredLoggers[modDirOrLogger]
+	elseif type(modDirOrLogger) == "table" and modDirOrLogger.modDir ~= nil then
+		return registeredLoggers[modDirOrLogger.modDir]
+	end
 end
 
 -- =============================================================================
@@ -818,24 +818,24 @@ end
 ---@param offset integer? for the line number to be accurate, this method assumes it's getting called 2 levels deep (i.e.). the offset adjusts this
 ---@return Logger.Record record
 function Logger:makeRecord(level, offset)
-    return {
-        level = level,
-        stackLevel = 3 + (offset or 0),
-        timestamp = self.sharedData.includeTimestamp   and socket.gettime(),
-        lineNumber = self.sharedData.includeLineNumber and debug.getinfo(3 + (offset or 0), "l").currentline
-    }
+	return {
+		level = level,
+		stackLevel = 3 + (offset or 0),
+		timestamp = self.sharedData.includeTimestamp   and socket.gettime(),
+		lineNumber = self.sharedData.includeLineNumber and debug.getinfo(3 + (offset or 0), "l").currentline
+	}
 end
 
 ---@protected
 ---@param record Logger.Record
 ---@return string
 function Logger:makeHeader(record)
-    -- We're going to shove various things into here, and then call `table.concat`.
-    local strs = {}
+	-- We're going to shove various things into here, and then call `table.concat`.
+	local strs = {}
 
-    local sharedData = self.sharedData
-    local moduleName = self.moduleName
-    
+	local sharedData = self.sharedData
+	local moduleName = self.moduleName
+	
 	if moduleName then
 		table.insert(strs, fmt("%s (%s)", sharedData.modName, moduleName))
 	else
@@ -883,30 +883,30 @@ function Logger:makeHeader(record)
 	end
 
 
-    if record.timestamp then
-        local floor = math.floor
-        local ts = record.timestamp - LAUNCH_TIME
-        local milliseconds = floor(1000 * (ts % 1))
-        local hours, minutes, seconds = floor(ts / 3600), floor(ts / 60) % 60, floor(ts) % 60
+	if record.timestamp then
+		local floor = math.floor
+		local ts = record.timestamp - LAUNCH_TIME
+		local milliseconds = floor(1000 * (ts % 1))
+		local hours, minutes, seconds = floor(ts / 3600), floor(ts / 60) % 60, floor(ts) % 60
 
 		-- Only show the number of hours if it's `> 1`.
-        table.insert(strs, hours > 0 and fmt("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
-                               		  or fmt(     "%02d:%02d.%03d",        minutes, seconds, milliseconds))
-    end
+		table.insert(strs, hours > 0 and fmt("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
+							   		  or fmt(	 "%02d:%02d.%03d",		minutes, seconds, milliseconds))
+	end
 	-- Notice the trailing space!
-    return fmt("[%s] ", table.concat(strs, " | "))
+	return fmt("[%s] ", table.concat(strs, " | "))
 end
 
 
 -- Writes the string to a file and possibly also to the console.
 ---@protected
 function Logger:write(str)
-    if self.outputFile then
-        self.outputFile:write(str, "\n")
-        self.outputFile:flush()
-    else
-        print(str)
-    end
+	if self.outputFile then
+		self.outputFile:write(str, "\n")
+		self.outputFile:flush()
+	else
+		print(str)
+	end
 	if self.logToConsole then
 		tes3ui.log(str)
 	end
@@ -918,7 +918,7 @@ end
 ---@param record Logger.Record
 ---@param ... any
 function Logger:writeRecord(record, ...)
-    self:write(self.sharedData.formatter(self, record, ...))
+	self:write(self.sharedData.formatter(self, record, ...))
 	
 end
 
@@ -926,46 +926,46 @@ end
 -- This code will be deleted once the API has been finalized and the documentation has been made.
 do 
 
-    --- Write an `error` level debug message.
-    ---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-    ---@param ... any Additional arguments to pass when formatting.
-    function Logger:error(msg, ...) end
+	--- Write an `error` level debug message.
+	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
+	---@param ... any Additional arguments to pass when formatting.
+	function Logger:error(msg, ...) end
 
-    --- Write an `warn` level debug message.
-    ---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-    ---@param ... any Additional arguments to pass when formatting.
-    function Logger:warn(msg, ...) end
+	--- Write an `warn` level debug message.
+	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
+	---@param ... any Additional arguments to pass when formatting.
+	function Logger:warn(msg, ...) end
 
-    --- Write an `info` level debug message.
-    ---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-    ---@param ... any Additional arguments to pass when formatting.
-    function Logger:info(msg, ...) end
+	--- Write an `info` level debug message.
+	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
+	---@param ... any Additional arguments to pass when formatting.
+	function Logger:info(msg, ...) end
 
-    --- Write an `debug` level debug message.
-    ---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-    ---@param ... any Additional arguments to pass when formatting.
-    function Logger:debug(msg, ...) end
+	--- Write an `debug` level debug message.
+	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
+	---@param ... any Additional arguments to pass when formatting.
+	function Logger:debug(msg, ...) end
 
-    --- Write an `trace` level debug message.
-    ---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-    ---@param ... any Additional arguments to pass when formatting.
-    function Logger:trace(msg, ...) end
+	--- Write an `trace` level debug message.
+	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
+	---@param ... any Additional arguments to pass when formatting.
+	function Logger:trace(msg, ...) end
 
 end
 
 -- Make the logging functions
 ---@param levelStr string
 for levelStr, level in pairs(LOG_LEVEL) do
-    -- e.g., "DEBUG" -> "debug"
-    ---@param self Logger
+	-- e.g., "DEBUG" -> "debug"
+	---@param self Logger
 	---@diagnostic disable-next-line: assign-type-mismatch
-    Logger[string.lower(levelStr)] = function(self, ...)
+	Logger[string.lower(levelStr)] = function(self, ...)
 		---@diagnostic disable-next-line: invisible
 		if self.sharedData.level >= level then
 			---@diagnostic disable-next-line: invisible
 			self:writeRecord(self:makeRecord(level), ...)
 		end
-    end
+	end
 end
 
 -- I am a very good programmer.
@@ -984,32 +984,32 @@ LoggerMeta.__call = Logger.debug
 ---@return string|S str
 ---@return A? ...
 function Logger:assert(v, msg, ...)
-    if v then return v, msg, ... end
+	if v then return v, msg, ... end
 
-    -- cant call `Logger:error` because we need the call to `debug.getinfo` to produce the correct line number. super hacky :/
-    local str = self:formatter(self:makeRecord(LOG_LEVEL.ERROR), msg, ...)
+	-- cant call `Logger:error` because we need the call to `debug.getinfo` to produce the correct line number. super hacky :/
+	local str = self:formatter(self:makeRecord(LOG_LEVEL.ERROR), msg, ...)
 
-    if self.sharedData.level >= LOG_LEVEL.ERROR then
-        self:write(str)
-    end
+	if self.sharedData.level >= LOG_LEVEL.ERROR then
+		self:write(str)
+	end
 
-    return assert(v, str, ...)
+	return assert(v, str, ...)
 end
 
 function Logger:writeInitMessage(version)
-    if self.sharedData.level < LOG_LEVEL.INFO then return end
+	if self.sharedData.level < LOG_LEVEL.INFO then return end
 
-    local record = self:makeRecord(LOG_LEVEL.INFO)
+	local record = self:makeRecord(LOG_LEVEL.INFO)
 	
 	if not version then	
 		local m = tes3.getLuaModMetadata(self.modDir)
 		version = m and m.package and m.package.version
 	end
-    if version then
-        self:write(self:formatter(record, "Initialized version %s.", version))
-    else
-        self:write(self:formatter(record, "Mod initialized."))
-    end
+	if version then
+		self:write(self:formatter(record, "Initialized version %s.", version))
+	else
+		self:write(self:formatter(record, "Mod initialized."))
+	end
 end
 
 
