@@ -18,6 +18,30 @@ local LAUNCH_TIME = socket.gettime()
 
 local fmt = string.format
 
+local inspect = require("inspect")
+local inspect_METATABLE = inspect.METATABLE
+---@diagnostic disable-next-line: cast-local-type
+inspect = inspect.inspect
+
+-- Thank you G7.
+local INSPECT_PARAMS = {
+	newline = ' ',
+	indent = '',
+	process = function (item, path)
+		if path[#path] == inspect_METATABLE then
+			-- ignore metatables
+		else
+			-- sol types have this magic property we can (ab)use
+			local _, subtype = type(item)
+			if subtype then
+				return fmt('%s("%s")', subtype, item)
+			else
+				return item
+			end
+		end
+	end
+}
+
 
 
 local LOG_LEVEL = {
@@ -353,10 +377,10 @@ local SHARED_DEFAULT_VALUES = {
                 local info = debug.getinfo(a, "u")
                 if info.isvararg then break end
                 i = i + info.nparams
-			elseif aType == "table" and getmetatable(a).__tostring == nil then
-				table.insert(fmtArgs, json.encode(a))
+			-- elseif aType == "table" and getmetatable(a).__tostring == nil then
 			else
-				table.insert(fmtArgs, tostring(a))
+				table.insert(fmtArgs, inspect(a, INSPECT_PARAMS))
+				-- table.insert(fmtArgs, tostring(a))
             end
             i = i + 1
         end
