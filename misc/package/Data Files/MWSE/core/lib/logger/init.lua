@@ -588,17 +588,16 @@ local LoggerMeta = {
 -- create a new logger by passing in a table with parameters or by passing in a string with just the `modName`
 ---@param params string|Logger.newParams?
 ---@return Logger
-function Logger.new(params, params2)
-	-- handle the case when this function is called as a method
-	if params == Logger or params and getmetatable(params) == LoggerMeta then
-		params = params2
-	end
+function Logger.new(params)
 
 
 	if type(params) == "table" then
 		-- Update the names of the parameters in-place, for backwards compatibility.
+		---@diagnostic disable-next-line: undefined-field
 		params.modName = params.modName or params.name
+		---@diagnostic disable-next-line: undefined-field
 		params.level = params.level or params.logLevel
+		---@diagnostic disable-next-line: undefined-field
 		params.filePath = params.filePath or params.filepath
 	elseif type(params) == "string" then
 		params = {modName = params}
@@ -814,6 +813,7 @@ end
 -- FUNCTIONS THAT HAVE TO DO WITH WRITING THINGS TO A FILE
 -- =============================================================================
 
+---@protected
 ---@param level Logger.LEVEL
 ---@param offset integer? for the line number to be accurate, this method assumes it's getting called 2 levels deep (i.e.). the offset adjusts this
 ---@return Logger.Record record
