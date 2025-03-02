@@ -363,11 +363,33 @@ local SHARED_DEFAULT_VALUES = {
 	outputFile = nil,
 	logToConsole = false,
 
+	-- This formatter could be altered to recursively process function parameters,
+	-- but at the moment that does not seem particularly useful.
+	-- And it would add a lot more complexity to an already pretty complex
+	-- formatting function.
+
 	---@param self Logger
 	---@param record Logger.Record
 	---@param ... any
 	formatter = function(self, record, ...)
 		local fmtArgs = {}
+
+		-- This is necessary because `{...}` will flatten out any `nil`s,
+		-- which would lead to very confusing errors if it caused 
+		-- `string.format` to get fewer arguments than it was expecting.
+		local function addArgs(...)
+			for i = 1, select("#", ...) do
+				local v = select(i, ...)
+				if type(v) == "table" or type(v) == "userdata" then
+					table.insert(fmtArgs, inspect(v, INSPECT_PARAMS))
+				elseif v == nil then
+					table.insert(fmtArgs, tostring(v))
+				else
+					table.insert(fmtArgs, v)
+				end
+			end
+		end
+
 		
 		local i, n = 1, select("#", ...)
 		--[[Format each of the arguments.
@@ -379,23 +401,28 @@ local SHARED_DEFAULT_VALUES = {
 			- Everything else: will be sent to `tostring`.
 		]]
 		while i <= n do
-			local a = select(i, ...)
-			local aType = type(a)
-			if aType == "function" then
-				local s = i + 1
-				local rets = (s <= n) and {a(select(s, ...))} or {a()}
-				--- NOTE: return values are NOT pretty printed
-				for _, v in ipairs(rets) do
-					table.insert(fmtArgs, v)
+			local v = select(i, ...)
+			local vType = type(v)
+			if vType == "function" then
+				if i < n then
+					-- adds in every argument after `i`
+					addArgs(v(select(i + 1, ...)))
+				else
+					addArgs(v())
 				end
-
-				local info = debug.getinfo(a, "u")
+				-- Find out how many arguments `v` actually wanted, then skip ahead that many argumetns.
+				local info = debug.getinfo(v, "u")
 				if info.isvararg then break end
+				-- Note that at this point, `i` stores the index of the last argument that was passed to `v`
+				-- So, we still need to increment it once more at the end of this loop.
 				i = i + info.nparams
-			elseif type(a) == "table" or type(a) == "userdata" then
-				table.insert(fmtArgs, inspect(a, INSPECT_PARAMS))
+			elseif vType == "table" or vType == "userdata" then
+				table.insert(fmtArgs, inspect(v, INSPECT_PARAMS))
+			-- `nil` will mess up the table packing and unpacking, so we treat it specially
+			elseif v == nil then
+				table.insert(fmtArgs, "nil")
 			else
-				table.insert(fmtArgs, tostring(a))
+				table.insert(fmtArgs, v)
 			end
 			i = i + 1
 		end
