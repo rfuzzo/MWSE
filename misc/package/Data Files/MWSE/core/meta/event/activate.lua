@@ -12,8 +12,6 @@
 --- - When a door is used.
 --- - When an item is picked up.
 --- - When someone attempts to open a container.
----
---- [Examples available in online documentation](https://mwse.github.io/MWSE/events/activate).
 --- @class activateEventData
 --- @field block boolean If set to `true`, vanilla logic will be suppressed. Returning `false` will set this to `true`.
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.
