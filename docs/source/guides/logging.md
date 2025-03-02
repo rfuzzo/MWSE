@@ -31,7 +31,7 @@ The above message will then be written to `MWSE.log` in the following format:
 [My Awesome Mod | main.lua:6  | DEBUG] my message
 ```
 The information in the header says that this log message was written on line 6 of the `main.lua` file of a mod called `"My Awesome Mod"`.
-All of this information is captured automatically behind the scenes.
+All of this information is captured automatically behind the scenes. In particular, the mod name will be loaded from your mod's [metadata file](../guides/metadata.md) if it has one.
 
 ### Writing More Useful Log Messages
 In general, you'll likely want to log the values of various local variables you have floating around in your code. The logging framework makes this easy. For example:
