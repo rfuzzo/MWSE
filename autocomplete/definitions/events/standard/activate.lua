@@ -23,14 +23,14 @@ Some examples of when the activate event fires includes:
 	},
 	filter = "target",
 	blockable = true,
-	-- examples = {
-	-- 	["ShowActivationTarget"] = {
-	-- 		title = "Show a message for what the player is activating",
-	-- 	},
-	-- 	["PreventActivatingNPCs"] = {
-	-- 		title = "Prevent the player from activating NPCs",
-	-- 	},
-	-- },
+	examples = {
+		["ShowActivationTarget"] = {
+			title = "Show a message for what the player is activating",
+		},
+		["PreventActivatingNPCs"] = {
+			title = "Prevent the player from activating NPCs",
+		},
+	},
 	links = {
 		["xActivate"] = "mwscript/functions/actor/xActivate",
 	},
