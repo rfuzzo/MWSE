@@ -319,7 +319,7 @@ local SHARED_DEFAULT_VALUES = {
 	-- And it would add a lot more complexity to an already pretty complex
 	-- formatting function.
 
-	formatter = dofile("logger.formatters").DEFAULT
+	formatter = require("logger.formatters").DEFAULT
 }
 
 --- This is the metatable used by `SharedData` instances.
