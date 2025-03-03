@@ -18,29 +18,6 @@ local LAUNCH_TIME = socket.gettime()
 
 local fmt = string.format
 
-local inspect = require("inspect")
-local inspect_METATABLE = inspect.METATABLE
----@diagnostic disable-next-line: cast-local-type
-inspect = inspect.inspect
-
--- Thank you G7.
-local INSPECT_PARAMS = {
-	newline = ' ',
-	indent = '',
-	process = function (item, path)
-		if path[#path] == inspect_METATABLE then
-			-- ignore metatables
-		else
-			-- sol types have this magic property we can (ab)use
-			local _, subtype = type(item)
-			if subtype then
-				return fmt('%s("%s")', subtype, item)
-			else
-				return item
-			end
-		end
-	end
-}
 
 
 
@@ -56,14 +33,14 @@ local LOG_LEVEL = {
 --- This table takes in a log level string and spits out the corresponding numeric log level.
 --- This is defined to be the inversion of `LOG_LEVEL`.
 --- So, `LOG_LEVEL_STRINGS[number]` is equivalent to `table.find(LOG_LEVEL, number)`.
----@type table<Logger.LEVEL, string>
+---@type table<mwseLogger.LOG_LEVEL, string>
 local LOG_LEVEL_STRINGS = table.invert(LOG_LEVEL)
 
 -- Note: \x1B is the escape character.
 
 -- Tiny optimization: store the terminal escape sequences for each log level, so they don't 
 -- have to be recomputed every log message.
----@type table<Logger.LEVEL, string>
+---@type table<mwseLogger.LOG_LEVEL, string>
 local LOG_LEVEL_COLOR_STRINGS = {
 	-- color doesn't matter
 	[LOG_LEVEL.NONE]  = "NONE",
@@ -80,7 +57,7 @@ local LOG_LEVEL_COLOR_STRINGS = {
 }
 
 -- Pre-colored versions of the abbreviated log level strings.
----@type table<Logger.LEVEL, string>
+---@type table<mwseLogger.LOG_LEVEL, string>
 local LOG_LEVEL_ABBREVIATED_COLOR_STRINGS = {
 	-- color doesn't matter
 	[LOG_LEVEL.NONE]  = "NONE",
@@ -106,58 +83,31 @@ do
 --- This function should return a string, which will then be printed to the appropriate file.
 --- This function should also include the header of the log message. The default header can be accessed by 
 --- using the `makeHeader` method.
----@alias Logger.formatter fun(self: Logger, record: Logger.Record, ...: string|any|fun(...): ...): string
+---@alias mwseLogger.formatter fun(self: mwseLogger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string
 
 
---- A logging record. Contains information about the log level and the line number.
----@class Logger.Record
----@field stackLevel integer how far up the stack we're being called
----@field level Logger.LEVEL logging level
----@field lineNumber integer|false the line number, if enabled for this logger
----@field timestamp number|false the timestamp of this message
 
---- Parameters used to create a new `Logger`. 
--- All parameters are optional, as they will be retrieved automatically if not provided.
--- 
---- In addition to displayed parameters, you can also pass a `modName`, a `filepath`, a `level` and a `filepath`.
--- Although for the latter options, it's recommended you use the relevant methods instead.
----@class Logger.newParams
----@field logToConsole bool? Should the output be written to the console?
----@field modName string? the name of the mod this logger is for. will be automatically retrieved if not provided
----@field modDir string? The directory that this mod operates in. Used to retrieve the `Mod_Info`.
----@field moduleName string|false? The name of a module that this logger belongs to.
--- This is useful in cases where one file has several distinct parts. 
--- The `moduleName` will be displayed next to the name of the mod, in parentheses.
----@field filepath string? path to the file. will be retrieved if not provided
----@field level Logger.LEVEL? the log level to set this object to. Default: "LEVEL.INFO"
----@field writeToFile string|boolean|nil whether to write the log messages to a file, or the name of the file to write to. if `false` or `nil`, messages will be written to `MWSE.log`
----@field includeLineNumber boolean? Should the current line number be printed when writing log messages? Default: `true`
----@field includeTimestamp boolean? should timestamps be included in logging messages? Default: `false`
----@field abbreviateHeader boolean? Should the header messages be abbreviated? Default: `false`.
----@field formatter Logger.formatter? A way to specify how logging messages should be formatted. A default one will be used if not provided.
-
-
----@alias Logger.LEVEL
+---@alias mwseLogger.LOG_LEVEL
 ---|0					   NONE: Nothing will be printed
 ---|1					   ERROR: Error messages will be printed
 ---|2					   WARN: Warning messages will be printed
 ---|3					   INFO: Only crucial information will be printed
 ---|4					   DEBUG: Debug messages will be printed
 ---|5					   TRACE: Many debug messages will be printed
----|`Logger.LEVEL.NONE`	 Nothing will be printed
----|`Logger.LEVEL.ERROR`	Error messages will be printed
----|`Logger.LEVEL.WARN`	 Warning messages will be printed
----|`Logger.LEVEL.INFO`	 Crucial information will be printed
----|`Logger.LEVEL.DEBUG`	Debug messages will be printed
----|`Logger.LEVEL.TRACE`	Many debug messages will be printed
+---|`mwseLogger.LOG_LEVEL.NONE`	 Nothing will be printed
+---|`mwseLogger.LOG_LEVEL.ERROR`	Error messages will be printed
+---|`mwseLogger.LOG_LEVEL.WARN`	 Warning messages will be printed
+---|`mwseLogger.LOG_LEVEL.INFO`	 Crucial information will be printed
+---|`mwseLogger.LOG_LEVEL.DEBUG`	Debug messages will be printed
+---|`mwseLogger.LOG_LEVEL.TRACE`	Many debug messages will be printed
 
 
 --- Stores all the mod-level information for a logger. 
 --- This allows a mod to have several different loggers that are all sychronized with each other.
----@class Logger.SharedData
----@field level Logger.LEVEL The logging level for this logger
+---@class mwseLogger.SharedData
+---@field level mwseLogger.LOG_LEVEL The logging level for this logger
 ---@field logToConsole bool
----@field formatter Logger.formatter
+---@field formatter mwseLogger.formatter
 ---@field modName string name of the mod
 ---@field modDir string
 ---@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
@@ -312,16 +262,17 @@ end
 
 
 -- Logging framework.
----@class Logger : Logger.SharedData
----@operator call (Logger.newParams?): Logger
----@field level Logger.LEVEL
----@field filepath string? the relative path to the file this logger was defined in.
----@field protected sharedData Logger.SharedData stores communal data
----@field moduleName string|false? the module this logger belongs to, or `nil` if it's a general purpose logger
-local Logger = {LOG_LEVEL = LOG_LEVEL}
+---@class mwseLogger : mwseLogger.SharedData
+---@field protected sharedData mwseLogger.SharedData stores communal data
+local Logger = {
+	LOG_LEVEL = LOG_LEVEL,
+	--- A table containing all the provided logging formatters. 
+	--- But of course, it is also possible to define your own custom formatter.
+	FORMATTERS = require("logger.formatters")
+}
 
 --- Indexed by `modDir`. Keeps track of all the loggers associated with a given mod.
----@type table<string, Logger[]>
+---@type table<string, mwseLogger[]>
 local registeredLoggers = {}
 
 --- A set containing all the "communal keys", i.e., the keys stored in SharedData.
@@ -350,7 +301,7 @@ local COMMUNAL_KEYS = {
 -- The default value for each of the shared values, except for `modName` and `modDir`, which MUST
 -- be provided when creating a new `SharedData`.
 -- This includes, in particular, defining the default formatter.
----@type Logger.SharedData
+---@type mwseLogger.SharedData
 local SHARED_DEFAULT_VALUES = {
 	---@diagnostic disable-next-line: assign-type-mismatch
 	modDir = nil,
@@ -368,81 +319,7 @@ local SHARED_DEFAULT_VALUES = {
 	-- And it would add a lot more complexity to an already pretty complex
 	-- formatting function.
 
-	---@param self Logger
-	---@param record Logger.Record
-	---@param ... any
-	formatter = function(self, record, ...)
-		local fmtArgs = {}
-
-		-- This is necessary because `{...}` will flatten out any `nil`s,
-		-- which would lead to very confusing errors if it caused 
-		-- `string.format` to get fewer arguments than it was expecting.
-		local function addArgs(...)
-			for i = 1, select("#", ...) do
-				local v = select(i, ...)
-				if type(v) == "table" or type(v) == "userdata" then
-					table.insert(fmtArgs, inspect(v, INSPECT_PARAMS))
-				elseif v == nil then
-					table.insert(fmtArgs, tostring(v))
-				else
-					table.insert(fmtArgs, v)
-				end
-			end
-		end
-
-		
-		local i, n = 1, select("#", ...)
-		--[[Format each of the arguments.
-			- Functions: will be called using the appropriate number of arguments.
-				- E.g., if `f` is defined to accept exactly two arguments, then
-				`log:debug(msg, f, a, b, c)` will reduce to `log:debug(msg, f(a,b), c)`,
-				with `f(a,b)` being computed ONLY if the logging level is appropriate.
-			- Tables: will be passed to `json.encode`, unless they have a `tostring` metamethod.
-			- Everything else: will be sent to `tostring`.
-		]]
-		while i <= n do
-			local v = select(i, ...)
-			local vType = type(v)
-			if vType == "function" then
-				if i < n then
-					-- adds in every argument after `i`
-					addArgs(v(select(i + 1, ...)))
-				else
-					addArgs(v())
-				end
-				-- Find out how many arguments `v` actually wanted, then skip ahead that many argumetns.
-				local info = debug.getinfo(v, "u")
-				if info.isvararg then break end
-				-- Note that at this point, `i` stores the index of the last argument that was passed to `v`
-				-- So, we still need to increment it once more at the end of this loop.
-				i = i + info.nparams
-			elseif vType == "table" or vType == "userdata" then
-				table.insert(fmtArgs, inspect(v, INSPECT_PARAMS))
-			-- `nil` will mess up the table packing and unpacking, so we treat it specially
-			elseif v == nil then
-				table.insert(fmtArgs, "nil")
-			else
-				table.insert(fmtArgs, v)
-			end
-			i = i + 1
-		end
-		-- Create the return string.
-		local str
-		-- Only call `string.format` if there's more than one argument.
-		-- This helps to avoid errors caused by users writing strings that they don't
-		-- expect will be formatted. 
-		-- e.g., `log:debug("progress: 50%")`
-		if #fmtArgs > 1 then
-			str = fmt(table.unpack(fmtArgs))
-		else
-			str = fmtArgs[1]
-		end
-
-		---@diagnostic disable-next-line: invisible
-		local header = self:makeHeader(record)
-
-		return header .. str
-	end
+	formatter = dofile("logger.formatters").DEFAULT
 }
 
 --- This is the metatable used by `SharedData` instances.
@@ -460,7 +337,7 @@ local SharedDataMeta = {
 	--- 		```
 	--- 3) If no custom formatter was found (i.e., `logger.sharedData["formatter"] == nil)`, 
 	--- 	then this metamethod is called, and it returns the default formatter.
-	---@param self Logger.SharedData
+	---@param self mwseLogger.SharedData
 	---@param k string
 	__index = function(self, k)
 		if k == "name" then
@@ -479,7 +356,7 @@ local SharedDataMeta = {
 
 -- This function is responsible for updating the `outputFile` field of a logger.
 -- This is only called in one place, but is factored out to help with code readability.
----@param sharedData Logger.SharedData
+---@param sharedData mwseLogger.SharedData
 ---@param outputFile string|false|nil
 local function setOutputFile(sharedData, outputFile)
 	---@type file*|false
@@ -567,7 +444,7 @@ There are currently three supported metamethods:
 ]]
 ---@type metatable
 local LoggerMeta = {
-	---@param self Logger
+	---@param self mwseLogger
 	__index = function (self, key)
 		-- Note: backwards compatibility is handled by `SharedData.__index`.
 		if COMMUNAL_KEYS[key] ~= nil then
@@ -577,7 +454,7 @@ local LoggerMeta = {
 		return Logger[key]
 	end,
 
-	---@param self Logger
+	---@param self mwseLogger
 	__newindex = function (self, k, v)
 		if COMMUNAL_KEYS[k] == nil then
 			rawset(self, k, v)
@@ -613,8 +490,8 @@ local LoggerMeta = {
 
 
 -- create a new logger by passing in a table with parameters or by passing in a string with just the `modName`
----@param params string|Logger.newParams?
----@return Logger
+---@param params string|mwseLogger.new.data?
+---@return mwseLogger
 function Logger.new(params)
 
 
@@ -667,7 +544,7 @@ function Logger.new(params)
 
 	
 	-- All of the loggers associated with the active mod.
-	---@type Logger[]
+	---@type mwseLogger[]
 	local siblings = table.getset(registeredLoggers, modDir, {})
 
 	-- Check if this Logger has already been constructed.
@@ -707,7 +584,7 @@ function Logger.new(params)
 		}, SharedDataMeta)
 	end
 
-	---@type Logger
+	---@type mwseLogger
 	---@diagnostic disable-next-line: missing-fields
 	local self = {
 		moduleName = params.moduleName, 
@@ -756,13 +633,14 @@ do
 	e.g. to set the `log.level` to "DEBUG", you can write any of the following:
 	1) `log:setLevel("DEBUG")`
 	2) `log:setLevel(4)`
-	3) `log:setLevel(Logger.LEVEL.DEBUG)`
+	3) `log:setLevel(mwseLogger.LOG_LEVEL.DEBUG)`
 	]]
 	---@param self Logger
-	---@param level Logger.LEVEL
-	---@return Logger.LEVEL? the level that was set
+	---@param level mwseLogger.LOG_LEVEL
+	---@return mwseLogger.LOG_LEVEL? the level that was set
 	function Logger:setLevel(level) end
 end
+
 
 -- backwards compatibility / explicit setters
 for key in pairs(COMMUNAL_KEYS) do   
@@ -771,13 +649,12 @@ for key in pairs(COMMUNAL_KEYS) do
 		self[key] = val
 	end
 end
-Logger.setLogLevel = Logger.setLevel
 
 
 --[[Get a previously registered logger with the specified `modDir`. You can optionally specify a filepath.]]
 ---@param modDir string name of the mod
 ---@param filepath string? the relative filepath of this logger
----@return Logger? logger
+---@return mwseLogger? logger
 function Logger.get(modDir, filepath)
 	local arr = registeredLoggers[modDir]
 	if not arr then return end
@@ -802,7 +679,7 @@ end
 
 
 
----@deprecated Use compare the `level` field directly with `Logger.LEVEL.DEBUG` (etc.)
+---@deprecated Use compare the `level` field directly with `mwseLogger.LOG_LEVEL.DEBUG` (etc.)
 function Logger:doLog(level)
 	if LOG_LEVEL[level] then
 		return self.sharedData.level >= LOG_LEVEL[level]
@@ -812,20 +689,20 @@ function Logger:doLog(level)
 end
 
 --- Gets a string representation of a given logging level.
----@param level Logger.LEVEL? The logging level to get the string for. Default: `self.level`.
+---@param level mwseLogger.LOG_LEVEL? The logging level to get the string for. Default: `self.level`.
 ---@return string
 function Logger:getLevelStr(level)
 	return LOG_LEVEL_STRINGS[level or self.level]
 end
 
 -- Returns all the siblings of this logger
----@return Logger[]
+---@return mwseLogger[]
 function Logger:getSiblings()
 	return registeredLoggers[self.sharedData.modDir]
 end
 
 --- returns all the loggers for a given mod directory (can pass a Logger as well)
----@param modDirOrLogger string|Logger
+---@param modDirOrLogger string|mwseLogger
 function Logger.getLoggers(modDirOrLogger)
 	if type(modDirOrLogger) == "string" then
 		return registeredLoggers[modDirOrLogger]
@@ -839,9 +716,9 @@ end
 -- =============================================================================
 
 ---@protected
----@param level Logger.LEVEL
+---@param level mwseLogger.LOG_LEVEL
 ---@param offset integer? for the line number to be accurate, this method assumes it's getting called 2 levels deep (i.e.). the offset adjusts this
----@return Logger.Record record
+---@return mwseLogger.Record record
 function Logger:makeRecord(level, offset)
 	return {
 		level = level,
@@ -852,7 +729,7 @@ function Logger:makeRecord(level, offset)
 end
 
 ---@protected
----@param record Logger.Record
+---@param record mwseLogger.Record
 ---@return string
 function Logger:makeHeader(record)
 	-- We're going to shove various things into here, and then call `table.concat`.
@@ -940,49 +817,19 @@ end
 
 -- calls format on the record and writes it to the appropriate location
 ---@protected
----@param record Logger.Record
+---@param record mwseLogger.Record
 ---@param ... any
 function Logger:writeRecord(record, ...)
 	self:write(self.sharedData.formatter(self, record, ...))
 	
 end
 
--- Make dummy methods for typehinting purposes.
--- This code will be deleted once the API has been finalized and the documentation has been made.
-do 
-
-	--- Write an `error` level debug message.
-	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-	---@param ... any Additional arguments to pass when formatting.
-	function Logger:error(msg, ...) end
-
-	--- Write an `warn` level debug message.
-	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-	---@param ... any Additional arguments to pass when formatting.
-	function Logger:warn(msg, ...) end
-
-	--- Write an `info` level debug message.
-	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-	---@param ... any Additional arguments to pass when formatting.
-	function Logger:info(msg, ...) end
-
-	--- Write an `debug` level debug message.
-	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-	---@param ... any Additional arguments to pass when formatting.
-	function Logger:debug(msg, ...) end
-
-	--- Write an `trace` level debug message.
-	---@param msg string|fun(...): ...|any Message, or a function that returns all the arguments.
-	---@param ... any Additional arguments to pass when formatting.
-	function Logger:trace(msg, ...) end
-
-end
 
 -- Make the logging functions
 ---@param levelStr string
 for levelStr, level in pairs(LOG_LEVEL) do
 	-- e.g., "DEBUG" -> "debug"
-	---@param self Logger
+	---@param self mwseLogger
 	---@diagnostic disable-next-line: assign-type-mismatch
 	Logger[string.lower(levelStr)] = function(self, ...)
 		---@diagnostic disable-next-line: invisible
