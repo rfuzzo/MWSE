@@ -1001,6 +1001,7 @@ namespace mwse::patch {
 		}
 
 		if (result->light == nullptr) {
+			reference->deleteDynamicLightAttachment();
 			return nullptr;
 		}
 
@@ -1920,6 +1921,7 @@ namespace mwse::patch {
 		writeDoubleWordUnprotected(0x74611C, reinterpret_cast<DWORD>(&PatchFindClose));
 
 		// Patch: Guard against updating dynamic light attachments that have no actual light.
+		genCallEnforced(0x485DA4, 0x4E5170, reinterpret_cast<DWORD>(PatchGetLightAttachmentIfItHasALight));
 		genCallEnforced(0x485E87, 0x4E5170, reinterpret_cast<DWORD>(PatchGetLightAttachmentIfItHasALight));
 		genCallEnforced(0x4D260C, 0x4E5170, reinterpret_cast<DWORD>(PatchGetLightAttachmentIfItHasALight));
 		genCallEnforced(0x5243D6, 0x4E5170, reinterpret_cast<DWORD>(PatchGetLightAttachmentIfItHasALight));
