@@ -39,7 +39,6 @@ Slider.jump = 5
 ---@param sliderLabel string Label of the slider that triggered an error.
 ---@param msg string The error message. 
 ---@param ... string|number Parameters to pass to `string.format(msg, ...)`
----@return nil
 local function printSliderWarning(sliderLabel, msg, ...)
 	mwse.log(
 		'[createSlider WARNING] A slider labeled "%s" was created with invalid parameters:\n\t%s',
