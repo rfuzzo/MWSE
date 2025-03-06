@@ -62,30 +62,45 @@ function Slider:new(data)
 			printSliderWarning(t.label, "Slider.max (=%s) should be greater than Slider.min (=%s)", t.max, t.min)
 		end
 		if t.step <= 0 then
-			printSliderWarning(t.label, "Slider.step (=%s) should be greater than 0.", t.step)
+			printSliderWarning(t.label, "Slider.step (=%s) should be a positive number.", t.step)
 		end
 		if t.jump <= 0 then
-			printSliderWarning(t.label, "Slider.jump (=%s) should be greater than 0.", t.jump)
+			printSliderWarning(t.label, "Slider.jump (=%s) should be a positive number.", t.jump)
 		end
 		if t.decimalPlaces % 1 ~= 0 or t.decimalPlaces < 0 then
-			printSliderWarning(t.label, "Slider.decimalPlaces (=%s) should be a positive whole number.", t.decimalPlaces)
-			-- If we don't change this now then an error will occur later.
-			t.decimalPlaces = 0
+			error(string.format(
+				'A slider labeled "%s" was created with invalid parameters:\n\t\z
+					Slider.decimalPlaces (=%s) should be a positive whole number.',
+				t.label, t.decimalPlaces
+			))
+		end
+
+		-- Avoid breaking existing mods that have variable min or max but a fixed step/jump.
+		-- Clamp instead of asserting.
+		if t.step > dist + math.epsilon then
+			-- Only print the error message when `slider.min` and `slider.max` are set properly.
+			-- Seeing something like "It should be less than -1 = Slider.max - Slider.min" is not very helpful.
+			if dist > 0 then
+				printSliderWarning(t.label, 
+					"Slider.step (= %s) is too big! It should be less than %s = Slider.max - Slider.min.",
+					t.step, dist
+				)
+			end
+			t.step = dist
+		end
+		if t.jump > dist + math.epsilon then
+			-- Only print the error message when `slider.min` and `slider.max` are set properly.
+			if dist > 0 then
+				printSliderWarning(t.label, 
+					"Slider.jump (= %s) is too big! It should be less than %s = Slider.max - Slider.min.",
+					t.jump, dist
+				)
+			end
+			t.jump = dist
 		end
 	end
 
-	-- Avoid breaking existing mods that have variable min or max but a fixed step/jump.
-	-- Clamp instead of asserting.
-	if t.step > dist + math.epsilon then
-		mwse.log("mcm.Slider: 'step' parameter is greater than 'max' - 'min'")
-		mwse.log(debug.traceback())
-		t.step = dist
-	end
-	if t.jump > dist + math.epsilon then
-		mwse.log("mcm.Slider: 'jump' parameter is greater than 'max' - 'min'")
-		mwse.log(debug.traceback())
-		t.jump = dist
-	end
+	
 
 	return t
 end
