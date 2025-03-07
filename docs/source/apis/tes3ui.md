@@ -230,7 +230,7 @@ local result = tes3ui.createTooltipMenu({ object = ..., itemData = ..., spell = 
 Requests menu mode be activated on a menu with a given id.
 
 ```lua
-local unnamed1 = tes3ui.enterMenuMode(id)
+local result = tes3ui.enterMenuMode(id)
 ```
 
 **Parameters**:
@@ -239,7 +239,7 @@ local unnamed1 = tes3ui.enterMenuMode(id)
 
 **Returns**:
 
-* `unnamed` (boolean): true if the menu was switched, or false if it was already active.
+* `result` (boolean): true if the menu was switched, or false if it was already active.
 
 ***
 
@@ -622,12 +622,12 @@ local executed = tes3ui.lookupID(id)
 Checks if the game is in menu mode.
 
 ```lua
-local unnamed1 = tes3ui.menuMode()
+local result = tes3ui.menuMode()
 ```
 
 **Returns**:
 
-* `unnamed` (boolean): true if in menu mode.
+* `result` (boolean): true if in menu mode.
 
 ***
 
