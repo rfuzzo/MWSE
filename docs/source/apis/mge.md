@@ -590,7 +590,7 @@ mge.saveScreenshot({ path = ..., captureWithUI = ... })
 **Parameters**:
 
 * `params` (table)
-	* `path` (string)
+	* `path` (string): The location of the folder to save the screenshot to. Relative to the Morrowind directory. *Needs* to include the file format extension.
 	* `captureWithUI` (boolean): *Default*: `false`. If set to `true`, the screenshot will include the user interface.
 
 ***
