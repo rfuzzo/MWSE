@@ -5,6 +5,6 @@ return {
 		{ name = "id", type = "string|number" },
 	},
 	returns = {
-		{ name = "result", type = "boolean", description =  "true if the menu was switched, or false if it was already active.", }
+		{ name = "result", type = "boolean", description =  "True if the menu was switched, or false if it was already active.", }
 	}
 }
