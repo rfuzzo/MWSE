@@ -106,7 +106,7 @@ do
 --- This allows a mod to have several different loggers that are all sychronized with each other.
 ---@class mwseLogger.SharedData
 ---@field level mwseLogger.LOG_LEVEL The logging level for this logger
----@field logToConsole bool
+---@field logToConsole boolean
 ---@field formatter mwseLogger.formatter
 ---@field modName string name of the mod
 ---@field modDir string
@@ -678,13 +678,8 @@ function Logger:getLevelStr(level)
 	return LOG_LEVEL_STRINGS[level or self.level]
 end
 
--- Returns all the siblings of this logger
----@return mwseLogger[]
-function Logger:getSiblings()
-	return registeredLoggers[self.sharedData.modDir]
-end
 
---- returns all the loggers for a given mod directory (can pass a Logger as well)
+--- Returns all the loggers for a given mod directory (can pass a Logger as well).
 ---@param modDirOrLogger string|mwseLogger
 function Logger.getLoggers(modDirOrLogger)
 	if type(modDirOrLogger) == "string" then
