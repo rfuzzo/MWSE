@@ -271,6 +271,10 @@ local Logger = {
 	FORMATTERS = require("logger.formatters")
 }
 
+-- Make it available globally.
+mwse.Logger = Logger
+mwse.LOG_LEVEL = LOG_LEVEL
+
 --- Indexed by `modDir`. Keeps track of all the loggers associated with a given mod.
 ---@type table<string, mwseLogger[]>
 local registeredLoggers = {}
@@ -615,31 +619,6 @@ end
 -- METHODS
 -- =============================================================================
 
--- define dummy methods that will get overriden soon 
--- these are just to help with linting until the documentation is finalized
--- these won't be present in the final release.
-do 
-	--- Determines whether the logging output should be written to a specific file, or to `MWSE.log`.
-	---@param filepath string|boolean 
-	--- 1) If `false`, output will be written to `MWSE.log`.
-	--- 2) If `true`, a default filepath will be generated, in the form "Data Files/MWSE/logs/<MOD_DIR>.log".
-	---  - e.g. "Data Files/MWSE/logs/herbert100/More QuickLoot.log".
-	--- 3) If a `string`, then that string will be used as the filepath. Taken relative to `Data Files/MWSE/logs/`
-	function Logger:setOutputFile(filepath) end
-
-
-
-	--[[Change the current logging level. You can specify a string or number.
-	e.g. to set the `log.level` to "DEBUG", you can write any of the following:
-	1) `log:setLevel("DEBUG")`
-	2) `log:setLevel(4)`
-	3) `log:setLevel(mwseLogger.LOG_LEVEL.DEBUG)`
-	]]
-	---@param self Logger
-	---@param level mwseLogger.LOG_LEVEL
-	---@return mwseLogger.LOG_LEVEL? the level that was set
-	function Logger:setLevel(level) end
-end
 
 
 -- backwards compatibility / explicit setters
@@ -648,6 +627,10 @@ for key in pairs(COMMUNAL_KEYS) do
 	Logger["set".. key:sub(1,1):upper() .. key:sub(2)] = function(self, val) 
 		self[key] = val
 	end
+end
+
+function Logger:setModuleName(newModuleName)
+	self.moduleName = newModuleName
 end
 
 

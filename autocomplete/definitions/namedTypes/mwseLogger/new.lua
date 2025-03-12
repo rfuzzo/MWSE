@@ -18,8 +18,6 @@ return {
 			{ name = "abbreviateHeader", type = "bool", optional = true, default = false, description = "Should the headers be abbreviated?" },
 			{ name = "formatter", type = "fun(self: Logger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string", optional = true, description = "A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used." },
 			
-			{ name = "modDir", 		type = "string", optional = true, description = "The directory this mod resides in. This will be retrieved automatically if not provided. This parameter should not be used in the vast majority of situations."},
-			{ name = "filepath", 	type = "string", optional = true, description = "The path of the file that this Logger is used in. This will be retrieved automatically if not provided. This path is relative to `modDir`. This parameter should not be used in the vast majority of situations." },
 		},
 	}},
 	returns = {

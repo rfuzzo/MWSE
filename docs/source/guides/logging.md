@@ -6,13 +6,11 @@ The MWSE Logger library allows you to create a logger for your mod. It can be a 
 ## Quickstart
 
 ### Creating a Logger
-For the vast majority of use-cases, it's enough to write:
+For the vast majority of use-cases, it's enough to write
 ```lua
--- Import the library.
-local Logger = require("logger")
--- Create a new logger.
-local log = Logger.new()
+local log = mwse.Logger.new()
 ```
+
 ### Writing Log Messages
 
 To start debugging, set the logging level to be `DEBUG` or higher:
