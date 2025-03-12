@@ -41,6 +41,7 @@ namespace TES3 {
 
 	std::string MagicEffect::getComplexName(int attribute, int skill) const {
 		auto ndd = DataHandler::get()->nonDynamicData;
+		const auto extendedData = getExtendedData();
 
 		std::stringstream ss;
 
@@ -88,8 +89,8 @@ namespace TES3 {
 		else if (nameGMST > 0) {
 			ss << ndd->GMSTs[nameGMST]->value.asString;
 		}
-		else if (auto itt = ndd->magicEffects->effectCustomNames.find(id); itt != ndd->magicEffects->effectCustomNames.end()) {
-			ss << itt->second;
+		else if (extendedData && !extendedData->name.empty()) {
+			ss << extendedData->name;
 		}
 		else {
 			ss << "<invalid effect>";
@@ -340,6 +341,28 @@ namespace TES3 {
 		return reinterpret_cast<int*>(0x7926B8)[school];
 	}
 
+	MagicEffectExtendedData* MagicEffect::getExtendedData() const {
+		return DataHandler::get()->nonDynamicData->magicEffects->effectExtendedData[id];
+	}
+
+
+	//
+	// MagicEffectExtendedData
+	//
+
+	MagicEffectExtendedData::MagicEffectExtendedData() {
+		name = "Unnamed Effect";
+	}
+
+	bool MagicEffectExtendedData::hasName() const {
+		return !name.empty();
+	}
+
+
+	//
+	// Effect
+	//
+
 	Effect::Effect() {
 		effectID = EffectID::None;
 		skillID = SkillID::Invalid;
@@ -488,6 +511,8 @@ namespace TES3 {
 		if (effectData == nullptr) {
 			return {};
 		}
+
+		const auto extendedData = effectData->getExtendedData();
 
 		// We'll use a string stream and build up the result.
 		std::stringstream ss;

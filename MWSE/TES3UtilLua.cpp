@@ -5198,12 +5198,14 @@ namespace mwse::lua {
 		effect->hitEffect = getOptionalParamObject<TES3::PhysicalObject>(params, "hitVFX");
 		effect->areaEffect = getOptionalParamObject<TES3::PhysicalObject>(params, "areaVFX");
 
+		auto& extendedData = magicEffectController->effectExtendedData[id];
+		if (extendedData == nullptr) {
+			extendedData = new TES3::MagicEffectExtendedData();
+		}
+
 		sol::optional<std::string> name = params["name"];
 		if (name) {
-			magicEffectController->effectCustomNames[id] = name.value();
-		}
-		else {
-			magicEffectController->effectCustomNames[id] = "Unnamed Effect";
+			extendedData->name = name.value();
 		}
 
 		// Actually add the effect.
@@ -5250,11 +5252,11 @@ namespace mwse::lua {
 		// Get the tick function.
 		sol::optional<sol::protected_function> onTick = params["onTick"];
 		if (onTick) {
-			magicEffectController->effectLuaTickFunctions[id] = onTick.value();
+			extendedData->tickFunction = onTick.value();
 		}
 		sol::optional<sol::protected_function> onCollision = params["onCollision"];
 		if (onCollision) {
-			magicEffectController->effectLuaCollisionFunctions[id] = onCollision.value();
+			extendedData->collisionFunction = onCollision.value();
 		}
 
 		// Set the GMST as the negative effect ID for custom hooks later.
