@@ -358,6 +358,23 @@ namespace TES3 {
 		return !name.empty();
 	}
 
+	bool MagicEffectExtendedData::hasMagnitudeType() const {
+		return !magnitudeType.empty();
+	}
+
+	std::string_view MagicEffectExtendedData::getMagnitudeType(bool plural) const {
+		if (!hasMagnitudeType()) {
+			const auto gmst = plural ? GMST::spoints : GMST::spoint;
+			return DataHandler::get()->nonDynamicData->GMSTs[gmst]->value.asString;
+		}
+
+		if (plural && !magnitudeTypePlural.empty()) {
+			return magnitudeTypePlural;
+		}
+
+		return magnitudeType;
+	}
+
 
 	//
 	// Effect
@@ -587,7 +604,10 @@ namespace TES3 {
 					}
 					break;
 				default:
-					if (magnitudeMax == 1) {
+					if (extendedData) {
+						ss << " " << extendedData->getMagnitudeType(magnitudeMax != 1);
+					}
+					else if (magnitudeMax == 1) {
 						ss << " " << ndd->GMSTs[GMST::spoint]->value.asString;
 					}
 					else {

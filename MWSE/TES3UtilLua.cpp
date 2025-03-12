@@ -5208,6 +5208,16 @@ namespace mwse::lua {
 			extendedData->name = name.value();
 		}
 
+		sol::optional<std::string> magnitudeType = params["magnitudeType"];
+		if (magnitudeType) {
+			extendedData->magnitudeType = magnitudeType.value();
+
+			sol::optional<std::string> magnitudeTypePlural = params["magnitudeTypePlural"];
+			if (magnitudeTypePlural) {
+				extendedData->magnitudeTypePlural = magnitudeTypePlural.value();
+			}
+		}
+
 		// Actually add the effect.
 		magicEffectController->addEffectObject(effect);
 

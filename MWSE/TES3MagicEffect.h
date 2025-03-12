@@ -337,12 +337,16 @@ namespace TES3 {
 
 	struct MagicEffectExtendedData {
 		std::string name;
+		std::string magnitudeType;
+		std::string magnitudeTypePlural;
 		sol::protected_function tickFunction;
 		sol::protected_function collisionFunction;
 
 		MagicEffectExtendedData();
 
 		bool hasName() const;
+		bool hasMagnitudeType() const;
+		std::string_view getMagnitudeType(bool plural) const;
 	};
 
 	struct Effect {
