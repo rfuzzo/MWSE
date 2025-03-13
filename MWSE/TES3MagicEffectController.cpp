@@ -34,15 +34,21 @@ namespace TES3 {
 	int MagicEffectController::cachedSpellEffectEventEffectIndex = {};
 	unsigned int MagicEffectController::cachedSpellEffectEventResistAttribute = {};
 
-	MagicEffectController::MagicEffectController() {
+	MagicEffectController::MagicEffectController() :
+		effectObjects(),
+		effectExtendedData()
+	{
 
 	}
 
 	MagicEffectController::~MagicEffectController() {
 		for (auto& effect : effectObjects) {
-			if (effect) {
-				delete effect;
+			if (effect == nullptr) {
+				continue;
 			}
+
+			delete effect;
+			effect = nullptr;
 		}
 	}
 
