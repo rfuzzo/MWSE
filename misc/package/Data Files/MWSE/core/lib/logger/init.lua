@@ -262,7 +262,7 @@ end
 
 -- Logging framework.
 ---@class mwseLogger : mwseLogger.SharedData
----@field protected sharedData mwseLogger.SharedData stores communal data
+---@field protected sharedData mwseLogger.SharedData Stores information that's shared between loggers. This should not be accessed directly.
 local Logger = {
 	LOG_LEVEL = LOG_LEVEL,
 	--- A table containing all the provided logging formatters. 
@@ -483,6 +483,17 @@ local LoggerMeta = {
 		-- Backwards compatibility: convert to `name` to `modName`.
 		elseif k == "name" then
 			sharedData.modName = v
+
+		-- Make it harder for the `modDir` to be changed after loggers are initialized.
+		-- Note: This only affects the behavior when writing `log.modDir = "foo"`. It does not 
+		-- 	change change what happens when writing `log.sharedData.modDir = "foo"`.
+		-- But this is about the best we can do in Lua.
+		-- The reason we are doing this is that some weird bugs can happen if users decide to 
+		-- change the `modDir` after initializing a logger, as it could potentially
+		-- result in loggers from different mods having the same `sharedData`.
+		elseif k == "modDir" then
+			-- Do nothing.
+
 		else -- `k` is a communal key that doesn't need any special treatment.
 			sharedData[k] = v
 		end
@@ -587,6 +598,8 @@ function Logger.new(params)
 			level = params.level or SHARED_DEFAULT_VALUES.level,
 		}, SharedDataMeta)
 	end
+
+	
 
 	---@type mwseLogger
 	---@diagnostic disable-next-line: missing-fields
@@ -701,7 +714,7 @@ function Logger:makeRecord(level, offset)
 	return {
 		level = level,
 		stackLevel = 3 + (offset or 0),
-		timestamp = self.sharedData.includeTimestamp   and socket.gettime(),
+		timestamp = self.sharedData.includeTimestamp and socket.gettime(),
 		lineNumber = mwse.getConfig("EnableLogLineNumbers") and debug.getinfo(3 + (offset or 0), "l").currentline
 	}
 end

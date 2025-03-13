@@ -43,6 +43,10 @@
 --- This can be useful if the `filepath` alone is not enough to distinguish what code is reponsible for issuing a log message.
 --- For example, the MWSE dependency management system uses a `moduleName` to alert the user about which mod had a dependency problem.
 --- 	
+--- @field outputFile string|boolean Determines where logging messages are printed. If `false`, log messages are printed to `MWSE.log`. 
+--- If it's a `string`, then logging messages will be printed to `Data Files/MWSE/logs/<log.outputFile>.log`.
+--- 
+--- Setting this to `true` is the same as writing `log.outputFile = log.modDir`.
 mwseLogger = {}
 
 --- Creates a new logger based on the input parameters.
@@ -57,8 +61,6 @@ mwseLogger = {}
 --- `logToConsole`: bool? — *Default*: `false`. Should the output also be written to the in-game console?
 --- 
 --- `outputFile`: bool|string|nil — *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
---- 
---- `includeLineNumber`: bool? — *Default*: `true`. Should line numbers be included in logging messages?
 --- 
 --- `includeTimestamp`: bool? — *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
 --- 
@@ -75,7 +77,6 @@ function mwseLogger.new(params) end
 --- @field level mwseLogger.LOG_LEVEL? *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
 --- @field logToConsole bool? *Default*: `false`. Should the output also be written to the in-game console?
 --- @field outputFile bool|string|nil *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
---- @field includeLineNumber bool? *Default*: `true`. Should line numbers be included in logging messages?
 --- @field includeTimestamp bool? *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
 --- @field abbreviateHeader bool? *Default*: `false`. Should the headers be abbreviated?
 --- @field formatter nil|fun(self: Logger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string *Optional*. A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used.

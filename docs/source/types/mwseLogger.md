@@ -134,6 +134,20 @@ For example, the MWSE dependency management system uses a `moduleName` to alert 
 
 ***
 
+### `outputFile`
+<div class="search_terms" style="display: none">outputfile</div>
+
+Determines where logging messages are printed. If `false`, log messages are printed to `MWSE.log`. 
+If it's a `string`, then logging messages will be printed to `Data Files/MWSE/logs/<log.outputFile>.log`.
+
+Setting this to `true` is the same as writing `log.outputFile = log.modDir`.
+
+**Returns**:
+
+* `result` (string, boolean)
+
+***
+
 ## Methods
 
 ### `assert`
@@ -425,7 +439,7 @@ myObject:warn(message, ...)
 Creates a new logger based on the input parameters.
 
 ```lua
-local log = mwseLogger.new({ modName = ..., moduleName = ..., level = ..., logToConsole = ..., outputFile = ..., includeLineNumber = ..., includeTimestamp = ..., abbreviateHeader = ..., formatter = ... })
+local log = mwseLogger.new({ modName = ..., moduleName = ..., level = ..., logToConsole = ..., outputFile = ..., includeTimestamp = ..., abbreviateHeader = ..., formatter = ... })
 ```
 
 **Parameters**:
@@ -436,7 +450,6 @@ local log = mwseLogger.new({ modName = ..., moduleName = ..., level = ..., logTo
 	* `level` (mwseLogger.LOG_LEVEL): *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
 	* `logToConsole` (bool): *Default*: `false`. Should the output also be written to the in-game console?
 	* `outputFile` (bool, string): *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
-	* `includeLineNumber` (bool): *Default*: `true`. Should line numbers be included in logging messages?
 	* `includeTimestamp` (bool): *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
 	* `abbreviateHeader` (bool): *Default*: `false`. Should the headers be abbreviated?
 	* `formatter` (fun(self: Logger, record: [mwseLogger.Record](../types/mwseLogger.Record.md), ...: string|any|fun(...)): string): *Optional*. A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used.

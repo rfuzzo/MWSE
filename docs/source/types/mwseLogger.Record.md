@@ -25,8 +25,8 @@ The logging level of this message. (e.g, if `Logger:info` was called, then this 
 <div class="search_terms" style="display: none">linenumber</div>
 
 The linenumber that triggered this record to be created.
+Will be `false` if the "Enable Log Line Numbers" MWSE setting is disabled.
 
-Will be `false` if the `Logger.includeLineNumber` is `false`.
 
 **Returns**:
 
