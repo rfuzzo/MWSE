@@ -13,7 +13,6 @@ return {
 			{ name = "logToConsole", type = "bool", 			    optional = true, default = false, 					     description = "Should the output also be written to the in-game console?" },
 			{ name = "outputFile", 	 type = "bool|string", 			optional = true, default = false, 					     description = "The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path." },
 			
-			{ name = "includeLineNumber", type = "bool", optional = true, default = true, description = "Should line numbers be included in logging messages?" },
 			{ name = "includeTimestamp", type = "bool", optional = true, default = true, description = "Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched." },
 			{ name = "abbreviateHeader", type = "bool", optional = true, default = false, description = "Should the headers be abbreviated?" },
 			{ name = "formatter", type = "fun(self: Logger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string", optional = true, description = "A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used." },

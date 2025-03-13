@@ -111,7 +111,6 @@ do
 ---@field modName string name of the mod
 ---@field modDir string
 ---@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
----@field includeLineNumber boolean should the current time be printed when writing log messages? Default: `false`
 ---@field outputFile file*|nil The file the log is being written to, or `nil`.
 ---@field abbreviateHeader boolean Print a shorter header?
 
@@ -295,7 +294,6 @@ local COMMUNAL_KEYS = {
 	modDir = true,
 	logToConsole = true,
 	includeTimestamp = true,
-	includeLineNumber = true,
 	outputFile = true,
 	abbreviateHeader = true,
 	defaultOutputPath = true,
@@ -312,7 +310,6 @@ local SHARED_DEFAULT_VALUES = {
 	---@diagnostic disable-next-line: assign-type-mismatch
 	modName = nil,
 	abbreviateHeader = false,
-	includeLineNumber = true,
 	includeTimestamp = false,
 	level = LOG_LEVEL.INFO,
 	outputFile = nil,
@@ -555,6 +552,8 @@ function Logger.new(params)
 	-- If it has, update its communal values and then return it.
 	for _, sibling in pairs(siblings) do
 		if sibling.filepath == filepath and sibling.moduleName == params.moduleName then
+			-- If we reach this point, we will update the shared settings and then return.
+
 			for k in pairs(COMMUNAL_KEYS) do
 				local paramVal = params[k]
 				if paramVal ~= nil then
@@ -564,6 +563,7 @@ function Logger.new(params)
 			end
 			-- No need to create a new logger in this case.
 			return sibling
+
 		end
 	end
 	
@@ -702,7 +702,7 @@ function Logger:makeRecord(level, offset)
 		level = level,
 		stackLevel = 3 + (offset or 0),
 		timestamp = self.sharedData.includeTimestamp   and socket.gettime(),
-		lineNumber = self.sharedData.includeLineNumber and debug.getinfo(3 + (offset or 0), "l").currentline
+		lineNumber = mwse.getConfig("EnableLogLineNumbers") and debug.getinfo(3 + (offset or 0), "l").currentline
 	}
 end
 

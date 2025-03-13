@@ -18,7 +18,7 @@ local testSuite = UnitWind.new({
 testSuite:start("Testing logging API")
 
 local loggerName = "Test"
-local log = logger.new({ name = loggerName, includeLineNumber = false })
+local log = logger.new({ name = loggerName})
 
 testSuite:test("Test logger.new", function()
 	testSuite:expect(log.name).toBe(loggerName)

@@ -179,6 +179,12 @@ being written to `Data Files/MWSE/logs/My Awesome Mod.log`.
 In the MCM page of the script extender, there is an option to enable log colors. 
 This will display logs in different colors according to their log level.
 
+### Line Numbers
+
+In the MCM page of the script extender, there is an option to line numbers in log messages.
+This can make it easier to  
+This will display logs in different colors according to their log level.
+
 ## Creating a new Logger
 The simplest way to create a new logger is to simply call `Logger.new()` and have all the relevant information be retrieved automatically.
 But it's also possible to pass additional parameters to the `new` function, all of which are optional:
