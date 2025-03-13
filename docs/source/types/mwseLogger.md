@@ -8,7 +8,7 @@
 
 A class to facilitate printing log messages.
 A new one can be constructed by simply calling `mwse.Logger.new()`.
-See the [Quickstart Guide](../../guides/logging#quickstart)
+See the [Quickstart Guide](../guides/logging.md#quickstart)
 for more information.
 
 
@@ -175,9 +175,9 @@ If multiple arguments are passed, then they will be passed to `string.format`.
 	
 All `table` or `userdata` arguments will be prettyprinted.
 You can also pass a function as the first or second parameter to lazily evaluate log statements.
-See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
-and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
-sections of the [Logging Guide](../../guides/logging) 
+See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+sections of the [Logging Guide](../guides/logging.md) 
 for more information.
 
 !!! note "Shorthand Syntax"
@@ -204,9 +204,9 @@ If multiple arguments are passed, then they will be passed to `string.format`.
 	
 All `table` or `userdata` arguments will be prettyprinted.
 You can also pass a function as the first or second parameter to lazily evaluate log statements.
-See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
-and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
-sections of the [Logging Guide](../../guides/logging) 
+See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+sections of the [Logging Guide](../guides/logging.md) 
 for more information.
 
 
@@ -229,9 +229,9 @@ If multiple arguments are passed, then they will be passed to `string.format`.
 	
 All `table` or `userdata` arguments will be prettyprinted.
 You can also pass a function as the first or second parameter to lazily evaluate log statements.
-See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
-and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
-sections of the [Logging Guide](../../guides/logging) 
+See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+sections of the [Logging Guide](../guides/logging.md) 
 for more information.
 
 
@@ -389,9 +389,9 @@ If multiple arguments are passed, then they will be passed to `string.format`.
 	
 All `table` or `userdata` arguments will be prettyprinted.
 You can also pass a function as the first or second parameter to lazily evaluate log statements.
-See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
-and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
-sections of the [Logging Guide](../../guides/logging) 
+See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+sections of the [Logging Guide](../guides/logging.md) 
 for more information.
 
 
@@ -414,9 +414,9 @@ If multiple arguments are passed, then they will be passed to `string.format`.
 	
 All `table` or `userdata` arguments will be prettyprinted.
 You can also pass a function as the first or second parameter to lazily evaluate log statements.
-See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
-and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
-sections of the [Logging Guide](../../guides/logging) 
+See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+sections of the [Logging Guide](../guides/logging.md) 
 for more information.
 
 
@@ -428,6 +428,24 @@ myObject:warn(message, ...)
 
 * `message` (string, fun(...): ...)
 * `...` (any): *Optional*. Formatting arguments. These are passed to `string.format`. Tables and userdata values are pretty printed.
+
+***
+
+### `writeInitMessage`
+<div class="search_terms" style="display: none">writeinitmessage</div>
+
+Writes an `INFO` message saying this mod has been initialized. 
+If your mod has [metadata file](../guides/metadata.md#package-section) that specifies its current version,
+then that will also be included in the initialization message. 
+You may also supply a version number directly as an argument to this method.
+
+```lua
+myObject:writeInitMessage(version)
+```
+
+**Parameters**:
+
+* `version` (string): *Optional*. The current version of your mod. If not provided, the logger will attempt to retrieve it from your mod's metadata file.
 
 ***
 

@@ -5,7 +5,7 @@
 
 --- A class to facilitate printing log messages.
 --- A new one can be constructed by simply calling `mwse.Logger.new()`.
---- See the [Quickstart Guide](../../guides/logging#quickstart)
+--- See the [Quickstart Guide](../guides/logging.md#quickstart)
 --- for more information.
 --- 
 --- @class mwseLogger
@@ -92,9 +92,9 @@ function mwseLogger:assert(condition, message, ...) end
 --- 	
 --- All `table` or `userdata` arguments will be prettyprinted.
 --- You can also pass a function as the first or second parameter to lazily evaluate log statements.
---- See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
---- and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
---- sections of the [Logging Guide](../../guides/logging) 
+--- See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+--- and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+--- sections of the [Logging Guide](../guides/logging.md) 
 --- for more information.
 --- 
 --- !!! note "Shorthand Syntax"
@@ -126,9 +126,9 @@ function mwseLogger:doLog(logLevel) end
 --- 	
 --- All `table` or `userdata` arguments will be prettyprinted.
 --- You can also pass a function as the first or second parameter to lazily evaluate log statements.
---- See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
---- and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
---- sections of the [Logging Guide](../../guides/logging) 
+--- See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+--- and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+--- sections of the [Logging Guide](../guides/logging.md) 
 --- for more information.
 --- 
 --- @param message string|fun(...): ... No description yet available.
@@ -140,9 +140,9 @@ function mwseLogger:error(message, ...) end
 --- 	
 --- All `table` or `userdata` arguments will be prettyprinted.
 --- You can also pass a function as the first or second parameter to lazily evaluate log statements.
---- See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
---- and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
---- sections of the [Logging Guide](../../guides/logging) 
+--- See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+--- and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+--- sections of the [Logging Guide](../guides/logging.md) 
 --- for more information.
 --- 
 --- @param message string|fun(...): ... No description yet available.
@@ -212,9 +212,9 @@ function mwseLogger:setOutputFile(outputFile) end
 --- 	
 --- All `table` or `userdata` arguments will be prettyprinted.
 --- You can also pass a function as the first or second parameter to lazily evaluate log statements.
---- See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
---- and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
---- sections of the [Logging Guide](../../guides/logging) 
+--- See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+--- and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+--- sections of the [Logging Guide](../guides/logging.md) 
 --- for more information.
 --- 
 --- @param message string|fun(...): ... No description yet available.
@@ -226,12 +226,19 @@ function mwseLogger:trace(message, ...) end
 --- 	
 --- All `table` or `userdata` arguments will be prettyprinted.
 --- You can also pass a function as the first or second parameter to lazily evaluate log statements.
---- See the [Writing More Useful Log Messages](../../guides/logging.md#writing-more-useful-log-messages) 
---- and [Passing Functions to Logging Methods](../../guides/logging.md#passing-functions-to-the-logging-methods) 
---- sections of the [Logging Guide](../../guides/logging) 
+--- See the [Writing More Useful Log Messages](../guides/logging.md#writing-more-useful-log-messages) 
+--- and [Passing Functions to Logging Methods](../guides/logging.md#passing-functions-to-the-logging-methods) 
+--- sections of the [Logging Guide](../guides/logging.md) 
 --- for more information.
 --- 
 --- @param message string|fun(...): ... No description yet available.
 --- @param ... any? *Optional*. Formatting arguments. These are passed to `string.format`. Tables and userdata values are pretty printed.
 function mwseLogger:warn(message, ...) end
+
+--- Writes an `INFO` message saying this mod has been initialized. 
+--- If your mod has [metadata file](../guides/metadata.md#package-section) that specifies its current version,
+--- then that will also be included in the initialization message. 
+--- You may also supply a version number directly as an argument to this method.
+--- @param version string? *Optional*. The current version of your mod. If not provided, the logger will attempt to retrieve it from your mod's metadata file.
+function mwseLogger:writeInitMessage(version) end
 

@@ -41,7 +41,7 @@ outputs
 ```
 [My Awesome Mod | main.lua:10  | DEBUG] myData = { date = "2025-03-02", x = 1, y = 20 }.
 ```
-Internally, the logging methods convert their arguments into useful, human-readable text representations and then pass them to [`string.format`](/apis/string/#stringformat).
+Internally, the logging methods convert their arguments into useful, human-readable text representations and then pass them to [`string.format`](../apis/string.md#stringformat).
 
 This wraps up the quickstart guide. But there are still a few useful things you may want to know about before publishing your mod.
 
