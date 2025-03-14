@@ -142,6 +142,17 @@ A bit field for the spell's flags.
 
 ***
 
+### `isAbility`
+<div class="search_terms" style="display: none">isability, ability</div>
+
+*Read-only*. `true` if the spell is an ability. This is equivalent to checking the `.castType` property against the constant.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isActiveCast`
 <div class="search_terms" style="display: none">isactivecast, activecast</div>
 
@@ -153,10 +164,76 @@ A bit field for the spell's flags.
 
 ***
 
+### `isBlightDisease`
+<div class="search_terms" style="display: none">isblightdisease, blightdisease</div>
+
+*Read-only*. `true` if the spell is a blight disease. This is equivalent to checking the `.castType` property against the constant.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isCommonDisease`
+<div class="search_terms" style="display: none">iscommondisease, commondisease</div>
+
+*Read-only*. `true` if the spell is a common disease. This is equivalent to checking the `.castType` property against the constant.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isCurse`
+<div class="search_terms" style="display: none">iscurse, curse</div>
+
+*Read-only*. `true` if the spell is a curse. This is equivalent to checking the `.castType` property against the constant.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isDisease`
+<div class="search_terms" style="display: none">isdisease, disease</div>
+
+*Read-only*. `true` if the spell is a common or blight disease. This is equivalent to checking the `.castType` property against the constants.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `isLocationMarker`
 <div class="search_terms" style="display: none">islocationmarker, locationmarker</div>
 
 True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isPower`
+<div class="search_terms" style="display: none">ispower, power</div>
+
+*Read-only*. `true` if the spell is a power. This is equivalent to checking the `.castType` property against the constant.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isSpell`
+<div class="search_terms" style="display: none">isspell, spell</div>
+
+*Read-only*. `true` if the spell is a normal spell. This is equivalent to checking the `.castType` property against the constant.
 
 **Returns**:
 

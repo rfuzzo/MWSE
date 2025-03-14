@@ -195,6 +195,34 @@ namespace TES3 {
 		setSpellFlag(SpellFlag::Flag::AlwaysSucceeds, value);
 	}
 
+	bool Spell::isAbility() const {
+		return castType == SpellCastType::Ability;
+	}
+
+	bool Spell::isBlightDisease() const {
+		return castType == SpellCastType::Blight;
+	}
+
+	bool Spell::isCommonDisease() const {
+		return castType == SpellCastType::Disease;
+	}
+
+	bool Spell::isCurse() const {
+		return castType == SpellCastType::Curse;
+	}
+
+	bool Spell::isDisease() const {
+		return isCommonDisease() || isBlightDisease();
+	}
+
+	bool Spell::isPower() const {
+		return castType == SpellCastType::Power;
+	}
+
+	bool Spell::isSpell() const {
+		return castType == SpellCastType::Spell;
+	}
+
 	int Spell::getValue() const {
 		return DataHandler::get()->nonDynamicData->GMSTs[GMST::fSpellValueMult]->value.asFloat * magickaCost;
 	}

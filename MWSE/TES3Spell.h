@@ -90,6 +90,14 @@ namespace TES3 {
 		bool getAlwaysSucceeds() const;
 		void setAlwaysSucceeds(bool value);
 
+		bool isAbility() const;
+		bool isBlightDisease() const;
+		bool isCommonDisease() const;
+		bool isCurse() const;
+		bool isDisease() const;
+		bool isPower() const;
+		bool isSpell() const;
+
 		int getValue() const;
 
 		size_t getActiveEffectCount() const;
