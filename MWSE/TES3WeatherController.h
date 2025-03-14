@@ -54,6 +54,7 @@ namespace TES3 {
 		NI::Node* sgSunBase; // 0x4
 		NI::Node* sgSunGlare; // 0x8
 		int daysRemaining; // 0xC
+		bool unknown_0x10;
 		Weather* arrayWeathers[MAX_WEATHER_COUNT]; // 0x14
 		Weather* currentWeather; // 0x3C
 		Weather* nextWeather; // 0x40
