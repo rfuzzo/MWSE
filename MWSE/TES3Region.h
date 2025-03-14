@@ -47,8 +47,8 @@ namespace TES3 {
 		const char* getName() const;
 		void setName(const char* value);
 
-		unsigned char getWeatherChance(unsigned int);
-		void setWeatherChance(unsigned int, unsigned char);
+		unsigned char getWeatherChance(int) const;
+		void setWeatherChance(int, unsigned char);
 		
 		std::reference_wrapper<unsigned char[10]> getWeatherChances();
 
