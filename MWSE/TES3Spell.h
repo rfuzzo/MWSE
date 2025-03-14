@@ -92,8 +92,9 @@ namespace TES3 {
 
 		int getValue() const;
 
-		size_t getActiveEffectCount();
-		int getFirstIndexOfEffect(int effectId);
+		size_t getActiveEffectCount() const;
+		int getFirstIndexOfEffect(int effectId) const;
+		bool hasEffect(int effectId) const;
 
 		int calculateBasePuchaseCost() const;
 		float calculateCastChance_lua(sol::table params);

@@ -199,7 +199,7 @@ namespace TES3 {
 		return DataHandler::get()->nonDynamicData->GMSTs[GMST::fSpellValueMult]->value.asFloat * magickaCost;
 	}
 
-	size_t Spell::getActiveEffectCount() {
+	size_t Spell::getActiveEffectCount() const {
 		size_t count = 0;
 		for (size_t i = 0; i < 8; ++i) {
 			if (effects[i].effectID != TES3::EffectID::None) {
@@ -209,13 +209,17 @@ namespace TES3 {
 		return count;
 	}
 
-	int Spell::getFirstIndexOfEffect(int effectId) {
+	int Spell::getFirstIndexOfEffect(int effectId) const {
 		for (size_t i = 0; i < 8; ++i) {
 			if (effects[i].effectID == effectId) {
 				return i;
 			}
 		}
 		return -1;
+	}
+
+	bool Spell::hasEffect(int effectId) const {
+		return getFirstIndexOfEffect(effectId) != -1;
 	}
 
 	int Spell::calculateBasePuchaseCost() const {

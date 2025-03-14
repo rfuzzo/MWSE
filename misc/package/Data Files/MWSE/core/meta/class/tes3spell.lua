@@ -64,7 +64,7 @@ function tes3spell:getActiveEffectCount() end
 --- @return number result No description yet available.
 function tes3spell:getAutoCalcMagickaCost() end
 
---- Gets the first index of an effect ID in the spell effect table. Returns `-1` if provided effect doesn't exist in the spell
+--- Gets the first index of an effect ID in the spell effect table. Returns `-1` if provided effect doesn't exist in the spell.
 --- @param effectId tes3.effect|integer A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 --- @return integer index Returns 0-based index. Because Lua's arrays are 1-based, to index the spell's `effects` array with the return value add 1.
 function tes3spell:getFirstIndexOfEffect(effectId) end
@@ -78,4 +78,9 @@ function tes3spell:getLeastProficientEffect(actor) end
 --- @param actor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|tes3npc|tes3npcInstance The actor to calculate for. A mobile actor is preferred, as passing only a `tes3npc` will not use up to date skill information.
 --- @return tes3.magicSchool|nil schoolID The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
 function tes3spell:getLeastProficientSchool(actor) end
+
+--- Determines if the spell contains an effect with the given id.
+--- @param effectId tes3.effect|integer A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+--- @return boolean hasEffect Returns `true` if the spell contains the given effect id, otherwise `false`.
+function tes3spell:hasEffect(effectId) end
 

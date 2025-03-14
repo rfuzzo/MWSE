@@ -93,6 +93,7 @@ namespace mwse::lua {
 		usertypeDefinition["getFirstIndexOfEffect"] = &TES3::Spell::getFirstIndexOfEffect;
 		usertypeDefinition["getLeastProficientEffect"] = &TES3::Spell::getLeastProficientEffect_lua;
 		usertypeDefinition["getLeastProficientSchool"] = &TES3::Spell::getLeastProficientSchool_lua;
+		usertypeDefinition["hasEffect"] = &TES3::Spell::hasEffect;
 
 		// Convenient flag access.
 		usertypeDefinition["alwaysSucceeds"] = sol::property(&TES3::Spell::getAlwaysSucceeds, &TES3::Spell::setAlwaysSucceeds);

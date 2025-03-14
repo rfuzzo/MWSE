@@ -457,7 +457,7 @@ local result = myObject:getAutoCalcMagickaCost()
 ### `getFirstIndexOfEffect`
 <div class="search_terms" style="display: none">getfirstindexofeffect, firstindexofeffect</div>
 
-Gets the first index of an effect ID in the spell effect table. Returns `-1` if provided effect doesn't exist in the spell
+Gets the first index of an effect ID in the spell effect table. Returns `-1` if provided effect doesn't exist in the spell.
 
 ```lua
 local index = myObject:getFirstIndexOfEffect(effectId)
@@ -508,4 +508,23 @@ local schoolID = myObject:getLeastProficientSchool(actor)
 **Returns**:
 
 * `schoolID` ([tes3.magicSchool](../references/magic-schools.md), nil): The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
+
+***
+
+### `hasEffect`
+<div class="search_terms" style="display: none">haseffect, effect</div>
+
+Determines if the spell contains an effect with the given id.
+
+```lua
+local hasEffect = myObject:hasEffect(effectId)
+```
+
+**Parameters**:
+
+* `effectId` ([tes3.effect](../references/magic-effects.md), integer): A value from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
+
+**Returns**:
+
+* `hasEffect` (boolean): Returns `true` if the spell contains the given effect id, otherwise `false`.
 
