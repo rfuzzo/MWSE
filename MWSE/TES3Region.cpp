@@ -17,11 +17,6 @@ namespace TES3 {
 	// TES3::Region
 	//
 
-	const auto TES3_Region_changeWeather = reinterpret_cast<void(__thiscall*)(Region*, int)>(0x4812F0);
-	void Region::changeWeather(int weather) {
-		TES3_Region_changeWeather(this, weather);
-	}
-
 	const auto TES3_Region_randomizeWeather = reinterpret_cast<void(__thiscall*)(Region*)>(0x4812A0);
 	void Region::randomizeWeather() {
 		TES3_Region_randomizeWeather(this);
@@ -83,7 +78,7 @@ namespace TES3 {
 			return false;
 		}
 
-		changeWeather(index);
+		currentWeatherIndex = index;
 		return true;
 	}
 

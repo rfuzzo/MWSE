@@ -37,7 +37,6 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
-		void changeWeather(int);
 		void randomizeWeather();
 
 		//
