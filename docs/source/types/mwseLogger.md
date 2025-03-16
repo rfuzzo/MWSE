@@ -221,6 +221,21 @@ myObject:error(message, ...)
 
 ***
 
+### `getLevelStr`
+<div class="search_terms" style="display: none">getlevelstr, levelstr</div>
+
+Gets a `string` representation of the current logging level.
+
+```lua
+myObject:getLevelStr(level)
+```
+
+**Parameters**:
+
+* `level` (mwseLogger.LOG_LEVEL): *Optional*. If provided, a string representation of this logging level will be returned. If `nil`, then a string representation of the current logging level will be returned.
+
+***
+
 ### `info`
 <div class="search_terms" style="display: none">info</div>
 
@@ -466,10 +481,10 @@ local log = mwseLogger.new({ modName = ..., moduleName = ..., level = ..., logTo
 	* `modName` (string): *Optional*. The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided.
 	* `moduleName` (string): *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
 	* `level` (mwseLogger.LOG_LEVEL): *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
-	* `logToConsole` (bool): *Default*: `false`. Should the output also be written to the in-game console?
-	* `outputFile` (bool, string): *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
-	* `includeTimestamp` (bool): *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
-	* `abbreviateHeader` (bool): *Default*: `false`. Should the headers be abbreviated?
+	* `logToConsole` (boolean): *Default*: `false`. Should the output also be written to the in-game console?
+	* `outputFile` (boolean, string): *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
+	* `includeTimestamp` (boolean): *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
+	* `abbreviateHeader` (boolean): *Default*: `false`. Should the headers be abbreviated?
 	* `formatter` (fun(self: Logger, record: [mwseLogger.Record](../types/mwseLogger.Record.md), ...: string|any|fun(...)): string): *Optional*. A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used.
 
 **Returns**:

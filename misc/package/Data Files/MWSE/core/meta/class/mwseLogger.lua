@@ -58,13 +58,13 @@ mwseLogger = {}
 --- 
 --- `level`: mwseLogger.LOG_LEVEL? — *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
 --- 
---- `logToConsole`: bool? — *Default*: `false`. Should the output also be written to the in-game console?
+--- `logToConsole`: boolean? — *Default*: `false`. Should the output also be written to the in-game console?
 --- 
---- `outputFile`: bool|string|nil — *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
+--- `outputFile`: boolean|string|nil — *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
 --- 
---- `includeTimestamp`: bool? — *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
+--- `includeTimestamp`: boolean? — *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
 --- 
---- `abbreviateHeader`: bool? — *Default*: `false`. Should the headers be abbreviated?
+--- `abbreviateHeader`: boolean? — *Default*: `false`. Should the headers be abbreviated?
 --- 
 --- `formatter`: nil|fun(self: Logger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string — *Optional*. A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used.
 --- @return mwseLogger log The newly created logger.
@@ -75,10 +75,10 @@ function mwseLogger.new(params) end
 --- @field modName string? *Optional*. The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided.
 --- @field moduleName string? *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
 --- @field level mwseLogger.LOG_LEVEL? *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
---- @field logToConsole bool? *Default*: `false`. Should the output also be written to the in-game console?
---- @field outputFile bool|string|nil *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
---- @field includeTimestamp bool? *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
---- @field abbreviateHeader bool? *Default*: `false`. Should the headers be abbreviated?
+--- @field logToConsole boolean? *Default*: `false`. Should the output also be written to the in-game console?
+--- @field outputFile boolean|string|nil *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
+--- @field includeTimestamp boolean? *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
+--- @field abbreviateHeader boolean? *Default*: `false`. Should the headers be abbreviated?
 --- @field formatter nil|fun(self: Logger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string *Optional*. A custom formatter. This lets you customize how your logging messages are formatted. If not provided, the default formatter will be used.
 
 --- Assert a condition and log an error if it fails.
@@ -134,6 +134,10 @@ function mwseLogger:doLog(logLevel) end
 --- @param message string|fun(...): ... No description yet available.
 --- @param ... any? *Optional*. Formatting arguments. These are passed to `string.format`. Tables and userdata values are pretty printed.
 function mwseLogger:error(message, ...) end
+
+--- Gets a `string` representation of the current logging level.
+--- @param level mwseLogger.LOG_LEVEL? *Optional*. If provided, a string representation of this logging level will be returned. If `nil`, then a string representation of the current logging level will be returned.
+function mwseLogger:getLevelStr(level) end
 
 --- Log an `INFO` message. This will only be printed if the current logging level is `INFO` or higher.
 --- If multiple arguments are passed, then they will be passed to `string.format`.
