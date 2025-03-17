@@ -13,50 +13,71 @@ inspect = inspect.inspect
 local INSPECT_PARAMS = {
 	newline = ' ',
 	indent = '',
-	process = function (item, path)
+	process = function(item, path)
 		if path[#path] == inspect_METATABLE then
 			-- ignore metatables
-		else
+			return
+		end
+		
+		
+		local ty, subtype = type(item)
+
+		-- Check if it's a `table` or `userdata` with a `__tostring` metamethod
+		if ty == "table" or ty == "userdata" then
+
 			-- sol types have this magic property we can (ab)use
-			local _, subtype = type(item)
 			if subtype then
 				return fmt('%s("%s")', subtype, item)
-			else
-				return item
+			end
+
+			-- Some things incorrectly define the `__tostring` method on the object instead of its metatable.
+			-- But we'll play nice and support them anyway.
+			local tostr = item.__tostring
+			if not tostr then
+				---@type metatable|nil
+				local meta = getmetatable(item)
+
+				tostr = meta and meta.__tostring
+			end
+
+			if tostr then
+				-- sometimes people define their `__tostring` metamethods in a way that causes errors.
+				local status, str = pcall(tostr, item)
+
+				if status then
+					return str
+				end
 			end
 		end
+
+		return item
 	end
 }
 
+--- Recursively iterates through the `varargs` and replaces any `table`s and `userdata`s with
+--- 		a prettyprinted version.
+--- Other types of arguments are left unchanged.
+--- This function is also written so that it performs tail recursion.
+--- Credit to G7 for the idea.
+---@param val any The argument currently being processed.
+---@param ... any Arguments left to process.
+---@return string|any ... The processed arguments.
+local function prettyProcess(val, ...)
+	if type(val) == "table" or type(val) == "userdata" then
+		val = inspect(val, INSPECT_PARAMS)
+	end
+	if select("#", ...) > 0 then
+		-- Only issue a recursive call if there are more arguments to process.
+		-- Note that it is not sufficient to check if `...` is `nil`.
+		return val, prettyProcess(...)
+	else
+		return val
+	end
+end
+
 do -- Define the DEFAULT formatter
 
-	--- Recursively iterates through the `varargs` and replaces any `table`s and `userdata`s with
-	--- 		a prettyprinted version.
-	--- Other types of arguments are left unchanged.
-	--- This function is also written so that it performs tail recursion.
-	--- Credit to G7 for the idea.
-	---@param val any The argument currently being processed.
-	---@param ... any Arguments left to process.
-	---@return string|any ... The processed arguments.
-	local function prettyProcess(val, ...)
-		if type(val) == "table" or type(val) == "userdata" then
-			if select("#", ...) > 0 then
-				-- Only issue a recursive call if there are more arguments to process.
-				-- Note that it is not sufficient to check if `...` is `nil`.
-				return inspect(val, INSPECT_PARAMS), prettyProcess(...)
-			else
-				return inspect(val, INSPECT_PARAMS)
-			end
-		else
-			if select("#", ...) > 0 then
-				-- Only issue a recursive call if there are more arguments to process.
-				-- Note that it is not sufficient to check if `...` is `nil`.
-				return val, prettyProcess(...)
-			else
-				return val
-			end
-		end
-	end
+	
 
 	--- Expands the parameters, and calls `string.format` if more than one argument was given.
 	--- If `string.format` triggered an error (because invalid formatting parameters were passed),
@@ -122,7 +143,7 @@ do -- Define the DEFAULT formatter
 			-- proper string representation.
 			-- This results in some wasted computation, but this is only done
 			-- in the unlikely scenario where a logging message was improperly formatted.
-			argList[i] = fmt("\t\t%i) %s", i, inspect(val, INSPECT_PARAMS))
+			argList[i] = fmt("\t\t%i) %s", i, prettyProcess(val))
 		end
 
 		error(
@@ -171,7 +192,7 @@ do -- Define the `expandAllFunctions` formatter
 		for i = 1, select("#", ...) do
 			local v = select(i, ...)
 			if type(v) == "table" or type(v) == "userdata" then
-				table.insert(fmtArgs, inspect(v, INSPECT_PARAMS))
+				table.insert(fmtArgs, prettyProcess(v))
 			elseif v == nil then
 				table.insert(fmtArgs, tostring(v))
 			else
@@ -214,7 +235,7 @@ do -- Define the `expandAllFunctions` formatter
 				-- So, we still need to increment it once more at the end of this loop.
 				i = i + info.nparams
 			elseif vType == "table" or vType == "userdata" then
-				table.insert(fmtArgs, inspect(v, INSPECT_PARAMS))
+				table.insert(fmtArgs, prettyProcess(v))
 			-- `nil` will mess up the table packing and unpacking, so we treat it specially
 			elseif v == nil then
 				table.insert(fmtArgs, "nil")
