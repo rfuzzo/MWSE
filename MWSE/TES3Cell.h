@@ -219,8 +219,6 @@ namespace TES3 {
 		const char* getDisplayName() const;
 		std::string getEditorName() const;
 
-		void updateDynamicPointLight(NI::PointLight* light) const;
-
 		//
 		// Helper functions.
 		//
