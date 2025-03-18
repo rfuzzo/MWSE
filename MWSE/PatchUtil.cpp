@@ -1497,27 +1497,14 @@ namespace mwse::patch {
 	// Patch: Improve lights
 	//
 
-	const auto TES3_UpdateDynamicLightingForPointLight = reinterpret_cast<void(__cdecl*)(NI::PointLight * light, TES3::Cell * cell, int radius, int lightFlags, bool highPriority)>(0x4D2C20);
-
-	static void __cdecl PatchUpdateDynamicLightingForPointLight(NI::PointLight* light, TES3::Cell* cell, int radius, int lightFlags, bool highPriority) {
+	const auto TES3_DynamicLightingTest = reinterpret_cast<void(__cdecl*)(NI::PointLight * light, NI::Node * node, int radius, int lightFlags, bool isLand, bool highPriority)>(0x4D2F40);
+	static void __cdecl PatchDynamicLightingTest(NI::PointLight* light, NI::Node* node, int radius, int lightFlags, bool isLand, bool highPriority) {
 		if (!Configuration::ReplaceLightSorting) {
-			TES3_UpdateDynamicLightingForPointLight(light, cell, radius, lightFlags, highPriority);
+			TES3_DynamicLightingTest(light, node, radius, lightFlags, isLand, highPriority);
 			return;
 		}
 
-		if (light == nullptr) {
-			return;
-		}
-
-		// Ignore culled and 0-radius lights.
-		if (light->getAppCulled() || radius == 0) {
-			return;
-		}
-
-		// Allow blocking light updates.
-		const auto worldController = TES3::WorldController::get();
-		const auto menuController = worldController ? worldController->menuController : nullptr;
-		if (menuController == nullptr || menuController->getLightingUpdatesDisabled()) {
+		if (light == nullptr || node == nullptr) {
 			return;
 		}
 
@@ -1525,22 +1512,7 @@ namespace mwse::patch {
 		light->setFlag(highPriority, 3u);
 		light->specular = { float(radius), float(radius), float(radius) };
 
-		// Only update dynamic lights and lights from actors.
-		const auto lightReference = light->getTes3Reference(true);
-		const auto lightReferenceIsActor = lightReference && lightReference->baseObject->isActor();
-		const auto isDynamic = BITMASK_TEST(lightFlags, TES3::LightFlags::Dynamic);
-		if (!isDynamic && !lightReferenceIsActor) {
-			return;
-		}
-
-		// The player is always tested.
-		const auto macp = worldController->getMobilePlayer();
-		if (macp) {
-			macp->reference->updateDynamicPointLight(light);
-			macp->firstPersonReference->updateDynamicPointLight(light);
-		}
-
-		cell->updateDynamicPointLight(light);
+		node->updatePointLight(light, isLand);
 	}
 
 	//
@@ -2037,10 +2009,12 @@ namespace mwse::patch {
 		genCallUnprotected(0x4968E1 + 0x2, reinterpret_cast<DWORD>(PatchUnequipIndexedProjectile));
 
 		// Patch: Update dynamic lights to implement custom light sorting.
-		genCallEnforced(0x485BF0, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
-		genCallEnforced(0x485C2A, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
-		genCallEnforced(0x4D2C07, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
-		genCallEnforced(0x4EB9E4, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
+		genCallEnforced(0x485B60, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
+		genCallEnforced(0x4D2C9C, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
+		genCallEnforced(0x4D2D04, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
+		genCallEnforced(0x4D2D9F, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
+		genCallEnforced(0x4D2F10, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
+		genCallEnforced(0x4D3350, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
 	}
 
 	void installPostLuaPatches() {

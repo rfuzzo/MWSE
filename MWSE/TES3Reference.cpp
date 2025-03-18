@@ -228,7 +228,7 @@ namespace TES3 {
 
 	void Reference::updateDynamicPointLight(NI::PointLight* light) const {
 		if (sceneNode) {
-			sceneNode->updatePointLight(light);
+			sceneNode->updatePointLight(light, false);
 		}
 	}
 

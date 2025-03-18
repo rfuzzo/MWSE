@@ -43,8 +43,8 @@ namespace NI {
 		static constexpr auto LIGHT_LIMIT = 8;
 
 		bool shouldBeAffectedByLight(const NI::PointLight* light) const;
-		void updatePointLight(PointLight* light);
-		void sortDynamicEffects();
+		void updatePointLight(PointLight* light, bool isLand);
+		void sortDynamicEffects(bool isLand);
 	};
 	static_assert(sizeof(Node) == 0xB0, "NI::Node failed size validation");
 

@@ -326,7 +326,7 @@ namespace TES3 {
 		if (landscape && landscape->sceneNode) {
 			for (auto& child : landscape->sceneNode->children) {
 				if (child && child->isInstanceOfType(NI::RTTIStaticPtr::NiNode)) {
-					static_cast<NI::Node*>(child.get())->updatePointLight(light);
+					static_cast<NI::Node*>(child.get())->updatePointLight(light, true);
 				}
 			}
 		}
