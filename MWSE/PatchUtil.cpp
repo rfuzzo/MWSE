@@ -41,6 +41,7 @@
 #include "NIFlipController.h"
 #include "NILinesData.h"
 #include "NIPick.h"
+#include "NIPointLight.h"
 #include "NISortAdjustNode.h"
 #include "NITriShape.h"
 #include "NITriShapeData.h"
@@ -1493,6 +1494,56 @@ namespace mwse::patch {
 	constexpr size_t PatchUnequipIndexedProjectileSetup_size = 0x2;
 
 	//
+	// Patch: Improve lights
+	//
+
+	const auto TES3_UpdateDynamicLightingForPointLight = reinterpret_cast<void(__cdecl*)(NI::PointLight * light, TES3::Cell * cell, int radius, int lightFlags, bool highPriority)>(0x4D2C20);
+
+	static void __cdecl PatchUpdateDynamicLightingForPointLight(NI::PointLight* light, TES3::Cell* cell, int radius, int lightFlags, bool highPriority) {
+		if (!Configuration::ReplaceLightSorting) {
+			TES3_UpdateDynamicLightingForPointLight(light, cell, radius, lightFlags, highPriority);
+			return;
+		}
+
+		if (light == nullptr) {
+			return;
+		}
+
+		// Ignore culled and 0-radius lights.
+		if (light->getAppCulled() || radius == 0) {
+			return;
+		}
+
+		// Allow blocking light updates.
+		const auto worldController = TES3::WorldController::get();
+		const auto menuController = worldController ? worldController->menuController : nullptr;
+		if (menuController == nullptr || menuController->getLightingUpdatesDisabled()) {
+			return;
+		}
+
+		// Store information about the light into the light itself. Because that's what Morrowind does.
+		light->setFlag(highPriority, 3u);
+		light->specular = { float(radius), float(radius), float(radius) };
+
+		// Only update dynamic lights and lights from actors.
+		const auto lightReference = light->getTes3Reference(true);
+		const auto lightReferenceIsActor = lightReference && lightReference->baseObject->isActor();
+		const auto isDynamic = BITMASK_TEST(lightFlags, TES3::LightFlags::Dynamic);
+		if (!isDynamic && !lightReferenceIsActor) {
+			return;
+		}
+
+		// The player is always tested.
+		const auto macp = worldController->getMobilePlayer();
+		if (macp) {
+			macp->reference->updateDynamicPointLight(light);
+			macp->firstPersonReference->updateDynamicPointLight(light);
+		}
+
+		cell->updateDynamicPointLight(light);
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1984,6 +2035,12 @@ namespace mwse::patch {
 		genNOPUnprotected(0x4968E1, 0x4968FB - 0x4968E1);
 		writePatchCodeUnprotected(0x4968E1, (BYTE*)&PatchUnequipIndexedProjectileSetup, PatchUnequipIndexedProjectileSetup_size);
 		genCallUnprotected(0x4968E1 + 0x2, reinterpret_cast<DWORD>(PatchUnequipIndexedProjectile));
+
+		// Patch: Update dynamic lights to implement custom light sorting.
+		genCallEnforced(0x485BF0, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
+		genCallEnforced(0x485C2A, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
+		genCallEnforced(0x4D2C07, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
+		genCallEnforced(0x4EB9E4, 0x4D2C20, reinterpret_cast<DWORD>(PatchUpdateDynamicLightingForPointLight));
 	}
 
 	void installPostLuaPatches() {

@@ -9,6 +9,7 @@
 
 #include "TES3DataHandler.h"
 #include "TES3GameSetting.h"
+#include "TES3Land.h"
 #include "TES3Region.h"
 
 namespace TES3 {
@@ -306,6 +307,29 @@ namespace TES3 {
 		}
 
 		return std::move(ss.str());
+	}
+
+	void Cell::updateDynamicPointLight(NI::PointLight* light) const {
+		// Update all references in the cell.
+		for (auto reference : actors) {
+			reference->updateDynamicPointLight(light);
+		}
+		for (auto reference : persistentRefs) {
+			reference->updateDynamicPointLight(light);
+		}
+		for (auto reference : temporaryRefs) {
+			reference->updateDynamicPointLight(light);
+		}
+
+		// If we're in an exterior, also update the land nodes.
+		const auto landscape = getLandscape();
+		if (landscape && landscape->sceneNode) {
+			for (auto& child : landscape->sceneNode->children) {
+				if (child && child->isInstanceOfType(NI::RTTIStaticPtr::NiNode)) {
+					static_cast<NI::Node*>(child.get())->updatePointLight(light);
+				}
+			}
+		}
 	}
 
 	bool Cell::isPointInCell(float x, float y) const {

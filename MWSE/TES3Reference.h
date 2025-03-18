@@ -138,6 +138,7 @@ namespace TES3 {
 		LightAttachmentNode* getAttachedDynamicLight();
 		LightAttachmentNode* getOrCreateAttachedDynamicLight_lua(sol::optional<NI::PointLight*> light, sol::optional<float> value);
 		NI::Pointer<NI::Light> getAttachedNiLight();
+		void updateDynamicPointLight(NI::PointLight* light) const;
 
 		bool isLeveledSpawn();
 

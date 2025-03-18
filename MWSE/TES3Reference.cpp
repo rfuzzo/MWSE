@@ -226,6 +226,12 @@ namespace TES3 {
 		return nullptr;
 	}
 
+	void Reference::updateDynamicPointLight(NI::PointLight* light) const {
+		if (sceneNode) {
+			sceneNode->updatePointLight(light);
+		}
+	}
+
 	bool Reference::isLeveledSpawn() {
 		return getLeveledBaseReference() != nullptr;
 	}
