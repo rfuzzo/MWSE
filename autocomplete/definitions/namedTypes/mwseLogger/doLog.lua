@@ -3,15 +3,14 @@ return {
 	deprecated = true,
 	description = [[
 		Returns true if the messages of the given log level will be logged.
-		The preferred way of doing this is to access `log.level` directly and compare it with the log level constants. E.g.,
+		This method is deprecated. It is recommended to either use 
+		[lazy evaluation](../guides/logging.md#passing-functions-to-the-logging-methods)
+		or check the logging level directly, e.g.:
 		```lua
-		local Logger = require("Logger")
-		local log = Logger.new()
 		if log.level >= mwse.LOG_LEVEL.DEBUG then 
-			-- do sstuff
+			-- do stuff
 		end
 		```
-		However, in practice this shouldn't be all that necessary due to the ability to lazy-evaluate the arguments to the logging functions.
 	]],
 	arguments = {
 		{ name = "logLevel", type = "mwseLoggerLogLevel", description = [[Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".]] },

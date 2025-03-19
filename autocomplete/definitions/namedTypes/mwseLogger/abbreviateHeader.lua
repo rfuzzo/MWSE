@@ -5,7 +5,7 @@ For example, suppose the following log message is written on line `20` of the fi
 ```lua
 log("My message")
 ```
-Then the resulting log statements would be:
+Then the resulting output to MWSE.log would be:
 ```
 -- abbreviateHeader == true:
 [My Mod | s/p/c/swords:20  | D] My message

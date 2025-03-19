@@ -25,9 +25,9 @@ log:debug("my message")
 ```
 The above message will then be written to `MWSE.log` in the following format:
 ```
-[My Awesome Mod | main.lua:6  | DEBUG] my message
+[My Awesome Mod | main.lua | DEBUG] my message
 ```
-The information in the header says that this log message was written on line 6 of the `main.lua` file of a mod called `"My Awesome Mod"`.
+The information in the header says that this log message was written in the `main.lua` file of a mod called `"My Awesome Mod"`.
 All of this information is captured automatically behind the scenes. In particular, the mod name will be loaded from your mod's [metadata file](../guides/metadata.md) if it has one.
 
 ### Writing More Useful Log Messages
@@ -39,7 +39,7 @@ log:debug("myData = %s.", myData)
 ```
 outputs
 ```
-[My Awesome Mod | main.lua:10  | DEBUG] myData = { date = "2025-03-02", x = 1, y = 20 }.
+[My Awesome Mod | main.lua | DEBUG] myData = { date = "2025-03-02", x = 1, y = 20 }.
 ```
 Internally, the logging methods convert their arguments into useful, human-readable text representations and then pass them to [`string.format`](../apis/string.md#stringformat).
 
@@ -143,9 +143,9 @@ end)
 ```
 yields
 ```
-[My Awesome Mod | main.lua:40  | DEBUG | 00:00.343] In main.lua!
+[My Awesome Mod | main.lua | DEBUG | 00:00.343] In main.lua!
 ... -- other messages
-[My Awesome Mod | main.lua:42  | DEBUG | 00:04.250] Game has initialized!
+[My Awesome Mod | main.lua | DEBUG | 00:04.250] Game has initialized!
 ```
 This can also be used as an easy way to time certain functions:
 ```lua
@@ -182,8 +182,16 @@ This will display logs in different colors according to their log level.
 ### Line Numbers
 
 In the MCM page of the script extender, there is an option to line numbers in log messages.
-This can make it easier to  
-This will display logs in different colors according to their log level.
+This can make it easier to track down a specific location in which a log message was written.
+For example, writing the following log statement on line 215
+```lua
+log("Here!")
+```
+prints the following text to `MWSE.log`:
+```
+[My Awesome Mod | main.lua:215 | DEBUG] Here!
+```
+Note that enabling line numbers does incur a performance penalty, which is why it is enabled for default.
 
 ## Creating a new Logger
 The simplest way to create a new logger is to simply call `Logger.new()` and have all the relevant information be retrieved automatically.

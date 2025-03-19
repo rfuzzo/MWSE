@@ -14,7 +14,7 @@
 --- ```lua
 --- log("My message")
 --- ```
---- Then the resulting log statements would be:
+--- Then the resulting output to MWSE.log would be:
 --- ```
 --- -- abbreviateHeader == true:
 --- [My Mod | s/p/c/swords:20  | D] My message
@@ -48,6 +48,23 @@
 --- 
 --- Setting this to `true` is the same as writing `log.outputFile = log.modDir`.
 mwseLogger = {}
+
+--- Gets a logger associated with a particular `modDir`. You can also filter by `filepath` as well.
+--- @param modDir string The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
+--- @param filepath string? *Optional*. The filepath to retrieve the logger for. This is relative to `modDir` and corresponds to the `filepath` field of the logger to retrieve.
+--- @return mwseLogger|nil logger The logger, if it exists.
+function mwseLogger.get(modDir, filepath) end
+
+--- Gets a logger with a specific `modName`. You should use `mwseLogger.get` instead.
+--- @deprecated
+--- @param modName string The name of the mod to retrieve the logger for.
+--- @return mwseLogger|nil logger The logger, if it exists.
+function mwseLogger.getLogger(modName) end
+
+--- Gets all the loggers registered to a particular `modDir`.
+--- @param modDir string The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
+--- @return mwseLogger[]|nil logger The loggers, if they exist.
+function mwseLogger.getLoggers(modDir) end
 
 --- Creates a new logger based on the input parameters.
 --- @param params mwseLogger.new.params? This table accepts the following values:
@@ -106,15 +123,14 @@ function mwseLogger:assert(condition, message, ...) end
 function mwseLogger:debug(message, ...) end
 
 --- 		Returns true if the messages of the given log level will be logged.
---- 		The preferred way of doing this is to access `log.level` directly and compare it with the log level constants. E.g.,
+--- 		This method is deprecated. It is recommended to either use 
+--- 		[lazy evaluation](../guides/logging.md#passing-functions-to-the-logging-methods)
+--- 		or check the logging level directly, e.g.:
 --- 		```lua
---- 		local Logger = require("Logger")
---- 		local log = Logger.new()
 --- 		if log.level >= mwse.LOG_LEVEL.DEBUG then 
---- 			-- do sstuff
+--- 			-- do stuff
 --- 		end
 --- 		```
---- 		However, in practice this shouldn't be all that necessary due to the ability to lazy-evaluate the arguments to the logging functions.
 --- 	
 --- @deprecated
 --- @param logLevel mwseLoggerLogLevel Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".

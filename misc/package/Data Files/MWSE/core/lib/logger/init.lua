@@ -74,8 +74,7 @@ local LOG_LEVEL_ABBREVIATED_COLOR_STRINGS = {
 	[LOG_LEVEL.TRACE] = "\x1B[0m\x1B[1m\x1B[37mT\x1B[0m",
 }
 
--- Define various things that will be moved into the official documtation system
--- once the API has been finalized.
+
 do 
 
 --- A function that handles the formatting of log messages, given the `logger`, a `record`, and the log function parameters.
@@ -650,11 +649,6 @@ function Logger:setModuleName(newModuleName)
 	self.moduleName = newModuleName
 end
 
-
---[[Get a previously registered logger with the specified `modDir`. You can optionally specify a filepath.]]
----@param modDir string name of the mod
----@param filepath string? the relative filepath of this logger
----@return mwseLogger? logger
 function Logger.get(modDir, filepath)
 	local arr = registeredLoggers[modDir]
 	if not arr then return end
@@ -666,7 +660,7 @@ function Logger.get(modDir, filepath)
 	end
 end
 
----@deprecated Use Logger.get
+---@deprecated 
 function Logger.getLogger(modName)
 	for _, arr in pairs(registeredLoggers) do
 		if arr[1] and arr[1].sharedData.modName == modName then
@@ -679,7 +673,7 @@ end
 
 
 
----@deprecated Use compare the `level` field directly with `mwseLogger.LOG_LEVEL.DEBUG` (etc.)
+---@deprecated
 function Logger:doLog(level)
 	if LOG_LEVEL[level] then
 		return self.sharedData.level >= LOG_LEVEL[level]
@@ -688,16 +682,12 @@ function Logger:doLog(level)
 	end
 end
 
---- Gets a string representation of a given logging level.
----@param level mwseLogger.LOG_LEVEL? The logging level to get the string for. Default: `self.level`.
----@return string
 function Logger:getLevelStr(level)
 	return LOG_LEVEL_STRINGS[level or self.level]
 end
 
 
---- Returns all the loggers for a given mod directory (can pass a Logger as well).
----@param modDirOrLogger string|mwseLogger
+
 function Logger.getLoggers(modDirOrLogger)
 	if type(modDirOrLogger) == "string" then
 		return registeredLoggers[modDirOrLogger]
@@ -843,14 +833,6 @@ Logger.none = nil
 --This is so that the line numbers are pulled correctly when using the metamethod.
 LoggerMeta.__call = Logger.debug
 
----@generic T, S, A
---- Wrapper for `assert`
----@param v T 
----@param msg string|any
----@param ... A
----@return T condition
----@return string|S str
----@return A? ...
 function Logger:assert(v, msg, ...)
 	if v then return v, msg, ... end
 

@@ -22,7 +22,7 @@ For example, suppose the following log message is written on line `20` of the fi
 ```lua
 log("My message")
 ```
-Then the resulting log statements would be:
+Then the resulting output to MWSE.log would be:
 ```
 -- abbreviateHeader == true:
 [My Mod | s/p/c/swords:20  | D] My message
@@ -465,6 +465,45 @@ myObject:writeInitMessage(version)
 ***
 
 ## Functions
+
+### `get`
+<div class="search_terms" style="display: none">get</div>
+
+Gets a logger associated with a particular `modDir`. You can also filter by `filepath` as well.
+
+```lua
+local logger = mwseLogger.get(modDir, filepath)
+```
+
+**Parameters**:
+
+* `modDir` (string): The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
+* `filepath` (string): *Optional*. The filepath to retrieve the logger for. This is relative to `modDir` and corresponds to the `filepath` field of the logger to retrieve.
+
+**Returns**:
+
+* `logger` ([mwseLogger](../types/mwseLogger.md), nil): The logger, if it exists.
+
+***
+
+### `getLoggers`
+<div class="search_terms" style="display: none">getloggers, loggers</div>
+
+Gets all the loggers registered to a particular `modDir`.
+
+```lua
+local logger = mwseLogger.getLoggers(modDir)
+```
+
+**Parameters**:
+
+* `modDir` (string): The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
+
+**Returns**:
+
+* `logger` ([mwseLogger](../types/mwseLogger.md)[], nil): The loggers, if they exist.
+
+***
 
 ### `new`
 <div class="search_terms" style="display: none">new</div>
