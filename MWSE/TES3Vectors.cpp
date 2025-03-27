@@ -103,6 +103,14 @@ namespace TES3 {
 		return *this;
 	}
 
+	Vector2 Vector2::min(const Vector2& other) const {
+		return Vector2(std::min(x, other.x), std::min(y, other.y));
+	}
+
+	Vector2 Vector2::max(const Vector2& other) const {
+		return Vector2(std::max(x, other.x), std::max(y, other.y));
+	}
+
 	float Vector2::length() const {
 		return sqrt(x * x + y * y);
 	}
@@ -260,6 +268,14 @@ namespace TES3 {
 
 	Vector3 Vector3::copy() const {
 		return *this;
+	}
+
+	Vector3 Vector3::min(const Vector3& other) const {
+		return Vector3(std::min(x, other.x), std::min(y, other.y), std::min(z, other.z));
+	}
+
+	Vector3 Vector3::max(const Vector3& other) const {
+		return Vector3(std::max(x, other.x), std::max(y, other.y), std::max(z, other.z));
 	}
 
 	NI::Color Vector3::toNiColor() const {
@@ -445,6 +461,14 @@ namespace TES3 {
 
 	Vector4 Vector4::copy() const {
 		return *this;
+	}
+
+	Vector4 Vector4::min(const Vector4& other) const {
+		return Vector4(std::min(x, other.x), std::min(y, other.y), std::min(z, other.z), std::min(w, other.w));
+	}
+
+	Vector4 Vector4::max(const Vector4& other) const {
+		return Vector4(std::max(x, other.x), std::max(y, other.y), std::max(z, other.z), std::max(w, other.w));
 	}
 
 	float Vector4::distance(const Vector4* vec4) const {

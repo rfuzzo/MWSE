@@ -118,6 +118,16 @@ function tes3vector3:length() end
 --- @return tes3vector3 lerpedVector The calculated value.
 function tes3vector3:lerp(toVector, transition) end
 
+--- Returns a vector containing the maximum values for each component of the given vectors.
+--- @param other tes3vector3 No description yet available.
+--- @return tes3vector3 result No description yet available.
+function tes3vector3:max(other) end
+
+--- Returns a vector containing the minimum values for each component of the given vectors.
+--- @param other tes3vector3 No description yet available.
+--- @return tes3vector3 result No description yet available.
+function tes3vector3:min(other) end
+
 --- Negates all values in the vector.
 function tes3vector3:negate() end
 

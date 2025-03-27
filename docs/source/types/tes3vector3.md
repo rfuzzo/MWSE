@@ -445,6 +445,44 @@ local lerpedVector = myObject:lerp(toVector, transition)
 
 ***
 
+### `max`
+<div class="search_terms" style="display: none">max</div>
+
+Returns a vector containing the maximum values for each component of the given vectors.
+
+```lua
+local result = myObject:max(other)
+```
+
+**Parameters**:
+
+* `other` ([tes3vector3](../types/tes3vector3.md))
+
+**Returns**:
+
+* `result` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
+### `min`
+<div class="search_terms" style="display: none">min</div>
+
+Returns a vector containing the minimum values for each component of the given vectors.
+
+```lua
+local result = myObject:min(other)
+```
+
+**Parameters**:
+
+* `other` ([tes3vector3](../types/tes3vector3.md))
+
+**Returns**:
+
+* `result` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
 ### `negate`
 <div class="search_terms" style="display: none">negate</div>
 

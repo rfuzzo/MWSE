@@ -56,6 +56,8 @@ namespace mwse::lua {
 			usertypeDefinition["length"] = &TES3::Vector2::length;
 			usertypeDefinition["normalize"] = &TES3::Vector2::normalize;
 			usertypeDefinition["normalized"] = &TES3::Vector2::normalized;
+			usertypeDefinition["min"] = &TES3::Vector2::min;
+			usertypeDefinition["max"] = &TES3::Vector2::max;
 		}
 
 		// Binding for TES3::Vector3.
@@ -112,6 +114,8 @@ namespace mwse::lua {
 			usertypeDefinition["normalize"] = &TES3::Vector3::normalize;
 			usertypeDefinition["normalized"] = &TES3::Vector3::normalized;
 			usertypeDefinition["interpolate"] = &TES3::Vector3::interpolate;
+			usertypeDefinition["min"] = &TES3::Vector3::min;
+			usertypeDefinition["max"] = &TES3::Vector3::max;
 
 			// Conversion to NI::Color.
 			usertypeDefinition["toColor"] = &TES3::Vector3::toNiColor;
@@ -147,6 +151,8 @@ namespace mwse::lua {
 			usertypeDefinition["distanceChebyshev"] = &TES3::Vector4::distanceChebyshev;
 			usertypeDefinition["distanceManhattan"] = &TES3::Vector4::distanceManhattan;
 			usertypeDefinition["length"] = &TES3::Vector4::length;
+			usertypeDefinition["min"] = &TES3::Vector4::min;
+			usertypeDefinition["max"] = &TES3::Vector4::max;
 		}
 
 		// Binding for TES3::BoundingBox.

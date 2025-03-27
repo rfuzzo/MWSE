@@ -35,6 +35,8 @@ namespace TES3 {
 		std::string toJson() const;
 
 		Vector2 copy() const;
+		Vector2 min(const Vector2& other) const;
+		Vector2 max(const Vector2& other) const;
 
 		float length() const;
 		bool normalize();
@@ -82,6 +84,9 @@ namespace TES3 {
 		//
 
 		Vector3 copy() const;
+		Vector3 min(const Vector3& other) const;
+		Vector3 max(const Vector3& other) const;
+
 		NI::Color toNiColor() const;
 
 		Vector3 crossProduct(const Vector3*) const;
@@ -136,6 +141,8 @@ namespace TES3 {
 		std::string toJson() const;
 
 		Vector4 copy() const;
+		Vector4 min(const Vector4& other) const;
+		Vector4 max(const Vector4& other) const;
 
 		float distance(const Vector4*) const;
 		float distanceChebyshev(const Vector4*) const;
