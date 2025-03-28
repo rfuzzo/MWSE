@@ -581,6 +581,81 @@ local vector = tes3vector3.new(x, y, z)
 
 ***
 
+### `ones`
+<div class="search_terms" style="display: none">ones</div>
+
+Creates a new vector with all components set to 1.
+
+```lua
+local vector = tes3vector3.ones()
+```
+
+**Returns**:
+
+* `vector` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
+### `unitX`
+<div class="search_terms" style="display: none">unitx</div>
+
+Creates a new vector pointing along the positive X axis.
+
+```lua
+local vector = tes3vector3.unitX()
+```
+
+**Returns**:
+
+* `vector` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
+### `unitY`
+<div class="search_terms" style="display: none">unity</div>
+
+Creates a new vector pointing along the positive Y axis.
+
+```lua
+local vector = tes3vector3.unitY()
+```
+
+**Returns**:
+
+* `vector` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
+### `unitZ`
+<div class="search_terms" style="display: none">unitz</div>
+
+Creates a new vector pointing along the positive Z axis.
+
+```lua
+local vector = tes3vector3.unitZ()
+```
+
+**Returns**:
+
+* `vector` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
+### `zeroes`
+<div class="search_terms" style="display: none">zeroes</div>
+
+Creates a new vector with all components set to 0.
+
+```lua
+local vector = tes3vector3.zeroes()
+```
+
+**Returns**:
+
+* `vector` ([tes3vector3](../types/tes3vector3.md))
+
+***
+
 ## Math Operations
 
 ### Addition (`+`)

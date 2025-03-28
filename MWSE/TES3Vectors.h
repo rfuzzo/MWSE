@@ -44,8 +44,14 @@ namespace TES3 {
 		float distanceChebyshev(const Vector2*) const;
 		float distanceManhattan(const Vector2*) const;
 
-
 		Vector2 normalized() const;
+
+		const static Vector2 UNIT_X;
+		const static Vector2 UNIT_NEG_X;
+		const static Vector2 UNIT_Y;
+		const static Vector2 UNIT_NEG_Y;
+		const static Vector2 ONES;
+		const static Vector2 ZEROES;
 	};
 	static_assert(sizeof(Vector2) == 0x8, "TES3::Vector2 failed size validation");
 
@@ -115,6 +121,8 @@ namespace TES3 {
 		const static Vector3 UNIT_NEG_Y;
 		const static Vector3 UNIT_Z;
 		const static Vector3 UNIT_NEG_Z;
+		const static Vector3 ONES;
+		const static Vector3 ZEROES;
 
 	};
 	static_assert(sizeof(Vector3) == 0xC, "TES3::Vector3 failed size validation");
@@ -221,6 +229,7 @@ namespace TES3 {
 
 		bool reorthogonalize();
 
+		const static Matrix33 IDENTITY;
 	};
 	static_assert(sizeof(Matrix33) == 0x24, "TES3::Matrix33 failed size validation");
 
@@ -257,6 +266,7 @@ namespace TES3 {
 
 		void toZero();
 
+		const static Matrix44 IDENTITY;
 	};
 	static_assert(sizeof(Matrix44) == 0x40, "TES3::Matrix44 failed size validation");
 

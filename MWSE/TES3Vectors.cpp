@@ -9,6 +9,12 @@ namespace TES3 {
 	//
 	// Vector2
 	//
+	const Vector2 Vector2::UNIT_X = { 1.0f, 0.0f };
+	const Vector2 Vector2::UNIT_NEG_X = { -1.0f, 0.0f };
+	const Vector2 Vector2::UNIT_Y = { 0.0f, 1.0f };
+	const Vector2 Vector2::UNIT_NEG_Y = { 0.0f, -1.0f };
+	const Vector2 Vector2::ONES = { 1.0f, 1.0f };
+	const Vector2 Vector2::ZEROES = { 0.0f, 0.0f };
 
 	Vector2::Vector2() :
 		x(0),
@@ -143,6 +149,8 @@ namespace TES3 {
 	const Vector3 Vector3::UNIT_NEG_Y = { 0.0f, -1.0f, 0.0f };
 	const Vector3 Vector3::UNIT_Z = { 0.0f, 0.0f, 1.0f };
 	const Vector3 Vector3::UNIT_NEG_Z = { 0.0f, 0.0f, -1.0f };
+	const Vector3 Vector3::ONES = { 1.0f, 1.0f, 1.0f };
+	const Vector3 Vector3::ZEROES = { 0.0f, 0.0f, 0.0f };
 
 	Vector3::Vector3() :
 		x(0.0f),
@@ -528,6 +536,12 @@ namespace TES3 {
 
 	const auto NI_Quaternion_FromRotation = reinterpret_cast<TES3::Matrix33 * (__thiscall*)(const NI::Quaternion*, TES3::Matrix33*)>(0x6FBEF0);
 
+	const Matrix33 Matrix33::IDENTITY = { 
+		1.0f, 0.0f, 0.0f, 
+		0.0f, 1.0f, 0.0f, 
+		0.0f, 0.0f, 1.0f 
+	};
+
 	Matrix33::Matrix33() : m0(), m1(), m2() {
 
 	}
@@ -779,6 +793,13 @@ namespace TES3 {
 	//
 	// Matrix44
 	//
+
+	const Matrix44 Matrix44::IDENTITY = { 
+		1.0f, 0.0f, 0.0f, 0.0f, 
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f, 
+		0.0f, 0.0f, 0.0f, 1.0f 
+	};
 
 	Matrix44::Matrix44() :
 		m0(),

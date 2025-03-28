@@ -29,6 +29,26 @@ tes3vector3 = {}
 --- @return tes3vector3 vector No description yet available.
 function tes3vector3.new(x, y, z) end
 
+--- Creates a new vector with all components set to 1.
+--- @return tes3vector3 vector No description yet available.
+function tes3vector3.ones() end
+
+--- Creates a new vector pointing along the positive X axis.
+--- @return tes3vector3 vector No description yet available.
+function tes3vector3.unitX() end
+
+--- Creates a new vector pointing along the positive Y axis.
+--- @return tes3vector3 vector No description yet available.
+function tes3vector3.unitY() end
+
+--- Creates a new vector pointing along the positive Z axis.
+--- @return tes3vector3 vector No description yet available.
+function tes3vector3.unitZ() end
+
+--- Creates a new vector with all components set to 0.
+--- @return tes3vector3 vector No description yet available.
+function tes3vector3.zeroes() end
+
 --- Converts the vector to a string with 2 decimal places.
 --- @return string result No description yet available.
 function tes3vector3:__tostring() end
