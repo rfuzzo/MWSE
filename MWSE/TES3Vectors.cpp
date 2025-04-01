@@ -950,13 +950,6 @@ namespace TES3 {
 
 	}
 
-	BoundingBox::BoundingBox(const NI::Node* node) {
-		constexpr auto huge = std::numeric_limits<float>::max();
-		minimum = { huge, huge, huge };
-		maximum = { -huge, -huge, -huge };
-		node->updateBoundingBox(*this);
-	}
-
 	bool BoundingBox::operator==(const BoundingBox& other) const {
 		return minimum == other.minimum && maximum == other.maximum;
 	}

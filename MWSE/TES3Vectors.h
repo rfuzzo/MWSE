@@ -278,7 +278,6 @@ namespace TES3 {
 		BoundingBox(const Vector3& min, const Vector3& max);
 		BoundingBox(const BoundingBox& bbox);
 		BoundingBox(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
-		BoundingBox(const NI::Node* node);
 
 		bool operator==(const BoundingBox& other) const;
 		bool operator!=(const BoundingBox& other) const;
