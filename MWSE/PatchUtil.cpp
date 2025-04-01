@@ -1920,6 +1920,7 @@ namespace mwse::patch {
 		writePatchCodeUnprotected(0x4968E1, (BYTE*)&PatchUnequipIndexedProjectileSetup, PatchUnequipIndexedProjectileSetup_size);
 		genCallUnprotected(0x4968E1 + 0x2, reinterpret_cast<DWORD>(PatchUnequipIndexedProjectile));
 
+#if false
 		// Patch: Update dynamic lights to implement custom light sorting.
 		genCallEnforced(0x485B60, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
 		genCallEnforced(0x4D2C9C, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
@@ -1927,6 +1928,7 @@ namespace mwse::patch {
 		genCallEnforced(0x4D2D9F, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
 		genCallEnforced(0x4D2F10, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
 		genCallEnforced(0x4D3350, 0x4D2F40, reinterpret_cast<DWORD>(PatchDynamicLightingTest));
+#endif
 	}
 
 	void installPostLuaPatches() {
