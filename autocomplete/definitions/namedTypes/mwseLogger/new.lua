@@ -6,12 +6,12 @@ return {
 		type = "table",
 		optional = true,
 		tableParams = {
-			{ name = "modName", 	type = "string", optional = true, description = "The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided." },
-			{ name = "moduleName", 	type = "string", optional = true, description = "The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses."},
+			{ name = "modName", type = "string", optional = true, description = "The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided." },
+			{ name = "moduleName", type = "string", optional = true, description = "The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses."},
 			
-			{ name = "level", 	     type = "mwseLogger.LOG_LEVEL", optional = true, default = "mwseLogger.LOG_LEVEL.DEBUG", description = "The logging level for all loggers associated to this mod." },
-			{ name = "logToConsole", type = "boolean", 			    optional = true, default = false, 					     description = "Should the output also be written to the in-game console?" },
-			{ name = "outputFile", 	 type = "boolean|string", 			optional = true, default = false, 					     description = "The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path." },
+			{ name = "level", type = "mwseLogger.LOG_LEVEL", optional = true, default = "mwseLogger.LOG_LEVEL.INFO", description = "The logging level for all loggers associated to this mod." },
+			{ name = "logToConsole", type = "boolean", optional = true, default = false, description = "Should the output also be written to the in-game console?" },
+			{ name = "outputFile", type = "boolean|string", optional = true, default = false, description = "The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path." },
 			
 			{ name = "includeTimestamp", type = "boolean", optional = true, default = true, description = "Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched." },
 			{ name = "abbreviateHeader", type = "boolean", optional = true, default = false, description = "Should the headers be abbreviated?" },

@@ -5,6 +5,6 @@ return {
 		{ name = "modDir", type = "string",  description = [[The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.]] }
 	},
 	returns = {
-		{ name = "logger", type = "mwseLogger[]|nil", description = "The loggers, if they exist." }
+		{ name = "loggers", type = "mwseLogger[]|nil", description = "The loggers, if they exist." }
 	}
 }

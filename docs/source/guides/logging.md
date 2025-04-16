@@ -1,12 +1,12 @@
 # Logging
 
-The MWSE Logger library allows you to create a logger for your mod. It can be a helpful tool when debugging mods, and has designed to be simple to use. 
+The MWSE Logger library allows you to create a logger for your mod. It can be a helpful tool when debugging mods, and is designed to be simple to use. 
 
 
 ## Quickstart
 
 ### Creating a Logger
-For the vast majority of use-cases, it's enough to write
+For the vast majority of use-cases, it's enough to write:
 ```lua
 local log = mwse.Logger.new()
 ```
@@ -27,8 +27,7 @@ The above message will then be written to `MWSE.log` in the following format:
 ```
 [My Awesome Mod | main.lua | DEBUG] my message
 ```
-The information in the header says that this log message was written in the `main.lua` file of a mod called `"My Awesome Mod"`.
-All of this information is captured automatically behind the scenes. In particular, the mod name will be loaded from your mod's [metadata file](../guides/metadata.md) if it has one.
+The information in the header says that this log message was written in the `main.lua` file of a mod called `"My Awesome Mod"`. All of this information is captured automatically behind the scenes. In particular, the mod name will be loaded from your mod's [metadata file](../guides/metadata.md) if it has one.
 
 ### Writing More Useful Log Messages
 In general, you'll likely want to log the values of various local variables you have floating around in your code. The logging framework makes this easy. For example:
@@ -69,8 +68,7 @@ log:warn("This is a WARN message")
 log:error("This is an ERROR message")
 ```
 
-Only logs at or below the current log level will be printed to the log file. For example, if the log level is set to `INFO`, then `INFO`, `WARN` and `ERROR` messages will be logged, but `TRACE` and `DEBUG` messages will not.
-This has two advantages:
+Only logs at or below the current log level will be printed to the log file. For example, if the log level is set to `INFO`, then `INFO`, `WARN` and `ERROR` messages will be logged, but `TRACE` and `DEBUG` messages will not. This has two advantages:
 
 1. Logging messages have basically no performance impact when the user has disabled them.
 2. The `MWSE.log` file is (ideally) not flooded by tons of logging messages that the user does not care about.
@@ -78,18 +76,14 @@ This has two advantages:
 
 
 ### Loggers Synchronize their Settings
-Each file of your mod gets its own unique logger, corresponding to that filepath. 
-This helps to make it easy to track down the exact origin of a logging statement. 
-But this also introduces a potential problem: how do you make sure all the loggers synchronize their settings properly?
+ 
+Each file of your mod gets its own unique logger, corresponding to that filepath. This helps to make it easy to track down the exact origin of a logging statement.  But this also introduces a potential problem: how do you make sure all the loggers synchronize their settings properly?
 
-The answer is that you don't have to! The logging framework ensures that all loggers synchronize their data automatically.
-Whenever you update the logging level of one logger, all the other loggers have their logging levels updated as well.
-The same goes for changing the `modName`, whether or not to include timestamps, and various other formatting parameters.
+The answer is that you don't have to! The logging framework ensures that all loggers synchronize their data automatically. Whenever you update the logging level of one logger, all the other loggers have their logging levels updated as well. The same goes for changing the `modName`, whether or not to include timestamps, and various other formatting parameters.
 
 ### Passing Functions to the Logging Methods
 
-The following situation is fairly common: you have some data you want to include in a log statement, but you'd like to transform it in some way before logging it. Examples include things like logging the keys of a table, logging the skill names of a table of `tes3.skill` IDs, etc.
-In other words, you would like to transform some data before including it in a log message, but it would be rather inefficient to transform the data if the log message isn't going to be printed anyway.
+The following situation is fairly common: you have some data you want to include in a log statement, but you'd like to transform it in some way before logging it. Examples include things like logging the keys of a table, logging the skill names of a table of `tes3.skill` IDs, etc. In other words, you would like to transform some data before including it in a log message, but it would be rather inefficient to transform the data if the log message isn't going to be printed anyway.
 
 
 To solve this problem, the logging framework allows you to lazily (i.e., only when necessary) compute the values passed to logging messages. For example: evaluate functions by passing them as arguments. For example:
@@ -110,10 +104,11 @@ log(formatString, func, ...)
 ```
 becomes
 ```lua
-log(formatString, func(...))
+if log.level >= mwse.LOG_LEVEL.DEBUG then
+        log(formatString, func(...))
+end
 ```
-This means that it's also possible to define `func` somewhere else and then re-use it in multiple log statements.
-For example, you can take advantage of the fact that tables are pretty-printed to write the log statement from before as 
+This means that it's also possible to define `func` somewhere else and then re-use it in multiple log statements. For example, you can take advantage of the fact that tables are pretty-printed to write the log statement from before as:
 ```lua
 log("The keys of my table are: %s.", table.keys, myTable)
 ```
@@ -132,8 +127,7 @@ This means it's possible to have a function return the format string as well.
 You can customize the appearance of your logging messages in a number of ways.
 
 ### Include a Timestamp
-If you set `log.includeTimestamp = true`, then all log messages will include a timestamp. 
-This is taken relative to the time the game launched. For example:
+If you set `log.includeTimestamp = true`, then all log messages will include a timestamp. This is taken relative to the time the game launched. For example:
 ```lua
 log.includeTimestamp = true
 log("In main.lua!")
@@ -156,34 +150,27 @@ local functionThatMightBeTooSlow()
 	return whatever
 end
 ```
-You can then compare the timestamps in the corresponding log messages to get an idea of how long it takes your function to execute.
-Log statements can also be sprinkled into various parts of your function to get a more granular view of how long it takes to execute each part of the function.
+You can then compare the timestamps in the corresponding log messages to get an idea of how long it takes your function to execute. Log statements can also be sprinkled into various parts of your function to get a more granular view of how long it takes to execute each part of the function.
 
 ### Set a custom output file.
-You can ask your logger to record its output in a separate file. To do so, write
+You can ask your logger to record its output in a separate file. To do so, write:
 ```lua
-log.SetOutputFile("my file")
+log:setOutputFile("my file")
 ```
-This will ensure your log messages get written to `Data Files/MWSE/logs/my file.log`. 
-You can also write
+This will ensure your log messages get written to `Data Files/MWSE/logs/my file.log`. You can also write:
 ```lua
-log.SetOutputFile(true)
+log:setOutputFile(true)
 ```
-to automatically generate an output file based on the name of your mod. 
-For example, if your mod was named "My Awesome Mod", then the above code would result in your logging statements
-being written to `Data Files/MWSE/logs/My Awesome Mod.log`.
+to automatically generate an output file based on the name of your mod. For example, if your mod was named "My Awesome Mod", then the above code would result in your logging statements being written to `Data Files/MWSE/logs/My Awesome Mod.log`.
 
 
 ### Log Colors
 
-In the MCM page of the script extender, there is an option to enable log colors. 
-This will display logs in different colors according to their log level.
+In the MCM page of the script extender, there is an option to enable log colors.  This will display logs in different colors according to their log level.
 
 ### Line Numbers
 
-In the MCM page of the script extender, there is an option to line numbers in log messages.
-This can make it easier to track down a specific location in which a log message was written.
-For example, writing the following log statement on line 215
+In the MCM page of the script extender, there is an option to include line numbers in log messages. This can make it easier to track down a specific location in which a log message was written. For example, writing the following log statement on line 215
 ```lua
 log("Here!")
 ```
@@ -191,13 +178,12 @@ prints the following text to `MWSE.log`:
 ```
 [My Awesome Mod | main.lua:215 | DEBUG] Here!
 ```
-Note that enabling line numbers does incur a performance penalty, which is why it is enabled for default.
+Note that enabling line numbers does incur a performance penalty, which is why it is not enabled by default.
 
 ## Creating a new Logger
-The simplest way to create a new logger is to simply call `Logger.new()` and have all the relevant information be retrieved automatically.
-But it's also possible to pass additional parameters to the `new` function, all of which are optional:
+The simplest way to create a new logger is to simply call `mwse.Logger.new()` and have all the relevant information be retrieved automatically. But it's also possible to pass additional parameters to the `new` function, all of which are optional:
 ```lua
-local log = Logger.new{
+local log = mwse.Logger.new{
 	-- Manually specify the name of your mod. 
 	-- This can be done if aren't happy with the way that the logger automatically retrieves the name of your mod.
 	modName = "My Mod",
@@ -218,15 +204,14 @@ local log = Logger.new{
 	formatter = myFormattingFunction
 }
 ```
-All of the above settings only need to be specified (at most) once, because loggers synchronize their settings.
-This means that, for example, it's enough to specify the `modName` parameter in a single file.
+All of the above settings only need to be specified (at most) once, because loggers synchronize their settings. This means that, for example, it's enough to specify the `modName` parameter in a single file.
 
 In your main.lua, place the logger creation before other source files are included or required. This is to ensure the logger is created and accessible to these other source files.
 
 
 ## Creating an MCM to control Log Level
 
-### TODO: Update this section once `LogLevelOptions` has been merged.
+
 
 In your MCM config, create a dropdown with the following options:
 ```lua
@@ -243,7 +228,7 @@ settings:createDropdown{
 		{ label = "ERROR", value = "ERROR"},
 		{ label = "NONE", value = "NONE"},
 	},
-	callback = function()
+	callback = function(self)
 		log.level = self.variable.value
 	end
 }

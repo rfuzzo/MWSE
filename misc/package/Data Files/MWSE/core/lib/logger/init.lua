@@ -22,56 +22,64 @@ local fmt = string.format
 
 
 
-local LOG_LEVEL = {
-	NONE  = 0,
-	ERROR = 1,
-	WARN  = 2,
-	INFO  = 3,
-	DEBUG = 4,
-	TRACE = 5
+local logLevel = {
+	none  = 0,
+	error = 1,
+	warn  = 2,
+	info  = 3,
+	debug = 4,
+	trace = 5
 }
 
+-- Holds the uppercased values of the logging levels.
+-- This is used for backwards compatibility with the old logging API.
+local logLevelUpper = {}
+
 --- This table takes in a log level string and spits out the corresponding numeric log level.
---- This is defined to be the inversion of `LOG_LEVEL`.
---- So, `LOG_LEVEL_STRINGS[number]` is equivalent to `table.find(LOG_LEVEL, number)`.
----@type table<mwseLogger.LOG_LEVEL, string>
-local LOG_LEVEL_STRINGS = table.invert(LOG_LEVEL)
+--- This is defined to be the inversion of `logLevel`.
+--- So, `logLevelStrings[number]` is equivalent to `table.find(logLevel, number)`.
+---@type table<mwseLogger.logLevel, string>
+local logLevelStrings = {}
+for k, v in pairs(logLevel) do	
+	logLevelStrings[v] = k:upper()
+	logLevelUpper[k:upper()] = v
+end
 
 -- Note: \x1B is the escape character.
 
 -- Tiny optimization: store the terminal escape sequences for each log level, so they don't 
 -- have to be recomputed every log message.
----@type table<mwseLogger.LOG_LEVEL, string>
+---@type table<mwseLogger.logLevel, string>
 local LOG_LEVEL_COLOR_STRINGS = {
 	-- color doesn't matter
-	[LOG_LEVEL.NONE]  = "NONE",
+	[logLevel.none]  = "NONE",
 	-- bright yellow
-	[LOG_LEVEL.WARN]  = "\x1B[0m\x1B[1m\x1B[33mWARN\x1B[0m",
+	[logLevel.warn]  = "\x1B[0m\x1B[1m\x1B[33mWARN\x1B[0m",
 	-- bright red
-	[LOG_LEVEL.ERROR] = "\x1B[0m\x1B[1m\x1B[31mERROR\x1B[0m",
+	[logLevel.error] = "\x1B[0m\x1B[1m\x1B[31mERROR\x1B[0m",
 	-- white
-	[LOG_LEVEL.INFO]  = "\x1B[0m\x1B[37mINFO\x1B[0m",
+	[logLevel.info]  = "\x1B[0m\x1B[37mINFO\x1B[0m",
 	-- bright green
-	[LOG_LEVEL.DEBUG] = "\x1B[0m\x1B[1m\x1B[32mDEBUG\x1B[0m",
+	[logLevel.debug] = "\x1B[0m\x1B[1m\x1B[32mDEBUG\x1B[0m",
 	-- bright white
-	[LOG_LEVEL.TRACE] = "\x1B[0m\x1B[1m\x1B[37mTRACE\x1B[0m",
+	[logLevel.trace] = "\x1B[0m\x1B[1m\x1B[37mTRACE\x1B[0m",
 }
 
 -- Pre-colored versions of the abbreviated log level strings.
----@type table<mwseLogger.LOG_LEVEL, string>
+---@type table<mwseLogger.logLevel, string>
 local LOG_LEVEL_ABBREVIATED_COLOR_STRINGS = {
 	-- color doesn't matter
-	[LOG_LEVEL.NONE]  = "NONE",
+	[logLevel.none]  = "NONE",
 	-- bright yellow
-	[LOG_LEVEL.WARN]  = "\x1B[0m\x1B[1m\x1B[33mW\x1B[0m",
+	[logLevel.warn]  = "\x1B[0m\x1B[1m\x1B[33mW\x1B[0m",
 	-- bright red
-	[LOG_LEVEL.ERROR] = "\x1B[0m\x1B[1m\x1B[31mE\x1B[0m",
+	[logLevel.error] = "\x1B[0m\x1B[1m\x1B[31mE\x1B[0m",
 	-- white
-	[LOG_LEVEL.INFO]  = "\x1B[0m\x1B[37mI\x1B[0m",
+	[logLevel.info]  = "\x1B[0m\x1B[37mI\x1B[0m",
 	-- bright green
-	[LOG_LEVEL.DEBUG] = "\x1B[0m\x1B[1m\x1B[32mD\x1B[0m",
+	[logLevel.debug] = "\x1B[0m\x1B[1m\x1B[32mD\x1B[0m",
 	-- bright white
-	[LOG_LEVEL.TRACE] = "\x1B[0m\x1B[1m\x1B[37mT\x1B[0m",
+	[logLevel.trace] = "\x1B[0m\x1B[1m\x1B[37mT\x1B[0m",
 }
 
 
@@ -87,25 +95,25 @@ do
 
 
 
----@alias mwseLogger.LOG_LEVEL
+---@alias mwseLogger.logLevel
 ---|0					   NONE: Nothing will be printed
 ---|1					   ERROR: Error messages will be printed
 ---|2					   WARN: Warning messages will be printed
 ---|3					   INFO: Only crucial information will be printed
 ---|4					   DEBUG: Debug messages will be printed
 ---|5					   TRACE: Many debug messages will be printed
----|`mwseLogger.LOG_LEVEL.NONE`	 Nothing will be printed
----|`mwseLogger.LOG_LEVEL.ERROR`	Error messages will be printed
----|`mwseLogger.LOG_LEVEL.WARN`	 Warning messages will be printed
----|`mwseLogger.LOG_LEVEL.INFO`	 Crucial information will be printed
----|`mwseLogger.LOG_LEVEL.DEBUG`	Debug messages will be printed
----|`mwseLogger.LOG_LEVEL.TRACE`	Many debug messages will be printed
+---|`mwseLogger.logLevel.none`	 Nothing will be printed
+---|`mwseLogger.logLevel.error`	Error messages will be printed
+---|`mwseLogger.logLevel.warn`	 Warning messages will be printed
+---|`mwseLogger.logLevel.info`	 Crucial information will be printed
+---|`mwseLogger.logLevel.debug`	Debug messages will be printed
+---|`mwseLogger.logLevel.trace`	Many debug messages will be printed
 
 
 --- Stores all the mod-level information for a logger. 
 --- This allows a mod to have several different loggers that are all sychronized with each other.
 ---@class mwseLogger.SharedData
----@field level mwseLogger.LOG_LEVEL The logging level for this logger
+---@field level mwseLogger.logLevel The logging level for this logger
 ---@field logToConsole boolean
 ---@field formatter mwseLogger.formatter
 ---@field modName string name of the mod
@@ -258,21 +266,22 @@ local function getModNameAndDirAndFilepath(offset)
 	return modName, modDir, relativeFilePath
 end
 
+--- A table containing all the provided logging formatters. 
+--- But of course, it is also possible to define your own custom formatter.
+local FORMATTERS = require("logger.formatters")
 
 
 -- Logging framework.
 ---@class mwseLogger : mwseLogger.SharedData
 ---@field protected sharedData mwseLogger.SharedData Stores information that's shared between loggers. This should not be accessed directly.
 local Logger = {
-	LOG_LEVEL = LOG_LEVEL,
-	--- A table containing all the provided logging formatters. 
-	--- But of course, it is also possible to define your own custom formatter.
-	FORMATTERS = require("logger.formatters")
+	logLevel = logLevel,
+	
 }
 
 -- Make it available globally.
 mwse.Logger = Logger
-mwse.LOG_LEVEL = LOG_LEVEL
+mwse.logLevel = logLevel
 
 --- Indexed by `modDir`. Keeps track of all the loggers associated with a given mod.
 ---@type table<string, mwseLogger[]>
@@ -311,7 +320,7 @@ local SHARED_DEFAULT_VALUES = {
 	modName = nil,
 	abbreviateHeader = false,
 	includeTimestamp = false,
-	level = LOG_LEVEL.INFO,
+	level = logLevel.info,
 	outputFile = nil,
 	logToConsole = false,
 
@@ -320,7 +329,7 @@ local SHARED_DEFAULT_VALUES = {
 	-- And it would add a lot more complexity to an already pretty complex
 	-- formatting function.
 
-	formatter = Logger.FORMATTERS.DEFAULT
+	formatter = FORMATTERS.DEFAULT
 }
 
 --- This is the metatable used by `SharedData` instances.
@@ -346,7 +355,7 @@ local SharedDataMeta = {
 			return rawget(self, "modName")
 		elseif k == "logLevel" then
 			-- Backwards compatibility: return the current logging level as a string.
-			return LOG_LEVEL_STRINGS[self.level]
+			return logLevelStrings[self.level]
 		else
 			-- Return the default value.
 			return SHARED_DEFAULT_VALUES[k]
@@ -358,7 +367,7 @@ local SharedDataMeta = {
 -- This function is responsible for updating the `outputFile` field of a logger.
 -- This is only called in one place, but is factored out to help with code readability.
 ---@param sharedData mwseLogger.SharedData
----@param outputFile string|false|nil
+---@param outputFile string|boolean|nil
 local function setOutputFile(sharedData, outputFile)
 	---@type file*|false
 	local prevOutputFile = sharedData.outputFile
@@ -471,10 +480,13 @@ local LoggerMeta = {
 			if not v then return end
 
 			-- If `v` is a string representation of a valid log level, store the numeric version.
-			if LOG_LEVEL[v] then
-				sharedData.level = LOG_LEVEL[v]
+			if logLevel[v] then
+				sharedData.level = logLevel[v]
+			-- It was passed in via upper case text.
+			elseif logLevelUpper[v] then	
+				sharedData.level = logLevelUpper[v]
 			-- If `v` is a numeric representation of a valid log level, store `v`.
-			elseif LOG_LEVEL_STRINGS[v] then
+			elseif logLevelStrings[v] then
 				sharedData.level = v
 			end
 
@@ -675,15 +687,17 @@ end
 
 ---@deprecated
 function Logger:doLog(level)
-	if LOG_LEVEL[level] then
-		return self.sharedData.level >= LOG_LEVEL[level]
-	elseif LOG_LEVEL_STRINGS[level] then
+	if logLevel[level] then
+		return self.sharedData.level >= logLevel[level]
+	elseif logLevelUpper[level] then
+		return self.sharedData.level >= logLevelUpper[level]
+	elseif logLevelStrings[level] then
 		return self.sharedData.level >= level
 	end
 end
 
 function Logger:getLevelStr(level)
-	return LOG_LEVEL_STRINGS[level or self.level]
+	return logLevelStrings[level or self.level]
 end
 
 
@@ -701,7 +715,7 @@ end
 -- =============================================================================
 
 ---@protected
----@param level mwseLogger.LOG_LEVEL
+---@param level mwseLogger.logLevel
 ---@param offset integer? for the line number to be accurate, this method assumes it's getting called 2 levels deep (i.e.). the offset adjusts this
 ---@return mwseLogger.Record record
 function Logger:makeRecord(level, offset)
@@ -761,7 +775,7 @@ function Logger:makeHeader(record)
 				levelStr = LOG_LEVEL_COLOR_STRINGS[level]
 			end
 		else
-			levelStr = LOG_LEVEL_STRINGS[level]
+			levelStr = logLevelStrings[level]
 			if sharedData.abbreviateHeader then
 				levelStr = levelStr:sub(1,1)
 			end
@@ -813,7 +827,7 @@ end
 
 -- Make the logging functions
 ---@param levelStr string
-for levelStr, level in pairs(LOG_LEVEL) do
+for levelStr, level in pairs(logLevel) do
 	-- e.g., "DEBUG" -> "debug"
 	---@param self mwseLogger
 	---@diagnostic disable-next-line: assign-type-mismatch
@@ -826,7 +840,6 @@ for levelStr, level in pairs(LOG_LEVEL) do
 	end
 end
 
--- I am a very good programmer.
 Logger.none = nil
 
 -- Update `call` to be the same as `debug`. 
@@ -837,9 +850,9 @@ function Logger:assert(v, msg, ...)
 	if v then return v, msg, ... end
 
 	-- cant call `Logger:error` because we need the call to `debug.getinfo` to produce the correct line number. super hacky :/
-	local str = self:formatter(self:makeRecord(LOG_LEVEL.ERROR), msg, ...)
+	local str = self:formatter(self:makeRecord(logLevel.error), msg, ...)
 
-	if self.sharedData.level >= LOG_LEVEL.ERROR then
+	if self.sharedData.level >= logLevel.error then
 		self:write(str)
 	end
 
@@ -847,18 +860,18 @@ function Logger:assert(v, msg, ...)
 end
 
 function Logger:writeInitMessage(version)
-	if self.sharedData.level < LOG_LEVEL.INFO then return end
+	if self.sharedData.level < logLevel.info then return end
 
-	local record = self:makeRecord(LOG_LEVEL.INFO)
+	local record = self:makeRecord(logLevel.info)
 	
 	if not version then	
 		local m = tes3.getLuaModMetadata(self.modDir)
 		version = m and m.package and m.package.version
 	end
 	if version then
-		self:write(self:formatter(record, "Initialized version %s.", version))
+		self:writeRecord(record, "Initialized version %s.", version)
 	else
-		self:write(self:formatter(record, "Mod initialized."))
+		self:writeRecord(record, "Mod initialized.")
 	end
 end
 
