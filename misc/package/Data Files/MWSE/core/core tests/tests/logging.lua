@@ -18,7 +18,7 @@ local testSuite = UnitWind.new({
 testSuite:start("Testing logging API")
 
 local loggerName = "Test"
-local log = logger.new({ name = loggerName})
+local log = logger.new({ name = loggerName })
 
 testSuite:test("Test logger.new", function()
 	testSuite:expect(log.name).toBe(loggerName)
@@ -76,7 +76,6 @@ testSuite:test("Test logger:setOutputFile", function()
 	testSuite:expect(log.outputFile).toBe(nil)
 	testSuite:spy(io, "open")
 
-	-- local newOutputFile = "test.log"
 	local newOutputFile = "Data Files/MWSE/logs/test.log"
 	log:setOutputFile(newOutputFile)
 	testSuite:expect(type(log.outputFile)).toBe("userdata")
@@ -88,24 +87,11 @@ testSuite:test("Test logger:setOutputFile", function()
 	testSuite:expect(log.outputFile).toBe(nil)
 end)
 
---- @param logLevel mwseLoggerLogLevel
---- @param color string
---- @param message string
---- @param ... any?
-local function oldDefaultFormatter(logLevel, color, message, ...)
-	local output = string.format("[%s: %s] %s", log.name, logLevel, tostring(message):format(...))
-
-	if mwse.getConfig("EnableLogColors") then
-		output = ansicolors(string.format("%%{%s}%s", color, output))
-	end
-
-	return output
-end
 
 --- @param logLevel mwseLoggerLogLevel
 --- @param color string
 --- @param ... any?
-local function newDefaultFormatter(logLevel, color, ...)
+local function defaultFormatter(logLevel, color, ...)
 	local fmtArgs = {}
 	
 	local i, n = 1, select("#", ...)
@@ -131,12 +117,10 @@ local function newDefaultFormatter(logLevel, color, ...)
 			local info = debug.getinfo(a, "u")
 			if info.isvararg then break end
 			i = i + info.nparams
-		-- elseif aType == "table" and getmetatable(a).__tostring == nil then
 		elseif type(a) == "table" or type(a) == "userdata" then
 			table.insert(fmtArgs, inspect(a, INSPECT_PARAMS))
 		else
 			table.insert(fmtArgs, tostring(a))
-			-- table.insert(fmtArgs, tostring(a))
 		end
 		i = i + 1
 	end
@@ -159,8 +143,6 @@ local function newDefaultFormatter(logLevel, color, ...)
 	return string.format("[%s | %s | %s] %s", log.name, log.filePath, logLevel, str)
 end
 
--- pick one based on which logging version is being tested.
-local defaultFormatter = logger.LOG_LEVEL and newDefaultFormatter or oldDefaultFormatter
 
 testSuite:test("Test logging", function()
 	local buffer = ""

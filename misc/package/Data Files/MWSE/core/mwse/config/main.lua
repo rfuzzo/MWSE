@@ -108,8 +108,8 @@ local config = {
 				},
 				{
 					class = "OnOffButton",
-					label = i18n("EnableLogLineNumbers.label"),
-					description = i18n("EnableLogLineNumbers.description"),
+					label = i18n("enableLogLineNumbers.label"),
+					description = i18n("enableLogLineNumbers.description"),
 					variable = {
 						id = "EnableLogLineNumbers",
 						class = "TableVariable",
