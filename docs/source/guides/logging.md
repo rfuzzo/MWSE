@@ -253,7 +253,8 @@ settings:createDropdown{
 }
 ```
 
-## Advanced: Customizing the formatter.
+## Advanced: Customizing the formatter
+
 Under the hood, logging messages are printed by executing code that (in its simplest form) is analogous to:
 ```lua
 print(self.formatter(self, logRecord, ...))
