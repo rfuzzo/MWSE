@@ -258,8 +258,7 @@ Under the hood, logging messages are printed by executing code that (in its simp
 ```lua
 print(self.formatter(self, logRecord, ...))
 ```
-The `formatter` is responsible for piecing together all of its arguments to generate a coherent (and helpful) logging message.
-It receives the following parameters:
+The `formatter` is responsible for piecing together all of its arguments to generate a coherent (and helpful) logging message. It receives the following parameters:
 
 - `self`: The `mwseLogger` that issued the logging statement.
 - `logRecord`: A [`mwseLogger.Record`](../types/mwseLogger.Record.md) created by the logging statement. This is basically just a table that, among other things, stores:
@@ -274,8 +273,7 @@ Several of the features mentioned in this guide (e.g. lazy function evaluation, 
 	```
 	[My Awesome Mod | main.lua | DEBUG | 00:04.250]
 	```
-	When writing a custom formatter, it is your responsibility to ensure a header is preprended to the output of your custom formatter.
-	If you would prefer to avoid rewriting the "header" yourself, you can use the protected `Logger:makeHeader` method to use the default header. This means your formatter would look something like:
+	When writing a custom formatter, it is your responsibility to ensure a header is preprended to the output of your custom formatter. If you would prefer to avoid rewriting the "header" yourself, you can use the protected `Logger:makeHeader` method to use the default header. This means your formatter would look something like:
 	```lua
 	---@param self mwseLogger
 	---@param record mwseLogger.Record
@@ -324,8 +322,7 @@ The definition of the default formatter can be found at `MWSE/core/lib/Logger/fo
 		end
 	}
 	```
-	Notice how in the above code, we used `msg` to capture the first variadic argument.
-	The above formatter would result in these log messages
+	Notice how in the above code, we used `msg` to capture the first variadic argument. The above formatter would result in these log messages
 	```lua
 	log:info("My table: %s", {a = 1})
 	log:info("Encoded table: %s", json.encode, {a = 1})
