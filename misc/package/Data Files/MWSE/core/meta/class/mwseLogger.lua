@@ -73,7 +73,7 @@ function mwseLogger.getLoggers(modDir) end
 --- 
 --- `moduleName`: string? — *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
 --- 
---- `level`: mwseLogger.LOG_LEVEL? — *Default*: `mwseLogger.LOG_LEVEL.INFO`. The logging level for all loggers associated to this mod.
+--- `level`: mwseLogger.logLevel|mwseLogger.logLevelString|nil — *Default*: `mwse.logLevel.info`. The logging level for all loggers associated to this mod.
 --- 
 --- `logToConsole`: boolean? — *Default*: `false`. Should the output also be written to the in-game console?
 --- 
@@ -91,7 +91,7 @@ function mwseLogger.new(params) end
 --- @class mwseLogger.new.params
 --- @field modName string? *Optional*. The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided.
 --- @field moduleName string? *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
---- @field level mwseLogger.LOG_LEVEL? *Default*: `mwseLogger.LOG_LEVEL.INFO`. The logging level for all loggers associated to this mod.
+--- @field level mwseLogger.logLevel|mwseLogger.logLevelString|nil *Default*: `mwse.logLevel.info`. The logging level for all loggers associated to this mod.
 --- @field logToConsole boolean? *Default*: `false`. Should the output also be written to the in-game console?
 --- @field outputFile boolean|string|nil *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
 --- @field includeTimestamp boolean? *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
@@ -201,11 +201,12 @@ function mwseLogger:setIncludeTimestamp(newIncludeTimestamp) end
 --- This function does exactly the same thing as writing `log.level = newLogLevel`. 
 --- Use whichever one you prefer.
 --- 
---- @param newLogLevel mwseLogger.logLevel No description yet available.
+--- @param newLogLevel mwseLogger.logLevel|mwseLogger.logLevelString No description yet available.
 function mwseLogger:setLevel(newLogLevel) end
 
---- Set the log level. Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".
---- @param newLogLevel mwseLogger.logLevel No description yet available.
+--- Set the log level. Use `mwseLogger:setLevel` instead.
+--- @deprecated
+--- @param newLogLevel mwseLogger.logLevel|mwseLogger.logLevelString No description yet available.
 function mwseLogger:setLogLevel(newLogLevel) end
 
 --- Changes the `modName` field of this logger.

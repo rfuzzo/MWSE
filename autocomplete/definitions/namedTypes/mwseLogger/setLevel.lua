@@ -8,6 +8,6 @@ This function does exactly the same thing as writing `log.level = newLogLevel`.
 Use whichever one you prefer.
 ]],
 	arguments = {
-		{ name = "newLogLevel", type = "mwseLogger.logLevel" }
+		{ name = "newLogLevel", type = "mwseLogger.logLevel|mwseLogger.logLevelString" }
 	}
 }

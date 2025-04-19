@@ -80,18 +80,20 @@ do
 	---@alias mwseLogger.formatter fun(self: mwseLogger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string
 
 	---@alias mwseLogger.logLevel
-	---|0					   NONE: Nothing will be printed
-	---|1					   ERROR: Error messages will be printed
-	---|2					   WARN: Warning messages will be printed
-	---|3					   INFO: Only crucial information will be printed
-	---|4					   DEBUG: Debug messages will be printed
-	---|5					   TRACE: Many debug messages will be printed
-	---|`mwseLogger.logLevel.none`	 Nothing will be printed
-	---|`mwseLogger.logLevel.error`	Error messages will be printed
-	---|`mwseLogger.logLevel.warn`	 Warning messages will be printed
-	---|`mwseLogger.logLevel.info`	 Crucial information will be printed
-	---|`mwseLogger.logLevel.debug`	Debug messages will be printed
-	---|`mwseLogger.logLevel.trace`	Many debug messages will be printed
+	---|`mwse.logLevel.none`	Nothing will be printed
+	---|`mwse.logLevel.error`	Error messages will be printed
+	---|`mwse.logLevel.warn`	Warning messages will be printed
+	---|`mwse.logLevel.info`	Crucial information will be printed
+	---|`mwse.logLevel.debug`	Debug messages will be printed
+	---|`mwse.logLevel.trace`	Many debug messages will be printed
+	
+	---@alias mwseLogger.logLevelString
+	---|`"NONE"`	 			Nothing will be printed
+	---|`"ERROR"`				Error messages will be printed
+	---|`"WARN"`	 			Warning messages will be printed
+	---|`"INFO"`	 			Crucial information will be printed
+	---|`"DEBUG"`				Debug messages will be printed
+	---|`"TRACE"`				Many debug messages will be printed
 
 	--- Stores all the mod-level information for a logger. 
 	--- This allows a mod to have several different loggers that are all sychronized with each other.

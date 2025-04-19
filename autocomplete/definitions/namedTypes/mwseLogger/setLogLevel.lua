@@ -1,6 +1,6 @@
 return {
 	deprecated = true,
 	type = "method",
-	description = [[Set the log level. Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".]],
-	arguments = { { name = "newLogLevel", type = "mwseLogger.logLevel" } },
+	description = [[Set the log level. Use `mwseLogger:setLevel` instead.]],
+	arguments = { { name = "newLogLevel", type = "mwseLogger.logLevel|mwseLogger.logLevelString" } },
 }
