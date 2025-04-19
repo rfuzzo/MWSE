@@ -45,6 +45,25 @@ Internally, the logging methods convert their arguments into useful, human-reada
 This wraps up the quickstart guide. But there are still a few useful things you may want to know about before publishing your mod.
 
 
+### Multifile Setups
+It's common for larger mods to split code into multiple files. The Logger API is designed with this is mind and makes it easy to track down which logging message originated from which file. No extra work is required to support multiple files. Just write
+```lua
+local log = mwse.Logger.new()
+```
+in each file you want a `Logger`. The rest will be taken care of behind the scenes. For example, consider the following code:
+```lua
+local log = mwse.Logger.new()
+log:info("Hello world")
+```
+If this code is run in `mods/My Awesome Mod/main.lua`, then the message would be:
+```
+[My Awesome Mod | main.lua | INFO] Hello world
+```
+Meanwhile, if the same code was run in `mods/My Awesome Mod/someOtherFile.lua`, the message would be
+```
+[My Awesome Mod | someotherfile.lua | INFO] Hello world
+```
+To make things simpler, the settings for all loggers created for a mod will all synchronize their settings. For example, if you update `log.level` in `mods/My Awesome Mod/main.lua`, then the logging level will also be updated in `mods/My Awesome Mod/someOtherFile.lua`.
 
 ## In more Detail
 
