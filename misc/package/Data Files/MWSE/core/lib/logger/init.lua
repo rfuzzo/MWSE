@@ -8,9 +8,7 @@ Current version made by herbert100.
 Many suggestions and feature ideas given by C3pa.
 
 Credit to Greatness7 as well, for the ideas of adding a `format` parameter and allowing functions to be passed to log messages.
-]]
-
-local socket = require("socket")
+]] local socket = require("socket")
 
 -- The time that the game was launched.
 ---@type number
@@ -18,14 +16,7 @@ local LAUNCH_TIME = socket.gettime()
 
 local fmt = string.format
 
-local logLevel = {
-	none  = 0,
-	error = 1,
-	warn  = 2,
-	info  = 3,
-	debug = 4,
-	trace = 5
-}
+local logLevel = { none = 0, error = 1, warn = 2, info = 3, debug = 4, trace = 5 }
 
 -- Holds the uppercased values of the logging levels.
 -- This is used for backwards compatibility with the old logging API.
@@ -36,7 +27,7 @@ local logLevelUpper = {}
 --- So, `logLevelStrings[number]` is equivalent to `table.find(logLevel, number)`.
 ---@type table<mwseLogger.logLevel, string>
 local logLevelStrings = {}
-for k, v in pairs(logLevel) do	
+for k, v in pairs(logLevel) do
 	logLevelStrings[v] = k:upper()
 	logLevelUpper[k:upper()] = v
 end
@@ -48,13 +39,13 @@ end
 ---@type table<mwseLogger.logLevel, string>
 local LOG_LEVEL_COLOR_STRINGS = {
 	-- color doesn't matter
-	[logLevel.none]  = "NONE",
+	[logLevel.none] = "NONE",
 	-- bright yellow
-	[logLevel.warn]  = "\x1B[0m\x1B[1m\x1B[33mWARN\x1B[0m",
+	[logLevel.warn] = "\x1B[0m\x1B[1m\x1B[33mWARN\x1B[0m",
 	-- bright red
 	[logLevel.error] = "\x1B[0m\x1B[1m\x1B[31mERROR\x1B[0m",
 	-- white
-	[logLevel.info]  = "\x1B[0m\x1B[37mINFO\x1B[0m",
+	[logLevel.info] = "\x1B[0m\x1B[37mINFO\x1B[0m",
 	-- bright green
 	[logLevel.debug] = "\x1B[0m\x1B[1m\x1B[32mDEBUG\x1B[0m",
 	-- bright white
@@ -65,59 +56,54 @@ local LOG_LEVEL_COLOR_STRINGS = {
 ---@type table<mwseLogger.logLevel, string>
 local LOG_LEVEL_ABBREVIATED_COLOR_STRINGS = {
 	-- color doesn't matter
-	[logLevel.none]  = "NONE",
+	[logLevel.none] = "NONE",
 	-- bright yellow
-	[logLevel.warn]  = "\x1B[0m\x1B[1m\x1B[33mW\x1B[0m",
+	[logLevel.warn] = "\x1B[0m\x1B[1m\x1B[33mW\x1B[0m",
 	-- bright red
 	[logLevel.error] = "\x1B[0m\x1B[1m\x1B[31mE\x1B[0m",
 	-- white
-	[logLevel.info]  = "\x1B[0m\x1B[37mI\x1B[0m",
+	[logLevel.info] = "\x1B[0m\x1B[37mI\x1B[0m",
 	-- bright green
 	[logLevel.debug] = "\x1B[0m\x1B[1m\x1B[32mD\x1B[0m",
 	-- bright white
 	[logLevel.trace] = "\x1B[0m\x1B[1m\x1B[37mT\x1B[0m",
 }
 
+do
 
-do 
+	--- A function that handles the formatting of log messages, given the `logger`, a `record`, and the log function parameters.
+	--- The record holds information about the logging level and line number, and the rest of the parameters are the ones passed
+	--- as arguments to the `Logger:debug` methods.
+	--- This function should return a string, which will then be printed to the appropriate file.
+	--- This function should also include the header of the log message. The default header can be accessed by 
+	--- using the `makeHeader` method.
+	---@alias mwseLogger.formatter fun(self: mwseLogger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string
 
---- A function that handles the formatting of log messages, given the `logger`, a `record`, and the log function parameters.
---- The record holds information about the logging level and line number, and the rest of the parameters are the ones passed
---- as arguments to the `Logger:debug` methods.
---- This function should return a string, which will then be printed to the appropriate file.
---- This function should also include the header of the log message. The default header can be accessed by 
---- using the `makeHeader` method.
----@alias mwseLogger.formatter fun(self: mwseLogger, record: mwseLogger.Record, ...: string|any|fun(...): ...): string
+	---@alias mwseLogger.logLevel
+	---|0					   NONE: Nothing will be printed
+	---|1					   ERROR: Error messages will be printed
+	---|2					   WARN: Warning messages will be printed
+	---|3					   INFO: Only crucial information will be printed
+	---|4					   DEBUG: Debug messages will be printed
+	---|5					   TRACE: Many debug messages will be printed
+	---|`mwseLogger.logLevel.none`	 Nothing will be printed
+	---|`mwseLogger.logLevel.error`	Error messages will be printed
+	---|`mwseLogger.logLevel.warn`	 Warning messages will be printed
+	---|`mwseLogger.logLevel.info`	 Crucial information will be printed
+	---|`mwseLogger.logLevel.debug`	Debug messages will be printed
+	---|`mwseLogger.logLevel.trace`	Many debug messages will be printed
 
-
-
----@alias mwseLogger.logLevel
----|0					   NONE: Nothing will be printed
----|1					   ERROR: Error messages will be printed
----|2					   WARN: Warning messages will be printed
----|3					   INFO: Only crucial information will be printed
----|4					   DEBUG: Debug messages will be printed
----|5					   TRACE: Many debug messages will be printed
----|`mwseLogger.logLevel.none`	 Nothing will be printed
----|`mwseLogger.logLevel.error`	Error messages will be printed
----|`mwseLogger.logLevel.warn`	 Warning messages will be printed
----|`mwseLogger.logLevel.info`	 Crucial information will be printed
----|`mwseLogger.logLevel.debug`	Debug messages will be printed
----|`mwseLogger.logLevel.trace`	Many debug messages will be printed
-
-
---- Stores all the mod-level information for a logger. 
---- This allows a mod to have several different loggers that are all sychronized with each other.
----@class mwseLogger.SharedData
----@field level mwseLogger.logLevel The logging level for this logger
----@field logToConsole boolean
----@field formatter mwseLogger.formatter
----@field modName string name of the mod
----@field modDir string
----@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
----@field outputFile file*|nil The file the log is being written to, or `nil`.
----@field abbreviateHeader boolean Print a shorter header?
-
+	--- Stores all the mod-level information for a logger. 
+	--- This allows a mod to have several different loggers that are all sychronized with each other.
+	---@class mwseLogger.SharedData
+	---@field level mwseLogger.logLevel The logging level for this logger
+	---@field logToConsole boolean
+	---@field formatter mwseLogger.formatter
+	---@field modName string name of the mod
+	---@field modDir string
+	---@field includeTimestamp boolean should the current time be printed when writing log messages? Default: `false`
+	---@field outputFile file*|nil The file the log is being written to, or `nil`.
+	---@field abbreviateHeader boolean Print a shorter header?
 
 end
 
@@ -156,23 +142,23 @@ local function getModNameAndDirAndFilepath(offset)
 	-- max 10 iterations, but in reality we will only need to do at most like 4
 	for i = startingOffset, startingOffset + GET_MOD_INFO_MAX_ITERS do
 		newDebugInfo = debug.getinfo(i, "S")
-		
-		if not newDebugInfo then 
+
+		if not newDebugInfo then
 			-- we've gone too high up the stack
 			break
 		end
 		newFilePath = newDebugInfo.source:lower()
 
-
-		if BAD_FILEPATHS[newFilePath] then 
+		if BAD_FILEPATHS[newFilePath] then
 			-- we've gone too high up the stack
 			break
 		end
 
 		filepath = newFilePath
 	end
-	if not filepath then return end
-
+	if not filepath then
+		return
+	end
 
 	-- =========================================================================
 	-- STEP 2: Use the filepath to decipher the mods name and directory.
@@ -185,27 +171,23 @@ local function getModNameAndDirAndFilepath(offset)
 		2) Some mods might be given names via a corresponding `metadata.toml` file.
 	]]
 
-
 	-- Kill off the part of the path that contains "data files\\mwse\\"
 	local _, mwseFolderEndIndex = filepath:find("data files\\mwse\\", 1, true)
 	if mwseFolderEndIndex then
 		filepath = filepath:sub(mwseFolderEndIndex + 1)
 	end
-	
+
 	---@type string[]
 	local pathParts = filepath:split("\\")
 
 	-- The root directory. This will be one of "mods", "lib", or "core".
 	local rootDir = table.remove(pathParts, 1)
 
-
-
 	-- now we will initialize the modName and modDir
 	-- we start off by assuming there is no mod author folder, and that the modName and modDir are the same.
 	local modDir = pathParts[1]
 	local modName = modDir
 
-	
 	-- If it's a mod, initialize it using the appropriate runtime.
 	-- Also check if there's a mod author folder.
 	-- By using runtimes, we can determine if a mod has an author folder or not.
@@ -216,13 +198,12 @@ local function getModNameAndDirAndFilepath(offset)
 			- `pathParts[1].."."..pathParts[2]` is the `modDir`.
 		Otherwise, pathParts[1]` is the `modName` and `modDir`
 		]]
-		local modDirWithAuthorName = pathParts[1].."."..pathParts[2]
+		local modDirWithAuthorName = pathParts[1] .. "." .. pathParts[2]
 
 		---@type {key: string, path: string, parent_path: string, legacy_mod: boolean, core_mod: boolean, metadata: MWSE.Metadata?}
 		---@diagnostic disable-next-line: undefined-field
 		local runtime = mwse.activeLuaMods[modDirWithAuthorName]
 
-		
 		if runtime then
 			modDir = modDirWithAuthorName
 			modName = pathParts[2]
@@ -237,21 +218,16 @@ local function getModNameAndDirAndFilepath(offset)
 			local pkg = runtime.metadata and runtime.metadata.package
 			modName = pkg and pkg.name or modName
 		else
-			mwse.log(
-				"[Logger | ERROR]: Could not find the runtime information for \"%s\" or \"%s\". \z
-					This should not happen!", 
-				pathParts[1], modDirWithAuthorName
-			)
+			mwse.log("[Logger | ERROR]: Could not find the runtime information for \"%s\" or \"%s\". \z
+					This should not happen!", pathParts[1], modDirWithAuthorName)
 		end
 	elseif rootDir == "lib" then
 		-- do nothing
 	elseif rootDir == "core" then
 		-- do nothing
 	else
-		mwse.log(
-			'\t[Logger | ERROR]: Filepath "%s" was not correctly deduced. "%s" is an invalid root direcotry', 
-			filepath, rootDir
-		)
+		mwse.log('\t[Logger | ERROR]: Filepath "%s" was not correctly deduced. "%s" is an invalid root direcotry', filepath,
+		         rootDir)
 	end
 	-- This is path of the filepath that does not include the `modDir`.
 	-- NOTE: `modDir` could be either `pathParts[1]` or `pathParts[1] .. "." .. pathParts[2]`.
@@ -265,7 +241,6 @@ end
 --- A table containing all the provided logging formatters. 
 --- But of course, it is also possible to define your own custom formatter.
 local FORMATTERS = require("logger.formatters")
-
 
 -- Logging framework.
 ---@class mwseLogger : mwseLogger.SharedData
@@ -287,11 +262,11 @@ local COMMUNAL_KEYS = {
 	--- This field will always be redirected to `SharedData.level`.
 	--- Note: This field should, from the users perspective, always be the string 
 	--- representation of the current logging level.
-	logLevel = true, 
+	logLevel = true,
 	formatter = true,
 	--- Backwards compatibility: this was the old name of the `modName` field.
 	--- This field will always be redirected to `SharedData.modName`.
-	name = true, 
+	name = true,
 	modName = true,
 	modDir = true,
 	logToConsole = true,
@@ -300,7 +275,6 @@ local COMMUNAL_KEYS = {
 	abbreviateHeader = true,
 	defaultOutputPath = true,
 }
-
 
 -- The default value for each of the shared values, except for `modName` and `modDir`, which MUST
 -- be provided when creating a new `SharedData`.
@@ -322,7 +296,7 @@ local SHARED_DEFAULT_VALUES = {
 	-- And it would add a lot more complexity to an already pretty complex
 	-- formatting function.
 
-	formatter = FORMATTERS.DEFAULT
+	formatter = FORMATTERS.DEFAULT,
 }
 
 --- This is the metatable used by `SharedData` instances.
@@ -353,9 +327,8 @@ local SharedDataMeta = {
 			-- Return the default value.
 			return SHARED_DEFAULT_VALUES[k]
 		end
-	end
+	end,
 }
-
 
 -- This function is responsible for updating the `outputFile` field of a logger.
 -- This is only called in one place, but is factored out to help with code readability.
@@ -365,7 +338,7 @@ local function setOutputFile(sharedData, outputFile)
 	---@type file*|false
 	local prevOutputFile = sharedData.outputFile
 
-	if prevOutputFile == outputFile then 
+	if prevOutputFile == outputFile then
 		return
 	end
 
@@ -379,10 +352,8 @@ local function setOutputFile(sharedData, outputFile)
 	end
 
 	if outputFile == true then
-		outputFile = fmt("%s/%s.log", 
-			LOG_FILE_PARENT_DIR, sharedData.modDir:gsub("[./\\]", "/")
-		)
-	-- sanitize the input string, 
+		outputFile = fmt("%s/%s.log", LOG_FILE_PARENT_DIR, sharedData.modDir:gsub("[./\\]", "/"))
+		-- sanitize the input string, 
 	elseif type(outputFile) == "string" then
 		-- If we're passed a string, we should ensure it's of the form `Data Files/MWSE/logs/%s.log`
 		-- And we should also make sure it's not equal to Data Files/MWSE/logs/MWSE.log
@@ -397,11 +368,11 @@ local function setOutputFile(sharedData, outputFile)
 		if not outputFile:startswith(LOG_FILE_PARENT_DIR) then
 			outputFile = fmt("%s/%s", LOG_FILE_PARENT_DIR, outputFile)
 		end
-		
+
 	end
 
 	do -- Ensure parent directory exists.
-	
+
 		---@type integer
 		local fileNameStart = assert(outputFile:find("[^/]+%.log$"), "Error: file stub could not be found!")
 		local parentDir = outputFile:sub(1, fileNameStart - 1)
@@ -448,7 +419,7 @@ There are currently three supported metamethods:
 ---@type metatable
 local LoggerMeta = {
 	---@param self mwseLogger
-	__index = function (self, key)
+	__index = function(self, key)
 		-- Note: backwards compatibility is handled by `SharedData.__index`.
 		if COMMUNAL_KEYS[key] ~= nil then
 			---@diagnostic disable-next-line: invisible
@@ -458,7 +429,7 @@ local LoggerMeta = {
 	end,
 
 	---@param self mwseLogger
-	__newindex = function (self, k, v)
+	__newindex = function(self, k, v)
 		if COMMUNAL_KEYS[k] == nil then
 			rawset(self, k, v)
 			return
@@ -470,32 +441,34 @@ local LoggerMeta = {
 		-- We also allow users to set the `logLevel` directly, for backwards compatibility.
 		-- In either case, we will update `sharedData.level.
 		if k == "level" or k == "logLevel" then
-			if not v then return end
+			if not v then
+				return
+			end
 
 			-- If `v` is a string representation of a valid log level, store the numeric version.
 			if logLevel[v] then
 				sharedData.level = logLevel[v]
-			-- It was passed in via upper case text.
-			elseif logLevelUpper[v] then	
+				-- It was passed in via upper case text.
+			elseif logLevelUpper[v] then
 				sharedData.level = logLevelUpper[v]
-			-- If `v` is a numeric representation of a valid log level, store `v`.
+				-- If `v` is a numeric representation of a valid log level, store `v`.
 			elseif logLevelStrings[v] then
 				sharedData.level = v
 			end
 
-		elseif k == "outputFile" then 
+		elseif k == "outputFile" then
 			setOutputFile(sharedData, v)
-		-- Backwards compatibility: convert to `name` to `modName`.
+			-- Backwards compatibility: convert to `name` to `modName`.
 		elseif k == "name" then
 			sharedData.modName = v
 
-		-- Make it harder for the `modDir` to be changed after loggers are initialized.
-		-- Note: This only affects the behavior when writing `log.modDir = "foo"`. It does not 
-		-- 	change change what happens when writing `log.sharedData.modDir = "foo"`.
-		-- But this is about the best we can do in Lua.
-		-- The reason we are doing this is that some weird bugs can happen if users decide to 
-		-- change the `modDir` after initializing a logger, as it could potentially
-		-- result in loggers from different mods having the same `sharedData`.
+			-- Make it harder for the `modDir` to be changed after loggers are initialized.
+			-- Note: This only affects the behavior when writing `log.modDir = "foo"`. It does not 
+			-- 	change change what happens when writing `log.sharedData.modDir = "foo"`.
+			-- But this is about the best we can do in Lua.
+			-- The reason we are doing this is that some weird bugs can happen if users decide to 
+			-- change the `modDir` after initializing a logger, as it could potentially
+			-- result in loggers from different mods having the same `sharedData`.
 		elseif k == "modDir" then
 			-- Do nothing.
 
@@ -505,12 +478,10 @@ local LoggerMeta = {
 	end,
 }
 
-
 -- create a new logger by passing in a table with parameters or by passing in a string with just the `modName`
 ---@param params string|mwseLogger.new.params?
 ---@return mwseLogger
 function Logger.new(params)
-
 
 	if type(params) == "table" then
 		-- Update the names of the parameters in-place, for backwards compatibility.
@@ -519,15 +490,13 @@ function Logger.new(params)
 		---@diagnostic disable-next-line: undefined-field
 		params.level = params.level or params.logLevel
 	elseif type(params) == "string" then
-		params = {modName = params}
+		params = { modName = params }
 	else
 		params = {}
 	end
 	if params.modName and type(params.modName) ~= "string" then
 		error("[Logger] No name provided.")
 	end
-
-
 
 	---@cast params -nil
 	---@cast params -string
@@ -551,7 +520,7 @@ function Logger.new(params)
 	-- This is `params.filepath`, or the autogenerated `filepath`.
 	---@diagnostic disable-next-line: undefined-field
 	local filepath = params.filepath
-	
+
 	if not (modName and modDir and filepath) then
 		local autoModName, autoModDir, autofilepath = getModNameAndDirAndFilepath(2)
 		modName = modName or autoModName
@@ -561,7 +530,6 @@ function Logger.new(params)
 
 	assert(modName, "[Logger: ERROR] Could not create a Logger because the modName could not be found.")
 
-	
 	-- All of the loggers associated with the active mod.
 	---@type mwseLogger[]
 	local siblings = table.getset(registeredLoggers, modDir, {})
@@ -584,7 +552,7 @@ function Logger.new(params)
 
 		end
 	end
-	
+
 	-- The shared data used by our new logger.
 	-- If there are any sibling loggers, we'll fetch the `SharedData` from one of the siblings.
 	-- Otherwise (i.e. if this is the logger made for a certain mod), we'll make a new `SharedData`.
@@ -596,24 +564,22 @@ function Logger.new(params)
 	else
 		-- We can't use the `modName` and `modDir` of any siblings, so use the autogenerated copies.
 		---@diagnostic disable-next-line: missing-fields
-		sharedData = setmetatable({ 
+		sharedData = setmetatable({
 			modDir = modDir,
 			modName = modName,
-			
+
 			-- Tiny optimization: store a copy of the logging level so that we don't trigger the
 			-- `__index` metamethod of `SharedData` whenever we check the logging level.
 			level = params.level or SHARED_DEFAULT_VALUES.level,
 		}, SharedDataMeta)
 	end
 
-	
-
 	---@type mwseLogger
 	---@diagnostic disable-next-line: missing-fields
 	local self = {
-		moduleName = params.moduleName, 
+		moduleName = params.moduleName,
 		---@diagnostic disable-next-line: assign-type-mismatch
-		filepath = filepath, 
+		filepath = filepath,
 		sharedData = sharedData,
 	}
 	setmetatable(self, LoggerMeta)
@@ -640,12 +606,10 @@ end
 -- METHODS
 -- =============================================================================
 
-
-
 -- backwards compatibility / explicit setters
-for key in pairs(COMMUNAL_KEYS) do   
+for key in pairs(COMMUNAL_KEYS) do
 	---@diagnostic disable-next-line: assign-type-mismatch
-	Logger["set".. key:sub(1,1):upper() .. key:sub(2)] = function(self, val) 
+	Logger["set" .. key:sub(1, 1):upper() .. key:sub(2)] = function(self, val)
 		self[key] = val
 	end
 end
@@ -656,8 +620,12 @@ end
 
 function Logger.get(modDir, filepath)
 	local arr = registeredLoggers[modDir]
-	if not arr then return end
-	if not filepath then return arr[1] end
+	if not arr then
+		return
+	end
+	if not filepath then
+		return arr[1]
+	end
 	for _, logger in ipairs(arr) do
 		if logger.filepath == filepath then
 			return logger
@@ -675,9 +643,6 @@ function Logger.getLogger(modName)
 	return false
 end
 
-
-
-
 ---@deprecated
 function Logger:doLog(level)
 	if logLevel[level] then
@@ -692,8 +657,6 @@ end
 function Logger:getLevelString(level)
 	return logLevelStrings[level or self.level]
 end
-
-
 
 function Logger.getLoggers(modDirOrLogger)
 	if type(modDirOrLogger) == "string" then
@@ -716,7 +679,7 @@ function Logger:makeRecord(level, offset)
 		level = level,
 		stackLevel = 3 + (offset or 0),
 		timestamp = self.sharedData.includeTimestamp and socket.gettime(),
-		lineNumber = mwse.getConfig("EnableLogLineNumbers") and debug.getinfo(3 + (offset or 0), "l").currentline
+		lineNumber = mwse.getConfig("EnableLogLineNumbers") and debug.getinfo(3 + (offset or 0), "l").currentline,
 	}
 end
 
@@ -729,7 +692,7 @@ function Logger:makeHeader(record)
 
 	local sharedData = self.sharedData
 	local moduleName = self.moduleName
-	
+
 	if moduleName then
 		table.insert(strs, fmt("%s (%s)", sharedData.modName, moduleName))
 	else
@@ -739,7 +702,7 @@ function Logger:makeHeader(record)
 	-- insert filepath and line number
 	local filepath, lineNo = self.filepath, record.lineNumber
 	if filepath then
-		if sharedData.abbreviateHeader then  
+		if sharedData.abbreviateHeader then
 			local pathParts = filepath:split("/")
 			local numParts = #pathParts
 			for i = 1, numParts - 1 do
@@ -770,12 +733,11 @@ function Logger:makeHeader(record)
 		else
 			levelStr = logLevelStrings[level]
 			if sharedData.abbreviateHeader then
-				levelStr = levelStr:sub(1,1)
+				levelStr = levelStr:sub(1, 1)
 			end
 		end
 		table.insert(strs, levelStr)
 	end
-
 
 	if record.timestamp then
 		local floor = math.floor
@@ -784,13 +746,12 @@ function Logger:makeHeader(record)
 		local hours, minutes, seconds = floor(ts / 3600), floor(ts / 60) % 60, floor(ts) % 60
 
 		-- Only show the number of hours if it's `> 1`.
-		table.insert(strs, hours > 0 and fmt("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds)
-							   		  or fmt(	 "%02d:%02d.%03d",		minutes, seconds, milliseconds))
+		table.insert(strs, hours > 0 and fmt("%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds) or
+		             fmt("%02d:%02d.%03d", minutes, seconds, milliseconds))
 	end
 	-- Notice the trailing space!
 	return fmt("[%s] ", table.concat(strs, " | "))
 end
-
 
 -- Writes the string to a file and possibly also to the console.
 ---@protected
@@ -807,16 +768,14 @@ function Logger:write(str)
 	end
 end
 
-
 -- calls format on the record and writes it to the appropriate location
 ---@protected
 ---@param record mwseLogger.Record
 ---@param ... any
 function Logger:writeRecord(record, ...)
 	self:write(self.sharedData.formatter(self, record, ...))
-	
-end
 
+end
 
 -- Make the logging functions
 ---@param levelStr string
@@ -836,11 +795,13 @@ end
 Logger.none = nil
 
 -- Update `call` to be the same as `debug`. 
---This is so that the line numbers are pulled correctly when using the metamethod.
+-- This is so that the line numbers are pulled correctly when using the metamethod.
 LoggerMeta.__call = Logger.debug
 
 function Logger:assert(v, msg, ...)
-	if v then return v, msg, ... end
+	if v then
+		return v, msg, ...
+	end
 
 	-- cant call `Logger:error` because we need the call to `debug.getinfo` to produce the correct line number. super hacky :/
 	local str = self:formatter(self:makeRecord(logLevel.error), msg, ...)
@@ -853,11 +814,13 @@ function Logger:assert(v, msg, ...)
 end
 
 function Logger:writeInitMessage(version)
-	if self.sharedData.level < logLevel.info then return end
+	if self.sharedData.level < logLevel.info then
+		return
+	end
 
 	local record = self:makeRecord(logLevel.info)
-	
-	if not version then	
+
+	if not version then
 		local m = tes3.getLuaModMetadata(self.modDir)
 		version = m and m.package and m.package.version
 	end
@@ -867,6 +830,5 @@ function Logger:writeInitMessage(version)
 		self:writeRecord(record, "Mod initialized.")
 	end
 end
-
 
 return Logger
