@@ -63,7 +63,7 @@ Meanwhile, if the same code was run in `mods/My Awesome Mod/someOtherFile.lua`, 
 ```
 [My Awesome Mod | someotherfile.lua | INFO] Hello world
 ```
-To make things simpler, the settings for all loggers created for a mod will all synchronize their settings. For example, if you update `log.level` in `mods/My Awesome Mod/main.lua`, then the logging level will also be updated in `mods/My Awesome Mod/someOtherFile.lua`.
+To make things simpler, all loggers created for a mod will synchronize their settings. For example, if you update `log.level` in `mods/My Awesome Mod/main.lua`, then the logging level will also be updated in `mods/My Awesome Mod/someOtherFile.lua`.
 
 ## In more Detail
 
@@ -72,7 +72,7 @@ To make things simpler, the settings for all loggers created for a mod will all 
 There are 5 logging levels:
 
 1. `ERROR`: Something bad happened.
-2. `WARN`: Something bad _almost_ happened, or something bad _did_ happen but it's not a big deal.
+2. `WARN`: Something something potentially bad happened, or something bad _almost_ happened.
 3. `INFO`: Something normal and expected has happened. (i.e., the mod was loaded.) 
 4. `DEBUG`: Used to record the inner workings of a mod. Useful for troubleshooting. 
 5. `TRACE`: Basically like `DEBUG`, but more extreme. Also useful for debugging code that gets run very frequently.
@@ -252,3 +252,89 @@ settings:createDropdown{
 	end
 }
 ```
+
+## Advanced: Customizing the formatter.
+Under the hood, logging messages are printed by executing code that (in its simplest form) is analogous to:
+```lua
+print(self.formatter(self, logRecord, ...))
+```
+The `formatter` is responsible for piecing together all of its arguments to generate a coherent (and helpful) logging message.
+It receives the following parameters:
+
+- `self`: The `mwseLogger` that issued the logging statement.
+- `logRecord`: A [`mwseLogger.Record`](../types/mwseLogger.Record.md) created by the logging statement. This is basically just a table that, among other things, stores:
+	- The line number that the log message originated from. This is only available if the relevant MWSE setting is enabled.
+	- The `mwseLogger.logLevel` of the log statement. (e.g., this will be `logLevel.debug` if the log statement was created by the `Logger:debug` method.)
+	- A timestamp that marks when the logging call was issued. This is only available if the logger in question had `log.includeTimestamp == true`.
+- `...`: This refers to the actual parameters passed to the logging functions (e.g., to `Logger:debug(...)`).
+
+Several of the features mentioned in this guide (e.g. lazy function evaluation, prettyprinting tables) are due to the behavior of the default formatter. As such, they can be customized by changing the `formatter` field of your `Logger`.
+!!! warning
+	The `formatter` field is also responsible for printing the "header" that appears in braces before the body of a log statement. In other words, it is the responsibility of the `formatter` to print the following part of logging messages:
+	```
+	[My Awesome Mod | main.lua | DEBUG | 00:04.250]
+	```
+	When writing a custom formatter, it is your responsibility to ensure a header is preprended to the output of your custom formatter.
+	If you would prefer to avoid rewriting the "header" yourself, you can use the protected `Logger:makeHeader` method to use the default header. This means your formatter would look something like:
+	```lua
+	---@param self mwseLogger
+	---@param record mwseLogger.Record
+	---@param ... any
+	local function myFormatter(self, record, ...)
+		-- Use the default header.
+		local header = self:makeHeader(record)
+
+		---@type string
+		local message
+
+		do -- Use `self`, `record`, and `...` to generate the logging `message`.
+			...
+		end
+
+		-- Prefix the message with the default header.
+		return header .. message
+	end
+	```
+
+The definition of the default formatter can be found at `MWSE/core/lib/Logger/formatters.lua`. The `formatters.lua` file also includes another formatter, labeled `expandAllFunctions` that illustrates how custom formatters can be used to alter the behavior of the logging methods. In particular, the `expandAllFunctions` formatter will lazily-evaluate _all_ functions that are passed to the logging methods.
+
+
+!!! example "Example: Creating a minimal formatter"
+	The following example illustrates how a custom `formatter` can be used to make the logging methods behave more similarly to `string.format`:
+	```lua
+	local log = mwse.Logger.new{
+		---@param self mwseLogger
+		---@param record mwseLogger.Record
+		---@param msg string|any
+		---@param ... any
+		formatter = function(self, record, msg, ...)
+			-- Use the default header.
+			local header = self:makeHeader(record)
+
+			-- Make sure the first parameter is a string.
+			local outputMessage = tostring(msg)
+
+			-- If there were multiple arguments passed, call `string.format`.
+			if select("#", ...) > 0 then
+				outputMessage = string.format(msg, ...)
+			end
+
+			-- Prefix the message with the default header.
+			return header .. outputMessage
+		end
+	}
+	```
+	Notice how in the above code, we used `msg` to capture the first variadic argument.
+	The above formatter would result in these log messages
+	```lua
+	log:info("My table: %s", {a = 1})
+	log:info("Encoded table: %s", json.encode, {a = 1})
+	```
+	being printed as:
+	```
+	[my awesome mod | main.lua | INFO] My table: table: 0x18b33be8
+	[my awesome mod | main.lua | INFO] Encoded table: function: 0x18515738
+	```
+	In particular, the above formatter does not prettyprint tables nor does it lazily evaluate its function arguments.
+
+Note that formatters are synchronized between all loggers belonging to the same mod, so you only need to update the formatter in one place. If customizing the formatter, it is best to do it at the very beginning of your `main.lua` file, before importing any other files. This ensures that all logging messages will use your formatter.
