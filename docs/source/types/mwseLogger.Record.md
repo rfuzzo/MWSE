@@ -13,11 +13,11 @@ Holds information about the context in which a logging message was created. This
 ### `level`
 <div class="search_terms" style="display: none">level</div>
 
-The logging level of this message. (e.g, if `Logger:info` was called, then this will be `mwseLogger.LOG_LEVEL.INFO`.)
+The logging level of this message. (e.g, if `Logger:info` was called, then this will be `mwseLogger.logLevel.info`.)
 
 **Returns**:
 
-* `result` (mwseLogger.LOG_LEVEL)
+* `result` (mwseLogger.logLevel)
 
 ***
 
@@ -48,9 +48,9 @@ The stack level offset at the time of record creation. This information can be u
 ### `timestamp`
 <div class="search_terms" style="display: none">timestamp</div>
 
-The timestamp that was created when this logging messages was created. This is obtained directly from `socket.gettime()`. In particular, it captures the current real-world time, rather than the amount of time since the game launched.that triggered this record to be created.
+The timestamp associated to this record. This is obtained directly from `socket.gettime()`. In particular, it captures the current real-world time, rather than the amount of time since the game launched.
 
-Will be `false` if the `Logger.includeTimetamp` is `false`.
+Will be `false` when `Logger.includeTimestamp` is `false`.
 
 **Returns**:
 

@@ -85,7 +85,7 @@ The current logging level.
 
 **Returns**:
 
-* `result` (mwseLogger.LOG_LEVEL)
+* `result` (mwseLogger.logLevel)
 
 ***
 
@@ -221,18 +221,22 @@ myObject:error(message, ...)
 
 ***
 
-### `getLevelStr`
-<div class="search_terms" style="display: none">getlevelstr, levelstr</div>
+### `getLevelString`
+<div class="search_terms" style="display: none">getlevelstring, levelstring</div>
 
 Gets a `string` representation of the current logging level.
 
 ```lua
-myObject:getLevelStr(level)
+local levelString = myObject:getLevelString(level)
 ```
 
 **Parameters**:
 
-* `level` (mwseLogger.LOG_LEVEL): *Optional*. If provided, a string representation of this logging level will be returned. If `nil`, then a string representation of the current logging level will be returned.
+* `level` (mwseLogger.logLevel): *Optional*. If provided, a string representation of this logging level will be returned. If `nil`, then a string representation of the current logging level will be returned.
+
+**Returns**:
+
+* `levelString` (string)
 
 ***
 
@@ -322,7 +326,7 @@ myObject:setIncludeTimestamp(newIncludeTimestamp)
 <div class="search_terms" style="display: none">setlevel, level</div>
 
 Set the log level. 
-You can pass in either a string representation of a logging level, or the corresponding numerical constant found in the `mwse.LOG_LEVEL` table.
+You can pass in either a string representation of a logging level, or the corresponding numerical constant found in the `mwse.logLevel` table.
 The options are: `"TRACE"`, `"DEBUG"`, `"INFO"`, `"WARN"`, `"ERROR"` and `"NONE"`.
 
 This function does exactly the same thing as writing `log.level = newLogLevel`. 
@@ -335,7 +339,22 @@ myObject:setLevel(newLogLevel)
 
 **Parameters**:
 
-* `newLogLevel` (mwseLogger.LOG_LEVEL)
+* `newLogLevel` (mwseLogger.logLevel)
+
+***
+
+### `setLogLevel`
+<div class="search_terms" style="display: none">setloglevel, loglevel</div>
+
+Set the log level. Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".
+
+```lua
+myObject:setLogLevel(newLogLevel)
+```
+
+**Parameters**:
+
+* `newLogLevel` (mwseLogger.logLevel)
 
 ***
 
@@ -477,7 +496,7 @@ local logger = mwseLogger.get(modDir, filepath)
 
 **Parameters**:
 
-* `modDir` (string): The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
+* `modDir` (string): The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mod's metadata file.
 * `filepath` (string): *Optional*. The filepath to retrieve the logger for. This is relative to `modDir` and corresponds to the `filepath` field of the logger to retrieve.
 
 **Returns**:
@@ -492,7 +511,7 @@ local logger = mwseLogger.get(modDir, filepath)
 Gets all the loggers registered to a particular `modDir`.
 
 ```lua
-local logger = mwseLogger.getLoggers(modDir)
+local loggers = mwseLogger.getLoggers(modDir)
 ```
 
 **Parameters**:
@@ -501,7 +520,7 @@ local logger = mwseLogger.getLoggers(modDir)
 
 **Returns**:
 
-* `logger` ([mwseLogger](../types/mwseLogger.md)[], nil): The loggers, if they exist.
+* `loggers` ([mwseLogger](../types/mwseLogger.md)[], nil): The loggers, if they exist.
 
 ***
 
@@ -519,7 +538,7 @@ local log = mwseLogger.new({ modName = ..., moduleName = ..., level = ..., logTo
 * `params` (table): *Optional*.
 	* `modName` (string): *Optional*. The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided.
 	* `moduleName` (string): *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
-	* `level` (mwseLogger.LOG_LEVEL): *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
+	* `level` (mwseLogger.LOG_LEVEL): *Default*: `mwseLogger.LOG_LEVEL.INFO`. The logging level for all loggers associated to this mod.
 	* `logToConsole` (boolean): *Default*: `false`. Should the output also be written to the in-game console?
 	* `outputFile` (boolean, string): *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
 	* `includeTimestamp` (boolean): *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.

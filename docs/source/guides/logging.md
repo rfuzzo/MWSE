@@ -104,8 +104,8 @@ log(formatString, func, ...)
 ```
 becomes
 ```lua
-if log.level >= mwse.LOG_LEVEL.DEBUG then
-        log(formatString, func(...))
+if log.level >= mwse.logLevel.debug then
+    log(formatString, func(...))
 end
 ```
 This means that it's also possible to define `func` somewhere else and then re-use it in multiple log statements. For example, you can take advantage of the fact that tables are pretty-printed to write the log statement from before as:

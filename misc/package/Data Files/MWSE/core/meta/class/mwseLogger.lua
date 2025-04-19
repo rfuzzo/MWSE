@@ -33,7 +33,7 @@
 --- Some examples can be found in the `logger/formatters.lua` folder of the core library.
 --- 
 --- @field includeTimestamp boolean If set to `true`, all the logged messages will include a timestamp.
---- @field level mwseLogger.LOG_LEVEL The current logging level.
+--- @field level mwseLogger.logLevel The current logging level.
 --- @field logToConsole boolean If `true`, all the logged messages will also be logged to the in-game console.
 --- @field modDir string The directory that your mod lives in. This is relative to `Data Files/MWSE/mods`.
 --- @field modName string Name of the mod, also counts as unique id of the logger.
@@ -50,7 +50,7 @@
 mwseLogger = {}
 
 --- Gets a logger associated with a particular `modDir`. You can also filter by `filepath` as well.
---- @param modDir string The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
+--- @param modDir string The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mod's metadata file.
 --- @param filepath string? *Optional*. The filepath to retrieve the logger for. This is relative to `modDir` and corresponds to the `filepath` field of the logger to retrieve.
 --- @return mwseLogger|nil logger The logger, if it exists.
 function mwseLogger.get(modDir, filepath) end
@@ -63,7 +63,7 @@ function mwseLogger.getLogger(modName) end
 
 --- Gets all the loggers registered to a particular `modDir`.
 --- @param modDir string The directory of mod to retrieve the loggers for. This argument corresponds to the `lua-mod` field of the mods metadata file.
---- @return mwseLogger[]|nil logger The loggers, if they exist.
+--- @return mwseLogger[]|nil loggers The loggers, if they exist.
 function mwseLogger.getLoggers(modDir) end
 
 --- Creates a new logger based on the input parameters.
@@ -73,7 +73,7 @@ function mwseLogger.getLoggers(modDir) end
 --- 
 --- `moduleName`: string? — *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
 --- 
---- `level`: mwseLogger.LOG_LEVEL? — *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
+--- `level`: mwseLogger.LOG_LEVEL? — *Default*: `mwseLogger.LOG_LEVEL.INFO`. The logging level for all loggers associated to this mod.
 --- 
 --- `logToConsole`: boolean? — *Default*: `false`. Should the output also be written to the in-game console?
 --- 
@@ -91,7 +91,7 @@ function mwseLogger.new(params) end
 --- @class mwseLogger.new.params
 --- @field modName string? *Optional*. The name of MWSE mod associated to this Logger. This will be retrieved automatically if not provided.
 --- @field moduleName string? *Optional*. The module this Logger is associated with. This can be useful for distinguishes which parts of your mod produce certain log messages. This will be displayed next to the name of the mod, in parentheses.
---- @field level mwseLogger.LOG_LEVEL? *Default*: `mwseLogger.LOG_LEVEL.DEBUG`. The logging level for all loggers associated to this mod.
+--- @field level mwseLogger.LOG_LEVEL? *Default*: `mwseLogger.LOG_LEVEL.INFO`. The logging level for all loggers associated to this mod.
 --- @field logToConsole boolean? *Default*: `false`. Should the output also be written to the in-game console?
 --- @field outputFile boolean|string|nil *Default*: `false`. The path of the output file to write log messages in. This path is taken relative to `Data Files/MWSE/logs/`. If not provided, log messages will be written to `MWSE.log`. If `true`, then the `modDir` will be used as the output path.
 --- @field includeTimestamp boolean? *Default*: `true`. Should timestamps be included in logging messages? The timestamps are relative to the time that the game was launched.
@@ -127,7 +127,7 @@ function mwseLogger:debug(message, ...) end
 --- 		[lazy evaluation](../guides/logging.md#passing-functions-to-the-logging-methods)
 --- 		or check the logging level directly, e.g.:
 --- 		```lua
---- 		if log.level >= mwse.LOG_LEVEL.DEBUG then 
+--- 		if log.level >= mwse.logLevel.debug then 
 --- 			-- do stuff
 --- 		end
 --- 		```
@@ -152,8 +152,9 @@ function mwseLogger:doLog(logLevel) end
 function mwseLogger:error(message, ...) end
 
 --- Gets a `string` representation of the current logging level.
---- @param level mwseLogger.LOG_LEVEL? *Optional*. If provided, a string representation of this logging level will be returned. If `nil`, then a string representation of the current logging level will be returned.
-function mwseLogger:getLevelStr(level) end
+--- @param level mwseLogger.logLevel? *Optional*. If provided, a string representation of this logging level will be returned. If `nil`, then a string representation of the current logging level will be returned.
+--- @return string levelString No description yet available.
+function mwseLogger:getLevelString(level) end
 
 --- Log an `INFO` message. This will only be printed if the current logging level is `INFO` or higher.
 --- If multiple arguments are passed, then they will be passed to `string.format`.
@@ -194,14 +195,18 @@ function mwseLogger:setFormatter(newFormatter) end
 function mwseLogger:setIncludeTimestamp(newIncludeTimestamp) end
 
 --- Set the log level. 
---- You can pass in either a string representation of a logging level, or the corresponding numerical constant found in the `mwse.LOG_LEVEL` table.
+--- You can pass in either a string representation of a logging level, or the corresponding numerical constant found in the `mwse.logLevel` table.
 --- The options are: `"TRACE"`, `"DEBUG"`, `"INFO"`, `"WARN"`, `"ERROR"` and `"NONE"`.
 --- 
 --- This function does exactly the same thing as writing `log.level = newLogLevel`. 
 --- Use whichever one you prefer.
 --- 
---- @param newLogLevel mwseLogger.LOG_LEVEL No description yet available.
+--- @param newLogLevel mwseLogger.logLevel No description yet available.
 function mwseLogger:setLevel(newLogLevel) end
+
+--- Set the log level. Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".
+--- @param newLogLevel mwseLogger.logLevel No description yet available.
+function mwseLogger:setLogLevel(newLogLevel) end
 
 --- Changes the `modName` field of this logger.
 --- 	

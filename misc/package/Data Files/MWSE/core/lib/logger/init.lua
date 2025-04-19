@@ -16,11 +16,7 @@ local socket = require("socket")
 ---@type number
 local LAUNCH_TIME = socket.gettime()
 
-
 local fmt = string.format
-
-
-
 
 local logLevel = {
 	none  = 0,
@@ -274,10 +270,7 @@ local FORMATTERS = require("logger.formatters")
 -- Logging framework.
 ---@class mwseLogger : mwseLogger.SharedData
 ---@field protected sharedData mwseLogger.SharedData Stores information that's shared between loggers. This should not be accessed directly.
-local Logger = {
-	logLevel = logLevel,
-	
-}
+local Logger = {}
 
 -- Make it available globally.
 mwse.Logger = Logger
@@ -696,7 +689,7 @@ function Logger:doLog(level)
 	end
 end
 
-function Logger:getLevelStr(level)
+function Logger:getLevelString(level)
 	return logLevelStrings[level or self.level]
 end
 

@@ -7,7 +7,7 @@ return {
 		[lazy evaluation](../guides/logging.md#passing-functions-to-the-logging-methods)
 		or check the logging level directly, e.g.:
 		```lua
-		if log.level >= mwse.LOG_LEVEL.DEBUG then 
+		if log.level >= mwse.logLevel.debug then 
 			-- do stuff
 		end
 		```

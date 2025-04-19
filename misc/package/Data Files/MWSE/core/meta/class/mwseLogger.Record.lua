@@ -5,11 +5,11 @@
 
 --- Holds information about the context in which a logging message was created. This is currently only used when formatting log messages. This structure makes it easier to specify custom formatters.
 --- @class mwseLogger.Record
---- @field level mwseLogger.LOG_LEVEL The logging level of this message. (e.g, if `Logger:info` was called, then this will be `mwseLogger.LOG_LEVEL.INFO`.)
+--- @field level mwseLogger.logLevel The logging level of this message. (e.g, if `Logger:info` was called, then this will be `mwseLogger.logLevel.info`.)
 --- @field lineNumber integer|false The linenumber that triggered this record to be created.
 --- Will be `false` if the "Enable Log Line Numbers" MWSE setting is disabled.
 --- 
 --- @field stackLevel integer The stack level offset at the time of record creation. This information can be used when calling `debug.getinfo` in custom formatters.
---- @field timestamp number|false The timestamp that was created when this logging messages was created. This is obtained directly from `socket.gettime()`. In particular, it captures the current real-world time, rather than the amount of time since the game launched.that triggered this record to be created.
+--- @field timestamp number|false The timestamp associated to this record. This is obtained directly from `socket.gettime()`. In particular, it captures the current real-world time, rather than the amount of time since the game launched.
 --- 
---- Will be `false` if the `Logger.includeTimetamp` is `false`.
+--- Will be `false` when `Logger.includeTimestamp` is `false`.
